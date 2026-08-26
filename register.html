@@ -16,35 +16,13 @@
     <p class="sub">English with Mariami — ისწავლე ინგლისური თამაშით 🎮</p>
 
     <form id="registerForm">
-      <div class="field">
-        <label for="fullName">სახელი და გვარი</label>
-        <input id="fullName" type="text" required placeholder="მაგ: ანა ბერიძე">
-      </div>
-
-      <div class="field">
-        <label for="email">ელფოსტა</label>
-        <input id="email" type="email" required placeholder="example@gmail.com">
-      </div>
-
-      <div class="field">
-        <label for="password">პაროლი</label>
-        <input id="password" type="password" minlength="6" required placeholder="მინიმუმ 6 სიმბოლო">
-      </div>
-
-      <div class="field">
-        <label for="grade">კლასი</label>
-        <select id="grade" required>
-          <option value="">აირჩიე კლასი</option>
-          <option value="2">მე-2 კლასი</option>
-          <option value="3">მე-3 კლასი</option>
-          <option value="4">მე-4 კლასი</option>
-        </select>
-      </div>
-
+      <div class="field"><label for="fullName">სახელი და გვარი</label><input id="fullName" type="text" required placeholder="მაგ: ანა ბერიძე"></div>
+      <div class="field"><label for="email">ელფოსტა</label><input id="email" type="email" required placeholder="example@gmail.com"></div>
+      <div class="field"><label for="password">პაროლი</label><input id="password" type="password" minlength="6" required placeholder="მინიმუმ 6 სიმბოლო"></div>
+      <div class="field"><label for="grade">კლასი</label><select id="grade" required><option value="">აირჩიე კლასი</option><option value="2">მე-2 კლასი</option><option value="3">მე-3 კლასი</option><option value="4">მე-4 კლასი</option></select></div>
       <button id="submitBtn" type="submit">🚀 რეგისტრაცია</button>
       <div id="message" class="message"></div>
     </form>
-
     <div class="login">უკვე გაქვს ანგარიში? <a href="login.html">შესვლა</a></div>
     <div class="brand">English with Mariami 🇬🇪 🇬🇧</div>
   </main>
@@ -68,23 +46,36 @@
       const grade = Number(document.getElementById('grade').value);
 
       try {
-        const { data, error } = await supabaseClient.auth.signUp({ email, password });
+        const { data, error } = await supabaseClient.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: fullName, grade: grade, role: 'student' }
+          }
+        });
         if (error) throw error;
         if (!data.user) throw new Error('მომხმარებლის შექმნა ვერ მოხერხდა.');
 
-        const { error: profileError } = await supabaseClient.from('profiles').insert({
-          user_id: data.user.id,
-          full_name: fullName,
-          grade: grade,
-          points: 0
-        });
-        if (profileError) throw profileError;
-
-        message.className = 'message success';
-        message.textContent = data.session
-          ? '🎉 რეგისტრაცია წარმატებით დასრულდა! ახლა შეგიძლია შეხვიდე.'
-          : '🎉 ანგარიში შეიქმნა! შეამოწმე ელფოსტა ანგარიშის დასადასტურებლად.';
-        form.reset();
+        // If email confirmation is disabled, a session exists and we can create
+        // the profile immediately. If confirmation is enabled, the metadata is
+        // saved in Auth and the profile is created after the user signs in.
+        if (data.session) {
+          const { error: profileError } = await supabaseClient.from('profiles').insert({
+            user_id: data.user.id,
+            full_name: fullName,
+            grade: grade,
+            role: 'student',
+            points: 0
+          });
+          if (profileError) throw profileError;
+          message.className = 'message success';
+          message.textContent = '🎉 რეგისტრაცია წარმატებით დასრულდა! ახლა შეგიძლია შეხვიდე.';
+          form.reset();
+        } else {
+          message.className = 'message success';
+          message.textContent = '📧 ანგარიში შეიქმნა! ჯერ დაადასტურე ელფოსტა, შემდეგ შედი სისტემაში.';
+          form.reset();
+        }
       } catch (error) {
         console.error(error);
         message.className = 'message error';
