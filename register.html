@@ -14,7 +14,6 @@
   <main class="card">
     <h1>✨ რეგისტრაცია</h1>
     <p class="sub">English with Mariami — ისწავლე ინგლისური თამაშით 🎮</p>
-
     <form id="registerForm">
       <div class="field"><label for="fullName">სახელი და გვარი</label><input id="fullName" type="text" required placeholder="მაგ: ანა ბერიძე"></div>
       <div class="field"><label for="email">ელფოსტა</label><input id="email" type="email" required placeholder="example@gmail.com"></div>
@@ -26,64 +25,18 @@
     <div class="login">უკვე გაქვს ანგარიში? <a href="login.html">შესვლა</a></div>
     <div class="brand">English with Mariami 🇬🇪 🇬🇧</div>
   </main>
-
   <script>
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    const form = document.getElementById('registerForm');
-    const message = document.getElementById('message');
-    const submitBtn = document.getElementById('submitBtn');
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      message.textContent = '';
-      message.className = 'message';
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'მიმდინარეობს...';
-
-      const fullName = document.getElementById('fullName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const grade = Number(document.getElementById('grade').value);
-
-      try {
-        const { data, error } = await supabaseClient.auth.signUp({
-          email,
-          password,
-          options: {
-            data: { full_name: fullName, grade: grade, role: 'student' }
-          }
-        });
-        if (error) throw error;
-        if (!data.user) throw new Error('მომხმარებლის შექმნა ვერ მოხერხდა.');
-
-        // If email confirmation is disabled, a session exists and we can create
-        // the profile immediately. If confirmation is enabled, the metadata is
-        // saved in Auth and the profile is created after the user signs in.
-        if (data.session) {
-          const { error: profileError } = await supabaseClient.from('profiles').insert({
-            user_id: data.user.id,
-            full_name: fullName,
-            grade: grade,
-            role: 'student',
-            points: 0
-          });
-          if (profileError) throw profileError;
-          message.className = 'message success';
-          message.textContent = '🎉 რეგისტრაცია წარმატებით დასრულდა! ახლა შეგიძლია შეხვიდე.';
-          form.reset();
-        } else {
-          message.className = 'message success';
-          message.textContent = '📧 ანგარიში შეიქმნა! ჯერ დაადასტურე ელფოსტა, შემდეგ შედი სისტემაში.';
-          form.reset();
-        }
-      } catch (error) {
-        console.error(error);
-        message.className = 'message error';
-        message.textContent = '❌ ' + (error.message || 'რეგისტრაციისას შეცდომა მოხდა.');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = '🚀 რეგისტრაცია';
-      }
+    const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    const form=document.getElementById('registerForm'),message=document.getElementById('message'),submitBtn=document.getElementById('submitBtn');
+    form.addEventListener('submit',async event=>{
+      event.preventDefault();message.textContent='';message.className='message';submitBtn.disabled=true;submitBtn.textContent='მიმდინარეობს...';
+      const fullName=document.getElementById('fullName').value.trim(),email=document.getElementById('email').value.trim(),password=document.getElementById('password').value,grade=Number(document.getElementById('grade').value);
+      try{
+        const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:fullName,grade:grade,role:'student'}}});
+        if(error)throw error;if(!data.user)throw new Error('მომხმარებლის შექმნა ვერ მოხერხდა.');
+        message.className='message success';message.textContent=data.session?'🎉 რეგისტრაცია წარმატებით დასრულდა!':'📧 ანგარიში შეიქმნა! ჯერ დაადასტურე ელფოსტა, შემდეგ შედი სისტემაში.';form.reset();
+      }catch(error){console.error(error);message.className='message error';message.textContent='❌ '+(error.message||'რეგისტრაციისას შეცდომა მოხდა.');}
+      finally{submitBtn.disabled=false;submitBtn.textContent='🚀 რეგისტრაცია';}
     });
   </script>
 </body>
