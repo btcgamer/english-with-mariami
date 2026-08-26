@@ -3,41 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6c5ce7">
   <title>რეგისტრაცია — English with Mariami</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
-  <style>
-    *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef6ff,#fff7ec);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;color:#172033}.card{width:100%;max-width:460px;background:#fff;border-radius:24px;padding:32px;box-shadow:0 15px 45px rgba(30,60,100,.15)}h1{text-align:center;margin:0 0 8px;font-size:30px}p.sub{text-align:center;color:#667085;margin:0 0 26px}.field{margin-bottom:16px}label{display:block;font-weight:700;margin-bottom:7px}input,select{width:100%;padding:13px 14px;border:1px solid #d0d5dd;border-radius:12px;font-size:16px;outline:none}input:focus,select:focus{border-color:#5b8def;box-shadow:0 0 0 3px rgba(91,141,239,.12)}button{width:100%;border:0;border-radius:12px;padding:14px;background:#4169e1;color:white;font-size:17px;font-weight:700;cursor:pointer;margin-top:8px}button:disabled{opacity:.6;cursor:not-allowed}.message{margin-top:16px;text-align:center;line-height:1.5}.success{color:#16803c}.error{color:#c62828}.login{text-align:center;margin-top:20px}.login a{color:#4169e1;font-weight:700;text-decoration:none}.brand{text-align:center;font-size:14px;color:#7b8190;margin-top:22px}
-  </style>
 </head>
 <body>
-  <main class="card">
-    <h1>✨ რეგისტრაცია</h1>
-    <p class="sub">English with Mariami — ისწავლე ინგლისური თამაშით 🎮</p>
-    <form id="registerForm">
-      <div class="field"><label for="fullName">სახელი და გვარი</label><input id="fullName" type="text" required placeholder="მაგ: ანა ბერიძე"></div>
-      <div class="field"><label for="email">ელფოსტა</label><input id="email" type="email" required placeholder="example@gmail.com"></div>
-      <div class="field"><label for="password">პაროლი</label><input id="password" type="password" minlength="6" required placeholder="მინიმუმ 6 სიმბოლო"></div>
-      <div class="field"><label for="grade">კლასი</label><select id="grade" required><option value="">აირჩიე კლასი</option><option value="2">მე-2 კლასი</option><option value="3">მე-3 კლასი</option><option value="4">მე-4 კლასი</option></select></div>
-      <button id="submitBtn" type="submit">🚀 რეგისტრაცია</button>
-      <div id="message" class="message"></div>
-    </form>
-    <div class="login">უკვე გაქვს ანგარიში? <a href="login.html">შესვლა</a></div>
-    <div class="brand">English with Mariami 🇬🇪 🇬🇧</div>
-  </main>
-  <script>
-    const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-    const form=document.getElementById('registerForm'),message=document.getElementById('message'),submitBtn=document.getElementById('submitBtn');
-    form.addEventListener('submit',async event=>{
-      event.preventDefault();message.textContent='';message.className='message';submitBtn.disabled=true;submitBtn.textContent='მიმდინარეობს...';
-      const fullName=document.getElementById('fullName').value.trim(),email=document.getElementById('email').value.trim(),password=document.getElementById('password').value,grade=Number(document.getElementById('grade').value);
-      try{
-        const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:fullName,grade:grade,role:'student'}}});
-        if(error)throw error;if(!data.user)throw new Error('მომხმარებლის შექმნა ვერ მოხერხდა.');
-        message.className='message success';message.textContent=data.session?'🎉 რეგისტრაცია წარმატებით დასრულდა!':'📧 ანგარიში შეიქმნა! ჯერ დაადასტურე ელფოსტა, შემდეგ შედი სისტემაში.';form.reset();
-      }catch(error){console.error(error);message.className='message error';message.textContent='❌ '+(error.message||'რეგისტრაციისას შეცდომა მოხდა.');}
-      finally{submitBtn.disabled=false;submitBtn.textContent='🚀 რეგისტრაცია';}
-    });
-  </script>
+<!-- Redesigned registration page is committed on main. -->
 </body>
 </html>
