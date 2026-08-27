@@ -1,23 +1,48 @@
 // English with Mariami — protected pages
-// This file redirects visitors to login.html when there is no Supabase session.
+// Shared Supabase session guard for all protected pages.
 (function () {
   const SUPABASE_URL = "https://vtdhvsfqhwesxtwmduew.supabase.co";
   const SUPABASE_KEY = "sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt";
+  const STORAGE_KEY = "english-with-mariami-auth";
+  const LOGIN = "login.html";
 
-  const script = document.createElement("script");
-  script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-  script.onload = async function () {
-    try {
-      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-      const { data } = await client.auth.getSession();
-      if (!data.session) {
-        const target = encodeURIComponent(location.pathname + location.search + location.hash);
-        location.replace("login.html?redirect=" + target);
-      }
-    } catch (e) {
-      console.error("Auth check failed", e);
-      location.replace("login.html");
+  function redirectToLogin() {
+    const target = location.pathname + location.search + location.hash;
+    location.replace(LOGIN + "?redirect=" + encodeURIComponent(target));
+  }
+
+  function startGuard() {
+    if (!window.supabase || !window.supabase.createClient) {
+      redirectToLogin();
+      return;
     }
-  };
-  document.head.appendChild(script);
+
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        storage: window.localStorage,
+        storageKey: STORAGE_KEY
+      }
+    });
+
+    client.auth.getSession().then(({ data }) => {
+      if (data && data.session) return;
+      setTimeout(async () => {
+        const { data: retry } = await client.auth.getSession();
+        if (!retry || !retry.session) redirectToLogin();
+      }, 700);
+    }).catch(() => redirectToLogin());
+  }
+
+  if (window.supabase && window.supabase.createClient) {
+    startGuard();
+  } else {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+    script.onload = startGuard;
+    script.onerror = redirectToLogin;
+    document.head.appendChild(script);
+  }
 })();
