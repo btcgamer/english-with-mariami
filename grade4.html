@@ -3,245 +3,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🚀 3-ე კლასი | English with Mariami</title>
+<title>⭐ 4-ე კლასი | English with Mariami</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  color:#fff;
-  background:
-    radial-gradient(circle at 10% 5%,#ffffff 0 5%,transparent 25%),
-    radial-gradient(circle at 90% 20%,#00eaff33,transparent 30%),
-    linear-gradient(135deg,#04152f,#062f38 50%,#102d16);
-  min-height:100vh;
+margin:0;
+font-family:Arial,sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 10% 5%,#fff 0 5%,transparent 25%),
+radial-gradient(circle at 90% 20%,#00eaff33,transparent 30%),
+linear-gradient(135deg,#04152f,#062f38 50%,#102d16);
+min-height:100vh
 }
 
 header{
-  background:linear-gradient(135deg,#075eff,#00d084,#ffe600);
-  border-radius:0 0 38px 38px;
-  box-shadow:0 20px 60px #00eaff66;
-  padding-bottom:35px;
+background:linear-gradient(135deg,#075eff,#00d084,#ffe600);
+border-radius:0 0 38px 38px;
+box-shadow:0 20px 60px #00eaff66;
+padding-bottom:35px
 }
 
 .container{
-  width:min(1150px,calc(100% - 30px));
-  margin:auto;
+width:min(1150px,calc(100% - 30px));
+margin:auto
 }
 
 nav{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  padding:18px 0;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+padding:18px 0
 }
 
-nav a,
-.home-btn{
-  display:inline-block;
-  padding:12px 18px;
-  border-radius:16px;
-  background:#06162f;
-  color:#ffe600;
-  text-decoration:none;
-  font-weight:900;
-  border:1px solid #ffe600;
-  box-shadow:0 0 16px #ffe60055;
-  transition:.3s;
+nav a,.home-btn{
+display:inline-block;
+padding:12px 18px;
+border-radius:16px;
+background:#06162f;
+color:#ffe600;
+text-decoration:none;
+font-weight:900;
+border:1px solid #ffe600;
+box-shadow:0 0 16px #ffe60055;
+transition:.3s
 }
 
-nav a:hover,
-.home-btn:hover{
-  transform:translateY(-4px) scale(1.04);
-  box-shadow:0 0 15px #00eaff,0 0 35px #00eaff;
+nav a:hover,.home-btn:hover{
+transform:translateY(-4px) scale(1.04);
+box-shadow:0 0 15px #00eaff,0 0 35px #00eaff
 }
 
 .hero{
-  text-align:center;
-  padding:35px 15px;
+text-align:center;
+padding:35px 15px
 }
 
 .hero .emoji{
-  font-size:75px;
-  filter:drop-shadow(0 0 20px #fff);
+font-size:75px;
+filter:drop-shadow(0 0 20px #fff)
 }
 
 h1{
-  font-size:clamp(35px,7vw,65px);
-  margin:10px 0;
-  text-shadow:0 0 20px #004;
+font-size:clamp(35px,7vw,65px);
+margin:10px 0;
+text-shadow:0 0 20px #004
 }
 
 .hero p{
-  font-size:19px;
-  font-weight:bold;
+font-size:19px;
+font-weight:bold
 }
 
 .section{
-  padding:45px 0;
+padding:45px 0
 }
 
 .title{
-  text-align:center;
-  margin-bottom:30px;
+text-align:center;
+margin-bottom:30px
 }
 
 .title h2{
-  font-size:35px;
-  color:#ffe600;
-  text-shadow:0 0 15px #ffe60066;
+font-size:35px;
+color:#ffe600;
+text-shadow:0 0 15px #ffe60066
 }
 
 .title p{
-  color:#dffcff;
+color:#dffcff
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px
 }
 
 .card{
-  background:linear-gradient(145deg,#102d4d,#123b35);
-  border:1px solid #00eaff88;
-  border-radius:24px;
-  padding:23px;
-  box-shadow:0 15px 35px #0008,0 0 20px #00eaff33;
-  transition:.35s;
+background:linear-gradient(145deg,#102d4d,#123b35);
+border:1px solid #00eaff88;
+border-radius:24px;
+padding:23px;
+box-shadow:0 15px 35px #0008,0 0 20px #00eaff33;
+transition:.35s
 }
 
 .card:hover{
-  transform:translateY(-9px) rotateX(3deg) rotateY(-2deg);
-  box-shadow:0 25px 50px #0009,0 0 35px #ffe60055;
+transform:translateY(-9px) rotateX(3deg) rotateY(-2deg);
+box-shadow:0 25px 50px #0009,0 0 35px #ffe60055
 }
 
 .card h3{
-  margin-top:0;
-  color:#ffe600;
-  font-size:23px;
-  text-shadow:0 0 10px #ffe60055;
+margin-top:0;
+color:#ffe600;
+font-size:23px;
+text-shadow:0 0 10px #ffe60055
 }
 
 .word{
-  padding:10px 5px;
-  border-bottom:1px solid #ffffff20;
-  line-height:1.5;
+padding:10px 5px;
+border-bottom:1px solid #ffffff20;
+line-height:1.5
 }
 
 .word b{
-  color:#6dffbf;
-  font-size:17px;
-}
-
-.word span{
-  color:#fff;
+color:#6dffbf;
+font-size:17px
 }
 
 .phrase{
-  background:#06162f;
-  padding:13px;
-  margin:9px 0;
-  border-radius:14px;
-  border-left:4px solid #ffe600;
+background:#06162f;
+padding:13px;
+margin:9px 0;
+border-radius:14px;
+border-left:4px solid #ffe600
 }
 
 .phrase b{
-  color:#6dffbf;
+color:#6dffbf
+}
+
+.grammar{
+background:linear-gradient(145deg,#102d4d,#123b35);
+border:1px solid #00eaff88;
+border-radius:25px;
+padding:25px;
+margin-bottom:20px;
+box-shadow:0 15px 35px #0008,0 0 20px #00eaff33
+}
+
+.grammar h3{
+color:#ffe600;
+font-size:24px
+}
+
+.example{
+background:#06162f;
+border-radius:14px;
+padding:14px;
+margin:10px 0;
+border-left:4px solid #00d084
+}
+
+.example strong{
+color:#6dffbf
 }
 
 .quiz{
-  background:linear-gradient(145deg,#102d4d,#123b35);
-  border:1px solid #00eaff88;
-  border-radius:25px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 15px 40px #0008,0 0 25px #00eaff33;
-  margin-top:25px;
+background:linear-gradient(145deg,#102d4d,#123b35);
+border:1px solid #00eaff88;
+border-radius:25px;
+padding:30px;
+text-align:center;
+box-shadow:0 15px 40px #0008,0 0 25px #00eaff33;
+margin-top:25px
 }
 
 .quiz h3{
-  color:#ffe600;
-  font-size:25px;
+color:#ffe600;
+font-size:25px
 }
 
 button{
-  border:0;
-  border-radius:14px;
-  padding:13px 20px;
-  margin:6px;
-  background:#075eff;
-  color:white;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 0 15px #00eaff55;
-  transition:.25s;
+border:0;
+border-radius:14px;
+padding:13px 20px;
+margin:6px;
+background:#075eff;
+color:white;
+font-weight:900;
+cursor:pointer;
+box-shadow:0 0 15px #00eaff55;
+transition:.25s
 }
 
 button:hover{
-  transform:translateY(-3px) scale(1.04);
-  box-shadow:0 0 20px #00eaff;
+transform:translateY(-3px) scale(1.04);
+box-shadow:0 0 20px #00eaff
 }
 
 .result{
-  min-height:25px;
-  font-weight:900;
-  color:#ffe600;
-  margin-top:15px;
+min-height:25px;
+font-weight:900;
+color:#ffe600;
+margin-top:15px
 }
 
 .alphabet{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
-  gap:12px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(70px,1fr));
+gap:12px
 }
 
 .letter{
-  height:75px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:35px;
-  font-weight:1000;
-  border-radius:18px;
-  background:linear-gradient(145deg,#075eff,#00d084);
-  color:#fff;
-  text-shadow:0 0 15px #fff;
-  box-shadow:0 8px 20px #0008,0 0 15px #00eaff55;
-  transition:.3s;
+height:75px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+font-weight:1000;
+border-radius:18px;
+background:linear-gradient(145deg,#075eff,#00d084);
+color:#fff;
+text-shadow:0 0 15px #fff;
+box-shadow:0 8px 20px #0008,0 0 15px #00eaff55;
+transition:.3s
 }
 
 .letter:hover{
-  transform:translateY(-7px) rotateY(15deg);
-  background:linear-gradient(145deg,#ffe600,#00d084);
-  color:#06162f;
+transform:translateY(-7px) rotateY(15deg);
+background:linear-gradient(145deg,#ffe600,#00d084);
+color:#06162f
 }
 
 .back-area{
-  text-align:center;
-  padding:30px 0 50px;
+text-align:center;
+padding:30px 0 50px
 }
 
 footer{
-  background:#06162f;
-  padding:30px 15px;
-  text-align:center;
-  border-top:1px solid #00eaff55;
+background:#06162f;
+padding:30px 15px;
+text-align:center;
+border-top:1px solid #00eaff55
 }
 
 footer a{
-  color:#ffe600;
-  text-decoration:none;
-  font-weight:900;
+color:#ffe600;
+text-decoration:none;
+font-weight:900
 }
 
 @media(max-width:600px){
-  nav a{font-size:13px;padding:10px 12px}
-  .hero .emoji{font-size:55px}
-  .card{padding:18px}
+nav a{font-size:13px;padding:10px 12px}
+.hero .emoji{font-size:55px}
+.card{padding:18px}
 }
 </style>
 </head>
@@ -259,13 +279,12 @@ footer a{
 </nav>
 
 <div class="hero">
-<div class="emoji">🚀</div>
-<h1>3-ე კლასი</h1>
-<p>English with Mariami 🇬🇧 | ისწავლე ინგლისური სახალისოდ! 🇬🇪</p>
+<div class="emoji">⭐</div>
+<h1>4-ე კლასი</h1>
+<p>English with Mariami 🇬🇧 | ისწავლე, იფიქრე და ისაუბრე ინგლისურად! 🇬🇪</p>
 </div>
 
 </header>
-
 
 <main class="container">
 
@@ -273,7 +292,7 @@ footer a{
 
 <div class="title">
 <h2>🔤 English Alphabet</h2>
-<p>ინგლისური ანბანი — გაიმეორე ასოები!</p>
+<p>გაიმეორე ინგლისური ანბანი</p>
 </div>
 
 <div class="alphabet">
@@ -312,168 +331,121 @@ footer a{
 
 <div class="title">
 <h2>📚 Vocabulary — სიტყვები</h2>
-<p>ისწავლე ახალი სიტყვები ინგლისურად და ქართულად.</p>
+<p>4-ე კლასისთვის ახალი და უფრო რთული ლექსიკა</p>
 </div>
 
 <div class="grid">
 
 
 <div class="card">
-<h3>👨‍👩‍👧 Family — ოჯახი</h3>
+<h3>👨‍👩‍👧 Family & People — ოჯახი და ადამიანები</h3>
 
 <div class="word"><b>family</b> — ოჯახი</div>
-<div class="word"><b>mother</b> — დედა</div>
-<div class="word"><b>father</b> — მამა</div>
+<div class="word"><b>relative</b> — ნათესავი</div>
+<div class="word"><b>neighbour</b> — მეზობელი</div>
+<div class="word"><b>classmate</b> — თანაკლასელი</div>
 <div class="word"><b>parents</b> — მშობლები</div>
-<div class="word"><b>brother</b> — ძმა</div>
-<div class="word"><b>sister</b> — და</div>
-<div class="word"><b>grandmother</b> — ბებია</div>
-<div class="word"><b>grandfather</b> — ბაბუა</div>
+<div class="word"><b>grandparents</b> — ბებია და ბაბუა</div>
 <div class="word"><b>daughter</b> — ქალიშვილი</div>
 <div class="word"><b>son</b> — ვაჟიშვილი</div>
+<div class="word"><b>uncle</b> — ბიძა</div>
+<div class="word"><b>aunt</b> — დეიდა/მამიდა</div>
 <div class="word"><b>cousin</b> — ბიძაშვილი/დეიდაშვილი</div>
-<div class="word"><b>relative</b> — ნათესავი</div>
-<div class="word"><b>friend</b> — მეგობარი</div>
+<div class="word"><b>person</b> — ადამიანი</div>
 </div>
 
 
 <div class="card">
 <h3>🏫 School — სკოლა</h3>
 
-<div class="word"><b>school</b> — სკოლა</div>
-<div class="word"><b>teacher</b> — მასწავლებელი</div>
-<div class="word"><b>student</b> — მოსწავლე</div>
 <div class="word"><b>classroom</b> — საკლასო ოთახი</div>
-<div class="word"><b>book</b> — წიგნი</div>
-<div class="word"><b>notebook</b> — რვეული</div>
-<div class="word"><b>pen</b> — კალამი</div>
-<div class="word"><b>pencil</b> — ფანქარი</div>
-<div class="word"><b>lesson</b> — გაკვეთილი</div>
 <div class="word"><b>subject</b> — საგანი</div>
+<div class="word"><b>lesson</b> — გაკვეთილი</div>
+<div class="word"><b>homework</b> — საშინაო დავალება</div>
+<div class="word"><b>project</b> — პროექტი</div>
 <div class="word"><b>question</b> — კითხვა</div>
 <div class="word"><b>answer</b> — პასუხი</div>
 <div class="word"><b>exercise</b> — სავარჯიშო</div>
-<div class="word"><b>learn</b> — სწავლა</div>
+<div class="word"><b>dictionary</b> — ლექსიკონი</div>
+<div class="word"><b>mistake</b> — შეცდომა</div>
+<div class="word"><b>correct</b> — სწორი</div>
+<div class="word"><b>practice</b> — ვარჯიში</div>
+<div class="word"><b>understand</b> — გაგება</div>
 </div>
 
 
 <div class="card">
-<h3>🏠 Home — სახლი</h3>
+<h3>🌍 World — მსოფლიო</h3>
 
-<div class="word"><b>home</b> — სახლი</div>
-<div class="word"><b>room</b> — ოთახი</div>
-<div class="word"><b>bedroom</b> — საძინებელი</div>
-<div class="word"><b>kitchen</b> — სამზარეულო</div>
-<div class="word"><b>bathroom</b> — სააბაზანო</div>
-<div class="word"><b>living room</b> — მისაღები</div>
-<div class="word"><b>garden</b> — ბაღი</div>
-<div class="word"><b>window</b> — ფანჯარა</div>
-<div class="word"><b>door</b> — კარი</div>
-<div class="word"><b>table</b> — მაგიდა</div>
-<div class="word"><b>chair</b> — სკამი</div>
-<div class="word"><b>bed</b> — საწოლი</div>
-<div class="word"><b>stairs</b> — კიბე</div>
+<div class="word"><b>country</b> — ქვეყანა</div>
+<div class="word"><b>capital</b> — დედაქალაქი</div>
+<div class="word"><b>city</b> — ქალაქი</div>
+<div class="word"><b>village</b> — სოფელი</div>
+<div class="word"><b>language</b> — ენა</div>
+<div class="word"><b>culture</b> — კულტურა</div>
+<div class="word"><b>people</b> — ხალხი</div>
+<div class="word"><b>world</b> — მსოფლიო</div>
+<div class="word"><b>map</b> — რუკა</div>
+<div class="word"><b>country</b> — ქვეყანა</div>
+<div class="word"><b>foreign</b> — უცხოური</div>
+<div class="word"><b>different</b> — განსხვავებული</div>
 </div>
 
 
 <div class="card">
-<h3>🍎 Food — საჭმელი</h3>
+<h3>🍎 Food & Health — საკვები და ჯანმრთელობა</h3>
 
-<div class="word"><b>food</b> — საჭმელი</div>
-<div class="word"><b>apple</b> — ვაშლი</div>
-<div class="word"><b>banana</b> — ბანანი</div>
-<div class="word"><b>orange</b> — ფორთოხალი</div>
-<div class="word"><b>bread</b> — პური</div>
-<div class="word"><b>cheese</b> — ყველი</div>
-<div class="word"><b>milk</b> — რძე</div>
-<div class="word"><b>water</b> — წყალი</div>
+<div class="word"><b>healthy</b> — ჯანსაღი</div>
+<div class="word"><b>unhealthy</b> — არაჯანსაღი</div>
 <div class="word"><b>breakfast</b> — საუზმე</div>
 <div class="word"><b>lunch</b> — სადილი</div>
 <div class="word"><b>dinner</b> — ვახშამი</div>
-<div class="word"><b>fruit</b> — ხილი</div>
 <div class="word"><b>vegetable</b> — ბოსტნეული</div>
+<div class="word"><b>fruit</b> — ხილი</div>
+<div class="word"><b>meal</b> — კვება</div>
 <div class="word"><b>hungry</b> — მშიერი</div>
 <div class="word"><b>thirsty</b> — მწყურვალი</div>
+<div class="word"><b>strong</b> — ძლიერი</div>
+<div class="word"><b>weak</b> — სუსტი</div>
+<div class="word"><b>exercise</b> — ვარჯიში</div>
 </div>
 
 
 <div class="card">
 <h3>🌳 Nature — ბუნება</h3>
 
-<div class="word"><b>tree</b> — ხე</div>
-<div class="word"><b>flower</b> — ყვავილი</div>
-<div class="word"><b>grass</b> — ბალახი</div>
+<div class="word"><b>environment</b> — გარემო</div>
 <div class="word"><b>forest</b> — ტყე</div>
+<div class="word"><b>mountain</b> — მთა</div>
 <div class="word"><b>river</b> — მდინარე</div>
 <div class="word"><b>lake</b> — ტბა</div>
-<div class="word"><b>mountain</b> — მთა</div>
-<div class="word"><b>sea</b> — ზღვა</div>
+<div class="word"><b>ocean</b> — ოკეანე</div>
 <div class="word"><b>island</b> — კუნძული</div>
 <div class="word"><b>animal</b> — ცხოველი</div>
+<div class="word"><b>wild</b> — ველური</div>
 <div class="word"><b>plant</b> — მცენარე</div>
 <div class="word"><b>weather</b> — ამინდი</div>
-<div class="word"><b>sun</b> — მზე</div>
-<div class="word"><b>rain</b> — წვიმა</div>
-<div class="word"><b>snow</b> — თოვლი</div>
+<div class="word"><b>temperature</b> — ტემპერატურა</div>
+<div class="word"><b>season</b> — წელიწადის დრო</div>
 </div>
 
 
 <div class="card">
 <h3>🏃 Actions — მოქმედებები</h3>
 
-<div class="word"><b>go</b> — წასვლა</div>
-<div class="word"><b>come</b> — მოსვლა</div>
-<div class="word"><b>run</b> — სირბილი</div>
-<div class="word"><b>walk</b> — სიარული</div>
-<div class="word"><b>jump</b> — ხტომა</div>
-<div class="word"><b>play</b> — თამაში</div>
-<div class="word"><b>read</b> — კითხვა</div>
-<div class="word"><b>write</b> — წერა</div>
-<div class="word"><b>listen</b> — მოსმენა</div>
-<div class="word"><b>speak</b> — საუბარი</div>
-<div class="word"><b>eat</b> — ჭამა</div>
-<div class="word"><b>drink</b> — დალევა</div>
-<div class="word"><b>help</b> — დახმარება</div>
+<div class="word"><b>arrive</b> — ჩამოსვლა</div>
+<div class="word"><b>leave</b> — წასვლა</div>
+<div class="word"><b>choose</b> — არჩევა</div>
 <div class="word"><b>remember</b> — გახსენება</div>
-</div>
-
-
-<div class="card">
-<h3>🏙️ Places — ადგილები</h3>
-
-<div class="word"><b>city</b> — ქალაქი</div>
-<div class="word"><b>village</b> — სოფელი</div>
-<div class="word"><b>park</b> — პარკი</div>
-<div class="word"><b>shop</b> — მაღაზია</div>
-<div class="word"><b>library</b> — ბიბლიოთეკა</div>
-<div class="word"><b>hospital</b> — საავადმყოფო</div>
-<div class="word"><b>street</b> — ქუჩა</div>
-<div class="word"><b>station</b> — სადგური</div>
-<div class="word"><b>school</b> — სკოლა</div>
-<div class="word"><b>restaurant</b> — რესტორანი</div>
-</div>
-
-
-<div class="card">
-<h3>🕒 Time — დრო</h3>
-
-<div class="word"><b>today</b> — დღეს</div>
-<div class="word"><b>tomorrow</b> — ხვალ</div>
-<div class="word"><b>yesterday</b> — გუშინ</div>
-<div class="word"><b>morning</b> — დილა</div>
-<div class="word"><b>afternoon</b> — შუადღე</div>
-<div class="word"><b>evening</b> — საღამო</div>
-<div class="word"><b>night</b> — ღამე</div>
-<div class="word"><b>week</b> — კვირა</div>
-<div class="word"><b>month</b> — თვე</div>
-<div class="word"><b>year</b> — წელი</div>
-<div class="word"><b>Monday</b> — ორშაბათი</div>
-<div class="word"><b>Tuesday</b> — სამშაბათი</div>
-<div class="word"><b>Wednesday</b> — ოთხშაბათი</div>
-<div class="word"><b>Thursday</b> — ხუთშაბათი</div>
-<div class="word"><b>Friday</b> — პარასკევი</div>
-<div class="word"><b>Saturday</b> — შაბათი</div>
-<div class="word"><b>Sunday</b> — კვირა</div>
+<div class="word"><b>forget</b> — დავიწყება</div>
+<div class="word"><b>decide</b> — გადაწყვეტა</div>
+<div class="word"><b>explain</b> — ახსნა</div>
+<div class="word"><b>answer</b> — პასუხის გაცემა</div>
+<div class="word"><b>ask</b> — კითხვა</div>
+<div class="word"><b>learn</b> — სწავლა</div>
+<div class="word"><b>improve</b> — გაუმჯობესება</div>
+<div class="word"><b>practice</b> — ვარჯიში</div>
+<div class="word"><b>discover</b> — აღმოჩენა</div>
 </div>
 
 
@@ -482,30 +454,173 @@ footer a{
 
 <div class="word"><b>happy</b> — ბედნიერი</div>
 <div class="word"><b>sad</b> — მოწყენილი</div>
+<div class="word"><b>excited</b> — აღელვებული</div>
+<div class="word"><b>nervous</b> — ნერვიული</div>
+<div class="word"><b>proud</b> — ამაყი</div>
+<div class="word"><b>worried</b> — შეშფოთებული</div>
+<div class="word"><b>surprised</b> — გაკვირვებული</div>
 <div class="word"><b>angry</b> — გაბრაზებული</div>
 <div class="word"><b>tired</b> — დაღლილი</div>
-<div class="word"><b>excited</b> — აღელვებული</div>
+<div class="word"><b>bored</b> — მოწყენილი/მობეზრებული</div>
 <div class="word"><b>afraid</b> — შეშინებული</div>
-<div class="word"><b>hungry</b> — მშიერი</div>
-<div class="word"><b>thirsty</b> — მწყურვალი</div>
-<div class="word"><b>fine</b> — კარგად</div>
-<div class="word"><b>great</b> — შესანიშნავი</div>
+<div class="word"><b>confident</b> — თავდაჯერებული</div>
 </div>
 
 
 <div class="card">
-<h3>🎨 Colors — ფერები</h3>
+<h3>🎨 Adjectives — ზედსართავები</h3>
 
-<div class="word"><b>red</b> — წითელი</div>
-<div class="word"><b>blue</b> — ლურჯი</div>
-<div class="word"><b>green</b> — მწვანე</div>
-<div class="word"><b>yellow</b> — ყვითელი</div>
-<div class="word"><b>orange</b> — ნარინჯისფერი</div>
-<div class="word"><b>purple</b> — იისფერი</div>
-<div class="word"><b>pink</b> — ვარდისფერი</div>
-<div class="word"><b>black</b> — შავი</div>
-<div class="word"><b>white</b> — თეთრი</div>
-<div class="word"><b>brown</b> — ყავისფერი</div>
+<div class="word"><b>beautiful</b> — ლამაზი</div>
+<div class="word"><b>interesting</b> — საინტერესო</div>
+<div class="word"><b>important</b> — მნიშვნელოვანი</div>
+<div class="word"><b>easy</b> — მარტივი</div>
+<div class="word"><b>difficult</b> — რთული</div>
+<div class="word"><b>different</b> — განსხვავებული</div>
+<div class="word"><b>similar</b> — მსგავსი</div>
+<div class="word"><b>famous</b> — ცნობილი</div>
+<div class="word"><b>friendly</b> — მეგობრული</div>
+<div class="word"><b>careful</b> — ფრთხილი</div>
+<div class="word"><b>clever</b> — ჭკვიანი</div>
+<div class="word"><b>special</b> — განსაკუთრებული</div>
+</div>
+
+
+<div class="card">
+<h3>🚗 Travel — მოგზაურობა</h3>
+
+<div class="word"><b>travel</b> — მოგზაურობა</div>
+<div class="word"><b>trip</b> — მოგზაურობა/მგზავრობა</div>
+<div class="word"><b>holiday</b> — არდადეგები</div>
+<div class="word"><b>airport</b> — აეროპორტი</div>
+<div class="word"><b>station</b> — სადგური</div>
+<div class="word"><b>ticket</b> — ბილეთი</div>
+<div class="word"><b>hotel</b> — სასტუმრო</div>
+<div class="word"><b>train</b> — მატარებელი</div>
+<div class="word"><b>plane</b> — თვითმფრინავი</div>
+<div class="word"><b>bus</b> — ავტობუსი</div>
+<div class="word"><b>visit</b> — მონახულება</div>
+<div class="word"><b>journey</b> — მოგზაურობა</div>
+</div>
+
+
+<div class="card">
+<h3>💻 Technology — ტექნოლოგია</h3>
+
+<div class="word"><b>computer</b> — კომპიუტერი</div>
+<div class="word"><b>phone</b> — ტელეფონი</div>
+<div class="word"><b>screen</b> — ეკრანი</div>
+<div class="word"><b>internet</b> — ინტერნეტი</div>
+<div class="word"><b>website</b> — ვებგვერდი</div>
+<div class="word"><b>message</b> — შეტყობინება</div>
+<div class="word"><b>video</b> — ვიდეო</div>
+<div class="word"><b>photo</b> — ფოტო</div>
+<div class="word"><b>search</b> — ძებნა</div>
+<div class="word"><b>click</b> — დაჭერა</div>
+<div class="word"><b>download</b> — ჩამოტვირთვა</div>
+<div class="word"><b>online</b> — ონლაინ</div>
+</div>
+
+</div>
+</section>
+
+
+<section class="section">
+
+<div class="title">
+<h2>📖 Grammar — გრამატიკა</h2>
+<p>4-ე კლასის მნიშვნელოვანი გრამატიკული წესები</p>
+</div>
+
+
+<div class="grammar">
+
+<h3>1️⃣ Present Simple — აწმყო მარტივი</h3>
+
+<p>ვიყენებთ ჩვევების, ყოველდღიური მოქმედებებისა და ფაქტების აღსაწერად.</p>
+
+<div class="example">
+<strong>I play</strong> football every day.<br>
+მე ყოველდღე ფეხბურთს ვთამაშობ.
+</div>
+
+<div class="example">
+<strong>She likes</strong> English.<br>
+მას ინგლისური მოსწონს.
+</div>
+
+<div class="example">
+<strong>They go</strong> to school.<br>
+ისინი სკოლაში დადიან.
+</div>
+
+</div>
+
+
+<div class="grammar">
+
+<h3>2️⃣ Present Continuous — აწმყო მიმდინარეობითი</h3>
+
+<p>ვიყენებთ მოქმედებისთვის, რომელიც ახლა მიმდინარეობს.</p>
+
+<div class="example">
+<strong>I am reading</strong> a book.<br>
+მე წიგნს ვკითხულობ.
+</div>
+
+<div class="example">
+<strong>She is writing</strong> a sentence.<br>
+ის წინადადებას წერს.
+</div>
+
+<div class="example">
+<strong>They are playing</strong> football.<br>
+ისინი ფეხბურთს თამაშობენ.
+</div>
+
+</div>
+
+
+<div class="grammar">
+
+<h3>3️⃣ Past Simple — წარსული</h3>
+
+<p>ვიყენებთ წარსულში დასრულებული მოქმედებისთვის.</p>
+
+<div class="example">
+<strong>I visited</strong> my grandmother yesterday.<br>
+გუშინ ბებიას ვესტუმრე.
+</div>
+
+<div class="example">
+<strong>We played</strong> football yesterday.<br>
+გუშინ ფეხბურთი ვითამაშეთ.
+</div>
+
+<div class="example">
+<strong>She watched</strong> a film last night.<br>
+მან წუხელ ფილმს უყურა.
+</div>
+
+</div>
+
+
+<div class="grammar">
+
+<h3>4️⃣ Can — შემიძლია</h3>
+
+<div class="example">
+<strong>I can swim.</strong><br>
+მე ცურვა შემიძლია.
+</div>
+
+<div class="example">
+<strong>Can you help me?</strong><br>
+შეგიძლია დამეხმარო?
+</div>
+
+<div class="example">
+<strong>She can speak English.</strong><br>
+მას ინგლისურად საუბარი შეუძლია.
 </div>
 
 </div>
@@ -517,33 +632,98 @@ footer a{
 
 <div class="title">
 <h2>🗣️ Everyday English</h2>
-<p>ყოველდღიური მარტივი ინგლისური ფრაზები</p>
+<p>ისწავლე ფრაზები და გამოიყენე საუბრისას</p>
 </div>
 
 <div class="grid">
 
 <div class="card">
-<div class="phrase"><b>Hello!</b><br>გამარჯობა!</div>
-<div class="phrase"><b>How are you?</b><br>როგორ ხარ?</div>
-<div class="phrase"><b>I am fine.</b><br>კარგად ვარ.</div>
-<div class="phrase"><b>What is your name?</b><br>რა გქვია?</div>
-<div class="phrase"><b>My name is Mariami.</b><br>მე მარიამი მქვია.</div>
+
+<div class="phrase">
+<b>How was your day?</b><br>
+როგორი იყო შენი დღე?
 </div>
 
-<div class="card">
-<div class="phrase"><b>Where are you from?</b><br>საიდან ხარ?</div>
-<div class="phrase"><b>I am from Georgia.</b><br>მე საქართველოდან ვარ.</div>
-<div class="phrase"><b>Thank you!</b><br>მადლობა!</div>
-<div class="phrase"><b>You are welcome.</b><br>არაფრის.</div>
-<div class="phrase"><b>Goodbye!</b><br>ნახვამდის!</div>
+<div class="phrase">
+<b>It was great!</b><br>
+შესანიშნავი იყო!
 </div>
 
+<div class="phrase">
+<b>What are you doing?</b><br>
+რას აკეთებ?
+</div>
+
+<div class="phrase">
+<b>I am doing my homework.</b><br>
+საშინაო დავალებას ვაკეთებ.
+</div>
+
+<div class="phrase">
+<b>What did you do yesterday?</b><br>
+რა გააკეთე გუშინ?
+</div>
+
+</div>
+
+
 <div class="card">
-<div class="phrase"><b>I don't understand.</b><br>ვერ ვიგებ.</div>
-<div class="phrase"><b>Please repeat.</b><br>გთხოვ, გაიმეორე.</div>
-<div class="phrase"><b>Can you help me?</b><br>შეგიძლია დამეხმარო?</div>
-<div class="phrase"><b>Yes, of course.</b><br>დიახ, რა თქმა უნდა.</div>
-<div class="phrase"><b>See you tomorrow!</b><br>ხვალამდე!</div>
+
+<div class="phrase">
+<b>Can you help me?</b><br>
+შეგიძლია დამეხმარო?
+</div>
+
+<div class="phrase">
+<b>Of course!</b><br>
+რა თქმა უნდა!
+</div>
+
+<div class="phrase">
+<b>Could you repeat, please?</b><br>
+გთხოვ, გაიმეორებ?
+</div>
+
+<div class="phrase">
+<b>I don't understand.</b><br>
+ვერ ვიგებ.
+</div>
+
+<div class="phrase">
+<b>What does this word mean?</b><br>
+რას ნიშნავს ეს სიტყვა?
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="phrase">
+<b>Where are you going?</b><br>
+სად მიდიხარ?
+</div>
+
+<div class="phrase">
+<b>I am going to school.</b><br>
+სკოლაში მივდივარ.
+</div>
+
+<div class="phrase">
+<b>What is your favourite subject?</b><br>
+რომელია შენი საყვარელი საგანი?
+</div>
+
+<div class="phrase">
+<b>My favourite subject is English.</b><br>
+ჩემი საყვარელი საგანი ინგლისურია.
+</div>
+
+<div class="phrase">
+<b>See you tomorrow!</b><br>
+ხვალამდე!
+</div>
+
 </div>
 
 </div>
@@ -554,23 +734,24 @@ footer a{
 <section class="section">
 
 <div class="title">
-<h2>🎯 შეამოწმე შენი ცოდნა</h2>
+<h2>🎯 Quiz — შეამოწმე ცოდნა</h2>
 </div>
+
 
 <div class="quiz">
 
-<h3>1️⃣ What does “relative” mean?</h3>
+<h3>1️⃣ What does “environment” mean?</h3>
 
-<button onclick="answer(this,'🎉 სწორია! Relative = ნათესავი')">
-ნათესავი
+<button onclick="answer(this,'🎉 სწორია! Environment = გარემო')">
+გარემო
 </button>
 
 <button onclick="answer(this,'❌ სცადე კიდევ!')">
-მასწავლებელი
+მოგზაურობა
 </button>
 
 <button onclick="answer(this,'❌ სცადე კიდევ!')">
-მაღაზია
+სკოლა
 </button>
 
 <p class="result"></p>
@@ -580,18 +761,18 @@ footer a{
 
 <div class="quiz">
 
-<h3>2️⃣ What does “forest” mean?</h3>
+<h3>2️⃣ Choose the correct sentence:</h3>
 
-<button onclick="answer(this,'❌ სცადე კიდევ!')">
-მდინარე
-</button>
-
-<button onclick="answer(this,'🎉 სწორია! Forest = ტყე')">
-ტყე
+<button onclick="answer(this,'🎉 სწორია! She likes English.')">
+She likes English.
 </button>
 
 <button onclick="answer(this,'❌ სცადე კიდევ!')">
-მთა
+She like English.
+</button>
+
+<button onclick="answer(this,'❌ სცადე კიდევ!')">
+She liking English.
 </button>
 
 <p class="result"></p>
@@ -601,18 +782,60 @@ footer a{
 
 <div class="quiz">
 
-<h3>3️⃣ What is “yellow”?</h3>
+<h3>3️⃣ What is the past of “go”?</h3>
 
 <button onclick="answer(this,'❌ სცადე კიდევ!')">
-ლურჯი
+goed
 </button>
 
-<button onclick="answer(this,'🎉 სწორია! Yellow = ყვითელი')">
-ყვითელი
+<button onclick="answer(this,'🎉 სწორია! Go → went')">
+went
 </button>
 
 <button onclick="answer(this,'❌ სცადე კიდევ!')">
-მწვანე
+going
+</button>
+
+<p class="result"></p>
+
+</div>
+
+
+<div class="quiz">
+
+<h3>4️⃣ What does “journey” mean?</h3>
+
+<button onclick="answer(this,'❌ სცადე კიდევ!')">
+სახლი
+</button>
+
+<button onclick="answer(this,'❌ სცადე კიდევ!')">
+საკვები
+</button>
+
+<button onclick="answer(this,'🎉 სწორია! Journey = მოგზაურობა')">
+მოგზაურობა
+</button>
+
+<p class="result"></p>
+
+</div>
+
+
+<div class="quiz">
+
+<h3>5️⃣ Complete: I ___ swimming.</h3>
+
+<button onclick="answer(this,'🎉 სწორია! I am swimming.')">
+am
+</button>
+
+<button onclick="answer(this,'❌ სცადე კიდევ!')">
+is
+</button>
+
+<button onclick="answer(this,'❌ სცადე კიდევ!')">
+are
 </button>
 
 <p class="result"></p>
@@ -632,8 +855,8 @@ footer a{
 🌱 2-ე კლასი
 </a>
 
-<a class="home-btn" href="grade4.html">
-⭐ 4-ე კლასი
+<a class="home-btn" href="grade3.html">
+🚀 3-ე კლასი
 </a>
 
 <a class="home-btn" href="games.html">
@@ -647,28 +870,33 @@ footer a{
 
 <footer>
 
-<p>🌈 English with Mariami</p>
+<p>🌈 <strong>English with Mariami</strong></p>
 
 <p>
 <a href="index.html">🏠 მთავარი</a>
 &nbsp; • &nbsp;
 <a href="grade2.html">🌱 2-ე კლასი</a>
 &nbsp; • &nbsp;
-<a href="grade4.html">⭐ 4-ე კლასი</a>
+<a href="grade3.html">🚀 3-ე კლასი</a>
 &nbsp; • &nbsp;
 <a href="games.html">🎮 თამაშები</a>
 </p>
 
-<p>📞 მარიამთან დაკავშირება — ინგლისურის სწავლა სიყვარულით ❤️</p>
+<p>📚 ისწავლე ინგლისური სიყვარულით ❤️</p>
 
 </footer>
 
 
 <script>
+
 function answer(button,text){
-  const box=button.closest(".quiz");
-  box.querySelector(".result").textContent=text;
+
+const box=button.closest(".quiz");
+
+box.querySelector(".result").textContent=text;
+
 }
+
 </script>
 
 </body>
