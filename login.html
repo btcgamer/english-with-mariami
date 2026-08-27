@@ -1,9 +1,31 @@
 <!doctype html>
 <html lang="ka">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🔐 შესვლა | English with Mariami</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 15% 10%,#075eff55,transparent 28%),radial-gradient(circle at 85% 20%,#00eaff33,transparent 30%),linear-gradient(135deg,#02091c,#043c55 55%,#071b30)}.box{width:min(500px,calc(100% - 30px));padding:35px;border-radius:30px;background:linear-gradient(145deg,#102d4d,#123b35);border:1px solid #00eaff99;box-shadow:0 25px 70px #000b,0 0 35px #00eaff44}.logo{text-align:center;font-size:65px}.h{text-align:center;font-size:34px;color:#ffe600;margin:10px 0}.sub{text-align:center;color:#dffcff;margin-bottom:28px;font-weight:bold}label{display:block;margin:14px 0 7px;color:#6dffbf;font-weight:900}input{width:100%;padding:15px;border-radius:14px;border:1px solid #00eaff77;background:#06162f;color:#fff;font-size:16px}button{width:100%;margin-top:22px;padding:16px;border:0;border-radius:16px;background:linear-gradient(135deg,#075eff,#00d084,#ffe600);color:#06162f;font-size:17px;font-weight:1000}.message{text-align:center;min-height:45px;margin-top:18px;font-weight:900;line-height:1.5}.links{text-align:center;margin-top:20px}.links a{color:#ffe600;font-weight:900;text-decoration:none;margin:0 8px}</style>
-</head><body><div class="box"><div class="logo">🔐</div><h1 class="h">შესვლა</h1><div class="sub">🌈 English with Mariami</div><form id="loginForm" autocomplete="on"><label>📧 ელფოსტა</label><input type="email" id="email" name="email" autocomplete="username" required><label>🔐 პაროლი</label><input type="password" id="password" name="password" autocomplete="current-password" required><button type="submit" id="loginBtn">🚀 შესვლა</button></form><div id="message" class="message"></div><div class="links">არ გაქვს ანგარიში? <a href="register.html">📝 რეგისტრაცია</a><br><br><a href="index.html">🏠 მთავარი</a></div></div>
-<script>const SUPABASE_URL="https://vtdhvsfqhwesxtwmduew.supabase.co",SUPABASE_KEY="sb_publishable_MnrM2ulyJY_ugwfFVfpV5wjCmt",STORAGE_KEY="english-with-mariami-auth";const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:window.localStorage,storageKey:STORAGE_KEY}});const form=document.getElementById('loginForm'),emailInput=document.getElementById('email'),passwordInput=document.getElementById('password'),msg=document.getElementById('message'),btn=document.getElementById('loginBtn');form.addEventListener('submit',async e=>{e.preventDefault();e.stopPropagation();btn.disabled=true;btn.textContent='⏳ მოწმდება...';msg.textContent='🔎 ვამოწმებ მონაცემებს...';try{const {data,error}=await db.auth.signInWithPassword({email:emailInput.value.trim(),password:passwordInput.value});if(error){msg.textContent='❌ '+error.message;btn.disabled=false;btn.textContent='🚀 შესვლა';return}if(!data?.session){msg.textContent='❌ ანგარიში ვერ დადასტურდა.';btn.disabled=false;btn.textContent='🚀 შესვლა';return}msg.textContent='🎉 წარმატებით შეხვედი!';setTimeout(()=>window.location.href='student.html',500)}catch(err){console.error(err);msg.textContent='❌ კავშირის შეცდომა. სცადე თავიდან.';btn.disabled=false;btn.textContent='🚀 შესვლა'}});</script></body></html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>შესვლა — English with Mariami</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#eef6ff,#fff7ec);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;color:#172033}.card{width:100%;max-width:440px;background:#fff;border-radius:24px;padding:32px;box-shadow:0 15px 45px rgba(30,60,100,.15)}h1{text-align:center;margin:0 0 8px;font-size:30px}.sub{text-align:center;color:#667085;margin:0 0 26px}.field{margin-bottom:16px}label{display:block;font-weight:700;margin-bottom:7px}input{width:100%;padding:13px 14px;border:1px solid #d0d5dd;border-radius:12px;font-size:16px;outline:none}input:focus{border-color:#5b8def;box-shadow:0 0 0 3px rgba(91,141,239,.12)}button{width:100%;border:0;border-radius:12px;padding:14px;background:#4169e1;color:#fff;font-size:17px;font-weight:700;cursor:pointer}button:disabled{opacity:.6}.message{margin-top:16px;text-align:center;line-height:1.5}.success{color:#16803c}.error{color:#c62828}.register{text-align:center;margin-top:20px}.register a{color:#4169e1;font-weight:700;text-decoration:none}.brand{text-align:center;font-size:14px;color:#7b8190;margin-top:22px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>🔐 შესვლა</h1>
+    <p class="sub">კეთილი იყოს შენი დაბრუნება! 🎓</p>
+    <form id="loginForm">
+      <div class="field"><label for="email">ელფოსტა</label><input id="email" type="email" required placeholder="example@gmail.com"></div>
+      <div class="field"><label for="password">პაროლი</label><input id="password" type="password" required placeholder="შეიყვანე პაროლი"></div>
+      <button id="submitBtn" type="submit">🚀 შესვლა</button><div id="message" class="message"></div>
+    </form>
+    <div class="register">არ გაქვს ანგარიში? <a href="register.html">რეგისტრაცია</a></div>
+    <div class="brand">English with Mariami 🇬🇪 🇬🇧</div>
+  </main>
+  <script>
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const form = document.getElementById('loginForm');const message = document.getElementById('message');const submitBtn = document.getElementById('submitBtn');
+    form.addEventListener('submit', async (event) => {event.preventDefault();message.textContent='';message.className='message';submitBtn.disabled=true;submitBtn.textContent='მიმდინარეობს...';const email=document.getElementById('email').value.trim();const password=document.getElementById('password').value;try{const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error)throw error;if(!data.user)throw new Error('შესვლა ვერ მოხერხდა.');message.className='message success';message.textContent='🎉 წარმატებით შეხვედი!';setTimeout(()=>{window.location.href='index.html';},700)}catch(error){console.error(error);message.className='message error';message.textContent='❌ '+(error.message||'ელფოსტა ან პაროლი არასწორია.')}finally{submitBtn.disabled=false;submitBtn.textContent='🚀 შესვლა'}});
+  </script>
+</body>
+</html>
