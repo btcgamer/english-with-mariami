@@ -1,48 +1,44 @@
-// English with Mariami — protected pages
-// Shared Supabase session guard for all protected pages.
+// English with Mariami — reliable protected-page guard
 (function () {
   const SUPABASE_URL = "https://vtdhvsfqhwesxtwmduew.supabase.co";
   const SUPABASE_KEY = "sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt";
-  const STORAGE_KEY = "english-with-mariami-auth";
   const LOGIN = "login.html";
 
-  function redirectToLogin() {
+  function goLogin() {
     const target = location.pathname + location.search + location.hash;
     location.replace(LOGIN + "?redirect=" + encodeURIComponent(target));
   }
 
-  function startGuard() {
-    if (!window.supabase || !window.supabase.createClient) {
-      redirectToLogin();
-      return;
-    }
+  function start() {
+    if (!window.supabase || !window.supabase.createClient) return goLogin();
+    let client;
+    try {
+      client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storage: window.localStorage }
+      });
+    } catch (e) { return goLogin(); }
 
-    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-      auth: {
-        persistSession: true,
-        autoRefreshToken: true,
-        detectSessionInUrl: true,
-        storage: window.localStorage,
-        storageKey: STORAGE_KEY
-      }
-    });
+    let allowed = false;
+    const allow = () => { allowed = true; };
+    const deny = () => { if (!allowed) goLogin(); };
 
     client.auth.getSession().then(({ data }) => {
-      if (data && data.session) return;
-      setTimeout(async () => {
-        const { data: retry } = await client.auth.getSession();
-        if (!retry || !retry.session) redirectToLogin();
-      }, 700);
-    }).catch(() => redirectToLogin());
+      if (data && data.session) { allow(); return; }
+      setTimeout(() => client.auth.getSession().then(({ data: retry }) => retry && retry.session ? allow() : deny()).catch(deny), 1800);
+    }).catch(deny);
+
+    client.auth.onAuthStateChange((event, session) => {
+      if (session) allow();
+      else if (event === "SIGNED_OUT") goLogin();
+    });
   }
 
-  if (window.supabase && window.supabase.createClient) {
-    startGuard();
-  } else {
+  if (window.supabase && window.supabase.createClient) start();
+  else {
     const script = document.createElement("script");
     script.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
-    script.onload = startGuard;
-    script.onerror = redirectToLogin;
+    script.onload = start;
+    script.onerror = goLogin;
     document.head.appendChild(script);
   }
 })();
