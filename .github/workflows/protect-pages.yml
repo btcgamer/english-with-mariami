@@ -1,0 +1,53 @@
+name: Protect student pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  protect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add auth guard to protected HTML pages
+        shell: bash
+        run: |
+          set -e
+          pages=(
+            grade2.html grade3.html grade4.html games.html
+            words.html speaking.html reading.html grammar.html listening.html
+            lessons.html lessons2.html class2.html
+          )
+          for file in "${pages[@]}"; do
+            if [ -f "$file" ] && ! grep -q 'src="protect.js"' "$file"; then
+              python3 - "$file" <<'PY'
+import sys
+from pathlib import Path
+p = Path(sys.argv[1])
+s = p.read_text(encoding='utf-8')
+needle = '</head>'
+if needle in s:
+    s = s.replace(needle, '<script src="protect.js"></script></head>', 1)
+    p.write_text(s, encoding='utf-8')
+PY
+            fi
+          done
+
+      - name: Commit protection changes
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No protection changes needed."
+            exit 0
+          fi
+          git add '*.html'
+          git commit -m "Protect student pages with Supabase login"
+          git push
