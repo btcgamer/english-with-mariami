@@ -1,1 +1,1205 @@
-<!doctype html><html lang="ka"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>📖 კითხვა | English with Mariami</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 15% 10%,#075eff55,transparent 28%),radial-gradient(circle at 85% 30%,#00eaff33,transparent 30%),linear-gradient(135deg,#02091c,#043c55 55%,#071b30);min-height:100vh}.wrap{width:min(1100px,calc(100% - 30px));margin:auto}header{background:linear-gradient(135deg,#075eff,#00d084,#ffe600);padding:18px 15px 42px;border-radius:0 0 40px 40px;box-shadow:0 20px 60px #00eaff66}nav{display:flex;justify-content:center;flex-wrap:wrap;gap:9px}nav a,.back{padding:11px 16px;border-radius:15px;background:#06162f;color:#ffe600;text-decoration:none;font-weight:900;border:1px solid #ffe600}.hero{text-align:center;padding:28px 0 0}.hero .i{font-size:70px}.hero h1{font-size:clamp(38px,7vw,62px);margin:8px}.hero p{font-weight:900}.tabs{text-align:center;margin:28px 0}.tabs button,.answers button{border:2px solid #00eaff;background:#06162f;color:#fff;padding:12px 18px;border-radius:14px;font-weight:900;margin:5px;cursor:pointer}.tabs button.active{background:linear-gradient(135deg,#075eff,#00d084);color:#ffe600}.panel{display:none}.panel.active{display:block}.reading{background:linear-gradient(145deg,#102d4d,#123b35);border:1px solid #00eaff77;border-radius:25px;padding:25px;box-shadow:0 15px 35px #0008;margin:22px 0}.reading h2{color:#ffe600}.story{background:#06162f;border-radius:18px;padding:20px;line-height:1.9;font-size:18px;border-left:5px solid #00d084}.q{margin-top:20px;padding:18px;border-radius:18px;background:#071a32;border:1px solid #00eaff44}.q h3{color:#ffe600}.answers button{background:#075eff}.result{font-weight:1000;color:#6dffbf;min-height:25px}.backbox{text-align:center;padding:40px}.back{display:inline-block;box-shadow:0 0 20px #00eaff55}.float{position:fixed;right:18px;bottom:18px}.float a{background:linear-gradient(135deg,#075eff,#00d084,#ffe600);color:#06162f;padding:14px 18px;border:2px solid #fff;border-radius:18px;font-weight:1000;text-decoration:none;box-shadow:0 0 20px #00eaff}@media(max-width:600px){nav a{font-size:12px}.hero .i{font-size:52px}}</style></head><body><header><nav><a href="index.html">🏠 მთავარი</a><a href="words.html">🧠 სიტყვები</a><a href="speaking.html">🗣️ საუბარი</a><a href="reading.html">📖 კითხვა</a><a href="grammar.html">✍️ გრამატიკა</a><a href="listening.html">🎧 მოსმენა</a><a href="games.html">🎮 თამაში</a></nav><div class="hero"><div class="i">📖</div><h1>კითხვა + პასუხი</h1><p>წაიკითხე ინგლისურად, უპასუხე კითხვებს და შეამოწმე შენი ცოდნა!</p></div></header><main class="wrap"><div class="tabs"><button class="active" onclick="show(2,this)">🌱 2-ე კლასი</button><button onclick="show(3,this)">🚀 3-ე კლასი</button><button onclick="show(4,this)">⭐ 4-ე კლასი</button></div><section id="g2" class="panel active"><article class="reading"><h2>🐱 My Cat</h2><div class="story">My name is Anna. I have a little cat. Her name is Mimi. Mimi is white. She likes milk and fish. She can run and jump.</div><div class="q"><h3>1️⃣ What is the cat's name?</h3><div class="answers"><button onclick="ans(this,'🎉 სწორია! Her name is Mimi.')">Mimi</button><button onclick="ans(this,'❌ სცადე კიდევ!')">Anna</button><button onclick="ans(this,'❌ სცადე კიდევ!')">Tom</button></div><p class="result"></p></div><div class="q"><h3>2️⃣ What colour is Mimi?</h3><div class="answers"><button onclick="ans(this,'❌ სცადე კიდევ!')">Black</button><button onclick="ans(this,'🎉 სწორია! Mimi is white.')">White</button><button onclick="ans(this,'❌ სცადე კიდევ!')">Green</button></div><p class="result"></p></div></article></section><section id="g3" class="panel"><article class="reading"><h2>🏫 My School Day</h2><div class="story">My name is Luka. I go to school every morning. I have English, maths and art lessons. My favourite subject is English. At lunch time I eat an apple and drink water. After school I play football with my friends.</div><div class="q"><h3>1️⃣ What is Luka's favourite subject?</h3><div class="answers"><button onclick="ans(this,'🎉 სწორია! His favourite subject is English.')">English</button><button onclick="ans(this,'❌ სცადე კიდევ!')">Maths</button><button onclick="ans(this,'❌ სცადე კიდევ!')">Art</button></div><p class="result"></p></div><div class="q"><h3>2️⃣ What does Luka drink at lunch?</h3><div class="answers"><button onclick="ans(this,'❌ სცადე კიდევ!')">Milk</button><button onclick="ans(this,'🎉 სწორია! He drinks water.')">Water</button><button onclick="ans(this,'❌ სცადე კიდევ!')">Juice</button></div><p class="result"></p></div></article></section><section id="g4" class="panel"><article class="reading"><h2>🌍 A Trip to the Mountains</h2><div class="story">Last weekend, Nika travelled to the mountains with his family. They stayed in a small hotel near a forest. On Saturday they walked beside a river and took many photos. The weather was sunny and warm. Nika enjoyed the trip because he loves nature and adventure.</div><div class="q"><h3>1️⃣ Where did Nika travel?</h3><div class="answers"><button onclick="ans(this,'🎉 სწორია! He travelled to the mountains.')">The mountains</button><button onclick="ans(this,'❌ სცადე კიდევ!')">The city</button><button onclick="ans(this,'❌ სცადე კიდევ!')">The beach</button></div><p class="result"></p></div><div class="q"><h3>2️⃣ Why did Nika enjoy the trip?</h3><div class="answers"><button onclick="ans(this,'❌ სცადე კიდევ!')">He likes shopping.</button><button onclick="ans(this,'🎉 სწორია! He loves nature and adventure.')">He loves nature and adventure.</button><button onclick="ans(this,'❌ სცადე კიდევ!')">He likes homework.</button></div><p class="result"></p></div></article></section><div class="backbox"><a class="back" href="index.html">🏠 მთავარ გვერდზე დაბრუნება</a></div></main><div class="float"><a href="index.html">🏠 მთავარი</a></div><script>function show(n,b){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById('g'+n).classList.add('active');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}function ans(b,t){b.closest('.q').querySelector('.result').textContent=t}</script></body></html>
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>📖 კითხვა + პასუხი | English with Mariami</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 10% 10%,#075eff55,transparent 25%),
+radial-gradient(circle at 90% 20%,#00eaff33,transparent 30%),
+radial-gradient(circle at 50% 90%,#00d08422,transparent 30%),
+linear-gradient(135deg,#02091c,#043c55 50%,#071b30);
+min-height:100vh;
+}
+
+.wrap{
+width:min(1100px,calc(100% - 30px));
+margin:auto;
+}
+
+header{
+background:linear-gradient(135deg,#075eff,#00d084,#ffe600);
+padding:18px 15px 42px;
+border-radius:0 0 40px 40px;
+box-shadow:0 20px 60px #00eaff66;
+}
+
+nav{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:9px;
+}
+
+nav a{
+padding:11px 16px;
+border-radius:15px;
+background:#06162f;
+color:#ffe600;
+text-decoration:none;
+font-weight:900;
+border:1px solid #ffe600;
+box-shadow:0 0 16px #ffe60044;
+transition:.3s;
+}
+
+nav a:hover{
+transform:translateY(-4px) scale(1.04);
+box-shadow:0 0 20px #00eaff,0 0 35px #00eaff;
+}
+
+.hero{
+text-align:center;
+padding:30px 0 0;
+}
+
+.hero .icon{
+font-size:75px;
+filter:drop-shadow(0 0 25px #fff);
+}
+
+.hero h1{
+font-size:clamp(38px,7vw,65px);
+margin:8px 0;
+text-shadow:0 0 20px #004;
+}
+
+.hero p{
+font-weight:900;
+font-size:18px;
+}
+
+.class-buttons{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+margin:35px 0;
+}
+
+.class-btn{
+border:2px solid #00eaff;
+border-radius:25px;
+padding:20px;
+background:linear-gradient(145deg,#06162f,#075eff);
+color:#fff;
+font-size:20px;
+font-weight:1000;
+cursor:pointer;
+box-shadow:0 12px 30px #0009,0 0 20px #00eaff55;
+transition:.3s;
+}
+
+.class-btn:hover{
+transform:translateY(-8px) scale(1.03);
+box-shadow:0 0 30px #00eaff,0 20px 40px #0009;
+}
+
+.class-btn.active{
+background:linear-gradient(135deg,#075eff,#00d084,#ffe600);
+color:#06162f;
+box-shadow:0 0 30px #ffe600,0 15px 35px #0009;
+}
+
+.score-box{
+position:sticky;
+top:10px;
+z-index:50;
+text-align:center;
+margin:20px 0;
+padding:15px;
+border-radius:20px;
+background:linear-gradient(135deg,#06162f,#075eff);
+border:2px solid #00eaff;
+box-shadow:0 0 25px #00eaff88;
+font-size:22px;
+font-weight:1000;
+}
+
+.score{
+color:#ffe600;
+font-size:28px;
+}
+
+.level{
+text-align:center;
+color:#6dffbf;
+font-weight:900;
+margin-top:5px;
+}
+
+.panel{
+display:none;
+animation:fade .4s ease;
+}
+
+.panel.active{
+display:block;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(15px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+.reading{
+background:linear-gradient(145deg,#102d4d,#123b35);
+border:1px solid #00eaff88;
+border-radius:28px;
+padding:25px;
+margin:25px 0;
+box-shadow:0 15px 40px #0009,0 0 25px #00eaff33;
+}
+
+.reading h2{
+color:#ffe600;
+font-size:28px;
+text-shadow:0 0 12px #ffe60066;
+}
+
+.story{
+background:#06162f;
+border-radius:20px;
+padding:22px;
+line-height:1.9;
+font-size:18px;
+border-left:5px solid #00d084;
+box-shadow:inset 0 0 20px #00eaff11;
+}
+
+.story b{
+color:#6dffbf;
+}
+
+.q{
+margin-top:22px;
+padding:20px;
+border-radius:20px;
+background:#071a32;
+border:1px solid #00eaff55;
+box-shadow:0 8px 25px #0006;
+}
+
+.q h3{
+color:#ffe600;
+font-size:20px;
+}
+
+.answers{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.answers button{
+flex:1;
+min-width:180px;
+border:2px solid #00eaff;
+background:linear-gradient(135deg,#075eff,#06436a);
+color:#fff;
+padding:14px 18px;
+border-radius:15px;
+font-weight:1000;
+cursor:pointer;
+transition:.25s;
+}
+
+.answers button:hover{
+transform:translateY(-4px) scale(1.02);
+box-shadow:0 0 20px #00eaff;
+}
+
+.answers button.correct{
+background:linear-gradient(135deg,#00d084,#6dffbf);
+color:#06162f;
+border-color:#6dffbf;
+}
+
+.answers button.wrong{
+background:linear-gradient(135deg,#9b111e,#ff4040);
+color:#fff;
+border-color:#ff7070;
+}
+
+.result{
+min-height:28px;
+margin:14px 0 0;
+font-weight:1000;
+font-size:17px;
+}
+
+.result.good{
+color:#6dffbf;
+}
+
+.result.bad{
+color:#ff7777;
+}
+
+.final{
+text-align:center;
+margin:35px 0;
+padding:30px;
+border-radius:28px;
+background:linear-gradient(145deg,#075eff,#00d084,#ffe600);
+color:#06162f;
+box-shadow:0 0 40px #00eaff88;
+}
+
+.final h2{
+font-size:32px;
+margin:5px;
+}
+
+.final-score{
+font-size:42px;
+font-weight:1000;
+}
+
+.reset{
+border:0;
+padding:14px 24px;
+border-radius:16px;
+background:#06162f;
+color:#ffe600;
+font-size:17px;
+font-weight:1000;
+cursor:pointer;
+box-shadow:0 0 20px #00eaff;
+margin-top:15px;
+}
+
+.backbox{
+text-align:center;
+padding:35px 0 55px;
+}
+
+.back{
+display:inline-block;
+padding:14px 20px;
+border-radius:18px;
+background:linear-gradient(135deg,#075eff,#00d084,#ffe600);
+color:#06162f;
+text-decoration:none;
+font-weight:1000;
+border:2px solid #fff;
+box-shadow:0 0 20px #00eaff;
+margin:5px;
+}
+
+.float{
+position:fixed;
+right:18px;
+bottom:18px;
+z-index:9999;
+}
+
+.float a{
+display:inline-block;
+background:linear-gradient(135deg,#075eff,#00d084,#ffe600);
+color:#06162f;
+padding:14px 18px;
+border:2px solid #fff;
+border-radius:18px;
+font-weight:1000;
+text-decoration:none;
+box-shadow:0 0 20px #00eaff,0 8px 30px #0008;
+}
+
+@media(max-width:700px){
+.class-buttons{
+grid-template-columns:1fr;
+}
+
+.answers{
+flex-direction:column;
+}
+
+.answers button{
+width:100%;
+}
+
+.hero .icon{
+font-size:55px;
+}
+
+.reading{
+padding:18px;
+}
+
+.score-box{
+font-size:18px;
+}
+
+.score{
+font-size:24px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav>
+<a href="index.html">🏠 მთავარი</a>
+<a href="words.html">🧠 სიტყვები</a>
+<a href="speaking.html">🗣️ საუბარი</a>
+<a href="reading.html">📖 კითხვა</a>
+<a href="grammar.html">✍️ გრამატიკა</a>
+<a href="listening.html">🎧 მოსმენა</a>
+<a href="games.html">🎮 თამაში</a>
+</nav>
+
+<div class="hero">
+<div class="icon">📖</div>
+<h1>კითხვა + პასუხი</h1>
+<p>წაიკითხე ტექსტი, უპასუხე კითხვებს და დააგროვე ქულები! 🏆</p>
+</div>
+
+</header>
+
+
+<main class="wrap">
+
+<div class="class-buttons">
+
+<button class="class-btn active" onclick="changeClass(2,this)">
+🌱 2-ე კლასი
+</button>
+
+<button class="class-btn" onclick="changeClass(3,this)">
+🚀 3-ე კლასი
+</button>
+
+<button class="class-btn" onclick="changeClass(4,this)">
+⭐ 4-ე კლასი
+</button>
+
+</div>
+
+
+<div class="score-box">
+⭐ შენი ქულა:
+<span class="score" id="score">0</span>
+/
+<span id="total">6</span>
+
+<div class="level" id="level">
+დაიწყე თამაში! 🚀
+</div>
+</div>
+
+
+<!-- ================= 2 CLASS ================= -->
+
+<section id="g2" class="panel active">
+
+<div class="reading">
+
+<h2>🐱 My Little Cat</h2>
+
+<div class="story">
+My name is Anna. I have a little cat.
+Her name is Mimi. Mimi is white.
+She likes milk and fish.
+She can run and jump.
+Every morning, Mimi plays in the garden.
+Anna loves her little cat very much.
+</div>
+
+
+<div class="q">
+<h3>1️⃣ What is the cat's name?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'Her name is Mimi.')">
+Mimi
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Anna
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Tom
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>2️⃣ What colour is Mimi?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+Black
+</button>
+
+<button onclick="answer(this,true,'Mimi is white.')">
+White
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Green
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>3️⃣ What does Mimi like?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+Apples
+</button>
+
+<button onclick="answer(this,true,'She likes milk and fish.')">
+Milk and fish
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Bread
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+</div>
+
+
+<div class="reading">
+
+<h2>🏫 My School</h2>
+
+<div class="story">
+I am Luka. I am eight years old.
+I go to school every day.
+I have a blue school bag.
+My favourite subject is English.
+I like reading books and playing with my friends.
+My teacher is very kind.
+</div>
+
+
+<div class="q">
+<h3>4️⃣ How old is Luka?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'Luka is eight years old.')">
+Eight
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Seven
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Ten
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>5️⃣ What is Luka's favourite subject?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'His favourite subject is English.')">
+English
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Maths
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Art
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>6️⃣ What colour is Luka's school bag?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+Red
+</button>
+
+<button onclick="answer(this,true,'His school bag is blue.')">
+Blue
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Green
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+</div>
+
+<div class="final" id="final2">
+<h2>🏆 2-ე კლასის შედეგი</h2>
+<div class="final-score">
+<span id="score2">0</span> / 6
+</div>
+<p id="message2">ჯერ დაიწყე ტესტი! 💪</p>
+
+<button class="reset" onclick="resetClass(2)">
+🔄 თავიდან დაწყება
+</button>
+</div>
+
+</section>
+
+
+<!-- ================= 3 CLASS ================= -->
+
+<section id="g3" class="panel">
+
+<div class="reading">
+
+<h2>🏫 My School Day</h2>
+
+<div class="story">
+My name is Luka. I go to school every morning.
+I have English, maths and art lessons.
+My favourite subject is English.
+At lunch time I eat an apple and drink water.
+After school I play football with my friends.
+In the evening I do my homework.
+</div>
+
+
+<div class="q">
+<h3>1️⃣ What is Luka's favourite subject?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'His favourite subject is English.')">
+English
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Maths
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Art
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>2️⃣ What does Luka drink at lunch?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+Milk
+</button>
+
+<button onclick="answer(this,true,'He drinks water.')">
+Water
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Juice
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>3️⃣ What does Luka do after school?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+He sleeps.
+</button>
+
+<button onclick="answer(this,true,'He plays football with his friends.')">
+He plays football.
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+He goes shopping.
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+</div>
+
+
+<div class="reading">
+
+<h2>🐶 My Best Friend</h2>
+
+<div class="story">
+I have a best friend called Giorgi.
+He is very friendly and funny.
+We go to school together.
+After school we often play football.
+At weekends we ride our bikes in the park.
+We like spending time together.
+</div>
+
+
+<div class="q">
+<h3>4️⃣ What is Giorgi like?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'He is friendly and funny.')">
+Friendly and funny
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Angry and tired
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Quiet and sad
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>5️⃣ Where do they ride their bikes?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+At school
+</button>
+
+<button onclick="answer(this,true,'They ride their bikes in the park.')">
+In the park
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+At home
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>6️⃣ What do they like doing together?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+Cooking
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Swimming
+</button>
+
+<button onclick="answer(this,true,'They like spending time together.')">
+Spending time together
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+</div>
+
+<div class="final">
+
+<h2>🏆 3-ე კლასის შედეგი</h2>
+
+<div class="final-score">
+<span id="score3">0</span> / 6
+</div>
+
+<p id="message3">ჯერ დაიწყე ტესტი! 💪</p>
+
+<button class="reset" onclick="resetClass(3)">
+🔄 თავიდან დაწყება
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= 4 CLASS ================= -->
+
+<section id="g4" class="panel">
+
+<div class="reading">
+
+<h2>🌍 A Trip to the Mountains</h2>
+
+<div class="story">
+Last weekend, Nika travelled to the mountains with his family.
+They stayed in a small hotel near a forest.
+On Saturday they walked beside a river and took many photos.
+The weather was sunny and warm.
+Nika enjoyed the trip because he loves nature and adventure.
+</div>
+
+
+<div class="q">
+<h3>1️⃣ Where did Nika travel?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'He travelled to the mountains.')">
+The mountains
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+The city
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+The beach
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>2️⃣ Where did they stay?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+At a school
+</button>
+
+<button onclick="answer(this,true,'They stayed in a small hotel.')">
+In a small hotel
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+At a big house
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>3️⃣ What was the weather like?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'The weather was sunny and warm.')">
+Sunny and warm
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Cold and rainy
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+Snowy
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+</div>
+
+
+<div class="reading">
+
+<h2>💻 A Day Without the Internet</h2>
+
+<div class="story">
+One Saturday, Ana decided to spend a day without the internet.
+In the morning she read a book.
+Then she went outside and rode her bicycle.
+In the afternoon she helped her mother in the garden.
+In the evening Ana played a board game with her family.
+She enjoyed the day because she had more time for her family.
+</div>
+
+
+<div class="q">
+<h3>4️⃣ What did Ana read?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+A newspaper
+</button>
+
+<button onclick="answer(this,true,'She read a book.')">
+A book
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+A magazine
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>5️⃣ What did Ana ride?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,true,'She rode her bicycle.')">
+A bicycle
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+A horse
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+A bus
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+
+<div class="q">
+<h3>6️⃣ Why did Ana enjoy the day?</h3>
+
+<div class="answers">
+
+<button onclick="answer(this,false,'Try again!')">
+She watched television.
+</button>
+
+<button onclick="answer(this,false,'Try again!')">
+She went shopping.
+</button>
+
+<button onclick="answer(this,true,'She had more time for her family.')">
+She had more time for her family.
+</button>
+
+</div>
+
+<p class="result"></p>
+</div>
+
+</div>
+
+<div class="final">
+
+<h2>🏆 4-ე კლასის შედეგი</h2>
+
+<div class="final-score">
+<span id="score4">0</span> / 6
+</div>
+
+<p id="message4">ჯერ დაიწყე ტესტი! 💪</p>
+
+<button class="reset" onclick="resetClass(4)">
+🔄 თავიდან დაწყება
+</button>
+
+</div>
+
+</section>
+
+
+<div class="backbox">
+
+<a class="back" href="index.html">
+🏠 მთავარ გვერდზე დაბრუნება
+</a>
+
+<a class="back" href="grade2.html">
+🌱 2-ე კლასი
+</a>
+
+<a class="back" href="grade3.html">
+🚀 3-ე კლასი
+</a>
+
+<a class="back" href="grade4.html">
+⭐ 4-ე კლასი
+</a>
+
+<a class="back" href="games.html">
+🎮 თამაში
+</a>
+
+</div>
+
+</main>
+
+
+<div class="float">
+<a href="index.html">🏠 მთავარი</a>
+</div>
+
+
+<script>
+
+let currentClass=2;
+
+const scores={
+2:0,
+3:0,
+4:0
+};
+
+const answered={
+2:0,
+3:0,
+4:0
+};
+
+
+function changeClass(n,button){
+
+currentClass=n;
+
+document.querySelectorAll(".panel").forEach(panel=>{
+panel.classList.remove("active");
+});
+
+document.getElementById("g"+n).classList.add("active");
+
+document.querySelectorAll(".class-btn").forEach(btn=>{
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+updateScore();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function answer(button,correct,text){
+
+const q=button.closest(".q");
+
+if(q.dataset.done==="yes"){
+return;
+}
+
+q.dataset.done="yes";
+
+const buttons=q.querySelectorAll("button");
+
+buttons.forEach(b=>{
+b.disabled=true;
+});
+
+const result=q.querySelector(".result");
+
+if(correct){
+
+button.classList.add("correct");
+
+scores[currentClass]++;
+answered[currentClass]++;
+
+result.textContent="🎉 სწორია! +1 ქულა — "+text;
+result.className="result good";
+
+}else{
+
+button.classList.add("wrong");
+
+answered[currentClass]++;
+
+result.textContent="❌ არასწორია! "+text;
+result.className="result bad";
+
+buttons.forEach(b=>{
+if(b!==button && b.getAttribute("onclick").includes("true")){
+b.classList.add("correct");
+}
+});
+
+}
+
+updateScore();
+
+checkFinished();
+
+}
+
+
+function updateScore(){
+
+document.getElementById("score").textContent=scores[currentClass];
+
+const total=6;
+
+document.getElementById("total").textContent=total;
+
+const level=document.getElementById("level");
+
+if(scores[currentClass]===0){
+level.textContent="დაიწყე თამაში! 🚀";
+}
+
+if(scores[currentClass]>=1 && scores[currentClass]<=2){
+level.textContent="🌱 კარგი დასაწყისია!";
+}
+
+if(scores[currentClass]>=3 && scores[currentClass]<=4){
+level.textContent="🔥 ძალიან კარგად მიდიხარ!";
+}
+
+if(scores[currentClass]>=5){
+level.textContent="🏆 შესანიშნავი შედეგია!";
+}
+
+document.getElementById("score"+currentClass).textContent=
+scores[currentClass];
+
+}
+
+
+function checkFinished(){
+
+if(answered[currentClass]===6){
+
+const score=scores[currentClass];
+
+const message=document.getElementById("message"+currentClass);
+
+if(score===6){
+message.textContent="🏆 საოცარია! ყველა პასუხი სწორია! 🌟";
+}
+
+else if(score>=4){
+message.textContent="🎉 ძალიან კარგი შედეგია! კიდევ ერთხელ სცადე სრულყოფილი ქულისთვის!";
+}
+
+else if(score>=2){
+message.textContent="👍 კარგი დასაწყისია! ივარჯიშე და კიდევ სცადე!";
+}
+
+else{
+message.textContent="💪 არ დანებდე! თავიდან დაიწყე და უკეთეს შედეგს მიიღებ!";
+}
+
+}
+
+}
+
+
+function resetClass(n){
+
+scores[n]=0;
+answered[n]=0;
+
+const panel=document.getElementById("g"+n);
+
+panel.querySelectorAll(".q").forEach(q=>{
+
+q.dataset.done="";
+
+q.querySelectorAll("button").forEach(button=>{
+button.disabled=false;
+button.classList.remove("correct","wrong");
+});
+
+const result=q.querySelector(".result");
+
+result.textContent="";
+result.className="result";
+
+});
+
+document.getElementById("score"+n).textContent="0";
+
+document.getElementById("message"+n).textContent=
+"ჯერ დაიწყე ტესტი! 💪";
+
+if(currentClass===n){
+updateScore();
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+updateScore();
+
+</script>
+
+</body>
+</html>
