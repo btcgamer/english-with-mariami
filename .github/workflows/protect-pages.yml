@@ -20,7 +20,7 @@ jobs:
         run: |
           set -e
           pages=(
-            grade2.html grade3.html grade4.html games.html
+            index.html grade2.html grade3.html grade4.html games.html
             words.html speaking.html reading.html grammar.html listening.html
             lessons.html lessons2.html class2.html
           )
@@ -49,5 +49,5 @@ PY
             exit 0
           fi
           git add '*.html'
-          git commit -m "Protect student pages with Supabase login"
+          git commit -m "Protect site content with Supabase login"
           git push
