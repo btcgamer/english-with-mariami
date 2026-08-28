@@ -1,232 +1,2155 @@
-<!doctype html><html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>მე-4 კლასი — English with Mariami</title><style>body{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 10% 10%,#00eaff35,transparent 25%),radial-gradient(circle at 90% 20%,#ffe60020,transparent 25%),linear-gradient(135deg,#020817,#062957 55%,#010713)}.wrap{max-width:1200px;margin:auto;padding:20px}.top{position:sticky;top:0;background:#02152df2;padding:14px;z-index:2}.brand{color:#00eaff;font-weight:900;text-decoration:none}.hero,.card{background:#071e3be8;border:1px solid #00eaff55;border-radius:22px;padding:25px;margin:18px 0;box-shadow:0 15px 45px #0008}.hero h1{font-size:48px}.neon{color:#00eaff}.yellow{color:#ffe600}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}.word{padding:16px;background:#092b50;border:1px solid #00eaff33;border-radius:16px}.word b{font-size:21px}.ka{color:#ffe600;font-weight:bold;margin:7px 0}.pron{color:#9dc7d5}.example{color:#c8e9f1;font-size:13px}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:bold;cursor:pointer;background:#00c9f2}.listen{background:#ffe600}.lesson{line-height:1.8;border-left:4px solid #00eaff;padding:16px;background:#08284a;border-radius:12px;margin:10px 0}.option{display:block;margin:7px 0;padding:10px;width:100%;background:#061a32;color:#fff;border:1px solid #00eaff33;border-radius:10px;text-align:left;cursor:pointer}a{color:#fff}</style>
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>მე-4 კლასი — English with Mariami 3D Academy</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  color:#f5fcff;
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 10% 10%,#00eaff30,transparent 25%),
+    radial-gradient(circle at 90% 15%,#ff00d430,transparent 25%),
+    radial-gradient(circle at 50% 100%,#0066ff35,transparent 35%),
+    linear-gradient(135deg,#01030c,#03142d 45%,#07001c 100%);
+}
+
+/* ================= BACKGROUND ================= */
+
+.bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.orb{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:.25;
+  animation:float 10s ease-in-out infinite;
+}
+
+.orb.one{
+  background:#00eaff;
+  top:5%;
+  left:-100px;
+}
+
+.orb.two{
+  background:#ff00e6;
+  right:-100px;
+  top:30%;
+  animation-delay:2s;
+}
+
+.orb.three{
+  background:#0066ff;
+  bottom:-100px;
+  left:40%;
+  animation-delay:4s;
+}
+
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(40px,-35px) scale(1.15)}
+}
+
+/* stars */
+
+.stars{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(#ffffffaa 1px,transparent 1px),
+    radial-gradient(#00eaff99 1px,transparent 1px);
+  background-size:70px 70px,110px 110px;
+  opacity:.15;
+  animation:starsMove 30s linear infinite;
+}
+
+@keyframes starsMove{
+  from{transform:translateY(0)}
+  to{transform:translateY(100px)}
+}
+
+/* ================= NAV ================= */
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(1,8,25,.72);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid #00eaff35;
+  box-shadow:0 5px 30px #0008;
+}
+
+.nav{
+  max-width:1250px;
+  margin:auto;
+  padding:13px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  color:#00eaff;
+  text-decoration:none;
+  font-weight:1000;
+  font-size:18px;
+  text-shadow:0 0 15px #00eaff;
+}
+
+.navlinks{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.navlinks a{
+  color:#dffaff;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  transition:.25s;
+}
+
+.navlinks a:hover{
+  color:#00eaff;
+  text-shadow:0 0 12px #00eaff;
+}
+
+/* ================= MAIN ================= */
+
+.wrap{
+  width:min(1250px,94%);
+  margin:auto;
+}
+
+section{
+  scroll-margin-top:90px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:650px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:30px;
+  padding:60px 0;
+}
+
+.heroText{
+  animation:heroIn 1s ease;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateX(-50px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 16px;
+  border:1px solid #00eaff66;
+  border-radius:30px;
+  background:#00eaff12;
+  color:#ffe600;
+  font-weight:900;
+  box-shadow:0 0 25px #00eaff15;
+}
+
+.hero h1{
+  margin:20px 0 10px;
+  font-size:clamp(42px,7vw,76px);
+  line-height:1;
+  letter-spacing:-3px;
+}
+
+.neon{
+  color:#00eaff;
+  text-shadow:
+    0 0 5px #00eaff,
+    0 0 20px #00eaff,
+    0 0 45px #00eaff55;
+}
+
+.pink{
+  color:#ff38e7;
+  text-shadow:0 0 25px #ff00dd;
+}
+
+.hero p{
+  color:#b9dbe6;
+  font-size:18px;
+  line-height:1.7;
+  max-width:680px;
+}
+
+.heroButtons{
+  margin-top:25px;
+}
+
+/* ================= 3D BOOK ================= */
+
+.bookScene{
+  perspective:1200px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:420px;
+}
+
+.book{
+  width:300px;
+  height:380px;
+  position:relative;
+  transform-style:preserve-3d;
+  transform:rotateY(-18deg) rotateX(8deg);
+  animation:bookFloat 5s ease-in-out infinite;
+}
+
+@keyframes bookFloat{
+  0%,100%{
+    transform:rotateY(-18deg) rotateX(8deg) translateY(0);
+  }
+  50%{
+    transform:rotateY(-8deg) rotateX(4deg) translateY(-20px);
+  }
+}
+
+.bookCover{
+  position:absolute;
+  inset:0;
+  border-radius:8px 20px 20px 8px;
+  background:
+    linear-gradient(135deg,#02182d,#063b65 55%,#06162f);
+  border:2px solid #00eaff88;
+  box-shadow:
+    25px 30px 50px #000b,
+    0 0 35px #00eaff25;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform:translateZ(18px);
+  overflow:hidden;
+}
+
+.bookCover:before{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  border:2px solid #00eaff33;
+  border-radius:50%;
+  box-shadow:
+    0 0 30px #00eaff22,
+    inset 0 0 30px #00eaff12;
+}
+
+.bookCover h2{
+  position:relative;
+  z-index:2;
+  color:#00eaff;
+  font-size:34px;
+  text-align:center;
+  text-shadow:0 0 20px #00eaff;
+}
+
+.bookCover p{
+  position:relative;
+  z-index:2;
+  color:#ffe600;
+  font-weight:900;
+}
+
+.bookSpine{
+  position:absolute;
+  width:35px;
+  height:100%;
+  left:-35px;
+  top:0;
+  background:linear-gradient(90deg,#03101e,#075078,#021525);
+  transform-origin:right;
+  transform:rotateY(-90deg);
+  border:1px solid #00eaff44;
+}
+
+.bookPages{
+  position:absolute;
+  inset:10px -13px 10px 10px;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      #d9ffff,
+      #d9ffff 3px,
+      #b4d8df 4px
+    );
+  transform:translateZ(0);
+  border-radius:4px 12px 12px 4px;
+  opacity:.8;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:12px 18px;
+  margin:5px;
+  font-weight:900;
+  cursor:pointer;
+  color:#001923;
+  background:linear-gradient(135deg,#00eaff,#00a8ff);
+  box-shadow:
+    0 8px 25px #00eaff22,
+    inset 0 1px #ffffff66;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:
+    0 12px 35px #00eaff45,
+    0 0 20px #00eaff25;
+}
+
+.btn.yellow{
+  background:linear-gradient(135deg,#ffe600,#ffb700);
+}
+
+.btn.pinkBtn{
+  background:linear-gradient(135deg,#ff38e7,#9c4dff);
+  color:white;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+  position:relative;
+  margin:25px 0;
+  padding:30px;
+  border-radius:28px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8,30,60,.85),
+      rgba(3,15,37,.82)
+    );
+  border:1px solid #00eaff40;
+  box-shadow:
+    0 25px 70px #0008,
+    inset 0 1px #ffffff10;
+  backdrop-filter:blur(15px);
+  overflow:hidden;
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:#00eaff10;
+  filter:blur(30px);
+  right:-70px;
+  top:-70px;
+}
+
+.card h2{
+  position:relative;
+  margin-top:0;
+  font-size:30px;
+}
+
+.card h2:after{
+  content:"";
+  display:block;
+  width:90px;
+  height:3px;
+  margin-top:9px;
+  background:#00eaff;
+  box-shadow:0 0 15px #00eaff;
+}
+
+/* ================= GRID ================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+
+/* ================= 3D TOPIC CARDS ================= */
+
+.topic{
+  min-height:150px;
+  padding:22px;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,#092f55,#04182f);
+  border:1px solid #00eaff35;
+  transform-style:preserve-3d;
+  transition:.4s;
+  box-shadow:0 15px 35px #0007;
+}
+
+.topic:hover{
+  transform:
+    perspective(700px)
+    rotateX(7deg)
+    rotateY(-7deg)
+    translateY(-8px);
+  border-color:#00eaff;
+  box-shadow:
+    0 25px 50px #0009,
+    0 0 25px #00eaff25;
+}
+
+.topicIcon{
+  font-size:42px;
+  filter:drop-shadow(0 0 12px #00eaff55);
+}
+
+.topic b{
+  display:block;
+  font-size:20px;
+  margin-top:10px;
+}
+
+.topic small{
+  display:block;
+  color:#8fb7c7;
+  margin-top:8px;
+}
+
+/* ================= VOCABULARY ================= */
+
+.search{
+  width:100%;
+  padding:16px 18px;
+  border-radius:15px;
+  border:1px solid #00eaff55;
+  background:#021528;
+  color:white;
+  outline:none;
+  font-size:16px;
+  box-shadow:inset 0 0 20px #0005;
+}
+
+.search:focus{
+  border-color:#00eaff;
+  box-shadow:
+    0 0 20px #00eaff20,
+    inset 0 0 20px #0005;
+}
+
+.word{
+  padding:20px;
+  border-radius:19px;
+  background:
+    linear-gradient(145deg,#0a3158,#041b36);
+  border:1px solid #00eaff30;
+  transition:.3s;
+  transform-style:preserve-3d;
+}
+
+.word:hover{
+  transform:
+    perspective(800px)
+    rotateX(5deg)
+    translateY(-5px);
+  border-color:#00eaff;
+  box-shadow:0 15px 35px #00eaff16;
+}
+
+.word b{
+  font-size:23px;
+  color:#fff;
+}
+
+.ka{
+  color:#ffe600;
+  font-weight:900;
+  margin:8px 0;
+}
+
+.pron{
+  color:#7fd9ec;
+  margin-top:6px;
+}
+
+.example{
+  color:#c5e8f0;
+  line-height:1.5;
+  font-size:14px;
+}
+
+/* ================= LESSON ================= */
+
+.lesson{
+  padding:22px;
+  margin:15px 0;
+  border-radius:18px;
+  background:
+    linear-gradient(135deg,#082c50,#04182f);
+  border-left:4px solid #00eaff;
+  line-height:1.85;
+  box-shadow:0 12px 30px #0006;
+}
+
+.lesson strong{
+  color:#00eaff;
+}
+
+.highlight{
+  color:#ffe600;
+  font-weight:900;
+}
+
+/* ================= 3D FLOATING LETTERS ================= */
+
+.letters{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.letter{
+  width:65px;
+  height:65px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  font-weight:1000;
+  color:#00eaff;
+  background:#041d37;
+  border:1px solid #00eaff66;
+  border-radius:15px;
+  box-shadow:
+    0 10px 25px #0007,
+    inset 0 0 20px #00eaff10;
+  transform-style:preserve-3d;
+  animation:letterFloat 3s ease-in-out infinite;
+}
+
+.letter:nth-child(2){animation-delay:.2s}
+.letter:nth-child(3){animation-delay:.4s}
+.letter:nth-child(4){animation-delay:.6s}
+.letter:nth-child(5){animation-delay:.8s}
+.letter:nth-child(6){animation-delay:1s}
+.letter:nth-child(7){animation-delay:1.2s}
+
+@keyframes letterFloat{
+  0%,100%{transform:translateY(0) rotateX(0)}
+  50%{transform:translateY(-10px) rotateX(12deg)}
+}
+
+/* ================= TABS ================= */
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:20px;
+}
+
+.tabs button{
+  background:#062747;
+  color:white;
+  border:1px solid #00eaff30;
+}
+
+.tabs button.active{
+  background:#00d9ff;
+  color:#001923;
+  box-shadow:0 0 20px #00eaff35;
+}
+
+.panel{
+  display:none;
+}
+
+.panel.active{
+  display:block;
+  animation:panelIn .35s ease;
+}
+
+@keyframes panelIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* ================= QUIZ ================= */
+
+.quiz{
+  max-width:850px;
+  margin:auto;
+}
+
+.quizHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  color:#00eaff;
+  font-weight:900;
+}
+
+.quizProgress{
+  height:10px;
+  background:#021326;
+  border-radius:20px;
+  overflow:hidden;
+  margin:15px 0 25px;
+}
+
+.quizProgress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#00eaff,#8b5cff,#ff38e7);
+  box-shadow:0 0 15px #00eaff;
+  transition:.4s;
+}
+
+.option{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:15px;
+  margin:9px 0;
+  border-radius:14px;
+  border:1px solid #00eaff25;
+  background:#041b35;
+  color:#fff;
+  cursor:pointer;
+  transition:.25s;
+  font-weight:bold;
+}
+
+.option:hover{
+  transform:translateX(5px);
+  border-color:#00eaff;
+  background:#06294a;
+}
+
+.option.correct{
+  border-color:#5cff9a;
+  background:#0b4b31;
+}
+
+.option.wrong{
+  border-color:#ff6b7a;
+  background:#541f2b;
+}
+
+/* ================= SCORE ================= */
+
+.scoreBox{
+  text-align:center;
+  padding:35px;
+  border-radius:25px;
+  background:
+    radial-gradient(circle at center,#00eaff15,transparent 60%),
+    #04182f;
+  border:1px solid #00eaff45;
+}
+
+.scoreNumber{
+  font-size:60px;
+  font-weight:1000;
+  color:#00eaff;
+  text-shadow:0 0 25px #00eaff;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  text-align:center;
+  padding:60px 20px 30px;
+  color:#7fa8b8;
+}
+
+.site-copyright{
+  margin-top:20px;
+  padding:20px;
+  text-align:center;
+  color:#83aebb;
+  border-top:1px solid #00eaff25;
+  font-size:14px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  .hero{
+    grid-template-columns:1fr;
+    padding-top:40px;
+  }
+
+  .bookScene{
+    min-height:350px;
+  }
+
+  .book{
+    transform:scale(.8) rotateY(-18deg) rotateX(8deg);
+  }
+
+  .hero h1{
+    font-size:48px;
+  }
+
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+@media(max-width:550px){
+
+  .wrap{
+    width:94%;
+  }
+
+  .card{
+    padding:20px;
+    border-radius:22px;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+  .book{
+    transform:scale(.65) rotateY(-18deg) rotateX(8deg);
+  }
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="bg">
+  <div class="stars"></div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+</div>
+
+<!-- ================= NAV ================= -->
+
+<header class="top">
+
+<div class="nav">
+
+<a class="brand" href="academy.html">
+⚡ ENGLISH WITH MARIAMI
+</a>
+
+<nav class="navlinks">
+<a href="academy.html">🎓 Academy</a>
+<a href="index.html">🏠 მთავარი</a>
+<a href="#vocabulary">📚 Vocabulary</a>
+<a href="#grammar">🧠 Grammar</a>
+<a href="#quiz">🏆 Quiz</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="wrap">
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="heroText">
+
+<span class="badge">
+⭐ CLASS 4 • 2026
+</span>
+
+<h1>
+მე-4 კლასი<br>
+<span class="neon">ENGLISH</span>
+<span class="pink">3D</span>
+</h1>
+
+<p>
+მოემზადე ახალი თავგადასავლისთვის! 🚀
+ისწავლე ინგლისური სიტყვები, გრამატიკა,
+დიალოგები, კითხვა, მოსმენა და წერა
+მოულოდნელი 3D სამყაროს საშუალებით.
+</p>
+
+<div class="heroButtons">
+
+<button class="btn"
+onclick="speak('Welcome to English Academy! Let us learn English together!')">
+🔊 Welcome
+</button>
+
+<button class="btn yellow"
+onclick="document.getElementById('vocabulary').scrollIntoView()">
+🚀 დავიწყოთ სწავლა
+</button>
+
+</div>
+
+<div class="letters">
+<div class="letter">E</div>
+<div class="letter">N</div>
+<div class="letter">G</div>
+<div class="letter">L</div>
+<div class="letter">I</div>
+<div class="letter">S</div>
+<div class="letter">H</div>
+</div>
+
+</div>
+
+
+<div class="bookScene">
+
+<div class="book">
+
+<div class="bookPages"></div>
+
+<div class="bookSpine"></div>
+
+<div class="bookCover">
+
+<h2>
+ENGLISH<br>
+ACADEMY
+</h2>
+
+<p>CLASS 4</p>
+
+<div style="font-size:65px;position:relative;z-index:2">
+📖
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TOPICS ================= -->
+
+<section class="card">
+
+<h2>🚀 მე-4 კლასის სასწავლო სამყარო</h2>
+
+<div class="grid">
+
+<div class="topic">
+<div class="topicIcon">📘</div>
+<b>Present Simple</b>
+<small>დადებითი • უარყოფითი • კითხვები</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">❓</div>
+<b>Questions</b>
+<small>What • Where • When • Why • How</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">📍</div>
+<b>Prepositions</b>
+<small>in • on • under • behind • between</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">📖</div>
+<b>Reading</b>
+<small>ტექსტის წაკითხვა და გაგება</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🗣️</div>
+<b>Speaking</b>
+<small>დიალოგები და ყოველდღიური საუბარი</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">✏️</div>
+<b>Writing</b>
+<small>წინადადებებისა და პატარა ტექსტების წერა</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🎧</div>
+<b>Listening</b>
+<small>სიტყვების მოსმენა და გამეორება</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🏆</div>
+<b>Final Quiz</b>
+<small>30 კითხვა და შედეგის შეფასება</small>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= VOCABULARY ================= -->
+
+<section class="card" id="vocabulary">
+
+<h2>🧠 3D Vocabulary Lab</h2>
+
+<p style="color:#9dc7d5">
+იპოვე სიტყვა, ნახე ქართული მნიშვნელობა,
+გამოთქმა და მოუსმინე ინგლისურ სიტყვას.
+</p>
+
+<input
+id="search"
+class="search"
+placeholder="🔎 მოძებნე ინგლისური ან ქართული სიტყვა..."
+>
+
+<div id="words" class="grid" style="margin-top:20px"></div>
+
+</section>
+
+
+<!-- ================= GRAMMAR ================= -->
+
+<section class="card" id="grammar">
+
+<h2>🧠 Grammar Control Center</h2>
+
+<div class="tabs">
+
+<button class="btn active"
+onclick="tab('g1',this)">
+Present Simple
+</button>
+
+<button class="btn"
+onclick="tab('g2',this)">
+Do / Does
+</button>
+
+<button class="btn"
+onclick="tab('g3',this)">
+Was / Were
+</button>
+
+<button class="btn"
+onclick="tab('g4',this)">
+Can
+</button>
+
+<button class="btn"
+onclick="tab('g5',this)">
+Have / Has
+</button>
+
+<button class="btn"
+onclick="tab('g6',this)">
+There is / are
+</button>
+
+</div>
+
+
+<div id="g1" class="panel active lesson">
+
+<h3>📘 Present Simple</h3>
+
+<strong>I / You / We / They</strong><br>
+
+I play football.<br>
+You play football.<br>
+We play football.<br>
+They play football.
+
+<br><br>
+
+<strong>He / She / It</strong><br>
+
+He <span class="highlight">plays</span> football.<br>
+She <span class="highlight">reads</span> books.<br>
+It <span class="highlight">works</span> well.
+
+<br><br>
+
+📌 He / She / It-თან ზმნას ხშირად ემატება
+<strong>-s / -es</strong>.
+
+</div>
+
+
+<div id="g2" class="panel lesson">
+
+<h3>❓ Do / Does</h3>
+
+Do you like English?<br>
+Yes, I do.<br>
+No, I don't.
+
+<br><br>
+
+Does she play tennis?<br>
+Yes, she does.<br>
+No, she doesn't.
+
+<br><br>
+
+📌 <strong>Do</strong> → I / You / We / They<br>
+📌 <strong>Does</strong> → He / She / It
+
+</div>
+
+
+<div id="g3" class="panel lesson">
+
+<h3>⏳ Was / Were</h3>
+
+I <strong>was</strong> tired yesterday.<br>
+He <strong>was</strong> at school.<br>
+She <strong>was</strong> happy.
+
+<br><br>
+
+We <strong>were</strong> at home.<br>
+They <strong>were</strong> busy.
+
+</div>
+
+
+<div id="g4" class="panel lesson">
+
+<h3>💪 Can</h3>
+
+I can swim.<br>
+She can sing.<br>
+He can ride a bike.
+
+<br><br>
+
+Can you speak English?<br>
+
+Yes, I can.<br>
+No, I can't.
+
+</div>
+
+
+<div id="g5" class="panel lesson">
+
+<h3>🎒 Have / Has</h3>
+
+I have a book.<br>
+You have a bike.<br>
+We have a house.
+
+<br><br>
+
+He has a dog.<br>
+She has a red bag.<br>
+It has four legs.
+
+</div>
+
+
+<div id="g6" class="panel lesson">
+
+<h3>🏠 There is / There are</h3>
+
+There is a book on the table.<br>
+There is a school near my house.
+
+<br><br>
+
+There are three pencils.<br>
+There are two cats in the room.
+
+</div>
+
+</section>
+
+
+<!-- ================= QUESTIONS ================= -->
+
+<section class="card">
+
+<h2>❓ Question Zone</h2>
+
+<div class="grid">
+
+<div class="word">
+<b>What?</b>
+<div class="ka">რა?</div>
+<div class="example">What do you like?</div>
+</div>
+
+<div class="word">
+<b>Who?</b>
+<div class="ka">ვინ?</div>
+<div class="example">Who is your teacher?</div>
+</div>
+
+<div class="word">
+<b>Where?</b>
+<div class="ka">სად?</div>
+<div class="example">Where do you live?</div>
+</div>
+
+<div class="word">
+<b>When?</b>
+<div class="ka">როდის?</div>
+<div class="example">When do you study?</div>
+</div>
+
+<div class="word">
+<b>Why?</b>
+<div class="ka">რატომ?</div>
+<div class="example">Why do you learn English?</div>
+</div>
+
+<div class="word">
+<b>How?</b>
+<div class="ka">როგორ?</div>
+<div class="example">How do you go to school?</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PREPOSITIONS ================= -->
+
+<section class="card">
+
+<h2>📍 Preposition 3D Zone</h2>
+
+<div class="grid">
+
+<div class="topic">
+<div class="topicIcon">📦</div>
+<b>IN</b>
+<small>The book is in the bag.</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">📚</div>
+<b>ON</b>
+<small>The book is on the table.</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🐱</div>
+<b>UNDER</b>
+<small>The cat is under the chair.</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🚪</div>
+<b>BEHIND</b>
+<small>The boy is behind the door.</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🏫</div>
+<b>NEXT TO</b>
+<small>The shop is next to the school.</small>
+</div>
+
+<div class="topic">
+<div class="topicIcon">🏠</div>
+<b>BETWEEN</b>
+<small>The house is between two shops.</small>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DIALOGUE ================= -->
+
+<section class="card">
+
+<h2>🗣️ Speaking Arena</h2>
+
+<div class="lesson">
+
+<strong>A:</strong>
+What do you usually do after school?
+
+<br>
+
+<strong>B:</strong>
+I usually do my homework and play football.
+
+<br>
+
+<strong>A:</strong>
+Where do you play?
+
+<br>
+
+<strong>B:</strong>
+I play in the park with my friends.
+
+</div>
+
+<button class="btn yellow"
+onclick="speak(dialogue)">
+🔊 დიალოგის მოსმენა
+</button>
+
+</section>
+
+
+<!-- ================= READING ================= -->
+
+<section class="card">
+
+<h2>📖 Reading Mission</h2>
+
+<div class="lesson">
+
+<h3>A Busy School Day</h3>
+
+<p id="reading">
+
+Emma gets up early every morning.
+She has breakfast and goes to school by bus.
+At school she studies English, science and maths.
+She usually reads during break time.
+After school she goes home, does her homework
+and helps her family.
+In the evening she reads a book
+and goes to bed at ten.
+
+</p>
+
+<p class="pron">
+
+ემა ყოველ დილით ადრე იღვიძებს.
+საუზმობს და ავტობუსით სკოლაში მიდის.
+სკოლაში სწავლობს ინგლისურს, მეცნიერებასა
+და მათემატიკას.
+შესვენებაზე ჩვეულებრივ კითხულობს.
+სკოლის შემდეგ სახლში მიდის,
+აკეთებს დავალებას და ოჯახს ეხმარება.
+საღამოს წიგნს კითხულობს და ათ საათზე იძინებს.
+
+</p>
+
+<button class="btn"
+onclick="speak(document.getElementById('reading').innerText)">
+🔊 ტექსტის მოსმენა
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ================= WRITING ================= -->
+
+<section class="card">
+
+<h2>✍️ Writing Studio</h2>
+
+<div class="grid">
+
+<div class="lesson">
+
+<h3>Mission 1</h3>
+
+Write 5 sentences about yourself.
+
+<br><br>
+
+My name is ____.<br>
+I am ____ years old.<br>
+I live in ____.<br>
+My favourite food is ____.<br>
+I like ____.
+
+</div>
+
+<div class="lesson">
+
+<h3>Mission 2</h3>
+
+Write about your daily routine.
+
+<br><br>
+
+I get up at ____.<br>
+I have breakfast.<br>
+I go to school.<br>
+After school I ____.<br>
+In the evening I ____.
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= LISTENING ================= -->
+
+<section class="card">
+
+<h2>🎧 Listening Lab</h2>
+
+<p style="color:#9dc7d5">
+მოუსმინე 15 სიტყვას. თითოეული სიტყვის შემდეგ
+გაიმეორე ხმამაღლა.
+</p>
+
+<button class="btn yellow"
+onclick="listenSet()">
+▶️ დაწყება
+</button>
 
+<p id="status" class="highlight"></p>
 
+</section>
 
 
+<!-- ================= QUIZ ================= -->
 
+<section class="card" id="quiz">
 
+<h2>🏆 FINAL 3D QUIZ</h2>
 
+<div class="quiz">
 
+<div class="quizHeader">
 
+<span id="questionNumber">
+Question 1 / 30
+</span>
 
+<span id="quizScore">
+⭐ 0
+</span>
 
+</div>
 
+<div class="quizProgress">
+<span id="quizBar"></span>
+</div>
 
+<div id="quizBox"></div>
 
+</div>
 
+</section>
 
 
+<!-- ================= TEACHER ================= -->
 
+<section class="card">
 
+<h2>👩‍🏫 მასწავლებელი მარიამი</h2>
 
+<div class="lesson">
 
+<p>
+ინგლისური ენის სწავლა ბავშვებისთვის
+შეიძლება იყოს საინტერესო, სახალისო და
+თანამედროვე.
+</p>
 
+<p class="highlight">
+📍 ქუთაისი
+</p>
 
+<p>
+📞 598 93 02 08
+</p>
 
+<button class="btn yellow"
+onclick="speak('Hello! Welcome to English with Mariami. I am your English teacher.')">
+🔊 მარიამის მისალმება
+</button>
 
+</div>
 
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+<div style="font-size:35px">
+⚡ 📖 🚀 🧠 🏆
+</div>
+
+<p>
+English with Mariami • Class 4 • 2026
+</p>
+
+<div class="site-copyright">
+© 2026 English with Mariami — ყველა უფლება დაცულია
+• Developed by btcgamer
+</div>
+
+</footer>
+
+
+<script>
+
+/* ================= SPEECH ================= */
+
+function speak(text){
+
+  if(!("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+
+  const u=new SpeechSynthesisUtterance(text);
+
+  u.lang="en-US";
+  u.rate=.82;
+  u.pitch=1;
+
+  speechSynthesis.speak(u);
+}
+
+
+/* ================= DIALOGUE ================= */
+
+const dialogue=
+"What do you usually do after school? "+
+"I usually do my homework and play football. "+
+"Where do you play? "+
+"I play in the park with my friends.";
+
+
+/* ================= VOCABULARY ================= */
+
+const data=[
+
+["usually","ჩვეულებრივ","იუჟუალი","I usually read books."],
+["always","ყოველთვის","ოლუეიზ","I always do my homework."],
+["often","ხშირად","ოფენ","I often play football."],
+["sometimes","ზოგჯერ","სამთაიმზ","I sometimes walk home."],
+["never","არასდროს","ნევერ","I never forget my book."],
+
+["important","მნიშვნელოვანი","იმფორთენთ","English is important."],
+["interesting","საინტერესო","ინტერესთინგ","The lesson is interesting."],
+["different","განსხვავებული","დიფერენთ","We are different."],
+["favorite","საყვარელი","ფეივორით","English is my favorite subject."],
+
+["question","შეკითხვა","ქუესჩენ","Ask a question."],
+["answer","პასუხი","ანსერ","Give an answer."],
+["sentence","წინადადება","სენთენს","Write a sentence."],
+["story","მოთხრობა","სთორი","Read the story."],
+["subject","საგანი","საბჯიქთ","English is my favorite subject."],
+
+["homework","საშინაო დავალება","ჰოუმუორქ","I do my homework."],
+["lesson","გაკვეთილი","ლესენ","The lesson starts at nine."],
+["practice","ვარჯიში","პრაქტის","Practice every day."],
+["remember","დამახსოვრება","რიმემბერ","Remember this word."],
+["understand","გაგება","ანდერსთენდ","I understand the question."],
+["explain","ახსნა","ექსფლეინ","Please explain it."],
+
+["choose","არჩევა","ჩუზ","Choose an answer."],
+["describe","აღწერა","დისქრაიბ","Describe your room."],
+["compare","შედარება","ქომპერ","Compare two pictures."],
+
+["beautiful","ლამაზი","ბიუთიფულ","It is a beautiful day."],
+["careful","ფრთხილი","ქეერფულ","Be careful."],
+["friendly","მეგობრული","ფრენდლი","She is friendly."],
+["healthy","ჯანმრთელი","ჰელთი","Healthy food is good."],
+["strong","ძლიერი","სთრონგ","He is strong."],
+["quiet","ჩუმი","ქუაიეთ","The room is quiet."],
+["busy","დაკავებული","ბიზი","I am busy today."],
+
+["early","ადრე","ერლი","I get up early."],
+["late","გვიან","ლეით","Do not be late."],
+["quickly","სწრაფად","ქუიქლი","Run quickly."],
+["carefully","ფრთხილად","ქეერფული","Listen carefully."],
+
+["because","იმიტომ რომ","ბიქოზ","I learn because I like English."],
+["before","მანამდე","ბიფორ","Wash your hands before dinner."],
+["after","შემდეგ","აფთერ","Play after homework."],
+["between","შორის","ბითუინ","The school is between two shops."],
+["around","ირგვლივ","არაუნდ","Walk around the park."],
+["during","განმავლობაში","დიურინგ","Read during the lesson."],
+["together","ერთად","თუგეზერ","We learn together."],
+
+["journey","მოგზაურობა","ჯერნი","The journey is long."],
+["country","ქვეყანა","ქანთრი","Georgia is my country."],
+["language","ენა","ლენგვიჯ","English is a language."],
+["future","მომავალი","ფიუჩერ","Think about the future."],
+["problem","პრობლემა","პრობლემ","Solve the problem."],
+["idea","იდეა","აიდია","I have an idea."],
+["help","დახმარება","ჰელფ","Can you help me?"],
+["learn","სწავლა","ლერნ","I learn English."],
+["teach","სწავლება","თიჩ","Teachers teach students."],
+
+["school","სკოლა","სქულ","My school is big."],
+["teacher","მასწავლებელი","თიჩერ","My teacher is nice."],
+["student","მოსწავლე","სთიუდენთ","I am a student."],
+["classroom","საკლასო ოთახი","ქლასრუმ","Our classroom is bright."],
+["library","ბიბლიოთეკა","ლაიბრერი","I read in the library."],
+
+["morning","დილა","მორნინგ","I get up in the morning."],
+["afternoon","შუადღე","აფთერნუნ","Good afternoon."],
+["evening","საღამო","ივნინგ","Good evening."],
+["night","ღამე","ნაით","Good night."],
+
+["sunny","მზიანი","სანი","It is sunny."],
+["rainy","წვიმიანი","რეინი","It is rainy."],
+["cloudy","ღრუბლიანი","ქლაუდი","It is cloudy."],
+["windy","ქარიანი","უინდი","It is windy."],
+["snowy","თოვლიანი","სნოუი","It is snowy."],
+
+["happy","ბედნიერი","ჰეფი","I am happy."],
+["sad","სევდიანი","სედ","I am sad."],
+["tired","დაღლილი","თაიერდ","I am tired."],
+["angry","გაბრაზებული","ენგრი","He is angry."],
 
+["bread","პური","ბრედ","I eat bread."],
+["cheese","ყველი","ჩიზ","I like cheese."],
+["milk","რძე","მილქ","I drink milk."],
+["apple","ვაშლი","ეფლ","I eat an apple."],
+["banana","ბანანი","ბანანა","I like bananas."],
+["orange","ფორთოხალი","ორინჯ","The orange is sweet."],
 
+["bus","ავტობუსი","ბას","I go by bus."],
+["car","მანქანა","ქარ","This is a car."],
+["train","მატარებელი","თრეინ","The train is fast."],
+["bike","ველოსიპედი","ბაიქ","I ride my bike."],
 
+["run","სირბილი","რან","I can run."],
+["walk","სიარული","უოქ","I walk to school."],
+["jump","ხტომა","ჯამფ","Jump high."],
+["swim","ცურვა","სუიმ","I can swim."],
+["read","კითხვა","რიდ","I read books."],
+["write","წერა","რაით","I write a story."],
+["draw","ხატვა","დრო","I draw a picture."],
+["sing","სიმღერა","სინგ","I sing a song."],
+["play","თამაში","ფლეი","I play football."],
+["eat","ჭამა","ით","I eat breakfast."],
+["drink","დალევა","დრინქ","I drink water."],
+["sleep","ძილი","სლიფ","I sleep at night."]
 
+];
 
 
+/* ================= VOCAB CARD ================= */
 
+function wordCard(w){
 
+return `
+<div class="word">
 
+<b>${w[0]}</b>
 
+<div class="pron">
+🔊 ${w[2]}
+</div>
 
+<div class="ka">
+${w[1]}
+</div>
 
+<div class="example">
+💬 ${w[3]}
+</div>
 
+<button class="btn yellow"
+onclick='speak(${JSON.stringify(w[0])})'>
+🔊 სიტყვა
+</button>
 
+<button class="btn"
+onclick='speak(${JSON.stringify(w[3])})'>
+💬 მაგალითი
+</button>
 
+</div>
+`;
 
+}
 
 
+/* ================= RENDER ================= */
 
+function renderWords(){
 
+const q=
+(document.getElementById("search").value||"")
+.toLowerCase();
 
+document.getElementById("words").innerHTML=
 
+data
+.filter(w=>
+(w[0]+" "+w[1])
+.toLowerCase()
+.includes(q)
+)
+.map(wordCard)
+.join("");
 
+}
 
+document
+.getElementById("search")
+.addEventListener("input",renderWords);
 
+renderWords();
 
 
+/* ================= TABS ================= */
 
+function tab(id,btn){
 
+document
+.querySelectorAll(".panel")
+.forEach(x=>x.classList.remove("active"));
 
+document
+.querySelectorAll(".tabs button")
+.forEach(x=>x.classList.remove("active"));
 
+document
+.getElementById(id)
+.classList.add("active");
 
+btn.classList.add("active");
 
+}
 
 
+/* ================= LISTENING ================= */
 
+function listenSet(){
 
+const words=data.slice(0,15);
 
+let i=0;
 
+const status=
+document.getElementById("status");
 
+function next(){
 
+if(i>=words.length){
 
+status.textContent=
+"🎉 Listening დასრულდა! შესანიშნავი სამუშაო!";
 
+return;
 
+}
 
+status.textContent=
+(i+1)+"/15 — "+words[i][1];
 
+speak(words[i][0]);
 
+i++;
 
+setTimeout(next,1900);
 
+}
 
+next();
 
+}
 
 
+/* ================= QUIZ ================= */
 
+const questions=[
 
+[
+"He ___ to school every day.",
+["go","goes","going","gone"],
+"goes"
+],
 
+[
+"They ___ football on Saturdays.",
+["plays","play","playing","played"],
+"play"
+],
 
+[
+"___ she like English?",
+["Do","Does","Is","Are"],
+"Does"
+],
 
+[
+"___ you usually get up early?",
+["Do","Does","Is","Has"],
+"Do"
+],
 
+[
+"My sister ___ a book every evening.",
+["read","reads","reading","to read"],
+"reads"
+],
 
+[
+"We ___ breakfast at seven.",
+["has","have","having","had"],
+"have"
+],
 
+[
+"There ___ a book on the table.",
+["are","is","am","be"],
+"is"
+],
+
+[
+"There ___ three pencils.",
+["is","are","am","be"],
+"are"
+],
+
+[
+"The cat is ___ the chair.",
+["under","between","during","because"],
+"under"
+],
+
+[
+"The school is ___ the park and shop.",
+["between","under","at","during"],
+"between"
+],
+
+[
+"What does careful mean?",
+["ფრთხილი","დაღლილი","სწრაფი","მხიარული"],
+"ფრთხილი"
+],
+
+[
+"What does usually mean?",
+["არასდროს","ჩვეულებრივ","გუშინ","ხვალ"],
+"ჩვეულებრივ"
+],
+
+[
+"Yesterday I ___ football.",
+["play","plays","played","playing"],
+"played"
+],
+
+[
+"She ___ reading now.",
+["is","are","am","be"],
+"is"
+],
+
+[
+"We ___ at home yesterday.",
+["was","were","are","is"],
+"were"
+],
+
+[
+"I ___ tired yesterday.",
+["was","were","am","are"],
+"was"
+],
+
+[
+"How ___ apples are there?",
+["much","many","any","some"],
+"many"
+],
+
+[
+"How ___ water do you drink?",
+["many","much","any","few"],
+"much"
+],
+
+[
+"I have ___ homework today.",
+["many","much","a few","an"],
+"much"
+],
+
+[
+"There aren't ___ eggs.",
+["some","any","much","a"],
+"any"
+],
+
+[
+"A lion is ___ than a cat.",
+["strong","stronger","strongest","more strong"],
+"stronger"
+],
+
+[
+"This book is ___ than that book.",
+["interesting","more interesting","most interesting","interest"],
+"more interesting"
+],
+
+[
+"Which is a question word?",
+["Because","Where","Always","Under"],
+"Where"
+],
+
+[
+"Opposite of early?",
+["quickly","late","quiet","strong"],
+"late"
+],
+
+[
+"Opposite of different?",
+["same","busy","healthy","friendly"],
+"same"
+],
+
+[
+"Emma goes to school by bus. How?",
+["By car","By bus","On foot","By train"],
+"By bus"
+],
 
+[
+"Tom does homework after school. When?",
+["Before school","After school","At midnight","In the morning"],
+"After school"
+],
+
+[
+"The picture is ___ the wall.",
+["on","under","between","behind"],
+"on"
+],
+
+[
+"Why do you learn English?",
+[
+"Because I like it.",
+"At seven.",
+"In the room.",
+"With a pencil."
+],
+"Because I like it."
+],
 
+[
+"What do you usually do after school?",
+[
+"I usually do my homework.",
+"Yesterday.",
+"Under the table.",
+"She is my sister."
+],
+"I usually do my homework."
+]
 
+];
 
 
+let current=0;
+let score=0;
+let locked=false;
 
 
+function renderQuiz(){
 
+const box=
+document.getElementById("quizBox");
 
+if(current>=questions.length){
 
+box.innerHTML=`
 
+<div class="scoreBox">
 
+<h3>🏆 QUIZ COMPLETED!</h3>
 
+<div class="scoreNumber">
+${score}/30
+</div>
 
+<p>
 
+${
+score>=27
+?
+"🌟 საოცარი შედეგია! ინგლისურის ნამდვილი ჩემპიონი ხარ!"
+:
+score>=21
+?
+"👏 ძალიან კარგი შედეგია!"
+:
+score>=15
+?
+"👍 კარგი მცდელობა! კიდევ ცოტა ვარჯიში და უკეთესი შედეგი იქნება."
+:
+"💪 არ დანებდე! თავიდან სცადე და აუცილებლად გამოგივა!"
+}
 
+</p>
 
+<button class="btn yellow"
+onclick="restartQuiz()">
+🔄 თავიდან დაწყება
+</button>
 
+</div>
 
+`;
 
+return;
 
+}
 
 
+const q=questions[current];
 
+const options=[...q[1]]
+.sort(()=>Math.random()-.5);
 
+document
+.getElementById("questionNumber")
+.textContent=
+`Question ${current+1} / 30`;
 
+document
+.getElementById("quizScore")
+.textContent=
+`⭐ ${score}`;
 
+document
+.getElementById("quizBar")
+.style.width=
+((current)/30*100)+"%";
 
 
+box.innerHTML=`
 
+<div class="lesson">
 
+<h3>
+${q[0]}
+</h3>
 
+${options.map(option=>`
 
+<button class="option"
+onclick='answerQuiz(this,${JSON.stringify(option)},${JSON.stringify(q[2])})'>
 
+${option}
 
+</button>
 
+`).join("")}
 
+<div
+id="feedback"
+style="min-height:35px;margin-top:15px;font-weight:900">
+</div>
 
+</div>
 
+`;
 
+}
 
 
+function answerQuiz(button,answer,correct){
 
+if(locked)return;
 
+locked=true;
 
+document
+.querySelectorAll(".option")
+.forEach(x=>x.disabled=true);
 
 
+const feedback=
+document.getElementById("feedback");
 
 
+if(answer===correct){
 
+score++;
 
+button.classList.add("correct");
 
+feedback.textContent=
+"✅ სწორია! +1 ქულა";
 
+feedback.style.color="#5cff9a";
 
+}
 
+else{
 
+button.classList.add("wrong");
 
+feedback.textContent=
+"❌ არასწორია! სწორი პასუხია: "+correct;
 
+feedback.style.color="#ff8b9a";
 
+document
+.querySelectorAll(".option")
+.forEach(x=>{
 
+if(x.textContent.trim()===correct){
 
+x.classList.add("correct");
 
+}
 
+});
 
+}
 
 
+setTimeout(()=>{
 
+current++;
+locked=false;
+renderQuiz();
 
+},900);
 
+}
 
 
+function restartQuiz(){
 
+current=0;
+score=0;
+locked=false;
 
+renderQuiz();
 
+}
 
 
+renderQuiz();
 
 
+/* ================= MOUSE 3D EFFECT ================= */
 
+document
+.querySelectorAll(".topic,.word")
+.forEach(card=>{
 
+card.addEventListener("mousemove",e=>{
 
+const rect=
+card.getBoundingClientRect();
 
+const x=
+e.clientX-rect.left;
 
+const y=
+e.clientY-rect.top;
 
+const rotateY=
+((x/rect.width)-.5)*10;
 
+const rotateX=
+((y/rect.height)-.5)*-10;
 
+card.style.transform=
+`perspective(800px)
+ rotateX(${rotateX}deg)
+ rotateY(${rotateY}deg)
+ translateY(-6px)`;
 
+});
 
+card.addEventListener("mouseleave",()=>{
 
+card.style.transform="";
 
+});
 
+});
 
 
+</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- GRADE-3D-VISUALS-2026 -->
-<link rel="stylesheet" href="3d-visuals.css">
-<script src="3d-visuals.js" defer></script>
-<script src="config.js"></script>
-<script src="teacher-navigation.js"></script>
-
-<style id="site-copyright-style">.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.site-copyright::first-letter{color:#00eaff}</style>
-</head><body><header class="top"><div class="wrap"><a class="brand" href="academy.html">⚡ ENGLISH WITH MARIAMI</a> · <a href="academy.html">Academy</a></div></header><main class="wrap"><section class="hero"><span class="yellow">⭐ CLASS 4 • 2026</span><h1>მე-4 კლასი — <span class="neon">English Academy</span></h1><p>გაფართოებული ლექსიკა • Present Simple • კითხვები • ტექსტები • დიალოგები • წინდებულები • პრაქტიკა • წერითი დავალებები</p></section><section class="card"><h2>📚 სასწავლო თემები</h2><div id="topics" class="grid"></div></section><section class="card"><h2>🧠 Advanced Vocabulary</h2><input id="search" placeholder="🔎 მოძებნე სიტყვა ან ქართული თარგმანი" style="padding:12px;width:90%;border-radius:10px"><div id="words" class="grid"></div></section><section class="card"><h2>🔢 რიცხვები</h2><div id="numbers" class="grid"></div></section><section class="card"><h2>✍️ Present Simple</h2><div class="lesson"><b>დადებითი:</b> I play. / You play. / He plays. / She plays.<br><b>უარყოფითი:</b> I do not play. / He does not play.<br><b>კითხვა:</b> Do you play? / Does he play?<br>📌 He/She/It-თან ზმნას ემატება <b>-s/-es</b>.</div><div class="lesson"><b>Frequency:</b> always, usually, often, sometimes, never.<br>I usually read books. — მე ჩვეულებრივ წიგნებს ვკითხულობ.</div></section><section class="card"><h2>❓ Questions</h2><div class="lesson"><b>What</b> — რა / <b>Who</b> — ვინ / <b>Where</b> — სად / <b>When</b> — როდის / <b>Why</b> — რატომ / <b>How</b> — როგორ</div><div class="lesson">What do you like? — რა მოგწონს?<br>Where do you live? — სად ცხოვრობ?<br>When do you study? — როდის სწავლობ?<br>Why do you learn English? — რატომ სწავლობ ინგლისურს?</div></section><section class="card"><h2>📍 Prepositions</h2><div class="grid"><div class="word"><b>in</b><div class="ka">-ში</div>in the room</div><div class="word"><b>on</b><div class="ka">-ზე</div>on the table</div><div class="word"><b>under</b><div class="ka">ქვეშ</div>under the chair</div><div class="word"><b>behind</b><div class="ka">უკან</div>behind the door</div><div class="word"><b>next to</b><div class="ka">გვერდით</div>next to the school</div><div class="word"><b>between</b><div class="ka">შორის</div>between two houses</div></div></section><section class="card"><h2>🗣️ Dialogues</h2><div class="lesson"><b>A:</b> What do you usually do after school?<br><b>B:</b> I usually do my homework and play football.<br><b>A:</b> Where do you play?<br><b>B:</b> I play in the park with my friends.</div><button class="btn listen" onclick="speak('What do you usually do after school? I usually do my homework and play football. Where do you play? I play in the park with my friends.')">🔊 დიალოგის მოსმენა</button></section><section class="card"><h2>📖 Reading</h2><div class="lesson"><b>A Busy School Day</b><p>Emma gets up early every morning. She has breakfast and goes to school by bus. At school she studies English, science and maths. She usually reads during break time. After school she goes home, does her homework and helps her family. In the evening she reads a book and goes to bed at ten.</p><p class="pron">ემა ყოველ დილით ადრე იღვიძებს. საუზმობს და ავტობუსით სკოლაში მიდის. სკოლაში ინგლისურს, მეცნიერებას და მათემატიკას სწავლობს. შესვენებაზე ჩვეულებრივ კითხულობს. სკოლის შემდეგ სახლში მიდის, დავალებას აკეთებს და ოჯახს ეხმარება. საღამოს წიგნს კითხულობს და ათ საათზე იძინებს.</p><button class="btn" onclick="speak(reading)">🔊 ტექსტის მოსმენა</button></div></section><section class="card"><h2>✏️ Writing</h2><div class="lesson"><b>დავალება 1:</b> Write 5 sentences about your daily routine.<br>მაგალითი: I get up at seven. I have breakfast. I go to school...</div><div class="lesson"><b>დავალება 2:</b> Write 5 sentences about your family.<br><b>დავალება 3:</b> Describe your room using: in, on, under, next to, behind.</div></section><section class="card"><h2>🎧 Listening & 📝 Quiz</h2><button class="btn" onclick="listenSet()">▶️ 10 სიტყვა</button><p id="status" class="yellow"></p><div id="quiz"></div></section><section class="card"><h2>📞 მასწავლებელი მარიამი</h2><p>598 93 02 08 · 📍 ქუთაისი</p><p>კლასის განრიგისა და მეტი დეტალებისთვის დაგვიკავშირდით.</p></section></main><footer class="wrap" style="text-align:center;padding:35px">English with Mariami · საიტი შეიქმნა 2026 წელს · ყველა უფლება დაცულია © 2026</footer><script>const reading='Emma gets up early every morning. She has breakfast and goes to school by bus. At school she studies English, science and maths. She usually reads during break time. After school she goes home, does her homework and helps her family. In the evening she reads a book and goes to bed at ten.';const data=[['usually','ჩვეულებრივ','იუჟუალი','I usually read books.'],['always','ყოველთვის','ოლუეიზ','I always do my homework.'],['often','ხშირად','ოფენ','I often play football.'],['sometimes','ზოგჯერ','სამთაიმზ','I sometimes walk home.'],['never','არასდროს','ნევერ','I never forget my book.'],['important','მნიშვნელოვანი','იმფორთენთ','English is important.'],['interesting','საინტერესო','ინტერესთინგ','The lesson is interesting.'],['different','განსხვავებული','დიფერენთ','We are different.'],['favorite','საყვარელი','ფეივორით','English is my favorite subject.'],['question','შეკითხვა','ქუესჩენ','Ask a question.'],['answer','პასუხი','ანსერ','Give an answer.'],['sentence','წინადადება','სენთენს','Write a sentence.'],['story','მოთხრობა','სთორი','Read the story.'],['subject','საგანი','საბჯიქთ','English is my favorite subject.'],['homework','საშინაო დავალება','ჰოუმუორქ','I do my homework.'],['lesson','გაკვეთილი','ლესენ','The lesson starts at nine.'],['practice','ვარჯიში','პრაქტის','Practice every day.'],['remember','დამახსოვრება','რიმემბერ','Remember this word.'],['understand','გაგება','ანდერსთენდ','I understand the question.'],['explain','ახსნა','ექსფლეინ','Please explain it.'],['choose','არჩევა','ჩუზ','Choose an answer.'],['describe','აღწერა','დისქრაიბ','Describe your room.'],['compare','შედარება','ქომპერ','Compare two pictures.'],['beautiful','ლამაზი','ბიუთიფულ','It is a beautiful day.'],['careful','ფრთხილი','ქეერფულ','Be careful.'],['friendly','მეგობრული','ფრენდლი','She is friendly.'],['healthy','ჯანმრთელი','ჰელთი','Healthy food is good.'],['strong','ძლიერი','სთრონგ','He is strong.'],['quiet','ჩუმი','ქუაიეთ','The room is quiet.'],['busy','დაკავებული','ბიზი','I am busy today.'],['early','ადრე','ერლი','I get up early.'],['late','გვიან','ლეით','Do not be late.'],['quickly','სწრაფად','ქუიქლი','Run quickly.'],['carefully','ფრთხილად','ქეერფული','Listen carefully.'],['because','იმიტომ რომ','ბიქოზ','I learn because I like English.'],['before','მანამდე','ბიფორ','Wash your hands before dinner.'],['after','შემდეგ','აფთერ','Play after homework.'],['between','შორის','ბითუინ','The school is between two shops.'],['around','ირგვლივ','არაუნდ','Walk around the park.'],['during','განმავლობაში','დიურინგ','Read during the lesson.'],['together','ერთად','თუგეზერ','We learn together.'],['journey','მოგზაურობა','ჯერნი','The journey is long.'],['country','ქვეყანა','ქანთრი','Georgia is my country.'],['language','ენა','ლენგვიჯ','English is a language.'],['future','მომავალი','ფიუჩერ','Think about the future.'],['problem','პრობლემა','პრობლემ','Solve the problem.'],['idea','იდეა','აიდია','I have an idea.'],['help','დახმარება','ჰელფ','Can you help me?'],['learn','სწავლა','ლერნ','I learn English.'],['teach','სწავლება','თიჩ','Teachers teach students.']];const topics=['📘 Present Simple','❓ Questions','📍 Prepositions','📖 Reading','💬 Dialogues','✏️ Writing','🧩 Practice','🎧 Listening'];function speak(t){if('speechSynthesis'in window){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}}function card(w){return `<div class="word"><b>${w[0]}</b><div class="pron">/${w[2]||''}/</div><div class="ka">${w[1]}</div><div class="example">💬 ${w[3]||''}</div><button class="btn listen" onclick='speak(${JSON.stringify(w[0])})'>🔊 სიტყვა</button><button class="btn" onclick='speak(${JSON.stringify(w[3]||w[0])})'>💬 მაგალითი</button></div>`}function render(){let q=document.getElementById('search').value.toLowerCase();document.getElementById('words').innerHTML=data.filter(w=>(w[0]+' '+w[1]).toLowerCase().includes(q)).map(card).join('');document.getElementById('topics').innerHTML=topics.map(x=>`<div class="word"><b>${x}</b><p>გაკვეთილი + პრაქტიკა + მოსმენა + ქვიზი</p></div>`).join('');document.getElementById('numbers').innerHTML=['thirty — ოცდაათი','forty — ორმოცი','fifty — ორმოცდაათი','sixty — სამოცი','seventy — სამოცდაათი','eighty — ოთხმოცი','ninety — ოთხმოცდაათი','one hundred — ასი'].map(x=>`<div class="word"><b>${x}</b></div>`).join('');}function listenSet(){let ws=data.slice(0,10),i=0;function next(){if(i>=ws.length){document.getElementById('status').textContent='🎉 დასრულდა!';return}document.getElementById('status').textContent=(i+1)+'/10 — '+ws[i][1];speak(ws[i][0]);i++;setTimeout(next,1700)}next()}document.getElementById('search').oninput=render;render()</script><script>(function(){const quizBox=document.getElementById('quiz');if(!quizBox)return;const questions=[['Choose the correct sentence: He ___ to school every day.',['go','goes','going','gone'],'goes'],['Choose the correct sentence: They ___ football on Saturdays.',['plays','play','playing','played'],'play'],['___ she like English?',['Do','Does','Is','Are'],'Does'],['___ you usually get up early?',['Do','Does','Is','Has'],'Do'],['My sister ___ a book every evening.',['read','reads','reading','to read'],'reads'],['We ___ breakfast at seven o’clock.',['has','have','having','had'],'have'],['There ___ a book on the table.',['are','is','am','be'],'is'],['There ___ three pencils in my bag.',['is','are','am','be'],'are'],['The cat is ___ the chair.',['under','between','during','because'],'under'],['The school is ___ the park and the shop.',['between','under','at','during'],'between'],['What does “careful” mean?',['ფრთხილი','დაღლილი','სწრაფი','მხიარული'],'ფრთხილი'],['What does “usually” mean?',['არასდროს','ჩვეულებრივ','გუშინ','ხვალ'],'ჩვეულებრივ'],['Choose the correct past form: Yesterday I ___ football.',['play','plays','played','playing'],'played'],['Choose the correct sentence about now.',['She reads now.','She is reading now.','She read now.','She reading now.'],'She is reading now.'],['Choose the correct form: We ___ at home yesterday.',['was','were','are','is'],'were'],['Choose the correct form: I ___ tired yesterday.',['was','were','am','are'],'was'],['How ___ apples are there?',['much','many','any','some'],'many'],['How ___ water do you drink?',['many','much','any','few'],'much'],['I have ___ homework today.',['many','much','a few','an'],'much'],['There aren’t ___ eggs in the fridge.',['some','any','much','a'],'any'],['Choose the comparative: A lion is ___ than a cat.',['strong','stronger','strongest','more strong'],'stronger'],['Choose the comparative: This book is ___ than that book.',['interesting','more interesting','most interesting','interest'],'more interesting'],['Which word is a question word?',['Because','Where','Always','Under'],'Where'],['What is the opposite of “early”?',['quickly','late','quiet','strong'],'late'],['What is the opposite of “different”?',['same','busy','healthy','friendly'],'same'],['Read: “Emma goes to school by bus.” How does Emma go to school?',['By car','By bus','On foot','By train'],'By bus'],['Read: “Tom does his homework after school.” When does Tom do his homework?',['Before school','After school','At midnight','In the morning'],'After school'],['Choose the correct preposition: The picture is ___ the wall.',['on','under','between','behind'],'on'],['Choose the correct answer: Why do you learn English?',['Because I like it.','At seven.','In the room.','With a pencil.'],'Because I like it.'],['Choose the best answer: What do you usually do after school?',['I usually do my homework.','Yesterday.','Under the table.','She is my sister.'],'I usually do my homework.']];let current=0,score=0,answered=false;function renderQuiz(){if(current>=questions.length){quizBox.innerHTML=`<div class="lesson" style="text-align:center"><h3>🏆 მე-4 კლასის Quiz დასრულდა!</h3><p style="font-size:28px"><b>${score} / 30</b></p><p>${score>=27?'🌟 შესანიშნავი შედეგია!':score>=21?'👏 ძალიან კარგი შედეგია!':score>=15?'👍 კარგი მცდელობა!':'💪 კიდევ ივარჯიშე და თავიდან სცადე!'}</p><button class="btn" onclick="window.g4QuizRestart()">🔄 თავიდან დაწყება</button></div>`;return}const q=questions[current];const options=[...q[1]].sort(()=>Math.random()-.5);quizBox.innerHTML=`<div class="lesson"><div style="color:#00eaff;font-weight:900">კითხვა ${current+1} / 30</div><div style="margin:10px 0;height:8px;background:#061a32;border-radius:8px;overflow:hidden"><i style="display:block;height:100%;background:#00eaff;width:${(current/30)*100}%"></i></div><h3>${q[0]}</h3>${options.map(o=>`<button class="option" onclick="window.g4QuizAnswer(this,${JSON.stringify(o)},${JSON.stringify(q[2])})">${o}</button>`).join('')}<div id="g4-feedback" style="min-height:30px;margin-top:12px;font-weight:900"></div></div>`}window.g4QuizAnswer=function(el,answer,correct){if(answered)return;answered=true;document.querySelectorAll('#quiz .option').forEach(b=>b.disabled=true);const f=document.getElementById('g4-feedback');if(answer===correct){score++;el.style.borderColor='#ffe600';f.textContent='✅ სწორია! +1 ქულა';f.style.color='#ffe600'}else{el.style.borderColor='#ff6b7a';f.textContent='❌ არასწორია! სწორი პასუხია: '+correct;f.style.color='#ff9aaa';document.querySelectorAll('#quiz .option').forEach(b=>{if(b.textContent===correct)b.style.borderColor='#ffe600'})}setTimeout(()=>{current++;answered=false;renderQuiz()},850)};window.g4QuizRestart=function(){current=0;score=0;answered=false;renderQuiz()};renderQuiz()})()</script>
-
-
-<!-- SITE-COPYRIGHT-2026 -->
-<footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer>
-
-</body></html>
+</body>
+</html>
