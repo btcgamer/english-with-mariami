@@ -16,10 +16,25 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   }catch(_){}
 })();
 
-/* Grade pages stay hidden until grade-access.js has verified the account. */
 (function(){
   const p=location.pathname.toLowerCase();
   if(/\/grade[234]\.html$/.test(p)) document.documentElement.style.visibility='hidden';
+})();
+
+/* Grade 3 and Grade 4 never show a Home/Main-page control. */
+(function(){
+  const p=location.pathname.toLowerCase();
+  if(!/\/grade[34]\.html$/.test(p)) return;
+  const removeHomeLinks=()=>{
+    document.querySelectorAll('a').forEach(a=>{
+      const href=(a.getAttribute('href')||'').toLowerCase().split('#')[0];
+      const text=(a.textContent||'').trim().toLowerCase();
+      if(href==='index.html'||href==='./index.html'||href.endsWith('/index.html')||text==='🏠 მთავარი'||text==='მთავარი'||text.includes('მთავარ გვერდზე დაბრუნება')||text.includes('დაბრუნება მთავარზე')) a.remove();
+    });
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',removeHomeLinks);
+  else removeHomeLinks();
+  new MutationObserver(removeHomeLinks).observe(document.documentElement,{childList:true,subtree:true});
 })();
 
 if (!window.supabase) throw new Error('Supabase JS library failed to load.');
@@ -38,8 +53,6 @@ window.supabaseClient=supabaseClient;
   add('logout.js?v=20260829-2');
 })();
 
-// Grade access also runs on login.html so the student is routed directly
-// to the grade selected during registration.
 (function(){
   const add=(src)=>{const s=document.createElement('script');s.src=src;document.head.appendChild(s)};
   add('grade-access.js?v=20260829-2');
