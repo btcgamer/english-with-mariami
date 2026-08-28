@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>English with Mariami — Academy</title>
 
 <!-- SUPABASE -->
@@ -149,19 +150,60 @@ gap:7px;
 flex-wrap:wrap
 }
 
-.navlinks a{
+.navlinks a,
+.logout-btn{
 padding:9px 11px;
 border-radius:12px;
 background:#062443dd;
 border:1px solid #00eaff44;
 font-size:13px;
-transition:.2s
+transition:.2s;
+color:#fff;
+font-family:inherit;
+font-weight:700;
+cursor:pointer
 }
 
 .navlinks a:hover{
 background:#00c9f2;
 color:#00131a;
 box-shadow:0 0 20px #00eaff
+}
+
+/* =========================
+LOGOUT BUTTON
+========================= */
+
+.logout-btn{
+background:
+linear-gradient(
+135deg,
+#ff3b5c,
+#d90035
+);
+
+border:1px solid #ff6b82;
+
+box-shadow:
+0 0 18px #ff174455;
+
+font-weight:1000;
+}
+
+.logout-btn:hover{
+background:
+linear-gradient(
+135deg,
+#ff1744,
+#b8002c
+);
+
+color:#fff;
+
+box-shadow:
+0 0 25px #ff1744aa;
+
+transform:translateY(-2px)
 }
 
 /* =========================
@@ -728,7 +770,8 @@ flex-direction:column
 width:100%
 }
 
-.navlinks a{
+.navlinks a,
+.logout-btn{
 font-size:11px;
 padding:8px 9px
 }
@@ -828,15 +871,36 @@ NAV
 
 <nav class="navlinks">
 
-<a href="#grades">🎓 კლასები</a>
+<a href="#grades">
+🎓 კლასები
+</a>
 
-<a href="#course">🗺️ კურსი</a>
+<a href="#course">
+🗺️ კურსი
+</a>
 
-<a href="#learn">📚 სწავლა</a>
+<a href="#learn">
+📚 სწავლა
+</a>
 
-<a href="#progress">🏆 პროგრესი</a>
+<a href="#progress">
+🏆 პროგრესი
+</a>
 
-<a href="#parents">👨‍👩‍👧 მშობელი</a>
+<a href="#parents">
+👨‍👩‍👧 მშობელი
+</a>
+
+<!-- 🔴 გამოსვლის ღილაკი -->
+
+<button
+type="button"
+id="logoutBtn"
+class="logout-btn">
+
+🚪 გამოსვლა
+
+</button>
 
 </nav>
 
@@ -940,7 +1004,9 @@ CLASSROOM
 
 <article class="neon-card grade">
 
-<h3>🌱 მე-2 კლასი</h3>
+<h3>
+🌱 მე-2 კლასი
+</h3>
 
 <p>
 საბაზისო ლექსიკა, ოჯახი, სკოლა,
@@ -957,7 +1023,9 @@ CLASSROOM
 
 <article class="neon-card grade">
 
-<h3>🚀 მე-3 კლასი</h3>
+<h3>
+🚀 მე-3 კლასი
+</h3>
 
 <p>
 ყოველდღიური ცხოვრება, დღეები,
@@ -975,7 +1043,9 @@ Reading და მარტივი გრამატიკა.
 
 <article class="neon-card grade">
 
-<h3>⭐ მე-4 კლასი</h3>
+<h3>
+⭐ მე-4 კლასი
+</h3>
 
 <p>
 გაფართოებული Vocabulary,
@@ -1018,7 +1088,9 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>🧠 Vocabulary</b>
+<b>
+🧠 Vocabulary
+</b>
 
 <span>
 სიტყვა + ქართული თარგმანი +
@@ -1030,7 +1102,9 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>🔊 Listening</b>
+<b>
+🔊 Listening
+</b>
 
 <span>
 მოსმენა და გამეორება
@@ -1042,7 +1116,9 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>🗣️ Speaking</b>
+<b>
+🗣️ Speaking
+</b>
 
 <span>
 მოკლე დიალოგები და
@@ -1054,7 +1130,9 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>📝 Quiz</b>
+<b>
+📝 Quiz
+</b>
 
 <span>
 შემოწმება, ქულა და
@@ -1091,7 +1169,9 @@ FULL COURSE
 
 <div class="course-card">
 
-<b>მე-2 კლასი</b>
+<b>
+მე-2 კლასი
+</b>
 
 <p>
 სიტყვები, ფერები, ოჯახი,
@@ -1108,7 +1188,9 @@ FULL COURSE
 
 <div class="course-card">
 
-<b>მე-3 კლასი</b>
+<b>
+მე-3 კლასი
+</b>
 
 <p>
 დრო, დღეები, თვეები,
@@ -1126,7 +1208,9 @@ Reading და Grammar.
 
 <div class="course-card">
 
-<b>მე-4 კლასი</b>
+<b>
+მე-4 კლასი
+</b>
 
 <p>
 Present Simple, კითხვები,
@@ -1258,33 +1342,51 @@ C
 
 <div class="person father">
 
-<div class="head">👨</div>
+<div class="head">
+👨
+</div>
 
-<div class="body">👕</div>
+<div class="body">
+👕
+</div>
 
-<div class="legs">👖</div>
+<div class="legs">
+👖
+</div>
 
 </div>
 
 
 <div class="person mother">
 
-<div class="head">👩</div>
+<div class="head">
+👩
+</div>
 
-<div class="body">👗</div>
+<div class="body">
+👗
+</div>
 
-<div class="legs">👠</div>
+<div class="legs">
+👠
+</div>
 
 </div>
 
 
 <div class="person child">
 
-<div class="head">🧒</div>
+<div class="head">
+🧒
+</div>
 
-<div class="body">👕</div>
+<div class="body">
+👕
+</div>
 
-<div class="legs">👟</div>
+<div class="legs">
+👟
+</div>
 
 </div>
 
@@ -1408,7 +1510,7 @@ English Academy
 
 
 <!-- ==================================================
-     🔐 ACADEMY AUTH PROTECTION
+     🔐 ACADEMY AUTH + LOGOUT
 ================================================== -->
 
 <script>
@@ -1420,10 +1522,9 @@ SUPABASE_KEY
 );
 
 
-/*
-   Academy-ის გახსნისას ვამოწმებთ
-   Supabase-ის რეალურ ავტორიზაციას.
-*/
+/* ==================================================
+   ACADEMY AUTH PROTECTION
+================================================== */
 
 (async function(){
 
@@ -1438,8 +1539,8 @@ await supabaseClient.auth.getSession();
 
 
 /*
-   თუ ავტორიზებული არ არის,
-   Academy-ის მასალას ვერ ნახავს.
+თუ ავტორიზებული არ არის,
+Academy-ში არ შემოვუშვებთ.
 */
 
 if(!session){
@@ -1460,11 +1561,6 @@ return;
 }
 
 
-/*
-   ავტორიზებულია —
-   Academy ჩვეულებრივ იხსნება.
-*/
-
 console.log(
 "✅ Academy access granted"
 );
@@ -1484,6 +1580,56 @@ window.location.replace(
 }
 
 })();
+
+
+/* ==================================================
+   🚪 LOGOUT
+================================================== */
+
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async function(){
+
+const button = this;
+
+button.disabled = true;
+button.textContent = "⏳ გამოსვლა...";
+
+try{
+
+const { error } =
+await supabaseClient.auth.signOut();
+
+if(error){
+throw error;
+}
+
+
+/*
+   Supabase სესიიდან გამოსვლა დასრულდა.
+   მომხმარებელი გადავა Login გვერდზე.
+*/
+
+window.location.replace("login.html");
+
+
+}catch(error){
+
+console.error(
+"Logout error:",
+error
+);
+
+button.disabled = false;
+button.textContent = "🚪 გამოსვლა";
+
+alert(
+"გამოსვლისას მოხდა შეცდომა. გთხოვ, თავიდან სცადე."
+);
+
+}
+
+});
 
 </script>
 
