@@ -2,1408 +2,990 @@
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>English with Mariami — English Academy</title>
+<title>English with Mariami — ინგლისურის აკადემია</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-    font-family:Arial,"Noto Sans Georgian",sans-serif;
-    min-height:100vh;
-    overflow-x:hidden;
-    color:#082b46;
-    background:#eefaff;
+margin:0;
+font-family:Arial,"Noto Sans Georgian",sans-serif;
+color:#fff;
+background:#010712;
+min-height:100vh;
+overflow-x:hidden;
 }
 
 a{
-    text-decoration:none;
-    color:inherit;
+text-decoration:none;
+color:inherit;
 }
 
 .wrap{
-    width:min(1250px,calc(100% - 28px));
-    margin:auto;
+width:min(1250px,calc(100% - 28px));
+margin:auto;
 }
 
+/* =========================
+   BACKGROUND
+========================= */
 
-/* =========================================================
-   FUTURISTIC 3D WORLD
-========================================================= */
+.neon-world{
+position:fixed;
+inset:0;
+z-index:-2;
+overflow:hidden;
 
-.world{
-    position:fixed;
-    inset:0;
-    z-index:-10;
-    overflow:hidden;
-    perspective:1200px;
-
-    background:
-        radial-gradient(
-            circle at 50% 40%,
-            #ffffff 0%,
-            #f0fcff 30%,
-            #bdeeff 58%,
-            #50c8f5 82%,
-            #0876b8 100%
-        );
+background:
+radial-gradient(
+circle at 50% 40%,
+#eaffff 0,
+#c8f4ff 18%,
+#7fc9eb 42%,
+#245d86 70%,
+#020713 100%
+);
 }
 
-.world::before{
-    content:"";
-    position:absolute;
-    inset:-20%;
+.neon-world:before{
+content:"";
+position:absolute;
+inset:-30%;
 
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            transparent 20%,
-            #00cfff22 50%,
-            #006cff45 100%
-        );
+background:
+radial-gradient(
+ellipse at center,
+transparent 25%,
+#001329aa 70%,
+#00040c 100%
+);
 
-    animation:worldPulse 7s ease-in-out infinite;
+pointer-events:none;
 }
 
-@keyframes worldPulse{
+.grid-floor{
+position:absolute;
+left:-20%;
+right:-20%;
+bottom:-20%;
+height:62%;
 
-    0%,100%{
-        transform:scale(1);
-        opacity:.7;
-    }
+transform:
+perspective(450px)
+rotateX(62deg);
 
-    50%{
-        transform:scale(1.12);
-        opacity:1;
-    }
+background-image:
+linear-gradient(
+#00eaff35 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+#00eaff35 1px,
+transparent 1px
+);
+
+background-size:55px 55px;
+
+mask-image:
+linear-gradient(
+to top,
+black,
+transparent
+);
+
+opacity:.65;
 }
-
-
-/* =========================================================
-   3D FLOOR
-========================================================= */
-
-.floor{
-    position:absolute;
-
-    width:160%;
-    height:60%;
-
-    left:-30%;
-    bottom:-28%;
-
-    transform:
-        perspective(500px)
-        rotateX(68deg);
-
-    background-image:
-        linear-gradient(
-            #00aaff55 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            #00aaff55 1px,
-            transparent 1px
-        );
-
-    background-size:
-        60px 60px;
-
-    mask-image:
-        linear-gradient(
-            to top,
-            black,
-            transparent
-        );
-
-    animation:
-        floorMove 8s linear infinite;
-}
-
-@keyframes floorMove{
-
-    to{
-        background-position:
-            0 60px,
-            60px 0;
-    }
-}
-
-
-/* =========================================================
-   3D ABC LETTERS
-========================================================= */
 
 .letters{
-    position:absolute;
-    inset:0;
-
-    transform-style:preserve-3d;
+position:absolute;
+inset:0;
+perspective:900px;
 }
 
 .letter{
+position:absolute;
 
-    position:absolute;
+font-weight:1000;
+font-family:Arial,sans-serif;
 
-    font-family:Arial,sans-serif;
+font-size:clamp(45px,7vw,105px);
 
-    font-weight:1000;
+color:#fff;
 
-    color:#fff;
+text-shadow:
+0 0 5px #fff,
+0 0 14px #00eaff,
+0 0 30px #009cff,
+0 0 65px #006cff;
 
-    text-shadow:
-        0 0 5px #fff,
-        0 0 14px #00eaff,
-        0 0 35px #009cff,
-        0 0 70px #006cff,
-        0 0 120px #00aaff;
+filter:
+drop-shadow(
+0 15px 15px #002b4f99
+);
 
-    filter:
-        drop-shadow(
-            0 20px 25px #007cff66
-        );
+animation:
+float 7s ease-in-out infinite;
 
-    opacity:.85;
-
-    user-select:none;
-
-    animation:
-        letterFloat
-        9s
-        ease-in-out
-        infinite
-        alternate;
+user-select:none;
 }
 
-.a{
-    left:3%;
-    top:12%;
-    font-size:110px;
-    animation-delay:-1s;
+.letter:nth-child(1){
+left:5%;
+top:16%;
+animation-delay:-1s;
 }
 
-.b{
-    left:15%;
-    top:70%;
-    font-size:70px;
-    animation-delay:-5s;
+.letter:nth-child(2){
+left:18%;
+top:63%;
+animation-delay:-4s;
 }
 
-.c{
-    left:28%;
-    top:7%;
-    font-size:125px;
-    animation-delay:-2s;
+.letter:nth-child(3){
+left:31%;
+top:12%;
+animation-delay:-2s;
 }
 
-.d{
-    left:42%;
-    top:76%;
-    font-size:75px;
-    animation-delay:-7s;
+.letter:nth-child(4){
+left:44%;
+top:67%;
+animation-delay:-5s;
 }
 
-.e{
-    left:55%;
-    top:8%;
-    font-size:110px;
-    animation-delay:-3s;
+.letter:nth-child(5){
+left:56%;
+top:16%;
+animation-delay:-3s;
 }
 
-.f{
-    left:68%;
-    top:65%;
-    font-size:80px;
-    animation-delay:-6s;
+.letter:nth-child(6){
+left:69%;
+top:58%;
+animation-delay:-6s;
 }
 
-.g{
-    left:81%;
-    top:16%;
-    font-size:120px;
-    animation-delay:-4s;
+.letter:nth-child(7){
+left:81%;
+top:20%;
+animation-delay:-1.5s;
 }
 
-.h{
-    left:91%;
-    top:71%;
-    font-size:75px;
-    animation-delay:-8s;
+.letter:nth-child(8){
+left:91%;
+top:70%;
+animation-delay:-4.5s;
 }
 
-@keyframes letterFloat{
-
-    0%{
-        transform:
-            translate3d(
-                0,
-                0,
-                -250px
-            )
-            rotateX(15deg)
-            rotateY(-25deg)
-            rotateZ(-4deg);
-    }
-
-    50%{
-        transform:
-            translate3d(
-                35px,
-                -45px,
-                150px
-            )
-            rotateX(-15deg)
-            rotateY(30deg)
-            rotateZ(5deg);
-    }
-
-    100%{
-        transform:
-            translate3d(
-                -25px,
-                25px,
-                40px
-            )
-            rotateX(10deg)
-            rotateY(-15deg)
-            rotateZ(-3deg);
-    }
+.letter:nth-child(9){
+left:12%;
+top:35%;
+font-size:55px;
+animation-delay:-3.5s;
 }
 
-
-/* =========================================================
-   CENTRAL 3D CORE
-========================================================= */
-
-.core{
-
-    position:absolute;
-
-    left:50%;
-    top:43%;
-
-    width:
-        min(
-            520px,
-            70vw
-        );
-
-    aspect-ratio:1;
-
-    transform:
-        translate(-50%,-50%);
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #fff 0%,
-            #e8fcff 25%,
-            #a9eaff 52%,
-            #39bdf5 75%,
-            #007bc4 100%
-        );
-
-    box-shadow:
-
-        inset
-        -35px -45px
-        80px
-        #0068aa55,
-
-        0 30px 120px
-        #00aaff88,
-
-        0 0 100px
-        #00eaffaa;
-
-    animation:
-        coreFloat
-        6s
-        ease-in-out
-        infinite;
-
-    opacity:.9;
+.letter:nth-child(10){
+left:74%;
+top:39%;
+font-size:55px;
+animation-delay:-2.5s;
 }
 
-@keyframes coreFloat{
+@keyframes float{
 
-    0%,100%{
-        transform:
-            translate(-50%,-50%)
-            rotateX(10deg)
-            rotateY(-10deg);
-    }
-
-    50%{
-        transform:
-            translate(-50%,-53%)
-            rotateX(-8deg)
-            rotateY(18deg);
-    }
+0%,100%{
+transform:
+translate3d(0,0,0)
+rotateY(-12deg)
+rotateZ(-2deg);
 }
 
-.core::before{
-
-    content:"ABC";
-
-    position:absolute;
-    inset:0;
-
-    display:grid;
-    place-items:center;
-
-    font-size:
-        clamp(
-            75px,
-            11vw,
-            140px
-        );
-
-    font-weight:1000;
-
-    letter-spacing:10px;
-
-    color:white;
-
-    text-shadow:
-        0 0 10px white,
-        0 0 25px #00eaff,
-        0 0 55px #008cff,
-        0 0 100px #006cff;
+50%{
+transform:
+translate3d(25px,-35px,80px)
+rotateY(22deg)
+rotateZ(3deg);
 }
 
-
-/* =========================================================
-   ROTATING RINGS
-========================================================= */
-
-.ring{
-
-    position:absolute;
-
-    left:50%;
-    top:43%;
-
-    border-radius:50%;
-
-    border:
-        2px solid
-        #00eaff88;
-
-    box-shadow:
-        0 0 20px #00eaff,
-        inset 0 0 20px #00eaff55;
 }
 
-.ring1{
-
-    width:530px;
-    height:530px;
-
-    transform:
-        translate(-50%,-50%)
-        rotateX(70deg);
-
-    animation:
-        ringOne
-        12s
-        linear
-        infinite;
-}
-
-.ring2{
-
-    width:430px;
-    height:430px;
-
-    transform:
-        translate(-50%,-50%)
-        rotateY(70deg);
-
-    animation:
-        ringTwo
-        16s
-        linear
-        infinite
-        reverse;
-}
-
-.ring3{
-
-    width:650px;
-    height:650px;
-
-    transform:
-        translate(-50%,-50%)
-        rotateX(65deg)
-        rotateY(15deg);
-
-    border-color:#fff8;
-
-    animation:
-        ringThree
-        20s
-        linear
-        infinite;
-}
-
-@keyframes ringOne{
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotateX(70deg)
-            rotateZ(360deg);
-    }
-}
-
-@keyframes ringTwo{
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotateY(70deg)
-            rotateZ(-360deg);
-    }
-}
-
-@keyframes ringThree{
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotateX(65deg)
-            rotateY(375deg);
-    }
-}
-
-
-/* =========================================================
-   FLOATING WORDS
-========================================================= */
-
-.word{
-
-    position:absolute;
-
-    padding:
-        13px 18px;
-
-    border-radius:20px;
-
-    background:
-        #ffffffcc;
-
-    border:
-        1px solid
-        #00bfff88;
-
-    color:#0078b5;
-
-    font-size:14px;
-
-    font-weight:1000;
-
-    letter-spacing:1px;
-
-    backdrop-filter:
-        blur(12px);
-
-    box-shadow:
-        0 0 30px #00cfff55,
-        0 18px 40px #007cff22;
-
-    animation:
-        wordFloat
-        5s
-        ease-in-out
-        infinite;
-}
-
-.word1{
-    left:7%;
-    top:35%;
-}
-
-.word2{
-    right:7%;
-    top:29%;
-    animation-delay:-1.5s;
-}
-
-.word3{
-    right:13%;
-    top:53%;
-    animation-delay:-3s;
-}
-
-.word4{
-    left:11%;
-    bottom:20%;
-    animation-delay:-2s;
-}
-
-@keyframes wordFloat{
-
-    50%{
-        transform:
-            translateY(-18px)
-            rotateY(10deg);
-    }
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-.particle{
-
-    position:absolute;
-
-    width:5px;
-    height:5px;
-
-    border-radius:50%;
-
-    background:white;
-
-    box-shadow:
-        0 0 8px white,
-        0 0 20px #00eaff,
-        0 0 35px #009cff;
-
-    animation:
-        particleUp
-        var(--speed)
-        linear
-        infinite;
-}
-
-@keyframes particleUp{
-
-    0%{
-        transform:
-            translate(
-                var(--x),
-                110vh
-            );
-
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    80%{
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            translate(
-                calc(var(--x) + 100px),
-                -20vh
-            );
-
-        opacity:0;
-    }
-}
-
-
-/* =========================================================
+/* =========================
    NAVIGATION
-========================================================= */
+========================= */
 
 .top{
+position:sticky;
+top:0;
+z-index:50;
 
-    position:sticky;
-    top:0;
-    z-index:100;
+background:#02152de8;
 
-    background:
-        #ffffffdf;
+border-bottom:
+1px solid #00eaff66;
 
-    backdrop-filter:
-        blur(18px);
-
-    border-bottom:
-        1px solid
-        #00aaff55;
-
-    box-shadow:
-        0 8px 35px
-        #007cff20;
+backdrop-filter:
+blur(14px);
 }
 
 .nav{
-
-    min-height:68px;
-
-    display:flex;
-
-    justify-content:
-        space-between;
-
-    align-items:center;
-
-    gap:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:13px 0;
 }
 
 .brand{
+font-weight:1000;
+font-size:18px;
 
-    font-size:18px;
-
-    font-weight:1000;
-
-    color:#06416d;
-
-    text-shadow:
-        0 0 15px
-        #00bfff66;
+text-shadow:
+0 0 18px #00eaff;
 }
 
 .navlinks{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:7px;
+display:flex;
+gap:7px;
+flex-wrap:wrap;
 }
 
 .navlinks a{
+padding:10px 14px;
 
-    padding:
-        9px 12px;
+border-radius:13px;
 
-    border-radius:12px;
+background:#062443dd;
 
-    background:white;
+border:
+1px solid #00eaff44;
 
-    border:
-        1px solid
-        #00aaff44;
+font-size:13px;
 
-    font-size:13px;
-
-    font-weight:800;
-
-    transition:.25s;
+transition:.2s;
 }
 
 .navlinks a:hover{
+background:#00c9f2;
 
-    background:#00c9f2;
+color:#00131a;
 
-    color:#00202e;
+box-shadow:
+0 0 20px #00eaff;
 
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 0 25px
-        #00eaff99;
+transform:
+translateY(-2px);
 }
 
+/* მთავარი ღილაკი */
 
-/* =========================================================
+.academy-button{
+background:
+linear-gradient(
+135deg,
+#00c9f2,
+#007cff
+)!important;
+
+color:#fff!important;
+
+font-weight:1000!important;
+
+box-shadow:
+0 0 25px #00eaff66;
+}
+
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero{
+padding:75px 0 55px;
 
-    min-height:
-        calc(100vh - 68px);
+min-height:720px;
 
-    display:flex;
-
-    align-items:center;
-
-    padding:
-        45px 0;
+display:flex;
+align-items:center;
 }
 
 .hero-grid{
+display:grid;
 
-    width:100%;
+grid-template-columns:
+1.15fr .85fr;
 
-    display:grid;
+gap:30px;
 
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:35px;
-
-    align-items:center;
+align-items:center;
 }
 
 .badge{
+display:inline-block;
 
-    display:inline-block;
+padding:9px 15px;
 
-    padding:
-        9px 15px;
+border-radius:30px;
 
-    border-radius:30px;
+background:#061c38dd;
 
-    background:#ffffffdd;
+border:
+1px solid #00eaff88;
 
-    border:
-        1px solid
-        #00bfff77;
+color:#ffe600;
 
-    color:#007bbd;
+font-weight:900;
 
-    font-weight:1000;
-
-    box-shadow:
-        0 0 30px
-        #00cfff33;
+box-shadow:
+0 0 20px #00eaff22;
 }
 
-h1{
+.hero h1{
+font-size:
+clamp(
+42px,
+7vw,
+78px
+);
 
-    font-size:
-        clamp(
-            45px,
-            7vw,
-            82px
-        );
+line-height:1;
 
-    line-height:.98;
+margin:20px 0;
 
-    margin:
-        20px 0;
-
-    color:#062d4d;
-
-    text-shadow:
-        0 12px 35px
-        #008cff25;
+text-shadow:
+0 0 30px #00eaff88;
 }
 
-h1 span{
-
-    color:#009fe8;
-
-    text-shadow:
-        0 0 25px
-        #00cfff88;
+.hero h1 span{
+color:#00eaff;
 }
 
 .lead{
+font-size:19px;
 
-    max-width:720px;
+line-height:1.75;
 
-    font-size:18px;
+color:#e9fcff;
 
-    line-height:1.75;
+text-shadow:
+0 2px 8px #001b2d;
 
-    color:#31566e;
+max-width:720px;
 }
 
 .buttons{
+display:flex;
 
-    display:flex;
+gap:12px;
 
-    flex-wrap:wrap;
+flex-wrap:wrap;
 
-    gap:12px;
-
-    margin-top:25px;
+margin-top:25px;
 }
 
 .btn{
+display:inline-block;
 
-    display:inline-block;
+border:0;
 
-    padding:
-        14px 19px;
+cursor:pointer;
 
-    border-radius:14px;
+padding:13px 18px;
 
-    font-weight:1000;
+border-radius:14px;
 
-    transition:.25s;
+font-weight:900;
+
+transition:.2s;
 }
 
 .btn:hover{
-
-    transform:
-        translateY(-5px)
-        scale(1.03);
+transform:
+translateY(-3px)
+scale(1.03);
 }
 
 .primary{
+background:#00c9f2;
 
-    background:#00c9f2;
+color:#00131a;
 
-    color:#00202e;
-
-    box-shadow:
-        0 12px 35px
-        #00bfff55;
+box-shadow:
+0 0 25px #00eaff88;
 }
 
 .yellow{
+background:#ffe600;
 
-    background:#ffe600;
+color:#181500;
 
-    color:#211c00;
-
-    box-shadow:
-        0 12px 35px
-        #ffd90055;
+box-shadow:
+0 0 25px #ffe60066;
 }
 
+/* =========================
+   CARD
+========================= */
 
-/* =========================================================
-   VISUAL AREA
-========================================================= */
+.neon-card{
+background:
+linear-gradient(
+145deg,
+#041a31e8,
+#020b19e8
+);
 
-.visual{
+border:
+1px solid #00eaff66;
 
-    position:relative;
+border-radius:24px;
 
-    min-height:500px;
+box-shadow:
+0 18px 55px #0009,
+0 0 30px #00eaff22;
 
-    display:grid;
-
-    place-items:center;
+backdrop-filter:
+blur(10px);
 }
 
+.teacher{
+padding:32px;
 
-/* =========================================================
-   GRADES
-========================================================= */
+text-align:center;
+
+transform:
+perspective(900px)
+rotateY(-5deg);
+}
+
+.avatar{
+font-size:95px;
+
+filter:
+drop-shadow(
+0 0 25px #00eaff
+);
+
+animation:
+teacherFloat 4s ease-in-out infinite;
+}
+
+@keyframes teacherFloat{
+
+0%,100%{
+transform:
+translateY(0);
+}
+
+50%{
+transform:
+translateY(-12px);
+}
+
+}
+
+.teacher h2{
+font-size:28px;
+}
+
+.pill{
+display:inline-block;
+
+margin:4px;
+
+padding:8px 11px;
+
+border-radius:20px;
+
+background:#0a2d50cc;
+
+border:
+1px solid #00eaff44;
+}
+
+/* =========================
+   SECTIONS
+========================= */
 
 .section{
-
-    padding:
-        70px 0;
+padding:55px 0;
 }
 
 .section-title{
-
-    text-align:center;
-
-    margin-bottom:
-        30px;
+text-align:center;
+margin-bottom:28px;
 }
 
 .section-title h2{
-
-    margin:
-        12px 0;
-
-    font-size:
-        clamp(
-            28px,
-            5vw,
-            38px
-        );
-
-    color:#07365a;
+font-size:34px;
+margin:13px 0;
 }
 
 .muted{
-
-    color:#58758a;
+color:#c1eaf5;
 }
 
-.grid{
+/* =========================
+   FEATURES
+========================= */
 
-    display:grid;
+.feature-grid{
+display:grid;
 
-    grid-template-columns:
-        repeat(3,1fr);
+grid-template-columns:
+repeat(4,1fr);
 
-    gap:20px;
+gap:15px;
 }
 
-.card{
+.feature{
+padding:23px;
 
-    padding:
-        28px;
+text-align:center;
 
-    border-radius:25px;
-
-    background:
-        #ffffffdf;
-
-    border:
-        1px solid
-        #00aaff55;
-
-    backdrop-filter:
-        blur(15px);
-
-    box-shadow:
-        0 20px 60px
-        #007cff22;
-
-    transition:.3s;
+min-height:150px;
 }
 
-.card:hover{
+.feature b{
+display:block;
 
-    transform:
-        translateY(-10px);
+color:#ffe600;
 
-    box-shadow:
-        0 30px 75px
-        #007cff35;
+font-size:20px;
+
+margin-bottom:10px;
 }
 
-.card h3{
-
-    color:#007fbd;
-
-    font-size:25px;
-
-    margin-bottom:
-        12px;
+.feature span{
+line-height:1.6;
+color:#d9f7ff;
 }
 
-.card p{
+/* =========================
+   WHY US
+========================= */
 
-    line-height:1.7;
+.info-grid{
+display:grid;
 
-    color:#46677c;
+grid-template-columns:
+repeat(3,1fr);
 
-    margin-bottom:
-        20px;
+gap:16px;
 }
 
+.info-card{
+padding:25px;
 
-/* =========================================================
+text-align:center;
+}
+
+.info-icon{
+font-size:50px;
+
+filter:
+drop-shadow(
+0 0 18px #00eaff
+);
+}
+
+.info-card h3{
+color:#ffe600;
+}
+
+.info-card p{
+line-height:1.6;
+color:#d9f7ff;
+}
+
+/* =========================
+   CLASSES
+========================= */
+
+.classes{
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:16px;
+}
+
+.class-card{
+padding:28px;
+
+transition:.2s;
+}
+
+.class-card:hover{
+transform:
+translateY(-7px);
+
+box-shadow:
+0 25px 60px #000b,
+0 0 35px #00eaff44;
+}
+
+.class-card h3{
+color:#ffe600;
+
+font-size:25px;
+}
+
+.class-card p{
+line-height:1.7;
+
+color:#d9f7ff;
+}
+
+/* =========================
+   PARENT SPACE
+========================= */
+
+.parent-preview{
+position:relative;
+
+overflow:hidden;
+
+min-height:420px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:25px;
+
+background:
+radial-gradient(
+circle at center,
+#075b91,
+#032b4d 45%,
+#020f20 75%,
+#010711
+);
+
+border:
+1px solid #00eaff88;
+
+box-shadow:
+0 25px 70px #000c,
+0 0 50px #00eaff33;
+}
+
+.family{
+position:absolute;
+
+left:50%;
+top:45%;
+
+transform:
+translate(-50%,-50%);
+
+display:flex;
+
+align-items:flex-end;
+
+gap:25px;
+
+font-size:65px;
+
+animation:
+familyMove 5s ease-in-out infinite;
+
+filter:
+drop-shadow(
+0 0 20px #00eaff
+);
+}
+
+@keyframes familyMove{
+
+0%,100%{
+transform:
+translate(-50%,-50%)
+translateY(0)
+rotateY(-5deg);
+}
+
+50%{
+transform:
+translate(-50%,-55%)
+translateY(-15px)
+rotateY(8deg);
+}
+
+}
+
+.family-person{
+animation:
+personMove 3s ease-in-out infinite;
+}
+
+.family-person:nth-child(2){
+animation-delay:-1s;
+}
+
+.family-person:nth-child(3){
+animation-delay:-2s;
+}
+
+@keyframes personMove{
+
+0%,100%{
+transform:
+translateY(0);
+}
+
+50%{
+transform:
+translateY(-12px);
+}
+
+}
+
+.parent-content{
+position:relative;
+
+z-index:5;
+
+text-align:center;
+
+width:min(700px,92%);
+
+padding:32px 25px;
+
+background:
+linear-gradient(
+145deg,
+#02182bdd,
+#020a17dd
+);
+
+border:
+1px solid #00eaff66;
+
+border-radius:25px;
+
+box-shadow:
+0 20px 60px #000b;
+
+backdrop-filter:
+blur(9px);
+}
+
+.parent-content .icon{
+font-size:58px;
+
+animation:
+iconMove 3s ease-in-out infinite;
+}
+
+@keyframes iconMove{
+
+0%,100%{
+transform:
+translateY(0);
+}
+
+50%{
+transform:
+translateY(-9px)
+scale(1.08);
+}
+
+}
+
+.parent-content h2{
+color:#00eaff;
+
+font-size:32px;
+
+text-shadow:
+0 0 20px #00eaff88;
+}
+
+.parent-content p{
+line-height:1.7;
+
+color:#d9f7ff;
+}
+
+.parent-button{
+font-size:17px;
+
+padding:14px 25px;
+}
+
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
 .footer{
+margin-top:35px;
 
-    padding:
-        35px 15px;
+padding:35px 0;
 
-    text-align:center;
+text-align:center;
 
-    background:
-        #ffffffbb;
+border-top:
+1px solid #00eaff33;
 
-    border-top:
-        1px solid
-        #00aaff33;
-
-    color:#628196;
+color:#9dc7d5;
 }
 
-
-/* =========================================================
+/* =========================
    TABLET
-========================================================= */
+========================= */
 
-@media(max-width:900px){
+@media(max-width:850px){
 
-    .hero-grid{
-
-        grid-template-columns:
-            1fr;
-
-        text-align:center;
-    }
-
-    .lead{
-
-        margin:auto;
-    }
-
-    .buttons{
-
-        justify-content:center;
-    }
-
-    .visual{
-
-        min-height:
-            430px;
-    }
-
-    .grid{
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .nav{
-
-        flex-direction:
-            column;
-
-        padding:
-            12px 0;
-    }
-
-    .navlinks{
-
-        justify-content:
-            center;
-    }
-
-    .core{
-
-        width:370px;
-    }
-
-    .ring1{
-
-        width:390px;
-        height:390px;
-    }
-
-    .ring2{
-
-        width:320px;
-        height:320px;
-    }
-
-    .ring3{
-
-        width:470px;
-        height:470px;
-    }
+.hero-grid,
+.classes,
+.info-grid{
+grid-template-columns:1fr;
 }
 
-
-/* =========================================================
-   ANDROID
-========================================================= */
-
-@media(max-width:600px){
-
-    .wrap{
-
-        width:
-            calc(100% - 20px);
-    }
-
-    .navlinks{
-
-        gap:4px;
-    }
-
-    .navlinks a{
-
-        font-size:10px;
-
-        padding:
-            7px 8px;
-    }
-
-    .hero{
-
-        min-height:auto;
-
-        padding:
-            40px 0 25px;
-    }
-
-    h1{
-
-        font-size:
-            clamp(
-                39px,
-                12vw,
-                55px
-            );
-    }
-
-    .lead{
-
-        font-size:16px;
-    }
-
-    .visual{
-
-        min-height:
-            350px;
-    }
-
-    .core{
-
-        width:245px;
-    }
-
-    .core::before{
-
-        font-size:70px;
-
-        letter-spacing:5px;
-    }
-
-    .ring1{
-
-        width:285px;
-        height:285px;
-    }
-
-    .ring2{
-
-        width:225px;
-        height:225px;
-    }
-
-    .ring3{
-
-        width:350px;
-        height:350px;
-    }
-
-    .letter{
-
-        font-size:
-            48px!important;
-
-        opacity:.5;
-    }
-
-    .word{
-
-        font-size:10px;
-
-        padding:
-            8px 10px;
-    }
-
-    .word1{
-
-        left:0;
-        top:4%;
-    }
-
-    .word2{
-
-        right:0;
-        top:25%;
-    }
-
-    .word3{
-
-        right:1%;
-        top:52%;
-    }
-
-    .word4{
-
-        left:2%;
-        bottom:2%;
-    }
-
-    .grid{
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .card{
-
-        padding:
-            22px;
-    }
-
-    .section{
-
-        padding:
-            50px 0;
-    }
+.feature-grid{
+grid-template-columns:
+repeat(2,1fr);
 }
 
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media(max-width:380px){
-
-    .core{
-
-        width:210px;
-    }
-
-    .core::before{
-
-        font-size:
-            55px;
-    }
-
-    .ring1{
-
-        width:240px;
-        height:240px;
-    }
-
-    .ring2{
-
-        width:185px;
-        height:185px;
-    }
-
-    .ring3{
-
-        width:290px;
-        height:290px;
-    }
-
-    .letter{
-
-        font-size:
-            38px!important;
-    }
-
-    h1{
-
-        font-size:
-            37px;
-    }
+.teacher{
+transform:none;
 }
 
+.hero{
+padding-top:50px;
+}
 
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
+}
 
-@media(prefers-reduced-motion:reduce){
+/* =========================
+   PHONE
+========================= */
 
-    *,
-    *::before,
-    *::after{
+@media(max-width:520px){
 
-        animation-duration:
-            .01ms!important;
+.hero h1{
+font-size:42px;
+}
 
-        animation-iteration-count:
-            1!important;
-    }
+.feature-grid{
+grid-template-columns:1fr;
+}
+
+.nav{
+align-items:flex-start;
+
+flex-direction:column;
+}
+
+.navlinks{
+width:100%;
+}
+
+.navlinks a{
+font-size:11px;
+
+padding:8px 9px;
+}
+
+.letter{
+font-size:48px!important;
+}
+
+.family{
+font-size:40px;
+
+gap:3px;
+}
+
+.parent-preview{
+min-height:500px;
+}
+
+.parent-content{
+padding:25px 15px;
+}
+
+.parent-content h2{
+font-size:27px;
+}
+
+.parent-content p{
+font-size:14px;
+}
+
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+.reveal{
+animation:
+reveal .9s ease both;
+}
+
+@keyframes reveal{
+
+from{
+opacity:0;
+transform:
+translateY(25px);
+}
+
+to{
+opacity:1;
+transform:
+translateY(0);
+}
+
 }
 
 </style>
 </head>
 
-
 <body>
 
+<!-- =========================
+     BACKGROUND
+========================= -->
 
-<!-- =======================================================
-     3D BACKGROUND
-======================================================= -->
+<div class="neon-world">
 
-<div class="world">
+<div class="letters">
 
-    <div class="letters">
+<span class="letter">A</span>
+<span class="letter">B</span>
+<span class="letter">C</span>
+<span class="letter">D</span>
+<span class="letter">E</span>
+<span class="letter">F</span>
+<span class="letter">G</span>
+<span class="letter">H</span>
+<span class="letter">I</span>
+<span class="letter">J</span>
 
-        <span class="letter a">A</span>
-        <span class="letter b">B</span>
-        <span class="letter c">C</span>
-        <span class="letter d">D</span>
-        <span class="letter e">E</span>
-        <span class="letter f">F</span>
-        <span class="letter g">G</span>
-        <span class="letter h">H</span>
+</div>
 
-    </div>
-
-
-    <div class="core"></div>
-
-    <div class="ring ring1"></div>
-    <div class="ring ring2"></div>
-    <div class="ring ring3"></div>
-
-
-    <div class="word word1">
-        🔤 ABC WORLD
-    </div>
-
-    <div class="word word2">
-        🗣️ SPEAK
-    </div>
-
-    <div class="word word3">
-        🔊 LISTEN
-    </div>
-
-    <div class="word word4">
-        ⭐ LEARN
-    </div>
-
-
-    <div class="particle"
-         style="left:5%;--x:-20px;--speed:9s">
-    </div>
-
-    <div class="particle"
-         style="left:15%;--x:30px;--speed:12s">
-    </div>
-
-    <div class="particle"
-         style="left:25%;--x:-40px;--speed:10s">
-    </div>
-
-    <div class="particle"
-         style="left:35%;--x:50px;--speed:14s">
-    </div>
-
-    <div class="particle"
-         style="left:45%;--x:-20px;--speed:11s">
-    </div>
-
-    <div class="particle"
-         style="left:55%;--x:40px;--speed:13s">
-    </div>
-
-    <div class="particle"
-         style="left:65%;--x:-30px;--speed:9s">
-    </div>
-
-    <div class="particle"
-         style="left:75%;--x:50px;--speed:12s">
-    </div>
-
-    <div class="particle"
-         style="left:85%;--x:-40px;--speed:10s">
-    </div>
-
-    <div class="particle"
-         style="left:95%;--x:20px;--speed:15s">
-    </div>
-
-
-    <div class="floor"></div>
+<div class="grid-floor"></div>
 
 </div>
 
 
-<!-- =======================================================
-     NAVIGATION
-======================================================= -->
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="top">
 
@@ -1415,20 +997,21 @@ h1 span{
 
 <nav class="navlinks">
 
-<a href="#grades">
-🎓 კლასები
+<a href="academy.html"
+class="academy-button">
+🎓 სასწავლო ცენტრი
 </a>
 
-<a href="academy.html">
-📚 Academy
+<a href="#classes">
+📚 კლასები
 </a>
 
-<a href="login.html">
-🔐 შესვლა
+<a href="#learn">
+🧠 სწავლა
 </a>
 
-<a href="register.html">
-📝 რეგისტრაცია
+<a href="#parents">
+👨‍👩‍👧 მშობლის სივრცე
 </a>
 
 </nav>
@@ -1438,24 +1021,22 @@ h1 span{
 </header>
 
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
-
-<main>
+<main class="wrap">
 
 
-<section class="hero wrap">
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero reveal">
 
 <div class="hero-grid">
-
 
 <div>
 
 <span class="badge">
-🇬🇧 ENGLISH ACADEMY • 2026
+🇬🇧 ქართული ↔ English • 2026
 </span>
-
 
 <h1>
 
@@ -1464,43 +1045,34 @@ h1 span{
 <br>
 
 <span>
-ახალი სამყაროდან
+მარტივად და სახალისოდ
 </span>
 
 <br>
 
-დავიწყოთ ერთად!
+ბავშვებისთვის!
 
 </h1>
 
-
 <p class="lead">
 
-საბავშვო ინგლისურის თანამედროვე
-სასწავლო სივრცე —
-Vocabulary, Speaking, Reading,
-Listening, Grammar და Quiz
-ერთ ლამაზ, ინტერაქტიულ გარემოში.
+კეთილი იყოს შენი მობრძანება
+English with Mariami-ში! 🌟
+
+აქ ბავშვები ინგლისურს სწავლობენ
+თამაშით, საინტერესო დავალებებით,
+Vocabulary-ით, Speaking-ით,
+Reading-ით, Listening-ით და Quiz-ებით.
 
 </p>
-
 
 <div class="buttons">
 
 <a
 class="btn primary"
-href="#grades">
-
-🎓 აირჩიე კლასი
-
-</a>
-
-
-<a
-class="btn yellow"
 href="academy.html">
 
-🚀 სასწავლო ცენტრში შესვლა
+🎓 სასწავლო ცენტრში შესვლა →
 
 </a>
 
@@ -1509,22 +1081,54 @@ href="academy.html">
 </div>
 
 
-<div class="visual"></div>
+<div class="neon-card teacher">
 
+<div class="avatar">
+👩‍🏫
+</div>
+
+<h2>
+მასწავლებელი მარიამი
+</h2>
+
+<p class="muted">
+ინგლისურის სამყაროში შენი გზამკვლევი ✨
+</p>
+
+<span class="pill">
+🧠 Vocabulary
+</span>
+
+<span class="pill">
+🔊 Listening
+</span>
+
+<span class="pill">
+🗣️ Speaking
+</span>
+
+<span class="pill">
+📖 Reading
+</span>
+
+<span class="pill">
+✍️ Grammar
+</span>
+
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =======================================================
-     GRADES
-======================================================= -->
+<!-- =========================
+     CLASSES
+========================= -->
 
 <section
-id="grades"
-class="section wrap">
-
+id="classes"
+class="section reveal">
 
 <div class="section-title">
 
@@ -1533,90 +1137,97 @@ CLASSROOM
 </span>
 
 <h2>
-აირჩიე შენი კლასი
+🎓 სასწავლო კლასები
 </h2>
 
 <p class="muted">
-სწავლა ნაბიჯ-ნაბიჯ, მარტივად და სახალისოდ.
+მე-2, მე-3 და მე-4 კლასის სასწავლო პროგრამები
 </p>
 
 </div>
 
 
-<div class="grid">
+<div class="classes">
 
 
-<article class="card">
+<div class="neon-card class-card">
 
 <h3>
 🌱 მე-2 კლასი
 </h3>
 
 <p>
-საბაზისო სიტყვები, ოჯახი,
-სკოლა, ფერები, ცხოველები,
-საკვები, სახლი და რიცხვები.
+
+ფერები, ოჯახი, სკოლა,
+ცხოველები, საკვები,
+სხეულის ნაწილები,
+რიცხვები და მარტივი სიტყვები.
+
 </p>
 
 <a
 class="btn primary"
 href="academy.html#grades">
 
-სწავლა →
+კურსის ნახვა →
 
 </a>
 
-</article>
+</div>
 
 
-<article class="card">
+<div class="neon-card class-card">
 
 <h3>
 🚀 მე-3 კლასი
 </h3>
 
 <p>
+
 ყოველდღიური ცხოვრება,
 დღეები, თვეები, ამინდი,
 მოქმედებები, ქალაქი,
-Speaking, Reading
-და მარტივი გრამატიკა.
+Speaking და Reading.
+
 </p>
 
 <a
 class="btn primary"
-href="grade3.html">
+href="academy.html#grades">
 
-მე-3 კლასი →
+კურსის ნახვა →
 
 </a>
 
-</article>
+</div>
 
 
-<article class="card">
+<div class="neon-card class-card">
 
 <h3>
 ⭐ მე-4 კლასი
 </h3>
 
 <p>
-გაფართოებული Vocabulary,
-Present Simple, კითხვები,
-Prepositions, Reading,
-Dialogues, Writing
-და Practice.
+
+Present Simple,
+კითხვები,
+Prepositions,
+Reading,
+Writing,
+Dialogues და Practice.
+
 </p>
 
 <a
 class="btn primary"
-href="grade4.html">
+href="academy.html#grades">
 
-მე-4 კლასი →
+კურსის ნახვა →
 
 </a>
 
-</article>
+</div>
 
 
 </div>
@@ -1624,24 +1235,353 @@ href="grade4.html">
 </section>
 
 
-<section class="section wrap">
+<!-- =========================
+     LEARN
+========================= -->
+
+<section
+id="learn"
+class="section reveal">
 
 <div class="section-title">
 
 <span class="badge">
-LEARN • SPEAK • GROW
+LEARN
 </span>
 
 <h2>
-✨ შენი ინგლისური თავგადასავალი იწყება აქ
+📚 როგორ ვისწავლით?
+</h2>
+
+</div>
+
+
+<div class="feature-grid">
+
+
+<div class="neon-card feature">
+
+<b>
+🧠 Vocabulary
+</b>
+
+<span>
+
+ახალი ინგლისური სიტყვები,
+ქართული თარგმანი,
+გამოთქმა და მაგალითები.
+
+</span>
+
+</div>
+
+
+<div class="neon-card feature">
+
+<b>
+🔊 Listening
+</b>
+
+<span>
+
+მოსმენა,
+გამეორება და
+სიტყვების სწორად წარმოთქმა.
+
+</span>
+
+</div>
+
+
+<div class="neon-card feature">
+
+<b>
+🗣️ Speaking
+</b>
+
+<span>
+
+მოკლე დიალოგები,
+ფრაზები და
+საუბრის პრაქტიკა.
+
+</span>
+
+</div>
+
+
+<div class="neon-card feature">
+
+<b>
+📝 Quiz
+</b>
+
+<span>
+
+საინტერესო ტესტები,
+ქულები და
+სწავლის პროგრესი.
+
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     WHY US
+========================= -->
+
+<section class="section reveal">
+
+<div class="section-title">
+
+<span class="badge">
+WHY MARIAMI?
+</span>
+
+<h2>
+💙 რატომ ჩვენ?
+</h2>
+
+</div>
+
+
+<div class="info-grid">
+
+
+<div class="neon-card info-card">
+
+<div class="info-icon">
+🎮
+</div>
+
+<h3>
+სწავლა თამაშით
+</h3>
+
+<p>
+ბავშვები სწავლობენ
+საინტერესო და სახალისო
+სავარჯიშოებით.
+</p>
+
+</div>
+
+
+<div class="neon-card info-card">
+
+<div class="info-icon">
+🏆
+</div>
+
+<h3>
+პროგრესის კონტროლი
+</h3>
+
+<p>
+ქულები, Quiz-ები და
+სწავლის შედეგები
+ერთ სივრცეში.
+</p>
+
+</div>
+
+
+<div class="neon-card info-card">
+
+<div class="info-icon">
+👨‍👩‍👧
+</div>
+
+<h3>
+ოჯახის ჩართულობა
+</h3>
+
+<p>
+მშობელს შეუძლია
+თვალყური ადევნოს
+ბავშვის სწავლის პროცესს.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     PARENT SPACE
+========================= -->
+
+<section
+id="parents"
+class="section reveal">
+
+<div class="section-title">
+
+<span class="badge">
+FAMILY SPACE
+</span>
+
+<h2>
+👨‍👩‍👧 მშობლის სივრცე
 </h2>
 
 <p class="muted">
+ბავშვის სწავლა და ოჯახი ერთ სივრცეში ❤️
+</p>
 
-3D სივრცე • ნეონის ასოები •
-ინტერაქტიული სწავლა • პროგრესი
+</div>
+
+
+<div class="parent-preview neon-card">
+
+
+<!-- FAMILY ANIMATION -->
+
+<div class="family">
+
+<div class="family-person">
+👨
+</div>
+
+<div class="family-person">
+👩
+</div>
+
+<div class="family-person">
+🧒
+</div>
+
+</div>
+
+
+<!-- PARENT CONTENT -->
+
+<div class="parent-content">
+
+<div class="icon">
+👨‍👩‍👧
+</div>
+
+<h2>
+მშობლის სივრცე
+</h2>
+
+<p>
+
+მშობლის დაცულ სივრცეში
+შეგიძლიათ ნახოთ ბავშვის
+სწავლის პროგრესი,
+Quiz-ის შედეგები და
+დასვათ კითხვა მასწავლებელთან.
 
 </p>
+
+
+<div>
+
+<span class="pill">
+📊 პროგრესი
+</span>
+
+<span class="pill">
+📝 Quiz
+</span>
+
+<span class="pill">
+❓ კითხვები
+</span>
+
+<span class="pill">
+💬 პასუხები
+</span>
+
+</div>
+
+
+<div class="buttons"
+style="justify-content:center">
+
+<a
+href="academy.html#parents"
+class="btn primary parent-button">
+
+👨‍👩‍👧 მშობლის სივრცე →
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ACADEMY CTA
+========================= -->
+
+<section class="section reveal">
+
+<div
+class="neon-card"
+style="
+padding:45px 25px;
+text-align:center;
+">
+
+<span class="badge">
+ENGLISH ACADEMY
+</span>
+
+<h2
+style="
+font-size:36px;
+margin:18px 0;
+">
+
+🚀 მზად ხარ ინგლისურის
+სამყაროში შესასვლელად?
+
+</h2>
+
+<p
+class="muted"
+style="
+font-size:17px;
+line-height:1.7;
+">
+
+გადადით სასწავლო ცენტრში,
+აირჩიეთ კლასი და დაიწყეთ სწავლა.
+
+</p>
+
+<div
+class="buttons"
+style="
+justify-content:center;
+">
+
+<a
+class="btn primary"
+href="academy.html">
+
+🎓 სასწავლო ცენტრში შესვლა
+
+</a>
+
+</div>
 
 </div>
 
@@ -1651,7 +1591,13 @@ LEARN • SPEAK • GROW
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer class="footer">
+
+<div class="wrap">
 
 ⚡ English with Mariami
 •
@@ -1659,87 +1605,9 @@ English Academy
 •
 სწავლა, თამაში და პროგრესი ❤️
 
+</div>
+
 </footer>
-
-
-<!-- =======================================================
-     MOUSE + TOUCH 3D EFFECT
-======================================================= -->
-
-<script>
-
-(function(){
-
-    const world =
-        document.querySelector(".world");
-
-    if(!world) return;
-
-
-    /* DESKTOP */
-
-    document.addEventListener(
-        "mousemove",
-        function(e){
-
-            if(window.innerWidth < 701)
-                return;
-
-            const x =
-                (e.clientX /
-                window.innerWidth - .5);
-
-            const y =
-                (e.clientY /
-                window.innerHeight - .5);
-
-            world.style.transform =
-                "rotateX(" +
-                (-y * 2) +
-                "deg) rotateY(" +
-                (x * 2) +
-                "deg)";
-        }
-    );
-
-
-    /* ANDROID / TABLET */
-
-    document.addEventListener(
-        "touchmove",
-        function(e){
-
-            if(!e.touches.length)
-                return;
-
-            const touch =
-                e.touches[0];
-
-            const x =
-                touch.clientX /
-                window.innerWidth - .5;
-
-            const y =
-                touch.clientY /
-                window.innerHeight - .5;
-
-            world.style.transform =
-                "rotateX(" +
-                (-y * 1.5) +
-                "deg) rotateY(" +
-                (x * 1.5) +
-                "deg)";
-
-        },
-        {
-            passive:true
-        }
-    );
-
-})();
-
-</script>
-
 
 </body>
 </html>
