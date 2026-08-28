@@ -4,20 +4,28 @@
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const path = location.pathname.toLowerCase();
-  if (!/\/grade[234]\.html$/.test(path)) return;
+  if (!/\/grade[34]\.html$/.test(path)) return;
+
+  function hideAcademyAndHome() {
+    document.querySelectorAll('a').forEach(function (a) {
+      const href = (a.getAttribute('href') || '').toLowerCase();
+      const text = (a.textContent || '').trim().toLowerCase();
+      if (href.endsWith('index.html') || href === '/' || href.includes('academy.html') || text === 'academy' || text.includes('მთავარი')) {
+        a.style.setProperty('display', 'none', 'important');
+      }
+    });
+  }
 
   function addTeacherNav() {
+    hideAcademyAndHome();
     if (document.getElementById('teacher-only-nav')) return;
     const nav = document.createElement('div');
     nav.id = 'teacher-only-nav';
     nav.innerHTML = '<a href="teacher-dashboard.html">👩‍🏫 მასწავლებლის Dashboard</a>';
     const style = document.createElement('style');
-    style.textContent = '#teacher-only-nav{margin:10px auto 0;max-width:1200px;padding:0 18px;position:relative;z-index:9999}#teacher-only-nav a{display:inline-block;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,#075eff,#00c9f2);color:#fff;text-decoration:none;font-weight:900;box-shadow:0 0 18px #00eaff44}.teacher-main-link,.academy-link,a[href="index.html"],a[href="./index.html"],a[href="academy.html"],a[href="./academy.html"]{display:none!important}</style>';
+    style.textContent = '#teacher-only-nav{margin:10px auto 0;max-width:1200px;padding:0 18px;position:relative;z-index:9999}#teacher-only-nav a{display:inline-block!important;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,#075eff,#00c9f2);color:#fff;text-decoration:none;font-weight:900;box-shadow:0 0 18px #00eaff44}';
     document.head.appendChild(style);
     document.body.insertBefore(nav, document.body.firstChild);
-    const hideLinks = () => document.querySelectorAll('.teacher-main-link,.academy-link,a[href="index.html"],a[href="./index.html"],a[href="academy.html"],a[href="./academy.html"]').forEach(el => el.style.setProperty('display','none','important'));
-    hideLinks();
-    new MutationObserver(hideLinks).observe(document.body,{childList:true,subtree:true});
   }
 
   async function checkTeacher() {
