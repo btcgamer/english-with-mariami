@@ -28,7 +28,15 @@ window.supabaseClient=supabaseClient;
   if(p.endsWith('/login.html')||p.endsWith('/register.html')||p.endsWith('/reset-password.html')||p.endsWith('/teacher-login.html')) return;
   const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
   add('session-guard.js?v=20260828-4');
+  add('grade-access.js?v=20260829-1');
   add('logout.js?v=20260829-1');
+})();
+
+// Grade access also runs on login.html so the student is routed directly
+// to the grade selected during registration.
+(function(){
+  const add=(src)=>{const s=document.createElement('script');s.src=src;document.head.appendChild(s)};
+  add('grade-access.js?v=20260829-1');
 })();
 
 (function(){
