@@ -14,32 +14,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Add copyright and 3D visual links
+      - name: Normalize copyright and 3D visual links
         shell: python
         run: |
           from pathlib import Path
+          import re
 
           copyright_text = "© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer"
           copyright_marker = "<!-- SITE-COPYRIGHT-2026 -->"
           visual_marker = "<!-- GRADE-3D-VISUALS-2026 -->"
-          footer = f'''\n{copyright_marker}\n<footer class="site-copyright">{copyright_text}</footer>\n'''
           css = '''\n<style id="site-copyright-style">.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.site-copyright::first-letter{color:#00eaff}</style>\n'''
-          visuals = '''\n{visual_marker}\n<link rel="stylesheet" href="3d-visuals.css">\n<script src="3d-visuals.js" defer></script>\n'''.format(visual_marker=visual_marker)
+          footer = f'''\n{copyright_marker}\n<footer class="site-copyright">{copyright_text}</footer>\n'''
+          visuals = f'''\n{visual_marker}\n<link rel="stylesheet" href="3d-visuals.css">\n<script src="3d-visuals.js" defer></script>\n'''
 
           for path in Path('.').glob('*.html'):
               content = path.read_text(encoding='utf-8')
 
-              if path.name in {'grade2.html','grade3.html','grade4.html'} and visual_marker not in content:
+              # Remove old duplicate/custom copyright blocks and the unwanted domain text.
+              content = re.sub(r'\s*<!-- SITE-COPYRIGHT-2026 -->\s*<footer class="site-copyright">.*?</footer>\s*', '\n', content, flags=re.S)
+              content = re.sub(r'\s*<style id="site-copyright-style">.*?</style>\s*', '\n', content, flags=re.S)
+              content = content.replace('https://englishwithmariami.com.ge/', '')
+              content = content.replace('https://englishwithmariami.com.ge', '')
+              content = re.sub(r'\s+', ' ', content) if False else content
+
+              if path.name in {'grade2.html','grade3.html','grade4.html'}:
+                  content = content.replace(visual_marker, '')
+                  content = content.replace('<link rel="stylesheet" href="3d-visuals.css">', '')
+                  content = content.replace('<script src="3d-visuals.js" defer></script>', '')
                   if '</head>' in content:
                       content = content.replace('</head>', visuals + '</head>', 1)
 
-              if copyright_marker not in content:
-                  if '</head>' in content and 'site-copyright-style' not in content:
-                      content = content.replace('</head>', css + '</head>', 1)
-                  if '</body>' in content:
-                      content = content.replace('</body>', footer + '</body>', 1)
-                  else:
-                      content += footer
+              if '</head>' in content:
+                  content = content.replace('</head>', css + '</head>', 1)
+              if '</body>' in content:
+                  content = content.replace('</body>', footer + '\n</body>', 1)
+              else:
+                  content += footer
 
               path.write_text(content, encoding='utf-8')
 
@@ -48,5 +58,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add '*.html'
-          git diff --cached --quiet || git commit -m "Add live 3D visuals to grades 2 3 and 4"
+          git diff --cached --quiet || git commit -m "Fix duplicate copyright footer"
           git push
