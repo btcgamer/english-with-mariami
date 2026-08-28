@@ -4,49 +4,55 @@
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const path = location.pathname.toLowerCase();
-  if (!/\/grade[234]\.html$/.test(path)) return;
+  if (!/\/grade[234]\.html(?:$|\?)/.test(path)) return;
 
-  function hideAcademyAndHome() {
-    document.querySelectorAll('a').forEach(function (a) {
-      const href = (a.getAttribute('href') || '').toLowerCase();
-      const text = (a.textContent || '').trim().toLowerCase();
-      if (href.endsWith('index.html') || href === '/' || href.includes('academy.html') || text === 'academy' || text.includes('მთავარი')) {
-        a.style.setProperty('display', 'none', 'important');
-      }
+  function isTeacher() {
+    const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
+    if (!client) return Promise.resolve(false);
+    return client.auth.getSession().then(function (result) {
+      const user = result?.data?.session?.user;
+      if (!user) return false;
+      const email = String(user.email || '').toLowerCase();
+      if (email === TEACHER_EMAIL || user.id === TEACHER_ID) return true;
+      return client.from('profiles').select('role').eq('user_id', user.id).maybeSingle()
+        .then(function (r) { return String(r?.data?.role || '').toLowerCase() === 'teacher'; })
+        .catch(function () { return false; });
+    }).catch(function () { return false; });
+  }
+
+  function hideTeacherPageLinks() {
+    document.querySelectorAll('a,button').forEach(function (el) {
+      const href = (el.getAttribute('href') || '').toLowerCase();
+      const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const isHome = href === '/' || href.endsWith('/index.html') || href === 'index.html' || text === '🏠 მთავარი' || text === 'მთავარი';
+      const isAcademy = href.includes('academy.html') || text === 'academy' || text.includes('🎓 academy');
+      if (isHome || isAcademy) el.style.setProperty('display', 'none', 'important');
     });
   }
 
-  function addTeacherNav() {
-    hideAcademyAndHome();
-    // Keep hiding after page scripts dynamically rebuild the header.
-    setInterval(hideAcademyAndHome, 300);
-    if (document.getElementById('teacher-only-nav')) return;
+  function addTeacherBack() {
+    if (!document.body || document.getElementById('teacher-only-nav')) return;
     const nav = document.createElement('div');
     nav.id = 'teacher-only-nav';
     nav.innerHTML = '<a href="teacher-dashboard.html">👩‍🏫 მასწავლებლის Dashboard</a>';
     const style = document.createElement('style');
-    style.textContent = '#teacher-only-nav{margin:10px auto 0;max-width:1200px;padding:0 18px;position:relative;z-index:9999}#teacher-only-nav a{display:inline-block!important;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,#075eff,#00c9f2);color:#fff;text-decoration:none;font-weight:900;box-shadow:0 0 18px #00eaff44}';
+    style.textContent = '#teacher-only-nav{margin:10px auto;max-width:1200px;padding:0 18px;position:relative;z-index:999999}#teacher-only-nav a{display:inline-block!important;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,#075eff,#00c9f2);color:#fff!important;text-decoration:none!important;font-weight:900;box-shadow:0 0 18px #00eaff44}';
     document.head.appendChild(style);
     document.body.insertBefore(nav, document.body.firstChild);
   }
 
-  async function checkTeacher() {
-    const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
-    if (!client) return;
-    try {
-      const { data: { session } } = await client.auth.getSession();
-      if (!session || !session.user) return;
-      const user = session.user;
-      const email = String(user.email || '').toLowerCase();
-      let role = '';
-      try {
-        const { data } = await client.from('profiles').select('role').eq('user_id', user.id).maybeSingle();
-        role = String(data?.role || '').toLowerCase();
-      } catch (_) {}
-      if (email === TEACHER_EMAIL || user.id === TEACHER_ID || role === 'teacher') addTeacherNav();
-    } catch (_) {}
+  function enableTeacherView() {
+    hideTeacherPageLinks();
+    addTeacherBack();
+    setInterval(hideTeacherPageLinks, 250);
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', checkTeacher);
-  else checkTeacher();
+  function start() {
+    isTeacher().then(function (ok) {
+      if (ok) enableTeacherView();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 })();
