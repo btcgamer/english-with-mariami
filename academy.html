@@ -3,16 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
 <title>English with Mariami — Academy</title>
 
 <style>
-
 *{box-sizing:border-box}
-
-html{
-scroll-behavior:smooth
-}
+html{scroll-behavior:smooth}
 
 body{
 margin:0;
@@ -23,19 +18,15 @@ min-height:100vh;
 overflow-x:hidden
 }
 
-a{
-text-decoration:none;
-color:inherit
-}
+a{text-decoration:none;color:inherit}
 
 .wrap{
 width:min(1250px,calc(100% - 28px));
 margin:auto
 }
 
-
 /* =========================
-   3D NEON WORLD
+   3D NEON BACKGROUND
 ========================= */
 
 .neon-world{
@@ -44,14 +35,12 @@ inset:0;
 z-index:-2;
 overflow:hidden;
 background:
-radial-gradient(
-circle at 50% 45%,
+radial-gradient(circle at 50% 45%,
 #eaffff 0,
 #d9faff 18%,
 #9bd9f5 42%,
 #2a6f9b 72%,
-#020713 100%
-)
+#020713 100%)
 }
 
 .neon-world:before{
@@ -59,12 +48,10 @@ content:"";
 position:absolute;
 inset:-30%;
 background:
-radial-gradient(
-ellipse at center,
+radial-gradient(ellipse at center,
 transparent 30%,
 #001329aa 72%,
-#00040c 100%
-);
+#00040c 100%);
 pointer-events:none
 }
 
@@ -74,26 +61,12 @@ left:-20%;
 right:-20%;
 bottom:-20%;
 height:62%;
-transform:
-perspective(450px)
-rotateX(62deg);
+transform:perspective(450px) rotateX(62deg);
 background-image:
-linear-gradient(
-#00eaff35 1px,
-transparent 1px
-),
-linear-gradient(
-90deg,
-#00eaff35 1px,
-transparent 1px
-);
+linear-gradient(#00eaff35 1px,transparent 1px),
+linear-gradient(90deg,#00eaff35 1px,transparent 1px);
 background-size:55px 55px;
-mask-image:
-linear-gradient(
-to top,
-black,
-transparent
-);
+mask-image:linear-gradient(to top,black,transparent);
 opacity:.65
 }
 
@@ -107,106 +80,40 @@ perspective:900px
 position:absolute;
 font-weight:1000;
 font-family:Arial,sans-serif;
-font-size:
-clamp(45px,7vw,105px);
+font-size:clamp(45px,7vw,105px);
 color:#fff;
 text-shadow:
 0 0 5px #fff,
 0 0 14px #00eaff,
 0 0 30px #009cff,
 0 0 65px #006cff;
-filter:
-drop-shadow(
-0 15px 15px #002b4f99
-);
-animation:
-float 7s ease-in-out infinite;
+filter:drop-shadow(0 15px 15px #002b4f99);
+animation:float 7s ease-in-out infinite;
 user-select:none
 }
 
-.letter:nth-child(1){
-left:5%;
-top:16%;
-animation-delay:-1s
-}
-
-.letter:nth-child(2){
-left:18%;
-top:63%;
-animation-delay:-4s
-}
-
-.letter:nth-child(3){
-left:31%;
-top:12%;
-animation-delay:-2s
-}
-
-.letter:nth-child(4){
-left:44%;
-top:67%;
-animation-delay:-5s
-}
-
-.letter:nth-child(5){
-left:56%;
-top:16%;
-animation-delay:-3s
-}
-
-.letter:nth-child(6){
-left:69%;
-top:58%;
-animation-delay:-6s
-}
-
-.letter:nth-child(7){
-left:81%;
-top:20%;
-animation-delay:-1.5s
-}
-
-.letter:nth-child(8){
-left:91%;
-top:70%;
-animation-delay:-4.5s
-}
-
-.letter:nth-child(9){
-left:12%;
-top:35%;
-font-size:55px;
-animation-delay:-3.5s
-}
-
-.letter:nth-child(10){
-left:74%;
-top:39%;
-font-size:55px;
-animation-delay:-2.5s
-}
+.letter:nth-child(1){left:5%;top:16%;animation-delay:-1s}
+.letter:nth-child(2){left:18%;top:63%;animation-delay:-4s}
+.letter:nth-child(3){left:31%;top:12%;animation-delay:-2s}
+.letter:nth-child(4){left:44%;top:67%;animation-delay:-5s}
+.letter:nth-child(5){left:56%;top:16%;animation-delay:-3s}
+.letter:nth-child(6){left:69%;top:58%;animation-delay:-6s}
+.letter:nth-child(7){left:81%;top:20%;animation-delay:-1.5s}
+.letter:nth-child(8){left:91%;top:70%;animation-delay:-4.5s}
+.letter:nth-child(9){left:12%;top:35%;font-size:55px;animation-delay:-3.5s}
+.letter:nth-child(10){left:74%;top:39%;font-size:55px;animation-delay:-2.5s}
 
 @keyframes float{
-
 0%,100%{
-transform:
-translate3d(0,0,0)
-rotateY(-12deg)
-rotateZ(-2deg)
+transform:translate3d(0,0,0) rotateY(-12deg) rotateZ(-2deg)
 }
-
 50%{
-transform:
-translate3d(25px,-35px,80px)
-rotateY(22deg)
-rotateZ(3deg)
+transform:translate3d(25px,-35px,80px) rotateY(22deg) rotateZ(3deg)
 }
-
 }
-
 
 /* =========================
-   NAVIGATION
+   NAV
 ========================= */
 
 .top{
@@ -214,8 +121,7 @@ position:sticky;
 top:0;
 z-index:50;
 background:#02152de8;
-border-bottom:
-1px solid #00eaff66;
+border-bottom:1px solid #00eaff66;
 backdrop-filter:blur(14px)
 }
 
@@ -230,8 +136,7 @@ padding:13px 0
 .brand{
 font-weight:1000;
 font-size:18px;
-text-shadow:
-0 0 18px #00eaff
+text-shadow:0 0 18px #00eaff
 }
 
 .navlinks{
@@ -245,16 +150,15 @@ padding:9px 11px;
 border-radius:12px;
 background:#062443dd;
 border:1px solid #00eaff44;
-font-size:13px
+font-size:13px;
+transition:.2s
 }
 
 .navlinks a:hover{
 background:#00c9f2;
 color:#00131a;
-box-shadow:
-0 0 20px #00eaff
+box-shadow:0 0 20px #00eaff
 }
-
 
 /* =========================
    HERO
@@ -269,8 +173,7 @@ align-items:center
 
 .hero-grid{
 display:grid;
-grid-template-columns:
-1.15fr .85fr;
+grid-template-columns:1.15fr .85fr;
 gap:28px;
 align-items:center
 }
@@ -283,29 +186,23 @@ background:#061c38dd;
 border:1px solid #00eaff88;
 color:#ffe600;
 font-weight:900;
-box-shadow:
-0 0 20px #00eaff22
+box-shadow:0 0 20px #00eaff22
 }
 
 .hero h1{
-font-size:
-clamp(42px,7vw,76px);
+font-size:clamp(42px,7vw,76px);
 line-height:1;
 margin:18px 0;
-text-shadow:
-0 0 30px #00eaff88
+text-shadow:0 0 30px #00eaff88
 }
 
-.hero h1 span{
-color:#00eaff
-}
+.hero h1 span{color:#00eaff}
 
 .lead{
 font-size:18px;
 line-height:1.7;
 color:#e9fcff;
-text-shadow:
-0 2px 8px #001b2d
+text-shadow:0 2px 8px #001b2d
 }
 
 .buttons{
@@ -326,39 +223,28 @@ transition:.2s
 }
 
 .btn:hover{
-transform:
-translateY(-3px)
-scale(1.03)
+transform:translateY(-3px) scale(1.03)
 }
 
 .primary{
 background:#00c9f2;
 color:#00131a;
-box-shadow:
-0 0 25px #00eaff88
+box-shadow:0 0 25px #00eaff88
 }
 
 .yellow{
 background:#ffe600;
 color:#181500;
-box-shadow:
-0 0 25px #ffe60066
+box-shadow:0 0 25px #ffe60066
 }
-
 
 /* =========================
    CARDS
 ========================= */
 
 .neon-card{
-background:
-linear-gradient(
-145deg,
-#041a31e8,
-#020b19e8
-);
-border:
-1px solid #00eaff66;
+background:linear-gradient(145deg,#041a31e8,#020b19e8);
+border:1px solid #00eaff66;
 border-radius:24px;
 box-shadow:
 0 18px 55px #0009,
@@ -369,17 +255,12 @@ backdrop-filter:blur(10px)
 .teacher{
 padding:30px;
 text-align:center;
-transform:
-perspective(900px)
-rotateY(-5deg)
+transform:perspective(900px) rotateY(-5deg)
 }
 
 .avatar{
 font-size:90px;
-filter:
-drop-shadow(
-0 0 25px #00eaff
-)
+filter:drop-shadow(0 0 25px #00eaff)
 }
 
 .pill{
@@ -390,7 +271,6 @@ border-radius:20px;
 background:#0a2d50cc;
 border:1px solid #00eaff44
 }
-
 
 /* =========================
    SECTIONS
@@ -410,14 +290,11 @@ font-size:32px;
 margin:12px 0
 }
 
-.muted{
-color:#c1eaf5
-}
+.muted{color:#c1eaf5}
 
 .grid{
 display:grid;
-grid-template-columns:
-repeat(3,1fr);
+grid-template-columns:repeat(3,1fr);
 gap:16px
 }
 
@@ -427,10 +304,7 @@ transition:.2s
 }
 
 .grade:hover{
-transform:
-translateY(-6px)
-scale(1.01);
-
+transform:translateY(-6px) scale(1.01);
 box-shadow:
 0 25px 60px #000b,
 0 0 35px #00eaff44
@@ -446,15 +320,13 @@ line-height:1.6;
 color:#d9f7ff
 }
 
-
 /* =========================
    FEATURES
 ========================= */
 
 .feature-grid{
 display:grid;
-grid-template-columns:
-repeat(4,1fr);
+grid-template-columns:repeat(4,1fr);
 gap:14px
 }
 
@@ -470,36 +342,27 @@ font-size:20px;
 margin-bottom:8px
 }
 
-
 /* =========================
    COURSE
 ========================= */
 
 .course{
 display:grid;
-grid-template-columns:
-repeat(3,1fr);
+grid-template-columns:repeat(3,1fr);
 gap:14px
 }
 
 .course-card{
 padding:22px;
 border-radius:18px;
-background:
-linear-gradient(
-145deg,
-#0a3158,
-#061a32
-);
-border:
-1px solid #00eaff33
+background:linear-gradient(145deg,#0a3158,#061a32);
+border:1px solid #00eaff33
 }
 
 .course-card b{
 color:#ffe600;
 font-size:20px
 }
-
 
 /* =========================
    PROGRESS
@@ -521,18 +384,12 @@ margin:15px 0
 display:block;
 height:100%;
 width:35%;
-background:
-linear-gradient(
-90deg,
-#00eaff,
-#ffe600
-)
+background:linear-gradient(90deg,#00eaff,#ffe600)
 }
 
 .stats{
 display:grid;
-grid-template-columns:
-repeat(4,1fr);
+grid-template-columns:repeat(4,1fr);
 gap:10px
 }
 
@@ -541,8 +398,7 @@ padding:15px;
 text-align:center;
 background:#061a32;
 border-radius:15px;
-border:
-1px solid #00eaff22
+border:1px solid #00eaff22
 }
 
 .stat b{
@@ -551,88 +407,301 @@ font-size:25px;
 color:#ffe600
 }
 
-
 /* =========================
-   PARENT SPACE
+   3D FAMILY PARENT SPACE
 ========================= */
 
-.parent-space{
-margin-top:22px;
-padding:32px;
-text-align:center;
-background:
-linear-gradient(
-145deg,
-#031b35ee,
-#021021ee
-);
-border:
-1px solid #00eaff77;
-border-radius:24px;
-box-shadow:
-0 20px 60px #000b,
-0 0 35px #00eaff22;
+.family-parent{
 position:relative;
-overflow:hidden
+overflow:hidden;
+min-height:500px;
+padding:0!important;
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+radial-gradient(
+circle at 50% 45%,
+#075b91 0,
+#032b4d 35%,
+#020f20 70%,
+#010711 100%
+);
+
+border:1px solid #00eaff88;
+box-shadow:
+0 25px 70px #000c,
+0 0 50px #00eaff33
 }
 
-.parent-space:before{
-content:"";
+.family-glow{
 position:absolute;
-width:250px;
-height:250px;
+width:520px;
+height:520px;
 border-radius:50%;
+
 background:
 radial-gradient(
 circle,
-#00eaff30,
+#00eaff55,
+#008cff22 35%,
 transparent 70%
 );
-left:-100px;
-top:-100px
+
+animation:familyPulse 4s ease-in-out infinite
+}
+
+@keyframes familyPulse{
+0%,100%{
+transform:scale(.85);
+opacity:.5
+}
+50%{
+transform:scale(1.15);
+opacity:1
+}
+}
+
+.family-scene{
+position:absolute;
+inset:0;
+perspective:900px;
+transform-style:preserve-3d;
+overflow:hidden
+}
+
+/* FAMILY */
+
+.family{
+position:absolute;
+left:50%;
+top:40%;
+
+transform:
+translate(-50%,-50%)
+rotateX(8deg)
+rotateY(-10deg);
+
+display:flex;
+align-items:flex-end;
+gap:30px;
+
+transform-style:preserve-3d;
+
+animation:
+familyFloat 5s ease-in-out infinite
+}
+
+@keyframes familyFloat{
+
+0%,100%{
+transform:
+translate(-50%,-50%)
+rotateX(8deg)
+rotateY(-10deg)
+translateZ(0)
+}
+
+50%{
+transform:
+translate(-50%,-56%)
+rotateX(8deg)
+rotateY(14deg)
+translateZ(55px)
+}
+
+}
+
+.person{
+text-align:center;
+font-size:42px;
+filter:drop-shadow(0 0 15px #00eaff);
+transform-style:preserve-3d;
+animation:personFloat 3s ease-in-out infinite
+}
+
+.person:nth-child(2){
+animation-delay:-1s
+}
+
+.person:nth-child(3){
+animation-delay:-2s
+}
+
+@keyframes personFloat{
+
+0%,100%{
+transform:translateY(0) translateZ(0)
+}
+
+50%{
+transform:translateY(-14px) translateZ(30px)
+}
+
+}
+
+.head{font-size:52px}
+.body{font-size:48px;margin-top:-5px}
+.legs{font-size:38px;margin-top:-8px}
+
+/* FLOATING ABC */
+
+.family-letter{
+position:absolute;
+font-size:70px;
+font-weight:1000;
+color:#fff;
+
+text-shadow:
+0 0 5px #fff,
+0 0 15px #00eaff,
+0 0 35px #008cff,
+0 0 70px #006cff;
+
+animation:
+letter3d 6s ease-in-out infinite
+}
+
+.family-letter:nth-child(1){
+left:10%;
+top:15%
+}
+
+.family-letter:nth-child(2){
+right:12%;
+top:20%;
+animation-delay:-2s
+}
+
+.family-letter:nth-child(3){
+left:18%;
+bottom:20%;
+animation-delay:-4s
+}
+
+@keyframes letter3d{
+
+0%,100%{
+transform:
+translate3d(0,0,0)
+rotateY(-20deg)
+rotateZ(-5deg)
+}
+
+50%{
+transform:
+translate3d(35px,-40px,90px)
+rotateY(35deg)
+rotateZ(8deg)
+}
+
+}
+
+/* FLOOR */
+
+.family-floor{
+position:absolute;
+left:-20%;
+right:-20%;
+bottom:-32%;
+height:60%;
+
+transform:
+perspective(500px)
+rotateX(65deg);
+
+background-image:
+linear-gradient(
+#00eaff35 1px,
+transparent 1px
+),
+linear-gradient(
+90deg,
+#00eaff35 1px,
+transparent 1px
+);
+
+background-size:45px 45px;
+
+mask-image:
+linear-gradient(
+to top,
+black,
+transparent
+);
+
+opacity:.7
+}
+
+/* CONTENT */
+
+.parent-content{
+position:relative;
+z-index:10;
+text-align:center;
+padding:35px 25px;
+width:min(750px,90%);
+background:
+linear-gradient(
+145deg,
+#02182bdd,
+#020a17dd
+);
+
+border-radius:26px;
+border:1px solid #00eaff66;
+
+box-shadow:
+0 20px 60px #000b,
+0 0 40px #00eaff22;
+
+backdrop-filter:blur(7px)
 }
 
 .parent-icon{
 font-size:58px;
-filter:
-drop-shadow(
-0 0 20px #00eaff
-);
-position:relative
+filter:drop-shadow(0 0 20px #00eaff);
+animation:iconFloat 3s ease-in-out infinite
 }
 
-.parent-space h2{
+@keyframes iconFloat{
+
+0%,100%{
+transform:translateY(0) scale(1)
+}
+
+50%{
+transform:translateY(-9px) scale(1.07)
+}
+
+}
+
+.parent-content h2{
 color:#00eaff;
-font-size:30px;
-margin:12px 0;
-text-shadow:
-0 0 20px #00eaff88;
-position:relative
+font-size:32px;
+margin:10px 0;
+text-shadow:0 0 20px #00eaff88
 }
 
-.parent-space p{
-max-width:700px;
-margin:0 auto 20px;
+.parent-content p{
 color:#d9f7ff;
 line-height:1.7;
-position:relative
+margin:10px auto 20px
 }
 
 .parent-features{
 display:flex;
 justify-content:center;
-gap:10px;
+gap:8px;
 flex-wrap:wrap;
-margin-bottom:20px;
-position:relative
+margin-bottom:20px
 }
 
 .parent-button{
 font-size:16px;
-padding:14px 24px;
-position:relative
+padding:14px 25px
 }
-
 
 /* =========================
    FOOTER
@@ -642,14 +711,12 @@ position:relative
 margin-top:35px;
 padding:32px 0;
 text-align:center;
-border-top:
-1px solid #00eaff33;
+border-top:1px solid #00eaff33;
 color:#9dc7d5
 }
 
-
 /* =========================
-   MOBILE
+   TABLET
 ========================= */
 
 @media(max-width:850px){
@@ -661,8 +728,7 @@ grid-template-columns:1fr
 }
 
 .feature-grid{
-grid-template-columns:
-repeat(2,1fr)
+grid-template-columns:repeat(2,1fr)
 }
 
 .teacher{
@@ -671,7 +737,15 @@ transform:none
 
 }
 
+/* =========================
+   PHONE
+========================= */
+
 @media(max-width:520px){
+
+.hero{
+padding-top:45px
+}
 
 .hero h1{
 font-size:42px
@@ -682,8 +756,7 @@ grid-template-columns:1fr
 }
 
 .stats{
-grid-template-columns:
-repeat(2,1fr)
+grid-template-columns:repeat(2,1fr)
 }
 
 .nav{
@@ -701,16 +774,51 @@ padding:8px 9px
 }
 
 .letter{
-font-size:
-48px!important
+font-size:48px!important
 }
 
-.parent-space{
-padding:22px 16px
+.family-parent{
+min-height:540px
 }
 
-.parent-space h2{
-font-size:25px
+.family{
+gap:5px;
+transform:
+translate(-50%,-50%)
+scale(.68)
+rotateY(-8deg)
+}
+
+.person{
+font-size:32px
+}
+
+.head{
+font-size:40px
+}
+
+.body{
+font-size:37px
+}
+
+.legs{
+font-size:30px
+}
+
+.family-letter{
+font-size:45px
+}
+
+.parent-content{
+padding:25px 15px
+}
+
+.parent-content h2{
+font-size:27px
+}
+
+.parent-content p{
+font-size:14px
 }
 
 }
@@ -723,13 +831,12 @@ font-size:25px
 
 
 <!-- =========================
-     3D BACKGROUND
+     BACKGROUND
 ========================= -->
 
 <div class="neon-world">
 
 <div class="letters">
-
 <span class="letter">A</span>
 <span class="letter">B</span>
 <span class="letter">C</span>
@@ -740,7 +847,6 @@ font-size:25px
 <span class="letter">H</span>
 <span class="letter">I</span>
 <span class="letter">J</span>
-
 </div>
 
 <div class="grid-floor"></div>
@@ -760,36 +866,15 @@ font-size:25px
 ⚡ ENGLISH WITH MARIAMI
 </a>
 
-
 <nav class="navlinks">
 
-<a href="#grades">
-🎓 კლასები
-</a>
-
-<a href="#course">
-🗺️ კურსი
-</a>
-
-<a href="#learn">
-📚 სწავლა
-</a>
-
-<a href="#progress">
-🏆 პროგრესი
-</a>
-
-<a href="parent-space.html">
-👨‍👩‍👧 მშობელი
-</a>
-
-<a href="login.html">
-🔐 შესვლა
-</a>
-
-<a href="register.html">
-📝 რეგისტრაცია
-</a>
+<a href="#grades">🎓 კლასები</a>
+<a href="#course">🗺️ კურსი</a>
+<a href="#learn">📚 სწავლა</a>
+<a href="#progress">🏆 პროგრესი</a>
+<a href="#parents">👨‍👩‍👧 მშობელი</a>
+<a href="login.html">🔐 შესვლა</a>
+<a href="register.html">📝 რეგისტრაცია</a>
 
 </nav>
 
@@ -809,7 +894,6 @@ font-size:25px
 
 <div class="hero-grid">
 
-
 <div>
 
 <span class="badge">
@@ -828,20 +912,13 @@ Vocabulary, Speaking, Reading, Listening,
 Grammar, Writing და Quiz.
 </p>
 
-
 <div class="buttons">
 
-<a
-class="btn primary"
-href="#grades"
->
+<a class="btn primary" href="#grades">
 🎓 აირჩიე კლასი
 </a>
 
-<a
-class="btn yellow"
-href="#learn"
->
+<a class="btn yellow" href="#learn">
 🚀 დავიწყოთ სწავლა
 </a>
 
@@ -864,25 +941,11 @@ href="#learn"
 შენი ინგლისურის გზამკვლევი ✨
 </p>
 
-<span class="pill">
-🧠 Vocabulary
-</span>
-
-<span class="pill">
-🔊 Listening
-</span>
-
-<span class="pill">
-🗣️ Speaking
-</span>
-
-<span class="pill">
-📖 Reading
-</span>
-
-<span class="pill">
-✍️ Grammar
-</span>
+<span class="pill">🧠 Vocabulary</span>
+<span class="pill">🔊 Listening</span>
+<span class="pill">🗣️ Speaking</span>
+<span class="pill">📖 Reading</span>
+<span class="pill">✍️ Grammar</span>
 
 </div>
 
@@ -895,10 +958,7 @@ href="#learn"
      GRADES
 ========================= -->
 
-<section
-id="grades"
-class="section"
->
+<section id="grades" class="section">
 
 <div class="section-title">
 
@@ -911,7 +971,7 @@ CLASSROOM
 </h2>
 
 <p class="muted">
-ღილაკები ახლა პირდაპირ ხსნის შესაბამის სასწავლო გვერდს.
+ღილაკები პირდაპირ ხსნის შესაბამის სასწავლო გვერდს.
 </p>
 
 </div>
@@ -922,9 +982,7 @@ CLASSROOM
 
 <article class="neon-card grade">
 
-<h3>
-🌱 მე-2 კლასი
-</h3>
+<h3>🌱 მე-2 კლასი</h3>
 
 <p>
 საბაზისო ლექსიკა, ოჯახი, სკოლა,
@@ -932,10 +990,7 @@ CLASSROOM
 სხეულის ნაწილები, სახლი და რიცხვები.
 </p>
 
-<a
-class="btn primary"
-href="grade2.html"
->
+<a class="btn primary" href="grade2.html">
 მე-2 კლასი →
 </a>
 
@@ -944,9 +999,7 @@ href="grade2.html"
 
 <article class="neon-card grade">
 
-<h3>
-🚀 მე-3 კლასი
-</h3>
+<h3>🚀 მე-3 კლასი</h3>
 
 <p>
 ყოველდღიური ცხოვრება, დღეები,
@@ -955,10 +1008,7 @@ href="grade2.html"
 Reading და მარტივი გრამატიკა.
 </p>
 
-<a
-class="btn primary"
-href="grade3.html"
->
+<a class="btn primary" href="grade3.html">
 მე-3 კლასი →
 </a>
 
@@ -967,9 +1017,7 @@ href="grade3.html"
 
 <article class="neon-card grade">
 
-<h3>
-⭐ მე-4 კლასი
-</h3>
+<h3>⭐ მე-4 კლასი</h3>
 
 <p>
 გაფართოებული Vocabulary,
@@ -978,10 +1026,7 @@ When/Why/How, Prepositions,
 Reading, Dialogues, Writing და Practice.
 </p>
 
-<a
-class="btn primary"
-href="grade4.html"
->
+<a class="btn primary" href="grade4.html">
 მე-4 კლასი →
 </a>
 
@@ -997,10 +1042,7 @@ href="grade4.html"
      LEARN
 ========================= -->
 
-<section
-id="learn"
-class="section"
->
+<section id="learn" class="section">
 
 <div class="section-title">
 
@@ -1017,12 +1059,9 @@ LEARN
 
 <div class="feature-grid">
 
-
 <div class="neon-card feature">
 
-<b>
-🧠 Vocabulary
-</b>
+<b>🧠 Vocabulary</b>
 
 <span>
 სიტყვა + ქართული თარგმანი +
@@ -1034,9 +1073,7 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>
-🔊 Listening
-</b>
+<b>🔊 Listening</b>
 
 <span>
 მოსმენა და გამეორება
@@ -1048,9 +1085,7 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>
-🗣️ Speaking
-</b>
+<b>🗣️ Speaking</b>
 
 <span>
 მოკლე დიალოგები და
@@ -1062,9 +1097,7 @@ LEARN
 
 <div class="neon-card feature">
 
-<b>
-📝 Quiz
-</b>
+<b>📝 Quiz</b>
 
 <span>
 შემოწმება, ქულა და
@@ -1072,7 +1105,6 @@ LEARN
 </span>
 
 </div>
-
 
 </div>
 
@@ -1083,10 +1115,7 @@ LEARN
      COURSE
 ========================= -->
 
-<section
-id="course"
-class="section"
->
+<section id="course" class="section">
 
 <div class="section-title">
 
@@ -1106,9 +1135,7 @@ FULL COURSE
 
 <div class="course-card">
 
-<b>
-მე-2 კლასი
-</b>
+<b>მე-2 კლასი</b>
 
 <p>
 სიტყვები, ფერები, ოჯახი,
@@ -1116,10 +1143,7 @@ FULL COURSE
 და მარტივი წინადადებები.
 </p>
 
-<a
-class="btn primary"
-href="grade2.html"
->
+<a class="btn primary" href="grade2.html">
 კურსის გახსნა
 </a>
 
@@ -1128,9 +1152,7 @@ href="grade2.html"
 
 <div class="course-card">
 
-<b>
-მე-3 კლასი
-</b>
+<b>მე-3 კლასი</b>
 
 <p>
 დრო, დღეები, თვეები,
@@ -1139,10 +1161,7 @@ href="grade2.html"
 Reading და Grammar.
 </p>
 
-<a
-class="btn primary"
-href="grade3.html"
->
+<a class="btn primary" href="grade3.html">
 კურსის გახსნა
 </a>
 
@@ -1151,9 +1170,7 @@ href="grade3.html"
 
 <div class="course-card">
 
-<b>
-მე-4 კლასი
-</b>
+<b>მე-4 კლასი</b>
 
 <p>
 Present Simple, კითხვები,
@@ -1162,10 +1179,7 @@ Dialogues, Writing,
 Listening და Practice.
 </p>
 
-<a
-class="btn primary"
-href="grade4.html"
->
+<a class="btn primary" href="grade4.html">
 კურსის გახსნა
 </a>
 
@@ -1181,11 +1195,7 @@ href="grade4.html"
      PROGRESS
 ========================= -->
 
-<section
-id="progress"
-class="section"
->
-
+<section id="progress" class="section">
 
 <div class="section-title">
 
@@ -1198,72 +1208,42 @@ MY PROGRESS
 </h2>
 
 <p class="muted">
-აქ მომავალში დავამატებთ შენახულ
-ქულებსა და ნასწავლ სიტყვებს.
+აქ მომავალში გამოჩნდება შენახული ქულები
+და ნასწავლი სიტყვები.
 </p>
 
 </div>
 
 
-<!-- PROGRESS BOX -->
-
 <div class="neon-card progress-box">
-
 
 <div class="stats">
 
-
 <div class="stat">
-
-<b>
-0
-</b>
-
+<b>0</b>
 ნასწავლი სიტყვა
-
 </div>
 
-
 <div class="stat">
-
-<b>
-0
-</b>
-
+<b>0</b>
 Quiz
-
 </div>
 
-
 <div class="stat">
-
-<b>
-0%
-</b>
-
+<b>0%</b>
 პროგრესი
-
 </div>
-
 
 <div class="stat">
-
-<b>
-⭐
-</b>
-
+<b>⭐</b>
 დონე
-
 </div>
-
 
 </div>
 
 
 <div class="progress">
-
 <i></i>
-
 </div>
 
 
@@ -1272,57 +1252,158 @@ Quiz
 და შემდეგ აქ გამოჩნდება შენი შედეგები.
 </p>
 
-
 </div>
+
+</section>
 
 
 <!-- =========================
      PARENT SPACE
 ========================= -->
 
-<div class="parent-space">
+<section id="parents" class="section">
 
+<div class="section-title">
+
+<span class="badge">
+FAMILY SPACE
+</span>
+
+<h2>
+👨‍👩‍👧 მშობლის სივრცე
+</h2>
+
+<p class="muted">
+ოჯახი და სწავლა ერთ სივრცეში ❤️
+</p>
+
+</div>
+
+
+<div class="family-parent neon-card">
+
+
+<div class="family-glow"></div>
+
+
+<div class="family-scene">
+
+
+<!-- FLOATING LETTERS -->
+
+<div class="family-letter">
+A
+</div>
+
+<div class="family-letter">
+B
+</div>
+
+<div class="family-letter">
+C
+</div>
+
+
+<!-- FAMILY -->
+
+<div class="family">
+
+
+<div class="person father">
+
+<div class="head">
+👨
+</div>
+
+<div class="body">
+👕
+</div>
+
+<div class="legs">
+👖
+</div>
+
+</div>
+
+
+<div class="person mother">
+
+<div class="head">
+👩
+</div>
+
+<div class="body">
+👗
+</div>
+
+<div class="legs">
+👠
+</div>
+
+</div>
+
+
+<div class="person child">
+
+<div class="head">
+🧒
+</div>
+
+<div class="body">
+👕
+</div>
+
+<div class="legs">
+👟
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="family-floor"></div>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="parent-content">
 
 <div class="parent-icon">
 👨‍👩‍👧
 </div>
 
-
 <h2>
 მშობლის სივრცე
 </h2>
 
-
 <p>
-აქ მშობელს შეუძლია ნახოს ბავშვის
-სასწავლო ინფორმაცია, დასვას კითხვა
-მასწავლებელთან და მიიღოს პასუხი
-მარიამისგან.
+აქ მშობელს შეუძლია თვალყური ადევნოს
+ბავშვის სწავლას, დასვას კითხვა მასწავლებელთან
+და მიიღოს პასუხი მარიამისგან.
 </p>
 
 
 <div class="parent-features">
 
-
 <span class="pill">
 📊 პროგრესი
 </span>
-
 
 <span class="pill">
 📝 Quiz შედეგები
 </span>
 
-
 <span class="pill">
 ❓ კითხვები
 </span>
 
-
 <span class="pill">
-💬 მასწავლებლის პასუხები
+💬 პასუხები
 </span>
-
 
 </div>
 
@@ -1334,9 +1415,10 @@ class="btn primary parent-button"
 👨‍👩‍👧 მშობლის სივრცეში შესვლა →
 </a>
 
-
 </div>
 
+
+</div>
 
 </section>
 
@@ -1367,17 +1449,11 @@ class="buttons"
 style="justify-content:center"
 >
 
-<a
-class="btn primary"
-href="grade3.html"
->
+<a class="btn primary" href="grade3.html">
 მე-3 კლასი
 </a>
 
-<a
-class="btn yellow"
-href="grade4.html"
->
+<a class="btn yellow" href="grade4.html">
 მე-4 კლასი
 </a>
 
