@@ -3,230 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>მშობლის სივრცე — English with Mariami</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box}
 
 body{
-    font-family:Arial,"Noto Sans Georgian",sans-serif;
-    min-height:100vh;
-    color:#073b5c;
-    background:
-        radial-gradient(circle at 50% 20%,#fff 0%,#e9fbff 40%,#b8edff 100%);
-}
-
-.container{
-    width:min(1100px,calc(100% - 24px));
-    margin:auto;
+margin:0;
+font-family:Arial,"Noto Sans Georgian",sans-serif;
+background:linear-gradient(135deg,#f8feff,#c9f5ff,#eafcff);
+color:#073b5c;
+min-height:100vh
 }
 
 header{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:#ffffffdd;
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid #00bfff55;
-    box-shadow:0 8px 30px #008cff20;
+background:#ffffffdd;
+backdrop-filter:blur(15px);
+border-bottom:1px solid #00bfff44;
+padding:18px
 }
 
 .nav{
-    min-height:70px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
+max-width:1100px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px
 }
 
 .logo{
-    color:#006fa8;
-    font-size:19px;
-    font-weight:900;
-    text-decoration:none;
+font-weight:900;
+font-size:19px;
+color:#0076aa;
+text-decoration:none
 }
 
 .nav a{
-    color:#07547c;
-    text-decoration:none;
-    font-weight:800;
-    padding:10px 14px;
-    border-radius:12px;
+text-decoration:none;
+color:#07547c;
+font-weight:bold;
+margin-left:10px
 }
 
-.nav a:hover{
-    background:#00c9f2;
-}
-
-main{
-    padding:45px 0 70px;
+.container{
+max-width:1050px;
+margin:auto;
+padding:25px 15px 60px
 }
 
 .hero{
-    text-align:center;
-    padding:25px 15px 40px;
+text-align:center;
+padding:30px 10px
 }
 
 .badge{
-    display:inline-block;
-    padding:9px 16px;
-    border-radius:30px;
-    background:#ffffffcc;
-    color:#007db7;
-    border:1px solid #00bfff55;
-    font-weight:900;
-    box-shadow:0 0 25px #00cfff30;
+display:inline-block;
+padding:9px 17px;
+border-radius:30px;
+background:white;
+color:#0080ba;
+font-weight:900;
+box-shadow:0 0 25px #00cfff44
 }
 
 h1{
-    margin:20px 0 12px;
-    font-size:clamp(38px,7vw,65px);
-    color:#063957;
+font-size:clamp(38px,7vw,65px);
+margin:18px 0 10px
 }
 
 .hero p{
-    max-width:700px;
-    margin:auto;
-    line-height:1.7;
-    color:#527287;
-    font-size:17px;
+color:#59798b;
+line-height:1.7
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px
 }
 
 .card{
-    background:#ffffffdd;
-    border:1px solid #00bfff55;
-    border-radius:25px;
-    padding:25px;
-    box-shadow:0 20px 55px #007cff20;
-    backdrop-filter:blur(15px);
+background:#ffffffdd;
+border:1px solid #00bfff44;
+border-radius:25px;
+padding:24px;
+box-shadow:0 20px 55px #007cff18
 }
 
 .card h2{
-    color:#007bb8;
-    margin-bottom:18px;
+color:#007bb8;
+margin-top:0
 }
 
 label{
-    display:block;
-    font-weight:800;
-    margin-top:12px;
-    margin-bottom:6px;
+display:block;
+font-weight:bold;
+margin:12px 0 6px
 }
 
-input,
-select,
-textarea{
-    width:100%;
-    border:1px solid #9bdff2;
-    border-radius:13px;
-    padding:13px;
-    font:inherit;
-    background:#fff;
-    outline:none;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#00aeea;
-    box-shadow:0 0 15px #00cfff30;
+input,select,textarea{
+width:100%;
+padding:13px;
+border:1px solid #9bdff2;
+border-radius:13px;
+font:inherit;
+outline:none;
+background:white
 }
 
 textarea{
-    min-height:140px;
-    resize:vertical;
+min-height:140px;
+resize:vertical
 }
 
-.btn{
-    display:inline-block;
-    border:0;
-    cursor:pointer;
-    margin-top:15px;
-    padding:13px 18px;
-    border-radius:13px;
-    font-weight:900;
-    background:#00c9f2;
-    color:#002c40;
-    transition:.25s;
+input:focus,select:focus,textarea:focus{
+border-color:#00aeea;
+box-shadow:0 0 15px #00cfff33
 }
 
-.btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 25px #00bfff55;
+button{
+border:0;
+border-radius:13px;
+padding:13px 18px;
+margin-top:15px;
+background:#00c9f2;
+color:#002c40;
+font-weight:900;
+cursor:pointer
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 25px #00bfff44
 }
 
 .status{
-    margin-top:14px;
-    padding:12px;
-    border-radius:12px;
-    background:#effcff;
-    color:#28708d;
+margin-top:12px;
+padding:12px;
+border-radius:12px;
+background:#effcff
 }
 
 .question{
-    margin-top:20px;
-    padding:16px;
-    border-radius:16px;
-    background:#f5fcff;
-    border-left:5px solid #00bfff;
-}
-
-.question b{
-    color:#006fa8;
+background:#f4fcff;
+border-left:5px solid #00bfff;
+border-radius:15px;
+padding:16px;
+margin-top:12px
 }
 
 .answer{
-    margin-top:12px;
-    padding:12px;
-    border-radius:12px;
-    background:#e8fff7;
+background:#eafff7;
+padding:12px;
+border-radius:12px;
+margin-top:12px
 }
 
 .empty{
-    color:#718999;
-}
-
-footer{
-    text-align:center;
-    padding:30px 15px;
-    color:#678294;
-    border-top:1px solid #00aaff33;
-    background:#ffffffaa;
+color:#718999
 }
 
 @media(max-width:700px){
 
-    .nav{
-        flex-direction:column;
-        padding:12px 0;
-    }
+.nav{
+flex-direction:column
+}
 
-    .grid{
-        grid-template-columns:1fr;
-    }
+.grid{
+grid-template-columns:1fr
+}
 
-    main{
-        padding-top:25px;
-    }
+.container{
+padding-left:12px;
+padding-right:12px
+}
 
-    .card{
-        padding:19px;
-    }
+.card{
+padding:18px
+}
 
-    h1{
-        font-size:40px;
-    }
+h1{
+font-size:42px
+}
 }
 </style>
 </head>
@@ -234,435 +193,494 @@ footer{
 <body>
 
 <header>
-    <div class="container nav">
 
-        <a class="logo" href="index.html">
-            ⚡ ENGLISH WITH MARIAMI
-        </a>
+<div class="nav">
 
-        <nav>
-            <a href="academy.html">🎓 Academy</a>
-            <a href="index.html">🏠 მთავარი</a>
-        </nav>
+<a class="logo" href="index.html">
+⚡ ENGLISH WITH MARIAMI
+</a>
 
-    </div>
+<div>
+<a href="academy.html">🎓 Academy</a>
+<a href="index.html">🏠 მთავარი</a>
+</div>
+
+</div>
+
 </header>
 
 
-<main>
+<main class="container">
 
-<div class="container">
+<section class="hero">
 
-    <section class="hero">
+<span class="badge">
+👨‍👩‍👧 PARENT SPACE
+</span>
 
-        <span class="badge">
-            👨‍👩‍👧 PARENT SPACE
-        </span>
+<h1>
+მშობლის სივრცე
+</h1>
 
-        <h1>
-            მშობლის სივრცე
-        </h1>
+<p>
+ბავშვის პროგრესი • კითხვები • მასწავლებელთან კომუნიკაცია
+</p>
 
-        <p>
-            აქ მშობელს შეუძლია შეინახოს ბავშვის ინფორმაცია,
-            დასვას კითხვა მასწავლებელთან და ნახოს მიღებული პასუხები.
-        </p>
-
-    </section>
+</section>
 
 
-    <section class="grid">
+<section class="grid">
 
 
-        <!-- CHILD PROFILE -->
+<div class="card">
 
-        <div class="card">
+<h2>👤 ბავშვის ინფორმაცია</h2>
 
-            <h2>
-                👤 ბავშვის ინფორმაცია
-            </h2>
+<label>ბავშვის სახელი</label>
 
-            <label>
-                ბავშვის სახელი
-            </label>
+<input
+id="childName"
+placeholder="მაგ: ნინო"
+>
 
-            <input
-                id="childName"
-                type="text"
-                placeholder="მაგ: ნინო"
-            >
+<label>კლასი</label>
 
-            <label>
-                კლასი
-            </label>
+<select id="childGrade">
 
-            <select id="childGrade">
+<option value="2">მე-2 კლასი</option>
+<option value="3">მე-3 კლასი</option>
+<option value="4">მე-4 კლასი</option>
 
-                <option value="2">
-                    მე-2 კლასი
-                </option>
+</select>
 
-                <option value="3">
-                    მე-3 კლასი
-                </option>
+<button onclick="saveChild()">
+💾 შენახვა
+</button>
 
-                <option value="4">
-                    მე-4 კლასი
-                </option>
-
-            </select>
-
-            <button
-                class="btn"
-                onclick="saveChild()"
-            >
-                💾 შენახვა
-            </button>
-
-            <div
-                id="childStatus"
-                class="status"
-            >
-                ინფორმაცია ჯერ არ არის შენახული.
-            </div>
-
-        </div>
-
-
-        <!-- QUESTION -->
-
-        <div class="card">
-
-            <h2>
-                ❓ დაუსვი კითხვა მასწავლებელს
-            </h2>
-
-            <p style="color:#668096;line-height:1.6">
-                თუ ბავშვის სწავლასთან დაკავშირებით კითხვა გაქვს,
-                დაწერე აქ.
-            </p>
-
-            <textarea
-                id="question"
-                placeholder="მაგ: როგორ ასრულებს ჩემი შვილი ინგლისურის დავალებებს?"
-            ></textarea>
-
-            <button
-                class="btn"
-                onclick="sendQuestion()"
-            >
-                📨 კითხვის გაგზავნა
-            </button>
-
-            <div
-                id="sendStatus"
-                class="status"
-            ></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- QUESTIONS -->
-
-    <section
-        class="card"
-        style="margin-top:20px"
-    >
-
-        <h2>
-            💬 ჩემი კითხვები
-        </h2>
-
-        <div id="questions">
-
-            <p class="empty">
-                კითხვები ჯერ არ დაგისვამთ.
-            </p>
-
-        </div>
-
-    </section>
+<div id="childStatus" class="status">
+ინფორმაცია ჯერ არ არის შენახული.
+</div>
 
 </div>
+
+
+<div class="card">
+
+<h2>❓ ჰკითხე მასწავლებელს</h2>
+
+<textarea
+id="question"
+placeholder="დაწერე შენი კითხვა..."
+></textarea>
+
+<button onclick="sendQuestion()">
+📨 კითხვის გაგზავნა
+</button>
+
+<div id="sendStatus" class="status"></div>
+
+</div>
+
+</section>
+
+
+<section class="card" style="margin-top:20px">
+
+<h2>💬 კითხვები და პასუხები</h2>
+
+<div id="questions">
+
+<p class="empty">
+კითხვები ჯერ არ არის.
+</p>
+
+</div>
+
+</section>
 
 </main>
 
 
-<footer>
-
-    ⚡ English with Mariami
-    •
-    👨‍👩‍👧 Parent Space
-    •
-    სწავლა ერთად ❤️
-
-</footer>
-
-
 <script>
 
-const STORAGE_KEY =
-    "english_with_mariami_parent";
+/*
+========================================
+  SUPABASE SETTINGS
+========================================
+
+აქ ჩასვი მხოლოდ შენი PUBLIC
+Publishable / anon key.
+
+არ ჩასვა service_role ან secret key.
+*/
+
+const SUPABASE_URL =
+"https://vtdhvsfqhwesxtwmduew.supabase.co";
+
+const SUPABASE_KEY =
+"ჩასვი_აქ_შენი_PUBLIC_PUBLISHABLE_KEY";
 
 
-/* ============================
-   LOAD DATA
-============================ */
-
-function loadData(){
-
-    const data =
-        JSON.parse(
-            localStorage.getItem(STORAGE_KEY) || "{}"
-        );
+let parentEmail =
+localStorage.getItem("parent_email") || "";
 
 
-    if(data.childName){
+/* ------------------------------------
+   SUPABASE REQUEST
+------------------------------------ */
 
-        document.getElementById(
-            "childName"
-        ).value =
-            data.childName;
-    }
+async function supabaseRequest(
+path,
+options={}
+){
 
+const response =
+await fetch(
+SUPABASE_URL + path,
+{
 
-    if(data.grade){
+...options,
 
-        document.getElementById(
-            "childGrade"
-        ).value =
-            data.grade;
-    }
+headers:{
+"apikey":SUPABASE_KEY,
+"Authorization":
+"Bearer " + SUPABASE_KEY,
+"Content-Type":
+"application/json",
+...(options.headers || {})
+}
 
+});
 
-    renderQuestions(
-        data.questions || []
-    );
+if(!response.ok){
+
+const error =
+await response.text();
+
+throw new Error(error);
+
+}
+
+if(response.status===204)
+return null;
+
+return response.json();
+
 }
 
 
-/* ============================
+/* ------------------------------------
    SAVE CHILD
-============================ */
+------------------------------------ */
 
 function saveChild(){
 
-    const name =
-        document
-        .getElementById("childName")
-        .value
-        .trim();
+const name =
+document
+.getElementById("childName")
+.value
+.trim();
 
-    const grade =
-        document
-        .getElementById("childGrade")
-        .value;
+const grade =
+document
+.getElementById("childGrade")
+.value;
 
+if(!name){
 
-    if(!name){
+document.getElementById(
+"childStatus"
+).textContent =
+"⚠️ ჩაწერე ბავშვის სახელი.";
 
-        document.getElementById(
-            "childStatus"
-        ).textContent =
-            "⚠️ ჯერ ჩაწერე ბავშვის სახელი.";
+return;
 
-        return;
-    }
+}
 
+localStorage.setItem(
+"child_name",
+name
+);
 
-    const data =
-        JSON.parse(
-            localStorage.getItem(STORAGE_KEY) || "{}"
-        );
+localStorage.setItem(
+"child_grade",
+grade
+);
 
+document.getElementById(
+"childStatus"
+).textContent =
+"✅ ინფორმაცია შენახულია.";
 
-    data.childName = name;
-    data.grade = grade;
-
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-
-
-    document.getElementById(
-        "childStatus"
-    ).textContent =
-        "✅ ბავშვის ინფორმაცია შენახულია.";
 }
 
 
-/* ============================
+/* ------------------------------------
    SEND QUESTION
-============================ */
+------------------------------------ */
 
-function sendQuestion(){
+async function sendQuestion(){
 
-    const text =
-        document
-        .getElementById("question")
-        .value
-        .trim();
+const text =
+document
+.getElementById("question")
+.value
+.trim();
+
+if(!text){
+
+document.getElementById(
+"sendStatus"
+).textContent =
+"⚠️ დაწერე კითხვა.";
+
+return;
+
+}
+
+if(!parentEmail){
+
+document.getElementById(
+"sendStatus"
+).textContent =
+"⚠️ მშობლის ელფოსტა ჯერ არ არის მითითებული.";
+
+return;
+
+}
+
+const childName =
+document
+.getElementById("childName")
+.value
+.trim();
+
+const grade =
+Number(
+document
+.getElementById("childGrade")
+.value
+);
+
+if(!childName){
+
+document.getElementById(
+"sendStatus"
+).textContent =
+"⚠️ ჯერ მიუთითე ბავშვის სახელი.";
+
+return;
+
+}
+
+try{
+
+await supabaseRequest(
+"/rest/v1/parent_questions",
+{
+
+method:"POST",
+
+headers:{
+"Prefer":
+"return=minimal"
+},
+
+body:JSON.stringify({
+
+parent_email:
+parentEmail,
+
+child_name:
+childName,
+
+grade:
+grade,
+
+question:
+text
+
+})
+
+});
 
 
-    if(!text){
+document.getElementById(
+"question"
+).value="";
 
-        document.getElementById(
-            "sendStatus"
-        ).textContent =
-            "⚠️ ჯერ დაწერე კითხვა.";
+document.getElementById(
+"sendStatus"
+).textContent =
+"✅ კითხვა წარმატებით გაიგზავნა.";
 
-        return;
-    }
+loadQuestions();
 
+}
+catch(error){
 
-    const data =
-        JSON.parse(
-            localStorage.getItem(STORAGE_KEY) || "{}"
-        );
+console.error(error);
 
+document.getElementById(
+"sendStatus"
+).textContent =
+"❌ კითხვა ვერ გაიგზავნა. შეამოწმე Supabase-ის Key.";
 
-    if(!data.questions){
-        data.questions = [];
-    }
+}
 
-
-    data.questions.unshift({
-
-        text:text,
-
-        date:
-            new Date()
-            .toLocaleString("ka-GE"),
-
-        answer:""
-
-    });
-
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(data)
-    );
-
-
-    document.getElementById(
-        "question"
-    ).value = "";
-
-
-    document.getElementById(
-        "sendStatus"
-    ).textContent =
-        "✅ კითხვა შენახულია.";
-
-
-    renderQuestions(
-        data.questions
-    );
 }
 
 
-/* ============================
-   SHOW QUESTIONS
-============================ */
+/* ------------------------------------
+   LOAD QUESTIONS
+------------------------------------ */
+
+async function loadQuestions(){
+
+if(!parentEmail)
+return;
+
+try{
+
+const data =
+await supabaseRequest(
+"/rest/v1/parent_questions?parent_email=eq."+
+encodeURIComponent(parentEmail)+
+"&select=*&order=created_at.desc"
+);
+
+renderQuestions(data);
+
+}
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* ------------------------------------
+   DISPLAY
+------------------------------------ */
 
 function renderQuestions(list){
 
-    const box =
-        document.getElementById(
-            "questions"
-        );
+const box =
+document.getElementById(
+"questions"
+);
 
+if(!list || !list.length){
 
-    if(!list.length){
+box.innerHTML =
+'<p class="empty">კითხვები ჯერ არ არის.</p>';
 
-        box.innerHTML =
-            '<p class="empty">კითხვები ჯერ არ დაგისვამთ.</p>';
+return;
 
-        return;
-    }
+}
 
+box.innerHTML =
+list.map(item=>`
 
-    box.innerHTML =
-        list.map(function(item){
+<div class="question">
 
-            return `
+<strong>
+❓ კითხვა
+</strong>
 
-                <div class="question">
+<p>
+${escapeHTML(item.question)}
+</p>
 
-                    <b>
-                        ❓ თქვენი კითხვა
-                    </b>
+<small>
+${new Date(item.created_at)
+.toLocaleString("ka-GE")}
+</small>
 
-                    <p style="margin-top:8px">
-                        ${escapeHTML(item.text)}
-                    </p>
+<div class="answer">
 
-                    <small style="color:#718999">
-                        ${escapeHTML(item.date)}
-                    </small>
+<strong>
+👩‍🏫 მასწავლებლის პასუხი
+</strong>
 
+<p>
 
-                    <div class="answer">
+${
+item.answer
+?
+escapeHTML(item.answer)
+:
+"პასუხი ჯერ არ არის."
+}
 
-                        <b>
-                            👩‍🏫 მასწავლებლის პასუხი
-                        </b>
+</p>
 
-                        <p style="margin-top:7px">
+</div>
 
-                            ${
-                                item.answer
-                                ?
-                                escapeHTML(item.answer)
-                                :
-                                "პასუხი ჯერ არ არის."
-                            }
+</div>
 
-                        </p>
+`).join("");
 
-                    </div>
-
-                </div>
-
-            `;
-
-        }).join("");
 }
 
 
-/* ============================
+/* ------------------------------------
    SECURITY
-============================ */
+------------------------------------ */
 
 function escapeHTML(text){
 
-    return text.replace(
-        /[&<>"']/g,
-        function(char){
+return String(text).replace(
+/[&<>"']/g,
+char=>({
 
-            return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
 
-                "&":"&amp;",
-                "<":"&lt;",
-                ">":"&gt;",
-                '"':"&quot;",
-                "'":"&#039;"
+}[char])
+);
 
-            }[char];
+}
 
-        }
-    );
+
+/* ------------------------------------
+   LOAD SAVED CHILD
+------------------------------------ */
+
+function loadChild(){
+
+const name =
+localStorage.getItem(
+"child_name"
+);
+
+const grade =
+localStorage.getItem(
+"child_grade"
+);
+
+if(name)
+document.getElementById(
+"childName"
+).value=name;
+
+if(grade)
+document.getElementById(
+"childGrade"
+).value=grade;
+
 }
 
 
 /* START */
 
-loadData();
+loadChild();
+loadQuestions();
 
 </script>
 
