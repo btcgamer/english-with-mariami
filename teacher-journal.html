@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>მასწავლებლის ჟურნალი — English with Mariami</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+body{background:#020817;color:#eafcff}.journal{padding:28px 0 50px}.head{padding:26px;text-align:center}.head h1{margin:10px 0;font-size:clamp(30px,6vw,52px)}.head p{color:#b9dce7}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.toolbar input,.toolbar select{background:#041733;color:#fff;border:1px solid #00eaff55;border-radius:12px;padding:11px 13px;min-height:44px}.toolbar button{border:0;border-radius:12px;padding:11px 16px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#075eff,#00bde8);color:#fff}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.stat{padding:20px;border-radius:18px;background:#061936;border:1px solid #00eaff33;text-align:center}.stat b{display:block;font-size:30px;color:#ffe600}.stat span{color:#b9dce7}.table-wrap{overflow:auto;border-radius:18px;border:1px solid #00eaff33}.journal-table{width:100%;border-collapse:collapse;min-width:720px;background:#03132c}.journal-table th,.journal-table td{padding:13px 12px;border-bottom:1px solid #00eaff22;text-align:left}.journal-table th{color:#ffe600;background:#061936;position:sticky;top:0}.status{font-weight:900;border-radius:18px;padding:6px 10px;display:inline-block}.present{background:#0b633c;color:#a8ffd2}.late{background:#725a00;color:#fff0a0}.absent{background:#6e1d2d;color:#ffc1cb}.empty{padding:30px;text-align:center;color:#a8cbd7}.error{color:#ff9ca8;padding:15px;text-align:center}.back{display:inline-block;margin-bottom:15px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.head{padding:20px 14px}.journal{padding-top:16px}.toolbar>*{width:100%}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap nav"><a class="brand" href="index.html">⚡ ENGLISH WITH MARIAMI</a><div class="navlinks"><a href="academy.html">🎓 ცენტრი</a><a href="index.html">🏠 მთავარი</a></div></div></header>
+<main class="wrap journal">
+<a class="btn back" href="index.html">← მთავარზე დაბრუნება</a>
+<section class="neon-card head"><span class="badge">TEACHER DASHBOARD</span><h1>👩‍🏫 მასწავლებლის ჟურნალი</h1><p>დასწრება, დაგვიანება და გაცდენები ერთ სივრცეში.</p></section>
+<section id="app" class="neon-card content" style="margin-top:16px"><div class="empty">იტვირთება...</div></section>
+</main>
+<footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=20260828-6"></script>
+<script>
+(async function(){
+ const TEACHER_ID='be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
+ const app=document.getElementById('app'); const client=window.supabaseClient;
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ try{
+  const {data:{session}}=await client.auth.getSession();
+  if(!session||session.user.id!==TEACHER_ID){location.replace('login.html');return;}
+  const {data:profile,error:pe}=await client.from('profiles').select('full_name,role').eq('user_id',session.user.id).single();
+  if(pe||!profile||profile.role!=='teacher'){location.replace('index.html');return;}
+  const today=new Date().toISOString().slice(0,10);
+  app.innerHTML=`<div class="toolbar"><input id="date" type="date" value="${today}"><select id="grade"><option value="all">ყველა კლასი</option><option value="2">მე-2 კლასი</option><option value="3">მე-3 კლასი</option><option value="4">მე-4 კლასი</option></select><button id="refresh">🔄 განახლება</button></div><div class="stats"><div class="stat"><b id="all">0</b><span>მოსწავლე</span></div><div class="stat"><b id="present">0</b><span>მოვიდა</span></div><div class="stat"><b id="late">0</b><span>დააგვიანა</span></div><div class="stat"><b id="absent">0</b><span>გააცდინა</span></div></div><div id="table"></div>`;
+  async function load(){
+   const date=document.getElementById('date').value; const grade=document.getElementById('grade').value;
+   const [pRes,aRes]=await Promise.all([
+    client.from('profiles').select('user_id,full_name,grade').eq('role','student').order('full_name'),
+    client.from('attendance').select('student_id,status,arrival_time,departure_time,schedule_id').eq('teacher_id',session.user.id)
+   ]);
+   if(pRes.error) throw pRes.error; if(aRes.error) throw aRes.error;
+   const students=(pRes.data||[]).filter(x=>grade==='all'||String(x.grade)===grade);
+   const schedulesRes=await client.from('schedules').select('id,student_id,lesson_date').eq('teacher_id',session.user.id).eq('lesson_date',date);
+   if(schedulesRes.error) throw schedulesRes.error;
+   const scheduleIds=new Set((schedulesRes.data||[]).map(x=>x.id));
+   const studentIds=new Set((schedulesRes.data||[]).map(x=>x.student_id));
+   const att=(aRes.data||[]).filter(x=>scheduleIds.has(x.schedule_id)); const byStudent=new Map();
+   att.forEach(x=>byStudent.set(x.student_id,x));
+   const rows=students.filter(s=>studentIds.size===0?true:studentIds.has(s.user_id)).map(s=>{const a=byStudent.get(s.user_id);let status=a?.status||'absent';return {s,a,status}});
+   const counts={present:0,late:0,absent:0}; rows.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
+   document.getElementById('all').textContent=rows.length;document.getElementById('present').textContent=counts.present||0;document.getElementById('late').textContent=counts.late||0;document.getElementById('absent').textContent=counts.absent||0;
+   const label={present:'🟢 მოვიდა',late:'🟡 დააგვიანა',absent:'🔴 გააცდინა'};
+   if(!rows.length){document.getElementById('table').innerHTML='<div class="empty">ამ თარიღისთვის ჩანაწერი ჯერ არ არის.</div>';return;}
+   document.getElementById('table').innerHTML='<div class="table-wrap"><table class="journal-table"><thead><tr><th>მოსწავლე</th><th>კლასი</th><th>სტატუსი</th><th>მოსვლის დრო</th><th>წასვლის დრო</th></tr></thead><tbody>'+rows.map(r=>`<tr><td><b>${esc(r.s.full_name)}</b></td><td>${esc(r.s.grade)}</td><td><span class="status ${r.status}">${label[r.status]||esc(r.status)}</span></td><td>${r.a?.arrival_time?new Date(r.a.arrival_time).toLocaleTimeString('ka-GE',{hour:'2-digit',minute:'2-digit'}):'—'}</td><td>${r.a?.departure_time?new Date(r.a.departure_time).toLocaleTimeString('ka-GE',{hour:'2-digit',minute:'2-digit'}):'—'}</td></tr>`).join('')+'</tbody></table></div>';
+  }
+  document.getElementById('refresh').onclick=load;document.getElementById('date').onchange=load;document.getElementById('grade').onchange=load;await load();
+ }catch(e){console.error(e);app.innerHTML='<div class="error">ჟურნალის მონაცემების ჩატვირთვა ვერ მოხერხდა. შეამოწმე Supabase-ის RLS უფლებები.</div>';}
+})();
+</script>
+</body></html>
