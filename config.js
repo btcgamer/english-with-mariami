@@ -6,9 +6,35 @@ const SUPABASE_KEY = "sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt";
   if(!window.supabase || !window.supabase.createClient) return;
   const originalCreateClient = window.supabase.createClient.bind(window.supabase);
   if(!window.__ENGLISH_MARIAMI_SUPABASE_CLIENT){
-    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = originalCreateClient(SUPABASE_URL,SUPABASE_KEY,{
-      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}
-    });
+    const retryFetch = async function(input, init){
+      let lastError;
+      for(let attempt=0; attempt<3; attempt++){
+        try{
+          return await window.fetch(input, init);
+        }catch(error){
+          lastError = error;
+          if(attempt < 2){
+            await new Promise(function(resolve){setTimeout(resolve, 700 * (attempt + 1));});
+          }
+        }
+      }
+      throw lastError;
+    };
+
+    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = originalCreateClient(
+      SUPABASE_URL,
+      SUPABASE_KEY,
+      {
+        auth:{
+          persistSession:true,
+          autoRefreshToken:true,
+          detectSessionInUrl:false
+        },
+        global:{
+          fetch:retryFetch
+        }
+      }
+    );
   }
   window.supabase.createClient = function(){return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;};
 })();
