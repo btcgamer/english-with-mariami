@@ -1,4 +1,4 @@
-/* English with Mariami — strict grade access */
+/* English with Mariami — grade access */
 (function(){
   'use strict';
 
@@ -12,29 +12,18 @@
 
   if (!currentGrade) return;
 
-  /* Hide the grade page until access is verified. This prevents a flash of
-     another class while the Supabase profile is being checked. */
-  document.documentElement.style.visibility = 'hidden';
-
   const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
 
-  function go(url){
-    location.replace(url);
-  }
-
-  function allow(){
-    document.documentElement.style.visibility = 'visible';
-  }
+  function go(url){ location.replace(url); }
 
   async function check(){
-    if (!client) {
-      go('login.html');
-      return;
-    }
+    /* Never hide the existing Grade 2/3/4 page. Access control only redirects
+       accounts that are not allowed to open the page. */
+    if (!client) return;
 
     try {
-      const sessionResult = await client.auth.getSession();
-      const user = sessionResult?.data?.session?.user;
+      const result = await client.auth.getSession();
+      const user = result?.data?.session?.user;
 
       if (!user) {
         go('login.html?redirect=' + encodeURIComponent(location.pathname));
@@ -43,17 +32,11 @@
 
       const email = String(user.email || '').trim().toLowerCase();
 
-      /* Only this account has unrestricted access. */
-      if (email === FULL_ACCESS_EMAIL) {
-        allow();
-        return;
-      }
+      /* Owner: full access. */
+      if (email === FULL_ACCESS_EMAIL) return;
 
-      /* Teacher account must use the teacher dashboard, not student pages. */
-      if (email === TEACHER_EMAIL || user.id === TEACHER_ID) {
-        go('teacher-dashboard.html');
-        return;
-      }
+      /* Mariami: teacher account keeps full access to the learning site. */
+      if (email === TEACHER_EMAIL || user.id === TEACHER_ID) return;
 
       const profileResult = await client
         .from('profiles')
@@ -63,7 +46,6 @@
 
       if (profileResult.error) {
         console.error('Grade access profile error:', profileResult.error);
-        go('login.html');
         return;
       }
 
@@ -71,32 +53,23 @@
       const role = String(profile?.role || '').trim().toLowerCase();
       const grade = Number(profile?.grade || 0);
 
-      /* Parent: all three student grades. */
-      if (role === 'parent' && ALLOWED_GRADES.includes(currentGrade)) {
-        allow();
-        return;
-      }
+      /* Parent can see Grade 2, 3 and 4. */
+      if (role === 'parent' && ALLOWED_GRADES.includes(currentGrade)) return;
 
-      /* Student: exactly their registered grade. */
+      /* Student can see only the grade selected during registration. */
       if (role === 'student' && ALLOWED_GRADES.includes(grade)) {
-        if (grade === currentGrade) {
-          allow();
-          return;
-        }
+        if (grade === currentGrade) return;
         go('grade' + grade + '.html');
         return;
       }
 
-      /* A teacher profile is never treated as a student. */
-      if (role === 'teacher') {
-        go('teacher-dashboard.html');
-        return;
-      }
+      /* Teacher role is allowed to view all grades. */
+      if (role === 'teacher') return;
 
       go('login.html');
     } catch (error) {
+      /* Do not blank an existing grade page because of an access-script error. */
       console.error('Grade access error:', error);
-      go('login.html');
     }
   }
 
