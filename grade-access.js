@@ -9,6 +9,10 @@
   const publicPages = ['/login.html','/register.html','/reset-password.html','/teacher-login.html'];
   if(publicPages.some(p => path.endsWith(p))) return;
 
+  const DEVELOPER_EMAILS = ['developers@datogringo.com'];
+  const TEACHER_EMAILS = ['razmadzemariam45@gmail.com'];
+  const TEACHER_IDS = ['be4b1c4d-e5f2-4039-b35e-aec3c110a94a'];
+
   const gradeForPath = (p) => {
     if(p.endsWith('/grade2.html')) return 2;
     if(p.endsWith('/grade3.html')) return 3;
@@ -38,8 +42,20 @@
       return;
     }
 
+    const email = String(session.user?.email || '').trim().toLowerCase();
     const role = String(profile?.role || '').toLowerCase();
-    if(role === 'teacher' || role === 'admin') return;
+
+    // Teacher, admin and the developer account have unrestricted access.
+    if(TEACHER_EMAILS.includes(email) || TEACHER_IDS.includes(session.user?.id) || role === 'teacher' || role === 'admin' || DEVELOPER_EMAILS.includes(email)) return;
+
+    // Parents can freely browse the curriculum for grades 2, 3 and 4,
+    // but never get access to the teacher dashboard/admin area.
+    if(role === 'parent'){
+      if(path.endsWith('/teacher-dashboard.html') || path.endsWith('/teacher-login.html')){
+        location.replace('academy.html');
+      }
+      return;
+    }
 
     const grade = Number(profile?.grade);
     if(![2,3,4].includes(grade)){
@@ -50,14 +66,14 @@
     const currentGrade = gradeForPath(path);
     const isOpenPage = path.endsWith('/index.html') || path.endsWith('/academy.html') || path === '/' || path.endsWith('/english-with-mariami/');
 
-    // Students always land in their own grade.
+    // Students always land in their own grade and cannot browse another grade.
     if(isOpenPage || (currentGrade !== null && currentGrade !== grade)){
       const target = gradePage(grade);
       if(!path.endsWith('/' + target)) location.replace(target);
     }
   }
 
-  // Login page: intercept before the old login handler and route by the registered grade.
+  // Login page: route by registered grade, while parents/developer/teachers keep full curriculum access.
   if(path.endsWith('/login.html')){
     document.addEventListener('submit', async function(e){
       if(!e.target || e.target.id !== 'loginForm') return;
@@ -97,10 +113,25 @@
           console.error('Profile/grade lookup error:', profileError);
         }
 
-        if(em === 'razmadzemariam45@gmail.com' || user.id === 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a' || role === 'teacher' || role === 'admin'){
+        if(TEACHER_EMAILS.includes(em) || TEACHER_IDS.includes(user.id) || role === 'teacher' || role === 'admin'){
           message.className = 'message success';
           message.textContent = '👩‍🏫 შესვლა წარმატებულია!';
           setTimeout(() => location.replace('teacher-dashboard.html'), 300);
+          return;
+        }
+
+        if(DEVELOPER_EMAILS.includes(em)){
+          message.className = 'message success';
+          message.textContent = '🛠️ Developer შესვლა წარმატებულია! სრული წვდომა ჩართულია.';
+          setTimeout(() => location.replace('academy.html'), 300);
+          return;
+        }
+
+        if(role === 'parent'){
+          message.className = 'message success';
+          message.textContent = '👨‍👩‍👧 მშობლის შესვლა წარმატებულია! შეგიძლიათ ნახოთ მე-2, მე-3 და მე-4 კლასის მასალა.';
+          const target = new URLSearchParams(location.search).get('redirect');
+          setTimeout(() => location.replace(target || 'academy.html'), 350);
           return;
         }
 
