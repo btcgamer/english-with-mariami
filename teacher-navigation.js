@@ -4,7 +4,7 @@
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const path = location.pathname.toLowerCase();
-  if (!/\/grade[34]\.html$/.test(path)) return;
+  if (!/\/grade[234]\.html$/.test(path)) return;
 
   function hideAcademyAndHome() {
     document.querySelectorAll('a').forEach(function (a) {
@@ -18,6 +18,8 @@
 
   function addTeacherNav() {
     hideAcademyAndHome();
+    // Keep hiding after page scripts dynamically rebuild the header.
+    setInterval(hideAcademyAndHome, 300);
     if (document.getElementById('teacher-only-nav')) return;
     const nav = document.createElement('div');
     nav.id = 'teacher-only-nav';
