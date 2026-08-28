@@ -3,207 +3,1140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>მშობლის სივრცე — English with Mariami</title>
+
+<title>English with Mariami — მშობლის სივრცე</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
 
 body{
 margin:0;
 font-family:Arial,"Noto Sans Georgian",sans-serif;
-background:linear-gradient(135deg,#f8feff,#c9f5ff,#eafcff);
-color:#073b5c;
-min-height:100vh
+color:white;
+background:#010814;
+min-height:100vh;
+overflow-x:hidden;
 }
 
-header{
-background:#ffffffdd;
-backdrop-filter:blur(15px);
-border-bottom:1px solid #00bfff44;
-padding:18px
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button,
+input,
+textarea{
+font-family:inherit;
+}
+
+
+/* =====================================
+   BACKGROUND
+===================================== */
+
+.background{
+position:fixed;
+inset:0;
+z-index:-10;
+overflow:hidden;
+
+background:
+radial-gradient(
+circle at 50% 35%,
+#0a6795 0%,
+#063b61 25%,
+#021a32 55%,
+#010814 100%
+);
+}
+
+
+/* BIG BLUE GLOW */
+
+.background::before{
+content:"";
+position:absolute;
+
+width:700px;
+height:700px;
+
+left:50%;
+top:35%;
+
+transform:translate(-50%,-50%);
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+#00eaff45 0%,
+#008cff22 35%,
+transparent 70%
+);
+
+animation:
+bigGlow 5s ease-in-out infinite;
+}
+
+@keyframes bigGlow{
+
+0%,100%{
+transform:translate(-50%,-50%) scale(.85);
+opacity:.6;
+}
+
+50%{
+transform:translate(-50%,-50%) scale(1.15);
+opacity:1;
+}
+
+}
+
+
+/* =====================================
+   3D GRID FLOOR
+===================================== */
+
+.grid-floor{
+position:absolute;
+
+left:-30%;
+right:-30%;
+bottom:-30%;
+
+height:65%;
+
+transform:
+perspective(500px)
+rotateX(63deg);
+
+background-image:
+
+linear-gradient(
+#00eaff35 1px,
+transparent 1px
+),
+
+linear-gradient(
+90deg,
+#00eaff35 1px,
+transparent 1px
+);
+
+background-size:55px 55px;
+
+mask-image:
+linear-gradient(
+to top,
+black,
+transparent
+);
+
+animation:
+gridMove 8s linear infinite;
+}
+
+@keyframes gridMove{
+
+from{
+background-position:0 0;
+}
+
+to{
+background-position:0 55px;
+}
+
+}
+
+
+/* =====================================
+   FLOATING ABC
+===================================== */
+
+.letters{
+position:absolute;
+inset:0;
+perspective:1000px;
+}
+
+.letter{
+position:absolute;
+
+font-size:80px;
+font-weight:1000;
+
+color:white;
+
+text-shadow:
+
+0 0 5px white,
+0 0 15px #00eaff,
+0 0 35px #008cff,
+0 0 70px #006cff,
+0 0 110px #004cff;
+
+animation:
+letterFloat 7s ease-in-out infinite;
+
+user-select:none;
+}
+
+.letter:nth-child(1){
+left:7%;
+top:17%;
+}
+
+.letter:nth-child(2){
+left:20%;
+top:65%;
+animation-delay:-2s;
+}
+
+.letter:nth-child(3){
+right:13%;
+top:20%;
+animation-delay:-4s;
+}
+
+.letter:nth-child(4){
+right:5%;
+bottom:20%;
+animation-delay:-1s;
+}
+
+.letter:nth-child(5){
+left:43%;
+top:9%;
+font-size:55px;
+animation-delay:-5s;
+}
+
+@keyframes letterFloat{
+
+0%,100%{
+transform:
+translate3d(0,0,0)
+rotateY(-20deg)
+rotateZ(-4deg);
+}
+
+50%{
+transform:
+translate3d(35px,-45px,100px)
+rotateY(35deg)
+rotateZ(7deg);
+}
+
+}
+
+
+/* =====================================
+   HEADER
+===================================== */
+
+.header{
+position:sticky;
+top:0;
+z-index:100;
+
+background:#02152ded;
+
+border-bottom:
+1px solid #00eaff66;
+
+backdrop-filter:
+blur(15px);
 }
 
 .nav{
-max-width:1100px;
+width:min(1200px,calc(100% - 28px));
 margin:auto;
+
 display:flex;
-justify-content:space-between;
 align-items:center;
-gap:15px
+justify-content:space-between;
+
+gap:15px;
+
+padding:13px 0;
 }
 
 .logo{
-font-weight:900;
-font-size:19px;
-color:#0076aa;
-text-decoration:none
+font-size:18px;
+font-weight:1000;
+
+text-shadow:
+0 0 18px #00eaff;
 }
 
-.nav a{
-text-decoration:none;
-color:#07547c;
-font-weight:bold;
-margin-left:10px
+.nav-links{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
 }
+
+.nav-links a{
+padding:9px 12px;
+
+border-radius:12px;
+
+background:#062443dd;
+
+border:
+1px solid #00eaff44;
+
+font-size:13px;
+
+transition:.2s;
+}
+
+.nav-links a:hover{
+background:#00c9f2;
+color:#00131a;
+
+box-shadow:
+0 0 20px #00eaff;
+}
+
+
+/* =====================================
+   MAIN
+===================================== */
 
 .container{
-max-width:1050px;
+width:min(1200px,calc(100% - 28px));
 margin:auto;
-padding:25px 15px 60px
 }
 
+
+/* =====================================
+   HERO
+===================================== */
+
 .hero{
+min-height:620px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:60px 0;
+}
+
+.hero-card{
+
+position:relative;
+
+width:min(950px,100%);
+
+padding:45px 30px;
+
 text-align:center;
-padding:30px 10px
+
+border-radius:32px;
+
+background:
+linear-gradient(
+145deg,
+#031d35e8,
+#020a18e8
+);
+
+border:
+1px solid #00eaff77;
+
+box-shadow:
+
+0 30px 90px #000c,
+
+0 0 50px #00eaff22;
+
+backdrop-filter:blur(10px);
+
+transform:
+perspective(1200px)
+rotateX(2deg);
+
+}
+
+.parent-icon{
+
+font-size:75px;
+
+filter:
+drop-shadow(
+0 0 25px #00eaff
+);
+
+animation:
+parentIcon 3s ease-in-out infinite;
+}
+
+@keyframes parentIcon{
+
+0%,100%{
+transform:translateY(0) scale(1);
+}
+
+50%{
+transform:translateY(-12px) scale(1.08);
+}
+
 }
 
 .badge{
+
 display:inline-block;
-padding:9px 17px;
+
+padding:8px 15px;
+
 border-radius:30px;
-background:white;
-color:#0080ba;
+
+background:#061c38dd;
+
+border:
+1px solid #00eaff88;
+
+color:#ffe600;
+
 font-weight:900;
-box-shadow:0 0 25px #00cfff44
+
+box-shadow:
+0 0 20px #00eaff22;
 }
 
 h1{
-font-size:clamp(38px,7vw,65px);
-margin:18px 0 10px
+
+font-size:
+clamp(38px,7vw,70px);
+
+line-height:1;
+
+margin:18px 0;
+
+text-shadow:
+0 0 30px #00eaff88;
 }
 
-.hero p{
-color:#59798b;
-line-height:1.7
+h1 span{
+color:#00eaff;
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px
+.hero-text{
+
+font-size:18px;
+
+line-height:1.7;
+
+color:#dffaff;
+
+max-width:750px;
+
+margin:0 auto;
 }
 
-.card{
-background:#ffffffdd;
-border:1px solid #00bfff44;
+
+/* =====================================
+   3D FAMILY
+===================================== */
+
+.family-section{
+
+position:relative;
+
+min-height:560px;
+
+border-radius:32px;
+
+overflow:hidden;
+
+border:
+1px solid #00eaff66;
+
+background:
+linear-gradient(
+145deg,
+#031d35cc,
+#020b18dd
+);
+
+box-shadow:
+
+0 30px 80px #000c,
+
+0 0 45px #00eaff22;
+
+margin-bottom:40px;
+
+perspective:1200px;
+}
+
+
+/* FAMILY LIGHT */
+
+.family-light{
+
+position:absolute;
+
+width:500px;
+height:500px;
+
+left:50%;
+top:40%;
+
+transform:
+translate(-50%,-50%);
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+#00eaff35,
+transparent 70%
+);
+
+animation:
+familyLight 4s ease-in-out infinite;
+}
+
+@keyframes familyLight{
+
+0%,100%{
+transform:
+translate(-50%,-50%) scale(.8);
+}
+
+50%{
+transform:
+translate(-50%,-50%) scale(1.2);
+}
+
+}
+
+
+/* FAMILY */
+
+.family{
+
+position:absolute;
+
+left:50%;
+top:48%;
+
+transform:
+translate(-50%,-50%)
+rotateX(8deg)
+rotateY(-12deg);
+
+display:flex;
+
+align-items:flex-end;
+
+gap:45px;
+
+transform-style:preserve-3d;
+
+animation:
+familyMove 6s ease-in-out infinite;
+
+z-index:3;
+}
+
+@keyframes familyMove{
+
+0%,100%{
+
+transform:
+translate(-50%,-50%)
+rotateX(8deg)
+rotateY(-12deg)
+translateZ(0);
+
+}
+
+50%{
+
+transform:
+translate(-50%,-55%)
+rotateX(8deg)
+rotateY(15deg)
+translateZ(70px);
+
+}
+
+}
+
+
+/* PEOPLE */
+
+.person{
+
+text-align:center;
+
+transform-style:preserve-3d;
+
+filter:
+drop-shadow(
+0 0 18px #00eaff
+);
+
+animation:
+personMove 3s ease-in-out infinite;
+}
+
+.person:nth-child(2){
+animation-delay:-1s;
+}
+
+.person:nth-child(3){
+animation-delay:-2s;
+}
+
+@keyframes personMove{
+
+0%,100%{
+transform:
+translateY(0)
+translateZ(0);
+}
+
+50%{
+transform:
+translateY(-18px)
+translateZ(35px);
+}
+
+}
+
+.face{
+font-size:62px;
+}
+
+.clothes{
+font-size:58px;
+margin-top:-8px;
+}
+
+.shoes{
+font-size:42px;
+margin-top:-10px;
+}
+
+
+/* =====================================
+   FAMILY TITLE
+===================================== */
+
+.family-title{
+
+position:absolute;
+
+top:25px;
+left:0;
+right:0;
+
+text-align:center;
+
+z-index:10;
+}
+
+.family-title h2{
+
+font-size:32px;
+
+margin:10px;
+
+color:#00eaff;
+
+text-shadow:
+0 0 20px #00eaff88;
+}
+
+.family-title p{
+
+color:#bdefff;
+}
+
+
+/* =====================================
+   FLOOR
+===================================== */
+
+.family-floor{
+
+position:absolute;
+
+left:-30%;
+right:-30%;
+
+bottom:-35%;
+
+height:60%;
+
+transform:
+perspective(500px)
+rotateX(65deg);
+
+background-image:
+
+linear-gradient(
+#00eaff30 1px,
+transparent 1px
+),
+
+linear-gradient(
+90deg,
+#00eaff30 1px,
+transparent 1px
+);
+
+background-size:50px 50px;
+
+mask-image:
+linear-gradient(
+to top,
+black,
+transparent
+);
+
+}
+
+
+/* =====================================
+   QUESTIONS
+===================================== */
+
+.questions{
+
+padding:55px 0;
+}
+
+.section-title{
+
+text-align:center;
+
+margin-bottom:28px;
+}
+
+.section-title h2{
+
+font-size:34px;
+
+margin:12px 0;
+}
+
+.section-title p{
+
+color:#bdefff;
+}
+
+
+.question-card{
+
+max-width:850px;
+
+margin:auto;
+
+padding:30px;
+
 border-radius:25px;
-padding:24px;
-box-shadow:0 20px 55px #007cff18
-}
 
-.card h2{
-color:#007bb8;
-margin-top:0
+background:
+linear-gradient(
+145deg,
+#041b32ee,
+#020b18ee
+);
+
+border:
+1px solid #00eaff55;
+
+box-shadow:
+0 25px 65px #000b;
 }
 
 label{
+
 display:block;
-font-weight:bold;
-margin:12px 0 6px
+
+font-weight:900;
+
+margin:0 0 8px;
+
+color:#ffe600;
 }
 
-input,select,textarea{
+input,
+textarea{
+
 width:100%;
-padding:13px;
-border:1px solid #9bdff2;
-border-radius:13px;
-font:inherit;
+
+border:1px solid #00eaff44;
+
+background:#020b18dd;
+
+color:white;
+
+border-radius:14px;
+
+padding:14px;
+
+font-size:16px;
+
 outline:none;
-background:white
+
+margin-bottom:18px;
+
+transition:.2s;
+}
+
+input:focus,
+textarea:focus{
+
+border-color:#00eaff;
+
+box-shadow:
+0 0 18px #00eaff33;
 }
 
 textarea{
-min-height:140px;
-resize:vertical
+
+min-height:150px;
+
+resize:vertical;
 }
 
-input:focus,select:focus,textarea:focus{
-border-color:#00aeea;
-box-shadow:0 0 15px #00cfff33
-}
+.send-button{
 
-button{
 border:0;
-border-radius:13px;
-padding:13px 18px;
-margin-top:15px;
+
+cursor:pointer;
+
+padding:14px 24px;
+
+border-radius:14px;
+
+font-weight:1000;
+
+font-size:16px;
+
 background:#00c9f2;
-color:#002c40;
-font-weight:900;
-cursor:pointer
+
+color:#00131a;
+
+box-shadow:
+0 0 25px #00eaff66;
+
+transition:.2s;
 }
 
-button:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 25px #00bfff44
+.send-button:hover{
+
+transform:
+translateY(-3px)
+scale(1.02);
+
+box-shadow:
+0 0 35px #00eaffaa;
 }
 
-.status{
-margin-top:12px;
-padding:12px;
-border-radius:12px;
-background:#effcff
+
+/* =====================================
+   FEATURES
+===================================== */
+
+.features{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:16px;
+
+margin-top:30px;
 }
 
-.question{
-background:#f4fcff;
-border-left:5px solid #00bfff;
-border-radius:15px;
-padding:16px;
-margin-top:12px
+.feature{
+
+padding:22px;
+
+text-align:center;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+145deg,
+#062746dd,
+#031426dd
+);
+
+border:
+1px solid #00eaff33;
+
+transition:.25s;
 }
 
-.answer{
-background:#eafff7;
-padding:12px;
-border-radius:12px;
-margin-top:12px
+.feature:hover{
+
+transform:
+translateY(-7px);
+
+box-shadow:
+0 20px 45px #000b,
+0 0 30px #00eaff33;
 }
 
-.empty{
-color:#718999
+.feature-icon{
+
+font-size:40px;
+
+filter:
+drop-shadow(
+0 0 12px #00eaff
+);
 }
 
-@media(max-width:700px){
+.feature h3{
+
+color:#ffe600;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+.footer{
+
+margin-top:45px;
+
+padding:30px 0;
+
+text-align:center;
+
+border-top:
+1px solid #00eaff33;
+
+color:#8fc5d5;
+}
+
+
+/* =====================================
+   TABLET
+===================================== */
+
+@media(max-width:850px){
 
 .nav{
-flex-direction:column
+
+flex-direction:column;
+
+align-items:flex-start;
 }
 
-.grid{
-grid-template-columns:1fr
+.nav-links{
+width:100%;
 }
+
+.features{
+grid-template-columns:1fr;
+}
+
+.family{
+gap:25px;
+}
+
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:600px){
 
 .container{
-padding-left:12px;
-padding-right:12px
+
+width:
+calc(100% - 20px);
 }
 
-.card{
-padding:18px
+.hero{
+
+padding:
+35px 0;
 }
 
-h1{
-font-size:42px
+.hero-card{
+
+padding:
+35px 18px;
+
+border-radius:24px;
 }
+
+.hero-text{
+
+font-size:16px;
 }
+
+.family-section{
+
+min-height:520px;
+
+border-radius:24px;
+}
+
+.family{
+
+gap:5px;
+
+transform:
+translate(-50%,-50%)
+scale(.68)
+rotateY(-8deg);
+}
+
+.family-title h2{
+
+font-size:26px;
+}
+
+.family-title p{
+
+font-size:14px;
+}
+
+.letter{
+
+font-size:48px;
+}
+
+.question-card{
+
+padding:20px;
+
+border-radius:20px;
+}
+
+.section-title h2{
+
+font-size:28px;
+}
+
+.nav-links a{
+
+font-size:11px;
+
+padding:
+8px 9px;
+}
+
+}
+
+
+/* =====================================
+   EXTRA SMALL
+===================================== */
+
+@media(max-width:380px){
+
+.family{
+
+transform:
+translate(-50%,-50%)
+scale(.58);
+}
+
+.family-section{
+
+min-height:500px;
+}
+
+.parent-icon{
+
+font-size:60px;
+}
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<header>
+
+<!-- =====================================
+     BACKGROUND
+===================================== -->
+
+<div class="background">
+
+<div class="letters">
+
+<div class="letter">A</div>
+<div class="letter">B</div>
+<div class="letter">C</div>
+<div class="letter">D</div>
+<div class="letter">E</div>
+
+</div>
+
+<div class="grid-floor"></div>
+
+</div>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header class="header">
 
 <div class="nav">
 
-<a class="logo" href="index.html">
+<a
+href="academy.html"
+class="logo"
+>
 ⚡ ENGLISH WITH MARIAMI
 </a>
 
-<div>
-<a href="academy.html">🎓 Academy</a>
-<a href="index.html">🏠 მთავარი</a>
-</div>
+<nav class="nav-links">
+
+<a href="academy.html">
+🏠 აკადემია
+</a>
+
+<a href="academy.html#grades">
+🎓 კლასები
+</a>
+
+<a href="academy.html#progress">
+🏆 პროგრესი
+</a>
+
+<a href="parent-space.html">
+👨‍👩‍👧 მშობლის სივრცე
+</a>
+
+<a href="login.html">
+🔐 შესვლა
+</a>
+
+</nav>
 
 </div>
 
@@ -212,477 +1145,401 @@ font-size:42px
 
 <main class="container">
 
+
+<!-- =====================================
+     HERO
+===================================== -->
+
 <section class="hero">
 
+<div class="hero-card">
+
+<div class="parent-icon">
+👨‍👩‍👧
+</div>
+
 <span class="badge">
-👨‍👩‍👧 PARENT SPACE
+FAMILY SPACE
 </span>
 
 <h1>
-მშობლის სივრცე
+მშობლის <span>სივრცე</span>
 </h1>
 
-<p>
-ბავშვის პროგრესი • კითხვები • მასწავლებელთან კომუნიკაცია
+<p class="hero-text">
+
+აქ მშობელი და მასწავლებელი
+ერთად ეხმარებიან ბავშვს ინგლისურის სწავლაში.
+
+შეგიძლია ნახო ბავშვის პროგრესი,
+დასვა კითხვა და მიიღო პასუხი.
+
 </p>
+
+</div>
 
 </section>
 
 
-<section class="grid">
+<!-- =====================================
+     3D FAMILY
+===================================== -->
+
+<section class="family-section">
+
+<div class="family-light"></div>
 
 
-<div class="card">
+<div class="family-title">
 
-<h2>👤 ბავშვის ინფორმაცია</h2>
+<h2>
+👨‍👩‍👧 ჩვენი სასწავლო ოჯახი
+</h2>
 
-<label>ბავშვის სახელი</label>
+<p>
+ერთად სწავლა უფრო მარტივია ❤️
+</p>
 
-<input
-id="childName"
-placeholder="მაგ: ნინო"
+</div>
+
+
+<!-- FAMILY -->
+
+<div class="family">
+
+
+<div class="person">
+
+<div class="face">
+👨
+</div>
+
+<div class="clothes">
+👕
+</div>
+
+<div class="shoes">
+👖
+</div>
+
+</div>
+
+
+<div class="person">
+
+<div class="face">
+👩
+</div>
+
+<div class="clothes">
+👗
+</div>
+
+<div class="shoes">
+👠
+</div>
+
+</div>
+
+
+<div class="person">
+
+<div class="face">
+🧒
+</div>
+
+<div class="clothes">
+👕
+</div>
+
+<div class="shoes">
+👟
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="family-floor"></div>
+
+</section>
+
+
+<!-- =====================================
+     QUESTION SECTION
+===================================== -->
+
+<section class="questions">
+
+<div class="section-title">
+
+<span class="badge">
+ASK MARIAMI
+</span>
+
+<h2>
+❓ გაქვს შეკითხვა?
+</h2>
+
+<p>
+დაუსვი კითხვა მასწავლებელს და მიიღე პასუხი.
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<form
+id="parentQuestionForm"
 >
 
-<label>კლასი</label>
+<label>
+👤 მშობლის სახელი
+</label>
 
-<select id="childGrade">
+<input
+type="text"
+id="parentName"
+placeholder="ჩაწერე შენი სახელი"
+required
+>
 
-<option value="2">მე-2 კლასი</option>
-<option value="3">მე-3 კლასი</option>
-<option value="4">მე-4 კლასი</option>
+
+<label>
+📧 ელფოსტა
+</label>
+
+<input
+type="email"
+id="parentEmail"
+placeholder="example@email.com"
+required
+>
+
+
+<label>
+🎓 ბავშვის კლასი
+</label>
+
+<select
+id="childGrade"
+required
+style="
+width:100%;
+padding:14px;
+margin-bottom:18px;
+border-radius:14px;
+border:1px solid #00eaff44;
+background:#020b18;
+color:white;
+font-size:16px;
+"
+>
+
+<option value="">
+აირჩიე კლასი
+</option>
+
+<option value="2">
+მე-2 კლასი
+</option>
+
+<option value="3">
+მე-3 კლასი
+</option>
+
+<option value="4">
+მე-4 კლასი
+</option>
 
 </select>
 
-<button onclick="saveChild()">
-💾 შენახვა
-</button>
 
-<div id="childStatus" class="status">
-ინფორმაცია ჯერ არ არის შენახული.
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>❓ ჰკითხე მასწავლებელს</h2>
+<label>
+💬 შენი კითხვა
+</label>
 
 <textarea
-id="question"
-placeholder="დაწერე შენი კითხვა..."
+id="questionText"
+placeholder="აქ დაწერე შენი კითხვა მასწავლებელ მარიამთან..."
+required
 ></textarea>
 
-<button onclick="sendQuestion()">
+
+<button
+type="submit"
+class="send-button"
+>
 📨 კითხვის გაგზავნა
 </button>
 
-<div id="sendStatus" class="status"></div>
+<p
+id="questionMessage"
+style="
+margin-top:15px;
+color:#00eaff;
+font-weight:bold;
+"
+></p>
+
+</form>
 
 </div>
 
-</section>
+
+<!-- =====================================
+     FEATURES
+===================================== -->
+
+<div class="features">
 
 
-<section class="card" style="margin-top:20px">
+<div class="feature">
 
-<h2>💬 კითხვები და პასუხები</h2>
+<div class="feature-icon">
+📊
+</div>
 
-<div id="questions">
+<h3>
+ბავშვის პროგრესი
+</h3>
 
-<p class="empty">
-კითხვები ჯერ არ არის.
+<p>
+მშობელს შეუძლია თვალყური
+ადევნოს ბავშვის სასწავლო პროგრესს.
 </p>
 
 </div>
 
+
+<div class="feature">
+
+<div class="feature-icon">
+❓
+</div>
+
+<h3>
+კითხვები
+</h3>
+
+<p>
+ნებისმიერ სასწავლო საკითხზე
+შეგიძლია დაუსვა კითხვა მასწავლებელს.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+💬
+</div>
+
+<h3>
+პასუხები
+</h3>
+
+<p>
+მასწავლებლის პასუხები
+მშობლის სივრცეში გამოჩნდება.
+</p>
+
+</div>
+
+
+</div>
+
 </section>
 
+
 </main>
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
+
+<footer class="footer">
+
+⚡ English with Mariami
+•
+Parent Space
+•
+ოჯახი + სწავლა ❤️
+
+</footer>
 
 
 <script>
 
 /*
-========================================
-  SUPABASE SETTINGS
-========================================
+==================================================
+PARENT QUESTION FORM
 
-აქ ჩასვი მხოლოდ შენი PUBLIC
-Publishable / anon key.
-
-არ ჩასვა service_role ან secret key.
+ეს ნაწილი ამ ეტაპზე აჩვენებს შეტყობინებას.
+შემდეგ შეგვიძლია პირდაპირ Supabase-ს დავუკავშიროთ.
+==================================================
 */
 
-const SUPABASE_URL =
-"https://vtdhvsfqhwesxtwmduew.supabase.co";
+const form =
+document.getElementById("parentQuestionForm");
 
-const SUPABASE_KEY =
-"ჩასვი_აქ_შენი_PUBLIC_PUBLISHABLE_KEY";
-
-
-let parentEmail =
-localStorage.getItem("parent_email") || "";
+const message =
+document.getElementById("questionMessage");
 
 
-/* ------------------------------------
-   SUPABASE REQUEST
------------------------------------- */
+form.addEventListener(
+"submit",
+function(event){
 
-async function supabaseRequest(
-path,
-options={}
+event.preventDefault();
+
+const name =
+document.getElementById("parentName").value.trim();
+
+const email =
+document.getElementById("parentEmail").value.trim();
+
+const grade =
+document.getElementById("childGrade").value;
+
+const question =
+document.getElementById("questionText").value.trim();
+
+
+if(
+!name ||
+!email ||
+!grade ||
+!question
 ){
 
-const response =
-await fetch(
-SUPABASE_URL + path,
-{
+message.textContent =
+"⚠️ გთხოვ, ყველა ველი შეავსე.";
 
-...options,
+return;
 
-headers:{
-"apikey":SUPABASE_KEY,
-"Authorization":
-"Bearer " + SUPABASE_KEY,
-"Content-Type":
-"application/json",
-...(options.headers || {})
 }
+
+
+/*
+შემდეგ ეტაპზე აქ ჩავრთავთ Supabase-ს.
+*/
+
+message.textContent =
+"✅ კითხვა მზადაა გასაგზავნად!";
+
+
+form.reset();
 
 });
-
-if(!response.ok){
-
-const error =
-await response.text();
-
-throw new Error(error);
-
-}
-
-if(response.status===204)
-return null;
-
-return response.json();
-
-}
-
-
-/* ------------------------------------
-   SAVE CHILD
------------------------------------- */
-
-function saveChild(){
-
-const name =
-document
-.getElementById("childName")
-.value
-.trim();
-
-const grade =
-document
-.getElementById("childGrade")
-.value;
-
-if(!name){
-
-document.getElementById(
-"childStatus"
-).textContent =
-"⚠️ ჩაწერე ბავშვის სახელი.";
-
-return;
-
-}
-
-localStorage.setItem(
-"child_name",
-name
-);
-
-localStorage.setItem(
-"child_grade",
-grade
-);
-
-document.getElementById(
-"childStatus"
-).textContent =
-"✅ ინფორმაცია შენახულია.";
-
-}
-
-
-/* ------------------------------------
-   SEND QUESTION
------------------------------------- */
-
-async function sendQuestion(){
-
-const text =
-document
-.getElementById("question")
-.value
-.trim();
-
-if(!text){
-
-document.getElementById(
-"sendStatus"
-).textContent =
-"⚠️ დაწერე კითხვა.";
-
-return;
-
-}
-
-if(!parentEmail){
-
-document.getElementById(
-"sendStatus"
-).textContent =
-"⚠️ მშობლის ელფოსტა ჯერ არ არის მითითებული.";
-
-return;
-
-}
-
-const childName =
-document
-.getElementById("childName")
-.value
-.trim();
-
-const grade =
-Number(
-document
-.getElementById("childGrade")
-.value
-);
-
-if(!childName){
-
-document.getElementById(
-"sendStatus"
-).textContent =
-"⚠️ ჯერ მიუთითე ბავშვის სახელი.";
-
-return;
-
-}
-
-try{
-
-await supabaseRequest(
-"/rest/v1/parent_questions",
-{
-
-method:"POST",
-
-headers:{
-"Prefer":
-"return=minimal"
-},
-
-body:JSON.stringify({
-
-parent_email:
-parentEmail,
-
-child_name:
-childName,
-
-grade:
-grade,
-
-question:
-text
-
-})
-
-});
-
-
-document.getElementById(
-"question"
-).value="";
-
-document.getElementById(
-"sendStatus"
-).textContent =
-"✅ კითხვა წარმატებით გაიგზავნა.";
-
-loadQuestions();
-
-}
-catch(error){
-
-console.error(error);
-
-document.getElementById(
-"sendStatus"
-).textContent =
-"❌ კითხვა ვერ გაიგზავნა. შეამოწმე Supabase-ის Key.";
-
-}
-
-}
-
-
-/* ------------------------------------
-   LOAD QUESTIONS
------------------------------------- */
-
-async function loadQuestions(){
-
-if(!parentEmail)
-return;
-
-try{
-
-const data =
-await supabaseRequest(
-"/rest/v1/parent_questions?parent_email=eq."+
-encodeURIComponent(parentEmail)+
-"&select=*&order=created_at.desc"
-);
-
-renderQuestions(data);
-
-}
-catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-/* ------------------------------------
-   DISPLAY
------------------------------------- */
-
-function renderQuestions(list){
-
-const box =
-document.getElementById(
-"questions"
-);
-
-if(!list || !list.length){
-
-box.innerHTML =
-'<p class="empty">კითხვები ჯერ არ არის.</p>';
-
-return;
-
-}
-
-box.innerHTML =
-list.map(item=>`
-
-<div class="question">
-
-<strong>
-❓ კითხვა
-</strong>
-
-<p>
-${escapeHTML(item.question)}
-</p>
-
-<small>
-${new Date(item.created_at)
-.toLocaleString("ka-GE")}
-</small>
-
-<div class="answer">
-
-<strong>
-👩‍🏫 მასწავლებლის პასუხი
-</strong>
-
-<p>
-
-${
-item.answer
-?
-escapeHTML(item.answer)
-:
-"პასუხი ჯერ არ არის."
-}
-
-</p>
-
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-
-/* ------------------------------------
-   SECURITY
------------------------------------- */
-
-function escapeHTML(text){
-
-return String(text).replace(
-/[&<>"']/g,
-char=>({
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-
-}[char])
-);
-
-}
-
-
-/* ------------------------------------
-   LOAD SAVED CHILD
------------------------------------- */
-
-function loadChild(){
-
-const name =
-localStorage.getItem(
-"child_name"
-);
-
-const grade =
-localStorage.getItem(
-"child_grade"
-);
-
-if(name)
-document.getElementById(
-"childName"
-).value=name;
-
-if(grade)
-document.getElementById(
-"childGrade"
-).value=grade;
-
-}
-
-
-/* START */
-
-loadChild();
-loadQuestions();
 
 </script>
+
 
 </body>
 </html>
