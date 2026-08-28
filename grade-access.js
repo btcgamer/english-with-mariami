@@ -1,358 +1,109 @@
-/*
-=========================================================
-ENGLISH WITH MARIAMI
-GRADE ACCESS SYSTEM
-2026
-=========================================================
-
-წესები:
-
-datogringo@gmail.com
-→ სრული წვდომა
-
-parent
-→ grade 2 + grade 3 + grade 4
-
-student grade 2
-→ მხოლოდ grade2.html
-
-student grade 3
-→ მხოლოდ grade3.html
-
-student grade 4
-→ მხოლოდ grade4.html
-=========================================================
-*/
-
+/* English with Mariami — strict grade access */
 (function(){
-
-"use strict";
-
-
-/*
-=========================================================
-სრული წვდომის მქონე ანგარიში
-=========================================================
-*/
-
-const FULL_ACCESS_EMAIL =
-"datogringo@gmail.com";
-
-
-/*
-=========================================================
-დაშვებული კლასები
-=========================================================
-*/
-
-const ALLOWED_GRADES =
-[2,3,4];
-
-
-/*
-=========================================================
-გვერდიდან კლასის ამოცნობა
-=========================================================
-*/
-
-function getCurrentGrade(){
-
-const file =
-(
-window.location.pathname
-.split("/")
-.pop()
-|| ""
-).toLowerCase();
-
-
-const match =
-file.match(/^grade([234])\.html$/);
-
-
-if(!match){
-
-return 0;
-
-}
-
-
-return Number(match[1]);
-
-}
-
-
-/*
-=========================================================
-მთავარი ფუნქცია
-=========================================================
-*/
-
-async function checkGradeAccess(){
-
-const client =
-window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;
-
-
-if(!client){
-
-console.error(
-"Supabase client ვერ მოიძებნა."
-);
-
-return;
-
-}
-
-
-const currentGrade =
-getCurrentGrade();
-
-
-/*
-თუ grade გვერდზე არ ვართ
-*/
-
-if(!currentGrade){
-
-return;
-
-}
-
-
-/*
-=========================================================
-მომხმარებლის მიღება
-=========================================================
-*/
-
-const result =
-await client.auth.getUser();
-
-
-const user =
-result.data?.user;
-
-
-if(!user){
-
-/*
-არ არის შესული
-*/
-
-location.replace(
-"login.html?redirect="+
-encodeURIComponent(
-window.location.pathname
-)
-);
-
-return;
-
-}
-
-
-const email =
-String(
-user.email || ""
-).trim()
-.toLowerCase();
-
-
-/*
-=========================================================
-FULL ACCESS
-=========================================================
-*/
-
-if(email === FULL_ACCESS_EMAIL){
-
-console.log(
-"FULL ACCESS: allowed"
-);
-
-return;
-
-}
-
-
-/*
-=========================================================
-PROFILE
-=========================================================
-*/
-
-let role="";
-let grade=0;
-
-try{
-
-const r =
-await client
-.from("profiles")
-.select("role,grade")
-.eq("user_id",user.id)
-.maybeSingle();
-
-
-if(r.data){
-
-role=
-String(
-r.data.role || ""
-).toLowerCase();
-
-grade=
-Number(
-r.data.grade || 0
-);
-
-}
-
-}catch(error){
-
-console.error(
-"Profile access error:",
-error
-);
-
-}
-
-
-/*
-=========================================================
-PARENT
-=========================================================
-
-მშობელს შეუძლია ნახოს:
-
-grade2
-grade3
-grade4
-=========================================================
-*/
-
-if(role === "parent"){
-
-if(ALLOWED_GRADES.includes(currentGrade)){
-
-console.log(
-"PARENT ACCESS: grade "+currentGrade
-);
-
-return;
-
-}
-
-}
-
-
-/*
-=========================================================
-STUDENT
-=========================================================
-
-მოსწავლეს შეუძლია მხოლოდ თავისი კლასი.
-=========================================================
-*/
-
-if(
-[2,3,4].includes(grade)
-&&
-grade === currentGrade
-){
-
-console.log(
-"STUDENT ACCESS: grade "+currentGrade
-);
-
-return;
-
-}
-
-
-/*
-=========================================================
-წვდომა არ აქვს
-=========================================================
-*/
-
-console.warn(
-"ACCESS DENIED",
-{
-email,
-role,
-grade,
-currentGrade
-}
-);
-
-
-/*
-მოსწავლე ყოველთვის ბრუნდება
-თავის კლასში
-*/
-
-if([2,3,4].includes(grade)){
-
-location.replace(
-"grade"+grade+".html"
-);
-
-return;
-
-}
-
-
-/*
-თუ მშობელია, მაგრამ უცნაური გვერდია
-*/
-
-if(role === "parent"){
-
-location.replace(
-"academy.html"
-);
-
-return;
-
-}
-
-
-/*
-სხვა შემთხვევა
-*/
-
-location.replace(
-"login.html"
-);
-
-}
-
-
-/*
-=========================================================
-გვერდის დაცვა
-=========================================================
-*/
-
-checkGradeAccess();
-
-
-/*
-=========================================================
-გლობალური ფუნქცია
-=========================================================
-*/
-
-window.ENGLISH_MARIAMI_GRADE_ACCESS = {
-
-check:
-checkGradeAccess,
-
-getCurrentGrade:
-getCurrentGrade
-
-};
-
+  'use strict';
+
+  const FULL_ACCESS_EMAIL = 'datogringo@gmail.com';
+  const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
+  const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
+  const ALLOWED_GRADES = [2,3,4];
+  const path = (location.pathname || '').toLowerCase();
+  const match = path.match(/(?:^|\/)grade([234])\.html$/);
+  const currentGrade = match ? Number(match[1]) : 0;
+
+  if (!currentGrade) return;
+
+  /* Hide the grade page until access is verified. This prevents a flash of
+     another class while the Supabase profile is being checked. */
+  document.documentElement.style.visibility = 'hidden';
+
+  const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
+
+  function go(url){
+    location.replace(url);
+  }
+
+  function allow(){
+    document.documentElement.style.visibility = 'visible';
+  }
+
+  async function check(){
+    if (!client) {
+      go('login.html');
+      return;
+    }
+
+    try {
+      const sessionResult = await client.auth.getSession();
+      const user = sessionResult?.data?.session?.user;
+
+      if (!user) {
+        go('login.html?redirect=' + encodeURIComponent(location.pathname));
+        return;
+      }
+
+      const email = String(user.email || '').trim().toLowerCase();
+
+      /* Only this account has unrestricted access. */
+      if (email === FULL_ACCESS_EMAIL) {
+        allow();
+        return;
+      }
+
+      /* Teacher account must use the teacher dashboard, not student pages. */
+      if (email === TEACHER_EMAIL || user.id === TEACHER_ID) {
+        go('teacher-dashboard.html');
+        return;
+      }
+
+      const profileResult = await client
+        .from('profiles')
+        .select('role,grade')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (profileResult.error) {
+        console.error('Grade access profile error:', profileResult.error);
+        go('login.html');
+        return;
+      }
+
+      const profile = profileResult.data;
+      const role = String(profile?.role || '').trim().toLowerCase();
+      const grade = Number(profile?.grade || 0);
+
+      /* Parent: all three student grades. */
+      if (role === 'parent' && ALLOWED_GRADES.includes(currentGrade)) {
+        allow();
+        return;
+      }
+
+      /* Student: exactly their registered grade. */
+      if (role === 'student' && ALLOWED_GRADES.includes(grade)) {
+        if (grade === currentGrade) {
+          allow();
+          return;
+        }
+        go('grade' + grade + '.html');
+        return;
+      }
+
+      /* A teacher profile is never treated as a student. */
+      if (role === 'teacher') {
+        go('teacher-dashboard.html');
+        return;
+      }
+
+      go('login.html');
+    } catch (error) {
+      console.error('Grade access error:', error);
+      go('login.html');
+    }
+  }
+
+  window.ENGLISH_MARIAMI_GRADE_ACCESS = {
+    check: check,
+    getCurrentGrade: function(){ return currentGrade; }
+  };
+
+  check();
 })();
