@@ -9,9 +9,7 @@
 
 <style>
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
-
 body{
  margin:0;
  font-family:Arial,"Noto Sans Georgian",sans-serif;
@@ -24,7 +22,6 @@ body{
  linear-gradient(135deg,#010713,#031b3b 48%,#010713);
  overflow-x:hidden;
 }
-
 body:before{
  content:"";
  position:fixed;
@@ -37,23 +34,9 @@ body:before{
  animation:stars 18s linear infinite;
  z-index:-1;
 }
-
-@keyframes stars{
- from{transform:translateY(0)}
- to{transform:translateY(-90px)}
-}
-
-a{
- color:inherit;
- text-decoration:none
-}
-
-.wrap{
- width:min(1250px,calc(100% - 28px));
- margin:auto
-}
-
-/* HEADER */
+@keyframes stars{from{transform:translateY(0)}to{transform:translateY(-90px)}}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1250px,calc(100% - 28px));margin:auto}
 
 .top{
  position:sticky;
@@ -64,29 +47,21 @@ a{
  backdrop-filter:blur(16px);
  box-shadow:0 5px 30px #0008;
 }
-
 nav{
  display:flex;
  justify-content:space-between;
  align-items:center;
  gap:12px;
  padding:13px 0;
- flex-wrap:wrap
+ flex-wrap:wrap;
 }
-
 .brand{
  font-size:17px;
  font-weight:1000;
  color:#fff;
  text-shadow:0 0 18px #00eaff;
 }
-
-.links{
- display:flex;
- gap:7px;
- flex-wrap:wrap
-}
-
+.links{display:flex;gap:7px;flex-wrap:wrap}
 .links a{
  padding:9px 12px;
  border-radius:12px;
@@ -95,21 +70,17 @@ nav{
  font-size:13px;
  transition:.25s;
 }
-
 .links a:hover{
  transform:translateY(-2px);
  border-color:#00eaff;
  background:#0b3158;
 }
 
-/* HERO */
-
 .hero{
  position:relative;
  padding:65px 0 35px;
  text-align:center;
 }
-
 .badge{
  display:inline-block;
  padding:9px 16px;
@@ -120,19 +91,16 @@ nav{
  font-weight:900;
  box-shadow:0 0 25px #00eaff18;
 }
-
 .hero h1{
  font-size:clamp(42px,7vw,76px);
  margin:18px 0 12px;
  line-height:1.05;
  text-shadow:0 10px 35px #0008;
 }
-
 .hero h1 span{
  color:#00eaff;
  text-shadow:0 0 25px #00eaff88;
 }
-
 .lead{
  font-size:18px;
  line-height:1.8;
@@ -141,22 +109,16 @@ nav{
  margin:auto;
 }
 
-/* STATS */
-
 .card{
  position:relative;
- background:
- linear-gradient(145deg,#092b50ee,#06182fee);
+ background:linear-gradient(145deg,#092b50ee,#06182fee);
  border:1px solid #00eaff35;
  border-radius:22px;
  padding:21px;
  margin:16px 0;
- box-shadow:
- 0 15px 45px #0007,
- inset 0 1px #ffffff0c;
+ box-shadow:0 15px 45px #0007,inset 0 1px #ffffff0c;
  overflow:hidden;
 }
-
 .card:before{
  content:"";
  position:absolute;
@@ -169,13 +131,11 @@ nav{
  border-radius:50%;
  pointer-events:none;
 }
-
 .stats{
  display:grid;
  grid-template-columns:repeat(4,1fr);
  gap:11px;
 }
-
 .stat{
  padding:17px 10px;
  text-align:center;
@@ -183,7 +143,6 @@ nav{
  border:1px solid #00eaff25;
  border-radius:17px;
 }
-
 .stat b{
  display:block;
  color:#ffe600;
@@ -191,7 +150,6 @@ nav{
  margin-bottom:4px;
  text-shadow:0 0 15px #ffe60044;
 }
-
 .progress{
  height:19px;
  margin-top:16px;
@@ -200,7 +158,6 @@ nav{
  border-radius:20px;
  overflow:hidden;
 }
-
 .progress i{
  display:block;
  height:100%;
@@ -209,24 +166,13 @@ nav{
  box-shadow:0 0 20px #00eaff99;
  transition:.5s;
 }
-
-/* TITLES */
-
 h2{
  margin-top:0;
  color:#fff;
  text-shadow:0 0 15px #00eaff22;
 }
-
-h2:first-letter{
- color:#00eaff;
-}
-
-.muted{
- color:#9dc7d5;
-}
-
-/* TOOLBAR */
+h2:first-letter{color:#00eaff}
+.muted{color:#9dc7d5}
 
 .toolbar{
  display:flex;
@@ -234,7 +180,6 @@ h2:first-letter{
  flex-wrap:wrap;
  margin-bottom:17px;
 }
-
 .input{
  flex:1;
  min-width:220px;
@@ -245,19 +190,16 @@ h2:first-letter{
  color:#fff;
  outline:none;
 }
-
 .input:focus{
  border-color:#00eaff;
  box-shadow:0 0 18px #00eaff22;
 }
-
 .filters{
  display:flex;
  gap:7px;
  flex-wrap:wrap;
  margin-bottom:15px;
 }
-
 .filter{
  padding:9px 12px;
  border-radius:12px;
@@ -268,69 +210,53 @@ h2:first-letter{
  font-weight:800;
  transition:.2s;
 }
-
-.filter:hover{
- transform:translateY(-2px);
-}
-
+.filter:hover{transform:translateY(-2px)}
 .filter.active{
  background:#ffe600;
  color:#111;
  border-color:#ffe600;
 }
 
-/* WORDS */
-
 .words{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
  gap:13px;
 }
-
 .word{
  position:relative;
  padding:17px 13px;
- background:
- linear-gradient(145deg,#0a3158,#06182f);
+ background:linear-gradient(145deg,#0a3158,#06182f);
  border:1px solid #00eaff30;
  border-radius:18px;
  text-align:center;
  min-height:220px;
  transition:.25s;
 }
-
 .word:hover{
  transform:translateY(-5px) rotateX(2deg);
  border-color:#00eaff88;
- box-shadow:
- 0 15px 35px #0008,
- 0 0 25px #00eaff12;
+ box-shadow:0 15px 35px #0008,0 0 25px #00eaff12;
 }
-
 .word strong{
  font-size:23px;
  display:block;
  color:#fff;
 }
-
 .pron{
  font-size:13px;
  color:#8fbfce;
  margin:7px;
 }
-
 .ka{
  color:#ffe600;
  font-weight:1000;
  font-size:16px;
 }
-
 .cat{
  font-size:11px;
  color:#6ea9bc;
  margin:5px;
 }
-
 .example{
  font-size:12px;
  color:#c8e9f1;
@@ -338,7 +264,6 @@ h2:first-letter{
  margin:9px 0;
  min-height:37px;
 }
-
 .btn{
  border:0;
  border-radius:10px;
@@ -349,39 +274,28 @@ h2:first-letter{
  color:#111;
  transition:.2s;
 }
-
 .btn:hover{
  transform:scale(1.05);
  box-shadow:0 0 15px #ffe60044;
 }
-
 .btn.listen{
  background:#00eaff;
 }
 
-/* LESSON */
-
 .lesson{
  padding:20px;
- background:
- linear-gradient(135deg,#08284add,#04162ddd);
+ background:linear-gradient(135deg,#08284add,#04162ddd);
  border-left:4px solid #00eaff;
  border-radius:15px;
  line-height:1.85;
  margin:12px 0;
  box-shadow:inset 0 0 25px #00eaff06;
 }
-
 .lesson h3{
  color:#ffe600;
  margin-top:0;
 }
-
-.lesson b{
- color:#00eaff;
-}
-
-/* PHRASES */
+.lesson b{color:#00eaff}
 
 .phrase{
  display:flex;
@@ -394,8 +308,6 @@ h2:first-letter{
  border-radius:12px;
  border:1px solid #00eaff22;
 }
-
-/* QUIZ */
 
 .option{
  display:block;
@@ -410,22 +322,18 @@ h2:first-letter{
  cursor:pointer;
  transition:.2s;
 }
-
 .option:hover{
  border-color:#00eaff;
  transform:translateX(3px);
 }
-
 .correct{
  border-color:#ffe600!important;
  background:#164b3a!important;
 }
-
 .wrong{
  border-color:#ff6b81!important;
  background:#4a1c29!important;
 }
-
 .quiz-result{
  text-align:center;
  padding:18px;
@@ -433,13 +341,10 @@ h2:first-letter{
  background:#061a32;
  margin-top:15px;
 }
-
 .quiz-result strong{
  color:#ffe600;
  font-size:30px;
 }
-
-/* NUMBERS */
 
 .number{
  min-height:130px;
@@ -449,8 +354,6 @@ h2:first-letter{
  align-items:center;
 }
 
-/* FOOTER */
-
 footer{
  margin-top:40px;
  padding:30px 0;
@@ -458,7 +361,6 @@ footer{
  color:#9dc7d5;
  border-top:1px solid #00eaff33;
 }
-
 .site-copyright{
  margin-top:0;
  padding:18px 12px;
@@ -469,88 +371,35 @@ footer{
  background:#020b19aa;
 }
 
-/* MOBILE */
-
 @media(max-width:800px){
- .stats{
-  grid-template-columns:repeat(2,1fr)
- }
+ .stats{grid-template-columns:repeat(2,1fr)}
 }
-
 @media(max-width:600px){
- .wrap{
-  width:min(100% - 18px,1250px)
- }
-
- nav{
-  justify-content:center
- }
-
- .brand{
-  width:100%;
-  text-align:center
- }
-
- .links{
-  width:100%;
-  justify-content:center
- }
-
- .hero{
-  padding-top:42px
- }
-
- .hero h1{
-  font-size:43px
- }
-
- .lead{
-  font-size:15px
- }
-
- .card{
-  padding:15px;
-  border-radius:17px
- }
-
- .words{
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
- }
-
- .word{
-  padding:13px 8px;
-  min-height:205px;
- }
-
- .word strong{
-  font-size:19px
- }
-
- .btn{
-  font-size:11px;
-  padding:7px 8px
- }
-
- .phrase{
-  align-items:flex-start
- }
+ .wrap{width:min(100% - 18px,1250px)}
+ nav{justify-content:center}
+ .brand{width:100%;text-align:center}
+ .links{width:100%;justify-content:center}
+ .hero{padding-top:42px}
+ .hero h1{font-size:43px}
+ .lead{font-size:15px}
+ .card{padding:15px;border-radius:17px}
+ .words{grid-template-columns:repeat(2,1fr);gap:8px}
+ .word{padding:13px 8px;min-height:205px}
+ .word strong{font-size:19px}
+ .btn{font-size:11px;padding:7px 8px}
+ .phrase{align-items:flex-start}
 }
-
 @media(max-width:390px){
- .words{
-  grid-template-columns:1fr
- }
+ .words{grid-template-columns:1fr}
 }
 </style>
 
-<!-- სურვილისამებრ 3D ფაილები -->
 <link rel="stylesheet" href="3d-visuals.css">
 <script src="3d-visuals.js" defer></script>
 
-<!-- შენი საერთო კონფიგურაცია -->
 <script src="config.js"></script>
 <script src="teacher-navigation.js"></script>
+<script src="grade-access.js"></script>
 
 </head>
 
@@ -559,6 +408,7 @@ footer{
 <header class="top">
  <div class="wrap">
   <nav>
+
    <a class="brand" href="academy.html">
     ⚡ ENGLISH WITH MARIAMI
    </a>
@@ -569,13 +419,12 @@ footer{
     <a href="#grammar">✍️ გრამატიკა</a>
     <a href="#quiz">📝 ქვიზი</a>
    </div>
+
   </nav>
  </div>
 </header>
 
 <main class="wrap">
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -593,8 +442,6 @@ footer{
  </p>
 
 </section>
-
-<!-- STATS -->
 
 <section class="card">
 
@@ -632,8 +479,6 @@ footer{
 
 </section>
 
-<!-- VOCABULARY -->
-
 <section class="card" id="vocabulary">
 
  <h2>🧠 Vocabulary Lab — მე-2 კლასი</h2>
@@ -649,15 +494,12 @@ footer{
   <input
    id="search"
    class="input"
-   placeholder="🔎 მოძებნე ინგლისური ან ქართული სიტყვა"
-  >
+   placeholder="🔎 მოძებნე ინგლისური ან ქართული სიტყვა">
  </div>
 
  <div id="words" class="words"></div>
 
 </section>
-
-<!-- NUMBERS -->
 
 <section class="card">
 
@@ -671,14 +513,11 @@ footer{
 
 </section>
 
-<!-- GRAMMAR -->
-
 <section class="card" id="grammar">
 
  <h2>✍️ მე-2 კლასის გრამატიკის საფუძვლები</h2>
 
  <div class="lesson">
-
   <h3>1️⃣ To be — am / is / are</h3>
 
   <b>I am</b> — მე ვარ<br>
@@ -694,22 +533,18 @@ footer{
   <b>I am Mari.</b> — მე მარი ვარ.<br>
   <b>She is happy.</b> — ის ბედნიერია.<br>
   <b>They are students.</b> — ისინი მოსწავლეები არიან.
-
  </div>
 
  <div class="lesson">
-
   <h3>2️⃣ Have / Has</h3>
 
   <b>I have a book.</b> — მე მაქვს წიგნი.<br>
   <b>You have a pen.</b> — შენ გაქვს კალამი.<br>
   <b>She has a cat.</b> — მას ჰყავს კატა.<br>
   <b>He has a ball.</b> — მას აქვს ბურთი.
-
  </div>
 
  <div class="lesson">
-
   <h3>3️⃣ Can — შემიძლია</h3>
 
   <b>I can run.</b> — მე შემიძლია სირბილი.<br>
@@ -717,21 +552,17 @@ footer{
   <b>Can you swim?</b> — შეგიძლია ცურვა?<br>
   <b>Yes, I can.</b> — დიახ, შემიძლია.<br>
   <b>No, I can't.</b> — არა, არ შემიძლია.
-
  </div>
 
  <div class="lesson">
-
   <h3>4️⃣ This / That</h3>
 
   <b>This is a book.</b> — ეს არის წიგნი.<br>
   <b>That is a dog.</b> — ის არის ძაღლი.<br>
   <b>This is my bag.</b> — ეს ჩემი ჩანთაა.
-
  </div>
 
  <div class="lesson">
-
   <h3>5️⃣ მარტივი კითხვები</h3>
 
   <b>What is this?</b> — რა არის ეს?<br>
@@ -739,12 +570,9 @@ footer{
   <b>Where is my book?</b> — სად არის ჩემი წიგნი?<br>
   <b>How old are you?</b> — რამდენი წლის ხარ?<br>
   <b>What is your name?</b> — რა გქვია?
-
  </div>
 
 </section>
-
-<!-- SPEAKING -->
 
 <section class="card">
 
@@ -805,8 +633,6 @@ footer{
  </div>
 
 </section>
-
-<!-- READING -->
 
 <section class="card">
 
@@ -870,8 +696,6 @@ footer{
 
 </section>
 
-<!-- QUIZ -->
-
 <section class="card" id="quiz">
 
  <h2>📝 მე-2 კლასის ქვიზი</h2>
@@ -885,8 +709,6 @@ footer{
  <div id="quizResult"></div>
 
 </section>
-
-<!-- GOALS -->
 
 <section class="card">
 
@@ -931,17 +753,11 @@ footer{
 
   <strong>⚡ English with Mariami</strong>
 
-  <p>
-   ვისწავლოთ ინგლისური მარიამისთან ერთად ❤️
-  </p>
+  <p>ვისწავლოთ ინგლისური მარიამისთან ერთად ❤️</p>
 
-  <p>
-   📞 598 93 02 08 • 📍 ქუთაისი
-  </p>
+  <p>📞 598 93 02 08 • 📍 ქუთაისი</p>
 
-  <p>
-   საიტი შეიქმნა 2026 წელს • ყველა უფლება დაცულია © 2026
-  </p>
+  <p>საიტი შეიქმნა 2026 წელს • ყველა უფლება დაცულია © 2026</p>
 
  </div>
 
@@ -953,10 +769,6 @@ footer{
 </footer>
 
 <script>
-
-/* =========================
-   VOCABULARY DATA
-========================= */
 
 const DATA={
 
@@ -1196,99 +1008,53 @@ const DATA={
 
 };
 
-
-/* =========================
-   STATE
-========================= */
-
 let cat='all';
 
-let points=Number(
- localStorage.getItem('g2_points')||0
-);
-
-let learned=Number(
- localStorage.getItem('g2_learned')||0
-);
-
-let quizPoints=Number(
- localStorage.getItem('g2_quiz_points')||0
-);
-
+let points=Number(localStorage.getItem('g2_points')||0);
+let learned=Number(localStorage.getItem('g2_learned')||0);
+let quizPoints=Number(localStorage.getItem('g2_quiz_points')||0);
 let quizAnswered=0;
-
-
-/* =========================
-   HELPERS
-========================= */
 
 const $=id=>document.getElementById(id);
 
 function allWords(){
-
  return Object.entries(DATA)
   .flatMap(([category,words])=>
    words.map(word=>[...word,category])
   );
-
 }
 
 function safeKey(word){
-
- return word
-  .toLowerCase()
-  .replace(/[^a-z0-9]+/g,'_');
-
+ return word.toLowerCase().replace(/[^a-z0-9]+/g,'_');
 }
 
 function done(word){
-
- return localStorage.getItem(
-  'g2_word_'+safeKey(word)
- )==='1';
-
+ return localStorage.getItem('g2_word_'+safeKey(word))==='1';
 }
-
-
-/* =========================
-   SPEECH
-========================= */
 
 function speak(text){
 
  if(!('speechSynthesis' in window)){
-
   alert('ამ მოწყობილობაზე ხმის ფუნქცია მიუწვდომელია.');
-
   return;
-
  }
 
  speechSynthesis.cancel();
 
- const u=
-  new SpeechSynthesisUtterance(text);
+ const u=new SpeechSynthesisUtterance(text);
 
  u.lang='en-US';
  u.rate=.78;
  u.pitch=1;
 
  speechSynthesis.speak(u);
-
 }
-
-
-/* =========================
-   WORD CARD
-========================= */
 
 function wordCard(w){
 
- const learnedClass=
-  done(w[0])?'done':'';
+ const learnedClass=done(w[0])?'done':'';
 
- const buttonText=
-  done(w[0])
+ const buttonText=done(w[0])
   ?'⭐ ნასწავლია'
   :'+2 სწავლა';
 
@@ -1298,21 +1064,13 @@ function wordCard(w){
 
   <strong>${w[0]}</strong>
 
-  <div class="pron">
-   /${w[2]}/
-  </div>
+  <div class="pron">/${w[2]}/</div>
 
-  <div class="ka">
-   ${w[1]}
-  </div>
+  <div class="ka">${w[1]}</div>
 
-  <div class="cat">
-   ${w[4]}
-  </div>
+  <div class="cat">${w[4]}</div>
 
-  <div class="example">
-   💬 ${w[3]}
-  </div>
+  <div class="example">💬 ${w[3]}</div>
 
   <button
    class="btn listen"
@@ -1329,13 +1087,7 @@ function wordCard(w){
  </article>
 
  `;
-
 }
-
-
-/* =========================
-   MARK WORD
-========================= */
 
 function markWord(word){
 
@@ -1350,90 +1102,42 @@ function markWord(word){
  points+=2;
 
  save();
-
  render();
-
 }
-
-
-/* =========================
-   SAVE
-========================= */
 
 function save(){
 
- localStorage.setItem(
-  'g2_points',
-  points
- );
-
- localStorage.setItem(
-  'g2_learned',
-  learned
- );
-
- localStorage.setItem(
-  'g2_quiz_points',
-  quizPoints
- );
-
+ localStorage.setItem('g2_points',points);
+ localStorage.setItem('g2_learned',learned);
+ localStorage.setItem('g2_quiz_points',quizPoints);
 }
-
-
-/* =========================
-   RENDER
-========================= */
 
 function render(){
 
- const q=
-  $('search').value
-   .trim()
-   .toLowerCase();
+ const q=$('search').value.trim().toLowerCase();
 
- const words=
-  allWords()
-   .filter(w=>
-    (cat==='all'||w[4]===cat)
-   )
-   .filter(w=>
-    (w[0]+' '+w[1]+' '+w[3])
-     .toLowerCase()
-     .includes(q)
-   );
+ const words=allWords()
+  .filter(w=>cat==='all'||w[4]===cat)
+  .filter(w=>
+   (w[0]+' '+w[1]+' '+w[3])
+    .toLowerCase()
+    .includes(q)
+  );
 
- $('words').innerHTML=
-  words.map(wordCard).join('');
+ $('words').innerHTML=words.map(wordCard).join('');
 
- $('count').textContent=
-  allWords().length;
-
- $('points').textContent=
-  points;
-
- $('learned').textContent=
-  learned;
-
- $('quizScore').textContent=
-  quizPoints;
+ $('count').textContent=allWords().length;
+ $('points').textContent=points;
+ $('learned').textContent=learned;
+ $('quizScore').textContent=quizPoints;
 
  $('bar').style.width=
-  Math.min(
-   100,
-   learned/allWords().length*100
-  )+'%';
-
+  Math.min(100,learned/allWords().length*100)+'%';
 }
-
-
-/* =========================
-   FILTERS
-========================= */
 
 function buildFilters(){
 
- const categories=
-  Object.keys(DATA);
+ const categories=Object.keys(DATA);
 
  $('filters').innerHTML=
 
@@ -1452,9 +1156,7 @@ function buildFilters(){
    </button>
 
   `).join('');
-
 }
-
 
 function setCat(category,button){
 
@@ -1462,20 +1164,12 @@ function setCat(category,button){
 
  document
   .querySelectorAll('.filter')
-  .forEach(x=>
-   x.classList.remove('active')
-  );
+  .forEach(x=>x.classList.remove('active'));
 
  button.classList.add('active');
 
  render();
-
 }
-
-
-/* =========================
-   NUMBERS
-========================= */
 
 const numbers=[
  ['one','ერთი'],
@@ -1517,7 +1211,6 @@ const numbers=[
  ['one hundred','ასი']
 ];
 
-
 function numberCard(item){
 
  return `
@@ -1526,9 +1219,7 @@ function numberCard(item){
 
   <strong>${item[0]}</strong>
 
-  <div class="ka">
-   ${item[1]}
-  </div>
+  <div class="ka">${item[1]}</div>
 
   <button
    class="btn listen"
@@ -1539,16 +1230,9 @@ function numberCard(item){
  </article>
 
  `;
-
 }
 
-
-/* =========================
-   QUIZ
-========================= */
-
 const quizQuestions=[
-
  ['mother','დედა'],
  ['school','სკოლა'],
  ['red','წითელი'],
@@ -1564,9 +1248,7 @@ const quizQuestions=[
  ['blue','ლურჯი'],
  ['fish','თევზი'],
  ['family','ოჯახი']
-
 ];
-
 
 function buildQuiz(){
 
@@ -1620,23 +1302,17 @@ function buildQuiz(){
    `;
 
   }).join('');
-
 }
-
 
 function answerQuiz(button,answer,correct){
 
- if(button.dataset.done==='1')
-  return;
+ if(button.dataset.done==='1') return;
 
- const parent=
-  button.parentElement;
+ const parent=button.parentElement;
 
- if(parent.dataset.answered==='1')
-  return;
+ if(parent.dataset.answered==='1') return;
 
  parent.dataset.answered='1';
-
  button.dataset.done='1';
 
  quizAnswered++;
@@ -1645,8 +1321,7 @@ function answerQuiz(button,answer,correct){
 
   button.classList.add('correct');
 
-  button.innerHTML=
-   '✅ სწორია! +10 ქულა';
+  button.innerHTML='✅ სწორია! +10 ქულა';
 
   quizPoints+=10;
   points+=10;
@@ -1655,8 +1330,7 @@ function answerQuiz(button,answer,correct){
 
   button.classList.add('wrong');
 
-  button.innerHTML=
-   '❌ არასწორია';
+  button.innerHTML='❌ არასწორია';
 
   [...parent.querySelectorAll('.option')]
    .forEach(x=>{
@@ -1665,7 +1339,6 @@ function answerQuiz(button,answer,correct){
      x.classList.add('correct');
 
    });
-
  }
 
  save();
@@ -1699,22 +1372,14 @@ function answerQuiz(button,answer,correct){
    `;
 
   },250);
-
  }
 
  render();
-
 }
-
-
-/* =========================
-   INIT
-========================= */
 
 buildFilters();
 
-$('search')
- .addEventListener('input',render);
+$('search').addEventListener('input',render);
 
 $('numbers').innerHTML=
  numbers.map(numberCard).join('');
