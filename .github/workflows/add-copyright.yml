@@ -1,4 +1,4 @@
-name: Add site copyright and 3D visuals
+name: Normalize site footer and 3D visuals
 
 on:
   push:
@@ -8,35 +8,37 @@ permissions:
   contents: write
 
 jobs:
-  enhance-site:
+  normalize-site:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Normalize copyright and 3D visual links
+      - name: Normalize HTML
         shell: python
         run: |
           from pathlib import Path
           import re
 
           copyright_text = "© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer"
-          copyright_marker = "<!-- SITE-COPYRIGHT-2026 -->"
+          marker = "<!-- SITE-COPYRIGHT-2026 -->"
           visual_marker = "<!-- GRADE-3D-VISUALS-2026 -->"
           css = '''\n<style id="site-copyright-style">.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.site-copyright::first-letter{color:#00eaff}</style>\n'''
-          footer = f'''\n{copyright_marker}\n<footer class="site-copyright">{copyright_text}</footer>\n'''
+          footer = f'''\n{marker}\n<footer class="site-copyright">{copyright_text}</footer>\n'''
           visuals = f'''\n{visual_marker}\n<link rel="stylesheet" href="3d-visuals.css">\n<script src="3d-visuals.js" defer></script>\n'''
 
           for path in Path('.').glob('*.html'):
               content = path.read_text(encoding='utf-8')
 
-              # Remove old duplicate/custom copyright blocks and the unwanted domain text.
-              content = re.sub(r'\s*<!-- SITE-COPYRIGHT-2026 -->\s*<footer class="site-copyright">.*?</footer>\s*', '\n', content, flags=re.S)
-              content = re.sub(r'\s*<style id="site-copyright-style">.*?</style>\s*', '\n', content, flags=re.S)
+              # Remove EVERY old copyright footer, whether or not it has our marker.
+              content = re.sub(r'\s*(?:<!--\s*SITE-COPYRIGHT-2026\s*-->)?\s*<footer\b[^>]*class=["\'][^"\']*site-copyright[^"\']*["\'][^>]*>.*?</footer>\s*', '\n', content, flags=re.I|re.S)
+              content = re.sub(r'\s*<style\b[^>]*id=["\']site-copyright-style["\'][^>]*>.*?</style>\s*', '\n', content, flags=re.I|re.S)
+
+              # Remove old injected domain text.
               content = content.replace('https://englishwithmariami.com.ge/', '')
               content = content.replace('https://englishwithmariami.com.ge', '')
-              content = re.sub(r'\s+', ' ', content) if False else content
 
+              # Grade pages get the 3D files exactly once.
               if path.name in {'grade2.html','grade3.html','grade4.html'}:
                   content = content.replace(visual_marker, '')
                   content = content.replace('<link rel="stylesheet" href="3d-visuals.css">', '')
@@ -44,8 +46,11 @@ jobs:
                   if '</head>' in content:
                       content = content.replace('</head>', visuals + '</head>', 1)
 
+              # Add the copyright style exactly once.
               if '</head>' in content:
                   content = content.replace('</head>', css + '</head>', 1)
+
+              # Add the copyright footer exactly once, immediately before body end.
               if '</body>' in content:
                   content = content.replace('</body>', footer + '\n</body>', 1)
               else:
@@ -53,10 +58,10 @@ jobs:
 
               path.write_text(content, encoding='utf-8')
 
-      - name: Commit changes
+      - name: Commit normalized files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add '*.html'
-          git diff --cached --quiet || git commit -m "Fix duplicate copyright footer"
+          git add '*.html' '.github/workflows/add-copyright.yml'
+          git diff --cached --quiet || git commit -m "Normalize single footer and prevent duplicates"
           git push
