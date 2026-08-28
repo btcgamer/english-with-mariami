@@ -7,24 +7,14 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
   'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
-
-// Supabase JS-ის შემოწმება
 if (!window.supabase) {
-  throw new Error(
-    'Supabase JS library failed to load.'
-  );
+  throw new Error('Supabase JS library failed to load.');
 }
 
-
-// კონფიგურაციის შემოწმება
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-  throw new Error(
-    'Supabase configuration is missing.'
-  );
+  throw new Error('Supabase configuration is missing.');
 }
 
-
-// ერთი საერთო Supabase Client
 const supabaseClient =
   window.supabase.createClient(
     SUPABASE_URL,
@@ -38,10 +28,20 @@ const supabaseClient =
     }
   );
 
+window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = supabaseClient;
+window.supabaseClient = supabaseClient;
 
-// მთელ საიტზე ხელმისაწვდომი Client
-window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
-  supabaseClient;
+// ავტომატურად დავამატოთ საერთო Logout ღილაკი ყველა ავტორიზებულ გვერდზე.
+(function () {
+  const path = location.pathname.toLowerCase();
+  if (
+    path.endsWith('/login.html') ||
+    path.endsWith('/register.html') ||
+    path.endsWith('/reset-password.html')
+  ) return;
 
-window.supabaseClient =
-  supabaseClient;
+  const script = document.createElement('script');
+  script.src = 'logout.js?v=20260828';
+  script.defer = true;
+  document.head.appendChild(script);
+})();
