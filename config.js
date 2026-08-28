@@ -16,6 +16,12 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   }catch(_){}
 })();
 
+/* Grade pages stay hidden until grade-access.js has verified the account. */
+(function(){
+  const p=location.pathname.toLowerCase();
+  if(/\/grade[234]\.html$/.test(p)) document.documentElement.style.visibility='hidden';
+})();
+
 if (!window.supabase) throw new Error('Supabase JS library failed to load.');
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
@@ -26,17 +32,17 @@ window.supabaseClient=supabaseClient;
 (function(){
   const p=location.pathname.toLowerCase();
   if(p.endsWith('/login.html')||p.endsWith('/register.html')||p.endsWith('/reset-password.html')||p.endsWith('/teacher-login.html')) return;
-  const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
-  add('session-guard.js?v=20260828-4');
-  add('grade-access.js?v=20260829-1');
-  add('logout.js?v=20260829-1');
+  const add=(src)=>{const s=document.createElement('script');s.src=src;document.head.appendChild(s)};
+  add('session-guard.js?v=20260829-5');
+  add('grade-access.js?v=20260829-2');
+  add('logout.js?v=20260829-2');
 })();
 
 // Grade access also runs on login.html so the student is routed directly
 // to the grade selected during registration.
 (function(){
   const add=(src)=>{const s=document.createElement('script');s.src=src;document.head.appendChild(s)};
-  add('grade-access.js?v=20260829-1');
+  add('grade-access.js?v=20260829-2');
 })();
 
 (function(){
