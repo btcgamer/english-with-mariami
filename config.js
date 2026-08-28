@@ -15,31 +15,36 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_
 window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = supabaseClient;
 window.supabaseClient = supabaseClient;
 
-// Login page: never reuse an old saved session.
+// Login must never inherit an old browser session.
 if (location.pathname.toLowerCase().endsWith('/login.html')) {
-  (async function clearOldAuth() {
+  (async function () {
     try { await supabaseClient.auth.signOut({ scope: 'global' }); } catch (_) {}
     try {
-      const remove = (storage) => {
+      const clear = storage => {
         const keys = [];
         for (let i = 0; i < storage.length; i++) {
-          const key = storage.key(i);
-          if (key && (key.startsWith('sb-') || key.toLowerCase().includes('supabase'))) keys.push(key);
+          const k = storage.key(i);
+          if (k && (k.startsWith('sb-') || k.toLowerCase().includes('supabase'))) keys.push(k);
         }
         keys.forEach(k => storage.removeItem(k));
       };
-      remove(localStorage);
-      remove(sessionStorage);
+      clear(localStorage);
+      clear(sessionStorage);
     } catch (_) {}
   })();
 }
 
-// Load the shared logout button on protected/site pages only.
 (function () {
   const path = location.pathname.toLowerCase();
   if (path.endsWith('/login.html') || path.endsWith('/register.html') || path.endsWith('/reset-password.html')) return;
-  const script = document.createElement('script');
-  script.src = 'logout.js?v=20260828-4';
-  script.defer = true;
-  document.head.appendChild(script);
+
+  const guard = document.createElement('script');
+  guard.src = 'session-guard.js?v=20260828-1';
+  guard.defer = true;
+  document.head.appendChild(guard);
+
+  const logout = document.createElement('script');
+  logout.src = 'logout.js?v=20260828-5';
+  logout.defer = true;
+  document.head.appendChild(logout);
 })();
