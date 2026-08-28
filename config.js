@@ -2,17 +2,47 @@
 const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
+// On the login page, clear only stale local browser auth state BEFORE creating
+// the client. Do not call auth.signOut() here: that makes a network request and
+// can race with signInWithPassword(), producing the false "server connection"
+// error immediately after the user presses Login.
+(function(){
+  if(!location.pathname.toLowerCase().endsWith('/login.html')) return;
+  try{
+    [localStorage,sessionStorage].forEach(store=>{
+      const remove=[];
+      for(let i=0;i<store.length;i++){
+        const key=store.key(i);
+        if(key&&(key.startsWith('sb-')||key.toLowerCase().includes('supabase'))) remove.push(key);
+      }
+      remove.forEach(key=>store.removeItem(key));
+    });
+  }catch(_){}
+})();
+
 if (!window.supabase) throw new Error('Supabase JS library failed to load.');
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
+  auth:{
+    persistSession:true,
+    autoRefreshToken:true,
+    detectSessionInUrl:true
+  }
 });
 window.__ENGLISH_MARIAMI_SUPABASE_CLIENT=supabaseClient;
 window.supabaseClient=supabaseClient;
 
-if(location.pathname.toLowerCase().endsWith('/login.html')){
-  (async function(){try{await supabaseClient.auth.signOut({scope:'global'});}catch(_){}try{const c=s=>{const k=[];for(let i=0;i<s.length;i++){const x=s.key(i);if(x&&(x.startsWith('sb-')||x.toLowerCase().includes('supabase')))k.push(x)}k.forEach(x=>s.removeItem(x))};c(localStorage);c(sessionStorage)}catch(_){}})();
-}
-(function(){const p=location.pathname.toLowerCase();if(p.endsWith('/login.html')||p.endsWith('/register.html')||p.endsWith('/reset-password.html')||p.endsWith('/teacher-login.html'))return;const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};add('session-guard.js?v=20260828-3');add('logout.js?v=20260828-7')})();
+(function(){
+  const p=location.pathname.toLowerCase();
+  if(p.endsWith('/login.html')||p.endsWith('/register.html')||p.endsWith('/reset-password.html')||p.endsWith('/teacher-login.html')) return;
+  const add=(src)=>{
+    const s=document.createElement('script');
+    s.src=src;
+    s.defer=true;
+    document.head.appendChild(s);
+  };
+  add('session-guard.js?v=20260828-4');
+  add('logout.js?v=20260829-1');
+})();
 
 /* Academy visual layer: applies only to academy.html so the other pages stay unchanged. */
 (function(){
@@ -44,7 +74,7 @@ if(location.pathname.toLowerCase().endsWith('/login.html')){
   document.head.appendChild(style);
 
   const v=document.createElement('script');
-  v.src='academy-visual.js?v=20260829-1';
+  v.src='academy-visual.js?v=20260829-2';
   v.defer=true;
   document.head.appendChild(v);
 })();
