@@ -1,5 +1,8 @@
 @import url('./app.css');
 
+/* Hide return-to-main-page links on Grade 3 / Grade 4 navigation */
+a[href="index.html"]{display:none!important}
+
 /* ===== MOBILE APP FEEL ===== */
 @media (max-width: 900px){
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
