@@ -2,8 +2,38 @@ const SUPABASE_URL = "https://vtdhvsfqhwesxtwmduew.supabase.co";
 const SUPABASE_KEY = "sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt";
 
 /* ==================================================
+   ⚡ SHARED SUPABASE CLIENT
+   Keep one Auth client per page. This avoids creating
+   multiple Supabase clients on academy.html and makes
+   login -> academy navigation faster.
+================================================== */
+
+(function(){
+  if(!window.supabase || !window.supabase.createClient) return;
+
+  const originalCreateClient = window.supabase.createClient.bind(window.supabase);
+
+  if(!window.__ENGLISH_MARIAMI_SUPABASE_CLIENT){
+    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = originalCreateClient(
+      SUPABASE_URL,
+      SUPABASE_KEY,
+      {
+        auth:{
+          persistSession:true,
+          autoRefreshToken:true,
+          detectSessionInUrl:false
+        }
+      }
+    );
+  }
+
+  window.supabase.createClient = function(){
+    return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;
+  };
+})();
+
+/* ==================================================
    🔐 ACADEMY LOGOUT BUTTON
-   Adds the logout button only to academy.html.
 ================================================== */
 
 (function(){
@@ -41,7 +71,7 @@ const SUPABASE_KEY = "sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt";
       button.textContent = 'გამოსვლა...';
 
       try{
-        const client = window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+        const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;
         const {error} = await client.auth.signOut();
 
         if(error) throw error;
