@@ -5,6 +5,26 @@
   const path = location.pathname.toLowerCase();
   if (path.endsWith('/login.html') || path.endsWith('/register.html') || path.endsWith('/reset-password.html')) return;
 
+  function clearStoredSupabaseSession() {
+    try {
+      const localKeys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && (key.startsWith('sb-') || key.toLowerCase().includes('supabase'))) localKeys.push(key);
+      }
+      localKeys.forEach(key => localStorage.removeItem(key));
+
+      const sessionKeys = [];
+      for (let i = 0; i < sessionStorage.length; i++) {
+        const key = sessionStorage.key(i);
+        if (key && (key.startsWith('sb-') || key.toLowerCase().includes('supabase'))) sessionKeys.push(key);
+      }
+      sessionKeys.forEach(key => sessionStorage.removeItem(key));
+    } catch (e) {
+      console.warn('Could not clear stored Auth session:', e);
+    }
+  }
+
   function installLogout() {
     if (document.getElementById('ewm-logout')) return;
 
@@ -31,14 +51,13 @@
       button.disabled = true;
       button.textContent = '⏳ გამოდის...';
       try {
-        const { error } = await client.auth.signOut();
-        if (error) throw error;
-        location.replace('login.html');
+        const { error } = await client.auth.signOut({ scope: 'global' });
+        if (error) console.warn('Supabase signOut warning:', error);
       } catch (error) {
-        console.error('Logout error:', error);
-        button.disabled = false;
-        button.textContent = '🚪 გამოსვლა';
-        alert('გამოსვლა ვერ მოხერხდა. სცადე თავიდან.');
+        console.warn('Logout request failed:', error);
+      } finally {
+        clearStoredSupabaseSession();
+        location.replace('login.html');
       }
     });
 
