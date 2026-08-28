@@ -1,1 +1,1469 @@
-<!doctype html><html lang="ka"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Academy — English with Mariami</title><link rel="stylesheet" href="styles.css"><script src="curriculum.js"></script></head><body><header class="top"><div class="wrap nav"><a class="brand" href="academy.html">⚡ ENGLISH WITH MARIAMI</a><div class="navlinks"><a href="#grades">კლასები</a><a href="#learn">სწავლა</a><a href="#progress">პროგრესი</a><a href="login.html">შესვლა</a><a href="register.html">რეგისტრაცია</a></div></div></header><main class="wrap"><section class="hero"><div class="hero-grid"><div><span class="badge">🇬🇧 ქართული ↔ English • 2026</span><h1>ვისწავლოთ<br><span>ინგლისური</span> მარიამისთან ერთად!</h1><p class="lead">ერთიანი სასწავლო სივრცე 2-ე, 3-ე და 4-ე კლასისთვის — სიტყვები, თარგმანი, მოსმენა, საუბარი, გრამატიკა, კითხვა, ქვიზები და პროგრესი.</p><div class="buttons"><a class="btn primary" href="#grades">🎓 აირჩიე კლასი</a><a class="btn yellow" href="#words">🔊 სიტყვების სწავლა</a></div></div><div class="neon-card teacher"><div class="avatar">👩‍🏫</div><h2>მასწავლებელი მარიამი</h2><p>შენი ინგლისურის გზამკვლევი ✨</p><div class="pill">🧠 Vocabulary</div><div class="pill">🗣️ Speaking</div><div class="pill">🎧 Listening</div></div></div></section><section id="grades" class="section"><div class="section-title"><span class="badge">CLASSROOM</span><h2>აირჩიე შენი კლასი</h2><p class="muted">მასალა ასაკისა და დონის მიხედვით.</p></div><div class="grid"><article class="neon-card grade"><h3>🌱 მე-2 კლასი</h3><p>საბაზისო სიტყვები, ოჯახი, სკოლა, ფერები, ცხოველები, რიცხვები და მარტივი წინადადებები.</p><button class="btn primary" onclick="selectGrade(2)">სწავლა →</button></article><article class="neon-card grade"><h3>🚀 მე-3 კლასი</h3><p>ყოველდღიური ლექსიკა, დღეები, ამინდი, მოქმედებები, საუბარი და საბაზისო გრამატიკა.</p><button class="btn primary" onclick="selectGrade(3)">სწავლა →</button></article><article class="neon-card grade"><h3>⭐ მე-4 კლასი</h3><p>გაფართოებული ლექსიკა, Present Simple, ტექსტები, დიალოგები და უფრო რთული პრაქტიკა.</p><button class="btn primary" onclick="selectGrade(4)">სწავლა →</button></article></div></section><section id="learn" class="section"><div class="dashboard"><aside class="neon-card side"><h3>📚 სასწავლო მენიუ</h3><button data-tab="words" class="active">🧠 სიტყვები</button><button data-tab="numbers">🔢 რიცხვები</button><button data-tab="grammar">✍️ გრამატიკა</button><button data-tab="speaking">🗣️ საუბარი</button><button data-tab="reading">📖 კითხვა</button><button data-tab="listening">🎧 მოსმენა</button><button data-tab="quiz">📝 ქვიზი</button></aside><section class="neon-card content"><div class="toolbar"><select id="gradeSelect" class="select"><option value="2">მე-2 კლასი</option><option value="3">მე-3 კლასი</option><option value="4">მე-4 კლასი</option></select><input id="search" class="select" placeholder="🔎 მოძებნე სიტყვა / თარგმანი" oninput="render()"></div><div id="words" class="tab"></div><div id="numbers" class="tab hidden"></div><div id="grammar" class="tab hidden"></div><div id="speaking" class="tab hidden"></div><div id="reading" class="tab hidden"></div><div id="listening" class="tab hidden"></div><div id="quiz" class="tab hidden"></div></section></div></section><section id="words" class="section"><div class="section-title"><span class="badge">WORD LAB</span><h2>ინგლისური სიტყვები + ქართული თარგმანი + ხმა</h2><p class="muted">დააჭირე 🔊-ს და მოუსმინე სწორ ინგლისურ გამოთქმას.</p></div><div id="wordPreview" class="words"></div></section><section id="progress" class="section"><div class="neon-card content"><h2>🏆 ჩემი პროგრესი</h2><p>ნასწავლი სიტყვები: <strong id="learned">0</strong></p><div class="progress"><i id="bar"></i></div><p class="muted">ქულები: <strong id="points">0</strong> • დონე: <strong id="level">დამწყები</strong></p></div></section><section class="section"><div class="neon-card content"><h2>👨‍👩‍👧 მასწავლებელი და მშობელი</h2><p class="lead">მასწავლებელს შეუძლია გამოიყენოს ეს სივრცე გაკვეთილისთვის, ხოლო ბავშვს — დამოუკიდებელი სწავლისთვის, მოსმენისთვის და ქვიზებისთვის.</p><p>📞 <strong>598 93 02 08</strong><br>📍 საცხოვრებელი: <strong>ქუთაისი</strong><br>📌 კლასის განრიგისა და მეტი დეტალებისთვის დაგვიკავშირდით.</p></div></section></main><footer class="footer"><div class="wrap"><strong>English with Mariami</strong><p>ვისწავლოთ ინგლისური მარიამისთან ერთად ❤️</p><p>საიტი შეიქმნა 2026 წელს • ყველა უფლება დაცულია © 2026</p></div></footer><script>let grade=Number(localStorage.getItem('grade')||2),tab='words',points=Number(localStorage.getItem('points')||0),learned=Number(localStorage.getItem('learned')||0);const $=id=>document.getElementById(id);function selectGrade(g){grade=g;localStorage.setItem('grade',g);$('gradeSelect').value=g;render();location.hash='learn'}function speak(text){if('speechSynthesis' in window){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.8;speechSynthesis.speak(u)}}function card(w){return `<article class="word"><button class="listen" onclick="speak(${JSON.stringify(w[0])})">🔊</button><strong>${w[0]}</strong><div class="ka">${w[1]}</div><small>მოსმენა • თარგმანი • გამოთქმა</small></article>`}function render(){grade=Number($('gradeSelect').value);const d=DATA[grade],q=$('search').value.toLowerCase();let ws=d.words.filter(w=>(w[0]+' '+w[1]).toLowerCase().includes(q));$('words').innerHTML=`<h2>🧠 ${d.name} — სიტყვები</h2><p class="muted">${ws.length} სიტყვა ნაჩვენებია</p><div class="words">${ws.map(card).join('')}</div>`;$('numbers').innerHTML=`<h2>🔢 რიცხვები</h2><div class="words">${d.numbers.map(card).join('')}</div>`;$('grammar').innerHTML=`<h2>✍️ გრამატიკა</h2>${d.grammar.map(x=>`<div class="lesson"><strong>${x[0]}</strong><br><span class="muted">${x[1]}</span></div>`).join('')}`;$('speaking').innerHTML=`<h2>🗣️ სასაუბრო პრაქტიკა</h2>${d.dialogue.map(x=>`<div class="dialogue"><strong>${x[0]}</strong><br>${x[1]} <button class="listen" onclick="speak(${JSON.stringify(x[0])})">🔊</button></div>`).join('')}`;$('reading').innerHTML=`<h2>📖 Reading</h2><div class="lesson"><strong>My English Lesson</strong><p>Hello! My name is Mari. I am a student. I like English. I read books, learn new words and speak with my friends. English is fun!</p><p class="muted">გამარჯობა! მე მარი მქვია. მოსწავლე ვარ. ინგლისური მომწონს. ვკითხულობ წიგნებს, ვსწავლობ ახალ სიტყვებს და მეგობრებთან ვსაუბრობ.</p><button class="btn primary" onclick="speak('Hello! My name is Mari. I am a student. I like English. English is fun!')">🔊 ტექსტის მოსმენა</button></div>`;$('listening').innerHTML=`<h2>🎧 Listening Lab</h2><div class="lesson"><p>მოუსმინე სიტყვას და გაიმეორე ხმამაღლა. შემდეგ შეამოწმე ქართული მნიშვნელობა სიტყვების განყოფილებაში.</p><button class="btn primary" onclick="listenSet()">▶️ 10 სიტყვის მოსმენა</button><p id="listenStatus" class="muted"></p></div>`;$('quiz').innerHTML=quizHtml(d);$('wordPreview').innerHTML=ws.slice(0,12).map(card).join('');$('points').textContent=points;$('learned').textContent=learned;$('level').textContent=points>=100?'ინგლისურის გმირი 🏆':points>=50?'მოწინავე 🚀':'დამწყები 🌱';$('bar').style.width=Math.min(100,points)+'%'}function quizHtml(d){let qs=d.words.slice(0,5);return `<div class="quiz"><h2>📝 სწრაფი ქვიზი</h2>${qs.map((w,i)=>{let opts=[w[1],d.words[(i+3)%d.words.length][1],d.words[(i+7)%d.words.length][1]].sort(()=>Math.random()-.5);return `<div class="lesson"><strong>${i+1}. რას ნიშნავს “${w[0]}”?</strong>${opts.map(o=>`<button class="option" onclick="answer(this,${JSON.stringify(o)},${JSON.stringify(w[1])})">${o}</button>`).join('')}</div>`}).join('')}<p class="score">ქულა: ${points}</p></div>`}function answer(el,a,b){if(el.dataset.done)return;el.dataset.done='1';if(a===b){points+=10;learned++;el.textContent='✅ სწორია! +10';el.style.borderColor='#ffe600';}else{el.textContent='❌ სცადე თავიდან';}localStorage.setItem('points',points);localStorage.setItem('learned',learned);render()}function listenSet(){let ws=DATA[grade].words.slice(0,10),i=0;function next(){if(i>=ws.length){$('listenStatus').textContent='🎉 დასრულდა!';return}$('listenStatus').textContent=`${i+1}/10 — ${ws[i][1]}`;speak(ws[i][0]);i++;setTimeout(next,1700)}next()}document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));$(tab).classList.remove('hidden');document.querySelectorAll('[data-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active')});$('gradeSelect').value=grade;render();</script></body></html>
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English with Mariami — Academy</title>
+
+<style>
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+font-family:Arial,"Noto Sans Georgian",sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 10% 10%,#00eaff38,transparent 25%),
+radial-gradient(circle at 90% 20%,#ffe60022,transparent 25%),
+linear-gradient(135deg,#020817 0%,#062957 50%,#010713 100%);
+min-height:100vh;
+}
+
+body:before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background:linear-gradient(115deg,transparent 20%,#00eaff08 50%,transparent 80%);
+}
+
+a{text-decoration:none;color:inherit}
+
+.wrap{
+width:min(1200px,calc(100% - 28px));
+margin:auto;
+}
+
+.top{
+position:sticky;
+top:0;
+z-index:100;
+background:#02152de8;
+border-bottom:1px solid #00eaff55;
+backdrop-filter:blur(15px);
+}
+
+.nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+padding:15px 0;
+}
+
+.brand{
+font-size:19px;
+font-weight:1000;
+text-shadow:0 0 15px #00eaff;
+}
+
+.navlinks{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+}
+
+.navlinks a{
+padding:9px 12px;
+border-radius:12px;
+background:#082443;
+border:1px solid #00eaff33;
+font-size:14px;
+}
+
+.navlinks a:hover{
+background:#00bfe8;
+color:#00121b;
+}
+
+.hero{
+padding:70px 0 50px;
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:30px;
+align-items:center;
+}
+
+.badge{
+display:inline-block;
+padding:9px 15px;
+border-radius:30px;
+background:#061c38;
+border:1px solid #00eaff77;
+color:#ffe600;
+font-weight:900;
+box-shadow:0 0 18px #00eaff18;
+}
+
+.hero h1{
+font-size:clamp(42px,7vw,78px);
+line-height:1.02;
+margin:20px 0;
+text-shadow:0 0 28px #00eaff55;
+}
+
+.hero h1 span{
+color:#00eaff;
+}
+
+.lead{
+font-size:19px;
+line-height:1.7;
+color:#d8f7ff;
+}
+
+.buttons{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:25px;
+}
+
+.btn{
+display:inline-block;
+border:0;
+cursor:pointer;
+padding:13px 19px;
+border-radius:14px;
+font-weight:1000;
+font-size:15px;
+transition:.2s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.primary{
+background:#00c9f2;
+color:#00131a;
+box-shadow:0 0 22px #00eaff55;
+}
+
+.yellow{
+background:#ffe600;
+color:#181500;
+box-shadow:0 0 22px #ffe60033;
+}
+
+.neon-card{
+background:linear-gradient(145deg,#071e3be8,#031326ee);
+border:1px solid #00eaff55;
+border-radius:26px;
+box-shadow:
+0 20px 60px #0009,
+inset 0 1px #ffffff0b,
+0 0 25px #00eaff12;
+}
+
+.teacher{
+padding:35px;
+text-align:center;
+transform:perspective(800px) rotateY(-4deg);
+}
+
+.avatar{
+font-size:95px;
+filter:drop-shadow(0 0 18px #00eaff);
+}
+
+.pill{
+display:inline-block;
+margin:5px;
+padding:8px 12px;
+border-radius:20px;
+background:#0a2d50;
+border:1px solid #00eaff33;
+color:#dffbff;
+}
+
+.section{
+padding:35px 0;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:25px;
+}
+
+.section-title h2{
+font-size:34px;
+margin:13px 0;
+}
+
+.muted{
+color:#9dc7d5;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.grade{
+padding:27px;
+transition:.25s;
+}
+
+.grade:hover{
+transform:translateY(-7px) rotateX(2deg);
+box-shadow:0 20px 50px #0008,0 0 30px #00eaff20;
+}
+
+.grade h3{
+font-size:25px;
+color:#ffe600;
+}
+
+.grade p{
+line-height:1.65;
+color:#d1edf4;
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:230px 1fr;
+gap:18px;
+}
+
+.side{
+padding:15px;
+height:max-content;
+}
+
+.side h3{
+margin:8px 10px 15px;
+}
+
+.side button{
+width:100%;
+padding:13px;
+margin:5px 0;
+border:1px solid #00eaff33;
+border-radius:12px;
+background:#061a32;
+color:#fff;
+text-align:left;
+cursor:pointer;
+font-weight:800;
+}
+
+.side button:hover,
+.side button.active{
+background:#00bfe8;
+color:#00131a;
+}
+
+.content{
+padding:25px;
+}
+
+.toolbar{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:22px;
+}
+
+.select{
+padding:12px;
+border-radius:12px;
+border:1px solid #00eaff55;
+background:#04152a;
+color:#fff;
+outline:none;
+}
+
+#search{
+flex:1;
+min-width:180px;
+}
+
+.words{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:13px;
+}
+
+.word{
+position:relative;
+padding:21px 14px;
+text-align:center;
+background:linear-gradient(145deg,#092b50,#061a32);
+border:1px solid #00eaff33;
+border-radius:18px;
+min-height:135px;
+transition:.2s;
+}
+
+.word:hover{
+transform:translateY(-4px);
+border-color:#00eaff88;
+}
+
+.word strong{
+display:block;
+font-size:21px;
+padding-top:8px;
+}
+
+.ka{
+color:#ffe600;
+font-weight:1000;
+margin:9px 0;
+}
+
+.listen{
+border:0;
+border-radius:50%;
+background:#ffe600;
+width:36px;
+height:36px;
+cursor:pointer;
+font-size:17px;
+position:absolute;
+right:9px;
+top:9px;
+}
+
+.listen:hover{
+transform:scale(1.1);
+}
+
+.lesson,
+.dialogue{
+padding:19px;
+margin:11px 0;
+background:#08284a;
+border-radius:16px;
+border-left:4px solid #00eaff;
+line-height:1.8;
+}
+
+.option{
+display:block;
+width:100%;
+margin-top:9px;
+padding:11px;
+border:1px solid #00eaff33;
+border-radius:11px;
+background:#061a32;
+color:#fff;
+cursor:pointer;
+text-align:left;
+}
+
+.option:hover{
+background:#0b3960;
+}
+
+.hidden{
+display:none;
+}
+
+.progress{
+height:20px;
+border-radius:30px;
+background:#020a16;
+overflow:hidden;
+border:1px solid #00eaff22;
+}
+
+.progress i{
+display:block;
+height:100%;
+width:0;
+background:linear-gradient(90deg,#00eaff,#ffe600);
+box-shadow:0 0 15px #00eaff;
+transition:1s;
+}
+
+.contact{
+text-align:center;
+}
+
+.contact strong.phone{
+font-size:26px;
+color:#ffe600;
+}
+
+.footer{
+margin-top:40px;
+padding:35px 0;
+text-align:center;
+border-top:1px solid #00eaff33;
+color:#9dc7d5;
+}
+
+.footer strong{
+color:#fff;
+font-size:20px;
+}
+
+@media(max-width:850px){
+.hero-grid,
+.dashboard,
+.grid{
+grid-template-columns:1fr;
+}
+
+.teacher{
+transform:none;
+}
+
+.nav{
+justify-content:center;
+}
+
+.hero{
+padding-top:40px;
+}
+}
+
+@media(max-width:500px){
+.hero h1{
+font-size:42px;
+}
+
+.section-title h2{
+font-size:27px;
+}
+
+.content{
+padding:17px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+<div class="wrap nav">
+
+<a class="brand" href="academy.html">
+⚡ ENGLISH WITH MARIAMI
+</a>
+
+<nav class="navlinks">
+<a href="#grades">🎓 კლასები</a>
+<a href="#learn">📚 სწავლა</a>
+<a href="#progress">🏆 პროგრესი</a>
+<a href="login.html">🔐 შესვლა</a>
+<a href="register.html">📝 რეგისტრაცია</a>
+</nav>
+
+</div>
+</header>
+
+
+<main class="wrap">
+
+<section class="hero">
+
+<div class="hero-grid">
+
+<div>
+
+<span class="badge">
+🇬🇧 ქართული ↔ English • 2026
+</span>
+
+<h1>
+ვისწავლოთ<br>
+<span>ინგლისური</span><br>
+მარიამისთან ერთად!
+</h1>
+
+<p class="lead">
+სრული ონლაინ სასწავლო სივრცე მე-2, მე-3 და მე-4 კლასის
+მოსწავლეებისთვის.
+<br><br>
+🧠 სიტყვები • 🔊 მოსმენა • 🗣️ საუბარი • ✍️ გრამატიკა
+• 📖 კითხვა • 📝 ქვიზი • 🏆 ქულები • 📈 პროგრესი
+</p>
+
+<div class="buttons">
+<a class="btn primary" href="#grades">
+🎓 აირჩიე კლასი
+</a>
+
+<a class="btn yellow" href="#learn">
+🚀 დავიწყოთ სწავლა
+</a>
+</div>
+
+</div>
+
+
+<div class="neon-card teacher">
+
+<div class="avatar">👩‍🏫</div>
+
+<h2>მასწავლებელი მარიამი</h2>
+
+<p class="muted">
+შენი ინგლისურის გზამკვლევი ✨
+</p>
+
+<div class="pill">🧠 Vocabulary</div>
+<div class="pill">🗣️ Speaking</div>
+<div class="pill">🎧 Listening</div>
+<div class="pill">📖 Reading</div>
+<div class="pill">✍️ Grammar</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="grades" class="section">
+
+<div class="section-title">
+
+<span class="badge">CLASSROOM</span>
+
+<h2>აირჩიე შენი კლასი</h2>
+
+<p class="muted">
+მასალა ასაკისა და სასწავლო დონის მიხედვით
+</p>
+
+</div>
+
+
+<div class="grid">
+
+
+<article class="neon-card grade">
+
+<h3>🌱 მე-2 კლასი</h3>
+
+<p>
+საბაზისო ინგლისური სიტყვები,
+ოჯახი, სკოლა, ფერები, ცხოველები,
+საკვები და რიცხვები.
+</p>
+
+<button class="btn primary" onclick="selectGrade(2)">
+სწავლა →
+</button>
+
+</article>
+
+
+<article class="neon-card grade">
+
+<h3>🚀 მე-3 კლასი</h3>
+
+<p>
+ყოველდღიური ლექსიკა, დღეები,
+ამინდი, მოქმედებები, მარტივი საუბარი
+და გრამატიკის საფუძვლები.
+</p>
+
+<button class="btn primary" onclick="selectGrade(3)">
+სწავლა →
+</button>
+
+</article>
+
+
+<article class="neon-card grade">
+
+<h3>⭐ მე-4 კლასი</h3>
+
+<p>
+გაფართოებული სიტყვები,
+Present Simple, Reading,
+დიალოგები და პრაქტიკული დავალებები.
+</p>
+
+<button class="btn primary" onclick="selectGrade(4)">
+სწავლა →
+</button>
+
+</article>
+
+</div>
+
+</section>
+
+
+<section id="learn" class="section">
+
+<div class="dashboard">
+
+
+<aside class="neon-card side">
+
+<h3>📚 სასწავლო მენიუ</h3>
+
+<button class="active" data-tab="words">
+🧠 სიტყვები
+</button>
+
+<button data-tab="numbers">
+🔢 რიცხვები
+</button>
+
+<button data-tab="grammar">
+✍️ გრამატიკა
+</button>
+
+<button data-tab="speaking">
+🗣️ საუბარი
+</button>
+
+<button data-tab="reading">
+📖 კითხვა
+</button>
+
+<button data-tab="listening">
+🎧 მოსმენა
+</button>
+
+<button data-tab="quiz">
+📝 ქვიზი
+</button>
+
+</aside>
+
+
+<section class="neon-card content">
+
+<div class="toolbar">
+
+<select id="gradeSelect" class="select">
+
+<option value="2">
+მე-2 კლასი
+</option>
+
+<option value="3">
+მე-3 კლასი
+</option>
+
+<option value="4">
+მე-4 კლასი
+</option>
+
+</select>
+
+
+<input
+id="search"
+class="select"
+placeholder="🔎 მოძებნე ინგლისური ან ქართული სიტყვა"
+>
+
+</div>
+
+
+<div id="words" class="tab"></div>
+
+<div id="numbers" class="tab hidden"></div>
+
+<div id="grammar" class="tab hidden"></div>
+
+<div id="speaking" class="tab hidden"></div>
+
+<div id="reading" class="tab hidden"></div>
+
+<div id="listening" class="tab hidden"></div>
+
+<div id="quiz" class="tab hidden"></div>
+
+</section>
+
+</div>
+
+</section>
+
+
+<section id="progress" class="section">
+
+<div class="neon-card content">
+
+<h2>🏆 ჩემი პროგრესი</h2>
+
+<p>
+ქულები:
+<strong id="points">0</strong>
+</p>
+
+<p>
+ნასწავლი სიტყვები:
+<strong id="learned">0</strong>
+</p>
+
+<div class="progress">
+<i id="bar"></i>
+</div>
+
+<p class="muted">
+დონე:
+<strong id="level">დამწყები 🌱</strong>
+</p>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="neon-card content contact">
+
+<h2>👩‍🏫 მასწავლებელი მარიამი</h2>
+
+<p class="lead">
+ინგლისურის სწავლა მარტივად, სახალისოდ და ნაბიჯ-ნაბიჯ.
+</p>
+
+<p>
+📞
+<strong class="phone">
+598 93 02 08
+</strong>
+</p>
+
+<p>
+📍 საცხოვრებელი:
+<strong>ქუთაისი</strong>
+</p>
+
+<p>
+📅 კლასის განრიგისა და მეტი დეტალებისთვის დაგვიკავშირდით.
+</p>
+
+<p>
+🎓 მე-2 • მე-3 • მე-4 კლასი
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+<div class="wrap">
+
+<strong>
+English with Mariami
+</strong>
+
+<p>
+ვისწავლოთ ინგლისური მარიამისთან ერთად ❤️
+</p>
+
+<p>
+საიტი შეიქმნა 2026 წელს • ყველა უფლება დაცულია © 2026
+</p>
+
+</div>
+
+</footer>
+
+
+<script>
+
+const DATA={
+
+2:{
+name:"მე-2 კლასი",
+
+words:[
+["hello","გამარჯობა"],
+["goodbye","ნახვამდის"],
+["please","გთხოვთ"],
+["thank you","მადლობა"],
+["yes","დიახ"],
+["no","არა"],
+["mother","დედა"],
+["father","მამა"],
+["sister","და"],
+["brother","ძმა"],
+["family","ოჯახი"],
+["school","სკოლა"],
+["teacher","მასწავლებელი"],
+["student","მოსწავლე"],
+["book","წიგნი"],
+["pen","კალამი"],
+["pencil","ფანქარი"],
+["bag","ჩანთა"],
+["desk","მერხი"],
+["chair","სკამი"],
+["house","სახლი"],
+["room","ოთახი"],
+["door","კარი"],
+["window","ფანჯარა"],
+["dog","ძაღლი"],
+["cat","კატა"],
+["bird","ჩიტი"],
+["fish","თევზი"],
+["apple","ვაშლი"],
+["banana","ბანანი"],
+["orange","ფორთოხალი"],
+["milk","რძე"],
+["water","წყალი"],
+["bread","პური"],
+["red","წითელი"],
+["blue","ლურჯი"],
+["green","მწვანე"],
+["yellow","ყვითელი"],
+["black","შავი"],
+["white","თეთრი"],
+["big","დიდი"],
+["small","პატარა"],
+["happy","ბედნიერი"],
+["sad","სევდიანი"],
+["sun","მზე"],
+["moon","მთვარე"],
+["star","ვარსკვლავი"]
+],
+
+numbers:[
+["one","ერთი"],
+["two","ორი"],
+["three","სამი"],
+["four","ოთხი"],
+["five","ხუთი"],
+["six","ექვსი"],
+["seven","შვიდი"],
+["eight","რვა"],
+["nine","ცხრა"],
+["ten","ათი"]
+]
+
+},
+
+3:{
+name:"მე-3 კლასი",
+
+words:[
+["morning","დილა"],
+["afternoon","შუადღე"],
+["evening","საღამო"],
+["night","ღამე"],
+["friend","მეგობარი"],
+["family","ოჯახი"],
+["city","ქალაქი"],
+["street","ქუჩა"],
+["park","პარკი"],
+["shop","მაღაზია"],
+["food","საჭმელი"],
+["breakfast","საუზმე"],
+["lunch","სადილი"],
+["dinner","ვახშამი"],
+["happy","ბედნიერი"],
+["sad","სევდიანი"],
+["beautiful","ლამაზი"],
+["strong","ძლიერი"],
+["fast","სწრაფი"],
+["slow","ნელი"],
+["read","კითხვა"],
+["write","წერა"],
+["listen","მოსმენა"],
+["speak","საუბარი"],
+["play","თამაში"],
+["run","სირბილი"],
+["walk","სეირნობა"],
+["jump","ხტომა"],
+["open","გახსნა"],
+["close","დახურვა"],
+["Monday","ორშაბათი"],
+["Tuesday","სამშაბათი"],
+["Wednesday","ოთხშაბათი"],
+["Thursday","ხუთშაბათი"],
+["Friday","პარასკევი"],
+["Saturday","შაბათი"],
+["Sunday","კვირა"],
+["today","დღეს"],
+["tomorrow","ხვალ"],
+["yesterday","გუშინ"],
+["weather","ამინდი"],
+["rain","წვიმა"],
+["snow","თოვლი"],
+["sunny","მზიანი"],
+["cold","ცივი"],
+["hot","ცხელი"]
+],
+
+numbers:[
+["eleven","თერთმეტი"],
+["twelve","თორმეტი"],
+["thirteen","ცამეტი"],
+["fourteen","თოთხმეტი"],
+["fifteen","თხუთმეტი"],
+["sixteen","თექვსმეტი"],
+["seventeen","ჩვიდმეტი"],
+["eighteen","თვრამეტი"],
+["nineteen","ცხრამეტი"],
+["twenty","ოცი"]
+]
+
+},
+
+4:{
+name:"მე-4 კლასი",
+
+words:[
+["usually","ჩვეულებრივ"],
+["always","ყოველთვის"],
+["sometimes","ზოგჯერ"],
+["never","არასდროს"],
+["beautiful","ლამაზი"],
+["interesting","საინტერესო"],
+["important","მნიშვნელოვანი"],
+["different","განსხვავებული"],
+["begin","დაწყება"],
+["finish","დასრულება"],
+["understand","გაგება"],
+["remember","დამახსოვრება"],
+["question","კითხვა"],
+["answer","პასუხი"],
+["lesson","გაკვეთილი"],
+["homework","საშინაო დავალება"],
+["library","ბიბლიოთეკა"],
+["hospital","საავადმყოფო"],
+["market","ბაზარი"],
+["weather","ამინდი"],
+["spring","გაზაფხული"],
+["summer","ზაფხული"],
+["autumn","შემოდგომა"],
+["winter","ზამთარი"],
+["today","დღეს"],
+["tomorrow","ხვალ"],
+["yesterday","გუშინ"],
+["because","იმიტომ რომ"],
+["before","მანამდე"],
+["after","შემდეგ"],
+["morning","დილა"],
+["afternoon","შუადღე"],
+["evening","საღამო"],
+["country","ქვეყანა"],
+["language","ენა"],
+["question","შეკითხვა"],
+["practice","ვარჯიში"],
+["learn","სწავლა"],
+["teach","სწავლება"],
+["remember","დამახსოვრება"],
+["important","მნიშვნელოვანი"]
+],
+
+numbers:[
+["thirty","ოცდაათი"],
+["forty","ორმოცი"],
+["fifty","ორმოცდაათი"],
+["sixty","სამოცი"],
+["seventy","სამოცდაათი"],
+["eighty","ოთხმოცი"],
+["ninety","ოთხმოცდაათი"],
+["one hundred","ასი"]
+]
+
+}
+
+};
+
+
+let grade=Number(localStorage.getItem("grade")||2);
+
+let points=Number(localStorage.getItem("points")||0);
+
+let learned=Number(localStorage.getItem("learned")||0);
+
+
+const $=id=>document.getElementById(id);
+
+
+function speak(text){
+
+if(!("speechSynthesis" in window)){
+alert("ამ ბრაუზერს ხმოვანი ფუნქცია არ აქვს.");
+return;
+}
+
+speechSynthesis.cancel();
+
+const u=new SpeechSynthesisUtterance(text);
+
+u.lang="en-US";
+
+u.rate=.78;
+
+speechSynthesis.speak(u);
+
+}
+
+
+function card(w){
+
+return `
+<article class="word">
+
+<button
+class="listen"
+onclick='speak(${JSON.stringify(w[0])})'
+>
+🔊
+</button>
+
+<strong>${w[0]}</strong>
+
+<div class="ka">
+${w[1]}
+</div>
+
+<small class="muted">
+მოსმენა • გამოთქმა
+</small>
+
+</article>
+`;
+
+}
+
+
+function selectGrade(g){
+
+grade=g;
+
+localStorage.setItem("grade",g);
+
+$("gradeSelect").value=g;
+
+render();
+
+location.hash="learn";
+
+}
+
+
+function render(){
+
+grade=Number($("gradeSelect").value);
+
+const d=DATA[grade];
+
+const q=$("search").value.toLowerCase();
+
+
+const ws=d.words.filter(w=>
+(w[0]+" "+w[1]).toLowerCase().includes(q)
+);
+
+
+$("words").innerHTML=`
+
+<h2>🧠 ${d.name} — სიტყვები</h2>
+
+<p class="muted">
+${ws.length} სიტყვა ნაჩვენებია
+</p>
+
+<div class="words">
+${ws.map(card).join("")}
+</div>
+
+`;
+
+
+$("numbers").innerHTML=`
+
+<h2>🔢 რიცხვები</h2>
+
+<p class="muted">
+ინგლისური რიცხვები და ქართული მნიშვნელობა
+</p>
+
+<div class="words">
+${d.numbers.map(card).join("")}
+</div>
+
+`;
+
+
+$("grammar").innerHTML=`
+
+<h2>✍️ გრამატიკის გაკვეთილი</h2>
+
+<div class="lesson">
+
+<strong>To Be — am / is / are</strong>
+
+<br>
+
+I am — მე ვარ
+
+<br>
+
+You are — შენ ხარ
+
+<br>
+
+He is — ის არის
+
+<br>
+
+She is — ის არის
+
+<br>
+
+We are — ჩვენ ვართ
+
+<br>
+
+They are — ისინი არიან
+
+</div>
+
+
+<div class="lesson">
+
+<strong>Present Simple</strong>
+
+<br>
+
+I go to school every day.
+
+<br>
+
+<span class="muted">
+მე ყოველდღე სკოლაში მივდივარ.
+</span>
+
+<br><br>
+
+She likes music.
+
+<br>
+
+<span class="muted">
+მას მუსიკა მოსწონს.
+</span>
+
+</div>
+
+`;
+
+
+$("speaking").innerHTML=`
+
+<h2>🗣️ სასაუბრო ინგლისური</h2>
+
+<div class="dialogue">
+
+<strong>Hello! How are you?</strong>
+
+<br>
+
+I am fine, thank you!
+
+<br><br>
+
+<strong>What is your name?</strong>
+
+<br>
+
+My name is Mari.
+
+<br><br>
+
+<strong>Where do you live?</strong>
+
+<br>
+
+I live in Kutaisi.
+
+<br><br>
+
+<button
+class="btn yellow"
+onclick="speak('Hello! How are you? I am fine, thank you! What is your name? My name is Mari. Where do you live? I live in Kutaisi.')"
+>
+🔊 მოუსმინე დიალოგს
+</button>
+
+</div>
+
+`;
+
+
+$("reading").innerHTML=`
+
+<h2>📖 Reading — კითხვა</h2>
+
+<div class="lesson">
+
+<strong>My English Day</strong>
+
+<p>
+Hello! My name is Mari.
+I am a student.
+I go to school every day.
+I like English.
+I read books and learn new words.
+I speak English with my friends.
+English is fun!
+</p>
+
+<p class="muted">
+გამარჯობა! მე მარი მქვია.
+მე მოსწავლე ვარ.
+ყოველდღე სკოლაში მივდივარ.
+ინგლისური მომწონს.
+ვკითხულობ წიგნებს და ახალ სიტყვებს ვსწავლობ.
+მეგობრებთან ინგლისურად ვსაუბრობ.
+ინგლისური სახალისოა!
+</p>
+
+<button
+class="btn primary"
+onclick="speak('Hello! My name is Mari. I am a student. I go to school every day. I like English. I read books and learn new words. I speak English with my friends. English is fun!')"
+>
+🔊 ტექსტის მოსმენა
+</button>
+
+</div>
+
+`;
+
+
+$("listening").innerHTML=`
+
+<h2>🎧 Listening Lab</h2>
+
+<div class="lesson">
+
+<p>
+მოუსმინე სიტყვას, გაიმეორე ხმამაღლა
+და შემდეგ შეამოწმე მისი ქართული მნიშვნელობა.
+</p>
+
+<button
+class="btn primary"
+onclick="listenSet()"
+>
+▶️ 10 სიტყვის მოსმენა
+</button>
+
+<p id="listenStatus" class="muted"></p>
+
+</div>
+
+`;
+
+
+$("quiz").innerHTML=quizHTML(d);
+
+
+$("points").textContent=points;
+
+$("learned").textContent=learned;
+
+$("bar").style.width=Math.min(100,points)+"%";
+
+
+if(points>=100){
+
+$("level").textContent="ინგლისურის გმირი 🏆";
+
+}else if(points>=50){
+
+$("level").textContent="მოწინავე 🚀";
+
+}else{
+
+$("level").textContent="დამწყები 🌱";
+
+}
+
+}
+
+
+function quizHTML(d){
+
+const qs=d.words.slice(0,5);
+
+return `
+
+<h2>📝 სწრაფი ქვიზი</h2>
+
+<p class="muted">
+აირჩიე სწორი ქართული თარგმანი.
+</p>
+
+${qs.map((w,i)=>{
+
+let options=[
+w[1],
+d.words[(i+3)%d.words.length][1],
+d.words[(i+7)%d.words.length][1]
+];
+
+options=[...new Set(options)]
+.sort(()=>Math.random()-.5);
+
+return `
+
+<div class="lesson">
+
+<strong>
+${i+1}. რას ნიშნავს "${w[0]}"?
+</strong>
+
+${options.map(o=>`
+
+<button
+class="option"
+onclick='answer(this,${JSON.stringify(o)},${JSON.stringify(w[1])})'
+>
+${o}
+</button>
+
+`).join("")}
+
+</div>
+
+`;
+
+}).join("")}
+
+<p>
+🏆 მიმდინარე ქულა:
+<strong>${points}</strong>
+</p>
+
+`;
+
+}
+
+
+function answer(el,a,b){
+
+if(el.dataset.done)return;
+
+el.dataset.done="1";
+
+
+if(a===b){
+
+points+=10;
+
+learned++;
+
+el.textContent="✅ სწორია! +10 ქულა";
+
+}else{
+
+el.textContent="❌ არასწორია — სცადე შემდეგი";
+
+}
+
+
+localStorage.setItem("points",points);
+
+localStorage.setItem("learned",learned);
+
+render();
+
+}
+
+
+function listenSet(){
+
+const ws=DATA[grade].words.slice(0,10);
+
+let i=0;
+
+
+function next(){
+
+if(i>=ws.length){
+
+$("listenStatus").textContent="🎉 Listening დასრულდა!";
+
+return;
+
+}
+
+$("listenStatus").textContent=
+`${i+1}/10 — მოუსმინე და გაიმეორე: ${ws[i][1]}`;
+
+speak(ws[i][0]);
+
+i++;
+
+setTimeout(next,1800);
+
+}
+
+next();
+
+}
+
+
+document
+.querySelectorAll("[data-tab]")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+const target=button.dataset.tab;
+
+
+document
+.querySelectorAll(".tab")
+.forEach(x=>x.classList.add("hidden"));
+
+
+$(target).classList.remove("hidden");
+
+
+document
+.querySelectorAll("[data-tab]")
+.forEach(x=>x.classList.remove("active"));
+
+
+button.classList.add("active");
+
+};
+
+});
+
+
+$("gradeSelect").value=grade;
+
+$("gradeSelect").onchange=()=>{
+
+grade=Number($("gradeSelect").value);
+
+localStorage.setItem("grade",grade);
+
+render();
+
+};
+
+
+$("search").addEventListener("input",render);
+
+
+render();
+
+</script>
+
+</body>
+</html>
