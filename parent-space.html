@@ -1,1525 +1,1862 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ka">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>მშობლის სივრცე — English with Mariami</title>
 
-<title>English with Mariami — მშობლის სივრცე</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 
 <style>
+*{box-sizing:border-box}
 
-*{
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
 margin:0;
-font-family:Arial,"Noto Sans Georgian",sans-serif;
-color:white;
-background:#010814;
 min-height:100vh;
-overflow-x:hidden;
+font-family:Arial,"Noto Sans Georgian",sans-serif;
+color:#fff;
+background:#010712;
+overflow-x:hidden
 }
 
-a{
-text-decoration:none;
-color:inherit;
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+.wrap{
+width:min(1200px,calc(100% - 28px));
+margin:auto
 }
 
-button,
-input,
-textarea{
-font-family:inherit;
-}
+/* =========================
+   3D BACKGROUND
+========================= */
 
-
-/* =====================================
-   BACKGROUND
-===================================== */
-
-.background{
+.world{
 position:fixed;
 inset:0;
 z-index:-10;
 overflow:hidden;
-
 background:
-radial-gradient(
-circle at 50% 35%,
-#0a6795 0%,
-#063b61 25%,
-#021a32 55%,
-#010814 100%
-);
+radial-gradient(circle at 50% 35%,
+#efffff 0%,
+#a9e8fa 16%,
+#318db9 42%,
+#0b466c 68%,
+#010712 100%)
 }
 
-
-/* BIG BLUE GLOW */
-
-.background::before{
+.world:after{
 content:"";
 position:absolute;
-
-width:700px;
-height:700px;
-
-left:50%;
-top:35%;
-
-transform:translate(-50%,-50%);
-
-border-radius:50%;
-
+inset:-20%;
 background:
 radial-gradient(
-circle,
-#00eaff45 0%,
-#008cff22 35%,
-transparent 70%
-);
-
-animation:
-bigGlow 5s ease-in-out infinite;
+ellipse at center,
+transparent 25%,
+#00152c66 60%,
+#00040cee 100%)
 }
 
-@keyframes bigGlow{
-
-0%,100%{
-transform:translate(-50%,-50%) scale(.85);
-opacity:.6;
-}
-
-50%{
-transform:translate(-50%,-50%) scale(1.15);
-opacity:1;
-}
-
-}
-
-
-/* =====================================
-   3D GRID FLOOR
-===================================== */
-
-.grid-floor{
+.glow{
 position:absolute;
+width:650px;
+height:650px;
+left:50%;
+top:42%;
+transform:translate(-50%,-50%);
+border-radius:50%;
+background:
+radial-gradient(circle,
+#00eaff66,
+#008cff20 40%,
+transparent 72%);
+filter:blur(5px);
+animation:pulse 5s ease-in-out infinite
+}
 
+@keyframes pulse{
+0%,100%{
+transform:translate(-50%,-50%) scale(.8);
+opacity:.55
+}
+50%{
+transform:translate(-50%,-50%) scale(1.2);
+opacity:1
+}
+}
+
+/* 3D LETTERS */
+
+.letters{
+position:absolute;
+inset:0;
+perspective:1000px
+}
+
+.letter{
+position:absolute;
+font-size:clamp(45px,7vw,100px);
+font-weight:1000;
+color:#fff;
+text-shadow:
+0 0 5px #fff,
+0 0 15px #00eaff,
+0 0 35px #009cff,
+0 0 75px #006cff;
+animation:float 7s ease-in-out infinite;
+user-select:none
+}
+
+.letter:nth-child(1){left:5%;top:13%}
+.letter:nth-child(2){left:20%;top:67%;animation-delay:-2s}
+.letter:nth-child(3){left:35%;top:10%;animation-delay:-4s}
+.letter:nth-child(4){right:20%;top:62%;animation-delay:-1s}
+.letter:nth-child(5){right:7%;top:17%;animation-delay:-3s}
+.letter:nth-child(6){right:4%;bottom:14%;animation-delay:-5s}
+.letter:nth-child(7){left:48%;bottom:12%;font-size:55px}
+
+@keyframes float{
+0%,100%{
+transform:
+translate3d(0,0,0)
+rotateY(-15deg)
+rotateZ(-3deg)
+}
+50%{
+transform:
+translate3d(25px,-35px,80px)
+rotateY(25deg)
+rotateZ(3deg)
+}
+}
+
+/* FLOOR */
+
+.floor{
+position:absolute;
 left:-30%;
 right:-30%;
 bottom:-30%;
-
 height:65%;
-
 transform:
 perspective(500px)
 rotateX(63deg);
 
 background-image:
-
-linear-gradient(
-#00eaff35 1px,
-transparent 1px
-),
-
-linear-gradient(
-90deg,
-#00eaff35 1px,
-transparent 1px
-);
+linear-gradient(#00eaff38 1px,transparent 1px),
+linear-gradient(90deg,#00eaff38 1px,transparent 1px);
 
 background-size:55px 55px;
 
 mask-image:
-linear-gradient(
-to top,
-black,
-transparent
-);
+linear-gradient(to top,black,transparent);
 
-animation:
-gridMove 8s linear infinite;
+animation:gridMove 8s linear infinite
 }
 
 @keyframes gridMove{
-
-from{
-background-position:0 0;
+from{background-position:0 0}
+to{background-position:0 55px}
 }
 
-to{
-background-position:0 55px;
-}
+/* HEADER */
 
-}
-
-
-/* =====================================
-   FLOATING ABC
-===================================== */
-
-.letters{
-position:absolute;
-inset:0;
-perspective:1000px;
-}
-
-.letter{
-position:absolute;
-
-font-size:80px;
-font-weight:1000;
-
-color:white;
-
-text-shadow:
-
-0 0 5px white,
-0 0 15px #00eaff,
-0 0 35px #008cff,
-0 0 70px #006cff,
-0 0 110px #004cff;
-
-animation:
-letterFloat 7s ease-in-out infinite;
-
-user-select:none;
-}
-
-.letter:nth-child(1){
-left:7%;
-top:17%;
-}
-
-.letter:nth-child(2){
-left:20%;
-top:65%;
-animation-delay:-2s;
-}
-
-.letter:nth-child(3){
-right:13%;
-top:20%;
-animation-delay:-4s;
-}
-
-.letter:nth-child(4){
-right:5%;
-bottom:20%;
-animation-delay:-1s;
-}
-
-.letter:nth-child(5){
-left:43%;
-top:9%;
-font-size:55px;
-animation-delay:-5s;
-}
-
-@keyframes letterFloat{
-
-0%,100%{
-transform:
-translate3d(0,0,0)
-rotateY(-20deg)
-rotateZ(-4deg);
-}
-
-50%{
-transform:
-translate3d(35px,-45px,100px)
-rotateY(35deg)
-rotateZ(7deg);
-}
-
-}
-
-
-/* =====================================
-   HEADER
-===================================== */
-
-.header{
+.top{
 position:sticky;
 top:0;
 z-index:100;
-
 background:#02152ded;
-
-border-bottom:
-1px solid #00eaff66;
-
-backdrop-filter:
-blur(15px);
+border-bottom:1px solid #00eaff66;
+backdrop-filter:blur(15px)
 }
 
 .nav{
-width:min(1200px,calc(100% - 28px));
-margin:auto;
-
 display:flex;
-align-items:center;
 justify-content:space-between;
-
+align-items:center;
 gap:15px;
-
-padding:13px 0;
+padding:13px 0
 }
 
-.logo{
+.brand{
 font-size:18px;
 font-weight:1000;
-
-text-shadow:
-0 0 18px #00eaff;
+text-shadow:0 0 18px #00eaff
 }
 
-.nav-links{
+.navlinks{
 display:flex;
 gap:7px;
-flex-wrap:wrap;
+flex-wrap:wrap
 }
 
-.nav-links a{
-padding:9px 12px;
-
+.navlinks a{
+padding:9px 11px;
 border-radius:12px;
-
 background:#062443dd;
-
-border:
-1px solid #00eaff44;
-
-font-size:13px;
-
-transition:.2s;
+border:1px solid #00eaff44;
+font-size:13px
 }
 
-.nav-links a:hover{
+.navlinks a:hover{
 background:#00c9f2;
 color:#00131a;
-
-box-shadow:
-0 0 20px #00eaff;
+box-shadow:0 0 25px #00eaff
 }
 
+/* MAIN */
 
-/* =====================================
-   MAIN
-===================================== */
-
-.container{
-width:min(1200px,calc(100% - 28px));
-margin:auto;
+main{
+padding:45px 0 70px
 }
-
-
-/* =====================================
-   HERO
-===================================== */
 
 .hero{
-min-height:620px;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-padding:60px 0;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
+align-items:stretch
 }
 
-.hero-card{
-
-position:relative;
-
-width:min(950px,100%);
-
-padding:45px 30px;
-
-text-align:center;
-
-border-radius:32px;
-
+.card{
 background:
 linear-gradient(
 145deg,
-#031d35e8,
-#020a18e8
-);
-
-border:
-1px solid #00eaff77;
-
+#041a31ed,
+#020b19ed);
+border:1px solid #00eaff66;
+border-radius:26px;
 box-shadow:
-
-0 30px 90px #000c,
-
-0 0 50px #00eaff22;
-
-backdrop-filter:blur(10px);
-
-transform:
-perspective(1200px)
-rotateX(2deg);
-
+0 25px 70px #000b,
+0 0 35px #00eaff20;
+backdrop-filter:blur(12px)
 }
 
-.parent-icon{
-
-font-size:75px;
-
-filter:
-drop-shadow(
-0 0 25px #00eaff
-);
-
-animation:
-parentIcon 3s ease-in-out infinite;
-}
-
-@keyframes parentIcon{
-
-0%,100%{
-transform:translateY(0) scale(1);
-}
-
-50%{
-transform:translateY(-12px) scale(1.08);
-}
-
+.content{
+padding:32px
 }
 
 .badge{
-
 display:inline-block;
-
 padding:8px 15px;
-
 border-radius:30px;
-
 background:#061c38dd;
-
-border:
-1px solid #00eaff88;
-
+border:1px solid #00eaff88;
 color:#ffe600;
-
 font-weight:900;
-
-box-shadow:
-0 0 20px #00eaff22;
+box-shadow:0 0 20px #00eaff22
 }
 
 h1{
-
-font-size:
-clamp(38px,7vw,70px);
-
+font-size:clamp(40px,6vw,68px);
 line-height:1;
-
 margin:18px 0;
-
-text-shadow:
-0 0 30px #00eaff88;
+text-shadow:0 0 30px #00eaff88
 }
 
 h1 span{
-color:#00eaff;
+color:#00eaff
 }
 
-.hero-text{
-
+.lead{
 font-size:18px;
-
 line-height:1.7;
-
-color:#dffaff;
-
-max-width:750px;
-
-margin:0 auto;
+color:#e6fbff
 }
 
-
-/* =====================================
-   3D FAMILY
-===================================== */
-
-.family-section{
-
-position:relative;
-
-min-height:560px;
-
-border-radius:32px;
-
-overflow:hidden;
-
-border:
-1px solid #00eaff66;
-
-background:
-linear-gradient(
-145deg,
-#031d35cc,
-#020b18dd
-);
-
-box-shadow:
-
-0 30px 80px #000c,
-
-0 0 45px #00eaff22;
-
-margin-bottom:40px;
-
-perspective:1200px;
-}
-
-
-/* FAMILY LIGHT */
-
-.family-light{
-
-position:absolute;
-
-width:500px;
-height:500px;
-
-left:50%;
-top:40%;
-
-transform:
-translate(-50%,-50%);
-
-border-radius:50%;
-
-background:
-radial-gradient(
-circle,
-#00eaff35,
-transparent 70%
-);
-
-animation:
-familyLight 4s ease-in-out infinite;
-}
-
-@keyframes familyLight{
-
-0%,100%{
-transform:
-translate(-50%,-50%) scale(.8);
-}
-
-50%{
-transform:
-translate(-50%,-50%) scale(1.2);
-}
-
-}
-
-
-/* FAMILY */
+/* FAMILY 3D */
 
 .family{
-
-position:absolute;
-
-left:50%;
-top:48%;
-
-transform:
-translate(-50%,-50%)
-rotateX(8deg)
-rotateY(-12deg);
-
+min-height:430px;
+position:relative;
+overflow:hidden;
 display:flex;
-
-align-items:flex-end;
-
-gap:45px;
-
-transform-style:preserve-3d;
-
-animation:
-familyMove 6s ease-in-out infinite;
-
-z-index:3;
+align-items:center;
+justify-content:center;
+perspective:1000px
 }
 
-@keyframes familyMove{
-
-0%,100%{
-
-transform:
-translate(-50%,-50%)
-rotateX(8deg)
-rotateY(-12deg)
-translateZ(0);
-
-}
-
-50%{
-
-transform:
-translate(-50%,-55%)
-rotateX(8deg)
-rotateY(15deg)
-translateZ(70px);
-
-}
-
-}
-
-
-/* PEOPLE */
-
-.person{
-
-text-align:center;
-
-transform-style:preserve-3d;
-
-filter:
-drop-shadow(
-0 0 18px #00eaff
-);
-
-animation:
-personMove 3s ease-in-out infinite;
-}
-
-.person:nth-child(2){
-animation-delay:-1s;
-}
-
-.person:nth-child(3){
-animation-delay:-2s;
-}
-
-@keyframes personMove{
-
-0%,100%{
-transform:
-translateY(0)
-translateZ(0);
-}
-
-50%{
-transform:
-translateY(-18px)
-translateZ(35px);
-}
-
-}
-
-.face{
-font-size:62px;
-}
-
-.clothes{
-font-size:58px;
-margin-top:-8px;
-}
-
-.shoes{
-font-size:42px;
-margin-top:-10px;
-}
-
-
-/* =====================================
-   FAMILY TITLE
-===================================== */
-
-.family-title{
-
+.familyTitle{
 position:absolute;
-
 top:25px;
 left:0;
 right:0;
-
 text-align:center;
-
-z-index:10;
+z-index:5
 }
 
-.family-title h2{
-
-font-size:32px;
-
-margin:10px;
-
+.familyTitle h2{
+margin:5px;
+font-size:28px;
 color:#00eaff;
-
-text-shadow:
-0 0 20px #00eaff88;
+text-shadow:0 0 20px #00eaff
 }
 
-.family-title p{
-
-color:#bdefff;
+.familyTitle p{
+margin:5px;
+color:#c8f5ff
 }
 
+.familyIcons{
+font-size:110px;
+filter:
+drop-shadow(0 0 20px #00eaff)
+drop-shadow(0 25px 30px #001b35);
+animation:familyFloat 4s ease-in-out infinite
+}
 
-/* =====================================
-   FLOOR
-===================================== */
-
-.family-floor{
-
-position:absolute;
-
-left:-30%;
-right:-30%;
-
-bottom:-35%;
-
-height:60%;
-
+@keyframes familyFloat{
+0%,100%{
 transform:
-perspective(500px)
-rotateX(65deg);
-
-background-image:
-
-linear-gradient(
-#00eaff30 1px,
-transparent 1px
-),
-
-linear-gradient(
-90deg,
-#00eaff30 1px,
-transparent 1px
-);
-
-background-size:50px 50px;
-
-mask-image:
-linear-gradient(
-to top,
-black,
-transparent
-);
-
+translateY(0)
+rotateY(-10deg)
+translateZ(0)
+}
+50%{
+transform:
+translateY(-20px)
+rotateY(12deg)
+translateZ(70px)
+}
 }
 
-
-/* =====================================
-   QUESTIONS
-===================================== */
-
-.questions{
-
-padding:55px 0;
+.heart{
+position:absolute;
+font-size:42px;
+filter:drop-shadow(0 0 15px #00eaff);
+animation:heartFloat 4s ease-in-out infinite
 }
 
-.section-title{
+.one{left:15%;top:34%}
+.two{right:15%;top:38%;animation-delay:-2s}
+.three{left:27%;bottom:18%;animation-delay:-1s}
+.four{right:27%;bottom:20%;animation-delay:-3s}
 
+@keyframes heartFloat{
+0%,100%{transform:translateY(0) rotate(-5deg)}
+50%{transform:translateY(-28px) rotate(8deg)}
+}
+
+/* AUTH */
+
+.auth{
+max-width:650px;
+margin:35px auto 0;
+padding:28px
+}
+
+.auth h2{
 text-align:center;
-
-margin-bottom:28px;
+color:#00eaff;
+text-shadow:0 0 18px #00eaff
 }
 
-.section-title h2{
-
-font-size:34px;
-
-margin:12px 0;
+.tabs{
+display:flex;
+gap:8px;
+margin:20px 0
 }
 
-.section-title p{
-
-color:#bdefff;
+.tab{
+flex:1;
+padding:13px;
+border-radius:12px;
+border:1px solid #00eaff44;
+background:#062443;
+color:#fff;
+font-weight:900
 }
 
+.tab.active{
+background:#00c9f2;
+color:#00131a;
+box-shadow:0 0 25px #00eaff66
+}
 
-.question-card{
+.form{
+display:none
+}
 
-max-width:850px;
+.form.active{
+display:block
+}
 
-margin:auto;
-
-padding:30px;
-
-border-radius:25px;
-
-background:
-linear-gradient(
-145deg,
-#041b32ee,
-#020b18ee
-);
-
-border:
-1px solid #00eaff55;
-
-box-shadow:
-0 25px 65px #000b;
+.field{
+margin:15px 0
 }
 
 label{
-
 display:block;
-
-font-weight:900;
-
-margin:0 0 8px;
-
+margin-bottom:7px;
 color:#ffe600;
+font-weight:800
 }
 
-input,
-textarea{
-
+input{
 width:100%;
-
-border:1px solid #00eaff44;
-
-background:#020b18dd;
-
-color:white;
-
-border-radius:14px;
-
 padding:14px;
-
-font-size:16px;
-
-outline:none;
-
-margin-bottom:18px;
-
-transition:.2s;
+border-radius:12px;
+border:1px solid #00eaff55;
+background:#020b18;
+color:#fff;
+outline:none
 }
 
-input:focus,
-textarea:focus{
-
+input:focus{
 border-color:#00eaff;
-
-box-shadow:
-0 0 18px #00eaff33;
+box-shadow:0 0 15px #00eaff44
 }
 
-textarea{
-
-min-height:150px;
-
-resize:vertical;
-}
-
-.send-button{
-
+.btn{
+width:100%;
 border:0;
-
-cursor:pointer;
-
-padding:14px 24px;
-
-border-radius:14px;
-
+padding:14px;
+border-radius:13px;
 font-weight:1000;
-
-font-size:16px;
-
 background:#00c9f2;
-
 color:#00131a;
-
-box-shadow:
-0 0 25px #00eaff66;
-
-transition:.2s;
+box-shadow:0 0 25px #00eaff66;
+margin-top:10px
 }
 
-.send-button:hover{
-
-transform:
-translateY(-3px)
-scale(1.02);
-
-box-shadow:
-0 0 35px #00eaffaa;
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 0 35px #00eaffaa
 }
 
-
-/* =====================================
-   FEATURES
-===================================== */
-
-.features{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:16px;
-
-margin-top:30px;
+.yellow{
+background:#ffe600
 }
 
-.feature{
-
-padding:22px;
-
-text-align:center;
-
-border-radius:20px;
-
-background:
-linear-gradient(
-145deg,
-#062746dd,
-#031426dd
-);
-
-border:
-1px solid #00eaff33;
-
-transition:.25s;
+.red{
+background:#ff4f70;
+color:#fff
 }
 
-.feature:hover{
-
-transform:
-translateY(-7px);
-
-box-shadow:
-0 20px 45px #000b,
-0 0 30px #00eaff33;
+.message{
+display:none;
+margin-top:15px;
+padding:13px;
+border-radius:12px;
+background:#062443;
+border:1px solid #00eaff44;
+line-height:1.5
 }
 
-.feature-icon{
-
-font-size:40px;
-
-filter:
-drop-shadow(
-0 0 12px #00eaff
-);
+.showMessage{
+display:block
 }
 
-.feature h3{
+/* DASHBOARD */
 
+.dashboard{
+display:none;
+max-width:900px;
+margin:35px auto
+}
+
+.dashboard.show{
+display:block
+}
+
+.dashboardCard{
+padding:30px
+}
+
+.dashboardTitle{
+text-align:center
+}
+
+.dashboardTitle h2{
+font-size:32px;
 color:#ffe600;
+text-shadow:0 0 20px #ffe60055
 }
 
+.connect{
+margin-top:25px;
+padding:25px;
+background:#061a32;
+border-radius:20px;
+border:1px solid #00eaff44
+}
 
-/* =====================================
-   FOOTER
-===================================== */
+.connect h3{
+color:#00eaff
+}
 
-.footer{
-
-margin-top:45px;
-
-padding:30px 0;
-
+.codeInput{
+max-width:450px;
+margin:15px auto;
+display:block;
 text-align:center;
-
-border-top:
-1px solid #00eaff33;
-
-color:#8fc5d5;
+text-transform:uppercase;
+font-size:20px;
+letter-spacing:3px
 }
 
+.child{
+display:none;
+margin-top:25px;
+padding:25px;
+border-radius:20px;
+background:
+linear-gradient(145deg,#092b4b,#04172c);
+border:1px solid #00eaff55;
+box-shadow:0 0 30px #00eaff22
+}
 
-/* =====================================
-   TABLET
-===================================== */
+.child.show{
+display:block
+}
+
+.child h3{
+color:#ffe600
+}
+
+.childName{
+font-size:22px;
+font-weight:900;
+margin:10px 0
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:20px
+}
+
+.stat{
+padding:18px;
+border-radius:16px;
+background:#061a32;
+border:1px solid #00eaff33;
+text-align:center
+}
+
+.stat b{
+display:block;
+font-size:28px;
+color:#ffe600;
+margin-bottom:6px
+}
+
+.logout{
+margin-top:25px
+}
+
+.hidden{
+display:none!important
+}
+
+/* MOBILE */
 
 @media(max-width:850px){
 
-.nav{
-
-flex-direction:column;
-
-align-items:flex-start;
-}
-
-.nav-links{
-width:100%;
-}
-
-.features{
-grid-template-columns:1fr;
+.hero{
+grid-template-columns:1fr
 }
 
 .family{
-gap:25px;
+min-height:360px
 }
 
 }
-
-
-/* =====================================
-   MOBILE
-===================================== */
 
 @media(max-width:600px){
 
-.container{
-
-width:
-calc(100% - 20px);
+.wrap{
+width:calc(100% - 18px)
 }
 
-.hero{
-
-padding:
-35px 0;
+.nav{
+flex-direction:column;
+align-items:flex-start
 }
 
-.hero-card{
-
-padding:
-35px 18px;
-
-border-radius:24px;
+.navlinks{
+width:100%
 }
 
-.hero-text{
-
-font-size:16px;
+.navlinks a{
+font-size:11px;
+padding:8px 9px
 }
 
-.family-section{
+main{
+padding-top:25px
+}
 
-min-height:520px;
+.content{
+padding:22px
+}
 
-border-radius:24px;
+h1{
+font-size:42px
+}
+
+.lead{
+font-size:16px
+}
+
+.familyIcons{
+font-size:80px
 }
 
 .family{
-
-gap:5px;
-
-transform:
-translate(-50%,-50%)
-scale(.68)
-rotateY(-8deg);
+min-height:330px
 }
 
-.family-title h2{
-
-font-size:26px;
-}
-
-.family-title p{
-
-font-size:14px;
+.stats{
+grid-template-columns:1fr
 }
 
 .letter{
-
-font-size:48px;
+font-size:48px
 }
 
-.question-card{
-
-padding:20px;
-
-border-radius:20px;
-}
-
-.section-title h2{
-
-font-size:28px;
-}
-
-.nav-links a{
-
-font-size:11px;
-
-padding:
-8px 9px;
+.auth{
+padding:20px
 }
 
 }
-
-
-/* =====================================
-   EXTRA SMALL
-===================================== */
-
-@media(max-width:380px){
-
-.family{
-
-transform:
-translate(-50%,-50%)
-scale(.58);
-}
-
-.family-section{
-
-min-height:500px;
-}
-
-.parent-icon{
-
-font-size:60px;
-}
-
-}
-
 </style>
 </head>
 
-
 <body>
 
+<!-- 3D WORLD -->
 
-<!-- =====================================
-     BACKGROUND
-===================================== -->
+<div class="world">
 
-<div class="background">
+<div class="glow"></div>
 
 <div class="letters">
-
 <div class="letter">A</div>
 <div class="letter">B</div>
 <div class="letter">C</div>
 <div class="letter">D</div>
 <div class="letter">E</div>
+<div class="letter">F</div>
+<div class="letter">G</div>
+</div>
+
+<div class="floor"></div>
 
 </div>
 
-<div class="grid-floor"></div>
 
-</div>
+<!-- HEADER -->
 
+<header class="top">
 
-<!-- =====================================
-     HEADER
-===================================== -->
+<div class="wrap nav">
 
-<header class="header">
-
-<div class="nav">
-
-<a
-href="academy.html"
-class="logo"
->
+<a class="brand" href="academy.html">
 ⚡ ENGLISH WITH MARIAMI
 </a>
 
-<nav class="nav-links">
+<div class="navlinks">
 
 <a href="academy.html">
-🏠 აკადემია
+🎓 Academy
 </a>
 
-<a href="academy.html#grades">
-🎓 კლასები
+<a href="teacher.html">
+👩‍🏫 მასწავლებელი
 </a>
 
-<a href="academy.html#progress">
-🏆 პროგრესი
-</a>
-
-<a href="parent-space.html">
-👨‍👩‍👧 მშობლის სივრცე
-</a>
-
-<a href="login.html">
-🔐 შესვლა
-</a>
-
-</nav>
+</div>
 
 </div>
 
 </header>
 
 
-<main class="container">
+<main class="wrap">
 
-
-<!-- =====================================
-     HERO
-===================================== -->
+<!-- HERO -->
 
 <section class="hero">
 
-<div class="hero-card">
-
-<div class="parent-icon">
-👨‍👩‍👧
-</div>
+<div class="card content">
 
 <span class="badge">
-FAMILY SPACE
+PARENT SPACE
 </span>
 
 <h1>
-მშობლის <span>სივრცე</span>
+👨‍👩‍👧
+მშობლის
+<span>სივრცე</span>
 </h1>
 
-<p class="hero-text">
-
-აქ მშობელი და მასწავლებელი
-ერთად ეხმარებიან ბავშვს ინგლისურის სწავლაში.
-
-შეგიძლია ნახო ბავშვის პროგრესი,
-დასვა კითხვა და მიიღო პასუხი.
-
+<p class="lead">
+მშობლის პირადი და დაცული სივრცე.
+აქ შეგიძლია შექმნა საკუთარი ანგარიში,
+დააკავშირო ბავშვის ანგარიში სპეციალური
+კოდით და ნახო ბავშვის სასწავლო ინფორმაცია.
 </p>
+
+<div class="connect">
+
+<h3>
+🔐 უსაფრთხო კავშირი
+</h3>
+
+<p>
+1️⃣ შექმენი მშობლის ანგარიში.
+</p>
+
+<p>
+2️⃣ დაადასტურე ელფოსტა, თუ ამას სისტემა მოგთხოვს.
+</p>
+
+<p>
+3️⃣ შედი მშობლის ანგარიშში.
+</p>
+
+<p>
+4️⃣ შეიყვანე ბავშვის სპეციალური კოდი.
+</p>
+
+<p>
+5️⃣ ნახე მხოლოდ შენთან დაკავშირებული ბავშვის ინფორმაცია.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- 3D FAMILY -->
+
+<div class="card family">
+
+<div class="familyTitle">
+
+<h2>
+👨‍👩‍👧 Family Learning
+</h2>
+
+<p>
+Family • Learning • Progress
+</p>
+
+</div>
+
+<div class="heart one">💙</div>
+<div class="heart two">⭐</div>
+<div class="heart three">📚</div>
+<div class="heart four">✨</div>
+
+<div class="familyIcons">
+👨‍👩‍👧
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =====================================
-     3D FAMILY
-===================================== -->
+<!-- AUTH -->
 
-<section class="family-section">
-
-<div class="family-light"></div>
-
-
-<div class="family-title">
+<section class="card auth" id="authBox">
 
 <h2>
-👨‍👩‍👧 ჩვენი სასწავლო ოჯახი
+👨‍👩‍👧 მშობლის ანგარიში
 </h2>
 
-<p>
-ერთად სწავლა უფრო მარტივია ❤️
-</p>
+<div class="tabs">
+
+<button
+type="button"
+class="tab active"
+id="loginTab"
+onclick="showForm('login')">
+🔐 შესვლა
+</button>
+
+<button
+type="button"
+class="tab"
+id="registerTab"
+onclick="showForm('register')">
+📝 რეგისტრაცია
+</button>
 
 </div>
 
 
-<!-- FAMILY -->
-
-<div class="family">
-
-
-<div class="person">
-
-<div class="face">
-👨
-</div>
-
-<div class="clothes">
-👕
-</div>
-
-<div class="shoes">
-👖
-</div>
-
-</div>
-
-
-<div class="person">
-
-<div class="face">
-👩
-</div>
-
-<div class="clothes">
-👗
-</div>
-
-<div class="shoes">
-👠
-</div>
-
-</div>
-
-
-<div class="person">
-
-<div class="face">
-🧒
-</div>
-
-<div class="clothes">
-👕
-</div>
-
-<div class="shoes">
-👟
-</div>
-
-</div>
-
-
-</div>
-
-
-<div class="family-floor"></div>
-
-</section>
-
-
-<!-- =====================================
-     QUESTION SECTION
-===================================== -->
-
-<section class="questions">
-
-<div class="section-title">
-
-<span class="badge">
-ASK MARIAMI
-</span>
-
-<h2>
-❓ გაქვს შეკითხვა?
-</h2>
-
-<p>
-დაუსვი კითხვა მასწავლებელს და მიიღე პასუხი.
-</p>
-
-</div>
-
-
-<div class="question-card">
+<!-- LOGIN -->
 
 <form
-id="parentQuestionForm"
->
+id="loginForm"
+class="form active"
+onsubmit="loginParent(event)">
 
-<label>
-👤 მშობლის სახელი
-</label>
-
-<input
-type="text"
-id="parentName"
-placeholder="ჩაწერე შენი სახელი"
-required
->
-
+<div class="field">
 
 <label>
 📧 ელფოსტა
 </label>
 
 <input
+id="loginEmail"
 type="email"
-id="parentEmail"
-placeholder="example@email.com"
 required
->
+autocomplete="email"
+placeholder="parent@gmail.com">
 
+</div>
+
+
+<div class="field">
 
 <label>
-🎓 ბავშვის კლასი
+🔑 პაროლი
 </label>
 
-<select
-id="childGrade"
+<input
+id="loginPassword"
+type="password"
 required
-style="
-width:100%;
-padding:14px;
-margin-bottom:18px;
-border-radius:14px;
-border:1px solid #00eaff44;
-background:#020b18;
-color:white;
-font-size:16px;
-"
->
+autocomplete="current-password"
+placeholder="შეიყვანე პაროლი">
 
-<option value="">
-აირჩიე კლასი
-</option>
-
-<option value="2">
-მე-2 კლასი
-</option>
-
-<option value="3">
-მე-3 კლასი
-</option>
-
-<option value="4">
-მე-4 კლასი
-</option>
-
-</select>
-
-
-<label>
-💬 შენი კითხვა
-</label>
-
-<textarea
-id="questionText"
-placeholder="აქ დაწერე შენი კითხვა მასწავლებელ მარიამთან..."
-required
-></textarea>
+</div>
 
 
 <button
-type="submit"
-class="send-button"
->
-📨 კითხვის გაგზავნა
+class="btn"
+id="loginBtn"
+type="submit">
+🚀 მშობლის შესვლა
 </button>
-
-<p
-id="questionMessage"
-style="
-margin-top:15px;
-color:#00eaff;
-font-weight:bold;
-"
-></p>
 
 </form>
 
-</div>
 
+<!-- REGISTER -->
 
-<!-- =====================================
-     FEATURES
-===================================== -->
+<form
+id="registerForm"
+class="form"
+onsubmit="registerParent(event)">
 
-<div class="features">
+<div class="field">
 
+<label>
+👤 სახელი და გვარი
+</label>
 
-<div class="feature">
-
-<div class="feature-icon">
-📊
-</div>
-
-<h3>
-ბავშვის პროგრესი
-</h3>
-
-<p>
-მშობელს შეუძლია თვალყური
-ადევნოს ბავშვის სასწავლო პროგრესს.
-</p>
+<input
+id="registerName"
+type="text"
+required
+placeholder="მშობლის სახელი და გვარი">
 
 </div>
 
 
-<div class="feature">
+<div class="field">
 
-<div class="feature-icon">
-❓
-</div>
+<label>
+📧 ელფოსტა
+</label>
 
-<h3>
-კითხვები
-</h3>
-
-<p>
-ნებისმიერ სასწავლო საკითხზე
-შეგიძლია დაუსვა კითხვა მასწავლებელს.
-</p>
+<input
+id="registerEmail"
+type="email"
+required
+autocomplete="email"
+placeholder="parent@gmail.com">
 
 </div>
 
 
-<div class="feature">
+<div class="field">
 
-<div class="feature-icon">
-💬
+<label>
+🔑 პაროლი
+</label>
+
+<input
+id="registerPassword"
+type="password"
+required
+minlength="6"
+autocomplete="new-password"
+placeholder="მინიმუმ 6 სიმბოლო">
+
 </div>
 
-<h3>
-პასუხები
-</h3>
 
-<p>
-მასწავლებლის პასუხები
-მშობლის სივრცეში გამოჩნდება.
-</p>
+<button
+class="btn yellow"
+id="registerBtn"
+type="submit">
+📝 მშობლის რეგისტრაცია
+</button>
 
-</div>
+</form>
 
 
+<div
+id="authMessage"
+class="message">
 </div>
 
 </section>
 
 
+<!-- PARENT DASHBOARD -->
+
+<section
+id="dashboard"
+class="dashboard">
+
+<div class="card dashboardCard">
+
+<div class="dashboardTitle">
+
+<span class="badge">
+PARENT DASHBOARD
+</span>
+
+<h2>
+👨‍👩‍👧 მშობლის პირადი სივრცე
+</h2>
+
+<p id="parentWelcome">
+კეთილი იყოს შენი მობრძანება.
+</p>
+
+</div>
+
+
+<div class="connect">
+
+<h3>
+🔗 ბავშვის ანგარიშთან დაკავშირება
+</h3>
+
+<p>
+შეიყვანე ბავშვის მიერ მოწოდებული სპეციალური კოდი.
+</p>
+
+<input
+id="childCode"
+class="codeInput"
+type="text"
+maxlength="40"
+autocomplete="off"
+placeholder="მაგ: ABC12345">
+
+
+<button
+class="btn"
+id="connectBtn"
+onclick="connectChild()">
+🔗 ბავშვის დაკავშირება
+</button>
+
+
+<div
+id="connectMessage"
+class="message">
+</div>
+
+
+<!-- CHILD -->
+
+<div
+id="childCard"
+class="child">
+
+<h3>
+🎓 ბავშვის ინფორმაცია
+</h3>
+
+<div
+id="childName"
+class="childName">
+მოსწავლე
+</div>
+
+<p>
+აქ ნაჩვენებია მხოლოდ შენს ანგარიშთან დაკავშირებული ბავშვის ინფორმაცია.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+
+<b id="childGrade">
+-
+</b>
+
+კლასი
+
+</div>
+
+
+<div class="stat">
+
+<b id="childProgress">
+0%
+</b>
+
+პროგრესი
+
+</div>
+
+
+<div class="stat">
+
+<b id="childQuiz">
+0
+</b>
+
+Quiz
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="btn red logout"
+onclick="logoutParent()">
+🚪 გამოსვლა
+</button>
+
+</div>
+
+</section>
+
 </main>
 
 
-<!-- =====================================
-     FOOTER
-===================================== -->
+<footer style="
+text-align:center;
+padding:30px;
+color:#9dc7d5">
 
-<footer class="footer">
-
-⚡ English with Mariami
-•
-Parent Space
-•
-ოჯახი + სწავლა ❤️
+⚡ English with Mariami • Parent Space ❤️
 
 </footer>
 
 
 <script>
 
-/*
-==================================================
-PARENT QUESTION FORM
+/* =====================================================
+   SUPABASE CONNECTION
+   იყენებს config.js-ს
+===================================================== */
 
-ეს ნაწილი ამ ეტაპზე აჩვენებს შეტყობინებას.
-შემდეგ შეგვიძლია პირდაპირ Supabase-ს დავუკავშიროთ.
-==================================================
-*/
-
-const form =
-document.getElementById("parentQuestionForm");
-
-const message =
-document.getElementById("questionMessage");
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 
-form.addEventListener(
-"submit",
-function(event){
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(id,text){
+
+const el=document.getElementById(id);
+
+el.textContent=text;
+
+el.classList.add("showMessage");
+
+}
+
+
+function hideMessage(id){
+
+const el=document.getElementById(id);
+
+el.textContent="";
+
+el.classList.remove("showMessage");
+
+}
+
+
+/* =====================================================
+   SWITCH LOGIN / REGISTER
+===================================================== */
+
+function showForm(type){
+
+hideMessage("authMessage");
+
+const loginForm=
+document.getElementById("loginForm");
+
+const registerForm=
+document.getElementById("registerForm");
+
+const loginTab=
+document.getElementById("loginTab");
+
+const registerTab=
+document.getElementById("registerTab");
+
+
+if(type==="login"){
+
+loginForm.classList.add("active");
+registerForm.classList.remove("active");
+
+loginTab.classList.add("active");
+registerTab.classList.remove("active");
+
+}else{
+
+registerForm.classList.add("active");
+loginForm.classList.remove("active");
+
+registerTab.classList.add("active");
+loginTab.classList.remove("active");
+
+}
+
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+async function registerParent(event){
 
 event.preventDefault();
 
-const name =
-document.getElementById("parentName").value.trim();
+const name=
+document.getElementById("registerName")
+.value.trim();
 
-const email =
-document.getElementById("parentEmail").value.trim();
+const email=
+document.getElementById("registerEmail")
+.value.trim();
 
-const grade =
-document.getElementById("childGrade").value;
+const password=
+document.getElementById("registerPassword")
+.value;
 
-const question =
-document.getElementById("questionText").value.trim();
+const btn=
+document.getElementById("registerBtn");
+
+btn.disabled=true;
+
+showMessage(
+"authMessage",
+"⏳ მშობლის ანგარიშს ვქმნით..."
+);
 
 
-if(
-!name ||
-!email ||
-!grade ||
-!question
-){
+try{
 
-message.textContent =
-"⚠️ გთხოვ, ყველა ველი შეავსე.";
+const {
+data,
+error
+}=
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name,
+role:"parent"
+}
+}
+
+});
+
+
+if(error)
+throw error;
+
+
+if(!data.user){
+
+throw new Error(
+"ანგარიშის შექმნა ვერ მოხერხდა."
+);
+
+}
+
+
+/*
+   პროფილის არსებობის შემოწმება
+*/
+
+const {
+data:profile,
+error:profileError
+}=
+await supabaseClient
+.from("profiles")
+.select("user_id,role")
+.eq("user_id",data.user.id)
+.maybeSingle();
+
+
+if(profileError){
+
+console.warn(
+"profile check:",
+profileError
+);
+
+}
+
+
+/*
+   თუ პროფილი ჯერ არ არსებობს,
+   ვცდილობთ parent პროფილის შექმნას.
+*/
+
+if(!profile){
+
+const {
+error:insertError
+}=
+await supabaseClient
+.from("profiles")
+.insert({
+
+user_id:data.user.id,
+
+full_name:name,
+
+role:"parent",
+
+points:0
+
+});
+
+
+if(insertError){
+
+console.warn(
+"profile insert:",
+insertError
+);
+
+}
+
+}
+
+
+/*
+   თუ ავტომატურად შევიდა
+*/
+
+if(data.session){
+
+showMessage(
+"authMessage",
+"✅ ანგარიში შექმნილია!"
+);
+
+await openParentDashboard();
+
+}else{
+
+showMessage(
+"authMessage",
+"✅ რეგისტრაცია დასრულებულია! თუ ელფოსტის დადასტურება მოგთხოვა, დაადასტურე ელფოსტა და შემდეგ შედი."
+);
+
+showForm("login");
+
+document.getElementById(
+"loginEmail"
+).value=email;
+
+}
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"authMessage",
+"❌ "+
+(
+error.message ||
+"რეგისტრაცია ვერ მოხერხდა."
+)
+);
+
+}finally{
+
+btn.disabled=false;
+
+}
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+async function loginParent(event){
+
+event.preventDefault();
+
+const email=
+document.getElementById("loginEmail")
+.value.trim();
+
+const password=
+document.getElementById("loginPassword")
+.value;
+
+const btn=
+document.getElementById("loginBtn");
+
+btn.disabled=true;
+
+showMessage(
+"authMessage",
+"⏳ ანგარიშს ვამოწმებთ..."
+);
+
+
+try{
+
+const {
+data,
+error
+}=
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error)
+throw error;
+
+
+const user=data.user;
+
+
+if(!user){
+
+throw new Error(
+"მომხმარებელი ვერ მოიძებნა."
+);
+
+}
+
+
+/*
+   რეალური role-ის შემოწმება
+*/
+
+const {
+data:profile,
+error:profileError
+}=
+await supabaseClient
+.from("profiles")
+.select(
+"user_id,full_name,role"
+)
+.eq("user_id",user.id)
+.maybeSingle();
+
+
+if(profileError)
+throw profileError;
+
+
+if(!profile){
+
+await supabaseClient.auth.signOut();
+
+throw new Error(
+"მშობლის პროფილი ვერ მოიძებნა."
+);
+
+}
+
+
+if(profile.role!=="parent"){
+
+await supabaseClient.auth.signOut();
+
+throw new Error(
+"ეს ანგარიში მშობლის ანგარიში არ არის."
+);
+
+}
+
+
+showMessage(
+"authMessage",
+"✅ წარმატებით შეხვედი!"
+);
+
+await openParentDashboard();
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"authMessage",
+"❌ "+
+(
+error.message ||
+"შესვლა ვერ მოხერხდა."
+)
+);
+
+}finally{
+
+btn.disabled=false;
+
+}
+
+}
+
+
+/* =====================================================
+   OPEN DASHBOARD
+===================================================== */
+
+async function openParentDashboard(){
+
+document.getElementById(
+"authBox"
+).style.display="none";
+
+document.getElementById(
+"dashboard"
+).classList.add("show");
+
+
+const {
+data:{
+user
+}
+}=
+await supabaseClient.auth.getUser();
+
+
+if(user){
+
+const {
+data:profile
+}=
+await supabaseClient
+.from("profiles")
+.select("full_name,role")
+.eq("user_id",user.id)
+.maybeSingle();
+
+
+if(profile){
+
+document.getElementById(
+"parentWelcome"
+).textContent=
+"კეთილი იყოს შენი მობრძანება, "+
+(
+profile.full_name ||
+"მშობელო"
+)+
+"! ❤️";
+
+}
+
+}
+
+
+await loadChildren();
+
+}
+
+
+/* =====================================================
+   CONNECT CHILD
+===================================================== */
+
+async function connectChild(){
+
+const code=
+document.getElementById("childCode")
+.value
+.trim()
+.toUpperCase();
+
+const btn=
+document.getElementById("connectBtn");
+
+hideMessage("connectMessage");
+
+if(!code){
+
+showMessage(
+"connectMessage",
+"⚠️ ჯერ შეიყვანე ბავშვის სპეციალური კოდი."
+);
+
+return;
+
+}
+
+
+const {
+data:{
+user
+}
+}=
+await supabaseClient.auth.getUser();
+
+
+if(!user){
+
+showMessage(
+"connectMessage",
+"❌ ავტორიზაცია დასრულებულია. თავიდან შედი."
+);
+
+return;
+
+}
+
+
+btn.disabled=true;
+
+showMessage(
+"connectMessage",
+"⏳ ბავშვის კოდს ვამოწმებთ..."
+);
+
+
+try{
+
+/*
+=====================================================
+   რეალური Supabase RPC
+
+   link_parent_to_child(p_code)
+=====================================================
+*/
+
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"link_parent_to_child",
+{
+p_code:code
+}
+);
+
+
+if(error)
+throw error;
+
+
+await loadChildren();
+
+
+const child=
+Array.isArray(data)
+?data[0]
+:data;
+
+
+if(child){
+
+displayChild(child);
+
+showMessage(
+"connectMessage",
+"✅ ბავშვი წარმატებით დაუკავშირდა შენს ანგარიშს!"
+);
+
+}else{
+
+/*
+   RPC-ს შეიძლება მხოლოდ კავშირის შექმნა
+   ჰქონდეს და მონაცემები get_parent_children-მა
+   დააბრუნოს.
+*/
+
+showMessage(
+"connectMessage",
+"✅ კავშირი წარმატებით შეიქმნა!"
+);
+
+}
+
+
+}catch(error){
+
+console.error(
+"Child linking:",
+error
+);
+
+showMessage(
+"connectMessage",
+"❌ "+
+(
+error.message ||
+"ბავშვის დაკავშირება ვერ მოხერხდა."
+)
+);
+
+}finally{
+
+btn.disabled=false;
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD CHILDREN
+===================================================== */
+
+async function loadChildren(){
+
+try{
+
+const {
+data,
+error
+}=
+await supabaseClient.rpc(
+"get_parent_children"
+);
+
+
+if(error){
+
+console.warn(
+"get_parent_children:",
+error
+);
+
+return;
+
+}
+
+
+if(!data)
+return;
+
+
+/*
+   ვიღებთ მხოლოდ პირველ დაკავშირებულ ბავშვს.
+   მომავალში შესაძლებელია რამდენიმე ბავშვის
+   დამატებაც.
+*/
+
+const children=
+Array.isArray(data)
+?data
+:[data];
+
+
+if(children.length===0){
+
+document.getElementById(
+"childCard"
+).classList.remove("show");
+
+return;
+
+}
+
+
+displayChild(children[0]);
+
+
+}catch(error){
+
+console.error(
+"Loading children:",
+error
+);
+
+}
+
+}
+
+
+/* =====================================================
+   DISPLAY CHILD
+===================================================== */
+
+function displayChild(child){
+
+if(!child)
+return;
+
+
+const name=
+child.full_name ||
+child.student_name ||
+child.name ||
+"მოსწავლე";
+
+
+const grade=
+child.grade ??
+child.student_grade ??
+"-";
+
+
+const progress=
+child.progress ??
+child.progress_percent ??
+0;
+
+
+const quiz=
+child.quiz_count ??
+child.quizzes ??
+child.quiz ??
+0;
+
+
+document.getElementById(
+"childName"
+).textContent=
+"👨‍🎓 "+name;
+
+
+document.getElementById(
+"childGrade"
+).textContent=
+grade;
+
+
+document.getElementById(
+"childProgress"
+).textContent=
+String(progress).includes("%")
+?progress
+:String(progress)+"%";
+
+
+document.getElementById(
+"childQuiz"
+).textContent=
+quiz;
+
+
+document.getElementById(
+"childCard"
+).classList.add("show");
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logoutParent(){
+
+await supabaseClient.auth.signOut();
+
+location.reload();
+
+}
+
+
+/* =====================================================
+   SESSION CHECK
+===================================================== */
+
+async function checkSession(){
+
+try{
+
+const {
+data:{
+session
+}
+}=
+await supabaseClient.auth.getSession();
+
+
+if(!session)
+return;
+
+
+const {
+data:{
+user
+}
+}=
+await supabaseClient.auth.getUser();
+
+
+if(!user)
+return;
+
+
+/*
+   რეალური role-ის შემოწმება
+*/
+
+const {
+data:profile,
+error
+}=
+await supabaseClient
+.from("profiles")
+.select("full_name,role")
+.eq("user_id",user.id)
+.maybeSingle();
+
+
+if(error || !profile){
+
+await supabaseClient.auth.signOut();
+
+return;
+
+}
+
+
+if(profile.role!=="parent"){
+
+await supabaseClient.auth.signOut();
 
 return;
 
@@ -1527,19 +1864,51 @@ return;
 
 
 /*
-შემდეგ ეტაპზე აქ ჩავრთავთ Supabase-ს.
+   ავტორიზებული parent
 */
 
-message.textContent =
-"✅ კითხვა მზადაა გასაგზავნად!";
+document.getElementById(
+"authBox"
+).style.display="none";
+
+document.getElementById(
+"dashboard"
+).classList.add("show");
 
 
-form.reset();
+document.getElementById(
+"parentWelcome"
+).textContent=
+"კეთილი იყოს შენი მობრძანება, "+
+(
+profile.full_name ||
+"მშობელო"
+)+
+"! ❤️";
 
-});
+
+await loadChildren();
+
+
+}catch(error){
+
+console.error(
+"Session:",
+error
+);
+
+}
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkSession();
 
 </script>
-
 
 </body>
 </html>
