@@ -7,6 +7,11 @@
 <title>English with Mariami — English Academy</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -25,318 +30,734 @@ body{
     background:#eefaff;
 }
 
-/* =========================
-   3D WORLD
-========================= */
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.wrap{
+    width:min(1250px,calc(100% - 28px));
+    margin:auto;
+}
+
+
+/* =========================================================
+   FUTURISTIC 3D WORLD
+========================================================= */
 
 .world{
     position:fixed;
     inset:0;
-    overflow:hidden;
     z-index:-10;
+    overflow:hidden;
     perspective:1200px;
-    background:
-        radial-gradient(circle at 50% 25%,
-        #ffffff 0%,
-        #effcff 35%,
-        #bcecff 70%,
-        #48bdf2 100%);
-}
 
-/* Light aura */
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #ffffff 0%,
+            #f0fcff 30%,
+            #bdeeff 58%,
+            #50c8f5 82%,
+            #0876b8 100%
+        );
+}
 
 .world::before{
     content:"";
     position:absolute;
-    width:80vw;
-    height:80vw;
-    max-width:1000px;
-    max-height:1000px;
-    left:50%;
-    top:35%;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
+    inset:-20%;
+
     background:
-        radial-gradient(circle,
-        #ffffff 0%,
-        #bdf5ff 25%,
-        #00cfff33 50%,
-        transparent 72%);
-    animation:aura 7s ease-in-out infinite;
+        radial-gradient(
+            circle at 50% 45%,
+            transparent 20%,
+            #00cfff22 50%,
+            #006cff45 100%
+        );
+
+    animation:worldPulse 7s ease-in-out infinite;
 }
 
-@keyframes aura{
+@keyframes worldPulse{
+
     0%,100%{
-        transform:translate(-50%,-50%) scale(1);
+        transform:scale(1);
+        opacity:.7;
     }
+
     50%{
-        transform:translate(-50%,-50%) scale(1.12);
+        transform:scale(1.12);
+        opacity:1;
     }
 }
 
-/* =========================
+
+/* =========================================================
    3D FLOOR
-========================= */
+========================================================= */
 
 .floor{
     position:absolute;
+
     width:160%;
-    height:55%;
+    height:60%;
+
     left:-30%;
-    bottom:-25%;
+    bottom:-28%;
 
     transform:
         perspective(500px)
         rotateX(68deg);
 
     background-image:
-        linear-gradient(#00aaff44 1px,transparent 1px),
-        linear-gradient(90deg,#00aaff44 1px,transparent 1px);
+        linear-gradient(
+            #00aaff55 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            #00aaff55 1px,
+            transparent 1px
+        );
 
-    background-size:60px 60px;
+    background-size:
+        60px 60px;
 
     mask-image:
-        linear-gradient(to top,#000,transparent);
+        linear-gradient(
+            to top,
+            black,
+            transparent
+        );
 
     animation:
         floorMove 8s linear infinite;
 }
 
 @keyframes floorMove{
+
     to{
         background-position:
-        0 60px,
-        60px 0;
+            0 60px,
+            60px 0;
     }
 }
 
-/* =========================
-   NEON LETTERS
-========================= */
+
+/* =========================================================
+   3D ABC LETTERS
+========================================================= */
 
 .letters{
     position:absolute;
     inset:0;
+
     transform-style:preserve-3d;
 }
 
 .letter{
+
     position:absolute;
 
     font-family:Arial,sans-serif;
+
     font-weight:1000;
 
-    font-size:clamp(
-        50px,
-        8vw,
-        125px
-    );
-
-    color:#ffffff;
+    color:#fff;
 
     text-shadow:
-        0 0 5px #ffffff,
-        0 0 12px #00eaff,
-        0 0 30px #009cff,
-        0 0 60px #006cff,
-        0 0 100px #00aaff;
+        0 0 5px #fff,
+        0 0 14px #00eaff,
+        0 0 35px #009cff,
+        0 0 70px #006cff,
+        0 0 120px #00aaff;
 
     filter:
-        drop-shadow(0 20px 25px #007cff66);
+        drop-shadow(
+            0 20px 25px #007cff66
+        );
 
-    opacity:.82;
-
-    animation:
-        float3d 9s ease-in-out infinite alternate,
-        neonPulse 4s ease-in-out infinite;
+    opacity:.85;
 
     user-select:none;
+
+    animation:
+        letterFloat
+        9s
+        ease-in-out
+        infinite
+        alternate;
 }
 
-/* Positions */
+.a{
+    left:3%;
+    top:12%;
+    font-size:110px;
+    animation-delay:-1s;
+}
 
-.a{left:3%;top:12%;animation-delay:-1s}
-.b{left:15%;top:67%;animation-delay:-5s}
-.c{left:28%;top:8%;animation-delay:-2s}
-.d{left:42%;top:75%;animation-delay:-7s}
-.e{left:55%;top:7%;animation-delay:-3s}
-.f{left:68%;top:63%;animation-delay:-6s}
-.g{left:81%;top:17%;animation-delay:-4s}
-.h{left:91%;top:70%;animation-delay:-8s}
-
-.i{
-    left:7%;
-    top:43%;
+.b{
+    left:15%;
+    top:70%;
     font-size:70px;
+    animation-delay:-5s;
 }
 
-.j{
-    left:75%;
-    top:40%;
-    font-size:70px;
+.c{
+    left:28%;
+    top:7%;
+    font-size:125px;
+    animation-delay:-2s;
 }
 
-@keyframes float3d{
+.d{
+    left:42%;
+    top:76%;
+    font-size:75px;
+    animation-delay:-7s;
+}
+
+.e{
+    left:55%;
+    top:8%;
+    font-size:110px;
+    animation-delay:-3s;
+}
+
+.f{
+    left:68%;
+    top:65%;
+    font-size:80px;
+    animation-delay:-6s;
+}
+
+.g{
+    left:81%;
+    top:16%;
+    font-size:120px;
+    animation-delay:-4s;
+}
+
+.h{
+    left:91%;
+    top:71%;
+    font-size:75px;
+    animation-delay:-8s;
+}
+
+@keyframes letterFloat{
 
     0%{
         transform:
-            translate3d(0,0,-100px)
-            rotateX(10deg)
-            rotateY(-20deg)
-            rotateZ(-3deg);
+            translate3d(
+                0,
+                0,
+                -250px
+            )
+            rotateX(15deg)
+            rotateY(-25deg)
+            rotateZ(-4deg);
     }
 
     50%{
         transform:
-            translate3d(35px,-40px,100px)
+            translate3d(
+                35px,
+                -45px,
+                150px
+            )
             rotateX(-15deg)
-            rotateY(25deg)
-            rotateZ(4deg);
+            rotateY(30deg)
+            rotateZ(5deg);
     }
 
     100%{
         transform:
-            translate3d(-20px,25px,20px)
-            rotateX(8deg)
-            rotateY(-10deg)
-            rotateZ(-2deg);
+            translate3d(
+                -25px,
+                25px,
+                40px
+            )
+            rotateX(10deg)
+            rotateY(-15deg)
+            rotateZ(-3deg);
     }
 }
 
-@keyframes neonPulse{
+
+/* =========================================================
+   CENTRAL 3D CORE
+========================================================= */
+
+.core{
+
+    position:absolute;
+
+    left:50%;
+    top:43%;
+
+    width:
+        min(
+            520px,
+            70vw
+        );
+
+    aspect-ratio:1;
+
+    transform:
+        translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #fff 0%,
+            #e8fcff 25%,
+            #a9eaff 52%,
+            #39bdf5 75%,
+            #007bc4 100%
+        );
+
+    box-shadow:
+
+        inset
+        -35px -45px
+        80px
+        #0068aa55,
+
+        0 30px 120px
+        #00aaff88,
+
+        0 0 100px
+        #00eaffaa;
+
+    animation:
+        coreFloat
+        6s
+        ease-in-out
+        infinite;
+
+    opacity:.9;
+}
+
+@keyframes coreFloat{
 
     0%,100%{
-        text-shadow:
-            0 0 5px #fff,
-            0 0 12px #00eaff,
-            0 0 30px #009cff,
-            0 0 60px #006cff;
+        transform:
+            translate(-50%,-50%)
+            rotateX(10deg)
+            rotateY(-10deg);
     }
 
     50%{
-        text-shadow:
-            0 0 8px #fff,
-            0 0 20px #00eaff,
-            0 0 50px #009cff,
-            0 0 100px #006cff;
+        transform:
+            translate(-50%,-53%)
+            rotateX(-8deg)
+            rotateY(18deg);
     }
 }
 
-/* =========================
+.core::before{
+
+    content:"ABC";
+
+    position:absolute;
+    inset:0;
+
+    display:grid;
+    place-items:center;
+
+    font-size:
+        clamp(
+            75px,
+            11vw,
+            140px
+        );
+
+    font-weight:1000;
+
+    letter-spacing:10px;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 25px #00eaff,
+        0 0 55px #008cff,
+        0 0 100px #006cff;
+}
+
+
+/* =========================================================
+   ROTATING RINGS
+========================================================= */
+
+.ring{
+
+    position:absolute;
+
+    left:50%;
+    top:43%;
+
+    border-radius:50%;
+
+    border:
+        2px solid
+        #00eaff88;
+
+    box-shadow:
+        0 0 20px #00eaff,
+        inset 0 0 20px #00eaff55;
+}
+
+.ring1{
+
+    width:530px;
+    height:530px;
+
+    transform:
+        translate(-50%,-50%)
+        rotateX(70deg);
+
+    animation:
+        ringOne
+        12s
+        linear
+        infinite;
+}
+
+.ring2{
+
+    width:430px;
+    height:430px;
+
+    transform:
+        translate(-50%,-50%)
+        rotateY(70deg);
+
+    animation:
+        ringTwo
+        16s
+        linear
+        infinite
+        reverse;
+}
+
+.ring3{
+
+    width:650px;
+    height:650px;
+
+    transform:
+        translate(-50%,-50%)
+        rotateX(65deg)
+        rotateY(15deg);
+
+    border-color:#fff8;
+
+    animation:
+        ringThree
+        20s
+        linear
+        infinite;
+}
+
+@keyframes ringOne{
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotateX(70deg)
+            rotateZ(360deg);
+    }
+}
+
+@keyframes ringTwo{
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotateY(70deg)
+            rotateZ(-360deg);
+    }
+}
+
+@keyframes ringThree{
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotateX(65deg)
+            rotateY(375deg);
+    }
+}
+
+
+/* =========================================================
+   FLOATING WORDS
+========================================================= */
+
+.word{
+
+    position:absolute;
+
+    padding:
+        13px 18px;
+
+    border-radius:20px;
+
+    background:
+        #ffffffcc;
+
+    border:
+        1px solid
+        #00bfff88;
+
+    color:#0078b5;
+
+    font-size:14px;
+
+    font-weight:1000;
+
+    letter-spacing:1px;
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 0 30px #00cfff55,
+        0 18px 40px #007cff22;
+
+    animation:
+        wordFloat
+        5s
+        ease-in-out
+        infinite;
+}
+
+.word1{
+    left:7%;
+    top:35%;
+}
+
+.word2{
+    right:7%;
+    top:29%;
+    animation-delay:-1.5s;
+}
+
+.word3{
+    right:13%;
+    top:53%;
+    animation-delay:-3s;
+}
+
+.word4{
+    left:11%;
+    bottom:20%;
+    animation-delay:-2s;
+}
+
+@keyframes wordFloat{
+
+    50%{
+        transform:
+            translateY(-18px)
+            rotateY(10deg);
+    }
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.particle{
+
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 20px #00eaff,
+        0 0 35px #009cff;
+
+    animation:
+        particleUp
+        var(--speed)
+        linear
+        infinite;
+}
+
+@keyframes particleUp{
+
+    0%{
+        transform:
+            translate(
+                var(--x),
+                110vh
+            );
+
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    80%{
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                calc(var(--x) + 100px),
+                -20vh
+            );
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
    NAVIGATION
-========================= */
+========================================================= */
 
 .top{
+
     position:sticky;
     top:0;
     z-index:100;
 
-    background:#ffffffdf;
+    background:
+        #ffffffdf;
 
-    backdrop-filter:blur(18px);
+    backdrop-filter:
+        blur(18px);
 
     border-bottom:
-        1px solid #00aaff55;
+        1px solid
+        #00aaff55;
 
     box-shadow:
-        0 8px 35px #007cff20;
-}
-
-.wrap{
-    width:min(
-        1250px,
-        calc(100% - 28px)
-    );
-
-    margin:auto;
+        0 8px 35px
+        #007cff20;
 }
 
 .nav{
+
     min-height:68px;
 
     display:flex;
-    justify-content:space-between;
+
+    justify-content:
+        space-between;
+
     align-items:center;
 
     gap:15px;
 }
 
 .brand{
+
     font-size:18px;
+
     font-weight:1000;
 
     color:#06416d;
 
     text-shadow:
-        0 0 15px #00bfff66;
+        0 0 15px
+        #00bfff66;
 }
 
 .navlinks{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:7px;
 }
 
 .navlinks a{
-    padding:9px 12px;
+
+    padding:
+        9px 12px;
 
     border-radius:12px;
 
-    background:#ffffff;
+    background:white;
 
     border:
-        1px solid #00aaff44;
+        1px solid
+        #00aaff44;
 
     font-size:13px;
-    font-weight:800;
 
-    box-shadow:
-        0 5px 18px #007cff12;
+    font-weight:800;
 
     transition:.25s;
 }
 
 .navlinks a:hover{
+
     background:#00c9f2;
-    color:#00202c;
+
+    color:#00202e;
 
     transform:
         translateY(-3px);
 
     box-shadow:
-        0 0 25px #00eaff99;
+        0 0 25px
+        #00eaff99;
 }
 
-/* =========================
+
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero{
+
     min-height:
         calc(100vh - 68px);
 
     display:flex;
+
     align-items:center;
 
     padding:
-        50px 0;
+        45px 0;
 }
 
 .hero-grid{
+
     width:100%;
 
     display:grid;
 
     grid-template-columns:
-        1.05fr
-        .95fr;
+        1fr 1fr;
 
-    gap:40px;
+    gap:35px;
 
     align-items:center;
 }
 
 .badge{
+
     display:inline-block;
 
     padding:
@@ -347,17 +768,20 @@ body{
     background:#ffffffdd;
 
     border:
-        1px solid #00bfff77;
+        1px solid
+        #00bfff77;
 
     color:#007bbd;
 
     font-weight:1000;
 
     box-shadow:
-        0 0 30px #00cfff33;
+        0 0 30px
+        #00cfff33;
 }
 
 h1{
+
     font-size:
         clamp(
             45px,
@@ -373,17 +797,21 @@ h1{
     color:#062d4d;
 
     text-shadow:
-        0 12px 35px #008cff25;
+        0 12px 35px
+        #008cff25;
 }
 
 h1 span{
+
     color:#009fe8;
 
     text-shadow:
-        0 0 25px #00cfff88;
+        0 0 25px
+        #00cfff88;
 }
 
 .lead{
+
     max-width:720px;
 
     font-size:18px;
@@ -394,14 +822,18 @@ h1 span{
 }
 
 .buttons{
+
     display:flex;
+
     flex-wrap:wrap;
+
     gap:12px;
 
     margin-top:25px;
 }
 
 .btn{
+
     display:inline-block;
 
     padding:
@@ -411,262 +843,67 @@ h1 span{
 
     font-weight:1000;
 
-    border:0;
-
-    cursor:pointer;
-
     transition:.25s;
 }
 
 .btn:hover{
+
     transform:
         translateY(-5px)
         scale(1.03);
 }
 
 .primary{
+
     background:#00c9f2;
 
     color:#00202e;
 
     box-shadow:
-        0 12px 35px #00bfff55;
+        0 12px 35px
+        #00bfff55;
 }
 
 .yellow{
+
     background:#ffe600;
 
     color:#211c00;
 
     box-shadow:
-        0 12px 35px #ffd90055;
+        0 12px 35px
+        #ffd90055;
 }
 
-/* =========================
-   CENTRAL 3D ORB
-========================= */
+
+/* =========================================================
+   VISUAL AREA
+========================================================= */
 
 .visual{
-    position:relative;
-
-    min-height:470px;
-
-    display:grid;
-    place-items:center;
-
-    perspective:1000px;
-}
-
-.orb{
-    width:
-        min(
-            390px,
-            70vw
-        );
-
-    aspect-ratio:1;
-
-    border-radius:50%;
 
     position:relative;
 
-    background:
-        radial-gradient(
-            circle at 30% 25%,
-            #ffffff 0%,
-            #ecfcff 30%,
-            #bceeff 55%,
-            #54c8f8 75%,
-            #008dde 100%
-        );
-
-    box-shadow:
-
-        inset
-        -35px -40px
-        70px
-        #0067aa55,
-
-        0 30px 100px
-        #00aaff77,
-
-        0 0 90px
-        #00eaff88;
-
-    transform:
-        rotateX(12deg)
-        rotateY(-15deg);
-
-    animation:
-        orbFloat 6s ease-in-out infinite;
-
-    transform-style:preserve-3d;
-}
-
-@keyframes orbFloat{
-
-    0%,100%{
-        transform:
-            rotateX(12deg)
-            rotateY(-15deg)
-            translateY(0);
-    }
-
-    50%{
-        transform:
-            rotateX(-8deg)
-            rotateY(18deg)
-            translateY(-15px);
-    }
-}
-
-.orb::before{
-
-    content:"ABC";
-
-    position:absolute;
-
-    inset:0;
+    min-height:500px;
 
     display:grid;
+
     place-items:center;
-
-    font-size:
-        clamp(
-            75px,
-            11vw,
-            130px
-        );
-
-    font-weight:1000;
-
-    letter-spacing:10px;
-
-    color:#ffffff;
-
-    text-shadow:
-        0 0 10px #fff,
-        0 0 25px #00eaff,
-        0 0 60px #007cff;
-
-    transform:
-        translateZ(90px);
 }
 
-.orb::after{
 
-    content:
-        "A   B   C   D   E   F   G   H";
-
-    position:absolute;
-
-    inset:-38px;
-
-    display:grid;
-    place-items:center;
-
-    border:
-        2px solid #00bfff55;
-
-    border-radius:50%;
-
-    color:#fff;
-
-    font-weight:1000;
-
-    font-size:22px;
-
-    letter-spacing:4px;
-
-    text-shadow:
-        0 0 8px #fff,
-        0 0 20px #00bfff,
-        0 0 40px #007cff;
-
-    box-shadow:
-        0 0 40px #00bfff55;
-
-    animation:
-        ring 14s linear infinite;
-}
-
-@keyframes ring{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* =========================
-   FLOATING CARDS
-========================= */
-
-.float-card{
-
-    position:absolute;
-
-    padding:
-        14px 18px;
-
-    border-radius:18px;
-
-    background:#ffffffdf;
-
-    border:
-        1px solid #00bfff77;
-
-    color:#087ab6;
-
-    font-weight:1000;
-
-    box-shadow:
-        0 18px 45px #007cff33,
-        0 0 30px #00cfff33;
-
-    backdrop-filter:
-        blur(12px);
-
-    animation:
-        cardFloat 4s ease-in-out infinite;
-}
-
-.fc1{
-    left:0;
-    top:8%;
-}
-
-.fc2{
-    right:0;
-    top:30%;
-
-    animation-delay:-1.5s;
-}
-
-.fc3{
-    left:8%;
-    bottom:7%;
-
-    animation-delay:-2.5s;
-}
-
-@keyframes cardFloat{
-
-    50%{
-        transform:
-            translateY(-15px)
-            rotate(2deg);
-    }
-}
-
-/* =========================
+/* =========================================================
    GRADES
-========================= */
+========================================================= */
 
 .section{
+
     padding:
         70px 0;
 }
 
 .section-title{
+
     text-align:center;
 
     margin-bottom:
@@ -674,6 +911,7 @@ h1 span{
 }
 
 .section-title h2{
+
     margin:
         12px 0;
 
@@ -688,6 +926,7 @@ h1 span{
 }
 
 .muted{
+
     color:#58758a;
 }
 
@@ -708,17 +947,19 @@ h1 span{
 
     border-radius:25px;
 
-    background:#ffffffdf;
+    background:
+        #ffffffdf;
 
     border:
-        1px solid #00aaff55;
+        1px solid
+        #00aaff55;
 
     backdrop-filter:
         blur(15px);
 
     box-shadow:
-        0 20px 60px #007cff22,
-        0 0 35px #00cfff18;
+        0 20px 60px
+        #007cff22;
 
     transition:.3s;
 }
@@ -726,12 +967,11 @@ h1 span{
 .card:hover{
 
     transform:
-        translateY(-10px)
-        rotateX(2deg);
+        translateY(-10px);
 
     box-shadow:
-        0 30px 75px #007cff30,
-        0 0 45px #00cfff44;
+        0 30px 75px
+        #007cff35;
 }
 
 .card h3{
@@ -740,7 +980,8 @@ h1 span{
 
     font-size:25px;
 
-    margin-bottom:12px;
+    margin-bottom:
+        12px;
 }
 
 .card p{
@@ -749,12 +990,14 @@ h1 span{
 
     color:#46677c;
 
-    margin-bottom:20px;
+    margin-bottom:
+        20px;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 .footer{
 
@@ -763,17 +1006,20 @@ h1 span{
 
     text-align:center;
 
-    background:#ffffffbb;
+    background:
+        #ffffffbb;
 
     border-top:
-        1px solid #00aaff33;
+        1px solid
+        #00aaff33;
 
     color:#628196;
 }
 
-/* =========================
+
+/* =========================================================
    TABLET
-========================= */
+========================================================= */
 
 @media(max-width:900px){
 
@@ -786,23 +1032,29 @@ h1 span{
     }
 
     .lead{
+
         margin:auto;
     }
 
     .buttons{
+
         justify-content:center;
     }
 
     .visual{
-        min-height:420px;
+
+        min-height:
+            430px;
     }
 
     .grid{
+
         grid-template-columns:
             repeat(2,1fr);
     }
 
     .nav{
+
         flex-direction:
             column;
 
@@ -811,25 +1063,59 @@ h1 span{
     }
 
     .navlinks{
-        justify-content:center;
+
+        justify-content:
+            center;
+    }
+
+    .core{
+
+        width:370px;
+    }
+
+    .ring1{
+
+        width:390px;
+        height:390px;
+    }
+
+    .ring2{
+
+        width:320px;
+        height:320px;
+    }
+
+    .ring3{
+
+        width:470px;
+        height:470px;
     }
 }
 
-/* =========================
-   ANDROID PHONE
-========================= */
+
+/* =========================================================
+   ANDROID
+========================================================= */
 
 @media(max-width:600px){
 
     .wrap{
+
         width:
             calc(100% - 20px);
     }
 
+    .navlinks{
+
+        gap:4px;
+    }
+
     .navlinks a{
-        font-size:11px;
+
+        font-size:10px;
+
         padding:
-            8px 9px;
+            7px 8px;
     }
 
     .hero{
@@ -837,113 +1123,172 @@ h1 span{
         min-height:auto;
 
         padding:
-            45px 0 30px;
+            40px 0 25px;
     }
 
     h1{
 
         font-size:
             clamp(
-                40px,
+                39px,
                 12vw,
                 55px
             );
     }
 
     .lead{
+
         font-size:16px;
     }
 
     .visual{
-        min-height:340px;
+
+        min-height:
+            350px;
     }
 
-    .orb{
+    .core{
+
         width:245px;
     }
 
-    .orb::after{
-        inset:-22px;
-        font-size:11px;
-        letter-spacing:2px;
+    .core::before{
+
+        font-size:70px;
+
+        letter-spacing:5px;
     }
 
-    .float-card{
-        font-size:11px;
+    .ring1{
+
+        width:285px;
+        height:285px;
+    }
+
+    .ring2{
+
+        width:225px;
+        height:225px;
+    }
+
+    .ring3{
+
+        width:350px;
+        height:350px;
+    }
+
+    .letter{
+
+        font-size:
+            48px!important;
+
+        opacity:.5;
+    }
+
+    .word{
+
+        font-size:10px;
+
         padding:
-            9px 11px;
+            8px 10px;
     }
 
-    .fc1{
+    .word1{
+
         left:0;
-        top:5%;
+        top:4%;
     }
 
-    .fc2{
+    .word2{
+
         right:0;
         top:25%;
     }
 
-    .fc3{
+    .word3{
+
+        right:1%;
+        top:52%;
+    }
+
+    .word4{
+
         left:2%;
-        bottom:3%;
-    }
-
-    .letter{
-        font-size:50px;
-    }
-
-    .i,
-    .j{
-        display:none;
+        bottom:2%;
     }
 
     .grid{
+
         grid-template-columns:
             1fr;
     }
 
     .card{
-        padding:22px;
+
+        padding:
+            22px;
     }
 
     .section{
+
         padding:
             50px 0;
     }
 }
 
-/* =========================
+
+/* =========================================================
    SMALL PHONES
-========================= */
+========================================================= */
 
 @media(max-width:380px){
 
+    .core{
+
+        width:210px;
+    }
+
+    .core::before{
+
+        font-size:
+            55px;
+    }
+
+    .ring1{
+
+        width:240px;
+        height:240px;
+    }
+
+    .ring2{
+
+        width:185px;
+        height:185px;
+    }
+
+    .ring3{
+
+        width:290px;
+        height:290px;
+    }
+
+    .letter{
+
+        font-size:
+            38px!important;
+    }
+
     h1{
-        font-size:38px;
-    }
 
-    .orb{
-        width:215px;
-    }
-
-    .float-card{
-        font-size:10px;
-    }
-
-    .navlinks{
-        gap:4px;
-    }
-
-    .navlinks a{
-        padding:
-            7px 8px;
+        font-size:
+            37px;
     }
 }
 
-/* =========================
-   PERFORMANCE MODE
-========================= */
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -952,24 +1297,23 @@ h1 span{
     *::after{
 
         animation-duration:
-            .01ms !important;
+            .01ms!important;
 
         animation-iteration-count:
-            1 !important;
-
-        scroll-behavior:
-            auto !important;
+            1!important;
     }
 }
 
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =======================================================
      3D BACKGROUND
-========================= -->
+======================================================= -->
 
 <div class="world">
 
@@ -983,19 +1327,83 @@ h1 span{
         <span class="letter f">F</span>
         <span class="letter g">G</span>
         <span class="letter h">H</span>
-        <span class="letter i">I</span>
-        <span class="letter j">J</span>
 
     </div>
+
+
+    <div class="core"></div>
+
+    <div class="ring ring1"></div>
+    <div class="ring ring2"></div>
+    <div class="ring ring3"></div>
+
+
+    <div class="word word1">
+        🔤 ABC WORLD
+    </div>
+
+    <div class="word word2">
+        🗣️ SPEAK
+    </div>
+
+    <div class="word word3">
+        🔊 LISTEN
+    </div>
+
+    <div class="word word4">
+        ⭐ LEARN
+    </div>
+
+
+    <div class="particle"
+         style="left:5%;--x:-20px;--speed:9s">
+    </div>
+
+    <div class="particle"
+         style="left:15%;--x:30px;--speed:12s">
+    </div>
+
+    <div class="particle"
+         style="left:25%;--x:-40px;--speed:10s">
+    </div>
+
+    <div class="particle"
+         style="left:35%;--x:50px;--speed:14s">
+    </div>
+
+    <div class="particle"
+         style="left:45%;--x:-20px;--speed:11s">
+    </div>
+
+    <div class="particle"
+         style="left:55%;--x:40px;--speed:13s">
+    </div>
+
+    <div class="particle"
+         style="left:65%;--x:-30px;--speed:9s">
+    </div>
+
+    <div class="particle"
+         style="left:75%;--x:50px;--speed:12s">
+    </div>
+
+    <div class="particle"
+         style="left:85%;--x:-40px;--speed:10s">
+    </div>
+
+    <div class="particle"
+         style="left:95%;--x:20px;--speed:15s">
+    </div>
+
 
     <div class="floor"></div>
 
 </div>
 
 
-<!-- =========================
+<!-- =======================================================
      NAVIGATION
-========================= -->
+======================================================= -->
 
 <header class="top">
 
@@ -1030,11 +1438,12 @@ h1 span{
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- =======================================================
+     MAIN
+======================================================= -->
 
 <main>
+
 
 <section class="hero wrap">
 
@@ -1046,6 +1455,7 @@ h1 span{
 <span class="badge">
 🇬🇧 ENGLISH ACADEMY • 2026
 </span>
+
 
 <h1>
 
@@ -1063,6 +1473,7 @@ h1 span{
 
 </h1>
 
+
 <p class="lead">
 
 საბავშვო ინგლისურის თანამედროვე
@@ -1073,6 +1484,7 @@ Listening, Grammar და Quiz
 
 </p>
 
+
 <div class="buttons">
 
 <a
@@ -1082,6 +1494,7 @@ href="#grades">
 🎓 აირჩიე კლასი
 
 </a>
+
 
 <a
 class="btn yellow"
@@ -1096,38 +1509,22 @@ href="academy.html">
 </div>
 
 
-<!-- 3D OBJECT -->
+<div class="visual"></div>
 
-<div class="visual">
-
-<div class="float-card fc1">
-🔤 ABC WORLD
-</div>
-
-<div class="float-card fc2">
-🔊 LISTENING
-</div>
-
-<div class="float-card fc3">
-⭐ LEARN & PLAY
-</div>
-
-<div class="orb"></div>
-
-</div>
 
 </div>
 
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
      GRADES
-========================= -->
+======================================================= -->
 
 <section
 id="grades"
 class="section wrap">
+
 
 <div class="section-title">
 
@@ -1140,8 +1537,7 @@ CLASSROOM
 </h2>
 
 <p class="muted">
-სწავლა ნაბიჯ-ნაბიჯ,
-მარტივად და სახალისოდ.
+სწავლა ნაბიჯ-ნაბიჯ, მარტივად და სახალისოდ.
 </p>
 
 </div>
@@ -1157,10 +1553,9 @@ CLASSROOM
 </h3>
 
 <p>
-საბაზისო სიტყვები,
-ოჯახი, სკოლა, ფერები,
-ცხოველები, საკვები,
-სახლი და რიცხვები.
+საბაზისო სიტყვები, ოჯახი,
+სკოლა, ფერები, ცხოველები,
+საკვები, სახლი და რიცხვები.
 </p>
 
 <a
@@ -1229,10 +1624,6 @@ href="grade4.html">
 </section>
 
 
-<!-- =========================
-     FINAL SECTION
-========================= -->
-
 <section class="section wrap">
 
 <div class="section-title">
@@ -1256,6 +1647,7 @@ LEARN • SPEAK • GROW
 
 </section>
 
+
 </main>
 
 
@@ -1268,6 +1660,85 @@ English Academy
 სწავლა, თამაში და პროგრესი ❤️
 
 </footer>
+
+
+<!-- =======================================================
+     MOUSE + TOUCH 3D EFFECT
+======================================================= -->
+
+<script>
+
+(function(){
+
+    const world =
+        document.querySelector(".world");
+
+    if(!world) return;
+
+
+    /* DESKTOP */
+
+    document.addEventListener(
+        "mousemove",
+        function(e){
+
+            if(window.innerWidth < 701)
+                return;
+
+            const x =
+                (e.clientX /
+                window.innerWidth - .5);
+
+            const y =
+                (e.clientY /
+                window.innerHeight - .5);
+
+            world.style.transform =
+                "rotateX(" +
+                (-y * 2) +
+                "deg) rotateY(" +
+                (x * 2) +
+                "deg)";
+        }
+    );
+
+
+    /* ANDROID / TABLET */
+
+    document.addEventListener(
+        "touchmove",
+        function(e){
+
+            if(!e.touches.length)
+                return;
+
+            const touch =
+                e.touches[0];
+
+            const x =
+                touch.clientX /
+                window.innerWidth - .5;
+
+            const y =
+                touch.clientY /
+                window.innerHeight - .5;
+
+            world.style.transform =
+                "rotateX(" +
+                (-y * 1.5) +
+                "deg) rotateY(" +
+                (x * 1.5) +
+                "deg)";
+
+        },
+        {
+            passive:true
+        }
+    );
+
+})();
+
+</script>
 
 
 </body>
