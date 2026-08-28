@@ -135,9 +135,253 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- GRADE-3D-VISUALS-2026 -->
 <link rel="stylesheet" href="3d-visuals.css">
 <script src="3d-visuals.js" defer></script>
+<script src="config.js"></script>
+<script src="teacher-navigation.js"></script>
 
 <style id="site-copyright-style">.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.site-copyright::first-letter{color:#00eaff}</style>
 </head>
@@ -159,22 +403,11 @@
 </main>
 <footer class="footer">⚡ English with Mariami • მე-3 კლასი • სწავლა, თამაში და პროგრესი ❤️</footer>
 <script>
-const data=[
-['morning','დილა','მორნინგ','I get up in the morning.'],['afternoon','შუადღე','აფთერნუნ','Good afternoon!'],['evening','საღამო','ივნინგ','Good evening!'],['night','ღამე','ნაით','Good night!'],['today','დღეს','თუდეი','Today is Monday.'],['tomorrow','ხვალ','თუმოროუ','See you tomorrow.'],['yesterday','გუშინ','იესთერდეი','Yesterday was sunny.'],['Monday','ორშაბათი','მანდეი','Monday is a school day.'],['Tuesday','სამშაბათი','თიუსდეი','I study on Tuesday.'],['Wednesday','ოთხშაბათი','უენზდეი','Wednesday is today.'],['Thursday','ხუთშაბათი','თერსდეი','Thursday is busy.'],['Friday','პარასკევი','ფრაიდეი','Friday is fun.'],['Saturday','შაბათი','სეთერდეი','I play on Saturday.'],['Sunday','კვირა','სანდეი','Sunday is a family day.'],['January','იანვარი','ჯენიუერი','January is cold.'],['February','თებერვალი','ფებრუერი','February is short.'],['March','მარტი','მარჩ','March is in spring.'],['April','აპრილი','ეიფრილ','April is rainy.'],['May','მაისი','მეი','May is warm.'],['June','ივნისი','ჯუნ','June is sunny.'],['July','ივლისი','ჯულაი','July is hot.'],['August','აგვისტო','ოგასთ','August is warm.'],['September','სექტემბერი','სეფთემბერ','School starts in September.'],['October','ოქტომბერი','ოქთოუბერ','October is cool.'],['November','ნოემბერი','ნოუვემბერ','November is cold.'],['December','დეკემბერი','დისემბერ','December is winter.'],['spring','გაზაფხული','სფრინგ','Spring is warm.'],['summer','ზაფხული','სამერ','Summer is hot.'],['autumn','შემოდგომა','ოთემ','Autumn is cool.'],['winter','ზამთარი','უინთერ','Winter is cold.'],['sunny','მზიანი','სანი','It is sunny.'],['rainy','წვიმიანი','რეინი','It is rainy.'],['cloudy','ღრუბლიანი','ქლაუდი','It is cloudy.'],['windy','ქარიანი','უინდი','It is windy.'],['snowy','თოვლიანი','სნოუი','It is snowy.'],['hot','ცხელი','ჰოთ','It is hot.'],['cold','ცივი','ქოულდ','It is cold.'],['warm','თბილი','უორმ','The day is warm.'],['run','სირბილი','რან','I can run.'],['walk','სიარული','უოქ','I walk to school.'],['jump','ხტომა','ჯამფ','Jump high!'],['swim','ცურვა','სუიმ','I can swim.'],['read','კითხვა','რიდ','I read books.'],['write','წერა','რაით','I write a story.'],['draw','ხატვა','დრო','I draw a picture.'],['sing','სიმღერა','სინგ','I sing a song.'],['play','თამაში','ფლეი','I play football.'],['eat','ჭამა','ით','I eat breakfast.'],['drink','დალევა','დრინქ','I drink water.'],['sleep','ძილი','სლიფ','I sleep at night.'],['city','ქალაქი','სითი','I live in a city.'],['street','ქუჩა','სთრით','My street is quiet.'],['park','პარკი','პარკ','We play in the park.'],['school','სკოლა','სქულ','My school is big.'],['shop','მაღაზია','შოფ','The shop is near.'],['hospital','საავადმყოფო','ჰოსპითლ','The hospital is big.'],['library','ბიბლიოთეკა','ლაიბრერი','I read at the library.'],['bus','ავტობუსი','ბას','I go by bus.'],['car','მანქანა','ქარ','This is a car.'],['train','მატარებელი','თრეინ','The train is fast.'],['bike','ველოსიპედი','ბაიქ','I ride my bike.'],['station','სადგური','სთეიშენ','The station is near.'],['bread','პური','ბრედ','I eat bread.'],['cheese','ყველი','ჩიზ','I like cheese.'],['milk','რძე','მილქ','I drink milk.'],['egg','კვერცხი','ეგ','I eat an egg.'],['rice','ბრინჯი','რაის','I like rice.'],['chicken','ქათამი','ჩიქენ','I eat chicken.'],['banana','ბანანი','ბანანა','I like bananas.'],['orange','ფორთოხალი','ორინჯ','The orange is sweet.'],['apple','ვაშლი','ეფლ','I eat an apple.'],['hungry','მშიერი','ჰანგრი','I am hungry.'],['thirsty','მწყურვალი','თერსთი','I am thirsty.'],['happy','ბედნიერი','ჰეფი','I am happy.'],['sad','სევდიანი','სედ','I am sad.'],['tired','დაღლილი','თაიერდ','I am tired.'],['angry','გაბრაზებული','ენგრი','He is angry.'],['early','ადრე','ერლი','I wake up early.'],['late','გვიან','ლეით','Do not be late.'],['big','დიდი','ბიგ','The house is big.'],['small','პატარა','სმოლ','The cat is small.'],['beautiful','ლამაზი','ბიუთიფულ','The flower is beautiful.'],['fast','სწრაფი','ფასთ','The train is fast.'],['slow','ნელი','სლოუ','The turtle is slow.'],['friend','მეგობარი','ფრენდ','My friend is kind.'],['family','ოჯახი','ფემილი','I love my family.'],['teacher','მასწავლებელი','თიჩერ','My teacher is nice.'],['homework','საშინაო დავალება','ჰოუმუორქ','I do my homework.'],['book','წიგნი','ბუქ','This is my book.'],['pen','კალამი','ფენ','I have a pen.'],['table','მაგიდა','თეიბლ','The book is on the table.'],['chair','სკამი','ჩეარ','The bag is on the chair.'],['door','კარი','დორ','Open the door.'],['window','ფანჯარა','უინდოუ','The window is open.']
-];
+const data=[['morning','დილა','მორნინგ','I get up in the morning.'],['afternoon','შუადღე','აფთერნუნ','Good afternoon!'],['evening','საღამო','ივნინგ','Good evening!'],['night','ღამე','ნაით','Good night!'],['today','დღეს','თუდეი','Today is Monday.'],['tomorrow','ხვალ','თუმოროუ','See you tomorrow.'],['yesterday','გუშინ','იესთერდეი','Yesterday was sunny.'],['Monday','ორშაბათი','მანდეი','Monday is a school day.'],['Tuesday','სამშაბათი','თიუსდეი','I study on Tuesday.'],['Wednesday','ოთხშაბათი','უენზდეი','Wednesday is today.'],['Thursday','ხუთშაბათი','თერსდეი','Thursday is busy.'],['Friday','პარასკევი','ფრაიდეი','Friday is fun.'],['Saturday','შაბათი','სეთერდეი','I play on Saturday.'],['Sunday','კვირა','სანდეი','Sunday is a family day.'],['January','იანვარი','ჯენიუერი','January is cold.'],['February','თებერვალი','ფებრუერი','February is short.'],['March','მარტი','მარჩ','March is in spring.'],['April','აპრილი','ეიფრილ','April is rainy.'],['May','მაისი','მეი','May is warm.'],['June','ივნისი','ჯუნ','June is sunny.'],['July','ივლისი','ჯულაი','July is hot.'],['August','აგვისტო','ოგასთ','August is warm.'],['September','სექტემბერი','სეფთემბერ','School starts in September.'],['October','ოქტომბერი','ოქთოუბერ','October is cool.'],['November','ნოემბერი','ნოუვემბერ','November is cold.'],['December','დეკემბერი','დისემბერ','December is winter.'],['spring','გაზაფხული','სფრინგ','Spring is warm.'],['summer','ზაფხული','სამერ','Summer is hot.'],['autumn','შემოდგომა','ოთემ','Autumn is cool.'],['winter','ზამთარი','უინთერ','Winter is cold.'],['sunny','მზიანი','სანი','It is sunny.'],['rainy','წვიმიანი','რეინი','It is rainy.'],['cloudy','ღრუბლიანი','ქლაუდი','It is cloudy.'],['windy','ქარიანი','უინდი','It is windy.'],['snowy','თოვლიანი','სნოუი','It is snowy.'],['hot','ცხელი','ჰოთ','It is hot.'],['cold','ცივი','ქოულდ','It is cold.'],['warm','თბილი','უორმ','The day is warm.'],['run','სირბილი','რან','I can run.'],['walk','სიარული','უოქ','I walk to school.'],['jump','ხტომა','ჯამფ','Jump high!'],['swim','ცურვა','სუიმ','I can swim.'],['read','კითხვა','რიდ','I read books.'],['write','წერა','რაით','I write a story.'],['draw','ხატვა','დრო','I draw a picture.'],['sing','სიმღერა','სინგ','I sing a song.'],['play','თამაში','ფლეი','I play football.'],['eat','ჭამა','ით','I eat breakfast.'],['drink','დალევა','დრინქ','I drink water.'],['sleep','ძილი','სლიფ','I sleep at night.'],['city','ქალაქი','სითი','I live in a city.'],['street','ქუჩა','სთრით','My street is quiet.'],['park','პარკი','პარკ','We play in the park.'],['school','სკოლა','სქულ','My school is big.'],['shop','მაღაზია','შოფ','The shop is near.'],['hospital','საავადმყოფო','ჰოსპითლ','The hospital is big.'],['library','ბიბლიოთეკა','ლაიბრერი','I read at the library.'],['bus','ავტობუსი','ბას','I go by bus.'],['car','მანქანა','ქარ','This is a car.'],['train','მატარებელი','თრეინ','The train is fast.'],['bike','ველოსიპედი','ბაიქ','I ride my bike.'],['station','სადგური','სთეიშენ','The station is near.'],['bread','პური','ბრედ','I eat bread.'],['cheese','ყველი','ჩიზ','I like cheese.'],['milk','რძე','მილქ','I drink milk.'],['egg','კვერცხი','ეგ','I eat an egg.'],['rice','ბრინჯი','რაის','I like rice.'],['chicken','ქათამი','ჩიქენ','I eat chicken.'],['banana','ბანანი','ბანანა','I like bananas.'],['orange','ფორთოხალი','ორინჯ','The orange is sweet.'],['apple','ვაშლი','ეფლ','I eat an apple.'],['hungry','მშიერი','ჰანგრი','I am hungry.'],['thirsty','მწყურვალი','თერსთი','I am thirsty.'],['happy','ბედნიერი','ჰეფი','I am happy.'],['sad','სევდიანი','სედ','I am sad.'],['tired','დაღლილი','თაიერდ','I am tired.'],['angry','გაბრაზებული','ენგრი','He is angry.'],['early','ადრე','ერლი','I wake up early.'],['late','გვიან','ლეით','Do not be late.'],['big','დიდი','ბიგ','The house is big.'],['small','პატარა','სმოლ','The cat is small.'],['beautiful','ლამაზი','ბიუთიფულ','The flower is beautiful.'],['fast','სწრაფი','ფასთ','The train is fast.'],['slow','ნელი','სლოუ','The turtle is slow.'],['friend','მეგობარი','ფრენდ','My friend is kind.'],['family','ოჯახი','ფემილი','I love my family.'],['teacher','მასწავლებელი','თიჩერ','My teacher is nice.'],['homework','საშინაო დავალება','ჰოუმუორქ','I do my homework.'],['book','წიგნი','ბუქ','This is my book.'],['pen','კალამი','ფენ','I have a pen.'],['table','მაგიდა','თეიბლ','The book is on the table.'],['chair','სკამი','ჩეარ','The bag is on the chair.'],['door','კარი','დორ','Open the door.'],['window','ფანჯარა','უინდოუ','The window is open.']];
 const topics=['🌞 Daily Life','📅 Days & Time','🗓️ Months & Seasons','🌦️ Weather','🏃 Actions','🏙️ City & Transport','🍎 Food & Drinks','😊 Feelings','🏫 School','🗣️ Speaking','📖 Reading','✍️ Writing'];
 const geoNums=['ერთი','ორი','სამი','ოთხი','ხუთი','ექვსი','შვიდი','რვა','ცხრა','ათი','თერთმეტი','თორმეტი','ცამეტი','თოთხმეტი','თხუთმეტი','თექვსმეტი','ჩვიდმეტი','თვრამეტი','ცხრამეტი','ოცი'];
 const nums=['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety','one hundred'];
-function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
-function wordCard(w){return `<div class="word"><b>${w[0]}</b><div class="pron">🔊 ${w[2]}</div><div class="ka">${w[1]}</div><div class="example">💬 ${w[3]}</div><button class="btn listen" onclick='speak(${JSON.stringify(w[0])})'>🔊 სიტყვა</button><button class="btn" onclick='speak(${JSON.stringify(w[3])})'>💬 მაგალითი</button></div>`}
-function render(){const q=(document.getElementById('search').value||'').toLowerCase();document.getElementById('words').innerHTML=data.filter(w=>(w[0]+' '+w[1]).toLowerCase().includes(q)).map(wordCard).join('');document.getElementById('topics').innerHTML=topics.map(t=>`<div class="word"><b>${t}</b><div class="small">Vocabulary • Listening • Speaking • Practice</div></div>`).join('');document.getElementById('numbers').innerHTML=nums.map((n,i)=>{let g=i<20?geoNums[i]:n;return `<div class="word"><b>${i+1}</b><div class="ka">${n}</div><div class="pron">${g}</div><button class="btn listen" onclick='speak(${JSON.stringify(n)})'>🔊</button></div>`}).join('')}
-function tab(id,btn){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}
-function listenSet(){const ws=data.slice(0,15);let i=0;const s=document.getElementById('status');function next(){if(i>=ws.length){s.textContent='🎉 Listening დასრულდა!';return}s.textContent=`${i+1}/15 — ${ws[i][1]}`;speak(ws[i][0]);i++;setTimeout(next,1900)}next()}
-const quiz=[['What is the Georgian meaning of “happy”?',['ბედნიერი','მშიერი','დაღლილი'],0],['Choose: She ___ football every day.',['play','plays','playing'],1],['What is “წვიმიანი” in English?',['sunny','rainy','windy'],1],['Choose: ___ you like apples?',['Do','Does','Is'],0],['He ___ a dog.',['have','has','can'],1],['There ___ three books.',['is','are','am'],1],['The book is ___ the table.',['on','run','happy'],0],['What is “მატარებელი”?',['bus','train','car'],1],['Choose: I ___ swim.',['can','has','does'],0],['What is “ზამთარი”?',['summer','winter','spring'],1]];
-function buildQuiz(){document.getElementById('quiz').innerHTML=quiz.map((q,i)=>`<div class="quizq"><b>${i+1}. ${q[0]}</b><br>${q[1].map((a,j)=>`<button class="btn" onclick="answer(${i},${j},this)">${a}</button>`).join('')}<span id="q${i}" style="margin-left:6px"></span></div>`).join('')}
-let score=0,answered=0;function answer(i,j,btn){const box=document.getElementById('q'+i);if(box.textContent)return;answered++;if(j===quiz[i][2]){score++;box.textContent=' ✅ სწორია';box.className='correct'}else{box.textContent=' ❌ სწორი პასუხია: '+quiz[i][1][quiz[i][2]];box.className='wrong'}document.getElementById('score').textContent=`ქულა: ${score}/${answered}`;document.getElementById('bar').style.width=(answered/quiz.length*100)+'%'}
-function completeLesson(){let n=Number(localStorage.getItem('grade3Lessons')||0)+1;localStorage.setItem('grade3Lessons',n);document.getElementById('lessonCount').textContent=n}function resetProgress(){localStorage.removeItem('grade3Lessons');document.getElementById('lessonCount').textContent=0}
-document.getElementById('search').addEventListener('input',render);render();buildQuiz();document.getElementById('lessonCount').textContent=localStorage.getItem('grade3Lessons')||0;
+function speak(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}function wordCard(w){return `<div class="word"><b>${w[0]}</b><div class="pron">🔊 ${w[2]}</div><div class="ka">${w[1]}</div><div class="example">💬 ${w[3]}</div><button class="btn listen" onclick='speak(${JSON.stringify(w[0])})'>🔊 სიტყვა</button><button class="btn" onclick='speak(${JSON.stringify(w[3])})'>💬 მაგალითი</button></div>`}function render(){const q=(document.getElementById('search').value||'').toLowerCase();document.getElementById('words').innerHTML=data.filter(w=>(w[0]+' '+w[1]).toLowerCase().includes(q)).map(wordCard).join('');document.getElementById('topics').innerHTML=topics.map(t=>`<div class="word"><b>${t}</b><div class="small">Vocabulary • Listening • Speaking • Practice</div></div>`).join('');document.getElementById('numbers').innerHTML=nums.map((n,i)=>{let g=i<20?geoNums[i]:n;return `<div class="word"><b>${i+1}</b><div class="ka">${n}</div><div class="pron">${g}</div><button class="btn listen" onclick='speak(${JSON.stringify(n)})'>🔊</button></div>`}).join('')}function tab(id,btn){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active')}function listenSet(){const ws=data.slice(0,15);let i=0;const s=document.getElementById('status');function next(){if(i>=ws.length){s.textContent='🎉 Listening დასრულდა!';return}s.textContent=`${i+1}/15 — ${ws[i][1]}`;speak(ws[i][0]);i++;setTimeout(next,1900)}next()}const quiz=[['What is the Georgian meaning of “happy”?',['ბედნიერი','მშიერი','დაღლილი'],0],['Choose: She ___ football every day.',['play','plays','playing'],1],['What is “წვიმიანი” in English?',['sunny','rainy','windy'],1],['Choose: ___ you like apples?',['Do','Does','Is'],0],['He ___ a dog.',['have','has','can'],1],['There ___ three books.',['is','are','am'],1],['The book is ___ the table.',['on','run','happy'],0],['What is “მატარებელი”?',['bus','train','car'],1],['Choose: I ___ swim.',['can','has','does'],0],['What is “ზამთარი”?',['summer','winter','spring'],1]];function buildQuiz(){document.getElementById('quiz').innerHTML=quiz.map((q,i)=>`<div class="quizq"><b>${i+1}. ${q[0]}</b><br>${q[1].map((a,j)=>`<button class="btn" onclick="answer(${i},${j},this)">${a}</button>`).join('')}<span id="q${i}" style="margin-left:6px"></span></div>`).join('')}let score=0,answered=0;function answer(i,j,btn){const box=document.getElementById('q'+i);if(box.textContent)return;answered++;if(j===quiz[i][2]){score++;box.textContent=' ✅ სწორია';box.className='correct'}else{box.textContent=' ❌ სწორი პასუხია: '+quiz[i][1][quiz[i][2]];box.className='wrong'}document.getElementById('score').textContent=`ქულა: ${score}/${answered}`;document.getElementById('bar').style.width=(answered/quiz.length*100)+'%'}function completeLesson(){let n=Number(localStorage.getItem('grade3Lessons')||0)+1;localStorage.setItem('grade3Lessons',n);document.getElementById('lessonCount').textContent=n}function resetProgress(){localStorage.removeItem('grade3Lessons');document.getElementById('lessonCount').textContent=0}document.getElementById('search').addEventListener('input',render);render();buildQuiz();document.getElementById('lessonCount').textContent=localStorage.getItem('grade3Lessons')||0;
 </script>
 
 <!-- SITE-COPYRIGHT-2026 -->
