@@ -1,10 +1,22 @@
-// English with Mariami — teacher-only navigation for grade pages
+// English with Mariami — grade navigation
 (function () {
   'use strict';
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const path = location.pathname.toLowerCase();
-  if (!/\/grade[234]\.html(?:$|\?)/.test(path)) return;
+  const isGrade3 = /\/grade3\.html(?:$|\?)/.test(path);
+  const isTeacherGrade = /\/teacher-grade[234]\.html(?:$|\?)/.test(path);
+  if (!isGrade3 && !isTeacherGrade) return;
+
+  function hideGrade3Home() {
+    if (!isGrade3) return;
+    document.querySelectorAll('a').forEach(function (el) {
+      const href = (el.getAttribute('href') || '').toLowerCase();
+      const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const isHome = href === '/' || href.endsWith('/index.html') || href === 'index.html' || text === '🏠 მთავარი' || text === 'მთავარი';
+      if (isHome) el.style.setProperty('display', 'none', 'important');
+    });
+  }
 
   function isTeacher() {
     const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
@@ -21,6 +33,7 @@
   }
 
   function hideTeacherPageLinks() {
+    if (!isTeacherGrade) return;
     document.querySelectorAll('a,button').forEach(function (el) {
       const href = (el.getAttribute('href') || '').toLowerCase();
       const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -48,9 +61,13 @@
   }
 
   function start() {
-    isTeacher().then(function (ok) {
-      if (ok) enableTeacherView();
-    });
+    hideGrade3Home();
+    if (isTeacherGrade) {
+      isTeacher().then(function (ok) {
+        if (ok) enableTeacherView();
+      });
+    }
+    if (isGrade3) setInterval(hideGrade3Home, 250);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
