@@ -1,5 +1,5 @@
 // English with Mariami — Supabase configuration
-const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue2.supabase.co';
+const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmduew.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpV5wjCmt';
 
 if (!window.supabase) throw new Error('Supabase JS library failed to load.');
