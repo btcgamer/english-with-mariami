@@ -1,5 +1,5 @@
 // English with Mariami — Supabase configuration
-const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmduew.supabase.co';
+const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 if (!window.supabase) throw new Error('Supabase JS library failed to load.');
@@ -39,9 +39,12 @@ if(location.pathname.toLowerCase().endsWith('/login.html')){
       filter:drop-shadow(0 0 12px #00eaff) drop-shadow(0 18px 18px rgba(0,30,80,.75));
     }
     @keyframes academyPulse{0%,100%{opacity:.72}50%{opacity:1}}
-    @media(max-width:850px){
-      .neon-world{background-position:center top !important;}
-    }
+    @media(max-width:850px){.neon-world{background-position:center top !important;}}
   `;
   document.head.appendChild(style);
+
+  const v=document.createElement('script');
+  v.src='academy-visual.js?v=20260829-1';
+  v.defer=true;
+  document.head.appendChild(v);
 })();
