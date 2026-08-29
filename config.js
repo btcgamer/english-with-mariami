@@ -8,10 +8,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   const publicPages=['/login.html','/register.html','/reset-password.html','/teacher-login.html'];
   const isPublic=publicPages.some(p=>path.endsWith(p));
 
-  /* Registration no longer asks the student to choose Grade 2/3/4.
-     We keep the existing #grade element in the DOM so the old registration
-     script continues to work, but hide it and submit grade 0. A teacher can
-     assign the student's actual grade later. */
   function hideRegistrationGrade(){
     if(!path.endsWith('/register.html')) return;
     const grade=document.getElementById('grade');
@@ -23,23 +19,16 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     if(field) field.style.display='none';
   }
 
-  /* Login routing fix:
-     The old login handler routed every authenticated account directly to
-     grade{grade}.html. That meant teacher/admin accounts carrying grade=2
-     could incorrectly land in Grade 2. This guard runs before the old
-     handler and owns the redirect decision based on role + grade. */
+  /* One login for everybody. Role + grade decide the destination. */
   function installSafeLoginRouter(){
     if(!path.endsWith('/login.html')) return;
-
     const install=()=>{
       const form=document.getElementById('loginForm');
       if(!form || form.dataset.safeRouterInstalled==='1') return;
       form.dataset.safeRouterInstalled='1';
-
       form.addEventListener('submit',async function(event){
         event.preventDefault();
         event.stopImmediatePropagation();
-
         const emailInput=document.getElementById('email');
         const passwordInput=document.getElementById('password');
         const button=document.getElementById('loginButton');
@@ -47,51 +36,38 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
         const email=String(emailInput?.value||'').trim().toLowerCase();
         const password=String(passwordInput?.value||'');
         const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
-
         if(!client || !email || !password) return;
         if(button){button.disabled=true;button.textContent='⏳ შესვლა...';}
         if(message){message.className='message';message.textContent='';}
-
         try{
           const {data,error}=await client.auth.signInWithPassword({email,password});
           if(error) throw error;
           if(!data?.session || !data?.user) throw new Error('სესია ვერ შეიქმნა.');
-
           const user=data.user;
-          const {data:profile,error:profileError}=await client
-            .from('profiles')
-            .select('role,grade')
-            .eq('user_id',user.id)
-            .maybeSingle();
-
+          const {data:profile,error:profileError}=await client.from('profiles').select('role,grade').eq('user_id',user.id).maybeSingle();
           if(profileError) throw profileError;
-
           const role=String(profile?.role||'').trim().toLowerCase();
           const grade=Number(profile?.grade||0);
           const isTeacher=role==='teacher' || user.id==='be4b1c4d-e5f2-4039-b35e-aec3c110a94a' || email==='razmadzemariam45@gmail.com';
 
-          /* Teacher/admin accounts must never be routed by grade. */
           if(isTeacher){
             if(message){message.className='message success';message.textContent='✅ შესვლა წარმატებულია! იხსნება მასწავლებლის სივრცე...';}
-            setTimeout(()=>location.replace('academy.html'),300);
+            setTimeout(()=>location.replace('teacher-dashboard.html'),300);
             return;
           }
 
-          /* Parent keeps the existing Academy destination. */
           if(role==='parent'){
             if(message){message.className='message success';message.textContent='👨‍👩‍👧 იხსნება სასწავლო აკადემია...';}
             setTimeout(()=>location.replace('academy.html'),300);
             return;
           }
 
-          /* Only a verified student with an assigned 2/3/4 grade may enter a grade page. */
           if(role==='student' && [2,3,4].includes(grade)){
             if(message){message.className='message success';message.textContent='✅ შესვლა წარმატებულია! იხსნება მე-'+grade+' კლასის სივრცე...';}
             setTimeout(()=>location.replace('grade'+grade+'.html'),300);
             return;
           }
 
-          /* New/unassigned/unknown accounts stay out of all grade spaces. */
           if(message){message.className='message error';message.textContent='⚠️ თქვენი ანგარიში ჯერ არ არის მიბმული კლასზე. გთხოვთ, დაუკავშირდეთ მასწავლებელს.';}
           try{await client.auth.signOut();}catch(_){ }
         }catch(error){
@@ -106,56 +82,36 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
         }
       },true);
     };
-
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install,{once:true});
     else install();
   }
 
-  /* Grade 3/4 pages should stay inside the Academy.
-     Remove only the old "მთავარი" navigation link; the page content,
-     Academy link and section navigation remain unchanged. */
   function cleanGradeNavigation(){
     if(!/\/grade[34]\.html$/.test(path)) return;
     const removeMainLinks=()=>{
       document.querySelectorAll('.nav-links a[href="index.html"], .navlinks a[href="index.html"]').forEach(a=>a.remove());
     };
-    if(document.readyState==='loading'){
-      document.addEventListener('DOMContentLoaded',removeMainLinks,{once:true});
-    }else{
-      removeMainLinks();
-    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',removeMainLinks,{once:true});
+    else removeMainLinks();
     const observer=new MutationObserver(removeMainLinks);
     observer.observe(document.documentElement,{childList:true,subtree:true});
     setTimeout(()=>observer.disconnect(),10000);
   }
 
   if(path.endsWith('/register.html')){
-    if(document.readyState==='loading'){
-      document.addEventListener('DOMContentLoaded',hideRegistrationGrade,{once:true});
-    }else{
-      hideRegistrationGrade();
-    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',hideRegistrationGrade,{once:true});
+    else hideRegistrationGrade();
   }
 
   cleanGradeNavigation();
   installSafeLoginRouter();
 
-  if(path.endsWith('/login.html')){
-    try{
-      [localStorage,sessionStorage].forEach(store=>{
-        const remove=[];
-        for(let i=0;i<store.length;i++){
-          const key=store.key(i);
-          if(key&&(key.startsWith('sb-')||key.toLowerCase().includes('supabase'))) remove.push(key);
-        }
-        remove.forEach(key=>store.removeItem(key));
-      });
-    }catch(_){}
-  }
+  /* IMPORTANT: do not clear Supabase storage on login.html.
+     Supabase needs its persisted session during authentication and redirects. */
 
   if(path.endsWith('/grade2.html')){
     const quizScript=document.createElement('script');
-    quizScript.src='grade2-quiz-fix.js?v=20260829-3';
+    quizScript.src='grade2-quiz-fix.js?v=20260829-4';
     quizScript.defer=true;
     document.head.appendChild(quizScript);
   }
@@ -163,10 +119,10 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   function loadAfterSupabase(){
     const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
     if(!isPublic){
-      add('session-guard.js?v=20260829-7');
-      add('grade-access.js?v=20260829-7');
-      add('logout.js?v=20260829-4');
-      add('teacher-navigation.js?v=20260829-4');
+      add('session-guard.js?v=20260829-8');
+      add('grade-access.js?v=20260829-8');
+      add('logout.js?v=20260829-5');
+      add('teacher-navigation.js?v=20260829-5');
       if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-2');
     }
     if(path.endsWith('/academy.html')){
@@ -188,13 +144,11 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     loadAfterSupabase();
   }
 
-  if(window.supabase&&typeof window.supabase.createClient==='function'){
-    init();
-  }else{
+  if(window.supabase&&typeof window.supabase.createClient==='function') init();
+  else{
     const existing=document.querySelector('script[data-english-mariami-supabase]');
-    if(existing){
-      existing.addEventListener('load',init,{once:true});
-    }else{
+    if(existing) existing.addEventListener('load',init,{once:true});
+    else{
       const script=document.createElement('script');
       script.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
       script.dataset.englishMariamiSupabase='1';
