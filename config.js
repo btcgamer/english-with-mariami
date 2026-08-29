@@ -9,6 +9,18 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   const isPublic=publicPages.some(p=>path.endsWith(p));
   const isTeacherDashboard=path.endsWith('/teacher-dashboard.html');
 
+  function installLoginLayoutFix(){
+    if(!path.endsWith('/login.html')) return;
+    const install=()=>{
+      if(document.getElementById('englishMariamiLoginLayoutFix')) return;
+      const style=document.createElement('style');
+      style.id='englishMariamiLoginLayoutFix';
+      style.textContent='.login-card .links{margin-top:10px!important}.login-card #message{margin-top:9px!important;min-height:20px}.login-card .links:last-of-type{margin-top:6px!important}';
+      document.head.appendChild(style);
+    };
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install,{once:true}); else install();
+  }
+
   function hideRegistrationGrade(){
     if(!path.endsWith('/register.html')) return;
     const grade=document.getElementById('grade');
@@ -79,6 +91,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     const observer=new MutationObserver(removeMainLinks); observer.observe(document.documentElement,{childList:true,subtree:true}); setTimeout(()=>observer.disconnect(),10000);
   }
 
+  installLoginLayoutFix();
   if(path.endsWith('/register.html')){if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',hideRegistrationGrade,{once:true}); else hideRegistrationGrade();}
   cleanGradeNavigation(); installSafeLoginRouter();
 
