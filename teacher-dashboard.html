@@ -3,1062 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>მასწავლებლის გვერდი — English with Mariami</title>
-
+<title>მასწავლებლის ჟურნალი — English with Mariami</title>
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-color:#fff;
-background:
-radial-gradient(circle at 10% 10%,#075eff44,transparent 28%),
-radial-gradient(circle at 90% 90%,#00eaff33,transparent 28%),
-#020817;
-}
-
-.wrap{
-width:min(1200px,94%);
-margin:auto;
-}
-
-.top{
-padding:18px 0;
-border-bottom:1px solid #00eaff22;
-background:#020817dd;
-}
-
-.brand{
-color:#00eaff;
-font-weight:900;
-text-decoration:none;
-font-size:20px;
-}
-
-.head{
-text-align:center;
-padding:38px 0 25px;
-}
-
-.head h1{
-font-size:clamp(30px,5vw,52px);
-margin:10px 0;
-}
-
-.head p{
-color:#b9dce7;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px;
-}
-
-.card{
-padding:22px;
-border-radius:22px;
-background:#03142bf0;
-border:1px solid #00eaff33;
-box-shadow:0 15px 45px #0006;
-}
-
-.stat{
-text-align:center;
-}
-
-.stat b{
-display:block;
-font-size:34px;
-margin:8px;
-color:#00eaff;
-}
-
-.stat span{
-color:#b9dce7;
-}
-
-.card h2{
-margin-top:0;
-color:#ffe600;
-}
-
-.toolbar{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-bottom:15px;
-}
-
-.toolbar input,
-.toolbar select,
-.toolbar button{
-height:44px;
-border-radius:12px;
-border:1px solid #00eaff44;
-background:#020b1e;
-color:#fff;
-padding:0 12px;
-}
-
-.toolbar button{
-background:#075eff;
-font-weight:900;
-cursor:pointer;
-}
-
-.table-wrap{
-overflow-x:auto;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-min-width:700px;
-}
-
-th,td{
-padding:13px 10px;
-border-bottom:1px solid #00eaff18;
-text-align:left;
-}
-
-th{
-color:#00eaff;
-}
-
-tr:hover{
-background:#00eaff08;
-}
-
-.badge{
-display:inline-block;
-padding:6px 10px;
-border-radius:10px;
-font-weight:bold;
-}
-
-.present{
-background:#0c6b3c;
-}
-
-.late{
-background:#806400;
-}
-
-.absent{
-background:#721d2d;
-}
-
-.none{
-background:#344054;
-}
-
-.quiz-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-}
-
-.quiz-btn{
-display:block;
-text-align:center;
-padding:16px 10px;
-border-radius:15px;
-text-decoration:none;
-color:#fff;
-background:linear-gradient(135deg,#075eff,#00aeea);
-font-weight:900;
-border:0;
-cursor:pointer;
-}
-
-.danger{
-background:#6e1d2d;
-}
-
-.msg{
-color:#b9dce7;
-}
-
-.student-name{
-font-weight:bold;
-color:#fff;
-}
-
-.grade{
-color:#ffe600;
-font-weight:bold;
-}
-
-.score{
-font-weight:bold;
-color:#00eaff;
-}
-
-.empty{
-padding:25px;
-text-align:center;
-color:#9ab7c2;
-}
-
-.foot{
-text-align:center;
-padding:30px;
-color:#7899a8;
-}
-
-@media(max-width:900px){
-.cards{
-grid-template-columns:repeat(2,1fr);
-}
-
-.quiz-grid{
-grid-template-columns:1fr;
-}
-}
-
-@media(max-width:600px){
-.cards{
-grid-template-columns:1fr;
-}
-
-.toolbar>*{
-width:100%;
-}
-}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 10% 10%,#075eff44,transparent 28%),radial-gradient(circle at 90% 90%,#00eaff33,transparent 28%),#020817}.wrap{width:min(1250px,94%);margin:auto}.top{padding:18px 0;border-bottom:1px solid #00eaff22;background:#020817ee}.brand{color:#00eaff;font-weight:900;text-decoration:none;font-size:20px}.head{text-align:center;padding:32px 0 22px}.head h1{font-size:clamp(30px,5vw,52px);margin:10px 0}.head p{color:#b9dce7}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{padding:20px;border-radius:22px;background:#03142bf0;border:1px solid #00eaff33;box-shadow:0 15px 45px #0006}.stat{text-align:center}.stat b{display:block;font-size:34px;margin:8px;color:#00eaff}.stat span{color:#b9dce7}.card h2{margin-top:0;color:#ffe600}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}.toolbar input,.toolbar select,.toolbar button,.modal input,.modal textarea,.modal select{height:44px;border-radius:12px;border:1px solid #00eaff44;background:#020b1e;color:#fff;padding:0 12px}.toolbar button{background:#075eff;font-weight:900;cursor:pointer}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:1100px}th,td{padding:12px 9px;border-bottom:1px solid #00eaff18;text-align:left;vertical-align:middle}th{color:#00eaff}tr:hover{background:#00eaff08}.badge{display:inline-block;padding:6px 9px;border-radius:10px;font-weight:bold}.present{background:#0c6b3c}.late{background:#806400}.absent{background:#721d2d}.none{background:#344054}.student-name{font-weight:bold}.grade{color:#ffe600;font-weight:bold}.score{font-weight:bold;color:#00eaff}.empty{padding:25px;text-align:center;color:#9ab7c2}.foot{text-align:center;padding:30px;color:#7899a8}.actions{display:flex;gap:6px;flex-wrap:wrap}.action{border:0;border-radius:9px;padding:8px 10px;color:#fff;font-weight:800;cursor:pointer}.arrive{background:#0c6b3c}.lateBtn{background:#806400}.absentBtn{background:#721d2d}.leave{background:#075eff}.rate{background:#8b5cf6}.action:disabled{opacity:.45;cursor:not-allowed}.toast{position:fixed;right:20px;bottom:20px;max-width:420px;padding:14px 18px;border-radius:14px;background:#061a2d;border:1px solid #00eaff66;box-shadow:0 12px 40px #0008;z-index:1001;display:none}.toast.show{display:block}.modal-back{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}.modal-back.show{display:flex}.modal{width:min(520px,100%);background:#06152a;border:1px solid #00eaff55;border-radius:22px;padding:22px;box-shadow:0 20px 80px #000}.modal h2{margin-top:0;color:#ffe600}.modal label{display:block;margin:12px 0 6px;color:#b9dce7}.modal input,.modal textarea,.modal select{width:100%;height:46px}.modal textarea{height:110px;padding-top:12px;resize:vertical}.modal-actions{display:flex;gap:10px;margin-top:18px}.modal-actions button{flex:1;height:44px;border:0;border-radius:12px;color:#fff;font-weight:900;cursor:pointer}.save{background:#075eff}.cancel{background:#344054}.mini{font-size:12px;color:#8eabb7;margin-top:5px}@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.cards{grid-template-columns:1fr}.toolbar>*{width:100%}}
 </style>
 </head>
-
 <body>
-
-<header class="top">
-<div class="wrap">
-<a class="brand" href="teacher-dashboard.html">
-🌈📚 English with Mariami
-</a>
-</div>
-</header>
-
+<header class="top"><div class="wrap"><a class="brand" href="teacher-dashboard.html">🌈📚 English with Mariami</a></div></header>
 <main class="wrap">
-
-<section class="head">
-<div>TEACHER DASHBOARD</div>
-
-<h1>👩‍🏫 მარიამი რაზმაძე</h1>
-
-<p>
-მასწავლებლის პირადი სივრცე — მოსწავლეები, ჟურნალი და Quiz შედეგები
-</p>
-</section>
-
-
-<!-- სტატისტიკა -->
-
+<section class="head"><div>TEACHER DASHBOARD</div><h1>👩‍🏫 მასწავლებლის ჟურნალი</h1><p id="teacherName">მოსწავლეების დასწრება, შეფასება და Quiz შედეგები</p></section>
 <section class="cards">
-
-<div class="card stat">
-<b id="studentCount">—</b>
-<span>👨‍🎓 მოსწავლეები</span>
-</div>
-
-<div class="card stat">
-<b id="presentCount">—</b>
-<span>🟢 დღეს მოვიდა</span>
-</div>
-
-<div class="card stat">
-<b id="lateCount">—</b>
-<span>🟡 დღეს დააგვიანა</span>
-</div>
-
-<div class="card stat">
-<b id="absentCount">—</b>
-<span>🔴 დღეს გააცდინა</span>
-</div>
-
+<div class="card stat"><b id="studentCount">—</b><span>👨‍🎓 მოსწავლეები</span></div>
+<div class="card stat"><b id="presentCount">—</b><span>🟢 დღეს მოვიდა</span></div>
+<div class="card stat"><b id="lateCount">—</b><span>🟡 დააგვიანა</span></div>
+<div class="card stat"><b id="absentCount">—</b><span>🔴 გააცდინა</span></div>
 </section>
-
-
-<!-- მოსწავლეების ჟურნალი -->
-
 <section class="card" style="margin-top:18px">
-
-<h2>📋 მოსწავლეების ჟურნალი</h2>
-
+<h2>📋 დღევანდელი ჟურნალი</h2>
 <div class="toolbar">
-
-<input
-id="search"
-type="search"
-placeholder="🔎 მოსწავლის ძებნა..."
->
-
-<select id="grade">
-<option value="all">ყველა კლასი</option>
-<option value="2">მე-2 კლასი</option>
-<option value="3">მე-3 კლასი</option>
-<option value="4">მე-4 კლასი</option>
-</select>
-
-<input id="date" type="date">
-
-<button id="load">
-🔄 განახლება
-</button>
-
+<input id="search" type="search" placeholder="🔎 მოსწავლის ძებნა...">
+<select id="grade"><option value="all">ყველა კლასი</option><option value="2">მე-2 კლასი</option><option value="3">მე-3 კლასი</option><option value="4">მე-4 კლასი</option></select>
+<input id="date" type="date"><button id="load">🔄 განახლება</button>
 </div>
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>მოსწავლე</th>
-<th>კლასი</th>
-<th>დასწრება</th>
-<th>შემოსვლის დრო</th>
-<th>გასვლის დრო</th>
-</tr>
-
-</thead>
-
-<tbody id="studentTable">
-
-<tr>
-<td colspan="5" class="empty">
-იტვირთება...
-</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
+<div class="table-wrap"><table><thead><tr><th>მოსწავლე</th><th>კლასი</th><th>სტატუსი</th><th>მოსვლა</th><th>წასვლა</th><th>მოქმედებები</th><th>შეფასება</th></tr></thead><tbody id="studentTable"><tr><td colspan="7" class="empty">იტვირთება...</td></tr></tbody></table></div>
 </section>
-
-
-<!-- Quiz -->
-
-<section class="card" style="margin-top:18px">
-
-<h2>🧠 Quiz-ები</h2>
-
-<div class="quiz-grid">
-
-<a class="quiz-btn" href="teacher-grade2.html">
-📗 მე-2 კლასის Quiz
-</a>
-
-<a class="quiz-btn" href="teacher-grade3.html">
-📘 მე-3 კლასის Quiz
-</a>
-
-<a class="quiz-btn" href="teacher-grade4.html">
-📕 მე-4 კლასის Quiz
-</a>
-
-</div>
-
-</section>
-
-
-<!-- Quiz შედეგები -->
-
-<section class="card" style="margin-top:18px">
-
-<h2>🏆 მოსწავლეების Quiz შედეგები</h2>
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-<th>მოსწავლე</th>
-<th>კლასი</th>
-<th>Quiz</th>
-<th>ქულა</th>
-<th>თარიღი</th>
-</tr>
-
-</thead>
-
-<tbody id="quizTable">
-
-<tr>
-<td colspan="5" class="empty">
-იტვირთება...
-</td>
-</tr>
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-
-<!-- გამოსვლა -->
-
-<section class="card" style="margin-top:18px">
-
-<button
-id="logout"
-class="quiz-btn danger"
-style="width:100%"
->
-🚪 მასწავლებლის ანგარიშიდან გამოსვლა
-</button>
-
-</section>
-
+<section class="card" style="margin-top:18px"><h2>🏆 Quiz შედეგები</h2><div class="table-wrap"><table><thead><tr><th>მოსწავლე</th><th>კლასი</th><th>Quiz</th><th>ქულა</th><th>თარიღი</th></tr></thead><tbody id="quizTable"><tr><td colspan="5" class="empty">იტვირთება...</td></tr></tbody></table></div></section>
+<section class="card" style="margin-top:18px"><button id="logout" class="action leave" style="width:100%;height:46px">🚪 მასწავლებლის ანგარიშიდან გამოსვლა</button></section>
 </main>
-
-
-<footer class="foot">
-
-© 2026 English with Mariami —
-ყველა უფლება დაცულია
-
-</footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="config.js?v=teacher-dashboard-20260829"></script>
-
-
+<footer class="foot">© 2026 English with Mariami — ყველა უფლება დაცულია</footer>
+<div id="toast" class="toast"></div>
+<div id="ratingModal" class="modal-back"><div class="modal"><h2>⭐ მოსწავლის შეფასება</h2><div id="ratingStudent" class="mini"></div><label for="ratingValue">ქულა</label><select id="ratingValue"><option value="10">10 — შესანიშნავი</option><option value="9">9 — ძალიან კარგი</option><option value="8">8 — კარგი</option><option value="7">7 — დამაკმაყოფილებელი</option><option value="6">6 — საჭიროებს გაუმჯობესებას</option><option value="5">5 — დამატებითი მუშაობა</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select><label for="ratingComment">კომენტარი</label><textarea id="ratingComment" placeholder="მოკლე კომენტარი მოსწავლის შესახებ..."></textarea><div class="modal-actions"><button class="cancel" id="cancelRating">გაუქმება</button><button class="save" id="saveRating">💾 შენახვა</button></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js?v=teacher-dashboard-20260829-2"></script>
 <script>
-
 (async()=>{
-
-const TEACHER_ID =
-'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
-
-const db = window.supabaseClient;
-
-const $ = id => document.getElementById(id);
-
-
-/* უსაფრთხოება */
-
-if(!db){
-
-location.replace('login.html');
-
-return;
-
+'use strict';
+const TEACHER_ID='be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
+const db=window.supabaseClient||window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;
+const $=id=>document.getElementById(id);
+let currentUser=null,currentProfile=null,allStudents=[],attendanceMap={},scheduleMap={};
+let ratingStudent=null;
+function esc(v){return String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
+function fmt(v){if(!v)return '—';const d=new Date(v);return Number.isNaN(d.getTime())?'—':d.toLocaleTimeString('ka-GE',{hour:'2-digit',minute:'2-digit'})}
+function toast(text){const el=$('toast');el.textContent=text;el.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>el.classList.remove('show'),3000)}
+function localDate(){const d=new Date();return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tbilisi'}).format(d)}
+function dateBounds(date){return {from:date+'T00:00:00',to:date+'T23:59:59.999'}}
+async function guard(){
+ if(!db){location.replace('login.html');return false}
+ const {data:{session}}=await db.auth.getSession(); if(!session){location.replace('login.html');return false}
+ currentUser=session.user;
+ const {data:profile,error}=await db.from('profiles').select('user_id,full_name,role,grade').eq('user_id',currentUser.id).maybeSingle();
+ if(error){console.error(error);location.replace('login.html');return false}
+ const isTeacher=profile?.role==='teacher'||currentUser.id===TEACHER_ID||String(currentUser.email||'').toLowerCase()==='razmadzemariam45@gmail.com';
+ if(!isTeacher){await db.auth.signOut();location.replace('login.html');return false}
+ currentProfile=profile;$('teacherName').textContent='👩‍🏫 '+(profile?.full_name||'მასწავლებელი')+' — მოსწავლეების დასწრება, შეფასება და Quiz შედეგები';return true;
 }
-
-
-try{
-
-const {
-data:{session}
-} = await db.auth.getSession();
-
-
-if(!session){
-
-location.replace('login.html');
-
-return;
-
-}
-
-
-const user = session.user;
-
-
-/* პროფილის შემოწმება */
-
-const {
-data:profile,
-error:profileError
-} = await db
-.from('profiles')
-.select('user_id,full_name,role,grade')
-.eq('user_id',user.id)
-.maybeSingle();
-
-
-if(profileError){
-
-console.error(profileError);
-
-location.replace('login.html');
-
-return;
-
-}
-
-
-/* მხოლოდ მასწავლებელი */
-
-const isTeacher =
-profile?.role === 'teacher' ||
-user.id === TEACHER_ID ||
-String(user.email).toLowerCase() ===
-'razmadzemariam45@gmail.com';
-
-
-if(!isTeacher){
-
-await db.auth.signOut();
-
-location.replace('login.html');
-
-return;
-
-}
-
-
-/* თარიღი */
-
-$('date').value =
-new Date().toISOString().slice(0,10);
-
-
-/* მოსწავლეების ჩატვირთვა */
-
 async function loadStudents(){
-
-$('studentTable').innerHTML =
-`<tr>
-<td colspan="5" class="empty">
-⏳ იტვირთება...
-</td>
-</tr>`;
-
-
-const selectedGrade =
-$('grade').value;
-
-const search =
-$('search').value.trim().toLowerCase();
-
-
-/* მასწავლებელთან დაკავშირებული მოსწავლეები */
-
-const {
-data:relations,
-error:relationError
-} = await db
-.from('teacher_students')
-.select('student_id')
-.eq('teacher_id',user.id);
-
-
-if(relationError){
-
-console.error(relationError);
-
-showEmpty('მოსწავლეების ჩატვირთვა ვერ მოხერხდა.');
-
-return;
-
+ $('studentTable').innerHTML='<tr><td colspan="7" class="empty">⏳ იტვირთება...</td></tr>';
+ const {data:relations,error:re}=await db.from('teacher_students').select('student_id').eq('teacher_id',currentUser.id);
+ if(re){console.error(re);showEmpty('მოსწავლეების სია ვერ ჩაიტვირთა.');return}
+ const ids=[...(new Set((relations||[]).map(x=>x.student_id)))];
+ if(!ids.length){allStudents=[];attendanceMap={};scheduleMap={};renderStudents();return}
+ let q=db.from('profiles').select('user_id,full_name,grade,role').in('user_id',ids).eq('role','student');
+ if($('grade').value!=='all')q=q.eq('grade',Number($('grade').value));
+ const {data:students,error:se}=await q;
+ if(se){console.error(se);showEmpty('მოსწავლეების სია ვერ ჩაიტვირთა.');return}
+ allStudents=students||[];
+ const date=$('date').value,b=dateBounds(date);
+ const {data:att,error:ae}=await db.from('attendance').select('id,schedule_id,student_id,teacher_id,status,arrival_time,departure_time,private_note').eq('teacher_id',currentUser.id).gte('created_at',b.from).lte('created_at',b.to);
+ if(ae)console.error(ae);
+ attendanceMap={};(att||[]).forEach(a=>{attendanceMap[a.student_id]=a});
+ const {data:schedules,error:sce}=await db.from('schedules').select('id,student_id,teacher_id,lesson_date,start_time,end_time,subject').eq('teacher_id',currentUser.id).eq('lesson_date',date).in('student_id',ids);
+ if(sce)console.error(sce);
+ scheduleMap={};(schedules||[]).forEach(s=>{if(!scheduleMap[s.student_id])scheduleMap[s.student_id]=s});
+ renderStudents();
 }
-
-
-const studentIds =
-(relations||[]).map(x=>x.student_id);
-
-
-if(studentIds.length===0){
-
-showEmpty('მასწავლებელთან ჯერ არცერთი მოსწავლე არ არის მიბმული.');
-
-updateStats([]);
-
-return;
-
+function renderStudents(){
+ const search=$('search').value.trim().toLowerCase();let list=allStudents.filter(s=>!search||String(s.full_name||'').toLowerCase().includes(search));
+ if(!list.length){showEmpty(allStudents.length?'მოსწავლე ვერ მოიძებნა.':'მასწავლებელთან ჯერ არცერთი მოსწავლე არ არის მიბმული.');updateStats([]);return}
+ $('studentTable').innerHTML=list.map(s=>{
+ const a=attendanceMap[s.user_id],status=a?.status||'none';let text=status==='present'?'🟢 მოვიდა':status==='late'?'🟡 დააგვიანა':status==='absent'?'🔴 გააცდინა':'—';
+ const disabledLeave=a?.arrival_time?'':'disabled';
+ return `<tr><td class="student-name">${esc(s.full_name||'უცნობი')}</td><td class="grade">${s.grade?'მე-'+s.grade+' კლასი':'—'}</td><td><span class="badge ${status}">${text}</span></td><td>${fmt(a?.arrival_time)}</td><td>${fmt(a?.departure_time)}</td><td><div class="actions"><button class="action arrive" data-action="present" data-id="${esc(s.user_id)}">🟢 მოვიდა</button><button class="action lateBtn" data-action="late" data-id="${esc(s.user_id)}">🟡 დაგვიანდა</button><button class="action absentBtn" data-action="absent" data-id="${esc(s.user_id)}">🔴 გაცდენა</button><button class="action leave" data-action="leave" data-id="${esc(s.user_id)}" ${disabledLeave}>🚪 წავიდა</button></div></td><td><button class="action rate" data-action="rate" data-id="${esc(s.user_id)}">⭐ შეფასება</button></td></tr>`;
+ }).join('');
+ document.querySelectorAll('[data-action]').forEach(btn=>btn.addEventListener('click',handleAction));updateStats(list);
 }
-
-
-/* პროფილები */
-
-let query =
-db
-.from('profiles')
-.select('user_id,full_name,grade,role')
-.in('user_id',studentIds)
-.eq('role','student');
-
-
-if(selectedGrade !== 'all'){
-
-query =
-query.eq('grade',Number(selectedGrade));
-
+function showEmpty(t){$('studentTable').innerHTML=`<tr><td colspan="7" class="empty">${esc(t)}</td></tr>`}
+function updateStats(list){$('studentCount').textContent=list.length;let p=0,l=0,a=0;list.forEach(s=>{const st=attendanceMap[s.user_id]?.status;if(st==='present')p++;if(st==='late')l++;if(st==='absent')a++});$('presentCount').textContent=p;$('lateCount').textContent=l;$('absentCount').textContent=a}
+async function ensureSchedule(studentId){
+ let s=scheduleMap[studentId];if(s)return s;
+ const date=$('date').value;
+ const {data,error}=await db.from('schedules').select('id,student_id,teacher_id,lesson_date,start_time,end_time,subject').eq('teacher_id',currentUser.id).eq('student_id',studentId).eq('lesson_date',date).order('start_time',{ascending:true}).limit(1).maybeSingle();
+ if(error){console.error(error);throw error}if(s){scheduleMap[studentId]=s;return s}if(data){scheduleMap[studentId]=data;return data}
+ throw new Error('ამ მოსწავლისთვის არჩეულ თარიღზე გაკვეთილის ჩანაწერი (schedule) ვერ მოიძებნა. ჯერ შექმენი გაკვეთილი/განრიგი.');
 }
-
-
-const {
-data:students,
-error:studentError
-} = await query;
-
-
-if(studentError){
-
-console.error(studentError);
-
-showEmpty('მოსწავლეების ჩატვირთვა ვერ მოხერხდა.');
-
-return;
-
+async function saveAttendance(studentId,status){
+ const schedule=await ensureSchedule(studentId);const existing=attendanceMap[studentId];
+ const patch={status};
+ if(status==='present'||status==='late'){if(!existing?.arrival_time)patch.arrival_time=new Date().toISOString()}
+ if(status==='absent'){patch.arrival_time=null;patch.departure_time=null}
+ if(existing){const {data,error}=await db.from('attendance').update(patch).eq('id',existing.id).eq('teacher_id',currentUser.id).select().maybeSingle();if(error)throw error;attendanceMap[studentId]={...existing,...(data||patch)}}
+ else{const row={schedule_id:schedule.id,student_id:studentId,teacher_id:currentUser.id,status,arrival_time:(status==='present'||status==='late')?new Date().toISOString():null,departure_time:null};const {data,error}=await db.from('attendance').insert(row).select().single();if(error)throw error;attendanceMap[studentId]=data}
+ toast(status==='present'?'✅ მოსვლა ჩაიწერა':status==='late'?'🟡 დაგვიანება ჩაიწერა':'🔴 გაცდენა ჩაიწერა');renderStudents();
 }
-
-
-let filtered =
-students||[];
-
-
-/* ძებნა */
-
-if(search){
-
-filtered =
-filtered.filter(s=>
-String(s.full_name||'')
-.toLowerCase()
-.includes(search)
-);
-
+async function saveDeparture(studentId){
+ const existing=attendanceMap[studentId];if(!existing)throw new Error('ჯერ მოსვლა ან დაგვიანება უნდა მონიშნო.');if(existing.status==='absent')throw new Error('გაცდენილ მოსწავლეს წასვლის დრო ვერ დაემატება.');
+ const now=new Date().toISOString();const {data,error}=await db.from('attendance').update({departure_time:now}).eq('id',existing.id).eq('teacher_id',currentUser.id).select().maybeSingle();if(error)throw error;attendanceMap[studentId]={...existing,...(data||{departure_time:now})};toast('🚪 წასვლის დრო ჩაიწერა');renderStudents();
 }
-
-
-/* დასწრება */
-
-const date =
-$('date').value;
-
-
-const {
-data:attendance,
-error:attendanceError
-} = await db
-.from('attendance')
-.select(
-'student_id,status,arrival_time,departure_time'
-)
-.eq('teacher_id',user.id)
-.gte('created_at',date+'T00:00:00')
-.lt('created_at',date+'T23:59:59.999');
-
-
-if(attendanceError){
-
-console.error(attendanceError);
-
-}
-
-
-/* attendance map */
-
-const attMap = {};
-
-(attendance||[]).forEach(a=>{
-
-attMap[a.student_id]=a;
-
-});
-
-
-/* ცხრილი */
-
-if(filtered.length===0){
-
-showEmpty('მოსწავლე ვერ მოიძებნა.');
-
-}else{
-
-$('studentTable').innerHTML =
-filtered.map(student=>{
-
-const a =
-attMap[student.user_id];
-
-
-let status='none';
-let text='არ არის მონიშნული';
-
-
-if(a){
-
-if(a.status==='present'){
-
-status='present';
-text='🟢 მოვიდა';
-
-}
-
-else if(a.status==='late'){
-
-status='late';
-text='🟡 დააგვიანა';
-
-}
-
-else if(a.status==='absent'){
-
-status='absent';
-text='🔴 გააცდინა';
-
-}
-
-else{
-
-text=a.status;
-
-}
-
-}
-
-
-return `
-<tr>
-
-<td class="student-name">
-${escapeHtml(student.full_name||'უცნობი')}
-</td>
-
-<td class="grade">
-${student.grade ? 'მე-'+student.grade+' კლასი' : '—'}
-</td>
-
-<td>
-<span class="badge ${status}">
-${text}
-</span>
-</td>
-
-<td>
-${formatDate(a?.arrival_time)}
-</td>
-
-<td>
-${formatDate(a?.departure_time)}
-</td>
-
-</tr>
-`;
-
-}).join('');
-
-}
-
-
-updateStats(filtered,attMap);
-
-}
-
-
-/* სტატისტიკა */
-
-function updateStats(students,attMap={}){
-
-$('studentCount').textContent =
-students.length;
-
-
-let present=0;
-let late=0;
-let absent=0;
-
-
-students.forEach(s=>{
-
-const a=attMap[s.user_id];
-
-if(!a)return;
-
-
-if(a.status==='present')present++;
-
-if(a.status==='late')late++;
-
-if(a.status==='absent')absent++;
-
-});
-
-
-$('presentCount').textContent=present;
-
-$('lateCount').textContent=late;
-
-$('absentCount').textContent=absent;
-
-}
-
-
-/* Quiz შედეგები */
-
+async function handleAction(e){const btn=e.currentTarget,id=btn.dataset.id,action=btn.dataset.action;btn.disabled=true;try{if(action==='rate'){openRating(id);return}if(action==='leave')await saveDeparture(id);else await saveAttendance(id,action)}catch(err){console.error(err);toast('❌ '+(err?.message||'ოპერაცია ვერ შესრულდა'))}finally{btn.disabled=false}}
+function openRating(id){const s=allStudents.find(x=>x.user_id===id);if(!s)return;ratingStudent=s;$('ratingStudent').textContent=(s.full_name||'მოსწავლე')+' — '+(s.grade?'მე-'+s.grade+' კლასი':'კლასი უცნობია');$('ratingValue').value='10';$('ratingComment').value='';$('ratingModal').classList.add('show')}
+function closeRating(){ratingStudent=null;$('ratingModal').classList.remove('show')}
+async function saveRating(){if(!ratingStudent)return;const grade=Number($('ratingValue').value);const comment=$('ratingComment').value.trim();const lesson=scheduleMap[ratingStudent.user_id];const row={student_id:ratingStudent.user_id,teacher_id:currentUser.id,grade,comment:comment||null,lesson_id:lesson?.id?String(lesson.id):null};const {error}=await db.from('student_grades').insert(row);if(error)throw error;toast('⭐ შეფასება წარმატებით შეინახა');closeRating()}
 async function loadQuizResults(){
-
-$('quizTable').innerHTML =
-`<tr>
-<td colspan="5" class="empty">
-⏳ იტვირთება...
-</td>
-</tr>`;
-
-
-const {
-data:relations,
-error:relationError
-} = await db
-.from('teacher_students')
-.select('student_id')
-.eq('teacher_id',user.id);
-
-
-if(relationError){
-
-console.error(relationError);
-
-return;
-
+ $('quizTable').innerHTML='<tr><td colspan="5" class="empty">⏳ იტვირთება...</td></tr>';
+ const {data:relations,error:re}=await db.from('teacher_students').select('student_id').eq('teacher_id',currentUser.id);if(re){console.error(re);return}const ids=[...(new Set((relations||[]).map(x=>x.student_id)))];if(!ids.length){$('quizTable').innerHTML='<tr><td colspan="5" class="empty">Quiz შედეგები ჯერ არ არის.</td></tr>';return}
+ const {data:results,error}=await db.from('quiz_results').select('student_id,quiz_id,grade,score,total,completed_at').in('student_id',ids).order('completed_at',{ascending:false});if(error){console.error(error);$('quizTable').innerHTML='<tr><td colspan="5" class="empty">Quiz შედეგების ჩატვირთვა ვერ მოხერხდა.</td></tr>';return}
+ const {data:students}=await db.from('profiles').select('user_id,full_name').in('user_id',ids);const names={};(students||[]).forEach(s=>names[s.user_id]=s.full_name);if(!results?.length){$('quizTable').innerHTML='<tr><td colspan="5" class="empty">ჯერ არცერთი Quiz შედეგი არ არის.</td></tr>';return}
+ $('quizTable').innerHTML=results.map(r=>`<tr><td class="student-name">${esc(names[r.student_id]||'უცნობი')}</td><td class="grade">${r.grade?'მე-'+r.grade:'—'}</td><td>${esc(r.quiz_id||'Quiz')}</td><td class="score">${r.score??0} / ${r.total??0}</td><td>${r.completed_at?new Date(r.completed_at).toLocaleString('ka-GE'):'—'}</td></tr>`).join('');
 }
-
-
-const ids =
-(relations||[]).map(x=>x.student_id);
-
-
-if(ids.length===0){
-
-$('quizTable').innerHTML =
-`<tr>
-<td colspan="5" class="empty">
-Quiz შედეგები ჯერ არ არის.
-</td>
-</tr>`;
-
-return;
-
-}
-
-
-const {
-data:results,
-error
-} = await db
-.from('quiz_results')
-.select(
-'student_id,quiz_id,grade,score,total,completed_at'
-)
-.in('student_id',ids)
-.order('completed_at',{ascending:false});
-
-
-if(error){
-
-console.error(error);
-
-$('quizTable').innerHTML =
-`<tr>
-<td colspan="5" class="empty">
-Quiz შედეგების ჩატვირთვა ვერ მოხერხდა.
-</td>
-</tr>`;
-
-return;
-
-}
-
-
-/* სახელების მოძებნა */
-
-const {
-data:students
-} = await db
-.from('profiles')
-.select('user_id,full_name')
-.in('user_id',ids);
-
-
-const names={};
-
-(students||[]).forEach(s=>{
-
-names[s.user_id]=s.full_name;
-
-});
-
-
-if(!results?.length){
-
-$('quizTable').innerHTML =
-`<tr>
-<td colspan="5" class="empty">
-ჯერ არცერთი Quiz შედეგი არ არის.
-</td>
-</tr>`;
-
-return;
-
-}
-
-
-$('quizTable').innerHTML =
-results.map(r=>{
-
-return `
-<tr>
-
-<td class="student-name">
-${escapeHtml(names[r.student_id]||'უცნობი')}
-</td>
-
-<td class="grade">
-${r.grade ? 'მე-'+r.grade : '—'}
-</td>
-
-<td>
-${escapeHtml(r.quiz_id||'Quiz')}
-</td>
-
-<td class="score">
-${r.score ?? 0} / ${r.total ?? 0}
-</td>
-
-<td>
-${formatDate(r.completed_at)}
-</td>
-
-</tr>
-`;
-
-}).join('');
-
-}
-
-
-/* დამხმარე ფუნქციები */
-
-function showEmpty(text){
-
-$('studentTable').innerHTML =
-`<tr>
-<td colspan="5" class="empty">
-${escapeHtml(text)}
-</td>
-</tr>`;
-
-}
-
-
-function escapeHtml(value){
-
-return String(value)
-.replaceAll('&','&amp;')
-.replaceAll('<','&lt;')
-.replaceAll('>','&gt;')
-.replaceAll('"','&quot;')
-.replaceAll("'","&#039;");
-
-}
-
-
-function formatDate(value){
-
-if(!value)return '—';
-
-const d=new Date(value);
-
-if(Number.isNaN(d.getTime()))return '—';
-
-return d.toLocaleString('ka-GE',{
-day:'2-digit',
-month:'2-digit',
-year:'numeric',
-hour:'2-digit',
-minute:'2-digit'
-});
-
-}
-
-
-/* ღილაკები */
-
-$('load').addEventListener(
-'click',
-()=>{
-loadStudents();
-loadQuizResults();
-});
-
-
-$('search').addEventListener(
-'input',
-()=>{
-loadStudents();
-});
-
-
-$('grade').addEventListener(
-'change',
-()=>{
-loadStudents();
-});
-
-
-$('date').addEventListener(
-'change',
-()=>{
-loadStudents();
-});
-
-
-$('logout').addEventListener(
-'click',
-async()=>{
-
-$('logout').disabled=true;
-
-try{
-
-await db.auth.signOut();
-
-}catch(e){
-
-console.error(e);
-
-}
-
-location.replace('login.html');
-
-});
-
-
-/* პირველი ჩატვირთვა */
-
-await loadStudents();
-
-await loadQuizResults();
-
-
-}catch(error){
-
-console.error(error);
-
-location.replace('login.html');
-
-}
-
+$('load').addEventListener('click',()=>{loadStudents();loadQuizResults()});$('search').addEventListener('input',renderStudents);$('grade').addEventListener('change',loadStudents);$('date').addEventListener('change',loadStudents);$('cancelRating').addEventListener('click',closeRating);$('ratingModal').addEventListener('click',e=>{if(e.target.id==='ratingModal')closeRating()});$('saveRating').addEventListener('click',async()=>{const b=$('saveRating');b.disabled=true;try{await saveRating()}catch(err){console.error(err);toast('❌ '+(err?.message||'შეფასება ვერ შეინახა'))}finally{b.disabled=false}});$('logout').addEventListener('click',async()=>{await db.auth.signOut();location.replace('login.html')});
+$('date').value=localDate();
+if(await guard()){await loadStudents();await loadQuizResults()}
 })();
-
 </script>
-
 </body>
 </html>
