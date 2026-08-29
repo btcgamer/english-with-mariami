@@ -1,1 +1,1818 @@
-<!DOCTYPE html><html lang="ka"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>English with Mariami — Academy</title><script src="https://cdn.jsdelivr.net/npm/@Supabase/supabase-js@2"></script><script src="config.js"></script><style>body{margin:0;font-family:Arial,"Noto Sans Georgian",sans-serif;color:#fff;background:#010712;min-height:100vh;overflow-x:hidden}a{text-decoration:none;color:inherit}.wrap{width:min(1250px,calc(100% - 28px));margin:auto}.neon-world{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(circle at 50% 45%,#eaffff 0,#d9faff 18%,#9bd9f5 42%,#2a6f9b 72%,#020713 100%)}.grid-floor{position:absolute;left:-20%;right:-20%;bottom:-20%;height:62%;transform:perspective(450px) rotateX(62deg);background-image:linear-gradient(#00eaff35 1px,transparent 1px),linear-gradient(90deg,#00eaff35 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to top,black,transparent)}.letters{position:absolute;inset:0}.letter{position:absolute;font-weight:1000;font-size:clamp(45px,7vw,105px);color:#fff;text-shadow:0 0 5px #fff,0 0 14px #00eaff,0 0 30px #009cff,0 0 65px #006cff;animation:float 7s ease-in-out infinite}.letter:nth-child(1){left:5%;top:16%}.letter:nth-child(2){left:18%;top:63%}.letter:nth-child(3){left:31%;top:12%}.letter:nth-child(4){left:44%;top:67%}.letter:nth-child(5){left:56%;top:16%}.letter:nth-child(6){left:69%;top:58%}.letter:nth-child(7){left:81%;top:20%}.letter:nth-child(8){left:91%;top:70%}.letter:nth-child(9){left:12%;top:35%;font-size:55px}.letter:nth-child(10){left:74%;top:39%;font-size:55px}@keyframes float{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(25px,-35px,60px)}}.top{position:sticky;top:0;z-index:50;background:#02152de8;border-bottom:1px solid #00eaff66;backdrop-filter:blur(14px)}.nav{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0}.brand{font-weight:1000;font-size:18px;text-shadow:0 0 18px #00eaff}.navlinks{display:flex;gap:7px;flex-wrap:wrap}.navlinks a{padding:9px 11px;border-radius:12px;background:#062443dd;border:1px solid #00eaff44;font-size:13px}.hero{padding:70px 0 45px;min-height:650px;display:flex;align-items:center}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}.badge{display:inline-block;padding:8px 14px;border-radius:30px;background:#061c38dd;border:1px solid #00eaff88;color:#ffe600;font-weight:900}.hero h1{font-size:clamp(42px,7vw,76px);line-height:1;margin:18px 0}.hero h1 span{color:#00eaff}.lead{font-size:18px;line-height:1.7;color:#e9fcff}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.btn{display:inline-block;border:0;cursor:pointer;padding:12px 17px;border-radius:13px;font-weight:900}.primary{background:#00c9f2;color:#00131a;box-shadow:0 0 25px #00eaff88}.yellow{background:#ffe600;color:#181500}.neon-card{background:linear-gradient(145deg,#041a31e8,#020b19e8);border:1px solid #00eaff66;border-radius:24px;box-shadow:0 18px 55px #0009,0 0 30px #00eaff22;backdrop-filter:blur(10px)}.teacher{padding:30px;text-align:center}.avatar{font-size:90px}.pill{display:inline-block;margin:4px;padding:7px 10px;border-radius:20px;background:#0a2d50cc;border:1px solid #00eaff44}.section{padding:55px 0}.section-title{text-align:center;margin-bottom:30px}.section-title h2{font-size:32px;margin:12px 0}.muted{color:#c1eaf5}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.grade{position:relative;min-height:450px;overflow:hidden;transition:.3s}.grade:hover{transform:translateY(-10px);box-shadow:0 35px 80px #000d,0 0 45px #00eaff66}.class-scene{height:220px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 50%,#075b91,#032c50 48%,#020b19 100%);border-bottom:1px solid #00eaff44}.scene-floor{position:absolute;left:-30%;right:-30%;bottom:-65px;height:150px;transform:perspective(350px) rotateX(65deg);background-image:linear-gradient(#00eaff45 1px,transparent 1px),linear-gradient(90deg,#00eaff45 1px,transparent 1px);background-size:30px 30px}.float-letter{position:absolute;font-size:38px;font-weight:1000;color:#fff;text-shadow:0 0 5px #fff,0 0 15px #00eaff,0 0 30px #008cff}.book{position:absolute;left:50%;top:51%;width:145px;height:90px;transform:translate(-50%,-50%) rotateX(58deg);background:linear-gradient(135deg,#fff,#bcefff);border:2px solid #00c9f2;box-shadow:0 0 18px #00eaff88}.plant{position:absolute;left:25%;bottom:40px;font-size:55px}.rocket{position:absolute;left:50%;top:48%;font-size:75px;transform:translate(-50%,-50%) rotate(-25deg)}.planet{position:absolute;border-radius:50%;box-shadow:inset -12px -10px 20px #001b35,0 0 25px #00eaff66}.planet.big{width:65px;height:65px;right:17%;top:35%;background:radial-gradient(circle at 30% 25%,#ffe600,#ff7a00 45%,#9d2700)}.planet.small{width:25px;height:25px;left:15%;top:25%;background:radial-gradient(circle at 30% 30%,#fff,#00eaff 45%,#006cff)}.globe{position:absolute;left:50%;top:48%;width:120px;height:120px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 30% 25%,#dffcff,#00c9f2 22%,#007cff 60%,#023b75);box-shadow:inset -20px -20px 30px #001a3a,0 0 25px #00eaff}.word{position:absolute;font-weight:1000;color:#fff;padding:5px 9px;border-radius:12px;background:#062443cc;border:1px solid #00eaff55}.grade-content{padding:23px}.grade h3{color:#ffe600;font-size:25px}.grade p{line-height:1.65;color:#d9f7ff;min-height:105px}.grade-label{position:absolute;top:15px;left:15px;z-index:8;padding:7px 11px;border-radius:20px;background:#02182ddd;border:1px solid #00eaff66;font-size:12px;font-weight:900;color:#ffe600}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature{padding:20px;text-align:center}.feature b{display:block;color:#ffe600;font-size:20px;margin-bottom:8px}.feature span{line-height:1.6;color:#d9f7ff}.course{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.course-card{padding:22px;border-radius:18px;background:linear-gradient(145deg,#0a3158,#061a32);border:1px solid #00eaff33}.progress-box{padding:25px}.progress{height:20px;border-radius:30px;background:#020a16;overflow:hidden;margin:15px 0}.progress i{display:block;height:100%;width:35%;background:linear-gradient(90deg,#00eaff,#ffe600)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:15px;text-align:center;background:#061a32;border-radius:15px;border:1px solid #00eaff22}.stat b{display:block;font-size:25px;color:#ffe600}.family-parent{position:relative;overflow:hidden;min-height:500px;padding:0!important;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,#075b91 0,#032b4d 35%,#020f20 70%,#010711 100%);border:1px solid #00eaff88}.family-glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,#00eaff55,transparent 70%)}.family-scene{position:absolute;inset:0;overflow:hidden}.family{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);display:flex;align-items:flex-end;gap:30px}.person{text-align:center;font-size:42px;filter:drop-shadow(0 0 15px #00eaff)}.head{font-size:52px}.body{font-size:48px}.legs{font-size:38px}.family-letter{position:absolute;font-size:70px;font-weight:1000;color:#fff;text-shadow:0 0 5px #fff,0 0 15px #00eaff,0 0 35px #008cff}.family-floor{position:absolute;left:-20%;right:-20%;bottom:-32%;height:60%;transform:perspective(500px) rotateX(65deg);background-image:linear-gradient(#00eaff35 1px,transparent 1px),linear-gradient(90deg,#00eaff35 1px,transparent 1px);background-size:45px 45px}.parent-content{position:relative;z-index:10;text-align:center;padding:35px 25px;width:min(750px,90%);background:linear-gradient(145deg,#02182bdd,#020a17dd);border-radius:26px;border:1px solid #00eaff66}.parent-icon{font-size:58px}.parent-content h2{color:#00eaff;font-size:32px}.parent-content p{color:#d9f7ff;line-height:1.7}.parent-features{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.footer{margin-top:35px;padding:32px 0;text-align:center;border-top:1px solid #00eaff33;color:#9dc7d5}.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33}@media(max-width:850px){.hero-grid,.grid,.course{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.hero h1{font-size:42px}.feature-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column}.navlinks{width:100%}.family{gap:5px;transform:translate(-50%,-50%) scale(.68)}.family-parent{min-height:540px}}</style></head><body><div class="neon-world"><div class="letters"><span class="letter">A</span><span class="letter">B</span><span class="letter">C</span><span class="letter">D</span><span class="letter">E</span><span class="letter">F</span><span class="letter">G</span><span class="letter">H</span><span class="letter">I</span><span class="letter">J</span></div><div class="grid-floor"></div></div><header class="top"><div class="wrap nav"><a class="brand" href="index.html">⚡ ENGLISH WITH MARIAMI</a><nav class="navlinks"><a href="#grades">🎓 კლასები</a><a href="#course">🗺️ კურსი</a><a href="#learn">📚 სწავლა</a><a href="#progress">🏆 პროგრესი</a><a href="#parents">👨‍👩‍👧 მშობელი</a><a href="login.html">🚪 გამოსვლა</a></nav></div></header><main class="wrap"><section class="hero"><div class="hero-grid"><div><span class="badge">🇬🇧 ქართული ↔ English • 2026</span><h1>ვისწავლოთ<br><span>ინგლისური</span><br>მარიამისთან ერთად!</h1><p class="lead">სრული სასწავლო სივრცე მე-2, მე-3 და მე-4 კლასისთვის: Vocabulary, Speaking, Reading, Listening, Grammar, Writing და Quiz.</p><div class="buttons"><a class="btn primary" href="#grades">🎓 აირჩიე კლასი</a><a class="btn yellow" href="#learn">🚀 დავიწყოთ სწავლა</a></div></div><div class="neon-card teacher"><div class="avatar">👩‍🏫</div><h2>მასწავლებელი მარიამი</h2><p class="muted">შენი ინგლისურის გზამკვლევი ✨</p><span class="pill">🧠 Vocabulary</span><span class="pill">🔊 Listening</span><span class="pill">🗣️ Speaking</span><span class="pill">📖 Reading</span><span class="pill">✍️ Grammar</span></div></div></section><section id="grades" class="section"><div class="section-title"><span class="badge">CLASSROOM</span><h2>აირჩიე შენი კლასი</h2><p class="muted">მასწავლებლის მიერ მინიჭებული კლასი ავტომატურად განსაზღვრავს შენს სასწავლო სივრცეს.</p></div><div class="grid"><article class="neon-card grade"><div class="class-scene"><span class="grade-label">🌱 BEGINNER</span><div class="float-letter" style="left:12%;top:20%">A</div><div class="float-letter" style="right:13%;top:27%">B</div><div class="plant">🌱</div><div class="book"></div><div class="scene-floor"></div></div><div class="grade-content"><h3>🌱 მე-2 კლასი</h3><p>პირველი ნაბიჯები ინგლისურში: ფერები, ოჯახი, სკოლა, ცხოველები, საკვები, სხეულის ნაწილები, სახლი, რიცხვები და მარტივი წინადადებები.</p><a class="btn primary grade-link" data-grade="2" href="grade2.html">🚀 მე-2 კლასში შესვლა →</a></div></article><article class="neon-card grade"><div class="class-scene"><span class="grade-label">🚀 ELEMENTARY</span><div class="planet big"></div><div class="planet small"></div><div class="rocket">🚀</div><div class="flame">🔥</div><div class="scene-floor"></div></div><div class="grade-content"><h3>🚀 მე-3 კლასი</h3><p>ყოველდღიური ცხოვრება, დღეები, თვეები, ამინდი, მოქმედებები, ქალაქი, საკვები, Speaking, Reading და მარტივი გრამატიკა.</p><a class="btn primary grade-link" data-grade="3" href="grade3.html">🚀 მე-3 კლასში შესვლა →</a></div></article><article class="neon-card grade"><div class="class-scene"><span class="grade-label">⭐ ADVANCED</span><div class="globe"><div class="continent one">🌎</div><div class="continent two">🌍</div></div><div class="word one">SPEAK</div><div class="word two">READ</div><div class="word three">WRITE</div><div class="word four">ENGLISH</div><div class="scene-floor"></div></div><div class="grade-content"><h3>⭐ მე-4 კლასი</h3><p>გაფართოებული Vocabulary, Present Simple, კითხვები, Prepositions, Reading, Dialogues, Writing, Listening და Practice.</p><a class="btn primary grade-link" data-grade="4" href="grade4.html">⭐ მე-4 კლასში შესვლა →</a></div></article></div></section><section id="learn" class="section"><div class="section-title"><span class="badge">LEARN</span><h2>📚 როგორ ვისწავლით?</h2></div><div class="feature-grid"><div class="neon-card feature"><b>🧠 Vocabulary</b><span>სიტყვა + ქართული თარგმანი + გამოთქმა + მაგალითი.</span></div><div class="neon-card feature"><b>🔊 Listening</b><span>მოსმენა და გამეორება მარტივი სავარჯიშოებით.</span></div><div class="neon-card feature"><b>🗣️ Speaking</b><span>მოკლე დიალოგები და ყოველდღიური ფრაზები.</span></div><div class="neon-card feature"><b>📝 Quiz</b><span>შემოწმება, ქულა და პროგრესის კონტროლი.</span></div></div></section><section id="course" class="section"><div class="section-title"><span class="badge">FULL COURSE</span><h2>🗺️ სრული სასწავლო კურსი</h2></div><div class="course"><div class="course-card"><b>🌱 მე-2 კლასი</b><p>სიტყვები, ფერები, ოჯახი, სკოლა, ცხოველები, საკვები და მარტივი წინადადებები.</p><a class="btn primary grade-link" data-grade="2" href="grade2.html">კურსის გახსნა</a></div><div class="course-card"><b>🚀 მე-3 კლასი</b><p>დრო, დღეები, თვეები, ამინდი, მოქმედებები, ქალაქი, Speaking, Reading და Grammar.</p><a class="btn primary grade-link" data-grade="3" href="grade3.html">კურსის გახსნა</a></div><div class="course-card"><b>⭐ მე-4 კლასი</b><p>Present Simple, კითხვები, Prepositions, Reading, Dialogues, Writing, Listening და Practice.</p><a class="btn primary grade-link" data-grade="4" href="grade4.html">კურსის გახსნა</a></div></div></section><section id="progress" class="section"><div class="section-title"><span class="badge">MY PROGRESS</span><h2>🏆 შენი პროგრესი</h2><p class="muted">აქ გამოჩნდება შენი სწავლის შედეგები.</p></div><div class="neon-card progress-box"><div class="stats"><div class="stat"><b>0</b>ნასწავლი სიტყვა</div><div class="stat"><b>0</b>Quiz</div><div class="stat"><b>0%</b>პროგრესი</div><div class="stat"><b>⭐</b>დონე</div></div><div class="progress"><i></i></div><p class="muted">დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.</p></div></section><section id="parents" class="section"><div class="section-title"><span class="badge">FAMILY SPACE</span><h2>👨‍👩‍👧 მშობლის სივრცე</h2><p class="muted">ოჯახი და სწავლა ერთ სივრცეში ❤️</p></div><div class="family-parent neon-card"><div class="family-glow"></div><div class="family-scene"><div class="family-letter">A</div><div class="family-letter">B</div><div class="family-letter">C</div><div class="family"><div class="person"><div class="head">👨</div><div class="body">👕</div><div class="legs">👖</div></div><div class="person"><div class="head">👩</div><div class="body">👗</div><div class="legs">👠</div></div><div class="person"><div class="head">🧒</div><div class="body">👕</div><div class="legs">👟</div></div></div><div class="family-floor"></div></div><div class="parent-content"><div class="parent-icon">👨‍👩‍👧</div><h2>მშობლის სივრცე</h2><p>აქ მშობელს შეუძლია თვალყური ადევნოს ბავშვის სწავლას, პროგრესს, Quiz შედეგებს და დასვას კითხვა მასწავლებელთან.</p><div class="parent-features"><span class="pill">📊 პროგრესი</span><span class="pill">📝 Quiz შედეგები</span><span class="pill">❓ კითხვები</span><span class="pill">💬 პასუხები</span></div><a href="parent-space.html" class="btn primary">👨‍👩‍👧 მშობლის სივრცეში შესვლა →</a></div></div></section><section class="section"><div class="section-title"><span class="badge">READY?</span><h2>🚀 მზად ხარ?</h2><p class="muted">შენი კლასი ავტომატურად არის განსაზღვრული მასწავლებლის მიერ.</p><div class="buttons" style="justify-content:center"><a class="btn primary grade-link" data-grade="2" href="grade2.html">🌱 მე-2 კლასი</a><a class="btn primary grade-link" data-grade="3" href="grade3.html">🚀 მე-3 კლასი</a><a class="btn yellow grade-link" data-grade="4" href="grade4.html">⭐ მე-4 კლასი</a></div></div></section></main><footer class="footer"><div class="wrap">⚡ English with Mariami • English Academy • სწავლა, თამაში და პროგრესი ❤️</div></footer><footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer><script>(async function(){'use strict';function getClient(){return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null}function go(){location.replace('login.html?redirect='+encodeURIComponent('academy.html'))}const client=getClient();if(!client){window.addEventListener('englishMariamiSupabaseReady',()=>location.reload(),{once:true});setTimeout(()=>{if(!getClient())go()},5000);return}try{const {data:{session},error}=await client.auth.getSession();if(error||!session?.user){go();return}const {data:profile,error:pe}=await client.from('profiles').select('role,grade,full_name').eq('user_id',session.user.id).maybeSingle();if(pe){console.error(pe);go();return}const role=String(profile?.role||session.user.user_metadata?.role||'student').toLowerCase();const grade=Number(profile?.grade||session.user.user_metadata?.grade||0);if(role!=='teacher'&&role!=='admin'&&role!=='parent'&&!([2,3,4].includes(grade))){await client.auth.signOut();alert('შენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს.');go();return}if(role==='student'){document.querySelectorAll('.grade-link').forEach(a=>{if(Number(a.dataset.grade)!==grade){a.style.display='none';a.removeAttribute('href')}});const p=document.querySelector('#grades .section-title p');if(p)p.textContent='შენი მინიჭებული კლასი: მე-'+grade+' კლასი 🎓'}}catch(e){console.error(e);go()}})();</script></body></html>
+<!DOCTYPE html>
+
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>English with Mariami — Academy</title>
+
+  <!-- Supabase -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: Arial, "Noto Sans Georgian", sans-serif;
+      color: #fff;
+      background: #010712;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      touch-action: manipulation;
+    }
+
+    .wrap {
+      width: min(1250px, calc(100% - 28px));
+      margin: auto;
+    }
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .neon-world {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          #eaffff 0,
+          #d9faff 18%,
+          #9bd9f5 42%,
+          #2a6f9b 72%,
+          #020713 100%
+        );
+    }
+
+    .grid-floor {
+      position: absolute;
+      left: -20%;
+      right: -20%;
+      bottom: -20%;
+      height: 62%;
+      transform: perspective(450px) rotateX(62deg);
+      background-image:
+        linear-gradient(#00eaff35 1px, transparent 1px),
+        linear-gradient(90deg, #00eaff35 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: linear-gradient(to top, black, transparent);
+      -webkit-mask-image: linear-gradient(to top, black, transparent);
+    }
+
+    .letters {
+      position: absolute;
+      inset: 0;
+    }
+
+    .letter {
+      position: absolute;
+      font-weight: 1000;
+      font-size: clamp(45px, 7vw, 105px);
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 14px #00eaff,
+        0 0 30px #009cff,
+        0 0 65px #006cff;
+      animation: floatLetter 7s ease-in-out infinite;
+    }
+
+    .letter:nth-child(1) { left: 5%; top: 16%; }
+    .letter:nth-child(2) { left: 18%; top: 63%; }
+    .letter:nth-child(3) { left: 31%; top: 12%; }
+    .letter:nth-child(4) { left: 44%; top: 67%; }
+    .letter:nth-child(5) { left: 56%; top: 16%; }
+    .letter:nth-child(6) { left: 69%; top: 58%; }
+    .letter:nth-child(7) { left: 81%; top: 20%; }
+    .letter:nth-child(8) { left: 91%; top: 70%; }
+    .letter:nth-child(9) {
+      left: 12%;
+      top: 35%;
+      font-size: 55px;
+    }
+    .letter:nth-child(10) {
+      left: 74%;
+      top: 39%;
+      font-size: 55px;
+    }
+
+    @keyframes floatLetter {
+      0%, 100% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      50% {
+        transform: translate3d(25px, -35px, 60px);
+      }
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #02152de8;
+      border-bottom: 1px solid #00eaff66;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 13px 0;
+    }
+
+    .brand {
+      font-weight: 1000;
+      font-size: 18px;
+      text-shadow: 0 0 18px #00eaff;
+      white-space: nowrap;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .navlinks a {
+      padding: 9px 11px;
+      border-radius: 12px;
+      background: #062443dd;
+      border: 1px solid #00eaff44;
+      font-size: 13px;
+    }
+
+    .navlinks a:hover {
+      background: #0a3158;
+      border-color: #00eaff99;
+    }
+
+    /* =========================================================
+       GENERAL
+    ========================================================= */
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 30px;
+      background: #061c38dd;
+      border: 1px solid #00eaff88;
+      color: #ffe600;
+      font-weight: 900;
+    }
+
+    .section {
+      padding: 55px 0;
+    }
+
+    .section-title {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      margin: 12px 0;
+      font-size: 32px;
+    }
+
+    .muted {
+      color: #c1eaf5;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      min-height: 44px;
+      padding: 12px 17px;
+      border: 0;
+      border-radius: 13px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .primary {
+      color: #00131a;
+      background: #00c9f2;
+      box-shadow: 0 0 25px #00eaff88;
+    }
+
+    .yellow {
+      color: #181500;
+      background: #ffe600;
+    }
+
+    .neon-card {
+      background: linear-gradient(145deg, #041a31e8, #020b19e8);
+      border: 1px solid #00eaff66;
+      border-radius: 24px;
+      box-shadow:
+        0 18px 55px #0009,
+        0 0 30px #00eaff22;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 650px;
+      padding: 70px 0 45px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 28px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero h1 {
+      margin: 18px 0;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1;
+    }
+
+    .hero h1 span {
+      color: #00eaff;
+    }
+
+    .lead {
+      max-width: 720px;
+      color: #e9fcff;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .teacher {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .avatar {
+      font-size: 90px;
+    }
+
+    .pill {
+      display: inline-block;
+      margin: 4px;
+      padding: 7px 10px;
+      border-radius: 20px;
+      background: #0a2d50cc;
+      border: 1px solid #00eaff44;
+    }
+
+    /* =========================================================
+       GRADES
+    ========================================================= */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grade {
+      position: relative;
+      min-height: 450px;
+      overflow: hidden;
+      transition: .3s ease;
+    }
+
+    .grade:hover {
+      transform: translateY(-10px);
+      box-shadow:
+        0 35px 80px #000d,
+        0 0 45px #00eaff66;
+    }
+
+    .class-scene {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          #075b91,
+          #032c50 48%,
+          #020b19 100%
+        );
+      border-bottom: 1px solid #00eaff44;
+    }
+
+    .scene-floor {
+      position: absolute;
+      left: -30%;
+      right: -30%;
+      bottom: -65px;
+      height: 150px;
+      transform: perspective(350px) rotateX(65deg);
+      background-image:
+        linear-gradient(#00eaff45 1px, transparent 1px),
+        linear-gradient(90deg, #00eaff45 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    .float-letter {
+      position: absolute;
+      font-size: 38px;
+      font-weight: 1000;
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 15px #00eaff,
+        0 0 30px #008cff;
+    }
+
+    .book {
+      position: absolute;
+      left: 50%;
+      top: 51%;
+      width: 145px;
+      height: 90px;
+      transform: translate(-50%, -50%) rotateX(58deg);
+      background: linear-gradient(135deg, #fff, #bcefff);
+      border: 2px solid #00c9f2;
+      box-shadow: 0 0 18px #00eaff88;
+    }
+
+    .plant {
+      position: absolute;
+      left: 25%;
+      bottom: 40px;
+      font-size: 55px;
+    }
+
+    .rocket {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      font-size: 75px;
+      transform: translate(-50%, -50%) rotate(-25deg);
+    }
+
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      box-shadow:
+        inset -12px -10px 20px #001b35,
+        0 0 25px #00eaff66;
+    }
+
+    .planet.big {
+      width: 65px;
+      height: 65px;
+      right: 17%;
+      top: 35%;
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #ffe600,
+          #ff7a00 45%,
+          #9d2700
+        );
+    }
+
+    .planet.small {
+      width: 25px;
+      height: 25px;
+      left: 15%;
+      top: 25%;
+      background:
+        radial-gradient(
+          circle at 30% 30%,
+          #fff,
+          #00eaff 45%,
+          #006cff
+        );
+    }
+
+    .globe {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #dffcff,
+          #00c9f2 22%,
+          #007cff 60%,
+          #023b75
+        );
+      box-shadow:
+        inset -20px -20px 30px #001a3a,
+        0 0 25px #00eaff;
+    }
+
+    .word {
+      position: absolute;
+      padding: 5px 9px;
+      border-radius: 12px;
+      color: #fff;
+      font-weight: 1000;
+      background: #062443cc;
+      border: 1px solid #00eaff55;
+    }
+
+    .grade-content {
+      padding: 23px;
+    }
+
+    .grade h3 {
+      color: #ffe600;
+      font-size: 25px;
+    }
+
+    .grade p {
+      min-height: 105px;
+      color: #d9f7ff;
+      line-height: 1.65;
+    }
+
+    .grade-label {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 8;
+      padding: 7px 11px;
+      border-radius: 20px;
+      background: #02182ddd;
+      border: 1px solid #00eaff66;
+      color: #ffe600;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       LEARNING
+    ========================================================= */
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .feature {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .feature b {
+      display: block;
+      margin-bottom: 8px;
+      color: #ffe600;
+      font-size: 20px;
+    }
+
+    .feature span {
+      color: #d9f7ff;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       COURSE
+    ========================================================= */
+
+    .course {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .course-card {
+      padding: 22px;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #0a3158, #061a32);
+      border: 1px solid #00eaff33;
+    }
+
+    /* =========================================================
+       PROGRESS
+    ========================================================= */
+
+    .progress-box {
+      padding: 25px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 15px;
+      text-align: center;
+      background: #061a32;
+      border-radius: 15px;
+      border: 1px solid #00eaff22;
+    }
+
+    .stat b {
+      display: block;
+      color: #ffe600;
+      font-size: 25px;
+    }
+
+    .progress {
+      height: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+      border-radius: 30px;
+      background: #020a16;
+    }
+
+    .progress i {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #00eaff, #ffe600);
+      transition: width .5s ease;
+    }
+
+    /* =========================================================
+       PARENT
+    ========================================================= */
+
+    .family-parent {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+      padding: 0 !important;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          #075b91 0,
+          #032b4d 35%,
+          #020f20 70%,
+          #010711 100%
+        );
+      border: 1px solid #00eaff88;
+    }
+
+    .family-glow {
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #00eaff55, transparent 70%);
+    }
+
+    .family-scene {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .family {
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      display: flex;
+      align-items: flex-end;
+      gap: 30px;
+      transform: translate(-50%, -50%);
+    }
+
+    .person {
+      text-align: center;
+      font-size: 42px;
+      filter: drop-shadow(0 0 15px #00eaff);
+    }
+
+    .head {
+      font-size: 52px;
+    }
+
+    .body {
+      font-size: 48px;
+    }
+
+    .legs {
+      font-size: 38px;
+    }
+
+    .family-letter {
+      position: absolute;
+      color: #fff;
+      font-size: 70px;
+      font-weight: 1000;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 15px #00eaff,
+        0 0 35px #008cff;
+    }
+
+    .family-floor {
+      position: absolute;
+      left: -20%;
+      right: -20%;
+      bottom: -32%;
+      height: 60%;
+      transform: perspective(500px) rotateX(65deg);
+      background-image:
+        linear-gradient(#00eaff35 1px, transparent 1px),
+        linear-gradient(90deg, #00eaff35 1px, transparent 1px);
+      background-size: 45px 45px;
+    }
+
+    .parent-content {
+      position: relative;
+      z-index: 10;
+      width: min(750px, 90%);
+      padding: 35px 25px;
+      text-align: center;
+      background: linear-gradient(145deg, #02182bdd, #020a17dd);
+      border-radius: 26px;
+      border: 1px solid #00eaff66;
+    }
+
+    .parent-icon {
+      font-size: 58px;
+    }
+
+    .parent-content h2 {
+      color: #00eaff;
+      font-size: 32px;
+    }
+
+    .parent-content p {
+      color: #d9f7ff;
+      line-height: 1.7;
+    }
+
+    .parent-features {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .footer {
+      margin-top: 35px;
+      padding: 32px 0;
+      text-align: center;
+      color: #9dc7d5;
+      border-top: 1px solid #00eaff33;
+    }
+
+    .site-copyright {
+      margin-top: 30px;
+      padding: 18px 12px;
+      text-align: center;
+      color: #9dc7d5;
+      font-size: 14px;
+      border-top: 1px solid #00eaff33;
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .grid,
+      .course {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+      body {
+        padding-bottom: 20px;
+      }
+
+      .wrap {
+        width: min(100% - 22px, 720px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .navlinks {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+      }
+
+      .navlinks a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+      }
+
+      .grade {
+        min-height: auto;
+      }
+
+      .grade p {
+        min-height: auto;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .family {
+        gap: 5px;
+        transform: translate(-50%, -50%) scale(.68);
+      }
+
+      .family-parent {
+        min-height: 540px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .class-scene {
+        height: 205px;
+      }
+
+      .family {
+        transform: translate(-50%, -50%) scale(.58);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- =======================================================
+       BACKGROUND
+  ======================================================== -->
+
+  <div class="neon-world" aria-hidden="true">
+    <div class="letters">
+      <span class="letter">A</span>
+      <span class="letter">B</span>
+      <span class="letter">C</span>
+      <span class="letter">D</span>
+      <span class="letter">E</span>
+      <span class="letter">F</span>
+      <span class="letter">G</span>
+      <span class="letter">H</span>
+      <span class="letter">I</span>
+      <span class="letter">J</span>
+    </div>
+
+```
+<div class="grid-floor"></div>
+```
+
+  </div>
+
+  <!-- =======================================================
+       NAV
+  ======================================================== -->
+
+  <header class="top">
+    <div class="wrap nav">
+
+```
+  <a class="brand" href="index.html">
+    ⚡ ENGLISH WITH MARIAMI
+  </a>
+
+  <nav class="navlinks">
+    <a href="#grades">🎓 კლასები</a>
+    <a href="#course">🗺️ კურსი</a>
+    <a href="#learn">📚 სწავლა</a>
+    <a href="#progress">🏆 პროგრესი</a>
+    <a href="#parents">👨‍👩‍👧 მშობელი</a>
+    <a href="login.html">🚪 გამოსვლა</a>
+  </nav>
+
+</div>
+```
+
+  </header>
+
+  <main class="wrap">
+
+```
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+  <div class="hero-grid">
+
+    <div>
+
+      <span class="badge">
+        🇬🇧 ქართული ↔ English • 2026
+      </span>
+
+      <h1>
+        ვისწავლოთ<br>
+        <span>ინგლისური</span><br>
+        მარიამისთან ერთად!
+      </h1>
+
+      <p class="lead">
+        სრული სასწავლო სივრცე მე-2, მე-3 და მე-4 კლასისთვის:
+        Vocabulary, Speaking, Reading, Listening, Grammar,
+        Writing და Quiz.
+      </p>
+
+      <div class="buttons">
+
+        <a class="btn primary" href="#grades">
+          🎓 აირჩიე კლასი
+        </a>
+
+        <a class="btn yellow" href="#learn">
+          🚀 დავიწყოთ სწავლა
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="neon-card teacher">
+
+      <div class="avatar">👩‍🏫</div>
+
+      <h2>მასწავლებელი მარიამი</h2>
+
+      <p class="muted">
+        შენი ინგლისურის გზამკვლევი ✨
+      </p>
+
+      <span class="pill">🧠 Vocabulary</span>
+      <span class="pill">🔊 Listening</span>
+      <span class="pill">🗣️ Speaking</span>
+      <span class="pill">📖 Reading</span>
+      <span class="pill">✍️ Grammar</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     GRADES
+====================================================== -->
+
+<section id="grades" class="section">
+
+  <div class="section-title">
+
+    <span class="badge">CLASSROOM</span>
+
+    <h2>აირჩიე შენი კლასი</h2>
+
+    <p class="muted" id="grade-message">
+      მასწავლებლის მიერ მინიჭებული კლასი ავტომატურად
+      განსაზღვრავს შენს სასწავლო სივრცეს.
+    </p>
+
+  </div>
+
+  <div class="grid">
+
+    <!-- GRADE 2 -->
+
+    <article class="neon-card grade">
+
+      <div class="class-scene">
+
+        <span class="grade-label">
+          🌱 BEGINNER
+        </span>
+
+        <div
+          class="float-letter"
+          style="left:12%;top:20%"
+        >A</div>
+
+        <div
+          class="float-letter"
+          style="right:13%;top:27%"
+        >B</div>
+
+        <div class="plant">🌱</div>
+
+        <div class="book"></div>
+
+        <div class="scene-floor"></div>
+
+      </div>
+
+      <div class="grade-content">
+
+        <h3>🌱 მე-2 კლასი</h3>
+
+        <p>
+          პირველი ნაბიჯები ინგლისურში: ფერები, ოჯახი,
+          სკოლა, ცხოველები, საკვები, სხეულის ნაწილები,
+          სახლი, რიცხვები და მარტივი წინადადებები.
+        </p>
+
+        <a
+          class="btn primary grade-link"
+          data-grade="2"
+          href="grade2.html"
+        >
+          🚀 მე-2 კლასში შესვლა →
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- GRADE 3 -->
+
+    <article class="neon-card grade">
+
+      <div class="class-scene">
+
+        <span class="grade-label">
+          🚀 ELEMENTARY
+        </span>
+
+        <div class="planet big"></div>
+        <div class="planet small"></div>
+
+        <div class="rocket">🚀</div>
+
+        <div class="scene-floor"></div>
+
+      </div>
+
+      <div class="grade-content">
+
+        <h3>🚀 მე-3 კლასი</h3>
+
+        <p>
+          ყოველდღიური ცხოვრება, დღეები, თვეები,
+          ამინდი, მოქმედებები, ქალაქი, საკვები,
+          Speaking, Reading და მარტივი გრამატიკა.
+        </p>
+
+        <a
+          class="btn primary grade-link"
+          data-grade="3"
+          href="grade3.html"
+        >
+          🚀 მე-3 კლასში შესვლა →
+        </a>
+
+      </div>
+
+    </article>
+
+    <!-- GRADE 4 -->
+
+    <article class="neon-card grade">
+
+      <div class="class-scene">
+
+        <span class="grade-label">
+          ⭐ ADVANCED
+        </span>
+
+        <div class="globe">
+          <div>🌎</div>
+        </div>
+
+        <div
+          class="word"
+          style="left:8%;top:15%"
+        >
+          SPEAK
+        </div>
+
+        <div
+          class="word"
+          style="right:8%;top:20%"
+        >
+          READ
+        </div>
+
+        <div
+          class="word"
+          style="left:10%;bottom:20%"
+        >
+          WRITE
+        </div>
+
+        <div
+          class="word"
+          style="right:8%;bottom:15%"
+        >
+          ENGLISH
+        </div>
+
+        <div class="scene-floor"></div>
+
+      </div>
+
+      <div class="grade-content">
+
+        <h3>⭐ მე-4 კლასი</h3>
+
+        <p>
+          გაფართოებული Vocabulary, Present Simple,
+          კითხვები, Prepositions, Reading, Dialogues,
+          Writing, Listening და Practice.
+        </p>
+
+        <a
+          class="btn primary grade-link"
+          data-grade="4"
+          href="grade4.html"
+        >
+          ⭐ მე-4 კლასში შესვლა →
+        </a>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     LEARNING
+====================================================== -->
+
+<section id="learn" class="section">
+
+  <div class="section-title">
+
+    <span class="badge">LEARN</span>
+
+    <h2>📚 როგორ ვისწავლით?</h2>
+
+  </div>
+
+  <div class="feature-grid">
+
+    <div class="neon-card feature">
+      <b>🧠 Vocabulary</b>
+      <span>
+        სიტყვა + ქართული თარგმანი + გამოთქმა + მაგალითი.
+      </span>
+    </div>
+
+    <div class="neon-card feature">
+      <b>🔊 Listening</b>
+      <span>
+        მოსმენა და გამეორება მარტივი სავარჯიშოებით.
+      </span>
+    </div>
+
+    <div class="neon-card feature">
+      <b>🗣️ Speaking</b>
+      <span>
+        მოკლე დიალოგები და ყოველდღიური ფრაზები.
+      </span>
+    </div>
+
+    <div class="neon-card feature">
+      <b>📝 Quiz</b>
+      <span>
+        შემოწმება, ქულა და პროგრესის კონტროლი.
+      </span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     COURSE
+====================================================== -->
+
+<section id="course" class="section">
+
+  <div class="section-title">
+
+    <span class="badge">FULL COURSE</span>
+
+    <h2>🗺️ სრული სასწავლო კურსი</h2>
+
+  </div>
+
+  <div class="course">
+
+    <div class="course-card">
+
+      <b>🌱 მე-2 კლასი</b>
+
+      <p>
+        სიტყვები, ფერები, ოჯახი, სკოლა, ცხოველები,
+        საკვები და მარტივი წინადადებები.
+      </p>
+
+      <a
+        class="btn primary grade-link"
+        data-grade="2"
+        href="grade2.html"
+      >
+        კურსის გახსნა
+      </a>
+
+    </div>
+
+    <div class="course-card">
+
+      <b>🚀 მე-3 კლასი</b>
+
+      <p>
+        დრო, დღეები, თვეები, ამინდი, მოქმედებები,
+        ქალაქი, Speaking, Reading და Grammar.
+      </p>
+
+      <a
+        class="btn primary grade-link"
+        data-grade="3"
+        href="grade3.html"
+      >
+        კურსის გახსნა
+      </a>
+
+    </div>
+
+    <div class="course-card">
+
+      <b>⭐ მე-4 კლასი</b>
+
+      <p>
+        Present Simple, კითხვები, Prepositions,
+        Reading, Dialogues, Writing, Listening და Practice.
+      </p>
+
+      <a
+        class="btn primary grade-link"
+        data-grade="4"
+        href="grade4.html"
+      >
+        კურსის გახსნა
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PROGRESS
+====================================================== -->
+
+<section id="progress" class="section">
+
+  <div class="section-title">
+
+    <span class="badge">MY PROGRESS</span>
+
+    <h2>🏆 შენი პროგრესი</h2>
+
+    <p class="muted">
+      აქ გამოჩნდება შენი სწავლის შედეგები.
+    </p>
+
+  </div>
+
+  <div class="neon-card progress-box">
+
+    <div class="stats">
+
+      <div class="stat">
+        <b id="words-count">0</b>
+        ნასწავლი სიტყვა
+      </div>
+
+      <div class="stat">
+        <b id="quiz-count">0</b>
+        Quiz
+      </div>
+
+      <div class="stat">
+        <b id="progress-percent">0%</b>
+        პროგრესი
+      </div>
+
+      <div class="stat">
+        <b id="student-level">⭐</b>
+        დონე
+      </div>
+
+    </div>
+
+    <div class="progress">
+      <i id="progress-bar"></i>
+    </div>
+
+    <p class="muted" id="progress-message">
+      დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     PARENT
+====================================================== -->
+
+<section id="parents" class="section">
+
+  <div class="section-title">
+
+    <span class="badge">FAMILY SPACE</span>
+
+    <h2>👨‍👩‍👧 მშობლის სივრცე</h2>
+
+    <p class="muted">
+      ოჯახი და სწავლა ერთ სივრცეში ❤️
+    </p>
+
+  </div>
+
+  <div class="family-parent neon-card">
+
+    <div class="family-glow"></div>
+
+    <div class="family-scene">
+
+      <div
+        class="family-letter"
+        style="left:10%;top:15%"
+      >
+        A
+      </div>
+
+      <div
+        class="family-letter"
+        style="right:12%;top:25%"
+      >
+        B
+      </div>
+
+      <div
+        class="family-letter"
+        style="left:20%;bottom:20%"
+      >
+        C
+      </div>
+
+      <div class="family">
+
+        <div class="person">
+          <div class="head">👨</div>
+          <div class="body">👕</div>
+          <div class="legs">👖</div>
+        </div>
+
+        <div class="person">
+          <div class="head">👩</div>
+          <div class="body">👗</div>
+          <div class="legs">👠</div>
+        </div>
+
+        <div class="person">
+          <div class="head">🧒</div>
+          <div class="body">👕</div>
+          <div class="legs">👟</div>
+        </div>
+
+      </div>
+
+      <div class="family-floor"></div>
+
+    </div>
+
+    <div class="parent-content">
+
+      <div class="parent-icon">
+        👨‍👩‍👧
+      </div>
+
+      <h2>მშობლის სივრცე</h2>
+
+      <p>
+        აქ მშობელს შეუძლია თვალყური ადევნოს ბავშვის
+        სწავლას, პროგრესს, Quiz შედეგებს და დასვას
+        კითხვა მასწავლებელთან.
+      </p>
+
+      <div class="parent-features">
+
+        <span class="pill">📊 პროგრესი</span>
+        <span class="pill">📝 Quiz შედეგები</span>
+        <span class="pill">❓ კითხვები</span>
+        <span class="pill">💬 პასუხები</span>
+
+      </div>
+
+      <a
+        href="parent-space.html"
+        class="btn primary"
+      >
+        👨‍👩‍👧 მშობლის სივრცეში შესვლა →
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =====================================================
+     READY
+====================================================== -->
+
+<section class="section">
+
+  <div class="section-title">
+
+    <span class="badge">READY?</span>
+
+    <h2>🚀 მზად ხარ?</h2>
+
+    <p class="muted">
+      შენი კლასი ავტომატურად არის განსაზღვრული
+      მასწავლებლის მიერ.
+    </p>
+
+    <div
+      class="buttons"
+      style="justify-content:center"
+    >
+
+      <a
+        class="btn primary grade-link"
+        data-grade="2"
+        href="grade2.html"
+      >
+        🌱 მე-2 კლასი
+      </a>
+
+      <a
+        class="btn primary grade-link"
+        data-grade="3"
+        href="grade3.html"
+      >
+        🚀 მე-3 კლასი
+      </a>
+
+      <a
+        class="btn yellow grade-link"
+        data-grade="4"
+        href="grade4.html"
+      >
+        ⭐ მე-4 კლასი
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+```
+
+  </main>
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer class="footer">
+    <div class="wrap">
+      ⚡ English with Mariami • English Academy •
+      სწავლა, თამაში და პროგრესი ❤️
+    </div>
+  </footer>
+
+  <footer class="site-copyright">
+    © 2026 English with Mariami —
+    ყველა უფლება დაცულია • Developed by btcgamer
+  </footer>
+
+  <!-- =======================================================
+       SUPABASE / AUTH
+  ======================================================== -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      /*
+       * Wait until config.js creates the Supabase client.
+       * Supported existing client names are preserved.
+       */
+
+      function getClient() {
+        return (
+          window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+          window.supabaseClient ||
+          null
+        );
+      }
+
+      function redirectToLogin() {
+        const redirect =
+          "login.html?redirect=" +
+          encodeURIComponent("academy.html");
+
+        window.location.replace(redirect);
+      }
+
+      function hideWrongGrades(grade) {
+        document.querySelectorAll(".grade-link").forEach((link) => {
+          const linkGrade = Number(link.dataset.grade);
+
+          if (linkGrade !== grade) {
+            link.style.display = "none";
+            link.removeAttribute("href");
+            link.setAttribute("aria-hidden", "true");
+          }
+        });
+      }
+
+      function showAllGrades() {
+        document.querySelectorAll(".grade-link").forEach((link) => {
+          link.style.display = "";
+          link.removeAttribute("aria-hidden");
+        });
+      }
+
+      function updateStudentMessage(grade) {
+        const message =
+          document.getElementById("grade-message");
+
+        if (message && [2, 3, 4].includes(grade)) {
+          message.textContent =
+            "შენი მინიჭებული კლასი: მე-" +
+            grade +
+            " კლასი 🎓";
+        }
+      }
+
+      function setProgress(
+        words = 0,
+        quizzes = 0,
+        percent = 0,
+        level = "⭐"
+      ) {
+        const safeWords =
+          Number.isFinite(Number(words))
+            ? Math.max(0, Number(words))
+            : 0;
+
+        const safeQuizzes =
+          Number.isFinite(Number(quizzes))
+            ? Math.max(0, Number(quizzes))
+            : 0;
+
+        const safePercent =
+          Number.isFinite(Number(percent))
+            ? Math.min(100, Math.max(0, Number(percent)))
+            : 0;
+
+        const wordsEl =
+          document.getElementById("words-count");
+
+        const quizEl =
+          document.getElementById("quiz-count");
+
+        const percentEl =
+          document.getElementById("progress-percent");
+
+        const levelEl =
+          document.getElementById("student-level");
+
+        const barEl =
+          document.getElementById("progress-bar");
+
+        if (wordsEl) {
+          wordsEl.textContent = safeWords;
+        }
+
+        if (quizEl) {
+          quizEl.textContent = safeQuizzes;
+        }
+
+        if (percentEl) {
+          percentEl.textContent =
+            Math.round(safePercent) + "%";
+        }
+
+        if (levelEl) {
+          levelEl.textContent = level || "⭐";
+        }
+
+        if (barEl) {
+          barEl.style.width =
+            Math.round(safePercent) + "%";
+        }
+      }
+
+      async function initAcademy() {
+        let client = getClient();
+
+        /*
+         * config.js may expose the client asynchronously.
+         */
+        if (!client) {
+          await new Promise((resolve) => {
+            let finished = false;
+
+            const finish = () => {
+              if (finished) return;
+              finished = true;
+              resolve();
+            };
+
+            window.addEventListener(
+              "englishMariamiSupabaseReady",
+              finish,
+              { once: true }
+            );
+
+            setTimeout(finish, 5000);
+          });
+
+          client = getClient();
+        }
+
+        if (!client) {
+          console.error(
+            "Supabase client was not initialized."
+          );
+
+          redirectToLogin();
+          return;
+        }
+
+        try {
+
+          /* ---------------------------------------------
+             AUTH SESSION
+          --------------------------------------------- */
+
+          const {
+            data: sessionData,
+            error: sessionError
+          } = await client.auth.getSession();
+
+          if (
+            sessionError ||
+            !sessionData ||
+            !sessionData.session ||
+            !sessionData.session.user
+          ) {
+            redirectToLogin();
+            return;
+          }
+
+          const user =
+            sessionData.session.user;
+
+          /* ---------------------------------------------
+             PROFILE
+          --------------------------------------------- */
+
+          const {
+            data: profile,
+            error: profileError
+          } = await client
+            .from("profiles")
+            .select("role,grade,full_name")
+            .eq("user_id", user.id)
+            .maybeSingle();
+
+          if (profileError) {
+            console.error(
+              "Profile loading error:",
+              profileError
+            );
+
+            redirectToLogin();
+            return;
+          }
+
+          /*
+           * Existing metadata is used only as fallback.
+           * Database profile remains the primary source.
+           */
+
+          const role = String(
+            profile?.role ??
+            user.user_metadata?.role ??
+            "student"
+          ).toLowerCase();
+
+          const grade = Number(
+            profile?.grade ??
+            user.user_metadata?.grade ??
+            0
+          );
+
+          /* ---------------------------------------------
+             ROLE VALIDATION
+          --------------------------------------------- */
+
+          const validGrades = [2, 3, 4];
+
+          /*
+           * Teacher / admin / parent can see the academy
+           * without having a student grade assigned.
+           */
+          const privilegedRoles = [
+            "teacher",
+            "admin",
+            "parent"
+          ];
+
+          /*
+           * A student MUST have a valid assigned grade.
+           */
+          if (
+            role === "student" &&
+            !validGrades.includes(grade)
+          ) {
+            alert(
+              "შენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს."
+            );
+
+            redirectToLogin();
+            return;
+          }
+
+          /*
+           * Unknown roles are not allowed into the academy.
+           */
+          if (
+            !privilegedRoles.includes(role) &&
+            role !== "student"
+          ) {
+            console.error(
+              "Unknown profile role:",
+              role
+            );
+
+            await client.auth.signOut();
+
+            redirectToLogin();
+            return;
+          }
+
+          /* ---------------------------------------------
+             STUDENT VIEW
+          --------------------------------------------- */
+
+          if (role === "student") {
+
+            hideWrongGrades(grade);
+
+            updateStudentMessage(grade);
+
+            const progressMessage =
+              document.getElementById(
+                "progress-message"
+              );
+
+            if (progressMessage) {
+              progressMessage.textContent =
+                "შენი სასწავლო სივრცე: მე-" +
+                grade +
+                " კლასი. წარმატებები! 🚀";
+            }
+          }
+
+          /*
+           * Teacher/admin/parent:
+           * all three grade sections remain visible.
+           */
+          else {
+            showAllGrades();
+          }
+
+          /*
+           * At this stage progress values intentionally
+           * remain safe defaults.
+           *
+           * We will connect these to the actual Supabase
+           * progress tables after the remaining files/schema
+           * are checked, so no existing data is guessed or
+           * overwritten.
+           */
+          setProgress(0, 0, 0, "⭐");
+
+        } catch (error) {
+
+          console.error(
+            "Academy initialization error:",
+            error
+          );
+
+          redirectToLogin();
+        }
+      }
+
+      /*
+       * Start only after DOM is available.
+       */
+      if (
+        document.readyState === "loading"
+      ) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          initAcademy,
+          { once: true }
+        );
+      } else {
+        initAcademy();
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
