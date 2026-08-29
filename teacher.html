@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#02152d">
-<title>English with Mariami — Teacher Dashboard</title>
+<title>English with Mariami — Teacher</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -13,7 +13,6 @@
 
 <style>
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
 
 body{
@@ -26,17 +25,13 @@ overflow-x:hidden
 }
 
 a{text-decoration:none;color:inherit}
-
 button,input,select,textarea{font:inherit}
-
 button{cursor:pointer}
 
 .wrap{
-width:min(1250px,calc(100% - 28px));
+width:min(1250px,calc(100% - 24px));
 margin:auto
 }
-
-/* BACKGROUND */
 
 .neon-world{
 position:fixed;
@@ -110,8 +105,6 @@ user-select:none
 50%{transform:translate3d(25px,-35px,70px) rotateY(20deg)}
 }
 
-/* NAV */
-
 .top{
 position:sticky;
 top:0;
@@ -162,8 +155,6 @@ transform:translateY(-2px);
 box-shadow:0 0 20px #00eaff55
 }
 
-/* GENERAL */
-
 main{
 padding:35px 0 80px
 }
@@ -205,16 +196,8 @@ color:#ffe600;
 margin-top:0
 }
 
-.muted{
-color:#bfe5f0
-}
-
-.small{
-font-size:13px;
-color:#9dc7d5
-}
-
-/* HEADER */
+.muted{color:#bfe5f0}
+.small{font-size:13px;color:#9dc7d5}
 
 .dashboard-head{
 display:flex;
@@ -235,8 +218,6 @@ font-size:20px;
 color:#00eaff;
 margin-bottom:7px
 }
-
-/* TABS */
 
 .tabs{
 display:flex;
@@ -261,15 +242,8 @@ color:#00131a;
 box-shadow:0 0 22px #00eaff55
 }
 
-.panel{
-display:none
-}
-
-.panel.active{
-display:block
-}
-
-/* GRID */
+.panel{display:none}
+.panel.active{display:block}
 
 .grid2{
 display:grid;
@@ -282,8 +256,6 @@ display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:15px
 }
-
-/* FORMS */
 
 .form-card{
 padding:25px
@@ -368,8 +340,6 @@ background:#17324b;
 color:#fff
 }
 
-/* LESSON */
-
 .lesson-box{
 padding:25px;
 margin-bottom:20px
@@ -422,8 +392,6 @@ color:#00eaff;
 margin:10px 0
 }
 
-/* STUDENT */
-
 .student-card{
 padding:18px;
 display:flex;
@@ -460,23 +428,10 @@ font-size:12px;
 font-weight:900
 }
 
-.att-btn.active-present{
-background:#18c878
-}
-
-.att-btn.active-late{
-background:#d99b00
-}
-
-.att-btn.active-absent{
-background:#d9364f
-}
-
-.att-btn.active-left{
-background:#008fc2
-}
-
-/* TABLE */
+.att-btn.active-present{background:#18c878}
+.att-btn.active-late{background:#d99b00}
+.att-btn.active-absent{background:#d9364f}
+.att-btn.active-left{background:#008fc2}
 
 .table-wrap{
 overflow-x:auto
@@ -488,8 +443,7 @@ border-collapse:collapse;
 min-width:700px
 }
 
-th,
-td{
+th,td{
 padding:12px;
 border-bottom:1px solid #00eaff22;
 text-align:left
@@ -504,8 +458,6 @@ td{
 color:#d9f7ff
 }
 
-/* MESSAGE */
-
 .message{
 display:none;
 padding:13px 15px;
@@ -514,9 +466,7 @@ margin-bottom:15px;
 font-weight:900
 }
 
-.message.show{
-display:block
-}
+.message.show{display:block}
 
 .message.ok{
 background:#0b633e;
@@ -528,7 +478,24 @@ background:#6d1624;
 border:1px solid #ff5b72
 }
 
-/* FOOTER */
+.stat-card{
+padding:20px;
+text-align:center
+}
+
+.stat-number{
+font-size:32px;
+font-weight:1000;
+color:#ffe600;
+display:block;
+margin-bottom:7px
+}
+
+.empty{
+padding:25px;
+text-align:center;
+color:#9dc7d5
+}
 
 .footer{
 text-align:center;
@@ -537,7 +504,15 @@ border-top:1px solid #00eaff33;
 color:#9dc7d5
 }
 
-/* MOBILE */
+.site-copyright{
+margin-top:20px;
+padding:18px 12px;
+text-align:center;
+color:#9dc7d5;
+font-size:13px;
+border-top:1px solid #00eaff33;
+background:linear-gradient(180deg,transparent,#020b19aa)
+}
 
 @media(max-width:900px){
 
@@ -640,7 +615,7 @@ text-align:center
 </a>
 
 <nav class="navlinks">
-<a href="teacher-dashboard.html">👩‍🏫 მასწავლებელი</a>
+<a href="teacher.html">👩‍🏫 მასწავლებელი</a>
 <a href="academy.html">🎓 სასწავლო ცენტრი</a>
 <a href="index.html">🏠 მთავარი</a>
 <button class="logout" id="logoutBtn">🚪 გამოსვლა</button>
@@ -654,16 +629,25 @@ text-align:center
 <div class="dashboard-head">
 
 <div>
-<span class="badge">TEACHER DASHBOARD</span>
+<span class="badge">TEACHER SPACE</span>
+
 <h1>👩‍🏫 მასწავლებლის სივრცე</h1>
+
 <p class="muted">
-გაკვეთილის მართვა • დასწრება • შეფასება • პროგრესი
+გაკვეთილის მართვა • დასწრება • შეფასება • ისტორია
 </p>
 </div>
 
 <div class="card teacher-info">
-<strong id="teacherName">მასწავლებელი</strong>
-<span id="teacherEmail" class="small">იტვირთება...</span>
+
+<strong id="teacherName">
+მასწავლებელი
+</strong>
+
+<span id="teacherEmail" class="small">
+იტვირთება...
+</span>
+
 </div>
 
 </div>
@@ -690,7 +674,7 @@ text-align:center
 
 </div>
 
-<!-- ================= LESSON ================= -->
+<!-- LESSON -->
 
 <section id="lesson" class="panel active">
 
@@ -698,11 +682,12 @@ text-align:center
 
 <div class="card form-card">
 
-<h2>📅 გაკვეთილის შექმნა / მოძებნა</h2>
+<h2>📅 გაკვეთილის მართვა</h2>
 
 <div class="form-group">
 <label>კლასი</label>
-<select id="classSelect">
+
+<select id="gradeSelect">
 <option value="">აირჩიე კლასი</option>
 <option value="2">მე-2 კლასი</option>
 <option value="3">მე-3 კლასი</option>
@@ -712,6 +697,7 @@ text-align:center
 
 <div class="form-group">
 <label>მოსწავლე</label>
+
 <select id="studentSelect">
 <option value="">ჯერ აირჩიე კლასი</option>
 </select>
@@ -719,6 +705,7 @@ text-align:center
 
 <div class="form-group">
 <label>თარიღი</label>
+
 <input type="date" id="lessonDate">
 </div>
 
@@ -726,34 +713,46 @@ text-align:center
 
 <div class="form-group">
 <label>დაწყების დრო</label>
+
 <input type="time" id="startTime">
 </div>
 
 <div class="form-group">
 <label>დასრულების დრო</label>
+
 <input type="time" id="endTime">
 </div>
 
 </div>
 
 <div class="form-group">
-<label>საგანი</label>
-<input id="subject" value="English">
+<label>გაკვეთილის თემა</label>
+
+<input
+type="text"
+id="lessonTopic"
+placeholder="მაგ: Colors / Family / Present Simple">
+
 </div>
 
 <div class="form-group">
-<label>შენიშვნა / თემა</label>
-<textarea id="notes" placeholder="მაგ: Vocabulary — Family"></textarea>
+
+<label>შენიშვნა</label>
+
+<textarea
+id="lessonNote"
+placeholder="დამატებითი ინფორმაცია..."></textarea>
+
 </div>
 
 <div class="actions">
 
-<button class="btn primary" id="findScheduleBtn">
-🔎 გაკვეთილის მოძებნა
+<button class="btn primary" id="saveLessonBtn">
+💾 გაკვეთილის შენახვა
 </button>
 
-<button class="btn yellow" id="createScheduleBtn">
-➕ ახალი გაკვეთილი
+<button class="btn gray" id="findLessonBtn">
+🔎 დღის ჩანაწერის მოძებნა
 </button>
 
 </div>
@@ -762,59 +761,97 @@ text-align:center
 
 <div class="card lesson-box">
 
-<h2>🎓 მიმდინარე გაკვეთილი</h2>
+<h2>🎬 მიმდინარე გაკვეთილი</h2>
 
 <div class="lesson-status">
+
 <span id="statusDot" class="status-dot"></span>
-<strong id="lessonStatus">გაკვეთილი არჩეული არ არის</strong>
+
+<strong id="lessonStatus">
+გაკვეთილი არჩეული არ არის
+</strong>
+
 </div>
 
-<div id="lessonInfo" class="muted">
-აირჩიე კლასი, მოსწავლე და თარიღი.
+<div class="small">
+კლასი
 </div>
 
-<div class="time-display" id="lessonTime">
---
+<div id="currentGrade" class="time-display">
+—
+</div>
+
+<div class="small">
+მოსწავლე
+</div>
+
+<div id="currentStudent" class="time-display">
+—
+</div>
+
+<div class="small">
+დაწყება / დასრულება
+</div>
+
+<div id="currentTimes" class="time-display">
+— / —
 </div>
 
 <div class="actions">
 
-<button class="btn green" id="startLessonBtn" disabled>
+<button class="btn green" id="startLessonBtn">
 ▶️ გაკვეთილის დაწყება
 </button>
 
-<button class="btn red" id="finishLessonBtn" disabled>
+<button class="btn red" id="finishLessonBtn">
 ⏹️ გაკვეთილის დასრულება
 </button>
 
 </div>
 
+<p class="small" style="margin-top:18px">
+გაკვეთილის დაწყებისას ჩაიწერება რეალური დაწყების დრო,
+ხოლო დასრულებისას — რეალური დასრულების დრო.
+</p>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- ================= ATTENDANCE ================= -->
+<!-- ATTENDANCE -->
 
 <section id="attendance" class="panel">
 
 <div class="card form-card">
 
-<h2>🧑‍🎓 მოსწავლის დასწრება</h2>
+<h2>🧑‍🎓 მოსწავლეების დასწრება</h2>
 
-<p class="muted">
-აირჩიე გაკვეთილი და მონიშნე მოსწავლის სტატუსი.
-</p>
+<div class="grid2">
 
-<div id="attendanceLessonInfo" class="lesson-status">
-<span class="status-dot"></span>
-<strong>ჯერ არ არის არჩეული გაკვეთილი</strong>
+<div class="form-group">
+<label>კლასი</label>
+
+<select id="attendanceGrade">
+<option value="">აირჩიე კლასი</option>
+<option value="2">მე-2 კლასი</option>
+<option value="3">მე-3 კლასი</option>
+<option value="4">მე-4 კლასი</option>
+</select>
 </div>
 
-<div id="attendanceList">
-<div class="muted">
-გაკვეთილის არჩევის შემდეგ აქ გამოჩნდება მოსწავლე.
+<div class="form-group">
+<label>თარიღი</label>
+
+<input type="date" id="attendanceDate">
+</div>
+
+</div>
+
+<div id="studentsAttendance">
+<div class="empty">
+აირჩიე კლასი და თარიღი.
 </div>
 </div>
 
@@ -822,7 +859,7 @@ text-align:center
 
 </section>
 
-<!-- ================= GRADES ================= -->
+<!-- GRADES -->
 
 <section id="grades" class="panel">
 
@@ -830,30 +867,90 @@ text-align:center
 
 <h2>⭐ მოსწავლის შეფასება</h2>
 
-<div class="form-group">
-<label>შეფასება</label>
+<div class="grid2">
 
-<select id="gradeValue">
-<option value="">აირჩიე ქულა</option>
-<option value="10">10 — შესანიშნავი</option>
-<option value="9">9 — ძალიან კარგი</option>
-<option value="8">8 — კარგი</option>
-<option value="7">7 — კარგი</option>
-<option value="6">6 — დამაკმაყოფილებელი</option>
-<option value="5">5 — გასაუმჯობესებელი</option>
-<option value="4">4</option>
-<option value="3">3</option>
-<option value="2">2</option>
-<option value="1">1</option>
+<div class="form-group">
+
+<label>კლასი</label>
+
+<select id="gradeClass">
+<option value="">აირჩიე კლასი</option>
+<option value="2">მე-2 კლასი</option>
+<option value="3">მე-3 კლასი</option>
+<option value="4">მე-4 კლასი</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>მოსწავლე</label>
+
+<select id="gradeStudent">
+<option value="">აირჩიე მოსწავლე</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="grid3">
+
+<div class="form-group">
+<label>Vocabulary</label>
+
+<select id="vocabularyGrade">
+<option value="">ქულა</option>
+<option value="10">10</option>
+<option value="9">9</option>
+<option value="8">8</option>
+<option value="7">7</option>
+<option value="6">6</option>
+<option value="5">5</option>
 </select>
 </div>
 
 <div class="form-group">
-<label>კომენტარი</label>
-<textarea id="gradeComment" placeholder="მაგ: ძალიან კარგად იმუშავა Vocabulary-ზე."></textarea>
+<label>Speaking</label>
+
+<select id="speakingGrade">
+<option value="">ქულა</option>
+<option value="10">10</option>
+<option value="9">9</option>
+<option value="8">8</option>
+<option value="7">7</option>
+<option value="6">6</option>
+<option value="5">5</option>
+</select>
 </div>
 
-<button class="btn yellow" id="saveGradeBtn" disabled>
+<div class="form-group">
+<label>Reading</label>
+
+<select id="readingGrade">
+<option value="">ქულა</option>
+<option value="10">10</option>
+<option value="9">9</option>
+<option value="8">8</option>
+<option value="7">7</option>
+<option value="6">6</option>
+<option value="5">5</option>
+</select>
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label>შეფასების კომენტარი</label>
+
+<textarea
+id="gradeComment"
+placeholder="მაგ: ძალიან კარგად იმუშავა, სიტყვები სწორად გაიმეორა..."></textarea>
+
+</div>
+
+<button class="btn yellow" id="saveGradeBtn">
 ⭐ შეფასების შენახვა
 </button>
 
@@ -861,17 +958,36 @@ text-align:center
 
 </section>
 
-<!-- ================= HISTORY ================= -->
+<!-- HISTORY -->
 
 <section id="history" class="panel">
 
-<div class="card form-card">
+<div class="grid3">
+
+<div class="card stat-card">
+<span class="stat-number" id="totalLessons">0</span>
+გაკვეთილი
+</div>
+
+<div class="card stat-card">
+<span class="stat-number" id="totalPresent">0</span>
+მოსვლა
+</div>
+
+<div class="card stat-card">
+<span class="stat-number" id="totalAbsent">0</span>
+გაცდენა
+</div>
+
+</div>
+
+<div class="card form-card" style="margin-top:18px">
+
+<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
 
 <h2>📋 გაკვეთილების ისტორია</h2>
 
-<div class="actions" style="margin-bottom:18px">
-
-<button class="btn primary" id="loadHistoryBtn">
+<button class="btn primary" id="refreshHistoryBtn">
 🔄 განახლება
 </button>
 
@@ -882,20 +998,23 @@ text-align:center
 <table>
 
 <thead>
+
 <tr>
 <th>თარიღი</th>
+<th>კლასი</th>
+<th>მოსწავლე</th>
 <th>დაწყება</th>
 <th>დასრულება</th>
-<th>საგანი</th>
-<th>შენიშვნა</th>
+<th>სტატუსი</th>
 </tr>
+
 </thead>
 
 <tbody id="historyBody">
 
 <tr>
-<td colspan="5" class="muted">
-იტვირთება...
+<td colspan="6" style="text-align:center">
+ისტორია იტვირთება...
 </td>
 </tr>
 
@@ -912,14 +1031,14 @@ text-align:center
 </main>
 
 <footer class="footer">
-⚡ English with Mariami • Teacher Dashboard • 2026
+⚡ English with Mariami • Teacher Space • სწავლა, თამაში და პროგრესი ❤️
 </footer>
 
-<script>
+<div class="site-copyright">
+© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
+</div>
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+<script>
 
 const supabaseClient =
 window.supabase.createClient(
@@ -927,133 +1046,113 @@ SUPABASE_URL,
 SUPABASE_KEY
 );
 
-
-/* =========================================================
-   STATE
-========================================================= */
-
 let currentUser = null;
-let currentTeacherId = null;
-let currentSchedule = null;
-let currentStudent = null;
+let currentLesson = null;
+let students = [];
 
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const messageBox =
-document.getElementById("message");
-
-const classSelect =
-document.getElementById("classSelect");
-
-const studentSelect =
-document.getElementById("studentSelect");
-
-const lessonDate =
-document.getElementById("lessonDate");
-
-const startTime =
-document.getElementById("startTime");
-
-const endTime =
-document.getElementById("endTime");
-
-const subject =
-document.getElementById("subject");
-
-const notes =
-document.getElementById("notes");
-
-const lessonStatus =
-document.getElementById("lessonStatus");
-
-const lessonInfo =
-document.getElementById("lessonInfo");
-
-const lessonTime =
-document.getElementById("lessonTime");
-
-const statusDot =
-document.getElementById("statusDot");
-
-const startLessonBtn =
-document.getElementById("startLessonBtn");
-
-const finishLessonBtn =
-document.getElementById("finishLessonBtn");
-
-const saveGradeBtn =
-document.getElementById("saveGradeBtn");
-
-
-/* =========================================================
-   MESSAGE
-========================================================= */
+const $ = id => document.getElementById(id);
 
 function showMessage(text,type="ok"){
 
-messageBox.textContent = text;
+const box=$("message");
 
-messageBox.className =
-"message show " +
-(type === "error" ? "error" : "ok");
+box.textContent=text;
+
+box.className="message show "+type;
 
 setTimeout(()=>{
-messageBox.className="message";
-},5000);
+box.className="message";
+},4500);
 
 }
 
+function today(){
 
-/* =========================================================
-   AUTH
-========================================================= */
+const d=new Date();
 
-async function checkAuth(){
+const y=d.getFullYear();
+const m=String(d.getMonth()+1).padStart(2,"0");
+const day=String(d.getDate()).padStart(2,"0");
+
+return `${y}-${m}-${day}`;
+
+}
+
+function setDefaultDates(){
+
+$("lessonDate").value=today();
+$("attendanceDate").value=today();
+
+}
+
+function setActiveTab(tab){
+
+document.querySelectorAll(".tab").forEach(btn=>{
+btn.classList.toggle(
+"active",
+btn.dataset.tab===tab
+);
+});
+
+document.querySelectorAll(".panel").forEach(panel=>{
+panel.classList.toggle(
+"active",
+panel.id===tab
+);
+});
+
+}
+
+document.querySelectorAll(".tab").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+setActiveTab(btn.dataset.tab);
+
+if(btn.dataset.tab==="history"){
+loadHistory();
+}
+
+});
+
+});
+
+async function requireTeacher(){
 
 try{
 
 const {
-data:{session},
+data:{
+user
+},
 error
-} =
-await supabaseClient.auth.getSession();
+}=await supabaseClient.auth.getUser();
 
 if(error) throw error;
 
-if(!session){
+if(!user){
+
+const redirect=
+"teacher.html";
 
 window.location.replace(
-"login.html?redirect=" +
-encodeURIComponent(
-"teacher-dashboard.html"
-)
+"login.html?redirect="+
+encodeURIComponent(redirect)
 );
 
 return false;
 
 }
 
-currentUser = session.user;
+currentUser=user;
 
-document.getElementById("teacherEmail")
-.textContent =
-currentUser.email || "";
+$("teacherEmail").textContent=
+user.email||"";
 
-document.getElementById("teacherName")
-.textContent =
-currentUser.user_metadata?.full_name ||
-currentUser.email ||
+$("teacherName").textContent=
+user.user_metadata?.full_name ||
+user.user_metadata?.name ||
 "მასწავლებელი";
-
-
-/*
-   teacher_students და schedules-ში
-   teacher_id უნდა ემთხვეოდეს auth.uid()-ს.
-*/
-currentTeacherId = currentUser.id;
 
 return true;
 
@@ -1061,9 +1160,8 @@ return true;
 
 console.error(error);
 
-showMessage(
-"ავტორიზაციის შემოწმება ვერ მოხერხდა.",
-"error"
+window.location.replace(
+"login.html?redirect=teacher.html"
 );
 
 return false;
@@ -1072,75 +1170,41 @@ return false;
 
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-document
-.getElementById("logoutBtn")
-.addEventListener("click",async()=>{
+async function logout(){
 
 await supabaseClient.auth.signOut();
 
 window.location.replace("login.html");
 
-});
+}
 
-
-/* =========================================================
-   TABS
-========================================================= */
-
-document
-.querySelectorAll(".tab")
-.forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-document
-.querySelectorAll(".tab")
-.forEach(x=>x.classList.remove("active"));
-
-document
-.querySelectorAll(".panel")
-.forEach(x=>x.classList.remove("active"));
-
-button.classList.add("active");
-
-document
-.getElementById(button.dataset.tab)
-.classList.add("active");
-
-});
-
-});
-
-
-/* =========================================================
-   LOAD STUDENTS
-========================================================= */
-
-classSelect.addEventListener(
-"change",
-loadStudents
+$("logoutBtn").addEventListener(
+"click",
+logout
 );
 
+function clearStudentSelect(selectId,text){
 
-async function loadStudents(){
+$(selectId).innerHTML=
+`<option value="">${text}</option>`;
 
-studentSelect.innerHTML =
-'<option value="">იტვირთება...</option>';
+}
 
-currentStudent = null;
+async function loadStudentsByGrade(grade,selectId){
 
-const selectedClass =
-classSelect.value;
+const select=$(selectId);
 
-if(!selectedClass){
+clearStudentSelect(
+selectId,
+"იტვირთება..."
+);
 
-studentSelect.innerHTML =
-'<option value="">ჯერ აირჩიე კლასი</option>';
+if(!grade){
+
+clearStudentSelect(
+selectId,
+"ჯერ აირჩიე კლასი"
+);
 
 return;
 
@@ -1149,114 +1213,210 @@ return;
 try{
 
 /*
-  teacher_students
-  -> student_id
-  -> students
-
-  აქ class filtering-ს ვაკეთებთ
-  students.grade-ის მიხედვით.
+  ვცდილობთ მოსწავლეების გავრცელებულ
+  ცხრილებს უსაფრთხოდ.
 */
 
-const {
-data,
-error
-} =
+let result=
 await supabaseClient
-.from("teacher_students")
-.select(`
-student_id,
-students (
-id,
-full_name,
-email,
-grade
-)
-`)
-.eq(
-"teacher_id",
-currentTeacherId
+.from("students")
+.select("*")
+.eq("grade",grade)
+.order("name");
+
+if(result.error){
+
+result=
+await supabaseClient
+.from("profiles")
+.select("*")
+.eq("grade",grade)
+.order("full_name");
+
+}
+
+if(result.error){
+
+clearStudentSelect(
+selectId,
+"მოსწავლეები ვერ მოიძებნა"
 );
 
-if(error) throw error;
+return;
 
-const students =
-(data || [])
-.filter(row =>
-row.students &&
-String(row.students.grade) === String(selectedClass)
-);
+}
 
-studentSelect.innerHTML =
-'<option value="">აირჩიე მოსწავლე</option>';
+students=result.data||[];
 
-students.forEach(row=>{
+select.innerHTML=
+`<option value="">აირჩიე მოსწავლე</option>`;
 
-const s = row.students;
+students.forEach(student=>{
 
-const option =
+const id=
+student.id ||
+student.user_id ||
+student.student_id;
+
+const name=
+student.name ||
+student.full_name ||
+student.display_name ||
+student.email ||
+"მოსწავლე";
+
+const option=
 document.createElement("option");
 
-option.value = s.id;
+option.value=id;
 
-option.textContent =
-s.full_name +
-(s.email ? " — " + s.email : "");
+option.textContent=name;
 
-studentSelect.appendChild(option);
+option.dataset.name=name;
+
+select.appendChild(option);
 
 });
 
-if(!students.length){
-
-studentSelect.innerHTML =
-'<option value="">ამ კლასში მოსწავლე ვერ მოიძებნა</option>';
-
-}
-
 }catch(error){
 
 console.error(error);
 
-studentSelect.innerHTML =
-'<option value="">მოსწავლეების ჩატვირთვა ვერ მოხერხდა</option>';
-
-showMessage(
-"მოსწავლეების მოძებნისას შეცდომა მოხდა.",
-"error"
+clearStudentSelect(
+selectId,
+"მოსწავლეები ვერ ჩაიტვირთა"
 );
 
 }
 
 }
 
-
-/* =========================================================
-   FIND EXACT SCHEDULE
-========================================================= */
-
-document
-.getElementById("findScheduleBtn")
-.addEventListener(
-"click",
-findSchedule
+$("gradeSelect").addEventListener(
+"change",
+e=>{
+loadStudentsByGrade(
+e.target.value,
+"studentSelect"
+);
+}
 );
 
+$("gradeClass").addEventListener(
+"change",
+e=>{
+loadStudentsByGrade(
+e.target.value,
+"gradeStudent"
+);
+}
+);
 
-async function findSchedule(){
+$("attendanceGrade").addEventListener(
+"change",
+loadAttendanceStudents
+);
 
-const studentId =
-studentSelect.value;
+$("attendanceDate").addEventListener(
+"change",
+loadAttendanceStudents
+);
 
-const date =
-lessonDate.value;
+function selectedStudentName(selectId){
 
-const start =
-startTime.value;
+const select=$(selectId);
 
-if(!studentId){
+if(!select.value) return "";
+
+const option=
+select.options[select.selectedIndex];
+
+return option.dataset.name ||
+option.textContent ||
+"";
+
+}
+
+function updateCurrentLessonUI(){
+
+if(!currentLesson){
+
+$("lessonStatus").textContent=
+"გაკვეთილი არჩეული არ არის";
+
+$("statusDot").className=
+"status-dot";
+
+$("currentGrade").textContent="—";
+$("currentStudent").textContent="—";
+$("currentTimes").textContent="— / —";
+
+return;
+
+}
+
+$("currentGrade").textContent=
+"მე-"+currentLesson.grade+" კლასი";
+
+$("currentStudent").textContent=
+currentLesson.student_name||"მოსწავლე";
+
+$("currentTimes").textContent=
+(currentLesson.start_time||"—")+
+" / "+
+(currentLesson.end_time||"—");
+
+const status=
+currentLesson.status||"scheduled";
+
+if(status==="live"){
+
+$("lessonStatus").textContent=
+"🟢 გაკვეთილი მიმდინარეობს";
+
+$("statusDot").className=
+"status-dot live";
+
+}
+
+else if(status==="completed"){
+
+$("lessonStatus").textContent=
+"🔵 გაკვეთილი დასრულებულია";
+
+$("statusDot").className=
+"status-dot done";
+
+}
+
+else{
+
+$("lessonStatus").textContent=
+"🟡 დაგეგმილი გაკვეთილი";
+
+$("statusDot").className=
+"status-dot ready";
+
+}
+
+}
+
+async function saveLesson(){
+
+const grade=$("gradeSelect").value;
+const studentId=$("studentSelect").value;
+const studentName=
+selectedStudentName("studentSelect");
+
+const date=$("lessonDate").value;
+const start=$("startTime").value;
+const end=$("endTime").value;
+const topic=$("lessonTopic").value.trim();
+const note=$("lessonNote").value.trim();
+
+if(!grade||!date||!start||!end){
 
 showMessage(
-"ჯერ აირჩიე მოსწავლე.",
+"გთხოვ შეავსე კლასი, თარიღი, დაწყება და დასრულება.",
 "error"
 );
 
@@ -1264,150 +1424,7 @@ return;
 
 }
 
-if(!date){
-
-showMessage(
-"აირჩიე გაკვეთილის თარიღი.",
-"error"
-);
-
-return;
-
-}
-
-if(!start){
-
-showMessage(
-"მიუთითე დაწყების დრო.",
-"error"
-);
-
-return;
-
-}
-
-try{
-
-/*
-  IMPORTANT:
-  ზუსტი მოძებნა ხდება:
-  teacher_id + student_id + lesson_date + start_time
-*/
-
-const {
-data,
-error
-} =
-await supabaseClient
-.from("schedules")
-.select("*")
-.eq(
-"teacher_id",
-currentTeacherId
-)
-.eq(
-"student_id",
-studentId
-)
-.eq(
-"lesson_date",
-date
-)
-.eq(
-"start_time",
-start)
-.maybeSingle();
-
-if(error) throw error;
-
-if(!data){
-
-currentSchedule = null;
-
-updateLessonUI();
-
-showMessage(
-"ამ ზუსტ თარიღსა და დაწყების დროზე გაკვეთილი ვერ მოიძებნა.",
-"error"
-);
-
-return;
-
-}
-
-currentSchedule = data;
-
-updateLessonUI();
-
-await loadAttendance();
-
-showMessage(
-"გაკვეთილი წარმატებით მოიძებნა."
-);
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"გაკვეთილის მოძებნისას შეცდომა მოხდა.",
-"error"
-);
-
-}
-
-}
-
-
-/* =========================================================
-   CREATE SCHEDULE
-========================================================= */
-
-document
-.getElementById("createScheduleBtn")
-.addEventListener(
-"click",
-createSchedule
-);
-
-
-async function createSchedule(){
-
-const studentId =
-studentSelect.value;
-
-const date =
-lessonDate.value;
-
-const start =
-startTime.value;
-
-const end =
-endTime.value;
-
-if(!studentId){
-
-showMessage(
-"აირჩიე მოსწავლე.",
-"error"
-);
-
-return;
-
-}
-
-if(!date || !start || !end){
-
-showMessage(
-"თარიღი, დაწყება და დასრულება აუცილებელია.",
-"error"
-);
-
-return;
-
-}
-
-if(end <= start){
+if(end<=start){
 
 showMessage(
 "დასრულების დრო უნდა იყოს დაწყების დროზე გვიან.",
@@ -1421,503 +1438,42 @@ return;
 try{
 
 /*
-  არ ვწერთ ისეთ სვეტებს,
-  რომლებიც შენს schedules ცხრილში არ არსებობს.
+  მთავარი ცხრილი:
+  lessons
+
+  თუ შენს ბაზაში უკვე გაქვს lessons,
+  ეს ჩანაწერი პირდაპირ გამოიყენებს მას.
 */
 
-const {
-data,
-error
-} =
-await supabaseClient
-.from("schedules")
-.insert({
-teacher_id:currentTeacherId,
-student_id:studentId,
+const payload={
+teacher_id:currentUser.id,
+student_id:studentId||null,
+student_name:studentName||null,
+grade:Number(grade),
 lesson_date:date,
 start_time:start,
 end_time:end,
-subject:subject.value.trim() || "English",
-notes:notes.value.trim() || null
-})
-.select()
-.single();
-
-if(error) throw error;
-
-currentSchedule = data;
-
-updateLessonUI();
-
-await loadAttendance();
-
-showMessage(
-"✅ ახალი გაკვეთილი შეიქმნა."
-);
-
-}catch(error){
-
-console.error(error);
-
-if(error.code === "23505"){
-
-showMessage(
-"ასეთი გაკვეთილი უკვე არსებობს.",
-"error"
-);
-
-}else{
-
-showMessage(
-"გაკვეთილის შექმნა ვერ მოხერხდა: " +
-(error.message || ""),
-"error"
-);
-
-}
-
-}
-
-}
-
-
-/* =========================================================
-   LESSON UI
-========================================================= */
-
-function updateLessonUI(){
-
-if(!currentSchedule){
-
-lessonStatus.textContent =
-"გაკვეთილი არჩეული არ არის";
-
-lessonInfo.textContent =
-"აირჩიე გაკვეთილი.";
-
-lessonTime.textContent =
-"--";
-
-statusDot.className =
-"status-dot";
-
-startLessonBtn.disabled = true;
-
-finishLessonBtn.disabled = true;
-
-saveGradeBtn.disabled = true;
-
-return;
-
-}
-
-const s = currentSchedule;
-
-lessonInfo.innerHTML =
-"<strong>" +
-escapeHtml(s.subject || "English") +
-"</strong><br>" +
-escapeHtml(s.notes || "თემა მითითებული არ არის");
-
-lessonTime.textContent =
-formatTime(s.start_time) +
-" — " +
-formatTime(s.end_time);
-
-statusDot.className =
-"status-dot ready";
-
-lessonStatus.textContent =
-"გაკვეთილი დაგეგმილია";
-
-startLessonBtn.disabled = false;
-
-finishLessonBtn.disabled = false;
-
-saveGradeBtn.disabled = false;
-
-}
-
-
-/* =========================================================
-   START LESSON
-========================================================= */
-
-startLessonBtn.addEventListener(
-"click",
-async()=>{
-
-if(!currentSchedule) return;
-
-try{
-
-/*
-  schedules-ში status/actual_start
-  არ ვწერთ, რადგან არსებული
-  სტრუქტურა ამას არ შეიცავს.
-
-  გაკვეთილის დაწყება ფიქსირდება
-  attendance-ში arrival_time-ის
-  საშუალებით.
-*/
-
-const studentId =
-currentSchedule.student_id;
-
-const now =
-new Date();
-
-const time =
-now.toTimeString().slice(0,8);
-
-const {
-data,
-error
-} =
-await supabaseClient
-.from("attendance")
-.upsert({
-schedule_id:currentSchedule.id,
-student_id:studentId,
-status:"present",
-arrival_time:time
-},{
-onConflict:"schedule_id,student_id"
-})
-.select()
-.single();
-
-if(error) throw error;
-
-statusDot.className =
-"status-dot live";
-
-lessonStatus.textContent =
-"🟢 გაკვეთილი მიმდინარეობს";
-
-startLessonBtn.disabled = true;
-
-showMessage(
-"▶️ გაკვეთილი დაიწყო. მოსწავლე მონიშნულია მოსულად."
-);
-
-await loadAttendance();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"გაკვეთილის დაწყება ვერ მოხერხდა: " +
-(error.message || ""),
-"error"
-);
-
-}
-
-});
-
-
-/* =========================================================
-   FINISH LESSON
-========================================================= */
-
-finishLessonBtn.addEventListener(
-"click",
-async()=>{
-
-if(!currentSchedule) return;
-
-try{
-
-const now =
-new Date();
-
-const time =
-now.toTimeString().slice(0,8);
-
-const studentId =
-currentSchedule.student_id;
-
-const {
-data:existing,
-error:findError
-} =
-await supabaseClient
-.from("attendance")
-.select("id,status")
-.eq(
-"schedule_id",
-currentSchedule.id
-)
-.eq(
-"student_id",
-studentId
-)
-.maybeSingle();
-
-if(findError) throw findError;
-
-if(!existing){
-
-const {
-error
-} =
-await supabaseClient
-.from("attendance")
-.insert({
-schedule_id:currentSchedule.id,
-student_id:studentId,
-status:"present",
-arrival_time:time,
-departure_time:time
-});
-
-if(error) throw error;
-
-}else{
-
-const {
-error
-} =
-await supabaseClient
-.from("attendance")
-.update({
-departure_time:time
-})
-.eq("id",existing.id);
-
-if(error) throw error;
-
-}
-
-statusDot.className =
-"status-dot done";
-
-lessonStatus.textContent =
-"🔵 გაკვეთილი დასრულებულია";
-
-finishLessonBtn.disabled = true;
-
-showMessage(
-"⏹️ გაკვეთილი დასრულდა. წასვლის დრო ჩაიწერა."
-);
-
-await loadAttendance();
-
-}catch(error){
-
-console.error(error);
-
-showMessage(
-"გაკვეთილის დასრულება ვერ მოხერხდა: " +
-(error.message || ""),
-"error"
-);
-
-}
-
-});
-
-
-/* =========================================================
-   ATTENDANCE
-========================================================= */
-
-async function loadAttendance(){
-
-const box =
-document.getElementById("attendanceList");
-
-const info =
-document.getElementById("attendanceLessonInfo");
-
-if(!currentSchedule){
-
-box.innerHTML =
-'<div class="muted">ჯერ აირჩიე გაკვეთილი.</div>';
-
-return;
-
-}
-
-info.innerHTML =
-'<span class="status-dot live"></span>' +
-"<strong>" +
-formatDate(currentSchedule.lesson_date) +
-" • " +
-formatTime(currentSchedule.start_time) +
-" — " +
-formatTime(currentSchedule.end_time) +
-"</strong>";
-
-box.innerHTML =
-'<div class="muted">იტვირთება...</div>';
-
-try{
-
-const {
-data:student,
-error:studentError
-} =
-await supabaseClient
-.from("students")
-.select("id,full_name,email,grade")
-.eq("id",currentSchedule.student_id)
-.maybeSingle();
-
-if(studentError) throw studentError;
-
-if(!student){
-
-box.innerHTML =
-'<div class="muted">მოსწავლე ვერ მოიძებნა.</div>';
-
-return;
-
-}
-
-const {
-data:attendance,
-error:attError
-} =
-await supabaseClient
-.from("attendance")
-.select("*")
-.eq(
-"schedule_id",
-currentSchedule.id
-)
-.eq(
-"student_id",
-student.id
-)
-.maybeSingle();
-
-if(attError) throw attError;
-
-renderAttendance(
-box,
-student,
-attendance
-);
-
-}catch(error){
-
-console.error(error);
-
-box.innerHTML =
-'<div class="muted">დასწრების მონაცემების ჩატვირთვა ვერ მოხერხდა.</div>';
-
-}
-
-}
-
-
-function renderAttendance(
-box,
-student,
-attendance
-){
-
-const status =
-attendance?.status || "";
-
-box.innerHTML = `
-<div class="student-card">
-
-<div>
-<div class="student-name">
-🧑‍🎓 ${escapeHtml(student.full_name || "მოსწავლე")}
-</div>
-
-<div class="student-email">
-${escapeHtml(student.email || "")}
-</div>
-
-<div class="small" style="margin-top:8px">
-მოსვლა:
-${attendance?.arrival_time ? formatTime(attendance.arrival_time) : "--"}
-&nbsp;&nbsp;
-წასვლა:
-${attendance?.departure_time ? formatTime(attendance.departure_time) : "--"}
-</div>
-</div>
-
-<div class="attendance-buttons">
-
-<button class="att-btn ${status==="present"?"active-present":""}"
-onclick="setAttendance('present')">
-✅ მოსვლა
-</button>
-
-<button class="att-btn ${status==="late"?"active-late":""}"
-onclick="setAttendance('late')">
-⏰ დაგვიანება
-</button>
-
-<button class="att-btn ${status==="absent"?"active-absent":""}"
-onclick="setAttendance('absent')">
-❌ გაცდენა
-</button>
-
-<button class="att-btn"
-onclick="setDeparture()">
-🚪 წასვლა
-</button>
-
-</div>
-
-</div>
-`;
-
-}
-
-
-async function setAttendance(status){
-
-if(!currentSchedule) return;
-
-try{
-
-const studentId =
-currentSchedule.student_id;
-
-let payload = {
-schedule_id:currentSchedule.id,
-student_id:studentId,
-status:status
+topic:topic||null,
+note:note||null,
+status:"scheduled"
 };
 
-if(status === "present" || status === "late"){
-
-payload.arrival_time =
-new Date().toTimeString().slice(0,8);
-
-}
-
-const {
-error
-} =
+const {data,error}=
 await supabaseClient
-.from("attendance")
-.upsert(
-payload,
-{
-onConflict:"schedule_id,student_id"
-}
-);
+.from("lessons")
+.insert(payload)
+.select()
+.single();
 
 if(error) throw error;
 
-await loadAttendance();
+currentLesson=data;
+
+updateCurrentLessonUI();
 
 showMessage(
-status === "present"
-? "✅ მოსწავლე მოსულად აღინიშნა."
-: status === "late"
-? "⏰ მოსწავლე დაგვიანებულად აღინიშნა."
-: "❌ მოსწავლე გაცდენილად აღინიშნა."
+"✅ გაკვეთილი წარმატებით შეინახა.",
+"ok"
 );
 
 }catch(error){
@@ -1925,8 +1481,7 @@ status === "present"
 console.error(error);
 
 showMessage(
-"დასწრების შენახვა ვერ მოხერხდა: " +
-(error.message || ""),
+"გაკვეთილის შენახვა ვერ მოხერხდა. შეამოწმე Supabase-ის lessons ცხრილი.",
 "error"
 );
 
@@ -1934,68 +1489,88 @@ showMessage(
 
 }
 
+$("saveLessonBtn").addEventListener(
+"click",
+saveLesson
+);
 
-async function setDeparture(){
+async function findLesson(){
 
-if(!currentSchedule) return;
+const grade=$("gradeSelect").value;
+const studentId=$("studentSelect").value;
+const date=$("lessonDate").value;
+
+if(!grade||!date){
+
+showMessage(
+"აირჩიე კლასი და თარიღი.",
+"error"
+);
+
+return;
+
+}
 
 try{
 
-const studentId =
-currentSchedule.student_id;
+let query=
+supabaseClient
+.from("lessons")
+.select("*")
+.eq("teacher_id",currentUser.id)
+.eq("grade",Number(grade))
+.eq("lesson_date",date)
+.order("start_time",{ascending:true})
+.limit(1);
 
-const time =
-new Date().toTimeString().slice(0,8);
+if(studentId){
 
-const {
-data:existing,
-error:findError
-} =
-await supabaseClient
-.from("attendance")
-.select("id")
-.eq("schedule_id",currentSchedule.id)
-.eq("student_id",studentId)
-.maybeSingle();
-
-if(findError) throw findError;
-
-if(!existing){
-
-const {
-error
-} =
-await supabaseClient
-.from("attendance")
-.insert({
-schedule_id:currentSchedule.id,
-student_id:studentId,
-status:"present",
-departure_time:time
-});
-
-if(error) throw error;
-
-}else{
-
-const {
-error
-} =
-await supabaseClient
-.from("attendance")
-.update({
-departure_time:time
-})
-.eq("id",existing.id);
-
-if(error) throw error;
+query=query.eq(
+"student_id",
+studentId
+);
 
 }
 
-await loadAttendance();
+const {data,error}=
+await query;
+
+if(error) throw error;
+
+if(!data||!data.length){
+
+currentLesson=null;
+
+updateCurrentLessonUI();
 
 showMessage(
-"🚪 მოსწავლის წასვლის დრო ჩაიწერა."
+"ამ დღისთვის გაკვეთილი ვერ მოიძებნა.",
+"error"
+);
+
+return;
+
+}
+
+currentLesson=data[0];
+
+$("lessonTopic").value=
+currentLesson.topic||"";
+
+$("lessonNote").value=
+currentLesson.note||"";
+
+$("startTime").value=
+currentLesson.start_time||"";
+
+$("endTime").value=
+currentLesson.end_time||"";
+
+updateCurrentLessonUI();
+
+showMessage(
+"✅ გაკვეთილი მოიძებნა.",
+"ok"
 );
 
 }catch(error){
@@ -2003,7 +1578,7 @@ showMessage(
 console.error(error);
 
 showMessage(
-"წასვლის დრო ვერ ჩაიწერა.",
+"ჩანაწერის მოძებნა ვერ მოხერხდა.",
 "error"
 );
 
@@ -2011,20 +1586,80 @@ showMessage(
 
 }
 
-
-/* =========================================================
-   SAVE GRADE
-========================================================= */
-
-saveGradeBtn.addEventListener(
+$("findLessonBtn").addEventListener(
 "click",
-saveGrade
+findLesson
 );
 
+async function startLesson(){
 
-async function saveGrade(){
+if(!currentLesson){
 
-if(!currentSchedule){
+await findLesson();
+
+if(!currentLesson) return;
+
+}
+
+if(currentLesson.status==="completed"){
+
+showMessage(
+"ეს გაკვეთილი უკვე დასრულებულია.",
+"error"
+);
+
+return;
+
+}
+
+try{
+
+const now=
+new Date().toISOString();
+
+const {data,error}=
+await supabaseClient
+.from("lessons")
+.update({
+status:"live",
+actual_start:now
+})
+.eq("id",currentLesson.id)
+.select()
+.single();
+
+if(error) throw error;
+
+currentLesson=data;
+
+updateCurrentLessonUI();
+
+showMessage(
+"🟢 გაკვეთილი დაიწყო.",
+"ok"
+);
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"გაკვეთილის დაწყება ვერ მოხერხდა.",
+"error"
+);
+
+}
+
+}
+
+$("startLessonBtn").addEventListener(
+"click",
+startLesson
+);
+
+async function finishLesson(){
+
+if(!currentLesson){
 
 showMessage(
 "ჯერ აირჩიე გაკვეთილი.",
@@ -2035,16 +1670,10 @@ return;
 
 }
 
-const grade =
-document.getElementById("gradeValue").value;
-
-const comment =
-document.getElementById("gradeComment").value.trim();
-
-if(!grade){
+if(currentLesson.status==="completed"){
 
 showMessage(
-"აირჩიე შეფასება.",
+"გაკვეთილი უკვე დასრულებულია.",
 "error"
 );
 
@@ -2054,39 +1683,29 @@ return;
 
 try{
 
-/*
-  student_grades-ში არსებული
-  სტრუქტურის მიხედვით:
-  student_id
-  teacher_id
-  lesson_id
-  grade
-  comment
+const now=
+new Date().toISOString();
 
-  schedule_id აქ შეგნებულად
-  არ გამოიყენება.
-*/
-
-const {
-error
-} =
+const {data,error}=
 await supabaseClient
-.from("student_grades")
-.insert({
-student_id:currentSchedule.student_id,
-teacher_id:currentTeacherId,
-lesson_id:currentSchedule.id,
-grade:Number(grade),
-comment:comment || null
-});
+.from("lessons")
+.update({
+status:"completed",
+actual_end:now
+})
+.eq("id",currentLesson.id)
+.select()
+.single();
 
 if(error) throw error;
 
-document.getElementById("gradeValue").value="";
-document.getElementById("gradeComment").value="";
+currentLesson=data;
+
+updateCurrentLessonUI();
 
 showMessage(
-"⭐ შეფასება წარმატებით შეინახა."
+"🔵 გაკვეთილი დასრულდა.",
+"ok"
 );
 
 }catch(error){
@@ -2094,8 +1713,7 @@ showMessage(
 console.error(error);
 
 showMessage(
-"შეფასების შენახვა ვერ მოხერხდა: " +
-(error.message || ""),
+"გაკვეთილის დასრულება ვერ მოხერხდა.",
 "error"
 );
 
@@ -2103,74 +1721,406 @@ showMessage(
 
 }
 
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-document
-.getElementById("loadHistoryBtn")
-.addEventListener(
+$("finishLessonBtn").addEventListener(
 "click",
-loadHistory
+finishLesson
 );
 
+async function loadAttendanceStudents(){
 
-async function loadHistory(){
+const grade=$("attendanceGrade").value;
+const date=$("attendanceDate").value;
 
-const body =
-document.getElementById("historyBody");
+const container=
+$("studentsAttendance");
 
-body.innerHTML =
-'<tr><td colspan="5">იტვირთება...</td></tr>';
+if(!grade||!date){
 
-try{
-
-const {
-data,
-error
-} =
-await supabaseClient
-.from("schedules")
-.select("*")
-.eq(
-"teacher_id",
-currentTeacherId
-)
-.order(
-"lesson_date",
-{ascending:false}
-)
-.order(
-"start_time",
-{ascending:false}
-)
-.limit(100);
-
-if(error) throw error;
-
-if(!data || !data.length){
-
-body.innerHTML =
-'<tr><td colspan="5" class="muted">გაკვეთილების ისტორია ჯერ ცარიელია.</td></tr>';
+container.innerHTML=
+`<div class="empty">
+აირჩიე კლასი და თარიღი.
+</div>`;
 
 return;
 
 }
 
+container.innerHTML=
+`<div class="empty">მოსწავლეები იტვირთება...</div>`;
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("students")
+.select("*")
+.eq("grade",grade)
+.order("name");
+
+if(error) throw error;
+
+if(!data||!data.length){
+
+container.innerHTML=
+`<div class="empty">
+ამ კლასში მოსწავლეები ვერ მოიძებნა.
+</div>`;
+
+return;
+
+}
+
+container.innerHTML="";
+
+for(const student of data){
+
+const id=
+student.id ||
+student.user_id ||
+student.student_id;
+
+const name=
+student.name ||
+student.full_name ||
+student.display_name ||
+student.email ||
+"მოსწავლე";
+
+const card=
+document.createElement("div");
+
+card.className=
+"card student-card";
+
+card.innerHTML=`
+
+<div>
+
+<div class="student-name">
+${escapeHtml(name)}
+</div>
+
+<div class="student-email">
+${escapeHtml(student.email||"")}
+</div>
+
+</div>
+
+<div class="attendance-buttons">
+
+<button class="att-btn"
+data-status="present"
+data-student="${escapeHtml(id)}">
+🟢 მოვიდა
+</button>
+
+<button class="att-btn"
+data-status="late"
+data-student="${escapeHtml(id)}">
+🟡 დააგვიანა
+</button>
+
+<button class="att-btn"
+data-status="absent"
+data-student="${escapeHtml(id)}">
+🔴 გააცდინა
+</button>
+
+<button class="att-btn"
+data-status="left"
+data-student="${escapeHtml(id)}">
+🚪 წავიდა
+</button>
+
+</div>
+`;
+
+container.appendChild(card);
+
+}
+
+container
+.querySelectorAll(".att-btn")
+.forEach(button=>{
+
+button.addEventListener(
+"click",
+()=>saveAttendance(
+button,
+grade,
+date
+)
+);
+
+});
+
+}catch(error){
+
+console.error(error);
+
+container.innerHTML=
+`<div class="empty">
+დასწრების სიის ჩატვირთვა ვერ მოხერხდა.
+</div>`;
+
+}
+
+}
+
+function escapeHtml(value){
+
+return String(value??"")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+async function saveAttendance(
+button,
+grade,
+date
+){
+
+const studentId=
+button.dataset.student;
+
+const status=
+button.dataset.status;
+
+try{
+
+/*
+  attendance ცხრილი
+*/
+
+const payload={
+teacher_id:currentUser.id,
+student_id:studentId,
+grade:Number(grade),
+attendance_date:date,
+status:status
+};
+
+const {error}=
+await supabaseClient
+.from("attendance")
+.upsert(
+payload,
+{
+onConflict:
+"student_id,attendance_date"
+}
+);
+
+if(error) throw error;
+
+button
+.parentElement
+.querySelectorAll(".att-btn")
+.forEach(b=>{
+b.className="att-btn";
+});
+
+button.classList.add(
+"active-"+status
+);
+
+showMessage(
+status==="present"
+?"🟢 მოსვლა ჩაიწერა."
+:
+status==="late"
+?"🟡 დაგვიანება ჩაიწერა."
+:
+status==="absent"
+?"🔴 გაცდენა ჩაიწერა."
+:
+"🚪 წასვლა ჩაიწერა.",
+"ok"
+);
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"დასწრების შენახვა ვერ მოხერხდა. შეამოწმე attendance ცხრილი.",
+"error"
+);
+
+}
+
+}
+
+async function saveGrade(){
+
+const studentId=
+$("gradeStudent").value;
+
+const studentName=
+selectedStudentName("gradeStudent");
+
+const grade=
+$("gradeClass").value;
+
+if(!studentId||!grade){
+
+showMessage(
+"აირჩიე კლასი და მოსწავლე.",
+"error"
+);
+
+return;
+
+}
+
+const payload={
+teacher_id:currentUser.id,
+student_id:studentId,
+student_name:studentName,
+grade:Number(grade),
+vocabulary:$("vocabularyGrade").value||null,
+speaking:$("speakingGrade").value||null,
+reading:$("readingGrade").value||null,
+comment:$("gradeComment").value.trim()||null,
+created_at:new Date().toISOString()
+};
+
+try{
+
+const {error}=
+await supabaseClient
+.from("grades")
+.insert(payload);
+
+if(error) throw error;
+
+showMessage(
+"⭐ შეფასება წარმატებით შეინახა.",
+"ok"
+);
+
+$("gradeComment").value="";
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"შეფასების შენახვა ვერ მოხერხდა. შეამოწმე grades ცხრილი.",
+"error"
+);
+
+}
+
+}
+
+$("saveGradeBtn").addEventListener(
+"click",
+saveGrade
+);
+
+function formatTime(value){
+
+if(!value) return "—";
+
+if(value.includes("T")){
+
+return new Date(value)
+.toLocaleTimeString(
+"ka-GE",
+{
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+
+}
+
+return value.slice(0,5);
+
+}
+
+function statusText(status){
+
+if(status==="live")
+return "🟢 მიმდინარეობს";
+
+if(status==="completed")
+return "🔵 დასრულებული";
+
+return "🟡 დაგეგმილი";
+
+}
+
+async function loadHistory(){
+
+try{
+
+const {data,error}=
+await supabaseClient
+.from("lessons")
+.select("*")
+.eq("teacher_id",currentUser.id)
+.order("lesson_date",{ascending:false})
+.order("start_time",{ascending:false})
+.limit(100);
+
+if(error) throw error;
+
+const body=
+$("historyBody");
+
 body.innerHTML="";
 
-data.forEach(item=>{
+$("totalLessons").textContent=
+data?.length||0;
 
-const tr =
+if(!data||!data.length){
+
+body.innerHTML=`
+<tr>
+<td colspan="6" style="text-align:center">
+ჯერ გაკვეთილები არ არის.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+data.forEach(row=>{
+
+const tr=
 document.createElement("tr");
 
 tr.innerHTML=`
-<td>${formatDate(item.lesson_date)}</td>
-<td>${formatTime(item.start_time)}</td>
-<td>${formatTime(item.end_time)}</td>
-<td>${escapeHtml(item.subject || "")}</td>
-<td>${escapeHtml(item.notes || "")}</td>
+
+<td>${escapeHtml(row.lesson_date||"—")}</td>
+
+<td>
+მე-${escapeHtml(row.grade||"—")}
+</td>
+
+<td>
+${escapeHtml(row.student_name||"მოსწავლე")}
+</td>
+
+<td>
+${formatTime(row.actual_start||row.start_time)}
+</td>
+
+<td>
+${formatTime(row.actual_end||row.end_time)}
+</td>
+
+<td>
+${statusText(row.status)}
+</td>
 `;
 
 body.appendChild(tr);
@@ -2181,80 +2131,80 @@ body.appendChild(tr);
 
 console.error(error);
 
-body.innerHTML =
-'<tr><td colspan="5">ისტორიის ჩატვირთვა ვერ მოხერხდა.</td></tr>';
+$("historyBody").innerHTML=`
+<tr>
+<td colspan="6" style="text-align:center">
+ისტორიის ჩატვირთვა ვერ მოხერხდა.
+</td>
+</tr>
+`;
 
 }
 
 }
 
+async function loadStatistics(){
 
-/* =========================================================
-   HELPERS
-========================================================= */
+try{
 
-function formatTime(value){
+const lessons=
+await supabaseClient
+.from("lessons")
+.select("id",{count:"exact",head:true})
+.eq("teacher_id",currentUser.id);
 
-if(!value) return "--";
+$("totalLessons").textContent=
+lessons.count||0;
 
-return String(value).slice(0,5);
+const attendance=
+await supabaseClient
+.from("attendance")
+.select("status")
+.eq("teacher_id",currentUser.id);
+
+const rows=
+attendance.data||[];
+
+$("totalPresent").textContent=
+rows.filter(
+x=>x.status==="present"
+).length;
+
+$("totalAbsent").textContent=
+rows.filter(
+x=>x.status==="absent"
+).length;
+
+}catch(error){
+
+console.error(error);
 
 }
 
+}
 
-function formatDate(value){
-
-if(!value) return "--";
-
-const parts =
-String(value).split("-");
-
-if(parts.length !== 3)
-return value;
-
-return (
-parts[2] +
-"." +
-parts[1] +
-"." +
-parts[0]
+$("refreshHistoryBtn").addEventListener(
+"click",
+async()=>{
+await loadHistory();
+await loadStatistics();
+}
 );
 
-}
+async function init(){
 
+setDefaultDates();
 
-function escapeHtml(value){
-
-return String(value ?? "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-(async function(){
-
-const ok =
-await checkAuth();
+const ok=
+await requireTeacher();
 
 if(!ok) return;
 
-const today =
-new Date();
+await loadStatistics();
 
-lessonDate.value =
-today.toISOString().slice(0,10);
+}
 
-await loadHistory();
-
-})();
+init();
 
 </script>
 
