@@ -5,45 +5,2013 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#02152d">
 <title>English with Mariami — Teacher Dashboard</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
+
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#010712;color:#fff;font-family:Arial,"Noto Sans Georgian",sans-serif;min-height:100vh}a{text-decoration:none;color:inherit}button,input,select{font:inherit}button{cursor:pointer}.wrap{width:min(1250px,calc(100% - 28px));margin:auto}.neon-world{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(circle at 50% 35%,#eaffff 0,#c8f4ff 18%,#6eb5d8 42%,#245d86 70%,#020713 100%)}.neon-world:before{content:"";position:absolute;inset:-30%;background:radial-gradient(ellipse at center,transparent 25%,#001329aa 70%,#00040c 100%)}.grid-floor{position:absolute;left:-20%;right:-20%;bottom:-20%;height:62%;transform:perspective(450px) rotateX(62deg);background-image:linear-gradient(#00eaff35 1px,transparent 1px),linear-gradient(90deg,#00eaff35 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to top,black,transparent)}.letters{position:absolute;inset:0}.letter{position:absolute;font-size:clamp(50px,7vw,105px);font-weight:1000;color:#fff;text-shadow:0 0 5px #fff,0 0 14px #00eaff,0 0 30px #009cff,0 0 65px #006cff;animation:float 7s ease-in-out infinite}.letter:nth-child(1){left:5%;top:15%}.letter:nth-child(2){left:20%;top:65%;animation-delay:-3s}.letter:nth-child(3){left:35%;top:12%;animation-delay:-2s}.letter:nth-child(4){left:50%;top:68%;animation-delay:-5s}.letter:nth-child(5){left:67%;top:15%;animation-delay:-1s}.letter:nth-child(6){left:82%;top:65%;animation-delay:-4s}@keyframes float{0%,100%{transform:translate3d(0,0,0) rotateY(-12deg)}50%{transform:translate3d(25px,-35px,70px) rotateY(20deg)}}.top{position:sticky;top:0;z-index:50;background:#02152de8;border-bottom:1px solid #00eaff66;backdrop-filter:blur(14px)}.nav{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0}.brand{font-weight:1000;font-size:18px;text-shadow:0 0 18px #00eaff}.navlinks{display:flex;gap:7px;flex-wrap:wrap}.navlinks a,.logout{padding:10px 13px;border-radius:12px;background:#062443dd;border:1px solid #00eaff44;color:#fff;font-size:13px}.logout{background:#7d1724;border-color:#ff5d70}.card{background:linear-gradient(145deg,#041a31ee,#020b19ee);border:1px solid #00eaff66;border-radius:22px;box-shadow:0 18px 55px #0009,0 0 30px #00eaff22;backdrop-filter:blur(10px)}main{padding:35px 0 70px}.head{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:25px}.badge{display:inline-block;padding:8px 13px;border-radius:30px;background:#061c38dd;border:1px solid #00eaff88;color:#ffe600;font-weight:900;font-size:12px}h1{font-size:clamp(32px,5vw,58px);margin:15px 0 8px;text-shadow:0 0 25px #00eaff66}h2{margin:0 0 18px;font-size:27px}.muted{color:#bfe5f0}.small{font-size:13px;color:#9dc7d5}.teacher-info{padding:22px;min-width:280px}.teacher-info strong{display:block;color:#00eaff;font-size:20px;margin-bottom:7px}.message{display:none;padding:13px 15px;border-radius:12px;margin-bottom:15px;font-weight:900}.message.show{display:block}.message.ok{background:#0b633e;border:1px solid #19e58a}.message.error{background:#6d1624;border:1px solid #ff5b72}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{border:1px solid #00eaff44;background:#062443dd;color:#fff;padding:12px 16px;border-radius:13px;font-weight:900}.tab.active,.tab:hover{background:#00c9f2;color:#00131a}.panel{display:none}.panel.active{display:block}.form-card{padding:25px}.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:12px 17px;font-weight:900;transition:.2s}.btn:hover{transform:translateY(-2px)}.primary{background:#00c9f2;color:#00131a}.yellow{background:#ffe600;color:#181500}.green{background:#18c878;color:#00180d}.red{background:#d9364f;color:#fff}.gray{background:#17324b;color:#fff}.student-tools{display:grid;grid-template-columns:1.5fr .9fr .9fr auto;gap:10px;margin:18px 0}.student-tools-info{color:#9dc7d5;font-size:13px;margin-bottom:14px}.student-card{padding:18px;margin-bottom:12px;border:1px solid #00eaff22;border-radius:17px;background:#061a32cc;display:grid;grid-template-columns:minmax(220px,1.3fr) minmax(120px,.7fr) minmax(230px,1.4fr);gap:14px;align-items:center}.student-name{font-weight:1000;font-size:18px}.class-badge{display:inline-block;padding:8px 11px;border-radius:20px;font-weight:900;background:#17324b;border:1px solid #00eaff44}.class-2{color:#74ffb2}.class-3{color:#5eeeff}.class-4{color:#ffe600}.class-0{color:#ffb3c0}.student-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}input,select{width:100%;border:1px solid #00eaff55;border-radius:12px;padding:12px 13px;background:#020d1ddd;color:#fff;outline:none}select option{background:#071a2e;color:#fff}input:focus,select:focus{border-color:#00eaff;box-shadow:0 0 15px #00eaff22}.empty,.placeholder{padding:35px;text-align:center;border:1px dashed #00eaff44;border-radius:16px;color:#9dc7d5}.attendance-head{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.attendance-date{max-width:220px}.attendance-row{padding:16px;margin-bottom:11px;border:1px solid #00eaff22;border-radius:17px;background:#061a32cc;display:grid;grid-template-columns:1.1fr auto;gap:15px;align-items:center}.attendance-name{font-size:18px;font-weight:1000}.attendance-status{display:inline-block;margin-top:7px;padding:6px 10px;border-radius:20px;background:#17324b;color:#cdefff;font-size:12px;font-weight:900}.attendance-buttons{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.att-btn{border:1px solid #00eaff44;border-radius:11px;padding:10px 12px;font-weight:900;color:#fff;background:#17324b}.att-btn:hover{transform:translateY(-2px)}.att-btn.active{outline:2px solid #fff;box-shadow:0 0 18px #00eaff66}.came{background:#18c878;color:#00180d}.left{background:#00aeea;color:#00131a}.absent{background:#d9364f}.late{background:#ffe600;color:#181500}.break{background:#8b5cf6}.attendance-note{padding:12px 14px;border-radius:12px;background:#062443aa;border:1px solid #00eaff22;color:#bfe5f0;font-size:13px;margin-bottom:15px}.footer{text-align:center;padding:25px;border-top:1px solid #00eaff33;color:#9dc7d5}@media(max-width:900px){.head{display:grid;grid-template-columns:1fr}.teacher-info{min-width:0}.student-tools,.student-card,.attendance-row{grid-template-columns:1fr}.student-actions,.attendance-buttons{justify-content:flex-start}.nav{flex-direction:column;align-items:stretch}.navlinks{display:grid;grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.wrap{width:calc(100% - 18px)}main{padding-top:20px}.form-card{padding:18px}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab{text-align:center}.navlinks a,.logout{text-align:center}.head h1{font-size:34px}.student-actions>*{flex:1}.attendance-buttons>*{flex:1;min-width:105px}.attendance-date{max-width:none}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+background:#010712;
+color:#fff;
+font-family:Arial,"Noto Sans Georgian",sans-serif;
+min-height:100vh;
+}
+
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.wrap{
+width:min(1250px,calc(100% - 28px));
+margin:auto;
+}
+
+/* BACKGROUND */
+
+.neon-world{
+position:fixed;
+inset:0;
+z-index:-2;
+overflow:hidden;
+background:
+radial-gradient(circle at 50% 35%,
+#eaffff 0,
+#c8f4ff 18%,
+#6eb5d8 42%,
+#245d86 70%,
+#020713 100%);
+}
+
+.neon-world:before{
+content:"";
+position:absolute;
+inset:-30%;
+background:
+radial-gradient(ellipse at center,
+transparent 25%,
+#001329aa 70%,
+#00040c 100%);
+}
+
+.grid-floor{
+position:absolute;
+left:-20%;
+right:-20%;
+bottom:-20%;
+height:62%;
+transform:perspective(450px) rotateX(62deg);
+background-image:
+linear-gradient(#00eaff35 1px,transparent 1px),
+linear-gradient(90deg,#00eaff35 1px,transparent 1px);
+background-size:55px 55px;
+mask-image:linear-gradient(to top,black,transparent);
+}
+
+.letters{
+position:absolute;
+inset:0;
+}
+
+.letter{
+position:absolute;
+font-size:clamp(50px,7vw,105px);
+font-weight:1000;
+color:#fff;
+text-shadow:
+0 0 5px #fff,
+0 0 14px #00eaff,
+0 0 30px #009cff,
+0 0 65px #006cff;
+animation:float 7s ease-in-out infinite;
+}
+
+.letter:nth-child(1){left:5%;top:15%}
+.letter:nth-child(2){left:20%;top:65%;animation-delay:-3s}
+.letter:nth-child(3){left:35%;top:12%;animation-delay:-2s}
+.letter:nth-child(4){left:50%;top:68%;animation-delay:-5s}
+.letter:nth-child(5){left:67%;top:15%;animation-delay:-1s}
+.letter:nth-child(6){left:82%;top:65%;animation-delay:-4s}
+
+@keyframes float{
+0%,100%{
+transform:translate3d(0,0,0) rotateY(-12deg)
+}
+50%{
+transform:translate3d(25px,-35px,70px) rotateY(20deg)
+}
+}
+
+/* NAV */
+
+.top{
+position:sticky;
+top:0;
+z-index:50;
+background:#02152de8;
+border-bottom:1px solid #00eaff66;
+backdrop-filter:blur(14px);
+}
+
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:13px 0;
+}
+
+.brand{
+font-weight:1000;
+font-size:18px;
+text-shadow:0 0 18px #00eaff;
+}
+
+.navlinks{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+}
+
+.navlinks a,
+.logout{
+padding:10px 13px;
+border-radius:12px;
+background:#062443dd;
+border:1px solid #00eaff44;
+color:#fff;
+font-size:13px;
+}
+
+.logout{
+background:#7d1724;
+border-color:#ff5d70;
+}
+
+/* GENERAL */
+
+.card{
+background:linear-gradient(145deg,#041a31ee,#020b19ee);
+border:1px solid #00eaff66;
+border-radius:22px;
+box-shadow:
+0 18px 55px #0009,
+0 0 30px #00eaff22;
+backdrop-filter:blur(10px);
+}
+
+main{
+padding:35px 0 70px;
+}
+
+.head{
+display:flex;
+justify-content:space-between;
+gap:20px;
+align-items:center;
+margin-bottom:25px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 13px;
+border-radius:30px;
+background:#061c38dd;
+border:1px solid #00eaff88;
+color:#ffe600;
+font-weight:900;
+font-size:12px;
+}
+
+h1{
+font-size:clamp(32px,5vw,58px);
+margin:15px 0 8px;
+text-shadow:0 0 25px #00eaff66;
+}
+
+h2{
+margin:0 0 18px;
+font-size:27px;
+}
+
+.muted{
+color:#bfe5f0;
+}
+
+.small{
+font-size:13px;
+color:#9dc7d5;
+}
+
+.teacher-info{
+padding:22px;
+min-width:280px;
+}
+
+.teacher-info strong{
+display:block;
+color:#00eaff;
+font-size:20px;
+margin-bottom:7px;
+}
+
+/* MESSAGE */
+
+.message{
+display:none;
+padding:13px 15px;
+border-radius:12px;
+margin-bottom:15px;
+font-weight:900;
+}
+
+.message.show{
+display:block;
+}
+
+.message.ok{
+background:#0b633e;
+border:1px solid #19e58a;
+}
+
+.message.error{
+background:#6d1624;
+border:1px solid #ff5b72;
+}
+
+/* TABS */
+
+.tabs{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin:20px 0;
+}
+
+.tab{
+border:1px solid #00eaff44;
+background:#062443dd;
+color:#fff;
+padding:12px 16px;
+border-radius:13px;
+font-weight:900;
+}
+
+.tab.active,
+.tab:hover{
+background:#00c9f2;
+color:#00131a;
+}
+
+.panel{
+display:none;
+}
+
+.panel.active{
+display:block;
+}
+
+/* FORM */
+
+.form-card{
+padding:25px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.btn{
+border:0;
+border-radius:13px;
+padding:12px 17px;
+font-weight:900;
+transition:.2s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+.primary{
+background:#00c9f2;
+color:#00131a;
+}
+
+.yellow{
+background:#ffe600;
+color:#181500;
+}
+
+.green{
+background:#18c878;
+color:#00180d;
+}
+
+.red{
+background:#d9364f;
+color:#fff;
+}
+
+.gray{
+background:#17324b;
+color:#fff;
+}
+
+/* SEARCH */
+
+.student-tools{
+display:grid;
+grid-template-columns:1.5fr .9fr .9fr auto;
+gap:10px;
+margin:18px 0;
+}
+
+.student-tools-info{
+color:#9dc7d5;
+font-size:13px;
+margin-bottom:14px;
+}
+
+input,
+select{
+width:100%;
+border:1px solid #00eaff55;
+border-radius:12px;
+padding:12px 13px;
+background:#020d1ddd;
+color:#fff;
+outline:none;
+}
+
+select option{
+background:#071a2e;
+color:#fff;
+}
+
+input:focus,
+select:focus{
+border-color:#00eaff;
+box-shadow:0 0 15px #00eaff22;
+}
+
+/* STUDENT CARD */
+
+.student-card{
+padding:18px;
+margin-bottom:12px;
+border:1px solid #00eaff22;
+border-radius:17px;
+background:#061a32cc;
+
+display:grid;
+grid-template-columns:minmax(210px,1.1fr) minmax(110px,.55fr) minmax(500px,2fr);
+gap:14px;
+align-items:center;
+}
+
+.student-name{
+font-weight:1000;
+font-size:18px;
+}
+
+.class-badge{
+display:inline-block;
+padding:8px 11px;
+border-radius:20px;
+font-weight:900;
+background:#17324b;
+border:1px solid #00eaff44;
+}
+
+.class-2{color:#74ffb2}
+.class-3{color:#5eeeff}
+.class-4{color:#ffe600}
+.class-0{color:#ffb3c0}
+
+/* ATTENDANCE BUTTONS NEXT TO STUDENT */
+
+.student-attendance{
+display:flex;
+gap:6px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.student-attendance-title{
+width:100%;
+font-size:11px;
+color:#9dc7d5;
+margin-bottom:2px;
+}
+
+.att-btn{
+border:1px solid #00eaff44;
+border-radius:10px;
+padding:9px 10px;
+font-weight:900;
+color:#fff;
+background:#17324b;
+transition:.2s;
+white-space:nowrap;
+}
+
+.att-btn:hover{
+transform:translateY(-2px);
+}
+
+.att-btn.active{
+outline:2px solid #fff;
+box-shadow:0 0 18px #00eaff66;
+}
+
+.came{
+background:#18c878;
+color:#00180d;
+}
+
+.left{
+background:#00aeea;
+color:#00131a;
+}
+
+.absent{
+background:#d9364f;
+}
+
+.late{
+background:#ffe600;
+color:#181500;
+}
+
+.break{
+background:#8b5cf6;
+}
+
+/* STUDENT MANAGEMENT */
+
+.student-management{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+margin-top:12px;
+}
+
+.student-management select{
+width:130px;
+}
+
+/* EMPTY */
+
+.empty,
+.placeholder{
+padding:35px;
+text-align:center;
+border:1px dashed #00eaff44;
+border-radius:16px;
+color:#9dc7d5;
+}
+
+/* ATTENDANCE PANEL */
+
+.attendance-head{
+display:flex;
+justify-content:space-between;
+gap:15px;
+align-items:center;
+flex-wrap:wrap;
+margin-bottom:18px;
+}
+
+.attendance-date{
+max-width:220px;
+}
+
+.attendance-row{
+padding:16px;
+margin-bottom:11px;
+border:1px solid #00eaff22;
+border-radius:17px;
+background:#061a32cc;
+
+display:grid;
+grid-template-columns:1.1fr auto;
+gap:15px;
+align-items:center;
+}
+
+.attendance-name{
+font-size:18px;
+font-weight:1000;
+}
+
+.attendance-status{
+display:inline-block;
+margin-top:7px;
+padding:6px 10px;
+border-radius:20px;
+background:#17324b;
+color:#cdefff;
+font-size:12px;
+font-weight:900;
+}
+
+.attendance-buttons{
+display:flex;
+gap:7px;
+flex-wrap:wrap;
+justify-content:flex-end;
+}
+
+.attendance-note{
+padding:12px 14px;
+border-radius:12px;
+background:#062443aa;
+border:1px solid #00eaff22;
+color:#bfe5f0;
+font-size:13px;
+margin-bottom:15px;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+padding:25px;
+border-top:1px solid #00eaff33;
+color:#9dc7d5;
+}
+
+/* TABLET */
+
+@media(max-width:1050px){
+
+.student-card{
+grid-template-columns:1fr;
+}
+
+.student-attendance{
+justify-content:flex-start;
+}
+
+.student-management{
+justify-content:flex-start;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.head{
+display:grid;
+grid-template-columns:1fr;
+}
+
+.teacher-info{
+min-width:0;
+}
+
+.student-tools{
+grid-template-columns:1fr;
+}
+
+.attendance-row{
+grid-template-columns:1fr;
+}
+
+.attendance-buttons{
+justify-content:flex-start;
+}
+
+.nav{
+flex-direction:column;
+align-items:stretch;
+}
+
+.navlinks{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
+
+.student-card{
+grid-template-columns:1fr;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:600px){
+
+.wrap{
+width:calc(100% - 18px);
+}
+
+main{
+padding-top:20px;
+}
+
+.form-card{
+padding:18px;
+}
+
+.tabs{
+display:grid;
+grid-template-columns:1fr 1fr;
+}
+
+.tab{
+text-align:center;
+}
+
+.navlinks a,
+.logout{
+text-align:center;
+}
+
+.head h1{
+font-size:34px;
+}
+
+.student-attendance{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
+
+.student-attendance-title{
+grid-column:1/-1;
+}
+
+.att-btn{
+width:100%;
+font-size:12px;
+padding:10px 5px;
+}
+
+.student-management{
+display:grid;
+grid-template-columns:1fr 1fr;
+}
+
+.student-management select{
+width:100%;
+grid-column:1/-1;
+}
+
+.student-management .btn{
+width:100%;
+}
+
+.attendance-buttons{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+}
+
+.attendance-buttons .att-btn{
+width:100%;
+}
+
+.attendance-date{
+max-width:none;
+}
+
+}
 </style>
 </head>
+
 <body>
-<div class="neon-world"><div class="letters"><span class="letter">A</span><span class="letter">B</span><span class="letter">C</span><span class="letter">D</span><span class="letter">E</span><span class="letter">F</span></div><div class="grid-floor"></div></div>
-<header class="top"><div class="wrap nav"><a class="brand" href="index.html">⚡ ENGLISH WITH MARIAMI</a><nav class="navlinks"><a href="teacher-dashboard.html">👩‍🏫 მასწავლებელი</a><a href="academy.html">🎓 სასწავლო ცენტრი</a><a href="index.html">🏠 მთავარი</a><button class="logout" id="logoutBtn" type="button">🚪 გამოსვლა</button></nav></div></header>
+
+<div class="neon-world">
+<div class="letters">
+<span class="letter">A</span>
+<span class="letter">B</span>
+<span class="letter">C</span>
+<span class="letter">D</span>
+<span class="letter">E</span>
+<span class="letter">F</span>
+</div>
+<div class="grid-floor"></div>
+</div>
+
+<header class="top">
+<div class="wrap nav">
+
+<a class="brand" href="index.html">
+⚡ ENGLISH WITH MARIAMI
+</a>
+
+<nav class="navlinks">
+<a href="teacher-dashboard.html">👩‍🏫 მასწავლებელი</a>
+<a href="academy.html">🎓 სასწავლო ცენტრი</a>
+<a href="index.html">🏠 მთავარი</a>
+<button class="logout" id="logoutBtn" type="button">
+🚪 გამოსვლა
+</button>
+</nav>
+
+</div>
+</header>
+
 <main class="wrap">
-<section class="head"><div><span class="badge">TEACHER DASHBOARD</span><h1>👩‍🏫 მასწავლებლის სივრცე</h1><p class="muted">მოსწავლეები • კლასის მინიჭება • დასწრება • შეფასება • ისტორია</p></div><div class="card teacher-info"><strong id="teacherName">მასწავლებელი</strong><span id="teacherEmail" class="small">იტვირთება...</span></div></section>
+
+<section class="head">
+
+<div>
+<span class="badge">
+TEACHER DASHBOARD
+</span>
+
+<h1>
+👩‍🏫 მასწავლებლის სივრცე
+</h1>
+
+<p class="muted">
+მოსწავლეები • კლასის მინიჭება • დასწრება • შეფასება • ისტორია
+</p>
+</div>
+
+<div class="card teacher-info">
+
+<strong id="teacherName">
+მასწავლებელი
+</strong>
+
+<span id="teacherEmail" class="small">
+იტვირთება...
+</span>
+
+</div>
+
+</section>
+
 <div id="message" class="message"></div>
-<div class="tabs"><button class="tab active" data-tab="students">👥 მოსწავლეები</button><button class="tab" data-tab="lesson">📅 გაკვეთილი</button><button class="tab" data-tab="attendance">🧑‍🎓 დასწრება</button><button class="tab" data-tab="grades">⭐ შეფასება</button><button class="tab" data-tab="history">📋 ისტორია</button></div>
-<section id="students" class="panel active"><div class="card form-card"><h2>👥 მოსწავლეების მართვა</h2><p class="muted">რეგისტრირებული მოსწავლე ავტომატურად გამოჩნდება აქ. კლასის მინიჭების შემდეგ ავტორიზაციისას საკუთარ კლასში გადავა.</p><div class="actions"><button class="btn primary" id="refreshBtn" type="button">🔄 განახლება</button></div><div class="student-tools"><input id="studentSearch" type="search" placeholder="🔎 მოძებნე სახელით ან User ID-ით"><select id="gradeFilter"><option value="all">🎓 ყველა კლასი</option><option value="0">⏳ კლასის გარეშე</option><option value="2">🌱 მე-2 კლასი</option><option value="3">🚀 მე-3 კლასი</option><option value="4">⭐ მე-4 კლასი</option></select><select id="linkFilter"><option value="all">👥 ყველა მოსწავლე</option><option value="mine">👩‍🏫 ჩემი მოსწავლეები</option><option value="unlinked">🔓 ჯერ არ არის მიბმული</option></select><button class="btn gray" id="clearFilters" type="button">🧹</button></div><div id="studentInfo" class="student-tools-info"></div><div id="studentList"><div class="muted">⏳ იტვირთება...</div></div></div></section>
-<section id="lesson" class="panel"><div class="card form-card placeholder"><h2>📅 გაკვეთილის მართვა</h2><p>გაკვეთილის მოდული მზად არის შემდეგი ფუნქციებისთვის.</p></div></section>
-<section id="attendance" class="panel"><div class="card form-card"><div class="attendance-head"><div><h2>🧑‍🎓 მოსწავლეების დასწრება</h2><p class="muted">აირჩიე თარიღი და თითოეულ მოსწავლეზე დააფიქსირე: წავიდა, მოვიდა, გაცდენა, დააგვიანდა ან დასვენება.</p></div><div class="attendance-date"><label for="attendanceDate" class="small">📅 თარიღი</label><input id="attendanceDate" type="date"></div></div><div class="attendance-note">✅ მონიშნული მდგომარეობა ინახება Supabase-ში კონკრეტული მოსწავლისა და დღის მიხედვით. იმავე დღის ხელახლა მონიშვნა ძველ მდგომარეობას შეცვლის.</div><div id="attendanceList"><div class="muted">⏳ იტვირთება...</div></div></div></section>
-<section id="grades" class="panel"><div class="card form-card placeholder"><h2>⭐ შეფასება</h2><p>მოსწავლეების შეფასების მოდული.</p></div></section>
-<section id="history" class="panel"><div class="card form-card placeholder"><h2>📋 ისტორია</h2><p>გაკვეთილებისა და დასწრების ისტორია.</p></div></section>
+
+<div class="tabs">
+
+<button class="tab active" data-tab="students">
+👥 მოსწავლეები
+</button>
+
+<button class="tab" data-tab="lesson">
+📅 გაკვეთილი
+</button>
+
+<button class="tab" data-tab="attendance">
+🧑‍🎓 დასწრება
+</button>
+
+<button class="tab" data-tab="grades">
+⭐ შეფასება
+</button>
+
+<button class="tab" data-tab="history">
+📋 ისტორია
+</button>
+
+</div>
+
+<!-- STUDENTS -->
+
+<section id="students" class="panel active">
+
+<div class="card form-card">
+
+<h2>
+👥 მოსწავლეების მართვა
+</h2>
+
+<p class="muted">
+რეგისტრირებული მოსწავლე ავტომატურად გამოჩნდება აქ.
+</p>
+
+<div class="actions">
+<button class="btn primary" id="refreshBtn" type="button">
+🔄 განახლება
+</button>
+</div>
+
+<div class="student-tools">
+
+<input
+id="studentSearch"
+type="search"
+placeholder="🔎 მოძებნე სახელით ან User ID-ით"
+>
+
+<select id="gradeFilter">
+
+<option value="all">
+🎓 ყველა კლასი
+</option>
+
+<option value="0">
+⏳ კლასის გარეშე
+</option>
+
+<option value="2">
+🌱 მე-2 კლასი
+</option>
+
+<option value="3">
+🚀 მე-3 კლასი
+</option>
+
+<option value="4">
+⭐ მე-4 კლასი
+</option>
+
+</select>
+
+<select id="linkFilter">
+
+<option value="all">
+👥 ყველა მოსწავლე
+</option>
+
+<option value="mine">
+👩‍🏫 ჩემი მოსწავლეები
+</option>
+
+<option value="unlinked">
+🔓 ჯერ არ არის მიბმული
+</option>
+
+</select>
+
+<button class="btn gray" id="clearFilters" type="button">
+🧹
+</button>
+
+</div>
+
+<div id="studentInfo" class="student-tools-info"></div>
+
+<div id="studentList">
+<div class="muted">
+⏳ იტვირთება...
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- LESSON -->
+
+<section id="lesson" class="panel">
+
+<div class="card form-card placeholder">
+
+<h2>
+📅 გაკვეთილის მართვა
+</h2>
+
+<p>
+გაკვეთილის მოდული მზად არის შემდეგი ფუნქციებისთვის.
+</p>
+
+</div>
+
+</section>
+
+<!-- ATTENDANCE -->
+
+<section id="attendance" class="panel">
+
+<div class="card form-card">
+
+<div class="attendance-head">
+
+<div>
+
+<h2>
+🧑‍🎓 მოსწავლეების დასწრება
+</h2>
+
+<p class="muted">
+აირჩიე თარიღი და თითოეულ მოსწავლეზე დააფიქსირე მდგომარეობა.
+</p>
+
+</div>
+
+<div class="attendance-date">
+
+<label for="attendanceDate" class="small">
+📅 თარიღი
+</label>
+
+<input
+id="attendanceDate"
+type="date"
+>
+
+</div>
+
+</div>
+
+<div class="attendance-note">
+
+✅ დასწრება ინახება Supabase-ში კონკრეტული მოსწავლისა და დღის მიხედვით.
+<br>
+იმავე დღის ახალი სტატუსი ძველს შეცვლის.
+
+</div>
+
+<div id="attendanceList">
+
+<div class="muted">
+⏳ იტვირთება...
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- GRADES -->
+
+<section id="grades" class="panel">
+
+<div class="card form-card placeholder">
+
+<h2>
+⭐ შეფასება
+</h2>
+
+<p>
+მოსწავლეების შეფასების მოდული.
+</p>
+
+</div>
+
+</section>
+
+<!-- HISTORY -->
+
+<section id="history" class="panel">
+
+<div class="card form-card placeholder">
+
+<h2>
+📋 ისტორია
+</h2>
+
+<p>
+გაკვეთილებისა და დასწრების ისტორია.
+</p>
+
+</div>
+
+</section>
+
 </main>
-<footer class="footer">⚡ English with Mariami • Teacher Dashboard • 2026</footer>
+
+<footer class="footer">
+⚡ English with Mariami • Teacher Dashboard • 2026
+</footer>
+
 <script>
-(function(){'use strict';
-const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;
-const $=id=>document.getElementById(id);let students=[];let attendance={};
-function msg(t,c='ok'){const e=$('message');e.textContent=t;e.className='message show '+c;clearTimeout(msg.x);msg.x=setTimeout(()=>e.className='message',4500)}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function cls(g){return g==2?'🌱 მე-2 კლასი':g==3?'🚀 მე-3 კლასი':g==4?'⭐ მე-4 კლასი':'⏳ კლასი არ არის მინიჭებული'}
-function statusText(s){return s==='came'?'მოვიდა':s==='left'?'წავიდა':s==='absent'?'გაცდენა':s==='late'?'დააგვიანდა':s==='break'?'დასვენება':'არ დაფიქსირებულა'}
-function render(){const q=$('studentSearch').value.trim().toLowerCase(),g=$('gradeFilter').value,l=$('linkFilter').value;const a=students.filter(s=>(!q||(s.full_name||'').toLowerCase().includes(q)||(s.user_id||'').toLowerCase().includes(q))&&(g==='all'||String(s.grade||0)===g)&&(l==='all'||(l==='mine'?s.linked:!s.linked)));$('studentInfo').textContent='ნაჩვენებია '+a.length+' / '+students.length+' მოსწავლე';$('studentList').innerHTML=a.length?a.map(s=>`<article class="student-card"><div><div class="student-name">👤 ${esc(s.full_name||'უსახელო')}</div><div class="small">ID: ${esc(s.user_id)}</div><div style="margin-top:9px"><span class="class-badge class-${Number(s.grade||0)}">${cls(s.grade)}</span> ${s.linked?'<span class="small">• ჩემი მოსწავლეა</span>':'<span class="small">• ჯერ არ არის მიბმული</span>'}</div></div><div><div class="small">მიმდინარე კლასი</div><div style="margin-top:8px" class="class-badge class-${Number(s.grade||0)}">${cls(s.grade)}</div></div><div class="student-actions"><select data-grade="${esc(s.user_id)}"><option value="">კლასი</option><option value="2">🌱 მე-2</option><option value="3">🚀 მე-3</option><option value="4">⭐ მე-4</option></select><button class="btn green" data-a="assign" data-id="${esc(s.user_id)}">მინიჭება / შეცვლა</button><button class="btn yellow" data-a="reset" data-id="${esc(s.user_id)}">♻️ განულება</button><button class="btn red" data-a="remove" data-id="${esc(s.user_id)}">🗑️ წაშლა</button></div></article>`).join(''):'<div class="empty">👨‍🎓 მოსწავლე ვერ მოიძებნა.</div>'}
-function renderAttendance(){const linked=students.filter(s=>s.linked&&Number(s.grade||0)>0);if(!linked.length){$('attendanceList').innerHTML='<div class="empty">👨‍🎓 ჯერ არ არის მიბმული/კლასმინიჭებული მოსწავლე.</div>';return}$('attendanceList').innerHTML=linked.map(s=>{const st=attendance[s.user_id]||'';return `<article class="attendance-row"><div><div class="attendance-name">👤 ${esc(s.full_name||'უსახელო')}</div><div class="small">${cls(s.grade)}</div><span class="attendance-status">${st?'დღეს: '+statusText(st):'დღეს ჯერ არ დაფიქსირებულა'}</span></div><div class="attendance-buttons"><button class="att-btn left ${st==='left'?'active':''}" data-status="left" data-id="${esc(s.user_id)}">🚪 წავიდა</button><button class="att-btn came ${st==='came'?'active':''}" data-status="came" data-id="${esc(s.user_id)}">✅ მოვიდა</button><button class="att-btn absent ${st==='absent'?'active':''}" data-status="absent" data-id="${esc(s.user_id)}">❌ გაცდენა</button><button class="att-btn late ${st==='late'?'active':''}" data-status="late" data-id="${esc(s.user_id)}">⏰ დააგვიანდა</button><button class="att-btn break ${st==='break'?'active':''}" data-status="break" data-id="${esc(s.user_id)}">☕ დასვენება</button></div></article>`}).join('')}
-async function load(){if(!client)return msg('❌ Supabase ვერ ჩაიტვირთა.','error');const {data:{session}}=await client.auth.getSession();if(!session){location.replace('login.html?redirect='+encodeURIComponent(location.pathname));return}const me=await client.from('profiles').select('full_name,role').eq('user_id',session.user.id).maybeSingle();if(me.error||!me.data||String(me.data.role).toLowerCase()!=='teacher'){msg('❌ ამ გვერდზე მხოლოდ მასწავლებელს აქვს წვდომა.','error');setTimeout(()=>location.replace('login.html'),700);return}$('teacherName').textContent=me.data.full_name||'მასწავლებელი';$('teacherEmail').textContent=session.user.email||'';const [p,t]=await Promise.all([client.from('profiles').select('user_id,full_name,grade,role').eq('role','student').order('full_name'),client.from('teacher_students').select('student_id').eq('teacher_id',session.user.id)]);if(p.error)return msg('❌ მოსწავლეების ჩატვირთვა ვერ მოხერხდა: '+p.error.message,'error');if(t.error)return msg('❌ მოსწავლეების კავშირების ჩატვირთვა ვერ მოხერხდა: '+t.error.message,'error');const set=new Set((t.data||[]).map(x=>x.student_id));students=(p.data||[]).map(x=>({...x,linked:set.has(x.user_id)}));render();await loadAttendance(session.user.id)}
-async function loadAttendance(teacherId){const date=$('attendanceDate').value;if(!date)return;const r=await client.from('teacher_attendance').select('student_id,status').eq('teacher_id',teacherId).eq('attendance_date',date);if(r.error){msg('❌ დასწრების ჩატვირთვა ვერ მოხერხდა: '+r.error.message,'error');return}attendance={};(r.data||[]).forEach(x=>attendance[x.student_id]=x.status);renderAttendance()}
-async function markAttendance(id,status){const date=$('attendanceDate').value;if(!date)return msg('⚠️ ჯერ აირჩიე თარიღი.','error');const {data:{session}}=await client.auth.getSession();if(!session)return;const r=await client.from('teacher_attendance').upsert({teacher_id:session.user.id,student_id:id,attendance_date:date,status,marked_at:new Date().toISOString()},{onConflict:'teacher_id,student_id,attendance_date'});if(r.error){msg('❌ დასწრების შენახვა ვერ მოხერხდა: '+r.error.message,'error');return}attendance[id]=status;renderAttendance();msg('✅ '+statusText(status)+' — დასწრება დაფიქსირდა.')}
-async function call(name,id,grade){const r=await client.rpc(name,grade===undefined?{p_student_id:id}:{p_student_id:id,p_grade:Number(grade)});if(r.error)throw r.error;return r.data}
-async function assign(id){const s=document.querySelector(`select[data-grade="${CSS.escape(id)}"]`),g=s&&s.value;if(!g)return msg('⚠️ ჯერ აირჩიე კლასი.','error');if(!confirm('მოსწავლეს მიენიჭოს '+g+' კლასი?'))return;try{await call('teacher_assign_student',id,g);msg('✅ კლასი წარმატებით მიენიჭა/შეეცვალა.');await load()}catch(e){msg('❌ კლასის მინიჭება ვერ მოხერხდა: '+e.message,'error')}}
-async function reset(id){if(!confirm('განულდეს მოსწავლის კლასი და ქულები? სწავლების ისტორია არ იშლება.'))return;try{await call('teacher_reset_student',id);msg('♻️ მოსწავლის კლასი განულდა.');await load()}catch(e){msg('❌ განულება ვერ მოხერხდა: '+e.message,'error')}}
-async function remove(id){if(!confirm('წაიშალოს მოსწავლე შენი მასწავლებლის სიიდან? ანგარიში არ წაიშლება; მხოლოდ კავშირი გაუქმდება და კლასი განულდება.'))return;try{await call('teacher_remove_student',id);msg('🗑️ მოსწავლე წაიშალა შენი სიიდან.');await load()}catch(e){msg('❌ წაშლა ვერ მოხერხდა: '+e.message,'error')}}
-$('attendanceDate').value=new Date().toISOString().slice(0,10);$('attendanceDate').addEventListener('change',async()=>{const {data:{session}}=await client.auth.getSession();if(session)await loadAttendance(session.user.id)});$('refreshBtn').onclick=load;$('studentSearch').oninput=render;$('gradeFilter').onchange=render;$('linkFilter').onchange=render;$('clearFilters').onclick=()=>{$('studentSearch').value='';$('gradeFilter').value='all';$('linkFilter').value='all';render()};$('studentList').onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const id=b.dataset.id;if(b.dataset.a==='assign')assign(id);if(b.dataset.a==='reset')reset(id);if(b.dataset.a==='remove')remove(id)};$('attendanceList').onclick=e=>{const b=e.target.closest('[data-status]');if(b)markAttendance(b.dataset.id,b.dataset.status)};document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active');if(b.dataset.tab==='attendance')renderAttendance()});$('logoutBtn').onclick=async()=>{await client.auth.signOut();location.replace('login.html')};window.teacherDashboard={reload:load};load();
+
+(function(){
+
+'use strict';
+
+const client =
+window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+window.supabaseClient ||
+null;
+
+const $ = id => document.getElementById(id);
+
+let students = [];
+let attendance = {};
+
+function msg(text,type='ok'){
+
+const el = $('message');
+
+el.textContent = text;
+
+el.className =
+'message show ' + type;
+
+clearTimeout(msg.timer);
+
+msg.timer =
+setTimeout(()=>{
+el.className='message';
+},4500);
+
+}
+
+function esc(value){
+
+return String(value ?? '')
+.replace(/[&<>"']/g,c=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+'"':'&quot;',
+"'":'&#39;'
+}[c]));
+
+}
+
+function cls(grade){
+
+return grade==2
+?'🌱 მე-2 კლასი'
+:grade==3
+?'🚀 მე-3 კლასი'
+:grade==4
+?'⭐ მე-4 კლასი'
+:'⏳ კლასი არ არის მინიჭებული';
+
+}
+
+function statusText(status){
+
+return status==='came'
+?'მოვიდა'
+:status==='left'
+?'წავიდა'
+:status==='absent'
+?'გაცდენა'
+:status==='late'
+?'დააგვიანდა'
+:status==='break'
+?'დასვენება'
+:'არ დაფიქსირებულა';
+
+}
+
+/* =========================
+   STUDENT LIST
+========================= */
+
+function render(){
+
+const q =
+$('studentSearch')
+.value
+.trim()
+.toLowerCase();
+
+const g =
+$('gradeFilter').value;
+
+const l =
+$('linkFilter').value;
+
+const filtered =
+students.filter(s =>
+
+(
+!q ||
+(s.full_name||'')
+.toLowerCase()
+.includes(q) ||
+
+(s.user_id||'')
+.toLowerCase()
+.includes(q)
+)
+
+&&
+
+(
+g==='all' ||
+String(s.grade||0)===g
+)
+
+&&
+
+(
+l==='all' ||
+(l==='mine' ? s.linked : !s.linked)
+)
+
+);
+
+$('studentInfo').textContent =
+'ნაჩვენებია ' +
+filtered.length +
+' / ' +
+students.length +
+' მოსწავლე';
+
+if(!filtered.length){
+
+$('studentList').innerHTML =
+'<div class="empty">👨‍🎓 მოსწავლე ვერ მოიძებნა.</div>';
+
+return;
+
+}
+
+$('studentList').innerHTML =
+filtered.map(s=>{
+
+const id=esc(s.user_id);
+
+const st =
+attendance[s.user_id] || '';
+
+return `
+
+<article class="student-card">
+
+<div>
+
+<div class="student-name">
+👤 ${esc(s.full_name||'უსახელო')}
+</div>
+
+<div class="small">
+ID: ${esc(s.user_id)}
+</div>
+
+<div style="margin-top:9px">
+
+<span class="class-badge class-${Number(s.grade||0)}">
+${cls(s.grade)}
+</span>
+
+${
+s.linked
+?
+'<span class="small"> • ჩემი მოსწავლეა</span>'
+:
+'<span class="small"> • ჯერ არ არის მიბმული</span>'
+}
+
+</div>
+
+</div>
+
+<div>
+
+<div class="small">
+მიმდინარე კლასი
+</div>
+
+<div style="margin-top:8px">
+
+<span class="class-badge class-${Number(s.grade||0)}">
+${cls(s.grade)}
+</span>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="student-attendance-title">
+📌 დღევანდელი დასწრება
+</div>
+
+<div class="student-attendance">
+
+<button
+class="att-btn came ${st==='came'?'active':''}"
+data-status="came"
+data-id="${id}">
+✅ მოვიდა
+</button>
+
+<button
+class="att-btn left ${st==='left'?'active':''}"
+data-status="left"
+data-id="${id}">
+🚪 წავიდა
+</button>
+
+<button
+class="att-btn absent ${st==='absent'?'active':''}"
+data-status="absent"
+data-id="${id}">
+❌ გაცდენა
+</button>
+
+<button
+class="att-btn late ${st==='late'?'active':''}"
+data-status="late"
+data-id="${id}">
+⏰ დააგვიანდა
+</button>
+
+<button
+class="att-btn break ${st==='break'?'active':''}"
+data-status="break"
+data-id="${id}">
+☕ დასვენება
+</button>
+
+</div>
+
+<div class="student-management">
+
+<select data-grade="${id}">
+
+<option value="">
+🎓 კლასი
+</option>
+
+<option value="2">
+🌱 მე-2
+</option>
+
+<option value="3">
+🚀 მე-3
+</option>
+
+<option value="4">
+⭐ მე-4
+</option>
+
+</select>
+
+<button
+class="btn green"
+data-action="assign"
+data-id="${id}">
+მინიჭება / შეცვლა
+</button>
+
+<button
+class="btn yellow"
+data-action="reset"
+data-id="${id}">
+♻️ განულება
+</button>
+
+<button
+class="btn red"
+data-action="remove"
+data-id="${id}">
+🗑️ წაშლა
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+`;
+
+}).join('');
+
+}
+
+/* =========================
+   ATTENDANCE
+========================= */
+
+function renderAttendance(){
+
+const linked =
+students.filter(
+s=>s.linked &&
+Number(s.grade||0)>0
+);
+
+if(!linked.length){
+
+$('attendanceList').innerHTML =
+'<div class="empty">👨‍🎓 ჯერ არ არის მიბმული და კლასმინიჭებული მოსწავლე.</div>';
+
+return;
+
+}
+
+$('attendanceList').innerHTML =
+linked.map(s=>{
+
+const st =
+attendance[s.user_id] || '';
+
+return `
+
+<article class="attendance-row">
+
+<div>
+
+<div class="attendance-name">
+👤 ${esc(s.full_name||'უსახელო')}
+</div>
+
+<div class="small">
+${cls(s.grade)}
+</div>
+
+<span class="attendance-status">
+
+${
+st
+?
+'დღეს: '+statusText(st)
+:
+'დღეს ჯერ არ დაფიქსირებულა'
+}
+
+</span>
+
+</div>
+
+<div class="attendance-buttons">
+
+<button
+class="att-btn came ${st==='came'?'active':''}"
+data-status="came"
+data-id="${esc(s.user_id)}">
+✅ მოვიდა
+</button>
+
+<button
+class="att-btn left ${st==='left'?'active':''}"
+data-status="left"
+data-id="${esc(s.user_id)}">
+🚪 წავიდა
+</button>
+
+<button
+class="att-btn absent ${st==='absent'?'active':''}"
+data-status="absent"
+data-id="${esc(s.user_id)}">
+❌ გაცდენა
+</button>
+
+<button
+class="att-btn late ${st==='late'?'active':''}"
+data-status="late"
+data-id="${esc(s.user_id)}">
+⏰ დააგვიანდა
+</button>
+
+<button
+class="att-btn break ${st==='break'?'active':''}"
+data-status="break"
+data-id="${esc(s.user_id)}">
+☕ დასვენება
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}).join('');
+
+}
+
+/* =========================
+   LOAD DATA
+========================= */
+
+async function load(){
+
+if(!client){
+
+msg(
+'❌ Supabase ვერ ჩაიტვირთა.',
+'error'
+);
+
+return;
+
+}
+
+try{
+
+const {
+data:{session}
+} =
+await client.auth.getSession();
+
+if(!session){
+
+location.replace(
+'login.html?redirect='+
+encodeURIComponent(location.pathname)
+);
+
+return;
+
+}
+
+/* CHECK TEACHER */
+
+const me =
+await client
+.from('profiles')
+.select('full_name,role')
+.eq('user_id',session.user.id)
+.maybeSingle();
+
+if(
+me.error ||
+!me.data ||
+String(me.data.role).toLowerCase()!=='teacher'
+){
+
+msg(
+'❌ ამ გვერდზე მხოლოდ მასწავლებელს აქვს წვდომა.',
+'error'
+);
+
+setTimeout(
+()=>location.replace('login.html'),
+700
+);
+
+return;
+
+}
+
+$('teacherName').textContent =
+me.data.full_name ||
+'მასწავლებელი';
+
+$('teacherEmail').textContent =
+session.user.email || '';
+
+/* STUDENTS */
+
+const [
+profilesResult,
+teachersResult
+] =
+await Promise.all([
+
+client
+.from('profiles')
+.select(
+'user_id,full_name,grade,role'
+)
+.eq('role','student')
+.order('full_name'),
+
+client
+.from('teacher_students')
+.select('student_id')
+.eq('teacher_id',session.user.id)
+
+]);
+
+if(profilesResult.error){
+
+msg(
+'❌ მოსწავლეების ჩატვირთვა ვერ მოხერხდა: '+
+profilesResult.error.message,
+'error'
+);
+
+return;
+
+}
+
+if(teachersResult.error){
+
+msg(
+'❌ მოსწავლეების კავშირების ჩატვირთვა ვერ მოხერხდა: '+
+teachersResult.error.message,
+'error'
+);
+
+return;
+
+}
+
+const linkedSet =
+new Set(
+(teachersResult.data||[])
+.map(x=>x.student_id)
+);
+
+students =
+(profilesResult.data||[])
+.map(x=>({
+
+...x,
+
+linked:
+linkedSet.has(x.user_id)
+
+}));
+
+await loadAttendance(
+session.user.id
+);
+
+render();
+
+renderAttendance();
+
+}
+catch(error){
+
+console.error(error);
+
+msg(
+'❌ სისტემური შეცდომა: '+
+(error.message||error),
+'error'
+);
+
+}
+
+}
+
+/* =========================
+   LOAD ATTENDANCE
+========================= */
+
+async function loadAttendance(teacherId){
+
+const date =
+$('attendanceDate').value;
+
+if(!date)return;
+
+const result =
+await client
+.from('teacher_attendance')
+.select(
+'student_id,status'
+)
+.eq(
+'teacher_id',
+teacherId
+)
+.eq(
+'attendance_date',
+date
+);
+
+if(result.error){
+
+msg(
+'❌ დასწრების ჩატვირთვა ვერ მოხერხდა: '+
+result.error.message,
+'error'
+);
+
+return;
+
+}
+
+attendance={};
+
+(result.data||[])
+.forEach(row=>{
+
+attendance[row.student_id]=
+row.status;
+
+});
+
+}
+
+/* =========================
+   MARK ATTENDANCE
+========================= */
+
+async function markAttendance(
+studentId,
+status
+){
+
+const date =
+$('attendanceDate').value;
+
+if(!date){
+
+msg(
+'⚠️ ჯერ აირჩიე თარიღი.',
+'error'
+);
+
+return;
+
+}
+
+const {
+data:{session}
+} =
+await client.auth.getSession();
+
+if(!session)return;
+
+const result =
+await client
+.from('teacher_attendance')
+.upsert(
+
+{
+teacher_id:session.user.id,
+student_id:studentId,
+attendance_date:date,
+status:status,
+marked_at:new Date().toISOString()
+},
+
+{
+onConflict:
+'teacher_id,student_id,attendance_date'
+}
+
+);
+
+if(result.error){
+
+msg(
+'❌ დასწრების შენახვა ვერ მოხერხდა: '+
+result.error.message,
+'error'
+);
+
+return;
+
+}
+
+attendance[studentId]=status;
+
+render();
+renderAttendance();
+
+msg(
+'✅ '+statusText(status)+
+' — დასწრება დაფიქსირდა.'
+);
+
+}
+
+/* =========================
+   RPC
+========================= */
+
+async function callRPC(
+name,
+studentId,
+grade
+){
+
+const result =
+await client.rpc(
+name,
+grade===undefined
+?
+{
+p_student_id:studentId
+}
+:
+{
+p_student_id:studentId,
+p_grade:Number(grade)
+}
+);
+
+if(result.error)
+throw result.error;
+
+return result.data;
+
+}
+
+/* =========================
+   ASSIGN
+========================= */
+
+async function assign(studentId){
+
+const selector =
+document.querySelector(
+`select[data-grade="${CSS.escape(studentId)}"]`
+);
+
+const grade =
+selector &&
+selector.value;
+
+if(!grade){
+
+msg(
+'⚠️ ჯერ აირჩიე კლასი.',
+'error'
+);
+
+return;
+
+}
+
+if(
+!confirm(
+'მოსწავლეს მიენიჭოს '+
+grade+
+' კლასი?'
+)
+)return;
+
+try{
+
+await callRPC(
+'teacher_assign_student',
+studentId,
+grade
+);
+
+msg(
+'✅ კლასი წარმატებით მიენიჭა/შეეცვალა.'
+);
+
+await load();
+
+}
+catch(error){
+
+msg(
+'❌ კლასის მინიჭება ვერ მოხერხდა: '+
+error.message,
+'error'
+);
+
+}
+
+}
+
+/* =========================
+   RESET
+========================= */
+
+async function resetStudent(studentId){
+
+if(
+!confirm(
+'განულდეს მოსწავლის კლასი და ქულები?'
+)
+)return;
+
+try{
+
+await callRPC(
+'teacher_reset_student',
+studentId
+);
+
+msg(
+'♻️ მოსწავლის კლასი განულდა.'
+);
+
+await load();
+
+}
+catch(error){
+
+msg(
+'❌ განულება ვერ მოხერხდა: '+
+error.message,
+'error'
+);
+
+}
+
+}
+
+/* =========================
+   REMOVE
+========================= */
+
+async function removeStudent(studentId){
+
+if(
+!confirm(
+'წაიშალოს მოსწავლე შენი მასწავლებლის სიიდან? ანგარიში არ წაიშლება.'
+)
+)return;
+
+try{
+
+await callRPC(
+'teacher_remove_student',
+studentId
+);
+
+msg(
+'🗑️ მოსწავლე წაიშალა შენი სიიდან.'
+);
+
+await load();
+
+}
+catch(error){
+
+msg(
+'❌ წაშლა ვერ მოხერხდა: '+
+error.message,
+'error'
+);
+
+}
+
+}
+
+/* =========================
+   DATE
+========================= */
+
+$('attendanceDate').value =
+new Date()
+.toISOString()
+.slice(0,10);
+
+$('attendanceDate')
+.addEventListener(
+'change',
+async()=>{
+
+const {
+data:{session}
+} =
+await client.auth.getSession();
+
+if(session){
+
+await loadAttendance(
+session.user.id
+);
+
+render();
+renderAttendance();
+
+}
+
+}
+);
+
+/* =========================
+   EVENTS
+========================= */
+
+$('refreshBtn').onclick =
+load;
+
+$('studentSearch').oninput =
+render;
+
+$('gradeFilter').onchange =
+render;
+
+$('linkFilter').onchange =
+render;
+
+$('clearFilters').onclick =
+()=>{
+
+$('studentSearch').value='';
+$('gradeFilter').value='all';
+$('linkFilter').value='all';
+
+render();
+
+};
+
+/* STUDENT AREA */
+
+$('studentList').addEventListener(
+'click',
+event=>{
+
+const attendanceButton =
+event.target.closest(
+'[data-status]'
+);
+
+if(attendanceButton){
+
+markAttendance(
+attendanceButton.dataset.id,
+attendanceButton.dataset.status
+);
+
+return;
+
+}
+
+const actionButton =
+event.target.closest(
+'[data-action]'
+);
+
+if(!actionButton)return;
+
+const id =
+actionButton.dataset.id;
+
+const action =
+actionButton.dataset.action;
+
+if(action==='assign')
+assign(id);
+
+if(action==='reset')
+resetStudent(id);
+
+if(action==='remove')
+removeStudent(id);
+
+});
+
+/* ATTENDANCE TAB */
+
+$('attendanceList').addEventListener(
+'click',
+event=>{
+
+const button =
+event.target.closest(
+'[data-status]'
+);
+
+if(!button)return;
+
+markAttendance(
+button.dataset.id,
+button.dataset.status
+);
+
+});
+
+/* TABS */
+
+document
+.querySelectorAll('.tab')
+.forEach(button=>{
+
+button.onclick=()=>{
+
+document
+.querySelectorAll('.tab')
+.forEach(x=>
+x.classList.remove('active')
+);
+
+document
+.querySelectorAll('.panel')
+.forEach(x=>
+x.classList.remove('active')
+);
+
+button.classList.add('active');
+
+$(button.dataset.tab)
+.classList.add('active');
+
+if(
+button.dataset.tab==='attendance'
+){
+
+renderAttendance();
+
+}
+
+};
+
+});
+
+/* LOGOUT */
+
+$('logoutBtn').onclick =
+async()=>{
+
+await client.auth.signOut();
+
+location.replace(
+'login.html'
+);
+
+};
+
+/* START */
+
+window.teacherDashboard={
+reload:load
+};
+
+load();
+
 })();
 </script>
+
 </body>
 </html>
