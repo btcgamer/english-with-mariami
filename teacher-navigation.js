@@ -2,7 +2,6 @@
 (function () {
   'use strict';
 
-  const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const path = location.pathname.toLowerCase();
   const isAcademy = /\/academy\.html(?:$|\?)/.test(path);
   const isTeacherDashboard = /\/teacher-dashboard\.html(?:$|\?)/.test(path);
@@ -21,11 +20,20 @@
     }).catch(function () { return null; });
   }
 
-  function isTeacher() {
+  function getProfile() {
+    const client = getClient();
     return getSession().then(function (session) {
-      if (!session || !session.user) return false;
-      const email = String(session.user.email || '').trim().toLowerCase();
-      return email === TEACHER_EMAIL;
+      if (!client || !session || !session.user) return null;
+      return client.from('profiles').select('full_name,role,grade').eq('user_id', session.user.id).maybeSingle().then(function (result) {
+        if (result.error || !result.data) return null;
+        return result.data;
+      }).catch(function () { return null; });
+    });
+  }
+
+  function isTeacher() {
+    return getProfile().then(function (profile) {
+      return !!profile && String(profile.role || '').trim().toLowerCase() === 'teacher';
     });
   }
 
@@ -52,8 +60,8 @@
   }
 
   function esc(value) {
-    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
-      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);
+    return String(value == null ? '' : value).replace(/[&<>\"']/g, function (c) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]);
     });
   }
 
@@ -94,7 +102,6 @@
     const role = String(profileResult.data.role || '').toLowerCase();
     const grade = Number(profileResult.data.grade || 0);
 
-    // Students can never open another class directly by changing the URL.
     if (role === 'student' && grade !== pageGrade) {
       if ([2,3,4].includes(grade)) {
         window.location.replace('grade' + grade + '.html');
@@ -104,7 +111,6 @@
       return;
     }
 
-    // Teachers may preview class pages; parents use their own parent space.
     if (role !== 'student' && role !== 'teacher') return;
 
     injectStudentStyles();
@@ -132,7 +138,6 @@
       .limit(20);
 
     if (result.error) {
-      // RLS/API errors must not expose private data or break the existing class page.
       list.innerHTML = '<div class="bridge-empty">📚 შენი კლასის სასწავლო მასალა ხელმისაწვდომია. დაგეგმილი გაკვეთილები ჯერ არ არის ნაჩვენები.</div>';
       return;
     }
