@@ -2,7 +2,6 @@
 (function(){
   'use strict';
 
-  const FULL_ACCESS_EMAIL = 'datogringo@gmail.com';
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const ALLOWED_GRADES = [2,3,4];
@@ -23,8 +22,6 @@
     }
 
     try {
-      /* getUser() verifies the user against Supabase Auth instead of trusting
-         only the locally stored session object. */
       const { data: userData, error: userError } = await client.auth.getUser();
 
       if (userError || !userData || !userData.user) {
@@ -34,9 +31,6 @@
 
       const user = userData.user;
       const email = String(user.email || '').trim().toLowerCase();
-
-      /* Owner: full access to every grade. */
-      if (email === FULL_ACCESS_EMAIL) return;
 
       /* Mariami: teacher account + Teacher Dashboard access stays intact. */
       if (email === TEACHER_EMAIL || user.id === TEACHER_ID) return;
@@ -63,7 +57,7 @@
       /* Teacher role: Grade 2, 3 and 4. */
       if (role === 'teacher') return;
 
-      /* Student: ONLY the grade saved in profiles during registration. */
+      /* Student: ONLY the grade saved in profiles. */
       if (role === 'student') {
         if (!ALLOWED_GRADES.includes(grade)) {
           go('login.html');
