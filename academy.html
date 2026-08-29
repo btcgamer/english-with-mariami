@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>English with Mariami — Academy</title>
 
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE
+========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="config.js"></script>
 
 <style>
@@ -310,7 +311,7 @@ color:#c1eaf5
 }
 
 /* =========================
-🔥 3D CLASSROOM
+CLASS GRID
 ========================= */
 
 .grid{
@@ -343,8 +344,6 @@ box-shadow:
 0 0 45px #00eaff66
 }
 
-/* animated light */
-
 .grade:before{
 content:"";
 position:absolute;
@@ -362,8 +361,6 @@ pointer-events:none
 0%,100%{transform:scale(.8);opacity:.5}
 50%{transform:scale(1.25);opacity:1}
 }
-
-/* 3D scene */
 
 .class-scene{
 height:220px;
@@ -392,8 +389,6 @@ background-size:30px 30px;
 opacity:.7
 }
 
-/* floating letters */
-
 .float-letter{
 position:absolute;
 font-size:38px;
@@ -415,7 +410,7 @@ transform:translate3d(18px,-25px,55px) rotateY(25deg)
 }
 }
 
-/* ---------- BOOK ---------- */
+/* BOOK */
 
 .book{
 position:absolute;
@@ -487,7 +482,7 @@ translateZ(35px)
 }
 }
 
-/* ---------- 2D CLASS ---------- */
+/* PLANT */
 
 .plant{
 position:absolute;
@@ -503,7 +498,7 @@ animation:plantMove 3s ease-in-out infinite
 50%{transform:translateY(-12px) rotate(4deg)}
 }
 
-/* ---------- 3D ROCKET ---------- */
+/* ROCKET */
 
 .rocket{
 position:absolute;
@@ -543,7 +538,7 @@ from{transform:scale(.8)}
 to{transform:scale(1.25)}
 }
 
-/* ---------- PLANETS ---------- */
+/* PLANETS */
 
 .planet{
 position:absolute;
@@ -577,7 +572,7 @@ radial-gradient(circle at 30% 30%,#fff,#00eaff 45%,#006cff)
 50%{transform:translate3d(15px,-25px,70px)}
 }
 
-/* ---------- GLOBE ---------- */
+/* GLOBE */
 
 .globe{
 position:absolute;
@@ -654,7 +649,7 @@ translateZ(50px)
 }
 }
 
-/* ---------- WORD CLOUD ---------- */
+/* WORD CLOUD */
 
 .word{
 position:absolute;
@@ -700,8 +695,6 @@ transform:translate3d(0,0,20px) rotateY(-8deg)
 transform:translate3d(15px,-18px,65px) rotateY(12deg)
 }
 }
-
-/* card content */
 
 .grade-content{
 position:relative;
@@ -820,14 +813,9 @@ margin:15px 0
 .progress i{
 display:block;
 height:100%;
-width:35%;
+width:0;
 background:linear-gradient(90deg,#00eaff,#ffe600);
-animation:progressGlow 2s ease-in-out infinite alternate
-}
-
-@keyframes progressGlow{
-from{filter:brightness(.8)}
-to{filter:brightness(1.3)}
+transition:width .8s ease
 }
 
 .stats{
@@ -1052,6 +1040,67 @@ padding:14px 25px
 }
 
 /* =========================
+AUTH INFO
+========================= */
+
+.auth-box{
+display:none;
+margin:20px auto 0;
+padding:14px 18px;
+width:min(850px,100%);
+border:1px solid #00eaff55;
+border-radius:16px;
+background:#02182ddd;
+text-align:center;
+box-shadow:0 0 25px #00eaff22
+}
+
+.auth-box.show{
+display:block
+}
+
+.auth-name{
+color:#00eaff;
+font-weight:900
+}
+
+.auth-grade{
+color:#ffe600;
+font-weight:900
+}
+
+.logout-btn{
+border:0;
+cursor:pointer;
+padding:9px 12px;
+border-radius:12px;
+background:#ff5475;
+color:#fff;
+font-weight:900;
+box-shadow:0 0 15px #ff547555
+}
+
+.locked{
+display:none;
+text-align:center;
+padding:60px 20px
+}
+
+.locked.show{
+display:block
+}
+
+.locked h2{
+font-size:32px;
+color:#ffe600
+}
+
+.locked p{
+color:#d9f7ff;
+line-height:1.7
+}
+
+/* =========================
 FOOTER
 ========================= */
 
@@ -1061,6 +1110,17 @@ padding:32px 0;
 text-align:center;
 border-top:1px solid #00eaff33;
 color:#9dc7d5
+}
+
+.site-copyright{
+margin-top:30px;
+padding:18px 12px;
+text-align:center;
+color:#9dc7d5;
+font-size:14px;
+border-top:1px solid #00eaff33;
+background:linear-gradient(180deg,transparent,#020b19aa);
+letter-spacing:.2px
 }
 
 /* =========================
@@ -1204,8 +1264,6 @@ font-size:14px
 
 }
 </style>
-
-<style id="site-copyright-style">.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.site-copyright::first-letter{color:#00eaff}</style>
 </head>
 
 <body>
@@ -1217,9 +1275,16 @@ BACKGROUND
 <div class="neon-world">
 
 <div class="letters">
-
-<span class="letter">A</span> <span class="letter">B</span> <span class="letter">C</span> <span class="letter">D</span> <span class="letter">E</span> <span class="letter">F</span> <span class="letter">G</span> <span class="letter">H</span> <span class="letter">I</span> <span class="letter">J</span>
-
+<span class="letter">A</span>
+<span class="letter">B</span>
+<span class="letter">C</span>
+<span class="letter">D</span>
+<span class="letter">E</span>
+<span class="letter">F</span>
+<span class="letter">G</span>
+<span class="letter">H</span>
+<span class="letter">I</span>
+<span class="letter">J</span>
 </div>
 
 <div class="grid-floor"></div>
@@ -1241,14 +1306,14 @@ NAV
 <nav class="navlinks">
 
 <a href="#grades">🎓 კლასები</a>
-
 <a href="#course">🗺️ კურსი</a>
-
 <a href="#learn">📚 სწავლა</a>
-
 <a href="#progress">🏆 პროგრესი</a>
-
 <a href="#parents">👨‍👩‍👧 მშობელი</a>
+
+<button id="logoutBtn" class="logout-btn" type="button">
+🚪 გამოსვლა
+</button>
 
 </nav>
 
@@ -1257,6 +1322,26 @@ NAV
 </header>
 
 <main class="wrap">
+
+<!-- =========================
+AUTH INFO
+========================= -->
+
+<div id="authBox" class="auth-box">
+
+<span>👋 მოგესალმები, </span>
+
+<span id="userName" class="auth-name">
+მოსწავლე
+</span>
+
+<span> • </span>
+
+<span id="userGrade" class="auth-grade">
+კლასი იტვირთება...
+</span>
+
+</div>
 
 <!-- =========================
 HERO
@@ -1312,7 +1397,11 @@ Grammar, Writing და Quiz.
 შენი ინგლისურის გზამკვლევი ✨
 </p>
 
-<span class="pill">🧠 Vocabulary</span> <span class="pill">🔊 Listening</span> <span class="pill">🗣️ Speaking</span> <span class="pill">📖 Reading</span> <span class="pill">✍️ Grammar</span>
+<span class="pill">🧠 Vocabulary</span>
+<span class="pill">🔊 Listening</span>
+<span class="pill">🗣️ Speaking</span>
+<span class="pill">📖 Reading</span>
+<span class="pill">✍️ Grammar</span>
 
 </div>
 
@@ -1321,10 +1410,28 @@ Grammar, Writing და Quiz.
 </section>
 
 <!-- =========================
+LOCKED MESSAGE
+========================= -->
+
+<section id="locked" class="locked neon-card">
+
+<h2>🔐 სასწავლო სივრცე შეზღუდულია</h2>
+
+<p id="lockedMessage">
+შენი ანგარიში იტვირთება...
+</p>
+
+<a class="btn yellow" href="login.html">
+🔐 შესვლა
+</a>
+
+</section>
+
+<!-- =========================
 GRADES
 ========================= -->
 
-<section id="grades" class="section">
+<section id="grades" class="section protected-content">
 
 <div class="section-title">
 
@@ -1333,22 +1440,20 @@ CLASSROOM
 </span>
 
 <h2>
-აირჩიე შენი კლასი
+შენი სასწავლო კლასი
 </h2>
 
-<p class="muted">
-სამი განსხვავებული დონე — სამი განსხვავებული სასწავლო სამყარო 🚀
+<p id="gradeDescription" class="muted">
+კლასი იტვირთება...
 </p>
 
 </div>
 
-<div class="grid">
+<div id="gradesGrid" class="grid">
 
-<!-- =========================
-GRADE 2
-========================= -->
+<!-- GRADE 2 -->
 
-<article class="neon-card grade">
+<article id="grade2Card" class="neon-card grade">
 
 <div class="class-scene">
 
@@ -1375,19 +1480,15 @@ C
 <div class="book">
 
 <div class="book-page left">
-
 <div class="book-line one"></div>
 <div class="book-line two"></div>
 <div class="book-line three"></div>
-
 </div>
 
 <div class="book-page right">
-
 <div class="book-line one"></div>
 <div class="book-line two"></div>
 <div class="book-line three"></div>
-
 </div>
 
 </div>
@@ -1398,9 +1499,7 @@ C
 
 <div class="grade-content">
 
-<h3>
-🌱 მე-2 კლასი
-</h3>
+<h3>🌱 მე-2 კლასი</h3>
 
 <p>
 პირველი ნაბიჯები ინგლისურში:
@@ -1409,7 +1508,7 @@ C
 რიცხვები და მარტივი წინადადებები.
 </p>
 
-<a class="btn primary" href="grade2.html">
+<a class="btn primary grade-link" data-grade="2" href="grade2.html">
 🚀 მე-2 კლასში შესვლა →
 </a>
 
@@ -1417,11 +1516,9 @@ C
 
 </article>
 
-<!-- =========================
-GRADE 3
-========================= -->
+<!-- GRADE 3 -->
 
-<article class="neon-card grade">
+<article id="grade3Card" class="neon-card grade">
 
 <div class="class-scene">
 
@@ -1458,9 +1555,7 @@ F
 
 <div class="grade-content">
 
-<h3>
-🚀 მე-3 კლასი
-</h3>
+<h3>🚀 მე-3 კლასი</h3>
 
 <p>
 ყოველდღიური ცხოვრება, დღეები,
@@ -1469,7 +1564,7 @@ F
 Reading და მარტივი გრამატიკა.
 </p>
 
-<a class="btn primary" href="grade3.html">
+<a class="btn primary grade-link" data-grade="3" href="grade3.html">
 🚀 მე-3 კლასში შესვლა →
 </a>
 
@@ -1477,11 +1572,9 @@ Reading და მარტივი გრამატიკა.
 
 </article>
 
-<!-- =========================
-GRADE 4
-========================= -->
+<!-- GRADE 4 -->
 
-<article class="neon-card grade">
+<article id="grade4Card" class="neon-card grade">
 
 <div class="class-scene">
 
@@ -1531,9 +1624,7 @@ H
 
 <div class="grade-content">
 
-<h3>
-⭐ მე-4 კლასი
-</h3>
+<h3>⭐ მე-4 კლასი</h3>
 
 <p>
 გაფართოებული Vocabulary,
@@ -1543,7 +1634,7 @@ Reading, Dialogues, Writing,
 Listening და Practice.
 </p>
 
-<a class="btn primary" href="grade4.html">
+<a class="btn primary grade-link" data-grade="4" href="grade4.html">
 ⭐ მე-4 კლასში შესვლა →
 </a>
 
@@ -1559,7 +1650,7 @@ Listening და Practice.
 LEARN
 ========================= -->
 
-<section id="learn" class="section">
+<section id="learn" class="section protected-content">
 
 <div class="section-title">
 
@@ -1576,47 +1667,35 @@ LEARN
 <div class="feature-grid">
 
 <div class="neon-card feature">
-
 <b>🧠 Vocabulary</b>
-
 <span>
 სიტყვა + ქართული თარგმანი +
 გამოთქმა + მაგალითი.
 </span>
-
 </div>
 
 <div class="neon-card feature">
-
 <b>🔊 Listening</b>
-
 <span>
 მოსმენა და გამეორება
 მარტივი სავარჯიშოებით.
 </span>
-
 </div>
 
 <div class="neon-card feature">
-
 <b>🗣️ Speaking</b>
-
 <span>
 მოკლე დიალოგები და
 ყოველდღიური ფრაზები.
 </span>
-
 </div>
 
 <div class="neon-card feature">
-
 <b>📝 Quiz</b>
-
 <span>
 შემოწმება, ქულა და
 პროგრესის კონტროლი.
 </span>
-
 </div>
 
 </div>
@@ -1627,7 +1706,7 @@ LEARN
 COURSE
 ========================= -->
 
-<section id="course" class="section">
+<section id="course" class="section protected-content">
 
 <div class="section-title">
 
@@ -1644,7 +1723,6 @@ FULL COURSE
 <div class="course">
 
 <div class="course-card">
-
 <b>🌱 მე-2 კლასი</b>
 
 <p>
@@ -1653,14 +1731,13 @@ FULL COURSE
 და მარტივი წინადადებები.
 </p>
 
-<a class="btn primary" href="grade2.html">
+<a class="btn primary course-link" data-grade="2" href="grade2.html">
 კურსის გახსნა
 </a>
 
 </div>
 
 <div class="course-card">
-
 <b>🚀 მე-3 კლასი</b>
 
 <p>
@@ -1670,14 +1747,13 @@ FULL COURSE
 Reading და Grammar.
 </p>
 
-<a class="btn primary" href="grade3.html">
+<a class="btn primary course-link" data-grade="3" href="grade3.html">
 კურსის გახსნა
 </a>
 
 </div>
 
 <div class="course-card">
-
 <b>⭐ მე-4 კლასი</b>
 
 <p>
@@ -1687,7 +1763,7 @@ Dialogues, Writing,
 Listening და Practice.
 </p>
 
-<a class="btn primary" href="grade4.html">
+<a class="btn primary course-link" data-grade="4" href="grade4.html">
 კურსის გახსნა
 </a>
 
@@ -1701,7 +1777,7 @@ Listening და Practice.
 PROGRESS
 ========================= -->
 
-<section id="progress" class="section">
+<section id="progress" class="section protected-content">
 
 <div class="section-title">
 
@@ -1724,32 +1800,32 @@ MY PROGRESS
 <div class="stats">
 
 <div class="stat">
-<b>0</b>
+<b id="wordsCount">0</b>
 ნასწავლი სიტყვა
 </div>
 
 <div class="stat">
-<b>0</b>
+<b id="quizCount">0</b>
 Quiz
 </div>
 
 <div class="stat">
-<b>0%</b>
+<b id="progressPercent">0%</b>
 პროგრესი
 </div>
 
 <div class="stat">
-<b>⭐</b>
+<b id="levelText">⭐</b>
 დონე
 </div>
 
 </div>
 
 <div class="progress">
-<i></i>
+<i id="progressBar"></i>
 </div>
 
-<p class="muted">
+<p id="progressText" class="muted">
 დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.
 </p>
 
@@ -1758,10 +1834,10 @@ Quiz
 </section>
 
 <!-- =========================
-PARENT SPACE
+PARENT
 ========================= -->
 
-<section id="parents" class="section">
+<section id="parents" class="section protected-content">
 
 <div class="section-title">
 
@@ -1800,27 +1876,21 @@ C
 <div class="family">
 
 <div class="person father">
-
 <div class="head">👨</div>
 <div class="body">👕</div>
 <div class="legs">👖</div>
-
 </div>
 
 <div class="person mother">
-
 <div class="head">👩</div>
 <div class="body">👗</div>
 <div class="legs">👠</div>
-
 </div>
 
 <div class="person child">
-
 <div class="head">🧒</div>
 <div class="body">👕</div>
 <div class="legs">👟</div>
-
 </div>
 
 </div>
@@ -1847,30 +1917,16 @@ C
 
 <div class="parent-features">
 
-<span class="pill">
-📊 პროგრესი
-</span>
-
-<span class="pill">
-📝 Quiz შედეგები
-</span>
-
-<span class="pill">
-❓ კითხვები
-</span>
-
-<span class="pill">
-💬 პასუხები
-</span>
+<span class="pill">📊 პროგრესი</span>
+<span class="pill">📝 Quiz შედეგები</span>
+<span class="pill">❓ კითხვები</span>
+<span class="pill">💬 პასუხები</span>
 
 </div>
 
-<a
-href="parent-space.html"
+<a href="parent-space.html"
 class="btn primary parent-button">
-
 👨‍👩‍👧 მშობლის სივრცეში შესვლა →
-
 </a>
 
 </div>
@@ -1883,7 +1939,7 @@ class="btn primary parent-button">
 READY
 ========================= -->
 
-<section class="section">
+<section class="section protected-content">
 
 <div class="section-title">
 
@@ -1896,23 +1952,20 @@ READY?
 </h2>
 
 <p class="muted">
-აირჩიე კლასი და დაიწყე სწავლა.
+აირჩიე შენი კლასი და დაიწყე სწავლა.
 </p>
 
-<div
-class="buttons"
-style="justify-content:center"
->
+<div class="buttons" style="justify-content:center">
 
-<a class="btn primary" href="grade2.html">
+<a class="btn primary grade-link" data-grade="2" href="grade2.html">
 🌱 მე-2 კლასი
 </a>
 
-<a class="btn primary" href="grade3.html">
+<a class="btn primary grade-link" data-grade="3" href="grade3.html">
 🚀 მე-3 კლასი
 </a>
 
-<a class="btn yellow" href="grade4.html">
+<a class="btn yellow grade-link" data-grade="4" href="grade4.html">
 ⭐ მე-4 კლასი
 </a>
 
@@ -1938,49 +1991,548 @@ English Academy
 
 </footer>
 
+<footer class="site-copyright">
+© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
+</footer>
+
 <!-- ==================================================
-     🔐 ACADEMY AUTH PROTECTION
+     🔐 SUPABASE AUTH + GRADE PROTECTION
 ================================================== -->
 
 <script>
+(function(){
 
-const supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
+"use strict";
 
-(async function(){
+/*
+==================================================
+GET EXISTING SUPABASE CLIENT
+==================================================
+*/
 
-try{
+function getClient(){
 
-const {
-data:{
-session
+if(window.__ENGLISH_MARIAMI_SUPABASE_CLIENT){
+return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;
 }
-} =
-await supabaseClient.auth.getSession();
 
-if(!session){
+if(window.supabaseClient){
+return window.supabaseClient;
+}
+
+return null;
+}
+
+/*
+==================================================
+ELEMENTS
+==================================================
+*/
+
+const authBox =
+document.getElementById("authBox");
+
+const userName =
+document.getElementById("userName");
+
+const userGrade =
+document.getElementById("userGrade");
+
+const locked =
+document.getElementById("locked");
+
+const lockedMessage =
+document.getElementById("lockedMessage");
+
+const protectedContent =
+document.querySelectorAll(".protected-content");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+const gradeDescription =
+document.getElementById("gradeDescription");
+
+const gradeLinks =
+document.querySelectorAll(".grade-link,.course-link");
+
+/*
+==================================================
+HIDE CONTENT UNTIL AUTH IS VERIFIED
+==================================================
+*/
+
+protectedContent.forEach(function(el){
+el.style.display = "none";
+});
+
+locked.style.display = "none";
+
+/*
+==================================================
+LOGIN REDIRECT
+==================================================
+*/
+
+function redirectToLogin(){
 
 const currentPage =
 window.location.pathname +
 window.location.search +
 window.location.hash;
 
-const redirect =
+window.location.replace(
 "login.html?redirect=" +
-encodeURIComponent(currentPage);
+encodeURIComponent(currentPage)
+);
 
-window.location.replace(redirect);
+}
+
+/*
+==================================================
+SHOW LOCKED
+==================================================
+*/
+
+function showLocked(text){
+
+locked.style.display = "block";
+
+locked.classList.add("show");
+
+lockedMessage.textContent =
+text;
+
+protectedContent.forEach(function(el){
+el.style.display = "none";
+});
+
+}
+
+/*
+==================================================
+SHOW CONTENT
+==================================================
+*/
+
+function showContent(){
+
+locked.style.display = "none";
+
+protectedContent.forEach(function(el){
+el.style.display = "";
+});
+
+}
+
+/*
+==================================================
+GRADE ACCESS
+==================================================
+*/
+
+function setupGradeAccess(grade){
+
+gradeLinks.forEach(function(link){
+
+const linkGrade =
+Number(link.dataset.grade);
+
+if(linkGrade !== grade){
+
+link.style.display = "none";
 
 return;
 
 }
 
-console.log(
-"✅ Academy access granted"
+link.addEventListener("click",function(event){
+
+event.preventDefault();
+
+const destination =
+link.getAttribute("href");
+
+if(destination){
+window.location.href =
+destination;
+}
+
+});
+
+});
+
+}
+
+/*
+==================================================
+LOAD PROGRESS
+==================================================
+*/
+
+async function loadProgress(client,user){
+
+try{
+
+const lessonResult =
+await client
+.from("lesson_progress")
+.select("*")
+.eq("user_id",user.id);
+
+let words = 0;
+let progress = 0;
+
+if(
+lessonResult.data &&
+Array.isArray(lessonResult.data)
+){
+
+lessonResult.data.forEach(function(row){
+
+const possibleWords =
+Number(
+row.words_learned ||
+row.words_completed ||
+row.completed_words ||
+0
 );
+
+words +=
+Number.isFinite(possibleWords)
+? possibleWords
+: 0;
+
+});
+
+if(lessonResult.data.length > 0){
+
+progress =
+Math.round(
+Math.min(
+100,
+(
+lessonResult.data.filter(function(row){
+return (
+row.completed === true ||
+row.is_completed === true
+);
+}).length /
+lessonResult.data.length
+) * 100
+)
+);
+
+}
+
+}
+
+/*
+QUIZ
+*/
+
+let quizCount = 0;
+
+const quizResult =
+await client
+.from("quiz_results")
+.select("*")
+.eq("user_id",user.id);
+
+if(
+quizResult.data &&
+Array.isArray(quizResult.data)
+){
+
+quizCount =
+quizResult.data.length;
+
+}
+
+/*
+UPDATE UI
+*/
+
+document.getElementById(
+"wordsCount"
+).textContent = words;
+
+document.getElementById(
+"quizCount"
+).textContent = quizCount;
+
+document.getElementById(
+"progressPercent"
+).textContent = progress + "%";
+
+document.getElementById(
+"progressBar"
+).style.width = progress + "%";
+
+if(progress >= 80){
+
+document.getElementById(
+"levelText"
+).textContent = "🏆 EXCELLENT";
+
+}else if(progress >= 50){
+
+document.getElementById(
+"levelText"
+).textContent = "⭐ GOOD";
+
+}else if(progress > 0){
+
+document.getElementById(
+"levelText"
+).textContent = "🚀 STARTER";
+
+}else{
+
+document.getElementById(
+"levelText"
+).textContent = "🌱 START";
+
+}
+
+document.getElementById(
+"progressText"
+).textContent =
+progress > 0
+? "შენი მიმდინარე პროგრესი: " + progress + "%."
+: "დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.";
+
+}catch(error){
+
+console.warn(
+"Progress loading skipped:",
+error
+);
+
+}
+
+}
+
+/*
+==================================================
+MAIN AUTH
+==================================================
+*/
+
+async function init(){
+
+const client =
+getClient();
+
+if(!client){
+
+showLocked(
+"❌ Supabase ვერ ჩაიტვირთა. შეამოწმე config.js."
+);
+
+return;
+
+}
+
+try{
+
+/*
+GET CURRENT SESSION
+*/
+
+const sessionResult =
+await client.auth.getSession();
+
+const session =
+sessionResult?.data?.session || null;
+
+if(!session){
+
+redirectToLogin();
+
+return;
+
+}
+
+const user =
+session.user;
+
+if(!user || !user.id){
+
+redirectToLogin();
+
+return;
+
+}
+
+/*
+GET PROFILE
+*/
+
+const profileResult =
+await client
+.from("profiles")
+.select("user_id,full_name,role,grade")
+.eq("user_id",user.id)
+.maybeSingle();
+
+if(profileResult.error){
+
+console.error(
+"Profile error:",
+profileResult.error
+);
+
+showLocked(
+"❌ მომხმარებლის პროფილის წაკითხვა ვერ მოხერხდა."
+);
+
+return;
+
+}
+
+const profile =
+profileResult.data;
+
+if(!profile){
+
+showLocked(
+"⚠️ შენი პროფილი ჯერ არ არის შექმნილი. გთხოვ, დაუკავშირდი მასწავლებელს."
+);
+
+return;
+
+}
+
+/*
+ROLE
+*/
+
+const role =
+String(profile.role || "")
+.trim()
+.toLowerCase();
+
+/*
+NAME
+*/
+
+const name =
+String(
+profile.full_name ||
+user.user_metadata?.full_name ||
+user.email ||
+"მოსწავლე"
+).trim();
+
+userName.textContent =
+name;
+
+authBox.classList.add("show");
+
+/*
+TEACHER
+*/
+
+if(role === "teacher"){
+
+userGrade.textContent =
+"👩‍🏫 მასწავლებელი";
+
+gradeDescription.textContent =
+"მასწავლებლის ანგარიში — სრული სასწავლო სივრცე.";
+
+showContent();
+
+gradeLinks.forEach(function(link){
+link.style.display = "";
+});
+
+return;
+
+}
+
+/*
+PARENT
+*/
+
+if(role === "parent"){
+
+userGrade.textContent =
+"👨‍👩‍👧 მშობელი";
+
+gradeDescription.textContent =
+"მშობლის სასწავლო სივრცე.";
+
+showContent();
+
+gradeLinks.forEach(function(link){
+link.style.display = "none";
+});
+
+return;
+
+}
+
+/*
+STUDENT
+*/
+
+if(role !== "student"){
+
+showLocked(
+"❌ ამ ანგარიშს სასწავლო სივრცეზე წვდომა არ აქვს."
+);
+
+return;
+
+}
+
+/*
+GRADE
+*/
+
+const grade =
+Number(profile.grade || 0);
+
+if(![2,3,4].includes(grade)){
+
+userGrade.textContent =
+"⚠️ კლასი ჯერ არ არის მინიჭებული";
+
+showLocked(
+"⚠️ შენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. გთხოვ, დაელოდე მასწავლებელს."
+);
+
+return;
+
+}
+
+/*
+STUDENT UI
+*/
+
+userGrade.textContent =
+"🎓 მე-" + grade + " კლასი";
+
+gradeDescription.textContent =
+"შენთვის ხელმისაწვდომია მხოლოდ მე-" +
+grade +
+" კლასის სასწავლო სივრცე.";
+
+showContent();
+
+/*
+ONLY CURRENT GRADE LINK
+*/
+
+setupGradeAccess(grade);
+
+/*
+LOAD PROGRESS
+*/
+
+await loadProgress(client,user);
 
 }catch(error){
 
@@ -1989,18 +2541,99 @@ console.error(
 error
 );
 
-window.location.replace(
-"login.html?redirect=academy.html"
+showLocked(
+"❌ ავტორიზაციის შემოწმება ვერ მოხერხდა. სცადე თავიდან."
 );
 
 }
 
+}
+
+/*
+==================================================
+LOGOUT
+==================================================
+*/
+
+logoutBtn.addEventListener(
+"click",
+async function(){
+
+const client =
+getClient();
+
+if(!client){
+
+window.location.replace(
+"login.html"
+);
+
+return;
+
+}
+
+logoutBtn.disabled =
+true;
+
+logoutBtn.textContent =
+"⏳ გამოსვლა...";
+
+try{
+
+await client.auth.signOut();
+
+}catch(error){
+
+console.error(
+"Logout error:",
+error
+);
+
+}finally{
+
+window.location.replace(
+"login.html"
+);
+
+}
+
+});
+
+/*
+==================================================
+AUTH STATE CHANGES
+==================================================
+*/
+
+const client =
+getClient();
+
+if(client){
+
+client.auth.onAuthStateChange(
+function(event,session){
+
+if(event === "SIGNED_OUT"){
+
+window.location.replace(
+"login.html"
+);
+
+}
+
+}
+);
+
+}
+
+/*
+START
+*/
+
+init();
+
 })();
-
 </script>
-
-<!-- SITE-COPYRIGHT-2026 -->
-<footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer>
 
 </body>
 </html>
