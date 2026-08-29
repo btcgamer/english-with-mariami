@@ -2,8 +2,6 @@
 (function(){
   'use strict';
 
-  const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
-  const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const ALLOWED_GRADES = [2,3,4];
   const path = (location.pathname || '').toLowerCase();
   const match = path.match(/(?:^|\/)grade([234])\.html$/);
@@ -30,10 +28,6 @@
       }
 
       const user = userData.user;
-      const email = String(user.email || '').trim().toLowerCase();
-
-      /* Mariami: teacher account + Teacher Dashboard access stays intact. */
-      if (email === TEACHER_EMAIL || user.id === TEACHER_ID) return;
 
       const { data: profile, error: profileError } = await client
         .from('profiles')
@@ -42,20 +36,20 @@
         .maybeSingle();
 
       /* SECURITY: if we cannot verify the profile, do not grant grade access. */
-      if (profileError) {
+      if (profileError || !profile) {
         console.error('Grade access profile error:', profileError);
         go('login.html');
         return;
       }
 
-      const role = String(profile?.role || '').trim().toLowerCase();
-      const grade = Number(profile?.grade || 0);
+      const role = String(profile.role || '').trim().toLowerCase();
+      const grade = Number(profile.grade || 0);
 
       /* Parent: Grade 2, 3 and 4. */
       if (role === 'parent' && ALLOWED_GRADES.includes(currentGrade)) return;
 
-      /* Teacher role: Grade 2, 3 and 4. */
-      if (role === 'teacher') return;
+      /* Teacher: Grade 2, 3 and 4. */
+      if (role === 'teacher' && ALLOWED_GRADES.includes(currentGrade)) return;
 
       /* Student: ONLY the grade saved in profiles. */
       if (role === 'student') {
