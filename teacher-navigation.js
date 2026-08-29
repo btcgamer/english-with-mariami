@@ -1,15 +1,18 @@
 // English with Mariami — grade navigation
 (function () {
   'use strict';
+
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
   const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const path = location.pathname.toLowerCase();
   const isGrade3 = /\/grade3\.html(?:$|\?)/.test(path);
+  const isGrade4 = /\/grade4\.html(?:$|\?)/.test(path);
   const isTeacherGrade = /\/teacher-grade[234]\.html(?:$|\?)/.test(path);
-  if (!isGrade3 && !isTeacherGrade) return;
 
-  function hideGrade3Home() {
-    if (!isGrade3) return;
+  if (!isGrade3 && !isGrade4 && !isTeacherGrade) return;
+
+  function hideGradeHome() {
+    if (!isGrade3 && !isGrade4) return;
     document.querySelectorAll('a').forEach(function (el) {
       const href = (el.getAttribute('href') || '').toLowerCase();
       const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
@@ -24,10 +27,12 @@
     return client.auth.getSession().then(function (result) {
       const user = result?.data?.session?.user;
       if (!user) return false;
-      const email = String(user.email || '').toLowerCase();
+      const email = String(user.email || '').trim().toLowerCase();
       if (email === TEACHER_EMAIL || user.id === TEACHER_ID) return true;
       return client.from('profiles').select('role').eq('user_id', user.id).maybeSingle()
-        .then(function (r) { return String(r?.data?.role || '').toLowerCase() === 'teacher'; })
+        .then(function (r) {
+          return String(r?.data?.role || '').trim().toLowerCase() === 'teacher';
+        })
         .catch(function () { return false; });
     }).catch(function () { return false; });
   }
@@ -61,13 +66,13 @@
   }
 
   function start() {
-    hideGrade3Home();
-    if (isTeacherGrade) {
+    hideGradeHome();
+    if (isTeacherGrade || isGrade3 || isGrade4) {
       isTeacher().then(function (ok) {
         if (ok) enableTeacherView();
       });
     }
-    if (isGrade3) setInterval(hideGrade3Home, 250);
+    if (isGrade3 || isGrade4) setInterval(hideGradeHome, 250);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
