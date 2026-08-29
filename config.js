@@ -21,6 +21,64 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install,{once:true}); else install();
   }
 
+  function installMobileAuthFit(){
+    if(!path.endsWith('/login.html') && !path.endsWith('/register.html')) return;
+    const install=()=>{
+      if(document.getElementById('englishMariamiMobileAuthFit')) return;
+      const style=document.createElement('style');
+      style.id='englishMariamiMobileAuthFit';
+      style.textContent=`
+        html,body{width:100%;min-height:100%;}
+        @media (max-width:600px) and (max-height:850px){
+          body{min-height:100dvh;height:100dvh;padding:8px;overflow:hidden;}
+          .register-card,.login-card{width:min(500px,100%);max-height:calc(100dvh - 16px);overflow:hidden;padding:18px 18px;border-radius:24px;}
+          .register-card h1{font-size:27px;margin:0 0 4px;line-height:1.1;}
+          .register-card .subtitle{margin:4px 0 10px;font-size:14px;}
+          .register-card .field{margin:8px 0;}
+          .register-card label{margin-bottom:5px;font-size:14px;}
+          .register-card input{height:44px;font-size:15px;border-radius:12px;}
+          .register-card .register-button{height:47px;margin-top:4px;border-radius:13px;font-size:16px;}
+          .register-card .message{min-height:18px;margin-top:7px;font-size:13px;line-height:1.25;}
+          .register-card .login{margin-top:8px;font-size:14px;}
+          .register-card .brand{margin-top:8px;font-size:16px;}
+          .register-card .site-copyright{margin-top:9px;padding:8px 3px;font-size:11px;line-height:1.25;}
+          .login-card{padding:17px 18px;}
+          .login-card .logo{font-size:38px;margin-bottom:3px;}
+          .login-card .brand{font-size:19px;line-height:1.1;}
+          .login-card .subtitle{margin:4px 0 8px;font-size:13px;}
+          .login-card h1{font-size:24px;margin:4px 0;line-height:1.1;}
+          .login-card p{margin:5px 0;font-size:13px;line-height:1.25;}
+          .login-card .form-group{margin:8px 0;}
+          .login-card .form-group label{margin-bottom:5px;font-size:14px;}
+          .login-card .form-group input{height:44px;font-size:15px;border-radius:12px;}
+          .login-card .login-button{height:47px;margin-top:4px;border-radius:13px;font-size:16px;}
+          .login-card .links{margin-top:5px!important;}
+          .login-card .links a{margin:2px;padding:7px 9px;font-size:12px;border-radius:10px;}
+          .login-card #message{margin-top:5px!important;min-height:17px;font-size:12px;line-height:1.2;}
+          .login-card .site-copyright{margin-top:8px;padding:7px 3px;font-size:10px;line-height:1.2;}
+        }
+        @media (max-width:600px) and (max-height:620px){
+          .register-card,.login-card{padding:12px 15px;border-radius:20px;}
+          .register-card h1{font-size:24px;}
+          .register-card .subtitle{font-size:12px;margin:2px 0 6px;}
+          .register-card .field{margin:5px 0;}
+          .register-card input,.login-card .form-group input{height:40px;}
+          .register-card .register-button,.login-card .login-button{height:43px;}
+          .register-card .site-copyright,.login-card .site-copyright{margin-top:5px;padding:5px 2px;}
+          .login-card .logo{font-size:31px;}
+          .login-card .brand{font-size:17px;}
+          .login-card .subtitle{font-size:11px;margin:2px 0 5px;}
+          .login-card h1{font-size:21px;}
+          .login-card p{margin:3px 0;font-size:11px;}
+          .login-card .form-group{margin:5px 0;}
+          .login-card .links a{padding:5px 7px;font-size:11px;}
+        }
+      `;
+      document.head.appendChild(style);
+    };
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install,{once:true}); else install();
+  }
+
   function hideRegistrationGrade(){
     if(!path.endsWith('/register.html')) return;
     const grade=document.getElementById('grade');
@@ -92,6 +150,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   }
 
   installLoginLayoutFix();
+  installMobileAuthFit();
   if(path.endsWith('/register.html')){if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',hideRegistrationGrade,{once:true}); else hideRegistrationGrade();}
   cleanGradeNavigation(); installSafeLoginRouter();
 
