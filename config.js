@@ -25,7 +25,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
     if(!isPublic){
       add('session-guard.js?v=20260829-6');
-      add('grade-access.js?v=20260829-4');
+      add('grade-access.js?v=20260829-5');
       add('logout.js?v=20260829-3');
       add('teacher-navigation.js?v=20260829-2');
     }
