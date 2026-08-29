@@ -5,35 +5,1794 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#02152d">
 <title>English with Mariami — ინგლისურის აკადემია</title>
+
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,"Noto Sans Georgian",sans-serif;color:#fff;background:#010712;min-height:100vh;overflow-x:hidden;padding-bottom:0}a{text-decoration:none;color:inherit}.wrap{width:min(1250px,calc(100% - 28px));margin:auto}
-.neon-world{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(circle at 50% 40%,#eaffff 0,#c8f4ff 18%,#7fc9eb 42%,#245d86 70%,#020713 100%)}.neon-world:before{content:"";position:absolute;inset:-30%;background:radial-gradient(ellipse at center,transparent 25%,#001329aa 70%,#00040c 100%);pointer-events:none}.grid-floor{position:absolute;left:-20%;right:-20%;bottom:-20%;height:62%;transform:perspective(450px) rotateX(62deg);background-image:linear-gradient(#00eaff35 1px,transparent 1px),linear-gradient(90deg,#00eaff35 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(to top,black,transparent);opacity:.65}.letters{position:absolute;inset:0;perspective:900px}.letter{position:absolute;font-weight:1000;font-family:Arial,sans-serif;font-size:clamp(45px,7vw,105px);color:#fff;text-shadow:0 0 5px #fff,0 0 14px #00eaff,0 0 30px #009cff,0 0 65px #006cff;filter:drop-shadow(0 15px 15px #002b4f99);animation:float 7s ease-in-out infinite;user-select:none}.letter:nth-child(1){left:5%;top:16%;animation-delay:-1s}.letter:nth-child(2){left:18%;top:63%;animation-delay:-4s}.letter:nth-child(3){left:31%;top:12%;animation-delay:-2s}.letter:nth-child(4){left:44%;top:67%;animation-delay:-5s}.letter:nth-child(5){left:56%;top:16%;animation-delay:-3s}.letter:nth-child(6){left:69%;top:58%;animation-delay:-6s}.letter:nth-child(7){left:81%;top:20%;animation-delay:-1.5s}.letter:nth-child(8){left:91%;top:70%;animation-delay:-4.5s}.letter:nth-child(9){left:12%;top:35%;font-size:55px;animation-delay:-3.5s}.letter:nth-child(10){left:74%;top:39%;font-size:55px;animation-delay:-2.5s}@keyframes float{0%,100%{transform:translate3d(0,0,0) rotateY(-12deg) rotateZ(-2deg)}50%{transform:translate3d(25px,-35px,80px) rotateY(22deg) rotateZ(3deg)}}
-.top{position:sticky;top:0;z-index:50;background:#02152de8;border-bottom:1px solid #00eaff66;backdrop-filter:blur(14px)}.nav{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0}.brand{font-weight:1000;font-size:18px;text-shadow:0 0 18px #00eaff}.navlinks{display:flex;gap:7px;flex-wrap:wrap}.navlinks a{padding:10px 14px;border-radius:13px;background:#062443dd;border:1px solid #00eaff44;font-size:13px;transition:.2s}.navlinks a:hover{background:#00c9f2;color:#00131a;box-shadow:0 0 20px #00eaff;transform:translateY(-2px)}.academy-button{background:linear-gradient(135deg,#00c9f2,#007cff)!important;color:#fff!important;font-weight:1000!important;box-shadow:0 0 25px #00eaff66}
-.hero{padding:75px 0 55px;min-height:720px;display:flex;align-items:center}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center}.badge{display:inline-block;padding:9px 15px;border-radius:30px;background:#061c38dd;border:1px solid #00eaff88;color:#ffe600;font-weight:900;box-shadow:0 0 20px #00eaff22}.hero h1{font-size:clamp(42px,7vw,78px);line-height:1;margin:20px 0;text-shadow:0 0 30px #00eaff88}.hero h1 span{color:#00eaff}.lead{font-size:19px;line-height:1.75;color:#e9fcff;text-shadow:0 2px 8px #001b2d;max-width:720px}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;cursor:pointer;padding:13px 18px;border-radius:14px;font-weight:900;transition:.2s;min-height:46px}.btn:hover{transform:translateY(-3px) scale(1.03)}.primary{background:#00c9f2;color:#00131a;box-shadow:0 0 25px #00eaff88}.yellow{background:#ffe600;color:#181500;box-shadow:0 0 25px #ffe60066}
-.neon-card{background:linear-gradient(145deg,#041a31e8,#020b19e8);border:1px solid #00eaff66;border-radius:24px;box-shadow:0 18px 55px #0009,0 0 30px #00eaff22;backdrop-filter:blur(10px)}.teacher{padding:32px;text-align:center;transform:perspective(900px) rotateY(-5deg)}.avatar{font-size:95px;filter:drop-shadow(0 0 25px #00eaff);animation:teacherFloat 4s ease-in-out infinite}@keyframes teacherFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.teacher h2{font-size:28px}.pill{display:inline-block;margin:4px;padding:8px 11px;border-radius:20px;background:#0a2d50cc;border:1px solid #00eaff44}.section{padding:55px 0}.section-title{text-align:center;margin-bottom:28px}.section-title h2{font-size:34px;margin:13px 0}.muted{color:#c1eaf5}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.feature{padding:23px;text-align:center;min-height:150px}.feature b{display:block;color:#ffe600;font-size:20px;margin-bottom:10px}.feature span{line-height:1.6;color:#d9f7ff}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info-card{padding:25px;text-align:center}.info-icon{font-size:50px;filter:drop-shadow(0 0 18px #00eaff)}.info-card h3{color:#ffe600}.info-card p{line-height:1.6;color:#d9f7ff}.classes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.class-card{padding:28px;transition:.2s}.class-card:hover{transform:translateY(-7px);box-shadow:0 25px 60px #000b,0 0 35px #00eaff44}.class-card h3{color:#ffe600;font-size:25px}.class-card p{line-height:1.7;color:#d9f7ff}.parent-preview{position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;justify-content:center;padding:25px;background:radial-gradient(circle at center,#075b91,#032b4d 45%,#020f20 75%,#010711);border:1px solid #00eaff88;box-shadow:0 25px 70px #000c,0 0 50px #00eaff33}.family{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);display:flex;align-items:flex-end;gap:25px;font-size:65px;animation:familyMove 5s ease-in-out infinite;filter:drop-shadow(0 0 20px #00eaff)}@keyframes familyMove{0%,100%{transform:translate(-50%,-50%) translateY(0) rotateY(-5deg)}50%{transform:translate(-50%,-55%) translateY(-15px) rotateY(8deg)}}.family-person{animation:personMove 3s ease-in-out infinite}.family-person:nth-child(2){animation-delay:-1s}.family-person:nth-child(3){animation-delay:-2s}@keyframes personMove{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.parent-content{position:relative;z-index:5;text-align:center;width:min(700px,92%);padding:32px 25px;background:linear-gradient(145deg,#02182bdd,#020a17dd);border:1px solid #00eaff66;border-radius:25px;box-shadow:0 20px 60px #000b;backdrop-filter:blur(9px)}.parent-content .icon{font-size:58px;animation:iconMove 3s ease-in-out infinite}@keyframes iconMove{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px) scale(1.08)}}.parent-content h2{color:#00eaff;font-size:32px;text-shadow:0 0 20px #00eaff88}.parent-content p{line-height:1.7;color:#d9f7ff}.parent-button{font-size:17px;padding:14px 25px}.footer{margin-top:35px;padding:35px 0;text-align:center;border-top:1px solid #00eaff33;color:#9dc7d5}.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.reveal{animation:reveal .9s ease both}@keyframes reveal{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:850px){.hero-grid,.classes,.info-grid{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}.teacher{transform:none}.hero{padding-top:50px}}
-@media(max-width:520px){body{padding-bottom:74px}.wrap{width:min(100% - 20px,480px)}.top{position:sticky}.nav{padding:10px 0 8px;gap:8px}.brand{font-size:15px;white-space:nowrap}.navlinks{width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.navlinks a{min-height:42px;padding:7px 4px;border-radius:11px;font-size:10px;text-align:center;display:flex;align-items:center;justify-content:center;line-height:1.15}.hero{min-height:auto;padding:38px 0 28px}.hero-grid{gap:20px}.hero h1{font-size:clamp(34px,10vw,44px);line-height:1.08;margin:15px 0}.lead{font-size:16px;line-height:1.55}.badge{font-size:12px;padding:8px 11px}.buttons{gap:9px;margin-top:18px}.btn{width:100%;min-height:48px;padding:12px 14px}.teacher{padding:24px 15px}.avatar{font-size:70px}.teacher h2{font-size:23px;margin:12px 0 8px}.pill{font-size:12px;padding:7px 9px;margin:3px}.section{padding:34px 0}.section-title{margin-bottom:18px}.section-title h2{font-size:27px;line-height:1.15}.classes,.info-grid,.feature-grid{grid-template-columns:1fr;gap:12px}.class-card{padding:20px}.class-card h3{font-size:22px;margin-top:0}.class-card p{font-size:14px;line-height:1.55}.feature{min-height:0;padding:19px}.info-card{padding:20px}.info-icon{font-size:42px}.parent-preview{min-height:470px;padding:14px}.family{font-size:39px;gap:4px;top:30%}.parent-content{width:100%;padding:22px 13px}.parent-content .icon{font-size:48px}.parent-content h2{font-size:25px;margin:10px 0}.parent-content p{font-size:14px;line-height:1.55}.parent-button{font-size:15px}.footer{padding:25px 0;font-size:13px}.site-copyright{font-size:11px;padding-bottom:88px}.neon-world .letter{font-size:38px!important;opacity:.65}.grid-floor{opacity:.35}}
-/* Mobile app navigation */
-.mobile-nav{display:none}@media(max-width:520px){.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:0;right:0;bottom:0;z-index:100;height:68px;padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:#02152df5;border-top:1px solid #00eaff66;backdrop-filter:blur(18px);box-shadow:0 -10px 35px #000b}.mobile-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:12px;font-size:10px;color:#bdebf5}.mobile-nav a:first-child{background:#063455;color:#fff;box-shadow:0 0 14px #00eaff22}.mobile-nav .mi{font-size:21px;line-height:1}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,"Noto Sans Georgian",sans-serif;color:#fff;background:#010712;min-height:100vh;overflow-x:hidden;padding-bottom:0}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(1250px,calc(100% - 28px));margin:auto}
+
+.neon-world{
+position:fixed;
+inset:0;
+z-index:-2;
+overflow:hidden;
+background:radial-gradient(circle at 50% 40%,#eaffff 0,#c8f4ff 18%,#7fc9eb 42%,#245d86 70%,#020713 100%)
+}
+
+.neon-world:before{
+content:"";
+position:absolute;
+inset:-30%;
+background:radial-gradient(ellipse at center,transparent 25%,#001329aa 70%,#00040c 100%);
+pointer-events:none
+}
+
+.grid-floor{
+position:absolute;
+left:-20%;
+right:-20%;
+bottom:-20%;
+height:62%;
+transform:perspective(450px) rotateX(62deg);
+background-image:linear-gradient(#00eaff35 1px,transparent 1px),linear-gradient(90deg,#00eaff35 1px,transparent 1px);
+background-size:55px 55px;
+mask-image:linear-gradient(to top,black,transparent);
+opacity:.65
+}
+
+.letters{
+position:absolute;
+inset:0;
+perspective:900px
+}
+
+.letter{
+position:absolute;
+font-weight:1000;
+font-family:Arial,sans-serif;
+font-size:clamp(45px,7vw,105px);
+color:#fff;
+text-shadow:0 0 5px #fff,0 0 14px #00eaff,0 0 30px #009cff,0 0 65px #006cff;
+filter:drop-shadow(0 15px 15px #002b4f99);
+animation:float 7s ease-in-out infinite;
+user-select:none
+}
+
+.letter:nth-child(1){left:5%;top:16%;animation-delay:-1s}
+.letter:nth-child(2){left:18%;top:63%;animation-delay:-4s}
+.letter:nth-child(3){left:31%;top:12%;animation-delay:-2s}
+.letter:nth-child(4){left:44%;top:67%;animation-delay:-5s}
+.letter:nth-child(5){left:56%;top:16%;animation-delay:-3s}
+.letter:nth-child(6){left:69%;top:58%;animation-delay:-6s}
+.letter:nth-child(7){left:81%;top:20%;animation-delay:-1.5s}
+.letter:nth-child(8){left:91%;top:70%;animation-delay:-4.5s}
+.letter:nth-child(9){left:12%;top:35%;font-size:55px;animation-delay:-3.5s}
+.letter:nth-child(10){left:74%;top:39%;font-size:55px;animation-delay:-2.5s}
+
+@keyframes float{
+0%,100%{transform:translate3d(0,0,0) rotateY(-12deg) rotateZ(-2deg)}
+50%{transform:translate3d(25px,-35px,80px) rotateY(22deg) rotateZ(3deg)}
+}
+
+.top{
+position:sticky;
+top:0;
+z-index:50;
+background:#02152de8;
+border-bottom:1px solid #00eaff66;
+backdrop-filter:blur(14px)
+}
+
+.nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+padding:13px 0
+}
+
+.brand{
+font-weight:1000;
+font-size:18px;
+text-shadow:0 0 18px #00eaff
+}
+
+.navlinks{
+display:flex;
+gap:7px;
+flex-wrap:wrap
+}
+
+.navlinks a{
+padding:10px 14px;
+border-radius:13px;
+background:#062443dd;
+border:1px solid #00eaff44;
+font-size:13px;
+transition:.2s
+}
+
+.navlinks a:hover{
+background:#00c9f2;
+color:#00131a;
+box-shadow:0 0 20px #00eaff;
+transform:translateY(-2px)
+}
+
+.academy-button{
+background:linear-gradient(135deg,#00c9f2,#007cff)!important;
+color:#fff!important;
+font-weight:1000!important;
+box-shadow:0 0 25px #00eaff66
+}
+
+.hero{
+padding:75px 0 55px;
+min-height:720px;
+display:flex;
+align-items:center
+}
+
+.hero-grid{
+display:grid;
+grid-template-columns:1.15fr .85fr;
+gap:30px;
+align-items:center
+}
+
+.badge{
+display:inline-block;
+padding:9px 15px;
+border-radius:30px;
+background:#061c38dd;
+border:1px solid #00eaff88;
+color:#ffe600;
+font-weight:900;
+box-shadow:0 0 20px #00eaff22
+}
+
+.hero h1{
+font-size:clamp(42px,7vw,78px);
+line-height:1;
+margin:20px 0;
+text-shadow:0 0 30px #00eaff88
+}
+
+.hero h1 span{color:#00eaff}
+
+.lead{
+font-size:19px;
+line-height:1.75;
+color:#e9fcff;
+text-shadow:0 2px 8px #001b2d;
+max-width:720px
+}
+
+.buttons{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+margin-top:25px
+}
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+border:0;
+cursor:pointer;
+padding:13px 18px;
+border-radius:14px;
+font-weight:900;
+transition:.2s;
+min-height:46px
+}
+
+.btn:hover{
+transform:translateY(-3px) scale(1.03)
+}
+
+.primary{
+background:#00c9f2;
+color:#00131a;
+box-shadow:0 0 25px #00eaff88
+}
+
+.yellow{
+background:#ffe600;
+color:#181500;
+box-shadow:0 0 25px #ffe60066
+}
+
+.neon-card{
+background:linear-gradient(145deg,#041a31e8,#020b19e8);
+border:1px solid #00eaff66;
+border-radius:24px;
+box-shadow:0 18px 55px #0009,0 0 30px #00eaff22;
+backdrop-filter:blur(10px)
+}
+
+.teacher{
+padding:32px;
+text-align:center;
+transform:perspective(900px) rotateY(-5deg)
+}
+
+.avatar{
+font-size:95px;
+filter:drop-shadow(0 0 25px #00eaff);
+animation:teacherFloat 4s ease-in-out infinite
+}
+
+@keyframes teacherFloat{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+}
+
+.teacher h2{font-size:28px}
+
+.pill{
+display:inline-block;
+margin:4px;
+padding:8px 11px;
+border-radius:20px;
+background:#0a2d50cc;
+border:1px solid #00eaff44
+}
+
+.section{padding:55px 0}
+
+.section-title{
+text-align:center;
+margin-bottom:28px
+}
+
+.section-title h2{
+font-size:34px;
+margin:13px 0
+}
+
+.muted{color:#c1eaf5}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px
+}
+
+.feature{
+padding:23px;
+text-align:center;
+min-height:150px
+}
+
+.feature b{
+display:block;
+color:#ffe600;
+font-size:20px;
+margin-bottom:10px
+}
+
+.feature span{
+line-height:1.6;
+color:#d9f7ff
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px
+}
+
+.info-card{
+padding:25px;
+text-align:center
+}
+
+.info-icon{
+font-size:50px;
+filter:drop-shadow(0 0 18px #00eaff)
+}
+
+.info-card h3{color:#ffe600}
+
+.info-card p{
+line-height:1.6;
+color:#d9f7ff
+}
+
+.classes{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:16px
+}
+
+.class-card{
+padding:28px;
+transition:.2s
+}
+
+.class-card:hover{
+transform:translateY(-7px);
+box-shadow:0 25px 60px #000b,0 0 35px #00eaff44
+}
+
+.class-card h3{
+color:#ffe600;
+font-size:25px
+}
+
+.class-card p{
+line-height:1.7;
+color:#d9f7ff
+}
+
+.parent-preview{
+position:relative;
+overflow:hidden;
+min-height:420px;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:25px;
+background:radial-gradient(circle at center,#075b91,#032b4d 45%,#020f20 75%,#010711);
+border:1px solid #00eaff88;
+box-shadow:0 25px 70px #000c,0 0 50px #00eaff33
+}
+
+.family{
+position:absolute;
+left:50%;
+top:45%;
+transform:translate(-50%,-50%);
+display:flex;
+align-items:flex-end;
+gap:25px;
+font-size:65px;
+animation:familyMove 5s ease-in-out infinite;
+filter:drop-shadow(0 0 20px #00eaff)
+}
+
+@keyframes familyMove{
+0%,100%{transform:translate(-50%,-50%) translateY(0) rotateY(-5deg)}
+50%{transform:translate(-50%,-55%) translateY(-15px) rotateY(8deg)}
+}
+
+.family-person{
+animation:personMove 3s ease-in-out infinite
+}
+
+.family-person:nth-child(2){animation-delay:-1s}
+.family-person:nth-child(3){animation-delay:-2s}
+
+@keyframes personMove{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+}
+
+.parent-content{
+position:relative;
+z-index:5;
+text-align:center;
+width:min(700px,92%);
+padding:32px 25px;
+background:linear-gradient(145deg,#02182bdd,#020a17dd);
+border:1px solid #00eaff66;
+border-radius:25px;
+box-shadow:0 20px 60px #000b;
+backdrop-filter:blur(9px)
+}
+
+.parent-content .icon{
+font-size:58px;
+animation:iconMove 3s ease-in-out infinite
+}
+
+@keyframes iconMove{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-9px) scale(1.08)}
+}
+
+.parent-content h2{
+color:#00eaff;
+font-size:32px;
+text-shadow:0 0 20px #00eaff88
+}
+
+.parent-content p{
+line-height:1.7;
+color:#d9f7ff
+}
+
+.parent-button{
+font-size:17px;
+padding:14px 25px
+}
+
+.footer{
+margin-top:35px;
+padding:35px 0;
+text-align:center;
+border-top:1px solid #00eaff33;
+color:#9dc7d5
+}
+
+.site-copyright{
+margin-top:30px;
+padding:18px 12px;
+text-align:center;
+color:#9dc7d5;
+font-size:14px;
+border-top:1px solid #00eaff33;
+background:linear-gradient(180deg,transparent,#020b19aa);
+letter-spacing:.2px
+}
+
+.reveal{
+animation:reveal .9s ease both
+}
+
+@keyframes reveal{
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:850px){
+.hero-grid,.classes,.info-grid{grid-template-columns:1fr}
+.feature-grid{grid-template-columns:repeat(2,1fr)}
+.teacher{transform:none}
+.hero{padding-top:50px}
+}
+
+@media(max-width:520px){
+
+body{padding-bottom:74px}
+
+.wrap{
+width:min(100% - 20px,480px)
+}
+
+.top{
+position:sticky
+}
+
+.nav{
+padding:10px 0 8px;
+gap:8px
+}
+
+.brand{
+font-size:15px;
+white-space:nowrap
+}
+
+.navlinks{
+width:100%;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:5px
+}
+
+.navlinks a{
+min-height:42px;
+padding:7px 4px;
+border-radius:11px;
+font-size:10px;
+text-align:center;
+display:flex;
+align-items:center;
+justify-content:center;
+line-height:1.15
+}
+
+.hero{
+min-height:auto;
+padding:38px 0 28px
+}
+
+.hero-grid{gap:20px}
+
+.hero h1{
+font-size:clamp(34px,10vw,44px);
+line-height:1.08;
+margin:15px 0
+}
+
+.lead{
+font-size:16px;
+line-height:1.55
+}
+
+.badge{
+font-size:12px;
+padding:8px 11px
+}
+
+.buttons{
+gap:9px;
+margin-top:18px
+}
+
+.btn{
+width:100%;
+min-height:48px;
+padding:12px 14px
+}
+
+.teacher{
+padding:24px 15px
+}
+
+.avatar{font-size:70px}
+
+.teacher h2{
+font-size:23px;
+margin:12px 0 8px
+}
+
+.pill{
+font-size:12px;
+padding:7px 9px;
+margin:3px
+}
+
+.section{padding:34px 0}
+
+.section-title{
+margin-bottom:18px
+}
+
+.section-title h2{
+font-size:27px;
+line-height:1.15
+}
+
+.classes,.info-grid,.feature-grid{
+grid-template-columns:1fr;
+gap:12px
+}
+
+.class-card{padding:20px}
+
+.class-card h3{
+font-size:22px;
+margin-top:0
+}
+
+.class-card p{
+font-size:14px;
+line-height:1.55
+}
+
+.feature{
+min-height:0;
+padding:19px
+}
+
+.info-card{padding:20px}
+
+.info-icon{font-size:42px}
+
+.parent-preview{
+min-height:470px;
+padding:14px
+}
+
+.family{
+font-size:39px;
+gap:4px;
+top:30%
+}
+
+.parent-content{
+width:100%;
+padding:22px 13px
+}
+
+.parent-content .icon{font-size:48px}
+
+.parent-content h2{
+font-size:25px;
+margin:10px 0
+}
+
+.parent-content p{
+font-size:14px;
+line-height:1.55
+}
+
+.parent-button{font-size:15px}
+
+.footer{
+padding:25px 0;
+font-size:13px
+}
+
+.site-copyright{
+font-size:11px;
+padding-bottom:88px
+}
+
+.neon-world .letter{
+font-size:38px!important;
+opacity:.65
+}
+
+.grid-floor{opacity:.35}
+
+}
+
+.mobile-nav{display:none}
+
+@media(max-width:520px){
+
+.mobile-nav{
+position:fixed;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+left:0;
+right:0;
+bottom:0;
+z-index:100;
+height:68px;
+padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+background:#02152df5;
+border-top:1px solid #00eaff66;
+backdrop-filter:blur(18px);
+box-shadow:0 -10px 35px #000b
+}
+
+.mobile-nav a{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:2px;
+border-radius:12px;
+font-size:10px;
+color:#bdebf5
+}
+
+.mobile-nav a:first-child{
+background:#063455;
+color:#fff;
+box-shadow:0 0 14px #00eaff22
+}
+
+.mobile-nav .mi{
+font-size:21px;
+line-height:1
+}
+
+}
+
+/* AUTH STATUS */
+.auth-status{
+display:none;
+margin-top:12px;
+padding:10px 14px;
+border-radius:14px;
+background:#021a31dd;
+border:1px solid #00eaff44;
+color:#d9f7ff;
+font-size:13px;
+text-align:center
+}
+
+.auth-status.show{display:block}
+
+.auth-status strong{color:#00eaff}
+
+.auth-loading{
+opacity:.7;
+pointer-events:none
+}
+
 </style>
 
-<style id="site-copyright-style">.site-copyright{margin-top:30px;padding:18px 12px;text-align:center;color:#9dc7d5;font-size:14px;border-top:1px solid #00eaff33;background:linear-gradient(180deg,transparent,#020b19aa);letter-spacing:.2px}.site-copyright::first-letter{color:#00eaff}</style>
+<style id="site-copyright-style">
+.site-copyright{
+margin-top:30px;
+padding:18px 12px;
+text-align:center;
+color:#9dc7d5;
+font-size:14px;
+border-top:1px solid #00eaff33;
+background:linear-gradient(180deg,transparent,#020b19aa);
+letter-spacing:.2px
+}
+
+.site-copyright::first-letter{color:#00eaff}
+</style>
+
 </head>
+
 <body>
-<div class="neon-world"><div class="letters"><span class="letter">A</span><span class="letter">B</span><span class="letter">C</span><span class="letter">D</span><span class="letter">E</span><span class="letter">F</span><span class="letter">G</span><span class="letter">H</span><span class="letter">I</span><span class="letter">J</span></div><div class="grid-floor"></div></div>
-<header class="top"><div class="wrap nav"><a class="brand" href="index.html">⚡ ENGLISH WITH MARIAMI</a><nav class="navlinks"><a href="academy.html" class="academy-button">🎓 ცენტრი</a><a href="#classes">📚 კლასები</a><a href="#learn">🧠 სწავლა</a><a href="#parents">👨‍👩‍👧 მშობელი</a></nav></div></header>
+
+<div class="neon-world">
+
+<div class="letters">
+<span class="letter">A</span>
+<span class="letter">B</span>
+<span class="letter">C</span>
+<span class="letter">D</span>
+<span class="letter">E</span>
+<span class="letter">F</span>
+<span class="letter">G</span>
+<span class="letter">H</span>
+<span class="letter">I</span>
+<span class="letter">J</span>
+</div>
+
+<div class="grid-floor"></div>
+
+</div>
+
+
+<header class="top">
+
+<div class="wrap nav">
+
+<a class="brand" href="index.html">
+⚡ ENGLISH WITH MARIAMI
+</a>
+
+<nav class="navlinks">
+
+<a href="academy.html" class="academy-button auth-link">
+🎓 ცენტრი
+</a>
+
+<a href="#classes">
+📚 კლასები
+</a>
+
+<a href="#learn">
+🧠 სწავლა
+</a>
+
+<a href="#parents">
+👨‍👩‍👧 მშობელი
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
 <main class="wrap">
-<section class="hero reveal"><div class="hero-grid"><div><span class="badge">🇬🇧 ქართული ↔ English • 2026</span><h1>ინგლისური<br><span>მარტივად და სახალისოდ</span><br>ბავშვებისთვის!</h1><p class="lead">კეთილი იყოს შენი მობრძანება English with Mariami-ში! 🌟<br>აქ ბავშვები ინგლისურს სწავლობენ თამაშით, საინტერესო დავალებებით, Vocabulary-ით, Speaking-ით, Reading-ით, Listening-ით და Quiz-ებით.</p><div class="buttons"><a class="btn primary" href="academy.html">🎓 სასწავლო ცენტრში შესვლა →</a></div></div><div class="neon-card teacher"><div class="avatar">👩‍🏫</div><h2>მასწავლებელი მარიამი</h2><p class="muted">ინგლისურის სამყაროში შენი გზამკვლევი ✨</p><span class="pill">🧠 Vocabulary</span><span class="pill">🔊 Listening</span><span class="pill">🗣️ Speaking</span><span class="pill">📖 Reading</span><span class="pill">✍️ Grammar</span></div></div></section>
-<section id="classes" class="section reveal"><div class="section-title"><span class="badge">CLASSROOM</span><h2>🎓 სასწავლო კლასები</h2><p class="muted">მე-2, მე-3 და მე-4 კლასის სასწავლო პროგრამები</p></div><div class="classes"><div class="neon-card class-card"><h3>🌱 მე-2 კლასი</h3><p>ფერები, ოჯახი, სკოლა, ცხოველები, საკვები, სხეულის ნაწილები, რიცხვები და მარტივი სიტყვები.</p><a class="btn primary" href="academy.html#grades">კურსის ნახვა →</a></div><div class="neon-card class-card"><h3>🚀 მე-3 კლასი</h3><p>ყოველდღიური ცხოვრება, დღეები, თვეები, ამინდი, მოქმედებები, ქალაქი, Speaking და Reading.</p><a class="btn primary" href="academy.html#grades">კურსის ნახვა →</a></div><div class="neon-card class-card"><h3>⭐ მე-4 კლასი</h3><p>Present Simple, კითხვები, Prepositions, Reading, Writing, Dialogues და Practice.</p><a class="btn primary" href="academy.html#grades">კურსის ნახვა →</a></div></div></section>
-<section id="learn" class="section reveal"><div class="section-title"><span class="badge">LEARN</span><h2>📚 როგორ ვისწავლით?</h2></div><div class="feature-grid"><div class="neon-card feature"><b>🧠 Vocabulary</b><span>ახალი ინგლისური სიტყვები, ქართული თარგმანი, გამოთქმა და მაგალითები.</span></div><div class="neon-card feature"><b>🔊 Listening</b><span>მოსმენა, გამეორება და სიტყვების სწორად წარმოთქმა.</span></div><div class="neon-card feature"><b>🗣️ Speaking</b><span>მოკლე დიალოგები, ფრაზები და საუბრის პრაქტიკა.</span></div><div class="neon-card feature"><b>📝 Quiz</b><span>საინტერესო ტესტები, ქულები და სწავლის პროგრესი.</span></div></div></section>
-<section class="section reveal"><div class="section-title"><span class="badge">WHY MARIAMI?</span><h2>💙 რატომ ჩვენ?</h2></div><div class="info-grid"><div class="neon-card info-card"><div class="info-icon">🎮</div><h3>სწავლა თამაშით</h3><p>ბავშვები სწავლობენ საინტერესო და სახალისო სავარჯიშოებით.</p></div><div class="neon-card info-card"><div class="info-icon">🏆</div><h3>პროგრესის კონტროლი</h3><p>ქულები, Quiz-ები და სწავლის შედეგები ერთ სივრცეში.</p></div><div class="neon-card info-card"><div class="info-icon">👨‍👩‍👧</div><h3>ოჯახის ჩართულობა</h3><p>მშობელს შეუძლია თვალყური ადევნოს ბავშვის სწავლის პროცესს.</p></div></div></section>
-<section id="parents" class="section reveal"><div class="section-title"><span class="badge">FAMILY SPACE</span><h2>👨‍👩‍👧 მშობლის სივრცე</h2><p class="muted">ბავშვის სწავლა და ოჯახი ერთ სივრცეში ❤️</p></div><div class="parent-preview neon-card"><div class="family"><div class="family-person">👨</div><div class="family-person">👩</div><div class="family-person">🧒</div></div><div class="parent-content"><div class="icon">👨‍👩‍👧</div><h2>მშობლის სივრცე</h2><p>მშობლის დაცულ სივრცეში შეგიძლიათ ნახოთ ბავშვის სწავლის პროგრესი, Quiz-ის შედეგები და დასვათ კითხვა მასწავლებელთან.</p><div><span class="pill">📊 პროგრესი</span><span class="pill">📝 Quiz</span><span class="pill">❓ კითხვები</span><span class="pill">💬 პასუხები</span></div><div class="buttons" style="justify-content:center"><a href="academy.html#parents" class="btn primary parent-button">👨‍👩‍👧 მშობლის სივრცე →</a></div></div></div></section>
-<section class="section reveal"><div class="neon-card" style="padding:45px 25px;text-align:center"><span class="badge">ENGLISH ACADEMY</span><h2 style="font-size:36px;margin:18px 0">🚀 მზად ხარ ინგლისურის სამყაროში შესასვლელად?</h2><p class="muted" style="font-size:17px;line-height:1.7">გადადით სასწავლო ცენტრში, აირჩიეთ კლასი და დაიწყეთ სწავლა.</p><div class="buttons" style="justify-content:center"><a class="btn primary" href="academy.html">🎓 სასწავლო ცენტრში შესვლა</a></div></div></section>
+
+
+<section class="hero reveal">
+
+<div class="hero-grid">
+
+<div>
+
+<span class="badge">
+🇬🇧 ქართული ↔ English • 2026
+</span>
+
+<h1>
+ინგლისური<br>
+<span>მარტივად და სახალისოდ</span><br>
+ბავშვებისთვის!
+</h1>
+
+<p class="lead">
+კეთილი იყოს შენი მობრძანება English with Mariami-ში! 🌟<br>
+აქ ბავშვები ინგლისურს სწავლობენ თამაშით, საინტერესო დავალებებით, Vocabulary-ით, Speaking-ით, Reading-ით, Listening-ით და Quiz-ებით.
+</p>
+
+<div class="buttons">
+
+<a
+class="btn primary auth-link"
+href="academy.html"
+>
+🎓 სასწავლო ცენტრში შესვლა →
+</a>
+
+</div>
+
+<div id="authStatus" class="auth-status"></div>
+
+</div>
+
+
+<div class="neon-card teacher">
+
+<div class="avatar">👩‍🏫</div>
+
+<h2>მასწავლებელი მარიამი</h2>
+
+<p class="muted">
+ინგლისურის სამყაროში შენი გზამკვლევი ✨
+</p>
+
+<span class="pill">🧠 Vocabulary</span>
+<span class="pill">🔊 Listening</span>
+<span class="pill">🗣️ Speaking</span>
+<span class="pill">📖 Reading</span>
+<span class="pill">✍️ Grammar</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="classes" class="section reveal">
+
+<div class="section-title">
+
+<span class="badge">CLASSROOM</span>
+
+<h2>🎓 სასწავლო კლასები</h2>
+
+<p class="muted">
+მე-2, მე-3 და მე-4 კლასის სასწავლო პროგრამები
+</p>
+
+</div>
+
+
+<div class="classes">
+
+
+<div class="neon-card class-card">
+
+<h3>🌱 მე-2 კლასი</h3>
+
+<p>
+ფერები, ოჯახი, სკოლა, ცხოველები, საკვები, სხეულის ნაწილები, რიცხვები და მარტივი სიტყვები.
+</p>
+
+<a
+class="btn primary auth-link"
+href="academy.html#grades"
+>
+კურსის ნახვა →
+</a>
+
+</div>
+
+
+<div class="neon-card class-card">
+
+<h3>🚀 მე-3 კლასი</h3>
+
+<p>
+ყოველდღიური ცხოვრება, დღეები, თვეები, ამინდი, მოქმედებები, ქალაქი, Speaking და Reading.
+</p>
+
+<a
+class="btn primary auth-link"
+href="academy.html#grades"
+>
+კურსის ნახვა →
+</a>
+
+</div>
+
+
+<div class="neon-card class-card">
+
+<h3>⭐ მე-4 კლასი</h3>
+
+<p>
+Present Simple, კითხვები, Prepositions, Reading, Writing, Dialogues და Practice.
+</p>
+
+<a
+class="btn primary auth-link"
+href="academy.html#grades"
+>
+კურსის ნახვა →
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section id="learn" class="section reveal">
+
+<div class="section-title">
+
+<span class="badge">LEARN</span>
+
+<h2>📚 როგორ ვისწავლით?</h2>
+
+</div>
+
+
+<div class="feature-grid">
+
+
+<div class="neon-card feature">
+
+<b>🧠 Vocabulary</b>
+
+<span>
+ახალი ინგლისური სიტყვები, ქართული თარგმანი, გამოთქმა და მაგალითები.
+</span>
+
+</div>
+
+
+<div class="neon-card feature">
+
+<b>🔊 Listening</b>
+
+<span>
+მოსმენა, გამეორება და სიტყვების სწორად წარმოთქმა.
+</span>
+
+</div>
+
+
+<div class="neon-card feature">
+
+<b>🗣️ Speaking</b>
+
+<span>
+მოკლე დიალოგები, ფრაზები და საუბრის პრაქტიკა.
+</span>
+
+</div>
+
+
+<div class="neon-card feature">
+
+<b>📝 Quiz</b>
+
+<span>
+საინტერესო ტესტები, ქულები და სწავლის პროგრესი.
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="section reveal">
+
+<div class="section-title">
+
+<span class="badge">WHY MARIAMI?</span>
+
+<h2>💙 რატომ ჩვენ?</h2>
+
+</div>
+
+
+<div class="info-grid">
+
+
+<div class="neon-card info-card">
+
+<div class="info-icon">🎮</div>
+
+<h3>სწავლა თამაშით</h3>
+
+<p>
+ბავშვები სწავლობენ საინტერესო და სახალისო სავარჯიშოებით.
+</p>
+
+</div>
+
+
+<div class="neon-card info-card">
+
+<div class="info-icon">🏆</div>
+
+<h3>პროგრესის კონტროლი</h3>
+
+<p>
+ქულები, Quiz-ები და სწავლის შედეგები ერთ სივრცეში.
+</p>
+
+</div>
+
+
+<div class="neon-card info-card">
+
+<div class="info-icon">👨‍👩‍👧</div>
+
+<h3>ოჯახის ჩართულობა</h3>
+
+<p>
+მშობელს შეუძლია თვალყური ადევნოს ბავშვის სწავლის პროცესს.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section id="parents" class="section reveal">
+
+<div class="section-title">
+
+<span class="badge">FAMILY SPACE</span>
+
+<h2>👨‍👩‍👧 მშობლის სივრცე</h2>
+
+<p class="muted">
+ბავშვის სწავლა და ოჯახი ერთ სივრცეში ❤️
+</p>
+
+</div>
+
+
+<div class="parent-preview neon-card">
+
+
+<div class="family">
+
+<div class="family-person">👨</div>
+<div class="family-person">👩</div>
+<div class="family-person">🧒</div>
+
+</div>
+
+
+<div class="parent-content">
+
+<div class="icon">👨‍👩‍👧</div>
+
+<h2>მშობლის სივრცე</h2>
+
+<p>
+მშობლის დაცულ სივრცეში შეგიძლიათ ნახოთ ბავშვის სწავლის პროგრესი, Quiz-ის შედეგები და დასვათ კითხვა მასწავლებელთან.
+</p>
+
+
+<div>
+
+<span class="pill">📊 პროგრესი</span>
+<span class="pill">📝 Quiz</span>
+<span class="pill">❓ კითხვები</span>
+<span class="pill">💬 პასუხები</span>
+
+</div>
+
+
+<div class="buttons" style="justify-content:center">
+
+<a
+href="academy.html#parents"
+class="btn primary auth-link parent-button"
+>
+👨‍👩‍👧 მშობლის სივრცე →
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="section reveal">
+
+<div
+class="neon-card"
+style="padding:45px 25px;text-align:center"
+>
+
+<span class="badge">
+ENGLISH ACADEMY
+</span>
+
+<h2 style="font-size:36px;margin:18px 0">
+🚀 მზად ხარ ინგლისურის სამყაროში შესასვლელად?
+</h2>
+
+<p
+class="muted"
+style="font-size:17px;line-height:1.7"
+>
+გადადით სასწავლო ცენტრში, აირჩიეთ კლასი და დაიწყეთ სწავლა.
+</p>
+
+
+<div
+class="buttons"
+style="justify-content:center"
+>
+
+<a
+class="btn primary auth-link"
+href="academy.html"
+>
+🎓 სასწავლო ცენტრში შესვლა
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
 </main>
-<footer class="footer"><div class="wrap">⚡ English with Mariami • English Academy • სწავლა, თამაში და პროგრესი ❤️</div></footer>
-<nav class="mobile-nav" aria-label="მობილური მენიუ"><a href="index.html"><span class="mi">🏠</span>მთავარი</a><a href="academy.html#grades"><span class="mi">📚</span>კლასები</a><a href="academy.html"><span class="mi">🎓</span>ცენტრი</a><a href="academy.html#parents"><span class="mi">👤</span>პროფილი</a></nav>
 
-<!-- SITE-COPYRIGHT-2026 -->
-<footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer>
 
-</body></html>
+<footer class="footer">
+
+<div class="wrap">
+⚡ English with Mariami • English Academy • სწავლა, თამაში და პროგრესი ❤️
+</div>
+
+</footer>
+
+
+<nav class="mobile-nav" aria-label="მობილური მენიუ">
+
+<a href="index.html">
+<span class="mi">🏠</span>
+მთავარი
+</a>
+
+<a href="academy.html#grades" class="auth-link">
+<span class="mi">📚</span>
+კლასები
+</a>
+
+<a href="academy.html" class="auth-link">
+<span class="mi">🎓</span>
+ცენტრი
+</a>
+
+<a href="academy.html#parents" class="auth-link">
+<span class="mi">👤</span>
+პროფილი
+</a>
+
+</nav>
+
+
+<footer class="site-copyright">
+© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
+</footer>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js?v=home-auth-20260829"></script>
+
+
+<script>
+
+/*
+========================================================
+ ENGLISH WITH MARIAMI
+ მთავარი გვერდის ერთიანი ავტორიზაცია
+========================================================
+*/
+
+(function(){
+
+"use strict";
+
+
+const LOGIN_PAGE = "login.html";
+
+const TEACHER_PAGE = "teacher-dashboard.html";
+
+const GRADE2_PAGE = "grade2.html";
+
+const GRADE3_PAGE = "grade3.html";
+
+const GRADE4_PAGE = "grade4.html";
+
+
+/*
+--------------------------------------------------------
+ ელემენტები
+--------------------------------------------------------
+*/
+
+const statusBox =
+document.getElementById("authStatus");
+
+
+/*
+--------------------------------------------------------
+ HTML უსაფრთხო ტექსტი
+--------------------------------------------------------
+*/
+
+function escapeHtml(value){
+
+return String(value || "")
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/*
+--------------------------------------------------------
+ სტატუსის ჩვენება
+--------------------------------------------------------
+*/
+
+function showStatus(text){
+
+if(!statusBox)return;
+
+statusBox.innerHTML = text;
+
+statusBox.classList.add("show");
+
+}
+
+
+/*
+--------------------------------------------------------
+ მომხმარებლის პროფილის მოძებნა
+--------------------------------------------------------
+*/
+
+async function getProfile(userId){
+
+try{
+
+const client = window.supabaseClient;
+
+if(!client)return null;
+
+
+const result =
+await client
+.from("profiles")
+.select("user_id,full_name,role,grade")
+.eq("user_id",userId)
+.maybeSingle();
+
+
+if(result.error){
+
+console.error(
+"Profile error:",
+result.error
+);
+
+return null;
+
+}
+
+
+return result.data || null;
+
+
+}catch(error){
+
+console.error(
+"Profile exception:",
+error
+);
+
+return null;
+
+}
+
+}
+
+
+/*
+--------------------------------------------------------
+ მასწავლებლის შემოწმება
+--------------------------------------------------------
+*/
+
+function isTeacher(user,profile){
+
+const email =
+String(user?.email || "")
+.toLowerCase()
+.trim();
+
+
+return (
+profile?.role === "teacher" ||
+email === "razmadzemariam45@gmail.com"
+);
+
+}
+
+
+/*
+--------------------------------------------------------
+ კლასის განსაზღვრა
+--------------------------------------------------------
+*/
+
+function getGrade(profile){
+
+if(!profile)return null;
+
+
+const grade =
+Number(profile.grade);
+
+
+if(
+grade === 2 ||
+grade === 3 ||
+grade === 4
+){
+
+return grade;
+
+}
+
+
+return null;
+
+}
+
+
+/*
+--------------------------------------------------------
+ მომხმარებლის მიმართულება
+--------------------------------------------------------
+*/
+
+async function getDestination(){
+
+const client =
+window.supabaseClient;
+
+
+if(!client){
+
+return LOGIN_PAGE;
+
+}
+
+
+const {
+data:{session},
+error
+} =
+await client.auth.getSession();
+
+
+if(error){
+
+console.error(
+"Session error:",
+error
+);
+
+return LOGIN_PAGE;
+
+}
+
+
+if(!session?.user){
+
+return LOGIN_PAGE;
+
+}
+
+
+const user =
+session.user;
+
+
+const profile =
+await getProfile(user.id);
+
+
+/*
+მასწავლებელი
+*/
+
+if(
+isTeacher(user,profile)
+){
+
+return TEACHER_PAGE;
+
+}
+
+
+/*
+მოსწავლის კლასი
+*/
+
+const grade =
+getGrade(profile);
+
+
+if(grade === 2){
+
+return GRADE2_PAGE;
+
+}
+
+
+if(grade === 3){
+
+return GRADE3_PAGE;
+
+}
+
+
+if(grade === 4){
+
+return GRADE4_PAGE;
+
+}
+
+
+/*
+კლასის გარეშე მომხმარებელი
+არ გადადის Grade 2-ში
+*/
+
+return LOGIN_PAGE;
+
+}
+
+
+/*
+--------------------------------------------------------
+ დაცულ ბმულზე დაჭერა
+--------------------------------------------------------
+*/
+
+async function handleProtectedLink(event){
+
+event.preventDefault();
+
+
+const link =
+event.currentTarget;
+
+
+const originalHref =
+link.getAttribute("href") ||
+ACADEMY_PAGE;
+
+
+link.classList.add("auth-loading");
+
+
+try{
+
+const client =
+window.supabaseClient;
+
+
+if(!client){
+
+window.location.href =
+LOGIN_PAGE;
+
+return;
+
+}
+
+
+const {
+data:{session}
+} =
+await client.auth.getSession();
+
+
+/*
+არ არის შესული
+*/
+
+if(!session?.user){
+
+window.location.href =
+LOGIN_PAGE +
+"?return=" +
+encodeURIComponent(originalHref);
+
+return;
+
+}
+
+
+/*
+უკვე შესულია
+*/
+
+const profile =
+await getProfile(
+session.user.id
+);
+
+
+/*
+მასწავლებელი
+*/
+
+if(
+isTeacher(session.user,profile)
+){
+
+window.location.href =
+TEACHER_PAGE;
+
+return;
+
+}
+
+
+/*
+მოსწავლე
+*/
+
+const grade =
+getGrade(profile);
+
+
+if(grade === 2){
+
+window.location.href =
+GRADE2_PAGE;
+
+return;
+
+}
+
+
+if(grade === 3){
+
+window.location.href =
+GRADE3_PAGE;
+
+return;
+
+}
+
+
+if(grade === 4){
+
+window.location.href =
+GRADE4_PAGE;
+
+return;
+
+}
+
+
+/*
+არ აქვს კლასი
+*/
+
+showStatus(
+"🔐 ანგარიშზე კლასი ჯერ არ არის მინიჭებული. გთხოვთ გაიაროთ ავტორიზაცია ან დაუკავშირდეთ მასწავლებელს."
+);
+
+
+link.classList.remove("auth-loading");
+
+}catch(error){
+
+console.error(error);
+
+link.classList.remove("auth-loading");
+
+window.location.href =
+LOGIN_PAGE;
+
+}
+
+}
+
+
+/*
+--------------------------------------------------------
+ ყველა დაცული ბმულის მიერთება
+--------------------------------------------------------
+*/
+
+function bindLinks(){
+
+document
+.querySelectorAll(".auth-link")
+.forEach(link=>{
+
+link.addEventListener(
+"click",
+handleProtectedLink
+);
+
+});
+
+}
+
+
+/*
+--------------------------------------------------------
+ შესული მომხმარებლის ჩვენება
+--------------------------------------------------------
+*/
+
+async function showLoggedUser(){
+
+const client =
+window.supabaseClient;
+
+
+if(!client)return;
+
+
+try{
+
+const {
+data:{session}
+} =
+await client.auth.getSession();
+
+
+if(!session?.user)return;
+
+
+const profile =
+await getProfile(
+session.user.id
+);
+
+
+if(
+isTeacher(session.user,profile)
+){
+
+showStatus(
+"👩‍🏫 შესული ხართ როგორც <strong>მასწავლებელი</strong>. სასწავლო ცენტრში შესვლისას გაიხსნება მასწავლებლის სივრცე."
+);
+
+return;
+
+}
+
+
+const grade =
+getGrade(profile);
+
+
+if(grade){
+
+showStatus(
+"👨‍🎓 შესული ხართ როგორც მოსწავლე — <strong>მე-"+grade+" კლასი</strong>. სასწავლო ცენტრში შესვლისას გაიხსნება თქვენი კლასი."
+);
+
+return;
+
+}
+
+
+}catch(error){
+
+console.error(
+"Logged user error:",
+error
+);
+
+}
+
+}
+
+
+/*
+--------------------------------------------------------
+ ავტორიზაციის ცვლილებების მოსმენა
+--------------------------------------------------------
+*/
+
+function watchAuth(){
+
+const client =
+window.supabaseClient;
+
+
+if(!client)return;
+
+
+client.auth.onAuthStateChange(
+(event,session)=>{
+
+if(
+event === "SIGNED_IN" &&
+session?.user
+){
+
+showLoggedUser();
+
+}
+
+if(
+event === "SIGNED_OUT"
+){
+
+if(statusBox){
+
+statusBox.classList.remove(
+"show"
+);
+
+}
+
+}
+
+});
+
+}
+
+
+/*
+--------------------------------------------------------
+ დაწყება
+--------------------------------------------------------
+*/
+
+async function init(){
+
+bindLinks();
+
+await showLoggedUser();
+
+watchAuth();
+
+}
+
+
+/*
+--------------------------------------------------------
+ DOM მზადაა
+--------------------------------------------------------
+*/
+
+if(
+document.readyState === "loading"
+){
+
+document.addEventListener(
+"DOMContentLoaded",
+init
+);
+
+}else{
+
+init();
+
+}
+
+})();
+
+</script>
+
+</body>
+</html>
