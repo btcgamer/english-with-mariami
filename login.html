@@ -7,23 +7,34 @@
 
 <title>English with Mariami — შესვლა</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@Supabase/supabase-js@2"></script>
 
 <script src="config.js"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
+html,
 body{
   margin:0;
+  min-height:100%;
+}
+
+body{
   min-height:100vh;
   padding:20px;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  overflow:hidden;
+
+  overflow-x:hidden;
+
   font-family:Arial,"Noto Sans Georgian",sans-serif;
   color:#fff;
+
   background:
     radial-gradient(circle at 50% 30%,#bdf5ff 0%,#4fb9e5 20%,#14537d 48%,#020817 75%);
 }
@@ -35,7 +46,9 @@ body::after{
   left:-20%;
   width:140%;
   height:180px;
+
   border-radius:50%;
+
   pointer-events:none;
   opacity:.35;
   filter:blur(4px);
@@ -43,67 +56,106 @@ body::after{
 
 body::before{
   top:8%;
+
   border:2px solid #00eaff;
-  box-shadow:0 0 20px #00eaff,0 0 50px #00eaff;
+
+  box-shadow:
+    0 0 20px #00eaff,
+    0 0 50px #00eaff;
+
   animation:wave1 8s ease-in-out infinite;
 }
 
 body::after{
   bottom:8%;
+
   border:2px solid #075eff;
-  box-shadow:0 0 20px #075eff,0 0 50px #075eff;
+
+  box-shadow:
+    0 0 20px #075eff,
+    0 0 50px #075eff;
+
   animation:wave2 10s ease-in-out infinite;
 }
 
 @keyframes wave1{
-  0%,100%{transform:translateX(-30px) rotate(-3deg)}
-  50%{transform:translateX(30px) rotate(3deg)}
+  0%,100%{
+    transform:translateX(-30px) rotate(-3deg);
+  }
+
+  50%{
+    transform:translateX(30px) rotate(3deg);
+  }
 }
 
 @keyframes wave2{
-  0%,100%{transform:translateX(30px) rotate(3deg)}
-  50%{transform:translateX(-30px) rotate(-3deg)}
+  0%,100%{
+    transform:translateX(30px) rotate(3deg);
+  }
+
+  50%{
+    transform:translateX(-30px) rotate(-3deg);
+  }
 }
 
 .login-card{
   position:relative;
   z-index:5;
+
   width:min(430px,100%);
+
   padding:35px 28px;
+
   text-align:center;
+
   border-radius:30px;
-  background:linear-gradient(
-    145deg,
-    rgba(2,24,42,.94),
-    rgba(2,8,23,.98)
-  );
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(2,24,42,.94),
+      rgba(2,8,23,.98)
+    );
+
   border:1px solid rgba(0,234,255,.65);
+
   box-shadow:
     0 30px 90px rgba(0,0,0,.8),
     0 0 45px rgba(0,234,255,.3),
     inset 0 1px 0 rgba(255,255,255,.12);
+
   backdrop-filter:blur(18px);
 }
 
 .logo{
   font-size:58px;
   line-height:1;
+
   margin-bottom:10px;
+
   filter:
     drop-shadow(0 0 8px #00eaff)
     drop-shadow(0 0 20px #075eff);
+
   animation:logoFloat 4s ease-in-out infinite;
 }
 
 @keyframes logoFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
 }
 
 .brand{
   font-size:25px;
   font-weight:900;
+
   color:#00eaff;
+
   text-shadow:
     0 0 10px #00eaff,
     0 0 25px #00eaff;
@@ -116,7 +168,9 @@ body::after{
 
 h1{
   margin:10px 0;
+
   color:#00eaff;
+
   text-shadow:
     0 0 10px #00eaff,
     0 0 25px #00eaff;
@@ -134,6 +188,7 @@ p{
 .form-group label{
   display:block;
   margin-bottom:8px;
+
   color:#ffe600;
   font-weight:900;
 }
@@ -141,18 +196,37 @@ p{
 .form-group input{
   width:100%;
   height:52px;
+
   padding:0 15px;
+
   border-radius:15px;
+
   border:1px solid rgba(0,234,255,.4);
+
   outline:none;
-  background:linear-gradient(145deg,#041733,#020b1e);
+
+  background:
+    linear-gradient(
+      145deg,
+      #041733,
+      #020b1e
+    );
+
   color:#fff;
+
   font-size:16px;
-  box-shadow:inset 0 0 15px rgba(0,0,0,.5);
+
+  box-shadow:
+    inset 0 0 15px rgba(0,0,0,.5);
+}
+
+.form-group input::placeholder{
+  color:#8eafbd;
 }
 
 .form-group input:focus{
   border-color:#00eaff;
+
   box-shadow:
     0 0 12px rgba(0,234,255,.4),
     inset 0 0 10px rgba(0,234,255,.08);
@@ -161,27 +235,42 @@ p{
 .login-button{
   width:100%;
   height:55px;
+
   margin-top:8px;
+
   border:1px solid #8ff7ff;
   border-radius:16px;
-  background:linear-gradient(135deg,#00eaff,#008cff);
+
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #008cff
+    );
+
   color:#00131a;
+
   font-size:18px;
   font-weight:1000;
+
   cursor:pointer;
-  box-shadow:0 0 20px rgba(0,234,255,.35);
+
+  box-shadow:
+    0 0 20px rgba(0,234,255,.35);
+
   transition:.2s;
 }
 
 .login-button:hover{
   transform:translateY(-2px);
-  box-shadow:0 0 25px rgba(0,234,255,.65);
+
+  box-shadow:
+    0 0 25px rgba(0,234,255,.65);
 }
 
 .login-button:disabled{
   opacity:.6;
   cursor:wait;
-  transform:none;
 }
 
 .links{
@@ -190,20 +279,41 @@ p{
 
 .links a{
   display:inline-block;
+
   margin:5px;
+
   padding:9px 13px;
+
   border-radius:12px;
+
   color:#ffe600;
+
   font-weight:900;
+
   text-decoration:none;
+
   background:rgba(6,36,67,.8);
+
   border:1px solid rgba(0,234,255,.25);
+
+  transition:.2s;
+}
+
+.links a:hover{
+  transform:translateY(-1px);
+
+  border-color:#00eaff;
+
+  box-shadow:0 0 12px rgba(0,234,255,.25);
 }
 
 .message{
   min-height:25px;
+
   margin-top:15px;
+
   font-weight:700;
+
   line-height:1.5;
 }
 
@@ -217,10 +327,16 @@ p{
 
 .site-copyright{
   margin-top:25px;
+
   padding:15px 5px;
-  border-top:1px solid rgba(0,234,255,.2);
+
+  border-top:
+    1px solid rgba(0,234,255,.2);
+
   color:#9dc7d5;
+
   font-size:13px;
+
   text-align:center;
 }
 
@@ -289,8 +405,6 @@ p{
     type="email"
     required
     autocomplete="email"
-    inputmode="email"
-    maxlength="254"
     placeholder="შეიყვანე ელფოსტა"
   >
 
@@ -307,8 +421,6 @@ p{
     type="password"
     required
     autocomplete="current-password"
-    minlength="6"
-    maxlength="128"
     placeholder="შეიყვანე პაროლი"
   >
 
@@ -362,9 +474,11 @@ p{
 
 "use strict";
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
+/*
+====================================================
+ELEMENTS
+====================================================
+*/
 
 const form =
   document.getElementById("loginForm");
@@ -382,9 +496,11 @@ const message =
   document.getElementById("message");
 
 
-/* =====================================================
-   MESSAGE
-===================================================== */
+/*
+====================================================
+MESSAGE
+====================================================
+*/
 
 function showMessage(text,type){
 
@@ -397,35 +513,44 @@ function showMessage(text,type){
 }
 
 
-/* =====================================================
-   SUPABASE CLIENT
-   მუშაობს როგორც პირდაპირ ჩატვირთულ client-ზე,
-   ასევე config.js-ის მიერ შექმნილ client-ზე.
-===================================================== */
+/*
+====================================================
+SUPABASE CLIENT
+====================================================
+*/
 
-async function getSupabaseClient(){
+function getSupabaseClient(){
 
-  if(window.__ENGLISH_MARIAMI_SUPABASE_CLIENT){
-
+  if(
+    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT
+  ){
     return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT;
-
   }
 
-  if(window.supabaseClient){
-
+  if(
+    window.supabaseClient
+  ){
     return window.supabaseClient;
-
   }
 
-  if(window.supabase &&
-     typeof window.supabase.createClient === "function"){
+  return null;
 
-    /*
-      თუ config.js-მ უკვე შექმნა client,
-      მაგრამ გლობალურად სხვა სახელით არ გამოაქვეყნა,
-      აქ ხელით შექმნას არ ვცდილობთ.
-    */
+}
 
+
+/*
+====================================================
+WAIT FOR CONFIG.JS
+====================================================
+*/
+
+async function waitForSupabase(){
+
+  const existing =
+    getSupabaseClient();
+
+  if(existing){
+    return existing;
   }
 
   return new Promise(function(resolve){
@@ -434,14 +559,14 @@ async function getSupabaseClient(){
 
     function done(){
 
-      if(finished) return;
+      if(finished){
+        return;
+      }
 
       finished = true;
 
       resolve(
-        window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-        window.supabaseClient ||
-        null
+        getSupabaseClient()
       );
 
     }
@@ -452,145 +577,78 @@ async function getSupabaseClient(){
       {once:true}
     );
 
-    setTimeout(done,5000);
+    setTimeout(
+      done,
+      5000
+    );
 
   });
 
 }
 
 
-/* =====================================================
-   SAFE REDIRECT
-   მხოლოდ ჩვენი საიტის ცნობილი გვერდები.
-   URL-დან ნებისმიერი უცხო მისამართის გაშვება აკრძალულია.
-===================================================== */
+/*
+====================================================
+REDIRECT
+====================================================
+*/
 
-function getSafeRedirect(){
+function redirectTo(page){
 
-  const params =
-    new URLSearchParams(window.location.search);
+  window.location.replace(page);
 
-  const requested =
-    params.get("redirect");
+}
 
-  if(!requested){
-    return null;
-  }
+
+/*
+====================================================
+LOAD PROFILE
+====================================================
+*/
+
+async function getUserProfile(client,userId){
 
   try{
 
-    const decoded =
-      decodeURIComponent(requested);
+    const result =
+      await client
+        .from("profiles")
+        .select("role,grade,full_name")
+        .eq("user_id",userId)
+        .maybeSingle();
 
-    /*
-      მხოლოდ relative local paths
-    */
+    if(result.error){
 
-    if(
-      !decoded.startsWith("/") ||
-      decoded.startsWith("//") ||
-      decoded.includes("://")
-    ){
+      console.warn(
+        "Profile query error:",
+        result.error
+      );
 
       return null;
 
     }
 
-    const clean =
-      decoded.split("?")[0].split("#")[0];
-
-    const allowed = [
-
-      "/academy.html",
-      "/teacher-dashboard.html",
-      "/grade2.html",
-      "/grade3.html",
-      "/grade4.html"
-
-    ];
-
-    if(allowed.includes(clean)){
-
-      return decoded;
-
-    }
+    return result.data || null;
 
   }catch(error){
 
     console.warn(
-      "Invalid redirect:",
+      "Profile loading error:",
       error
     );
-
-  }
-
-  return null;
-
-}
-
-
-/* =====================================================
-   ROLE + GRADE ROUTING
-===================================================== */
-
-function getDestination(role,grade){
-
-  role =
-    String(role || "")
-      .trim()
-      .toLowerCase();
-
-  grade =
-    Number(grade || 0);
-
-
-  /*
-    TEACHER
-  */
-
-  if(role === "teacher"){
-
-    return "teacher-dashboard.html";
-
-  }
-
-
-  /*
-    PARENT
-  */
-
-  if(role === "parent"){
-
-    return "academy.html";
-
-  }
-
-
-  /*
-    STUDENT
-  */
-
-  if(role === "student"){
-
-    if([2,3,4].includes(grade)){
-
-      return "grade" + grade + ".html";
-
-    }
 
     return null;
 
   }
 
-
-  return null;
-
 }
 
 
-/* =====================================================
-   LOGIN
-===================================================== */
+/*
+====================================================
+LOGIN
+====================================================
+*/
 
 form.addEventListener(
   "submit",
@@ -598,6 +656,7 @@ form.addEventListener(
 
     event.preventDefault();
 
+    showMessage("");
 
     const email =
       emailInput.value
@@ -607,6 +666,12 @@ form.addEventListener(
     const password =
       passwordInput.value;
 
+
+    /*
+    ----------------------------------------------
+    VALIDATION
+    ----------------------------------------------
+    */
 
     if(!email){
 
@@ -636,52 +701,49 @@ form.addEventListener(
     }
 
 
-    if(password.length < 6){
+    /*
+    ----------------------------------------------
+    SUPABASE
+    ----------------------------------------------
+    */
+
+    const client =
+      await waitForSupabase();
+
+    if(!client){
 
       showMessage(
-        "❌ პაროლი უნდა შეიცავდეს მინიმუმ 6 სიმბოლოს.",
+        "❌ Auth სისტემის ჩატვირთვა ვერ მოხერხდა. განაახლე გვერდი.",
         "error"
       );
-
-      passwordInput.focus();
 
       return;
 
     }
 
 
+    /*
+    ----------------------------------------------
+    BUTTON
+    ----------------------------------------------
+    */
+
     loginButton.disabled =
       true;
 
     loginButton.textContent =
-      "⏳ მოწმდება...";
-
-    showMessage("","");
+      "⏳ შესვლა...";
 
 
     try{
 
-      const client =
-        await getSupabaseClient();
+      /*
+      ============================================
+      SIGN IN
+      ============================================
+      */
 
-
-      if(!client){
-
-        throw new Error(
-          "AUTH_CLIENT_NOT_READY"
-        );
-
-      }
-
-
-      /* =================================================
-         SUPABASE AUTH
-      ================================================= */
-
-      const {
-        data,
-        error
-      } =
+      const result =
         await client.auth.signInWithPassword({
 
           email:email,
@@ -689,6 +751,13 @@ form.addEventListener(
           password:password
 
         });
+
+
+      const data =
+        result.data;
+
+      const error =
+        result.error;
 
 
       if(error){
@@ -715,40 +784,31 @@ form.addEventListener(
         data.user;
 
 
-      /* =================================================
-         პროფილის წაკითხვა
-         role და grade მხოლოდ profiles-დან.
-      ================================================= */
+      /*
+      ============================================
+      PROFILE
+      ============================================
+      */
 
-      const {
-        data:profile,
-        error:profileError
-      } =
-        await client
-          .from("profiles")
-          .select("role,grade,full_name")
-          .eq("user_id",user.id)
-          .maybeSingle();
-
-
-      if(profileError){
-
-        console.error(
-          "Profile error:",
-          profileError
+      const profile =
+        await getUserProfile(
+          client,
+          user.id
         );
-
-        throw new Error(
-          "მომხმარებლის პროფილის წაკითხვა ვერ მოხერხდა."
-        );
-
-      }
 
 
       if(!profile){
 
+        /*
+        თუ პროფილი ვერ მოიძებნა,
+        სესიას ვხურავთ და მომხმარებელს
+        არ ვუშვებთ დაცულ გვერდზე.
+        */
+
+        await client.auth.signOut();
+
         throw new Error(
-          "თქვენი პროფილი ჯერ არ არის შექმნილი. გთხოვთ, დაუკავშირდით მასწავლებელს."
+          "მომხმარებლის პროფილი ვერ მოიძებნა. გთხოვთ, დაუკავშირდით მასწავლებელს."
         );
 
       }
@@ -756,7 +816,7 @@ form.addEventListener(
 
       const role =
         String(
-          profile.role || "student"
+          profile.role || ""
         )
         .trim()
         .toLowerCase();
@@ -768,142 +828,109 @@ form.addEventListener(
         );
 
 
-      /* =================================================
-         DESTINATION
-      ================================================= */
+      /*
+      ============================================
+      TEACHER
+      ============================================
+      */
 
-      const destination =
-        getDestination(
-          role,
-          grade
+      if(role === "teacher"){
+
+        showMessage(
+          "👩‍🏫 შესვლა წარმატებულია! იხსნება მასწავლებლის სივრცე...",
+          "success"
         );
 
+        setTimeout(function(){
 
-      /* =================================================
-         UNKNOWN ROLE
-      ================================================= */
-
-      if(!destination){
-
-        /*
-          სტუდენტი რეგისტრირებულია,
-          მაგრამ მასწავლებელს ჯერ კლასი არ მიუნიჭებია.
-        */
-
-        if(role === "student"){
-
-          showMessage(
-            "ℹ️ ანგარიში სწორად არის შექმნილი, მაგრამ კლასი ჯერ არ არის მინიჭებული. გთხოვთ, დაელოდოთ მასწავლებელს.",
-            "error"
+          redirectTo(
+            "teacher-dashboard.html"
           );
 
-        }else{
-
-          showMessage(
-            "❌ ანგარიშის როლი ან კლასი არასწორად არის მითითებული. დაუკავშირდი ადმინისტრატორს.",
-            "error"
-          );
-
-        }
-
-        /*
-          სესიას ვხურავთ, რადგან მომხმარებელი
-          დაუდგენელი/არასწორი მდგომარეობით არ უნდა დარჩეს.
-        */
-
-        await client.auth.signOut();
+        },500);
 
         return;
 
       }
 
 
-      /* =================================================
-         REDIRECT REQUEST
-         მხოლოდ იმ შემთხვევაში გამოიყენება,
-         თუ მოთხოვნილი გვერდი შეესაბამება როლს.
-      ================================================= */
+      /*
+      ============================================
+      PARENT
+      ============================================
+      */
 
-      const requestedRedirect =
-        getSafeRedirect();
+      if(role === "parent"){
 
+        showMessage(
+          "👨‍👩‍👧 შესვლა წარმატებულია! იხსნება სასწავლო ცენტრი...",
+          "success"
+        );
 
-      let finalDestination =
-        destination;
+        setTimeout(function(){
 
+          redirectTo(
+            "academy.html"
+          );
 
-      if(requestedRedirect){
+        },500);
 
-        const clean =
-          requestedRedirect
-            .split("?")[0]
-            .split("#")[0];
-
-
-        /*
-          STUDENT → მხოლოდ თავისი grade
-        */
-
-        if(
-          role === "student" &&
-          clean === "/grade" + grade + ".html"
-        ){
-
-          finalDestination =
-            requestedRedirect;
-
-        }
-
-
-        /*
-          TEACHER
-        */
-
-        else if(
-          role === "teacher" &&
-          clean === "/teacher-dashboard.html"
-        ){
-
-          finalDestination =
-            requestedRedirect;
-
-        }
-
-
-        /*
-          PARENT
-        */
-
-        else if(
-          role === "parent" &&
-          clean === "/academy.html"
-        ){
-
-          finalDestination =
-            requestedRedirect;
-
-        }
+        return;
 
       }
 
 
-      /* =================================================
-         SUCCESS
-      ================================================= */
+      /*
+      ============================================
+      STUDENT
+      ============================================
+      */
 
-      showMessage(
-        "✅ შესვლა წარმატებულია! გადამისამართება...",
-        "success"
-      );
+      if(role === "student"){
+
+        if(
+          ![2,3,4].includes(grade)
+        ){
+
+          await client.auth.signOut();
+
+          throw new Error(
+            "თქვენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. გთხოვთ, დაუკავშირდით მასწავლებელს."
+          );
+
+        }
 
 
-      setTimeout(function(){
-
-        window.location.replace(
-          finalDestination
+        showMessage(
+          "🎓 შესვლა წარმატებულია! იხსნება მე-"+grade+" კლასის სივრცე...",
+          "success"
         );
 
-      },500);
+
+        setTimeout(function(){
+
+          redirectTo(
+            "grade"+grade+".html"
+          );
+
+        },500);
+
+        return;
+
+      }
+
+
+      /*
+      ============================================
+      UNKNOWN ROLE
+      ============================================
+      */
+
+      await client.auth.signOut();
+
+      throw new Error(
+        "თქვენს ანგარიშზე მომხმარებლის ტიპი სწორად არ არის განსაზღვრული. გთხოვთ, დაუკავშირდით მასწავლებელს."
+      );
 
 
     }catch(error){
@@ -914,45 +941,21 @@ form.addEventListener(
       );
 
 
-      const raw =
+      const errorText =
         String(
-          error &&
-          error.message
-          ? error.message
-          : ""
+          error?.message || ""
         );
 
 
-      const lower =
-        raw.toLowerCase();
-
-
-      /* ================================================
-         NETWORK
-      ================================================ */
+      /*
+      ============================================
+      AUTH ERRORS
+      ============================================
+      */
 
       if(
-        lower.includes("failed to fetch") ||
-        lower.includes("networkerror") ||
-        lower.includes("err_name_not_resolved") ||
-        lower.includes("fetch")
-      ){
-
-        showMessage(
-          "🌐 სერვერთან დაკავშირება ვერ მოხერხდა. შეამოწმე ინტერნეტი და სცადე თავიდან.",
-          "error"
-        );
-
-      }
-
-
-      /* ================================================
-         WRONG LOGIN
-      ================================================ */
-
-      else if(
-        lower.includes("invalid login credentials") ||
-        lower.includes("invalid_credentials")
+        /invalid login credentials/i
+          .test(errorText)
       ){
 
         showMessage(
@@ -962,67 +965,37 @@ form.addEventListener(
 
       }
 
-
-      /* ================================================
-         EMAIL NOT CONFIRMED
-      ================================================ */
-
       else if(
-        lower.includes("email not confirmed")
+        /email not confirmed/i
+          .test(errorText)
       ){
 
         showMessage(
-          "📧 ელფოსტა ჯერ არ არის დადასტურებული. შეამოწმე ელფოსტა და დაადასტურე ანგარიში.",
+          "📧 ელფოსტა ჯერ არ არის დადასტურებული. შეამოწმე ელფოსტა.",
           "error"
         );
 
       }
 
-
-      /* ================================================
-         RATE LIMIT
-      ================================================ */
-
       else if(
-        lower.includes("rate limit") ||
-        lower.includes("too many requests")
+        /failed to fetch|networkerror|err_name_not_resolved|fetch/i
+          .test(errorText)
       ){
 
         showMessage(
-          "⏳ ძალიან ბევრი მცდელობაა. ცოტა ხანში სცადე თავიდან.",
+          "🌐 სერვერთან დაკავშირება ვერ მოხერხდა. შეამოწმე ინტერნეტი.",
           "error"
         );
 
       }
-
-
-      /* ================================================
-         AUTH CLIENT
-      ================================================ */
-
-      else if(
-        raw === "AUTH_CLIENT_NOT_READY"
-      ){
-
-        showMessage(
-          "❌ ავტორიზაციის სისტემა ვერ ჩაიტვირთა. განაახლე გვერდი და სცადე თავიდან.",
-          "error"
-        );
-
-      }
-
-
-      /* ================================================
-         OTHER
-      ================================================ */
 
       else{
 
         showMessage(
           "❌ " +
           (
-            raw ||
-            "შესვლა ვერ მოხერხდა. სცადე თავიდან."
+            errorText ||
+            "შესვლა ვერ მოხერხდა."
           ),
           "error"
         );
@@ -1030,8 +1003,6 @@ form.addEventListener(
       }
 
     }
-
-
     finally{
 
       loginButton.disabled =
@@ -1039,6 +1010,39 @@ form.addEventListener(
 
       loginButton.textContent =
         "🚀 შესვლა";
+
+    }
+
+  }
+);
+
+
+/*
+====================================================
+ENTER KEY / INPUT
+====================================================
+*/
+
+emailInput.addEventListener(
+  "input",
+  function(){
+
+    if(message.classList.contains("error")){
+
+      showMessage("");
+
+    }
+
+  }
+);
+
+passwordInput.addEventListener(
+  "input",
+  function(){
+
+    if(message.classList.contains("error")){
+
+      showMessage("");
 
     }
 
