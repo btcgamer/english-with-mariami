@@ -1,5 +1,5 @@
 // English with Mariami — Supabase configuration
-const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue.supabase.co';
+const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmduew.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 (function(){
@@ -23,6 +23,25 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     if(field) field.style.display='none';
   }
 
+  /* Grade 3/4 pages should stay inside the Academy.
+     Remove only the old "მთავარი" navigation link; the page content,
+     Academy link and section navigation remain unchanged. */
+  function cleanGradeNavigation(){
+    if(!/\/grade[34]\.html$/.test(path)) return;
+    const removeMainLinks=()=>{
+      document.querySelectorAll('.nav-links a[href="index.html"], .navlinks a[href="index.html"]').forEach(a=>a.remove());
+    };
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',removeMainLinks,{once:true});
+    }else{
+      removeMainLinks();
+    }
+    /* Also catch navigation inserted by another script after page load. */
+    const observer=new MutationObserver(removeMainLinks);
+    observer.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(()=>observer.disconnect(),10000);
+  }
+
   if(path.endsWith('/register.html')){
     if(document.readyState==='loading'){
       document.addEventListener('DOMContentLoaded',hideRegistrationGrade,{once:true});
@@ -30,6 +49,8 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
       hideRegistrationGrade();
     }
   }
+
+  cleanGradeNavigation();
 
   if(path.endsWith('/login.html')){
     try{
@@ -49,7 +70,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
      is slow or unavailable. */
   if(path.endsWith('/grade2.html')){
     const quizScript=document.createElement('script');
-    quizScript.src='grade2-quiz-fix.js?v=20260829-2';
+    quizScript.src='grade2-quiz-fix.js?v=20260829-3';
     quizScript.defer=true;
     document.head.appendChild(quizScript);
   }
@@ -57,17 +78,17 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   function loadAfterSupabase(){
     const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
     if(!isPublic){
-      add('session-guard.js?v=20260829-6');
-      add('grade-access.js?v=20260829-6');
-      add('logout.js?v=20260829-3');
-      add('teacher-navigation.js?v=20260829-3');
-      if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-1');
+      add('session-guard.js?v=20260829-7');
+      add('grade-access.js?v=20260829-7');
+      add('logout.js?v=20260829-4');
+      add('teacher-navigation.js?v=20260829-4');
+      if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-2');
     }
     if(path.endsWith('/academy.html')){
       const style=document.createElement('style');
       style.textContent=`.neon-world{background:#010713 url('academy-bg.svg') center/cover no-repeat!important;background-attachment:fixed!important}.neon-world:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 15%,rgba(0,20,55,.12) 48%,rgba(0,4,15,.72) 100%),linear-gradient(180deg,rgba(0,234,255,.08),rgba(0,0,20,.35));pointer-events:none;animation:academyPulse 6s ease-in-out infinite}.neon-world .grid-floor{opacity:.3!important;mix-blend-mode:screen}.neon-world .letter{z-index:3;filter:drop-shadow(0 0 12px #00eaff) drop-shadow(0 18px 18px rgba(0,30,80,.75))}@keyframes academyPulse{0%,100%{opacity:.72}50%{opacity:1}}@media(max-width:850px){.neon-world{background-position:center top!important}}`;
       document.head.appendChild(style);
-      const v=document.createElement('script');v.src='academy-visual.js?v=20260829-3';v.defer=true;document.head.appendChild(v);
+      const v=document.createElement('script');v.src='academy-visual.js?v=20260829-4';v.defer=true;document.head.appendChild(v);
     }
   }
 
