@@ -8,6 +8,29 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   const publicPages=['/login.html','/register.html','/reset-password.html','/teacher-login.html'];
   const isPublic=publicPages.some(p=>path.endsWith(p));
 
+  /* Registration no longer asks the student to choose Grade 2/3/4.
+     We keep the existing #grade element in the DOM so the old registration
+     script continues to work, but hide it and submit grade 0. A teacher can
+     assign the student's actual grade later. */
+  function hideRegistrationGrade(){
+    if(!path.endsWith('/register.html')) return;
+    const grade=document.getElementById('grade');
+    if(!grade) return;
+    grade.required=false;
+    grade.value='0';
+    grade.setAttribute('aria-hidden','true');
+    const field=grade.closest('.field') || grade.parentElement;
+    if(field) field.style.display='none';
+  }
+
+  if(path.endsWith('/register.html')){
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded',hideRegistrationGrade,{once:true});
+    }else{
+      hideRegistrationGrade();
+    }
+  }
+
   if(path.endsWith('/login.html')){
     try{
       [localStorage,sessionStorage].forEach(store=>{
@@ -25,7 +48,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
     if(!isPublic){
       add('session-guard.js?v=20260829-6');
-      add('grade-access.js?v=20260829-5');
+      add('grade-access.js?v=20260829-6');
       add('logout.js?v=20260829-3');
       add('teacher-navigation.js?v=20260829-2');
       if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-1');
@@ -49,9 +72,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     loadAfterSupabase();
   }
 
-  /* Grade 2/3/4 pages previously loaded config.js without loading supabase-js first.
-     The old config threw an exception, which left those pages completely blank.
-     Supabase officially supports loading supabase-js v2 from this CDN in browser apps. */
   if(window.supabase&&typeof window.supabase.createClient==='function'){
     init();
   }else{
