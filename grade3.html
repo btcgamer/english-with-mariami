@@ -1,1800 +1,717 @@
-<!doctype html>
-<html lang="ka">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>მე-3 კლასი | English with Mariami</title>
-
-<style>
-*{
- box-sizing:border-box;
- margin:0;
- padding:0;
-}
-
-html{
- scroll-behavior:smooth;
-}
-
-body{
- font-family:Arial,"Noto Sans Georgian",sans-serif;
- color:#fff;
- min-height:100vh;
- overflow-x:hidden;
- background:
- radial-gradient(circle at 15% 15%,#00eaff30,transparent 25%),
- radial-gradient(circle at 85% 10%,#9b00ff30,transparent 25%),
- radial-gradient(circle at 50% 90%,#0066ff25,transparent 30%),
- linear-gradient(135deg,#020617,#071333 45%,#020617);
-}
-
-/* BACKGROUND */
-
-body:before{
- content:"";
- position:fixed;
- inset:0;
- pointer-events:none;
- background:
- radial-gradient(circle at 50% 50%,transparent 0%,transparent 55%,#0008 100%);
- z-index:-2;
-}
-
-.stars{
- position:fixed;
- inset:0;
- pointer-events:none;
- z-index:-1;
-}
-
-.star{
- position:absolute;
- width:3px;
- height:3px;
- background:#fff;
- border-radius:50%;
- box-shadow:0 0 10px #fff;
- animation:twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle{
- from{opacity:.2;transform:scale(.7)}
- to{opacity:1;transform:scale(1.5)}
-}
-
-/* NAV */
-
-nav{
- position:sticky;
- top:0;
- z-index:100;
- background:#020817dd;
- backdrop-filter:blur(18px);
- border-bottom:1px solid #00eaff55;
- box-shadow:0 0 30px #00eaff15;
-}
-
-.nav-inner{
- max-width:1250px;
- margin:auto;
- padding:14px 20px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:15px;
-}
-
-.logo{
- color:#00eaff;
- font-weight:900;
- font-size:20px;
- text-decoration:none;
- text-shadow:0 0 15px #00eaff;
-}
-
-.nav-links{
- display:flex;
- gap:8px;
- flex-wrap:wrap;
-}
-
-.nav-links a{
- color:#dffaff;
- text-decoration:none;
- padding:9px 13px;
- border-radius:10px;
- transition:.25s;
-}
-
-.nav-links a:hover{
- background:#00eaff18;
- color:#00eaff;
- box-shadow:0 0 15px #00eaff22;
-}
-
-/* MAIN */
-
-.container{
- max-width:1250px;
- margin:auto;
- padding:20px;
-}
-
-/* HERO */
-
-.hero{
- min-height:650px;
- margin-top:20px;
- border:1px solid #00eaff55;
- border-radius:35px;
- position:relative;
- overflow:hidden;
- display:flex;
- align-items:center;
- padding:55px;
- background:
- radial-gradient(circle at 75% 45%,#00eaff22,transparent 28%),
- radial-gradient(circle at 90% 70%,#8a00ff22,transparent 25%),
- linear-gradient(145deg,#06142fdd,#081a3ddd);
- box-shadow:
- 0 30px 80px #000b,
- inset 0 0 80px #00eaff08;
-}
-
-.hero-content{
- max-width:650px;
- position:relative;
- z-index:3;
-}
-
-.badge{
- display:inline-block;
- padding:9px 16px;
- border:1px solid #ffe60088;
- border-radius:50px;
- color:#ffe600;
- background:#ffe6000d;
- box-shadow:0 0 20px #ffe60022;
- font-weight:bold;
- margin-bottom:20px;
-}
-
-.hero h1{
- font-size:clamp(45px,7vw,82px);
- line-height:1;
- margin-bottom:20px;
-}
-
-.gradient-text{
- background:linear-gradient(90deg,#00eaff,#6d7cff,#c900ff);
- -webkit-background-clip:text;
- color:transparent;
- filter:drop-shadow(0 0 18px #00eaff44);
-}
-
-.hero p{
- color:#b7d9e8;
- font-size:19px;
- line-height:1.7;
- margin-bottom:25px;
-}
-
-.hero-buttons{
- display:flex;
- flex-wrap:wrap;
- gap:10px;
-}
-
-.btn{
- border:0;
- cursor:pointer;
- padding:13px 19px;
- border-radius:13px;
- font-weight:bold;
- font-size:15px;
- transition:.25s;
-}
-
-.btn-neon{
- color:#00151c;
- background:#00eaff;
- box-shadow:0 0 20px #00eaff66;
-}
-
-.btn-neon:hover{
- transform:translateY(-3px) scale(1.03);
- box-shadow:0 0 35px #00eaffaa;
-}
-
-.btn-purple{
- color:#fff;
- background:#8200ff;
- box-shadow:0 0 20px #8200ff66;
-}
-
-.btn-yellow{
- color:#151000;
- background:#ffe600;
- box-shadow:0 0 20px #ffe60055;
-}
-
-/* 3D PLANET */
-
-.scene{
- position:absolute;
- right:5%;
- top:50%;
- transform:translateY(-50%);
- width:430px;
- height:430px;
- perspective:900px;
-}
-
-.planet{
- position:absolute;
- width:280px;
- height:280px;
- left:75px;
- top:70px;
- border-radius:50%;
- transform-style:preserve-3d;
- background:
- radial-gradient(circle at 30% 28%,#fff 0 2%,transparent 3%),
- radial-gradient(circle at 60% 60%,#00eaff 0%,#006eff 38%,#16006e 70%,#020617 100%);
- box-shadow:
- 0 0 25px #00eaff,
- 0 0 80px #006effaa,
- 0 0 160px #8200ff55,
- inset -35px -30px 60px #000b;
- animation:planet 12s linear infinite;
-}
-
-@keyframes planet{
- to{transform:rotateY(360deg) rotateX(8deg)}
-}
-
-.ring{
- position:absolute;
- width:390px;
- height:110px;
- left:20px;
- top:150px;
- border:5px solid #00eaff88;
- border-radius:50%;
- transform:rotateX(65deg) rotateZ(-10deg);
- box-shadow:0 0 25px #00eaff88;
- animation:ring 5s linear infinite;
-}
-
-@keyframes ring{
- to{transform:rotateX(65deg) rotateZ(350deg)}
-}
-
-.orbit{
- position:absolute;
- width:390px;
- height:390px;
- border:1px solid #00eaff22;
- border-radius:50%;
- animation:orbit 9s linear infinite;
-}
-
-.orbit-dot{
- position:absolute;
- width:16px;
- height:16px;
- border-radius:50%;
- background:#ffe600;
- box-shadow:0 0 20px #ffe600;
- top:35px;
- left:50%;
-}
-
-/* CARDS */
-
-.section{
- margin-top:25px;
- background:#061632cc;
- border:1px solid #00eaff33;
- border-radius:28px;
- padding:28px;
- box-shadow:0 20px 55px #0008;
-}
-
-.section-title{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:15px;
- margin-bottom:22px;
-}
-
-.section-title h2{
- font-size:30px;
-}
-
-.section-title span{
- color:#00eaff;
-}
-
-/* 3D TOPICS */
-
-.topic-grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:18px;
-}
-
-.topic{
- min-height:190px;
- padding:22px;
- position:relative;
- overflow:hidden;
- border-radius:22px;
- background:linear-gradient(145deg,#09244a,#06152e);
- border:1px solid #00eaff44;
- transform-style:preserve-3d;
- transition:.35s;
- box-shadow:0 15px 35px #0008;
-}
-
-.topic:hover{
- transform:perspective(700px) rotateX(5deg) rotateY(-5deg) translateY(-8px);
- border-color:#00eaffaa;
- box-shadow:0 20px 45px #00eaff22;
-}
-
-.topic-icon{
- font-size:45px;
- margin-bottom:15px;
- filter:drop-shadow(0 0 12px #00eaff);
-}
-
-.topic h3{
- font-size:21px;
- margin-bottom:8px;
-}
-
-.topic p{
- color:#94bfd0;
- font-size:14px;
- line-height:1.5;
-}
-
-.topic:after{
- content:"";
- position:absolute;
- width:100px;
- height:100px;
- right:-35px;
- bottom:-35px;
- border-radius:50%;
- background:#00eaff22;
- filter:blur(10px);
-}
-
-/* VOCAB */
-
-.search{
- width:100%;
- padding:16px;
- border-radius:14px;
- border:1px solid #00eaff55;
- outline:none;
- background:#020c20;
- color:#fff;
- font-size:16px;
- margin-bottom:20px;
- box-shadow:inset 0 0 20px #00eaff08;
-}
-
-.word-grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:14px;
-}
-
-.word{
- background:#08244a;
- border:1px solid #00eaff2c;
- border-radius:18px;
- padding:18px;
- transition:.25s;
-}
-
-.word:hover{
- transform:translateY(-5px);
- box-shadow:0 12px 30px #00eaff18;
- border-color:#00eaff77;
-}
-
-.word h3{
- color:#fff;
- font-size:22px;
-}
-
-.georgian{
- color:#ffe600;
- font-weight:bold;
- margin:7px 0;
-}
-
-.pron{
- color:#8eb6c8;
- font-size:13px;
-}
-
-.example{
- margin-top:10px;
- color:#c9e6ee;
- font-size:13px;
- line-height:1.5;
-}
-
-.word button{
- margin-top:12px;
-}
-
-/* LESSON */
-
-.lesson-grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
- gap:18px;
-}
-
-.lesson{
- background:linear-gradient(145deg,#09294e,#06162f);
- padding:24px;
- border-radius:20px;
- border-left:4px solid #00eaff;
- box-shadow:0 12px 35px #0006;
- line-height:1.8;
-}
-
-.lesson h3{
- color:#00eaff;
- margin-bottom:10px;
-}
-
-/* GRAMMAR */
-
-.grammar-tabs{
- display:flex;
- gap:8px;
- flex-wrap:wrap;
- margin-bottom:18px;
-}
-
-.grammar-tabs button{
- background:#0a3155;
- color:#fff;
- border:1px solid #00eaff33;
-}
-
-.grammar-tabs button.active{
- background:#00eaff;
- color:#00151c;
-}
-
-.grammar-panel{
- display:none;
-}
-
-.grammar-panel.active{
- display:block;
-}
-
-/* NUMBERS */
-
-.numbers{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(105px,1fr));
- gap:10px;
-}
-
-.number{
- padding:15px;
- text-align:center;
- border-radius:14px;
- background:#09294e;
- border:1px solid #00eaff22;
-}
-
-.number strong{
- display:block;
- font-size:20px;
-}
-
-.number span{
- color:#ffe600;
- font-size:13px;
-}
-
-/* QUIZ */
-
-.quiz{
- display:grid;
- gap:14px;
-}
-
-.quiz-question{
- padding:20px;
- border-radius:18px;
- background:#09294e;
- border:1px solid #00eaff22;
-}
-
-.quiz-question h3{
- margin-bottom:12px;
-}
-
-.quiz-option{
- margin:4px;
- background:#0b3a62;
- color:#fff;
-}
-
-.correct{
- color:#5cff9a;
- font-weight:bold;
-}
-
-.wrong{
- color:#ff7777;
- font-weight:bold;
-}
-
-.score{
- font-size:22px;
- color:#ffe600;
- margin-top:18px;
-}
-
-/* PROGRESS */
-
-.progress-box{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:20px;
-}
-
-.stat{
- padding:25px;
- border-radius:20px;
- background:#09294e;
- border:1px solid #00eaff33;
- text-align:center;
-}
-
-.stat-number{
- font-size:45px;
- font-weight:900;
- color:#00eaff;
- text-shadow:0 0 20px #00eaff66;
-}
-
-.progress-bar{
- height:14px;
- border-radius:20px;
- background:#020c20;
- overflow:hidden;
- margin-top:15px;
-}
-
-.progress-fill{
- height:100%;
- width:0;
- background:linear-gradient(90deg,#00eaff,#8200ff);
- box-shadow:0 0 20px #00eaff;
- transition:1s;
-}
-
-/* FOOTER */
-
-footer{
- text-align:center;
- padding:45px 20px;
- color:#779aaa;
-}
-
-.footer-neon{
- color:#00eaff;
-}
-
-/* MOBILE */
-
-@media(max-width:800px){
-
- .hero{
-  min-height:600px;
-  padding:30px;
- }
-
- .scene{
-  opacity:.25;
-  right:-100px;
- }
-
- .hero-content{
-  z-index:4;
- }
-
- .nav-links{
-  display:none;
- }
-
- .progress-box{
-  grid-template-columns:1fr;
- }
-
-}
-
-@media(max-width:500px){
-
- .container{
-  padding:11px;
- }
-
- .section{
-  padding:18px;
- }
-
- .hero{
-  border-radius:25px;
-  padding:24px;
- }
-
- .hero h1{
-  font-size:43px;
- }
-
- .hero p{
-  font-size:16px;
- }
-
- .section-title h2{
-  font-size:24px;
- }
-
- .scene{
-  transform:translateY(-50%) scale(.7);
-  right:-150px;
- }
-
-}
-</style>
-  <script src="config.js"></script>
-</head>
-
-<body>
-
-<div class="stars" id="stars"></div>
-
-<nav>
- <div class="nav-inner">
-
-  <a class="logo" href="academy.html">
-   ⚡ ENGLISH WITH MARIAMI
-  </a>
-
-  <div class="nav-links">
-   <a href="index.html">🏠 მთავარი</a>
-   <a href="academy.html">🎓 Academy</a>
-   <a href="#topics">📚 თემები</a>
-   <a href="#vocabulary">🧠 სიტყვები</a>
-   <a href="#quiz">📝 Quiz</a>
-  </div>
-
- </div>
-</nav>
-
-<main class="container">
-
-<!-- HERO -->
-
-<section class="hero">
-
- <div class="hero-content">
-
-  <div class="badge">
-   🚀 CLASS 3 • ENGLISH MISSION 2026
-  </div>
-
-  <h1>
-   მე-3 კლასი<br>
-   <span class="gradient-text">
-    English Adventure
-   </span>
-  </h1>
-
-  <p>
-   კეთილი იყოს შენი მობრძანება ინგლისურის ყველაზე
-   საინტერესო სამყაროში! 🌌
-   ისწავლე ახალი სიტყვები, ილაპარაკე ინგლისურად,
-   ამოხსენი მისიები და დააგროვე ქულები.
-  </p>
-
-  <div class="hero-buttons">
-
-   <button class="btn btn-neon"
-    onclick="speak('Welcome to English Adventure. Let us learn English together!')">
-    🔊 მისიის დაწყება
-   </button>
-
-   <button class="btn btn-purple"
-    onclick="document.getElementById('topics').scrollIntoView()">
-    🚀 დავიწყოთ სწავლა
-   </button>
-
-   <button class="btn btn-yellow"
-    onclick="document.getElementById('quiz').scrollIntoView()">
-    🏆 Quiz
-   </button>
-
-  </div>
-
- </div>
-
- <!-- 3D -->
-
- <div class="scene">
-
-  <div class="orbit">
-   <div class="orbit-dot"></div>
-  </div>
-
-  <div class="planet"></div>
-
-  <div class="ring"></div>
-
- </div>
-
-</section>
-
-
-<!-- TOPICS -->
-
-<section class="section" id="topics">
-
- <div class="section-title">
-  <h2>🌌 სასწავლო მისიები</h2>
-  <span>12 MISSIONS</span>
- </div>
-
- <div class="topic-grid">
-
-  <div class="topic">
-   <div class="topic-icon">🌞</div>
-   <h3>Daily Life</h3>
-   <p>ყოველდღიური ცხოვრება, დილა, საღამო და ყოველდღიური მოქმედებები.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">📅</div>
-   <h3>Days & Time</h3>
-   <p>კვირის დღეები, საათი, დღეს, ხვალ და გუშინ.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🌍</div>
-   <h3>Months & Seasons</h3>
-   <p>თვეები და წელიწადის ოთხი სეზონი.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🌦️</div>
-   <h3>Weather</h3>
-   <p>მზიანი, წვიმიანი, თოვლიანი, ქარიანი და სხვა ამინდი.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🏃</div>
-   <h3>Actions</h3>
-   <p>Run, jump, swim, read, write, play და ბევრი სხვა ზმნა.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🏙️</div>
-   <h3>City</h3>
-   <p>ქალაქი, ქუჩა, პარკი, მაღაზია და ტრანსპორტი.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🍎</div>
-   <h3>Food</h3>
-   <p>საკვები და სასმელები ყოველდღიური საუბრებისთვის.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">😊</div>
-   <h3>Feelings</h3>
-   <p>Happy, sad, angry, tired, hungry და სხვა გრძნობები.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🏫</div>
-   <h3>School</h3>
-   <p>სკოლა, მასწავლებელი, წიგნი, კალამი და გაკვეთილები.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">🗣️</div>
-   <h3>Speaking</h3>
-   <p>მარტივი დიალოგები რეალური სიტუაციებისთვის.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">📖</div>
-   <h3>Reading</h3>
-   <p>მოკლე და საინტერესო ტექსტების კითხვა.</p>
-  </div>
-
-  <div class="topic">
-   <div class="topic-icon">✍️</div>
-   <h3>Writing</h3>
-   <p>საკუთარი წინადადებებისა და პატარა ტექსტების წერა.</p>
-  </div>
-
- </div>
-
-</section>
-
-
-<!-- VOCABULARY -->
-
-<section class="section" id="vocabulary">
-
- <div class="section-title">
-  <h2>🧠 სიტყვების ლაბორატორია</h2>
-  <span>VOCABULARY</span>
- </div>
-
- <input
-  id="search"
-  class="search"
-  placeholder="🔎 მოძებნე ინგლისური ან ქართული სიტყვა..."
- >
-
- <div id="words" class="word-grid"></div>
-
-</section>
-
-
-<!-- READING -->
-
-<section class="section">
-
- <div class="section-title">
-  <h2>📖 Reading Zone</h2>
-  <span>READ</span>
- </div>
-
- <div class="lesson-grid">
-
-  <div class="lesson">
-
-   <h3>🌞 My Day</h3>
-
-   <p id="reading1">
-    My name is Mari.
-    I get up at seven o'clock.
-    I wash my face and have breakfast.
-    Then I go to school.
-    I study English and read books.
-    After school I go home and do my homework.
-    In the evening I play with my friends.
-    I have dinner with my family and go to bed at nine o'clock.
-   </p>
-
-   <br>
-
-   <p class="pron">
-    ჩემი სახელია მარი.
-    შვიდ საათზე ვიღვიძებ.
-    სახეს ვიბან და ვსაუზმობ.
-    შემდეგ სკოლაში მივდივარ.
-    ვსწავლობ ინგლისურს და ვკითხულობ წიგნებს.
-    სკოლის შემდეგ სახლში მივდივარ და დავალებას ვაკეთებ.
-   </p>
-
-   <button class="btn btn-neon"
-    onclick="speak(document.getElementById('reading1').innerText)">
-    🔊 მოსმენა
-   </button>
-
-  </div>
-
-
-  <div class="lesson">
-
-   <h3>🌧️ A Rainy Day</h3>
-
-   <p id="reading2">
-    Today it is rainy.
-    Anna takes her umbrella and walks to school.
-    She has English, maths and art.
-    At lunch time she eats a sandwich and drinks water.
-    After school the rain stops.
-    Anna plays in the park with her brother.
-   </p>
-
-   <br>
-
-   <p class="pron">
-    დღეს წვიმიანი ამინდია.
-    ანა იღებს ქოლგას და სკოლაში მიდის.
-    მას აქვს ინგლისური, მათემატიკა და ხელოვნება.
-    სადილის დროს სენდვიჩს ჭამს და წყალს სვამს.
-   </p>
-
-   <button class="btn btn-neon"
-    onclick="speak(document.getElementById('reading2').innerText)">
-    🔊 მოსმენა
-   </button>
-
-  </div>
-
- </div>
-
-</section>
-
-
-<!-- SPEAKING -->
-
-<section class="section">
-
- <div class="section-title">
-  <h2>🗣️ Speaking Arena</h2>
-  <span>SPEAK</span>
- </div>
-
- <div class="lesson-grid">
-
-  <div class="lesson">
-
-   <h3>🏫 At School</h3>
-
-   <p>
-    A: Hello! What is your name?<br>
-    B: My name is Nino.<br>
-    A: What class are you in?<br>
-    B: I am in class three.<br>
-    A: What is your favourite subject?<br>
-    B: My favourite subject is English.
-   </p>
-
-   <button class="btn btn-purple"
-    onclick="speak('Hello! What is your name? My name is Nino. What class are you in? I am in class three. What is your favourite subject? My favourite subject is English.')">
-    🔊 დიალოგის მოსმენა
-   </button>
-
-  </div>
-
-
-  <div class="lesson">
-
-   <h3>🛒 At the Shop</h3>
-
-   <p>
-    A: Can I have two apples, please?<br>
-    B: Here you are.<br>
-    A: How much is it?<br>
-    B: It is three lari.<br>
-    A: Thank you!<br>
-    B: You are welcome!
-   </p>
-
-   <button class="btn btn-purple"
-    onclick="speak('Can I have two apples, please? Here you are. How much is it? It is three lari. Thank you! You are welcome!')">
-    🔊 დიალოგის მოსმენა
-   </button>
-
-  </div>
-
- </div>
-
-</section>
-
-
-<!-- GRAMMAR -->
-
-<section class="section">
-
- <div class="section-title">
-  <h2>⚡ Grammar Lab</h2>
-  <span>GRAMMAR</span>
- </div>
-
- <div class="grammar-tabs">
-
-  <button class="btn active" onclick="showGrammar('g1',this)">
-   Present Simple
-  </button>
-
-  <button class="btn" onclick="showGrammar('g2',this)">
-   Do / Does
-  </button>
-
-  <button class="btn" onclick="showGrammar('g3',this)">
-   Can
-  </button>
-
-  <button class="btn" onclick="showGrammar('g4',this)">
-   Have / Has
-  </button>
-
-  <button class="btn" onclick="showGrammar('g5',this)">
-   There is / are
-  </button>
-
-  <button class="btn" onclick="showGrammar('g6',this)">
-   Prepositions
-  </button>
-
- </div>
-
-
- <div id="g1" class="grammar-panel active lesson">
-  <h3>Present Simple</h3>
-
-  I play every day. — მე ყოველდღე ვთამაშობ.<br>
-  She plays tennis. — ის ჩოგბურთს თამაშობს.<br>
-  He goes to school. — ის სკოლაში მიდის.
-
-  <br><br>
-
-  ⭐ He / She / It-თან ზმნას ხშირად ემატება
-  <b>-s / -es</b>.
- </div>
-
-
- <div id="g2" class="grammar-panel lesson">
-  <h3>Do / Does</h3>
-
-  Do you like apples?<br>
-  Does she read books?<br><br>
-
-  Yes, I do.<br>
-  No, I don't.<br>
-  Yes, she does.<br>
-  No, she doesn't.
- </div>
-
-
- <div id="g3" class="grammar-panel lesson">
-  <h3>Can</h3>
-
-  I can swim. — ცურვა შემიძლია.<br>
-  She can sing. — მას სიმღერა შეუძლია.<br>
-  Can you ride a bike?<br>
-  Yes, I can.<br>
-  No, I can't.
- </div>
-
-
- <div id="g4" class="grammar-panel lesson">
-  <h3>Have / Has</h3>
-
-  I have a book.<br>
-  You have a bike.<br>
-  He has a dog.<br>
-  She has a red bag.
- </div>
-
-
- <div id="g5" class="grammar-panel lesson">
-  <h3>There is / There are</h3>
-
-  There is a park.<br>
-  There are three books.<br>
-  There is one apple and there are two bananas.
- </div>
-
-
- <div id="g6" class="grammar-panel lesson">
-  <h3>Prepositions</h3>
-
-  <b>in</b> — შიგნით<br>
-  The book is in the bag.<br><br>
-
-  <b>on</b> — ზედ<br>
-  The book is on the table.<br><br>
-
-  <b>under</b> — ქვეშ<br>
-  The cat is under the chair.<br><br>
-
-  <b>next to</b> — გვერდით<br>
-  The school is next to the park.
- </div>
-
-</section>
-
-
-<!-- NUMBERS -->
-
-<section class="section">
-
- <div class="section-title">
-  <h2>🔢 Number Station</h2>
-  <span>1 — 100</span>
- </div>
-
- <div id="numbers" class="numbers"></div>
-
-</section>
-
-
-<!-- WRITING -->
-
-<section class="section">
-
- <div class="section-title">
-  <h2>✍️ Writing Mission</h2>
-  <span>WRITE</span>
- </div>
-
- <div class="lesson-grid">
-
-  <div class="lesson">
-
-   <h3>🚀 Mission 1</h3>
-
-   Write 5 sentences about yourself.
-
-   <br><br>
-
-   My name is ___.<br>
-   I am ___ years old.<br>
-   I live in ___.<br>
-   My favourite food is ___.<br>
-   I like ___.
-
-  </div>
-
-
-  <div class="lesson">
-
-   <h3>🌟 Mission 2</h3>
-
-   Write about your day.
-
-   <br><br>
-
-   I get up at ___.<br>
-   I have breakfast.<br>
-   I go to ___.<br>
-   After school I ___.<br>
-   In the evening I ___.
-
-  </div>
-
- </div>
-
-</section>
-
-
-<!-- QUIZ -->
-
-<section class="section" id="quiz">
-
- <div class="section-title">
-  <h2>📝 Final Boss — Quiz</h2>
-  <span>10 QUESTIONS</span>
- </div>
-
- <div id="quizBox" class="quiz"></div>
-
- <div id="score" class="score"></div>
-
- <div class="progress-bar">
-  <div id="quizProgress" class="progress-fill"></div>
- </div>
-
-</section>
-
-
-<!-- PROGRESS -->
-
-<section class="section">
-
- <div class="section-title">
-  <h2>🏆 ჩემი პროგრესი</h2>
-  <span>PLAYER</span>
- </div>
-
- <div class="progress-box">
-
-  <div class="stat">
-   <div class="stat-number" id="lessonCount">0</div>
-   <p>დასრულებული გაკვეთილი</p>
-  </div>
-
-  <div class="stat">
-   <div class="stat-number" id="bestScore">0</div>
-   <p>საუკეთესო Quiz ქულა</p>
-  </div>
-
- </div>
-
- <br>
-
- <button class="btn btn-neon"
-  onclick="completeLesson()">
-  ✅ გაკვეთილი დავასრულე
- </button>
-
- <button class="btn btn-yellow"
-  onclick="resetProgress()">
-  🔄 პროგრესის თავიდან დაწყება
- </button>
-
-</section>
-
-</main>
-
-
-<footer>
-
- <div class="footer-neon">
-  ⚡ ENGLISH WITH MARIAMI
- </div>
-
- <br>
-
- მე-3 კლასი • English Adventure • 2026 🚀
-
- <br><br>
-
- © 2026 English with Mariami — ყველა უფლება დაცულია
- <br>
- Developed by btcgamer
-
-</footer>
-
-
-<script>
-
-/* STARS */
-
-const stars=document.getElementById("stars");
-
-for(let i=0;i<100;i++){
-
- const s=document.createElement("div");
-
- s.className="star";
-
- s.style.left=Math.random()*100+"%";
- s.style.top=Math.random()*100+"%";
- s.style.animationDelay=(Math.random()*3)+"s";
-
- stars.appendChild(s);
-
-}
-
-
-/* SPEECH */
-
-function speak(text){
-
- if(!("speechSynthesis" in window)){
-
-  alert("თქვენს ბრაუზერს ხმოვანი ფუნქცია არ აქვს.");
-
-  return;
-
- }
-
- speechSynthesis.cancel();
-
- const u=new SpeechSynthesisUtterance(text);
-
- u.lang="en-US";
- u.rate=.82;
- u.pitch=1.05;
-
- speechSynthesis.speak(u);
-
-}
-
-
-/* VOCABULARY */
-
-const words=[
-
- ["morning","დილა","მორნინგ","I get up in the morning."],
- ["afternoon","შუადღე","აფთერნუნ","Good afternoon!"],
- ["evening","საღამო","ივნინგ","Good evening!"],
- ["night","ღამე","ნაით","Good night!"],
-
- ["today","დღეს","თუდეი","Today is Monday."],
- ["tomorrow","ხვალ","თუმოროუ","See you tomorrow."],
- ["yesterday","გუშინ","იესთერდეი","Yesterday was sunny."],
-
- ["Monday","ორშაბათი","მანდეი","Monday is a school day."],
- ["Tuesday","სამშაბათი","თიუსდეი","I study on Tuesday."],
- ["Wednesday","ოთხშაბათი","უენზდეი","Wednesday is today."],
- ["Thursday","ხუთშაბათი","თერსდეი","Thursday is busy."],
- ["Friday","პარასკევი","ფრაიდეი","Friday is fun."],
- ["Saturday","შაბათი","სეთერდეი","I play on Saturday."],
- ["Sunday","კვირა","სანდეი","Sunday is a family day."],
-
- ["January","იანვარი","ჯენიუერი","January is cold."],
- ["February","თებერვალი","ფებრუერი","February is short."],
- ["March","მარტი","მარჩ","March is in spring."],
- ["April","აპრილი","ეიფრილ","April is rainy."],
- ["May","მაისი","მეი","May is warm."],
- ["June","ივნისი","ჯუნ","June is sunny."],
- ["July","ივლისი","ჯულაი","July is hot."],
- ["August","აგვისტო","ოგასთ","August is warm."],
- ["September","სექტემბერი","სეფთემბერ","School starts in September."],
- ["October","ოქტომბერი","ოქთოუბერ","October is cool."],
- ["November","ნოემბერი","ნოუვემბერ","November is cold."],
- ["December","დეკემბერი","დისემბერ","December is winter."],
-
- ["spring","გაზაფხული","სფრინგ","Spring is warm."],
- ["summer","ზაფხული","სამერ","Summer is hot."],
- ["autumn","შემოდგომა","ოთემ","Autumn is cool."],
- ["winter","ზამთარი","უინთერ","Winter is cold."],
-
- ["sunny","მზიანი","სანი","It is sunny."],
- ["rainy","წვიმიანი","რეინი","It is rainy."],
- ["cloudy","ღრუბლიანი","ქლაუდი","It is cloudy."],
- ["windy","ქარიანი","უინდი","It is windy."],
- ["snowy","თოვლიანი","სნოუი","It is snowy."],
- ["hot","ცხელი","ჰოთ","It is hot."],
- ["cold","ცივი","ქოულდ","It is cold."],
- ["warm","თბილი","უორმ","The day is warm."],
-
- ["run","სირბილი","რან","I can run."],
- ["walk","სიარული","უოქ","I walk to school."],
- ["jump","ხტომა","ჯამფ","Jump high!"],
- ["swim","ცურვა","სუიმ","I can swim."],
- ["read","კითხვა","რიდ","I read books."],
- ["write","წერა","რაით","I write a story."],
- ["draw","ხატვა","დრო","I draw a picture."],
- ["sing","სიმღერა","სინგ","I sing a song."],
- ["play","თამაში","ფლეი","I play football."],
- ["eat","ჭამა","ით","I eat breakfast."],
- ["drink","დალევა","დრინქ","I drink water."],
- ["sleep","ძილი","სლიფ","I sleep at night."],
-
- ["city","ქალაქი","სითი","I live in a city."],
- ["street","ქუჩა","სთრით","My street is quiet."],
- ["park","პარკი","პარკ","We play in the park."],
- ["school","სკოლა","სქულ","My school is big."],
- ["shop","მაღაზია","შოფ","The shop is near."],
- ["hospital","საავადმყოფო","ჰოსპითლ","The hospital is big."],
- ["library","ბიბლიოთეკა","ლაიბრერი","I read at the library."],
-
- ["bus","ავტობუსი","ბას","I go by bus."],
- ["car","მანქანა","ქარ","This is a car."],
- ["train","მატარებელი","თრეინ","The train is fast."],
- ["bike","ველოსიპედი","ბაიქ","I ride my bike."],
- ["station","სადგური","სთეიშენ","The station is near."],
-
- ["bread","პური","ბრედ","I eat bread."],
- ["cheese","ყველი","ჩიზ","I like cheese."],
- ["milk","რძე","მილქ","I drink milk."],
- ["egg","კვერცხი","ეგ","I eat an egg."],
- ["rice","ბრინჯი","რაის","I like rice."],
- ["chicken","ქათამი","ჩიქენ","I eat chicken."],
- ["banana","ბანანი","ბანანა","I like bananas."],
- ["orange","ფორთოხალი","ორინჯ","The orange is sweet."],
- ["apple","ვაშლი","ეფლ","I eat an apple."],
-
- ["hungry","მშიერი","ჰანგრი","I am hungry."],
- ["thirsty","მწყურვალი","თერსთი","I am thirsty."],
- ["happy","ბედნიერი","ჰეფი","I am happy."],
- ["sad","სევდიანი","სედ","I am sad."],
- ["tired","დაღლილი","თაიერდ","I am tired."],
- ["angry","გაბრაზებული","ენგრი","He is angry."],
-
- ["early","ადრე","ერლი","I wake up early."],
- ["late","გვიან","ლეით","Do not be late."],
- ["big","დიდი","ბიგ","The house is big."],
- ["small","პატარა","სმოლ","The cat is small."],
- ["beautiful","ლამაზი","ბიუთიფულ","The flower is beautiful."],
- ["fast","სწრაფი","ფასთ","The train is fast."],
- ["slow","ნელი","სლოუ","The turtle is slow."],
-
- ["friend","მეგობარი","ფრენდ","My friend is kind."],
- ["family","ოჯახი","ფემილი","I love my family."],
- ["teacher","მასწავლებელი","თიჩერ","My teacher is nice."],
- ["homework","საშინაო დავალება","ჰოუმუორქ","I do my homework."],
- ["book","წიგნი","ბუქ","This is my book."],
- ["pen","კალამი","ფენ","I have a pen."],
- ["table","მაგიდა","თეიბლ","The book is on the table."],
- ["chair","სკამი","ჩეარ","The bag is on the chair."],
- ["door","კარი","დორ","Open the door."],
- ["window","ფანჯარა","უინდოუ","The window is open."]
-
-];
-
-
-function renderWords(){
-
- const q=document
-  .getElementById("search")
-  .value
-  .toLowerCase();
-
- document.getElementById("words").innerHTML=
-
- words
- .filter(w=>
-  (w[0]+" "+w[1])
-  .toLowerCase()
-  .includes(q)
- )
- .map(w=>`
-
- <div class="word">
-
-  <h3>${w[0]}</h3>
-
-  <div class="georgian">
-   ${w[1]}
-  </div>
-
-  <div class="pron">
-   🔊 ${w[2]}
-  </div>
-
-  <div class="example">
-   💬 ${w[3]}
-  </div>
-
-  <button class="btn btn-yellow"
-   onclick='speak(${JSON.stringify(w[0])})'>
-   🔊 სიტყვა
-  </button>
-
-  <button class="btn btn-neon"
-   onclick='speak(${JSON.stringify(w[3])})'>
-   💬 მაგალითი
-  </button>
-
- </div>
-
- `)
- .join("");
-
-}
-
-document
- .getElementById("search")
- .addEventListener("input",renderWords);
-
-renderWords();
-
-
-/* GRAMMAR */
-
-function showGrammar(id,button){
-
- document
-  .querySelectorAll(".grammar-panel")
-  .forEach(x=>x.classList.remove("active"));
-
- document
-  .querySelectorAll(".grammar-tabs button")
-  .forEach(x=>x.classList.remove("active"));
-
- document
-  .getElementById(id)
-  .classList.add("active");
-
- button.classList.add("active");
-
-}
-
-
-/* NUMBERS */
-
-const numberNames=[
-
- "one","two","three","four","five",
- "six","seven","eight","nine","ten",
- "eleven","twelve","thirteen","fourteen",
- "fifteen","sixteen","seventeen","eighteen",
- "nineteen","twenty"
-
-];
-
-const numberGeo=[
-
- "ერთი","ორი","სამი","ოთხი","ხუთი",
- "ექვსი","შვიდი","რვა","ცხრა","ათი",
- "თერთმეტი","თორმეტი","ცამეტი","თოთხმეტი",
- "თხუთმეტი","თექვსმეტი","ჩვიდმეტი",
- "თვრამეტი","ცხრამეტი","ოცი"
-
-];
-
-const tens={
-
- 30:"thirty",
- 40:"forty",
- 50:"fifty",
- 60:"sixty",
- 70:"seventy",
- 80:"eighty",
- 90:"ninety",
- 100:"one hundred"
-
-};
-
-const numberBox=document.getElementById("numbers");
-
-for(let i=1;i<=100;i++){
-
- let english;
-
- if(i<=20){
-
-  english=numberNames[i-1];
-
- }else if(i%10===0){
-
-  english=tens[i];
-
- }else{
-
-  english=tens[Math.floor(i/10)*10]+"-"+numberNames[i%10-1];
-
- }
-
- let geo="";
-
- if(i<=20){
-  geo=numberGeo[i-1];
- }
-
- numberBox.innerHTML+=`
-
- <div class="number">
-
-  <strong>${i}</strong>
-
-  <span>${english}</span>
-
-  ${geo?`<div class="georgian">${geo}</div>`:""}
-
-  <button class="btn btn-neon"
-   onclick='speak(${JSON.stringify(english)})'>
-   🔊
-  </button>
-
- </div>
-
- `;
-
-}
-
-
-/* QUIZ */
-
-const quiz=[
-
- [
-  "What is the Georgian meaning of “happy”?",
-  ["ბედნიერი","მშიერი","დაღლილი"],
-  0
- ],
-
- [
-  "Choose: She ___ football every day.",
-  ["play","plays","playing"],
-  1
- ],
-
- [
-  "What is “წვიმიანი” in English?",
-  ["sunny","rainy","windy"],
-  1
- ],
-
- [
-  "___ you like apples?",
-  ["Do","Does","Is"],
-  0
- ],
-
- [
-  "He ___ a dog.",
-  ["have","has","can"],
-  1
- ],
-
- [
-  "There ___ three books.",
-  ["is","are","am"],
-  1
- ],
-
- [
-  "The book is ___ the table.",
-  ["on","run","happy"],
-  0
- ],
-
- [
-  "What is “მატარებელი”?",
-  ["bus","train","car"],
-  1
- ],
-
- [
-  "I ___ swim.",
-  ["can","has","does"],
-  0
- ],
-
- [
-  "What is “ზამთარი”?",
-  ["summer","winter","spring"],
-  1
- ]
-
-];
-
-let quizScore=0;
-let quizAnswered=0;
-
-function buildQuiz(){
-
- document.getElementById("quizBox").innerHTML=
-
- quiz.map((q,i)=>`
-
- <div class="quiz-question">
-
-  <h3>
-   ${i+1}. ${q[0]}
-  </h3>
-
-  ${q[1].map((answer,j)=>`
-
-   <button
-    class="btn quiz-option"
-    onclick="answerQuiz(${i},${j},this)">
-
-    ${answer}
-
-   </button>
-
-  `).join("")}
-
-  <span id="answer${i}"></span>
-
- </div>
-
- `).join("");
-
-}
-
-function answerQuiz(i,j,button){
-
- const box=document.getElementById("answer"+i);
-
- if(box.textContent)return;
-
- quizAnswered++;
-
- if(j===quiz[i][2]){
-
-  quizScore++;
-
-  box.textContent=" ✅ სწორია!";
-  box.className="correct";
-
- }else{
-
-  box.textContent=
-   " ❌ სწორი პასუხია: "+
-   quiz[i][1][quiz[i][2]];
-
-  box.className="wrong";
-
- }
-
- document.getElementById("score").textContent=
-  "🏆 ქულა: "+
-  quizScore+
-  "/"+
-  quizAnswered;
-
- document.getElementById("quizProgress").style.width=
-  (quizAnswered/quiz.length*100)+"%";
-
- if(quizAnswered===quiz.length){
-
-  const old=Number(
-   localStorage.getItem("grade3BestScore")||0
-  );
-
-  if(quizScore>old){
-
-   localStorage.setItem(
-    "grade3BestScore",
-    quizScore
-   );
-
-   document.getElementById("bestScore")
-    .textContent=quizScore;
-
+/* Grade 3 — MY PROGRESS + safe Supabase sync
+   Local cache = offline/UI continuity
+   Supabase = durable record
+*/
+(function () {
+  'use strict';
+
+  const KEY = 'grade3LearnedWords';
+  const QUIZ_KEY = 'grade3QuizAttempts';
+  const BEST_KEY = 'grade3BestScore';
+
+  function getLearned() {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(KEY) || '[]'));
+    } catch (_) {
+      return new Set();
+    }
   }
 
-  if(quizScore>=8){
+  function saveLearned(set) {
+    localStorage.setItem(KEY, JSON.stringify([...set]));
+  }
 
-   setTimeout(()=>{
+  function getBestQuiz() {
+    return Math.max(
+      0,
+      Math.min(10, Number(localStorage.getItem(BEST_KEY) || 0))
+    );
+  }
 
-    alert(
-     "🎉 საოცარია! შენ ინგლისურის ნამდვილი გმირი ხარ!"
+  function supabaseClient() {
+    return (
+      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+      window.supabaseClient ||
+      null
+    );
+  }
+
+  async function syncActivity(type, id, score, maxScore, points) {
+    const client = supabaseClient();
+
+    if (!client) return;
+
+    try {
+      const {
+        data: { user }
+      } = await client.auth.getUser();
+
+      if (!user) return;
+
+      const { data: profile } = await client
+        .from('profiles')
+        .select('role,grade')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (
+        String(profile?.role || '').toLowerCase() !== 'student' ||
+        Number(profile?.grade) !== 3
+      ) {
+        return;
+      }
+
+      await client.rpc('academy_record_activity', {
+        p_grade: 3,
+        p_activity_type: type,
+        p_activity_id: String(id),
+        p_score: Math.max(
+          0,
+          Math.min(
+            Number(maxScore) || 0,
+            Number(score) || 0
+          )
+        ),
+        p_max_score: Math.max(
+          1,
+          Number(maxScore) || 1
+        ),
+        p_points: Math.max(
+          0,
+          Math.min(
+            50,
+            Number(points) || 0
+          )
+        )
+      });
+
+    } catch (error) {
+      console.warn(
+        'Grade 3 progress sync skipped:',
+        error
+      );
+    }
+  }
+
+  function syncLearnedWord(word) {
+    const safe = String(word || '').trim();
+
+    if (!safe) return;
+
+    syncActivity(
+      'word',
+      'grade3-word-' + encodeURIComponent(safe),
+      1,
+      1,
+      0
+    );
+  }
+
+  function readQuizScore() {
+    const el = document.getElementById('quizScore');
+
+    if (!el) {
+      return getBestQuiz();
+    }
+
+    const match = String(el.textContent || '')
+      .match(/\d+(?:\.\d+)?/);
+
+    const value = match
+      ? Number(match[0])
+      : getBestQuiz();
+
+    return Math.max(
+      0,
+      Math.min(
+        10,
+        Number.isFinite(value)
+          ? value
+          : getBestQuiz()
+      )
+    );
+  }
+
+  function syncQuiz(score) {
+    const safeScore = Math.max(
+      0,
+      Math.min(10, Number(score) || 0)
     );
 
-   },300);
+    const attemptId =
+      'grade3-quiz-' +
+      Date.now() +
+      '-' +
+      Math.random()
+        .toString(36)
+        .slice(2, 8);
 
+    syncActivity(
+      'quiz',
+      attemptId,
+      safeScore,
+      10,
+      Math.min(50, safeScore * 5)
+    );
   }
 
- }
+  function ensurePanel() {
+    let panel =
+      document.getElementById(
+        'grade3WorkingProgress'
+      );
 
-}
+    if (panel) return panel;
 
+    panel = document.createElement('section');
 
-/* PROGRESS */
+    panel.id = 'grade3WorkingProgress';
+    panel.className = 'section';
 
-function loadProgress(){
+    panel.innerHTML = `
+      <div class="section-title">
+        <h2>🏆 MY PROGRESS</h2>
+        <span>CLASS 3</span>
+      </div>
 
- document.getElementById("lessonCount")
-  .textContent=
-  localStorage.getItem("grade3Lessons")||0;
+      <p class="grade3-progress-description">
+        აქ გამოჩნდება შენი სწავლის შედეგები.
+      </p>
 
- document.getElementById("bestScore")
-  .textContent=
-  localStorage.getItem("grade3BestScore")||0;
+      <div class="grade3-progress-grid">
 
-}
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">📚</div>
+          <div
+            class="grade3-progress-number"
+            id="grade3LearnedCount"
+          >0</div>
+          <div>ნასწავლი სიტყვა</div>
+        </div>
 
-function completeLesson(){
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">📝</div>
+          <div
+            class="grade3-progress-number"
+            id="grade3QuizCount"
+          >0/10</div>
+          <div>Quiz</div>
+        </div>
 
- let n=Number(
-  localStorage.getItem("grade3Lessons")||0
- )+1;
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">📈</div>
 
- localStorage.setItem(
-  "grade3Lessons",
-  n
- );
+          <div
+            class="grade3-progress-number"
+            id="grade3OverallProgress"
+          >0%</div>
 
- document.getElementById("lessonCount")
-  .textContent=n;
+          <div>პროგრესი</div>
 
-}
+          <div class="grade3-mini-bar">
+            <div id="grade3OverallFill"></div>
+          </div>
+        </div>
 
-function resetProgress(){
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">⭐</div>
 
- localStorage.removeItem("grade3Lessons");
- localStorage.removeItem("grade3BestScore");
+          <div
+            class="grade3-progress-number"
+            id="grade3Level"
+          >დამწყები</div>
 
- document.getElementById("lessonCount")
-  .textContent=0;
+          <div>დონე</div>
+        </div>
 
- document.getElementById("bestScore")
-  .textContent=0;
+      </div>
 
-}
+      <button
+        class="btn btn-yellow"
+        id="grade3ResetProgress"
+        style="margin-top:20px"
+      >
+        🔄 პროგრესის თავიდან დაწყება
+      </button>
+    `;
 
+    const style =
+      document.createElement('style');
 
-/* START */
+    style.textContent = `
+      .grade3-progress-description {
+        color:#b7d9e8;
+        margin-bottom:20px;
+      }
 
-buildQuiz();
-loadProgress();
+      .grade3-progress-grid {
+        display:grid;
+        grid-template-columns:
+          repeat(4,1fr);
+        gap:16px;
+      }
 
-</script>
+      .grade3-progress-card {
+        padding:22px 15px;
+        border-radius:20px;
 
-</body>
-</html>
+        background:
+          linear-gradient(
+            145deg,
+            #09294e,
+            #06162f
+          );
+
+        border:1px solid #00eaff33;
+
+        text-align:center;
+
+        box-shadow:
+          0 12px 35px #0006;
+
+        min-height:175px;
+      }
+
+      .grade3-progress-icon {
+        font-size:34px;
+        margin-bottom:8px;
+      }
+
+      .grade3-progress-number {
+        font-size:30px;
+        font-weight:900;
+        color:#00eaff;
+
+        text-shadow:
+          0 0 18px #00eaff55;
+
+        margin-bottom:6px;
+      }
+
+      .grade3-mini-bar {
+        height:9px;
+        background:#020c20;
+        border-radius:20px;
+        overflow:hidden;
+        margin:14px 8px 0;
+      }
+
+      .grade3-mini-bar div {
+        height:100%;
+        width:0;
+
+        background:
+          linear-gradient(
+            90deg,
+            #00eaff,
+            #8200ff
+          );
+
+        transition:.5s;
+      }
+
+      .grade3-learned-btn {
+        margin-top:10px!important;
+        font-size:12px!important;
+        padding:8px 11px!important;
+      }
+
+      .grade3-learned-btn.learned {
+        background:#5cff9a!important;
+        color:#00151c!important;
+      }
+
+      @media(max-width:800px) {
+        .grade3-progress-grid {
+          grid-template-columns:1fr 1fr;
+        }
+      }
+
+      @media(max-width:500px) {
+        .grade3-progress-grid {
+          grid-template-columns:1fr;
+        }
+
+        .grade3-progress-card {
+          min-height:145px;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    const footer =
+      document.querySelector('footer');
+
+    if (footer) {
+      footer.parentNode.insertBefore(
+        panel,
+        footer
+      );
+    } else {
+      document
+        .querySelector('main')
+        ?.appendChild(panel);
+    }
+
+    const resetButton =
+      document.getElementById(
+        'grade3ResetProgress'
+      );
+
+    if (resetButton) {
+      resetButton.addEventListener(
+        'click',
+        function () {
+
+          localStorage.removeItem(KEY);
+          localStorage.removeItem(QUIZ_KEY);
+          localStorage.removeItem(BEST_KEY);
+
+          document
+            .querySelectorAll(
+              '.grade3-learned-btn'
+            )
+            .forEach(function (button) {
+
+              button.classList.remove(
+                'learned'
+              );
+
+              button.textContent =
+                '✅ ვისწავლე';
+            });
+
+          update();
+        }
+      );
+    }
+
+    return panel;
+  }
+
+  function update() {
+    const learned = getLearned();
+
+    const total =
+      (
+        Array.isArray(
+          window.grade3WordsForProgress
+        )
+          ? window.grade3WordsForProgress.length
+          : 0
+      ) ||
+      document.querySelectorAll(
+        '#words .word'
+      ).length;
+
+    const learnedCount =
+      learned.size;
+
+    const percentage =
+      total
+        ? Math.min(
+            100,
+            Math.round(
+              learnedCount /
+              total *
+              100
+            )
+          )
+        : 0;
+
+    const best = getBestQuiz();
+
+    const learnedEl =
+      document.getElementById(
+        'grade3LearnedCount'
+      );
+
+    const quizEl =
+      document.getElementById(
+        'grade3QuizCount'
+      );
+
+    const progressEl =
+      document.getElementById(
+        'grade3OverallProgress'
+      );
+
+    const fill =
+      document.getElementById(
+        'grade3OverallFill'
+      );
+
+    const levelEl =
+      document.getElementById(
+        'grade3Level'
+      );
+
+    if (learnedEl) {
+      learnedEl.textContent =
+        learnedCount;
+    }
+
+    if (quizEl) {
+      quizEl.textContent =
+        best + '/10';
+    }
+
+    if (progressEl) {
+      progressEl.textContent =
+        percentage + '%';
+    }
+
+    if (fill) {
+      fill.style.width =
+        percentage + '%';
+    }
+
+    if (levelEl) {
+
+      let level = 'დამწყები';
+
+      if (percentage >= 100) {
+        level = '🏆 Master';
+      } else if (percentage >= 75) {
+        level = '🚀 გმირი';
+      } else if (percentage >= 50) {
+        level = '⭐ ვარსკვლავი';
+      } else if (percentage >= 25) {
+        level = '🌟 Explorer';
+      }
+
+      levelEl.textContent = level;
+    }
+  }
+
+  function addLearnButtons() {
+    const wordsBox =
+      document.getElementById('words');
+
+    if (!wordsBox) return;
+
+    const learned =
+      getLearned();
+
+    wordsBox
+      .querySelectorAll('.word')
+      .forEach(function (card) {
+
+        if (
+          card.querySelector(
+            '.grade3-learned-btn'
+          )
+        ) {
+          return;
+        }
+
+        const title =
+          card.querySelector('h3');
+
+        if (!title) return;
+
+        const word =
+          title.textContent.trim();
+
+        const btn =
+          document.createElement(
+            'button'
+          );
+
+        btn.type = 'button';
+
+        btn.className =
+          'btn btn-yellow grade3-learned-btn' +
+          (
+            learned.has(word)
+              ? ' learned'
+              : ''
+          );
+
+        btn.textContent =
+          learned.has(word)
+            ? '✓ ნასწავლია'
+            : '✅ ვისწავლე';
+
+        btn.addEventListener(
+          'click',
+          function () {
+
+            const set =
+              getLearned();
+
+            if (set.has(word)) {
+
+              set.delete(word);
+
+            } else {
+
+              set.add(word);
+
+              syncLearnedWord(word);
+            }
+
+            saveLearned(set);
+
+            btn.classList.toggle(
+              'learned',
+              set.has(word)
+            );
+
+            btn.textContent =
+              set.has(word)
+                ? '✓ ნასწავლია'
+                : '✅ ვისწავლე';
+
+            update();
+          }
+        );
+
+        card.appendChild(btn);
+      });
+  }
+
+  function watchWords() {
+    const box =
+      document.getElementById('words');
+
+    if (!box) return;
+
+    addLearnButtons();
+
+    new MutationObserver(
+      function () {
+        addLearnButtons();
+        update();
+      }
+    ).observe(
+      box,
+      {
+        childList:true,
+        subtree:true
+      }
+    );
+  }
+
+  function watchQuiz() {
+    const quizBox =
+      document.getElementById(
+        'quizBox'
+      );
+
+    if (!quizBox) return;
+
+    let counted = false;
+
+    const observer =
+      new MutationObserver(
+        function () {
+
+          const progress =
+            document.getElementById(
+              'quizProgress'
+            );
+
+          if (
+            progress &&
+            progress.style.width === '100%' &&
+            !counted
+          ) {
+
+            counted = true;
+
+            const attempts =
+              Number(
+                localStorage.getItem(
+                  QUIZ_KEY
+                ) || 0
+              ) + 1;
+
+            localStorage.setItem(
+              QUIZ_KEY,
+              String(attempts)
+            );
+
+            const score =
+              readQuizScore();
+
+            localStorage.setItem(
+              BEST_KEY,
+              String(
+                Math.max(
+                  getBestQuiz(),
+                  score
+                )
+              )
+            );
+
+            syncQuiz(score);
+
+            update();
+          }
+
+          if (
+            progress &&
+            progress.style.width !== '100%'
+          ) {
+            counted = false;
+          }
+        }
+      );
+
+    observer.observe(
+      quizBox,
+      {
+        childList:true,
+        subtree:true,
+        characterData:true,
+        attributes:true,
+        attributeFilter:['style']
+      }
+    );
+  }
+
+  function start() {
+
+    if (
+      !location.pathname
+        .toLowerCase()
+        .endsWith('grade3.html')
+    ) {
+      return;
+    }
+
+    ensurePanel();
+
+    addLearnButtons();
+
+    watchWords();
+
+    watchQuiz();
+
+    update();
+
+    setInterval(
+      update,
+      1000
+    );
+  }
+
+  if (
+    document.readyState ===
+    'loading'
+  ) {
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      start,
+      { once:true }
+    );
+
+  } else {
+
+    start();
+  }
+
+})();
