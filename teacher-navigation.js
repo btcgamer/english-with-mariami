@@ -1,80 +1,74 @@
-// English with Mariami — grade navigation
+// English with Mariami — teacher dashboard navigation
 (function () {
   'use strict';
 
   const TEACHER_EMAIL = 'razmadzemariam45@gmail.com';
-  const TEACHER_ID = 'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
   const path = location.pathname.toLowerCase();
-  const isGrade3 = /\/grade3\.html(?:$|\?)/.test(path);
-  const isGrade4 = /\/grade4\.html(?:$|\?)/.test(path);
-  const isTeacherGrade = /\/teacher-grade[234]\.html(?:$|\?)/.test(path);
+  const isAcademy = /\/academy\.html(?:$|\?)/.test(path);
 
-  if (!isGrade3 && !isGrade4 && !isTeacherGrade) return;
+  // Teacher Dashboard must NOT appear on Grade 2, Grade 3 or Grade 4 pages.
+  // It is shown only on the main Academy page and only to the teacher account.
+  if (!isAcademy) return;
 
-  function hideGradeHome() {
-    if (!isGrade3 && !isGrade4) return;
-    document.querySelectorAll('a').forEach(function (el) {
-      const href = (el.getAttribute('href') || '').toLowerCase();
-      const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
-      const isHome = href === '/' || href.endsWith('/index.html') || href === 'index.html' || text === '🏠 მთავარი' || text === 'მთავარი';
-      if (isHome) el.style.setProperty('display', 'none', 'important');
-    });
+  function getClient() {
+    return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient || null;
   }
 
   function isTeacher() {
-    const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
+    const client = getClient();
     if (!client) return Promise.resolve(false);
-    return client.auth.getSession().then(function (result) {
-      const user = result?.data?.session?.user;
-      if (!user) return false;
-      const email = String(user.email || '').trim().toLowerCase();
-      if (email === TEACHER_EMAIL || user.id === TEACHER_ID) return true;
-      return client.from('profiles').select('role').eq('user_id', user.id).maybeSingle()
-        .then(function (r) {
-          return String(r?.data?.role || '').trim().toLowerCase() === 'teacher';
-        })
-        .catch(function () { return false; });
-    }).catch(function () { return false; });
-  }
 
-  function hideTeacherPageLinks() {
-    if (!isTeacherGrade) return;
-    document.querySelectorAll('a,button').forEach(function (el) {
-      const href = (el.getAttribute('href') || '').toLowerCase();
-      const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
-      const isHome = href === '/' || href.endsWith('/index.html') || href === 'index.html' || text === '🏠 მთავარი' || text === 'მთავარი';
-      const isAcademy = href.includes('academy.html') || text === 'academy' || text.includes('🎓 academy');
-      if (isHome || isAcademy) el.style.setProperty('display', 'none', 'important');
+    return client.auth.getSession().then(function (result) {
+      const user = result && result.data && result.data.session
+        ? result.data.session.user
+        : null;
+
+      if (!user) return false;
+
+      const email = String(user.email || '').trim().toLowerCase();
+      return email === TEACHER_EMAIL;
+    }).catch(function () {
+      return false;
     });
   }
 
-  function addTeacherBack() {
-    if (!document.body || document.getElementById('teacher-only-nav')) return;
-    const nav = document.createElement('div');
-    nav.id = 'teacher-only-nav';
-    nav.innerHTML = '<a href="teacher-dashboard.html">👩‍🏫 მასწავლებლის Dashboard</a>';
-    const style = document.createElement('style');
-    style.textContent = '#teacher-only-nav{margin:10px auto;max-width:1200px;padding:0 18px;position:relative;z-index:999999}#teacher-only-nav a{display:inline-block!important;padding:11px 16px;border-radius:12px;background:linear-gradient(135deg,#075eff,#00c9f2);color:#fff!important;text-decoration:none!important;font-weight:900;box-shadow:0 0 18px #00eaff44}';
-    document.head.appendChild(style);
-    document.body.insertBefore(nav, document.body.firstChild);
+  function addTeacherDashboard() {
+    if (document.getElementById('teacher-dashboard-main-link')) return;
+
+    const nav = document.querySelector('.navlinks');
+    if (!nav) return;
+
+    const link = document.createElement('a');
+    link.id = 'teacher-dashboard-main-link';
+    link.href = 'teacher-dashboard.html';
+    link.textContent = '👩‍🏫 მასწავლებლის Dashboard';
+    link.style.background = 'linear-gradient(135deg,#075eff,#00c9f2)';
+    link.style.borderColor = '#00eaff';
+    link.style.color = '#fff';
+    link.style.fontWeight = '900';
+    link.style.boxShadow = '0 0 18px #00eaff44';
+
+    nav.appendChild(link);
   }
 
-  function enableTeacherView() {
-    hideTeacherPageLinks();
-    addTeacherBack();
-    setInterval(hideTeacherPageLinks, 250);
+  function removeTeacherDashboard() {
+    const link = document.getElementById('teacher-dashboard-main-link');
+    if (link) link.remove();
   }
 
   function start() {
-    hideGradeHome();
-    if (isTeacherGrade || isGrade3 || isGrade4) {
-      isTeacher().then(function (ok) {
-        if (ok) enableTeacherView();
-      });
-    }
-    if (isGrade3 || isGrade4) setInterval(hideGradeHome, 250);
+    isTeacher().then(function (ok) {
+      if (ok) addTeacherDashboard();
+      else removeTeacherDashboard();
+    });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+
+  // config.js initializes Supabase and then dispatches this event.
+  window.addEventListener('englishMariamiSupabaseReady', start);
 })();
