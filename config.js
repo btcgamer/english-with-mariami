@@ -19,7 +19,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     if(field) field.style.display='none';
   }
 
-  /* One login for everybody. Role + grade decide the destination. */
   function installSafeLoginRouter(){
     if(!path.endsWith('/login.html')) return;
     const install=()=>{
@@ -106,9 +105,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   cleanGradeNavigation();
   installSafeLoginRouter();
 
-  /* IMPORTANT: do not clear Supabase storage on login.html.
-     Supabase needs its persisted session during authentication and redirects. */
-
   if(path.endsWith('/grade2.html')){
     const quizScript=document.createElement('script');
     quizScript.src='grade2-quiz-fix.js?v=20260829-4';
@@ -122,7 +118,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
       add('session-guard.js?v=20260829-8');
       add('grade-access.js?v=20260829-8');
       add('logout.js?v=20260829-5');
-      add('teacher-navigation.js?v=20260829-5');
+      add('teacher-navigation.js?v=20260829-6');
       if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-2');
     }
     if(path.endsWith('/academy.html')){
