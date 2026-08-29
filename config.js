@@ -52,6 +52,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
       add('logout.js?v=20260829-3');
       add('teacher-navigation.js?v=20260829-3');
       if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-1');
+      if(path.endsWith('/grade2.html')) add('grade2-quiz-fix.js?v=20260829-1');
     }
     if(path.endsWith('/academy.html')){
       const style=document.createElement('style');
