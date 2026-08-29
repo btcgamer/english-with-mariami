@@ -1,0 +1,184 @@
+/* Grade 3 — working MY PROGRESS panel
+   This file is additive: the original grade3.html is not replaced. */
+(function(){
+  'use strict';
+
+  const KEY='grade3LearnedWords';
+  const QUIZ_KEY='grade3QuizAttempts';
+  const BEST_KEY='grade3BestScore';
+
+  function getLearned(){
+    try{return new Set(JSON.parse(localStorage.getItem(KEY)||'[]'));}
+    catch(_){return new Set();}
+  }
+
+  function saveLearned(set){
+    localStorage.setItem(KEY,JSON.stringify([...set]));
+  }
+
+  function getBestQuiz(){
+    return Math.max(0,Math.min(10,Number(localStorage.getItem(BEST_KEY)||0)));
+  }
+
+  function ensurePanel(){
+    let panel=document.getElementById('grade3WorkingProgress');
+    if(panel) return panel;
+
+    panel=document.createElement('section');
+    panel.id='grade3WorkingProgress';
+    panel.className='section';
+    panel.innerHTML=`
+      <div class="section-title">
+        <h2>🏆 MY PROGRESS</h2>
+        <span>CLASS 3</span>
+      </div>
+      <p style="color:#b7d9e8;margin-bottom:20px">აქ გამოჩნდება შენი სწავლის შედეგები.</p>
+      <div class="grade3-progress-grid">
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">📚</div>
+          <div class="grade3-progress-number" id="grade3LearnedCount">0</div>
+          <div>ნასწავლი სიტყვა</div>
+        </div>
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">📝</div>
+          <div class="grade3-progress-number" id="grade3QuizCount">0/10</div>
+          <div>Quiz</div>
+        </div>
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">📈</div>
+          <div class="grade3-progress-number" id="grade3OverallProgress">0%</div>
+          <div>პროგრესი</div>
+          <div class="grade3-mini-bar"><div id="grade3OverallFill"></div></div>
+        </div>
+        <div class="grade3-progress-card">
+          <div class="grade3-progress-icon">⭐</div>
+          <div class="grade3-progress-number" id="grade3Level">დამწყები</div>
+          <div>დონე</div>
+        </div>
+      </div>
+      <button class="btn btn-yellow" id="grade3ResetProgress" style="margin-top:20px">🔄 პროგრესის თავიდან დაწყება</button>
+    `;
+
+    const style=document.createElement('style');
+    style.textContent=`
+      .grade3-progress-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+      .grade3-progress-card{padding:22px 15px;border-radius:20px;background:linear-gradient(145deg,#09294e,#06162f);border:1px solid #00eaff33;text-align:center;box-shadow:0 12px 35px #0006;min-height:175px}
+      .grade3-progress-icon{font-size:34px;margin-bottom:8px}
+      .grade3-progress-number{font-size:30px;font-weight:900;color:#00eaff;text-shadow:0 0 18px #00eaff55;margin-bottom:6px}
+      .grade3-mini-bar{height:9px;background:#020c20;border-radius:20px;overflow:hidden;margin:14px 8px 0}
+      .grade3-mini-bar div{height:100%;width:0;background:linear-gradient(90deg,#00eaff,#8200ff);transition:.5s}
+      .grade3-learned-btn{margin-top:10px!important;font-size:12px!important;padding:8px 11px!important}
+      .grade3-learned-btn.learned{background:#5cff9a!important;color:#00151c!important}
+      @media(max-width:800px){.grade3-progress-grid{grid-template-columns:1fr 1fr}}
+      @media(max-width:500px){.grade3-progress-grid{grid-template-columns:1fr}.grade3-progress-card{min-height:145px}}
+    `;
+    document.head.appendChild(style);
+
+    const footer=document.querySelector('footer');
+    if(footer) footer.parentNode.insertBefore(panel,footer);
+    else document.querySelector('main')?.appendChild(panel);
+
+    document.getElementById('grade3ResetProgress').addEventListener('click',function(){
+      localStorage.removeItem(KEY);
+      localStorage.removeItem(QUIZ_KEY);
+      localStorage.removeItem(BEST_KEY);
+      document.querySelectorAll('.grade3-learned-btn').forEach(b=>{
+        b.classList.remove('learned');
+        b.textContent='✅ ვისწავლე';
+      });
+      update();
+    });
+
+    return panel;
+  }
+
+  function update(){
+    const learned=getLearned();
+    const total=(Array.isArray(window.grade3WordsForProgress)?window.grade3WordsForProgress.length:0) || document.querySelectorAll('#words .word').length;
+    const learnedCount=learned.size;
+    const percentage=total?Math.min(100,Math.round(learnedCount/total*100)):0;
+    const best=getBestQuiz();
+
+    const learnedEl=document.getElementById('grade3LearnedCount');
+    const quizEl=document.getElementById('grade3QuizCount');
+    const progressEl=document.getElementById('grade3OverallProgress');
+    const fill=document.getElementById('grade3OverallFill');
+    const levelEl=document.getElementById('grade3Level');
+
+    if(learnedEl) learnedEl.textContent=learnedCount;
+    if(quizEl) quizEl.textContent=best+'/10';
+    if(progressEl) progressEl.textContent=percentage+'%';
+    if(fill) fill.style.width=percentage+'%';
+    if(levelEl){
+      let level='დამწყები';
+      if(percentage>=100) level='🏆 Master';
+      else if(percentage>=75) level='🚀 გმირი';
+      else if(percentage>=50) level='⭐ ვარსკვლავი';
+      else if(percentage>=25) level='🌟 Explorer';
+      levelEl.textContent=level;
+    }
+  }
+
+  function addLearnButtons(){
+    const wordsBox=document.getElementById('words');
+    if(!wordsBox) return;
+    const learned=getLearned();
+
+    wordsBox.querySelectorAll('.word').forEach(card=>{
+      if(card.querySelector('.grade3-learned-btn')) return;
+      const title=card.querySelector('h3');
+      if(!title) return;
+      const word=title.textContent.trim();
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='btn btn-yellow grade3-learned-btn'+(learned.has(word)?' learned':'');
+      btn.textContent=learned.has(word)?'✓ ნასწავლია':'✅ ვისწავლე';
+      btn.addEventListener('click',function(){
+        const set=getLearned();
+        if(set.has(word)) set.delete(word);
+        else set.add(word);
+        saveLearned(set);
+        btn.classList.toggle('learned',set.has(word));
+        btn.textContent=set.has(word)?'✓ ნასწავლია':'✅ ვისწავლე';
+        update();
+      });
+      card.appendChild(btn);
+    });
+  }
+
+  function watchWords(){
+    const box=document.getElementById('words');
+    if(!box) return;
+    addLearnButtons();
+    new MutationObserver(function(){addLearnButtons();update()}).observe(box,{childList:true,subtree:true});
+  }
+
+  function watchQuiz(){
+    const quizBox=document.getElementById('quizBox');
+    if(!quizBox) return;
+    let counted=false;
+    const observer=new MutationObserver(function(){
+      const progress=document.getElementById('quizProgress');
+      if(progress && progress.style.width==='100%' && !counted){
+        counted=true;
+        const attempts=Number(localStorage.getItem(QUIZ_KEY)||0)+1;
+        localStorage.setItem(QUIZ_KEY,String(attempts));
+        update();
+      }
+    });
+    observer.observe(quizBox,{childList:true,subtree:true,characterData:true});
+  }
+
+  function start(){
+    if(!location.pathname.toLowerCase().endsWith('grade3.html')) return;
+    ensurePanel();
+    addLearnButtons();
+    watchWords();
+    watchQuiz();
+    update();
+    setInterval(update,1000);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
+})();
