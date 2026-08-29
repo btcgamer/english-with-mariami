@@ -23,6 +23,94 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     if(field) field.style.display='none';
   }
 
+  /* Login routing fix:
+     The old login handler routed every authenticated account directly to
+     grade{grade}.html. That meant teacher/admin accounts carrying grade=2
+     could incorrectly land in Grade 2. This guard runs before the old
+     handler and owns the redirect decision based on role + grade. */
+  function installSafeLoginRouter(){
+    if(!path.endsWith('/login.html')) return;
+
+    const install=()=>{
+      const form=document.getElementById('loginForm');
+      if(!form || form.dataset.safeRouterInstalled==='1') return;
+      form.dataset.safeRouterInstalled='1';
+
+      form.addEventListener('submit',async function(event){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+
+        const emailInput=document.getElementById('email');
+        const passwordInput=document.getElementById('password');
+        const button=document.getElementById('loginButton');
+        const message=document.getElementById('message');
+        const email=String(emailInput?.value||'').trim().toLowerCase();
+        const password=String(passwordInput?.value||'');
+        const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
+
+        if(!client || !email || !password) return;
+        if(button){button.disabled=true;button.textContent='⏳ შესვლა...';}
+        if(message){message.className='message';message.textContent='';}
+
+        try{
+          const {data,error}=await client.auth.signInWithPassword({email,password});
+          if(error) throw error;
+          if(!data?.session || !data?.user) throw new Error('სესია ვერ შეიქმნა.');
+
+          const user=data.user;
+          const {data:profile,error:profileError}=await client
+            .from('profiles')
+            .select('role,grade')
+            .eq('user_id',user.id)
+            .maybeSingle();
+
+          if(profileError) throw profileError;
+
+          const role=String(profile?.role||'').trim().toLowerCase();
+          const grade=Number(profile?.grade||0);
+          const isTeacher=role==='teacher' || user.id==='be4b1c4d-e5f2-4039-b35e-aec3c110a94a' || email==='razmadzemariam45@gmail.com';
+
+          /* Teacher/admin accounts must never be routed by grade. */
+          if(isTeacher){
+            if(message){message.className='message success';message.textContent='✅ შესვლა წარმატებულია! იხსნება მასწავლებლის სივრცე...';}
+            setTimeout(()=>location.replace('academy.html'),300);
+            return;
+          }
+
+          /* Parent keeps the existing Academy destination. */
+          if(role==='parent'){
+            if(message){message.className='message success';message.textContent='👨‍👩‍👧 იხსნება სასწავლო აკადემია...';}
+            setTimeout(()=>location.replace('academy.html'),300);
+            return;
+          }
+
+          /* Only a verified student with an assigned 2/3/4 grade may enter a grade page. */
+          if(role==='student' && [2,3,4].includes(grade)){
+            if(message){message.className='message success';message.textContent='✅ შესვლა წარმატებულია! იხსნება მე-'+grade+' კლასის სივრცე...';}
+            setTimeout(()=>location.replace('grade'+grade+'.html'),300);
+            return;
+          }
+
+          /* New/unassigned/unknown accounts stay out of all grade spaces. */
+          if(message){message.className='message error';message.textContent='⚠️ თქვენი ანგარიში ჯერ არ არის მიბმული კლასზე. გთხოვთ, დაუკავშირდეთ მასწავლებელს.';}
+          try{await client.auth.signOut();}catch(_){ }
+        }catch(error){
+          console.error('Safe login error:',error);
+          if(message){
+            message.className='message error';
+            const text=String(error?.message||'');
+            message.textContent=/invalid login credentials/i.test(text)?'❌ ელფოსტა ან პაროლი არასწორია.':'❌ '+(text||'შესვლა ვერ მოხერხდა.');
+          }
+        }finally{
+          if(button){button.disabled=false;button.textContent='🚀 შესვლა';}
+        }
+      },true);
+    };
+
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',install,{once:true});
+    else install();
+  }
+
   /* Grade 3/4 pages should stay inside the Academy.
      Remove only the old "მთავარი" navigation link; the page content,
      Academy link and section navigation remain unchanged. */
@@ -36,7 +124,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     }else{
       removeMainLinks();
     }
-    /* Also catch navigation inserted by another script after page load. */
     const observer=new MutationObserver(removeMainLinks);
     observer.observe(document.documentElement,{childList:true,subtree:true});
     setTimeout(()=>observer.disconnect(),10000);
@@ -51,6 +138,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
   }
 
   cleanGradeNavigation();
+  installSafeLoginRouter();
 
   if(path.endsWith('/login.html')){
     try{
@@ -65,9 +153,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     }catch(_){}
   }
 
-  /* Grade 2 quiz must not depend on Supabase loading.
-     Load it immediately so the quiz works even when the network/auth client
-     is slow or unavailable. */
   if(path.endsWith('/grade2.html')){
     const quizScript=document.createElement('script');
     quizScript.src='grade2-quiz-fix.js?v=20260829-3';
