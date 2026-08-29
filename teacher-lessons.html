@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<title>📚 გაკვეთილები — English with Mariami</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:#fff;
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,#00eaff30,transparent 25%),
+    radial-gradient(circle at 90% 15%,#7c3cff30,transparent 28%),
+    radial-gradient(circle at 50% 100%,#006eff30,transparent 40%),
+    linear-gradient(135deg,#01030b,#03152e 45%,#010713);
+  overflow-x:hidden;
+}
+
+/* =========================
+   3D BACKGROUND
+========================= */
+
+#visual3d{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
+  perspective:1200px;
+}
+
+.grid3d{
+  position:absolute;
+  width:180%;
+  height:180%;
+  left:-40%;
+  top:35%;
+
+  background-image:
+    linear-gradient(#00eaff18 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff18 1px,transparent 1px);
+
+  background-size:65px 65px;
+
+  transform:
+    perspective(700px)
+    rotateX(67deg)
+    translateZ(-100px);
+
+  animation:gridMove 14s linear infinite;
+}
+
+@keyframes gridMove{
+  from{
+    transform:
+      perspective(700px)
+      rotateX(67deg)
+      translateY(0)
+      translateZ(-100px);
+  }
+
+  to{
+    transform:
+      perspective(700px)
+      rotateX(67deg)
+      translateY(65px)
+      translateZ(-100px);
+  }
+}
+
+.glow{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(5px);
+  mix-blend-mode:screen;
+}
+
+.glow.a{
+  width:360px;
+  height:360px;
+  left:-120px;
+  top:15%;
+  background:radial-gradient(circle,#00eaff55,transparent 68%);
+  animation:floatA 9s ease-in-out infinite alternate;
+}
+
+.glow.b{
+  width:420px;
+  height:420px;
+  right:-130px;
+  top:5%;
+  background:radial-gradient(circle,#7c3cff55,transparent 68%);
+  animation:floatB 12s ease-in-out infinite alternate;
+}
+
+.glow.c{
+  width:400px;
+  height:400px;
+  left:35%;
+  bottom:-220px;
+  background:radial-gradient(circle,#006eff45,transparent 68%);
+  animation:floatC 11s ease-in-out infinite alternate;
+}
+
+@keyframes floatA{
+  to{
+    transform:translate3d(130px,70px,100px) scale(1.3);
+  }
+}
+
+@keyframes floatB{
+  to{
+    transform:translate3d(-120px,100px,120px) scale(1.25);
+  }
+}
+
+@keyframes floatC{
+  to{
+    transform:translate3d(80px,-100px,100px) scale(1.2);
+  }
+}
+
+.stars span{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#00eaff;
+  box-shadow:0 0 12px #00eaff;
+  animation:starFloat linear infinite;
+}
+
+@keyframes starFloat{
+  0%{
+    transform:translateY(100px) scale(.4);
+    opacity:0;
+  }
+
+  20%{
+    opacity:.8;
+  }
+
+  80%{
+    opacity:.8;
+  }
+
+  100%{
+    transform:translate3d(30px,-220px,200px) scale(1.5);
+    opacity:0;
+  }
+}
+
+.stars span:nth-child(1){left:5%;top:70%;animation-duration:8s}
+.stars span:nth-child(2){left:15%;top:40%;animation-duration:12s}
+.stars span:nth-child(3){left:25%;top:80%;animation-duration:10s}
+.stars span:nth-child(4){left:36%;top:25%;animation-duration:9s}
+.stars span:nth-child(5){left:47%;top:65%;animation-duration:13s}
+.stars span:nth-child(6){left:58%;top:35%;animation-duration:11s}
+.stars span:nth-child(7){left:68%;top:78%;animation-duration:8s}
+.stars span:nth-child(8){left:76%;top:20%;animation-duration:14s}
+.stars span:nth-child(9){left:87%;top:60%;animation-duration:10s}
+.stars span:nth-child(10){left:94%;top:35%;animation-duration:12s}
+.stars span:nth-child(11){left:20%;top:10%;animation-duration:15s}
+.stars span:nth-child(12){left:50%;top:15%;animation-duration:9s}
+
+/* =========================
+   HEADER
+========================= */
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  background:rgba(2,8,23,.82);
+  backdrop-filter:blur(20px);
+
+  border-bottom:1px solid #00eaff30;
+
+  box-shadow:
+    0 10px 40px #0008,
+    inset 0 -1px #00eaff12;
+}
+
+.nav{
+  max-width:1250px;
+  margin:auto;
+
+  min-height:68px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:15px;
+  padding:10px 18px;
+}
+
+.brand{
+  color:#fff;
+  text-decoration:none;
+  font-weight:1000;
+  letter-spacing:.5px;
+
+  text-shadow:
+    0 0 15px #00eaff55;
+}
+
+.navlinks{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.navlinks a{
+  color:#dffaff;
+  text-decoration:none;
+
+  padding:10px 14px;
+  border-radius:12px;
+
+  border:1px solid #00eaff22;
+  background:#03152caa;
+
+  transition:.25s;
+}
+
+.navlinks a:hover{
+  transform:translateY(-2px);
+  border-color:#00eaff66;
+  box-shadow:0 0 20px #00eaff22;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.wrap{
+  width:min(1250px,calc(100% - 28px));
+  margin:auto;
+}
+
+.main{
+  padding:30px 0 60px;
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+
+  padding:35px 25px;
+  border-radius:28px;
+
+  border:1px solid #00eaff35;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(4,24,52,.88),
+      rgba(3,11,30,.82)
+    );
+
+  box-shadow:
+    0 30px 90px #000b,
+    0 0 50px #00eaff10,
+    inset 0 1px #ffffff12;
+
+  transform:perspective(1200px) rotateX(0deg);
+  transition:.4s;
+}
+
+.hero:hover{
+  transform:perspective(1200px) rotateX(1deg) translateY(-2px);
+
+  box-shadow:
+    0 35px 100px #000c,
+    0 0 65px #00eaff18,
+    inset 0 1px #ffffff18;
+}
+
+.hero:after{
+  content:"";
+
+  position:absolute;
+  width:300px;
+  height:300px;
+
+  right:-100px;
+  top:-130px;
+
+  border-radius:50%;
+
+  background:radial-gradient(circle,#00eaff25,transparent 70%);
+
+  animation:heroOrb 6s ease-in-out infinite alternate;
+}
+
+@keyframes heroOrb{
+  to{
+    transform:translate(-80px,80px) scale(1.3);
+  }
+}
+
+.badge{
+  display:inline-block;
+
+  padding:7px 12px;
+  border-radius:999px;
+
+  color:#00eaff;
+  background:#00eaff10;
+  border:1px solid #00eaff35;
+
+  font-weight:1000;
+  font-size:12px;
+
+  box-shadow:0 0 20px #00eaff12;
+}
+
+.hero h1{
+  margin:14px 0 8px;
+
+  font-size:clamp(30px,5vw,55px);
+
+  line-height:1.05;
+
+  text-shadow:
+    0 0 20px #00eaff25,
+    0 8px 35px #000;
+}
+
+.hero p{
+  margin:0;
+  color:#afd6e1;
+  font-size:16px;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+  margin-top:18px;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.control{
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(135deg,#061a36dd,#031027dd);
+
+  border:1px solid #00eaff28;
+
+  box-shadow:
+    0 18px 50px #0008,
+    inset 0 1px #ffffff0b;
+}
+
+.control label{
+  display:block;
+  margin-bottom:9px;
+
+  color:#8fcbd9;
+  font-weight:900;
+  font-size:13px;
+}
+
+.control select{
+  width:100%;
+
+  min-height:48px;
+
+  border-radius:14px;
+  border:1px solid #00eaff40;
+
+  padding:0 14px;
+
+  background:#020b1d;
+  color:#fff;
+
+  font-size:15px;
+  font-weight:800;
+
+  outline:none;
+}
+
+.control select:focus{
+  border-color:#00eaff;
+  box-shadow:0 0 25px #00eaff20;
+}
+
+/* =========================
+   GRADE BUTTONS
+========================= */
+
+.grades{
+  margin-top:20px;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.grade-btn{
+  position:relative;
+  overflow:hidden;
+
+  border:1px solid #00eaff30;
+
+  border-radius:22px;
+
+  padding:20px;
+
+  cursor:pointer;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #061c3b,
+      #031027
+    );
+
+  box-shadow:
+    0 15px 45px #0008,
+    inset 0 1px #ffffff10;
+
+  transition:
+    transform .3s,
+    box-shadow .3s,
+    border-color .3s;
+}
+
+.grade-btn:hover{
+  transform:
+    translateY(-6px)
+    perspective(600px)
+    rotateX(2deg);
+
+  border-color:#00eaff75;
+
+  box-shadow:
+    0 25px 60px #000b,
+    0 0 35px #00eaff18;
+}
+
+.grade-btn.active{
+  border-color:#00eaff;
+
+  box-shadow:
+    0 20px 55px #000b,
+    0 0 35px #00eaff30,
+    inset 0 0 25px #00eaff08;
+}
+
+.grade-icon{
+  font-size:34px;
+  display:block;
+  margin-bottom:8px;
+}
+
+.grade-name{
+  font-size:20px;
+  font-weight:1000;
+}
+
+.grade-desc{
+  display:block;
+  margin-top:5px;
+  color:#91bfcb;
+  font-size:12px;
+}
+
+/* =========================
+   LESSON HEADER
+========================= */
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin:30px 0 15px;
+}
+
+.section-title h2{
+  margin:0;
+  font-size:24px;
+
+  text-shadow:
+    0 0 15px #00eaff25;
+}
+
+.lesson-count{
+  color:#82c6d5;
+  font-size:13px;
+}
+
+/* =========================
+   LESSON GRID
+========================= */
+
+.lessons{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+/* 3D CARD */
+
+.lesson-card{
+  position:relative;
+  overflow:hidden;
+
+  min-height:220px;
+
+  padding:22px;
+
+  border-radius:24px;
+
+  text-decoration:none;
+  color:#fff;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(7,29,59,.94),
+      rgba(2,12,29,.94)
+    );
+
+  border:1px solid #00eaff2b;
+
+  box-shadow:
+    0 20px 55px #0009,
+    inset 0 1px #ffffff0c;
+
+  transform:
+    perspective(1000px)
+    rotateX(0)
+    rotateY(0);
+
+  transition:
+    transform .35s,
+    box-shadow .35s,
+    border-color .35s;
+}
+
+.lesson-card:before{
+  content:"";
+
+  position:absolute;
+  width:180px;
+  height:180px;
+
+  right:-70px;
+  top:-70px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #00eaff20,
+      transparent 70%
+    );
+
+  transition:.4s;
+}
+
+.lesson-card:after{
+  content:"";
+
+  position:absolute;
+  left:-120%;
+  top:0;
+
+  width:50%;
+  height:100%;
+
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #ffffff12,
+    transparent
+  );
+
+  transform:skewX(-20deg);
+
+  transition:.7s;
+}
+
+.lesson-card:hover{
+  transform:
+    perspective(1000px)
+    rotateX(3deg)
+    rotateY(-3deg)
+    translateY(-8px);
+
+  border-color:#00eaff70;
+
+  box-shadow:
+    0 30px 75px #000c,
+    0 0 35px #00eaff18;
+}
+
+.lesson-card:hover:before{
+  transform:scale(1.6);
+}
+
+.lesson-card:hover:after{
+  left:140%;
+}
+
+.number{
+  display:inline-grid;
+
+  place-items:center;
+
+  width:38px;
+  height:38px;
+
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075eff,
+      #00c8e8
+    );
+
+  font-weight:1000;
+
+  box-shadow:
+    0 0 22px #00eaff25,
+    0 8px 20px #0007;
+}
+
+.lesson-icon{
+  font-size:34px;
+  margin-top:17px;
+}
+
+.lesson-card h3{
+  margin:9px 0 6px;
+
+  font-size:20px;
+
+  position:relative;
+  z-index:2;
+}
+
+.lesson-card p{
+  margin:0;
+
+  color:#94c4cf;
+
+  font-size:13px;
+
+  line-height:1.5;
+
+  position:relative;
+  z-index:2;
+}
+
+.lesson-meta{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+
+  margin-top:17px;
+
+  position:relative;
+  z-index:2;
+}
+
+.tag{
+  padding:6px 9px;
+
+  border-radius:999px;
+
+  background:#00eaff0c;
+  border:1px solid #00eaff22;
+
+  color:#8dd5e2;
+
+  font-size:11px;
+  font-weight:900;
+}
+
+.open{
+  position:absolute;
+
+  right:18px;
+  bottom:18px;
+
+  padding:8px 11px;
+
+  border-radius:11px;
+
+  background:#075eff;
+  color:#fff;
+
+  font-size:11px;
+  font-weight:1000;
+
+  box-shadow:0 0 18px #075eff35;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  margin-top:20px;
+
+  padding:45px 20px;
+
+  text-align:center;
+
+  border-radius:22px;
+
+  border:1px dashed #00eaff30;
+
+  background:#031229aa;
+
+  color:#8dbbc6;
+}
+
+.error{
+  padding:25px;
+
+  text-align:center;
+
+  border-radius:18px;
+
+  background:#4b1420aa;
+
+  border:1px solid #ff506666;
+
+  color:#ffb5bd;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-copyright{
+  padding:25px 15px 35px;
+
+  text-align:center;
+
+  color:#6793a0;
+
+  font-size:12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .lessons{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grades{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .nav{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .navlinks{
+    width:100%;
+  }
+
+  .navlinks a{
+    flex:1;
+    text-align:center;
+  }
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .lessons{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:26px 18px;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    animation:none!important;
+    transition:none!important;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     3D BACKGROUND
+========================= -->
+
+<div id="visual3d">
+
+  <div class="grid3d"></div>
+
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+  <div class="glow c"></div>
+
+  <div class="stars">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="top">
+
+  <div class="nav">
+
+    <a class="brand" href="teacher-dashboard.html">
+      ⚡ ENGLISH WITH MARIAMI
+    </a>
+
+    <div class="navlinks">
+
+      <a href="teacher-dashboard.html">
+        👩‍🏫 მასწავლებელი
+      </a>
+
+      <a href="teacher-journal.html">
+        📋 ჟურნალი
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="wrap main">
+
+<section class="hero">
+
+  <span class="badge">
+    📚 TEACHER LESSON CENTER
+  </span>
+
+  <h1>
+    გაკვეთილების ცენტრი
+  </h1>
+
+  <p>
+    აირჩიე კლასი, მოსწავლე და გაკვეთილი.
+    თითოეული გაკვეთილი შეიცავს სიტყვებს,
+    გამოთქმას, გრამატიკას, მაგალითებს,
+    სავარჯიშოებს და მოსმენის ფუნქციას.
+  </p>
+
+</section>
+
+
+<!-- =========================
+     CONTROLS
+========================= -->
+
+<section class="controls">
+
+  <div class="control">
+
+    <label>
+      🎓 აირჩიე კლასი
+    </label>
+
+    <select id="gradeSelect">
+
+      <option value="2">
+        🌱 მე-2 კლასი
+      </option>
+
+      <option value="3">
+        🚀 მე-3 კლასი
+      </option>
+
+      <option value="4">
+        ⭐ მე-4 კლასი
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div class="control">
+
+    <label>
+      👨‍🎓 მოსწავლე
+    </label>
+
+    <select id="studentSelect">
+
+      <option value="">
+        ჯერ აირჩიე მოსწავლე
+      </option>
+
+    </select>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     GRADE BUTTONS
+========================= -->
+
+<section class="grades">
+
+  <button class="grade-btn active" data-grade="2">
+
+    <span class="grade-icon">
+      🌱
+    </span>
+
+    <span class="grade-name">
+      მე-2 კლასი
+    </span>
+
+    <span class="grade-desc">
+      Beginner English
+    </span>
+
+  </button>
+
+
+  <button class="grade-btn" data-grade="3">
+
+    <span class="grade-icon">
+      🚀
+    </span>
+
+    <span class="grade-name">
+      მე-3 კლასი
+    </span>
+
+    <span class="grade-desc">
+      Elementary English
+    </span>
+
+  </button>
+
+
+  <button class="grade-btn" data-grade="4">
+
+    <span class="grade-icon">
+      ⭐
+    </span>
+
+    <span class="grade-name">
+      მე-4 კლასი
+    </span>
+
+    <span class="grade-desc">
+      Pre-Intermediate English
+    </span>
+
+  </button>
+
+</section>
+
+
+<!-- =========================
+     LESSON TITLE
+========================= -->
+
+<div class="section-title">
+
+  <h2 id="lessonTitle">
+    🌱 მე-2 კლასის გაკვეთილები
+  </h2>
+
+  <span class="lesson-count" id="lessonCount">
+    იტვირთება...
+  </span>
+
+</div>
+
+
+<!-- =========================
+     LESSONS
+========================= -->
+
+<section id="lessons" class="lessons">
+
+  <div class="empty">
+    📡 გაკვეთილები იტვირთება...
+  </div>
+
+</section>
+
+
+</main>
+
+
+<footer class="site-copyright">
+
+  © 2026 English with Mariami
+  — ყველა უფლება დაცულია
+  • Developed by btcgamer
+
+</footer>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js?v=20260828-6"></script>
+
+
+<script>
+
+(function(){
+
+'use strict';
+
+
+const TEACHER_ID =
+  'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
+
+
+const client =
+  window.supabaseClient;
+
+
+const gradeSelect =
+  document.getElementById('gradeSelect');
+
+
+const studentSelect =
+  document.getElementById('studentSelect');
+
+
+const lessonsBox =
+  document.getElementById('lessons');
+
+
+const lessonTitle =
+  document.getElementById('lessonTitle');
+
+
+const lessonCount =
+  document.getElementById('lessonCount');
+
+
+let currentGrade = '2';
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/[&<>"']/g,function(c){
+
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+
+      }[c];
+
+    });
+
+}
+
+
+/* =========================
+   CHECK TEACHER
+========================= */
+
+async function checkTeacher(){
+
+  if(!client){
+
+    throw new Error(
+      'Supabase client ვერ მოიძებნა.'
+    );
+
+  }
+
+
+  const {
+    data:{
+      session
+    }
+  } =
+  await client.auth.getSession();
+
+
+  if(
+    !session ||
+    session.user.id !== TEACHER_ID
+  ){
+
+    location.replace('login.html');
+
+    return null;
+
+  }
+
+
+  const {
+    data:profile,
+    error
+  } =
+  await client
+    .from('profiles')
+    .select('full_name,role')
+    .eq(
+      'user_id',
+      session.user.id
+    )
+    .maybeSingle();
+
+
+  if(
+    error ||
+    !profile ||
+    profile.role !== 'teacher'
+  ){
+
+    location.replace('index.html');
+
+    return null;
+
+  }
+
+
+  return session;
+
+}
+
+
+/* =========================
+   LOAD STUDENTS
+========================= */
+
+async function loadStudents(){
+
+  studentSelect.innerHTML = `
+    <option value="">
+      ყველა მოსწავლე
+    </option>
+  `;
+
+
+  const {
+    data,
+    error
+  } =
+  await client
+    .from('profiles')
+    .select(
+      'user_id,full_name,grade'
+    )
+    .eq('role','student')
+    .order('full_name');
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  (data || [])
+
+    .filter(function(student){
+
+      return String(student.grade) ===
+        String(currentGrade);
+
+    })
+
+    .forEach(function(student){
+
+      const option =
+        document.createElement('option');
+
+      option.value =
+        student.user_id;
+
+      option.textContent =
+        student.full_name ||
+        'მოსწავლე';
+
+      studentSelect.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================
+   LOAD LESSONS
+========================= */
+
+async function loadLessons(){
+
+  lessonsBox.innerHTML = `
+    <div class="empty">
+      ⚡ გაკვეთილები იტვირთება...
+    </div>
+  `;
+
+
+  const {
+    data,
+    error
+  } =
+  await client
+    .from('lessons')
+    .select('*')
+    .eq(
+      'grade',
+      Number(currentGrade)
+    )
+    .eq(
+      'published',
+      true
+    )
+    .order(
+      'lesson_number',
+      {
+        ascending:true
+      }
+    );
+
+
+  if(error){
+
+    console.error(error);
+
+    lessonsBox.innerHTML = `
+      <div class="error">
+        გაკვეთილების ჩატვირთვა ვერ მოხერხდა.
+        <br><br>
+        შეამოწმე Supabase-ის
+        <b>lessons</b> ცხრილი და RLS.
+      </div>
+    `;
+
+    lessonCount.textContent =
+      'შეცდომა';
+
+    return;
+
+  }
+
+
+  const lessons =
+    data || [];
+
+
+  lessonTitle.textContent =
+    currentGrade === '2'
+      ? '🌱 მე-2 კლასის გაკვეთილები'
+      : currentGrade === '3'
+      ? '🚀 მე-3 კლასის გაკვეთილები'
+      : '⭐ მე-4 კლასის გაკვეთილები';
+
+
+  lessonCount.textContent =
+    lessons.length +
+    ' გაკვეთილი';
+
+
+  if(!lessons.length){
+
+    lessonsBox.innerHTML = `
+      <div class="empty">
+        ამ კლასისთვის გაკვეთილები
+        ჯერ არ არის დამატებული.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  lessonsBox.innerHTML =
+    lessons.map(function(lesson){
+
+      return `
+
+        <a
+          class="lesson-card"
+          href="lesson.html?id=${encodeURIComponent(lesson.id)}&student_id=${encodeURIComponent(studentSelect.value || '')}"
+        >
+
+          <span class="number">
+            ${esc(lesson.lesson_number)}
+          </span>
+
+          <div class="lesson-icon">
+            ${esc(lesson.icon || '📚')}
+          </div>
+
+          <h3>
+            ${esc(lesson.title_ka)}
+          </h3>
+
+          <p>
+            ${esc(lesson.title_en || '')}
+          </p>
+
+          <div class="lesson-meta">
+
+            <span class="tag">
+              📖 სიტყვები
+            </span>
+
+            <span class="tag">
+              🔊 მოსმენა
+            </span>
+
+            <span class="tag">
+              🧠 გრამატიკა
+            </span>
+
+            <span class="tag">
+              ✍️ სავარჯიშო
+            </span>
+
+          </div>
+
+          <span class="open">
+            გახსნა →
+          </span>
+
+        </a>
+
+      `;
+
+    }).join('');
+
+}
+
+
+/* =========================
+   CHANGE GRADE
+========================= */
+
+async function changeGrade(grade){
+
+  currentGrade =
+    String(grade);
+
+  gradeSelect.value =
+    currentGrade;
+
+
+  document
+    .querySelectorAll('.grade-btn')
+    .forEach(function(btn){
+
+      btn.classList.toggle(
+        'active',
+        btn.dataset.grade === currentGrade
+      );
+
+    });
+
+
+  await loadStudents();
+
+  await loadLessons();
+
+}
+
+
+/* =========================
+   EVENTS
+========================= */
+
+gradeSelect.addEventListener(
+  'change',
+  function(){
+
+    changeGrade(
+      this.value
+    );
+
+  }
+);
+
+
+studentSelect.addEventListener(
+  'change',
+  function(){
+
+    /*
+      ბარათებში student_id
+      ავტომატურად განახლდება
+    */
+
+    document
+      .querySelectorAll('.lesson-card')
+      .forEach(function(card){
+
+        const url =
+          new URL(
+            card.href,
+            location.href
+          );
+
+        url.searchParams.set(
+          'student_id',
+          this.value || ''
+        );
+
+        card.href =
+          url.toString();
+
+      },this);
+
+  }
+);
+
+
+document
+  .querySelectorAll('.grade-btn')
+  .forEach(function(btn){
+
+    btn.addEventListener(
+      'click',
+      function(){
+
+        changeGrade(
+          this.dataset.grade
+        );
+
+      }
+    );
+
+  });
+
+
+/* =========================
+   INIT
+========================= */
+
+(async function(){
+
+  try{
+
+    const session =
+      await checkTeacher();
+
+    if(!session) return;
+
+
+    await loadStudents();
+
+    await loadLessons();
+
+  }catch(error){
+
+    console.error(error);
+
+    lessonsBox.innerHTML = `
+      <div class="error">
+        სისტემასთან დაკავშირება ვერ მოხერხდა.
+        <br><br>
+        ${esc(error.message)}
+      </div>
+    `;
+
+  }
+
+})();
+
+
+})();
+
+</script>
+
+</body>
+</html>
