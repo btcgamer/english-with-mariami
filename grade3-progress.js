@@ -1,5 +1,5 @@
-/* Grade 3 — working MY PROGRESS panel
-   This file is additive: the original grade3.html is not replaced. */
+/* Grade 3 — MY PROGRESS + safe Supabase sync
+   The local cache is kept for offline/UI continuity; Supabase is the durable record. */
 (function(){
   'use strict';
 
@@ -12,12 +12,49 @@
     catch(_){return new Set();}
   }
 
-  function saveLearned(set){
-    localStorage.setItem(KEY,JSON.stringify([...set]));
+  function saveLearned(set){localStorage.setItem(KEY,JSON.stringify([...set]));}
+
+  function getBestQuiz(){return Math.max(0,Math.min(10,Number(localStorage.getItem(BEST_KEY)||0)));}
+
+  function supabaseClient(){return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;}
+
+  async function syncActivity(type,id,score,maxScore,points){
+    const client=supabaseClient();
+    if(!client) return;
+    try{
+      const {data:{user}}=await client.auth.getUser();
+      if(!user) return;
+      const {data:profile}=await client.from('profiles').select('role,grade').eq('user_id',user.id).maybeSingle();
+      if(String(profile?.role||'').toLowerCase()!=='student' || Number(profile?.grade)!==3) return;
+      await client.rpc('academy_record_activity',{
+        p_grade:3,
+        p_activity_type:type,
+        p_activity_id:String(id),
+        p_score:Math.max(0,Math.min(Number(maxScore)||0,Number(score)||0)),
+        p_max_score:Math.max(1,Number(maxScore)||1),
+        p_points:Math.max(0,Math.min(50,Number(points)||0))
+      });
+    }catch(error){console.warn('Grade 3 progress sync skipped:',error);}
   }
 
-  function getBestQuiz(){
-    return Math.max(0,Math.min(10,Number(localStorage.getItem(BEST_KEY)||0)));
+  function syncLearnedWord(word){
+    const safe=String(word||'').trim();
+    if(!safe) return;
+    syncActivity('word','grade3-word-'+encodeURIComponent(safe),1,1,0);
+  }
+
+  function readQuizScore(){
+    const el=document.getElementById('quizScore');
+    if(!el) return getBestQuiz();
+    const match=String(el.textContent||'').match(/\d+(?:\.\d+)?/);
+    const value=match?Number(match[0]):getBestQuiz();
+    return Math.max(0,Math.min(10,Number.isFinite(value)?value:getBestQuiz()));
+  }
+
+  function syncQuiz(score){
+    const safeScore=Math.max(0,Math.min(10,Number(score)||0));
+    const attemptId='grade3-quiz-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+    syncActivity('quiz',attemptId,safeScore,10,Math.min(50,safeScore*5));
   }
 
   function ensurePanel(){
@@ -28,33 +65,13 @@
     panel.id='grade3WorkingProgress';
     panel.className='section';
     panel.innerHTML=`
-      <div class="section-title">
-        <h2>🏆 MY PROGRESS</h2>
-        <span>CLASS 3</span>
-      </div>
+      <div class="section-title"><h2>🏆 MY PROGRESS</h2><span>CLASS 3</span></div>
       <p style="color:#b7d9e8;margin-bottom:20px">აქ გამოჩნდება შენი სწავლის შედეგები.</p>
       <div class="grade3-progress-grid">
-        <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">📚</div>
-          <div class="grade3-progress-number" id="grade3LearnedCount">0</div>
-          <div>ნასწავლი სიტყვა</div>
-        </div>
-        <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">📝</div>
-          <div class="grade3-progress-number" id="grade3QuizCount">0/10</div>
-          <div>Quiz</div>
-        </div>
-        <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">📈</div>
-          <div class="grade3-progress-number" id="grade3OverallProgress">0%</div>
-          <div>პროგრესი</div>
-          <div class="grade3-mini-bar"><div id="grade3OverallFill"></div></div>
-        </div>
-        <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">⭐</div>
-          <div class="grade3-progress-number" id="grade3Level">დამწყები</div>
-          <div>დონე</div>
-        </div>
+        <div class="grade3-progress-card"><div class="grade3-progress-icon">📚</div><div class="grade3-progress-number" id="grade3LearnedCount">0</div><div>ნასწავლი სიტყვა</div></div>
+        <div class="grade3-progress-card"><div class="grade3-progress-icon">📝</div><div class="grade3-progress-number" id="grade3QuizCount">0/10</div><div>Quiz</div></div>
+        <div class="grade3-progress-card"><div class="grade3-progress-icon">📈</div><div class="grade3-progress-number" id="grade3OverallProgress">0%</div><div>პროგრესი</div><div class="grade3-mini-bar"><div id="grade3OverallFill"></div></div></div>
+        <div class="grade3-progress-card"><div class="grade3-progress-icon">⭐</div><div class="grade3-progress-number" id="grade3Level">დამწყები</div><div>დონე</div></div>
       </div>
       <button class="btn btn-yellow" id="grade3ResetProgress" style="margin-top:20px">🔄 პროგრესის თავიდან დაწყება</button>
     `;
@@ -82,10 +99,7 @@
       localStorage.removeItem(KEY);
       localStorage.removeItem(QUIZ_KEY);
       localStorage.removeItem(BEST_KEY);
-      document.querySelectorAll('.grade3-learned-btn').forEach(b=>{
-        b.classList.remove('learned');
-        b.textContent='✅ ვისწავლე';
-      });
+      document.querySelectorAll('.grade3-learned-btn').forEach(b=>{b.classList.remove('learned');b.textContent='✅ ვისწავლე';});
       update();
     });
 
@@ -94,17 +108,15 @@
 
   function update(){
     const learned=getLearned();
-    const total=(Array.isArray(window.grade3WordsForProgress)?window.grade3WordsForProgress.length:0) || document.querySelectorAll('#words .word').length;
+    const total=(Array.isArray(window.grade3WordsForProgress)?window.grade3WordsForProgress.length:0)||document.querySelectorAll('#words .word').length;
     const learnedCount=learned.size;
     const percentage=total?Math.min(100,Math.round(learnedCount/total*100)):0;
     const best=getBestQuiz();
-
     const learnedEl=document.getElementById('grade3LearnedCount');
     const quizEl=document.getElementById('grade3QuizCount');
     const progressEl=document.getElementById('grade3OverallProgress');
     const fill=document.getElementById('grade3OverallFill');
     const levelEl=document.getElementById('grade3Level');
-
     if(learnedEl) learnedEl.textContent=learnedCount;
     if(quizEl) quizEl.textContent=best+'/10';
     if(progressEl) progressEl.textContent=percentage+'%';
@@ -123,7 +135,6 @@
     const wordsBox=document.getElementById('words');
     if(!wordsBox) return;
     const learned=getLearned();
-
     wordsBox.querySelectorAll('.word').forEach(card=>{
       if(card.querySelector('.grade3-learned-btn')) return;
       const title=card.querySelector('h3');
@@ -136,7 +147,7 @@
       btn.addEventListener('click',function(){
         const set=getLearned();
         if(set.has(word)) set.delete(word);
-        else set.add(word);
+        else {set.add(word);syncLearnedWord(word);}
         saveLearned(set);
         btn.classList.toggle('learned',set.has(word));
         btn.textContent=set.has(word)?'✓ ნასწავლია':'✅ ვისწავლე';
@@ -163,10 +174,14 @@
         counted=true;
         const attempts=Number(localStorage.getItem(QUIZ_KEY)||0)+1;
         localStorage.setItem(QUIZ_KEY,String(attempts));
+        const score=readQuizScore();
+        localStorage.setItem(BEST_KEY,String(Math.max(getBestQuiz(),score)));
+        syncQuiz(score);
         update();
       }
+      if(progress && progress.style.width!=='100%') counted=false;
     });
-    observer.observe(quizBox,{childList:true,subtree:true,characterData:true});
+    observer.observe(quizBox,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['style']});
   }
 
   function start(){
