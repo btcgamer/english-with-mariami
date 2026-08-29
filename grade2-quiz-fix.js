@@ -1,4 +1,4 @@
-/* Grade 2 quiz fix — standalone, 30 questions, no dependency on inline globals */
+/* Grade 2 quiz — 30 questions + safe Supabase progress sync */
 (function(){
   'use strict';
 
@@ -17,9 +17,29 @@
 
   const byId=id=>document.getElementById(id);
   const shuffle=a=>a.slice().sort(()=>Math.random()-0.5);
-  const esc=s=>String(s).replace(/[&<>"']/g,m=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[m]));
+  const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  function client(){return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;}
+
+  async function syncQuizResult(correctCount){
+    const c=client();
+    if(!c) return;
+    try{
+      const {data:{user}}=await c.auth.getUser();
+      if(!user) return;
+      const {data:profile}=await c.from('profiles').select('role,grade').eq('user_id',user.id).maybeSingle();
+      if(String(profile?.role||'').toLowerCase()!=='student' || Number(profile?.grade)!==2) return;
+      const activityId='grade2-quiz-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+      await c.rpc('academy_record_activity',{
+        p_grade:2,
+        p_activity_type:'quiz',
+        p_activity_id:activityId,
+        p_score:Math.max(0,Math.min(30,correctCount)),
+        p_max_score:30,
+        p_points:Math.max(0,Math.min(300,correctCount*10))
+      });
+    }catch(error){console.warn('Grade 2 progress sync skipped:',error);}
+  }
 
   function updateScore(points){
     try{
@@ -86,6 +106,7 @@
           if(answered===current.length){
             const correctCount=earned/10;
             const percent=Math.round(correctCount/current.length*100);
+            syncQuizResult(correctCount);
             result.innerHTML=`<div class="quiz-result">
               <div>🎉 ქვიზი დასრულებულია!</div>
               <strong>⭐ ${earned} / 300</strong>
@@ -106,9 +127,6 @@
     buildQuiz();
   }
 
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',boot,{once:true});
-  }else{
-    boot();
-  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
+  else boot();
 })();
