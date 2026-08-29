@@ -1,5 +1,5 @@
 // English with Mariami — Supabase configuration
-const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmduew.supabase.co';
+const SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 (function(){
@@ -44,6 +44,16 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
     }catch(_){}
   }
 
+  /* Grade 2 quiz must not depend on Supabase loading.
+     Load it immediately so the quiz works even when the network/auth client
+     is slow or unavailable. */
+  if(path.endsWith('/grade2.html')){
+    const quizScript=document.createElement('script');
+    quizScript.src='grade2-quiz-fix.js?v=20260829-2';
+    quizScript.defer=true;
+    document.head.appendChild(quizScript);
+  }
+
   function loadAfterSupabase(){
     const add=(src)=>{const s=document.createElement('script');s.src=src;s.defer=true;document.head.appendChild(s)};
     if(!isPublic){
@@ -52,7 +62,6 @@ const SUPABASE_ANON_KEY = 'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
       add('logout.js?v=20260829-3');
       add('teacher-navigation.js?v=20260829-3');
       if(path.endsWith('/grade3.html')) add('grade3-progress.js?v=20260829-1');
-      if(path.endsWith('/grade2.html')) add('grade2-quiz-fix.js?v=20260829-1');
     }
     if(path.endsWith('/academy.html')){
       const style=document.createElement('style');
