@@ -1,0 +1,77 @@
+name: Safe auth cleanup
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply exact auth cleanup
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          register = Path('register.html')
+          login = Path('login.html')
+
+          r = register.read_text(encoding='utf-8')
+          l = login.read_text(encoding='utf-8')
+
+          # Remove only the redundant client-side profiles.upsert() block.
+          r_pattern = re.compile(
+              r'''\n\s*try \{\n\s*await supabaseClient\n\s*\.from\("profiles"\)\n\s*\.upsert\(\n\s*\{\n\s*user_id: data\.user\.id,\n\s*\n\s*full_name: fullName,\n\s*\n\s*grade: grade,\n\s*\n\s*points: 0\n\s*\},\n\s*\{\n\s*onConflict: "user_id"\n\s*\}\n\s*\);\n\s*\n\s*\} catch \(profileError\) \{\n\s*\n\s*console\.warn\(\n\s*"Profile save:",\n\s*profileError\n\s*\);\n\s*\n\s*\}''',
+              re.MULTILINE,
+          )
+          r2, n = r_pattern.subn('', r, count=1)
+          if n != 1:
+              raise SystemExit('register.html: expected profiles.upsert block was not found exactly once')
+
+          # Remove the hardcoded email constant and its client-side full-access redirect.
+          l_pattern = re.compile(
+              r'''\n/\*\n====================================================\nმხოლოდ ეს ანგარიშია სრული წვდომის მქონე\n====================================================\n\*/\n\nconst FULL_ACCESS_EMAIL =\n  "datogringo@gmail\.com";\n''',
+              re.MULTILINE,
+          )
+          l2, n1 = l_pattern.subn('\n', l, count=1)
+          if n1 != 1:
+              raise SystemExit('login.html: hardcoded FULL_ACCESS_EMAIL block was not found exactly once')
+
+          l_redirect = re.compile(
+              r'''\n\s*/\*\n\s*================================================\n\s*1\. DATOGRINGO\n\s*სრული წვდომა\n\s*================================================\n\s*\*/\n\n\s*if\(\n\s*email === FULL_ACCESS_EMAIL\n\s*\)\{.*?\n\s*return;\n\n\s*\}\n''',
+              re.DOTALL,
+          )
+          l3, n2 = l_redirect.subn('\n', l2, count=1)
+          if n2 != 1:
+              raise SystemExit('login.html: hardcoded full-access redirect block was not found exactly once')
+
+          register.write_text(r2, encoding='utf-8')
+          login.write_text(l3, encoding='utf-8')
+
+          print('Auth cleanup applied successfully.')
+
+      - name: Verify exact cleanup
+        shell: bash
+        run: |
+          ! grep -n 'profiles.*upsert\|FULL_ACCESS_EMAIL\|datogringo@gmail.com' register.html login.html
+
+      - name: Commit changes and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add register.html login.html .github/workflows/safe-auth-cleanup.yml
+          git rm .github/workflows/safe-auth-cleanup.yml
+          git diff --cached --quiet && exit 0
+          git commit -m 'fix: remove redundant auth client logic'
+          git push
