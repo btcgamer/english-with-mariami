@@ -1,1 +1,1064 @@
-<!doctype html><html lang="ka"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>მასწავლებლის გვერდი — English with Mariami</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 10% 10%,#075eff44,transparent 28%),radial-gradient(circle at 90% 90%,#00eaff33,transparent 28%),#020817}.wrap{width:min(1150px,94%);margin:auto}.top{padding:18px 0;border-bottom:1px solid #00eaff22;background:#020817cc}.brand{color:#00eaff;font-weight:900;text-decoration:none}.head{text-align:center;padding:38px 0 25px}.head h1{font-size:clamp(30px,5vw,52px);margin:10px 0}.head p{color:#b9dce7}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:22px;border-radius:22px;background:#03142bf0;border:1px solid #00eaff33;box-shadow:0 15px 45px #0006}.stat{text-align:center}.stat b{display:block;font-size:34px;margin:8px}.stat span{color:#b9dce7}.card h2{margin-top:0;color:#ffe600}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}.toolbar input,.toolbar select,.toolbar button{height:44px;border-radius:12px;border:1px solid #00eaff44;background:#020b1e;color:#fff;padding:0 12px}.toolbar button{background:#075eff;font-weight:900;cursor:pointer}.quiz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.quiz-btn{display:block;text-align:center;padding:16px 10px;border-radius:15px;text-decoration:none;color:#fff;background:linear-gradient(135deg,#075eff,#00aeea);font-weight:900}.danger{background:#6e1d2d}.msg{color:#b9dce7}.section{margin-top:18px}.foot{text-align:center;padding:30px;color:#7899a8}@media(max-width:850px){.cards,.quiz-grid{grid-template-columns:1fr}}</style></head><body><header class="top"><div class="wrap"><a class="brand" href="teacher-dashboard.html">🌈📚 English with Mariami</a></div></header><main class="wrap"><section class="head"><div>TEACHER DASHBOARD</div><h1>👩‍🏫 მარიამი რაზმაძე</h1><p>მასწავლებლის პირადი სივრცე — ჟურნალი და Quiz-ები ერთ გვერდზე</p></section><section class="cards"><div class="card stat"><b id="presentCount">—</b><span>🟢 დღეს მოვიდა</span></div><div class="card stat"><b id="lateCount">—</b><span>🟡 დღეს დააგვიანა</span></div><div class="card stat"><b id="absentCount">—</b><span>🔴 დღეს გააცდინა</span></div></section><section class="card section"><h2>📋 მოსწავლეების ჟურნალი</h2><div class="toolbar"><input id="date" type="date"><select id="grade"><option value="all">ყველა კლასი</option><option value="2">მე-2 კლასი</option><option value="3">მე-3 კლასი</option><option value="4">მე-4 კლასი</option></select><button id="load">🔄 განახლება</button></div><div id="table" class="msg">იტვირთება...</div></section><section class="card section"><h2>🧠 Quiz-ები</h2><div class="quiz-grid"><a class="quiz-btn" href="teacher-grade2.html">📗 მე-2 კლასის Quiz</a><a class="quiz-btn" href="teacher-grade3.html">📘 მე-3 კლასის Quiz</a><a class="quiz-btn" href="teacher-grade4.html">📕 მე-4 კლასის Quiz</a></div></section><section class="card section"><h2>🏆 მოსწავლეების Quiz შედეგები</h2><div id="quizTable" class="msg">იტვირთება...</div></section><section class="card section"><button id="logout" class="quiz-btn danger" style="border:0;cursor:pointer;width:100%">🚪 მასწავლებლის ანგარიშიდან გამოსვლა</button></section></main><footer class="foot">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js?v=teacher-nav-2"></script><script>(async()=>{const ID='be4b1c4d-e5f2-4039-b35e-aec3c110a94a',c=window.supabaseClient;const teacherLogin=()=>window.location.replace('teacher-login.html?logout=1');if(!c){teacherLogin();return}try{const{data:{session}}=await c.auth.getSession();if(!session||session.user.id!==ID){teacherLogin();return}const{data:p}=await c.from('profiles').select('role').eq('user_id',ID).maybeSingle();if(!p||p.role!=='teacher'){try{await c.auth.signOut({scope:'global'})}catch(_){}teacherLogin();return}document.getElementById('date').value=new Date().toISOString().slice(0,10);document.getElementById('logout').onclick=async()=>{document.getElementById('logout').disabled=true;try{await c.auth.signOut({scope:'global'})}catch(_){}try{localStorage.clear();sessionStorage.clear()}catch(_){}teacherLogin()};document.getElementById('table').innerHTML='<p>ჟურნალი მზადაა ჩასატვირთად.</p>';document.getElementById('quizTable').innerHTML='<p>Quiz შედეგები მზადაა.</p>'}catch(e){console.error(e);teacherLogin()}})();</script></body></html>
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>მასწავლებლის გვერდი — English with Mariami</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 10% 10%,#075eff44,transparent 28%),
+radial-gradient(circle at 90% 90%,#00eaff33,transparent 28%),
+#020817;
+}
+
+.wrap{
+width:min(1200px,94%);
+margin:auto;
+}
+
+.top{
+padding:18px 0;
+border-bottom:1px solid #00eaff22;
+background:#020817dd;
+}
+
+.brand{
+color:#00eaff;
+font-weight:900;
+text-decoration:none;
+font-size:20px;
+}
+
+.head{
+text-align:center;
+padding:38px 0 25px;
+}
+
+.head h1{
+font-size:clamp(30px,5vw,52px);
+margin:10px 0;
+}
+
+.head p{
+color:#b9dce7;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+}
+
+.card{
+padding:22px;
+border-radius:22px;
+background:#03142bf0;
+border:1px solid #00eaff33;
+box-shadow:0 15px 45px #0006;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat b{
+display:block;
+font-size:34px;
+margin:8px;
+color:#00eaff;
+}
+
+.stat span{
+color:#b9dce7;
+}
+
+.card h2{
+margin-top:0;
+color:#ffe600;
+}
+
+.toolbar{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:15px;
+}
+
+.toolbar input,
+.toolbar select,
+.toolbar button{
+height:44px;
+border-radius:12px;
+border:1px solid #00eaff44;
+background:#020b1e;
+color:#fff;
+padding:0 12px;
+}
+
+.toolbar button{
+background:#075eff;
+font-weight:900;
+cursor:pointer;
+}
+
+.table-wrap{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+min-width:700px;
+}
+
+th,td{
+padding:13px 10px;
+border-bottom:1px solid #00eaff18;
+text-align:left;
+}
+
+th{
+color:#00eaff;
+}
+
+tr:hover{
+background:#00eaff08;
+}
+
+.badge{
+display:inline-block;
+padding:6px 10px;
+border-radius:10px;
+font-weight:bold;
+}
+
+.present{
+background:#0c6b3c;
+}
+
+.late{
+background:#806400;
+}
+
+.absent{
+background:#721d2d;
+}
+
+.none{
+background:#344054;
+}
+
+.quiz-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+}
+
+.quiz-btn{
+display:block;
+text-align:center;
+padding:16px 10px;
+border-radius:15px;
+text-decoration:none;
+color:#fff;
+background:linear-gradient(135deg,#075eff,#00aeea);
+font-weight:900;
+border:0;
+cursor:pointer;
+}
+
+.danger{
+background:#6e1d2d;
+}
+
+.msg{
+color:#b9dce7;
+}
+
+.student-name{
+font-weight:bold;
+color:#fff;
+}
+
+.grade{
+color:#ffe600;
+font-weight:bold;
+}
+
+.score{
+font-weight:bold;
+color:#00eaff;
+}
+
+.empty{
+padding:25px;
+text-align:center;
+color:#9ab7c2;
+}
+
+.foot{
+text-align:center;
+padding:30px;
+color:#7899a8;
+}
+
+@media(max-width:900px){
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.quiz-grid{
+grid-template-columns:1fr;
+}
+}
+
+@media(max-width:600px){
+.cards{
+grid-template-columns:1fr;
+}
+
+.toolbar>*{
+width:100%;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+<div class="wrap">
+<a class="brand" href="teacher-dashboard.html">
+🌈📚 English with Mariami
+</a>
+</div>
+</header>
+
+<main class="wrap">
+
+<section class="head">
+<div>TEACHER DASHBOARD</div>
+
+<h1>👩‍🏫 მარიამი რაზმაძე</h1>
+
+<p>
+მასწავლებლის პირადი სივრცე — მოსწავლეები, ჟურნალი და Quiz შედეგები
+</p>
+</section>
+
+
+<!-- სტატისტიკა -->
+
+<section class="cards">
+
+<div class="card stat">
+<b id="studentCount">—</b>
+<span>👨‍🎓 მოსწავლეები</span>
+</div>
+
+<div class="card stat">
+<b id="presentCount">—</b>
+<span>🟢 დღეს მოვიდა</span>
+</div>
+
+<div class="card stat">
+<b id="lateCount">—</b>
+<span>🟡 დღეს დააგვიანა</span>
+</div>
+
+<div class="card stat">
+<b id="absentCount">—</b>
+<span>🔴 დღეს გააცდინა</span>
+</div>
+
+</section>
+
+
+<!-- მოსწავლეების ჟურნალი -->
+
+<section class="card" style="margin-top:18px">
+
+<h2>📋 მოსწავლეების ჟურნალი</h2>
+
+<div class="toolbar">
+
+<input
+id="search"
+type="search"
+placeholder="🔎 მოსწავლის ძებნა..."
+>
+
+<select id="grade">
+<option value="all">ყველა კლასი</option>
+<option value="2">მე-2 კლასი</option>
+<option value="3">მე-3 კლასი</option>
+<option value="4">მე-4 კლასი</option>
+</select>
+
+<input id="date" type="date">
+
+<button id="load">
+🔄 განახლება
+</button>
+
+</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>მოსწავლე</th>
+<th>კლასი</th>
+<th>დასწრება</th>
+<th>შემოსვლის დრო</th>
+<th>გასვლის დრო</th>
+</tr>
+
+</thead>
+
+<tbody id="studentTable">
+
+<tr>
+<td colspan="5" class="empty">
+იტვირთება...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- Quiz -->
+
+<section class="card" style="margin-top:18px">
+
+<h2>🧠 Quiz-ები</h2>
+
+<div class="quiz-grid">
+
+<a class="quiz-btn" href="teacher-grade2.html">
+📗 მე-2 კლასის Quiz
+</a>
+
+<a class="quiz-btn" href="teacher-grade3.html">
+📘 მე-3 კლასის Quiz
+</a>
+
+<a class="quiz-btn" href="teacher-grade4.html">
+📕 მე-4 კლასის Quiz
+</a>
+
+</div>
+
+</section>
+
+
+<!-- Quiz შედეგები -->
+
+<section class="card" style="margin-top:18px">
+
+<h2>🏆 მოსწავლეების Quiz შედეგები</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>მოსწავლე</th>
+<th>კლასი</th>
+<th>Quiz</th>
+<th>ქულა</th>
+<th>თარიღი</th>
+</tr>
+
+</thead>
+
+<tbody id="quizTable">
+
+<tr>
+<td colspan="5" class="empty">
+იტვირთება...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- გამოსვლა -->
+
+<section class="card" style="margin-top:18px">
+
+<button
+id="logout"
+class="quiz-btn danger"
+style="width:100%"
+>
+🚪 მასწავლებლის ანგარიშიდან გამოსვლა
+</button>
+
+</section>
+
+</main>
+
+
+<footer class="foot">
+
+© 2026 English with Mariami —
+ყველა უფლება დაცულია
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js?v=teacher-dashboard-20260829"></script>
+
+
+<script>
+
+(async()=>{
+
+const TEACHER_ID =
+'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
+
+const db = window.supabaseClient;
+
+const $ = id => document.getElementById(id);
+
+
+/* უსაფრთხოება */
+
+if(!db){
+
+location.replace('login.html');
+
+return;
+
+}
+
+
+try{
+
+const {
+data:{session}
+} = await db.auth.getSession();
+
+
+if(!session){
+
+location.replace('login.html');
+
+return;
+
+}
+
+
+const user = session.user;
+
+
+/* პროფილის შემოწმება */
+
+const {
+data:profile,
+error:profileError
+} = await db
+.from('profiles')
+.select('user_id,full_name,role,grade')
+.eq('user_id',user.id)
+.maybeSingle();
+
+
+if(profileError){
+
+console.error(profileError);
+
+location.replace('login.html');
+
+return;
+
+}
+
+
+/* მხოლოდ მასწავლებელი */
+
+const isTeacher =
+profile?.role === 'teacher' ||
+user.id === TEACHER_ID ||
+String(user.email).toLowerCase() ===
+'razmadzemariam45@gmail.com';
+
+
+if(!isTeacher){
+
+await db.auth.signOut();
+
+location.replace('login.html');
+
+return;
+
+}
+
+
+/* თარიღი */
+
+$('date').value =
+new Date().toISOString().slice(0,10);
+
+
+/* მოსწავლეების ჩატვირთვა */
+
+async function loadStudents(){
+
+$('studentTable').innerHTML =
+`<tr>
+<td colspan="5" class="empty">
+⏳ იტვირთება...
+</td>
+</tr>`;
+
+
+const selectedGrade =
+$('grade').value;
+
+const search =
+$('search').value.trim().toLowerCase();
+
+
+/* მასწავლებელთან დაკავშირებული მოსწავლეები */
+
+const {
+data:relations,
+error:relationError
+} = await db
+.from('teacher_students')
+.select('student_id')
+.eq('teacher_id',user.id);
+
+
+if(relationError){
+
+console.error(relationError);
+
+showEmpty('მოსწავლეების ჩატვირთვა ვერ მოხერხდა.');
+
+return;
+
+}
+
+
+const studentIds =
+(relations||[]).map(x=>x.student_id);
+
+
+if(studentIds.length===0){
+
+showEmpty('მასწავლებელთან ჯერ არცერთი მოსწავლე არ არის მიბმული.');
+
+updateStats([]);
+
+return;
+
+}
+
+
+/* პროფილები */
+
+let query =
+db
+.from('profiles')
+.select('user_id,full_name,grade,role')
+.in('user_id',studentIds)
+.eq('role','student');
+
+
+if(selectedGrade !== 'all'){
+
+query =
+query.eq('grade',Number(selectedGrade));
+
+}
+
+
+const {
+data:students,
+error:studentError
+} = await query;
+
+
+if(studentError){
+
+console.error(studentError);
+
+showEmpty('მოსწავლეების ჩატვირთვა ვერ მოხერხდა.');
+
+return;
+
+}
+
+
+let filtered =
+students||[];
+
+
+/* ძებნა */
+
+if(search){
+
+filtered =
+filtered.filter(s=>
+String(s.full_name||'')
+.toLowerCase()
+.includes(search)
+);
+
+}
+
+
+/* დასწრება */
+
+const date =
+$('date').value;
+
+
+const {
+data:attendance,
+error:attendanceError
+} = await db
+.from('attendance')
+.select(
+'student_id,status,arrival_time,departure_time'
+)
+.eq('teacher_id',user.id)
+.gte('created_at',date+'T00:00:00')
+.lt('created_at',date+'T23:59:59.999');
+
+
+if(attendanceError){
+
+console.error(attendanceError);
+
+}
+
+
+/* attendance map */
+
+const attMap = {};
+
+(attendance||[]).forEach(a=>{
+
+attMap[a.student_id]=a;
+
+});
+
+
+/* ცხრილი */
+
+if(filtered.length===0){
+
+showEmpty('მოსწავლე ვერ მოიძებნა.');
+
+}else{
+
+$('studentTable').innerHTML =
+filtered.map(student=>{
+
+const a =
+attMap[student.user_id];
+
+
+let status='none';
+let text='არ არის მონიშნული';
+
+
+if(a){
+
+if(a.status==='present'){
+
+status='present';
+text='🟢 მოვიდა';
+
+}
+
+else if(a.status==='late'){
+
+status='late';
+text='🟡 დააგვიანა';
+
+}
+
+else if(a.status==='absent'){
+
+status='absent';
+text='🔴 გააცდინა';
+
+}
+
+else{
+
+text=a.status;
+
+}
+
+}
+
+
+return `
+<tr>
+
+<td class="student-name">
+${escapeHtml(student.full_name||'უცნობი')}
+</td>
+
+<td class="grade">
+${student.grade ? 'მე-'+student.grade+' კლასი' : '—'}
+</td>
+
+<td>
+<span class="badge ${status}">
+${text}
+</span>
+</td>
+
+<td>
+${formatDate(a?.arrival_time)}
+</td>
+
+<td>
+${formatDate(a?.departure_time)}
+</td>
+
+</tr>
+`;
+
+}).join('');
+
+}
+
+
+updateStats(filtered,attMap);
+
+}
+
+
+/* სტატისტიკა */
+
+function updateStats(students,attMap={}){
+
+$('studentCount').textContent =
+students.length;
+
+
+let present=0;
+let late=0;
+let absent=0;
+
+
+students.forEach(s=>{
+
+const a=attMap[s.user_id];
+
+if(!a)return;
+
+
+if(a.status==='present')present++;
+
+if(a.status==='late')late++;
+
+if(a.status==='absent')absent++;
+
+});
+
+
+$('presentCount').textContent=present;
+
+$('lateCount').textContent=late;
+
+$('absentCount').textContent=absent;
+
+}
+
+
+/* Quiz შედეგები */
+
+async function loadQuizResults(){
+
+$('quizTable').innerHTML =
+`<tr>
+<td colspan="5" class="empty">
+⏳ იტვირთება...
+</td>
+</tr>`;
+
+
+const {
+data:relations,
+error:relationError
+} = await db
+.from('teacher_students')
+.select('student_id')
+.eq('teacher_id',user.id);
+
+
+if(relationError){
+
+console.error(relationError);
+
+return;
+
+}
+
+
+const ids =
+(relations||[]).map(x=>x.student_id);
+
+
+if(ids.length===0){
+
+$('quizTable').innerHTML =
+`<tr>
+<td colspan="5" class="empty">
+Quiz შედეგები ჯერ არ არის.
+</td>
+</tr>`;
+
+return;
+
+}
+
+
+const {
+data:results,
+error
+} = await db
+.from('quiz_results')
+.select(
+'student_id,quiz_id,grade,score,total,completed_at'
+)
+.in('student_id',ids)
+.order('completed_at',{ascending:false});
+
+
+if(error){
+
+console.error(error);
+
+$('quizTable').innerHTML =
+`<tr>
+<td colspan="5" class="empty">
+Quiz შედეგების ჩატვირთვა ვერ მოხერხდა.
+</td>
+</tr>`;
+
+return;
+
+}
+
+
+/* სახელების მოძებნა */
+
+const {
+data:students
+} = await db
+.from('profiles')
+.select('user_id,full_name')
+.in('user_id',ids);
+
+
+const names={};
+
+(students||[]).forEach(s=>{
+
+names[s.user_id]=s.full_name;
+
+});
+
+
+if(!results?.length){
+
+$('quizTable').innerHTML =
+`<tr>
+<td colspan="5" class="empty">
+ჯერ არცერთი Quiz შედეგი არ არის.
+</td>
+</tr>`;
+
+return;
+
+}
+
+
+$('quizTable').innerHTML =
+results.map(r=>{
+
+return `
+<tr>
+
+<td class="student-name">
+${escapeHtml(names[r.student_id]||'უცნობი')}
+</td>
+
+<td class="grade">
+${r.grade ? 'მე-'+r.grade : '—'}
+</td>
+
+<td>
+${escapeHtml(r.quiz_id||'Quiz')}
+</td>
+
+<td class="score">
+${r.score ?? 0} / ${r.total ?? 0}
+</td>
+
+<td>
+${formatDate(r.completed_at)}
+</td>
+
+</tr>
+`;
+
+}).join('');
+
+}
+
+
+/* დამხმარე ფუნქციები */
+
+function showEmpty(text){
+
+$('studentTable').innerHTML =
+`<tr>
+<td colspan="5" class="empty">
+${escapeHtml(text)}
+</td>
+</tr>`;
+
+}
+
+
+function escapeHtml(value){
+
+return String(value)
+.replaceAll('&','&amp;')
+.replaceAll('<','&lt;')
+.replaceAll('>','&gt;')
+.replaceAll('"','&quot;')
+.replaceAll("'","&#039;");
+
+}
+
+
+function formatDate(value){
+
+if(!value)return '—';
+
+const d=new Date(value);
+
+if(Number.isNaN(d.getTime()))return '—';
+
+return d.toLocaleString('ka-GE',{
+day:'2-digit',
+month:'2-digit',
+year:'numeric',
+hour:'2-digit',
+minute:'2-digit'
+});
+
+}
+
+
+/* ღილაკები */
+
+$('load').addEventListener(
+'click',
+()=>{
+loadStudents();
+loadQuizResults();
+});
+
+
+$('search').addEventListener(
+'input',
+()=>{
+loadStudents();
+});
+
+
+$('grade').addEventListener(
+'change',
+()=>{
+loadStudents();
+});
+
+
+$('date').addEventListener(
+'change',
+()=>{
+loadStudents();
+});
+
+
+$('logout').addEventListener(
+'click',
+async()=>{
+
+$('logout').disabled=true;
+
+try{
+
+await db.auth.signOut();
+
+}catch(e){
+
+console.error(e);
+
+}
+
+location.replace('login.html');
+
+});
+
+
+/* პირველი ჩატვირთვა */
+
+await loadStudents();
+
+await loadQuizResults();
+
+
+}catch(error){
+
+console.error(error);
+
+location.replace('login.html');
+
+}
+
+})();
+
+</script>
+
+</body>
+</html>
