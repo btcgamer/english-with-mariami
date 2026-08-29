@@ -1,4 +1,36 @@
 (() => {
+  // Keep teacher access/functionality, but hide the visible teacher-mode status label.
+  function hideTeacherModeLabel(root = document) {
+    const elements = root.querySelectorAll ? root.querySelectorAll('body *') : [];
+    elements.forEach(el => {
+      if (el.dataset && el.dataset.teacherLabelHidden === '1') return;
+      const text = String(el.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!text) return;
+      if (text.includes('მასწავლებლის რეჟიმი') && text.includes('კლასი')) {
+        const childMatch = Array.from(el.children || []).some(child => {
+          const childText = String(child.textContent || '').replace(/\s+/g, ' ').trim();
+          return childText.includes('მასწავლებლის რეჟიმი') && childText.includes('კლასი');
+        });
+        if (!childMatch) {
+          el.style.display = 'none';
+          el.dataset.teacherLabelHidden = '1';
+        }
+      }
+    });
+  }
+
+  const startTeacherLabelHider = () => {
+    hideTeacherModeLabel();
+    const observer = new MutationObserver(() => hideTeacherModeLabel());
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startTeacherLabelHider, { once: true });
+  } else {
+    startTeacherLabelHider();
+  }
+
   const path = location.pathname.toLowerCase();
   let grade = path.includes('grade2') ? '2' : path.includes('grade3') ? '3' : path.includes('grade4') ? '4' : null;
   if (!grade || document.getElementById('grade-3d-visual')) return;
