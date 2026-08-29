@@ -801,37 +801,6 @@
 
             if (data.session) {
 
-              try {
-
-                await supabaseClient
-                  .from("profiles")
-                  .upsert(
-
-                    {
-                      user_id: data.user.id,
-
-                      full_name: fullName,
-
-                      grade: grade,
-
-                      points: 0
-                    },
-
-                    {
-                      onConflict: "user_id"
-                    }
-
-                  );
-
-              } catch (profileError) {
-
-                console.warn(
-                  "Profile save:",
-                  profileError
-                );
-
-              }
-
 
               message.className =
                 "message success";

@@ -465,14 +465,6 @@ const message =
   document.getElementById("message");
 
 
-/*
-====================================================
-მხოლოდ ეს ანგარიშია სრული წვდომის მქონე
-====================================================
-*/
-
-const FULL_ACCESS_EMAIL =
-  "datogringo@gmail.com";
 
 
 /*
@@ -630,38 +622,6 @@ form.addEventListener(
           "Profile read error:",
           profileError
         );
-
-      }
-
-
-      /*
-      ================================================
-      1. DATOGRINGO
-      სრული წვდომა
-      ================================================
-      */
-
-      if(
-        email === FULL_ACCESS_EMAIL
-      ){
-
-        message.className =
-          "message success";
-
-        message.textContent =
-          "🛠️ სრული წვდომა ჩართულია!";
-
-
-        setTimeout(function(){
-
-          location.replace(
-            "academy.html"
-          );
-
-        },500);
-
-
-        return;
 
       }
 
