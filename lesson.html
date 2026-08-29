@@ -1,0 +1,1597 @@
+<!doctype html>
+<html lang="ka">
+<head>
+
+<meta charset="utf-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<title>გაკვეთილი — English with Mariami</title>
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  color:#fff;
+
+  font-family:
+    Arial,
+    "Noto Sans Georgian",
+    sans-serif;
+
+  background:
+    radial-gradient(circle at 10% 10%,#00eaff30,transparent 25%),
+    radial-gradient(circle at 90% 15%,#7c3cff30,transparent 28%),
+    linear-gradient(
+      135deg,
+      #01030b,
+      #03152e 50%,
+      #010713
+    );
+
+  overflow-x:hidden;
+}
+
+
+/* =========================
+   3D GRID
+========================= */
+
+#visual3d{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.grid{
+  position:absolute;
+
+  width:180%;
+  height:180%;
+
+  left:-40%;
+  top:35%;
+
+  background-image:
+    linear-gradient(#00eaff16 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff16 1px,transparent 1px);
+
+  background-size:65px 65px;
+
+  transform:
+    perspective(700px)
+    rotateX(67deg);
+
+  animation:gridMove 14s linear infinite;
+}
+
+@keyframes gridMove{
+
+  to{
+    transform:
+      perspective(700px)
+      rotateX(67deg)
+      translateY(65px);
+  }
+
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(5px);
+}
+
+.orb.one{
+  width:350px;
+  height:350px;
+
+  left:-120px;
+  top:10%;
+
+  background:
+    radial-gradient(
+      circle,
+      #00eaff45,
+      transparent 70%
+    );
+
+  animation:orb1 9s infinite alternate;
+}
+
+.orb.two{
+  width:400px;
+  height:400px;
+
+  right:-140px;
+  top:10%;
+
+  background:
+    radial-gradient(
+      circle,
+      #7c3cff45,
+      transparent 70%
+    );
+
+  animation:orb2 11s infinite alternate;
+}
+
+@keyframes orb1{
+  to{
+    transform:
+      translate(120px,80px)
+      scale(1.3);
+  }
+}
+
+@keyframes orb2{
+  to{
+    transform:
+      translate(-100px,100px)
+      scale(1.25);
+  }
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  padding:12px 18px;
+
+  background:
+    rgba(2,8,23,.85);
+
+  backdrop-filter:blur(20px);
+
+  border-bottom:
+    1px solid #00eaff30;
+
+  box-shadow:
+    0 10px 40px #0009;
+}
+
+.nav{
+  width:min(1250px,100%);
+  margin:auto;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+}
+
+.brand{
+  color:#fff;
+  text-decoration:none;
+  font-weight:1000;
+}
+
+.back{
+  padding:10px 14px;
+
+  border-radius:12px;
+
+  text-decoration:none;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075eff,
+      #00c8e8
+    );
+
+  font-weight:1000;
+
+  box-shadow:
+    0 0 20px #00eaff20;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.wrap{
+  width:min(1100px,calc(100% - 28px));
+  margin:auto;
+}
+
+.main{
+  padding:30px 0 60px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+  position:relative;
+  overflow:hidden;
+
+  padding:30px;
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #061c3ddd,
+      #020d20ee
+    );
+
+  border:1px solid #00eaff35;
+
+  box-shadow:
+    0 30px 90px #000b,
+    0 0 50px #00eaff10,
+    inset 0 1px #ffffff10;
+
+}
+
+.badge{
+
+  display:inline-block;
+
+  padding:7px 12px;
+
+  border-radius:999px;
+
+  background:#00eaff10;
+
+  border:1px solid #00eaff35;
+
+  color:#00eaff;
+
+  font-weight:1000;
+
+  font-size:12px;
+
+}
+
+.hero h1{
+
+  margin:14px 0 5px;
+
+  font-size:
+    clamp(
+      30px,
+      6vw,
+      52px
+    );
+
+  text-shadow:
+    0 0 25px #00eaff20;
+
+}
+
+.hero .english{
+
+  color:#00eaff;
+
+  font-size:20px;
+
+  font-weight:1000;
+
+}
+
+.hero p{
+
+  color:#a7ced8;
+
+  line-height:1.6;
+
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-box{
+
+  margin-top:18px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:#020b1baa;
+
+  border:1px solid #00eaff22;
+
+}
+
+.progress-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+
+  margin-bottom:10px;
+
+  color:#9acbd5;
+
+  font-size:13px;
+
+}
+
+.progress{
+
+  height:10px;
+
+  overflow:hidden;
+
+  border-radius:99px;
+
+  background:#061426;
+
+}
+
+.progress span{
+
+  display:block;
+
+  height:100%;
+
+  width:0%;
+
+  border-radius:99px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #075eff,
+      #00eaff,
+      #7c3cff
+    );
+
+  box-shadow:
+    0 0 20px #00eaff;
+
+  transition:
+    width .6s ease;
+
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+
+  margin-top:22px;
+
+  padding:24px;
+
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #061a35dd,
+      #020d20dd
+    );
+
+  border:
+    1px solid #00eaff28;
+
+  box-shadow:
+    0 20px 55px #0009,
+    inset 0 1px #ffffff0a;
+
+}
+
+.section h2{
+
+  margin:0 0 17px;
+
+  font-size:24px;
+
+  text-shadow:
+    0 0 15px #00eaff20;
+
+}
+
+
+/* =========================
+   WORDS
+========================= */
+
+.words{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
+
+  gap:13px;
+
+}
+
+.word{
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:#031229;
+
+  border:1px solid #00eaff20;
+
+  transition:.3s;
+
+}
+
+.word:hover{
+
+  transform:
+    translateY(-5px)
+    rotateX(2deg);
+
+  border-color:#00eaff65;
+
+  box-shadow:
+    0 15px 35px #0009,
+    0 0 25px #00eaff12;
+
+}
+
+.word-number{
+
+  color:#ffe600;
+
+  font-size:12px;
+
+  font-weight:1000;
+
+}
+
+.word-en{
+
+  margin-top:7px;
+
+  font-size:22px;
+
+  font-weight:1000;
+
+  color:#fff;
+
+}
+
+.word-ka{
+
+  margin-top:4px;
+
+  color:#8ed4e1;
+
+}
+
+.word-pron{
+
+  margin-top:7px;
+
+  color:#7db2c0;
+
+  font-size:12px;
+
+}
+
+.speak{
+
+  margin-top:12px;
+
+  border:0;
+
+  border-radius:11px;
+
+  padding:8px 11px;
+
+  cursor:pointer;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075eff,
+      #00bde8
+    );
+
+  font-weight:1000;
+
+  box-shadow:
+    0 0 18px #00eaff18;
+
+}
+
+
+/* =========================
+   EXAMPLES
+========================= */
+
+.examples{
+
+  display:grid;
+
+  gap:12px;
+
+}
+
+.example{
+
+  padding:16px;
+
+  border-left:
+    3px solid #00eaff;
+
+  border-radius:12px;
+
+  background:#031329;
+
+}
+
+.example .en{
+
+  font-size:18px;
+
+  font-weight:900;
+
+}
+
+.example .ka{
+
+  margin-top:6px;
+
+  color:#91cbd6;
+
+}
+
+
+/* =========================
+   GRAMMAR
+========================= */
+
+.grammar{
+
+  padding:20px;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #081f3f,
+      #031027
+    );
+
+  border:1px solid #7c3cff35;
+
+}
+
+.grammar h3{
+
+  margin-top:0;
+
+  color:#d8b9ff;
+
+}
+
+.grammar p{
+
+  color:#a9ced8;
+
+  line-height:1.7;
+
+}
+
+.rule{
+
+  margin-top:12px;
+
+  padding:13px;
+
+  border-radius:12px;
+
+  background:#020b1d;
+
+  border:1px solid #00eaff18;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+}
+
+
+/* =========================
+   EXERCISES
+========================= */
+
+.exercise{
+
+  padding:18px;
+
+  margin-bottom:13px;
+
+  border-radius:18px;
+
+  background:#031329;
+
+  border:1px solid #00eaff20;
+
+}
+
+.exercise-number{
+
+  color:#00eaff;
+
+  font-weight:1000;
+
+}
+
+.exercise-question{
+
+  margin:8px 0 12px;
+
+  font-size:17px;
+
+  font-weight:900;
+
+}
+
+.exercise input{
+
+  width:100%;
+
+  min-height:45px;
+
+  padding:10px 13px;
+
+  border-radius:12px;
+
+  border:1px solid #00eaff30;
+
+  background:#020b1c;
+
+  color:#fff;
+
+  outline:none;
+
+}
+
+.check{
+
+  margin-top:10px;
+
+  border:0;
+
+  border-radius:11px;
+
+  padding:9px 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075eff,
+      #00c8e8
+    );
+
+  color:#fff;
+
+  font-weight:1000;
+
+  cursor:pointer;
+
+}
+
+.feedback{
+
+  margin-top:8px;
+
+  font-size:13px;
+
+  font-weight:900;
+
+}
+
+
+/* =========================
+   FINISH
+========================= */
+
+.finish{
+
+  text-align:center;
+
+  padding:30px;
+
+}
+
+.finish button{
+
+  border:0;
+
+  padding:13px 20px;
+
+  border-radius:14px;
+
+  color:#fff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #075eff,
+      #00eaff,
+      #7c3cff
+    );
+
+  font-weight:1000;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 30px #00eaff30;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px){
+
+  .words{
+    grid-template-columns:
+      repeat(
+        2,
+        1fr
+      );
+  }
+
+}
+
+@media(max-width:600px){
+
+  .words{
+    grid-template-columns:1fr;
+  }
+
+  .hero,
+  .section{
+    padding:19px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div id="visual3d">
+
+  <div class="grid"></div>
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+</div>
+
+
+<header class="top">
+
+  <div class="nav">
+
+    <a
+      class="brand"
+      href="teacher-lessons.html"
+    >
+      ⚡ ENGLISH WITH MARIAMI
+    </a>
+
+    <a
+      class="back"
+      href="teacher-lessons.html"
+    >
+      ← გაკვეთილებზე დაბრუნება
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="wrap main">
+
+  <div id="app">
+
+    <div class="section">
+      📡 გაკვეთილი იტვირთება...
+    </div>
+
+  </div>
+
+</main>
+
+
+<script>
+
+(function(){
+
+'use strict';
+
+
+const client =
+  window.supabaseClient;
+
+
+const params =
+  new URLSearchParams(
+    location.search
+  );
+
+
+const lessonId =
+  params.get('id');
+
+
+const studentId =
+  params.get('student_id') || '';
+
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/[&<>"']/g,function(c){
+
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[c];
+
+    });
+
+}
+
+
+/* =========================
+   SPEAK
+========================= */
+
+window.speakWord =
+function(text){
+
+  if(
+    !('speechSynthesis' in window)
+  ) return;
+
+  window.speechSynthesis.cancel();
+
+  const voice =
+    new SpeechSynthesisUtterance(
+      text
+    );
+
+  voice.lang='en-US';
+  voice.rate=.8;
+  voice.pitch=1;
+
+  window.speechSynthesis.speak(
+    voice
+  );
+
+};
+
+
+/* =========================
+   LOAD LESSON
+========================= */
+
+async function loadLesson(){
+
+  const app =
+    document.getElementById('app');
+
+
+  if(!client){
+
+    app.innerHTML = `
+      <div class="section">
+        ❌ Supabase ვერ მოიძებნა.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  if(!lessonId){
+
+    app.innerHTML = `
+      <div class="section">
+        ❌ გაკვეთილი არ არის არჩეული.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const {
+    data:lesson,
+    error:lessonError
+  } =
+  await client
+    .from('lessons')
+    .select('*')
+    .eq('id',lessonId)
+    .single();
+
+
+  if(lessonError){
+
+    console.error(
+      lessonError
+    );
+
+    app.innerHTML = `
+      <div class="section">
+        ❌ გაკვეთილის ჩატვირთვა ვერ მოხერხდა.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const {
+    data:words,
+    error:wordsError
+  } =
+  await client
+    .from('lesson_words')
+    .select('*')
+    .eq(
+      'lesson_id',
+      lessonId
+    )
+    .order(
+      'word_number',
+      {
+        ascending:true
+      }
+    );
+
+
+  const {
+    data:examples
+  } =
+  await client
+    .from('lesson_examples')
+    .select('*')
+    .eq(
+      'lesson_id',
+      lessonId
+    )
+    .order(
+      'example_number',
+      {
+        ascending:true
+      }
+    );
+
+
+  const {
+    data:exercises
+  } =
+  await client
+    .from('lesson_exercises')
+    .select('*')
+    .eq(
+      'lesson_id',
+      lessonId
+    )
+    .order(
+      'exercise_number',
+      {
+        ascending:true
+      }
+    );
+
+
+  const {
+    data:grammar
+  } =
+  await client
+    .from('lesson_grammar')
+    .select('*')
+    .eq(
+      'lesson_id',
+      lessonId
+    )
+    .order(
+      'grammar_number',
+      {
+        ascending:true
+      }
+    );
+
+
+  render(
+    lesson,
+    words || [],
+    examples || [],
+    exercises || [],
+    grammar || []
+  );
+
+}
+
+
+function render(
+  lesson,
+  words,
+  examples,
+  exercises,
+  grammar
+){
+
+  const app =
+    document.getElementById('app');
+
+
+  app.innerHTML = `
+
+    <section class="hero">
+
+      <span class="badge">
+        ${esc(
+          lesson.grade
+        )} კლასი •
+        გაკვეთილი
+        ${esc(
+          lesson.lesson_number
+        )}
+      </span>
+
+      <h1>
+        ${esc(
+          lesson.icon || '📚'
+        )}
+        ${esc(
+          lesson.title_ka
+        )}
+      </h1>
+
+      <div class="english">
+        ${esc(
+          lesson.title_en || ''
+        )}
+      </div>
+
+      <p>
+        ${esc(
+          lesson.description || ''
+        )}
+      </p>
+
+      <div class="progress-box">
+
+        <div class="progress-head">
+
+          <span>
+            📊 სასწავლო მასალა
+          </span>
+
+          <span id="progressText">
+            0%
+          </span>
+
+        </div>
+
+        <div class="progress">
+          <span id="progressBar"></span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        📖 ახალი სიტყვები
+      </h2>
+
+      <div class="words">
+
+        ${
+          words.length
+          ?
+          words.map(function(word){
+
+            return `
+
+              <div class="word">
+
+                <div class="word-number">
+                  #${esc(
+                    word.word_number
+                  )}
+                </div>
+
+                <div class="word-en">
+                  ${esc(
+                    word.english
+                  )}
+                </div>
+
+                <div class="word-ka">
+                  ${esc(
+                    word.georgian
+                  )}
+                </div>
+
+                <div class="word-pron">
+                  🔤
+                  ${esc(
+                    word.pronunciation || ''
+                  )}
+                </div>
+
+                <button
+                  class="speak"
+                  onclick="speakWord('${esc(
+                    word.english
+                  ).replace(/'/g,"\\\\'")}')"
+                >
+                  🔊 მოსმენა
+                </button>
+
+              </div>
+
+            `;
+
+          }).join('')
+
+          :
+
+          `
+            <div class="word">
+              სიტყვები ჯერ არ არის დამატებული.
+            </div>
+          `
+        }
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        💬 მაგალითები
+      </h2>
+
+      <div class="examples">
+
+        ${
+          examples.length
+          ?
+          examples.map(function(item){
+
+            return `
+
+              <div class="example">
+
+                <div class="en">
+                  ${esc(
+                    item.english
+                  )}
+                </div>
+
+                <div class="ka">
+                  ${esc(
+                    item.georgian
+                  )}
+                </div>
+
+              </div>
+
+            `;
+
+          }).join('')
+
+          :
+
+          `
+            <div class="example">
+              მაგალითები ჯერ არ არის დამატებული.
+            </div>
+          `
+        }
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        🧠 გრამატიკა
+      </h2>
+
+      ${
+        grammar.length
+        ?
+
+        grammar.map(function(item){
+
+          return `
+
+            <div class="grammar">
+
+              <h3>
+                ${esc(
+                  item.title
+                )}
+              </h3>
+
+              <p>
+                ${esc(
+                  item.explanation
+                )}
+              </p>
+
+              <div class="rule">
+                ${esc(
+                  item.rule_text || ''
+                )}
+              </div>
+
+            </div>
+
+          `;
+
+        }).join('')
+
+        :
+
+        `
+          <div class="grammar">
+            გრამატიკის მასალა ჯერ არ არის დამატებული.
+          </div>
+        `
+      }
+
+    </section>
+
+
+    <section class="section">
+
+      <h2>
+        ✍️ სავარჯიშოები
+      </h2>
+
+      <div id="exerciseList">
+
+        ${
+          exercises.length
+          ?
+
+          exercises.map(function(item){
+
+            return `
+
+              <div
+                class="exercise"
+                data-answer="${esc(
+                  item.correct_answer
+                )}"
+              >
+
+                <div class="exercise-number">
+                  სავარჯიშო
+                  ${esc(
+                    item.exercise_number
+                  )}
+                </div>
+
+                <div class="exercise-question">
+                  ${esc(
+                    item.question
+                  )}
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="ჩაწერე პასუხი..."
+                >
+
+                <button
+                  class="check"
+                  onclick="checkAnswer(this)"
+                >
+                  ✓ შემოწმება
+                </button>
+
+                <div
+                  class="feedback"
+                ></div>
+
+              </div>
+
+            `;
+
+          }).join('')
+
+          :
+
+          `
+            <div class="exercise">
+              სავარჯიშოები ჯერ არ არის დამატებული.
+            </div>
+          `
+        }
+
+      </div>
+
+    </section>
+
+
+    <section class="section finish">
+
+      <h2>
+        ⭐ გაკვეთილი დასრულებულია?
+      </h2>
+
+      <p>
+        როცა მთელ მასალას გაივლი,
+        მონიშნე გაკვეთილი დასრულებულად.
+      </p>
+
+      <button
+        onclick="finishLesson()"
+      >
+        ⭐ გაკვეთილის დასრულება
+      </button>
+
+    </section>
+
+  `;
+
+
+  updateProgress();
+
+}
+
+
+window.checkAnswer =
+function(button){
+
+  const box =
+    button.closest('.exercise');
+
+  const input =
+    box.querySelector('input');
+
+  const feedback =
+    box.querySelector('.feedback');
+
+  const answer =
+    box.dataset.answer
+      .trim()
+      .toLowerCase();
+
+  const user =
+    input.value
+      .trim()
+      .toLowerCase();
+
+
+  if(!user){
+
+    feedback.textContent =
+      '⚠️ ჯერ ჩაწერე პასუხი.';
+
+    feedback.style.color =
+      '#ffe600';
+
+    return;
+
+  }
+
+
+  if(
+    user === answer
+  ){
+
+    feedback.textContent =
+      '✅ სწორია! შესანიშნავია!';
+
+    feedback.style.color =
+      '#68ffb0';
+
+  }else{
+
+    feedback.textContent =
+      '❌ ჯერ არასწორია. კიდევ სცადე!';
+
+    feedback.style.color =
+      '#ff8e9b';
+
+  }
+
+
+  updateProgress();
+
+};
+
+
+function updateProgress(){
+
+  const boxes =
+    document.querySelectorAll(
+      '.exercise'
+    );
+
+  let done = 0;
+
+
+  boxes.forEach(function(box){
+
+    const feedback =
+      box.querySelector(
+        '.feedback'
+      );
+
+    if(
+      feedback &&
+      feedback.textContent
+        .includes('სწორია')
+    ){
+
+      done++;
+
+    }
+
+  });
+
+
+  const percent =
+    boxes.length
+      ?
+      Math.round(
+        done /
+        boxes.length *
+        100
+      )
+      :
+      0;
+
+
+  const bar =
+    document.getElementById(
+      'progressBar'
+    );
+
+  const text =
+    document.getElementById(
+      'progressText'
+    );
+
+
+  if(bar)
+    bar.style.width =
+      percent + '%';
+
+  if(text)
+    text.textContent =
+      percent + '%';
+
+}
+
+
+window.finishLesson =
+async function(){
+
+  if(
+    studentId &&
+    client
+  ){
+
+    try{
+
+      await client
+        .from('lesson_progress')
+        .upsert({
+
+          student_id:
+            studentId,
+
+          lesson_id:
+            lessonId,
+
+          completed:true,
+
+          completed_at:
+            new Date().toISOString()
+
+        },{
+          onConflict:
+            'student_id,lesson_id'
+        });
+
+    }catch(error){
+
+      console.error(
+        error
+      );
+
+    }
+
+  }
+
+
+  alert(
+    '⭐ გაკვეთილი დასრულებულია!'
+  );
+
+};
+
+
+/* INIT */
+
+loadLesson();
+
+})();
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=20260828-6"></script>
+
+</body>
+</html>
