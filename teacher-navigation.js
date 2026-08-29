@@ -1,4 +1,4 @@
-// English with Mariami — teacher dashboard navigation + attendance quick controls
+// English with Mariami — shared navigation + secure student classroom bridge
 (function () {
   'use strict';
 
@@ -6,37 +6,34 @@
   const path = location.pathname.toLowerCase();
   const isAcademy = /\/academy\.html(?:$|\?)/.test(path);
   const isTeacherDashboard = /\/teacher-dashboard\.html(?:$|\?)/.test(path);
+  const gradeMatch = path.match(/\/grade([234])\.html(?:$|\?)/);
+  const pageGrade = gradeMatch ? Number(gradeMatch[1]) : 0;
 
-  // Teacher Dashboard link is shown only on the Academy page and only to the teacher.
   function getClient() {
     return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient || null;
   }
 
-  function isTeacher() {
+  function getSession() {
     const client = getClient();
-    if (!client) return Promise.resolve(false);
-
+    if (!client) return Promise.resolve(null);
     return client.auth.getSession().then(function (result) {
-      const user = result && result.data && result.data.session
-        ? result.data.session.user
-        : null;
+      return result && result.data ? result.data.session : null;
+    }).catch(function () { return null; });
+  }
 
-      if (!user) return false;
-
-      const email = String(user.email || '').trim().toLowerCase();
+  function isTeacher() {
+    return getSession().then(function (session) {
+      if (!session || !session.user) return false;
+      const email = String(session.user.email || '').trim().toLowerCase();
       return email === TEACHER_EMAIL;
-    }).catch(function () {
-      return false;
     });
   }
 
   function addTeacherDashboard() {
     if (!isAcademy) return;
     if (document.getElementById('teacher-dashboard-main-link')) return;
-
     const nav = document.querySelector('.navlinks');
     if (!nav) return;
-
     const link = document.createElement('a');
     link.id = 'teacher-dashboard-main-link';
     link.href = 'teacher-dashboard.html';
@@ -46,7 +43,6 @@
     link.style.color = '#fff';
     link.style.fontWeight = '900';
     link.style.boxShadow = '0 0 18px #00eaff44';
-
     nav.appendChild(link);
   }
 
@@ -55,13 +51,111 @@
     if (link) link.remove();
   }
 
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);
+    });
+  }
+
+  function injectStudentStyles() {
+    if (document.getElementById('student-teacher-bridge-style')) return;
+    const style = document.createElement('style');
+    style.id = 'student-teacher-bridge-style';
+    style.textContent = `
+      #student-teacher-bridge{margin:18px 0;padding:20px;border:1px solid #00eaff66;border-radius:22px;background:linear-gradient(145deg,#041a31ee,#020b19ee);box-shadow:0 18px 55px #0009,0 0 30px #00eaff22;color:#fff}
+      #student-teacher-bridge h2{margin:0 0 8px;color:#00eaff}
+      #student-teacher-bridge .bridge-note{color:#bfe5f0;font-size:13px;margin-bottom:14px}
+      .teacher-schedule-card{padding:15px;margin:9px 0;border-radius:15px;background:#061a32;border:1px solid #00eaff22}
+      .teacher-schedule-card b{color:#ffe600}
+      .teacher-schedule-card small{display:block;color:#9dc7d5;margin-top:6px;line-height:1.5}
+      .bridge-empty{padding:14px;border-radius:13px;background:#061a32;color:#9dc7d5;border:1px dashed #00eaff33}
+    `;
+    document.head.appendChild(style);
+  }
+
+  async function installStudentClassroomBridge() {
+    if (!pageGrade) return;
+
+    const client = getClient();
+    if (!client) return;
+
+    const session = await getSession();
+    if (!session || !session.user) {
+      window.location.replace('login.html?redirect=' + encodeURIComponent(location.pathname));
+      return;
+    }
+
+    const profileResult = await client.from('profiles').select('full_name,role,grade').eq('user_id', session.user.id).maybeSingle();
+    if (profileResult.error || !profileResult.data) {
+      window.location.replace('login.html');
+      return;
+    }
+
+    const role = String(profileResult.data.role || '').toLowerCase();
+    const grade = Number(profileResult.data.grade || 0);
+
+    // Students can never open another class directly by changing the URL.
+    if (role === 'student' && grade !== pageGrade) {
+      if ([2,3,4].includes(grade)) {
+        window.location.replace('grade' + grade + '.html');
+      } else {
+        window.location.replace('login.html');
+      }
+      return;
+    }
+
+    // Teachers may preview class pages; parents use their own parent space.
+    if (role !== 'student' && role !== 'teacher') return;
+
+    injectStudentStyles();
+
+    const bridge = document.createElement('section');
+    bridge.id = 'student-teacher-bridge';
+    bridge.innerHTML = `
+      <h2>👩‍🏫 მასწავლებელთან გავლილი და დაგეგმილი გაკვეთილები</h2>
+      <div class="bridge-note">${esc(profileResult.data.full_name || 'მოსწავლე')} • ${pageGrade === 2 ? 'მე-2' : pageGrade === 3 ? 'მე-3' : 'მე-4'} კლასი. აქ გამოჩნდება მასწავლებლის მიერ შენთვის დაგეგმილი გაკვეთილები.</div>
+      <div id="teacher-schedule-list"><div class="bridge-empty">⏳ იტვირთება...</div></div>
+    `;
+
+    const anchor = document.querySelector('#vocabulary') || document.querySelector('main section') || document.querySelector('main');
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(bridge, anchor);
+
+    const list = document.getElementById('teacher-schedule-list');
+    if (!list) return;
+
+    const result = await client
+      .from('schedules')
+      .select('id,lesson_date,start_time,end_time,subject,notes,status,started_at,finished_at')
+      .eq('student_id', session.user.id)
+      .order('lesson_date', { ascending: false })
+      .order('start_time', { ascending: false })
+      .limit(20);
+
+    if (result.error) {
+      // RLS/API errors must not expose private data or break the existing class page.
+      list.innerHTML = '<div class="bridge-empty">📚 შენი კლასის სასწავლო მასალა ხელმისაწვდომია. დაგეგმილი გაკვეთილები ჯერ არ არის ნაჩვენები.</div>';
+      return;
+    }
+
+    const rows = result.data || [];
+    if (!rows.length) {
+      list.innerHTML = '<div class="bridge-empty">📚 ჯერ დაგეგმილი გაკვეთილი არ გაქვს. მასწავლებელთან გაკვეთილის შემდეგ აქ გამოჩნდება დაგეგმილი მასალა.</div>';
+      return;
+    }
+
+    list.innerHTML = rows.map(function (row) {
+      const date = row.lesson_date || '';
+      const time = row.start_time ? row.start_time.slice(0,5) + (row.end_time ? '–' + row.end_time.slice(0,5) : '') : '';
+      const status = row.status ? ' • ' + row.status : '';
+      return `<article class="teacher-schedule-card"><b>📚 ${esc(row.subject || 'ინგლისურის გაკვეთილი')}</b><div>${esc(date)} ${esc(time)}${esc(status)}</div>${row.notes ? `<small>📝 ${esc(row.notes)}</small>` : ''}</article>`;
+    }).join('');
+  }
+
   function installAttendanceQuickControls() {
     if (!isTeacherDashboard) return;
     if (document.getElementById('teacher-attendance-quick')) return;
-
     const lessonBox = document.querySelector('#lesson .lesson-box');
     if (!lessonBox) return;
-
     const actions = lessonBox.querySelector('.actions');
     if (!actions) return;
 
@@ -83,41 +177,15 @@
     box.querySelectorAll('[data-quick-status]').forEach(function (button) {
       button.addEventListener('click', function () {
         const realButton = document.querySelector('#attendanceList [data-status="' + button.dataset.quickStatus + '"]');
-        if (realButton) {
-          realButton.click();
-          return;
-        }
-        const status = document.getElementById('teacher-attendance-quick-status');
-        if (status) status.textContent = '⚠️ ჯერ აირჩიე და მოძებნე გაკვეთილი.';
+        if (realButton) realButton.click();
       });
     });
 
     const departure = box.querySelector('[data-quick-departure]');
     departure.addEventListener('click', function () {
       const realButton = document.querySelector('#attendanceList [data-departure="1"]');
-      if (realButton) {
-        realButton.click();
-        return;
-      }
-      const status = document.getElementById('teacher-attendance-quick-status');
-      if (status) status.textContent = '⚠️ ჯერ აირჩიე და მოძებნე გაკვეთილი.';
+      if (realButton) realButton.click();
     });
-
-    // Keep the quick controls visible and give a clear hint until a schedule is selected.
-    const observer = new MutationObserver(function () {
-      const status = document.getElementById('teacher-attendance-quick-status');
-      if (!status) return;
-      const attendanceButtons = document.querySelectorAll('#attendanceList [data-status]');
-      const hasSchedule = !!document.querySelector('#attendanceList .student-card');
-      status.textContent = hasSchedule
-        ? 'აირჩიე მოსვლა, დაგვიანება, გაცდენა ან წასვლა.'
-        : 'აირჩიე კლასი, მოსწავლე, თარიღი და მოძებნე გაკვეთილი.';
-      box.querySelectorAll('button').forEach(function (b) {
-        b.style.opacity = hasSchedule ? '1' : '.55';
-      });
-    });
-    const attendanceList = document.getElementById('attendanceList');
-    if (attendanceList) observer.observe(attendanceList, { childList: true, subtree: true });
   }
 
   function start() {
@@ -125,13 +193,12 @@
       installAttendanceQuickControls();
       return;
     }
-
-    if (!isAcademy) return;
-
-    isTeacher().then(function (ok) {
-      if (ok) addTeacherDashboard();
-      else removeTeacherDashboard();
-    });
+    if (isAcademy) {
+      isTeacher().then(function (ok) {
+        if (ok) addTeacherDashboard(); else removeTeacherDashboard();
+      });
+    }
+    if (pageGrade) installStudentClassroomBridge();
   }
 
   if (document.readyState === 'loading') {
