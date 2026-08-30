@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>English with Mariami</title>
+<title>Grade 3 — English with Mariami</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
@@ -16,10 +16,11 @@ html{scroll-behavior:smooth}
 
 body{
   margin:0;
-  font-family:Arial,"Noto Sans Georgian",sans-serif;
-  color:white;
-  background:#01050d;
+  min-height:100vh;
   overflow-x:hidden;
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  color:#fff;
+  background:#01050d;
 }
 
 .world{
@@ -28,139 +29,305 @@ body{
   z-index:-10;
   overflow:hidden;
   background:
-    radial-gradient(circle at 50% 30%,
-      #087cae 0%,
-      #063957 25%,
-      #021729 55%,
+    radial-gradient(circle at 50% 35%,
+      #0a6f9e 0%,
+      #063957 24%,
+      #021729 50%,
       #01050d 100%);
 }
 
-.world:before{
-  content:"";
+.beam{
   position:absolute;
-  inset:0;
-  background:
-    linear-gradient(#00eaff12 1px,transparent 1px),
-    linear-gradient(90deg,#00eaff12 1px,transparent 1px);
-  background-size:55px 55px;
-  transform:perspective(500px) rotateX(60deg) scale(2);
-  transform-origin:center bottom;
-  animation:grid 5s linear infinite;
+  width:2px;
+  height:100vh;
+  background:linear-gradient(transparent,#00eaff,transparent);
+  opacity:.35;
+  filter:blur(1px);
+  animation:beamMove 5s linear infinite;
 }
 
-@keyframes grid{
-  to{background-position:0 55px,55px 0}
+.beam:nth-child(1){left:8%;animation-delay:-1s}
+.beam:nth-child(2){left:27%;animation-delay:-3s}
+.beam:nth-child(3){left:51%;animation-delay:-2s}
+.beam:nth-child(4){left:76%;animation-delay:-4s}
+.beam:nth-child(5){left:93%;animation-delay:-1.5s}
+
+@keyframes beamMove{
+  0%{transform:translateY(-100%)}
+  100%{transform:translateY(100%)}
+}
+
+.stars{
+  position:absolute;
+  inset:0;
 }
 
 .star{
   position:absolute;
-  width:4px;
-  height:4px;
+  width:3px;
+  height:3px;
   border-radius:50%;
-  background:white;
-  box-shadow:0 0 15px #00eaff;
-  animation:star 3s infinite ease-in-out;
+  background:#fff;
+  box-shadow:0 0 12px #00eaff;
+  animation:starFloat 4s ease-in-out infinite;
 }
 
-.s1{left:8%;top:15%}
-.s2{left:20%;top:60%}
-.s3{left:35%;top:25%}
-.s4{left:50%;top:70%}
-.s5{left:65%;top:20%}
-.s6{left:80%;top:55%}
-.s7{left:92%;top:25%}
+.star:nth-child(1){left:5%;top:20%}
+.star:nth-child(2){left:14%;top:60%}
+.star:nth-child(3){left:25%;top:12%}
+.star:nth-child(4){left:37%;top:75%}
+.star:nth-child(5){left:49%;top:22%}
+.star:nth-child(6){left:61%;top:68%}
+.star:nth-child(7){left:72%;top:15%}
+.star:nth-child(8){left:83%;top:52%}
+.star:nth-child(9){left:94%;top:28%}
+.star:nth-child(10){left:44%;top:45%}
+.star:nth-child(11){left:18%;top:35%}
+.star:nth-child(12){left:88%;top:78%}
 
-@keyframes star{
-  0%,100%{opacity:.2;transform:scale(.5)}
-  50%{opacity:1;transform:scale(2)}
+@keyframes starFloat{
+  0%,100%{opacity:.3;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.8)}
+}
+
+.alphabet{
+  position:absolute;
+  inset:0;
+  perspective:1000px;
+}
+
+.letter{
+  position:absolute;
+  font-weight:1000;
+  font-size:clamp(55px,8vw,120px);
+  color:#fff;
+  opacity:.8;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #00eaff,
+    0 0 35px #008cff,
+    0 0 70px #0055ff;
+  transform-style:preserve-3d;
+  animation:letter3D 9s ease-in-out infinite;
+}
+
+.letter:nth-child(1){left:3%;top:12%;animation-delay:-1s}
+.letter:nth-child(2){left:16%;top:65%;animation-delay:-4s}
+.letter:nth-child(3){left:28%;top:8%;animation-delay:-2s}
+.letter:nth-child(4){left:40%;top:73%;animation-delay:-6s}
+.letter:nth-child(5){left:53%;top:13%;animation-delay:-3s}
+.letter:nth-child(6){left:66%;top:66%;animation-delay:-7s}
+.letter:nth-child(7){left:78%;top:9%;animation-delay:-5s}
+.letter:nth-child(8){left:90%;top:57%;animation-delay:-2s}
+.letter:nth-child(9){left:10%;top:38%;font-size:55px}
+.letter:nth-child(10){left:72%;top:38%;font-size:55px}
+
+@keyframes letter3D{
+  0%,100%{
+    transform:translate3d(0,0,0)
+    rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  50%{
+    transform:translate3d(35px,-40px,130px)
+    rotateX(25deg) rotateY(35deg) rotateZ(8deg);
+  }
+}
+
+.floor{
+  position:absolute;
+  left:-20%;
+  right:-20%;
+  bottom:-30%;
+  height:65%;
+  transform:perspective(550px) rotateX(63deg);
+  background-image:
+    linear-gradient(#00eaff35 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff35 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:linear-gradient(to top,#000,transparent);
+  -webkit-mask-image:linear-gradient(to top,#000,transparent);
+  animation:gridMove 5s linear infinite;
+}
+
+@keyframes gridMove{
+  from{background-position:0 0,0 0}
+  to{background-position:0 55px,55px 0}
 }
 
 .wrap{
-  width:min(1200px,calc(100% - 24px));
+  width:min(1250px,calc(100% - 28px));
   margin:auto;
 }
 
-header{
+.top{
   position:sticky;
   top:0;
   z-index:100;
-  background:#021020e8;
-  border-bottom:1px solid #00eaff55;
-  backdrop-filter:blur(15px);
+  background:#021020d9;
+  border-bottom:1px solid #00eaff66;
+  backdrop-filter:blur(18px);
 }
 
 .nav{
   min-height:65px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:15px;
 }
 
 .brand{
+  font-size:18px;
+  font-weight:1000;
   color:#fff;
   text-decoration:none;
-  font-weight:1000;
-  text-shadow:0 0 15px #00eaff;
+  text-shadow:0 0 18px #00eaff;
 }
 
 .navlinks{
   display:flex;
   gap:7px;
-  overflow-x:auto;
+  flex-wrap:wrap;
 }
 
 .navlinks a{
-  color:white;
+  color:#fff;
   text-decoration:none;
   padding:9px 12px;
   border-radius:12px;
-  border:1px solid #00eaff44;
   background:#062443cc;
-  white-space:nowrap;
+  border:1px solid #00eaff44;
+  font-size:13px;
+  transition:.25s;
 }
 
 .navlinks a:hover{
+  transform:translateY(-3px);
   border-color:#00eaff;
   box-shadow:0 0 20px #00eaff55;
 }
 
 .hero{
-  min-height:600px;
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  padding:80px 0 55px;
+}
+
+.hero-grid{
+  width:100%;
   display:grid;
   grid-template-columns:1.1fr .9fr;
-  align-items:center;
   gap:35px;
+  align-items:center;
 }
 
 .badge{
   display:inline-block;
-  padding:8px 15px;
+  padding:9px 16px;
   border-radius:30px;
-  border:1px solid #00eaff88;
-  background:#031a32cc;
   color:#ffe600;
+  background:#031a32cc;
+  border:1px solid #00eaff88;
+  box-shadow:0 0 20px #00eaff22,inset 0 0 15px #00eaff11;
   font-weight:900;
-  box-shadow:0 0 20px #00eaff22;
 }
 
-h1{
-  font-size:clamp(45px,7vw,82px);
-  line-height:1;
+.hero h1{
   margin:20px 0;
+  font-size:clamp(45px,7vw,82px);
+  line-height:.98;
+  letter-spacing:-3px;
 }
 
-h1 span{
+.hero h1 span{
   color:#00eaff;
   text-shadow:
     0 0 10px #00eaff,
-    0 0 35px #008cff;
+    0 0 35px #008cff,
+    0 0 70px #0055ff;
 }
 
 .lead{
+  max-width:700px;
   font-size:18px;
-  line-height:1.7;
-  color:#e5faff;
+  line-height:1.75;
+  color:#e8fbff;
+}
+
+.hologram{
+  position:relative;
+  min-height:390px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-style:preserve-3d;
+  perspective:1000px;
+}
+
+.holo-ring{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border:2px solid #00eaff88;
+  border-radius:50%;
+  box-shadow:0 0 20px #00eaff,inset 0 0 30px #00eaff33;
+  animation:ringSpin 7s linear infinite;
+}
+
+.holo-ring:nth-child(2){
+  width:220px;
+  height:220px;
+  transform:rotateX(70deg);
+  animation-duration:5s;
+}
+
+.holo-ring:nth-child(3){
+  width:330px;
+  height:330px;
+  transform:rotateY(70deg);
+  animation-duration:10s;
+}
+
+@keyframes ringSpin{
+  from{transform:rotateZ(0deg) rotateX(65deg)}
+  to{transform:rotateZ(360deg) rotateX(65deg)}
+}
+
+.teacher-holo{
+  position:relative;
+  z-index:5;
+  width:240px;
+  min-height:290px;
+  padding:25px;
+  text-align:center;
+  border:1px solid #00eaff99;
+  border-radius:25px;
+  background:linear-gradient(145deg,#06385ddd,#021323dd);
+  box-shadow:0 0 35px #00eaff55,inset 0 0 30px #00eaff11;
+  backdrop-filter:blur(10px);
+  animation:holoFloat 4s ease-in-out infinite;
+}
+
+@keyframes holoFloat{
+  0%,100%{transform:translateY(0) rotateY(-3deg)}
+  50%{transform:translateY(-18px) rotateY(3deg)}
+}
+
+.avatar{
+  font-size:90px;
+  filter:drop-shadow(0 0 12px #00eaff)
+         drop-shadow(0 0 30px #008cff);
+}
+
+.teacher-holo h2{
+  margin:8px 0;
+  color:#00eaff;
+}
+
+.teacher-holo p{
+  color:#bfefff;
 }
 
 .buttons{
@@ -172,84 +339,29 @@ h1 span{
 
 .btn{
   display:inline-block;
-  border:0;
   padding:13px 18px;
   border-radius:14px;
+  border:1px solid transparent;
   font-weight:1000;
   cursor:pointer;
-  text-decoration:none;
   transition:.25s;
+  text-decoration:none;
 }
 
 .btn:hover{
-  transform:translateY(-4px) scale(1.03);
+  transform:translateY(-5px) scale(1.03);
 }
 
 .primary{
-  background:#00eaff;
   color:#00151c;
-  box-shadow:0 0 25px #00eaff66;
+  background:#00eaff;
+  box-shadow:0 0 15px #00eaff,0 0 35px #00eaff55;
 }
 
 .yellow{
-  background:#ffe600;
   color:#161300;
+  background:#ffe600;
   box-shadow:0 0 25px #ffe60055;
-}
-
-.hologram{
-  min-height:380px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-}
-
-.ring{
-  position:absolute;
-  width:290px;
-  height:290px;
-  border:2px solid #00eaff77;
-  border-radius:50%;
-  box-shadow:0 0 30px #00eaff55;
-  animation:spin 8s linear infinite;
-}
-
-.ring.r2{
-  width:220px;
-  height:220px;
-  transform:rotateX(65deg);
-  animation-duration:5s;
-}
-
-@keyframes spin{
-  to{transform:rotateZ(360deg)}
-}
-
-.teacher{
-  position:relative;
-  z-index:3;
-  width:250px;
-  padding:30px;
-  text-align:center;
-  border-radius:25px;
-  border:1px solid #00eaff99;
-  background:#031a2fee;
-  box-shadow:0 0 45px #00eaff55;
-  animation:float 4s ease-in-out infinite;
-}
-
-@keyframes float{
-  50%{transform:translateY(-15px)}
-}
-
-.avatar{
-  font-size:90px;
-  filter:drop-shadow(0 0 20px #00eaff);
-}
-
-.teacher h2{
-  color:#00eaff;
 }
 
 .section{
@@ -262,58 +374,64 @@ h1 span{
 }
 
 .section-title h2{
-  font-size:36px;
+  font-size:35px;
+  margin:15px 0;
 }
 
 .muted{
   color:#bfe8f4;
 }
 
-.profile{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:20px;
-  margin-top:20px;
-  border-radius:20px;
-  border:1px solid #00eaff55;
-  background:#03182cdd;
-}
-
-.profile strong{
-  color:#ffe600;
-  font-size:20px;
-}
-
-.cards{
+.lesson-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
-.card{
+.lesson{
+  position:relative;
+  min-height:390px;
   padding:25px;
-  min-height:260px;
+  overflow:hidden;
   border-radius:25px;
-  border:1px solid #00eaff55;
+  border:1px solid #00eaff66;
   background:linear-gradient(145deg,#062746e8,#020c19ed);
-  box-shadow:0 20px 50px #000b;
-  transition:.3s;
+  box-shadow:0 20px 50px #000b,0 0 25px #00eaff22;
+  transform-style:preserve-3d;
+  transition:.35s;
 }
 
-.card:hover{
-  transform:translateY(-10px) rotateX(4deg);
-  box-shadow:0 0 40px #00eaff44;
+.lesson:hover{
+  transform:perspective(800px) rotateX(5deg) rotateY(-5deg) translateY(-12px);
+  box-shadow:0 35px 70px #000e,0 0 45px #00eaff55;
 }
 
-.icon{
-  font-size:60px;
+.lesson::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-70px;
+  top:-70px;
+  border-radius:50%;
+  background:#00eaff22;
+  filter:blur(5px);
 }
 
-.card h3{
+.lesson-icon{
+  font-size:65px;
+  filter:drop-shadow(0 0 10px #00eaff)
+         drop-shadow(0 0 25px #008cff);
+}
+
+.lesson h3{
   color:#ffe600;
-  font-size:25px;
+  font-size:26px;
+}
+
+.lesson p{
+  color:#d9f7ff;
+  line-height:1.7;
 }
 
 .words{
@@ -322,81 +440,51 @@ h1 span{
   gap:15px;
 }
 
-.word{
+.word-card{
+  position:relative;
+  min-height:155px;
   padding:22px;
-  min-height:150px;
   text-align:center;
   border-radius:20px;
   border:1px solid #00eaff44;
   background:#03182cdd;
-  cursor:pointer;
   transition:.3s;
+  overflow:hidden;
+  cursor:pointer;
 }
 
-.word:hover{
-  transform:translateY(-7px) scale(1.02);
+.word-card:hover{
+  transform:perspective(700px) rotateX(8deg) translateY(-8px);
   border-color:#00eaff;
   box-shadow:0 0 30px #00eaff55;
 }
 
-.word strong{
+.word-card strong{
   display:block;
   font-size:25px;
-  color:white;
+  color:#fff;
+  text-shadow:0 0 12px #00eaff;
 }
 
-.word span{
+.word-card span{
   display:block;
   margin-top:10px;
   color:#ffe600;
   font-weight:900;
 }
 
-.quiz{
-  padding:30px;
+.word-card small{
+  display:block;
+  margin-top:8px;
+  color:#9deaff;
+}
+
+.progress-box{
+  padding:28px;
   border-radius:25px;
   border:1px solid #00eaff66;
-  background:#031629ee;
-  box-shadow:0 0 40px #00eaff22;
-  text-align:center;
-}
-
-.question{
-  font-size:32px;
-  color:#00eaff;
-  font-weight:1000;
-  margin:20px 0;
-}
-
-.answers{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  max-width:650px;
-  margin:auto;
-}
-
-.answer{
-  padding:15px;
-  border-radius:15px;
-  border:1px solid #00eaff44;
-  background:#062443;
-  color:white;
-  cursor:pointer;
-  font-size:17px;
-  font-weight:bold;
-}
-
-.answer:hover{
-  background:#074b6e;
-  border-color:#00eaff;
-}
-
-.result{
-  margin-top:20px;
-  min-height:28px;
-  color:#ffe600;
-  font-weight:bold;
+  background:#031629dd;
+  box-shadow:0 0 35px #00eaff22;
 }
 
 .stats{
@@ -406,7 +494,7 @@ h1 span{
 }
 
 .stat{
-  padding:20px;
+  padding:18px;
   text-align:center;
   border-radius:16px;
   background:#061c32;
@@ -422,10 +510,11 @@ h1 span{
 
 .progress{
   height:20px;
-  margin-top:25px;
-  border-radius:30px;
+  margin-top:20px;
   overflow:hidden;
+  border-radius:30px;
   background:#010811;
+  border:1px solid #00eaff33;
 }
 
 .progress i{
@@ -434,924 +523,974 @@ h1 span{
   height:100%;
   background:linear-gradient(90deg,#00eaff,#008cff,#ffe600);
   box-shadow:0 0 20px #00eaff;
-  transition:1s;
+  transition:width 1s ease;
 }
 
 .mission{
+  position:relative;
+  padding:40px;
+  overflow:hidden;
   text-align:center;
-  padding:45px 20px;
   border-radius:30px;
-  border:1px solid #00eaff66;
+  border:1px solid #00eaff77;
   background:linear-gradient(135deg,#06385ddd,#020d1bdd);
-  box-shadow:0 0 50px #00eaff22;
+  box-shadow:0 30px 70px #000c,0 0 40px #00eaff33;
 }
 
-footer{
+.mission-content{
+  position:relative;
+  z-index:2;
+}
+
+.mission h2{
+  color:#00eaff;
+  font-size:35px;
+}
+
+.footer{
   margin-top:50px;
-  padding:35px;
+  padding:35px 0;
   text-align:center;
   color:#9dc7d5;
   border-top:1px solid #00eaff33;
 }
 
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .cards{grid-template-columns:1fr}
-  .words{grid-template-columns:repeat(2,1fr)}
-  .stats{grid-template-columns:repeat(2,1fr)}
+.copyright{
+  padding:20px;
+  text-align:center;
+  color:#789eac;
+  border-top:1px solid #00eaff22;
 }
 
-@media(max-width:600px){
-  .nav{flex-direction:column;padding:12px 0}
+@media(max-width:900px){
+
+  .hero-grid{grid-template-columns:1fr}
+
+  .lesson-grid{grid-template-columns:1fr}
+
+  .words{grid-template-columns:repeat(2,1fr)}
+
+  .stats{grid-template-columns:repeat(2,1fr)}
+
+  .hero{padding-top:55px}
+}
+
+@media(max-width:650px){
+
+  .wrap{width:calc(100% - 20px)}
+
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px 0;
+  }
+
+  .navlinks{
+    width:100%;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:5px;
+  }
+
+  .navlinks a{
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+
+  .hero h1{
+    font-size:43px;
+    letter-spacing:-2px;
+  }
+
   .words{grid-template-columns:1fr}
+
   .stats{grid-template-columns:1fr 1fr}
-  .answers{grid-template-columns:1fr}
+
+  .mission{padding:28px 18px}
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="world">
-  <i class="star s1"></i>
-  <i class="star s2"></i>
-  <i class="star s3"></i>
-  <i class="star s4"></i>
-  <i class="star s5"></i>
-  <i class="star s6"></i>
-  <i class="star s7"></i>
+<div class="world" aria-hidden="true">
+
+  <div class="beam"></div>
+  <div class="beam"></div>
+  <div class="beam"></div>
+  <div class="beam"></div>
+  <div class="beam"></div>
+
+  <div class="stars">
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+  </div>
+
+  <div class="alphabet">
+    <span class="letter">A</span>
+    <span class="letter">B</span>
+    <span class="letter">C</span>
+    <span class="letter">D</span>
+    <span class="letter">E</span>
+    <span class="letter">F</span>
+    <span class="letter">G</span>
+    <span class="letter">H</span>
+    <span class="letter">I</span>
+    <span class="letter">J</span>
+  </div>
+
+  <div class="floor"></div>
+
 </div>
 
-<header>
-<div class="wrap nav">
+<header class="top">
 
-<a class="brand" href="academy.html">
-⚡ ENGLISH WITH MARIAMI
-</a>
+  <div class="wrap nav">
 
-<nav class="navlinks">
-<a href="academy.html">🏠 Academy</a>
-<a href="#lessons">🎓 Lessons</a>
-<a href="#vocabulary">🧠 Vocabulary</a>
-<a href="#quiz">📝 Quiz</a>
-<a href="#progress">🏆 Progress</a>
-<a href="#" id="logout">🚪 გამოსვლა</a>
-</nav>
+    <a href="academy.html" class="brand">
+      ⚡ ENGLISH WITH MARIAMI
+    </a>
 
-</div>
+    <nav class="navlinks">
+
+      <a href="academy.html">🏠 Academy</a>
+
+      <a href="#lessons">📚 Lessons</a>
+
+      <a href="#vocabulary">🧠 Vocabulary</a>
+
+      <a href="#progress">🏆 Progress</a>
+
+      <a href="#mission">🚀 Mission</a>
+
+      <a href="login.html">🚪 გამოსვლა</a>
+
+    </nav>
+
+  </div>
+
 </header>
 
 <main class="wrap">
 
 <section class="hero">
 
-<div>
+  <div class="hero-grid">
 
-<span class="badge" id="gradeBadge">
-GRADE
-</span>
+    <div>
 
-<h1>
-ინგლისური
-<span id="gradeTitle">ახალი სამყაროა.</span>
-</h1>
+      <span class="badge">
+        🌟 GRADE 3 • ENGLISH EXPLORER
+      </span>
 
-<p class="lead" id="gradeDescription">
-კეთილი იყოს შენი მობრძანება English with Mariami-ის
-ფუტურისტულ აკადემიაში.
-</p>
+      <h1>
+        ინგლისური
+        <span>შემდეგ დონეზე.</span>
+      </h1>
 
-<div class="buttons">
+      <p class="lead">
+        კეთილი იყოს შენი მობრძანება მე-3 კლასის
+        ინგლისურის სამყაროში. აქ ისწავლი ასობით
+        ახალ სიტყვას, წინადადებებს, ზმნებს,
+        ზედსართავებს, ოჯახს, სკოლას, საკვებს,
+        ცხოველებს, დროს, ამინდს და ყოველდღიურ
+        ინგლისურ საუბარს.
+      </p>
 
-<a href="#vocabulary" class="btn primary">
-🧠 დავიწყოთ სწავლა
-</a>
+      <div class="buttons">
 
-<a href="#quiz" class="btn yellow">
-📝 Quiz
-</a>
+        <a href="#vocabulary" class="btn primary">
+          🧠 სიტყვების სწავლა
+        </a>
 
-</div>
+        <a href="#lessons" class="btn yellow">
+          📚 გაკვეთილები
+        </a>
 
-<div class="profile">
-<div>
-👤 მოსწავლე:
-<strong id="studentName">იტვირთება...</strong>
-</div>
+      </div>
 
-<div id="studentGrade">
-GRADE
-</div>
-</div>
+    </div>
 
-</div>
+    <div class="hologram">
 
-<div class="hologram">
+      <div class="holo-ring"></div>
+      <div class="holo-ring"></div>
+      <div class="holo-ring"></div>
 
-<div class="ring"></div>
-<div class="ring r2"></div>
+      <div class="teacher-holo">
 
-<div class="teacher">
+        <div class="avatar">👩‍🏫</div>
 
-<div class="avatar">👩‍🏫</div>
+        <h2>Teacher Mariami</h2>
 
-<h2>Teacher Mariami</h2>
+        <p>
+          შენი Grade 3 English Guide ✨
+        </p>
 
-<p class="muted">
-შენი ინგლისურის გზამკვლევი ✨
-</p>
+        <span class="badge">
+          LEVEL 3
+        </span>
 
-<span class="badge" id="levelBadge">
-LEVEL
-</span>
+      </div>
 
-</div>
+    </div>
 
-</div>
+  </div>
 
 </section>
-
 
 <section id="lessons" class="section">
 
-<div class="section-title">
+  <div class="section-title">
 
-<span class="badge">
-🎓 LESSONS
-</span>
+    <span class="badge">
+      🎓 GRADE 3 LESSONS
+    </span>
 
-<h2 id="lessonsTitle">
-რას ვისწავლით?
-</h2>
+    <h2>რას ვისწავლით?</h2>
 
-<p class="muted">
-ისწავლე, მოუსმინე, ივარჯიშე და დააგროვე ქულები.
-</p>
+    <p class="muted">
+      თითოეული მისია გაძლევს ახალ სიტყვებსა და წინადადებებს.
+    </p>
 
-</div>
+  </div>
 
-<div class="cards" id="lessonCards"></div>
+  <div class="lesson-grid">
+
+    <article class="lesson">
+
+      <div class="lesson-icon">👨‍👩‍👧‍👦</div>
+
+      <h3>Family & People</h3>
+
+      <p>
+        mother, father, sister, brother,
+        parents, child, grandmother,
+        grandfather, uncle, aunt, cousin,
+        friend, teacher, student, boy, girl.
+      </p>
+
+      <a href="#vocabulary" class="btn primary">
+        სწავლა →
+      </a>
+
+    </article>
+
+    <article class="lesson">
+
+      <div class="lesson-icon">🏫</div>
+
+      <h3>School World</h3>
+
+      <p>
+        school, classroom, teacher, student,
+        book, notebook, pencil, pen, ruler,
+        desk, chair, board, lesson, homework,
+        question, answer, read, write.
+      </p>
+
+      <a href="#vocabulary" class="btn primary">
+        სწავლა →
+      </a>
+
+    </article>
+
+    <article class="lesson">
+
+      <div class="lesson-icon">🌎</div>
+
+      <h3>Everyday English</h3>
+
+      <p>
+        morning, afternoon, evening, night,
+        today, tomorrow, yesterday, happy,
+        sad, hungry, thirsty, tired, ready,
+        good, bad, easy, difficult.
+      </p>
+
+      <a href="#vocabulary" class="btn primary">
+        სწავლა →
+      </a>
+
+    </article>
+
+  </div>
 
 </section>
-
 
 <section id="vocabulary" class="section">
 
-<div class="section-title">
+  <div class="section-title">
 
-<span class="badge">
-🧠 VOCABULARY LAB
-</span>
+    <span class="badge">
+      🧠 VOCABULARY LAB
+    </span>
 
-<h2>
-სასწავლო სიტყვები
-</h2>
+    <h2>Grade 3 — სიტყვების დიდი ლაბორატორია</h2>
 
-<p class="muted">
-დააჭირე სიტყვას 🔊 — ინგლისურად წარმოვთქვამთ.
-</p>
+    <p class="muted">
+      ინგლისური სიტყვა • ქართული მნიშვნელობა • გამოთქმა
+    </p>
 
-</div>
+  </div>
 
-<div class="words" id="wordList"></div>
+  <div class="words">
+
+    <div class="word-card">
+      <strong>ABOUT</strong>
+      <span>შესახებ</span>
+      <small>ə-baut</small>
+    </div>
+
+    <div class="word-card">
+      <strong>ALWAYS</strong>
+      <span>ყოველთვის</span>
+      <small>ოლვეიზ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>ANSWER</strong>
+      <span>პასუხი</span>
+      <small>ანსერ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BEAUTIFUL</strong>
+      <span>ლამაზი</span>
+      <small>ბიუთიფულ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BECAUSE</strong>
+      <span>იმიტომ რომ</span>
+      <small>ბიქოზ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BEGIN</strong>
+      <span>დაწყება</span>
+      <small>ბიგინ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BETWEEN</strong>
+      <span>შორის</span>
+      <small>ბითუინ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BRING</strong>
+      <span>მოტანა</span>
+      <small>ბრინგ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BUILD</strong>
+      <span>აშენება</span>
+      <small>ბილდ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>BUSY</strong>
+      <span>დაკავებული</span>
+      <small>ბიზი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>CAREFUL</strong>
+      <span>ფრთხილი</span>
+      <small>ქეარფულ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>CHANGE</strong>
+      <span>შეცვლა</span>
+      <small>ჩეინჯ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>CHILDREN</strong>
+      <span>ბავშვები</span>
+      <small>ჩილდრენ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>CLEAN</strong>
+      <span>სუფთა / გაწმენდა</span>
+      <small>ქლინ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>CLOSE</strong>
+      <span>დახურვა / ახლოს</span>
+      <small>ქლოუზ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>COUNTRY</strong>
+      <span>ქვეყანა</span>
+      <small>ქანთრი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>DIFFERENT</strong>
+      <span>განსხვავებული</span>
+      <small>დიფერენთ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>EARLY</strong>
+      <span>ადრე</span>
+      <small>ერლი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>ENOUGH</strong>
+      <span>საკმარისი</span>
+      <small>ინაფ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>EVERY</strong>
+      <span>ყოველი</span>
+      <small>ევრი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>EXAMPLE</strong>
+      <span>მაგალითი</span>
+      <small>იგზამფლ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>FAMOUS</strong>
+      <span>ცნობილი</span>
+      <small>ფეიმეს</small>
+    </div>
+
+    <div class="word-card">
+      <strong>FAVORITE</strong>
+      <span>საყვარელი</span>
+      <small>ფეივორით</small>
+    </div>
+
+    <div class="word-card">
+      <strong>FINISH</strong>
+      <span>დასრულება</span>
+      <small>ფინიშ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>FOLLOW</strong>
+      <span>მიყოლა</span>
+      <small>ფოლოუ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>FORGET</strong>
+      <span>დავიწყება</span>
+      <small>ფორგეთ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>FRIENDLY</strong>
+      <span>მეგობრული</span>
+      <small>ფრენდლი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>HARD</strong>
+      <span>რთული / ძლიერად</span>
+      <small>ჰარდ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>HEALTHY</strong>
+      <span>ჯანმრთელი</span>
+      <small>ჰელთი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>IMPORTANT</strong>
+      <span>მნიშვნელოვანი</span>
+      <small>იმფორთენთ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>LEARN</strong>
+      <span>სწავლა</span>
+      <small>ლერნ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>LISTEN</strong>
+      <span>მოსმენა</span>
+      <small>ლისენ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>MINUTE</strong>
+      <span>წუთი</span>
+      <small>მინით</small>
+    </div>
+
+    <div class="word-card">
+      <strong>NEVER</strong>
+      <span>არასოდეს</span>
+      <small>ნევერ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>OFTEN</strong>
+      <span>ხშირად</span>
+      <small>ოფენ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>PLACE</strong>
+      <span>ადგილი</span>
+      <small>ფლეის</small>
+    </div>
+
+    <div class="word-card">
+      <strong>REMEMBER</strong>
+      <span>დამახსოვრება</span>
+      <small>რიმემბერ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>START</strong>
+      <span>დაწყება</span>
+      <small>სტარტ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>STRONG</strong>
+      <span>ძლიერი</span>
+      <small>სტრონგ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>THINK</strong>
+      <span>ფიქრი</span>
+      <small>თინქ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>TOGETHER</strong>
+      <span>ერთად</span>
+      <small>თუგეზერ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>UNDERSTAND</strong>
+      <span>გაგება</span>
+      <small>ანდერსთენდ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>USUALLY</strong>
+      <span>ჩვეულებრივ</span>
+      <small>იუჟუალი</small>
+    </div>
+
+    <div class="word-card">
+      <strong>VISIT</strong>
+      <span>სტუმრობა / მონახულება</span>
+      <small>ვიზით</small>
+    </div>
+
+    <div class="word-card">
+      <strong>WATCH</strong>
+      <span>ყურება</span>
+      <small>უოჩ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>WITHOUT</strong>
+      <span>გარეშე</span>
+      <small>უიზაუთ</small>
+    </div>
+
+    <div class="word-card">
+      <strong>YOUNG</strong>
+      <span>ახალგაზრდა</span>
+      <small>იანგ</small>
+    </div>
+
+  </div>
 
 </section>
-
-
-<section id="quiz" class="section">
-
-<div class="section-title">
-
-<span class="badge">
-📝 ENGLISH QUIZ
-</span>
-
-<h2>
-შეამოწმე შენი ცოდნა
-</h2>
-
-</div>
-
-<div class="quiz">
-
-<div class="question" id="question">
-მზად ხარ?
-</div>
-
-<div class="answers" id="answers"></div>
-
-<div class="result" id="quizResult"></div>
-
-<button class="btn primary" id="nextBtn" style="display:none">
-შემდეგი →
-</button>
-
-</div>
-
-</section>
-
-
-<section id="progress" class="section">
-
-<div class="section-title">
-
-<span class="badge">
-🏆 PLAYER STATUS
-</span>
-
-<h2>
-შენი პროგრესი
-</h2>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<b id="wordsCount">0</b>
-სიტყვა
-</div>
-
-<div class="stat">
-<b id="quizCount">0</b>
-Quiz
-</div>
-
-<div class="stat">
-<b id="scoreCount">0</b>
-ქულა
-</div>
-
-<div class="stat">
-<b id="percentCount">0%</b>
-პროგრესი
-</div>
-
-</div>
-
-<div class="progress">
-<i id="progressBar"></i>
-</div>
-
-<p class="muted" id="progressMessage">
-დაიწყე სწავლა 🚀
-</p>
-
-</section>
-
 
 <section class="section">
 
-<div class="mission">
+  <div class="section-title">
 
-<span class="badge">
-🚀 YOUR MISSION
-</span>
+    <span class="badge">
+      ⚡ ACTION WORDS
+    </span>
 
-<h2 id="missionTitle">
-მოიპოვე შენი პირველი ვარსკვლავი ⭐
-</h2>
+    <h2>მნიშვნელოვანი ზმნები</h2>
 
-<p class="muted" id="missionText">
-ისწავლე სიტყვები და გაიარე Quiz.
-</p>
+  </div>
 
-<a href="#quiz" class="btn primary">
-🚀 Start Mission
-</a>
+  <div class="words">
 
-</div>
+    <div class="word-card"><strong>GO</strong><span>წასვლა</span><small>გოუ</small></div>
+    <div class="word-card"><strong>COME</strong><span>მოსვლა</span><small>ქამ</small></div>
+    <div class="word-card"><strong>MAKE</strong><span>გაკეთება</span><small>მეიქ</small></div>
+    <div class="word-card"><strong>DO</strong><span>კეთება</span><small>დუ</small></div>
+
+    <div class="word-card"><strong>TAKE</strong><span>აღება</span><small>თეიქ</small></div>
+    <div class="word-card"><strong>GIVE</strong><span>მიცემა</span><small>გივ</small></div>
+    <div class="word-card"><strong>GET</strong><span>მიღება</span><small>გეთ</small></div>
+    <div class="word-card"><strong>KEEP</strong><span>შენახვა</span><small>ქიფ</small></div>
+
+    <div class="word-card"><strong>HELP</strong><span>დახმარება</span><small>ჰელფ</small></div>
+    <div class="word-card"><strong>OPEN</strong><span>გახსნა</span><small>ოუფენ</small></div>
+    <div class="word-card"><strong>PLAY</strong><span>თამაში</span><small>ფლეი</small></div>
+    <div class="word-card"><strong>READ</strong><span>კითხვა</span><small>რიდ</small></div>
+
+    <div class="word-card"><strong>WRITE</strong><span>წერა</span><small>რაით</small></div>
+    <div class="word-card"><strong>SPEAK</strong><span>ლაპარაკი</span><small>სპიქ</small></div>
+    <div class="word-card"><strong>ASK</strong><span>კითხვა</span><small>ესქ</small></div>
+    <div class="word-card"><strong>SHOW</strong><span>ჩვენება</span><small>შოუ</small></div>
+
+    <div class="word-card"><strong>USE</strong><span>გამოყენება</span><small>იუზ</small></div>
+    <div class="word-card"><strong>FIND</strong><span>პოვნა</span><small>ფაინდ</small></div>
+    <div class="word-card"><strong>LOOK</strong><span>შეხედვა</span><small>ლუქ</small></div>
+    <div class="word-card"><strong>CALL</strong><span>დარეკვა</span><small>ქოლ</small></div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-title">
+
+    <span class="badge">
+      🎨 ADJECTIVES
+    </span>
+
+    <h2>აღწერითი სიტყვები</h2>
+
+  </div>
+
+  <div class="words">
+
+    <div class="word-card"><strong>BIG</strong><span>დიდი</span></div>
+    <div class="word-card"><strong>SMALL</strong><span>პატარა</span></div>
+    <div class="word-card"><strong>LONG</strong><span>გრძელი</span></div>
+    <div class="word-card"><strong>SHORT</strong><span>მოკლე</span></div>
+
+    <div class="word-card"><strong>FAST</strong><span>სწრაფი</span></div>
+    <div class="word-card"><strong>SLOW</strong><span>ნელი</span></div>
+    <div class="word-card"><strong>HOT</strong><span>ცხელი</span></div>
+    <div class="word-card"><strong>COLD</strong><span>ცივი</span></div>
+
+    <div class="word-card"><strong>NEW</strong><span>ახალი</span></div>
+    <div class="word-card"><strong>OLD</strong><span>ძველი</span></div>
+    <div class="word-card"><strong>GOOD</strong><span>კარგი</span></div>
+    <div class="word-card"><strong>BAD</strong><span>ცუდი</span></div>
+
+    <div class="word-card"><strong>EASY</strong><span>ადვილი</span></div>
+    <div class="word-card"><strong>DIFFICULT</strong><span>რთული</span></div>
+    <div class="word-card"><strong>HAPPY</strong><span>ბედნიერი</span></div>
+    <div class="word-card"><strong>SAD</strong><span>სევდიანი</span></div>
+
+    <div class="word-card"><strong>HOT</strong><span>ცხელი</span></div>
+    <div class="word-card"><strong>COOL</strong><span>გრილი</span></div>
+    <div class="word-card"><strong>LOUD</strong><span>ხმამაღალი</span></div>
+    <div class="word-card"><strong>QUIET</strong><span>ჩუმი</span></div>
+
+  </div>
+
+</section>
+
+<section id="progress" class="section">
+
+  <div class="section-title">
+
+    <span class="badge">
+      🏆 PLAYER STATUS
+    </span>
+
+    <h2>შენი Grade 3 პროგრესი</h2>
+
+  </div>
+
+  <div class="progress-box">
+
+    <div class="stats">
+
+      <div class="stat">
+        <b id="words-count">0</b>
+        სიტყვა
+      </div>
+
+      <div class="stat">
+        <b id="quiz-count">0</b>
+        Quiz
+      </div>
+
+      <div class="stat">
+        <b id="progress-percent">0%</b>
+        პროგრესი
+      </div>
+
+      <div class="stat">
+        <b id="student-level">🌟</b>
+        დონე
+      </div>
+
+    </div>
+
+    <div class="progress">
+      <i id="progress-bar"></i>
+    </div>
+
+    <p id="progress-message" class="muted">
+      დაიწყე Grade 3-ის სწავლა და გახდი English Explorer 🚀
+    </p>
+
+  </div>
+
+</section>
+
+<section id="mission" class="section">
+
+  <div class="mission">
+
+    <div class="mission-content">
+
+      <span class="badge">
+        🚀 GRADE 3 MISSION
+      </span>
+
+      <h2>
+        მზად ხარ შემდეგი დონისთვის?
+      </h2>
+
+      <p class="muted">
+        ისწავლე ახალი სიტყვები, ივარჯიშე წინადადებებზე,
+        გაიარე Quiz და გახდი ინგლისურის ძლიერი Explorer ⭐
+      </p>
+
+      <div class="buttons" style="justify-content:center">
+
+        <a href="#vocabulary" class="btn primary">
+          🚀 Start Learning
+        </a>
+
+        <a href="academy.html" class="btn yellow">
+          ← Academy-ში დაბრუნება
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 </main>
 
-<footer>
+<footer class="footer">
 
-⚡ English with Mariami •
-<span id="footerGrade">Grade</span> •
-Learn • Play • Grow 🚀
-
-<br><br>
-
-© 2026 English with Mariami
+  ⚡ English with Mariami • Grade 3 •
+  Learn • Practice • Grow 🚀
 
 </footer>
 
+<div class="copyright">
+
+  © 2026 English with Mariami —
+  ყველა უფლება დაცულია •
+  Developed by btcgamer
+
+</div>
 
 <script>
 
-"use strict";
+(() => {
 
-/* =========================================================
-   GRADE DETECTION
-========================================================= */
+  "use strict";
 
-const fileName =
-  location.pathname
-    .split("/")
-    .pop()
-    .toLowerCase();
+  function getClient(){
 
-let GRADE = 2;
+    return (
+      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+      window.supabaseClient ||
+      null
+    );
 
-if(fileName.includes("grade3")){
-  GRADE = 3;
-}
-
-if(fileName.includes("grade4")){
-  GRADE = 4;
-}
-
-
-/* =========================================================
-   GRADE DATA
-========================================================= */
-
-const DATA = {
-
-2:{
-  title:"ახალი სამყაროა.",
-  description:
-    "კეთილი იყოს შენი მობრძანება მე-2 კლასის ფუტურისტულ ინგლისურის აკადემიაში. აქ ვისწავლით მარტივ სიტყვებს, ფერებს, ოჯახს, ცხოველებს, სკოლას და მარტივ წინადადებებს.",
-
-  lessons:[
-    ["🎨","Colors","Red, Blue, Green, Yellow და სხვა ფერები."],
-    ["👨‍👩‍👧","Family","Mother, Father, Sister, Brother და Family."],
-    ["🐶","Animals","Dog, Cat, Bird, Fish და სხვა ცხოველები."]
-  ],
-
-  words:[
-    ["APPLE","ვაშლი"],
-    ["BOOK","წიგნი"],
-    ["CAT","კატა"],
-    ["DOG","ძაღლი"],
-    ["HOUSE","სახლი"],
-    ["SCHOOL","სკოლა"],
-    ["WATER","წყალი"],
-    ["FAMILY","ოჯახი"],
-    ["RED","წითელი"],
-    ["BLUE","ლურჯი"],
-    ["GREEN","მწვანე"],
-    ["YELLOW","ყვითელი"]
-  ],
-
-  quiz:[
-    ["APPLE",["ვაშლი","სახლი","წიგნი","კატა"],0],
-    ["DOG",["ძაღლი","თევზი","ჩიტი","ცხენი"],0],
-    ["BOOK",["სკოლა","წიგნი","ოჯახი","წყალი"],1],
-    ["RED",["მწვანე","ლურჯი","წითელი","ყვითელი"],2],
-    ["CAT",["კატა","ძაღლი","თევზი","ჩიტი"],0],
-    ["WATER",["წყალი","სახლი","ვაშლი","წიგნი"],0]
-  ]
-},
-
-3:{
-  title:"შენი შემდეგი დონეა.",
-  description:
-    "კეთილი იყოს შენი მობრძანება მე-3 კლასის ინგლისურის სამყაროში. აქ უკვე ვისწავლით უფრო დიდ სიტყვებს, ყოველდღიურ მოქმედებებს, დროს, საკვებს და მარტივ წინადადებებს.",
-
-  lessons:[
-    ["🍎","Food","Apple, Bread, Milk, Cheese, Banana და სხვა საკვები."],
-    ["🏫","School","Teacher, Student, Classroom, Book, Pencil და School."],
-    ["⏰","Daily Life","Wake up, Eat, Go, Play, Read და ყოველდღიური მოქმედებები."]
-  ],
-
-  words:[
-    ["APPLE","ვაშლი"],
-    ["BANANA","ბანანი"],
-    ["BREAD","პური"],
-    ["MILK","რძე"],
-    ["CHEESE","ყველი"],
-    ["TEACHER","მასწავლებელი"],
-    ["STUDENT","მოსწავლე"],
-    ["PENCIL","ფანქარი"],
-    ["MORNING","დილა"],
-    ["NIGHT","ღამე"],
-    ["PLAY","თამაში"],
-    ["READ","კითხვა"]
-  ],
-
-  quiz:[
-    ["BANANA",["ვაშლი","ბანანი","პური","რძე"],1],
-    ["TEACHER",["მოსწავლე","მასწავლებელი","ექიმი","მამა"],1],
-    ["MILK",["წყალი","რძე","წვენი","ყავა"],1],
-    ["MORNING",["ღამე","დილა","საღამო","შუადღე"],1],
-    ["PENCIL",["კალამი","წიგნი","ფანქარი","მაგიდა"],2],
-    ["READ",["წერა","კითხვა","თამაში","სირბილი"],1]
-  ]
-},
-
-4:{
-  title:"შენი ინგლისური ძლიერდება.",
-  description:
-    "კეთილი იყოს შენი მობრძანება მე-4 კლასის ინგლისურის აკადემიაში. აქ უკვე ვსწავლობთ წინადადებებს, გრამატიკის საფუძვლებს, ყოველდღიურ საუბარს და უფრო რთულ სიტყვებს.",
-
-  lessons:[
-    ["🌎","My World","Country, City, Friend, Family, School და ყოველდღიური საუბარი."],
-    ["📚","Grammar","I am, You are, He is, She is და მარტივი წინადადებები."],
-    ["💬","Speaking","Hello, How are you?, What is your name? და სხვა ფრაზები."]
-  ],
-
-  words:[
-    ["FRIEND","მეგობარი"],
-    ["COUNTRY","ქვეყანა"],
-    ["CITY","ქალაქი"],
-    ["TEACHER","მასწავლებელი"],
-    ["STUDENT","მოსწავლე"],
-    ["HAPPY","ბედნიერი"],
-    ["SCHOOL","სკოლა"],
-    ["FAMILY","ოჯახი"],
-    ["BEAUTIFUL","ლამაზი"],
-    ["IMPORTANT","მნიშვნელოვანი"],
-    ["LEARN","სწავლა"],
-    ["SPEAK","ლაპარაკი"]
-  ],
-
-  quiz:[
-    ["FRIEND",["მეგობარი","მასწავლებელი","ოჯახი","მოსწავლე"],0],
-    ["COUNTRY",["ქალაქი","ქვეყანა","სკოლა","სახლი"],1],
-    ["HAPPY",["სევდიანი","ბედნიერი","მშიერი","დაღლილი"],1],
-    ["SPEAK",["წერა","კითხვა","ლაპარაკი","სირბილი"],2],
-    ["BEAUTIFUL",["დიდი","პატარა","ლამაზი","სწრაფი"],2],
-    ["LEARN",["სწავლა","თამაში","ჭამა","ძილი"],0]
-  ]
-}
-
-};
-
-const gradeData = DATA[GRADE];
-
-
-/* =========================================================
-   UI
-========================================================= */
-
-document.title =
-  `Grade ${GRADE} — English with Mariami`;
-
-document.getElementById("gradeBadge").textContent =
-  `🌱 GRADE ${GRADE} • ENGLISH`;
-
-document.getElementById("gradeTitle").textContent =
-  gradeData.title;
-
-document.getElementById("gradeDescription").textContent =
-  gradeData.description;
-
-document.getElementById("studentGrade").textContent =
-  `GRADE ${GRADE}`;
-
-document.getElementById("levelBadge").textContent =
-  `LEVEL ${GRADE}`;
-
-document.getElementById("footerGrade").textContent =
-  `Grade ${GRADE}`;
-
-document.getElementById("missionTitle").textContent =
-  `Grade ${GRADE} Mission ⭐`;
-
-document.getElementById("missionText").textContent =
-  `ისწავლე ${gradeData.words.length} ახალი სიტყვა და გაიარე პირველი Quiz.`;
-
-
-/* =========================================================
-   LESSONS
-========================================================= */
-
-const lessonCards =
-  document.getElementById("lessonCards");
-
-gradeData.lessons.forEach(item => {
-
-  const card =
-    document.createElement("article");
-
-  card.className="card";
-
-  card.innerHTML=`
-    <div class="icon">${item[0]}</div>
-    <h3>${item[1]}</h3>
-    <p class="muted">${item[2]}</p>
-    <a href="#vocabulary"
-       class="btn primary">
-       სწავლა →
-    </a>
-  `;
-
-  lessonCards.appendChild(card);
-
-});
-
-
-/* =========================================================
-   TEXT TO SPEECH
-========================================================= */
-
-function speak(text){
-
-  if(!("speechSynthesis" in window)){
-    alert("ამ მოწყობილობაზე ხმის ფუნქცია არ არის ხელმისაწვდომი.");
-    return;
   }
 
-  speechSynthesis.cancel();
+  function redirectToLogin(){
 
-  const voice =
-    new SpeechSynthesisUtterance(text);
+    window.location.replace(
+      "login.html?redirect=" +
+      encodeURIComponent("grade3.html")
+    );
 
-  voice.lang="en-US";
-  voice.rate=.75;
-  voice.pitch=1;
+  }
 
-  speechSynthesis.speak(voice);
-}
+  function setProgress(
+    words=0,
+    quizzes=0,
+    percent=0,
+    level="🌟"
+  ){
 
+    const safeWords =
+      Math.max(0,Number(words)||0);
 
-/* =========================================================
-   VOCABULARY
-========================================================= */
+    const safeQuizzes =
+      Math.max(0,Number(quizzes)||0);
 
-const wordList =
-  document.getElementById("wordList");
-
-let learnedWords =
-  Number(localStorage.getItem(
-    `grade${GRADE}_words`
-  )) || 0;
-
-gradeData.words.forEach((word,index)=>{
-
-  const div =
-    document.createElement("div");
-
-  div.className="word";
-
-  div.innerHTML=`
-    <strong>🔊 ${word[0]}</strong>
-    <span>${word[1]}</span>
-  `;
-
-  div.addEventListener("click",()=>{
-
-    speak(word[0]);
-
-    const key =
-      `grade${GRADE}_word_${index}`;
-
-    if(!localStorage.getItem(key)){
-
-      localStorage.setItem(key,"1");
-
-      learnedWords++;
-
-      localStorage.setItem(
-        `grade${GRADE}_words`,
-        learnedWords
+    const safePercent =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          Number(percent)||0
+        )
       );
 
-      updateProgress();
+    const wordsEl =
+      document.getElementById("words-count");
+
+    const quizEl =
+      document.getElementById("quiz-count");
+
+    const percentEl =
+      document.getElementById("progress-percent");
+
+    const levelEl =
+      document.getElementById("student-level");
+
+    const barEl =
+      document.getElementById("progress-bar");
+
+    if(wordsEl)
+      wordsEl.textContent=safeWords;
+
+    if(quizEl)
+      quizEl.textContent=safeQuizzes;
+
+    if(percentEl)
+      percentEl.textContent=
+        Math.round(safePercent)+"%";
+
+    if(levelEl)
+      levelEl.textContent=level;
+
+    if(barEl)
+      setTimeout(() => {
+
+        barEl.style.width =
+          Math.round(safePercent)+"%";
+
+      },300);
+
+  }
+
+  async function initGrade3(){
+
+    let client=getClient();
+
+    if(!client){
+
+      await new Promise(resolve => {
+
+        let finished=false;
+
+        const finish=()=>{
+
+          if(finished)return;
+
+          finished=true;
+          resolve();
+
+        };
+
+        window.addEventListener(
+          "englishMariamiSupabaseReady",
+          finish,
+          {once:true}
+        );
+
+        setTimeout(
+          finish,
+          5000
+        );
+
+      });
+
+      client=getClient();
 
     }
 
-  });
+    if(!client){
 
-  wordList.appendChild(div);
+      console.error(
+        "Supabase client not initialized."
+      );
 
-});
-
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-let quizIndex=0;
-let quizScore=0;
-let quizCompleted=
-  Number(localStorage.getItem(
-    `grade${GRADE}_quiz`
-  )) || 0;
-
-const question =
-  document.getElementById("question");
-
-const answers =
-  document.getElementById("answers");
-
-const result =
-  document.getElementById("quizResult");
-
-const nextBtn =
-  document.getElementById("nextBtn");
-
-
-function loadQuestion(){
-
-  result.textContent="";
-  nextBtn.style.display="none";
-
-  const q =
-    gradeData.quiz[quizIndex];
-
-  question.textContent =
-    `🔊 ${q[0]}`;
-
-  speak(q[0]);
-
-  answers.innerHTML="";
-
-  q[1].forEach((answer,index)=>{
-
-    const button =
-      document.createElement("button");
-
-    button.className="answer";
-
-    button.textContent =
-      answer;
-
-    button.onclick=()=>{
-
-      checkAnswer(index);
-
-    };
-
-    answers.appendChild(button);
-
-  });
-
-}
-
-
-function checkAnswer(selected){
-
-  const q =
-    gradeData.quiz[quizIndex];
-
-  const buttons =
-    answers.querySelectorAll(".answer");
-
-  buttons.forEach(b=>{
-    b.disabled=true;
-  });
-
-  if(selected===q[2]){
-
-    quizScore++;
-
-    result.textContent =
-      "✅ სწორია! +1 ქულა";
-
-    speak("Correct!");
-
-  }else{
-
-    result.textContent =
-      `❌ არასწორია. სწორი პასუხია: ${q[1][q[2]]}`;
-
-    speak("Try again!");
-
-  }
-
-  nextBtn.style.display="inline-block";
-
-}
-
-
-nextBtn.onclick=()=>{
-
-  quizIndex++;
-
-  if(quizIndex>=gradeData.quiz.length){
-
-    finishQuiz();
-
-  }else{
-
-    loadQuestion();
-
-  }
-
-};
-
-
-function finishQuiz(){
-
-  quizCompleted++;
-
-  localStorage.setItem(
-    `grade${GRADE}_quiz`,
-    quizCompleted
-  );
-
-  result.innerHTML =
-    `🏆 Quiz დასრულდა! შენი ქულა: <b>${quizScore}/${gradeData.quiz.length}</b>`;
-
-  question.textContent =
-    "🎉 შესანიშნავია!";
-
-  answers.innerHTML="";
-
-  nextBtn.style.display="none";
-
-  updateProgress();
-
-  saveProgress();
-
-}
-
-
-loadQuestion();
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-function getPercent(){
-
-  const wordPercent =
-    Math.min(
-      100,
-      (learnedWords /
-      gradeData.words.length)*60
-    );
-
-  const quizPercent =
-    Math.min(
-      40,
-      quizCompleted*10
-    );
-
-  return Math.min(
-    100,
-    wordPercent+quizPercent
-  );
-
-}
-
-
-function updateProgress(){
-
-  const percent =
-    Math.round(getPercent());
-
-  document.getElementById(
-    "wordsCount"
-  ).textContent=learnedWords;
-
-  document.getElementById(
-    "quizCount"
-  ).textContent=quizCompleted;
-
-  document.getElementById(
-    "scoreCount"
-  ).textContent=quizScore;
-
-  document.getElementById(
-    "percentCount"
-  ).textContent=`${percent}%`;
-
-  setTimeout(()=>{
-
-    document.getElementById(
-      "progressBar"
-    ).style.width=`${percent}%`;
-
-  },100);
-
-  let message =
-    "დაიწყე სწავლა 🚀";
-
-  if(percent>=25)
-    message="კარგად მიდიხარ! ⭐";
-
-  if(percent>=50)
-    message="შესანიშნავი პროგრესია! 🔥";
-
-  if(percent>=75)
-    message="თითქმის მზად ხარ შემდეგი დონისთვის! 🚀";
-
-  if(percent>=100)
-    message="🎉 Grade ${GRADE} Mission Complete!";
-
-  document.getElementById(
-    "progressMessage"
-  ).textContent=message;
-
-}
-
-
-updateProgress();
-
-
-/* =========================================================
-   SUPABASE
-========================================================= */
-
-function getClient(){
-
-  return (
-    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-    window.supabaseClient ||
-    null
-  );
-
-}
-
-
-function redirectLogin(){
-
-  location.replace(
-    "login.html?redirect="+
-    encodeURIComponent(
-      `grade${GRADE}.html`
-    )
-  );
-
-}
-
-
-async function waitForClient(){
-
-  let client=getClient();
-
-  if(client)
-    return client;
-
-  await new Promise(resolve=>{
-
-    let done=false;
-
-    const finish=()=>{
-
-      if(done)return;
-
-      done=true;
-      resolve();
-
-    };
-
-    window.addEventListener(
-      "englishMariamiSupabaseReady",
-      finish,
-      {once:true}
-    );
-
-    setTimeout(
-      finish,
-      5000
-    );
-
-  });
-
-  return getClient();
-
-}
-
-
-async function initAuth(){
-
-  const client =
-    await waitForClient();
-
-  if(!client){
-
-    console.error(
-      "Supabase client not found."
-    );
-
-    redirectLogin();
-    return;
-
-  }
-
-  try{
-
-    const {
-      data:userData,
-      error:userError
-    } =
-      await client.auth.getUser();
-
-    if(
-      userError ||
-      !userData ||
-      !userData.user
-    ){
-
-      redirectLogin();
+      redirectToLogin();
       return;
 
     }
 
-    const user =
-      userData.user;
+    try{
 
-    const {
-      data:profile,
-      error:profileError
-    } =
+      const {
+        data:sessionData,
+        error:sessionError
+      } =
+      await client.auth.getSession();
+
+      if(
+        sessionError ||
+        !sessionData ||
+        !sessionData.session ||
+        !sessionData.session.user
+      ){
+
+        redirectToLogin();
+        return;
+
+      }
+
+      const user =
+        sessionData.session.user;
+
+      const {
+        data:profile,
+        error:profileError
+      } =
       await client
       .from("profiles")
       .select(
@@ -1363,260 +1502,111 @@ async function initAuth(){
       )
       .maybeSingle();
 
-    if(profileError){
-
-      console.error(
-        profileError
-      );
-
-      redirectLogin();
-      return;
-
-    }
-
-    const role =
-      String(
-        profile?.role ?? "student"
-      ).toLowerCase();
-
-    const userGrade =
-      Number(
-        profile?.grade ?? 0
-      );
-
-    const name =
-      profile?.full_name ||
-      user.user_metadata?.full_name ||
-      user.email ||
-      "მოსწავლე";
-
-    document.getElementById(
-      "studentName"
-    ).textContent=name;
-
-
-    /*
-      Student must belong to
-      the current grade.
-    */
-
-    if(
-      role==="student" &&
-      userGrade!==GRADE
-    ){
-
-      alert(
-        `ეს გვერდი განკუთვნილია მხოლოდ მე-${GRADE} კლასისთვის.`
-      );
-
-      location.replace(
-        "academy.html"
-      );
-
-      return;
-
-    }
-
-
-    if(role!=="student"){
-
-      document.getElementById(
-        "progressMessage"
-      ).textContent =
-        `Grade ${GRADE} Preview Mode — ${role}`;
-
-    }
-
-
-    /*
-      Load saved Supabase progress
-    */
-
-    await loadProgress(client,user.id);
-
-  }catch(error){
-
-    console.error(
-      "Auth error:",
-      error
-    );
-
-    redirectLogin();
-
-  }
-
-}
-
-
-/* =========================================================
-   SUPABASE PROGRESS
-========================================================= */
-
-async function loadProgress(client,userId){
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await client
-      .from("student_progress")
-      .select(
-        "words_learned,quiz_completed,score"
-      )
-      .eq(
-        "user_id",
-        userId
-      )
-      .eq(
-        "grade",
-        GRADE
-      )
-      .maybeSingle();
-
-    if(error){
-
-      console.warn(
-        "Progress table unavailable:",
-        error.message
-      );
-
-      return;
-
-    }
-
-    if(data){
-
-      learnedWords =
-        Number(
-          data.words_learned
-        ) || learnedWords;
-
-      quizCompleted =
-        Number(
-          data.quiz_completed
-        ) || quizCompleted;
-
-      quizScore =
-        Number(
-          data.score
-        ) || quizScore;
-
-      localStorage.setItem(
-        `grade${GRADE}_words`,
-        learnedWords
-      );
-
-      localStorage.setItem(
-        `grade${GRADE}_quiz`,
-        quizCompleted
-      );
-
-      updateProgress();
-
-    }
-
-  }catch(e){
-
-    console.warn(e);
-
-  }
-
-}
-
-
-async function saveProgress(){
-
-  const client=getClient();
-
-  if(!client)
-    return;
-
-  try{
-
-    const {
-      data:userData
-    } =
-    await client.auth.getUser();
-
-    if(!userData?.user)
-      return;
-
-    await client
-      .from("student_progress")
-      .upsert({
-
-        user_id:
-          userData.user.id,
-
-        grade:
-          GRADE,
-
-        words_learned:
-          learnedWords,
-
-        quiz_completed:
-          quizCompleted,
-
-        score:
-          quizScore,
-
-        updated_at:
-          new Date().toISOString()
-
-      },{
-        onConflict:
-          "user_id,grade"
-      });
-
-  }catch(e){
-
-    console.warn(
-      "Could not save progress:",
-      e
-    );
-
-  }
-
-}
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-document
-  .getElementById("logout")
-  .addEventListener(
-    "click",
-    async(event)=>{
-
-      event.preventDefault();
-
-      const client=getClient();
-
-      if(client){
-
-        await client.auth.signOut({
-          scope:"local"
-        });
+      if(profileError){
+
+        console.error(
+          "Profile error:",
+          profileError
+        );
+
+        redirectToLogin();
+        return;
 
       }
 
-      location.replace(
-        "login.html"
+      const role =
+        String(
+          profile?.role ??
+          user.user_metadata?.role ??
+          "student"
+        ).toLowerCase();
+
+      const grade =
+        Number(
+          profile?.grade ??
+          user.user_metadata?.grade ??
+          0
+        );
+
+      /*
+       * Grade 3 access.
+       */
+
+      if(
+        role==="student" &&
+        grade!==3
+      ){
+
+        alert(
+          "ეს გვერდი განკუთვნილია მხოლოდ მე-3 კლასისთვის."
+        );
+
+        window.location.replace(
+          "academy.html"
+        );
+
+        return;
+
+      }
+
+      const progressMessage =
+        document.getElementById(
+          "progress-message"
+        );
+
+      if(progressMessage){
+
+        if(role==="student"){
+
+          progressMessage.textContent =
+            "მე-3 კლასი აქტიურია. წარმატებები, English Explorer! 🚀";
+
+        }else{
+
+          progressMessage.textContent =
+            "Grade 3 Preview Mode — Teacher / Admin / Parent";
+
+        }
+
+      }
+
+      setProgress(
+        0,
+        0,
+        0,
+        "🌟"
       );
 
+    }catch(error){
+
+      console.error(
+        "Grade 3 initialization error:",
+        error
+      );
+
+      redirectToLogin();
+
     }
-  );
 
+  }
 
-/* =========================================================
-   START
-========================================================= */
+  if(
+    document.readyState==="loading"
+  ){
 
-initAuth();
+    document.addEventListener(
+      "DOMContentLoaded",
+      initGrade3,
+      {once:true}
+    );
+
+  }else{
+
+    initGrade3();
+
+  }
+
+})();
 
 </script>
 
