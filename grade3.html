@@ -1,32 +1,104 @@
-/* Grade 3 — MY PROGRESS + safe Supabase sync
-   Local cache = offline/UI continuity
-   Supabase = durable record
-*/
+/* =========================================================
+   GRADE 3 — MY PROGRESS
+   Local cache + Safe Supabase Sync
+   ========================================================= */
+
 (function () {
   'use strict';
 
   const KEY = 'grade3LearnedWords';
   const QUIZ_KEY = 'grade3QuizAttempts';
   const BEST_KEY = 'grade3BestScore';
+  const SYNC_QUEUE_KEY = 'grade3SyncQueue';
+
+  let started = false;
+  let wordsObserver = null;
+  let quizObserver = null;
+  let updateTimer = null;
+
+  /* =========================================================
+     LOCAL STORAGE HELPERS
+     ========================================================= */
 
   function getLearned() {
     try {
-      return new Set(JSON.parse(localStorage.getItem(KEY) || '[]'));
+      const data = JSON.parse(
+        localStorage.getItem(KEY) || '[]'
+      );
+
+      return new Set(
+        Array.isArray(data)
+          ? data
+              .map(String)
+              .map(v => v.trim())
+              .filter(Boolean)
+          : []
+      );
     } catch (_) {
       return new Set();
     }
   }
 
   function saveLearned(set) {
-    localStorage.setItem(KEY, JSON.stringify([...set]));
+    try {
+      localStorage.setItem(
+        KEY,
+        JSON.stringify([...set])
+      );
+    } catch (error) {
+      console.warn(
+        'Grade 3 local save failed:',
+        error
+      );
+    }
+  }
+
+  function getAttempts() {
+    const value = Number(
+      localStorage.getItem(QUIZ_KEY) || 0
+    );
+
+    return Number.isFinite(value) && value >= 0
+      ? Math.floor(value)
+      : 0;
+  }
+
+  function saveAttempts(value) {
+    localStorage.setItem(
+      QUIZ_KEY,
+      String(Math.max(0, Math.floor(Number(value) || 0)))
+    );
   }
 
   function getBestQuiz() {
+    const value = Number(
+      localStorage.getItem(BEST_KEY) || 0
+    );
+
     return Math.max(
       0,
-      Math.min(10, Number(localStorage.getItem(BEST_KEY) || 0))
+      Math.min(
+        10,
+        Number.isFinite(value) ? value : 0
+      )
     );
   }
+
+  function saveBestQuiz(value) {
+    localStorage.setItem(
+      BEST_KEY,
+      String(
+        Math.max(
+          0,
+          Math.min(10, Number(value) || 0)
+        )
+      )
+    );
+  }
+
+  /* =========================================================
+     SUPABASE
+     ========================================================= */
 
   function supabaseClient() {
     return (
@@ -36,90 +108,287 @@
     );
   }
 
-  async function syncActivity(type, id, score, maxScore, points) {
+  async function getCurrentStudent() {
     const client = supabaseClient();
 
-    if (!client) return;
+    if (!client) return null;
 
     try {
       const {
-        data: { user }
+        data: { user },
+        error: userError
       } = await client.auth.getUser();
 
-      if (!user) return;
-
-      const { data: profile } = await client
-        .from('profiles')
-        .select('role,grade')
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if (
-        String(profile?.role || '').toLowerCase() !== 'student' ||
-        Number(profile?.grade) !== 3
-      ) {
-        return;
+      if (userError || !user) {
+        return null;
       }
 
-      await client.rpc('academy_record_activity', {
-        p_grade: 3,
-        p_activity_type: type,
-        p_activity_id: String(id),
-        p_score: Math.max(
-          0,
-          Math.min(
-            Number(maxScore) || 0,
-            Number(score) || 0
-          )
-        ),
-        p_max_score: Math.max(
-          1,
-          Number(maxScore) || 1
-        ),
-        p_points: Math.max(
-          0,
-          Math.min(
-            50,
-            Number(points) || 0
-          )
-        )
-      });
+      const { data: profile, error: profileError } =
+        await client
+          .from('profiles')
+          .select('role,grade')
+          .eq('user_id', user.id)
+          .maybeSingle();
+
+      if (profileError || !profile) {
+        return null;
+      }
+
+      if (
+        String(profile.role || '').toLowerCase() !==
+        'student'
+      ) {
+        return null;
+      }
+
+      if (Number(profile.grade) !== 3) {
+        return null;
+      }
+
+      return {
+        client,
+        user,
+        profile
+      };
 
     } catch (error) {
       console.warn(
-        'Grade 3 progress sync skipped:',
+        'Grade 3 student check failed:',
         error
       );
+
+      return null;
     }
   }
 
+  /* =========================================================
+     OFFLINE SYNC QUEUE
+     ========================================================= */
+
+  function getSyncQueue() {
+    try {
+      const data = JSON.parse(
+        localStorage.getItem(SYNC_QUEUE_KEY) || '[]'
+      );
+
+      return Array.isArray(data)
+        ? data
+        : [];
+    } catch (_) {
+      return [];
+    }
+  }
+
+  function saveSyncQueue(queue) {
+    try {
+      localStorage.setItem(
+        SYNC_QUEUE_KEY,
+        JSON.stringify(queue)
+      );
+    } catch (_) {}
+  }
+
+  function queueActivity(activity) {
+    const queue = getSyncQueue();
+
+    const exists = queue.some(function (item) {
+      return (
+        item.type === activity.type &&
+        item.id === activity.id
+      );
+    });
+
+    if (!exists) {
+      queue.push(activity);
+      saveSyncQueue(queue);
+    }
+  }
+
+  /* =========================================================
+     RECORD ACTIVITY
+     ========================================================= */
+
+  async function sendActivity(activity) {
+    const student = await getCurrentStudent();
+
+    if (!student) {
+      return false;
+    }
+
+    const client = student.client;
+
+    try {
+      const maxScore = Math.max(
+        1,
+        Number(activity.maxScore) || 1
+      );
+
+      const score = Math.max(
+        0,
+        Math.min(
+          maxScore,
+          Number(activity.score) || 0
+        )
+      );
+
+      const points = Math.max(
+        0,
+        Math.min(
+          50,
+          Number(activity.points) || 0
+        )
+      );
+
+      const { error } = await client.rpc(
+        'academy_record_activity',
+        {
+          p_grade: 3,
+          p_activity_type: String(
+            activity.type
+          ),
+          p_activity_id: String(
+            activity.id
+          ),
+          p_score: score,
+          p_max_score: maxScore,
+          p_points: points
+        }
+      );
+
+      if (error) {
+        console.warn(
+          'Grade 3 activity sync failed:',
+          error
+        );
+
+        return false;
+      }
+
+      return true;
+
+    } catch (error) {
+      console.warn(
+        'Grade 3 activity sync error:',
+        error
+      );
+
+      return false;
+    }
+  }
+
+  async function syncActivity(
+    type,
+    id,
+    score,
+    maxScore,
+    points
+  ) {
+    const activity = {
+      type: String(type),
+      id: String(id),
+      score: Number(score) || 0,
+      maxScore: Number(maxScore) || 1,
+      points: Number(points) || 0
+    };
+
+    const success =
+      await sendActivity(activity);
+
+    if (!success) {
+      queueActivity(activity);
+    }
+
+    return success;
+  }
+
+  /* =========================================================
+     FLUSH OFFLINE QUEUE
+     ========================================================= */
+
+  async function flushSyncQueue() {
+    const queue = getSyncQueue();
+
+    if (!queue.length) {
+      return;
+    }
+
+    const remaining = [];
+
+    for (const activity of queue) {
+      const success =
+        await sendActivity(activity);
+
+      if (!success) {
+        remaining.push(activity);
+      }
+    }
+
+    saveSyncQueue(remaining);
+  }
+
+  /* =========================================================
+     LEARNED WORD SYNC
+     ========================================================= */
+
   function syncLearnedWord(word) {
-    const safe = String(word || '').trim();
+    const safe = String(word || '')
+      .trim();
 
     if (!safe) return;
 
+    const id =
+      'grade3-word-' +
+      encodeURIComponent(
+        safe.toLowerCase()
+      );
+
     syncActivity(
       'word',
-      'grade3-word-' + encodeURIComponent(safe),
+      id,
       1,
       1,
       0
     );
   }
 
-  function readQuizScore() {
-    const el = document.getElementById('quizScore');
+  /* =========================================================
+     QUIZ SCORE
+     ========================================================= */
 
-    if (!el) {
+  function readQuizScore() {
+    const scoreElement =
+      document.getElementById(
+        'quizScore'
+      );
+
+    if (!scoreElement) {
       return getBestQuiz();
     }
 
-    const match = String(el.textContent || '')
-      .match(/\d+(?:\.\d+)?/);
+    const text =
+      String(
+        scoreElement.textContent || ''
+      );
 
-    const value = match
-      ? Number(match[0])
-      : getBestQuiz();
+    /*
+      Supports:
+      8/10
+      8 / 10
+      Score: 8
+      8
+    */
+
+    const match =
+      text.match(
+        /(?:^|\D)(10|[0-9])(?:\s*\/\s*10)?/
+      );
+
+    if (!match) {
+      return getBestQuiz();
+    }
+
+    const value =
+      Number(match[1]);
 
     return Math.max(
       0,
@@ -133,10 +402,14 @@
   }
 
   function syncQuiz(score) {
-    const safeScore = Math.max(
-      0,
-      Math.min(10, Number(score) || 0)
-    );
+    const safeScore =
+      Math.max(
+        0,
+        Math.min(
+          10,
+          Number(score) || 0
+        )
+      );
 
     const attemptId =
       'grade3-quiz-' +
@@ -144,16 +417,46 @@
       '-' +
       Math.random()
         .toString(36)
-        .slice(2, 8);
+        .slice(2, 9);
 
     syncActivity(
       'quiz',
       attemptId,
       safeScore,
       10,
-      Math.min(50, safeScore * 5)
+      Math.min(
+        50,
+        safeScore * 5
+      )
     );
   }
+
+  /* =========================================================
+     TOTAL WORDS
+     ========================================================= */
+
+  function getTotalWords() {
+    if (
+      Array.isArray(
+        window.grade3WordsForProgress
+      )
+    ) {
+      return window
+        .grade3WordsForProgress
+        .length;
+    }
+
+    const words =
+      document.querySelectorAll(
+        '#words .word'
+      );
+
+    return words.length;
+  }
+
+  /* =========================================================
+     PROGRESS PANEL
+     ========================================================= */
 
   function ensurePanel() {
     let panel =
@@ -161,12 +464,20 @@
         'grade3WorkingProgress'
       );
 
-    if (panel) return panel;
+    if (panel) {
+      return panel;
+    }
 
-    panel = document.createElement('section');
+    panel =
+      document.createElement(
+        'section'
+      );
 
-    panel.id = 'grade3WorkingProgress';
-    panel.className = 'section';
+    panel.id =
+      'grade3WorkingProgress';
+
+    panel.className =
+      'section';
 
     panel.innerHTML = `
       <div class="section-title">
@@ -181,47 +492,93 @@
       <div class="grade3-progress-grid">
 
         <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">📚</div>
+          <div class="grade3-progress-icon">
+            📚
+          </div>
+
           <div
             class="grade3-progress-number"
             id="grade3LearnedCount"
-          >0</div>
-          <div>ნასწავლი სიტყვა</div>
+          >
+            0
+          </div>
+
+          <div>
+            ნასწავლი სიტყვა
+          </div>
         </div>
 
+
         <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">📝</div>
+
+          <div class="grade3-progress-icon">
+            📝
+          </div>
+
           <div
             class="grade3-progress-number"
             id="grade3QuizCount"
-          >0/10</div>
-          <div>Quiz</div>
+          >
+            0/10
+          </div>
+
+          <div>
+            Quiz
+          </div>
+
+          <small
+            id="grade3QuizAttempts"
+            class="grade3-quiz-attempts"
+          >
+            მცდელობა: 0
+          </small>
+
         </div>
 
+
         <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">📈</div>
+
+          <div class="grade3-progress-icon">
+            📈
+          </div>
 
           <div
             class="grade3-progress-number"
             id="grade3OverallProgress"
-          >0%</div>
+          >
+            0%
+          </div>
 
-          <div>პროგრესი</div>
+          <div>
+            პროგრესი
+          </div>
 
           <div class="grade3-mini-bar">
-            <div id="grade3OverallFill"></div>
+            <div
+              id="grade3OverallFill"
+            ></div>
           </div>
+
         </div>
 
+
         <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">⭐</div>
+
+          <div class="grade3-progress-icon">
+            ⭐
+          </div>
 
           <div
             class="grade3-progress-number"
             id="grade3Level"
-          >დამწყები</div>
+          >
+            დამწყები
+          </div>
 
-          <div>დონე</div>
+          <div>
+            დონე
+          </div>
+
         </div>
 
       </div>
@@ -230,129 +587,184 @@
         class="btn btn-yellow"
         id="grade3ResetProgress"
         style="margin-top:20px"
+        type="button"
       >
         🔄 პროგრესის თავიდან დაწყება
       </button>
     `;
 
-    const style =
-      document.createElement('style');
+    /* =======================================================
+       CSS
+       ======================================================= */
 
-    style.textContent = `
-      .grade3-progress-description {
-        color:#b7d9e8;
-        margin-bottom:20px;
-      }
+    if (
+      !document.getElementById(
+        'grade3ProgressStyles'
+      )
+    ) {
 
-      .grade3-progress-grid {
-        display:grid;
-        grid-template-columns:
-          repeat(4,1fr);
-        gap:16px;
-      }
+      const style =
+        document.createElement(
+          'style'
+        );
 
-      .grade3-progress-card {
-        padding:22px 15px;
-        border-radius:20px;
+      style.id =
+        'grade3ProgressStyles';
 
-        background:
-          linear-gradient(
-            145deg,
-            #09294e,
-            #06162f
-          );
+      style.textContent = `
 
-        border:1px solid #00eaff33;
-
-        text-align:center;
-
-        box-shadow:
-          0 12px 35px #0006;
-
-        min-height:175px;
-      }
-
-      .grade3-progress-icon {
-        font-size:34px;
-        margin-bottom:8px;
-      }
-
-      .grade3-progress-number {
-        font-size:30px;
-        font-weight:900;
-        color:#00eaff;
-
-        text-shadow:
-          0 0 18px #00eaff55;
-
-        margin-bottom:6px;
-      }
-
-      .grade3-mini-bar {
-        height:9px;
-        background:#020c20;
-        border-radius:20px;
-        overflow:hidden;
-        margin:14px 8px 0;
-      }
-
-      .grade3-mini-bar div {
-        height:100%;
-        width:0;
-
-        background:
-          linear-gradient(
-            90deg,
-            #00eaff,
-            #8200ff
-          );
-
-        transition:.5s;
-      }
-
-      .grade3-learned-btn {
-        margin-top:10px!important;
-        font-size:12px!important;
-        padding:8px 11px!important;
-      }
-
-      .grade3-learned-btn.learned {
-        background:#5cff9a!important;
-        color:#00151c!important;
-      }
-
-      @media(max-width:800px) {
-        .grade3-progress-grid {
-          grid-template-columns:1fr 1fr;
+        .grade3-progress-description {
+          color:#b7d9e8;
+          margin-bottom:20px;
         }
-      }
 
-      @media(max-width:500px) {
         .grade3-progress-grid {
-          grid-template-columns:1fr;
+          display:grid;
+          grid-template-columns:
+            repeat(4,1fr);
+          gap:16px;
         }
 
         .grade3-progress-card {
-          min-height:145px;
-        }
-      }
-    `;
+          padding:22px 15px;
+          border-radius:20px;
 
-    document.head.appendChild(style);
+          background:
+            linear-gradient(
+              145deg,
+              #09294e,
+              #06162f
+            );
+
+          border:1px solid #00eaff33;
+
+          text-align:center;
+
+          box-shadow:
+            0 12px 35px #0006;
+
+          min-height:175px;
+
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+        }
+
+        .grade3-progress-icon {
+          font-size:34px;
+          margin-bottom:8px;
+        }
+
+        .grade3-progress-number {
+          font-size:30px;
+          font-weight:900;
+          color:#00eaff;
+
+          text-shadow:
+            0 0 18px #00eaff55;
+
+          margin-bottom:6px;
+        }
+
+        .grade3-quiz-attempts {
+          display:block;
+          margin-top:8px;
+          color:#9cc9dc;
+          font-size:12px;
+        }
+
+        .grade3-mini-bar {
+          width:calc(100% - 16px);
+          height:9px;
+          background:#020c20;
+          border-radius:20px;
+          overflow:hidden;
+          margin:14px 8px 0;
+        }
+
+        .grade3-mini-bar div {
+          height:100%;
+          width:0;
+
+          background:
+            linear-gradient(
+              90deg,
+              #00eaff,
+              #8200ff
+            );
+
+          transition:
+            width .5s ease;
+        }
+
+        .grade3-learned-btn {
+          margin-top:10px!important;
+          font-size:12px!important;
+          padding:8px 11px!important;
+        }
+
+        .grade3-learned-btn.learned {
+          background:#5cff9a!important;
+          color:#00151c!important;
+        }
+
+        .grade3-learned-btn:active {
+          transform:scale(.97);
+        }
+
+        @media(max-width:800px) {
+
+          .grade3-progress-grid {
+            grid-template-columns:
+              1fr 1fr;
+          }
+
+        }
+
+        @media(max-width:500px) {
+
+          .grade3-progress-grid {
+            grid-template-columns:
+              1fr;
+          }
+
+          .grade3-progress-card {
+            min-height:145px;
+          }
+
+        }
+
+      `;
+
+      document.head.appendChild(
+        style
+      );
+    }
 
     const footer =
-      document.querySelector('footer');
+      document.querySelector(
+        'footer'
+      );
 
     if (footer) {
+
       footer.parentNode.insertBefore(
         panel,
         footer
       );
+
     } else {
+
       document
         .querySelector('main')
         ?.appendChild(panel);
+
     }
+
+    /* =======================================================
+       RESET
+       ======================================================= */
 
     const resetButton =
       document.getElementById(
@@ -360,27 +772,52 @@
       );
 
     if (resetButton) {
+
       resetButton.addEventListener(
         'click',
         function () {
 
-          localStorage.removeItem(KEY);
-          localStorage.removeItem(QUIZ_KEY);
-          localStorage.removeItem(BEST_KEY);
+          const confirmed =
+            window.confirm(
+              'ნამდვილად გინდა Grade 3-ის პროგრესის თავიდან დაწყება?'
+            );
+
+          if (!confirmed) {
+            return;
+          }
+
+          localStorage.removeItem(
+            KEY
+          );
+
+          localStorage.removeItem(
+            QUIZ_KEY
+          );
+
+          localStorage.removeItem(
+            BEST_KEY
+          );
+
+          localStorage.removeItem(
+            SYNC_QUEUE_KEY
+          );
 
           document
             .querySelectorAll(
               '.grade3-learned-btn'
             )
-            .forEach(function (button) {
+            .forEach(
+              function (button) {
 
-              button.classList.remove(
-                'learned'
-              );
+                button.classList.remove(
+                  'learned'
+                );
 
-              button.textContent =
-                '✅ ვისწავლე';
-            });
+                button.textContent =
+                  '✅ ვისწავლე';
+
+              }
+            );
 
           update();
         }
@@ -390,26 +827,22 @@
     return panel;
   }
 
+  /* =========================================================
+     UPDATE UI
+     ========================================================= */
+
   function update() {
-    const learned = getLearned();
+    const learned =
+      getLearned();
 
     const total =
-      (
-        Array.isArray(
-          window.grade3WordsForProgress
-        )
-          ? window.grade3WordsForProgress.length
-          : 0
-      ) ||
-      document.querySelectorAll(
-        '#words .word'
-      ).length;
+      getTotalWords();
 
     const learnedCount =
       learned.size;
 
     const percentage =
-      total
+      total > 0
         ? Math.min(
             100,
             Math.round(
@@ -420,7 +853,11 @@
           )
         : 0;
 
-    const best = getBestQuiz();
+    const best =
+      getBestQuiz();
+
+    const attempts =
+      getAttempts();
 
     const learnedEl =
       document.getElementById(
@@ -430,6 +867,11 @@
     const quizEl =
       document.getElementById(
         'grade3QuizCount'
+      );
+
+    const attemptsEl =
+      document.getElementById(
+        'grade3QuizAttempts'
       );
 
     const progressEl =
@@ -449,12 +891,21 @@
 
     if (learnedEl) {
       learnedEl.textContent =
-        learnedCount;
+        learnedCount +
+        (total
+          ? '/' + total
+          : '');
     }
 
     if (quizEl) {
       quizEl.textContent =
         best + '/10';
+    }
+
+    if (attemptsEl) {
+      attemptsEl.textContent =
+        'მცდელობა: ' +
+        attempts;
     }
 
     if (progressEl) {
@@ -469,123 +920,196 @@
 
     if (levelEl) {
 
-      let level = 'დამწყები';
+      let level =
+        'დამწყები';
 
       if (percentage >= 100) {
-        level = '🏆 Master';
+
+        level =
+          '🏆 Master';
+
       } else if (percentage >= 75) {
-        level = '🚀 გმირი';
+
+        level =
+          '🚀 გმირი';
+
       } else if (percentage >= 50) {
-        level = '⭐ ვარსკვლავი';
+
+        level =
+          '⭐ ვარსკვლავი';
+
       } else if (percentage >= 25) {
-        level = '🌟 Explorer';
+
+        level =
+          '🌟 Explorer';
       }
 
-      levelEl.textContent = level;
+      levelEl.textContent =
+        level;
     }
   }
 
+  /* =========================================================
+     WORD BUTTONS
+     ========================================================= */
+
   function addLearnButtons() {
     const wordsBox =
-      document.getElementById('words');
+      document.getElementById(
+        'words'
+      );
 
-    if (!wordsBox) return;
+    if (!wordsBox) {
+      return;
+    }
 
     const learned =
       getLearned();
 
     wordsBox
-      .querySelectorAll('.word')
-      .forEach(function (card) {
+      .querySelectorAll(
+        '.word'
+      )
+      .forEach(
+        function (card) {
 
-        if (
-          card.querySelector(
-            '.grade3-learned-btn'
-          )
-        ) {
-          return;
-        }
+          if (
+            card.querySelector(
+              '.grade3-learned-btn'
+            )
+          ) {
+            return;
+          }
 
-        const title =
-          card.querySelector('h3');
+          const title =
+            card.querySelector(
+              'h3'
+            );
 
-        if (!title) return;
+          if (!title) {
+            return;
+          }
 
-        const word =
-          title.textContent.trim();
+          const word =
+            title.textContent
+              .trim();
 
-        const btn =
-          document.createElement(
-            'button'
-          );
+          if (!word) {
+            return;
+          }
 
-        btn.type = 'button';
+          const btn =
+            document.createElement(
+              'button'
+            );
 
-        btn.className =
-          'btn btn-yellow grade3-learned-btn' +
-          (
-            learned.has(word)
-              ? ' learned'
-              : ''
-          );
+          btn.type =
+            'button';
 
-        btn.textContent =
-          learned.has(word)
-            ? '✓ ნასწავლია'
-            : '✅ ვისწავლე';
+          btn.className =
+            'btn btn-yellow grade3-learned-btn';
 
-        btn.addEventListener(
-          'click',
-          function () {
+          function renderButton() {
 
-            const set =
-              getLearned();
-
-            if (set.has(word)) {
-
-              set.delete(word);
-
-            } else {
-
-              set.add(word);
-
-              syncLearnedWord(word);
-            }
-
-            saveLearned(set);
+            const isLearned =
+              getLearned()
+                .has(word);
 
             btn.classList.toggle(
               'learned',
-              set.has(word)
+              isLearned
             );
 
             btn.textContent =
-              set.has(word)
+              isLearned
                 ? '✓ ნასწავლია'
                 : '✅ ვისწავლე';
-
-            update();
           }
-        );
 
-        card.appendChild(btn);
-      });
+          renderButton();
+
+          btn.addEventListener(
+            'click',
+            function () {
+
+              const set =
+                getLearned();
+
+              if (
+                set.has(word)
+              ) {
+
+                /*
+                  Remove locally.
+                  We intentionally do NOT
+                  send a "delete" RPC because
+                  academy_record_activity
+                  is a record/activity function.
+                */
+
+                set.delete(
+                  word
+                );
+
+              } else {
+
+                set.add(
+                  word
+                );
+
+                syncLearnedWord(
+                  word
+                );
+              }
+
+              saveLearned(
+                set
+              );
+
+              renderButton();
+
+              update();
+            }
+          );
+
+          card.appendChild(
+            btn
+          );
+        }
+      );
   }
+
+  /* =========================================================
+     WATCH WORDS
+     ========================================================= */
 
   function watchWords() {
     const box =
-      document.getElementById('words');
+      document.getElementById(
+        'words'
+      );
 
-    if (!box) return;
+    if (!box) {
+      return;
+    }
 
     addLearnButtons();
 
-    new MutationObserver(
-      function () {
-        addLearnButtons();
-        update();
-      }
-    ).observe(
+    if (wordsObserver) {
+      wordsObserver.disconnect();
+    }
+
+    wordsObserver =
+      new MutationObserver(
+        function () {
+
+          addLearnButtons();
+
+          update();
+        }
+      );
+
+    wordsObserver.observe(
       box,
       {
         childList:true,
@@ -594,90 +1118,164 @@
     );
   }
 
+  /* =========================================================
+     QUIZ
+     ========================================================= */
+
   function watchQuiz() {
     const quizBox =
       document.getElementById(
         'quizBox'
       );
 
-    if (!quizBox) return;
+    if (!quizBox) {
+      return;
+    }
+
+    if (quizObserver) {
+      quizObserver.disconnect();
+    }
 
     let counted = false;
 
-    const observer =
+    function checkQuizFinished() {
+
+      const progress =
+        document.getElementById(
+          'quizProgress'
+        );
+
+      if (!progress) {
+        return;
+      }
+
+      const width =
+        String(
+          progress.style.width || ''
+        ).trim();
+
+      const numericWidth =
+        parseFloat(
+          width
+        );
+
+      const finished =
+        width === '100%' ||
+        numericWidth >= 100;
+
+      if (
+        finished &&
+        !counted
+      ) {
+
+        counted = true;
+
+        const attempts =
+          getAttempts() + 1;
+
+        saveAttempts(
+          attempts
+        );
+
+        const score =
+          readQuizScore();
+
+        saveBestQuiz(
+          Math.max(
+            getBestQuiz(),
+            score
+          )
+        );
+
+        syncQuiz(
+          score
+        );
+
+        update();
+
+      } else if (
+        !finished
+      ) {
+
+        counted = false;
+      }
+    }
+
+    quizObserver =
       new MutationObserver(
         function () {
-
-          const progress =
-            document.getElementById(
-              'quizProgress'
-            );
-
-          if (
-            progress &&
-            progress.style.width === '100%' &&
-            !counted
-          ) {
-
-            counted = true;
-
-            const attempts =
-              Number(
-                localStorage.getItem(
-                  QUIZ_KEY
-                ) || 0
-              ) + 1;
-
-            localStorage.setItem(
-              QUIZ_KEY,
-              String(attempts)
-            );
-
-            const score =
-              readQuizScore();
-
-            localStorage.setItem(
-              BEST_KEY,
-              String(
-                Math.max(
-                  getBestQuiz(),
-                  score
-                )
-              )
-            );
-
-            syncQuiz(score);
-
-            update();
-          }
-
-          if (
-            progress &&
-            progress.style.width !== '100%'
-          ) {
-            counted = false;
-          }
+          checkQuizFinished();
         }
       );
 
-    observer.observe(
+    quizObserver.observe(
       quizBox,
       {
         childList:true,
         subtree:true,
         characterData:true,
         attributes:true,
-        attributeFilter:['style']
+        attributeFilter:[
+          'style',
+          'class'
+        ]
+      }
+    );
+
+    checkQuizFinished();
+  }
+
+  /* =========================================================
+     ONLINE / OFFLINE
+     ========================================================= */
+
+  function setupConnectionSync() {
+
+    window.addEventListener(
+      'online',
+      function () {
+
+        flushSyncQueue();
+
+        addLearnButtons();
+
+        update();
+      }
+    );
+
+    window.addEventListener(
+      'offline',
+      function () {
+
+        console.info(
+          'Grade 3: offline mode'
+        );
       }
     );
   }
 
+  /* =========================================================
+     START
+     ========================================================= */
+
   function start() {
+
+    if (started) {
+      return;
+    }
+
+    started = true;
+
+    /*
+      Only Grade 3 page.
+    */
 
     if (
       !location.pathname
         .toLowerCase()
-        .endsWith('grade3.html')
+        .endsWith(
+          'grade3.html'
+        )
     ) {
       return;
     }
@@ -690,13 +1288,35 @@
 
     watchQuiz();
 
+    setupConnectionSync();
+
     update();
 
-    setInterval(
-      update,
-      1000
-    );
+    /*
+      Flush previously failed
+      activities when possible.
+    */
+
+    if (navigator.onLine) {
+      flushSyncQueue();
+    }
+
+    /*
+      Lightweight UI refresh.
+    */
+
+    updateTimer =
+      setInterval(
+        function () {
+          update();
+        },
+        1000
+      );
   }
+
+  /* =========================================================
+     BOOT
+     ========================================================= */
 
   if (
     document.readyState ===
@@ -706,7 +1326,9 @@
     document.addEventListener(
       'DOMContentLoaded',
       start,
-      { once:true }
+      {
+        once:true
+      }
     );
 
   } else {
