@@ -3,34 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020817">
 
 <title>გაკვეთილი — English with Mariami</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
   min-height:100vh;
-  color:#eefcff;
+  color:#effcff;
   font-family:Arial,"Noto Sans Georgian",sans-serif;
   background:
     radial-gradient(circle at 10% 10%,#00eaff35,transparent 25%),
     radial-gradient(circle at 90% 15%,#7c3cff35,transparent 28%),
-    radial-gradient(circle at 50% 100%,#075eff30,transparent 40%),
-    linear-gradient(135deg,#01030a,#02142c 48%,#010713);
+    radial-gradient(circle at 50% 100%,#006eff30,transparent 40%),
+    linear-gradient(135deg,#01030b,#03152e 48%,#010713);
   overflow-x:hidden;
 }
 
-/* =========================
-   3D BACKGROUND
-========================= */
+/* ================= 3D ================= */
 
 #visual3d{
   position:fixed;
@@ -47,6 +42,7 @@ body{
   height:180%;
   left:-40%;
   top:32%;
+  opacity:.2;
 
   background-image:
     linear-gradient(#00eaff20 1px,transparent 1px),
@@ -58,8 +54,6 @@ body{
     perspective(700px)
     rotateX(66deg);
 
-  opacity:.22;
-
   animation:gridMove 14s linear infinite;
 }
 
@@ -70,6 +64,7 @@ body{
       rotateX(66deg)
       translateY(0);
   }
+
   to{
     transform:
       perspective(700px)
@@ -86,69 +81,43 @@ body{
 }
 
 .orb1{
-  width:360px;
-  height:360px;
+  width:380px;
+  height:380px;
   left:-120px;
   top:10%;
-
-  background:
-    radial-gradient(circle,
-      #00eaff66,
-      #00eaff15 42%,
-      transparent 72%);
-
-  animation:orb1 9s ease-in-out infinite alternate;
+  background:radial-gradient(circle,#00eaff66,transparent 70%);
+  animation:o1 9s ease-in-out infinite alternate;
 }
 
 .orb2{
   width:450px;
   height:450px;
-  right:-150px;
+  right:-140px;
   top:5%;
-
-  background:
-    radial-gradient(circle,
-      #8b5cf666,
-      #7c3cff12 45%,
-      transparent 72%);
-
-  animation:orb2 12s ease-in-out infinite alternate;
+  background:radial-gradient(circle,#7c3cff66,transparent 70%);
+  animation:o2 12s ease-in-out infinite alternate;
 }
 
 .orb3{
-  width:400px;
-  height:400px;
+  width:420px;
+  height:420px;
   left:35%;
-  bottom:-200px;
-
-  background:
-    radial-gradient(circle,
-      #006eff55,
-      #006eff10 45%,
-      transparent 72%);
-
-  animation:orb3 10s ease-in-out infinite alternate;
+  bottom:-220px;
+  background:radial-gradient(circle,#006eff55,transparent 70%);
+  animation:o3 10s ease-in-out infinite alternate;
 }
 
-@keyframes orb1{
-  to{
-    transform:translate3d(150px,80px,100px) scale(1.25);
-  }
+@keyframes o1{
+  to{transform:translate3d(150px,80px,100px) scale(1.3)}
 }
 
-@keyframes orb2{
-  to{
-    transform:translate3d(-120px,100px,130px) scale(1.3);
-  }
+@keyframes o2{
+  to{transform:translate3d(-130px,100px,150px) scale(1.3)}
 }
 
-@keyframes orb3{
-  to{
-    transform:translate3d(80px,-100px,120px) scale(1.2);
-  }
+@keyframes o3{
+  to{transform:translate3d(80px,-100px,120px) scale(1.2)}
 }
-
-/* PARTICLES */
 
 .particles{
   position:absolute;
@@ -162,53 +131,42 @@ body{
   border-radius:50%;
   background:#00eaff;
   box-shadow:0 0 15px #00eaff;
-  opacity:.7;
-  animation:particle 9s linear infinite;
+  animation:p 10s linear infinite;
 }
 
-.particles span:nth-child(1){left:5%;top:80%;animation-duration:8s}
-.particles span:nth-child(2){left:12%;top:45%;animation-duration:11s}
-.particles span:nth-child(3){left:20%;top:70%;animation-duration:13s}
-.particles span:nth-child(4){left:28%;top:25%;animation-duration:9s}
-.particles span:nth-child(5){left:38%;top:80%;animation-duration:12s}
-.particles span:nth-child(6){left:47%;top:35%;animation-duration:10s}
-.particles span:nth-child(7){left:55%;top:65%;animation-duration:14s}
-.particles span:nth-child(8){left:63%;top:20%;animation-duration:9s}
-.particles span:nth-child(9){left:72%;top:78%;animation-duration:12s}
-.particles span:nth-child(10){left:81%;top:40%;animation-duration:10s}
-.particles span:nth-child(11){left:90%;top:70%;animation-duration:13s}
-.particles span:nth-child(12){left:17%;top:15%;animation-duration:15s}
-.particles span:nth-child(13){left:44%;top:10%;animation-duration:11s}
-.particles span:nth-child(14){left:68%;top:55%;animation-duration:14s}
-.particles span:nth-child(15){left:94%;top:15%;animation-duration:9s}
+.particles span:nth-child(1){left:5%;top:80%}
+.particles span:nth-child(2){left:15%;top:40%;animation-duration:12s}
+.particles span:nth-child(3){left:25%;top:70%;animation-duration:9s}
+.particles span:nth-child(4){left:35%;top:20%;animation-duration:14s}
+.particles span:nth-child(5){left:45%;top:80%;animation-duration:11s}
+.particles span:nth-child(6){left:55%;top:30%;animation-duration:13s}
+.particles span:nth-child(7){left:65%;top:70%;animation-duration:10s}
+.particles span:nth-child(8){left:75%;top:20%;animation-duration:15s}
+.particles span:nth-child(9){left:85%;top:60%;animation-duration:9s}
+.particles span:nth-child(10){left:95%;top:30%;animation-duration:12s}
 
-@keyframes particle{
+@keyframes p{
   0%{
     transform:translate3d(0,80px,0) scale(.4);
     opacity:0;
   }
-  20%{
-    opacity:.8;
-  }
-  80%{
-    opacity:.8;
-  }
+
+  25%{opacity:.8}
+
+  80%{opacity:.8}
+
   100%{
-    transform:translate3d(35px,-220px,180px) scale(1.5);
+    transform:translate3d(40px,-220px,180px) scale(1.5);
     opacity:0;
   }
 }
 
-/* =========================
-   TOP BAR
-========================= */
+/* ================= HEADER ================= */
 
 .top{
   position:sticky;
   top:0;
   z-index:9999;
-
-  min-height:70px;
 
   display:flex;
   align-items:center;
@@ -217,20 +175,12 @@ body{
   gap:15px;
   padding:12px 18px;
 
-  background:
-    linear-gradient(
-      135deg,
-      rgba(3,20,43,.95),
-      rgba(2,8,23,.9)
-    );
-
-  border-bottom:1px solid #00eaff55;
-
+  background:rgba(2,8,23,.88);
   backdrop-filter:blur(20px);
 
-  box-shadow:
-    0 10px 40px #000b,
-    inset 0 -1px #00eaff15;
+  border-bottom:1px solid #00eaff45;
+
+  box-shadow:0 10px 40px #000b;
 }
 
 .top:after{
@@ -265,22 +215,17 @@ body{
   color:#fff;
   text-decoration:none;
   font-weight:1000;
-  font-size:15px;
-  text-shadow:0 0 15px #00eaff66;
+  text-shadow:0 0 15px #00eaff55;
 }
 
 .back{
-  border:1px solid #00eaff66;
+  padding:10px 15px;
   border-radius:13px;
 
-  padding:10px 15px;
-
   color:#fff;
-  background:
-    linear-gradient(135deg,#075eff,#00c8e8);
+  background:linear-gradient(135deg,#075eff,#00c8e8);
 
   text-decoration:none;
-
   font-weight:1000;
 
   box-shadow:
@@ -292,22 +237,15 @@ body{
 
 .back:hover{
   transform:translateY(-3px) scale(1.03);
-  box-shadow:
-    0 15px 35px #000b,
-    0 0 30px #00eaff55;
 }
 
-/* =========================
-   MAIN
-========================= */
+/* ================= MAIN ================= */
 
 .container{
   width:min(1250px,94%);
   margin:auto;
   padding:35px 0 70px;
 }
-
-/* HERO */
 
 .hero{
   position:relative;
@@ -321,83 +259,48 @@ body{
   background:
     linear-gradient(
       135deg,
-      rgba(4,25,53,.88),
-      rgba(4,11,29,.82)
+      #061b38e8,
+      #031127ed
     );
 
   box-shadow:
     0 30px 80px #000c,
-    0 0 45px #00eaff12,
+    0 0 45px #00eaff15,
     inset 0 1px #ffffff15;
-
-  transform-style:preserve-3d;
-}
-
-.hero:before{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  right:-130px;
-  top:-140px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(circle,#00eaff40,transparent 70%);
-
-  filter:blur(5px);
-
-  animation:heroGlow 6s ease-in-out infinite alternate;
-}
-
-@keyframes heroGlow{
-  to{
-    transform:scale(1.4) translate(-60px,80px);
-  }
-}
-
-.hero-content{
-  position:relative;
-  z-index:2;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-
-  padding:7px 12px;
-
-  border-radius:999px;
-
-  background:#00eaff12;
-  border:1px solid #00eaff55;
-
-  color:#7fefff;
-
-  font-size:11px;
-  font-weight:1000;
-
-  box-shadow:0 0 20px #00eaff15;
 }
 
 .hero h1{
   margin:15px 0 10px;
 
-  font-size:clamp(30px,6vw,58px);
+  font-size:
+    clamp(30px,6vw,58px);
 
   line-height:1.05;
 
   text-shadow:
-    0 0 10px #00eaff44,
-    0 0 35px #00eaff22;
+    0 0 15px #00eaff45,
+    0 0 35px #7c3cff25;
 }
 
 .hero p{
   margin:0;
-  color:#afd9e6;
-  font-size:16px;
+  color:#acd3df;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 13px;
+
+  border-radius:999px;
+
+  color:#ffe600;
+
+  background:#ffe60012;
+
+  border:1px solid #ffe60035;
+
+  font-size:11px;
+  font-weight:1000;
 }
 
 .meta{
@@ -412,74 +315,20 @@ body{
   border-radius:12px;
 
   background:#061a36;
+
   border:1px solid #00eaff22;
 
   color:#c9f7ff;
+
   font-size:13px;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
-.lesson-nav{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:8px;
-
-  margin:22px 0;
-}
-
-.lesson-nav button{
-  min-height:52px;
-
-  border:1px solid #00eaff22;
-  border-radius:14px;
-
-  color:#cceff6;
-
-  background:
-    linear-gradient(
-      135deg,
-      #061a36,
-      #031126
-    );
-
-  cursor:pointer;
-
-  font-weight:900;
-
-  transition:.25s;
-}
-
-.lesson-nav button:hover,
-.lesson-nav button.active{
-  color:#fff;
-
-  border-color:#00eaff77;
-
-  background:
-    linear-gradient(
-      135deg,
-      #075eff,
-      #007da8
-    );
-
-  box-shadow:
-    0 0 25px #00eaff30;
-
-  transform:translateY(-3px);
-}
-
-/* =========================
-   SECTION
-========================= */
+/* ================= SECTIONS ================= */
 
 .section{
   position:relative;
 
   margin-top:22px;
-
   padding:25px;
 
   border-radius:24px;
@@ -487,8 +336,8 @@ body{
   background:
     linear-gradient(
       135deg,
-      rgba(5,25,52,.9),
-      rgba(2,11,27,.88)
+      #051934e8,
+      #020b1bed
     );
 
   border:1px solid #00eaff25;
@@ -502,7 +351,9 @@ body{
 
 .section:after{
   content:"";
+
   position:absolute;
+
   left:-100%;
   top:0;
 
@@ -521,15 +372,14 @@ body{
 }
 
 @keyframes scan{
-  to{
-    left:130%;
-  }
+  to{left:130%}
 }
 
 .section-title{
   display:flex;
   align-items:center;
   justify-content:space-between;
+
   gap:15px;
 
   margin-bottom:20px;
@@ -544,13 +394,13 @@ body{
   color:#7fd8e8;
 }
 
-/* =========================
-   VOCABULARY
-========================= */
+/* ================= WORDS ================= */
 
 .words{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:14px;
 }
 
@@ -559,7 +409,7 @@ body{
 
   padding:18px;
 
-  min-height:150px;
+  min-height:170px;
 
   border-radius:18px;
 
@@ -600,6 +450,7 @@ body{
   top:10px;
 
   color:#ffe600;
+
   font-size:11px;
   font-weight:1000;
 }
@@ -610,7 +461,8 @@ body{
 
   color:#fff;
 
-  text-shadow:0 0 12px #00eaff33;
+  text-shadow:
+    0 0 12px #00eaff33;
 }
 
 .word-ka{
@@ -618,10 +470,9 @@ body{
   color:#9bd9e7;
 }
 
-.pron{
-  margin-top:7px;
-  color:#6feaff;
-  font-size:12px;
+.word-emoji{
+  font-size:28px;
+  margin-bottom:8px;
 }
 
 .listen{
@@ -630,7 +481,7 @@ body{
   border:1px solid #00eaff44;
   border-radius:10px;
 
-  padding:7px 10px;
+  padding:8px 11px;
 
   color:#fff;
 
@@ -646,13 +497,11 @@ body{
   box-shadow:0 0 15px #00eaff25;
 }
 
-/* =========================
-   GRAMMAR
-========================= */
+/* ================= GRAMMAR ================= */
 
 .grammar{
   display:grid;
-  grid-template-columns:1.1fr .9fr;
+  grid-template-columns:1fr 1fr;
   gap:18px;
 }
 
@@ -663,49 +512,37 @@ body{
 
   background:#041630;
 
-  border:1px solid #7c3cff35;
+  border:1px solid #00eaff22;
 }
 
 .grammar-box h3{
   margin-top:0;
-  color:#d4b8ff;
-}
-
-.formula{
-  padding:16px;
-
-  border-radius:14px;
-
-  background:#020b1d;
-
-  border:1px solid #00eaff25;
-
-  font-size:18px;
-
-  color:#7fefff;
-
-  line-height:1.7;
+  color:#ffe600;
 }
 
 .example{
   margin-top:12px;
-  padding:13px;
 
-  border-left:3px solid #ffe600;
+  padding:15px;
 
-  background:#ffe60008;
+  border-radius:13px;
 
-  color:#eafcff;
+  background:#020d20;
+
+  border-left:3px solid #00eaff;
+
+  color:#cceff6;
 }
 
-/* =========================
-   EXERCISES
-========================= */
+/* ================= QUIZ ================= */
 
-.exercise{
-  margin-bottom:15px;
+.quiz{
+  display:grid;
+  gap:15px;
+}
 
-  padding:18px;
+.question{
+  padding:20px;
 
   border-radius:17px;
 
@@ -714,309 +551,152 @@ body{
   border:1px solid #00eaff20;
 }
 
-.exercise strong{
-  display:block;
-  margin-bottom:12px;
+.question h3{
+  margin-top:0;
 }
 
-.exercise-options{
+.options{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:9px;
 }
 
-.exercise-options button{
+.option{
   padding:12px;
 
-  border:1px solid #00eaff22;
   border-radius:12px;
 
-  background:#061b38;
+  border:1px solid #00eaff22;
+
   color:#dffaff;
 
+  background:#020d20;
+
   cursor:pointer;
+
   text-align:left;
 
   transition:.2s;
 }
 
-.exercise-options button:hover{
-  border-color:#00eaff66;
-  transform:translateY(-2px);
+.option:hover{
+  border-color:#00eaff;
+  background:#06304a;
 }
 
-.exercise-options button.correct{
-  background:#0b633c;
-  border-color:#46f39a;
+.option.correct{
+  background:#075b3c;
+  border-color:#00ff9d;
 }
 
-.exercise-options button.wrong{
-  background:#681d2d;
-  border-color:#ff7187;
+.option.wrong{
+  background:#631c2b;
+  border-color:#ff5470;
 }
-
-/* =========================
-   GAME
-========================= */
-
-.game{
-  text-align:center;
-  padding:30px 20px;
-}
-
-.game-word{
-  font-size:clamp(35px,8vw,75px);
-
-  font-weight:1000;
-
-  color:#fff;
-
-  text-shadow:
-    0 0 20px #00eaff,
-    0 0 50px #00eaff44;
-
-  animation:gamePulse 2s ease-in-out infinite;
-}
-
-@keyframes gamePulse{
-  50%{
-    transform:scale(1.05);
-  }
-}
-
-.game-options{
-  max-width:800px;
-  margin:25px auto 0;
-
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.game-options button{
-  padding:16px;
-
-  border-radius:15px;
-
-  border:1px solid #00eaff35;
-
-  background:#061b38;
-
-  color:#fff;
-
-  cursor:pointer;
-
-  font-weight:1000;
-}
-
-/* =========================
-   QUIZ
-========================= */
-
-.quiz-question{
-  padding:22px;
-
-  border-radius:18px;
-
-  background:#041630;
-
-  border:1px solid #00eaff25;
-
-  margin-bottom:15px;
-}
-
-.quiz-question h3{
-  margin-top:0;
-}
-
-.quiz-options{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.quiz-options label{
-  display:block;
-
-  padding:13px;
-
-  border:1px solid #00eaff22;
-
-  border-radius:12px;
-
-  background:#061b38;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.quiz-options label:hover{
-  border-color:#00eaff66;
-}
-
-.quiz-options input{
-  margin-right:8px;
-}
-
-.main-button{
-  border:0;
-  border-radius:15px;
-
-  padding:14px 22px;
-
-  background:
-    linear-gradient(135deg,#075eff,#00c8e8);
-
-  color:#fff;
-
-  font-weight:1000;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 10px 30px #0008,
-    0 0 25px #00eaff20;
-
-  transition:.25s;
-}
-
-.main-button:hover{
-  transform:translateY(-3px) scale(1.02);
-}
-
-/* =========================
-   RESULT
-========================= */
 
 .result{
-  display:none;
+  margin-top:20px;
+
+  padding:18px;
+
+  border-radius:17px;
 
   text-align:center;
 
-  padding:30px;
+  background:#061b38;
 
-  border-radius:20px;
-
-  background:
-    radial-gradient(circle at center,#075eff25,transparent 65%),
-    #041630;
-
-  border:1px solid #00eaff45;
-}
-
-.result.show{
-  display:block;
-  animation:resultIn .5s ease;
-}
-
-@keyframes resultIn{
-  from{
-    opacity:0;
-    transform:scale(.9);
-  }
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
+  border:1px solid #ffe60035;
 }
 
 .score{
-  font-size:70px;
+  font-size:40px;
   font-weight:1000;
   color:#ffe600;
-
-  text-shadow:
-    0 0 20px #ffe60088;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* ================= LOADING ================= */
 
-footer{
+.loading,
+.error{
+  padding:45px 20px;
+
   text-align:center;
-  padding:25px;
 
-  color:#75aebb;
-  font-size:12px;
+  border-radius:20px;
+
+  background:#03142ddd;
+
+  border:1px solid #00eaff25;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.error{
+  color:#ff9ca8;
+}
 
-@media(max-width:950px){
+.spinner{
+  width:50px;
+  height:50px;
+
+  margin:0 auto 15px;
+
+  border-radius:50%;
+
+  border:3px solid #00eaff15;
+
+  border-top-color:#00eaff;
+  border-right-color:#7c3cff;
+
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
 
   .words{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .lesson-nav{
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .grammar{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
 
   .top{
-    padding:9px 10px;
-    min-height:62px;
-  }
-
-  .brand{
-    font-size:12px;
+    flex-direction:column;
+    align-items:stretch;
   }
 
   .back{
-    padding:8px 10px;
-    font-size:10px;
-  }
-
-  .container{
-    width:94%;
-    padding-top:20px;
-  }
-
-  .hero{
-    padding:25px 18px;
-    border-radius:20px;
-  }
-
-  .hero h1{
-    font-size:34px;
-  }
-
-  .section{
-    padding:18px;
-    border-radius:18px;
-  }
-
-  .section-title h2{
-    font-size:20px;
+    text-align:center;
   }
 
   .words{
     grid-template-columns:1fr;
   }
 
-  .lesson-nav{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .exercise-options,
-  .quiz-options,
-  .game-options{
+  .options{
     grid-template-columns:1fr;
   }
+
+  .container{
+    width:min(100% - 18px,1250px);
+    padding-top:18px;
+  }
+
 }
 
 @media(prefers-reduced-motion:reduce){
-
   *,
   *:before,
   *:after{
@@ -1029,10 +709,6 @@ footer{
 
 <body>
 
-<!-- =========================
-     3D BACKGROUND
-========================= -->
-
 <div id="visual3d">
 
   <div class="grid"></div>
@@ -1042,32 +718,15 @@ footer{
   <div class="orb orb3"></div>
 
   <div class="particles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
 
 </div>
 
-<!-- =========================
-     TOP
-========================= -->
-
 <header class="top">
 
-  <a class="brand" href="teacher-dashboard.html">
+  <a class="brand" href="teacher-lessons.html">
     ⚡ ENGLISH WITH MARIAMI
   </a>
 
@@ -1079,2146 +738,833 @@ footer{
 
 <main class="container">
 
-<!-- =========================
-     HERO
-========================= -->
+  <div id="app">
 
-<section class="hero">
+    <div class="loading">
 
-  <div class="hero-content">
+      <div class="spinner"></div>
 
-    <span class="badge">
-      📚 ENGLISH LESSON
-    </span>
-
-    <h1 id="lessonTitle">
-      გაკვეთილი იტვირთება...
-    </h1>
-
-    <p id="lessonDescription">
-      ინგლისურის ინტერაქტიული სასწავლო სივრცე
-    </p>
-
-    <div class="meta">
-
-      <span id="gradeInfo">
-        🎓 კლასი
-      </span>
-
-      <span id="lessonInfo">
-        📖 გაკვეთილი
-      </span>
-
-      <span>
-        ⚡ Interactive 3D
-      </span>
+      <b>
+        გაკვეთილის ჩატვირთვა...
+      </b>
 
     </div>
 
   </div>
-
-</section>
-
-<!-- =========================
-     NAV
-========================= -->
-
-<nav class="lesson-nav">
-
-  <button class="active" onclick="scrollToSection('vocabulary')">
-    📚 სიტყვები
-  </button>
-
-  <button onclick="scrollToSection('grammar')">
-    📖 გრამატიკა
-  </button>
-
-  <button onclick="scrollToSection('listen')">
-    🔊 მოსმენა
-  </button>
-
-  <button onclick="scrollToSection('practice')">
-    ✍️ სავარჯიშო
-  </button>
-
-  <button onclick="scrollToSection('game')">
-    🎮 თამაში
-  </button>
-
-  <button onclick="scrollToSection('quiz')">
-    ⭐ ქვიზი
-  </button>
-
-  <button onclick="scrollToSection('result')">
-    🏆 შედეგი
-  </button>
-
-</nav>
-
-<!-- =========================
-     VOCABULARY
-========================= -->
-
-<section id="vocabulary" class="section">
-
-  <div class="section-title">
-
-    <div>
-      <h2>📚 ახალი სიტყვები</h2>
-      <small id="wordCount">0 სიტყვა</small>
-    </div>
-
-  </div>
-
-  <div id="words" class="words"></div>
-
-</section>
-
-<!-- =========================
-     GRAMMAR
-========================= -->
-
-<section id="grammar" class="section">
-
-  <div class="section-title">
-    <div>
-      <h2>📖 გრამატიკა</h2>
-      <small>მარტივად ახსნილი</small>
-    </div>
-  </div>
-
-  <div class="grammar">
-
-    <div class="grammar-box">
-
-      <h3 id="grammarTitle">
-        Present Simple
-      </h3>
-
-      <p id="grammarText">
-        Present Simple გამოიყენება ყოველდღიური მოქმედებებისა
-        და ჩვევების გამოსახატავად.
-      </p>
-
-      <div class="formula" id="grammarFormula">
-        I / You / We / They + verb<br>
-        He / She / It + verb + s
-      </div>
-
-    </div>
-
-    <div class="grammar-box">
-
-      <h3>💡 მაგალითები</h3>
-
-      <div class="example">
-        I go to school every day.
-        <br>
-        მე ყოველდღე სკოლაში მივდივარ.
-      </div>
-
-      <div class="example">
-        She likes English.
-        <br>
-        მას ინგლისური მოსწონს.
-      </div>
-
-      <div class="example">
-        They play football.
-        <br>
-        ისინი ფეხბურთს თამაშობენ.
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     LISTEN
-========================= -->
-
-<section id="listen" class="section">
-
-  <div class="section-title">
-
-    <div>
-      <h2>🔊 მოსმენა და გამეორება</h2>
-      <small>მოუსმინე და გაიმეორე ხმამაღლა</small>
-    </div>
-
-  </div>
-
-  <div class="game">
-
-    <div id="listenWord" class="game-word">
-      Hello
-    </div>
-
-    <p style="color:#9bd9e7">
-      დააჭირე ღილაკს და მოისმინე ინგლისური სიტყვა.
-    </p>
-
-    <button
-      class="main-button"
-      onclick="speakCurrentWord()">
-      🔊 მოსმენა
-    </button>
-
-    <button
-      class="main-button"
-      onclick="nextListenWord()">
-      ➡️ შემდეგი სიტყვა
-    </button>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     PRACTICE
-========================= -->
-
-<section id="practice" class="section">
-
-  <div class="section-title">
-
-    <div>
-      <h2>✍️ სავარჯიშო</h2>
-      <small>აირჩიე სწორი პასუხი</small>
-    </div>
-
-  </div>
-
-  <div id="exercises"></div>
-
-</section>
-
-<!-- =========================
-     GAME
-========================= -->
-
-<section id="game" class="section">
-
-  <div class="section-title">
-
-    <div>
-      <h2>🎮 სიტყვების თამაში</h2>
-      <small>იპოვე სწორი ქართული მნიშვნელობა</small>
-    </div>
-
-  </div>
-
-  <div class="game">
-
-    <div id="gameWord" class="game-word">
-      Hello
-    </div>
-
-    <div id="gameOptions" class="game-options"></div>
-
-    <div style="margin-top:20px">
-
-      <button
-        class="main-button"
-        onclick="newGameRound()">
-        🎲 ახალი სიტყვა
-      </button>
-
-    </div>
-
-    <p id="gameScore" style="color:#ffe600;font-weight:1000">
-      ქულა: 0
-    </p>
-
-  </div>
-
-</section>
-
-<!-- =========================
-     QUIZ
-========================= -->
-
-<section id="quiz" class="section">
-
-  <div class="section-title">
-
-    <div>
-      <h2>⭐ საბოლოო ქვიზი</h2>
-      <small>შეამოწმე ნასწავლი მასალა</small>
-    </div>
-
-  </div>
-
-  <form id="quizForm">
-
-    <div id="quizQuestions"></div>
-
-    <button
-      type="submit"
-      class="main-button">
-      ⭐ ქვიზის დასრულება
-    </button>
-
-  </form>
-
-</section>
-
-<!-- =========================
-     RESULT
-========================= -->
-
-<section id="result" class="section">
-
-  <div id="resultBox" class="result">
-
-    <div style="font-size:50px">
-      🏆
-    </div>
-
-    <h2>შენი შედეგი</h2>
-
-    <div id="score" class="score">
-      0%
-    </div>
-
-    <p id="resultText">
-      გააგრძელე სწავლა!
-    </p>
-
-    <button
-      class="main-button"
-      onclick="location.reload()">
-      🔄 თავიდან დაწყება
-    </button>
-
-  </div>
-
-</section>
 
 </main>
 
-<footer>
-  © 2026 English with Mariami — Interactive Learning Environment
-</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=20260830-lesson-db"></script>
 
 <script>
+(function(){
 
-/* =====================================================
-   URL PARAMETERS
-===================================================== */
+'use strict';
 
-const params = new URLSearchParams(location.search);
+const TEACHER_ID =
+  'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
+
+const client =
+  window.supabaseClient;
+
+const app =
+  document.getElementById('app');
+
+const params =
+  new URLSearchParams(location.search);
 
 const grade =
-  params.get('grade') || '2';
+  Number(params.get('grade'));
 
-const lesson =
-  params.get('lesson') || '1';
+const lessonNumber =
+  Number(params.get('lesson'));
 
-/* =====================================================
-   LESSON DATABASE
-===================================================== */
+const studentId =
+  params.get('student') || '';
 
-const lessons = {
+let lesson = null;
+let words = [];
+let quizzes = [];
+let score = 0;
+let answered = 0;
 
-  "2": {
+/* ================= ESCAPE ================= */
 
-    "1":{
-      title:"👋 Greetings & Introductions",
-      description:"მისალმება და საკუთარი თავის გაცნობა",
+function esc(value){
 
-      grammarTitle:"Verb to be — I am / You are",
-      grammarText:
-        "ამ გაკვეთილში ვისწავლით როგორ მივესალმოთ ადამიანს და როგორ გავაცნოთ საკუთარი თავი.",
+  return String(value ?? '')
+    .replace(/[&<>"']/g,function(c){
 
-      grammarFormula:
-        "I am ...<br>You are ...<br>He is ...<br>She is ...",
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[c];
 
-      words:[
-        ["Hello","გამარჯობა","ჰელოუ"],
-        ["Hi","სალამი","ჰაი"],
-        ["Good morning","დილა მშვიდობისა","გუდ მორნინგ"],
-        ["Good afternoon","შუადღე მშვიდობისა","გუდ აფთერნუნ"],
-        ["Good evening","საღამო მშვიდობისა","გუდ ივნინგ"],
-        ["Goodbye","ნახვამდის","გუდბაი"],
-        ["Bye","ნახვამდის","ბაი"],
-        ["Please","გთხოვ","ფლიზ"],
-        ["Thank you","მადლობა","თენქ იუ"],
-        ["Thanks","მადლობა","თენქს"],
-        ["Sorry","ბოდიში","სორი"],
-        ["Yes","კი","იეს"],
-        ["No","არა","ნოუ"],
-        ["Name","სახელი","ნეიმ"],
-        ["My","ჩემი","მაი"],
-        ["Your","შენი","იორ"],
-        ["Friend","მეგობარი","ფრენდი"],
-        ["Teacher","მასწავლებელი","თიჩერ"],
-        ["Student","მოსწავლე","სთიუდენტ"],
-        ["Boy","ბიჭი","ბოი"],
-        ["Girl","გოგო","გერლ"],
-        ["Man","კაცი","მენ"],
-        ["Woman","ქალი","ვუმენ"],
-        ["Nice","კარგი","ნაის"],
-        ["Meet","შეხვედრა","მით"],
-        ["Welcome","კეთილი იყოს თქვენი მობრძანება","უელქამ"],
-        ["How","როგორ","ჰაუ"],
-        ["What","რა","უოთ"],
-        ["Who","ვინ","ჰუ"],
-        ["Fine","კარგად","ფაინ"]
-      ],
+    });
 
-      exercises:[
-        {
-          q:"როგორ ვამბობთ „გამარჯობას“ ინგლისურად?",
-          options:["Hello","Goodbye","Sorry","Thanks"],
-          correct:0
-        },
-        {
-          q:"როგორ ვამბობთ „მადლობა“?",
-          options:["Please","Thank you","Hello","Bye"],
-          correct:1
-        },
-        {
-          q:"What is your name? ნიშნავს:",
-          options:["სად ცხოვრობ?","რამდენი წლის ხარ?","რა გქვია?","როგორ ხარ?"],
-          correct:2
-        }
-      ],
+}
 
-      quiz:[
-        {
-          q:"Which word means „გამარჯობა“?",
-          options:["Hello","Bye","Sorry","Name"],
-          correct:0
-        },
-        {
-          q:"Which word means „მეგობარი“?",
-          options:["Teacher","Friend","Student","Boy"],
-          correct:1
-        },
-        {
-          q:"Thank you means:",
-          options:["გთხოვ","ბოდიში","მადლობა","ნახვამდის"],
-          correct:2
-        },
-        {
-          q:"My name is Mariami means:",
-          options:[
-            "მე მქვია მარიამი",
-            "მე მყავს მეგობარი",
-            "მე მასწავლებელი ვარ",
-            "მე სკოლაში მივდივარ"
-          ],
-          correct:0
-        }
-      ]
-    },
+/* ================= AUTH ================= */
 
-    "2":{
-      title:"👨‍👩‍👧 Family",
-      description:"ოჯახის წევრები და მათი აღწერა",
+async function checkTeacher(){
 
-      grammarTitle:"Possessive adjectives",
-      grammarText:
-        "ვისწავლით my, your, his და her-ის გამოყენებას.",
+  if(!client){
 
-      grammarFormula:
-        "my = ჩემი<br>your = შენი<br>his = მისი (კაცი)<br>her = მისი (ქალი)",
-
-      words:[
-        ["Family","ოჯახი","ფემილი"],
-        ["Mother","დედა","მადერ"],
-        ["Father","მამა","ფადერ"],
-        ["Parents","მშობლები","ფეარენთს"],
-        ["Brother","ძმა","ბრადერ"],
-        ["Sister","და","სისთერ"],
-        ["Grandmother","ბებია","გრენდმადერ"],
-        ["Grandfather","ბაბუა","გრენდფადერ"],
-        ["Baby","ჩვილი","ბეიბი"],
-        ["Child","ბავშვი","ჩაილდ"],
-        ["Son","ვაჟი","სან"],
-        ["Daughter","ქალიშვილი","დოთერ"],
-        ["Uncle","ბიძა","ანკლ"],
-        ["Aunt","დეიდა","ანტ"],
-        ["Cousin","ბიძაშვილი","ქაზენ"],
-        ["Home","სახლი","ჰოუმ"],
-        ["Love","სიყვარული","ლავ"],
-        ["Happy","ბედნიერი","ჰეფი"],
-        ["Big","დიდი","ბიგ"],
-        ["Small","პატარა","სმოლ"]
-      ],
-
-      exercises:[
-        {
-          q:"Mother ნიშნავს:",
-          options:["დედა","მამა","და","ძმა"],
-          correct:0
-        },
-        {
-          q:"Brother ნიშნავს:",
-          options:["ბაბუა","ძმა","ბიძა","მამა"],
-          correct:1
-        },
-        {
-          q:"My family ნიშნავს:",
-          options:["შენი ოჯახი","ჩემი ოჯახი","მისი სახლი","დიდი ოჯახი"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Father means:",
-          options:["დედა","მამა","ძმა","ბაბუა"],
-          correct:1
-        },
-        {
-          q:"Sister means:",
-          options:["და","ძმა","დეიდა","დედა"],
-          correct:0
-        },
-        {
-          q:"Grandmother means:",
-          options:["ბებია","ბაბუა","დედა","და"],
-          correct:0
-        }
-      ]
-    },
-
-    "3":{
-      title:"🎒 School",
-      description:"სკოლის ნივთები და საკლასო ოთახი",
-
-      grammarTitle:"This is / These are",
-      grammarText:
-        "ვისწავლით როგორ აღვწეროთ ერთი ან რამდენიმე ნივთი.",
-
-      grammarFormula:
-        "This is a book.<br>These are books.",
-
-      words:[
-        ["School","სკოლა","სქულ"],
-        ["Classroom","საკლასო ოთახი","ქლასრუმ"],
-        ["Teacher","მასწავლებელი","თიჩერ"],
-        ["Student","მოსწავლე","სთიუდენტ"],
-        ["Book","წიგნი","ბუქ"],
-        ["Notebook","რვეული","ნოუთბუქ"],
-        ["Pen","კალამი","ფენ"],
-        ["Pencil","ფანქარი","ფენსილ"],
-        ["Bag","ჩანთა","ბეგ"],
-        ["Desk","მერხი","დესქ"],
-        ["Chair","სკამი","ჩეარ"],
-        ["Board","დაფა","ბორდ"],
-        ["Door","კარი","დორ"],
-        ["Window","ფანჯარა","უინდოუ"],
-        ["Ruler","სახაზავი","რულერ"],
-        ["Eraser","საშლელი","იერეიზერ"],
-        ["Read","კითხვა","რიდ"],
-        ["Write","წერა","რაით"],
-        ["Learn","სწავლა","ლერნ"],
-        ["Study","მეცადინეობა","სთადი"]
-      ],
-
-      exercises:[
-        {
-          q:"Book ნიშნავს:",
-          options:["წიგნი","კალამი","მაგიდა","ჩანთა"],
-          correct:0
-        },
-        {
-          q:"Pencil ნიშნავს:",
-          options:["რვეული","ფანქარი","სახაზავი","საშლელი"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Which word means „სკოლა“?",
-          options:["School","Home","Class","Book"],
-          correct:0
-        },
-        {
-          q:"Pen means:",
-          options:["ფანქარი","კალამი","საშლელი","სახაზავი"],
-          correct:1
-        }
-      ]
-    },
-
-    "4":{
-      title:"🎨 Colors",
-      description:"ფერები და ნივთების აღწერა",
-
-      grammarTitle:"Adjectives",
-      grammarText:
-        "ფერები ინგლისურში არსებითი სახელის წინ დგება.",
-
-      grammarFormula:
-        "a red ball<br>a blue bag<br>a green book",
-
-      words:[
-        ["Color","ფერი","ქალერ"],
-        ["Red","წითელი","რედ"],
-        ["Blue","ლურჯი","ბლუ"],
-        ["Green","მწვანე","გრინ"],
-        ["Yellow","ყვითელი","იელოუ"],
-        ["Orange","ნარინჯისფერი","ორინჯ"],
-        ["Pink","ვარდისფერი","ფინქ"],
-        ["Purple","იისფერი","ფერფლ"],
-        ["Black","შავი","ბლექ"],
-        ["White","თეთრი","უაით"],
-        ["Brown","ყავისფერი","ბრაუნ"],
-        ["Gray","ნაცრისფერი","გრეი"],
-        ["Light","ღია","ლაით"],
-        ["Dark","მუქი","დარკ"],
-        ["Bright","კაშკაშა","ბრაით"]
-      ],
-
-      exercises:[
-        {
-          q:"Red არის:",
-          options:["ლურჯი","წითელი","მწვანე","ყვითელი"],
-          correct:1
-        },
-        {
-          q:"Blue არის:",
-          options:["ლურჯი","შავი","თეთრი","ვარდისფერი"],
-          correct:0
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Green means:",
-          options:["წითელი","მწვანე","ლურჯი","ყვითელი"],
-          correct:1
-        },
-        {
-          q:"Yellow means:",
-          options:["ყვითელი","შავი","თეთრი","ყავისფერი"],
-          correct:0
-        }
-      ]
-    },
-
-    "5":{
-      title:"🔢 Numbers 1–20",
-      description:"რიცხვები 1-დან 20-მდე",
-
-      grammarTitle:"How many?",
-      grammarText:
-        "How many? გამოიყენება რაოდენობის კითხვისას.",
-
-      grammarFormula:
-        "How many books?<br>How many students?<br>I have five books.",
-
-      words:[
-        ["One","ერთი","უან"],
-        ["Two","ორი","თუ"],
-        ["Three","სამი","თრი"],
-        ["Four","ოთხი","ფორ"],
-        ["Five","ხუთი","ფაივ"],
-        ["Six","ექვსი","სიქს"],
-        ["Seven","შვიდი","სევენ"],
-        ["Eight","რვა","ეით"],
-        ["Nine","ცხრა","ნაინ"],
-        ["Ten","ათი","თენ"],
-        ["Eleven","თერთმეტი","ილევენ"],
-        ["Twelve","თორმეტი","თუელვ"],
-        ["Thirteen","ცამეტი","თერთინ"],
-        ["Fourteen","თოთხმეტი","ფორტინ"],
-        ["Fifteen","თხუთმეტი","ფიფთინ"],
-        ["Sixteen","თექვსმეტი","სიქსთინ"],
-        ["Seventeen","ჩვიდმეტი","სევენთინ"],
-        ["Eighteen","თვრამეტი","ეითინ"],
-        ["Nineteen","ცხრამეტი","ნაინთინ"],
-        ["Twenty","ოცი","თუენთი"]
-      ],
-
-      exercises:[
-        {
-          q:"Five ნიშნავს:",
-          options:["ოთხი","ხუთი","ექვსი","შვიდი"],
-          correct:1
-        },
-        {
-          q:"Ten ნიშნავს:",
-          options:["ათი","ცხრა","თორმეტი","ოცი"],
-          correct:0
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Seven means:",
-          options:["ექვსი","შვიდი","რვა","ცხრა"],
-          correct:1
-        },
-        {
-          q:"Twenty means:",
-          options:["თორმეტი","თხუთმეტი","ოცი","ცხრამეტი"],
-          correct:2
-        }
-      ]
-    },
-
-    "6":{
-      title:"🐶 Animals",
-      description:"ცხოველები და მათი აღწერა",
-
-      grammarTitle:"It is / It has",
-      grammarText:
-        "ცხოველების აღწერისას ხშირად ვიყენებთ It is და It has.",
-
-      grammarFormula:
-        "It is big.<br>It is small.<br>It has four legs.",
-
-      words:[
-        ["Animal","ცხოველი","ენიმალ"],
-        ["Dog","ძაღლი","დოგ"],
-        ["Cat","კატა","ქეთ"],
-        ["Bird","ჩიტი","ბერდ"],
-        ["Fish","თევზი","ფიშ"],
-        ["Horse","ცხენი","ჰორს"],
-        ["Cow","ძროხა","ქაუ"],
-        ["Sheep","ცხვარი","შიფ"],
-        ["Goat","თხა","გოუთ"],
-        ["Pig","ღორი","ფიგ"],
-        ["Chicken","ქათამი","ჩიქენ"],
-        ["Duck","იხვი","დაქ"],
-        ["Rabbit","კურდღელი","რებიტ"],
-        ["Lion","ლომი","ლაიენ"],
-        ["Tiger","ვეფხვი","თაიგერ"],
-        ["Bear","დათვი","ბეარ"],
-        ["Monkey","მაიმუნი","მანქი"],
-        ["Elephant","სპილო","ელიფენთ"],
-        ["Big","დიდი","ბიგ"],
-        ["Small","პატარა","სმოლ"]
-      ],
-
-      exercises:[
-        {
-          q:"Dog ნიშნავს:",
-          options:["კატა","ძაღლი","ცხენი","თევზი"],
-          correct:1
-        },
-        {
-          q:"Fish ნიშნავს:",
-          options:["ჩიტი","თევზი","იხვი","ძროხა"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Cat means:",
-          options:["კატა","ძაღლი","ცხვარი","თხა"],
-          correct:0
-        },
-        {
-          q:"Lion means:",
-          options:["ვეფხვი","ლომი","დათვი","სპილო"],
-          correct:1
-        }
-      ]
-    }
-
-  },
-
-  "3":{
-
-    "1":{
-      title:"👋 Greetings & Introductions",
-      description:"გაფართოებული მისალმება და გაცნობა",
-
-      grammarTitle:"Verb to be",
-      grammarText:
-        "ვიმუშავებთ am, is და are ფორმებზე.",
-
-      grammarFormula:
-        "I am<br>You are<br>He is<br>She is<br>We are<br>They are",
-
-      words:[
-        ["Hello","გამარჯობა","ჰელოუ"],
-        ["Hi","სალამი","ჰაი"],
-        ["Good morning","დილა მშვიდობისა","გუდ მორნინგ"],
-        ["Good afternoon","შუადღე მშვიდობისა","გუდ აფთერნუნ"],
-        ["Good evening","საღამო მშვიდობისა","გუდ ივნინგ"],
-        ["Goodbye","ნახვამდის","გუდბაი"],
-        ["Nice","სასიამოვნო","ნაის"],
-        ["Meet","შეხვედრა","მით"],
-        ["Name","სახელი","ნეიმ"],
-        ["First name","სახელი","ფერსთ ნეიმ"],
-        ["Last name","გვარი","ლასთ ნეიმ"],
-        ["Friend","მეგობარი","ფრენდი"],
-        ["Classmate","კლასელი","ქლასმეით"],
-        ["Teacher","მასწავლებელი","თიჩერ"],
-        ["Student","მოსწავლე","სთიუდენტ"],
-        ["How are you?","როგორ ხარ?","ჰაუ არ იუ"],
-        ["I am fine","კარგად ვარ","აი ემ ფაინ"],
-        ["Very","ძალიან","ვერი"],
-        ["Today","დღეს","თუდეი"],
-        ["Welcome","კეთილი იყოს შენი მობრძანება","უელქამ"]
-      ],
-
-      exercises:[
-        {
-          q:"Choose the correct sentence:",
-          options:[
-            "I am a student.",
-            "I are a student.",
-            "I is a student.",
-            "I be a student."
-          ],
-          correct:0
-        },
-        {
-          q:"She ___ a teacher.",
-          options:["am","are","is","be"],
-          correct:2
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Choose the correct form:",
-          options:["I is","I are","I am","I be"],
-          correct:2
-        },
-        {
-          q:"They ___ students.",
-          options:["is","am","are","be"],
-          correct:2
-        },
-        {
-          q:"Nice to meet you means:",
-          options:[
-            "ნახვამდის",
-            "სასიამოვნოა შენი გაცნობა",
-            "როგორ ხარ?",
-            "დილა მშვიდობისა"
-          ],
-          correct:1
-        }
-      ]
-    },
-
-    "2":{
-      title:"👨‍👩‍👧 Family",
-      description:"ოჯახი — გაფართოებული ლექსიკა",
-
-      grammarTitle:"Possessive adjectives",
-      grammarText:
-        "my, your, his, her, our და their გამოიყენება კუთვნილების გამოსახატავად.",
-
-      grammarFormula:
-        "my family<br>your brother<br>his father<br>her sister<br>our home<br>their parents",
-
-      words:[
-        ["Family","ოჯახი","ფემილი"],
-        ["Mother","დედა","მადერ"],
-        ["Father","მამა","ფადერ"],
-        ["Parents","მშობლები","ფეარენთს"],
-        ["Brother","ძმა","ბრადერ"],
-        ["Sister","და","სისთერ"],
-        ["Grandmother","ბებია","გრენდმადერ"],
-        ["Grandfather","ბაბუა","გრენდფადერ"],
-        ["Uncle","ბიძა","ანკლ"],
-        ["Aunt","დეიდა","ანტ"],
-        ["Cousin","ბიძაშვილი","ქაზენ"],
-        ["Son","ვაჟი","სან"],
-        ["Daughter","ქალიშვილი","დოთერ"],
-        ["Parents","მშობლები","ფეარენთს"],
-        ["Home","სახლი","ჰოუმ"],
-        ["Relative","ნათესავი","რელეთივ"],
-        ["Together","ერთად","თუგეზერ"],
-        ["Love","სიყვარული","ლავ"],
-        ["Happy","ბედნიერი","ჰეფი"],
-        ["Kind","კეთილი","ქაინდ"]
-      ],
-
-      exercises:[
-        {
-          q:"This is ___ mother. (მე)",
-          options:["my","your","his","their"],
-          correct:0
-        },
-        {
-          q:"This is ___ father. (ის — ბიჭი)",
-          options:["her","his","our","my"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Our family means:",
-          options:[
-            "ჩვენი ოჯახი",
-            "თქვენი ოჯახი",
-            "მისი ოჯახი",
-            "მათი ოჯახი"
-          ],
-          correct:0
-        },
-        {
-          q:"Her sister means:",
-          options:[
-            "მისი და",
-            "მისი ძმა",
-            "ჩვენი და",
-            "შენი და"
-          ],
-          correct:0
-        }
-      ]
-    },
-
-    "3":{
-      title:"🎒 School",
-      description:"სკოლა — ნივთები, საგნები და მოქმედებები",
-
-      grammarTitle:"There is / There are",
-      grammarText:
-        "There is გამოიყენება ერთი ნივთისთვის, There are — რამდენიმე ნივთისთვის.",
-
-      grammarFormula:
-        "There is a book.<br>There are three books.",
-
-      words:[
-        ["School","სკოლა","სქულ"],
-        ["Classroom","საკლასო ოთახი","ქლასრუმ"],
-        ["Lesson","გაკვეთილი","ლესენ"],
-        ["Subject","საგანი","საბჯიქთ"],
-        ["English","ინგლისური","ინგლიშ"],
-        ["Math","მათემატიკა","მეფ"],
-        ["Science","მეცნიერება","საიენს"],
-        ["History","ისტორია","ჰისთორი"],
-        ["Book","წიგნი","ბუქ"],
-        ["Notebook","რვეული","ნოუთბუქ"],
-        ["Pencil","ფანქარი","ფენსილ"],
-        ["Pen","კალამი","ფენ"],
-        ["Ruler","სახაზავი","რულერ"],
-        ["Eraser","საშლელი","იერეიზერ"],
-        ["Desk","მერხი","დესქ"],
-        ["Chair","სკამი","ჩეარ"],
-        ["Board","დაფა","ბორდ"],
-        ["Homework","საშინაო დავალება","ჰოუმუორქ"],
-        ["Question","კითხვა","ქუესჩენ"],
-        ["Answer","პასუხი","ენსერ"]
-      ],
-
-      exercises:[
-        {
-          q:"There ___ a book on the desk.",
-          options:["are","is","am","be"],
-          correct:1
-        },
-        {
-          q:"There ___ three pencils.",
-          options:["is","am","are","be"],
-          correct:2
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Homework means:",
-          options:["საშინაო დავალება","გაკვეთილი","სკოლა","პასუხი"],
-          correct:0
-        },
-        {
-          q:"There ___ two books.",
-          options:["is","are","am","be"],
-          correct:1
-        }
-      ]
-    },
-
-    "4":{
-      title:"🎨 Colors & Descriptions",
-      description:"ფერები და საგნების აღწერა",
-
-      grammarTitle:"Adjectives",
-      grammarText:
-        "ინგლისურში ზედსართავი სახელი ჩვეულებრივ არსებითი სახელის წინ დგას.",
-
-      grammarFormula:
-        "a red car<br>a big blue bag<br>a small green book",
-
-      words:[
-        ["Red","წითელი","რედ"],
-        ["Blue","ლურჯი","ბლუ"],
-        ["Green","მწვანე","გრინ"],
-        ["Yellow","ყვითელი","იელოუ"],
-        ["Orange","ნარინჯისფერი","ორინჯ"],
-        ["Pink","ვარდისფერი","ფინქ"],
-        ["Purple","იისფერი","ფერფლ"],
-        ["Black","შავი","ბლექ"],
-        ["White","თეთრი","უაით"],
-        ["Brown","ყავისფერი","ბრაუნ"],
-        ["Gray","ნაცრისფერი","გრეი"],
-        ["Light","ღია","ლაით"],
-        ["Dark","მუქი","დარკ"],
-        ["Bright","კაშკაშა","ბრაით"],
-        ["Colorful","ფერადი","ქალერფულ"],
-        ["Big","დიდი","ბიგ"],
-        ["Small","პატარა","სმოლ"],
-        ["Beautiful","ლამაზი","ბიუთიფულ"],
-        ["Clean","სუფთა","ქლინ"],
-        ["New","ახალი","ნიუ"]
-      ],
-
-      exercises:[
-        {
-          q:"Choose the correct phrase:",
-          options:[
-            "a red car",
-            "a car red",
-            "red a car",
-            "car a red"
-          ],
-          correct:0
-        },
-        {
-          q:"„დიდი ლურჯი ჩანთა“ არის:",
-          options:[
-            "a blue big bag",
-            "a big blue bag",
-            "a bag blue big",
-            "big a blue bag"
-          ],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Choose the correct phrase:",
-          options:[
-            "a green book",
-            "a book green",
-            "green a book",
-            "book a green"
-          ],
-          correct:0
-        },
-        {
-          q:"Beautiful means:",
-          options:["ახალი","ლამაზი","სუფთა","ფერადი"],
-          correct:1
-        }
-      ]
-    },
-
-    "5":{
-      title:"🔢 Numbers & Counting",
-      description:"რიცხვები და რაოდენობა",
-
-      grammarTitle:"How many?",
-      grammarText:
-        "How many? გამოიყენება თვლადი საგნების რაოდენობის დასადგენად.",
-
-      grammarFormula:
-        "How many books?<br>There are five books.<br>I have ten pencils.",
-
-      words:[
-        ["One","ერთი","უან"],
-        ["Two","ორი","თუ"],
-        ["Three","სამი","თრი"],
-        ["Four","ოთხი","ფორ"],
-        ["Five","ხუთი","ფაივ"],
-        ["Six","ექვსი","სიქს"],
-        ["Seven","შვიდი","სევენ"],
-        ["Eight","რვა","ეით"],
-        ["Nine","ცხრა","ნაინ"],
-        ["Ten","ათი","თენ"],
-        ["Eleven","თერთმეტი","ილევენ"],
-        ["Twelve","თორმეტი","თუელვ"],
-        ["Thirteen","ცამეტი","თერთინ"],
-        ["Fourteen","თოთხმეტი","ფორტინ"],
-        ["Fifteen","თხუთმეტი","ფიფთინ"],
-        ["Sixteen","თექვსმეტი","სიქსთინ"],
-        ["Seventeen","ჩვიდმეტი","სევენთინ"],
-        ["Eighteen","თვრამეტი","ეითინ"],
-        ["Nineteen","ცხრამეტი","ნაინთინ"],
-        ["Twenty","ოცი","თუენთი"]
-      ],
-
-      exercises:[
-        {
-          q:"How many books? — 5",
-          options:[
-            "There are five books.",
-            "There is five books.",
-            "There am five books.",
-            "There be five books."
-          ],
-          correct:0
-        },
-        {
-          q:"Twelve means:",
-          options:["თერთმეტი","თორმეტი","ცამეტი","ოცი"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Fifteen means:",
-          options:["თხუთმეტი","თექვსმეტი","თოთხმეტი","თორმეტი"],
-          correct:0
-        },
-        {
-          q:"How many? means:",
-          options:["რამდენი?","სად?","ვინ?","როგორ?"],
-          correct:0
-        }
-      ]
-    },
-
-    "6":{
-      title:"🐶 Animals",
-      description:"ცხოველები — აღწერა და მოქმედებები",
-
-      grammarTitle:"Can / Can't",
-      grammarText:
-        "Can გამოიყენება შესაძლებლობის გამოსახატავად, Can't — შეუძლებლობისთვის.",
-
-      grammarFormula:
-        "A bird can fly.<br>A fish can swim.<br>A dog can't fly.",
-
-      words:[
-        ["Dog","ძაღლი","დოგ"],
-        ["Cat","კატა","ქეთ"],
-        ["Bird","ჩიტი","ბერდ"],
-        ["Fish","თევზი","ფიშ"],
-        ["Horse","ცხენი","ჰორს"],
-        ["Cow","ძროხა","ქაუ"],
-        ["Sheep","ცხვარი","შიფ"],
-        ["Goat","თხა","გოუთ"],
-        ["Pig","ღორი","ფიგ"],
-        ["Chicken","ქათამი","ჩიქენ"],
-        ["Duck","იხვი","დაქ"],
-        ["Rabbit","კურდღელი","რებიტ"],
-        ["Lion","ლომი","ლაიენ"],
-        ["Tiger","ვეფხვი","თაიგერ"],
-        ["Bear","დათვი","ბეარ"],
-        ["Monkey","მაიმუნი","მანქი"],
-        ["Elephant","სპილო","ელიფენთ"],
-        ["Fly","ფრენა","ფლაი"],
-        ["Run","სირბილი","რან"],
-        ["Swim","ცურვა","სვიმ"]
-      ],
-
-      exercises:[
-        {
-          q:"A bird ___ fly.",
-          options:["can","can't","is","are"],
-          correct:0
-        },
-        {
-          q:"A fish ___ swim.",
-          options:["is","can","are","am"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Which animal can fly?",
-          options:["Bird","Fish","Cow","Horse"],
-          correct:0
-        },
-        {
-          q:"Swim means:",
-          options:["ფრენა","სირბილი","ცურვა","ხტომა"],
-          correct:2
-        }
-      ]
-    }
-
-  },
-
-  "4":{
-
-    "1":{
-      title:"👋 Greetings & Introductions",
-      description:"გაცნობა, საუბრის დაწყება და კითხვები",
-
-      grammarTitle:"Present Simple",
-      grammarText:
-        "Present Simple გამოიყენება რუტინის, ჩვევებისა და ზოგადი ფაქტების აღსაწერად.",
-
-      grammarFormula:
-        "I/You/We/They work.<br>He/She/It works.",
-
-      words:[
-        ["Greeting","მისალმება","გრითინგ"],
-        ["Introduction","გაცნობა","ინთროდაქშენ"],
-        ["Hello","გამარჯობა","ჰელოუ"],
-        ["Good morning","დილა მშვიდობისა","გუდ მორნინგ"],
-        ["Good afternoon","შუადღე მშვიდობისა","გუდ აფთერნუნ"],
-        ["Good evening","საღამო მშვიდობისა","გუდ ივნინგ"],
-        ["Goodbye","ნახვამდის","გუდბაი"],
-        ["Name","სახელი","ნეიმ"],
-        ["Surname","გვარი","სერნეიმ"],
-        ["Address","მისამართი","ედრეს"],
-        ["Country","ქვეყანა","ქანთრი"],
-        ["City","ქალაქი","სითი"],
-        ["Live","ცხოვრება","ლივ"],
-        ["Come","მოსვლა","ქამ"],
-        ["Speak","საუბარი","სფიქ"],
-        ["Learn","სწავლა","ლერნ"],
-        ["English","ინგლისური","ინგლიშ"],
-        ["Language","ენა","ლენგვიჯ"],
-        ["Interesting","საინტერესო","ინთერესთინგ"],
-        ["Important","მნიშვნელოვანი","იმფორთენთ"]
-      ],
-
-      exercises:[
-        {
-          q:"She ___ English every day.",
-          options:["study","studies","studying","studied"],
-          correct:1
-        },
-        {
-          q:"I ___ in Kutaisi.",
-          options:["live","lives","living","lived"],
-          correct:0
-        }
-      ],
-
-      quiz:[
-        {
-          q:"He ___ English.",
-          options:["speak","speaks","speaking","spoke"],
-          correct:1
-        },
-        {
-          q:"They ___ in Georgia.",
-          options:["live","lives","living","lived"],
-          correct:0
-        },
-        {
-          q:"Language means:",
-          options:["ქვეყანა","ენა","ქალაქი","მისამართი"],
-          correct:1
-        }
-      ]
-    },
-
-    "2":{
-      title:"👨‍👩‍👧 Family & People",
-      description:"ოჯახი, ადამიანები და მათი აღწერა",
-
-      grammarTitle:"Have / Has",
-      grammarText:
-        "Have და Has გამოიყენება იმის სათქმელად, რომ ვინმეს რაღაც აქვს.",
-
-      grammarFormula:
-        "I have a brother.<br>She has a sister.<br>They have two children.",
-
-      words:[
-        ["Family","ოჯახი","ფემილი"],
-        ["Mother","დედა","მადერ"],
-        ["Father","მამა","ფადერ"],
-        ["Brother","ძმა","ბრადერ"],
-        ["Sister","და","სისთერ"],
-        ["Parents","მშობლები","ფეარენთს"],
-        ["Grandmother","ბებია","გრენდმადერ"],
-        ["Grandfather","ბაბუა","გრენდფადერ"],
-        ["Uncle","ბიძა","ანკლ"],
-        ["Aunt","დეიდა","ანტ"],
-        ["Cousin","ბიძაშვილი","ქაზენ"],
-        ["Relative","ნათესავი","რელეთივ"],
-        ["Child","ბავშვი","ჩაილდ"],
-        ["Children","ბავშვები","ჩილდრენ"],
-        ["Person","ადამიანი","ფერსენ"],
-        ["People","ხალხი","ფიფლ"],
-        ["Tall","მაღალი","თოლ"],
-        ["Short","დაბალი","შორთ"],
-        ["Young","ახალგაზრდა","იანგ"],
-        ["Old","ხანდაზმული","ოულდ"]
-      ],
-
-      exercises:[
-        {
-          q:"She ___ two brothers.",
-          options:["have","has","having","had"],
-          correct:1
-        },
-        {
-          q:"They ___ a big family.",
-          options:["has","have","having","had"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"He ___ a sister.",
-          options:["have","has","having","had"],
-          correct:1
-        },
-        {
-          q:"Children means:",
-          options:["ბავშვი","ბავშვები","მშობლები","ხალხი"],
-          correct:1
-        }
-      ]
-    },
-
-    "3":{
-      title:"🎒 School & Daily Learning",
-      description:"სკოლა, საგნები და ყოველდღიური სწავლა",
-
-      grammarTitle:"Present Continuous",
-      grammarText:
-        "Present Continuous გამოიყენება მოქმედებისთვის, რომელიც ახლა მიმდინარეობს.",
-
-      grammarFormula:
-        "I am reading.<br>She is writing.<br>They are studying.",
-
-      words:[
-        ["School","სკოლა","სქულ"],
-        ["Lesson","გაკვეთილი","ლესენ"],
-        ["Subject","საგანი","საბჯიქთ"],
-        ["Classroom","საკლასო ოთახი","ქლასრუმ"],
-        ["Teacher","მასწავლებელი","თიჩერ"],
-        ["Student","მოსწავლე","სთიუდენტ"],
-        ["Book","წიგნი","ბუქ"],
-        ["Notebook","რვეული","ნოუთბუქ"],
-        ["Exercise","სავარჯიშო","ექსერსაიზ"],
-        ["Question","კითხვა","ქუესჩენ"],
-        ["Answer","პასუხი","ენსერ"],
-        ["Read","კითხვა","რიდ"],
-        ["Write","წერა","რაით"],
-        ["Listen","მოსმენა","ლისენ"],
-        ["Speak","საუბარი","სფიქ"],
-        ["Learn","სწავლა","ლერნ"],
-        ["Study","მეცადინეობა","სთადი"],
-        ["Understand","გაგება","ანდერსთენდ"],
-        ["Remember","დამახსოვრება","რიმემბერ"],
-        ["Practice","ვარჯიში","ფრექთის"]
-      ],
-
-      exercises:[
-        {
-          q:"She is ___ a book.",
-          options:["read","reading","reads","readed"],
-          correct:1
-        },
-        {
-          q:"They are ___ English.",
-          options:["study","studies","studying","studied"],
-          correct:2
-        }
-      ],
-
-      quiz:[
-        {
-          q:"I am ___ now.",
-          options:["read","reading","reads","readed"],
-          correct:1
-        },
-        {
-          q:"Listen means:",
-          options:["წერა","მოსმენა","კითხვა","საუბარი"],
-          correct:1
-        }
-      ]
-    },
-
-    "4":{
-      title:"🎨 Colors & Objects",
-      description:"ფერები, საგნები და მათი აღწერა",
-
-      grammarTitle:"Adjective order",
-      grammarText:
-        "ინგლისურში რამდენიმე ზედსართავი სახელის გამოყენებისას მნიშვნელოვანია მათი სწორი განლაგება.",
-
-      grammarFormula:
-        "a big red ball<br>a small blue box<br>a beautiful green dress",
-
-      words:[
-        ["Red","წითელი","რედ"],
-        ["Blue","ლურჯი","ბლუ"],
-        ["Green","მწვანე","გრინ"],
-        ["Yellow","ყვითელი","იელოუ"],
-        ["Orange","ნარინჯისფერი","ორინჯ"],
-        ["Pink","ვარდისფერი","ფინქ"],
-        ["Purple","იისფერი","ფერფლ"],
-        ["Black","შავი","ბლექ"],
-        ["White","თეთრი","უაით"],
-        ["Brown","ყავისფერი","ბრაუნ"],
-        ["Gray","ნაცრისფერი","გრეი"],
-        ["Bright","კაშკაშა","ბრაით"],
-        ["Dark","მუქი","დარკ"],
-        ["Light","ღია","ლაით"],
-        ["Beautiful","ლამაზი","ბიუთიფულ"],
-        ["Big","დიდი","ბიგ"],
-        ["Small","პატარა","სმოლ"],
-        ["Round","მრგვალი","რაუნდ"],
-        ["Long","გრძელი","ლონგ"],
-        ["Short","მოკლე","შორთ"]
-      ],
-
-      exercises:[
-        {
-          q:"Choose the correct phrase:",
-          options:[
-            "a big red ball",
-            "a red big ball",
-            "a ball red big",
-            "big a red ball"
-          ],
-          correct:0
-        },
-        {
-          q:"„პატარა ლურჯი ყუთი“ არის:",
-          options:[
-            "a blue small box",
-            "a small blue box",
-            "a box small blue",
-            "small a blue box"
-          ],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Choose the correct phrase:",
-          options:[
-            "a beautiful green dress",
-            "a green beautiful dress",
-            "a dress green beautiful",
-            "beautiful a green dress"
-          ],
-          correct:0
-        },
-        {
-          q:"Round means:",
-          options:["მრგვალი","გრძელი","მოკლე","მუქი"],
-          correct:0
-        }
-      ]
-    },
-
-    "5":{
-      title:"🔢 Numbers, Time & Quantities",
-      description:"რიცხვები, რაოდენობა და დრო",
-
-      grammarTitle:"There is / There are + numbers",
-      grammarText:
-        "რაოდენობის აღწერისას ვიყენებთ There is-ს ერთ საგანთან და There are-ს რამდენიმე საგანთან.",
-
-      grammarFormula:
-        "There is one book.<br>There are five books.<br>There are twenty students.",
-
-      words:[
-        ["One","ერთი","უან"],
-        ["Two","ორი","თუ"],
-        ["Three","სამი","თრი"],
-        ["Four","ოთხი","ფორ"],
-        ["Five","ხუთი","ფაივ"],
-        ["Six","ექვსი","სიქს"],
-        ["Seven","შვიდი","სევენ"],
-        ["Eight","რვა","ეით"],
-        ["Nine","ცხრა","ნაინ"],
-        ["Ten","ათი","თენ"],
-        ["Eleven","თერთმეტი","ილევენ"],
-        ["Twelve","თორმეტი","თუელვ"],
-        ["Thirteen","ცამეტი","თერთინ"],
-        ["Fourteen","თოთხმეტი","ფორტინ"],
-        ["Fifteen","თხუთმეტი","ფიფთინ"],
-        ["Sixteen","თექვსმეტი","სიქსთინ"],
-        ["Seventeen","ჩვიდმეტი","სევენთინ"],
-        ["Eighteen","თვრამეტი","ეითინ"],
-        ["Nineteen","ცხრამეტი","ნაინთინ"],
-        ["Twenty","ოცი","თუენთი"]
-      ],
-
-      exercises:[
-        {
-          q:"There ___ one student.",
-          options:["are","is","am","be"],
-          correct:1
-        },
-        {
-          q:"There ___ ten books.",
-          options:["is","are","am","be"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Eighteen means:",
-          options:["თვრამეტი","ჩვიდმეტი","ცხრამეტი","თექვსმეტი"],
-          correct:0
-        },
-        {
-          q:"There ___ twenty students.",
-          options:["is","are","am","be"],
-          correct:1
-        }
-      ]
-    },
-
-    "6":{
-      title:"🐶 Animals & Nature",
-      description:"ცხოველები, მოქმედებები და ბუნება",
-
-      grammarTitle:"Can / Can't + descriptions",
-      grammarText:
-        "ვისწავლით ცხოველების შესაძლებლობებისა და თვისებების აღწერას.",
-
-      grammarFormula:
-        "A bird can fly.<br>A fish can swim.<br>A lion can run fast.",
-
-      words:[
-        ["Animal","ცხოველი","ენიმალ"],
-        ["Dog","ძაღლი","დოგ"],
-        ["Cat","კატა","ქეთ"],
-        ["Bird","ჩიტი","ბერდ"],
-        ["Fish","თევზი","ფიშ"],
-        ["Horse","ცხენი","ჰორს"],
-        ["Cow","ძროხა","ქაუ"],
-        ["Sheep","ცხვარი","შიფ"],
-        ["Goat","თხა","გოუთ"],
-        ["Rabbit","კურდღელი","რებიტ"],
-        ["Lion","ლომი","ლაიენ"],
-        ["Tiger","ვეფხვი","თაიგერ"],
-        ["Bear","დათვი","ბეარ"],
-        ["Monkey","მაიმუნი","მანქი"],
-        ["Elephant","სპილო","ელიფენთ"],
-        ["Fly","ფრენა","ფლაი"],
-        ["Run","სირბილი","რან"],
-        ["Swim","ცურვა","სვიმ"],
-        ["Jump","ხტომა","ჯამფ"],
-        ["Fast","სწრაფი","ფასთ"]
-      ],
-
-      exercises:[
-        {
-          q:"A fish can ___.",
-          options:["fly","swim","run","read"],
-          correct:1
-        },
-        {
-          q:"A lion can run ___.",
-          options:["slow","fast","blue","small"],
-          correct:1
-        }
-      ],
-
-      quiz:[
-        {
-          q:"Which animal can swim?",
-          options:["Fish","Bird","Horse","Lion"],
-          correct:0
-        },
-        {
-          q:"Fast means:",
-          options:["ნელი","სწრაფი","დიდი","პატარა"],
-          correct:1
-        }
-      ]
-    }
+    throw new Error(
+      'Supabase client ვერ მოიძებნა. შეამოწმე config.js'
+    );
 
   }
 
-};
+  const {
+    data:{session},
+    error
+  } =
+    await client.auth.getSession();
 
-/* =====================================================
-   LOAD LESSON
-===================================================== */
+  if(error) throw error;
 
-const gradeData = lessons[grade] || lessons["2"];
+  if(!session){
 
-const data =
-  gradeData[lesson] ||
-  gradeData["1"];
+    location.replace('login.html');
 
-document.getElementById('lessonTitle').textContent =
-  data.title;
+    return false;
 
-document.getElementById('lessonDescription').textContent =
-  data.description;
+  }
 
-document.getElementById('gradeInfo').textContent =
-  grade==="2"
-    ? "🌱 მე-2 კლასი"
-    : grade==="3"
-      ? "🚀 მე-3 კლასი"
-      : "⭐ მე-4 კლასი";
+  if(session.user.id !== TEACHER_ID){
 
-document.getElementById('lessonInfo').textContent =
-  "📖 გაკვეთილი " + lesson;
+    location.replace('index.html');
 
-document.getElementById('grammarTitle').textContent =
-  data.grammarTitle;
+    return false;
 
-document.getElementById('grammarText').textContent =
-  data.grammarText;
+  }
 
-document.getElementById('grammarFormula').innerHTML =
-  data.grammarFormula;
+  const {data:profile,error:profileError} =
+    await client
+      .from('profiles')
+      .select('role')
+      .eq('user_id',session.user.id)
+      .maybeSingle();
 
-/* =====================================================
-   VOCABULARY
-===================================================== */
+  if(profileError) throw profileError;
 
-const wordsBox =
-  document.getElementById('words');
+  if(!profile || profile.role !== 'teacher'){
 
-document.getElementById('wordCount').textContent =
-  data.words.length + " სიტყვა";
+    location.replace('index.html');
 
-data.words.forEach((w,i)=>{
+    return false;
 
-  const card =
-    document.createElement('div');
+  }
 
-  card.className='word';
+  return true;
+}
 
-  card.innerHTML=`
+/* ================= VALIDATE URL ================= */
 
-    <span class="word-number">
-      #${i+1}
-    </span>
+function validateParams(){
 
-    <div class="word-en">
-      ${escapeHTML(w[0])}
-    </div>
+  if(
+    ![2,3,4].includes(grade) ||
+    !Number.isInteger(lessonNumber) ||
+    lessonNumber < 1
+  ){
 
-    <div class="word-ka">
-      🇬🇪 ${escapeHTML(w[1])}
-    </div>
+    throw new Error(
+      'გაკვეთილის მისამართი არასწორია. გამოიყენე grade და lesson.'
+    );
 
-    <div class="pron">
-      🔤 ${escapeHTML(w[2])}
-    </div>
+  }
 
-    <button
-      class="listen"
-      onclick="speak('${escapeJS(w[0])}')">
-      🔊 მოსმენა
-    </button>
+}
 
-  `;
+/* ================= LOAD LESSON ================= */
 
-  wordsBox.appendChild(card);
+async function loadLesson(){
 
-});
+  const {data,error} =
+    await client
+      .from('lessons')
+      .select(`
+        id,
+        grade,
+        lesson_number,
+        title,
+        topic,
+        description,
+        image_url,
+        audio_url
+      `)
+      .eq('grade',grade)
+      .eq('lesson_number',lessonNumber)
+      .maybeSingle();
 
-/* =====================================================
-   SPEECH
-===================================================== */
+  if(error) throw error;
+
+  if(!data){
+
+    throw new Error(
+      `მე-${grade} კლასის მე-${lessonNumber} გაკვეთილი Supabase-ში ვერ მოიძებნა.`
+    );
+
+  }
+
+  lesson = data;
+
+  const wordsRes =
+    await client
+      .from('lesson_words')
+      .select(`
+        id,
+        word,
+        translation,
+        emoji,
+        image_url,
+        audio_url,
+        sort_order
+      `)
+      .eq('lesson_id',lesson.id)
+      .order('sort_order',{ascending:true});
+
+  if(wordsRes.error)
+    throw wordsRes.error;
+
+  words =
+    wordsRes.data || [];
+
+  const quizRes =
+    await client
+      .from('lesson_quizzes')
+      .select(`
+        id,
+        question,
+        options,
+        correct_answer,
+        sort_order
+      `)
+      .eq('lesson_id',lesson.id)
+      .order('sort_order',{ascending:true});
+
+  if(quizRes.error)
+    throw quizRes.error;
+
+  quizzes =
+    quizRes.data || [];
+}
+
+/* ================= AUDIO ================= */
 
 function speak(text){
 
-  if(!('speechSynthesis' in window)){
-    alert('თქვენს ბრაუზერს ხმის მოსმენა არ აქვს მხარდაჭერილი.');
+  if(
+    !('speechSynthesis' in window)
+  ){
+
     return;
+
   }
 
   window.speechSynthesis.cancel();
 
-  const u =
+  const utterance =
     new SpeechSynthesisUtterance(text);
 
-  u.lang='en-US';
-  u.rate=.78;
-  u.pitch=1;
+  utterance.lang =
+    'en-US';
 
-  window.speechSynthesis.speak(u);
-}
+  utterance.rate =
+    .78;
 
-/* =====================================================
-   LISTENING
-===================================================== */
+  utterance.pitch =
+    1;
 
-let listenIndex=0;
-
-function renderListenWord(){
-
-  if(!data.words.length) return;
-
-  document.getElementById('listenWord').textContent =
-    data.words[listenIndex][0];
-
-}
-
-function speakCurrentWord(){
-
-  speak(data.words[listenIndex][0]);
-
-}
-
-function nextListenWord(){
-
-  listenIndex++;
-
-  if(listenIndex>=data.words.length){
-    listenIndex=0;
-  }
-
-  renderListenWord();
-
-  setTimeout(
-    speakCurrentWord,
-    150
+  window.speechSynthesis.speak(
+    utterance
   );
-
 }
 
-renderListenWord();
+/* ================= RENDER ================= */
 
-/* =====================================================
-   EXERCISES
-===================================================== */
+function render(){
 
-const exercisesBox =
-  document.getElementById('exercises');
+  app.innerHTML = `
 
-data.exercises.forEach((ex,i)=>{
+    <section class="hero">
 
-  const box =
-    document.createElement('div');
+      <span class="badge">
+        🌟 მე-${grade} კლასი • გაკვეთილი ${lessonNumber}
+      </span>
 
-  box.className='exercise';
+      <h1>
+        ${esc(lesson.title)}
+      </h1>
 
-  box.innerHTML=`
+      <p>
+        ${esc(
+          lesson.description ||
+          lesson.topic ||
+          'ინგლისურის სასწავლო გაკვეთილი'
+        )}
+      </p>
 
-    <strong>
-      ${i+1}. ${escapeHTML(ex.q)}
-    </strong>
+      <div class="meta">
 
-    <div class="exercise-options">
+        <span>
+          📚 ${words.length} ახალი სიტყვა
+        </span>
 
-      ${ex.options.map((option,j)=>`
+        <span>
+          🧠 ${quizzes.length} სავარჯიშო კითხვა
+        </span>
 
-        <button
-          type="button"
-          onclick="checkExercise(
-            this,
-            ${j},
-            ${ex.correct}
-          )">
+        <span>
+          🎧 მოსმენა
+        </span>
 
-          ${escapeHTML(option)}
+        <span>
+          ⭐ პრაქტიკა
+        </span>
 
-        </button>
+      </div>
 
-      `).join('')}
+    </section>
 
-    </div>
+    <section class="section">
+
+      <div class="section-title">
+
+        <h2>
+          🆕 ახალი სიტყვები
+        </h2>
+
+        <small>
+          ${words.length} სიტყვა
+        </small>
+
+      </div>
+
+      <div class="words">
+
+        ${
+          words.length
+          ? words.map(function(word,index){
+
+              return `
+
+                <article class="word">
+
+                  <div class="word-number">
+                    #${index + 1}
+                  </div>
+
+                  ${
+                    word.emoji
+                    ? `<div class="word-emoji">
+                         ${esc(word.emoji)}
+                       </div>`
+                    : ''
+                  }
+
+                  <div class="word-en">
+                    ${esc(word.word)}
+                  </div>
+
+                  <div class="word-ka">
+                    ${esc(word.translation || '')}
+                  </div>
+
+                  <button
+                    class="listen"
+                    data-speak="${esc(word.word)}">
+
+                    🔊 მოსმენა
+                  </button>
+
+                </article>
+
+              `;
+
+            }).join('')
+          : `
+              <div class="error">
+                ამ გაკვეთილს სიტყვები ჯერ არ აქვს.
+              </div>
+            `
+        }
+
+      </div>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <h2>
+          📖 გრამატიკა და პრაქტიკა
+        </h2>
+
+        <small>
+          ${esc(
+            lesson.topic ||
+            'ინგლისური ენის საფუძვლები'
+          )}
+        </small>
+
+      </div>
+
+      <div class="grammar">
+
+        <div class="grammar-box">
+
+          <h3>
+            🎯 გაკვეთილის თემა
+          </h3>
+
+          <p>
+            ${esc(
+              lesson.topic ||
+              lesson.title
+            )}
+          </p>
+
+          <div class="example">
+
+            <b>English:</b><br>
+
+            Practice the new words and
+            build simple English sentences.
+
+          </div>
+
+        </div>
+
+        <div class="grammar-box">
+
+          <h3>
+            🗣️ Speaking Practice
+          </h3>
+
+          <p>
+            წაიკითხე სიტყვები ხმამაღლა და
+            გამოიყენე ისინი წინადადებებში.
+          </p>
+
+          <div class="example">
+
+            <b>
+              ${esc(
+                words[0]?.word ||
+                'Hello'
+              )}
+            </b>
+
+            →
+            Make a sentence.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <h2>
+          🧠 ქვიზი
+        </h2>
+
+        <small>
+          ${quizzes.length} კითხვა
+        </small>
+
+      </div>
+
+      <div id="quiz" class="quiz">
+
+        ${
+          quizzes.length
+          ? quizzes.map(function(q,index){
+
+              return renderQuestion(q,index);
+
+            }).join('')
+          : `
+              <div class="error">
+                ამ გაკვეთილს ქვიზი ჯერ არ აქვს.
+              </div>
+            `
+        }
+
+      </div>
+
+      ${
+        quizzes.length
+        ? `
+          <div id="result" class="result">
+
+            <div>
+              შედეგი
+            </div>
+
+            <div class="score">
+              0 / ${quizzes.length}
+            </div>
+
+            <div>
+              უპასუხე ყველა კითხვას ⭐
+            </div>
+
+          </div>
+        `
+        : ''
+      }
+
+    </section>
 
   `;
 
-  exercisesBox.appendChild(box);
+  bindEvents();
 
-});
+}
 
-function checkExercise(button,index,correct){
+/* ================= QUESTION ================= */
 
-  const parent =
-    button.parentElement;
+function renderQuestion(q,index){
+
+  let options =
+    Array.isArray(q.options)
+      ? q.options
+      : [];
+
+  if(
+    !options.length &&
+    q.correct_answer
+  ){
+
+    options =
+      [q.correct_answer];
+
+  }
+
+  return `
+
+    <article
+      class="question"
+      data-question="${esc(q.id)}"
+      data-correct="${esc(q.correct_answer)}">
+
+      <h3>
+        ${index + 1}. ${esc(q.question)}
+      </h3>
+
+      <div class="options">
+
+        ${
+          options.map(function(option){
+
+            return `
+
+              <button
+                class="option"
+                data-answer="${esc(option)}">
+
+                ${esc(option)}
+
+              </button>
+
+            `;
+
+          }).join('')
+        }
+
+      </div>
+
+    </article>
+
+  `;
+}
+
+/* ================= EVENTS ================= */
+
+function bindEvents(){
+
+  document
+    .querySelectorAll('[data-speak]')
+    .forEach(function(button){
+
+      button.addEventListener(
+        'click',
+        function(){
+
+          speak(
+            button.dataset.speak
+          );
+
+        }
+      );
+
+    });
+
+  document
+    .querySelectorAll('.option')
+    .forEach(function(button){
+
+      button.addEventListener(
+        'click',
+        function(){
+
+          answerQuestion(button);
+
+        }
+      );
+
+    });
+
+}
+
+/* ================= QUIZ ANSWER ================= */
+
+async function answerQuestion(button){
+
+  const question =
+    button.closest('.question');
+
+  if(!question) return;
+
+  if(question.dataset.done === '1')
+    return;
+
+  question.dataset.done =
+    '1';
+
+  const correct =
+    question.dataset.correct;
+
+  const answer =
+    button.dataset.answer;
 
   const buttons =
-    parent.querySelectorAll('button');
+    question.querySelectorAll('.option');
 
-  buttons.forEach(b=>{
-    b.disabled=true;
+  buttons.forEach(function(b){
+    b.disabled = true;
   });
 
-  if(index===correct){
+  if(answer === correct){
 
     button.classList.add('correct');
+
+    score++;
 
   }else{
 
     button.classList.add('wrong');
 
-    buttons[correct].classList.add('correct');
+    buttons.forEach(function(b){
+
+      if(
+        b.dataset.answer === correct
+      ){
+
+        b.classList.add('correct');
+
+      }
+
+    });
 
   }
 
-}
+  answered++;
 
-/* =====================================================
-   GAME
-===================================================== */
+  updateResult();
 
-let gameIndex=0;
-let gameScore=0;
+  if(
+    studentId &&
+    client
+  ){
 
-function newGameRound(){
+    try{
 
-  if(!data.words.length) return;
+      await client
+        .from('student_question_scores')
+        .insert({
+          student_id:studentId,
+          quiz_id:lesson.id,
+          question_id:question.dataset.question,
+          grade:grade
+        });
 
-  gameIndex =
-    Math.floor(
-      Math.random()*data.words.length
-    );
+    }catch(error){
 
-  const correct =
-    data.words[gameIndex];
+      console.warn(
+        'ქულის შენახვა ვერ მოხერხდა:',
+        error
+      );
 
-  document.getElementById('gameWord').textContent =
-    correct[0];
-
-  let options=[
-    correct[1]
-  ];
-
-  while(options.length<4){
-
-    const random =
-      data.words[
-        Math.floor(
-          Math.random()*data.words.length
-        )
-      ][1];
-
-    if(!options.includes(random)){
-      options.push(random);
     }
 
   }
 
-  options.sort(
-    ()=>Math.random()-.5
-  );
-
-  const box =
-    document.getElementById('gameOptions');
-
-  box.innerHTML='';
-
-  options.forEach(option=>{
-
-    const btn =
-      document.createElement('button');
-
-    btn.textContent=option;
-
-    btn.onclick=()=>{
-
-      if(option===correct[1]){
-
-        gameScore++;
-
-        btn.style.background='#0b633c';
-
-        speak(correct[0]);
-
-      }else{
-
-        btn.style.background='#681d2d';
-
-      }
-
-      document.getElementById('gameScore').textContent =
-        'ქულა: '+gameScore;
-
-      setTimeout(
-        newGameRound,
-        650
-      );
-
-    };
-
-    box.appendChild(btn);
-
-  });
-
 }
 
-newGameRound();
+/* ================= RESULT ================= */
 
-/* =====================================================
-   QUIZ
-===================================================== */
+function updateResult(){
 
-const quizBox =
-  document.getElementById('quizQuestions');
+  const result =
+    document.getElementById('result');
 
-data.quiz.forEach((q,i)=>{
+  if(!result) return;
 
-  const box =
-    document.createElement('div');
+  let message =
+    'გააგრძელე! 💪';
 
-  box.className='quiz-question';
+  if(
+    answered === quizzes.length
+  ){
 
-  box.innerHTML=`
+    const percent =
+      quizzes.length
+        ? Math.round(
+            score /
+            quizzes.length *
+            100
+          )
+        : 0;
 
-    <h3>
-      ${i+1}. ${escapeHTML(q.q)}
-    </h3>
+    if(percent >= 90)
+      message =
+        'შესანიშნავი შედეგია! 🏆';
 
-    <div class="quiz-options">
+    else if(percent >= 70)
+      message =
+        'ძალიან კარგია! ⭐';
 
-      ${q.options.map((option,j)=>`
+    else if(percent >= 50)
+      message =
+        'კარგია, კიდევ ვივარჯიშოთ! 💪';
 
-        <label>
+    else
+      message =
+        'არაუშავს — თავიდან გავიმეოროთ! 🚀';
 
-          <input
-            type="radio"
-            name="q${i}"
-            value="${j}">
+  }
 
-          ${escapeHTML(option)}
+  result.innerHTML = `
 
-        </label>
+    <div>
+      შედეგი
+    </div>
 
-      `).join('')}
+    <div class="score">
+      ${score} / ${quizzes.length}
+    </div>
 
+    <div>
+      ${message}
     </div>
 
   `;
 
-  quizBox.appendChild(box);
-
-});
-
-/* =====================================================
-   QUIZ RESULT
-===================================================== */
-
-document
-.getElementById('quizForm')
-.addEventListener(
-  'submit',
-  function(e){
-
-    e.preventDefault();
-
-    let correct=0;
-
-    data.quiz.forEach((q,i)=>{
-
-      const selected =
-        document.querySelector(
-          `input[name="q${i}"]:checked`
-        );
-
-      if(
-        selected &&
-        Number(selected.value)===q.correct
-      ){
-
-        correct++;
-
-      }
-
-    });
-
-    const total =
-      data.quiz.length;
-
-    const percent =
-      Math.round(
-        (correct/total)*100
-      );
-
-    document.getElementById('score')
-      .textContent =
-      percent+"%";
-
-    let text='';
-
-    if(percent===100){
-
-      text=
-        '🏆 შესანიშნავია! ყველა პასუხი სწორია!';
-
-    }else if(percent>=80){
-
-      text=
-        '🔥 ძალიან კარგი შედეგია!';
-
-    }else if(percent>=60){
-
-      text=
-        '👏 კარგი დასაწყისია! კიდევ ერთხელ გაიმეორე სიტყვები.';
-
-    }else{
-
-      text=
-        '💪 არ დანებდე! გაიმეორე სიტყვები და სცადე თავიდან.';
-
-    }
-
-    document.getElementById('resultText')
-      .textContent =
-      `${correct} / ${total} სწორი პასუხი — ${text}`;
-
-    document
-      .getElementById('resultBox')
-      .classList.add('show');
-
-    document
-      .getElementById('result')
-      .scrollIntoView({
-        behavior:'smooth'
-      });
-
-  }
-);
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function scrollToSection(id){
-
-  const el =
-    document.getElementById(id);
-
-  if(el){
-
-    el.scrollIntoView({
-      behavior:'smooth',
-      block:'start'
-    });
-
-  }
-
 }
 
-/* =====================================================
-   3D MOUSE PARALLAX
-===================================================== */
+/* ================= START ================= */
 
-const visual =
-  document.getElementById('visual3d');
+(async function(){
+
+  try{
+
+    const allowed =
+      await checkTeacher();
+
+    if(!allowed) return;
+
+    validateParams();
+
+    await loadLesson();
+
+    render();
+
+  }catch(error){
+
+    console.error(
+      'Lesson error:',
+      error
+    );
+
+    app.innerHTML = `
+
+      <div class="error">
+
+        ❌ გაკვეთილის ჩატვირთვა ვერ მოხერხდა.
+
+        <br><br>
+
+        <b>
+          ${esc(
+            error.message ||
+            error
+          )}
+        </b>
+
+        <br><br>
+
+        <a
+          class="back"
+          href="teacher-lessons.html">
+
+          ← გაკვეთილებზე დაბრუნება
+
+        </a>
+
+      </div>
+
+    `;
+
+  }
+
+})();
+
+/* ================= PARALLAX ================= */
 
 document.addEventListener(
   'mousemove',
   function(e){
 
-    if(window.innerWidth<800) return;
+    if(window.innerWidth < 900)
+      return;
 
     const x =
-      (e.clientX/window.innerWidth-.5)*18;
+      (e.clientX /
+       window.innerWidth - .5) * 14;
 
     const y =
-      (e.clientY/window.innerHeight-.5)*18;
+      (e.clientY /
+       window.innerHeight - .5) * 14;
 
-    visual.style.transform=
-      `translate3d(${x*-0.12}px,${y*-0.12}px,0)`;
+    const visual =
+      document.getElementById('visual3d');
 
-  }
-);
+    if(visual){
 
-/* =====================================================
-   CARD 3D TILT
-===================================================== */
-
-document.addEventListener(
-  'mousemove',
-  function(e){
-
-    if(window.innerWidth<900) return;
-
-    document
-      .querySelectorAll('.word')
-      .forEach(card=>{
-
-        const r =
-          card.getBoundingClientRect();
-
-        const cx =
-          r.left+r.width/2;
-
-        const cy =
-          r.top+r.height/2;
-
-        const dx =
-          (e.clientX-cx)/r.width;
-
-        const dy =
-          (e.clientY-cy)/r.height;
-
-        if(
-          Math.abs(dx)<1.5 &&
-          Math.abs(dy)<1.5
-        ){
-
-          card.style.transform=
-            `perspective(700px)
-             rotateX(${dy*-4}deg)
-             rotateY(${dx*4}deg)
-             translateY(-4px)`;
-
-        }
-
-      });
-
-  }
-);
-
-/* =====================================================
-   SECURITY / HTML HELPERS
-===================================================== */
-
-function escapeHTML(value){
-
-  return String(value)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
-
-}
-
-function escapeJS(value){
-
-  return String(value)
-    .replace(/\\/g,'\\\\')
-    .replace(/'/g,"\\'")
-    .replace(/\n/g,'\\n')
-    .replace(/\r/g,'\\r');
-
-}
-
-/* =====================================================
-   KEYBOARD SHORTCUTS
-===================================================== */
-
-document.addEventListener(
-  'keydown',
-  function(e){
-
-    if(e.key===' '){
-
-      const tag =
-        document.activeElement.tagName;
-
-      if(
-        tag!=='INPUT' &&
-        tag!=='BUTTON' &&
-        tag!=='TEXTAREA'
-      ){
-
-        e.preventDefault();
-        speakCurrentWord();
-
-      }
+      visual.style.transform =
+        `translate3d(${x * -.15}px,${y * -.15}px,0)`;
 
     }
 
   }
 );
 
+})();
 </script>
 
 </body>
