@@ -3,1145 +3,2643 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#02152d">
-<title>English with Mariami — ინგლისურის აკადემია</title>
+
+<meta name="theme-color" content="#020817">
+<meta name="description" content="English with Mariami — ინგლისურის აკადემია ბავშვებისთვის">
+
+<title>English with Mariami — English Academy</title>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+/* =========================================================
+   ENGLISH WITH MARIAMI
+   FUTURISTIC 3D INDEX PAGE
+   ========================================================= */
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
 
 body{
-margin:0;
-font-family:Arial,"Noto Sans Georgian",sans-serif;
-color:#fff;
-background:#010712;
-min-height:100vh;
-overflow-x:hidden
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:
+    Arial,
+    "Noto Sans Georgian",
+    sans-serif;
+  color:#fff;
+  background:#01050d;
 }
 
-a{text-decoration:none;color:inherit}
-
-.wrap{
-width:min(1250px,calc(100% - 28px));
-margin:auto
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-/* BACKGROUND */
+button{
+  font-family:inherit;
+}
+
+/* =========================================================
+   3D WORLD
+   ========================================================= */
 
 .neon-world{
-position:fixed;
-inset:0;
-z-index:-2;
-overflow:hidden;
-background:
-radial-gradient(circle at 50% 40%,
-#eaffff 0,
-#c8f4ff 18%,
-#7fc9eb 42%,
-#245d86 70%,
-#020713 100%)
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 28%,
+      #dffaff 0%,
+      #8ed9f5 16%,
+      #236b9d 42%,
+      #061b34 68%,
+      #01050d 100%
+    );
 }
 
-.neon-world:before{
-content:"";
-position:absolute;
-inset:-30%;
-background:
-radial-gradient(ellipse at center,
-transparent 25%,
-#001329aa 70%,
-#00040c 100%);
-pointer-events:none
+.neon-world::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 18%,
+      rgba(0,20,45,.25) 45%,
+      rgba(0,5,15,.88) 85%
+    );
+
+  pointer-events:none;
 }
+
+.neon-world::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(0,234,255,.18),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(130,0,255,.14),
+      transparent 25%
+    );
+
+  animation:
+    worldPulse 8s ease-in-out infinite alternate;
+
+  pointer-events:none;
+}
+
+@keyframes worldPulse{
+  from{
+    opacity:.55;
+    transform:scale(1);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1.08);
+  }
+}
+
+/* =========================================================
+   3D GRID
+   ========================================================= */
 
 .grid-floor{
-position:absolute;
-left:-20%;
-right:-20%;
-bottom:-20%;
-height:62%;
-transform:perspective(450px) rotateX(62deg);
-background-image:
-linear-gradient(#00eaff35 1px,transparent 1px),
-linear-gradient(90deg,#00eaff35 1px,transparent 1px);
-background-size:55px 55px;
-mask-image:linear-gradient(to top,black,transparent);
-opacity:.65
+  position:absolute;
+  left:-30%;
+  right:-30%;
+  bottom:-28%;
+  height:70%;
+
+  transform:
+    perspective(500px)
+    rotateX(64deg);
+
+  transform-origin:center bottom;
+
+  background-image:
+    linear-gradient(
+      rgba(0,234,255,.28) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,234,255,.28) 1px,
+      transparent 1px
+    );
+
+  background-size:65px 65px;
+
+  mask-image:
+    linear-gradient(
+      to top,
+      #000 10%,
+      rgba(0,0,0,.7) 45%,
+      transparent 100%
+    );
+
+  animation:
+    gridMove 8s linear infinite;
+
+  opacity:.75;
 }
 
+@keyframes gridMove{
+  from{
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  to{
+    background-position:
+      0 65px,
+      65px 0;
+  }
+}
+
+/* =========================================================
+   FLOATING LETTERS
+   ========================================================= */
+
 .letters{
-position:absolute;
-inset:0;
-perspective:900px
+  position:absolute;
+  inset:0;
+  perspective:1200px;
+  overflow:hidden;
 }
 
 .letter{
-position:absolute;
-font-weight:1000;
-font-family:Arial,sans-serif;
-font-size:clamp(45px,7vw,105px);
-color:#fff;
-text-shadow:
-0 0 5px #fff,
-0 0 14px #00eaff,
-0 0 30px #009cff,
-0 0 65px #006cff;
-filter:drop-shadow(0 15px 15px #002b4f99);
-animation:float 7s ease-in-out infinite;
-user-select:none
+  position:absolute;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  width:clamp(55px,8vw,115px);
+  height:clamp(55px,8vw,115px);
+
+  font-size:clamp(45px,7vw,105px);
+  font-weight:1000;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 5px #fff,
+    0 0 12px #00eaff,
+    0 0 28px #00bfff,
+    0 0 60px #007cff;
+
+  filter:
+    drop-shadow(0 18px 20px rgba(0,20,50,.8));
+
+  transform-style:preserve-3d;
+
+  user-select:none;
+  pointer-events:none;
+
+  animation:
+    letterFloat
+    var(--duration,8s)
+    ease-in-out
+    infinite;
+
+  animation-delay:
+    var(--delay,0s);
 }
 
-.letter:nth-child(1){left:5%;top:16%;animation-delay:-1s}
-.letter:nth-child(2){left:18%;top:63%;animation-delay:-4s}
-.letter:nth-child(3){left:31%;top:12%;animation-delay:-2s}
-.letter:nth-child(4){left:44%;top:67%;animation-delay:-5s}
-.letter:nth-child(5){left:56%;top:16%;animation-delay:-3s}
-.letter:nth-child(6){left:69%;top:58%;animation-delay:-6s}
-.letter:nth-child(7){left:81%;top:20%;animation-delay:-1.5s}
-.letter:nth-child(8){left:91%;top:70%;animation-delay:-4.5s}
-.letter:nth-child(9){left:12%;top:35%;font-size:55px;animation-delay:-3.5s}
-.letter:nth-child(10){left:74%;top:39%;font-size:55px;animation-delay:-2.5s}
+.letter::before{
+  content:"";
+  position:absolute;
 
-@keyframes float{
-0%,100%{transform:translate3d(0,0,0) rotateY(-12deg) rotateZ(-2deg)}
-50%{transform:translate3d(25px,-35px,80px) rotateY(22deg) rotateZ(3deg)}
+  width:65%;
+  height:20%;
+
+  bottom:-8px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(0,234,255,.5),
+      transparent 70%
+    );
+
+  filter:blur(10px);
+
+  transform:
+    translateZ(-30px);
 }
 
-/* NAV */
+@keyframes letterFloat{
+
+  0%{
+    transform:
+      translate3d(0,0,0)
+      rotateX(-8deg)
+      rotateY(-18deg)
+      rotateZ(-3deg)
+      scale(.92);
+  }
+
+  25%{
+    transform:
+      translate3d(20px,-28px,70px)
+      rotateX(15deg)
+      rotateY(20deg)
+      rotateZ(3deg)
+      scale(1.05);
+  }
+
+  50%{
+    transform:
+      translate3d(-18px,-55px,110px)
+      rotateX(-15deg)
+      rotateY(32deg)
+      rotateZ(-4deg)
+      scale(1.12);
+  }
+
+  75%{
+    transform:
+      translate3d(25px,-20px,55px)
+      rotateX(10deg)
+      rotateY(-25deg)
+      rotateZ(4deg)
+      scale(1);
+  }
+
+  100%{
+    transform:
+      translate3d(0,0,0)
+      rotateX(-8deg)
+      rotateY(-18deg)
+      rotateZ(-3deg)
+      scale(.92);
+  }
+}
+
+/* =========================================================
+   PARTICLES
+   ========================================================= */
+
+.particles{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.particle{
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 8px #00eaff,
+    0 0 18px #00eaff;
+
+  animation:
+    particleMove
+    var(--p-duration,7s)
+    linear infinite;
+
+  animation-delay:
+    var(--p-delay,0s);
+}
+
+@keyframes particleMove{
+  0%{
+    transform:
+      translate3d(0,30px,0)
+      scale(.4);
+
+    opacity:0;
+  }
+
+  15%{
+    opacity:1;
+  }
+
+  70%{
+    opacity:.8;
+  }
+
+  100%{
+    transform:
+      translate3d(
+        var(--x,40px),
+        -110vh,
+        var(--z,50px)
+      )
+      scale(1.5);
+
+    opacity:0;
+  }
+}
+
+/* =========================================================
+   WRAPPER
+   ========================================================= */
+
+.wrap{
+  width:min(1250px,calc(100% - 28px));
+  margin:auto;
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 
 .top{
-position:sticky;
-top:0;
-z-index:50;
-background:#02152de8;
-border-bottom:1px solid #00eaff66;
-backdrop-filter:blur(14px)
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  background:
+    rgba(2,21,45,.82);
+
+  border-bottom:
+    1px solid rgba(0,234,255,.4);
+
+  backdrop-filter:
+    blur(18px);
+
+  box-shadow:
+    0 8px 35px rgba(0,0,0,.35);
 }
 
 .nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-padding:13px 0
+  min-height:70px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  gap:18px;
 }
 
 .brand{
-font-weight:1000;
-font-size:18px;
-text-shadow:0 0 18px #00eaff
+  font-size:18px;
+  font-weight:1000;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 10px #00eaff,
+    0 0 25px #00eaff;
+
+  white-space:nowrap;
 }
 
 .navlinks{
-display:flex;
-gap:7px;
-flex-wrap:wrap
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
 }
 
 .navlinks a{
-padding:10px 14px;
-border-radius:13px;
-background:#062443dd;
-border:1px solid #00eaff44;
-font-size:13px;
-transition:.2s
+  position:relative;
+
+  padding:10px 14px;
+
+  border-radius:13px;
+
+  background:
+    rgba(5,38,68,.8);
+
+  border:
+    1px solid rgba(0,234,255,.28);
+
+  font-size:13px;
+  font-weight:700;
+
+  transition:
+    .25s ease;
+
+  overflow:hidden;
+}
+
+.navlinks a::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,.25),
+      transparent
+    );
+
+  transform:
+    translateX(-120%);
+
+  transition:.5s;
+}
+
+.navlinks a:hover::before{
+  transform:
+    translateX(120%);
 }
 
 .navlinks a:hover{
-background:#00c9f2;
-color:#00131a;
-box-shadow:0 0 20px #00eaff;
-transform:translateY(-2px)
+  transform:
+    translateY(-3px);
+
+  background:#00c9f2;
+  color:#00131a;
+
+  box-shadow:
+    0 0 25px #00eaff,
+    0 10px 25px rgba(0,0,0,.4);
 }
 
 .academy-button{
-background:linear-gradient(135deg,#00c9f2,#007cff)!important;
-font-weight:1000!important
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #007cff
+    ) !important;
+
+  color:#00131a !important;
+  font-weight:1000 !important;
 }
 
-/* HERO */
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero{
-padding:75px 0 55px;
-min-height:720px;
-display:flex;
-align-items:center
+  min-height:760px;
+
+  display:flex;
+  align-items:center;
+
+  padding:
+    80px 0
+    60px;
 }
 
 .hero-grid{
-display:grid;
-grid-template-columns:1.15fr .85fr;
-gap:30px;
-align-items:center
+  display:grid;
+
+  grid-template-columns:
+    1.15fr .85fr;
+
+  gap:40px;
+
+  align-items:center;
 }
 
 .badge{
-display:inline-block;
-padding:9px 15px;
-border-radius:30px;
-background:#061c38dd;
-border:1px solid #00eaff88;
-color:#ffe600;
-font-weight:900;
-box-shadow:0 0 20px #00eaff22
+  display:inline-flex;
+  align-items:center;
+
+  padding:9px 15px;
+
+  border-radius:30px;
+
+  background:
+    rgba(3,28,55,.82);
+
+  border:
+    1px solid rgba(0,234,255,.55);
+
+  color:#ffe600;
+
+  font-weight:900;
+
+  box-shadow:
+    0 0 25px rgba(0,234,255,.15);
+
+  backdrop-filter:
+    blur(10px);
 }
 
 .hero h1{
-font-size:clamp(42px,7vw,78px);
-line-height:1;
-margin:20px 0;
-text-shadow:0 0 30px #00eaff88
+  margin:22px 0;
+
+  font-size:
+    clamp(44px,7vw,82px);
+
+  line-height:.98;
+
+  letter-spacing:-2px;
+
+  text-shadow:
+    0 0 25px rgba(0,234,255,.4);
 }
 
-.hero h1 span{color:#00eaff}
+.hero h1 span{
+  color:#00eaff;
+
+  text-shadow:
+    0 0 12px #00eaff,
+    0 0 35px #00eaff,
+    0 0 70px #008cff;
+}
 
 .lead{
-font-size:19px;
-line-height:1.75;
-color:#e9fcff;
-text-shadow:0 2px 8px #001b2d;
-max-width:720px
+  max-width:720px;
+
+  color:#ecfcff;
+
+  font-size:19px;
+
+  line-height:1.75;
+
+  text-shadow:
+    0 3px 12px #001b2d;
 }
 
 .buttons{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-margin-top:25px
+  display:flex;
+  flex-wrap:wrap;
+
+  gap:12px;
+
+  margin-top:27px;
 }
 
 .btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-border:0;
-cursor:pointer;
-padding:13px 18px;
-border-radius:14px;
-font-weight:900;
-transition:.2s;
-min-height:46px
+  position:relative;
+
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  min-height:48px;
+
+  padding:13px 19px;
+
+  border:0;
+  border-radius:14px;
+
+  cursor:pointer;
+
+  font-weight:900;
+
+  transition:
+    .25s ease;
+
+  overflow:hidden;
+}
+
+.btn::after{
+  content:"";
+
+  position:absolute;
+
+  top:-100%;
+  left:-30%;
+
+  width:25%;
+  height:300%;
+
+  background:
+    rgba(255,255,255,.45);
+
+  transform:
+    rotate(25deg);
+
+  transition:
+    .6s;
+}
+
+.btn:hover::after{
+  left:120%;
 }
 
 .btn:hover{
-transform:translateY(-3px) scale(1.03)
+  transform:
+    translateY(-4px)
+    scale(1.03);
 }
 
 .primary{
-background:#00c9f2;
-color:#00131a;
-box-shadow:0 0 25px #00eaff88
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #007cff
+    );
+
+  color:#00131a;
+
+  box-shadow:
+    0 0 25px rgba(0,234,255,.5);
 }
 
 .yellow{
-background:#ffe600;
-color:#181500;
-box-shadow:0 0 25px #ffe60066
+  background:#ffe600;
+
+  color:#181500;
+
+  box-shadow:
+    0 0 25px rgba(255,230,0,.35);
 }
 
-/* CARDS */
+/* =========================================================
+   3D TEACHER CARD
+   ========================================================= */
 
 .neon-card{
-background:linear-gradient(145deg,#041a31e8,#020b19e8);
-border:1px solid #00eaff66;
-border-radius:24px;
-box-shadow:
-0 18px 55px #0009,
-0 0 30px #00eaff22;
-backdrop-filter:blur(10px)
+  background:
+    linear-gradient(
+      145deg,
+      rgba(4,26,49,.9),
+      rgba(2,11,25,.9)
+    );
+
+  border:
+    1px solid rgba(0,234,255,.38);
+
+  border-radius:25px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.6),
+    0 0 35px rgba(0,234,255,.12);
+
+  backdrop-filter:
+    blur(15px);
+
+  transform-style:preserve-3d;
 }
 
 .teacher{
-padding:32px;
-text-align:center;
-transform:perspective(900px) rotateY(-5deg)
+  position:relative;
+
+  padding:38px 28px;
+
+  text-align:center;
+
+  transform:
+    perspective(1000px)
+    rotateY(-7deg)
+    rotateX(3deg);
+
+  transition:
+    transform .15s ease;
+}
+
+.teacher::before{
+  content:"";
+
+  position:absolute;
+  inset:1px;
+
+  border-radius:24px;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(0,234,255,.12),
+      transparent 70%
+    );
+
+  pointer-events:none;
 }
 
 .avatar{
-font-size:95px;
-filter:drop-shadow(0 0 25px #00eaff);
-animation:teacherFloat 4s ease-in-out infinite
+  position:relative;
+
+  font-size:105px;
+
+  transform:translateZ(55px);
+
+  filter:
+    drop-shadow(
+      0 0 28px #00eaff
+    );
+
+  animation:
+    teacherFloat 4s ease-in-out infinite;
 }
 
 @keyframes teacherFloat{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
+  0%,100%{
+    transform:
+      translateZ(55px)
+      translateY(0)
+      rotateZ(0);
+  }
+
+  50%{
+    transform:
+      translateZ(80px)
+      translateY(-15px)
+      rotateZ(2deg);
+  }
 }
 
-.teacher h2{font-size:28px}
+.teacher h2{
+  margin:17px 0 8px;
+
+  font-size:29px;
+
+  transform:
+    translateZ(40px);
+}
+
+.muted{
+  color:#bfe8f3;
+}
 
 .pill{
-display:inline-block;
-margin:4px;
-padding:8px 11px;
-border-radius:20px;
-background:#0a2d50cc;
-border:1px solid #00eaff44
+  display:inline-block;
+
+  margin:4px;
+
+  padding:8px 11px;
+
+  border-radius:20px;
+
+  background:
+    rgba(10,45,80,.8);
+
+  border:
+    1px solid rgba(0,234,255,.3);
+
+  font-size:13px;
 }
 
-/* SECTIONS */
+/* =========================================================
+   SECTIONS
+   ========================================================= */
 
-.section{padding:55px 0}
+.section{
+  padding:65px 0;
+}
 
 .section-title{
-text-align:center;
-margin-bottom:28px
+  margin-bottom:32px;
+  text-align:center;
 }
 
 .section-title h2{
-font-size:34px;
-margin:13px 0
+  margin:14px 0;
+
+  font-size:36px;
+
+  text-shadow:
+    0 0 20px rgba(0,234,255,.25);
 }
 
-.muted{color:#c1eaf5}
+/* =========================================================
+   FEATURES
+   ========================================================= */
 
 .feature-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:17px;
 }
 
 .feature{
-padding:23px;
-text-align:center;
-min-height:150px
+  min-height:165px;
+
+  padding:25px;
+
+  text-align:center;
+
+  transition:
+    .3s ease;
+}
+
+.feature:hover{
+  transform:
+    translateY(-10px)
+    rotateX(3deg);
+
+  box-shadow:
+    0 25px 55px rgba(0,0,0,.6),
+    0 0 35px rgba(0,234,255,.2);
 }
 
 .feature b{
-display:block;
-color:#ffe600;
-font-size:20px;
-margin-bottom:10px
+  display:block;
+
+  margin-bottom:11px;
+
+  color:#ffe600;
+
+  font-size:20px;
 }
 
 .feature span{
-line-height:1.6;
-color:#d9f7ff
+  color:#d9f7ff;
+
+  line-height:1.6;
 }
 
-.info-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:16px
-}
-
-.info-card{
-padding:25px;
-text-align:center
-}
-
-.info-icon{
-font-size:50px;
-filter:drop-shadow(0 0 18px #00eaff)
-}
-
-.info-card h3{color:#ffe600}
-
-.info-card p{
-line-height:1.6;
-color:#d9f7ff
-}
+/* =========================================================
+   CLASSES
+   ========================================================= */
 
 .classes{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:16px
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
 }
 
 .class-card{
-padding:28px;
-transition:.2s
+  padding:29px;
+
+  transition:
+    .3s ease;
 }
 
 .class-card:hover{
-transform:translateY(-7px);
-box-shadow:
-0 25px 60px #000b,
-0 0 35px #00eaff44
+  transform:
+    translateY(-9px)
+    perspective(800px)
+    rotateX(2deg);
+
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.7),
+    0 0 40px rgba(0,234,255,.2);
 }
 
 .class-card h3{
-color:#ffe600;
-font-size:25px
+  margin-bottom:13px;
+
+  color:#ffe600;
+
+  font-size:25px;
 }
 
 .class-card p{
-line-height:1.7;
-color:#d9f7ff
+  margin-bottom:20px;
+
+  color:#d9f7ff;
+
+  line-height:1.7;
 }
 
+/* =========================================================
+   INFO
+   ========================================================= */
+
+.info-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+}
+
+.info-card{
+  padding:28px;
+
+  text-align:center;
+
+  transition:
+    .3s ease;
+}
+
+.info-card:hover{
+  transform:
+    translateY(-8px);
+}
+
+.info-icon{
+  font-size:52px;
+
+  filter:
+    drop-shadow(
+      0 0 18px #00eaff
+    );
+}
+
+.info-card h3{
+  margin:12px 0;
+
+  color:#ffe600;
+}
+
+.info-card p{
+  color:#d9f7ff;
+
+  line-height:1.6;
+}
+
+/* =========================================================
+   PARENT SPACE
+   ========================================================= */
+
 .parent-preview{
-position:relative;
-overflow:hidden;
-min-height:420px;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:25px;
-background:
-radial-gradient(
-circle at center,
-#075b91,
-#032b4d 45%,
-#020f20 75%,
-#010711);
-border:1px solid #00eaff88;
-box-shadow:
-0 25px 70px #000c,
-0 0 50px #00eaff33
+  position:relative;
+
+  min-height:440px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  overflow:hidden;
+
+  padding:25px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #08669c,
+      #032d50 42%,
+      #020f20 75%,
+      #010711
+    );
+}
+
+.parent-preview::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 20%,
+      rgba(0,0,0,.5) 100%
+    );
 }
 
 .family{
-position:absolute;
-left:50%;
-top:45%;
-transform:translate(-50%,-50%);
-display:flex;
-align-items:flex-end;
-gap:25px;
-font-size:65px;
-animation:familyMove 5s ease-in-out infinite;
-filter:drop-shadow(0 0 20px #00eaff)
+  position:absolute;
+
+  left:50%;
+  top:43%;
+
+  transform:
+    translate(-50%,-50%);
+
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:25px;
+
+  font-size:70px;
+
+  filter:
+    drop-shadow(
+      0 0 22px #00eaff
+    );
+
+  animation:
+    familyMove 5s ease-in-out infinite;
 }
 
 @keyframes familyMove{
-0%,100%{
-transform:translate(-50%,-50%) translateY(0) rotateY(-5deg)
-}
-50%{
-transform:translate(-50%,-55%) translateY(-15px) rotateY(8deg)
-}
+  0%,100%{
+    transform:
+      translate(-50%,-50%)
+      translateY(0)
+      rotateY(-6deg);
+  }
+
+  50%{
+    transform:
+      translate(-50%,-55%)
+      translateY(-15px)
+      rotateY(8deg);
+  }
 }
 
 .family-person{
-animation:personMove 3s ease-in-out infinite
+  animation:
+    personMove 3s ease-in-out infinite;
 }
 
-.family-person:nth-child(2){animation-delay:-1s}
-.family-person:nth-child(3){animation-delay:-2s}
+.family-person:nth-child(2){
+  animation-delay:-1s;
+}
+
+.family-person:nth-child(3){
+  animation-delay:-2s;
+}
 
 @keyframes personMove{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-12px)}
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
 }
 
 .parent-content{
-position:relative;
-z-index:5;
-text-align:center;
-width:min(700px,92%);
-padding:32px 25px;
-background:
-linear-gradient(145deg,#02182bdd,#020a17dd);
-border:1px solid #00eaff66;
-border-radius:25px;
-box-shadow:0 20px 60px #000b;
-backdrop-filter:blur(9px)
+  position:relative;
+  z-index:5;
+
+  width:min(700px,92%);
+
+  padding:34px 27px;
+
+  text-align:center;
+
+  background:
+    rgba(2,24,45,.84);
+
+  border:
+    1px solid rgba(0,234,255,.4);
+
+  border-radius:26px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.7);
+
+  backdrop-filter:
+    blur(12px);
 }
 
 .parent-content .icon{
-font-size:58px;
-animation:iconMove 3s ease-in-out infinite
+  font-size:60px;
+
+  animation:
+    iconMove 3s ease-in-out infinite;
 }
 
 @keyframes iconMove{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-9px) scale(1.08)}
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:
+      translateY(-9px)
+      scale(1.08);
+  }
 }
 
 .parent-content h2{
-color:#00eaff;
-font-size:32px;
-text-shadow:0 0 20px #00eaff88
+  margin:10px 0 15px;
+
+  color:#00eaff;
+
+  font-size:33px;
+
+  text-shadow:
+    0 0 20px #00eaff88;
 }
 
 .parent-content p{
-line-height:1.7;
-color:#d9f7ff
+  color:#d9f7ff;
+
+  line-height:1.7;
 }
 
 .parent-button{
-font-size:17px;
-padding:14px 25px
+  font-size:17px;
 }
 
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta{
+  position:relative;
+
+  padding:50px 25px;
+
+  text-align:center;
+
+  overflow:hidden;
+}
+
+.cta::before{
+  content:"";
+
+  position:absolute;
+
+  width:350px;
+  height:350px;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,234,255,.2),
+      transparent 70%
+    );
+
+  animation:
+    ctaPulse 4s ease-in-out infinite;
+}
+
+@keyframes ctaPulse{
+  0%,100%{
+    transform:
+      translate(-50%,-50%)
+      scale(.8);
+  }
+
+  50%{
+    transform:
+      translate(-50%,-50%)
+      scale(1.25);
+  }
+}
+
+.cta > *{
+  position:relative;
+  z-index:2;
+}
+
+.cta h2{
+  margin:18px 0;
+
+  font-size:
+    clamp(27px,5vw,38px);
+}
+
+.cta p{
+  font-size:17px;
+
+  line-height:1.7;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
 .footer{
-margin-top:35px;
-padding:35px 0;
-text-align:center;
-border-top:1px solid #00eaff33;
-color:#9dc7d5
+  margin-top:35px;
+
+  padding:35px 0;
+
+  text-align:center;
+
+  color:#9dc7d5;
+
+  border-top:
+    1px solid rgba(0,234,255,.2);
 }
 
 .site-copyright{
-margin-top:30px;
-padding:18px 12px;
-text-align:center;
-color:#9dc7d5;
-font-size:14px;
-border-top:1px solid #00eaff33;
-background:linear-gradient(180deg,transparent,#020b19aa);
-letter-spacing:.2px
+  padding:18px 12px;
+
+  text-align:center;
+
+  color:#8fb8c5;
+
+  font-size:13px;
+
+  border-top:
+    1px solid rgba(0,234,255,.2);
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(2,11,25,.75)
+    );
 }
 
-/* MOBILE */
-
-.mobile-nav{display:none}
-
-@media(max-width:850px){
-
-.hero-grid,
-.classes,
-.info-grid{
-grid-template-columns:1fr
-}
-
-.feature-grid{
-grid-template-columns:repeat(2,1fr)
-}
-
-.teacher{transform:none}
-
-.hero{padding-top:50px}
-
-}
-
-@media(max-width:520px){
-
-body{padding-bottom:74px}
-
-.wrap{
-width:min(100% - 20px,480px)
-}
-
-.nav{
-padding:10px 0 8px;
-gap:8px
-}
-
-.brand{
-font-size:15px;
-white-space:nowrap
-}
-
-.navlinks{
-width:100%;
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:5px
-}
-
-.navlinks a{
-min-height:42px;
-padding:7px 4px;
-border-radius:11px;
-font-size:10px;
-text-align:center;
-display:flex;
-align-items:center;
-justify-content:center;
-line-height:1.15
-}
-
-.hero{
-min-height:auto;
-padding:38px 0 28px
-}
-
-.hero h1{
-font-size:clamp(34px,10vw,44px);
-line-height:1.08;
-margin:15px 0
-}
-
-.lead{
-font-size:16px;
-line-height:1.55
-}
-
-.badge{
-font-size:12px;
-padding:8px 11px
-}
-
-.buttons{
-gap:9px;
-margin-top:18px
-}
-
-.btn{
-width:100%;
-min-height:48px;
-padding:12px 14px
-}
-
-.teacher{
-padding:24px 15px
-}
-
-.avatar{font-size:70px}
-
-.teacher h2{
-font-size:23px;
-margin:12px 0 8px
-}
-
-.pill{
-font-size:12px;
-padding:7px 9px;
-margin:3px
-}
-
-.section{padding:34px 0}
-
-.section-title{
-margin-bottom:18px
-}
-
-.section-title h2{
-font-size:27px;
-line-height:1.15
-}
-
-.classes,
-.info-grid,
-.feature-grid{
-grid-template-columns:1fr;
-gap:12px
-}
-
-.class-card{padding:20px}
-
-.class-card h3{
-font-size:22px;
-margin-top:0
-}
-
-.class-card p{
-font-size:14px;
-line-height:1.55
-}
-
-.feature{
-min-height:0;
-padding:19px
-}
-
-.info-card{padding:20px}
-
-.info-icon{font-size:42px}
-
-.parent-preview{
-min-height:470px;
-padding:14px
-}
-
-.family{
-font-size:39px;
-gap:4px;
-top:30%
-}
-
-.parent-content{
-width:100%;
-padding:22px 13px
-}
-
-.parent-content .icon{font-size:48px}
-
-.parent-content h2{
-font-size:25px;
-margin:10px 0
-}
-
-.parent-content p{
-font-size:14px;
-line-height:1.55
-}
-
-.parent-button{font-size:15px}
-
-.footer{
-padding:25px 0;
-font-size:13px
-}
-
-.site-copyright{
-font-size:11px;
-padding-bottom:88px
-}
-
-.neon-world .letter{
-font-size:38px!important;
-opacity:.65
-}
-
-.grid-floor{opacity:.35}
+/* =========================================================
+   MOBILE NAV
+   ========================================================= */
 
 .mobile-nav{
-position:fixed;
-display:grid;
-grid-template-columns:repeat(4,1fr);
-left:0;
-right:0;
-bottom:0;
-z-index:100;
-height:68px;
-padding:7px 8px calc(7px + env(safe-area-inset-bottom));
-background:#02152df5;
-border-top:1px solid #00eaff66;
-backdrop-filter:blur(18px);
-box-shadow:0 -10px 35px #000b
+  display:none;
 }
 
-.mobile-nav a{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-gap:2px;
-border-radius:12px;
-font-size:10px;
-color:#bdebf5
+/* =========================================================
+   REVEAL
+   ========================================================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
 }
 
-.mobile-nav a:first-child{
-background:#063455;
-color:#fff
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
-.mobile-nav .mi{
-font-size:21px;
-line-height:1
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media(max-width:950px){
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .teacher{
+    max-width:620px;
+    width:100%;
+    margin:auto;
+  }
+
+  .feature-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .classes{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid{
+    grid-template-columns:
+      repeat(3,1fr);
+  }
 }
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:600px){
+
+  body{
+    padding-bottom:74px;
+  }
+
+  .wrap{
+    width:
+      min(
+        calc(100% - 20px),
+        480px
+      );
+  }
+
+  .top{
+    position:sticky;
+  }
+
+  .nav{
+    min-height:auto;
+
+    padding:
+      9px 0;
+
+    flex-direction:column;
+
+    gap:8px;
+  }
+
+  .brand{
+    width:100%;
+
+    text-align:center;
+
+    font-size:15px;
+  }
+
+  .navlinks{
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+      repeat(4,1fr);
+
+    gap:5px;
+  }
+
+  .navlinks a{
+    min-height:41px;
+
+    padding:
+      6px 3px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    font-size:10px;
+  }
+
+  .hero{
+    min-height:auto;
+
+    padding:
+      45px 0
+      30px;
+  }
+
+  .hero h1{
+    font-size:
+      clamp(
+        35px,
+        10vw,
+        46px
+      );
+
+    letter-spacing:-1px;
+  }
+
+  .lead{
+    font-size:16px;
+
+    line-height:1.6;
+  }
+
+  .buttons{
+    margin-top:19px;
+  }
+
+  .btn{
+    width:100%;
+
+    min-height:49px;
+  }
+
+  .teacher{
+    padding:27px 15px;
+
+    transform:none !important;
+  }
+
+  .avatar{
+    font-size:75px;
+  }
+
+  .teacher h2{
+    font-size:24px;
+  }
+
+  .section{
+    padding:
+      40px 0;
+  }
+
+  .section-title{
+    margin-bottom:21px;
+  }
+
+  .section-title h2{
+    font-size:28px;
+  }
+
+  .feature-grid,
+  .classes,
+  .info-grid{
+    grid-template-columns:1fr;
+
+    gap:13px;
+  }
+
+  .feature{
+    min-height:0;
+
+    padding:20px;
+  }
+
+  .class-card{
+    padding:22px;
+  }
+
+  .info-card{
+    padding:22px;
+  }
+
+  .parent-preview{
+    min-height:490px;
+
+    padding:14px;
+  }
+
+  .family{
+    top:29%;
+
+    gap:5px;
+
+    font-size:43px;
+  }
+
+  .parent-content{
+    width:100%;
+
+    padding:
+      24px 14px;
+  }
+
+  .parent-content .icon{
+    font-size:50px;
+  }
+
+  .parent-content h2{
+    font-size:26px;
+  }
+
+  .parent-content p{
+    font-size:14px;
+
+    line-height:1.6;
+  }
+
+  .pill{
+    font-size:11px;
+
+    padding:
+      7px 8px;
+  }
+
+  .cta{
+    padding:
+      38px 17px;
+  }
+
+  .cta h2{
+    font-size:27px;
+  }
+
+  .cta p{
+    font-size:14px;
+  }
+
+  .footer{
+    padding:
+      27px 0;
+
+    font-size:13px;
+  }
+
+  .site-copyright{
+    font-size:11px;
+
+    padding-bottom:92px;
+  }
+
+  /* mobile floating letters */
+
+  .letter{
+    width:45px;
+    height:45px;
+
+    font-size:38px !important;
+
+    opacity:.55;
+  }
+
+  .letter:nth-child(n+7){
+    display:none;
+  }
+
+  .grid-floor{
+    height:55%;
+
+    bottom:-18%;
+
+    opacity:.38;
+
+    background-size:
+      45px 45px;
+  }
+
+  /* mobile navigation */
+
+  .mobile-nav{
+    position:fixed;
+
+    display:grid;
+
+    grid-template-columns:
+      repeat(4,1fr);
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:200;
+
+    height:70px;
+
+    padding:
+      7px 8px
+      calc(
+        7px +
+        env(safe-area-inset-bottom)
+      );
+
+    background:
+      rgba(2,21,45,.94);
+
+    border-top:
+      1px solid rgba(0,234,255,.4);
+
+    backdrop-filter:
+      blur(18px);
+
+    box-shadow:
+      0 -10px 35px rgba(0,0,0,.65);
+  }
+
+  .mobile-nav a{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:2px;
+
+    border-radius:12px;
+
+    color:#bdebf5;
+
+    font-size:10px;
+  }
+
+  .mobile-nav a:first-child{
+    background:#063455;
+
+    color:#fff;
+
+    box-shadow:
+      inset 0 0 15px rgba(0,234,255,.12);
+  }
+
+  .mobile-nav .mi{
+    font-size:21px;
+
+    line-height:1;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+  }
 }
 </style>
-
 </head>
 
 <body>
 
+<!-- =======================================================
+     FUTURISTIC BACKGROUND
+     ======================================================= -->
+
 <div class="neon-world">
 
-<div class="letters">
-<span class="letter">A</span>
-<span class="letter">B</span>
-<span class="letter">C</span>
-<span class="letter">D</span>
-<span class="letter">E</span>
-<span class="letter">F</span>
-<span class="letter">G</span>
-<span class="letter">H</span>
-<span class="letter">I</span>
-<span class="letter">J</span>
+  <div class="letters">
+
+    <span class="letter"
+      style="left:4%;top:15%;--duration:8s;--delay:-1s">
+      A
+    </span>
+
+    <span class="letter"
+      style="left:17%;top:62%;--duration:10s;--delay:-4s">
+      B
+    </span>
+
+    <span class="letter"
+      style="left:30%;top:11%;--duration:7s;--delay:-2s">
+      C
+    </span>
+
+    <span class="letter"
+      style="left:43%;top:68%;--duration:9s;--delay:-5s">
+      D
+    </span>
+
+    <span class="letter"
+      style="left:55%;top:14%;--duration:8s;--delay:-3s">
+      E
+    </span>
+
+    <span class="letter"
+      style="left:68%;top:57%;--duration:11s;--delay:-6s">
+      F
+    </span>
+
+    <span class="letter"
+      style="left:80%;top:18%;--duration:9s;--delay:-1.5s">
+      G
+    </span>
+
+    <span class="letter"
+      style="left:91%;top:70%;--duration:10s;--delay:-4.5s">
+      H
+    </span>
+
+    <span class="letter"
+      style="left:12%;top:34%;font-size:55px;--duration:8s;--delay:-3.5s">
+      I
+    </span>
+
+    <span class="letter"
+      style="left:74%;top:38%;font-size:55px;--duration:7s;--delay:-2.5s">
+      J
+    </span>
+
+  </div>
+
+  <!-- Floating particles -->
+
+  <div class="particles">
+
+    <i class="particle"
+       style="left:8%;bottom:-10%;--x:30px;--p-duration:8s;--p-delay:-2s"></i>
+
+    <i class="particle"
+       style="left:18%;bottom:-5%;--x:-25px;--p-duration:11s;--p-delay:-5s"></i>
+
+    <i class="particle"
+       style="left:29%;bottom:-10%;--x:40px;--p-duration:9s;--p-delay:-1s"></i>
+
+    <i class="particle"
+       style="left:42%;bottom:-10%;--x:-40px;--p-duration:12s;--p-delay:-7s"></i>
+
+    <i class="particle"
+       style="left:53%;bottom:-10%;--x:25px;--p-duration:8s;--p-delay:-3s"></i>
+
+    <i class="particle"
+       style="left:64%;bottom:-10%;--x:-30px;--p-duration:10s;--p-delay:-6s"></i>
+
+    <i class="particle"
+       style="left:77%;bottom:-10%;--x:45px;--p-duration:9s;--p-delay:-4s"></i>
+
+    <i class="particle"
+       style="left:88%;bottom:-10%;--x:-35px;--p-duration:12s;--p-delay:-8s"></i>
+
+  </div>
+
+  <div class="grid-floor"></div>
+
 </div>
 
-<div class="grid-floor"></div>
 
-</div>
+<!-- =======================================================
+     NAV
+     ======================================================= -->
 
 <header class="top">
 
-<div class="wrap nav">
+  <div class="wrap nav">
 
-<a class="brand" href="index.html">
-⚡ ENGLISH WITH MARIAMI
-</a>
+    <a
+      class="brand"
+      href="index.html"
+    >
+      ⚡ ENGLISH WITH MARIAMI
+    </a>
 
-<nav class="navlinks">
+    <nav class="navlinks">
 
-<a href="academy.html" class="academy-button">
-🎓 ცენტრი
-</a>
+      <a
+        href="academy.html"
+        class="academy-button"
+      >
+        🎓 ცენტრი
+      </a>
 
-<a href="#classes">
-📚 კლასები
-</a>
+      <a href="#classes">
+        📚 კლასები
+      </a>
 
-<a href="#learn">
-🧠 სწავლა
-</a>
+      <a href="#learn">
+        🧠 სწავლა
+      </a>
 
-<a href="#parents">
-👨‍👩‍👧 მშობელი
-</a>
+      <a href="#parents">
+        👨‍👩‍👧 მშობელი
+      </a>
 
-</nav>
+    </nav>
 
-</div>
+  </div>
 
 </header>
 
+
+<!-- =======================================================
+     MAIN
+     ======================================================= -->
+
 <main class="wrap">
+
+
+<!-- HERO -->
 
 <section class="hero reveal">
 
-<div class="hero-grid">
+  <div class="hero-grid">
 
-<div>
+    <div>
 
-<span class="badge">
-🇬🇧 ქართული ↔ English • 2026
-</span>
+      <span class="badge">
+        🇬🇧 ქართული ↔ English • 2026
+      </span>
 
-<h1>
-ინგლისური<br>
-<span>მარტივად და სახალისოდ</span><br>
-ბავშვებისთვის!
-</h1>
+      <h1>
+        ინგლისური
+        <br>
 
-<p class="lead">
-კეთილი იყოს შენი მობრძანება English with Mariami-ში! 🌟<br>
-აქ ბავშვები ინგლისურს სწავლობენ თამაშით,
-საინტერესო დავალებებით, Vocabulary-ით,
-Speaking-ით, Reading-ით, Listening-ით და Quiz-ებით.
-</p>
+        <span>
+          მარტივად და სახალისოდ
+        </span>
 
-<div class="buttons">
+        <br>
 
-<a class="btn primary" href="academy.html">
-🎓 სასწავლო ცენტრში შესვლა →
-</a>
+        ბავშვებისთვის!
+      </h1>
 
-</div>
+      <p class="lead">
+        კეთილი იყოს შენი მობრძანება
+        English with Mariami-ში! 🌟
+        <br>
 
-</div>
+        აქ ბავშვები ინგლისურს სწავლობენ
+        თამაშით, საინტერესო დავალებებით,
+        Vocabulary-ით, Speaking-ით,
+        Reading-ით, Listening-ით და Quiz-ებით.
+      </p>
 
-<div class="neon-card teacher">
+      <div class="buttons">
 
-<div class="avatar">👩‍🏫</div>
+        <a
+          class="btn primary"
+          href="academy.html"
+        >
+          🎓 სასწავლო ცენტრში შესვლა →
+        </a>
 
-<h2>მასწავლებელი მარიამი</h2>
+      </div>
 
-<p class="muted">
-ინგლისურის სამყაროში შენი გზამკვლევი ✨
-</p>
+    </div>
 
-<span class="pill">🧠 Vocabulary</span>
-<span class="pill">🔊 Listening</span>
-<span class="pill">🗣️ Speaking</span>
-<span class="pill">📖 Reading</span>
-<span class="pill">✍️ Grammar</span>
 
-</div>
+    <!-- 3D TEACHER -->
 
-</div>
+    <div
+      class="neon-card teacher"
+      id="teacherCard"
+    >
 
-</section>
+      <div class="avatar">
+        👩‍🏫
+      </div>
 
-<section id="classes" class="section">
+      <h2>
+        მასწავლებელი მარიამი
+      </h2>
 
-<div class="section-title">
+      <p class="muted">
+        ინგლისურის სამყაროში
+        შენი გზამკვლევი ✨
+      </p>
 
-<span class="badge">CLASSROOM</span>
+      <div style="margin-top:15px">
 
-<h2>🎓 სასწავლო კლასები</h2>
+        <span class="pill">
+          🧠 Vocabulary
+        </span>
 
-<p class="muted">
-მე-2, მე-3 და მე-4 კლასის სასწავლო პროგრამები
-</p>
+        <span class="pill">
+          🔊 Listening
+        </span>
 
-</div>
+        <span class="pill">
+          🗣️ Speaking
+        </span>
 
-<div class="classes">
+        <span class="pill">
+          📖 Reading
+        </span>
 
-<div class="neon-card class-card">
+        <span class="pill">
+          ✍️ Grammar
+        </span>
 
-<h3>🌱 მე-2 კლასი</h3>
+      </div>
 
-<p>
-ფერები, ოჯახი, სკოლა, ცხოველები,
-საკვები, სხეულის ნაწილები, რიცხვები
-და მარტივი სიტყვები.
-</p>
+    </div>
 
-<a class="btn primary" href="academy.html#grades">
-კურსის ნახვა →
-</a>
-
-</div>
-
-<div class="neon-card class-card">
-
-<h3>🚀 მე-3 კლასი</h3>
-
-<p>
-ყოველდღიური ცხოვრება, დღეები,
-თვეები, ამინდი, მოქმედებები,
-ქალაქი, Speaking და Reading.
-</p>
-
-<a class="btn primary" href="academy.html#grades">
-კურსის ნახვა →
-</a>
-
-</div>
-
-<div class="neon-card class-card">
-
-<h3>⭐ მე-4 კლასი</h3>
-
-<p>
-Present Simple, კითხვები,
-Prepositions, Reading, Writing,
-Dialogues და Practice.
-</p>
-
-<a class="btn primary" href="academy.html#grades">
-კურსის ნახვა →
-</a>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
-<section id="learn" class="section">
 
-<div class="section-title">
+<!-- CLASSES -->
 
-<span class="badge">LEARN</span>
+<section
+  id="classes"
+  class="section reveal"
+>
 
-<h2>📚 როგორ ვისწავლით?</h2>
+  <div class="section-title">
 
-</div>
+    <span class="badge">
+      CLASSROOM
+    </span>
 
-<div class="feature-grid">
+    <h2>
+      🎓 სასწავლო კლასები
+    </h2>
 
-<div class="neon-card feature">
+    <p class="muted">
+      მე-2, მე-3 და მე-4 კლასის
+      სასწავლო პროგრამები
+    </p>
 
-<b>🧠 Vocabulary</b>
+  </div>
 
-<span>
-ახალი ინგლისური სიტყვები,
-ქართული თარგმანი, გამოთქმა და მაგალითები.
-</span>
 
-</div>
+  <div class="classes">
 
-<div class="neon-card feature">
+    <div class="neon-card class-card">
 
-<b>🔊 Listening</b>
+      <h3>
+        🌱 მე-2 კლასი
+      </h3>
 
-<span>
-მოსმენა, გამეორება და სიტყვების
-სწორად წარმოთქმა.
-</span>
+      <p>
+        ფერები, ოჯახი, სკოლა,
+        ცხოველები, საკვები,
+        სხეულის ნაწილები,
+        რიცხვები და მარტივი სიტყვები.
+      </p>
 
-</div>
+      <a
+        class="btn primary"
+        href="academy.html#grades"
+      >
+        კურსის ნახვა →
+      </a>
 
-<div class="neon-card feature">
+    </div>
 
-<b>🗣️ Speaking</b>
 
-<span>
-მოკლე დიალოგები, ფრაზები
-და საუბრის პრაქტიკა.
-</span>
+    <div class="neon-card class-card">
 
-</div>
+      <h3>
+        🚀 მე-3 კლასი
+      </h3>
 
-<div class="neon-card feature">
+      <p>
+        ყოველდღიური ცხოვრება,
+        დღეები, თვეები, ამინდი,
+        მოქმედებები, ქალაქი,
+        Speaking და Reading.
+      </p>
 
-<b>📝 Quiz</b>
+      <a
+        class="btn primary"
+        href="academy.html#grades"
+      >
+        კურსის ნახვა →
+      </a>
 
-<span>
-საინტერესო ტესტები,
-ქულები და სწავლის პროგრესი.
-</span>
+    </div>
 
-</div>
 
-</div>
+    <div class="neon-card class-card">
 
-</section>
+      <h3>
+        ⭐ მე-4 კლასი
+      </h3>
 
-<section class="section">
+      <p>
+        Present Simple, კითხვები,
+        Prepositions, Reading,
+        Writing, Dialogues
+        და Practice.
+      </p>
 
-<div class="section-title">
+      <a
+        class="btn primary"
+        href="academy.html#grades"
+      >
+        კურსის ნახვა →
+      </a>
 
-<span class="badge">WHY MARIAMI?</span>
+    </div>
 
-<h2>💙 რატომ ჩვენ?</h2>
-
-</div>
-
-<div class="info-grid">
-
-<div class="neon-card info-card">
-
-<div class="info-icon">🎮</div>
-
-<h3>სწავლა თამაშით</h3>
-
-<p>
-ბავშვები სწავლობენ საინტერესო
-და სახალისო სავარჯიშოებით.
-</p>
-
-</div>
-
-<div class="neon-card info-card">
-
-<div class="info-icon">🏆</div>
-
-<h3>პროგრესის კონტროლი</h3>
-
-<p>
-ქულები, Quiz-ები და სწავლის შედეგები
-ერთ სივრცეში.
-</p>
-
-</div>
-
-<div class="neon-card info-card">
-
-<div class="info-icon">👨‍👩‍👧</div>
-
-<h3>ოჯახის ჩართულობა</h3>
-
-<p>
-მშობელს შეუძლია თვალყური ადევნოს
-ბავშვის სწავლის პროცესს.
-</p>
-
-</div>
-
-</div>
+  </div>
 
 </section>
 
-<section id="parents" class="section">
 
-<div class="section-title">
+<!-- LEARNING -->
 
-<span class="badge">FAMILY SPACE</span>
+<section
+  id="learn"
+  class="section reveal"
+>
 
-<h2>👨‍👩‍👧 მშობლის სივრცე</h2>
+  <div class="section-title">
 
-<p class="muted">
-ბავშვის სწავლა და ოჯახი ერთ სივრცეში ❤️
-</p>
+    <span class="badge">
+      LEARN
+    </span>
 
-</div>
+    <h2>
+      📚 როგორ ვისწავლით?
+    </h2>
 
-<div class="parent-preview neon-card">
+  </div>
 
-<div class="family">
 
-<div class="family-person">👨</div>
-<div class="family-person">👩</div>
-<div class="family-person">🧒</div>
+  <div class="feature-grid">
 
-</div>
+    <div class="neon-card feature">
 
-<div class="parent-content">
+      <b>
+        🧠 Vocabulary
+      </b>
 
-<div class="icon">👨‍👩‍👧</div>
+      <span>
+        ახალი ინგლისური სიტყვები,
+        ქართული თარგმანი,
+        გამოთქმა და მაგალითები.
+      </span>
 
-<h2>მშობლის სივრცე</h2>
+    </div>
 
-<p>
-მშობლის დაცულ სივრცეში შეგიძლიათ ნახოთ
-ბავშვის სწავლის პროგრესი, Quiz-ის შედეგები
-და დასვათ კითხვა მასწავლებელთან.
-</p>
 
-<div>
+    <div class="neon-card feature">
 
-<span class="pill">📊 პროგრესი</span>
-<span class="pill">📝 Quiz</span>
-<span class="pill">❓ კითხვები</span>
-<span class="pill">💬 პასუხები</span>
+      <b>
+        🔊 Listening
+      </b>
 
-</div>
+      <span>
+        მოსმენა, გამეორება
+        და სიტყვების სწორად
+        წარმოთქმა.
+      </span>
 
-<div class="buttons" style="justify-content:center">
+    </div>
 
-<a href="academy.html#parents"
-class="btn primary parent-button">
-👨‍👩‍👧 მშობლის სივრცე →
-</a>
 
-</div>
+    <div class="neon-card feature">
 
-</div>
+      <b>
+        🗣️ Speaking
+      </b>
 
-</div>
+      <span>
+        მოკლე დიალოგები,
+        ფრაზები და საუბრის
+        პრაქტიკა.
+      </span>
+
+    </div>
+
+
+    <div class="neon-card feature">
+
+      <b>
+        📝 Quiz
+      </b>
+
+      <span>
+        საინტერესო ტესტები,
+        ქულები და სწავლის
+        პროგრესი.
+      </span>
+
+    </div>
+
+  </div>
 
 </section>
 
-<section class="section">
 
-<div class="neon-card"
-style="padding:45px 25px;text-align:center">
+<!-- WHY -->
 
-<span class="badge">ENGLISH ACADEMY</span>
+<section class="section reveal">
 
-<h2 style="font-size:36px;margin:18px 0">
-🚀 მზად ხარ ინგლისურის სამყაროში შესასვლელად?
-</h2>
+  <div class="section-title">
 
-<p class="muted"
-style="font-size:17px;line-height:1.7">
+    <span class="badge">
+      WHY MARIAMI?
+    </span>
 
-გადადით სასწავლო ცენტრში,
-აირჩიეთ კლასი და დაიწყეთ სწავლა.
+    <h2>
+      💙 რატომ ჩვენ?
+    </h2>
 
-</p>
+  </div>
 
-<div class="buttons"
-style="justify-content:center">
 
-<a class="btn primary" href="academy.html">
-🎓 სასწავლო ცენტრში შესვლა
-</a>
+  <div class="info-grid">
 
-</div>
+    <div class="neon-card info-card">
 
-</div>
+      <div class="info-icon">
+        🎮
+      </div>
+
+      <h3>
+        სწავლა თამაშით
+      </h3>
+
+      <p>
+        ბავშვები სწავლობენ
+        საინტერესო და სახალისო
+        სავარჯიშოებით.
+      </p>
+
+    </div>
+
+
+    <div class="neon-card info-card">
+
+      <div class="info-icon">
+        🏆
+      </div>
+
+      <h3>
+        პროგრესის კონტროლი
+      </h3>
+
+      <p>
+        ქულები, Quiz-ები
+        და სწავლის შედეგები
+        ერთ სივრცეში.
+      </p>
+
+    </div>
+
+
+    <div class="neon-card info-card">
+
+      <div class="info-icon">
+        👨‍👩‍👧
+      </div>
+
+      <h3>
+        ოჯახის ჩართულობა
+      </h3>
+
+      <p>
+        მშობელს შეუძლია
+        თვალყური ადევნოს
+        ბავშვის სწავლის პროცესს.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PARENTS -->
+
+<section
+  id="parents"
+  class="section reveal"
+>
+
+  <div class="section-title">
+
+    <span class="badge">
+      FAMILY SPACE
+    </span>
+
+    <h2>
+      👨‍👩‍👧 მშობლის სივრცე
+    </h2>
+
+    <p class="muted">
+      ბავშვის სწავლა და ოჯახი
+      ერთ სივრცეში ❤️
+    </p>
+
+  </div>
+
+
+  <div class="parent-preview neon-card">
+
+    <div class="family">
+
+      <div class="family-person">
+        👨
+      </div>
+
+      <div class="family-person">
+        👩
+      </div>
+
+      <div class="family-person">
+        🧒
+      </div>
+
+    </div>
+
+
+    <div class="parent-content">
+
+      <div class="icon">
+        👨‍👩‍👧
+      </div>
+
+      <h2>
+        მშობლის სივრცე
+      </h2>
+
+      <p>
+        მშობლის დაცულ სივრცეში
+        შეგიძლიათ ნახოთ ბავშვის
+        სწავლის პროგრესი,
+        Quiz-ის შედეგები და
+        დასვათ კითხვა მასწავლებელთან.
+      </p>
+
+      <div style="margin-top:15px">
+
+        <span class="pill">
+          📊 პროგრესი
+        </span>
+
+        <span class="pill">
+          📝 Quiz
+        </span>
+
+        <span class="pill">
+          ❓ კითხვები
+        </span>
+
+        <span class="pill">
+          💬 პასუხები
+        </span>
+
+      </div>
+
+      <div
+        class="buttons"
+        style="justify-content:center"
+      >
+
+        <a
+          href="academy.html#parents"
+          class="btn primary parent-button"
+        >
+          👨‍👩‍👧 მშობლის სივრცე →
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="section reveal">
+
+  <div class="neon-card cta">
+
+    <span class="badge">
+      ENGLISH ACADEMY
+    </span>
+
+    <h2>
+      🚀 მზად ხარ ინგლისურის
+      სამყაროში შესასვლელად?
+    </h2>
+
+    <p class="muted">
+      გადადი სასწავლო ცენტრში,
+      აირჩიე კლასი და დაიწყე სწავლა.
+    </p>
+
+    <div
+      class="buttons"
+      style="justify-content:center"
+    >
+
+      <a
+        class="btn primary"
+        href="academy.html"
+      >
+        🎓 სასწავლო ცენტრში შესვლა
+      </a>
+
+    </div>
+
+  </div>
 
 </section>
 
 </main>
 
+
+<!-- FOOTER -->
+
 <footer class="footer">
 
-<div class="wrap">
-⚡ English with Mariami • English Academy • სწავლა, თამაში და პროგრესი ❤️
-</div>
+  <div class="wrap">
+    ⚡ English with Mariami •
+    English Academy •
+    სწავლა, თამაში და პროგრესი ❤️
+  </div>
 
 </footer>
 
-<nav class="mobile-nav" aria-label="მობილური მენიუ">
 
-<a href="index.html">
-<span class="mi">🏠</span>
-მთავარი
-</a>
+<div class="site-copyright">
 
-<a href="academy.html#grades">
-<span class="mi">📚</span>
-კლასები
-</a>
+  © 2026 English with Mariami —
+  ყველა უფლება დაცულია •
+  Developed by btcgamer
 
-<a href="academy.html">
-<span class="mi">🎓</span>
-ცენტრი
-</a>
+</div>
 
-<a href="academy.html#parents">
-<span class="mi">👤</span>
-პროფილი
-</a>
+
+<!-- MOBILE NAV -->
+
+<nav
+  class="mobile-nav"
+  aria-label="მობილური მენიუ"
+>
+
+  <a href="index.html">
+
+    <span class="mi">
+      🏠
+    </span>
+
+    მთავარი
+
+  </a>
+
+
+  <a href="academy.html#grades">
+
+    <span class="mi">
+      📚
+    </span>
+
+    კლასები
+
+  </a>
+
+
+  <a href="academy.html">
+
+    <span class="mi">
+      🎓
+    </span>
+
+    ცენტრი
+
+  </a>
+
+
+  <a href="academy.html#parents">
+
+    <span class="mi">
+      👤
+    </span>
+
+    პროფილი
+
+  </a>
 
 </nav>
 
-<footer class="site-copyright">
-© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
-</footer>
+
+<script>
+/* =========================================================
+   INTERACTIVE 3D EFFECTS
+   ========================================================= */
+
+(function(){
+
+  "use strict";
+
+  /* -------------------------------------------------------
+     SCROLL REVEAL
+     ------------------------------------------------------- */
+
+  const revealItems =
+    document.querySelectorAll(".reveal");
+
+  if("IntersectionObserver" in window){
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold:.12
+        }
+      );
+
+    revealItems.forEach(
+      element =>
+        observer.observe(element)
+    );
+
+  }else{
+
+    revealItems.forEach(
+      element =>
+        element.classList.add("visible")
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     3D TEACHER MOUSE PARALLAX
+     ------------------------------------------------------- */
+
+  const teacher =
+    document.getElementById(
+      "teacherCard"
+    );
+
+  const canHover =
+    window.matchMedia(
+      "(hover:hover)"
+    ).matches;
+
+  if(
+    teacher &&
+    canHover
+  ){
+
+    let frame = null;
+
+    document.addEventListener(
+      "mousemove",
+      event => {
+
+        if(frame) return;
+
+        frame =
+          requestAnimationFrame(
+            () => {
+
+              const x =
+                event.clientX /
+                window.innerWidth -
+                .5;
+
+              const y =
+                event.clientY /
+                window.innerHeight -
+                .5;
+
+              const rotateY =
+                x * 12;
+
+              const rotateX =
+                y * -8;
+
+              teacher.style.transform =
+                `
+                perspective(1000px)
+                rotateY(${rotateY}deg)
+                rotateX(${rotateX}deg)
+                translateZ(8px)
+                `;
+
+              frame = null;
+
+            }
+          );
+
+      }
+    );
+
+    teacher.addEventListener(
+      "mouseleave",
+      () => {
+
+        teacher.style.transform =
+          `
+          perspective(1000px)
+          rotateY(-7deg)
+          rotateX(3deg)
+          `;
+
+      }
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     FLOATING LETTER MOUSE PARALLAX
+     ------------------------------------------------------- */
+
+  const letters =
+    document.querySelectorAll(
+      ".letter"
+    );
+
+  if(
+    canHover &&
+    letters.length
+  ){
+
+    let frame = null;
+
+    document.addEventListener(
+      "mousemove",
+      event => {
+
+        if(frame) return;
+
+        frame =
+          requestAnimationFrame(
+            () => {
+
+              const x =
+                event.clientX /
+                window.innerWidth -
+                .5;
+
+              const y =
+                event.clientY /
+                window.innerHeight -
+                .5;
+
+              letters.forEach(
+                (letter,index) => {
+
+                  const depth =
+                    (index % 5 + 1) * 3;
+
+                  const moveX =
+                    x * depth * 5;
+
+                  const moveY =
+                    y * depth * 4;
+
+                  letter.style.marginLeft =
+                    moveX + "px";
+
+                  letter.style.marginTop =
+                    moveY + "px";
+
+                }
+              );
+
+              frame = null;
+
+            }
+          );
+
+      }
+    );
+
+  }
+
+
+  /* -------------------------------------------------------
+     SMOOTH ACTIVE MOBILE NAV
+     ------------------------------------------------------- */
+
+  const mobileLinks =
+    document.querySelectorAll(
+      ".mobile-nav a"
+    );
+
+  mobileLinks.forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        mobileLinks.forEach(
+          item =>
+            item.style.background =
+              "transparent"
+        );
+
+        link.style.background =
+          "#063455";
+
+      }
+    );
+
+  });
+
+
+  /* -------------------------------------------------------
+     PERFORMANCE:
+     pause heavy background animation
+     when page is hidden
+     ------------------------------------------------------- */
+
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+
+      const world =
+        document.querySelector(
+          ".neon-world"
+        );
+
+      if(!world) return;
+
+      if(document.hidden){
+
+        world.style.animationPlayState =
+          "paused";
+
+      }else{
+
+        world.style.animationPlayState =
+          "running";
+
+      }
+
+    }
+  );
+
+})();
+</script>
 
 </body>
 </html>
