@@ -1,827 +1,1340 @@
 <!DOCTYPE html>
-
 <html lang="ka">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>English with Mariami — Academy</title>
+  <title>English with Mariami — Holographic Academy</title>
 
   <!-- Supabase -->
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script src="config.js"></script>
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root{
+      --cyan:#00eaff;
+      --blue:#008cff;
+      --purple:#8b5cff;
+      --pink:#ff36d9;
+      --yellow:#ffe600;
+      --dark:#010712;
+      --glass:rgba(3,18,39,.62);
+      --line:rgba(0,234,255,.35);
     }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      font-family: Arial, "Noto Sans Georgian", sans-serif;
-      color: #fff;
-      background: #010712;
+    html{
+      scroll-behavior:smooth;
+      -webkit-text-size-adjust:100%;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    body{
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:Arial,"Noto Sans Georgian",sans-serif;
+      color:white;
+      background:#010712;
+      perspective:1200px;
     }
 
-    button,
-    a {
-      touch-action: manipulation;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    .wrap {
-      width: min(1250px, calc(100% - 28px));
-      margin: auto;
+    button,a{
+      touch-action:manipulation;
+    }
+
+    .wrap{
+      width:min(1250px,calc(100% - 28px));
+      margin:auto;
     }
 
     /* =========================================================
-       BACKGROUND
+       FUTURISTIC BACKGROUND
     ========================================================= */
 
-    .neon-world {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      overflow: hidden;
+    .space{
+      position:fixed;
+      inset:0;
+      z-index:-20;
+      overflow:hidden;
       background:
-        radial-gradient(
-          circle at 50% 45%,
-          #eaffff 0,
-          #d9faff 18%,
-          #9bd9f5 42%,
-          #2a6f9b 72%,
-          #020713 100%
-        );
+        radial-gradient(circle at 50% 35%,#123c68 0,#061a35 28%,#020918 58%,#00030a 100%);
     }
 
-    .grid-floor {
-      position: absolute;
-      left: -20%;
-      right: -20%;
-      bottom: -20%;
-      height: 62%;
-      transform: perspective(450px) rotateX(62deg);
+    .space::before{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      background:
+        radial-gradient(circle at 20% 30%,rgba(0,234,255,.20),transparent 25%),
+        radial-gradient(circle at 80% 20%,rgba(139,92,255,.18),transparent 25%),
+        radial-gradient(circle at 55% 85%,rgba(255,54,217,.12),transparent 25%);
+      animation:universe 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes universe{
+      from{transform:scale(1) rotate(0deg)}
+      to{transform:scale(1.12) rotate(2deg)}
+    }
+
+    .stars{
+      position:absolute;
+      inset:0;
       background-image:
-        linear-gradient(#00eaff35 1px, transparent 1px),
-        linear-gradient(90deg, #00eaff35 1px, transparent 1px);
-      background-size: 55px 55px;
-      mask-image: linear-gradient(to top, black, transparent);
-      -webkit-mask-image: linear-gradient(to top, black, transparent);
+        radial-gradient(circle,#fff 1px,transparent 1.5px),
+        radial-gradient(circle,#00eaff 1px,transparent 1.5px),
+        radial-gradient(circle,#fff 1px,transparent 1.5px);
+      background-size:95px 95px,145px 145px,210px 210px;
+      background-position:20px 10px,70px 40px,130px 90px;
+      opacity:.5;
+      animation:starsMove 35s linear infinite;
     }
 
-    .letters {
-      position: absolute;
-      inset: 0;
+    @keyframes starsMove{
+      to{background-position:500px 800px,900px 500px,-400px 700px}
     }
 
-    .letter {
-      position: absolute;
-      font-weight: 1000;
-      font-size: clamp(45px, 7vw, 105px);
-      color: #fff;
+    .nebula{
+      position:absolute;
+      width:600px;
+      height:600px;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:.18;
+      background:#00eaff;
+      left:-250px;
+      top:20%;
+      animation:nebulaFloat 12s ease-in-out infinite alternate;
+    }
+
+    .nebula.two{
+      background:#8b5cff;
+      left:auto;
+      right:-250px;
+      top:45%;
+      animation-delay:-5s;
+    }
+
+    @keyframes nebulaFloat{
+      to{transform:translate(150px,-100px) scale(1.3)}
+    }
+
+    /* =========================================================
+       3D GRID
+    ========================================================= */
+
+    .grid-floor{
+      position:absolute;
+      left:-25%;
+      right:-25%;
+      bottom:-28%;
+      height:65%;
+      transform:
+        perspective(500px)
+        rotateX(64deg)
+        translateZ(0);
+      background-image:
+        linear-gradient(rgba(0,234,255,.28) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,234,255,.28) 1px,transparent 1px);
+      background-size:55px 55px;
+      mask-image:linear-gradient(to top,black,transparent);
+      -webkit-mask-image:linear-gradient(to top,black,transparent);
+      animation:gridMove 5s linear infinite;
+    }
+
+    @keyframes gridMove{
+      to{background-position:0 55px,55px 0}
+    }
+
+    /* =========================================================
+       FLOATING ALPHABET
+    ========================================================= */
+
+    .alphabet{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      perspective:900px;
+    }
+
+    .letter{
+      position:absolute;
+      font-size:clamp(45px,7vw,110px);
+      font-weight:1000;
+      color:rgba(255,255,255,.9);
+      opacity:.72;
       text-shadow:
         0 0 5px #fff,
-        0 0 14px #00eaff,
-        0 0 30px #009cff,
-        0 0 65px #006cff;
-      animation: floatLetter 7s ease-in-out infinite;
+        0 0 12px var(--cyan),
+        0 0 28px var(--blue),
+        0 0 60px var(--purple);
+      animation:
+        letterFloat var(--speed,8s) ease-in-out infinite alternate,
+        letterPulse 3s ease-in-out infinite;
+      transform-style:preserve-3d;
     }
 
-    .letter:nth-child(1) { left: 5%; top: 16%; }
-    .letter:nth-child(2) { left: 18%; top: 63%; }
-    .letter:nth-child(3) { left: 31%; top: 12%; }
-    .letter:nth-child(4) { left: 44%; top: 67%; }
-    .letter:nth-child(5) { left: 56%; top: 16%; }
-    .letter:nth-child(6) { left: 69%; top: 58%; }
-    .letter:nth-child(7) { left: 81%; top: 20%; }
-    .letter:nth-child(8) { left: 91%; top: 70%; }
-    .letter:nth-child(9) {
-      left: 12%;
-      top: 35%;
-      font-size: 55px;
-    }
-    .letter:nth-child(10) {
-      left: 74%;
-      top: 39%;
-      font-size: 55px;
-    }
+    .letter:nth-child(1){left:3%;top:17%;--speed:8s}
+    .letter:nth-child(2){left:14%;top:68%;--speed:11s}
+    .letter:nth-child(3){left:27%;top:10%;--speed:7s}
+    .letter:nth-child(4){left:39%;top:74%;--speed:10s}
+    .letter:nth-child(5){left:51%;top:14%;--speed:9s}
+    .letter:nth-child(6){left:62%;top:65%;--speed:12s}
+    .letter:nth-child(7){left:75%;top:12%;--speed:8s}
+    .letter:nth-child(8){left:87%;top:70%;--speed:10s}
+    .letter:nth-child(9){left:8%;top:42%;--speed:9s;font-size:50px}
+    .letter:nth-child(10){left:83%;top:42%;--speed:7s;font-size:50px}
+    .letter:nth-child(11){left:45%;top:27%;--speed:13s;font-size:42px}
+    .letter:nth-child(12){left:68%;top:28%;--speed:8s;font-size:48px}
 
-    @keyframes floatLetter {
-      0%, 100% {
-        transform: translate3d(0, 0, 0);
+    @keyframes letterFloat{
+      0%{
+        transform:translate3d(0,0,0) rotateX(0) rotateY(0);
       }
-
-      50% {
-        transform: translate3d(25px, -35px, 60px);
+      50%{
+        transform:translate3d(35px,-45px,80px) rotateX(25deg) rotateY(25deg);
       }
+      100%{
+        transform:translate3d(-25px,30px,20px) rotateX(-20deg) rotateY(-30deg);
+      }
+    }
+
+    @keyframes letterPulse{
+      50%{opacity:.45}
     }
 
     /* =========================================================
-       NAVIGATION
+       SCANLINES
     ========================================================= */
 
-    .top {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: #02152de8;
-      border-bottom: 1px solid #00eaff66;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+    .scanlines{
+      position:fixed;
+      inset:0;
+      z-index:100;
+      pointer-events:none;
+      opacity:.06;
+      background:repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        #00eaff 4px
+      );
     }
 
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      padding: 13px 0;
+    /* =========================================================
+       NAV
+    ========================================================= */
+
+    .top{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(1,9,22,.68);
+      border-bottom:1px solid rgba(0,234,255,.35);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:0 0 30px rgba(0,234,255,.08);
     }
 
-    .brand {
-      font-weight: 1000;
-      font-size: 18px;
-      text-shadow: 0 0 18px #00eaff;
-      white-space: nowrap;
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      padding:13px 0;
     }
 
-    .navlinks {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+    .brand{
+      font-weight:1000;
+      font-size:18px;
+      white-space:nowrap;
+      color:#fff;
+      text-shadow:
+        0 0 8px #fff,
+        0 0 20px var(--cyan),
+        0 0 40px var(--blue);
+      animation:brandGlow 2s ease-in-out infinite alternate;
     }
 
-    .navlinks a {
-      padding: 9px 11px;
-      border-radius: 12px;
-      background: #062443dd;
-      border: 1px solid #00eaff44;
-      font-size: 13px;
+    @keyframes brandGlow{
+      to{text-shadow:0 0 5px #fff,0 0 30px var(--cyan),0 0 60px var(--blue)}
     }
 
-    .navlinks a:hover {
-      background: #0a3158;
-      border-color: #00eaff99;
+    .navlinks{
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .navlinks a{
+      position:relative;
+      padding:9px 11px;
+      border-radius:12px;
+      background:rgba(4,31,59,.7);
+      border:1px solid rgba(0,234,255,.25);
+      font-size:13px;
+      overflow:hidden;
+      transition:.3s;
+    }
+
+    .navlinks a::before{
+      content:"";
+      position:absolute;
+      left:-100%;
+      top:0;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg,transparent,rgba(0,234,255,.25),transparent);
+      transition:.4s;
+    }
+
+    .navlinks a:hover{
+      transform:translateY(-3px) translateZ(20px);
+      border-color:var(--cyan);
+      box-shadow:0 0 20px rgba(0,234,255,.3);
+    }
+
+    .navlinks a:hover::before{
+      left:100%;
     }
 
     /* =========================================================
        GENERAL
     ========================================================= */
 
-    .badge {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 30px;
-      background: #061c38dd;
-      border: 1px solid #00eaff88;
-      color: #ffe600;
-      font-weight: 900;
+    .section{
+      padding:75px 0;
+      position:relative;
     }
 
-    .section {
-      padding: 55px 0;
-    }
-
-    .section-title {
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    .section-title h2 {
-      margin: 12px 0;
-      font-size: 32px;
-    }
-
-    .muted {
-      color: #c1eaf5;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 22px;
-    }
-
-    .btn {
-      display: inline-block;
-      min-height: 44px;
-      padding: 12px 17px;
-      border: 0;
-      border-radius: 13px;
-      cursor: pointer;
-      font-weight: 900;
-    }
-
-    .primary {
-      color: #00131a;
-      background: #00c9f2;
-      box-shadow: 0 0 25px #00eaff88;
-    }
-
-    .yellow {
-      color: #181500;
-      background: #ffe600;
-    }
-
-    .neon-card {
-      background: linear-gradient(145deg, #041a31e8, #020b19e8);
-      border: 1px solid #00eaff66;
-      border-radius: 24px;
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 15px;
+      border-radius:30px;
+      background:rgba(3,25,52,.72);
+      border:1px solid rgba(0,234,255,.55);
+      color:var(--yellow);
+      font-weight:900;
       box-shadow:
-        0 18px 55px #0009,
-        0 0 30px #00eaff22;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+        inset 0 0 15px rgba(0,234,255,.08),
+        0 0 18px rgba(0,234,255,.12);
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:38px;
+    }
+
+    .section-title h2{
+      margin:15px 0;
+      font-size:clamp(28px,5vw,42px);
+      text-shadow:
+        0 0 8px #fff,
+        0 0 22px var(--cyan);
+    }
+
+    .muted{
+      color:#bdebf7;
+    }
+
+    .buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:25px;
+    }
+
+    .btn{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:12px 18px;
+      border:1px solid transparent;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:900;
+      overflow:hidden;
+      transition:.3s;
+      transform-style:preserve-3d;
+    }
+
+    .btn:hover{
+      transform:translateY(-5px) translateZ(25px);
+    }
+
+    .btn::after{
+      content:"";
+      position:absolute;
+      width:40px;
+      height:180%;
+      top:-40%;
+      left:-70px;
+      transform:rotate(25deg);
+      background:rgba(255,255,255,.4);
+      transition:.5s;
+    }
+
+    .btn:hover::after{
+      left:120%;
+    }
+
+    .primary{
+      color:#00131a;
+      background:linear-gradient(135deg,#00eaff,#008cff);
+      box-shadow:
+        0 0 18px rgba(0,234,255,.5),
+        inset 0 1px rgba(255,255,255,.7);
+    }
+
+    .yellow{
+      color:#191500;
+      background:linear-gradient(135deg,#ffe600,#ff9d00);
+      box-shadow:0 0 20px rgba(255,230,0,.35);
+    }
+
+    /* =========================================================
+       GLASS HOLOGRAM CARD
+    ========================================================= */
+
+    .neon-card{
+      position:relative;
+      background:
+        linear-gradient(145deg,
+          rgba(5,30,57,.75),
+          rgba(1,9,22,.78));
+      border:1px solid rgba(0,234,255,.4);
+      border-radius:25px;
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.55),
+        0 0 35px rgba(0,234,255,.1),
+        inset 0 0 35px rgba(0,234,255,.04);
+      backdrop-filter:blur(15px);
+      -webkit-backdrop-filter:blur(15px);
+      transform-style:preserve-3d;
+    }
+
+    .neon-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      pointer-events:none;
+      background:
+        linear-gradient(90deg,transparent,rgba(0,234,255,.12),transparent);
+      opacity:.4;
+      animation:hologramSweep 6s linear infinite;
+    }
+
+    @keyframes hologramSweep{
+      0%{transform:translateX(-100%)}
+      100%{transform:translateX(100%)}
     }
 
     /* =========================================================
        HERO
     ========================================================= */
 
-    .hero {
-      display: flex;
-      align-items: center;
-      min-height: 650px;
-      padding: 70px 0 45px;
+    .hero{
+      min-height:720px;
+      display:flex;
+      align-items:center;
+      padding:80px 0 50px;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 28px;
-      align-items: center;
-      width: 100%;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:35px;
+      align-items:center;
+      width:100%;
     }
 
-    .hero h1 {
-      margin: 18px 0;
-      font-size: clamp(42px, 7vw, 76px);
-      line-height: 1;
+    .hero h1{
+      margin:20px 0;
+      font-size:clamp(44px,7vw,82px);
+      line-height:.98;
+      letter-spacing:-3px;
+      text-shadow:0 0 30px rgba(0,234,255,.12);
     }
 
-    .hero h1 span {
-      color: #00eaff;
+    .hero h1 span{
+      color:var(--cyan);
+      text-shadow:
+        0 0 5px #fff,
+        0 0 15px var(--cyan),
+        0 0 40px var(--blue),
+        0 0 70px var(--purple);
+      animation:neonText 2.5s ease-in-out infinite alternate;
     }
 
-    .lead {
-      max-width: 720px;
-      color: #e9fcff;
-      font-size: 18px;
-      line-height: 1.7;
+    @keyframes neonText{
+      to{
+        text-shadow:
+          0 0 8px #fff,
+          0 0 25px var(--cyan),
+          0 0 55px var(--blue),
+          0 0 90px var(--purple);
+      }
     }
 
-    .teacher {
-      padding: 30px;
-      text-align: center;
+    .lead{
+      max-width:720px;
+      color:#e7fbff;
+      font-size:18px;
+      line-height:1.75;
     }
 
-    .avatar {
-      font-size: 90px;
+    /* =========================================================
+       HOLOGRAM TEACHER
+    ========================================================= */
+
+    .teacher{
+      min-height:430px;
+      padding:35px 25px;
+      text-align:center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
     }
 
-    .pill {
-      display: inline-block;
-      margin: 4px;
-      padding: 7px 10px;
-      border-radius: 20px;
-      background: #0a2d50cc;
-      border: 1px solid #00eaff44;
+    .teacher::after{
+      content:"HOLOGRAM";
+      position:absolute;
+      top:16px;
+      right:18px;
+      font-size:10px;
+      letter-spacing:4px;
+      color:var(--cyan);
+      opacity:.7;
+    }
+
+    .avatar-ring{
+      position:relative;
+      width:190px;
+      height:190px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      margin-bottom:20px;
+      background:
+        radial-gradient(circle,
+          rgba(0,234,255,.2),
+          rgba(0,140,255,.05) 45%,
+          transparent 65%);
+      border:1px solid rgba(0,234,255,.6);
+      box-shadow:
+        0 0 20px rgba(0,234,255,.5),
+        inset 0 0 40px rgba(0,234,255,.15);
+      animation:ringFloat 5s ease-in-out infinite;
+    }
+
+    .avatar-ring::before,
+    .avatar-ring::after{
+      content:"";
+      position:absolute;
+      border:1px solid rgba(0,234,255,.5);
+      border-radius:50%;
+      animation:ringRotate 8s linear infinite;
+    }
+
+    .avatar-ring::before{
+      inset:-16px;
+      border-top-color:transparent;
+      border-bottom-color:transparent;
+    }
+
+    .avatar-ring::after{
+      inset:10px;
+      border-left-color:transparent;
+      border-right-color:transparent;
+      animation-direction:reverse;
+    }
+
+    @keyframes ringFloat{
+      50%{transform:translateY(-12px) rotateY(12deg)}
+    }
+
+    @keyframes ringRotate{
+      to{transform:rotateZ(360deg) rotateX(50deg)}
+    }
+
+    .avatar{
+      font-size:85px;
+      filter:
+        drop-shadow(0 0 10px #fff)
+        drop-shadow(0 0 25px var(--cyan))
+        drop-shadow(0 0 50px var(--blue));
+    }
+
+    .teacher h2{
+      color:#fff;
+      text-shadow:0 0 15px var(--cyan);
+      margin-bottom:8px;
+    }
+
+    .pill{
+      display:inline-block;
+      margin:5px 3px;
+      padding:7px 11px;
+      border-radius:20px;
+      background:rgba(8,45,80,.65);
+      border:1px solid rgba(0,234,255,.3);
+      box-shadow:inset 0 0 12px rgba(0,234,255,.06);
     }
 
     /* =========================================================
        GRADES
     ========================================================= */
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
     }
 
-    .grade {
-      position: relative;
-      min-height: 450px;
-      overflow: hidden;
-      transition: .3s ease;
+    .grade{
+      min-height:500px;
+      overflow:hidden;
+      transition:.4s;
     }
 
-    .grade:hover {
-      transform: translateY(-10px);
+    .grade:hover{
+      transform:
+        translateY(-14px)
+        rotateX(3deg)
+        rotateY(-3deg);
       box-shadow:
-        0 35px 80px #000d,
-        0 0 45px #00eaff66;
+        0 40px 90px rgba(0,0,0,.7),
+        0 0 50px rgba(0,234,255,.25);
     }
 
-    .class-scene {
-      position: relative;
-      height: 220px;
-      overflow: hidden;
+    .class-scene{
+      position:relative;
+      height:240px;
+      overflow:hidden;
       background:
-        radial-gradient(
-          circle at 50% 50%,
-          #075b91,
-          #032c50 48%,
-          #020b19 100%
-        );
-      border-bottom: 1px solid #00eaff44;
+        radial-gradient(circle at 50% 50%,
+          #086ca4,
+          #063355 38%,
+          #020817 80%);
+      border-bottom:1px solid rgba(0,234,255,.35);
     }
 
-    .scene-floor {
-      position: absolute;
-      left: -30%;
-      right: -30%;
-      bottom: -65px;
-      height: 150px;
-      transform: perspective(350px) rotateX(65deg);
+    .class-scene::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle,#fff 1px,transparent 2px);
+      background-size:45px 45px;
+      opacity:.18;
+      animation:sceneStars 10s linear infinite;
+    }
+
+    @keyframes sceneStars{
+      to{background-position:180px 180px}
+    }
+
+    .scene-floor{
+      position:absolute;
+      left:-30%;
+      right:-30%;
+      bottom:-70px;
+      height:160px;
+      transform:perspective(350px) rotateX(64deg);
       background-image:
-        linear-gradient(#00eaff45 1px, transparent 1px),
-        linear-gradient(90deg, #00eaff45 1px, transparent 1px);
-      background-size: 30px 30px;
+        linear-gradient(rgba(0,234,255,.35) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,234,255,.35) 1px,transparent 1px);
+      background-size:30px 30px;
+      animation:gridMove 4s linear infinite;
     }
 
-    .float-letter {
-      position: absolute;
-      font-size: 38px;
-      font-weight: 1000;
-      color: #fff;
+    .grade-label{
+      position:absolute;
+      top:15px;
+      left:15px;
+      z-index:5;
+      padding:7px 11px;
+      border-radius:20px;
+      background:rgba(1,17,35,.75);
+      border:1px solid rgba(0,234,255,.5);
+      color:var(--yellow);
+      font-size:12px;
+      font-weight:900;
+      box-shadow:0 0 15px rgba(0,234,255,.15);
+    }
+
+    .float-letter{
+      position:absolute;
+      font-size:52px;
+      font-weight:1000;
+      color:#fff;
       text-shadow:
-        0 0 5px #fff,
-        0 0 15px #00eaff,
-        0 0 30px #008cff;
+        0 0 6px #fff,
+        0 0 18px var(--cyan),
+        0 0 40px var(--blue);
+      animation:miniFloat 5s ease-in-out infinite alternate;
     }
 
-    .book {
-      position: absolute;
-      left: 50%;
-      top: 51%;
-      width: 145px;
-      height: 90px;
-      transform: translate(-50%, -50%) rotateX(58deg);
-      background: linear-gradient(135deg, #fff, #bcefff);
-      border: 2px solid #00c9f2;
-      box-shadow: 0 0 18px #00eaff88;
+    @keyframes miniFloat{
+      to{transform:translate3d(20px,-30px,60px) rotateY(30deg)}
     }
 
-    .plant {
-      position: absolute;
-      left: 25%;
-      bottom: 40px;
-      font-size: 55px;
+    .plant{
+      position:absolute;
+      left:20%;
+      bottom:35px;
+      font-size:65px;
+      filter:drop-shadow(0 0 18px #00eaff);
+      animation:plantFloat 4s ease-in-out infinite;
     }
 
-    .rocket {
-      position: absolute;
-      left: 50%;
-      top: 48%;
-      font-size: 75px;
-      transform: translate(-50%, -50%) rotate(-25deg);
+    @keyframes plantFloat{
+      50%{transform:translateY(-10px) rotate(-5deg)}
     }
 
-    .planet {
-      position: absolute;
-      border-radius: 50%;
+    .book{
+      position:absolute;
+      left:50%;
+      top:52%;
+      width:145px;
+      height:90px;
+      transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-3deg);
+      background:linear-gradient(135deg,#fff,#9defff);
+      border:2px solid var(--cyan);
       box-shadow:
-        inset -12px -10px 20px #001b35,
-        0 0 25px #00eaff66;
+        0 0 15px var(--cyan),
+        0 0 40px rgba(0,234,255,.45);
+      animation:bookFloat 4s ease-in-out infinite;
     }
 
-    .planet.big {
-      width: 65px;
-      height: 65px;
-      right: 17%;
-      top: 35%;
-      background:
-        radial-gradient(
-          circle at 30% 25%,
-          #ffe600,
-          #ff7a00 45%,
-          #9d2700
-        );
+    .book::before{
+      content:"ABC";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      color:#006d9a;
+      font-weight:1000;
+      font-size:22px;
     }
 
-    .planet.small {
-      width: 25px;
-      height: 25px;
-      left: 15%;
-      top: 25%;
-      background:
-        radial-gradient(
-          circle at 30% 30%,
-          #fff,
-          #00eaff 45%,
-          #006cff
-        );
+    @keyframes bookFloat{
+      50%{transform:translate(-50%,-65%) rotateX(58deg) rotateZ(3deg)}
     }
 
-    .globe {
-      position: absolute;
-      left: 50%;
-      top: 48%;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      background:
-        radial-gradient(
-          circle at 30% 25%,
-          #dffcff,
-          #00c9f2 22%,
-          #007cff 60%,
-          #023b75
-        );
+    .rocket{
+      position:absolute;
+      left:50%;
+      top:50%;
+      font-size:78px;
+      transform:translate(-50%,-50%) rotate(-25deg);
+      filter:
+        drop-shadow(0 0 10px #fff)
+        drop-shadow(0 0 30px var(--cyan));
+      animation:rocketFly 4s ease-in-out infinite;
+    }
+
+    @keyframes rocketFly{
+      50%{
+        transform:translate(-45%,-65%) rotate(-18deg) scale(1.08);
+      }
+    }
+
+    .planet{
+      position:absolute;
+      border-radius:50%;
       box-shadow:
-        inset -20px -20px 30px #001a3a,
-        0 0 25px #00eaff;
+        inset -15px -15px 25px rgba(0,20,50,.9),
+        0 0 25px rgba(0,234,255,.5);
+      animation:planetFloat 7s ease-in-out infinite;
     }
 
-    .word {
-      position: absolute;
-      padding: 5px 9px;
-      border-radius: 12px;
-      color: #fff;
-      font-weight: 1000;
-      background: #062443cc;
-      border: 1px solid #00eaff55;
+    .planet.big{
+      width:70px;
+      height:70px;
+      right:15%;
+      top:35%;
+      background:
+        radial-gradient(circle at 30% 25%,
+          #ffe600,#ff7a00 45%,#9d2700);
     }
 
-    .grade-content {
-      padding: 23px;
+    .planet.small{
+      width:26px;
+      height:26px;
+      left:14%;
+      top:25%;
+      background:
+        radial-gradient(circle at 30% 30%,
+          #fff,#00eaff 45%,#006cff);
+      animation-delay:-2s;
     }
 
-    .grade h3 {
-      color: #ffe600;
-      font-size: 25px;
+    @keyframes planetFloat{
+      50%{transform:translateY(-20px) translateX(15px) rotate(15deg)}
     }
 
-    .grade p {
-      min-height: 105px;
-      color: #d9f7ff;
-      line-height: 1.65;
+    .globe{
+      position:absolute;
+      left:50%;
+      top:48%;
+      width:125px;
+      height:125px;
+      border-radius:50%;
+      transform:translate(-50%,-50%);
+      display:grid;
+      place-items:center;
+      font-size:70px;
+      background:
+        radial-gradient(circle at 30% 25%,
+          #dffcff,#00c9f2 25%,#007cff 60%,#023b75);
+      box-shadow:
+        inset -25px -25px 35px #001a3a,
+        0 0 25px var(--cyan),
+        0 0 60px rgba(0,234,255,.3);
+      animation:globeSpin 10s linear infinite;
     }
 
-    .grade-label {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      z-index: 8;
-      padding: 7px 11px;
-      border-radius: 20px;
-      background: #02182ddd;
-      border: 1px solid #00eaff66;
-      color: #ffe600;
-      font-size: 12px;
-      font-weight: 900;
+    @keyframes globeSpin{
+      to{transform:translate(-50%,-50%) rotateY(360deg)}
+    }
+
+    .word{
+      position:absolute;
+      padding:6px 10px;
+      border-radius:12px;
+      color:#fff;
+      font-weight:1000;
+      background:rgba(4,36,67,.75);
+      border:1px solid rgba(0,234,255,.45);
+      box-shadow:0 0 12px rgba(0,234,255,.15);
+      animation:wordFloat 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes wordFloat{
+      to{transform:translateY(-10px) translateZ(30px)}
+    }
+
+    .grade-content{
+      padding:25px;
+    }
+
+    .grade h3{
+      color:var(--yellow);
+      font-size:25px;
+      text-shadow:0 0 12px rgba(255,230,0,.25);
+      margin-bottom:10px;
+    }
+
+    .grade p{
+      min-height:115px;
+      color:#d9f7ff;
+      line-height:1.65;
     }
 
     /* =========================================================
        LEARNING
     ========================================================= */
 
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
     }
 
-    .feature {
-      padding: 20px;
-      text-align: center;
+    .feature{
+      padding:27px 20px;
+      text-align:center;
+      transition:.35s;
     }
 
-    .feature b {
-      display: block;
-      margin-bottom: 8px;
-      color: #ffe600;
-      font-size: 20px;
+    .feature:hover{
+      transform:translateY(-10px) rotateX(4deg);
+      border-color:var(--cyan);
+      box-shadow:0 20px 45px rgba(0,0,0,.5),0 0 35px rgba(0,234,255,.2);
     }
 
-    .feature span {
-      color: #d9f7ff;
-      line-height: 1.6;
+    .feature-icon{
+      font-size:45px;
+      margin-bottom:13px;
+      filter:drop-shadow(0 0 15px var(--cyan));
+    }
+
+    .feature b{
+      display:block;
+      margin-bottom:9px;
+      color:var(--yellow);
+      font-size:20px;
+    }
+
+    .feature span{
+      color:#d9f7ff;
+      line-height:1.6;
     }
 
     /* =========================================================
        COURSE
     ========================================================= */
 
-    .course {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+    .course{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
     }
 
-    .course-card {
-      padding: 22px;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #0a3158, #061a32);
-      border: 1px solid #00eaff33;
+    .course-card{
+      position:relative;
+      padding:25px;
+      min-height:240px;
+      border-radius:20px;
+      background:linear-gradient(145deg,rgba(10,49,88,.75),rgba(2,15,32,.8));
+      border:1px solid rgba(0,234,255,.3);
+      overflow:hidden;
+      transition:.35s;
+    }
+
+    .course-card:hover{
+      transform:translateY(-9px) rotateX(4deg);
+      box-shadow:0 25px 60px rgba(0,0,0,.6),0 0 30px rgba(0,234,255,.2);
+    }
+
+    .course-card::after{
+      content:"";
+      position:absolute;
+      width:150px;
+      height:150px;
+      right:-70px;
+      top:-70px;
+      border-radius:50%;
+      background:rgba(0,234,255,.12);
+      filter:blur(10px);
+    }
+
+    .course-card b{
+      color:var(--yellow);
+      font-size:20px;
+    }
+
+    .course-card p{
+      color:#d9f7ff;
+      line-height:1.65;
+      margin:18px 0;
     }
 
     /* =========================================================
        PROGRESS
     ========================================================= */
 
-    .progress-box {
-      padding: 25px;
+    .progress-box{
+      padding:28px;
+      overflow:hidden;
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
     }
 
-    .stat {
-      padding: 15px;
-      text-align: center;
-      background: #061a32;
-      border-radius: 15px;
-      border: 1px solid #00eaff22;
+    .stat{
+      position:relative;
+      padding:18px;
+      text-align:center;
+      background:rgba(3,20,39,.7);
+      border-radius:16px;
+      border:1px solid rgba(0,234,255,.2);
+      overflow:hidden;
     }
 
-    .stat b {
-      display: block;
-      color: #ffe600;
-      font-size: 25px;
+    .stat::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,transparent,rgba(0,234,255,.08),transparent);
+      animation:statSweep 4s linear infinite;
     }
 
-    .progress {
-      height: 20px;
-      margin: 15px 0;
-      overflow: hidden;
-      border-radius: 30px;
-      background: #020a16;
+    @keyframes statSweep{
+      from{transform:translateX(-100%)}
+      to{transform:translateX(100%)}
     }
 
-    .progress i {
-      display: block;
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #00eaff, #ffe600);
-      transition: width .5s ease;
+    .stat b{
+      position:relative;
+      display:block;
+      color:var(--yellow);
+      font-size:28px;
+      text-shadow:0 0 15px rgba(255,230,0,.25);
+      margin-bottom:5px;
+    }
+
+    .progress{
+      height:22px;
+      margin:20px 0;
+      overflow:hidden;
+      border-radius:30px;
+      background:#020914;
+      border:1px solid rgba(0,234,255,.25);
+      box-shadow:inset 0 0 15px #000;
+    }
+
+    .progress i{
+      display:block;
+      width:0%;
+      height:100%;
+      border-radius:30px;
+      background:
+        linear-gradient(90deg,
+          #00eaff,
+          #008cff,
+          #8b5cff,
+          #ffe600);
+      box-shadow:
+        0 0 15px var(--cyan),
+        0 0 30px rgba(139,92,255,.4);
+      transition:width .8s cubic-bezier(.2,.8,.2,1);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .progress i::after{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100px;
+      width:80px;
+      height:100%;
+      background:rgba(255,255,255,.8);
+      filter:blur(10px);
+      animation:progressLight 2s linear infinite;
+    }
+
+    @keyframes progressLight{
+      to{left:110%}
     }
 
     /* =========================================================
-       PARENT
+       FAMILY HOLOGRAM
     ========================================================= */
 
-    .family-parent {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 500px;
-      padding: 0 !important;
-      overflow: hidden;
+    .family-parent{
+      position:relative;
+      min-height:550px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
       background:
-        radial-gradient(
-          circle at 50% 45%,
-          #075b91 0,
-          #032b4d 35%,
-          #020f20 70%,
-          #010711 100%
-        );
-      border: 1px solid #00eaff88;
+        radial-gradient(circle at 50% 45%,
+          rgba(0,115,180,.7),
+          rgba(3,35,65,.8) 38%,
+          rgba(1,8,20,.95) 78%);
     }
 
-    .family-glow {
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #00eaff55, transparent 70%);
+    .family-glow{
+      position:absolute;
+      width:550px;
+      height:550px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(0,234,255,.2),transparent 68%);
+      animation:familyGlow 4s ease-in-out infinite alternate;
     }
 
-    .family-scene {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
+    @keyframes familyGlow{
+      to{transform:scale(1.15);opacity:.7}
     }
 
-    .family {
-      position: absolute;
-      left: 50%;
-      top: 40%;
-      display: flex;
-      align-items: flex-end;
-      gap: 30px;
-      transform: translate(-50%, -50%);
+    .family-scene{
+      position:absolute;
+      inset:0;
+      overflow:hidden;
     }
 
-    .person {
-      text-align: center;
-      font-size: 42px;
-      filter: drop-shadow(0 0 15px #00eaff);
+    .family{
+      position:absolute;
+      left:50%;
+      top:40%;
+      display:flex;
+      align-items:flex-end;
+      gap:30px;
+      transform:translate(-50%,-50%);
+      animation:familyFloat 5s ease-in-out infinite;
     }
 
-    .head {
-      font-size: 52px;
+    @keyframes familyFloat{
+      50%{transform:translate(-50%,-54%) scale(1.03)}
     }
 
-    .body {
-      font-size: 48px;
+    .person{
+      text-align:center;
+      font-size:42px;
+      filter:
+        drop-shadow(0 0 8px #fff)
+        drop-shadow(0 0 20px var(--cyan));
     }
 
-    .legs {
-      font-size: 38px;
-    }
+    .head{font-size:52px}
+    .body{font-size:48px}
+    .legs{font-size:38px}
 
-    .family-letter {
-      position: absolute;
-      color: #fff;
-      font-size: 70px;
-      font-weight: 1000;
+    .family-letter{
+      position:absolute;
+      color:#fff;
+      font-size:70px;
+      font-weight:1000;
       text-shadow:
         0 0 5px #fff,
-        0 0 15px #00eaff,
-        0 0 35px #008cff;
+        0 0 15px var(--cyan),
+        0 0 35px var(--blue);
+      animation:familyLetter 6s ease-in-out infinite alternate;
     }
 
-    .family-floor {
-      position: absolute;
-      left: -20%;
-      right: -20%;
-      bottom: -32%;
-      height: 60%;
-      transform: perspective(500px) rotateX(65deg);
+    @keyframes familyLetter{
+      to{transform:translate3d(30px,-35px,70px) rotateY(25deg)}
+    }
+
+    .family-floor{
+      position:absolute;
+      left:-20%;
+      right:-20%;
+      bottom:-32%;
+      height:60%;
+      transform:perspective(500px) rotateX(65deg);
       background-image:
-        linear-gradient(#00eaff35 1px, transparent 1px),
-        linear-gradient(90deg, #00eaff35 1px, transparent 1px);
-      background-size: 45px 45px;
+        linear-gradient(rgba(0,234,255,.3) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,234,255,.3) 1px,transparent 1px);
+      background-size:45px 45px;
+      animation:gridMove 5s linear infinite;
     }
 
-    .parent-content {
-      position: relative;
-      z-index: 10;
-      width: min(750px, 90%);
-      padding: 35px 25px;
-      text-align: center;
-      background: linear-gradient(145deg, #02182bdd, #020a17dd);
-      border-radius: 26px;
-      border: 1px solid #00eaff66;
+    .parent-content{
+      position:relative;
+      z-index:10;
+      width:min(750px,90%);
+      padding:35px 25px;
+      text-align:center;
+      background:rgba(1,15,31,.72);
+      border-radius:26px;
+      border:1px solid rgba(0,234,255,.5);
+      backdrop-filter:blur(10px);
+      box-shadow:
+        0 0 35px rgba(0,234,255,.15),
+        inset 0 0 30px rgba(0,234,255,.05);
     }
 
-    .parent-icon {
-      font-size: 58px;
+    .parent-icon{
+      font-size:60px;
+      filter:drop-shadow(0 0 20px var(--cyan));
     }
 
-    .parent-content h2 {
-      color: #00eaff;
-      font-size: 32px;
+    .parent-content h2{
+      color:var(--cyan);
+      font-size:32px;
+      margin:12px 0;
+      text-shadow:0 0 18px var(--cyan);
     }
 
-    .parent-content p {
-      color: #d9f7ff;
-      line-height: 1.7;
+    .parent-content p{
+      color:#d9f7ff;
+      line-height:1.7;
+      margin-bottom:15px;
     }
 
-    .parent-features {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
+    .parent-features{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:20px;
     }
 
     /* =========================================================
        FOOTER
     ========================================================= */
 
-    .footer {
-      margin-top: 35px;
-      padding: 32px 0;
-      text-align: center;
-      color: #9dc7d5;
-      border-top: 1px solid #00eaff33;
+    .footer{
+      margin-top:30px;
+      padding:35px 0;
+      text-align:center;
+      color:#9dc7d5;
+      border-top:1px solid rgba(0,234,255,.25);
     }
 
-    .site-copyright {
-      margin-top: 30px;
-      padding: 18px 12px;
-      text-align: center;
-      color: #9dc7d5;
-      font-size: 14px;
-      border-top: 1px solid #00eaff33;
+    .site-copyright{
+      padding:18px 12px;
+      text-align:center;
+      color:#7197a5;
+      font-size:13px;
+      border-top:1px solid rgba(0,234,255,.15);
+    }
+
+    /* =========================================================
+       CURSOR ENERGY
+    ========================================================= */
+
+    .cursor-glow{
+      position:fixed;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:-1;
+      background:radial-gradient(circle,rgba(0,234,255,.11),transparent 65%);
+      transform:translate(-50%,-50%);
+      transition:opacity .3s;
     }
 
     /* =========================================================
        MOBILE
     ========================================================= */
 
-    @media (max-width: 850px) {
+    @media(max-width:900px){
       .hero-grid,
       .grid,
-      .course {
-        grid-template-columns: 1fr;
+      .course{
+        grid-template-columns:1fr;
       }
 
-      .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 650px) {
-      body {
-        padding-bottom: 20px;
+      .feature-grid{
+        grid-template-columns:repeat(2,1fr);
       }
 
-      .wrap {
-        width: min(100% - 22px, 720px);
+      .hero{
+        min-height:auto;
+        padding-top:65px;
       }
 
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .navlinks {
-        width: 100%;
-        justify-content: flex-start;
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 5px;
-      }
-
-      .navlinks a {
-        flex: 0 0 auto;
-        white-space: nowrap;
-      }
-
-      .grade {
-        min-height: auto;
-      }
-
-      .grade p {
-        min-height: auto;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .family {
-        gap: 5px;
-        transform: translate(-50%, -50%) scale(.68);
-      }
-
-      .family-parent {
-        min-height: 540px;
+      .teacher{
+        max-width:650px;
+        width:100%;
+        margin:auto;
       }
     }
 
-    @media (max-width: 430px) {
-      .hero h1 {
-        font-size: 42px;
+    @media(max-width:650px){
+      .wrap{
+        width:calc(100% - 22px);
       }
 
-      .class-scene {
-        height: 205px;
+      .nav{
+        align-items:flex-start;
+        flex-direction:column;
       }
 
-      .family {
-        transform: translate(-50%, -50%) scale(.58);
+      .navlinks{
+        width:100%;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        justify-content:flex-start;
+        padding-bottom:5px;
+      }
+
+      .navlinks a{
+        flex:0 0 auto;
+        white-space:nowrap;
+      }
+
+      .hero h1{
+        font-size:44px;
+        letter-spacing:-2px;
+      }
+
+      .lead{
+        font-size:16px;
+      }
+
+      .feature-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .family-parent{
+        min-height:570px;
+      }
+
+      .family{
+        gap:4px;
+        transform:translate(-50%,-50%) scale(.68);
+      }
+
+      .family-content{
+        width:94%;
+      }
+
+      .letter{
+        opacity:.35;
+      }
+
+      .grid-floor{
+        bottom:-15%;
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
+    @media(max-width:430px){
+      .hero h1{
+        font-size:40px;
+      }
+
+      .class-scene{
+        height:215px;
+      }
+
+      .family{
+        transform:translate(-50%,-50%) scale(.55);
+      }
+
+      .parent-content{
+        padding:27px 17px;
+      }
+
+      .parent-content h2{
+        font-size:27px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
       *,
       *::before,
-      *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
+      *::after{
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
       }
     }
   </style>
-
 </head>
 
 <body>
 
-  <!-- =======================================================
-       BACKGROUND
-  ======================================================== -->
+  <!-- =========================================================
+       FUTURISTIC WORLD
+  ========================================================== -->
 
-  <div class="neon-world" aria-hidden="true">
-    <div class="letters">
+  <div class="space" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="nebula"></div>
+    <div class="nebula two"></div>
+
+    <div class="alphabet">
       <span class="letter">A</span>
       <span class="letter">B</span>
       <span class="letter">C</span>
@@ -832,639 +1345,654 @@
       <span class="letter">H</span>
       <span class="letter">I</span>
       <span class="letter">J</span>
+      <span class="letter">K</span>
+      <span class="letter">L</span>
     </div>
 
-```
-<div class="grid-floor"></div>
-```
-
+    <div class="grid-floor"></div>
   </div>
 
-  <!-- =======================================================
-       NAV
-  ======================================================== -->
+  <div class="scanlines"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================== -->
 
   <header class="top">
     <div class="wrap nav">
 
-```
-  <a class="brand" href="index.html">
-    ⚡ ENGLISH WITH MARIAMI
-  </a>
+      <a class="brand" href="index.html">
+        ⚡ ENGLISH WITH MARIAMI
+      </a>
 
-  <nav class="navlinks">
-    <a href="#grades">🎓 კლასები</a>
-    <a href="#course">🗺️ კურსი</a>
-    <a href="#learn">📚 სწავლა</a>
-    <a href="#progress">🏆 პროგრესი</a>
-    <a href="#parents">👨‍👩‍👧 მშობელი</a>
-    <a href="login.html">🚪 გამოსვლა</a>
-  </nav>
+      <nav class="navlinks">
+        <a href="#grades">🎓 კლასები</a>
+        <a href="#course">🗺️ კურსი</a>
+        <a href="#learn">📚 სწავლა</a>
+        <a href="#progress">🏆 პროგრესი</a>
+        <a href="#parents">👨‍👩‍👧 მშობელი</a>
+        <a href="login.html">🚪 გამოსვლა</a>
+      </nav>
 
-</div>
-```
-
+    </div>
   </header>
 
   <main class="wrap">
 
-```
-<!-- =====================================================
-     HERO
-====================================================== -->
+    <!-- =======================================================
+         HERO
+    ======================================================== -->
 
-<section class="hero">
+    <section class="hero">
 
-  <div class="hero-grid">
+      <div class="hero-grid">
 
-    <div>
+        <div>
 
-      <span class="badge">
-        🇬🇧 ქართული ↔ English • 2026
-      </span>
+          <span class="badge">
+            🇬🇧 HOLOGRAPHIC ENGLISH ACADEMY • 2026
+          </span>
 
-      <h1>
-        ვისწავლოთ<br>
-        <span>ინგლისური</span><br>
-        მარიამისთან ერთად!
-      </h1>
+          <h1>
+            ვისწავლოთ<br>
+            <span>ინგლისური</span><br>
+            მარიამისთან ერთად!
+          </h1>
 
-      <p class="lead">
-        სრული სასწავლო სივრცე მე-2, მე-3 და მე-4 კლასისთვის:
-        Vocabulary, Speaking, Reading, Listening, Grammar,
-        Writing და Quiz.
-      </p>
+          <p class="lead">
+            მომავლის სასწავლო სივრცე მე-2, მე-3 და მე-4
+            კლასებისთვის. Vocabulary, Speaking, Reading,
+            Listening, Grammar, Writing და Quiz —
+            ყველაფერი ერთ ფუტურისტულ აკადემიაში.
+          </p>
 
-      <div class="buttons">
+          <div class="buttons">
 
-        <a class="btn primary" href="#grades">
-          🎓 აირჩიე კლასი
-        </a>
+            <a class="btn primary" href="#grades">
+              🎓 აირჩიე კლასი
+            </a>
 
-        <a class="btn yellow" href="#learn">
-          🚀 დავიწყოთ სწავლა
-        </a>
+            <a class="btn yellow" href="#learn">
+              🚀 დავიწყოთ სწავლა
+            </a>
 
-      </div>
+          </div>
 
-    </div>
+        </div>
 
-    <div class="neon-card teacher">
+        <!-- HOLOGRAM TEACHER -->
 
-      <div class="avatar">👩‍🏫</div>
+        <div class="neon-card teacher">
 
-      <h2>მასწავლებელი მარიამი</h2>
+          <div class="avatar-ring">
+            <div class="avatar">👩‍🏫</div>
+          </div>
 
-      <p class="muted">
-        შენი ინგლისურის გზამკვლევი ✨
-      </p>
+          <h2>მასწავლებელი მარიამი</h2>
 
-      <span class="pill">🧠 Vocabulary</span>
-      <span class="pill">🔊 Listening</span>
-      <span class="pill">🗣️ Speaking</span>
-      <span class="pill">📖 Reading</span>
-      <span class="pill">✍️ Grammar</span>
+          <p class="muted">
+            შენი ინგლისურის ჰოლოგრამული გზამკვლევი ✨
+          </p>
 
-    </div>
+          <div style="margin-top:12px">
+            <span class="pill">🧠 Vocabulary</span>
+            <span class="pill">🔊 Listening</span>
+            <span class="pill">🗣️ Speaking</span>
+            <span class="pill">📖 Reading</span>
+            <span class="pill">✍️ Grammar</span>
+          </div>
 
-  </div>
-
-</section>
-
-<!-- =====================================================
-     GRADES
-====================================================== -->
-
-<section id="grades" class="section">
-
-  <div class="section-title">
-
-    <span class="badge">CLASSROOM</span>
-
-    <h2>აირჩიე შენი კლასი</h2>
-
-    <p class="muted" id="grade-message">
-      მასწავლებლის მიერ მინიჭებული კლასი ავტომატურად
-      განსაზღვრავს შენს სასწავლო სივრცეს.
-    </p>
-
-  </div>
-
-  <div class="grid">
-
-    <!-- GRADE 2 -->
-
-    <article class="neon-card grade">
-
-      <div class="class-scene">
-
-        <span class="grade-label">
-          🌱 BEGINNER
-        </span>
-
-        <div
-          class="float-letter"
-          style="left:12%;top:20%"
-        >A</div>
-
-        <div
-          class="float-letter"
-          style="right:13%;top:27%"
-        >B</div>
-
-        <div class="plant">🌱</div>
-
-        <div class="book"></div>
-
-        <div class="scene-floor"></div>
+        </div>
 
       </div>
 
-      <div class="grade-content">
+    </section>
 
-        <h3>🌱 მე-2 კლასი</h3>
+    <!-- =======================================================
+         GRADES
+    ======================================================== -->
 
-        <p>
-          პირველი ნაბიჯები ინგლისურში: ფერები, ოჯახი,
-          სკოლა, ცხოველები, საკვები, სხეულის ნაწილები,
-          სახლი, რიცხვები და მარტივი წინადადებები.
+    <section id="grades" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">CLASSROOM SYSTEM</span>
+
+        <h2>🎓 აირჩიე შენი კლასი</h2>
+
+        <p class="muted" id="grade-message">
+          მასწავლებლის მიერ მინიჭებული კლასი ავტომატურად
+          განსაზღვრავს შენს სასწავლო სივრცეს.
         </p>
 
-        <a
-          class="btn primary grade-link"
-          data-grade="2"
-          href="grade2.html"
-        >
-          🚀 მე-2 კლასში შესვლა →
-        </a>
+      </div>
+
+      <div class="grid">
+
+        <!-- GRADE 2 -->
+
+        <article class="neon-card grade">
+
+          <div class="class-scene">
+
+            <span class="grade-label">
+              🌱 BEGINNER
+            </span>
+
+            <div
+              class="float-letter"
+              style="left:12%;top:20%"
+            >A</div>
+
+            <div
+              class="float-letter"
+              style="right:13%;top:27%"
+            >B</div>
+
+            <div class="plant">🌱</div>
+
+            <div class="book"></div>
+
+            <div class="scene-floor"></div>
+
+          </div>
+
+          <div class="grade-content">
+
+            <h3>🌱 მე-2 კლასი</h3>
+
+            <p>
+              პირველი ნაბიჯები ინგლისურში: ფერები, ოჯახი,
+              სკოლა, ცხოველები, საკვები, სხეულის ნაწილები,
+              სახლი, რიცხვები და მარტივი წინადადებები.
+            </p>
+
+            <a
+              class="btn primary grade-link"
+              data-grade="2"
+              href="grade2.html"
+            >
+              🚀 მე-2 კლასში შესვლა →
+            </a>
+
+          </div>
+
+        </article>
+
+        <!-- GRADE 3 -->
+
+        <article class="neon-card grade">
+
+          <div class="class-scene">
+
+            <span class="grade-label">
+              🚀 ELEMENTARY
+            </span>
+
+            <div class="planet big"></div>
+            <div class="planet small"></div>
+
+            <div class="rocket">🚀</div>
+
+            <div class="scene-floor"></div>
+
+          </div>
+
+          <div class="grade-content">
+
+            <h3>🚀 მე-3 კლასი</h3>
+
+            <p>
+              ყოველდღიური ცხოვრება, დღეები, თვეები,
+              ამინდი, მოქმედებები, ქალაქი, საკვები,
+              Speaking, Reading და მარტივი გრამატიკა.
+            </p>
+
+            <a
+              class="btn primary grade-link"
+              data-grade="3"
+              href="grade3.html"
+            >
+              🚀 მე-3 კლასში შესვლა →
+            </a>
+
+          </div>
+
+        </article>
+
+        <!-- GRADE 4 -->
+
+        <article class="neon-card grade">
+
+          <div class="class-scene">
+
+            <span class="grade-label">
+              ⭐ ADVANCED
+            </span>
+
+            <div class="globe">
+              🌎
+            </div>
+
+            <div
+              class="word"
+              style="left:8%;top:15%"
+            >
+              SPEAK
+            </div>
+
+            <div
+              class="word"
+              style="right:8%;top:20%"
+            >
+              READ
+            </div>
+
+            <div
+              class="word"
+              style="left:10%;bottom:20%"
+            >
+              WRITE
+            </div>
+
+            <div
+              class="word"
+              style="right:8%;bottom:15%"
+            >
+              ENGLISH
+            </div>
+
+            <div class="scene-floor"></div>
+
+          </div>
+
+          <div class="grade-content">
+
+            <h3>⭐ მე-4 კლასი</h3>
+
+            <p>
+              გაფართოებული Vocabulary, Present Simple,
+              კითხვები, Prepositions, Reading, Dialogues,
+              Writing, Listening და Practice.
+            </p>
+
+            <a
+              class="btn primary grade-link"
+              data-grade="4"
+              href="grade4.html"
+            >
+              ⭐ მე-4 კლასში შესვლა →
+            </a>
+
+          </div>
+
+        </article>
 
       </div>
 
-    </article>
+    </section>
 
-    <!-- GRADE 3 -->
+    <!-- =======================================================
+         LEARNING
+    ======================================================== -->
 
-    <article class="neon-card grade">
+    <section id="learn" class="section">
 
-      <div class="class-scene">
+      <div class="section-title">
 
-        <span class="grade-label">
-          🚀 ELEMENTARY
-        </span>
+        <span class="badge">LEARNING TECHNOLOGY</span>
 
-        <div class="planet big"></div>
-        <div class="planet small"></div>
-
-        <div class="rocket">🚀</div>
-
-        <div class="scene-floor"></div>
+        <h2>📚 როგორ ვისწავლით?</h2>
 
       </div>
 
-      <div class="grade-content">
+      <div class="feature-grid">
 
-        <h3>🚀 მე-3 კლასი</h3>
+        <div class="neon-card feature">
+          <div class="feature-icon">🧠</div>
+          <b>Vocabulary</b>
+          <span>
+            სიტყვა + ქართული თარგმანი + გამოთქმა +
+            მაგალითი.
+          </span>
+        </div>
 
-        <p>
-          ყოველდღიური ცხოვრება, დღეები, თვეები,
-          ამინდი, მოქმედებები, ქალაქი, საკვები,
-          Speaking, Reading და მარტივი გრამატიკა.
+        <div class="neon-card feature">
+          <div class="feature-icon">🔊</div>
+          <b>Listening</b>
+          <span>
+            მოსმენა და გამეორება მარტივი
+            სავარჯიშოებით.
+          </span>
+        </div>
+
+        <div class="neon-card feature">
+          <div class="feature-icon">🗣️</div>
+          <b>Speaking</b>
+          <span>
+            მოკლე დიალოგები და ყოველდღიური
+            ფრაზები.
+          </span>
+        </div>
+
+        <div class="neon-card feature">
+          <div class="feature-icon">📝</div>
+          <b>Quiz</b>
+          <span>
+            შემოწმება, ქულა და პროგრესის
+            კონტროლი.
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         COURSE
+    ======================================================== -->
+
+    <section id="course" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">FULL HOLOGRAPHIC COURSE</span>
+
+        <h2>🗺️ სრული სასწავლო კურსი</h2>
+
+      </div>
+
+      <div class="course">
+
+        <div class="course-card">
+
+          <b>🌱 მე-2 კლასი</b>
+
+          <p>
+            სიტყვები, ფერები, ოჯახი, სკოლა,
+            ცხოველები, საკვები და მარტივი
+            წინადადებები.
+          </p>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="2"
+            href="grade2.html"
+          >
+            კურსის გახსნა
+          </a>
+
+        </div>
+
+        <div class="course-card">
+
+          <b>🚀 მე-3 კლასი</b>
+
+          <p>
+            დრო, დღეები, თვეები, ამინდი,
+            მოქმედებები, ქალაქი, Speaking,
+            Reading და Grammar.
+          </p>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="3"
+            href="grade3.html"
+          >
+            კურსის გახსნა
+          </a>
+
+        </div>
+
+        <div class="course-card">
+
+          <b>⭐ მე-4 კლასი</b>
+
+          <p>
+            Present Simple, კითხვები,
+            Prepositions, Reading, Dialogues,
+            Writing, Listening და Practice.
+          </p>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="4"
+            href="grade4.html"
+          >
+            კურსის გახსნა
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         PROGRESS
+    ======================================================== -->
+
+    <section id="progress" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">MY HOLOGRAPHIC PROGRESS</span>
+
+        <h2>🏆 შენი პროგრესი</h2>
+
+        <p class="muted">
+          აქ გამოჩნდება შენი სწავლის შედეგები.
         </p>
 
-        <a
-          class="btn primary grade-link"
-          data-grade="3"
-          href="grade3.html"
-        >
-          🚀 მე-3 კლასში შესვლა →
-        </a>
-
       </div>
 
-    </article>
+      <div class="neon-card progress-box">
 
-    <!-- GRADE 4 -->
+        <div class="stats">
 
-    <article class="neon-card grade">
+          <div class="stat">
+            <b id="words-count">0</b>
+            ნასწავლი სიტყვა
+          </div>
 
-      <div class="class-scene">
+          <div class="stat">
+            <b id="quiz-count">0</b>
+            Quiz
+          </div>
 
-        <span class="grade-label">
-          ⭐ ADVANCED
-        </span>
+          <div class="stat">
+            <b id="progress-percent">0%</b>
+            პროგრესი
+          </div>
 
-        <div class="globe">
-          <div>🌎</div>
+          <div class="stat">
+            <b id="student-level">⭐</b>
+            დონე
+          </div>
+
         </div>
 
-        <div
-          class="word"
-          style="left:8%;top:15%"
-        >
-          SPEAK
+        <div class="progress">
+          <i id="progress-bar"></i>
         </div>
 
-        <div
-          class="word"
-          style="right:8%;top:20%"
-        >
-          READ
-        </div>
-
-        <div
-          class="word"
-          style="left:10%;bottom:20%"
-        >
-          WRITE
-        </div>
-
-        <div
-          class="word"
-          style="right:8%;bottom:15%"
-        >
-          ENGLISH
-        </div>
-
-        <div class="scene-floor"></div>
-
-      </div>
-
-      <div class="grade-content">
-
-        <h3>⭐ მე-4 კლასი</h3>
-
-        <p>
-          გაფართოებული Vocabulary, Present Simple,
-          კითხვები, Prepositions, Reading, Dialogues,
-          Writing, Listening და Practice.
+        <p class="muted" id="progress-message">
+          დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.
         </p>
 
-        <a
-          class="btn primary grade-link"
-          data-grade="4"
-          href="grade4.html"
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         PARENT SPACE
+    ======================================================== -->
+
+    <section id="parents" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">FAMILY HOLOGRAM</span>
+
+        <h2>👨‍👩‍👧 მშობლის სივრცე</h2>
+
+        <p class="muted">
+          ოჯახი და სწავლა ერთ სივრცეში ❤️
+        </p>
+
+      </div>
+
+      <div class="family-parent neon-card">
+
+        <div class="family-glow"></div>
+
+        <div class="family-scene">
+
+          <div
+            class="family-letter"
+            style="left:10%;top:15%"
+          >
+            A
+          </div>
+
+          <div
+            class="family-letter"
+            style="right:12%;top:25%"
+          >
+            B
+          </div>
+
+          <div
+            class="family-letter"
+            style="left:20%;bottom:20%"
+          >
+            C
+          </div>
+
+          <div class="family">
+
+            <div class="person">
+              <div class="head">👨</div>
+              <div class="body">👕</div>
+              <div class="legs">👖</div>
+            </div>
+
+            <div class="person">
+              <div class="head">👩</div>
+              <div class="body">👗</div>
+              <div class="legs">👠</div>
+            </div>
+
+            <div class="person">
+              <div class="head">🧒</div>
+              <div class="body">👕</div>
+              <div class="legs">👟</div>
+            </div>
+
+          </div>
+
+          <div class="family-floor"></div>
+
+        </div>
+
+        <div class="parent-content">
+
+          <div class="parent-icon">
+            👨‍👩‍👧
+          </div>
+
+          <h2>მშობლის სივრცე</h2>
+
+          <p>
+            აქ მშობელს შეუძლია თვალყური ადევნოს
+            ბავშვის სწავლას, პროგრესს, Quiz შედეგებს
+            და დასვას კითხვა მასწავლებელთან.
+          </p>
+
+          <div class="parent-features">
+
+            <span class="pill">📊 პროგრესი</span>
+            <span class="pill">📝 Quiz შედეგები</span>
+            <span class="pill">❓ კითხვები</span>
+            <span class="pill">💬 პასუხები</span>
+
+          </div>
+
+          <a
+            href="parent-space.html"
+            class="btn primary"
+          >
+            👨‍👩‍👧 მშობლის სივრცეში შესვლა →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =======================================================
+         READY
+    ======================================================== -->
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <span class="badge">SYSTEM READY</span>
+
+        <h2>🚀 მზად ხარ?</h2>
+
+        <p class="muted">
+          შენი კლასი ავტომატურად არის განსაზღვრული
+          მასწავლებლის მიერ.
+        </p>
+
+        <div
+          class="buttons"
+          style="justify-content:center"
         >
-          ⭐ მე-4 კლასში შესვლა →
-        </a>
 
-      </div>
+          <a
+            class="btn primary grade-link"
+            data-grade="2"
+            href="grade2.html"
+          >
+            🌱 მე-2 კლასი
+          </a>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="3"
+            href="grade3.html"
+          >
+            🚀 მე-3 კლასი
+          </a>
+
+          <a
+            class="btn yellow grade-link"
+            data-grade="4"
+            href="grade4.html"
+          >
+            ⭐ მე-4 კლასი
+          </a>
 
-    </article>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     LEARNING
-====================================================== -->
-
-<section id="learn" class="section">
-
-  <div class="section-title">
-
-    <span class="badge">LEARN</span>
-
-    <h2>📚 როგორ ვისწავლით?</h2>
-
-  </div>
-
-  <div class="feature-grid">
-
-    <div class="neon-card feature">
-      <b>🧠 Vocabulary</b>
-      <span>
-        სიტყვა + ქართული თარგმანი + გამოთქმა + მაგალითი.
-      </span>
-    </div>
-
-    <div class="neon-card feature">
-      <b>🔊 Listening</b>
-      <span>
-        მოსმენა და გამეორება მარტივი სავარჯიშოებით.
-      </span>
-    </div>
-
-    <div class="neon-card feature">
-      <b>🗣️ Speaking</b>
-      <span>
-        მოკლე დიალოგები და ყოველდღიური ფრაზები.
-      </span>
-    </div>
-
-    <div class="neon-card feature">
-      <b>📝 Quiz</b>
-      <span>
-        შემოწმება, ქულა და პროგრესის კონტროლი.
-      </span>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     COURSE
-====================================================== -->
-
-<section id="course" class="section">
-
-  <div class="section-title">
-
-    <span class="badge">FULL COURSE</span>
-
-    <h2>🗺️ სრული სასწავლო კურსი</h2>
-
-  </div>
-
-  <div class="course">
-
-    <div class="course-card">
-
-      <b>🌱 მე-2 კლასი</b>
-
-      <p>
-        სიტყვები, ფერები, ოჯახი, სკოლა, ცხოველები,
-        საკვები და მარტივი წინადადებები.
-      </p>
-
-      <a
-        class="btn primary grade-link"
-        data-grade="2"
-        href="grade2.html"
-      >
-        კურსის გახსნა
-      </a>
-
-    </div>
-
-    <div class="course-card">
-
-      <b>🚀 მე-3 კლასი</b>
-
-      <p>
-        დრო, დღეები, თვეები, ამინდი, მოქმედებები,
-        ქალაქი, Speaking, Reading და Grammar.
-      </p>
-
-      <a
-        class="btn primary grade-link"
-        data-grade="3"
-        href="grade3.html"
-      >
-        კურსის გახსნა
-      </a>
-
-    </div>
-
-    <div class="course-card">
-
-      <b>⭐ მე-4 კლასი</b>
-
-      <p>
-        Present Simple, კითხვები, Prepositions,
-        Reading, Dialogues, Writing, Listening და Practice.
-      </p>
-
-      <a
-        class="btn primary grade-link"
-        data-grade="4"
-        href="grade4.html"
-      >
-        კურსის გახსნა
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     PROGRESS
-====================================================== -->
-
-<section id="progress" class="section">
-
-  <div class="section-title">
-
-    <span class="badge">MY PROGRESS</span>
-
-    <h2>🏆 შენი პროგრესი</h2>
-
-    <p class="muted">
-      აქ გამოჩნდება შენი სწავლის შედეგები.
-    </p>
-
-  </div>
-
-  <div class="neon-card progress-box">
-
-    <div class="stats">
-
-      <div class="stat">
-        <b id="words-count">0</b>
-        ნასწავლი სიტყვა
-      </div>
-
-      <div class="stat">
-        <b id="quiz-count">0</b>
-        Quiz
-      </div>
-
-      <div class="stat">
-        <b id="progress-percent">0%</b>
-        პროგრესი
-      </div>
-
-      <div class="stat">
-        <b id="student-level">⭐</b>
-        დონე
-      </div>
-
-    </div>
-
-    <div class="progress">
-      <i id="progress-bar"></i>
-    </div>
-
-    <p class="muted" id="progress-message">
-      დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.
-    </p>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     PARENT
-====================================================== -->
-
-<section id="parents" class="section">
-
-  <div class="section-title">
-
-    <span class="badge">FAMILY SPACE</span>
-
-    <h2>👨‍👩‍👧 მშობლის სივრცე</h2>
-
-    <p class="muted">
-      ოჯახი და სწავლა ერთ სივრცეში ❤️
-    </p>
-
-  </div>
-
-  <div class="family-parent neon-card">
-
-    <div class="family-glow"></div>
-
-    <div class="family-scene">
-
-      <div
-        class="family-letter"
-        style="left:10%;top:15%"
-      >
-        A
-      </div>
-
-      <div
-        class="family-letter"
-        style="right:12%;top:25%"
-      >
-        B
-      </div>
-
-      <div
-        class="family-letter"
-        style="left:20%;bottom:20%"
-      >
-        C
-      </div>
-
-      <div class="family">
-
-        <div class="person">
-          <div class="head">👨</div>
-          <div class="body">👕</div>
-          <div class="legs">👖</div>
-        </div>
-
-        <div class="person">
-          <div class="head">👩</div>
-          <div class="body">👗</div>
-          <div class="legs">👠</div>
-        </div>
-
-        <div class="person">
-          <div class="head">🧒</div>
-          <div class="body">👕</div>
-          <div class="legs">👟</div>
         </div>
 
       </div>
 
-      <div class="family-floor"></div>
-
-    </div>
-
-    <div class="parent-content">
-
-      <div class="parent-icon">
-        👨‍👩‍👧
-      </div>
-
-      <h2>მშობლის სივრცე</h2>
-
-      <p>
-        აქ მშობელს შეუძლია თვალყური ადევნოს ბავშვის
-        სწავლას, პროგრესს, Quiz შედეგებს და დასვას
-        კითხვა მასწავლებელთან.
-      </p>
-
-      <div class="parent-features">
-
-        <span class="pill">📊 პროგრესი</span>
-        <span class="pill">📝 Quiz შედეგები</span>
-        <span class="pill">❓ კითხვები</span>
-        <span class="pill">💬 პასუხები</span>
-
-      </div>
-
-      <a
-        href="parent-space.html"
-        class="btn primary"
-      >
-        👨‍👩‍👧 მშობლის სივრცეში შესვლა →
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =====================================================
-     READY
-====================================================== -->
-
-<section class="section">
-
-  <div class="section-title">
-
-    <span class="badge">READY?</span>
-
-    <h2>🚀 მზად ხარ?</h2>
-
-    <p class="muted">
-      შენი კლასი ავტომატურად არის განსაზღვრული
-      მასწავლებლის მიერ.
-    </p>
-
-    <div
-      class="buttons"
-      style="justify-content:center"
-    >
-
-      <a
-        class="btn primary grade-link"
-        data-grade="2"
-        href="grade2.html"
-      >
-        🌱 მე-2 კლასი
-      </a>
-
-      <a
-        class="btn primary grade-link"
-        data-grade="3"
-        href="grade3.html"
-      >
-        🚀 მე-3 კლასი
-      </a>
-
-      <a
-        class="btn yellow grade-link"
-        data-grade="4"
-        href="grade4.html"
-      >
-        ⭐ მე-4 კლასი
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-```
+    </section>
 
   </main>
 
-  <!-- =======================================================
+  <!-- =========================================================
        FOOTER
-  ======================================================== -->
+  ========================================================== -->
 
   <footer class="footer">
     <div class="wrap">
-      ⚡ English with Mariami • English Academy •
+      ⚡ English with Mariami • Holographic English Academy •
       სწავლა, თამაში და პროგრესი ❤️
     </div>
   </footer>
@@ -1474,20 +2002,19 @@
     ყველა უფლება დაცულია • Developed by btcgamer
   </footer>
 
-  <!-- =======================================================
-       SUPABASE / AUTH
-  ======================================================== -->
+  <!-- =========================================================
+       SUPABASE / AUTH / EFFECTS
+  ========================================================== -->
 
   <script>
     (() => {
       "use strict";
 
-      /*
-       * Wait until config.js creates the Supabase client.
-       * Supported existing client names are preserved.
-       */
+      /* =======================================================
+         SUPABASE CLIENT
+      ======================================================== */
 
-      function getClient() {
+      function getClient(){
         return (
           window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
           window.supabaseClient ||
@@ -1495,7 +2022,7 @@
         );
       }
 
-      function redirectToLogin() {
+      function redirectToLogin(){
         const redirect =
           "login.html?redirect=" +
           encodeURIComponent("academy.html");
@@ -1503,125 +2030,181 @@
         window.location.replace(redirect);
       }
 
-      function hideWrongGrades(grade) {
-        document.querySelectorAll(".grade-link").forEach((link) => {
-          const linkGrade = Number(link.dataset.grade);
+      /* =======================================================
+         GRADE VISIBILITY
+      ======================================================== */
 
-          if (linkGrade !== grade) {
+      function hideWrongGrades(grade){
+
+        document.querySelectorAll(".grade-link").forEach(link => {
+
+          const linkGrade =
+            Number(link.dataset.grade);
+
+          if(linkGrade !== grade){
+
             link.style.display = "none";
             link.removeAttribute("href");
-            link.setAttribute("aria-hidden", "true");
+            link.setAttribute(
+              "aria-hidden",
+              "true"
+            );
+
           }
+
         });
+
       }
 
-      function showAllGrades() {
-        document.querySelectorAll(".grade-link").forEach((link) => {
-          link.style.display = "";
-          link.removeAttribute("aria-hidden");
-        });
+      function showAllGrades(){
+
+        document.querySelectorAll(".grade-link")
+          .forEach(link => {
+
+            link.style.display = "";
+            link.removeAttribute("aria-hidden");
+
+          });
+
       }
 
-      function updateStudentMessage(grade) {
+      function updateStudentMessage(grade){
+
         const message =
           document.getElementById("grade-message");
 
-        if (message && [2, 3, 4].includes(grade)) {
+        if(
+          message &&
+          [2,3,4].includes(grade)
+        ){
+
           message.textContent =
             "შენი მინიჭებული კლასი: მე-" +
             grade +
             " კლასი 🎓";
+
         }
+
       }
+
+      /* =======================================================
+         PROGRESS
+      ======================================================== */
 
       function setProgress(
         words = 0,
         quizzes = 0,
         percent = 0,
         level = "⭐"
-      ) {
+      ){
+
         const safeWords =
           Number.isFinite(Number(words))
-            ? Math.max(0, Number(words))
+            ? Math.max(0,Number(words))
             : 0;
 
         const safeQuizzes =
           Number.isFinite(Number(quizzes))
-            ? Math.max(0, Number(quizzes))
+            ? Math.max(0,Number(quizzes))
             : 0;
 
         const safePercent =
           Number.isFinite(Number(percent))
-            ? Math.min(100, Math.max(0, Number(percent)))
+            ? Math.min(
+                100,
+                Math.max(0,Number(percent))
+              )
             : 0;
 
         const wordsEl =
-          document.getElementById("words-count");
+          document.getElementById(
+            "words-count"
+          );
 
         const quizEl =
-          document.getElementById("quiz-count");
+          document.getElementById(
+            "quiz-count"
+          );
 
         const percentEl =
-          document.getElementById("progress-percent");
+          document.getElementById(
+            "progress-percent"
+          );
 
         const levelEl =
-          document.getElementById("student-level");
+          document.getElementById(
+            "student-level"
+          );
 
         const barEl =
-          document.getElementById("progress-bar");
+          document.getElementById(
+            "progress-bar"
+          );
 
-        if (wordsEl) {
-          wordsEl.textContent = safeWords;
-        }
+        if(wordsEl)
+          wordsEl.textContent =
+            safeWords;
 
-        if (quizEl) {
-          quizEl.textContent = safeQuizzes;
-        }
+        if(quizEl)
+          quizEl.textContent =
+            safeQuizzes;
 
-        if (percentEl) {
+        if(percentEl)
           percentEl.textContent =
             Math.round(safePercent) + "%";
-        }
 
-        if (levelEl) {
-          levelEl.textContent = level || "⭐";
-        }
+        if(levelEl)
+          levelEl.textContent =
+            level || "⭐";
 
-        if (barEl) {
+        if(barEl)
           barEl.style.width =
             Math.round(safePercent) + "%";
-        }
       }
 
-      async function initAcademy() {
+      /* =======================================================
+         SUPABASE INITIALIZATION
+      ======================================================== */
+
+      async function initAcademy(){
+
         let client = getClient();
 
-        /*
-         * config.js may expose the client asynchronously.
-         */
-        if (!client) {
-          await new Promise((resolve) => {
+        if(!client){
+
+          await new Promise(resolve => {
+
             let finished = false;
 
             const finish = () => {
-              if (finished) return;
+
+              if(finished)
+                return;
+
               finished = true;
               resolve();
+
             };
 
             window.addEventListener(
               "englishMariamiSupabaseReady",
               finish,
-              { once: true }
+              {once:true}
             );
 
-            setTimeout(finish, 5000);
+            setTimeout(
+              finish,
+              5000
+            );
+
           });
 
           client = getClient();
+
         }
 
-        if (!client) {
+        if(!client){
+
           console.error(
             "Supabase client was not initialized."
           );
@@ -1630,25 +2213,28 @@
           return;
         }
 
-        try {
+        try{
 
           /* ---------------------------------------------
              AUTH SESSION
           --------------------------------------------- */
 
           const {
-            data: sessionData,
-            error: sessionError
-          } = await client.auth.getSession();
+            data:sessionData,
+            error:sessionError
+          } =
+            await client.auth.getSession();
 
-          if (
+          if(
             sessionError ||
             !sessionData ||
             !sessionData.session ||
             !sessionData.session.user
-          ) {
+          ){
+
             redirectToLogin();
             return;
+
           }
 
           const user =
@@ -1659,15 +2245,22 @@
           --------------------------------------------- */
 
           const {
-            data: profile,
-            error: profileError
-          } = await client
-            .from("profiles")
-            .select("role,grade,full_name")
-            .eq("user_id", user.id)
-            .maybeSingle();
+            data:profile,
+            error:profileError
+          } =
+            await client
+              .from("profiles")
+              .select(
+                "role,grade,full_name"
+              )
+              .eq(
+                "user_id",
+                user.id
+              )
+              .maybeSingle();
 
-          if (profileError) {
+          if(profileError){
+
             console.error(
               "Profile loading error:",
               profileError
@@ -1675,63 +2268,60 @@
 
             redirectToLogin();
             return;
+
           }
 
-          /*
-           * Existing metadata is used only as fallback.
-           * Database profile remains the primary source.
-           */
+          const role =
+            String(
+              profile?.role ??
+              user.user_metadata?.role ??
+              "student"
+            ).toLowerCase();
 
-          const role = String(
-            profile?.role ??
-            user.user_metadata?.role ??
-            "student"
-          ).toLowerCase();
+          const grade =
+            Number(
+              profile?.grade ??
+              user.user_metadata?.grade ??
+              0
+            );
 
-          const grade = Number(
-            profile?.grade ??
-            user.user_metadata?.grade ??
-            0
-          );
+          const validGrades =
+            [2,3,4];
+
+          const privilegedRoles =
+            [
+              "teacher",
+              "admin",
+              "parent"
+            ];
 
           /* ---------------------------------------------
-             ROLE VALIDATION
+             STUDENT VALIDATION
           --------------------------------------------- */
 
-          const validGrades = [2, 3, 4];
-
-          /*
-           * Teacher / admin / parent can see the academy
-           * without having a student grade assigned.
-           */
-          const privilegedRoles = [
-            "teacher",
-            "admin",
-            "parent"
-          ];
-
-          /*
-           * A student MUST have a valid assigned grade.
-           */
-          if (
+          if(
             role === "student" &&
             !validGrades.includes(grade)
-          ) {
+          ){
+
             alert(
               "შენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს."
             );
 
             redirectToLogin();
             return;
+
           }
 
-          /*
-           * Unknown roles are not allowed into the academy.
-           */
-          if (
+          /* ---------------------------------------------
+             ROLE VALIDATION
+          --------------------------------------------- */
+
+          if(
             !privilegedRoles.includes(role) &&
             role !== "student"
-          ) {
+          ){
+
             console.error(
               "Unknown profile role:",
               role
@@ -1741,13 +2331,14 @@
 
             redirectToLogin();
             return;
+
           }
 
           /* ---------------------------------------------
              STUDENT VIEW
           --------------------------------------------- */
 
-          if (role === "student") {
+          if(role === "student"){
 
             hideWrongGrades(grade);
 
@@ -1758,34 +2349,35 @@
                 "progress-message"
               );
 
-            if (progressMessage) {
+            if(progressMessage){
+
               progressMessage.textContent =
                 "შენი სასწავლო სივრცე: მე-" +
                 grade +
                 " კლასი. წარმატებები! 🚀";
+
             }
-          }
 
-          /*
-           * Teacher/admin/parent:
-           * all three grade sections remain visible.
-           */
-          else {
+          }else{
+
             showAllGrades();
+
           }
 
           /*
-           * At this stage progress values intentionally
-           * remain safe defaults.
-           *
-           * We will connect these to the actual Supabase
-           * progress tables after the remaining files/schema
-           * are checked, so no existing data is guessed or
-           * overwritten.
+           * Safe defaults.
+           * Actual progress can later be connected
+           * to the Supabase progress tables.
            */
-          setProgress(0, 0, 0, "⭐");
 
-        } catch (error) {
+          setProgress(
+            0,
+            0,
+            0,
+            "⭐"
+          );
+
+        }catch(error){
 
           console.error(
             "Academy initialization error:",
@@ -1793,22 +2385,181 @@
           );
 
           redirectToLogin();
+
         }
+
       }
 
-      /*
-       * Start only after DOM is available.
-       */
-      if (
+      /* =======================================================
+         MOUSE 3D EFFECT
+      ======================================================== */
+
+      const glow =
+        document.getElementById(
+          "cursorGlow"
+        );
+
+      document.addEventListener(
+        "mousemove",
+        event => {
+
+          if(glow){
+
+            glow.style.left =
+              event.clientX + "px";
+
+            glow.style.top =
+              event.clientY + "px";
+
+          }
+
+          const cards =
+            document.querySelectorAll(
+              ".neon-card"
+            );
+
+          cards.forEach(card => {
+
+            if(
+              window.innerWidth < 850
+            )
+              return;
+
+            const rect =
+              card.getBoundingClientRect();
+
+            const x =
+              event.clientX -
+              (rect.left + rect.width / 2);
+
+            const y =
+              event.clientY -
+              (rect.top + rect.height / 2);
+
+            const distance =
+              Math.sqrt(x*x + y*y);
+
+            if(distance < 500){
+
+              const rotateY =
+                (x / rect.width) * 4;
+
+              const rotateX =
+                -(y / rect.height) * 4;
+
+              card.style.transform =
+                `perspective(900px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateZ(8px)`;
+
+            }else{
+
+              card.style.transform = "";
+
+            }
+
+          });
+
+        }
+      );
+
+      /* =======================================================
+         CLICK RIPPLE
+      ======================================================== */
+
+      document.addEventListener(
+        "click",
+        event => {
+
+          const target =
+            event.target.closest(
+              ".btn,.navlinks a"
+            );
+
+          if(!target)
+            return;
+
+          const ripple =
+            document.createElement(
+              "span"
+            );
+
+          ripple.style.position =
+            "absolute";
+
+          ripple.style.width =
+            "10px";
+
+          ripple.style.height =
+            "10px";
+
+          ripple.style.borderRadius =
+            "50%";
+
+          ripple.style.background =
+            "rgba(255,255,255,.8)";
+
+          ripple.style.left =
+            (event.offsetX - 5) + "px";
+
+          ripple.style.top =
+            (event.offsetY - 5) + "px";
+
+          ripple.style.pointerEvents =
+            "none";
+
+          ripple.style.animation =
+            "ripple .6s ease-out forwards";
+
+          target.appendChild(ripple);
+
+          setTimeout(
+            () => ripple.remove(),
+            700
+          );
+
+        }
+      );
+
+      const rippleStyle =
+        document.createElement("style");
+
+      rippleStyle.textContent = `
+        @keyframes ripple{
+          from{
+            transform:scale(1);
+            opacity:.8;
+          }
+          to{
+            transform:scale(25);
+            opacity:0;
+          }
+        }
+      `;
+
+      document.head.appendChild(
+        rippleStyle
+      );
+
+      /* =======================================================
+         START
+      ======================================================== */
+
+      if(
         document.readyState === "loading"
-      ) {
+      ){
+
         document.addEventListener(
           "DOMContentLoaded",
           initAcademy,
-          { once: true }
+          {once:true}
         );
-      } else {
+
+      }else{
+
         initAcademy();
+
       }
 
     })();
