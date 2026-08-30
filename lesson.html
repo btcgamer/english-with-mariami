@@ -1199,7 +1199,7 @@ async function loadWords(lesson){
       .from('lesson_words')
       .select('*')
       .eq('lesson_id',lesson.id)
-      .order('word_number');
+      .order('sort_order');
 
   if(!result.error && result.data?.length)
     return result.data;
@@ -1236,7 +1236,7 @@ async function loadQuizzes(lesson){
       .from('lesson_quizzes')
       .select('*')
       .eq('lesson_id',lesson.id)
-      .order('question_number');
+      .order('sort_order');
 
   if(!result.error && result.data?.length)
     return result.data;
