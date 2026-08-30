@@ -1,1339 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grade 3 — English with Mariami</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  color:white;
+  background:#010611;
+  overflow-x:hidden;
+}
+
 /* =========================================================
-   GRADE 3 — MY PROGRESS
-   Local cache + Safe Supabase Sync
-   ========================================================= */
+   FUTURISTIC BACKGROUND
+========================================================= */
 
-(function () {
-  'use strict';
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  background:
+    radial-gradient(circle at 50% 35%,#073c69 0,#02182f 35%,#010611 72%,#000 100%);
+}
 
-  const KEY = 'grade3LearnedWords';
-  const QUIZ_KEY = 'grade3QuizAttempts';
-  const BEST_KEY = 'grade3BestScore';
-  const SYNC_QUEUE_KEY = 'grade3SyncQueue';
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-4;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 49.8%,#00eaff12 50%,transparent 50.2%),
+    linear-gradient(transparent 49.8%,#00eaff12 50%,transparent 50.2%);
+  background-size:100px 100px;
+  mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 70%,transparent);
+}
 
-  let started = false;
-  let wordsObserver = null;
-  let quizObserver = null;
-  let updateTimer = null;
+/* stars / particles */
 
-  /* =========================================================
-     LOCAL STORAGE HELPERS
-     ========================================================= */
+.space{
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  overflow:hidden;
+  pointer-events:none;
+}
 
-  function getLearned() {
-    try {
-      const data = JSON.parse(
-        localStorage.getItem(KEY) || '[]'
-      );
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 10px #00eaff;
+  animation:starFloat linear infinite;
+}
 
-      return new Set(
-        Array.isArray(data)
-          ? data
-              .map(String)
-              .map(v => v.trim())
-              .filter(Boolean)
-          : []
-      );
-    } catch (_) {
-      return new Set();
-    }
+@keyframes starFloat{
+  from{
+    transform:translateY(110vh) scale(.4);
+    opacity:0;
+  }
+  20%{opacity:1}
+  80%{opacity:1}
+  to{
+    transform:translateY(-10vh) scale(1.5);
+    opacity:0;
+  }
+}
+
+/* =========================================================
+   3D FLOOR
+========================================================= */
+
+.floor{
+  position:fixed;
+  left:-20%;
+  width:140%;
+  bottom:-20%;
+  height:55%;
+  z-index:-2;
+  transform:perspective(500px) rotateX(65deg);
+  transform-origin:bottom;
+  background-image:
+    linear-gradient(#00eaff35 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff35 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:linear-gradient(to top,#000,transparent);
+}
+
+/* =========================================================
+   NAV
+========================================================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#020b18d9;
+  border-bottom:1px solid #00eaff55;
+  backdrop-filter:blur(18px);
+}
+
+.nav{
+  width:min(1250px,calc(100% - 28px));
+  margin:auto;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.logo{
+  font-size:19px;
+  font-weight:1000;
+  color:#fff;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 20px #00eaff,
+    0 0 40px #008cff;
+}
+
+.nav-links{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+}
+
+.nav-links a{
+  white-space:nowrap;
+  padding:9px 12px;
+  border:1px solid #00eaff35;
+  border-radius:12px;
+  background:#06213bdd;
+  font-size:13px;
+  color:#dfffff;
+  text-decoration:none;
+  transition:.25s;
+}
+
+.nav-links a:hover{
+  transform:translateY(-2px);
+  border-color:#00eaff;
+  box-shadow:0 0 20px #00eaff55;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+  width:min(1200px,calc(100% - 28px));
+  margin:auto;
+}
+
+section{
+  padding:70px 0;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  min-height:720px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  border:1px solid #00eaff88;
+  background:#031d38cc;
+  color:#ffe600;
+  font-weight:900;
+  box-shadow:
+    inset 0 0 20px #00eaff12,
+    0 0 20px #00eaff22;
+}
+
+.hero h1{
+  margin:20px 0;
+  font-size:clamp(45px,7vw,82px);
+  line-height:.95;
+  letter-spacing:-3px;
+}
+
+.hero h1 span{
+  color:#00eaff;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 25px #00eaff,
+    0 0 60px #008cff;
+}
+
+.hero-text{
+  color:#d8faff;
+  font-size:18px;
+  line-height:1.75;
+  max-width:650px;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:12px 18px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-weight:1000;
+  text-decoration:none;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-4px) scale(1.02);
+}
+
+.primary{
+  color:#00131b;
+  background:#00eaff;
+  box-shadow:
+    0 0 15px #00eaff,
+    0 0 40px #00eaff55;
+}
+
+.yellow{
+  color:#171300;
+  background:#ffe600;
+  box-shadow:0 0 25px #ffe60055;
+}
+
+/* =========================================================
+   3D HOLOGRAM
+========================================================= */
+
+.hologram{
+  position:relative;
+  min-height:480px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1000px;
+}
+
+.holo-ring{
+  position:absolute;
+  width:360px;
+  height:360px;
+  border-radius:50%;
+  border:2px solid #00eaff88;
+  box-shadow:
+    0 0 20px #00eaff,
+    inset 0 0 30px #00eaff55;
+  animation:ringSpin 12s linear infinite;
+}
+
+.holo-ring:nth-child(2){
+  width:290px;
+  height:290px;
+  transform:rotateX(70deg);
+  animation-duration:8s;
+}
+
+.holo-ring:nth-child(3){
+  width:400px;
+  height:150px;
+  transform:rotateY(70deg);
+  animation-duration:10s;
+}
+
+@keyframes ringSpin{
+  from{transform:rotateZ(0)}
+  to{transform:rotateZ(360deg)}
+}
+
+.holo-globe{
+  position:relative;
+  width:230px;
+  height:230px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 25%,#dfffff 0,#00d9ff 18%,#007cff 48%,#021e54 75%,#000814 100%);
+  box-shadow:
+    inset -30px -30px 50px #000b,
+    0 0 25px #00eaff,
+    0 0 70px #008cff88;
+  animation:globeFloat 4s ease-in-out infinite;
+}
+
+.holo-globe::before{
+  content:"";
+  position:absolute;
+  inset:-20px;
+  border-radius:50%;
+  border:1px solid #00eaff55;
+  box-shadow:0 0 25px #00eaff44;
+}
+
+.holo-globe::after{
+  content:"";
+  position:absolute;
+  inset:15%;
+  border-radius:50%;
+  border:1px solid #ffffff55;
+  transform:rotateX(70deg);
+}
+
+@keyframes globeFloat{
+  0%,100%{transform:translateY(0) rotateY(0)}
+  50%{transform:translateY(-18px) rotateY(180deg)}
+}
+
+.holo-word{
+  position:absolute;
+  padding:7px 12px;
+  border-radius:12px;
+  color:white;
+  font-weight:1000;
+  background:#02182dcc;
+  border:1px solid #00eaff77;
+  box-shadow:0 0 18px #00eaff44;
+  animation:wordFloat 4s ease-in-out infinite;
+}
+
+.w1{top:10%;left:10%}
+.w2{top:20%;right:5%;animation-delay:1s}
+.w3{bottom:20%;left:4%;animation-delay:2s}
+.w4{bottom:10%;right:10%;animation-delay:3s}
+
+@keyframes wordFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  margin:15px 0;
+  font-size:38px;
+  text-shadow:0 0 20px #00eaff55;
+}
+
+.muted{
+  color:#a9dce8;
+}
+
+/* =========================================================
+   MODULE CARDS
+========================================================= */
+
+.modules{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  padding:25px;
+  border-radius:24px;
+  background:
+    linear-gradient(145deg,#062747e8,#020b18ed);
+  border:1px solid #00eaff44;
+  box-shadow:
+    0 20px 60px #000b,
+    inset 0 0 30px #00eaff08;
+  transition:.35s;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-80px;
+  top:-80px;
+  border-radius:50%;
+  background:#00eaff22;
+  filter:blur(20px);
+}
+
+.card:hover{
+  transform:
+    perspective(800px)
+    rotateX(4deg)
+    rotateY(-4deg)
+    translateY(-10px);
+  border-color:#00eaffaa;
+  box-shadow:
+    0 35px 70px #000e,
+    0 0 40px #00eaff44;
+}
+
+.card-icon{
+  font-size:45px;
+  margin-bottom:15px;
+  filter:drop-shadow(0 0 12px #00eaff);
+}
+
+.card h3{
+  color:#00eaff;
+  font-size:23px;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#d4f6ff;
+  line-height:1.65;
+}
+
+.open{
+  display:inline-block;
+  margin-top:18px;
+  color:#ffe600;
+  font-weight:900;
+}
+
+/* =========================================================
+   VOCABULARY 3D
+========================================================= */
+
+.vocab{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.word-card{
+  min-height:190px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:18px;
+  border-radius:20px;
+  background:linear-gradient(145deg,#07375f,#021321);
+  border:1px solid #00eaff44;
+  transition:.35s;
+}
+
+.word-card:hover{
+  transform:translateY(-8px) rotateX(5deg) rotateY(5deg);
+  box-shadow:0 0 30px #00eaff55;
+}
+
+.english{
+  font-size:30px;
+  font-weight:1000;
+  color:#fff;
+  text-shadow:0 0 15px #00eaff;
+}
+
+.georgian{
+  margin-top:8px;
+  color:#ffe600;
+  font-weight:900;
+}
+
+.speak{
+  margin-top:12px;
+  padding:7px 11px;
+  border-radius:10px;
+  border:1px solid #00eaff55;
+  background:#031a2f;
+  color:#00eaff;
+  cursor:pointer;
+}
+
+/* =========================================================
+   GRAMMAR
+========================================================= */
+
+.grammar{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.example{
+  margin-top:15px;
+  padding:18px;
+  border-left:3px solid #00eaff;
+  background:#03182bdd;
+  border-radius:10px;
+}
+
+.example strong{
+  color:#ffe600;
+}
+
+/* =========================================================
+   QUIZ
+========================================================= */
+
+.quiz-box{
+  max-width:850px;
+  margin:auto;
+  padding:30px;
+  border-radius:28px;
+  background:
+    linear-gradient(145deg,#052949ee,#010b18f0);
+  border:1px solid #00eaff66;
+  box-shadow:0 25px 80px #000c;
+}
+
+.question{
+  font-size:25px;
+  font-weight:900;
+  margin-bottom:22px;
+}
+
+.answers{
+  display:grid;
+  gap:12px;
+}
+
+.answer{
+  padding:15px;
+  border-radius:14px;
+  border:1px solid #00eaff44;
+  background:#06213b;
+  color:white;
+  cursor:pointer;
+  text-align:left;
+  font-size:16px;
+  transition:.2s;
+}
+
+.answer:hover{
+  border-color:#00eaff;
+  transform:translateX(5px);
+}
+
+.answer.correct{
+  background:#07552f;
+  border-color:#00ff99;
+}
+
+.answer.wrong{
+  background:#581f2a;
+  border-color:#ff5577;
+}
+
+.quiz-result{
+  margin-top:20px;
+  font-size:20px;
+  font-weight:900;
+  color:#ffe600;
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-box{
+  padding:28px;
+  border-radius:25px;
+  background:#03182ddd;
+  border:1px solid #00eaff55;
+}
+
+.progress-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat{
+  padding:18px;
+  text-align:center;
+  border-radius:15px;
+  background:#061e36;
+  border:1px solid #00eaff25;
+}
+
+.stat b{
+  display:block;
+  color:#ffe600;
+  font-size:27px;
+  margin-bottom:5px;
+}
+
+.progress-bar{
+  height:22px;
+  margin-top:22px;
+  overflow:hidden;
+  border-radius:30px;
+  background:#010810;
+  border:1px solid #00eaff33;
+}
+
+.progress-fill{
+  width:35%;
+  height:100%;
+  background:linear-gradient(90deg,#00eaff,#008cff,#ffe600);
+  box-shadow:0 0 20px #00eaff;
+  animation:progressGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes progressGlow{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.5)}
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+  margin-top:40px;
+  padding:35px 15px;
+  text-align:center;
+  color:#8cbac7;
+  border-top:1px solid #00eaff33;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .hero{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding-top:50px;
   }
 
-  function saveLearned(set) {
-    try {
-      localStorage.setItem(
-        KEY,
-        JSON.stringify([...set])
-      );
-    } catch (error) {
-      console.warn(
-        'Grade 3 local save failed:',
-        error
-      );
-    }
+  .modules{
+    grid-template-columns:1fr 1fr;
   }
 
-  function getAttempts() {
-    const value = Number(
-      localStorage.getItem(QUIZ_KEY) || 0
-    );
-
-    return Number.isFinite(value) && value >= 0
-      ? Math.floor(value)
-      : 0;
+  .vocab{
+    grid-template-columns:1fr 1fr;
   }
 
-  function saveAttempts(value) {
-    localStorage.setItem(
-      QUIZ_KEY,
-      String(Math.max(0, Math.floor(Number(value) || 0)))
-    );
+  .grammar{
+    grid-template-columns:1fr;
   }
 
-  function getBestQuiz() {
-    const value = Number(
-      localStorage.getItem(BEST_KEY) || 0
-    );
+}
 
-    return Math.max(
-      0,
-      Math.min(
-        10,
-        Number.isFinite(value) ? value : 0
-      )
-    );
+@media(max-width:600px){
+
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px 0;
   }
 
-  function saveBestQuiz(value) {
-    localStorage.setItem(
-      BEST_KEY,
-      String(
-        Math.max(
-          0,
-          Math.min(10, Number(value) || 0)
-        )
-      )
-    );
+  .nav-links{
+    width:100%;
   }
 
-  /* =========================================================
-     SUPABASE
-     ========================================================= */
-
-  function supabaseClient() {
-    return (
-      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-      window.supabaseClient ||
-      null
-    );
+  .hero h1{
+    font-size:46px;
   }
 
-  async function getCurrentStudent() {
-    const client = supabaseClient();
-
-    if (!client) return null;
-
-    try {
-      const {
-        data: { user },
-        error: userError
-      } = await client.auth.getUser();
-
-      if (userError || !user) {
-        return null;
-      }
-
-      const { data: profile, error: profileError } =
-        await client
-          .from('profiles')
-          .select('role,grade')
-          .eq('user_id', user.id)
-          .maybeSingle();
-
-      if (profileError || !profile) {
-        return null;
-      }
-
-      if (
-        String(profile.role || '').toLowerCase() !==
-        'student'
-      ) {
-        return null;
-      }
-
-      if (Number(profile.grade) !== 3) {
-        return null;
-      }
-
-      return {
-        client,
-        user,
-        profile
-      };
-
-    } catch (error) {
-      console.warn(
-        'Grade 3 student check failed:',
-        error
-      );
-
-      return null;
-    }
+  .hologram{
+    min-height:390px;
   }
 
-  /* =========================================================
-     OFFLINE SYNC QUEUE
-     ========================================================= */
-
-  function getSyncQueue() {
-    try {
-      const data = JSON.parse(
-        localStorage.getItem(SYNC_QUEUE_KEY) || '[]'
-      );
-
-      return Array.isArray(data)
-        ? data
-        : [];
-    } catch (_) {
-      return [];
-    }
+  .holo-globe{
+    width:180px;
+    height:180px;
   }
 
-  function saveSyncQueue(queue) {
-    try {
-      localStorage.setItem(
-        SYNC_QUEUE_KEY,
-        JSON.stringify(queue)
-      );
-    } catch (_) {}
+  .holo-ring{
+    width:270px;
+    height:270px;
   }
 
-  function queueActivity(activity) {
-    const queue = getSyncQueue();
-
-    const exists = queue.some(function (item) {
-      return (
-        item.type === activity.type &&
-        item.id === activity.id
-      );
-    });
-
-    if (!exists) {
-      queue.push(activity);
-      saveSyncQueue(queue);
-    }
+  .modules,
+  .vocab{
+    grid-template-columns:1fr;
   }
 
-  /* =========================================================
-     RECORD ACTIVITY
-     ========================================================= */
-
-  async function sendActivity(activity) {
-    const student = await getCurrentStudent();
-
-    if (!student) {
-      return false;
-    }
-
-    const client = student.client;
-
-    try {
-      const maxScore = Math.max(
-        1,
-        Number(activity.maxScore) || 1
-      );
-
-      const score = Math.max(
-        0,
-        Math.min(
-          maxScore,
-          Number(activity.score) || 0
-        )
-      );
-
-      const points = Math.max(
-        0,
-        Math.min(
-          50,
-          Number(activity.points) || 0
-        )
-      );
-
-      const { error } = await client.rpc(
-        'academy_record_activity',
-        {
-          p_grade: 3,
-          p_activity_type: String(
-            activity.type
-          ),
-          p_activity_id: String(
-            activity.id
-          ),
-          p_score: score,
-          p_max_score: maxScore,
-          p_points: points
-        }
-      );
-
-      if (error) {
-        console.warn(
-          'Grade 3 activity sync failed:',
-          error
-        );
-
-        return false;
-      }
-
-      return true;
-
-    } catch (error) {
-      console.warn(
-        'Grade 3 activity sync error:',
-        error
-      );
-
-      return false;
-    }
+  .progress-stats{
+    grid-template-columns:1fr 1fr;
   }
 
-  async function syncActivity(
-    type,
-    id,
-    score,
-    maxScore,
-    points
-  ) {
-    const activity = {
-      type: String(type),
-      id: String(id),
-      score: Number(score) || 0,
-      maxScore: Number(maxScore) || 1,
-      points: Number(points) || 0
-    };
-
-    const success =
-      await sendActivity(activity);
-
-    if (!success) {
-      queueActivity(activity);
-    }
-
-    return success;
+  section{
+    padding:50px 0;
   }
+}
 
-  /* =========================================================
-     FLUSH OFFLINE QUEUE
-     ========================================================= */
-
-  async function flushSyncQueue() {
-    const queue = getSyncQueue();
-
-    if (!queue.length) {
-      return;
-    }
-
-    const remaining = [];
-
-    for (const activity of queue) {
-      const success =
-        await sendActivity(activity);
-
-      if (!success) {
-        remaining.push(activity);
-      }
-    }
-
-    saveSyncQueue(remaining);
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
   }
+}
+</style>
+</head>
 
-  /* =========================================================
-     LEARNED WORD SYNC
-     ========================================================= */
+<body>
 
-  function syncLearnedWord(word) {
-    const safe = String(word || '')
-      .trim();
+<!-- SPACE -->
+<div class="space" aria-hidden="true">
+  <span class="star" style="left:5%;animation-duration:8s"></span>
+  <span class="star" style="left:12%;animation-duration:12s"></span>
+  <span class="star" style="left:20%;animation-duration:10s"></span>
+  <span class="star" style="left:29%;animation-duration:15s"></span>
+  <span class="star" style="left:38%;animation-duration:9s"></span>
+  <span class="star" style="left:47%;animation-duration:13s"></span>
+  <span class="star" style="left:57%;animation-duration:11s"></span>
+  <span class="star" style="left:67%;animation-duration:16s"></span>
+  <span class="star" style="left:76%;animation-duration:10s"></span>
+  <span class="star" style="left:87%;animation-duration:14s"></span>
+  <span class="star" style="left:94%;animation-duration:9s"></span>
+</div>
 
-    if (!safe) return;
+<div class="floor"></div>
 
-    const id =
-      'grade3-word-' +
-      encodeURIComponent(
-        safe.toLowerCase()
-      );
+<!-- NAV -->
+<header>
+  <div class="nav">
 
-    syncActivity(
-      'word',
-      id,
-      1,
-      1,
-      0
-    );
-  }
+    <a class="logo" href="academy.html">
+      ⚡ ENGLISH WITH MARIAMI
+    </a>
 
-  /* =========================================================
-     QUIZ SCORE
-     ========================================================= */
+    <nav class="nav-links">
+      <a href="academy.html">🏠 Academy</a>
+      <a href="#modules">📚 Lessons</a>
+      <a href="#vocabulary">🧠 Vocabulary</a>
+      <a href="#grammar">✍️ Grammar</a>
+      <a href="#quiz">🎯 Quiz</a>
+      <a href="#progress">🏆 Progress</a>
+    </nav>
 
-  function readQuizScore() {
-    const scoreElement =
-      document.getElementById(
-        'quizScore'
-      );
+  </div>
+</header>
 
-    if (!scoreElement) {
-      return getBestQuiz();
-    }
+<main class="container">
 
-    const text =
-      String(
-        scoreElement.textContent || ''
-      );
+<!-- HERO -->
 
-    /*
-      Supports:
-      8/10
-      8 / 10
-      Score: 8
-      8
-    */
+<section class="hero">
 
-    const match =
-      text.match(
-        /(?:^|\D)(10|[0-9])(?:\s*\/\s*10)?/
-      );
+  <div>
 
-    if (!match) {
-      return getBestQuiz();
-    }
+    <span class="badge">
+      🚀 GRADE 3 • FUTURE ENGLISH
+    </span>
 
-    const value =
-      Number(match[1]);
+    <h1>
+      ENGLISH<br>
+      <span>MISSION</span><br>
+      03
+    </h1>
 
-    return Math.max(
-      0,
-      Math.min(
-        10,
-        Number.isFinite(value)
-          ? value
-          : getBestQuiz()
-      )
-    );
-  }
+    <p class="hero-text">
+      კეთილი იყოს შენი მობრძანება მე-3 კლასის
+      ფუტურისტულ ინგლისურის სამყაროში.
+      აქ Vocabulary, Speaking, Reading,
+      Listening და Grammar გადაიქცევა
+      ერთ დიდ ინტერაქტიულ თავგადასავლად.
+    </p>
 
-  function syncQuiz(score) {
-    const safeScore =
-      Math.max(
-        0,
-        Math.min(
-          10,
-          Number(score) || 0
-        )
-      );
+    <div class="buttons">
+      <a class="btn primary" href="#modules">
+        🚀 მისია დავიწყოთ
+      </a>
 
-    const attemptId =
-      'grade3-quiz-' +
-      Date.now() +
-      '-' +
-      Math.random()
-        .toString(36)
-        .slice(2, 9);
+      <a class="btn yellow" href="#quiz">
+        🎯 Quiz Challenge
+      </a>
+    </div>
 
-    syncActivity(
-      'quiz',
-      attemptId,
-      safeScore,
-      10,
-      Math.min(
-        50,
-        safeScore * 5
-      )
-    );
-  }
+  </div>
 
-  /* =========================================================
-     TOTAL WORDS
-     ========================================================= */
+  <!-- HOLOGRAM -->
 
-  function getTotalWords() {
-    if (
-      Array.isArray(
-        window.grade3WordsForProgress
-      )
-    ) {
-      return window
-        .grade3WordsForProgress
-        .length;
-    }
+  <div class="hologram">
 
-    const words =
-      document.querySelectorAll(
-        '#words .word'
-      );
+    <div class="holo-ring"></div>
+    <div class="holo-ring"></div>
+    <div class="holo-ring"></div>
 
-    return words.length;
-  }
+    <div class="holo-globe"></div>
 
-  /* =========================================================
-     PROGRESS PANEL
-     ========================================================= */
+    <div class="holo-word w1">SPEAK</div>
+    <div class="holo-word w2">READ</div>
+    <div class="holo-word w3">LISTEN</div>
+    <div class="holo-word w4">LEARN</div>
 
-  function ensurePanel() {
-    let panel =
-      document.getElementById(
-        'grade3WorkingProgress'
-      );
+  </div>
 
-    if (panel) {
-      return panel;
-    }
+</section>
 
-    panel =
-      document.createElement(
-        'section'
-      );
+<!-- MODULES -->
 
-    panel.id =
-      'grade3WorkingProgress';
+<section id="modules">
 
-    panel.className =
-      'section';
+  <div class="section-title">
 
-    panel.innerHTML = `
-      <div class="section-title">
-        <h2>🏆 MY PROGRESS</h2>
-        <span>CLASS 3</span>
+    <span class="badge">LEARNING SYSTEM</span>
+
+    <h2>🌌 შენი სასწავლო მისია</h2>
+
+    <p class="muted">
+      აირჩიე სასწავლო მოდული და დაიწყე ახალი დონე.
+    </p>
+
+  </div>
+
+  <div class="modules">
+
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h3>Vocabulary</h3>
+      <p>
+        ისწავლე ახალი სიტყვები ქართულ თარგმანთან,
+        გამოთქმასთან და მაგალითებთან ერთად.
+      </p>
+      <a class="open" href="#vocabulary">OPEN MODULE →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🗣️</div>
+      <h3>Speaking</h3>
+      <p>
+        ისწავლე ყოველდღიური ფრაზები და
+        ივარჯიშე ინგლისურად საუბარში.
+      </p>
+      <a class="open" href="#speaking">OPEN MODULE →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🔊</div>
+      <h3>Listening</h3>
+      <p>
+        მოუსმინე ინგლისურ სიტყვებს და
+        გაიმეორე მათი სწორი გამოთქმა.
+      </p>
+      <a class="open" href="#vocabulary">OPEN MODULE →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">📖</div>
+      <h3>Reading</h3>
+      <p>
+        მოკლე ტექსტები, წინადადებები და
+        საინტერესო კითხვები.
+      </p>
+      <a class="open" href="#grammar">OPEN MODULE →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">✍️</div>
+      <h3>Grammar</h3>
+      <p>
+        Present Simple და მარტივი კითხვები
+        პრაქტიკული მაგალითებით.
+      </p>
+      <a class="open" href="#grammar">OPEN MODULE →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Quiz</h3>
+      <p>
+        შეამოწმე ცოდნა, მიიღე ქულა და
+        გახსენი შემდეგი სასწავლო დონე.
+      </p>
+      <a class="open" href="#quiz">START QUIZ →</a>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- VOCABULARY -->
+
+<section id="vocabulary">
+
+  <div class="section-title">
+
+    <span class="badge">VOCABULARY LAB</span>
+
+    <h2>🧠 სიტყვების ჰოლოგრამა</h2>
+
+    <p class="muted">
+      დააჭირე 🔊 ღილაკს და სიტყვა ხმამაღლა მოისმინე.
+    </p>
+
+  </div>
+
+  <div class="vocab">
+
+    <div class="word-card">
+      <div class="english">SCHOOL</div>
+      <div class="georgian">სკოლა</div>
+      <button class="speak" onclick="speakWord('School')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">FRIEND</div>
+      <div class="georgian">მეგობარი</div>
+      <button class="speak" onclick="speakWord('Friend')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">WEATHER</div>
+      <div class="georgian">ამინდი</div>
+      <button class="speak" onclick="speakWord('Weather')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">MORNING</div>
+      <div class="georgian">დილა</div>
+      <button class="speak" onclick="speakWord('Morning')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">FAMILY</div>
+      <div class="georgian">ოჯახი</div>
+      <button class="speak" onclick="speakWord('Family')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">CITY</div>
+      <div class="georgian">ქალაქი</div>
+      <button class="speak" onclick="speakWord('City')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">FOOD</div>
+      <div class="georgian">საკვები</div>
+      <button class="speak" onclick="speakWord('Food')">🔊 Listen</button>
+    </div>
+
+    <div class="word-card">
+      <div class="english">PLAY</div>
+      <div class="georgian">თამაში</div>
+      <button class="speak" onclick="speakWord('Play')">🔊 Listen</button>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SPEAKING -->
+
+<section id="speaking">
+
+  <div class="section-title">
+
+    <span class="badge">SPEAKING LAB</span>
+
+    <h2>🗣️ Speak English</h2>
+
+  </div>
+
+  <div class="grammar">
+
+    <div class="card">
+
+      <div class="card-icon">👋</div>
+
+      <h3>Hello!</h3>
+
+      <div class="example">
+        <strong>A:</strong> Hello! How are you?
       </div>
 
-      <p class="grade3-progress-description">
-        აქ გამოჩნდება შენი სწავლის შედეგები.
-      </p>
-
-      <div class="grade3-progress-grid">
-
-        <div class="grade3-progress-card">
-          <div class="grade3-progress-icon">
-            📚
-          </div>
-
-          <div
-            class="grade3-progress-number"
-            id="grade3LearnedCount"
-          >
-            0
-          </div>
-
-          <div>
-            ნასწავლი სიტყვა
-          </div>
-        </div>
-
-
-        <div class="grade3-progress-card">
-
-          <div class="grade3-progress-icon">
-            📝
-          </div>
-
-          <div
-            class="grade3-progress-number"
-            id="grade3QuizCount"
-          >
-            0/10
-          </div>
-
-          <div>
-            Quiz
-          </div>
-
-          <small
-            id="grade3QuizAttempts"
-            class="grade3-quiz-attempts"
-          >
-            მცდელობა: 0
-          </small>
-
-        </div>
-
-
-        <div class="grade3-progress-card">
-
-          <div class="grade3-progress-icon">
-            📈
-          </div>
-
-          <div
-            class="grade3-progress-number"
-            id="grade3OverallProgress"
-          >
-            0%
-          </div>
-
-          <div>
-            პროგრესი
-          </div>
-
-          <div class="grade3-mini-bar">
-            <div
-              id="grade3OverallFill"
-            ></div>
-          </div>
-
-        </div>
-
-
-        <div class="grade3-progress-card">
-
-          <div class="grade3-progress-icon">
-            ⭐
-          </div>
-
-          <div
-            class="grade3-progress-number"
-            id="grade3Level"
-          >
-            დამწყები
-          </div>
-
-          <div>
-            დონე
-          </div>
-
-        </div>
-
+      <div class="example">
+        <strong>B:</strong> I am fine, thank you!
       </div>
 
       <button
-        class="btn btn-yellow"
-        id="grade3ResetProgress"
-        style="margin-top:20px"
-        type="button"
-      >
-        🔄 პროგრესის თავიდან დაწყება
+        class="btn primary"
+        onclick="speakWord('Hello! How are you? I am fine, thank you!')">
+        🔊 მოუსმინე
       </button>
-    `;
 
-    /* =======================================================
-       CSS
-       ======================================================= */
+    </div>
 
-    if (
-      !document.getElementById(
-        'grade3ProgressStyles'
-      )
-    ) {
+    <div class="card">
 
-      const style =
-        document.createElement(
-          'style'
-        );
+      <div class="card-icon">🏫</div>
 
-      style.id =
-        'grade3ProgressStyles';
+      <h3>At School</h3>
 
-      style.textContent = `
+      <div class="example">
+        <strong>A:</strong> What is your favourite subject?
+      </div>
 
-        .grade3-progress-description {
-          color:#b7d9e8;
-          margin-bottom:20px;
-        }
+      <div class="example">
+        <strong>B:</strong> My favourite subject is English.
+      </div>
 
-        .grade3-progress-grid {
-          display:grid;
-          grid-template-columns:
-            repeat(4,1fr);
-          gap:16px;
-        }
+      <button
+        class="btn primary"
+        onclick="speakWord('What is your favourite subject? My favourite subject is English.')">
+        🔊 მოუსმინე
+      </button>
 
-        .grade3-progress-card {
-          padding:22px 15px;
-          border-radius:20px;
+    </div>
 
-          background:
-            linear-gradient(
-              145deg,
-              #09294e,
-              #06162f
-            );
+  </div>
 
-          border:1px solid #00eaff33;
+</section>
 
-          text-align:center;
+<!-- GRAMMAR -->
 
-          box-shadow:
-            0 12px 35px #0006;
+<section id="grammar">
 
-          min-height:175px;
+  <div class="section-title">
 
-          display:flex;
-          flex-direction:column;
-          align-items:center;
-          justify-content:center;
-        }
+    <span class="badge">GRAMMAR CORE</span>
 
-        .grade3-progress-icon {
-          font-size:34px;
-          margin-bottom:8px;
-        }
+    <h2>✍️ Present Simple</h2>
 
-        .grade3-progress-number {
-          font-size:30px;
-          font-weight:900;
-          color:#00eaff;
+    <p class="muted">
+      ვისწავლოთ მოქმედებები, რომლებიც ხშირად ხდება.
+    </p>
 
-          text-shadow:
-            0 0 18px #00eaff55;
+  </div>
 
-          margin-bottom:6px;
-        }
+  <div class="grammar">
 
-        .grade3-quiz-attempts {
-          display:block;
-          margin-top:8px;
-          color:#9cc9dc;
-          font-size:12px;
-        }
+    <div class="card">
 
-        .grade3-mini-bar {
-          width:calc(100% - 16px);
-          height:9px;
-          background:#020c20;
-          border-radius:20px;
-          overflow:hidden;
-          margin:14px 8px 0;
-        }
+      <div class="card-icon">⚡</div>
 
-        .grade3-mini-bar div {
-          height:100%;
-          width:0;
+      <h3>I / You / We / They</h3>
 
-          background:
-            linear-gradient(
-              90deg,
-              #00eaff,
-              #8200ff
-            );
+      <p>
+        I play football.<br>
+        You like music.<br>
+        We study English.<br>
+        They live in Georgia.
+      </p>
 
-          transition:
-            width .5s ease;
-        }
+      <div class="example">
+        <strong>Rule:</strong>
+        I / You / We / They + verb
+      </div>
 
-        .grade3-learned-btn {
-          margin-top:10px!important;
-          font-size:12px!important;
-          padding:8px 11px!important;
-        }
+    </div>
 
-        .grade3-learned-btn.learned {
-          background:#5cff9a!important;
-          color:#00151c!important;
-        }
+    <div class="card">
 
-        .grade3-learned-btn:active {
-          transform:scale(.97);
-        }
+      <div class="card-icon">⭐</div>
 
-        @media(max-width:800px) {
+      <h3>He / She / It</h3>
 
-          .grade3-progress-grid {
-            grid-template-columns:
-              1fr 1fr;
-          }
+      <p>
+        He plays football.<br>
+        She likes music.<br>
+        It works well.
+      </p>
 
-        }
+      <div class="example">
+        <strong>Rule:</strong>
+        He / She / It + verb + S
+      </div>
 
-        @media(max-width:500px) {
+    </div>
 
-          .grade3-progress-grid {
-            grid-template-columns:
-              1fr;
-          }
+  </div>
 
-          .grade3-progress-card {
-            min-height:145px;
-          }
+</section>
 
-        }
+<!-- QUIZ -->
 
-      `;
+<section id="quiz">
 
-      document.head.appendChild(
-        style
-      );
-    }
+  <div class="section-title">
 
-    const footer =
-      document.querySelector(
-        'footer'
-      );
+    <span class="badge">NEON QUIZ</span>
 
-    if (footer) {
+    <h2>🎯 Mission Quiz</h2>
 
-      footer.parentNode.insertBefore(
-        panel,
-        footer
-      );
+    <p class="muted">
+      სწორ პასუხზე დააჭირე.
+    </p>
 
-    } else {
+  </div>
 
-      document
-        .querySelector('main')
-        ?.appendChild(panel);
+  <div class="quiz-box">
 
-    }
+    <div class="question" id="question">
+      What is the English word for „სკოლა“?
+    </div>
 
-    /* =======================================================
-       RESET
-       ======================================================= */
+    <div class="answers">
 
-    const resetButton =
-      document.getElementById(
-        'grade3ResetProgress'
-      );
+      <button class="answer" onclick="answerQuiz(this,false)">
+        FAMILY
+      </button>
 
-    if (resetButton) {
+      <button class="answer" onclick="answerQuiz(this,true)">
+        SCHOOL
+      </button>
 
-      resetButton.addEventListener(
-        'click',
-        function () {
+      <button class="answer" onclick="answerQuiz(this,false)">
+        WEATHER
+      </button>
 
-          const confirmed =
-            window.confirm(
-              'ნამდვილად გინდა Grade 3-ის პროგრესის თავიდან დაწყება?'
-            );
+      <button class="answer" onclick="answerQuiz(this,false)">
+        FRIEND
+      </button>
 
-          if (!confirmed) {
-            return;
-          }
+    </div>
 
-          localStorage.removeItem(
-            KEY
-          );
+    <div class="quiz-result" id="quizResult"></div>
 
-          localStorage.removeItem(
-            QUIZ_KEY
-          );
+  </div>
 
-          localStorage.removeItem(
-            BEST_KEY
-          );
+</section>
 
-          localStorage.removeItem(
-            SYNC_QUEUE_KEY
-          );
+<!-- PROGRESS -->
 
-          document
-            .querySelectorAll(
-              '.grade3-learned-btn'
-            )
-            .forEach(
-              function (button) {
+<section id="progress">
 
-                button.classList.remove(
-                  'learned'
-                );
+  <div class="section-title">
 
-                button.textContent =
-                  '✅ ვისწავლე';
+    <span class="badge">STUDENT SYSTEM</span>
 
-              }
-            );
+    <h2>🏆 შენი პროგრესი</h2>
 
-          update();
-        }
-      );
-    }
+  </div>
 
-    return panel;
+  <div class="progress-box">
+
+    <div class="progress-stats">
+
+      <div class="stat">
+        <b id="wordsCount">8</b>
+        Words
+      </div>
+
+      <div class="stat">
+        <b id="quizCount">0</b>
+        Quiz
+      </div>
+
+      <div class="stat">
+        <b id="progressPercent">35%</b>
+        Progress
+      </div>
+
+      <div class="stat">
+        <b>🚀</b>
+        Level 3
+      </div>
+
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <p class="muted" style="margin-top:15px">
+      გააგრძელე სწავლა და გახსენი შემდეგი მისია! 🚀
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  ⚡ English with Mariami • Grade 3 Future Academy
+  <br><br>
+  © 2026 English with Mariami — Developed by btcgamer
+</footer>
+
+<script>
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+function speakWord(text){
+
+  if(!("speechSynthesis" in window)){
+    alert("თქვენს ბრაუზერს ხმოვანი ფუნქცია არ აქვს.");
+    return;
   }
 
-  /* =========================================================
-     UPDATE UI
-     ========================================================= */
+  window.speechSynthesis.cancel();
 
-  function update() {
-    const learned =
-      getLearned();
+  const voice = new SpeechSynthesisUtterance(text);
 
-    const total =
-      getTotalWords();
+  voice.lang = "en-US";
+  voice.rate = 0.85;
+  voice.pitch = 1;
 
-    const learnedCount =
-      learned.size;
+  window.speechSynthesis.speak(voice);
+}
 
-    const percentage =
-      total > 0
-        ? Math.min(
-            100,
-            Math.round(
-              learnedCount /
-              total *
-              100
-            )
-          )
-        : 0;
+/* =========================================================
+   QUIZ
+========================================================= */
 
-    const best =
-      getBestQuiz();
+let quizScore = 0;
 
-    const attempts =
-      getAttempts();
+function answerQuiz(button, correct){
 
-    const learnedEl =
-      document.getElementById(
-        'grade3LearnedCount'
-      );
+  const buttons =
+    document.querySelectorAll(".answer");
 
-    const quizEl =
-      document.getElementById(
-        'grade3QuizCount'
-      );
+  buttons.forEach(btn=>{
+    btn.disabled=true;
+  });
 
-    const attemptsEl =
-      document.getElementById(
-        'grade3QuizAttempts'
-      );
+  if(correct){
 
-    const progressEl =
-      document.getElementById(
-        'grade3OverallProgress'
-      );
+    button.classList.add("correct");
 
-    const fill =
-      document.getElementById(
-        'grade3OverallFill'
-      );
+    quizScore++;
 
-    const levelEl =
-      document.getElementById(
-        'grade3Level'
-      );
+    document.getElementById("quizResult").textContent =
+      "🎉 შესანიშნავია! სწორი პასუხია! +1 ქულა";
 
-    if (learnedEl) {
-      learnedEl.textContent =
-        learnedCount +
-        (total
-          ? '/' + total
-          : '');
-    }
+    document.getElementById("quizCount").textContent =
+      quizScore;
 
-    if (quizEl) {
-      quizEl.textContent =
-        best + '/10';
-    }
+    document.getElementById("progressPercent").textContent =
+      "45%";
 
-    if (attemptsEl) {
-      attemptsEl.textContent =
-        'მცდელობა: ' +
-        attempts;
-    }
+    document.getElementById("progressFill").style.width =
+      "45%";
 
-    if (progressEl) {
-      progressEl.textContent =
-        percentage + '%';
-    }
+  }else{
 
-    if (fill) {
-      fill.style.width =
-        percentage + '%';
-    }
+    button.classList.add("wrong");
 
-    if (levelEl) {
+    document.getElementById("quizResult").textContent =
+      "❌ სცადე კიდევ ერთხელ! სწორი პასუხია SCHOOL.";
 
-      let level =
-        'დამწყები';
-
-      if (percentage >= 100) {
-
-        level =
-          '🏆 Master';
-
-      } else if (percentage >= 75) {
-
-        level =
-          '🚀 გმირი';
-
-      } else if (percentage >= 50) {
-
-        level =
-          '⭐ ვარსკვლავი';
-
-      } else if (percentage >= 25) {
-
-        level =
-          '🌟 Explorer';
+    buttons.forEach(btn=>{
+      if(btn.textContent.trim()==="SCHOOL"){
+        btn.classList.add("correct");
       }
-
-      levelEl.textContent =
-        level;
-    }
+    });
   }
 
-  /* =========================================================
-     WORD BUTTONS
-     ========================================================= */
+}
 
-  function addLearnButtons() {
-    const wordsBox =
-      document.getElementById(
-        'words'
-      );
+/* =========================================================
+   3D MOUSE EFFECT
+========================================================= */
 
-    if (!wordsBox) {
+document.querySelectorAll(".card,.word-card").forEach(card=>{
+
+  card.addEventListener("mousemove",function(e){
+
+    const rect=this.getBoundingClientRect();
+
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+
+    const centerX=rect.width/2;
+    const centerY=rect.height/2;
+
+    const rotateX=
+      ((y-centerY)/centerY)*-5;
+
+    const rotateY=
+      ((x-centerX)/centerX)*5;
+
+    this.style.transform=
+      `perspective(800px)
+       rotateX(${rotateX}deg)
+       rotateY(${rotateY}deg)
+       translateY(-7px)`;
+
+  });
+
+  card.addEventListener("mouseleave",function(){
+
+    this.style.transform="";
+
+  });
+
+});
+
+/* =========================================================
+   SUPABASE AUTH CHECK
+========================================================= */
+
+(async()=>{
+
+  try{
+
+    const client =
+      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+      window.supabaseClient;
+
+    if(!client){
+      console.warn("Supabase client not found.");
       return;
     }
 
-    const learned =
-      getLearned();
+    const {data,error} =
+      await client.auth.getSession();
 
-    wordsBox
-      .querySelectorAll(
-        '.word'
-      )
-      .forEach(
-        function (card) {
+    if(error || !data.session){
 
-          if (
-            card.querySelector(
-              '.grade3-learned-btn'
-            )
-          ) {
-            return;
-          }
+      window.location.href =
+        "login.html?redirect="+
+        encodeURIComponent("grade3.html");
 
-          const title =
-            card.querySelector(
-              'h3'
-            );
-
-          if (!title) {
-            return;
-          }
-
-          const word =
-            title.textContent
-              .trim();
-
-          if (!word) {
-            return;
-          }
-
-          const btn =
-            document.createElement(
-              'button'
-            );
-
-          btn.type =
-            'button';
-
-          btn.className =
-            'btn btn-yellow grade3-learned-btn';
-
-          function renderButton() {
-
-            const isLearned =
-              getLearned()
-                .has(word);
-
-            btn.classList.toggle(
-              'learned',
-              isLearned
-            );
-
-            btn.textContent =
-              isLearned
-                ? '✓ ნასწავლია'
-                : '✅ ვისწავლე';
-          }
-
-          renderButton();
-
-          btn.addEventListener(
-            'click',
-            function () {
-
-              const set =
-                getLearned();
-
-              if (
-                set.has(word)
-              ) {
-
-                /*
-                  Remove locally.
-                  We intentionally do NOT
-                  send a "delete" RPC because
-                  academy_record_activity
-                  is a record/activity function.
-                */
-
-                set.delete(
-                  word
-                );
-
-              } else {
-
-                set.add(
-                  word
-                );
-
-                syncLearnedWord(
-                  word
-                );
-              }
-
-              saveLearned(
-                set
-              );
-
-              renderButton();
-
-              update();
-            }
-          );
-
-          card.appendChild(
-            btn
-          );
-        }
-      );
-  }
-
-  /* =========================================================
-     WATCH WORDS
-     ========================================================= */
-
-  function watchWords() {
-    const box =
-      document.getElementById(
-        'words'
-      );
-
-    if (!box) {
       return;
     }
 
-    addLearnButtons();
+    const user=data.session.user;
 
-    if (wordsObserver) {
-      wordsObserver.disconnect();
-    }
+    const {data:profile,error:profileError} =
+      await client
+      .from("profiles")
+      .select("role,grade,full_name")
+      .eq("user_id",user.id)
+      .maybeSingle();
 
-    wordsObserver =
-      new MutationObserver(
-        function () {
-
-          addLearnButtons();
-
-          update();
-        }
-      );
-
-    wordsObserver.observe(
-      box,
-      {
-        childList:true,
-        subtree:true
-      }
-    );
-  }
-
-  /* =========================================================
-     QUIZ
-     ========================================================= */
-
-  function watchQuiz() {
-    const quizBox =
-      document.getElementById(
-        'quizBox'
-      );
-
-    if (!quizBox) {
+    if(profileError){
+      console.error(profileError);
       return;
     }
 
-    if (quizObserver) {
-      quizObserver.disconnect();
-    }
+    const role=String(
+      profile?.role ??
+      user.user_metadata?.role ??
+      "student"
+    ).toLowerCase();
 
-    let counted = false;
-
-    function checkQuizFinished() {
-
-      const progress =
-        document.getElementById(
-          'quizProgress'
-        );
-
-      if (!progress) {
-        return;
-      }
-
-      const width =
-        String(
-          progress.style.width || ''
-        ).trim();
-
-      const numericWidth =
-        parseFloat(
-          width
-        );
-
-      const finished =
-        width === '100%' ||
-        numericWidth >= 100;
-
-      if (
-        finished &&
-        !counted
-      ) {
-
-        counted = true;
-
-        const attempts =
-          getAttempts() + 1;
-
-        saveAttempts(
-          attempts
-        );
-
-        const score =
-          readQuizScore();
-
-        saveBestQuiz(
-          Math.max(
-            getBestQuiz(),
-            score
-          )
-        );
-
-        syncQuiz(
-          score
-        );
-
-        update();
-
-      } else if (
-        !finished
-      ) {
-
-        counted = false;
-      }
-    }
-
-    quizObserver =
-      new MutationObserver(
-        function () {
-          checkQuizFinished();
-        }
-      );
-
-    quizObserver.observe(
-      quizBox,
-      {
-        childList:true,
-        subtree:true,
-        characterData:true,
-        attributes:true,
-        attributeFilter:[
-          'style',
-          'class'
-        ]
-      }
+    const grade=Number(
+      profile?.grade ??
+      user.user_metadata?.grade ??
+      0
     );
-
-    checkQuizFinished();
-  }
-
-  /* =========================================================
-     ONLINE / OFFLINE
-     ========================================================= */
-
-  function setupConnectionSync() {
-
-    window.addEventListener(
-      'online',
-      function () {
-
-        flushSyncQueue();
-
-        addLearnButtons();
-
-        update();
-      }
-    );
-
-    window.addEventListener(
-      'offline',
-      function () {
-
-        console.info(
-          'Grade 3: offline mode'
-        );
-      }
-    );
-  }
-
-  /* =========================================================
-     START
-     ========================================================= */
-
-  function start() {
-
-    if (started) {
-      return;
-    }
-
-    started = true;
 
     /*
-      Only Grade 3 page.
+      Grade 3 page:
+      students must be assigned grade 3.
+      Teacher/admin/parent can preview.
     */
 
-    if (
-      !location.pathname
-        .toLowerCase()
-        .endsWith(
-          'grade3.html'
-        )
-    ) {
+    const privileged=[
+      "teacher",
+      "admin",
+      "parent"
+    ];
+
+    if(
+      role==="student" &&
+      grade!==3
+    ){
+
+      alert(
+        "ეს არის მე-3 კლასის სასწავლო სივრცე. შენს ანგარიშზე სხვა კლასია მინიჭებული."
+      );
+
+      window.location.href="academy.html";
       return;
     }
 
-    ensurePanel();
-
-    addLearnButtons();
-
-    watchWords();
-
-    watchQuiz();
-
-    setupConnectionSync();
-
-    update();
-
-    /*
-      Flush previously failed
-      activities when possible.
-    */
-
-    if (navigator.onLine) {
-      flushSyncQueue();
-    }
-
-    /*
-      Lightweight UI refresh.
-    */
-
-    updateTimer =
-      setInterval(
-        function () {
-          update();
-        },
-        1000
-      );
-  }
-
-  /* =========================================================
-     BOOT
-     ========================================================= */
-
-  if (
-    document.readyState ===
-    'loading'
-  ) {
-
-    document.addEventListener(
-      'DOMContentLoaded',
-      start,
-      {
-        once:true
-      }
+    console.log(
+      "Grade 3 Academy loaded:",
+      user.email
     );
 
-  } else {
+  }catch(error){
 
-    start();
+    console.error(
+      "Grade 3 initialization error:",
+      error
+    );
+
   }
 
 })();
+
+</script>
+
+</body>
+</html>
