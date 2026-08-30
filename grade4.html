@@ -2,2511 +2,725 @@
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Grade 4 — English with Mariami | Ultimate Level</title>
+<title>English with Mariami</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 
 <style>
+*{box-sizing:border-box}
 
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-  min-height:100vh;
-  overflow-x:hidden;
+  margin:0;
   font-family:Arial,"Noto Sans Georgian",sans-serif;
-  color:#fff;
-  background:#01030c;
+  color:white;
+  background:#01050d;
+  overflow-x:hidden;
 }
 
-/* =========================================================
-   COSMIC BACKGROUND
-========================================================= */
-
-body::before{
-  content:"";
+.world{
   position:fixed;
   inset:0;
   z-index:-10;
-
-  background:
-    radial-gradient(
-      circle at 50% 30%,
-      #182b76 0%,
-      #07174b 20%,
-      #020b25 45%,
-      #01030c 75%,
-      #000 100%
-    );
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-9;
-  pointer-events:none;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 20%,
-      #0008 100%
-    );
-}
-
-/* =========================================================
-   SPACE PARTICLES
-========================================================= */
-
-.space{
-  position:fixed;
-  inset:0;
   overflow:hidden;
-  z-index:-8;
-  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 30%,
+      #087cae 0%,
+      #063957 25%,
+      #021729 55%,
+      #01050d 100%);
+}
+
+.world:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(#00eaff12 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff12 1px,transparent 1px);
+  background-size:55px 55px;
+  transform:perspective(500px) rotateX(60deg) scale(2);
+  transform-origin:center bottom;
+  animation:grid 5s linear infinite;
+}
+
+@keyframes grid{
+  to{background-position:0 55px,55px 0}
 }
 
 .star{
   position:absolute;
-  width:2px;
-  height:2px;
+  width:4px;
+  height:4px;
   border-radius:50%;
-  background:#fff;
-
-  box-shadow:
-    0 0 6px #fff,
-    0 0 15px #00eaff;
-
-  animation:
-    starMove linear infinite;
+  background:white;
+  box-shadow:0 0 15px #00eaff;
+  animation:star 3s infinite ease-in-out;
 }
 
-@keyframes starMove{
+.s1{left:8%;top:15%}
+.s2{left:20%;top:60%}
+.s3{left:35%;top:25%}
+.s4{left:50%;top:70%}
+.s5{left:65%;top:20%}
+.s6{left:80%;top:55%}
+.s7{left:92%;top:25%}
 
-  from{
-    transform:
-      translate3d(0,110vh,0)
-      scale(.2);
-    opacity:0;
-  }
-
-  15%{
-    opacity:1;
-  }
-
-  85%{
-    opacity:1;
-  }
-
-  to{
-    transform:
-      translate3d(40px,-15vh,200px)
-      scale(1.8);
-    opacity:0;
-  }
+@keyframes star{
+  0%,100%{opacity:.2;transform:scale(.5)}
+  50%{opacity:1;transform:scale(2)}
 }
 
-/* =========================================================
-   FUTURE GRID
-========================================================= */
-
-.grid-floor{
-  position:fixed;
-  left:-25%;
-  right:-25%;
-  bottom:-28%;
-  height:62%;
-  z-index:-7;
-
-  transform:
-    perspective(550px)
-    rotateX(66deg);
-
-  background-image:
-    linear-gradient(#00eaff35 1px,transparent 1px),
-    linear-gradient(90deg,#00eaff35 1px,transparent 1px);
-
-  background-size:55px 55px;
-
-  mask-image:
-    linear-gradient(
-      to top,
-      #000,
-      transparent
-    );
+.wrap{
+  width:min(1200px,calc(100% - 24px));
+  margin:auto;
 }
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 header{
   position:sticky;
   top:0;
-  z-index:1000;
-
-  border-bottom:
-    1px solid #00eaff55;
-
-  background:#020713d9;
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  z-index:100;
+  background:#021020e8;
+  border-bottom:1px solid #00eaff55;
+  backdrop-filter:blur(15px);
 }
 
 .nav{
-  width:min(1250px,calc(100% - 28px));
-  min-height:68px;
-
-  margin:auto;
-
+  min-height:65px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
-
+  align-items:center;
   gap:15px;
 }
 
-.logo{
+.brand{
   color:#fff;
   text-decoration:none;
-
-  font-size:19px;
   font-weight:1000;
-
-  text-shadow:
-    0 0 8px #fff,
-    0 0 20px #00eaff,
-    0 0 45px #008cff;
+  text-shadow:0 0 15px #00eaff;
 }
 
 .navlinks{
   display:flex;
   gap:7px;
-
   overflow-x:auto;
 }
 
 .navlinks a{
-  white-space:nowrap;
-
-  padding:9px 12px;
-
-  color:#dfffff;
+  color:white;
   text-decoration:none;
-
-  font-size:13px;
-  font-weight:800;
-
+  padding:9px 12px;
   border-radius:12px;
-
-  border:
-    1px solid #00eaff35;
-
-  background:#06213bdd;
-
-  transition:.25s;
+  border:1px solid #00eaff44;
+  background:#062443cc;
+  white-space:nowrap;
 }
 
 .navlinks a:hover{
-  transform:translateY(-3px);
-
   border-color:#00eaff;
-
-  box-shadow:
-    0 0 15px #00eaff55,
-    inset 0 0 15px #00eaff12;
+  box-shadow:0 0 20px #00eaff55;
 }
-
-/* =========================================================
-   CONTAINER
-========================================================= */
-
-.container{
-  width:min(1200px,calc(100% - 28px));
-  margin:auto;
-}
-
-section{
-  padding:80px 0;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
 
 .hero{
-  min-height:780px;
-
+  min-height:600px;
   display:grid;
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1.1fr .9fr;
   align-items:center;
-
   gap:35px;
 }
 
-/* =========================================================
-   BADGE
-========================================================= */
-
 .badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-
-  padding:9px 16px;
-
-  color:#ffe600;
-
-  border:
-    1px solid #00eaff99;
-
+  display:inline-block;
+  padding:8px 15px;
   border-radius:30px;
-
-  background:#031b38dd;
-
-  box-shadow:
-    0 0 20px #00eaff22,
-    inset 0 0 20px #00eaff0c;
-
-  font-weight:1000;
-}
-
-/* =========================================================
-   HERO TEXT
-========================================================= */
-
-.hero h1{
-  margin:22px 0;
-
-  font-size:
-    clamp(48px,7vw,90px);
-
-  line-height:.88;
-
-  letter-spacing:-5px;
-}
-
-.hero h1 .cyan{
-  color:#00eaff;
-
-  text-shadow:
-    0 0 5px #fff,
-    0 0 18px #00eaff,
-    0 0 50px #008cff,
-    0 0 90px #006cff;
-}
-
-.hero h1 .gold{
+  border:1px solid #00eaff88;
+  background:#031a32cc;
   color:#ffe600;
+  font-weight:900;
+  box-shadow:0 0 20px #00eaff22;
+}
 
+h1{
+  font-size:clamp(45px,7vw,82px);
+  line-height:1;
+  margin:20px 0;
+}
+
+h1 span{
+  color:#00eaff;
   text-shadow:
-    0 0 10px #ffe600,
-    0 0 35px #ff9d00;
+    0 0 10px #00eaff,
+    0 0 35px #008cff;
 }
 
 .lead{
-  max-width:650px;
-
-  color:#d8faff;
-
   font-size:18px;
-
-  line-height:1.75;
+  line-height:1.7;
+  color:#e5faff;
 }
 
 .buttons{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
-
-  margin-top:28px;
+  margin-top:25px;
 }
 
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  min-height:47px;
-
-  padding:12px 18px;
-
+  display:inline-block;
+  border:0;
+  padding:13px 18px;
   border-radius:14px;
-
-  border:1px solid transparent;
-
   font-weight:1000;
-
-  text-decoration:none;
-
   cursor:pointer;
-
+  text-decoration:none;
   transition:.25s;
 }
 
 .btn:hover{
-  transform:
-    translateY(-5px)
-    scale(1.02);
+  transform:translateY(-4px) scale(1.03);
 }
 
 .primary{
-  color:#00131a;
   background:#00eaff;
-
-  box-shadow:
-    0 0 15px #00eaff,
-    0 0 45px #00eaff55;
+  color:#00151c;
+  box-shadow:0 0 25px #00eaff66;
 }
 
-.gold{
-  color:#191500;
+.yellow{
   background:#ffe600;
-
-  box-shadow:
-    0 0 20px #ffe60055;
+  color:#161300;
+  box-shadow:0 0 25px #ffe60055;
 }
 
-/* =========================================================
-   ULTIMATE HOLOGRAM
-========================================================= */
-
-.holo-zone{
-  position:relative;
-
-  min-height:560px;
-
+.hologram{
+  min-height:380px;
   display:flex;
-  align-items:center;
   justify-content:center;
-
-  perspective:1200px;
-}
-
-/* CENTRAL CORE */
-
-.core{
+  align-items:center;
   position:relative;
-
-  width:220px;
-  height:220px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #fff 0%,
-      #dfffff 8%,
-      #00eaff 25%,
-      #006cff 48%,
-      #071447 70%,
-      #000 100%
-    );
-
-  box-shadow:
-    0 0 20px #fff,
-    0 0 45px #00eaff,
-    0 0 100px #008cff,
-    0 0 170px #0055ff66;
-
-  animation:
-    coreFloat 4s ease-in-out infinite;
 }
-
-@keyframes coreFloat{
-
-  0%,100%{
-    transform:
-      translateY(0)
-      rotateY(0deg);
-  }
-
-  50%{
-    transform:
-      translateY(-18px)
-      rotateY(180deg);
-  }
-}
-
-.core::before{
-  content:"";
-
-  position:absolute;
-  inset:-18px;
-
-  border-radius:50%;
-
-  border:
-    2px solid #00eaffaa;
-
-  box-shadow:
-    0 0 30px #00eaff,
-    inset 0 0 30px #00eaff44;
-}
-
-.core::after{
-  content:"FINAL";
-
-  position:absolute;
-
-  inset:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:#fff;
-
-  font-size:24px;
-  font-weight:1000;
-
-  letter-spacing:5px;
-
-  text-shadow:
-    0 0 10px #fff,
-    0 0 25px #00eaff;
-}
-
-/* RINGS */
 
 .ring{
   position:absolute;
-
+  width:290px;
+  height:290px;
+  border:2px solid #00eaff77;
   border-radius:50%;
-
-  border:
-    1px solid #00eaff99;
-
-  box-shadow:
-    0 0 20px #00eaff44,
-    inset 0 0 20px #00eaff22;
+  box-shadow:0 0 30px #00eaff55;
+  animation:spin 8s linear infinite;
 }
 
-.r1{
-  width:330px;
-  height:330px;
-
-  animation:
-    ring1 9s linear infinite;
+.ring.r2{
+  width:220px;
+  height:220px;
+  transform:rotateX(65deg);
+  animation-duration:5s;
 }
 
-.r2{
-  width:430px;
-  height:170px;
-
-  transform:rotateX(70deg);
-
-  animation:
-    ring2 7s linear infinite;
-}
-
-.r3{
-  width:470px;
-  height:190px;
-
-  transform:rotateY(70deg);
-
-  animation:
-    ring3 11s linear infinite;
-}
-
-.r4{
-  width:520px;
-  height:250px;
-
-  transform:
-    rotateX(65deg)
-    rotateY(20deg);
-
-  border-color:#ffe60055;
-
-  animation:
-    ring4 14s linear infinite;
-}
-
-@keyframes ring1{
-  from{transform:rotateZ(0)}
+@keyframes spin{
   to{transform:rotateZ(360deg)}
 }
 
-@keyframes ring2{
-  from{
-    transform:
-      rotateX(70deg)
-      rotateZ(0);
-  }
-  to{
-    transform:
-      rotateX(70deg)
-      rotateZ(360deg);
-  }
+.teacher{
+  position:relative;
+  z-index:3;
+  width:250px;
+  padding:30px;
+  text-align:center;
+  border-radius:25px;
+  border:1px solid #00eaff99;
+  background:#031a2fee;
+  box-shadow:0 0 45px #00eaff55;
+  animation:float 4s ease-in-out infinite;
 }
 
-@keyframes ring3{
-  from{
-    transform:
-      rotateY(70deg)
-      rotateZ(0);
-  }
-  to{
-    transform:
-      rotateY(70deg)
-      rotateZ(360deg);
-  }
+@keyframes float{
+  50%{transform:translateY(-15px)}
 }
 
-@keyframes ring4{
-  from{
-    transform:
-      rotateX(65deg)
-      rotateY(20deg)
-      rotateZ(0);
-  }
-  to{
-    transform:
-      rotateX(65deg)
-      rotateY(20deg)
-      rotateZ(360deg);
-  }
+.avatar{
+  font-size:90px;
+  filter:drop-shadow(0 0 20px #00eaff);
 }
 
-/* =========================================================
-   FLOATING WORDS
-========================================================= */
-
-.holo-word{
-  position:absolute;
-
-  padding:8px 13px;
-
-  border-radius:13px;
-
-  color:#fff;
-
-  font-weight:1000;
-
-  background:#03182ddd;
-
-  border:
-    1px solid #00eaff77;
-
-  box-shadow:
-    0 0 20px #00eaff44;
-
-  text-shadow:
-    0 0 10px #00eaff;
-
-  animation:
-    holoWord 4s ease-in-out infinite;
+.teacher h2{
+  color:#00eaff;
 }
 
-.word1{
-  top:7%;
-  left:7%;
+.section{
+  padding:65px 0;
 }
-
-.word2{
-  top:20%;
-  right:3%;
-
-  animation-delay:1s;
-}
-
-.word3{
-  bottom:18%;
-  left:2%;
-
-  animation-delay:2s;
-}
-
-.word4{
-  bottom:8%;
-  right:8%;
-
-  animation-delay:3s;
-}
-
-.word5{
-  top:50%;
-  left:0%;
-
-  animation-delay:.5s;
-}
-
-@keyframes holoWord{
-
-  0%,100%{
-    transform:
-      translateY(0)
-      translateZ(0);
-  }
-
-  50%{
-    transform:
-      translateY(-18px)
-      translateZ(30px);
-  }
-}
-
-/* =========================================================
-   ALPHABET ORBIT
-========================================================= */
-
-.alphabet{
-  position:absolute;
-  width:500px;
-  height:500px;
-
-  animation:
-    alphabetSpin 30s linear infinite;
-}
-
-.alphabet span{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  font-size:27px;
-  font-weight:1000;
-
-  color:#fff;
-
-  text-shadow:
-    0 0 7px #fff,
-    0 0 18px #00eaff,
-    0 0 35px #008cff;
-
-  transform-origin:
-    0 0;
-}
-
-.alphabet span:nth-child(1){transform:rotate(0deg) translateX(250px)}
-.alphabet span:nth-child(2){transform:rotate(13.8deg) translateX(250px)}
-.alphabet span:nth-child(3){transform:rotate(27.6deg) translateX(250px)}
-.alphabet span:nth-child(4){transform:rotate(41.4deg) translateX(250px)}
-.alphabet span:nth-child(5){transform:rotate(55.2deg) translateX(250px)}
-.alphabet span:nth-child(6){transform:rotate(69deg) translateX(250px)}
-.alphabet span:nth-child(7){transform:rotate(82.8deg) translateX(250px)}
-.alphabet span:nth-child(8){transform:rotate(96.6deg) translateX(250px)}
-.alphabet span:nth-child(9){transform:rotate(110.4deg) translateX(250px)}
-.alphabet span:nth-child(10){transform:rotate(124.2deg) translateX(250px)}
-.alphabet span:nth-child(11){transform:rotate(138deg) translateX(250px)}
-.alphabet span:nth-child(12){transform:rotate(151.8deg) translateX(250px)}
-.alphabet span:nth-child(13){transform:rotate(165.6deg) translateX(250px)}
-.alphabet span:nth-child(14){transform:rotate(179.4deg) translateX(250px)}
-.alphabet span:nth-child(15){transform:rotate(193.2deg) translateX(250px)}
-.alphabet span:nth-child(16){transform:rotate(207deg) translateX(250px)}
-.alphabet span:nth-child(17){transform:rotate(220.8deg) translateX(250px)}
-.alphabet span:nth-child(18){transform:rotate(234.6deg) translateX(250px)}
-.alphabet span:nth-child(19){transform:rotate(248.4deg) translateX(250px)}
-.alphabet span:nth-child(20){transform:rotate(262.2deg) translateX(250px)}
-.alphabet span:nth-child(21){transform:rotate(276deg) translateX(250px)}
-.alphabet span:nth-child(22){transform:rotate(289.8deg) translateX(250px)}
-.alphabet span:nth-child(23){transform:rotate(303.6deg) translateX(250px)}
-.alphabet span:nth-child(24){transform:rotate(317.4deg) translateX(250px)}
-.alphabet span:nth-child(25){transform:rotate(331.2deg) translateX(250px)}
-.alphabet span:nth-child(26){transform:rotate(345deg) translateX(250px)}
-
-@keyframes alphabetSpin{
-  from{
-    transform:rotateZ(0);
-  }
-  to{
-    transform:rotateZ(360deg);
-  }
-}
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
 
 .section-title{
   text-align:center;
-  margin-bottom:38px;
+  margin-bottom:35px;
 }
 
 .section-title h2{
-  margin:15px 0;
-
-  font-size:40px;
-
-  text-shadow:
-    0 0 20px #00eaff55;
+  font-size:36px;
 }
 
 .muted{
-  color:#a9dce8;
+  color:#bfe8f4;
 }
 
-/* =========================================================
-   MISSION CARDS
-========================================================= */
-
-.missions{
-  display:grid;
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:18px;
-}
-
-.card{
-  position:relative;
-  overflow:hidden;
-
-  padding:26px;
-
-  min-height:250px;
-
-  border-radius:25px;
-
-  border:
-    1px solid #00eaff44;
-
-  background:
-    linear-gradient(
-      145deg,
-      #062b4be8,
-      #020a17ef
-    );
-
-  box-shadow:
-    0 25px 70px #000b,
-    inset 0 0 30px #00eaff08;
-
-  transition:
-    transform .25s,
-    box-shadow .25s,
-    border-color .25s;
-}
-
-.card::before{
-  content:"";
-
-  position:absolute;
-
-  width:180px;
-  height:180px;
-
-  top:-90px;
-  right:-90px;
-
-  border-radius:50%;
-
-  background:#00eaff22;
-
-  filter:blur(20px);
-}
-
-.card:hover{
-  border-color:#00eaffaa;
-
-  box-shadow:
-    0 35px 80px #000e,
-    0 0 45px #00eaff44;
-}
-
-.card-icon{
-  font-size:46px;
-
-  margin-bottom:15px;
-
-  filter:
-    drop-shadow(0 0 12px #00eaff);
-}
-
-.card h3{
-  margin-bottom:10px;
-
-  color:#00eaff;
-
-  font-size:24px;
-}
-
-.card p{
-  color:#d4f6ff;
-
-  line-height:1.7;
-}
-
-.card-link{
-  display:inline-block;
-
-  margin-top:18px;
-
-  color:#ffe600;
-
-  font-weight:1000;
-
-  text-decoration:none;
-}
-
-/* =========================================================
-   ADVANCED VOCABULARY
-========================================================= */
-
-.vocab{
-  display:grid;
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:15px;
-}
-
-.word-card{
-  position:relative;
-
-  min-height:190px;
-
+.profile{
   display:flex;
-  flex-direction:column;
-
-  justify-content:center;
   align-items:center;
-
-  text-align:center;
-
-  padding:18px;
-
+  justify-content:space-between;
+  gap:15px;
+  padding:20px;
+  margin-top:20px;
   border-radius:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #083960,
-      #020e1d
-    );
-
-  border:
-    1px solid #00eaff44;
-
-  transition:.3s;
+  border:1px solid #00eaff55;
+  background:#03182cdd;
 }
 
-.word-card:hover{
-  transform:
-    perspective(900px)
-    rotateX(6deg)
-    rotateY(-6deg)
-    translateY(-9px);
-
-  border-color:#00eaffaa;
-
-  box-shadow:
-    0 0 35px #00eaff44;
-}
-
-.english{
-  color:#fff;
-
-  font-size:28px;
-  font-weight:1000;
-
-  text-shadow:
-    0 0 15px #00eaff;
-}
-
-.georgian{
-  margin-top:8px;
-
+.profile strong{
   color:#ffe600;
-
-  font-weight:900;
+  font-size:20px;
 }
 
-.speak{
-  margin-top:13px;
-
-  padding:7px 11px;
-
-  border-radius:10px;
-
-  color:#00eaff;
-
-  background:#03182d;
-
-  border:
-    1px solid #00eaff55;
-
-  cursor:pointer;
-}
-
-/* =========================================================
-   GRAMMAR
-========================================================= */
-
-.grammar{
+.cards{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
-.rule{
-  margin-top:16px;
-
-  padding:18px;
-
-  border-left:
-    3px solid #00eaff;
-
-  border-radius:10px;
-
-  background:#03182ddd;
-
-  line-height:1.8;
+.card{
+  padding:25px;
+  min-height:260px;
+  border-radius:25px;
+  border:1px solid #00eaff55;
+  background:linear-gradient(145deg,#062746e8,#020c19ed);
+  box-shadow:0 20px 50px #000b;
+  transition:.3s;
 }
 
-.rule strong{
+.card:hover{
+  transform:translateY(-10px) rotateX(4deg);
+  box-shadow:0 0 40px #00eaff44;
+}
+
+.icon{
+  font-size:60px;
+}
+
+.card h3{
   color:#ffe600;
+  font-size:25px;
 }
 
-/* =========================================================
-   READING
-========================================================= */
-
-.reading{
-  max-width:900px;
-
-  margin:auto;
-
-  padding:32px;
-
-  border-radius:28px;
-
-  border:
-    1px solid #00eaff66;
-
-  background:
-    linear-gradient(
-      145deg,
-      #052849ee,
-      #010a17ee
-    );
-
-  box-shadow:
-    0 25px 80px #000c;
+.words{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
-.reading h3{
-  color:#00eaff;
-
-  font-size:28px;
-
-  margin-bottom:18px;
+.word{
+  padding:22px;
+  min-height:150px;
+  text-align:center;
+  border-radius:20px;
+  border:1px solid #00eaff44;
+  background:#03182cdd;
+  cursor:pointer;
+  transition:.3s;
 }
 
-.reading p{
-  color:#d9f7ff;
-
-  line-height:1.9;
-
-  font-size:17px;
+.word:hover{
+  transform:translateY(-7px) scale(1.02);
+  border-color:#00eaff;
+  box-shadow:0 0 30px #00eaff55;
 }
 
-.reading button{
-  margin-top:20px;
+.word strong{
+  display:block;
+  font-size:25px;
+  color:white;
 }
 
-/* =========================================================
-   FINAL QUIZ
-========================================================= */
+.word span{
+  display:block;
+  margin-top:10px;
+  color:#ffe600;
+  font-weight:900;
+}
 
 .quiz{
-  max-width:900px;
-
-  margin:auto;
-
-  padding:32px;
-
-  border-radius:30px;
-
-  border:
-    1px solid #00eaff77;
-
-  background:
-    linear-gradient(
-      145deg,
-      #062b4bee,
-      #010a18f0
-    );
-
-  box-shadow:
-    0 30px 100px #000d,
-    0 0 40px #00eaff18;
+  padding:30px;
+  border-radius:25px;
+  border:1px solid #00eaff66;
+  background:#031629ee;
+  box-shadow:0 0 40px #00eaff22;
+  text-align:center;
 }
 
 .question{
-  font-size:26px;
-
+  font-size:32px;
+  color:#00eaff;
   font-weight:1000;
-
-  margin-bottom:23px;
+  margin:20px 0;
 }
 
 .answers{
   display:grid;
-
+  grid-template-columns:repeat(2,1fr);
   gap:12px;
+  max-width:650px;
+  margin:auto;
 }
 
 .answer{
-  padding:16px;
-
-  text-align:left;
-
-  border-radius:14px;
-
-  border:
-    1px solid #00eaff44;
-
-  background:#06213b;
-
-  color:#fff;
-
-  font-size:16px;
-
+  padding:15px;
+  border-radius:15px;
+  border:1px solid #00eaff44;
+  background:#062443;
+  color:white;
   cursor:pointer;
-
-  transition:.2s;
+  font-size:17px;
+  font-weight:bold;
 }
 
 .answer:hover{
-  transform:translateX(6px);
-
+  background:#074b6e;
   border-color:#00eaff;
-
-  box-shadow:
-    0 0 20px #00eaff22;
 }
 
-.answer.correct{
-  background:#07552f;
-
-  border-color:#00ff99;
-
-  box-shadow:
-    0 0 20px #00ff9944;
-}
-
-.answer.wrong{
-  background:#581f2a;
-
-  border-color:#ff5577;
-}
-
-.quiz-result{
+.result{
   margin-top:20px;
-
+  min-height:28px;
   color:#ffe600;
-
-  font-size:20px;
-
-  font-weight:1000;
-}
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-box{
-  padding:30px;
-
-  border-radius:27px;
-
-  border:
-    1px solid #00eaff55;
-
-  background:#03182ddd;
+  font-weight:bold;
 }
 
 .stats{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:12px;
 }
 
 .stat{
-  padding:18px;
-
+  padding:20px;
   text-align:center;
-
   border-radius:16px;
-
-  background:#061e36;
-
-  border:
-    1px solid #00eaff25;
+  background:#061c32;
+  border:1px solid #00eaff33;
 }
 
 .stat b{
   display:block;
-
-  margin-bottom:5px;
-
-  color:#ffe600;
-
   font-size:28px;
+  color:#ffe600;
+  margin-bottom:6px;
 }
 
 .progress{
-  height:23px;
-
-  margin-top:24px;
-
-  overflow:hidden;
-
+  height:20px;
+  margin-top:25px;
   border-radius:30px;
-
-  background:#010810;
-
-  border:
-    1px solid #00eaff33;
+  overflow:hidden;
+  background:#010811;
 }
 
-.progress-fill{
-  width:72%;
-
+.progress i{
+  display:block;
+  width:0;
   height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      #00eaff,
-      #008cff,
-      #ffe600
-    );
-
-  box-shadow:
-    0 0 25px #00eaff;
-
-  animation:
-    progressPulse 2s ease-in-out infinite alternate;
+  background:linear-gradient(90deg,#00eaff,#008cff,#ffe600);
+  box-shadow:0 0 20px #00eaff;
+  transition:1s;
 }
 
-@keyframes progressPulse{
-  from{filter:brightness(1)}
-  to{filter:brightness(1.5)}
-}
-
-/* =========================================================
-   FINAL LEVEL
-========================================================= */
-
-.final{
+.mission{
   text-align:center;
-
-  padding:90px 20px;
+  padding:45px 20px;
+  border-radius:30px;
+  border:1px solid #00eaff66;
+  background:linear-gradient(135deg,#06385ddd,#020d1bdd);
+  box-shadow:0 0 50px #00eaff22;
 }
-
-.final h2{
-  font-size:
-    clamp(40px,6vw,70px);
-
-  color:#ffe600;
-
-  text-shadow:
-    0 0 10px #ffe600,
-    0 0 35px #ff9d00,
-    0 0 70px #ff550055;
-}
-
-.final p{
-  max-width:700px;
-
-  margin:20px auto;
-
-  color:#d9f7ff;
-
-  line-height:1.8;
-
-  font-size:18px;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
 
 footer{
-  padding:40px 15px;
-
+  margin-top:50px;
+  padding:35px;
   text-align:center;
-
-  color:#8cbac7;
-
-  border-top:
-    1px solid #00eaff33;
+  color:#9dc7d5;
+  border-top:1px solid #00eaff33;
 }
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:950px){
-
-  .hero{
-    grid-template-columns:1fr;
-  }
-
-  .missions{
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .vocab{
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .grammar{
-    grid-template-columns:1fr;
-  }
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .words{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
 }
 
-@media(max-width:650px){
-
-  .nav{
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    padding:12px 0;
-  }
-
-  .navlinks{
-    width:100%;
-  }
-
-  .hero{
-    min-height:auto;
-
-    padding-top:50px;
-  }
-
-  .hero h1{
-    font-size:48px;
-  }
-
-  .holo-zone{
-    min-height:430px;
-  }
-
-  .core{
-    width:160px;
-    height:160px;
-  }
-
-  .r1{
-    width:240px;
-    height:240px;
-  }
-
-  .r2{
-    width:300px;
-    height:120px;
-  }
-
-  .r3{
-    width:330px;
-    height:140px;
-  }
-
-  .r4{
-    width:360px;
-    height:170px;
-  }
-
-  .alphabet{
-    width:350px;
-    height:350px;
-  }
-
-  .alphabet span{
-    font-size:18px;
-  }
-
-  .alphabet span:nth-child(1){transform:rotate(0deg) translateX(175px)}
-  .alphabet span:nth-child(2){transform:rotate(13.8deg) translateX(175px)}
-  .alphabet span:nth-child(3){transform:rotate(27.6deg) translateX(175px)}
-  .alphabet span:nth-child(4){transform:rotate(41.4deg) translateX(175px)}
-  .alphabet span:nth-child(5){transform:rotate(55.2deg) translateX(175px)}
-  .alphabet span:nth-child(6){transform:rotate(69deg) translateX(175px)}
-  .alphabet span:nth-child(7){transform:rotate(82.8deg) translateX(175px)}
-  .alphabet span:nth-child(8){transform:rotate(96.6deg) translateX(175px)}
-  .alphabet span:nth-child(9){transform:rotate(110.4deg) translateX(175px)}
-  .alphabet span:nth-child(10){transform:rotate(124.2deg) translateX(175px)}
-  .alphabet span:nth-child(11){transform:rotate(138deg) translateX(175px)}
-  .alphabet span:nth-child(12){transform:rotate(151.8deg) translateX(175px)}
-  .alphabet span:nth-child(13){transform:rotate(165.6deg) translateX(175px)}
-  .alphabet span:nth-child(14){transform:rotate(179.4deg) translateX(175px)}
-  .alphabet span:nth-child(15){transform:rotate(193.2deg) translateX(175px)}
-  .alphabet span:nth-child(16){transform:rotate(207deg) translateX(175px)}
-  .alphabet span:nth-child(17){transform:rotate(220.8deg) translateX(175px)}
-  .alphabet span:nth-child(18){transform:rotate(234.6deg) translateX(175px)}
-  .alphabet span:nth-child(19){transform:rotate(248.4deg) translateX(175px)}
-  .alphabet span:nth-child(20){transform:rotate(262.2deg) translateX(175px)}
-  .alphabet span:nth-child(21){transform:rotate(276deg) translateX(175px)}
-  .alphabet span:nth-child(22){transform:rotate(289.8deg) translateX(175px)}
-  .alphabet span:nth-child(23){transform:rotate(303.6deg) translateX(175px)}
-  .alphabet span:nth-child(24){transform:rotate(317.4deg) translateX(175px)}
-  .alphabet span:nth-child(25){transform:rotate(331.2deg) translateX(175px)}
-  .alphabet span:nth-child(26){transform:rotate(345deg) translateX(175px)}
-
-  .missions,
-  .vocab{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  section{
-    padding:55px 0;
-  }
+@media(max-width:600px){
+  .nav{flex-direction:column;padding:12px 0}
+  .words{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .answers{grid-template-columns:1fr}
 }
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    animation-duration:.001ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-  }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- =======================================================
-     SPACE
-======================================================= -->
-
-<div class="space" aria-hidden="true">
-
-  <span class="star" style="left:3%;animation-duration:9s"></span>
-  <span class="star" style="left:8%;animation-duration:13s"></span>
-  <span class="star" style="left:14%;animation-duration:11s"></span>
-  <span class="star" style="left:20%;animation-duration:15s"></span>
-  <span class="star" style="left:27%;animation-duration:8s"></span>
-  <span class="star" style="left:34%;animation-duration:12s"></span>
-  <span class="star" style="left:42%;animation-duration:17s"></span>
-  <span class="star" style="left:50%;animation-duration:10s"></span>
-  <span class="star" style="left:58%;animation-duration:14s"></span>
-  <span class="star" style="left:65%;animation-duration:9s"></span>
-  <span class="star" style="left:73%;animation-duration:16s"></span>
-  <span class="star" style="left:81%;animation-duration:12s"></span>
-  <span class="star" style="left:89%;animation-duration:10s"></span>
-  <span class="star" style="left:96%;animation-duration:15s"></span>
-
+<div class="world">
+  <i class="star s1"></i>
+  <i class="star s2"></i>
+  <i class="star s3"></i>
+  <i class="star s4"></i>
+  <i class="star s5"></i>
+  <i class="star s6"></i>
+  <i class="star s7"></i>
 </div>
 
-<div class="grid-floor"></div>
-
-<!-- =======================================================
-     NAV
-======================================================= -->
-
 <header>
+<div class="wrap nav">
 
-  <div class="nav">
+<a class="brand" href="academy.html">
+⚡ ENGLISH WITH MARIAMI
+</a>
 
-    <a class="logo" href="academy.html">
-      ⚡ ENGLISH WITH MARIAMI
-    </a>
+<nav class="navlinks">
+<a href="academy.html">🏠 Academy</a>
+<a href="#lessons">🎓 Lessons</a>
+<a href="#vocabulary">🧠 Vocabulary</a>
+<a href="#quiz">📝 Quiz</a>
+<a href="#progress">🏆 Progress</a>
+<a href="#" id="logout">🚪 გამოსვლა</a>
+</nav>
 
-    <nav class="navlinks">
-
-      <a href="academy.html">
-        🏠 Academy
-      </a>
-
-      <a href="#missions">
-        🚀 Missions
-      </a>
-
-      <a href="#vocabulary">
-        🧠 Vocabulary
-      </a>
-
-      <a href="#grammar">
-        ✍️ Grammar
-      </a>
-
-      <a href="#reading">
-        📖 Reading
-      </a>
-
-      <a href="#quiz">
-        🎯 Final Quiz
-      </a>
-
-      <a href="#progress">
-        🏆 Progress
-      </a>
-
-    </nav>
-
-  </div>
-
+</div>
 </header>
 
-<main class="container">
-
-<!-- =======================================================
-     HERO
-======================================================= -->
+<main class="wrap">
 
 <section class="hero">
 
-  <div>
+<div>
 
-    <span class="badge">
-      ⭐ GRADE 4 • ULTIMATE LEVEL
-    </span>
+<span class="badge" id="gradeBadge">
+GRADE
+</span>
 
-    <h1>
+<h1>
+ინგლისური
+<span id="gradeTitle">ახალი სამყაროა.</span>
+</h1>
 
-      <span class="cyan">
-        ENGLISH
-      </span>
+<p class="lead" id="gradeDescription">
+კეთილი იყოს შენი მობრძანება English with Mariami-ის
+ფუტურისტულ აკადემიაში.
+</p>
 
-      <br>
+<div class="buttons">
 
-      <span class="gold">
-        MASTER
-      </span>
+<a href="#vocabulary" class="btn primary">
+🧠 დავიწყოთ სწავლა
+</a>
 
-      <br>
+<a href="#quiz" class="btn yellow">
+📝 Quiz
+</a>
 
-      <span class="cyan">
-        04
-      </span>
+</div>
 
-    </h1>
+<div class="profile">
+<div>
+👤 მოსწავლე:
+<strong id="studentName">იტვირთება...</strong>
+</div>
 
-    <p class="lead">
+<div id="studentGrade">
+GRADE
+</div>
+</div>
 
-      ეს უკვე ბოლო დონეა.
-      კეთილი იყოს შენი მობრძანება
-      English with Mariami-ის
-      Ultimate English სამყაროში.
+</div>
 
-      აქ გააერთიანებ Vocabulary-ს,
-      Grammar-ს, Reading-ს,
-      Listening-ს და Speaking-ს.
+<div class="hologram">
 
-      შენი საბოლოო მისია —
-      გახდე English Master! 🚀
+<div class="ring"></div>
+<div class="ring r2"></div>
 
-    </p>
+<div class="teacher">
 
-    <div class="buttons">
+<div class="avatar">👩‍🏫</div>
 
-      <a
-        class="btn primary"
-        href="#missions"
-      >
-        🚀 FINAL MISSION
-      </a>
+<h2>Teacher Mariami</h2>
 
-      <a
-        class="btn gold"
-        href="#quiz"
-      >
-        ⭐ ULTIMATE QUIZ
-      </a>
+<p class="muted">
+შენი ინგლისურის გზამკვლევი ✨
+</p>
 
-    </div>
+<span class="badge" id="levelBadge">
+LEVEL
+</span>
 
-  </div>
+</div>
 
-  <!-- HOLOGRAPHIC CORE -->
-
-  <div class="holo-zone">
-
-    <div class="alphabet">
-
-      <span>A</span>
-      <span>B</span>
-      <span>C</span>
-      <span>D</span>
-      <span>E</span>
-      <span>F</span>
-      <span>G</span>
-      <span>H</span>
-      <span>I</span>
-      <span>J</span>
-      <span>K</span>
-      <span>L</span>
-      <span>M</span>
-      <span>N</span>
-      <span>O</span>
-      <span>P</span>
-      <span>Q</span>
-      <span>R</span>
-      <span>S</span>
-      <span>T</span>
-      <span>U</span>
-      <span>V</span>
-      <span>W</span>
-      <span>X</span>
-      <span>Y</span>
-      <span>Z</span>
-
-    </div>
-
-    <div class="ring r1"></div>
-    <div class="ring r2"></div>
-    <div class="ring r3"></div>
-    <div class="ring r4"></div>
-
-    <div class="core"></div>
-
-    <div class="holo-word word1">
-      SPEAK
-    </div>
-
-    <div class="holo-word word2">
-      THINK
-    </div>
-
-    <div class="holo-word word3">
-      READ
-    </div>
-
-    <div class="holo-word word4">
-      WRITE
-    </div>
-
-    <div class="holo-word word5">
-      MASTER
-    </div>
-
-  </div>
+</div>
 
 </section>
 
-<!-- =======================================================
-     MISSIONS
-======================================================= -->
 
-<section id="missions">
+<section id="lessons" class="section">
 
-  <div class="section-title">
+<div class="section-title">
 
-    <span class="badge">
-      ULTIMATE LEARNING SYSTEM
-    </span>
+<span class="badge">
+🎓 LESSONS
+</span>
 
-    <h2>
-      🌌 Final Level Missions
-    </h2>
+<h2 id="lessonsTitle">
+რას ვისწავლით?
+</h2>
 
-    <p class="muted">
-      აირჩიე მიმართულება და განავითარე შენი ინგლისური.
-    </p>
+<p class="muted">
+ისწავლე, მოუსმინე, ივარჯიშე და დააგროვე ქულები.
+</p>
 
-  </div>
+</div>
 
-  <div class="missions">
-
-    <div class="card">
-
-      <div class="card-icon">
-        🧠
-      </div>
-
-      <h3>
-        Advanced Vocabulary
-      </h3>
-
-      <p>
-        ყოველდღიური ცხოვრების,
-        ქალაქის, მოგზაურობის,
-        საკვების, ადამიანებისა და
-        მოქმედებების ახალი სიტყვები.
-      </p>
-
-      <a
-        class="card-link"
-        href="#vocabulary"
-      >
-        OPEN LAB →
-      </a>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        ✍️
-      </div>
-
-      <h3>
-        Grammar Core
-      </h3>
-
-      <p>
-        Present Simple,
-        კითხვითი წინადადებები,
-        უარყოფითი ფორმები და
-        მნიშვნელოვანი წესები.
-      </p>
-
-      <a
-        class="card-link"
-        href="#grammar"
-      >
-        OPEN LAB →
-      </a>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        📖
-      </div>
-
-      <h3>
-        Reading Mission
-      </h3>
-
-      <p>
-        წაიკითხე ტექსტი,
-        გაიგე მთავარი აზრი და
-        უპასუხე ინგლისურ კითხვებს.
-      </p>
-
-      <a
-        class="card-link"
-        href="#reading"
-      >
-        OPEN LAB →
-      </a>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        🗣️
-      </div>
-
-      <h3>
-        Speaking
-      </h3>
-
-      <p>
-        ივარჯიშე ინგლისურად
-        საუბარში და ისწავლე
-        ბუნებრივი ყოველდღიური ფრაზები.
-      </p>
-
-      <a
-        class="card-link"
-        href="#speaking"
-      >
-        OPEN LAB →
-      </a>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        🔊
-      </div>
-
-      <h3>
-        Listening
-      </h3>
-
-      <p>
-        მოუსმინე სიტყვებსა და
-        წინადადებებს და გაიუმჯობესე
-        გამოთქმა.
-      </p>
-
-      <a
-        class="card-link"
-        href="#vocabulary"
-      >
-        START →
-      </a>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        ⭐
-      </div>
-
-      <h3>
-        Final Challenge
-      </h3>
-
-      <p>
-        საბოლოო Quiz —
-        შეამოწმე რამდენად მზად ხარ
-        English Master-ის სტატუსისთვის.
-      </p>
-
-      <a
-        class="card-link"
-        href="#quiz"
-      >
-        ENTER →
-      </a>
-
-    </div>
-
-  </div>
+<div class="cards" id="lessonCards"></div>
 
 </section>
 
-<!-- =======================================================
-     VOCABULARY
-======================================================= -->
 
-<section id="vocabulary">
+<section id="vocabulary" class="section">
 
-  <div class="section-title">
+<div class="section-title">
 
-    <span class="badge">
-      HOLOGRAPHIC VOCABULARY LAB
-    </span>
+<span class="badge">
+🧠 VOCABULARY LAB
+</span>
 
-    <h2>
-      🧠 Ultimate Vocabulary
-    </h2>
+<h2>
+სასწავლო სიტყვები
+</h2>
 
-    <p class="muted">
-      დააჭირე Listen-ს და მოისმინე სწორი გამოთქმა.
-    </p>
+<p class="muted">
+დააჭირე სიტყვას 🔊 — ინგლისურად წარმოვთქვამთ.
+</p>
 
-  </div>
+</div>
 
-  <div class="vocab">
-
-    <div class="word-card">
-
-      <div class="english">
-        TRAVEL
-      </div>
-
-      <div class="georgian">
-        მოგზაურობა
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Travel')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        FUTURE
-      </div>
-
-      <div class="georgian">
-        მომავალი
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Future')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        EXPERIENCE
-      </div>
-
-      <div class="georgian">
-        გამოცდილება
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Experience')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        IMPORTANT
-      </div>
-
-      <div class="georgian">
-        მნიშვნელოვანი
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Important')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        FRIENDLY
-      </div>
-
-      <div class="georgian">
-        მეგობრული
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Friendly')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        DISCOVER
-      </div>
-
-      <div class="georgian">
-        აღმოჩენა
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Discover')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        ADVENTURE
-      </div>
-
-      <div class="georgian">
-        თავგადასავალი
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Adventure')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="word-card">
-
-      <div class="english">
-        SUCCESS
-      </div>
-
-      <div class="georgian">
-        წარმატება
-      </div>
-
-      <button
-        class="speak"
-        onclick="speakWord('Success')"
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-  </div>
+<div class="words" id="wordList"></div>
 
 </section>
 
-<!-- =======================================================
-     SPEAKING
-======================================================= -->
 
-<section id="speaking">
+<section id="quiz" class="section">
 
-  <div class="section-title">
+<div class="section-title">
 
-    <span class="badge">
-      SPEAKING CORE
-    </span>
+<span class="badge">
+📝 ENGLISH QUIZ
+</span>
 
-    <h2>
-      🗣️ Speak Like a Master
-    </h2>
+<h2>
+შეამოწმე შენი ცოდნა
+</h2>
 
-  </div>
+</div>
 
-  <div class="grammar">
+<div class="quiz">
 
-    <div class="card">
+<div class="question" id="question">
+მზად ხარ?
+</div>
 
-      <div class="card-icon">
-        🌍
-      </div>
+<div class="answers" id="answers"></div>
 
-      <h3>
-        Talking About Yourself
-      </h3>
+<div class="result" id="quizResult"></div>
 
-      <div class="rule">
+<button class="btn primary" id="nextBtn" style="display:none">
+შემდეგი →
+</button>
 
-        <strong>
-          A:
-        </strong>
-
-        Tell me about yourself.
-
-        <br><br>
-
-        <strong>
-          B:
-        </strong>
-
-        My name is Alex.
-        I am a student and
-        I love learning English.
-
-      </div>
-
-      <button
-        class="btn primary"
-        onclick="
-          speakWord(
-            'Tell me about yourself. My name is Alex. I am a student and I love learning English.'
-          )
-        "
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        ✈️
-      </div>
-
-      <h3>
-        Talking About Travel
-      </h3>
-
-      <div class="rule">
-
-        <strong>
-          A:
-        </strong>
-
-        Where do you want to travel?
-
-        <br><br>
-
-        <strong>
-          B:
-        </strong>
-
-        I want to travel to
-        London because I love English.
-
-      </div>
-
-      <button
-        class="btn primary"
-        onclick="
-          speakWord(
-            'Where do you want to travel? I want to travel to London because I love English.'
-          )
-        "
-      >
-        🔊 Listen
-      </button>
-
-    </div>
-
-  </div>
+</div>
 
 </section>
 
-<!-- =======================================================
-     GRAMMAR
-======================================================= -->
 
-<section id="grammar">
+<section id="progress" class="section">
 
-  <div class="section-title">
+<div class="section-title">
 
-    <span class="badge">
-      GRAMMAR CORE
-    </span>
+<span class="badge">
+🏆 PLAYER STATUS
+</span>
 
-    <h2>
-      ✍️ Grammar Master
-    </h2>
+<h2>
+შენი პროგრესი
+</h2>
 
-    <p class="muted">
-      მთავარი წესები მარტივი მაგალითებით.
-    </p>
+</div>
 
-  </div>
+<div class="stats">
 
-  <div class="grammar">
+<div class="stat">
+<b id="wordsCount">0</b>
+სიტყვა
+</div>
 
-    <div class="card">
+<div class="stat">
+<b id="quizCount">0</b>
+Quiz
+</div>
 
-      <div class="card-icon">
-        ⚡
-      </div>
+<div class="stat">
+<b id="scoreCount">0</b>
+ქულა
+</div>
 
-      <h3>
-        Present Simple
-      </h3>
+<div class="stat">
+<b id="percentCount">0%</b>
+პროგრესი
+</div>
 
-      <p>
-        გამოიყენება ჩვევებისა და
-        ყოველდღიური მოქმედებებისთვის.
-      </p>
+</div>
 
-      <div class="rule">
+<div class="progress">
+<i id="progressBar"></i>
+</div>
 
-        <strong>
-          I / You / We / They
-        </strong>
-
-        + verb
-
-        <br>
-
-        I play football.
-
-        <br>
-
-        They study English.
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        ⭐
-      </div>
-
-      <h3>
-        He / She / It
-      </h3>
-
-      <p>
-        მესამე პირთან ზმნას ხშირად
-        ემატება <strong>-s</strong>.
-      </p>
-
-      <div class="rule">
-
-        <strong>
-          He / She / It
-        </strong>
-
-        + verb + S
-
-        <br>
-
-        She plays tennis.
-
-        <br>
-
-        He likes music.
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        ❓
-      </div>
-
-      <h3>
-        Questions
-      </h3>
-
-      <div class="rule">
-
-        <strong>
-          Do
-        </strong>
-
-        you like English?
-
-        <br><br>
-
-        <strong>
-          Does
-        </strong>
-
-        she play tennis?
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-icon">
-        🚫
-      </div>
-
-      <h3>
-        Negative
-      </h3>
-
-      <div class="rule">
-
-        I
-
-        <strong>
-          don't
-        </strong>
-
-        like coffee.
-
-        <br><br>
-
-        She
-
-        <strong>
-          doesn't
-        </strong>
-
-        play football.
-
-      </div>
-
-    </div>
-
-  </div>
+<p class="muted" id="progressMessage">
+დაიწყე სწავლა 🚀
+</p>
 
 </section>
 
-<!-- =======================================================
-     READING
-======================================================= -->
 
-<section id="reading">
+<section class="section">
 
-  <div class="section-title">
+<div class="mission">
 
-    <span class="badge">
-      READING MISSION
-    </span>
+<span class="badge">
+🚀 YOUR MISSION
+</span>
 
-    <h2>
-      📖 The Future Explorer
-    </h2>
+<h2 id="missionTitle">
+მოიპოვე შენი პირველი ვარსკვლავი ⭐
+</h2>
 
-  </div>
+<p class="muted" id="missionText">
+ისწავლე სიტყვები და გაიარე Quiz.
+</p>
 
-  <div class="reading">
+<a href="#quiz" class="btn primary">
+🚀 Start Mission
+</a>
 
-    <h3>
-      🚀 Alex's English Adventure
-    </h3>
-
-    <p>
-
-      Alex is a young student who loves English.
-      Every morning, he studies new words before
-      going to school.
-
-      <br><br>
-
-      One day, Alex decides to travel to London.
-      He wants to practise speaking English,
-      meet new people and discover new places.
-
-      <br><br>
-
-      Alex knows that learning a language takes
-      time, but he never gives up.
-
-    </p>
-
-    <button
-      class="btn primary"
-      onclick="
-        speakWord(
-          'Alex is a young student who loves English. Every morning, he studies new words before going to school. One day, Alex decides to travel to London. He wants to practise speaking English, meet new people and discover new places.'
-        )
-      "
-    >
-      🔊 Listen to Text
-    </button>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     FINAL QUIZ
-======================================================= -->
-
-<section id="quiz">
-
-  <div class="section-title">
-
-    <span class="badge">
-      ⭐ FINAL CHALLENGE
-    </span>
-
-    <h2>
-      🎯 Ultimate Quiz
-    </h2>
-
-    <p class="muted">
-      მზად ხარ English Master გახდე?
-    </p>
-
-  </div>
-
-  <div class="quiz">
-
-    <div
-      class="question"
-      id="question"
-    >
-      Which sentence is correct?
-    </div>
-
-    <div class="answers">
-
-      <button
-        class="answer"
-        onclick="answerQuiz(this,false)"
-      >
-        She play football.
-      </button>
-
-      <button
-        class="answer"
-        onclick="answerQuiz(this,true)"
-      >
-        She plays football.
-      </button>
-
-      <button
-        class="answer"
-        onclick="answerQuiz(this,false)"
-      >
-        She playing football.
-      </button>
-
-      <button
-        class="answer"
-        onclick="answerQuiz(this,false)"
-      >
-        She does plays football.
-      </button>
-
-    </div>
-
-    <div
-      class="quiz-result"
-      id="quizResult"
-    ></div>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     PROGRESS
-======================================================= -->
-
-<section id="progress">
-
-  <div class="section-title">
-
-    <span class="badge">
-      MASTER PROGRESS
-    </span>
-
-    <h2>
-      🏆 Your Final Progress
-    </h2>
-
-  </div>
-
-  <div class="progress-box">
-
-    <div class="stats">
-
-      <div class="stat">
-
-        <b id="wordsCount">
-          8
-        </b>
-
-        Words
-
-      </div>
-
-      <div class="stat">
-
-        <b id="quizCount">
-          0
-        </b>
-
-        Quiz
-
-      </div>
-
-      <div class="stat">
-
-        <b id="progressPercent">
-          72%
-        </b>
-
-        Progress
-
-      </div>
-
-      <div class="stat">
-
-        <b>
-          ⭐
-        </b>
-
-        Master
-
-      </div>
-
-    </div>
-
-    <div class="progress">
-
-      <div
-        class="progress-fill"
-        id="progressFill"
-      ></div>
-
-    </div>
-
-    <p
-      class="muted"
-      style="margin-top:15px"
-    >
-      შენ უკვე ბოლო ეტაპზე ხარ.
-      გააგრძელე და დაასრულე Final Mission! 🚀
-    </p>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     FINAL LEVEL
-======================================================= -->
-
-<section class="final">
-
-  <span class="badge">
-    🏆 FINAL LEVEL
-  </span>
-
-  <h2>
-    ENGLISH MASTER
-  </h2>
-
-  <p>
-
-    შენ გაიარე English with Mariami-ის
-    სასწავლო სამყაროს ბოლო დონე.
-
-    ახლა შენი შემდეგი მისიაა —
-    გამოიყენო ინგლისური რეალურ ცხოვრებაში.
-
-    <br><br>
-
-    Keep learning.
-    Keep speaking.
-    Keep growing. 🚀
-
-  </p>
-
-  <div class="buttons" style="justify-content:center">
-
-    <a
-      class="btn primary"
-      href="academy.html"
-    >
-      🏠 დაბრუნება Academy-ში
-    </a>
-
-  </div>
+</div>
 
 </section>
 
@@ -2514,216 +728,630 @@ footer{
 
 <footer>
 
-  ⚡ English with Mariami
-  • Grade 4 Ultimate Academy
+⚡ English with Mariami •
+<span id="footerGrade">Grade</span> •
+Learn • Play • Grow 🚀
 
-  <br><br>
+<br><br>
 
-  © 2026 English with Mariami —
-  ყველა უფლება დაცულია • Developed by btcgamer
+© 2026 English with Mariami
 
 </footer>
 
+
 <script>
 
+"use strict";
+
 /* =========================================================
-   SPEECH
+   GRADE DETECTION
 ========================================================= */
 
-function speakWord(text){
+const fileName =
+  location.pathname
+    .split("/")
+    .pop()
+    .toLowerCase();
+
+let GRADE = 2;
+
+if(fileName.includes("grade3")){
+  GRADE = 3;
+}
+
+if(fileName.includes("grade4")){
+  GRADE = 4;
+}
+
+
+/* =========================================================
+   GRADE DATA
+========================================================= */
+
+const DATA = {
+
+2:{
+  title:"ახალი სამყაროა.",
+  description:
+    "კეთილი იყოს შენი მობრძანება მე-2 კლასის ფუტურისტულ ინგლისურის აკადემიაში. აქ ვისწავლით მარტივ სიტყვებს, ფერებს, ოჯახს, ცხოველებს, სკოლას და მარტივ წინადადებებს.",
+
+  lessons:[
+    ["🎨","Colors","Red, Blue, Green, Yellow და სხვა ფერები."],
+    ["👨‍👩‍👧","Family","Mother, Father, Sister, Brother და Family."],
+    ["🐶","Animals","Dog, Cat, Bird, Fish და სხვა ცხოველები."]
+  ],
+
+  words:[
+    ["APPLE","ვაშლი"],
+    ["BOOK","წიგნი"],
+    ["CAT","კატა"],
+    ["DOG","ძაღლი"],
+    ["HOUSE","სახლი"],
+    ["SCHOOL","სკოლა"],
+    ["WATER","წყალი"],
+    ["FAMILY","ოჯახი"],
+    ["RED","წითელი"],
+    ["BLUE","ლურჯი"],
+    ["GREEN","მწვანე"],
+    ["YELLOW","ყვითელი"]
+  ],
+
+  quiz:[
+    ["APPLE",["ვაშლი","სახლი","წიგნი","კატა"],0],
+    ["DOG",["ძაღლი","თევზი","ჩიტი","ცხენი"],0],
+    ["BOOK",["სკოლა","წიგნი","ოჯახი","წყალი"],1],
+    ["RED",["მწვანე","ლურჯი","წითელი","ყვითელი"],2],
+    ["CAT",["კატა","ძაღლი","თევზი","ჩიტი"],0],
+    ["WATER",["წყალი","სახლი","ვაშლი","წიგნი"],0]
+  ]
+},
+
+3:{
+  title:"შენი შემდეგი დონეა.",
+  description:
+    "კეთილი იყოს შენი მობრძანება მე-3 კლასის ინგლისურის სამყაროში. აქ უკვე ვისწავლით უფრო დიდ სიტყვებს, ყოველდღიურ მოქმედებებს, დროს, საკვებს და მარტივ წინადადებებს.",
+
+  lessons:[
+    ["🍎","Food","Apple, Bread, Milk, Cheese, Banana და სხვა საკვები."],
+    ["🏫","School","Teacher, Student, Classroom, Book, Pencil და School."],
+    ["⏰","Daily Life","Wake up, Eat, Go, Play, Read და ყოველდღიური მოქმედებები."]
+  ],
+
+  words:[
+    ["APPLE","ვაშლი"],
+    ["BANANA","ბანანი"],
+    ["BREAD","პური"],
+    ["MILK","რძე"],
+    ["CHEESE","ყველი"],
+    ["TEACHER","მასწავლებელი"],
+    ["STUDENT","მოსწავლე"],
+    ["PENCIL","ფანქარი"],
+    ["MORNING","დილა"],
+    ["NIGHT","ღამე"],
+    ["PLAY","თამაში"],
+    ["READ","კითხვა"]
+  ],
+
+  quiz:[
+    ["BANANA",["ვაშლი","ბანანი","პური","რძე"],1],
+    ["TEACHER",["მოსწავლე","მასწავლებელი","ექიმი","მამა"],1],
+    ["MILK",["წყალი","რძე","წვენი","ყავა"],1],
+    ["MORNING",["ღამე","დილა","საღამო","შუადღე"],1],
+    ["PENCIL",["კალამი","წიგნი","ფანქარი","მაგიდა"],2],
+    ["READ",["წერა","კითხვა","თამაში","სირბილი"],1]
+  ]
+},
+
+4:{
+  title:"შენი ინგლისური ძლიერდება.",
+  description:
+    "კეთილი იყოს შენი მობრძანება მე-4 კლასის ინგლისურის აკადემიაში. აქ უკვე ვსწავლობთ წინადადებებს, გრამატიკის საფუძვლებს, ყოველდღიურ საუბარს და უფრო რთულ სიტყვებს.",
+
+  lessons:[
+    ["🌎","My World","Country, City, Friend, Family, School და ყოველდღიური საუბარი."],
+    ["📚","Grammar","I am, You are, He is, She is და მარტივი წინადადებები."],
+    ["💬","Speaking","Hello, How are you?, What is your name? და სხვა ფრაზები."]
+  ],
+
+  words:[
+    ["FRIEND","მეგობარი"],
+    ["COUNTRY","ქვეყანა"],
+    ["CITY","ქალაქი"],
+    ["TEACHER","მასწავლებელი"],
+    ["STUDENT","მოსწავლე"],
+    ["HAPPY","ბედნიერი"],
+    ["SCHOOL","სკოლა"],
+    ["FAMILY","ოჯახი"],
+    ["BEAUTIFUL","ლამაზი"],
+    ["IMPORTANT","მნიშვნელოვანი"],
+    ["LEARN","სწავლა"],
+    ["SPEAK","ლაპარაკი"]
+  ],
+
+  quiz:[
+    ["FRIEND",["მეგობარი","მასწავლებელი","ოჯახი","მოსწავლე"],0],
+    ["COUNTRY",["ქალაქი","ქვეყანა","სკოლა","სახლი"],1],
+    ["HAPPY",["სევდიანი","ბედნიერი","მშიერი","დაღლილი"],1],
+    ["SPEAK",["წერა","კითხვა","ლაპარაკი","სირბილი"],2],
+    ["BEAUTIFUL",["დიდი","პატარა","ლამაზი","სწრაფი"],2],
+    ["LEARN",["სწავლა","თამაში","ჭამა","ძილი"],0]
+  ]
+}
+
+};
+
+const gradeData = DATA[GRADE];
+
+
+/* =========================================================
+   UI
+========================================================= */
+
+document.title =
+  `Grade ${GRADE} — English with Mariami`;
+
+document.getElementById("gradeBadge").textContent =
+  `🌱 GRADE ${GRADE} • ENGLISH`;
+
+document.getElementById("gradeTitle").textContent =
+  gradeData.title;
+
+document.getElementById("gradeDescription").textContent =
+  gradeData.description;
+
+document.getElementById("studentGrade").textContent =
+  `GRADE ${GRADE}`;
+
+document.getElementById("levelBadge").textContent =
+  `LEVEL ${GRADE}`;
+
+document.getElementById("footerGrade").textContent =
+  `Grade ${GRADE}`;
+
+document.getElementById("missionTitle").textContent =
+  `Grade ${GRADE} Mission ⭐`;
+
+document.getElementById("missionText").textContent =
+  `ისწავლე ${gradeData.words.length} ახალი სიტყვა და გაიარე პირველი Quiz.`;
+
+
+/* =========================================================
+   LESSONS
+========================================================= */
+
+const lessonCards =
+  document.getElementById("lessonCards");
+
+gradeData.lessons.forEach(item => {
+
+  const card =
+    document.createElement("article");
+
+  card.className="card";
+
+  card.innerHTML=`
+    <div class="icon">${item[0]}</div>
+    <h3>${item[1]}</h3>
+    <p class="muted">${item[2]}</p>
+    <a href="#vocabulary"
+       class="btn primary">
+       სწავლა →
+    </a>
+  `;
+
+  lessonCards.appendChild(card);
+
+});
+
+
+/* =========================================================
+   TEXT TO SPEECH
+========================================================= */
+
+function speak(text){
 
   if(!("speechSynthesis" in window)){
-
-    alert(
-      "თქვენს ბრაუზერს ხმოვანი ფუნქცია არ აქვს."
-    );
-
+    alert("ამ მოწყობილობაზე ხმის ფუნქცია არ არის ხელმისაწვდომი.");
     return;
   }
 
-  window.speechSynthesis.cancel();
+  speechSynthesis.cancel();
 
-  const speech =
+  const voice =
     new SpeechSynthesisUtterance(text);
 
-  speech.lang="en-US";
-  speech.rate=.85;
-  speech.pitch=1;
+  voice.lang="en-US";
+  voice.rate=.75;
+  voice.pitch=1;
 
-  window.speechSynthesis.speak(speech);
+  speechSynthesis.speak(voice);
 }
+
+
+/* =========================================================
+   VOCABULARY
+========================================================= */
+
+const wordList =
+  document.getElementById("wordList");
+
+let learnedWords =
+  Number(localStorage.getItem(
+    `grade${GRADE}_words`
+  )) || 0;
+
+gradeData.words.forEach((word,index)=>{
+
+  const div =
+    document.createElement("div");
+
+  div.className="word";
+
+  div.innerHTML=`
+    <strong>🔊 ${word[0]}</strong>
+    <span>${word[1]}</span>
+  `;
+
+  div.addEventListener("click",()=>{
+
+    speak(word[0]);
+
+    const key =
+      `grade${GRADE}_word_${index}`;
+
+    if(!localStorage.getItem(key)){
+
+      localStorage.setItem(key,"1");
+
+      learnedWords++;
+
+      localStorage.setItem(
+        `grade${GRADE}_words`,
+        learnedWords
+      );
+
+      updateProgress();
+
+    }
+
+  });
+
+  wordList.appendChild(div);
+
+});
+
 
 /* =========================================================
    QUIZ
 ========================================================= */
 
+let quizIndex=0;
 let quizScore=0;
+let quizCompleted=
+  Number(localStorage.getItem(
+    `grade${GRADE}_quiz`
+  )) || 0;
 
-function answerQuiz(button,correct){
+const question =
+  document.getElementById("question");
 
-  const buttons =
-    document.querySelectorAll(".answer");
+const answers =
+  document.getElementById("answers");
 
-  buttons.forEach(btn=>{
-    btn.disabled=true;
+const result =
+  document.getElementById("quizResult");
+
+const nextBtn =
+  document.getElementById("nextBtn");
+
+
+function loadQuestion(){
+
+  result.textContent="";
+  nextBtn.style.display="none";
+
+  const q =
+    gradeData.quiz[quizIndex];
+
+  question.textContent =
+    `🔊 ${q[0]}`;
+
+  speak(q[0]);
+
+  answers.innerHTML="";
+
+  q[1].forEach((answer,index)=>{
+
+    const button =
+      document.createElement("button");
+
+    button.className="answer";
+
+    button.textContent =
+      answer;
+
+    button.onclick=()=>{
+
+      checkAnswer(index);
+
+    };
+
+    answers.appendChild(button);
+
   });
-
-  if(correct){
-
-    button.classList.add("correct");
-
-    quizScore++;
-
-    document.getElementById(
-      "quizResult"
-    ).textContent=
-      "🎉 PERFECT! სწორი პასუხია! +1 XP";
-
-    document.getElementById(
-      "quizCount"
-    ).textContent=
-      quizScore;
-
-    document.getElementById(
-      "progressPercent"
-    ).textContent=
-      "85%";
-
-    document.getElementById(
-      "progressFill"
-    ).style.width=
-      "85%";
-
-  }else{
-
-    button.classList.add("wrong");
-
-    document.getElementById(
-      "quizResult"
-    ).textContent=
-      "❌ თითქმის! სწორი პასუხია: She plays football.";
-
-    buttons.forEach(btn=>{
-
-      if(
-        btn.textContent.trim()===
-        "She plays football."
-      ){
-
-        btn.classList.add("correct");
-
-      }
-
-    });
-
-  }
 
 }
 
-/* =========================================================
-   3D CARD MOUSE EFFECT
-========================================================= */
 
-document
-.querySelectorAll(".card,.word-card")
-.forEach(card=>{
+function checkAnswer(selected){
 
-  card.addEventListener(
-    "mousemove",
-    function(e){
+  const q =
+    gradeData.quiz[quizIndex];
 
-      const rect=
-        this.getBoundingClientRect();
+  const buttons =
+    answers.querySelectorAll(".answer");
 
-      const x=
-        e.clientX-rect.left;
+  buttons.forEach(b=>{
+    b.disabled=true;
+  });
 
-      const y=
-        e.clientY-rect.top;
+  if(selected===q[2]){
 
-      const centerX=
-        rect.width/2;
+    quizScore++;
 
-      const centerY=
-        rect.height/2;
+    result.textContent =
+      "✅ სწორია! +1 ქულა";
 
-      const rotateX=
-        ((y-centerY)/centerY)*-5;
+    speak("Correct!");
 
-      const rotateY=
-        ((x-centerX)/centerX)*5;
+  }else{
 
-      this.style.transform=
-        `
-        perspective(900px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        translateY(-7px)
-        `;
+    result.textContent =
+      `❌ არასწორია. სწორი პასუხია: ${q[1][q[2]]}`;
 
-    }
+    speak("Try again!");
+
+  }
+
+  nextBtn.style.display="inline-block";
+
+}
+
+
+nextBtn.onclick=()=>{
+
+  quizIndex++;
+
+  if(quizIndex>=gradeData.quiz.length){
+
+    finishQuiz();
+
+  }else{
+
+    loadQuestion();
+
+  }
+
+};
+
+
+function finishQuiz(){
+
+  quizCompleted++;
+
+  localStorage.setItem(
+    `grade${GRADE}_quiz`,
+    quizCompleted
   );
 
-  card.addEventListener(
-    "mouseleave",
-    function(){
+  result.innerHTML =
+    `🏆 Quiz დასრულდა! შენი ქულა: <b>${quizScore}/${gradeData.quiz.length}</b>`;
 
-      this.style.transform="";
+  question.textContent =
+    "🎉 შესანიშნავია!";
 
-    }
-  );
+  answers.innerHTML="";
 
-});
+  nextBtn.style.display="none";
+
+  updateProgress();
+
+  saveProgress();
+
+}
+
+
+loadQuestion();
+
 
 /* =========================================================
-   SUPABASE AUTH
+   PROGRESS
 ========================================================= */
 
-(async()=>{
+function getPercent(){
+
+  const wordPercent =
+    Math.min(
+      100,
+      (learnedWords /
+      gradeData.words.length)*60
+    );
+
+  const quizPercent =
+    Math.min(
+      40,
+      quizCompleted*10
+    );
+
+  return Math.min(
+    100,
+    wordPercent+quizPercent
+  );
+
+}
+
+
+function updateProgress(){
+
+  const percent =
+    Math.round(getPercent());
+
+  document.getElementById(
+    "wordsCount"
+  ).textContent=learnedWords;
+
+  document.getElementById(
+    "quizCount"
+  ).textContent=quizCompleted;
+
+  document.getElementById(
+    "scoreCount"
+  ).textContent=quizScore;
+
+  document.getElementById(
+    "percentCount"
+  ).textContent=`${percent}%`;
+
+  setTimeout(()=>{
+
+    document.getElementById(
+      "progressBar"
+    ).style.width=`${percent}%`;
+
+  },100);
+
+  let message =
+    "დაიწყე სწავლა 🚀";
+
+  if(percent>=25)
+    message="კარგად მიდიხარ! ⭐";
+
+  if(percent>=50)
+    message="შესანიშნავი პროგრესია! 🔥";
+
+  if(percent>=75)
+    message="თითქმის მზად ხარ შემდეგი დონისთვის! 🚀";
+
+  if(percent>=100)
+    message="🎉 Grade ${GRADE} Mission Complete!";
+
+  document.getElementById(
+    "progressMessage"
+  ).textContent=message;
+
+}
+
+
+updateProgress();
+
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+function getClient(){
+
+  return (
+    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+    window.supabaseClient ||
+    null
+  );
+
+}
+
+
+function redirectLogin(){
+
+  location.replace(
+    "login.html?redirect="+
+    encodeURIComponent(
+      `grade${GRADE}.html`
+    )
+  );
+
+}
+
+
+async function waitForClient(){
+
+  let client=getClient();
+
+  if(client)
+    return client;
+
+  await new Promise(resolve=>{
+
+    let done=false;
+
+    const finish=()=>{
+
+      if(done)return;
+
+      done=true;
+      resolve();
+
+    };
+
+    window.addEventListener(
+      "englishMariamiSupabaseReady",
+      finish,
+      {once:true}
+    );
+
+    setTimeout(
+      finish,
+      5000
+    );
+
+  });
+
+  return getClient();
+
+}
+
+
+async function initAuth(){
+
+  const client =
+    await waitForClient();
+
+  if(!client){
+
+    console.error(
+      "Supabase client not found."
+    );
+
+    redirectLogin();
+    return;
+
+  }
 
   try{
 
-    const client=
-      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-      window.supabaseClient;
-
-    if(!client){
-
-      console.warn(
-        "Supabase client not found."
-      );
-
-      return;
-    }
-
     const {
-      data,
-      error
-    }=
-      await client.auth.getSession();
+      data:userData,
+      error:userError
+    } =
+      await client.auth.getUser();
 
     if(
-      error ||
-      !data ||
-      !data.session
+      userError ||
+      !userData ||
+      !userData.user
     ){
 
-      window.location.href=
-        "login.html?redirect="+
-        encodeURIComponent(
-          "grade4.html"
-        );
-
+      redirectLogin();
       return;
+
     }
 
-    const user=
-      data.session.user;
+    const user =
+      userData.user;
 
     const {
       data:profile,
       error:profileError
-    }=
+    } =
       await client
       .from("profiles")
       .select(
@@ -2741,59 +1369,254 @@ document
         profileError
       );
 
+      redirectLogin();
       return;
+
     }
 
-    const role=
+    const role =
       String(
-        profile?.role ??
-        user.user_metadata?.role ??
-        "student"
+        profile?.role ?? "student"
       ).toLowerCase();
 
-    const grade=
+    const userGrade =
       Number(
-        profile?.grade ??
-        user.user_metadata?.grade ??
-        0
+        profile?.grade ?? 0
       );
 
-    const privileged=[
-      "teacher",
-      "admin",
-      "parent"
-    ];
+    const name =
+      profile?.full_name ||
+      user.user_metadata?.full_name ||
+      user.email ||
+      "მოსწავლე";
+
+    document.getElementById(
+      "studentName"
+    ).textContent=name;
+
+
+    /*
+      Student must belong to
+      the current grade.
+    */
 
     if(
       role==="student" &&
-      grade!==4
+      userGrade!==GRADE
     ){
 
       alert(
-        "ეს არის მე-4 კლასის Ultimate სივრცე. შენს ანგარიშზე მე-4 კლასი არ არის მინიჭებული."
+        `ეს გვერდი განკუთვნილია მხოლოდ მე-${GRADE} კლასისთვის.`
       );
 
-      window.location.href=
-        "academy.html";
+      location.replace(
+        "academy.html"
+      );
 
       return;
+
     }
 
-    console.log(
-      "Grade 4 Ultimate loaded:",
-      user.email
-    );
+
+    if(role!=="student"){
+
+      document.getElementById(
+        "progressMessage"
+      ).textContent =
+        `Grade ${GRADE} Preview Mode — ${role}`;
+
+    }
+
+
+    /*
+      Load saved Supabase progress
+    */
+
+    await loadProgress(client,user.id);
 
   }catch(error){
 
     console.error(
-      "Grade 4 initialization error:",
+      "Auth error:",
       error
+    );
+
+    redirectLogin();
+
+  }
+
+}
+
+
+/* =========================================================
+   SUPABASE PROGRESS
+========================================================= */
+
+async function loadProgress(client,userId){
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await client
+      .from("student_progress")
+      .select(
+        "words_learned,quiz_completed,score"
+      )
+      .eq(
+        "user_id",
+        userId
+      )
+      .eq(
+        "grade",
+        GRADE
+      )
+      .maybeSingle();
+
+    if(error){
+
+      console.warn(
+        "Progress table unavailable:",
+        error.message
+      );
+
+      return;
+
+    }
+
+    if(data){
+
+      learnedWords =
+        Number(
+          data.words_learned
+        ) || learnedWords;
+
+      quizCompleted =
+        Number(
+          data.quiz_completed
+        ) || quizCompleted;
+
+      quizScore =
+        Number(
+          data.score
+        ) || quizScore;
+
+      localStorage.setItem(
+        `grade${GRADE}_words`,
+        learnedWords
+      );
+
+      localStorage.setItem(
+        `grade${GRADE}_quiz`,
+        quizCompleted
+      );
+
+      updateProgress();
+
+    }
+
+  }catch(e){
+
+    console.warn(e);
+
+  }
+
+}
+
+
+async function saveProgress(){
+
+  const client=getClient();
+
+  if(!client)
+    return;
+
+  try{
+
+    const {
+      data:userData
+    } =
+    await client.auth.getUser();
+
+    if(!userData?.user)
+      return;
+
+    await client
+      .from("student_progress")
+      .upsert({
+
+        user_id:
+          userData.user.id,
+
+        grade:
+          GRADE,
+
+        words_learned:
+          learnedWords,
+
+        quiz_completed:
+          quizCompleted,
+
+        score:
+          quizScore,
+
+        updated_at:
+          new Date().toISOString()
+
+      },{
+        onConflict:
+          "user_id,grade"
+      });
+
+  }catch(e){
+
+    console.warn(
+      "Could not save progress:",
+      e
     );
 
   }
 
-})();
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+document
+  .getElementById("logout")
+  .addEventListener(
+    "click",
+    async(event)=>{
+
+      event.preventDefault();
+
+      const client=getClient();
+
+      if(client){
+
+        await client.auth.signOut({
+          scope:"local"
+        });
+
+      }
+
+      location.replace(
+        "login.html"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   START
+========================================================= */
+
+initAuth();
 
 </script>
 
