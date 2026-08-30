@@ -1,1391 +1,1707 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#03152e">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>English with Mariami — მე-2 კლასი</title>
+<title>Grade 2 — English with Mariami</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
- margin:0;
- font-family:Arial,"Noto Sans Georgian",sans-serif;
- color:#fff;
- min-height:100vh;
- background:
- radial-gradient(circle at 10% 10%,#00eaff30,transparent 25%),
- radial-gradient(circle at 90% 15%,#ffe60025,transparent 25%),
- radial-gradient(circle at 50% 90%,#006eff22,transparent 35%),
- linear-gradient(135deg,#010713,#031b3b 48%,#010713);
- overflow-x:hidden;
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  color:#fff;
+  background:#01050d;
 }
-body:before{
- content:"";
- position:fixed;
- inset:0;
- pointer-events:none;
- background:
- radial-gradient(circle at 20% 30%,#00eaff12 0 2px,transparent 3px),
- radial-gradient(circle at 70% 60%,#ffe60012 0 2px,transparent 3px);
- background-size:90px 90px,130px 130px;
- animation:stars 18s linear infinite;
- z-index:-1;
+
+/* =========================================================
+   FUTURISTIC WORLD
+========================================================= */
+
+.world{
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 35%,
+      #0a6f9e 0%,
+      #063957 24%,
+      #021729 50%,
+      #01050d 100%);
 }
-@keyframes stars{from{transform:translateY(0)}to{transform:translateY(-90px)}}
-a{color:inherit;text-decoration:none}
-.wrap{width:min(1250px,calc(100% - 28px));margin:auto}
+
+/* Moving light beams */
+
+.beam{
+  position:absolute;
+  width:2px;
+  height:100vh;
+  background:linear-gradient(
+    transparent,
+    #00eaff,
+    transparent
+  );
+  opacity:.35;
+  filter:blur(1px);
+  animation:beamMove 5s linear infinite;
+}
+
+.beam:nth-child(1){left:8%;animation-delay:-1s}
+.beam:nth-child(2){left:27%;animation-delay:-3s}
+.beam:nth-child(3){left:51%;animation-delay:-2s}
+.beam:nth-child(4){left:76%;animation-delay:-4s}
+.beam:nth-child(5){left:93%;animation-delay:-1.5s}
+
+@keyframes beamMove{
+  0%{transform:translateY(-100%)}
+  100%{transform:translateY(100%)}
+}
+
+/* Stars */
+
+.stars{
+  position:absolute;
+  inset:0;
+}
+
+.star{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 12px #00eaff;
+  animation:starFloat 4s ease-in-out infinite;
+}
+
+.star:nth-child(1){left:5%;top:20%}
+.star:nth-child(2){left:14%;top:60%}
+.star:nth-child(3){left:25%;top:12%}
+.star:nth-child(4){left:37%;top:75%}
+.star:nth-child(5){left:49%;top:22%}
+.star:nth-child(6){left:61%;top:68%}
+.star:nth-child(7){left:72%;top:15%}
+.star:nth-child(8){left:83%;top:52%}
+.star:nth-child(9){left:94%;top:28%}
+.star:nth-child(10){left:44%;top:45%}
+.star:nth-child(11){left:18%;top:35%}
+.star:nth-child(12){left:88%;top:78%}
+
+@keyframes starFloat{
+  0%,100%{
+    opacity:.3;
+    transform:scale(.6);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.8);
+  }
+}
+
+/* =========================================================
+   3D FLOATING ALPHABET
+========================================================= */
+
+.alphabet{
+  position:absolute;
+  inset:0;
+  perspective:1000px;
+}
+
+.letter{
+  position:absolute;
+  font-weight:1000;
+  font-size:clamp(55px,8vw,120px);
+  color:#fff;
+  opacity:.8;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #00eaff,
+    0 0 35px #008cff,
+    0 0 70px #0055ff;
+  transform-style:preserve-3d;
+  animation:letter3D 9s ease-in-out infinite;
+}
+
+.letter:nth-child(1){left:3%;top:12%;animation-delay:-1s}
+.letter:nth-child(2){left:16%;top:65%;animation-delay:-4s}
+.letter:nth-child(3){left:28%;top:8%;animation-delay:-2s}
+.letter:nth-child(4){left:40%;top:73%;animation-delay:-6s}
+.letter:nth-child(5){left:53%;top:13%;animation-delay:-3s}
+.letter:nth-child(6){left:66%;top:66%;animation-delay:-7s}
+.letter:nth-child(7){left:78%;top:9%;animation-delay:-5s}
+.letter:nth-child(8){left:90%;top:57%;animation-delay:-2s}
+.letter:nth-child(9){left:10%;top:38%;font-size:55px}
+.letter:nth-child(10){left:72%;top:38%;font-size:55px}
+
+@keyframes letter3D{
+  0%,100%{
+    transform:
+      translate3d(0,0,0)
+      rotateX(0deg)
+      rotateY(0deg)
+      rotateZ(0deg);
+  }
+
+  50%{
+    transform:
+      translate3d(35px,-40px,130px)
+      rotateX(25deg)
+      rotateY(35deg)
+      rotateZ(8deg);
+  }
+}
+
+/* =========================================================
+   FLOOR
+========================================================= */
+
+.floor{
+  position:absolute;
+  left:-20%;
+  right:-20%;
+  bottom:-30%;
+  height:65%;
+  transform:
+    perspective(550px)
+    rotateX(63deg);
+  background-image:
+    linear-gradient(#00eaff35 1px,transparent 1px),
+    linear-gradient(90deg,#00eaff35 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:linear-gradient(to top,#000,transparent);
+  -webkit-mask-image:linear-gradient(to top,#000,transparent);
+  animation:gridMove 5s linear infinite;
+}
+
+@keyframes gridMove{
+  from{
+    background-position:0 0,0 0;
+  }
+  to{
+    background-position:0 55px,55px 0;
+  }
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.wrap{
+  width:min(1250px,calc(100% - 28px));
+  margin:auto;
+}
+
+/* =========================================================
+   NAV
+========================================================= */
 
 .top{
- position:sticky;
- top:0;
- z-index:100;
- background:#02152df2;
- border-bottom:1px solid #00eaff55;
- backdrop-filter:blur(16px);
- box-shadow:0 5px 30px #0008;
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#021020d9;
+  border-bottom:1px solid #00eaff66;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 }
-nav{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:12px;
- padding:13px 0;
- flex-wrap:wrap;
+
+.nav{
+  min-height:65px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
+
 .brand{
- font-size:17px;
- font-weight:1000;
- color:#fff;
- text-shadow:0 0 18px #00eaff;
+  font-size:18px;
+  font-weight:1000;
+  color:#fff;
+  text-shadow:0 0 18px #00eaff;
 }
-.links{display:flex;gap:7px;flex-wrap:wrap}
-.links a{
- padding:9px 12px;
- border-radius:12px;
- background:#082443;
- border:1px solid #00eaff33;
- font-size:13px;
- transition:.25s;
+
+.navlinks{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
 }
-.links a:hover{
- transform:translateY(-2px);
- border-color:#00eaff;
- background:#0b3158;
+
+.navlinks a{
+  padding:9px 12px;
+  border-radius:12px;
+  background:#062443cc;
+  border:1px solid #00eaff44;
+  font-size:13px;
+  transition:.25s;
 }
+
+.navlinks a:hover{
+  transform:translateY(-3px);
+  border-color:#00eaff;
+  box-shadow:0 0 20px #00eaff55;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero{
- position:relative;
- padding:65px 0 35px;
- text-align:center;
+  min-height:650px;
+  display:flex;
+  align-items:center;
+  padding:80px 0 55px;
 }
+
+.hero-grid{
+  width:100%;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:35px;
+  align-items:center;
+}
+
 .badge{
- display:inline-block;
- padding:9px 16px;
- border-radius:30px;
- background:#061c38dd;
- border:1px solid #00eaff77;
- color:#ffe600;
- font-weight:900;
- box-shadow:0 0 25px #00eaff18;
+  display:inline-block;
+  padding:9px 16px;
+  border-radius:30px;
+  color:#ffe600;
+  background:#031a32cc;
+  border:1px solid #00eaff88;
+  box-shadow:
+    0 0 20px #00eaff22,
+    inset 0 0 15px #00eaff11;
+  font-weight:900;
 }
+
 .hero h1{
- font-size:clamp(42px,7vw,76px);
- margin:18px 0 12px;
- line-height:1.05;
- text-shadow:0 10px 35px #0008;
+  margin:20px 0;
+  font-size:clamp(45px,7vw,82px);
+  line-height:.98;
+  letter-spacing:-3px;
 }
+
 .hero h1 span{
- color:#00eaff;
- text-shadow:0 0 25px #00eaff88;
+  color:#00eaff;
+  text-shadow:
+    0 0 10px #00eaff,
+    0 0 35px #008cff,
+    0 0 70px #0055ff;
 }
+
 .lead{
- font-size:18px;
- line-height:1.8;
- color:#d9f7ff;
- max-width:850px;
- margin:auto;
+  max-width:700px;
+  font-size:18px;
+  line-height:1.75;
+  color:#e8fbff;
 }
 
-.card{
- position:relative;
- background:linear-gradient(145deg,#092b50ee,#06182fee);
- border:1px solid #00eaff35;
- border-radius:22px;
- padding:21px;
- margin:16px 0;
- box-shadow:0 15px 45px #0007,inset 0 1px #ffffff0c;
- overflow:hidden;
-}
-.card:before{
- content:"";
- position:absolute;
- width:180px;
- height:180px;
- right:-80px;
- top:-100px;
- background:#00eaff18;
- filter:blur(40px);
- border-radius:50%;
- pointer-events:none;
-}
-.stats{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:11px;
-}
-.stat{
- padding:17px 10px;
- text-align:center;
- background:#04152bcc;
- border:1px solid #00eaff25;
- border-radius:17px;
-}
-.stat b{
- display:block;
- color:#ffe600;
- font-size:27px;
- margin-bottom:4px;
- text-shadow:0 0 15px #ffe60044;
-}
-.progress{
- height:19px;
- margin-top:16px;
- background:#020a16;
- border:1px solid #00eaff22;
- border-radius:20px;
- overflow:hidden;
-}
-.progress i{
- display:block;
- height:100%;
- width:0;
- background:linear-gradient(90deg,#00eaff,#ffe600);
- box-shadow:0 0 20px #00eaff99;
- transition:.5s;
-}
-h2{
- margin-top:0;
- color:#fff;
- text-shadow:0 0 15px #00eaff22;
-}
-h2:first-letter{color:#00eaff}
-.muted{color:#9dc7d5}
+/* =========================================================
+   HOLOGRAM TEACHER
+========================================================= */
 
-.toolbar{
- display:flex;
- gap:10px;
- flex-wrap:wrap;
- margin-bottom:17px;
-}
-.input{
- flex:1;
- min-width:220px;
- padding:12px 14px;
- border-radius:12px;
- border:1px solid #00eaff55;
- background:#04152a;
- color:#fff;
- outline:none;
-}
-.input:focus{
- border-color:#00eaff;
- box-shadow:0 0 18px #00eaff22;
-}
-.filters{
- display:flex;
- gap:7px;
- flex-wrap:wrap;
- margin-bottom:15px;
-}
-.filter{
- padding:9px 12px;
- border-radius:12px;
- border:1px solid #00eaff33;
- background:#061a32;
- color:#fff;
- cursor:pointer;
- font-weight:800;
- transition:.2s;
-}
-.filter:hover{transform:translateY(-2px)}
-.filter.active{
- background:#ffe600;
- color:#111;
- border-color:#ffe600;
+.hologram{
+  position:relative;
+  min-height:390px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform-style:preserve-3d;
+  perspective:1000px;
 }
 
-.words{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
- gap:13px;
+.holo-ring{
+  position:absolute;
+  width:280px;
+  height:280px;
+  border:2px solid #00eaff88;
+  border-radius:50%;
+  box-shadow:
+    0 0 20px #00eaff,
+    inset 0 0 30px #00eaff33;
+  animation:ringSpin 7s linear infinite;
 }
-.word{
- position:relative;
- padding:17px 13px;
- background:linear-gradient(145deg,#0a3158,#06182f);
- border:1px solid #00eaff30;
- border-radius:18px;
- text-align:center;
- min-height:220px;
- transition:.25s;
+
+.holo-ring:nth-child(2){
+  width:220px;
+  height:220px;
+  transform:rotateX(70deg);
+  animation-duration:5s;
 }
-.word:hover{
- transform:translateY(-5px) rotateX(2deg);
- border-color:#00eaff88;
- box-shadow:0 15px 35px #0008,0 0 25px #00eaff12;
+
+.holo-ring:nth-child(3){
+  width:330px;
+  height:330px;
+  transform:rotateY(70deg);
+  animation-duration:10s;
 }
-.word strong{
- font-size:23px;
- display:block;
- color:#fff;
+
+@keyframes ringSpin{
+  from{transform:rotateZ(0deg) rotateX(65deg)}
+  to{transform:rotateZ(360deg) rotateX(65deg)}
 }
-.pron{
- font-size:13px;
- color:#8fbfce;
- margin:7px;
+
+.teacher-holo{
+  position:relative;
+  z-index:5;
+  width:230px;
+  min-height:280px;
+  padding:25px;
+  text-align:center;
+  border:1px solid #00eaff99;
+  border-radius:25px;
+  background:
+    linear-gradient(
+      145deg,
+      #06385ddd,
+      #021323dd
+    );
+  box-shadow:
+    0 0 35px #00eaff55,
+    inset 0 0 30px #00eaff11;
+  backdrop-filter:blur(10px);
+  animation:holoFloat 4s ease-in-out infinite;
 }
-.ka{
- color:#ffe600;
- font-weight:1000;
- font-size:16px;
+
+@keyframes holoFloat{
+  0%,100%{
+    transform:translateY(0) rotateY(-3deg);
+  }
+  50%{
+    transform:translateY(-18px) rotateY(3deg);
+  }
 }
-.cat{
- font-size:11px;
- color:#6ea9bc;
- margin:5px;
+
+.avatar{
+  font-size:90px;
+  filter:
+    drop-shadow(0 0 12px #00eaff)
+    drop-shadow(0 0 30px #008cff);
 }
-.example{
- font-size:12px;
- color:#c8e9f1;
- line-height:1.5;
- margin:9px 0;
- min-height:37px;
+
+.teacher-holo h2{
+  margin:8px 0;
+  color:#00eaff;
 }
+
+.teacher-holo p{
+  color:#bfefff;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:25px;
+}
+
 .btn{
- border:0;
- border-radius:10px;
- padding:8px 10px;
- cursor:pointer;
- font-weight:900;
- background:#ffe600;
- color:#111;
- transition:.2s;
+  display:inline-block;
+  padding:13px 18px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-weight:1000;
+  cursor:pointer;
+  transition:.25s;
 }
+
 .btn:hover{
- transform:scale(1.05);
- box-shadow:0 0 15px #ffe60044;
+  transform:translateY(-5px) scale(1.03);
 }
-.btn.listen{
- background:#00eaff;
+
+.primary{
+  color:#00151c;
+  background:#00eaff;
+  box-shadow:
+    0 0 15px #00eaff,
+    0 0 35px #00eaff55;
+}
+
+.yellow{
+  color:#161300;
+  background:#ffe600;
+  box-shadow:0 0 25px #ffe60055;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+  padding:65px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.section-title h2{
+  font-size:35px;
+  margin:15px 0;
+}
+
+.muted{
+  color:#bfe8f4;
+}
+
+/* =========================================================
+   3D LESSON CARDS
+========================================================= */
+
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
 .lesson{
- padding:20px;
- background:linear-gradient(135deg,#08284add,#04162ddd);
- border-left:4px solid #00eaff;
- border-radius:15px;
- line-height:1.85;
- margin:12px 0;
- box-shadow:inset 0 0 25px #00eaff06;
+  position:relative;
+  min-height:370px;
+  padding:25px;
+  overflow:hidden;
+  border-radius:25px;
+  border:1px solid #00eaff66;
+  background:
+    linear-gradient(
+      145deg,
+      #062746e8,
+      #020c19ed
+    );
+  box-shadow:
+    0 20px 50px #000b,
+    0 0 25px #00eaff22;
+  transform-style:preserve-3d;
+  transition:.35s;
 }
+
+.lesson:hover{
+  transform:
+    perspective(800px)
+    rotateX(5deg)
+    rotateY(-5deg)
+    translateY(-12px);
+  box-shadow:
+    0 35px 70px #000e,
+    0 0 45px #00eaff55;
+}
+
+.lesson::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:-70px;
+  top:-70px;
+  border-radius:50%;
+  background:#00eaff22;
+  filter:blur(5px);
+}
+
+.lesson-icon{
+  font-size:65px;
+  filter:
+    drop-shadow(0 0 10px #00eaff)
+    drop-shadow(0 0 25px #008cff);
+}
+
 .lesson h3{
- color:#ffe600;
- margin-top:0;
-}
-.lesson b{color:#00eaff}
-
-.phrase{
- display:flex;
- justify-content:space-between;
- align-items:center;
- gap:10px;
- padding:12px;
- margin:7px 0;
- background:#061a32;
- border-radius:12px;
- border:1px solid #00eaff22;
+  color:#ffe600;
+  font-size:26px;
 }
 
-.option{
- display:block;
- width:100%;
- margin:8px 0;
- padding:12px;
- border-radius:11px;
- border:1px solid #00eaff33;
- background:#061a32;
- color:#fff;
- text-align:left;
- cursor:pointer;
- transition:.2s;
-}
-.option:hover{
- border-color:#00eaff;
- transform:translateX(3px);
-}
-.correct{
- border-color:#ffe600!important;
- background:#164b3a!important;
-}
-.wrong{
- border-color:#ff6b81!important;
- background:#4a1c29!important;
-}
-.quiz-result{
- text-align:center;
- padding:18px;
- border-radius:15px;
- background:#061a32;
- margin-top:15px;
-}
-.quiz-result strong{
- color:#ffe600;
- font-size:30px;
+.lesson p{
+  color:#d9f7ff;
+  line-height:1.7;
 }
 
-.number{
- min-height:130px;
- display:flex;
- flex-direction:column;
- justify-content:center;
- align-items:center;
+/* =========================================================
+   ALPHABET CHAMBER
+========================================================= */
+
+.alphabet-box{
+  position:relative;
+  min-height:500px;
+  overflow:hidden;
+  border-radius:30px;
+  border:1px solid #00eaff77;
+  background:
+    radial-gradient(
+      circle at center,
+      #075b91,
+      #032c4d 40%,
+      #010914 85%
+    );
+  box-shadow:
+    0 30px 80px #000c,
+    0 0 50px #00eaff33;
 }
 
-footer{
- margin-top:40px;
- padding:30px 0;
- text-align:center;
- color:#9dc7d5;
- border-top:1px solid #00eaff33;
-}
-.site-copyright{
- margin-top:0;
- padding:18px 12px;
- text-align:center;
- color:#9dc7d5;
- font-size:13px;
- border-top:1px solid #00eaff33;
- background:#020b19aa;
+.chamber-center{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:190px;
+  height:190px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(
+      circle,
+      #eaffff,
+      #00eaff 20%,
+      #006cff 55%,
+      #022447
+    );
+  box-shadow:
+    0 0 35px #00eaff,
+    0 0 80px #008cff88,
+    inset -20px -20px 30px #001b35;
+  animation:corePulse 3s ease-in-out infinite;
 }
 
-@media(max-width:800px){
- .stats{grid-template-columns:repeat(2,1fr)}
+@keyframes corePulse{
+  0%,100%{
+    transform:translate(-50%,-50%) scale(1);
+  }
+  50%{
+    transform:translate(-50%,-50%) scale(1.08);
+  }
 }
-@media(max-width:600px){
- .wrap{width:min(100% - 18px,1250px)}
- nav{justify-content:center}
- .brand{width:100%;text-align:center}
- .links{width:100%;justify-content:center}
- .hero{padding-top:42px}
- .hero h1{font-size:43px}
- .lead{font-size:15px}
- .card{padding:15px;border-radius:17px}
- .words{grid-template-columns:repeat(2,1fr);gap:8px}
- .word{padding:13px 8px;min-height:205px}
- .word strong{font-size:19px}
- .btn{font-size:11px;padding:7px 8px}
- .phrase{align-items:flex-start}
+
+.chamber-center span{
+  font-size:28px;
+  font-weight:1000;
+  text-shadow:0 0 15px #fff;
 }
-@media(max-width:390px){
- .words{grid-template-columns:1fr}
+
+.orbit{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:390px;
+  height:390px;
+  transform:translate(-50%,-50%);
+  border:1px solid #00eaff66;
+  border-radius:50%;
+  animation:orbitSpin 14s linear infinite;
+}
+
+.orbit.two{
+  width:300px;
+  height:300px;
+  animation-duration:9s;
+  transform:translate(-50%,-50%) rotateX(65deg);
+}
+
+.orbit.three{
+  width:470px;
+  height:470px;
+  animation-duration:20s;
+  transform:translate(-50%,-50%) rotateY(65deg);
+}
+
+@keyframes orbitSpin{
+  from{rotate:0deg}
+  to{rotate:360deg}
+}
+
+.orbit-letter{
+  position:absolute;
+  font-size:28px;
+  font-weight:1000;
+  color:#fff;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 18px #00eaff,
+    0 0 35px #008cff;
+}
+
+.orbit-letter:nth-child(1){left:0;top:50%}
+.orbit-letter:nth-child(2){right:0;top:50%}
+.orbit-letter:nth-child(3){left:48%;top:0}
+.orbit-letter:nth-child(4){left:48%;bottom:0}
+
+/* =========================================================
+   VOCABULARY
+========================================================= */
+
+.words{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.word-card{
+  position:relative;
+  min-height:150px;
+  padding:22px;
+  text-align:center;
+  border-radius:20px;
+  border:1px solid #00eaff44;
+  background:#03182cdd;
+  transition:.3s;
+  overflow:hidden;
+}
+
+.word-card:hover{
+  transform:
+    perspective(700px)
+    rotateX(8deg)
+    translateY(-8px);
+  border-color:#00eaff;
+  box-shadow:0 0 30px #00eaff55;
+}
+
+.word-card strong{
+  display:block;
+  font-size:26px;
+  color:#fff;
+  text-shadow:0 0 12px #00eaff;
+}
+
+.word-card span{
+  display:block;
+  margin-top:10px;
+  color:#ffe600;
+  font-weight:900;
+}
+
+/* =========================================================
+   MISSION
+========================================================= */
+
+.mission{
+  position:relative;
+  padding:40px;
+  overflow:hidden;
+  text-align:center;
+  border-radius:30px;
+  border:1px solid #00eaff77;
+  background:
+    linear-gradient(
+      135deg,
+      #06385ddd,
+      #020d1bdd
+    );
+  box-shadow:
+    0 30px 70px #000c,
+    0 0 40px #00eaff33;
+}
+
+.mission::before{
+  content:"";
+  position:absolute;
+  inset:-100%;
+  background:
+    conic-gradient(
+      transparent,
+      #00eaff44,
+      transparent 30%
+    );
+  animation:scan 5s linear infinite;
+}
+
+@keyframes scan{
+  to{transform:rotate(360deg)}
+}
+
+.mission-content{
+  position:relative;
+  z-index:2;
+}
+
+.mission h2{
+  color:#00eaff;
+  font-size:35px;
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-box{
+  padding:28px;
+  border-radius:25px;
+  border:1px solid #00eaff66;
+  background:#031629dd;
+  box-shadow:0 0 35px #00eaff22;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat{
+  padding:18px;
+  text-align:center;
+  border-radius:16px;
+  background:#061c32;
+  border:1px solid #00eaff33;
+}
+
+.stat b{
+  display:block;
+  font-size:28px;
+  color:#ffe600;
+  margin-bottom:6px;
+}
+
+.progress{
+  height:20px;
+  margin-top:20px;
+  overflow:hidden;
+  border-radius:30px;
+  background:#010811;
+  border:1px solid #00eaff33;
+}
+
+.progress i{
+  display:block;
+  width:0;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      #00eaff,
+      #008cff,
+      #ffe600
+    );
+  box-shadow:0 0 20px #00eaff;
+  transition:width 1s ease;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+  margin-top:50px;
+  padding:35px 0;
+  text-align:center;
+  color:#9dc7d5;
+  border-top:1px solid #00eaff33;
+}
+
+.copyright{
+  padding:20px;
+  text-align:center;
+  color:#789eac;
+  border-top:1px solid #00eaff22;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .lesson-grid{
+    grid-template-columns:1fr;
+  }
+
+  .words{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero{
+    padding-top:55px;
+  }
+}
+
+@media(max-width:650px){
+
+  .wrap{
+    width:calc(100% - 20px);
+  }
+
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:12px 0;
+  }
+
+  .navlinks{
+    width:100%;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:5px;
+  }
+
+  .navlinks a{
+    flex:0 0 auto;
+    white-space:nowrap;
+  }
+
+  .hero h1{
+    font-size:43px;
+    letter-spacing:-2px;
+  }
+
+  .alphabet-box{
+    min-height:400px;
+  }
+
+  .orbit{
+    width:280px;
+    height:280px;
+  }
+
+  .orbit.two{
+    width:220px;
+    height:220px;
+  }
+
+  .orbit.three{
+    width:340px;
+    height:340px;
+  }
+
+  .chamber-center{
+    width:135px;
+    height:135px;
+  }
+
+  .words{
+    grid-template-columns:1fr;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .mission{
+    padding:28px 18px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+  }
 }
 </style>
-
-<link rel="stylesheet" href="3d-visuals.css">
-<script src="3d-visuals.js" defer></script>
-
-<script src="config.js"></script>
-<script src="teacher-navigation.js"></script>
-
 </head>
 
 <body>
 
+<!-- =======================================================
+     FUTURISTIC BACKGROUND
+======================================================= -->
+
+<div class="world" aria-hidden="true">
+
+  <div class="beam"></div>
+  <div class="beam"></div>
+  <div class="beam"></div>
+  <div class="beam"></div>
+  <div class="beam"></div>
+
+  <div class="stars">
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+    <i class="star"></i>
+  </div>
+
+  <div class="alphabet">
+    <span class="letter">A</span>
+    <span class="letter">B</span>
+    <span class="letter">C</span>
+    <span class="letter">D</span>
+    <span class="letter">E</span>
+    <span class="letter">F</span>
+    <span class="letter">G</span>
+    <span class="letter">H</span>
+    <span class="letter">I</span>
+    <span class="letter">J</span>
+  </div>
+
+  <div class="floor"></div>
+
+</div>
+
+<!-- =======================================================
+     NAVIGATION
+======================================================= -->
+
 <header class="top">
- <div class="wrap">
-  <nav>
 
-   <a class="brand" href="academy.html">
-    ⚡ ENGLISH WITH MARIAMI
-   </a>
+  <div class="wrap nav">
 
-   <div class="links">
-    <a href="academy.html">🏠 აკადემია</a>
-    <a href="#vocabulary">📚 სიტყვები</a>
-    <a href="#grammar">✍️ გრამატიკა</a>
-    <a href="#quiz">📝 ქვიზი</a>
-   </div>
+    <a href="academy.html" class="brand">
+      ⚡ ENGLISH WITH MARIAMI
+    </a>
 
-  </nav>
- </div>
+    <nav class="navlinks">
+
+      <a href="academy.html">
+        🏠 Academy
+      </a>
+
+      <a href="#alphabet">
+        🔤 Alphabet
+      </a>
+
+      <a href="#vocabulary">
+        🧠 Vocabulary
+      </a>
+
+      <a href="#mission">
+        🚀 Mission
+      </a>
+
+      <a href="login.html">
+        🚪 გამოსვლა
+      </a>
+
+    </nav>
+
+  </div>
+
 </header>
 
 <main class="wrap">
 
+<!-- =======================================================
+     HERO
+======================================================= -->
+
 <section class="hero">
 
- <span class="badge">
-  🌱 მე-2 კლასი • სრული საბაზისო კურსი
- </span>
+  <div class="hero-grid">
 
- <h1>
-  ინგლისური <span>მარტივად</span> ვისწავლოთ!
- </h1>
+    <div>
 
- <p class="lead">
-  📚 სიტყვები → 🔊 მოსმენა → 🇬🇪 ქართული → 💬 მაგალითი →
-  🗣️ საუბარი → 📖 კითხვა → 📝 ქვიზი → ⭐ ქულა
- </p>
+      <span class="badge">
+        🌱 GRADE 2 • BEGINNER
+      </span>
+
+      <h1>
+        ინგლისური
+        <span>ახალი სამყაროა.</span>
+      </h1>
+
+      <p class="lead">
+        კეთილი იყოს შენი მობრძანება მე-2 კლასის
+        ფუტურისტულ ინგლისურის აკადემიაში.
+        აქ ვისწავლით სიტყვებს, ფერებს, ოჯახს,
+        ცხოველებს, სკოლას, საკვებს და მარტივ
+        ინგლისურ წინადადებებს.
+      </p>
+
+      <div class="buttons">
+
+        <a href="#alphabet" class="btn primary">
+          🔤 Alphabet-ის დაწყება
+        </a>
+
+        <a href="#vocabulary" class="btn yellow">
+          🧠 Vocabulary
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="hologram">
+
+      <div class="holo-ring"></div>
+      <div class="holo-ring"></div>
+      <div class="holo-ring"></div>
+
+      <div class="teacher-holo">
+
+        <div class="avatar">
+          👩‍🏫
+        </div>
+
+        <h2>
+          Teacher Mariami
+        </h2>
+
+        <p>
+          შენი ინგლისურის ჰოლოგრამული
+          გზამკვლევი ✨
+        </p>
+
+        <span class="badge">
+          LEVEL 2
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
-<section class="card">
+<!-- =======================================================
+     ALPHABET
+======================================================= -->
 
- <div class="stats">
+<section id="alphabet" class="section">
 
-  <div class="stat">
-   <b id="points">0</b>
-   ⭐ ქულა
+  <div class="section-title">
+
+    <span class="badge">
+      🔤 ALPHABET CHAMBER
+    </span>
+
+    <h2>
+      Welcome to the Alphabet World
+    </h2>
+
+    <p class="muted">
+      ინგლისური ანბანი ახლა შენს გარშემო მოძრაობს.
+    </p>
+
   </div>
 
-  <div class="stat">
-   <b id="learned">0</b>
-   📚 ნასწავლი სიტყვა
+  <div class="alphabet-box">
+
+    <div class="orbit">
+      <span class="orbit-letter">A</span>
+      <span class="orbit-letter">B</span>
+      <span class="orbit-letter">C</span>
+      <span class="orbit-letter">D</span>
+    </div>
+
+    <div class="orbit two">
+      <span class="orbit-letter">E</span>
+      <span class="orbit-letter">F</span>
+      <span class="orbit-letter">G</span>
+      <span class="orbit-letter">H</span>
+    </div>
+
+    <div class="orbit three">
+      <span class="orbit-letter">I</span>
+      <span class="orbit-letter">J</span>
+      <span class="orbit-letter">K</span>
+      <span class="orbit-letter">L</span>
+    </div>
+
+    <div class="chamber-center">
+      <span>
+        A<br>
+        B<br>
+        C
+      </span>
+    </div>
+
   </div>
-
-  <div class="stat">
-   <b id="quizScore">0</b>
-   📝 ქვიზის ქულა
-  </div>
-
-  <div class="stat">
-   <b>2</b>
-   🎓 კლასი
-  </div>
-
- </div>
-
- <div class="progress">
-  <i id="bar"></i>
- </div>
-
- <p class="muted" style="text-align:center">
-  შენი პროგრესი ავტომატურად ინახება ამ მოწყობილობაში.
- </p>
 
 </section>
 
-<section class="card" id="vocabulary">
+<!-- =======================================================
+     LESSONS
+======================================================= -->
 
- <h2>🧠 Vocabulary Lab — მე-2 კლასი</h2>
+<section class="section">
 
- <p class="muted">
-  სიტყვების რაოდენობა:
-  <strong id="count">0</strong>
- </p>
+  <div class="section-title">
 
- <div id="filters" class="filters"></div>
+    <span class="badge">
+      🎓 GRADE 2 MISSIONS
+    </span>
 
- <div class="toolbar">
-  <input
-   id="search"
-   class="input"
-   placeholder="🔎 მოძებნე ინგლისური ან ქართული სიტყვა">
- </div>
+    <h2>
+      რას ვისწავლით?
+    </h2>
 
- <div id="words" class="words"></div>
+  </div>
+
+  <div class="lesson-grid">
+
+    <article class="lesson">
+
+      <div class="lesson-icon">
+        🎨
+      </div>
+
+      <h3>
+        Colors
+      </h3>
+
+      <p>
+        Red, blue, green, yellow, black, white
+        და სხვა ფერები.
+        ვისწავლით სიტყვას, გამოთქმას და
+        მარტივ წინადადებებს.
+      </p>
+
+      <a href="#vocabulary" class="btn primary">
+        სწავლა →
+      </a>
+
+    </article>
+
+    <article class="lesson">
+
+      <div class="lesson-icon">
+        👨‍👩‍👧
+      </div>
+
+      <h3>
+        Family
+      </h3>
+
+      <p>
+        Mother, father, sister, brother,
+        grandmother და grandfather.
+        შენი ოჯახის ინგლისური სამყარო.
+      </p>
+
+      <a href="#vocabulary" class="btn primary">
+        სწავლა →
+      </a>
+
+    </article>
+
+    <article class="lesson">
+
+      <div class="lesson-icon">
+        🐶
+      </div>
+
+      <h3>
+        Animals
+      </h3>
+
+      <p>
+        Dog, cat, bird, fish, horse და სხვა
+        საყვარელი ცხოველები.
+      </p>
+
+      <a href="#vocabulary" class="btn primary">
+        სწავლა →
+      </a>
+
+    </article>
+
+  </div>
 
 </section>
 
-<section class="card">
+<!-- =======================================================
+     VOCABULARY
+======================================================= -->
 
- <h2>🔢 რიცხვები 1–100</h2>
+<section id="vocabulary" class="section">
 
- <p class="muted">
-  ისწავლე რიცხვები და მოუსმინე სწორ გამოთქმას.
- </p>
+  <div class="section-title">
 
- <div id="numbers" class="words"></div>
+    <span class="badge">
+      🧠 VOCABULARY LAB
+    </span>
+
+    <h2>
+      პირველი სიტყვები
+    </h2>
+
+    <p class="muted">
+      დააჭირე ბარათს და შეიგრძენი 3D ეფექტი.
+    </p>
+
+  </div>
+
+  <div class="words">
+
+    <div class="word-card">
+      <strong>APPLE</strong>
+      <span>ვაშლი 🍎</span>
+    </div>
+
+    <div class="word-card">
+      <strong>BOOK</strong>
+      <span>წიგნი 📖</span>
+    </div>
+
+    <div class="word-card">
+      <strong>CAT</strong>
+      <span>კატა 🐱</span>
+    </div>
+
+    <div class="word-card">
+      <strong>DOG</strong>
+      <span>ძაღლი 🐶</span>
+    </div>
+
+    <div class="word-card">
+      <strong>HOUSE</strong>
+      <span>სახლი 🏠</span>
+    </div>
+
+    <div class="word-card">
+      <strong>SCHOOL</strong>
+      <span>სკოლა 🏫</span>
+    </div>
+
+    <div class="word-card">
+      <strong>WATER</strong>
+      <span>წყალი 💧</span>
+    </div>
+
+    <div class="word-card">
+      <strong>FAMILY</strong>
+      <span>ოჯახი 👨‍👩‍👧</span>
+    </div>
+
+  </div>
 
 </section>
 
-<section class="card" id="grammar">
+<!-- =======================================================
+     PROGRESS
+======================================================= -->
 
- <h2>✍️ მე-2 კლასის გრამატიკის საფუძვლები</h2>
+<section class="section">
 
- <div class="lesson">
-  <h3>1️⃣ To be — am / is / are</h3>
+  <div class="section-title">
 
-  <b>I am</b> — მე ვარ<br>
-  <b>You are</b> — შენ ხარ / თქვენ ხართ<br>
-  <b>He is</b> — ის არის<br>
-  <b>She is</b> — ის არის<br>
-  <b>It is</b> — ეს არის<br>
-  <b>We are</b> — ჩვენ ვართ<br>
-  <b>They are</b> — ისინი არიან
+    <span class="badge">
+      🏆 PLAYER STATUS
+    </span>
 
-  <hr>
+    <h2>
+      შენი პროგრესი
+    </h2>
 
-  <b>I am Mari.</b> — მე მარი ვარ.<br>
-  <b>She is happy.</b> — ის ბედნიერია.<br>
-  <b>They are students.</b> — ისინი მოსწავლეები არიან.
- </div>
+  </div>
 
- <div class="lesson">
-  <h3>2️⃣ Have / Has</h3>
+  <div class="progress-box">
 
-  <b>I have a book.</b> — მე მაქვს წიგნი.<br>
-  <b>You have a pen.</b> — შენ გაქვს კალამი.<br>
-  <b>She has a cat.</b> — მას ჰყავს კატა.<br>
-  <b>He has a ball.</b> — მას აქვს ბურთი.
- </div>
+    <div class="stats">
 
- <div class="lesson">
-  <h3>3️⃣ Can — შემიძლია</h3>
+      <div class="stat">
+        <b id="words-count">0</b>
+        სიტყვა
+      </div>
 
-  <b>I can run.</b> — მე შემიძლია სირბილი.<br>
-  <b>I can jump.</b> — მე შემიძლია ხტომა.<br>
-  <b>Can you swim?</b> — შეგიძლია ცურვა?<br>
-  <b>Yes, I can.</b> — დიახ, შემიძლია.<br>
-  <b>No, I can't.</b> — არა, არ შემიძლია.
- </div>
+      <div class="stat">
+        <b id="quiz-count">0</b>
+        Quiz
+      </div>
 
- <div class="lesson">
-  <h3>4️⃣ This / That</h3>
+      <div class="stat">
+        <b id="progress-percent">0%</b>
+        პროგრესი
+      </div>
 
-  <b>This is a book.</b> — ეს არის წიგნი.<br>
-  <b>That is a dog.</b> — ის არის ძაღლი.<br>
-  <b>This is my bag.</b> — ეს ჩემი ჩანთაა.
- </div>
+      <div class="stat">
+        <b id="student-level">🌱</b>
+        დონე
+      </div>
 
- <div class="lesson">
-  <h3>5️⃣ მარტივი კითხვები</h3>
+    </div>
 
-  <b>What is this?</b> — რა არის ეს?<br>
-  <b>Who is she?</b> — ვინ არის ის?<br>
-  <b>Where is my book?</b> — სად არის ჩემი წიგნი?<br>
-  <b>How old are you?</b> — რამდენი წლის ხარ?<br>
-  <b>What is your name?</b> — რა გქვია?
- </div>
+    <div class="progress">
+      <i id="progress-bar"></i>
+    </div>
+
+    <p id="progress-message" class="muted">
+      დაიწყე სწავლა და შენი პროგრესი აქ გამოჩნდება 🚀
+    </p>
+
+  </div>
 
 </section>
 
-<section class="card">
+<!-- =======================================================
+     MISSION
+======================================================= -->
 
- <h2>🗣️ სასაუბრო ფრაზები</h2>
+<section id="mission" class="section">
 
- <div class="lesson">
+  <div class="mission">
 
-  <div class="phrase">
-   <span><b>Hello!</b> — გამარჯობა!</span>
-   <button class="btn listen" onclick="speak('Hello!')">🔊</button>
+    <div class="mission-content">
+
+      <span class="badge">
+        🚀 YOUR FIRST MISSION
+      </span>
+
+      <h2>
+        მზად ხარ ინგლისური სამყაროსთვის?
+      </h2>
+
+      <p class="muted">
+        ისწავლე 10 ახალი სიტყვა,
+        გაიარე პირველი Quiz
+        და გახდი English Explorer ⭐
+      </p>
+
+      <div class="buttons"
+           style="justify-content:center">
+
+        <a href="#" class="btn primary">
+          🚀 Start Mission
+        </a>
+
+        <a href="academy.html" class="btn yellow">
+          ← Academy-ში დაბრუნება
+        </a>
+
+      </div>
+
+    </div>
+
   </div>
-
-  <div class="phrase">
-   <span><b>Good morning!</b> — დილა მშვიდობისა!</span>
-   <button class="btn listen" onclick="speak('Good morning!')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>How are you?</b> — როგორ ხარ?</span>
-   <button class="btn listen" onclick="speak('How are you?')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>I am fine, thank you.</b> — კარგად ვარ, მადლობა.</span>
-   <button class="btn listen" onclick="speak('I am fine, thank you.')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>What is your name?</b> — რა გქვია?</span>
-   <button class="btn listen" onclick="speak('What is your name?')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>My name is Mari.</b> — მე მარი მქვია.</span>
-   <button class="btn listen" onclick="speak('My name is Mari.')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>How old are you?</b> — რამდენი წლის ხარ?</span>
-   <button class="btn listen" onclick="speak('How old are you?')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>I am eight years old.</b> — რვა წლის ვარ.</span>
-   <button class="btn listen" onclick="speak('I am eight years old.')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>Where do you live?</b> — სად ცხოვრობ?</span>
-   <button class="btn listen" onclick="speak('Where do you live?')">🔊</button>
-  </div>
-
-  <div class="phrase">
-   <span><b>I live in Kutaisi.</b> — მე ქუთაისში ვცხოვრობ.</span>
-   <button class="btn listen" onclick="speak('I live in Kutaisi.')">🔊</button>
-  </div>
-
- </div>
-
-</section>
-
-<section class="card">
-
- <h2>📖 Reading — წაკითხვა</h2>
-
- <div class="lesson">
-
-  <h3>👨‍👩‍👧 My Family</h3>
-
-  <p>
-   Hello! My name is Mari.
-   I am eight years old.
-   I have a mother, a father, a brother and a sister.
-   We live in a nice home.
-   I love my family.
-  </p>
-
-  <p class="muted">
-   გამარჯობა! მე მარი მქვია.
-   რვა წლის ვარ.
-   მყავს დედა, მამა, ძმა და და.
-   ჩვენ ლამაზ სახლში ვცხოვრობთ.
-   მე მიყვარს ჩემი ოჯახი.
-  </p>
-
-  <button
-   class="btn listen"
-   onclick="speak('Hello! My name is Mari. I am eight years old. I have a mother, a father, a brother and a sister. We live in a nice home. I love my family.')">
-   🔊 ტექსტის მოსმენა
-  </button>
-
- </div>
-
- <div class="lesson">
-
-  <h3>🏫 My School</h3>
-
-  <p>
-   I go to school every day.
-   I have a blue bag.
-   I have books, pencils and a pen.
-   My teacher is nice.
-   I love my school.
-  </p>
-
-  <p class="muted">
-   მე ყოველდღე სკოლაში მივდივარ.
-   მაქვს ლურჯი ჩანთა.
-   მაქვს წიგნები, ფანქრები და კალამი.
-   ჩემი მასწავლებელი კარგია.
-   მე მიყვარს ჩემი სკოლა.
-  </p>
-
-  <button
-   class="btn listen"
-   onclick="speak('I go to school every day. I have a blue bag. I have books, pencils and a pen. My teacher is nice. I love my school.')">
-   🔊 ტექსტის მოსმენა
-  </button>
-
- </div>
-
-</section>
-
-<section class="card" id="quiz">
-
- <h2>📝 მე-2 კლასის ქვიზი</h2>
-
- <p class="muted">
-  აირჩიე სწორი პასუხი და დააგროვე ქულები.
- </p>
-
- <div id="quizBox"></div>
-
- <div id="quizResult"></div>
-
-</section>
-
-<section class="card">
-
- <h2>🎯 სასწავლო მიზნები</h2>
-
- <div class="lesson">
-
-  ✅ 200+ საბაზისო სიტყვა<br>
-  ✅ ოჯახი და ადამიანები<br>
-  ✅ სკოლა და საკლასო ნივთები<br>
-  ✅ ფერები<br>
-  ✅ ცხოველები<br>
-  ✅ საკვები და სასმელები<br>
-  ✅ სხეულის ნაწილები<br>
-  ✅ სახლი და ოთახები<br>
-  ✅ ტანსაცმელი<br>
-  ✅ სათამაშოები<br>
-  ✅ ბუნება<br>
-  ✅ ამინდი<br>
-  ✅ გრძნობები<br>
-  ✅ მოქმედებები<br>
-  ✅ აღწერები<br>
-  ✅ მარტივი ფრაზები<br>
-  ✅ რიცხვები 1–100<br>
-  ✅ To be<br>
-  ✅ Have / Has<br>
-  ✅ Can<br>
-  ✅ This / That<br>
-  ✅ მარტივი კითხვები<br>
-  ✅ Reading<br>
-  ✅ Speaking
-
- </div>
 
 </section>
 
 </main>
 
-<footer>
+<!-- =======================================================
+     FOOTER
+======================================================= -->
 
- <div class="wrap">
+<footer class="footer">
 
-  <strong>⚡ English with Mariami</strong>
-
-  <p>ვისწავლოთ ინგლისური მარიამისთან ერთად ❤️</p>
-
-  <p>📞 598 93 02 08 • 📍 ქუთაისი</p>
-
-  <p>საიტი შეიქმნა 2026 წელს • ყველა უფლება დაცულია © 2026</p>
-
- </div>
+  ⚡ English with Mariami • Grade 2 •
+  Learn • Play • Grow 🚀
 
 </footer>
 
-<footer class="site-copyright">
- © 2026 English with Mariami —
- ყველა უფლება დაცულია • Developed by btcgamer
-</footer>
+<div class="copyright">
+
+  © 2026 English with Mariami —
+  ყველა უფლება დაცულია •
+  Developed by btcgamer
+
+</div>
+
+<!-- =======================================================
+     SUPABASE AUTH + PROFILE
+======================================================= -->
 
 <script>
 
-const DATA={
-
-'👨‍👩‍👧 ოჯახი':[
- ['mother','დედა','მადერ','My mother is kind.'],
- ['father','მამა','ფადერ','My father is happy.'],
- ['parent','მშობელი','ფარენთ','My parent loves me.'],
- ['sister','და','სისტერ','This is my sister.'],
- ['brother','ძმა','ბრაზერ','This is my brother.'],
- ['baby','ბავშვი','ბეიბი','The baby is small.'],
- ['grandmother','ბებია','გრენდმადერ','My grandmother is nice.'],
- ['grandfather','ბაბუა','გრენდფადერ','My grandfather is kind.'],
- ['family','ოჯახი','ფემილი','I love my family.'],
- ['friend','მეგობარი','ფრენდ','She is my friend.'],
- ['boy','ბიჭი','ბოი','The boy is happy.'],
- ['girl','გოგო','გერლ','The girl is nice.']
-],
-
-'🏫 სკოლა':[
- ['school','სკოლა','სქულ','I go to school.'],
- ['teacher','მასწავლებელი','თიჩერ','My teacher is nice.'],
- ['student','მოსწავლე','სთიუდენთ','I am a student.'],
- ['class','კლასი','ქლას','My class is big.'],
- ['book','წიგნი','ბუქ','I have a book.'],
- ['notebook','რვეული','ნოუთბუქ','This is my notebook.'],
- ['pen','კალამი','პენ','I have a pen.'],
- ['pencil','ფანქარი','ფენსილ','This is my pencil.'],
- ['eraser','საშლელი','ირესერ','I need an eraser.'],
- ['bag','ჩანთა','ბეგ','My bag is blue.'],
- ['desk','მერხი','დესქ','The book is on the desk.'],
- ['chair','სკამი','ჩეარ','Sit on the chair.'],
- ['door','კარი','დორ','Open the door.'],
- ['window','ფანჯარა','უინდოუ','Open the window.'],
- ['ruler','სახაზავი','რულერ','The ruler is long.'],
- ['board','დაფა','ბორდ','The teacher writes on the board.']
-],
-
-'🎨 ფერები':[
- ['red','წითელი','რედ','The apple is red.'],
- ['blue','ლურჯი','ბლუ','The sky is blue.'],
- ['green','მწვანე','გრინ','The tree is green.'],
- ['yellow','ყვითელი','იელოუ','The sun is yellow.'],
- ['orange','ნარინჯისფერი','ორინჯ','The orange is orange.'],
- ['purple','იასამნისფერი','ფარფლ','My bag is purple.'],
- ['pink','ვარდისფერი','ფინქ','The flower is pink.'],
- ['black','შავი','ბლექ','The cat is black.'],
- ['white','თეთრი','უაით','The snow is white.'],
- ['brown','ყავისფერი','ბრაუნ','The dog is brown.'],
- ['grey','ნაცრისფერი','გრეი','The elephant is grey.']
-],
-
-'🐶 ცხოველები':[
- ['dog','ძაღლი','დოგ','I have a dog.'],
- ['cat','კატა','ქეთ','The cat is small.'],
- ['bird','ჩიტი','ბერდ','The bird can fly.'],
- ['fish','თევზი','ფიშ','The fish can swim.'],
- ['horse','ცხენი','ჰორს','The horse is big.'],
- ['cow','ძროხა','ქაუ','The cow eats grass.'],
- ['sheep','ცხვარი','შიფ','The sheep is white.'],
- ['goat','თხა','გოუთ','The goat is small.'],
- ['pig','ღორი','ფიგ','The pig is pink.'],
- ['rabbit','კურდღელი','რებიტ','The rabbit can run.'],
- ['lion','ლომი','ლაიენ','The lion is big.'],
- ['tiger','ვეფხვი','თაიგერ','The tiger is strong.'],
- ['elephant','სპილო','ელიფენთ','The elephant is big.'],
- ['monkey','მაიმუნი','მანქი','The monkey can jump.'],
- ['bear','დათვი','ბეარ','The bear is big.'],
- ['duck','იხვი','დაქ','The duck can swim.']
-],
-
-'🍎 საკვები':[
- ['apple','ვაშლი','ეფლ','I eat an apple.'],
- ['banana','ბანანი','ბენანა','I like bananas.'],
- ['orange','ფორთოხალი','ორინჯ','I eat an orange.'],
- ['bread','პური','ბრედ','I like bread.'],
- ['cheese','ყველი','ჩიზ','I like cheese.'],
- ['egg','კვერცხი','ეგ','I eat an egg.'],
- ['milk','რძე','მილქ','I drink milk.'],
- ['water','წყალი','უოთერ','I drink water.'],
- ['juice','წვენი','ჯუს','I like juice.'],
- ['rice','ბრინჯი','რაის','I eat rice.'],
- ['meat','ხორცი','მით','I eat meat.'],
- ['chicken','ქათამი','ჩიქენ','I like chicken.'],
- ['cake','ნამცხვარი','ქეიქ','The cake is good.'],
- ['ice cream','ნაყინი','აის ქრიმ','I like ice cream.'],
- ['potato','კარტოფილი','ფათეითოუ','I like potatoes.'],
- ['tomato','პომიდორი','თომეითოუ','The tomato is red.']
-],
-
-'👀 სხეულის ნაწილები':[
- ['head','თავი','ჰედ','My head is small.'],
- ['hair','თმა','ჰეარ','My hair is brown.'],
- ['eye','თვალი','აი','I have two eyes.'],
- ['ear','ყური','იარ','I have two ears.'],
- ['nose','ცხვირი','ნოუზ','My nose is small.'],
- ['mouth','პირი','მაუთ','Open your mouth.'],
- ['tooth','კბილი','თუთ','I have a tooth.'],
- ['face','სახე','ფეის','Wash your face.'],
- ['hand','ხელი','ჰენდ','Raise your hand.'],
- ['arm','მკლავი','არმ','My arm is strong.'],
- ['leg','ფეხი','ლეგ','My leg is strong.'],
- ['foot','ტერფი','ფუთ','My foot is small.'],
- ['finger','თითი','ფინგერ','I have five fingers.'],
- ['body','სხეული','ბადი','Move your body.'],
- ['shoulder','მხარი','შოულდერ','My shoulder is strong.']
-],
-
-'🏠 სახლი':[
- ['home','სახლი','ჰოუმ','I am at home.'],
- ['house','სახლი','ჰაუს','My house is nice.'],
- ['room','ოთახი','რუმ','This is my room.'],
- ['bedroom','საძინებელი','ბედრუმ','My bedroom is small.'],
- ['kitchen','სამზარეულო','ქიჩენ','Mum is in the kitchen.'],
- ['bathroom','აბაზანა','ბათრუმ','The bathroom is clean.'],
- ['living room','მისაღები','ლივინგ რუმ','We sit in the living room.'],
- ['bed','საწოლი','ბედ','My bed is soft.'],
- ['table','მაგიდა','თეიბლ','The book is on the table.'],
- ['lamp','ლამპა','ლემფ','The lamp is on.'],
- ['box','ყუთი','ბოქს','The toy is in the box.'],
- ['wall','კედელი','უოლ','The picture is on the wall.'],
- ['floor','იატაკი','ფლორ','The ball is on the floor.'],
- ['garden','ბაღი','გარდენ','I play in the garden.']
-],
-
-'👕 ტანსაცმელი':[
- ['shirt','პერანგი','შერთ','My shirt is blue.'],
- ['T-shirt','მაისური','თი შერთ','I have a T-shirt.'],
- ['trousers','შარვალი','ტრაუზერზ','My trousers are black.'],
- ['dress','კაბა','დრეს','She has a red dress.'],
- ['skirt','ქვედაბოლო','სქერთ','Her skirt is pink.'],
- ['shoes','ფეხსაცმელი','შუზ','My shoes are new.'],
- ['socks','წინდები','სოქს','My socks are white.'],
- ['hat','ქუდი','ჰეთ','I have a hat.'],
- ['coat','პალტო','ქოუთ','My coat is warm.'],
- ['jacket','ქურთუკი','ჯექით','My jacket is blue.'],
- ['shorts','შორტი','შორთს','My shorts are black.']
-],
-
-'🧸 სათამაშოები':[
- ['toy','სათამაშო','თოი','This is my toy.'],
- ['ball','ბურთი','ბოლ','I have a ball.'],
- ['doll','თოჯინა','დოლ','The doll is pretty.'],
- ['car','მანქანა','ქარ','I have a toy car.'],
- ['robot','რობოტი','როუბოთ','The robot is cool.'],
- ['train','მატარებელი','თრეინ','The toy train is red.'],
- ['game','თამაში','გეიმ','I like this game.'],
- ['kite','ფრანი','ქაით','The kite is high.'],
- ['puzzle','ფაზლი','ფაზლ','I like this puzzle.']
-],
-
-'🌳 ბუნება':[
- ['tree','ხე','თრი','The tree is green.'],
- ['flower','ყვავილი','ფლაუერ','The flower is beautiful.'],
- ['grass','ბალახი','გრას','The grass is green.'],
- ['sun','მზე','სან','The sun is hot.'],
- ['moon','მთვარე','მუნ','The moon is white.'],
- ['star','ვარსკვლავი','სთარ','I see a star.'],
- ['sky','ცა','სქაი','The sky is blue.'],
- ['rain','წვიმა','რეინ','I like rain.'],
- ['snow','თოვლი','სნოუ','The snow is white.'],
- ['water','წყალი','უოთერ','The water is clean.'],
- ['cloud','ღრუბელი','ქლაუდ','The cloud is white.'],
- ['river','მდინარე','რივერ','The river is long.']
-],
-
-'😊 გრძნობები':[
- ['happy','ბედნიერი','ჰეფი','I am happy.'],
- ['sad','სევდიანი','სედ','I am sad.'],
- ['good','კარგი','გუდ','I feel good.'],
- ['bad','ცუდი','ბედ','I feel bad.'],
- ['tired','დაღლილი','თაიერდ','I am tired.'],
- ['hungry','მშიერი','ჰანგრი','I am hungry.'],
- ['thirsty','მწყურვალი','თერსთი','I am thirsty.'],
- ['scared','შეშინებული','სქეერდ','The child is scared.'],
- ['angry','გაბრაზებული','ენგრი','He is angry.'],
- ['love','სიყვარული','ლავ','I love my family.'],
- ['funny','სასაცილო','ფანი','The monkey is funny.'],
- ['kind','კეთილი','ქაინდ','My teacher is kind.']
-],
-
-'🏃 მოქმედებები':[
- ['run','სირბილი','რან','I can run.'],
- ['walk','სიარული','უოქ','I walk to school.'],
- ['jump','ხტომა','ჯამფ','I can jump.'],
- ['sit','ჯდომა','სით','Sit here.'],
- ['stand','დგომა','სთენდ','Stand up.'],
- ['read','კითხვა','რიდ','I read a book.'],
- ['write','წერა','რაით','I write my name.'],
- ['listen','მოსმენა','ლისენ','Listen to me.'],
- ['speak','საუბარი','სპიქ','I speak English.'],
- ['look','შეხედვა','ლუქ','Look at the picture.'],
- ['open','გახსნა','ოუფენ','Open the book.'],
- ['close','დახურვა','ქლოუზ','Close the door.'],
- ['eat','ჭამა','ით','I eat breakfast.'],
- ['drink','დალევა','დრინქ','I drink water.'],
- ['play','თამაში','ფლეი','I play with my friends.'],
- ['sleep','ძილი','სლიფ','I sleep at night.'],
- ['go','წასვლა','გოუუ','I go to school.'],
- ['come','მოსვლა','ქამ','Come here.'],
- ['draw','ხატვა','დრო','I draw a picture.'],
- ['sing','სიმღერა','სინგ','I can sing.']
-],
-
-'📏 აღწერები':[
- ['big','დიდი','ბიგ','The elephant is big.'],
- ['small','პატარა','სმოლ','The cat is small.'],
- ['long','გრძელი','ლონგ','The ruler is long.'],
- ['short','მოკლე','შორთ','The pencil is short.'],
- ['hot','ცხელი','ჰოთ','The soup is hot.'],
- ['cold','ცივი','ქოულდ','The water is cold.'],
- ['new','ახალი','ნიუ','My book is new.'],
- ['old','ძველი','ოულდ','The house is old.'],
- ['clean','სუფთა','ქლინ','My room is clean.'],
- ['dirty','ჭუჭყიანი','დერთი','My shoes are dirty.'],
- ['fast','სწრაფი','ფასთ','The horse is fast.'],
- ['slow','ნელი','სლოუ','The turtle is slow.'],
- ['beautiful','ლამაზი','ბიუთიფულ','The flower is beautiful.'],
- ['nice','კარგი/სასიამოვნო','ნაის','My teacher is nice.'],
- ['strong','ძლიერი','სთრონგ','The lion is strong.'],
- ['soft','რბილი','სოფთ','My bed is soft.']
-],
-
-'🗣️ მარტივი ფრაზები':[
- ['please','გთხოვ','ფლიზ','Please sit down.'],
- ['thank you','მადლობა','თენქ იუ','Thank you!'],
- ['sorry','ბოდიში','სორი','I am sorry.'],
- ['yes','დიახ','იეს','Yes, I can.'],
- ['no','არა','ნოუ','No, thank you.'],
- ['goodbye','ნახვამდის','გუდბაი','Goodbye, teacher!'],
- ['welcome','კეთილი იყოს შენი მობრძანება','უელქამ','Welcome to school.'],
- ['help','დახმარება','ჰელფ','Please help me.'],
- ['again','კიდევ ერთხელ','ეგეინ','Say it again.'],
- ['ready','მზად','რედი','I am ready.'],
- ['great','შესანიშნავი','გრეით','Great job!'],
- ['well done','კარგად გააკეთე','უელ დან','Well done!']
-]
-
-};
-
-let cat='all';
-
-let points=Number(localStorage.getItem('g2_points')||0);
-let learned=Number(localStorage.getItem('g2_learned')||0);
-let quizPoints=Number(localStorage.getItem('g2_quiz_points')||0);
-let quizAnswered=0;
-
-const $=id=>document.getElementById(id);
-
-function allWords(){
- return Object.entries(DATA)
-  .flatMap(([category,words])=>
-   words.map(word=>[...word,category])
-  );
-}
-
-function safeKey(word){
- return word.toLowerCase().replace(/[^a-z0-9]+/g,'_');
-}
-
-function done(word){
- return localStorage.getItem('g2_word_'+safeKey(word))==='1';
-}
-
-function speak(text){
-
- if(!('speechSynthesis' in window)){
-  alert('ამ მოწყობილობაზე ხმის ფუნქცია მიუწვდომელია.');
-  return;
- }
-
- speechSynthesis.cancel();
-
- const u=new SpeechSynthesisUtterance(text);
-
- u.lang='en-US';
- u.rate=.78;
- u.pitch=1;
-
- speechSynthesis.speak(u);
-}
-
-function wordCard(w){
-
- const learnedClass=done(w[0])?'done':'';
-
- const buttonText=done(w[0])
-  ?'⭐ ნასწავლია'
-  :'+2 სწავლა';
-
- return `
-
- <article class="word">
-
-  <strong>${w[0]}</strong>
-
-  <div class="pron">/${w[2]}/</div>
-
-  <div class="ka">${w[1]}</div>
-
-  <div class="cat">${w[4]}</div>
-
-  <div class="example">💬 ${w[3]}</div>
-
-  <button
-   class="btn listen"
-   onclick='speak(${JSON.stringify(w[0])})'>
-   🔊
-  </button>
-
-  <button
-   class="btn ${learnedClass}"
-   onclick='markWord(${JSON.stringify(w[0])})'>
-   ${buttonText}
-  </button>
-
- </article>
-
- `;
-}
-
-function markWord(word){
-
- if(done(word)) return;
-
- localStorage.setItem(
-  'g2_word_'+safeKey(word),
-  '1'
- );
-
- learned++;
- points+=2;
-
- save();
- render();
-}
-
-function save(){
-
- localStorage.setItem('g2_points',points);
- localStorage.setItem('g2_learned',learned);
- localStorage.setItem('g2_quiz_points',quizPoints);
-}
-
-function render(){
-
- const q=$('search').value.trim().toLowerCase();
-
- const words=allWords()
-  .filter(w=>cat==='all'||w[4]===cat)
-  .filter(w=>
-   (w[0]+' '+w[1]+' '+w[3])
-    .toLowerCase()
-    .includes(q)
-  );
-
- $('words').innerHTML=words.map(wordCard).join('');
-
- $('count').textContent=allWords().length;
- $('points').textContent=points;
- $('learned').textContent=learned;
- $('quizScore').textContent=quizPoints;
-
- $('bar').style.width=
-  Math.min(100,learned/allWords().length*100)+'%';
-}
-
-function buildFilters(){
-
- const categories=Object.keys(DATA);
-
- $('filters').innerHTML=
-
-  `<button
-    class="filter active"
-    onclick="setCat('all',this)">
-    🌟 ყველა
-   </button>`+
-
-  categories.map(c=>`
-
-   <button
-    class="filter"
-    onclick='setCat(${JSON.stringify(c)},this)'>
-    ${c}
-   </button>
-
-  `).join('');
-}
-
-function setCat(category,button){
-
- cat=category;
-
- document
-  .querySelectorAll('.filter')
-  .forEach(x=>x.classList.remove('active'));
-
- button.classList.add('active');
-
- render();
-}
-
-const numbers=[
- ['one','ერთი'],
- ['two','ორი'],
- ['three','სამი'],
- ['four','ოთხი'],
- ['five','ხუთი'],
- ['six','ექვსი'],
- ['seven','შვიდი'],
- ['eight','რვა'],
- ['nine','ცხრა'],
- ['ten','ათი'],
- ['eleven','თერთმეტი'],
- ['twelve','თორმეტი'],
- ['thirteen','ცამეტი'],
- ['fourteen','თოთხმეტი'],
- ['fifteen','თხუთმეტი'],
- ['sixteen','თექვსმეტი'],
- ['seventeen','ჩვიდმეტი'],
- ['eighteen','თვრამეტი'],
- ['nineteen','ცხრამეტი'],
- ['twenty','ოცი'],
- ['twenty-one','ოცდაერთი'],
- ['twenty-two','ოცდაორი'],
- ['twenty-three','ოცდასამი'],
- ['twenty-four','ოცდაოთხი'],
- ['twenty-five','ოცდახუთი'],
- ['twenty-six','ოცდაექვსი'],
- ['twenty-seven','ოცდაშვიდი'],
- ['twenty-eight','ოცდარვა'],
- ['twenty-nine','ოცდაცხრა'],
- ['thirty','ოცდაათი'],
- ['forty','ორმოცი'],
- ['fifty','ორმოცდაათი'],
- ['sixty','სამოცი'],
- ['seventy','სამოცდაათი'],
- ['eighty','ოთხმოცი'],
- ['ninety','ოთხმოცდაათი'],
- ['one hundred','ასი']
-];
-
-function numberCard(item){
-
- return `
-
- <article class="word number">
-
-  <strong>${item[0]}</strong>
-
-  <div class="ka">${item[1]}</div>
-
-  <button
-   class="btn listen"
-   onclick='speak(${JSON.stringify(item[0])})'>
-   🔊 მოსმენა
-  </button>
-
- </article>
-
- `;
-}
-
-const quizQuestions=[
- ['mother','დედა'],
- ['school','სკოლა'],
- ['red','წითელი'],
- ['dog','ძაღლი'],
- ['apple','ვაშლი'],
- ['book','წიგნი'],
- ['cat','კატა'],
- ['water','წყალი'],
- ['happy','ბედნიერი'],
- ['run','სირბილი'],
- ['house','სახლი'],
- ['teacher','მასწავლებელი'],
- ['blue','ლურჯი'],
- ['fish','თევზი'],
- ['family','ოჯახი']
-];
-
-function buildQuiz(){
-
- quizAnswered=0;
-
- $('quizResult').innerHTML='';
-
- const selected=
-  [...quizQuestions]
-   .sort(()=>Math.random()-.5)
-   .slice(0,10);
-
- $('quizBox').innerHTML=
-
-  selected.map((q,index)=>{
-
-   const wrong=
-    quizQuestions
-     .filter(x=>x[0]!==q[0])
-     .sort(()=>Math.random()-.5)
-     .slice(0,2);
-
-   const options=
-    [q,...wrong]
-     .sort(()=>Math.random()-.5);
-
-   return `
-
-   <div class="lesson">
-
-    <b>
-     ${index+1}. რას ნიშნავს
-     “${q[0]}”?
-    </b>
-
-    ${options.map(option=>`
-
-     <button
-      class="option"
-      data-question="${index}"
-      onclick='answerQuiz(this,${JSON.stringify(option[1])},${JSON.stringify(q[1])})'>
-
-      ${option[1]}
-
-     </button>
-
-    `).join('')}
-
-   </div>
-
-   `;
-
-  }).join('');
-}
-
-function answerQuiz(button,answer,correct){
-
- if(button.dataset.done==='1') return;
-
- const parent=button.parentElement;
-
- if(parent.dataset.answered==='1') return;
-
- parent.dataset.answered='1';
- button.dataset.done='1';
-
- quizAnswered++;
-
- if(answer===correct){
-
-  button.classList.add('correct');
-
-  button.innerHTML='✅ სწორია! +10 ქულა';
-
-  quizPoints+=10;
-  points+=10;
-
- }else{
-
-  button.classList.add('wrong');
-
-  button.innerHTML='❌ არასწორია';
-
-  [...parent.querySelectorAll('.option')]
-   .forEach(x=>{
-
-    if(x.textContent.trim()===correct)
-     x.classList.add('correct');
-
-   });
- }
-
- save();
-
- if(quizAnswered>=10){
-
-  setTimeout(()=>{
-
-   $('quizResult').innerHTML=`
-
-    <div class="quiz-result">
-
-     <div>🎉 ქვიზი დასრულებულია!</div>
-
-     <strong>⭐ ${quizPoints}</strong>
-
-     <div>ქვიზის დაგროვილი ქულა</div>
-
-     <br>
-
-     <button
-      class="btn"
-      onclick="buildQuiz()">
-
-      🔄 ახალი ქვიზი
-
-     </button>
-
-    </div>
-
-   `;
-
-  },250);
- }
-
- render();
-}
-
-buildFilters();
-
-$('search').addEventListener('input',render);
-
-$('numbers').innerHTML=
- numbers.map(numberCard).join('');
-
-render();
-
-buildQuiz();
+(() => {
+
+  "use strict";
+
+  function getClient(){
+
+    return (
+      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+      window.supabaseClient ||
+      null
+    );
+
+  }
+
+  function redirectToLogin(){
+
+    window.location.replace(
+      "login.html?redirect=" +
+      encodeURIComponent("grade2.html")
+    );
+
+  }
+
+  function setProgress(
+    words=0,
+    quizzes=0,
+    percent=0,
+    level="🌱"
+  ){
+
+    const safeWords =
+      Math.max(0,Number(words)||0);
+
+    const safeQuizzes =
+      Math.max(0,Number(quizzes)||0);
+
+    const safePercent =
+      Math.min(
+        100,
+        Math.max(
+          0,
+          Number(percent)||0
+        )
+      );
+
+    const wordsEl =
+      document.getElementById("words-count");
+
+    const quizEl =
+      document.getElementById("quiz-count");
+
+    const percentEl =
+      document.getElementById("progress-percent");
+
+    const levelEl =
+      document.getElementById("student-level");
+
+    const barEl =
+      document.getElementById("progress-bar");
+
+    if(wordsEl)
+      wordsEl.textContent=safeWords;
+
+    if(quizEl)
+      quizEl.textContent=safeQuizzes;
+
+    if(percentEl)
+      percentEl.textContent=
+        Math.round(safePercent)+"%";
+
+    if(levelEl)
+      levelEl.textContent=level;
+
+    if(barEl)
+      setTimeout(() => {
+        barEl.style.width=
+          Math.round(safePercent)+"%";
+      },300);
+
+  }
+
+  async function initGrade2(){
+
+    let client=getClient();
+
+    if(!client){
+
+      await new Promise(resolve => {
+
+        let finished=false;
+
+        const finish=()=>{
+
+          if(finished)return;
+
+          finished=true;
+          resolve();
+
+        };
+
+        window.addEventListener(
+          "englishMariamiSupabaseReady",
+          finish,
+          {once:true}
+        );
+
+        setTimeout(
+          finish,
+          5000
+        );
+
+      });
+
+      client=getClient();
+
+    }
+
+    if(!client){
+
+      console.error(
+        "Supabase client not initialized."
+      );
+
+      redirectToLogin();
+      return;
+
+    }
+
+    try{
+
+      const {
+        data:sessionData,
+        error:sessionError
+      } =
+      await client.auth.getSession();
+
+      if(
+        sessionError ||
+        !sessionData ||
+        !sessionData.session ||
+        !sessionData.session.user
+      ){
+
+        redirectToLogin();
+        return;
+
+      }
+
+      const user=
+        sessionData.session.user;
+
+      const {
+        data:profile,
+        error:profileError
+      } =
+      await client
+      .from("profiles")
+      .select(
+        "role,grade,full_name"
+      )
+      .eq(
+        "user_id",
+        user.id
+      )
+      .maybeSingle();
+
+      if(profileError){
+
+        console.error(
+          "Profile error:",
+          profileError
+        );
+
+        redirectToLogin();
+        return;
+
+      }
+
+      const role=String(
+        profile?.role ??
+        user.user_metadata?.role ??
+        "student"
+      ).toLowerCase();
+
+      const grade=Number(
+        profile?.grade ??
+        user.user_metadata?.grade ??
+        0
+      );
+
+      /*
+       * Student must belong to Grade 2.
+       */
+
+      if(
+        role==="student" &&
+        grade!==2
+      ){
+
+        alert(
+          "ეს გვერდი განკუთვნილია მხოლოდ მე-2 კლასისთვის."
+        );
+
+        window.location.replace(
+          "academy.html"
+        );
+
+        return;
+
+      }
+
+      /*
+       * Teacher/admin/parent
+       * may preview the page.
+       */
+
+      const progressMessage=
+        document.getElementById(
+          "progress-message"
+        );
+
+      if(progressMessage){
+
+        if(role==="student"){
+
+          progressMessage.textContent=
+            "მე-2 კლასი აქტიურია. წარმატებები, English Explorer! 🚀";
+
+        }else{
+
+          progressMessage.textContent=
+            "Grade 2 Preview Mode — Teacher / Admin / Parent";
+
+        }
+
+      }
+
+      /*
+       * Safe defaults.
+       * Real progress can later be connected
+       * to the existing Supabase progress tables.
+       */
+
+      setProgress(
+        0,
+        0,
+        0,
+        "🌱"
+      );
+
+    }catch(error){
+
+      console.error(
+        "Grade 2 initialization error:",
+        error
+      );
+
+      redirectToLogin();
+
+    }
+
+  }
+
+  if(
+    document.readyState==="loading"
+  ){
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initGrade2,
+      {once:true}
+    );
+
+  }else{
+
+    initGrade2();
+
+  }
+
+})();
 
 </script>
 
