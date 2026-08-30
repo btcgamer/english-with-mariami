@@ -12,9 +12,7 @@
 <style>
 *{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -29,9 +27,7 @@ body{
   overflow-x:hidden;
 }
 
-/* =========================
-   3D BACKGROUND
-========================= */
+/* ================= 3D BACKGROUND ================= */
 
 .visual3d{
   position:fixed;
@@ -48,7 +44,7 @@ body{
   height:180%;
   left:-40%;
   top:35%;
-  opacity:.18;
+  opacity:.2;
   background-image:
     linear-gradient(#00eaff22 1px,transparent 1px),
     linear-gradient(90deg,#00eaff22 1px,transparent 1px);
@@ -57,7 +53,7 @@ body{
     perspective(700px)
     rotateX(66deg)
     translateZ(-100px);
-  animation:gridMove 15s linear infinite;
+  animation:gridMove 14s linear infinite;
 }
 
 @keyframes gridMove{
@@ -80,56 +76,48 @@ body{
 .orb{
   position:absolute;
   border-radius:50%;
-  filter:blur(3px);
+  filter:blur(4px);
   mix-blend-mode:screen;
 }
 
 .orb1{
-  width:330px;
-  height:330px;
-  left:-100px;
-  top:15%;
-  background:radial-gradient(circle,#00eaff66,transparent 68%);
-  animation:orbMove1 9s ease-in-out infinite alternate;
+  width:360px;
+  height:360px;
+  left:-120px;
+  top:10%;
+  background:radial-gradient(circle,#00eaff66,#00eaff12 45%,transparent 72%);
+  animation:orb1 9s ease-in-out infinite alternate;
 }
 
 .orb2{
-  width:430px;
-  height:430px;
-  right:-140px;
+  width:450px;
+  height:450px;
+  right:-150px;
   top:5%;
-  background:radial-gradient(circle,#7c3cff60,transparent 68%);
-  animation:orbMove2 12s ease-in-out infinite alternate;
+  background:radial-gradient(circle,#8b5cf666,#7c3cff10 45%,transparent 72%);
+  animation:orb2 12s ease-in-out infinite alternate;
 }
 
 .orb3{
-  width:390px;
-  height:390px;
+  width:400px;
+  height:400px;
   left:35%;
   bottom:-220px;
-  background:radial-gradient(circle,#006eff55,transparent 68%);
-  animation:orbMove3 11s ease-in-out infinite alternate;
+  background:radial-gradient(circle,#006eff55,#006eff08 45%,transparent 72%);
+  animation:orb3 11s ease-in-out infinite alternate;
 }
 
-@keyframes orbMove1{
-  to{
-    transform:translate3d(120px,70px,100px) scale(1.25);
-  }
+@keyframes orb1{
+  to{transform:translate3d(150px,80px,100px) scale(1.25)}
 }
 
-@keyframes orbMove2{
-  to{
-    transform:translate3d(-120px,100px,150px) scale(1.3);
-  }
+@keyframes orb2{
+  to{transform:translate3d(-120px,100px,150px) scale(1.3)}
 }
 
-@keyframes orbMove3{
-  to{
-    transform:translate3d(80px,-90px,100px) scale(1.2);
-  }
+@keyframes orb3{
+  to{transform:translate3d(80px,-90px,100px) scale(1.2)}
 }
-
-/* particles */
 
 .particles{
   position:absolute;
@@ -143,8 +131,8 @@ body{
   border-radius:50%;
   background:#00eaff;
   box-shadow:0 0 15px #00eaff;
-  animation:particle linear infinite;
-  opacity:.65;
+  opacity:.7;
+  animation:particle 10s linear infinite;
 }
 
 .particles span:nth-child(1){left:5%;top:80%;animation-duration:8s}
@@ -171,20 +159,18 @@ body{
   20%{opacity:.8}
   80%{opacity:.8}
   100%{
-    transform:translate3d(30px,-180px,200px) scale(1.5);
+    transform:translate3d(35px,-200px,180px) scale(1.5);
     opacity:0;
   }
 }
 
-/* =========================
-   HEADER
-========================= */
+/* ================= HEADER ================= */
 
 .top{
   position:sticky;
   top:0;
   z-index:9999;
-  background:rgba(2,8,23,.82);
+  background:rgba(2,8,23,.86);
   backdrop-filter:blur(20px);
   border-bottom:1px solid #00eaff40;
   box-shadow:0 10px 40px #0009;
@@ -194,14 +180,15 @@ body{
   content:"";
   display:block;
   height:2px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    #00eaff,
-    #7c3cff,
-    #ffe600,
-    transparent
-  );
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #00eaff,
+      #7c3cff,
+      #ffe600,
+      transparent
+    );
   background-size:200% 100%;
   animation:energy 4s linear infinite;
 }
@@ -228,7 +215,6 @@ body{
   color:#fff;
   text-decoration:none;
   font-weight:1000;
-  letter-spacing:.5px;
   text-shadow:0 0 18px #00eaff55;
 }
 
@@ -254,9 +240,7 @@ body{
   box-shadow:0 0 20px #00eaff25;
 }
 
-/* =========================
-   MAIN
-========================= */
+/* ================= MAIN ================= */
 
 .lessons{
   padding:35px 0 70px;
@@ -264,39 +248,35 @@ body{
 
 .hero{
   position:relative;
-  padding:35px 25px;
+  overflow:hidden;
+  padding:38px 25px;
   text-align:center;
   border-radius:28px;
   border:1px solid #00eaff35;
   background:
-    linear-gradient(135deg,#061b38cc,#031127dd);
+    linear-gradient(135deg,#061b38dd,#031127ee);
   box-shadow:
     0 25px 70px #000a,
-    0 0 45px #00eaff10,
+    0 0 45px #00eaff15,
     inset 0 1px #ffffff15;
-  overflow:hidden;
 }
 
 .hero:before{
   content:"";
   position:absolute;
-  inset:-2px;
-  background:linear-gradient(
-    120deg,
-    transparent 20%,
-    #00eaff15 45%,
-    #7c3cff15 55%,
-    transparent 80%
-  );
-  transform:translateX(-100%);
-  animation:heroShine 7s linear infinite;
+  inset:-100px;
+  background:
+    radial-gradient(circle at 30% 50%,#00eaff15,transparent 25%),
+    radial-gradient(circle at 70% 50%,#7c3cff15,transparent 25%);
+  animation:heroFloat 8s ease-in-out infinite alternate;
 }
 
-@keyframes heroShine{
-  to{transform:translateX(100%)}
+@keyframes heroFloat{
+  to{transform:scale(1.2) rotate(3deg)}
 }
 
 .badge{
+  position:relative;
   display:inline-block;
   padding:7px 13px;
   border-radius:20px;
@@ -312,7 +292,6 @@ body{
   position:relative;
   margin:15px 0 8px;
   font-size:clamp(30px,6vw,55px);
-  line-height:1.05;
   text-shadow:
     0 0 15px #00eaff35,
     0 0 35px #7c3cff25;
@@ -322,12 +301,9 @@ body{
   position:relative;
   margin:0;
   color:#acd3df;
-  font-size:15px;
 }
 
-/* =========================
-   CLASS SELECTOR
-========================= */
+/* ================= CONTROL ================= */
 
 .control-panel{
   margin-top:20px;
@@ -353,28 +329,20 @@ body{
 }
 
 .class-btn{
-  position:relative;
-  overflow:hidden;
-  min-height:75px;
+  min-height:80px;
   border-radius:18px;
   border:1px solid #00eaff25;
   color:#fff;
-  background:
-    linear-gradient(145deg,#061b38,#041127);
+  background:linear-gradient(145deg,#061b38,#041127);
   cursor:pointer;
   font-weight:1000;
   font-size:15px;
-  box-shadow:
-    0 10px 25px #0007,
-    inset 0 1px #ffffff0c;
-  transition:
-    transform .25s,
-    box-shadow .25s,
-    border-color .25s;
+  box-shadow:0 10px 25px #0007;
+  transition:.25s;
 }
 
 .class-btn:hover{
-  transform:translateY(-5px) rotateX(2deg);
+  transform:translateY(-5px);
   border-color:#00eaff70;
   box-shadow:
     0 18px 35px #000b,
@@ -383,12 +351,10 @@ body{
 
 .class-btn.active{
   border-color:#00eaff;
+  background:linear-gradient(145deg,#063a5a,#071b42);
   box-shadow:
     0 15px 35px #000b,
-    0 0 35px #00eaff35,
-    inset 0 0 25px #00eaff0c;
-  background:
-    linear-gradient(145deg,#063a5a,#071b42);
+    0 0 35px #00eaff35;
 }
 
 .class-btn .emoji{
@@ -401,12 +367,9 @@ body{
   display:block;
   color:#82cbd9;
   font-size:10px;
-  font-weight:700;
 }
 
-/* =========================
-   STUDENT
-========================= */
+/* ================= STUDENT ================= */
 
 .student-box{
   margin-top:15px;
@@ -436,9 +399,7 @@ body{
   box-shadow:0 0 20px #00eaff18;
 }
 
-/* =========================
-   LESSON LIST
-========================= */
+/* ================= LESSONS ================= */
 
 .lessons-header{
   margin-top:22px;
@@ -469,55 +430,25 @@ body{
 .lesson-card{
   position:relative;
   overflow:hidden;
-  min-height:175px;
+  min-height:205px;
   padding:20px;
   border-radius:22px;
   border:1px solid #00eaff25;
-  background:
-    linear-gradient(145deg,#061a37e8,#031027ed);
+  background:linear-gradient(145deg,#061a37e8,#031027ed);
   box-shadow:
     0 18px 45px #0008,
     inset 0 1px #ffffff0b;
   cursor:pointer;
-  transition:
-    transform .3s,
-    border-color .3s,
-    box-shadow .3s;
-}
-
-.lesson-card:before{
-  content:"";
-  position:absolute;
-  width:170px;
-  height:170px;
-  right:-80px;
-  top:-80px;
-  border-radius:50%;
-  background:#00eaff12;
-  filter:blur(5px);
-}
-
-.lesson-card:after{
-  content:"";
-  position:absolute;
-  width:60px;
-  height:220%;
-  top:-60%;
-  left:-100px;
-  background:#ffffff08;
-  transform:rotate(25deg);
-  transition:left .6s;
-}
-
-.lesson-card:hover:after{
-  left:130%;
+  transition:.3s;
+  transform-style:preserve-3d;
 }
 
 .lesson-card:hover{
   transform:
-    translateY(-7px)
-    rotateX(2deg)
-    rotateY(-1deg);
+    perspective(900px)
+    rotateX(3deg)
+    rotateY(-2deg)
+    translateY(-7px);
   border-color:#00eaff65;
   box-shadow:
     0 25px 55px #000b,
@@ -528,24 +459,25 @@ body{
   position:absolute;
   right:16px;
   top:14px;
-  width:38px;
-  height:38px;
+  width:42px;
+  height:42px;
   display:grid;
   place-items:center;
-  border-radius:12px;
+  border-radius:13px;
   color:#ffe600;
   background:#ffe60012;
   border:1px solid #ffe60035;
   font-weight:1000;
+  box-shadow:0 0 15px #ffe60012;
 }
 
 .lesson-icon{
-  font-size:34px;
+  font-size:36px;
   margin-bottom:10px;
 }
 
 .lesson-card h3{
-  margin:0 45px 8px 0;
+  margin:0 55px 8px 0;
   font-size:19px;
 }
 
@@ -553,7 +485,7 @@ body{
   margin:0;
   color:#91c5d2;
   font-size:12px;
-  line-height:1.5;
+  line-height:1.55;
 }
 
 .lesson-tags{
@@ -573,20 +505,36 @@ body{
   font-weight:800;
 }
 
+.lesson-meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.lesson-meta span{
+  padding:6px 9px;
+  border-radius:9px;
+  background:#7c3cff10;
+  border:1px solid #7c3cff30;
+  color:#c9b7ff;
+  font-size:10px;
+  font-weight:900;
+}
+
 .open-btn{
-  margin-top:15px;
   display:inline-block;
-  padding:8px 12px;
-  border-radius:10px;
+  margin-top:14px;
+  padding:9px 13px;
+  border-radius:11px;
   color:#fff;
   background:linear-gradient(135deg,#075eff,#00bde8);
   font-size:11px;
   font-weight:1000;
+  box-shadow:0 7px 20px #0007;
 }
 
-/* =========================
-   EMPTY / LOADING
-========================= */
+/* ================= STATES ================= */
 
 .loading,
 .empty,
@@ -620,10 +568,6 @@ body{
   to{transform:rotate(360deg)}
 }
 
-/* =========================
-   FOOTER
-========================= */
-
 .site-copyright{
   padding:22px 15px;
   text-align:center;
@@ -632,24 +576,12 @@ body{
   border-top:1px solid #00eaff15;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:800px){
-
   .nav{
     padding:10px 0;
     flex-direction:column;
-    align-items:stretch;
-  }
-
-  .brand{
-    text-align:center;
-  }
-
-  .navlinks{
-    justify-content:center;
   }
 
   .class-buttons{
@@ -666,7 +598,6 @@ body{
 }
 
 @media(max-width:480px){
-
   .wrap{
     width:min(100% - 18px,1200px);
   }
@@ -680,7 +611,7 @@ body{
   }
 
   .lesson-card{
-    min-height:165px;
+    min-height:190px;
   }
 }
 
@@ -697,37 +628,21 @@ body{
 
 <body>
 
-<!-- =========================
-     3D VISUAL
-========================= -->
-
 <div class="visual3d">
-
   <div class="grid3d"></div>
-
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
 
   <div class="particles">
-    <span></span><span></span><span></span>
-    <span></span><span></span><span></span>
-    <span></span><span></span><span></span>
-    <span></span><span></span><span></span>
-    <span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
   </div>
-
 </div>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="top">
-
   <div class="wrap nav">
-
     <a class="brand" href="teacher-dashboard.html">
       ⚡ ENGLISH WITH MARIAMI
     </a>
@@ -737,165 +652,84 @@ body{
       <a href="teacher-journal.html">📋 ჟურნალი</a>
       <a href="index.html">🏠 მთავარი</a>
     </div>
-
   </div>
-
 </header>
-
-
-<!-- =========================
-     MAIN
-========================= -->
 
 <main class="wrap lessons">
 
-  <section class="hero">
+<section class="hero">
+  <span class="badge">TEACHER LEARNING CENTER</span>
 
-    <span class="badge">
-      TEACHER LEARNING CENTER
-    </span>
+  <h1>📚 გაკვეთილები</h1>
 
-    <h1>
-      📚 გაკვეთილები
-    </h1>
+  <p>
+    მე-2, მე-3 და მე-4 კლასის სრული ინგლისურის სასწავლო ბაზა
+  </p>
+</section>
 
-    <p>
-      მე-2, მე-3 და მე-4 კლასის ინგლისურის სრული სასწავლო სივრცე
-    </p>
+<section class="control-panel">
 
-  </section>
+  <div class="control-title">
+    🎓 აირჩიე კლასი
+  </div>
 
+  <div class="class-buttons">
 
-  <!-- CLASS -->
+    <button class="class-btn active" data-grade="2">
+      <span class="emoji">🌱</span>
+      მე-2 კლასი
+      <span class="sub">დამწყები დონე</span>
+    </button>
 
-  <section class="control-panel">
+    <button class="class-btn" data-grade="3">
+      <span class="emoji">🚀</span>
+      მე-3 კლასი
+      <span class="sub">განვითარებადი დონე</span>
+    </button>
 
-    <div class="control-title">
-      🎓 აირჩიე კლასი
-    </div>
-
-    <div class="class-buttons">
-
-      <button
-        class="class-btn active"
-        data-grade="2">
-
-        <span class="emoji">🌱</span>
-        მე-2 კლასი
-
-        <span class="sub">
-          დამწყები დონე
-        </span>
-
-      </button>
-
-
-      <button
-        class="class-btn"
-        data-grade="3">
-
-        <span class="emoji">🚀</span>
-        მე-3 კლასი
-
-        <span class="sub">
-          განვითარებადი დონე
-        </span>
-
-      </button>
-
-
-      <button
-        class="class-btn"
-        data-grade="4">
-
-        <span class="emoji">⭐</span>
-        მე-4 კლასი
-
-        <span class="sub">
-          გაძლიერებული დონე
-        </span>
-
-      </button>
-
-    </div>
-
-
-    <!-- STUDENT -->
-
-    <div class="student-box">
-
-      <label for="student">
-        👨‍🎓 მოსწავლე
-      </label>
-
-      <select id="student">
-        <option value="">
-          აირჩიე მოსწავლე
-        </option>
-      </select>
-
-    </div>
-
-  </section>
-
-
-  <!-- LESSONS -->
-
-  <div class="lessons-header">
-
-    <h2>
-      📖 გაკვეთილების თემები
-    </h2>
-
-    <span
-      id="lessonCount"
-      class="count">
-      0 გაკვეთილი
-    </span>
+    <button class="class-btn" data-grade="4">
+      <span class="emoji">⭐</span>
+      მე-4 კლასი
+      <span class="sub">გაძლიერებული დონე</span>
+    </button>
 
   </div>
 
+  <div class="student-box">
+    <label for="student">👨‍🎓 მოსწავლე</label>
 
-  <div id="lessonArea">
-
-    <div class="loading">
-
-      <div class="spinner"></div>
-
-      <b>
-        გაკვეთილების ჩატვირთვა...
-      </b>
-
-    </div>
-
+    <select id="student">
+      <option value="">აირჩიე მოსწავლე</option>
+    </select>
   </div>
+
+</section>
+
+<div class="lessons-header">
+  <h2>📖 გაკვეთილების თემები</h2>
+  <span id="lessonCount" class="count">0 გაკვეთილი</span>
+</div>
+
+<div id="lessonArea">
+  <div class="loading">
+    <div class="spinner"></div>
+    <b>Supabase-დან გაკვეთილების ჩატვირთვა...</b>
+  </div>
+</div>
 
 </main>
 
-
 <footer class="site-copyright">
-  © 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
+© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
 </footer>
 
-
-<!-- =========================
-     SUPABASE
-========================= -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="config.js?v=20260830"></script>
-
+<script src="config.js?v=20260830-lessons-db"></script>
 
 <script>
 (function(){
 
 'use strict';
-
-
-/* =====================================
-   CONFIG
-===================================== */
 
 const TEACHER_ID =
   'be4b1c4d-e5f2-4039-b35e-aec3c110a94a';
@@ -903,153 +737,34 @@ const TEACHER_ID =
 const client =
   window.supabaseClient;
 
-
 const lessonArea =
   document.getElementById('lessonArea');
-
-const studentSelect =
-  document.getElementById('student');
 
 const lessonCount =
   document.getElementById('lessonCount');
 
-let currentGrade = '2';
+const studentSelect =
+  document.getElementById('student');
 
+let currentGrade = 2;
+let students = [];
 
-/* =====================================
-   HUGE LESSON DATABASE
-===================================== */
-
-const lessonData = {
-
-  '2': [
-
-    ['👋','Greetings & Introductions','Hello, Hi, Good morning, My name is...','hello, hi, goodbye, name, friend, teacher'],
-    ['👨‍👩‍👧','Family','Family members and simple sentences','mother, father, sister, brother, family, baby'],
-    ['🎒','School','School objects and classroom language','book, pen, pencil, bag, desk, chair'],
-    ['🎨','Colors','Basic colors and descriptions','red, blue, green, yellow, black, white'],
-    ['🔢','Numbers 1–20','Counting and simple numbers','one, two, three, four, five, six'],
-    ['🐶','Animals','Pets and wild animals','dog, cat, bird, fish, lion, tiger'],
-    ['🏠','My House','Rooms and objects at home','house, room, door, window, bed, kitchen'],
-    ['🍎','Food','Food and drinks','apple, banana, bread, milk, water, juice'],
-    ['👕','Clothes','Everyday clothes','shirt, trousers, shoes, dress, hat, jacket'],
-    ['😊','Feelings','Simple feelings','happy, sad, tired, angry, hungry, good'],
-    ['🌞','Weather','Weather words','sunny, rainy, cloudy, windy, hot, cold'],
-    ['📅','Days of the Week','Monday to Sunday','Monday, Tuesday, Wednesday, Thursday, Friday'],
-    ['⏰','Time','Basic time expressions','morning, afternoon, evening, night, today'],
-    ['🏫','Classroom English','Useful classroom expressions','listen, repeat, read, write, open, close'],
-    ['🧍','Body Parts','Parts of the body','head, hand, arm, leg, eye, ear'],
-    ['⚽','Sports','Popular sports','football, basketball, tennis, swimming, running'],
-    ['🚗','Transport','Ways of travelling','car, bus, train, plane, bike, boat'],
-    ['🌳','Nature','Nature vocabulary','tree, flower, river, mountain, sun, moon'],
-    ['🧸','Toys','Children’s toys','ball, doll, toy, car, teddy, kite'],
-    ['🎂','Birthday','Birthday vocabulary','birthday, cake, candle, gift, party'],
-    ['🛒','Shopping','Simple shopping words','shop, money, buy, price, bag, food'],
-    ['🏃','Daily Actions','Everyday verbs','go, come, eat, drink, play, sleep'],
-    ['🐱','Pets','Talking about pets','pet, dog, cat, bird, small, big'],
-    ['🌈','Opposites','Basic opposites','big, small, hot, cold, old, new'],
-    ['🔤','Alphabet','English alphabet','A, B, C, D, E, F, G'],
-    ['🧩','Shapes','Basic shapes','circle, square, triangle, star, line'],
-    ['📍','Places','Common places','home, school, park, shop, street'],
-    ['🎵','Music','Music vocabulary','song, music, sing, dance, listen'],
-    ['🚀','Revision','Revision of vocabulary','review, remember, practice, repeat'],
-    ['⭐','Final Review','Complete beginner review','words, sentences, grammar, speaking']
-
-  ],
-
-  '3': [
-
-    ['👋','Greetings & Introductions','Introducing yourself and others','hello, introduce, name, age, live, friend'],
-    ['👨‍👩‍👧','Family','Family members and descriptions','parents, cousin, uncle, aunt, grandmother'],
-    ['🎒','School','School subjects and objects','English, maths, science, lesson, homework'],
-    ['🏠','Home','Rooms, furniture and objects','bedroom, bathroom, kitchen, table, sofa'],
-    ['🍎','Food & Drinks','Food vocabulary and preferences','breakfast, lunch, dinner, fruit, vegetables'],
-    ['🐯','Animals','Animals and descriptions','elephant, monkey, giraffe, rabbit, dangerous'],
-    ['👕','Clothes','Clothes and appearance','jeans, sweater, socks, shoes, jacket'],
-    ['🌦️','Weather','Weather and seasons','spring, summer, autumn, winter, sunny'],
-    ['📅','Days & Months','Calendar vocabulary','January, February, March, April, May'],
-    ['⏰','Time & Daily Routine','Daily routine and time','wake up, get up, go, study, finish'],
-    ['🏃','Daily Activities','Common verbs','play, watch, read, write, clean, help'],
-    ['⚽','Sports','Sports and activities','football, tennis, basketball, swimming'],
-    ['🚗','Transport','Transport vocabulary','car, bus, train, plane, bicycle, station'],
-    ['🏙️','My Town','Places in town','library, hospital, bank, supermarket, park'],
-    ['🛍️','Shopping','Shopping conversations','price, cheap, expensive, buy, sell, customer'],
-    ['🧍','Body & Health','Body parts and simple health language','headache, stomach, hand, foot, healthy'],
-    ['😊','Feelings & Emotions','Expressing emotions','excited, worried, bored, happy, nervous'],
-    ['📚','Hobbies','Free-time activities','reading, drawing, dancing, gaming, cycling'],
-    ['🎵','Music & Movies','Entertainment vocabulary','movie, actor, singer, song, cinema'],
-    ['🌳','Nature','Nature vocabulary','forest, river, lake, mountain, animal'],
-    ['🌍','Countries','Countries and nationalities','Georgia, England, Germany, Georgian, English'],
-    ['🗣️','Speaking Practice','Simple conversations','question, answer, speak, listen, conversation'],
-    ['✏️','Grammar: To Be','am, is, are','I am, you are, he is, she is'],
-    ['📖','Grammar: Have Got','have / has got','I have got, she has got, they have got'],
-    ['🔄','Grammar: Present Simple','Present Simple basics','play, plays, go, goes, like, likes'],
-    ['❓','Questions','Question words','what, where, when, who, why, how'],
-    ['📍','Prepositions','Place and position','in, on, under, behind, next to'],
-    ['🔢','Numbers 1–100','Numbers and quantities','twenty, thirty, forty, fifty, hundred'],
-    ['🧠','Vocabulary Review','Large vocabulary revision','remember, practice, repeat, learn'],
-    ['⭐','Final Revision','Complete grade 3 revision','grammar, vocabulary, reading, speaking']
-
-  ],
-
-  '4': [
-
-    ['👋','Greetings & Personal Information','Advanced introductions','introduce, surname, address, nationality, hobbies'],
-    ['👨‍👩‍👧','Family & Relationships','Family descriptions','relative, parents, cousin, married, child'],
-    ['🏫','School Life','Subjects and school routines','subject, timetable, homework, project, lesson'],
-    ['🏠','Home & Furniture','Detailed home vocabulary','living room, bedroom, furniture, shelf, carpet'],
-    ['🍽️','Food & Nutrition','Food and healthy choices','breakfast, healthy, vegetables, protein, meal'],
-    ['🛒','Shopping & Money','Shopping conversations','customer, price, discount, expensive, cheap'],
-    ['🌍','Countries & Nationalities','Countries and nationalities','country, nationality, capital, language'],
-    ['🏙️','City & Places','City vocabulary','museum, theatre, hospital, station, supermarket'],
-    ['🚆','Travel','Travel vocabulary','ticket, airport, luggage, passport, hotel'],
-    ['🌦️','Weather & Seasons','Weather expressions','temperature, cloudy, stormy, season, forecast'],
-    ['⏰','Daily Routine','Routine and time','usually, sometimes, always, never, morning'],
-    ['🎯','Hobbies & Free Time','Free-time activities','collect, paint, play, travel, read'],
-    ['⚽','Sports & Fitness','Sports and health','training, team, player, match, exercise'],
-    ['🧍','Body & Health','Health vocabulary','healthy, illness, medicine, headache, exercise'],
-    ['😊','Emotions','Advanced feelings','excited, nervous, disappointed, surprised, proud'],
-    ['🌳','Nature & Environment','Environment vocabulary','forest, pollution, recycle, river, environment'],
-    ['🐘','Animals','Animal descriptions','wild, domestic, dangerous, friendly, habitat'],
-    ['📱','Technology','Everyday technology','computer, phone, internet, screen, website'],
-    ['🎬','Movies & Entertainment','Entertainment vocabulary','movie, actor, actress, cinema, music'],
-    ['📚','Reading Skills','Reading comprehension','story, character, question, answer, paragraph'],
-    ['✍️','Writing Skills','Basic writing','sentence, paragraph, title, description, letter'],
-    ['🗣️','Speaking Skills','Conversation practice','opinion, answer, question, explain, describe'],
-    ['📖','Grammar: Present Simple','Present Simple revision','work, works, study, studies, watch'],
-    ['🔄','Grammar: Present Continuous','Actions happening now','am doing, is doing, are doing'],
-    ['⏳','Grammar: Past Simple','Past events','went, saw, played, watched, visited'],
-    ['🔮','Grammar: Future','Future plans','will, going to, tomorrow, next week'],
-    ['📍','Grammar: Prepositions','Place and time','at, in, on, under, between, opposite'],
-    ['📊','Adjectives & Adverbs','Descriptions','beautiful, quickly, slowly, carefully'],
-    ['❓','Question Forms','Building questions','what, where, when, why, how often'],
-    ['🔢','Numbers & Quantities','Large numbers','hundred, thousand, first, second'],
-    ['⭐','Final Grammar Review','Complete grammar revision','grammar, verbs, nouns, adjectives'],
-    ['🏆','Final Vocabulary Review','Complete vocabulary revision','revision, practice, speaking, reading'],
-    ['🎓','Final Grade 4 Course','Complete English course review','English, grammar, vocabulary, communication']
-
-  ]
-
-};
-
-
-/* =====================================
-   AUTH
-===================================== */
+/* ================= AUTH ================= */
 
 async function checkTeacher(){
 
   if(!client){
     throw new Error(
-      'Supabase client ვერ მოიძებნა.'
+      'Supabase client ვერ მოიძებნა. შეამოწმე config.js'
     );
   }
 
-  const result =
-    await client.auth.getSession();
+  const {
+    data:{session},
+    error
+  } = await client.auth.getSession();
 
-  const session =
-    result?.data?.session;
+  if(error) throw error;
 
   if(!session){
     location.replace('login.html');
@@ -1057,40 +772,45 @@ async function checkTeacher(){
   }
 
   if(session.user.id !== TEACHER_ID){
-
     location.replace('index.html');
-
     return false;
   }
 
-  const profile =
+  const {data:profile,error:profileError} =
     await client
       .from('profiles')
       .select('role')
       .eq('user_id',session.user.id)
       .maybeSingle();
 
-  if(profile.error ||
-     !profile.data ||
-     profile.data.role !== 'teacher'){
+  if(profileError) throw profileError;
 
+  if(!profile || profile.role !== 'teacher'){
     location.replace('index.html');
-
     return false;
   }
 
   return true;
 }
 
+/* ================= ESCAPE ================= */
 
-/* =====================================
-   STUDENTS
-===================================== */
+function esc(value){
+  return String(value ?? '')
+    .replace(/[&<>"']/g,function(c){
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+      }[c];
+    });
+}
+
+/* ================= STUDENTS ================= */
 
 async function loadStudents(){
-
-  studentSelect.innerHTML =
-    '<option value="">იტვირთება...</option>';
 
   const {data,error} =
     await client
@@ -1099,267 +819,281 @@ async function loadStudents(){
       .eq('role','student')
       .order('full_name');
 
-  if(error){
-    console.error(error);
+  if(error) throw error;
 
-    studentSelect.innerHTML =
-      '<option value="">მოსწავლეების ჩატვირთვა ვერ მოხერხდა</option>';
+  students = data || [];
 
-    return;
-  }
-
-  renderStudents(data || []);
+  renderStudents();
 }
 
-
-function renderStudents(students){
+function renderStudents(){
 
   const filtered =
-    students.filter(function(student){
-
-      return String(student.grade) ===
-             String(currentGrade);
-
+    students.filter(function(s){
+      return Number(s.grade) === Number(currentGrade);
     });
 
   if(!filtered.length){
-
     studentSelect.innerHTML =
       '<option value="">ამ კლასში მოსწავლე არ არის</option>';
-
     return;
   }
 
   studentSelect.innerHTML =
     '<option value="">აირჩიე მოსწავლე</option>' +
-
-    filtered.map(function(student){
-
-      const name =
-        escapeHtml(student.full_name || 'მოსწავლე');
-
+    filtered.map(function(s){
       return `
-        <option value="${escapeAttr(student.user_id)}">
-          ${name}
+        <option value="${esc(s.user_id)}">
+          ${esc(s.full_name || 'მოსწავლე')}
         </option>
       `;
-
     }).join('');
-
 }
 
+/* ================= SUPABASE LESSONS ================= */
 
-/* =====================================
-   LESSONS
-===================================== */
+async function loadLessons(){
 
-function renderLessons(){
+  lessonArea.innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <b>მე-${currentGrade} კლასის გაკვეთილები იტვირთება...</b>
+    </div>
+  `;
 
-  const lessons =
-    lessonData[currentGrade] || [];
+  const {data,error} =
+    await client
+      .from('lessons')
+      .select(`
+        id,
+        grade,
+        lesson_number,
+        title,
+        topic,
+        description,
+        image_url,
+        audio_url
+      `)
+      .eq('grade',Number(currentGrade))
+      .order('lesson_number',{ascending:true});
+
+  if(error) throw error;
+
+  const lessons = data || [];
 
   lessonCount.textContent =
     lessons.length + ' გაკვეთილი';
 
   if(!lessons.length){
 
-    lessonArea.innerHTML =
-      '<div class="empty">გაკვეთილები ვერ მოიძებნა.</div>';
+    lessonArea.innerHTML = `
+      <div class="empty">
+        ❌ ამ კლასისთვის Supabase-ში გაკვეთილები ვერ მოიძებნა.
+      </div>
+    `;
 
     return;
   }
 
-  lessonArea.innerHTML =
-    '<div class="lesson-grid">' +
+  /* Load word counts for every lesson */
 
-    lessons.map(function(item,index){
+  const lessonIds =
+    lessons.map(x => x.id);
 
-      const icon = item[0];
-      const title = item[1];
-      const description = item[2];
-      const words = item[3];
+  const {data:words,error:wordError} =
+    await client
+      .from('lesson_words')
+      .select('lesson_id')
+      .in('lesson_id',lessonIds);
 
-      const wordArray =
-        words.split(',');
+  if(wordError) throw wordError;
 
-      const tags =
-        wordArray.slice(0,4).map(function(word){
+  const {data:quizzes,error:quizError} =
+    await client
+      .from('lesson_quizzes')
+      .select('lesson_id')
+      .in('lesson_id',lessonIds);
 
-          return `<span>${escapeHtml(word.trim())}</span>`;
+  if(quizError) throw quizError;
 
-        }).join('');
+  const wordCounts = {};
+  const quizCounts = {};
 
-      return `
+  (words || []).forEach(function(w){
+    wordCounts[w.lesson_id] =
+      (wordCounts[w.lesson_id] || 0) + 1;
+  });
 
-        <article
-          class="lesson-card"
-          data-index="${index + 1}">
+  (quizzes || []).forEach(function(q){
+    quizCounts[q.lesson_id] =
+      (quizCounts[q.lesson_id] || 0) + 1;
+  });
 
-          <div class="lesson-number">
-            ${index + 1}
-          </div>
+  lessonArea.innerHTML = `
+    <div class="lesson-grid">
+      ${lessons.map(function(lesson){
 
-          <div class="lesson-icon">
-            ${icon}
-          </div>
+        const number =
+          Number(lesson.lesson_number);
 
-          <h3>
-            ${escapeHtml(title)}
-          </h3>
+        const icon =
+          lessonIcon(number);
 
-          <p>
-            ${escapeHtml(description)}
-          </p>
+        const wc =
+          wordCounts[lesson.id] || 0;
 
-          <div class="lesson-tags">
-            ${tags}
-          </div>
+        const qc =
+          quizCounts[lesson.id] || 0;
 
-          <div class="open-btn">
-            📖 გაკვეთილის გახსნა
-          </div>
+        return `
+          <article
+            class="lesson-card"
+            data-id="${esc(lesson.id)}"
+            data-number="${number}">
 
-        </article>
+            <div class="lesson-number">
+              ${number}
+            </div>
 
-      `;
+            <div class="lesson-icon">
+              ${icon}
+            </div>
 
-    }).join('') +
+            <h3>
+              ${esc(lesson.title || 'გაკვეთილი ' + number)}
+            </h3>
 
-    '</div>';
+            <p>
+              ${esc(
+                lesson.description ||
+                lesson.topic ||
+                'ინგლისურის სასწავლო გაკვეთილი'
+              )}
+            </p>
 
+            <div class="lesson-tags">
+
+              ${
+                lesson.topic
+                ? `<span>${esc(lesson.topic)}</span>`
+                : ''
+              }
+
+              <span>📚 ${wc} სიტყვა</span>
+
+              <span>🧠 ${qc} კითხვა</span>
+
+            </div>
+
+            <div class="lesson-meta">
+              <span>🎧 მოსმენა</span>
+              <span>📝 სავარჯიშო</span>
+              <span>⭐ პროგრესი</span>
+            </div>
+
+            <div class="open-btn">
+              📖 გაკვეთილის გახსნა →
+            </div>
+
+          </article>
+        `;
+
+      }).join('')}
+    </div>
+  `;
 
   document
     .querySelectorAll('.lesson-card')
     .forEach(function(card){
 
-      card.addEventListener(
-        'click',
-        function(){
+      card.addEventListener('click',function(){
 
-          const number =
-            card.dataset.index;
+        const params =
+          new URLSearchParams();
 
-          const student =
-            studentSelect.value;
+        params.set(
+          'grade',
+          currentGrade
+        );
 
-          const params =
-            new URLSearchParams();
+        params.set(
+          'lesson',
+          card.dataset.number
+        );
+
+        if(studentSelect.value){
 
           params.set(
-            'grade',
-            currentGrade
+            'student',
+            studentSelect.value
           );
-
-          params.set(
-            'lesson',
-            number
-          );
-
-          if(student){
-
-            params.set(
-              'student',
-              student
-            );
-
-          }
-
-          location.href =
-            'lesson.html?' +
-            params.toString();
 
         }
-      );
+
+        location.href =
+          'lesson.html?' +
+          params.toString();
+
+      });
 
     });
-
 }
 
+/* ================= ICONS ================= */
 
-/* =====================================
-   CLASS BUTTONS
-===================================== */
+function lessonIcon(n){
+
+  const icons = [
+    '👋','👨‍👩‍👧','🎒','🎨','🔢','🐶',
+    '🏠','🍎','👕','😊','🌞','📅',
+    '⏰','🏫','🧍','⚽','🚗','🌳',
+    '🧸','🎂','🛒','🏃','🌈','🔤',
+    '🧩','📍','🎵','🚀','🧠','⭐',
+    '🎓','🏆','🌟','📚','🎯','💎'
+  ];
+
+  return icons[(n - 1) % icons.length] || '📚';
+}
+
+/* ================= CLASS BUTTONS ================= */
 
 document
   .querySelectorAll('.class-btn')
   .forEach(function(button){
 
-    button.addEventListener(
-      'click',
-      async function(){
+    button.addEventListener('click',async function(){
 
-        document
-          .querySelectorAll('.class-btn')
-          .forEach(function(btn){
+      document
+        .querySelectorAll('.class-btn')
+        .forEach(function(btn){
+          btn.classList.remove('active');
+        });
 
-            btn.classList.remove('active');
+      button.classList.add('active');
 
-          });
+      currentGrade =
+        Number(button.dataset.grade);
 
-        button.classList.add('active');
+      renderStudents();
 
-        currentGrade =
-          button.dataset.grade;
+      try{
+        await loadLessons();
+      }catch(error){
+        console.error(error);
 
-        renderStudentsFromCache();
-
-        renderLessons();
-
+        lessonArea.innerHTML = `
+          <div class="error">
+            ❌ გაკვეთილების ჩატვირთვა ვერ მოხერხდა.<br>
+            ${esc(error.message || error)}
+          </div>
+        `;
       }
-    );
+
+    });
 
   });
 
-
-let cachedStudents = [];
-
-
-function renderStudentsFromCache(){
-
-  renderStudents(
-    cachedStudents
-  );
-
-}
-
-
-/* =====================================
-   SECURITY / ESCAPE
-===================================== */
-
-function escapeHtml(value){
-
-  return String(value ?? '')
-    .replace(
-      /[&<>"']/g,
-      function(char){
-
-        return {
-
-          '&':'&amp;',
-          '<':'&lt;',
-          '>':'&gt;',
-          '"':'&quot;',
-          "'":'&#39;'
-
-        }[char];
-
-      }
-    );
-
-}
-
-
-function escapeAttr(value){
-
-  return escapeHtml(value);
-
-}
-
-
-/* =====================================
-   START
-===================================== */
+/* ================= START ================= */
 
 (async function(){
 
@@ -1370,32 +1104,9 @@ function escapeAttr(value){
 
     if(!allowed) return;
 
+    await loadStudents();
 
-    const {data,error} =
-      await client
-        .from('profiles')
-        .select('user_id,full_name,grade')
-        .eq('role','student')
-        .order('full_name');
-
-    if(error){
-
-      console.error(error);
-
-      cachedStudents = [];
-
-    }else{
-
-      cachedStudents =
-        data || [];
-
-    }
-
-
-    renderStudentsFromCache();
-
-    renderLessons();
-
+    await loadLessons();
 
   }catch(error){
 
@@ -1406,8 +1117,8 @@ function escapeAttr(value){
 
     lessonArea.innerHTML = `
       <div class="error">
-        ❌ გაკვეთილების ჩატვირთვა ვერ მოხერხდა.<br>
-        შეამოწმე Supabase-ის კავშირი და RLS უფლებები.
+        ❌ Supabase-დან გაკვეთილების ჩატვირთვა ვერ მოხერხდა.<br><br>
+        <b>${esc(error.message || error)}</b>
       </div>
     `;
 
@@ -1415,25 +1126,21 @@ function escapeAttr(value){
 
 })();
 
-
-/* =====================================
-   MOUSE PARALLAX
-===================================== */
+/* ================= PARALLAX ================= */
 
 document.addEventListener(
   'mousemove',
-  function(event){
+  function(e){
 
-    if(window.innerWidth < 900)
-      return;
+    if(window.innerWidth < 900) return;
 
     const x =
-      (event.clientX /
-       window.innerWidth - .5) * 12;
+      (e.clientX /
+      window.innerWidth - .5) * 12;
 
     const y =
-      (event.clientY /
-       window.innerHeight - .5) * 12;
+      (e.clientY /
+      window.innerHeight - .5) * 12;
 
     const visual =
       document.querySelector('.visual3d');
@@ -1442,40 +1149,6 @@ document.addEventListener(
 
       visual.style.transform =
         `translate3d(${x * -.18}px,${y * -.18}px,0)`;
-
-    }
-
-  }
-);
-
-
-/* =====================================
-   KEYBOARD
-===================================== */
-
-document.addEventListener(
-  'keydown',
-  function(event){
-
-    if(
-      event.key.toLowerCase() === 'f' &&
-      !event.ctrlKey &&
-      !event.altKey &&
-      !event.shiftKey
-    ){
-
-      if(!document.fullscreenElement){
-
-        document
-          .documentElement
-          .requestFullscreen?.();
-
-      }else{
-
-        document
-          .exitFullscreen?.();
-
-      }
 
     }
 
