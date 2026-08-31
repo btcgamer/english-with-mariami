@@ -1,36 +1,35 @@
 <!DOCTYPE html>
+
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#020711">
-
-<title>English with Mariami — Teacher Xenon Command</title>
+<meta name="theme-color" content="#030711">
+<title>English with Mariami — Xenon Teacher OS</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="config.js"></script>
 
 <style>
 :root{
-  --bg:#02050d;
-  --panel:rgba(5,15,31,.88);
-  --panel2:rgba(7,23,45,.92);
-  --cyan:#00f6ff;
-  --blue:#1478ff;
-  --purple:#9b4dff;
-  --pink:#ff36d1;
-  --green:#00ffa6;
+  --bg:#02040b;
+  --panel:rgba(7,13,28,.78);
+  --panel2:rgba(10,20,40,.88);
+  --cyan:#00eaff;
+  --blue:#2777ff;
+  --violet:#9b5cff;
+  --pink:#ff36c8;
+  --green:#00f5a0;
   --yellow:#ffe600;
-  --red:#ff3b68;
+  --red:#ff426d;
   --white:#f5fbff;
-  --muted:#88a3b8;
-  --line:rgba(0,246,255,.20);
-  --shadow:0 25px 90px rgba(0,0,0,.55);
+  --muted:#8295ad;
+  --line:rgba(0,234,255,.18);
+  --shadow:0 25px 80px rgba(0,0,0,.5);
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html{
   scroll-behavior:smooth;
@@ -40,27 +39,16 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--white);
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   background:
-    radial-gradient(circle at 15% 5%,rgba(0,246,255,.14),transparent 25%),
-    radial-gradient(circle at 90% 10%,rgba(155,77,255,.18),transparent 28%),
-    radial-gradient(circle at 50% 100%,rgba(20,120,255,.13),transparent 35%),
-    linear-gradient(145deg,#01030a,#031020 50%,#01040b);
-
+    radial-gradient(circle at 15% 10%,rgba(0,234,255,.12),transparent 25%),
+    radial-gradient(circle at 85% 15%,rgba(155,92,255,.15),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(39,119,255,.10),transparent 35%),
+    #02040b;
   overflow-x:hidden;
 }
 
-button,
-input,
-select{
+button,input,select{
   font:inherit;
 }
 
@@ -69,120 +57,107 @@ button{
 }
 
 button:disabled{
-  opacity:.45;
+  opacity:.5;
   cursor:not-allowed;
 }
 
 ::-webkit-scrollbar{
-  width:9px;
+  width:8px;
 }
 
 ::-webkit-scrollbar-track{
-  background:#01050c;
+  background:#02050d;
 }
 
 ::-webkit-scrollbar-thumb{
-  background:linear-gradient(
-    var(--cyan),
-    var(--blue),
-    var(--purple)
-  );
+  background:linear-gradient(var(--cyan),var(--violet));
   border-radius:20px;
 }
 
-/* BACKGROUND */
+/* ================= BACKGROUND ================= */
 
-.grid{
+.space{
   position:fixed;
   inset:0;
-  z-index:-5;
+  z-index:-10;
+  overflow:hidden;
   pointer-events:none;
+}
 
+.grid{
+  position:absolute;
+  inset:-20%;
+  opacity:.18;
   background-image:
-    linear-gradient(
-      rgba(0,246,255,.045) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(0,246,255,.045) 1px,
-      transparent 1px
-    );
-
-  background-size:42px 42px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black,
-      transparent 92%
-    );
+    linear-gradient(rgba(0,234,255,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.08) 1px,transparent 1px);
+  background-size:55px 55px;
+  transform:perspective(700px) rotateX(60deg) translateY(120px) scale(1.4);
+  animation:gridMove 16s linear infinite;
 }
 
-.scan{
-  position:fixed;
-  left:0;
-  right:0;
-  height:2px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    var(--cyan),
-    transparent
-  );
-  box-shadow:0 0 30px var(--cyan);
-  opacity:.15;
-  animation:scan 8s linear infinite;
-  pointer-events:none;
-  z-index:-2;
-}
-
-@keyframes scan{
-  from{top:-5%}
-  to{top:105%}
+@keyframes gridMove{
+  from{background-position:0 0,0 0}
+  to{background-position:0 550px,550px 0}
 }
 
 .orb{
-  position:fixed;
-  width:330px;
-  height:330px;
+  position:absolute;
   border-radius:50%;
-  filter:blur(100px);
-  pointer-events:none;
-  z-index:-3;
+  filter:blur(70px);
+  animation:float 9s ease-in-out infinite alternate;
 }
 
 .orb.a{
+  width:360px;
+  height:360px;
   left:-150px;
-  top:200px;
-  background:rgba(0,246,255,.08);
+  top:120px;
+  background:rgba(0,234,255,.12);
 }
 
 .orb.b{
-  right:-150px;
-  top:500px;
-  background:rgba(155,77,255,.10);
+  width:420px;
+  height:420px;
+  right:-180px;
+  top:280px;
+  background:rgba(155,92,255,.13);
+  animation-delay:-3s;
 }
 
-/* TOP BAR */
+.orb.c{
+  width:260px;
+  height:260px;
+  left:45%;
+  bottom:-150px;
+  background:rgba(255,54,200,.08);
+  animation-delay:-5s;
+}
+
+@keyframes float{
+  to{
+    transform:translate(40px,-35px) scale(1.1);
+  }
+}
+
+/* ================= HEADER ================= */
 
 .top{
   position:sticky;
   top:0;
-  z-index:5000;
-  background:rgba(1,5,13,.82);
-  backdrop-filter:blur(22px);
+  z-index:1000;
   border-bottom:1px solid var(--line);
+  background:rgba(2,5,14,.72);
+  backdrop-filter:blur(22px);
 }
 
 .nav{
   width:min(1500px,calc(100% - 28px));
   margin:auto;
-  min-height:76px;
-
+  min-height:72px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
 }
 
@@ -193,244 +168,178 @@ button:disabled{
 }
 
 .logo{
-  width:48px;
-  height:48px;
+  width:47px;
+  height:47px;
   display:grid;
   place-items:center;
-
-  border-radius:16px;
-
+  border-radius:15px;
+  font-size:24px;
   background:
-    linear-gradient(
-      135deg,
-      #00f6ff,
-      #1478ff,
-      #9b4dff
-    );
-
+    linear-gradient(135deg,#00eaff,#276eff,#a855f7);
   box-shadow:
-    0 0 20px rgba(0,246,255,.30),
-    0 0 60px rgba(155,77,255,.15);
+    0 0 20px rgba(0,234,255,.35),
+    inset 0 0 18px rgba(255,255,255,.2);
+  animation:logoPulse 3s infinite;
+}
 
-  font-size:25px;
-
-  transform:perspective(300px) rotateY(-8deg);
+@keyframes logoPulse{
+  50%{
+    box-shadow:
+      0 0 35px rgba(0,234,255,.6),
+      inset 0 0 18px rgba(255,255,255,.25);
+  }
 }
 
 .brand-title{
   font-weight:1000;
-  letter-spacing:.3px;
+  letter-spacing:.4px;
 }
 
 .brand-sub{
   color:var(--muted);
   font-size:9px;
-  letter-spacing:1.5px;
+  letter-spacing:2px;
   margin-top:3px;
 }
 
 .nav-actions{
   display:flex;
   gap:8px;
-  flex-wrap:wrap;
 }
-
-/* BUTTONS */
 
 .btn{
   min-height:42px;
-  padding:10px 14px;
-
-  border-radius:13px;
-
   border:1px solid rgba(255,255,255,.12);
-
-  color:white;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.09),
-      rgba(255,255,255,.035)
-    );
-
-  font-weight:900;
-
-  transition:
-    transform .18s ease,
-    box-shadow .18s ease,
-    border-color .18s ease;
+  border-radius:13px;
+  padding:10px 14px;
+  color:#fff;
+  background:rgba(255,255,255,.055);
+  font-weight:850;
+  transition:.2s;
 }
 
 .btn:hover{
   transform:translateY(-2px);
-
-  border-color:
-    rgba(0,246,255,.55);
-
-  box-shadow:
-    0 0 25px rgba(0,246,255,.14);
+  border-color:rgba(0,234,255,.5);
+  box-shadow:0 0 25px rgba(0,234,255,.13);
 }
 
 .btn.cyan{
-  background:
-    linear-gradient(
-      135deg,
-      #007bff,
-      #00d9ff
-    );
+  background:linear-gradient(135deg,#057aff,#00cbe8);
 }
 
-.btn.purple{
-  background:
-    linear-gradient(
-      135deg,
-      #6332cf,
-      #a855f7
-    );
+.btn.violet{
+  background:linear-gradient(135deg,#6937d9,#a855f7);
 }
 
 .btn.green{
-  background:
-    linear-gradient(
-      135deg,
-      #008e61,
-      #00e5a0
-    );
+  background:linear-gradient(135deg,#009d69,#00e0a0);
 }
 
 .btn.yellow{
-  color:#07101b;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffe600,
-      #ffb800
-    );
+  color:#07111b;
+  background:linear-gradient(135deg,#ffe600,#ffb900);
 }
 
 .btn.red{
-  background:
-    linear-gradient(
-      135deg,
-      #b51647,
-      #ff3c68
-    );
+  background:linear-gradient(135deg,#c91949,#ff3865);
 }
 
-.btn.dark{
-  background:#06152a;
+.btn.small{
+  min-height:36px;
+  padding:7px 10px;
+  font-size:12px;
 }
 
-/* MAIN */
+/* ================= APP ================= */
 
-.wrap{
+.app{
   width:min(1500px,calc(100% - 28px));
   margin:auto;
+  padding:25px 0 60px;
+}
+
+/* ================= HOME ================= */
+
+.home{
+  display:grid;
+  grid-template-columns:1.35fr .65fr;
+  gap:18px;
+  margin-bottom:18px;
 }
 
 .hero{
-  padding:34px 0 20px;
-}
-
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.4fr .6fr;
-  gap:16px;
-}
-
-.panel{
+  min-height:290px;
+  padding:30px;
   position:relative;
-
+  overflow:hidden;
   border:1px solid var(--line);
   border-radius:28px;
-
   background:
-    linear-gradient(
-      145deg,
-      rgba(7,26,50,.92),
-      rgba(2,10,22,.92)
-    );
-
+    linear-gradient(145deg,rgba(7,25,48,.88),rgba(4,9,21,.88));
   box-shadow:var(--shadow);
-
-  overflow:hidden;
 }
 
-.panel:before{
+.hero:after{
   content:"";
   position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      110deg,
-      transparent,
-      rgba(255,255,255,.035),
-      transparent
-    );
-
-  pointer-events:none;
-}
-
-.hero-main{
-  padding:34px;
-  min-height:255px;
+  width:280px;
+  height:280px;
+  right:-100px;
+  top:-100px;
+  border-radius:50%;
+  border:1px solid rgba(0,234,255,.18);
+  box-shadow:
+    0 0 50px rgba(0,234,255,.1),
+    inset 0 0 50px rgba(155,92,255,.08);
 }
 
 .kicker{
   color:var(--cyan);
-  font-weight:1000;
   font-size:11px;
+  font-weight:1000;
   letter-spacing:3px;
 }
 
-h1{
-  margin:12px 0;
-
-  font-size:
-    clamp(
-      2.3rem,
-      5vw,
-      5rem
-    );
-
-  line-height:.95;
+.hero h1{
+  margin:13px 0 10px;
+  font-size:clamp(2.2rem,5vw,4.8rem);
+  line-height:.98;
   letter-spacing:-3px;
 }
 
 .gradient-text{
-  background:
-    linear-gradient(
-      90deg,
-      white,
-      var(--cyan),
-      var(--purple),
-      var(--pink),
-      var(--yellow)
-    );
-
+  background:linear-gradient(
+    90deg,
+    #fff,
+    var(--cyan),
+    var(--violet),
+    var(--pink)
+  );
   -webkit-background-clip:text;
   color:transparent;
 }
 
-.hero-text{
-  max-width:800px;
-  color:#b5cbd9;
+.hero p{
+  max-width:760px;
+  color:#a9bbca;
   line-height:1.65;
 }
 
-.hero-actions{
+.command{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-  margin-top:20px;
+  margin-top:22px;
 }
 
 .system{
-  padding:28px;
-
+  min-height:290px;
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(7,25,48,.88),rgba(4,9,21,.88));
+  box-shadow:var(--shadow);
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -439,13 +348,13 @@ h1{
 .online{
   display:flex;
   align-items:center;
-  gap:8px;
-
+  gap:9px;
   color:var(--green);
   font-weight:1000;
+  letter-spacing:1px;
 }
 
-.dot{
+.pulse{
   width:10px;
   height:10px;
   border-radius:50%;
@@ -455,14 +364,133 @@ h1{
 }
 
 @keyframes pulse{
-  50%{
-    transform:scale(.55);
-    opacity:.45;
-  }
+  50%{transform:scale(.65);opacity:.45}
 }
 
 .system h2{
-  margin:14px 0 4px;
+  font-size:27px;
+  margin:15px 0 5px;
+}
+
+.system .email{
+  color:var(--muted);
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:11px;
+  margin-bottom:18px;
+}
+
+.stat{
+  position:relative;
+  overflow:hidden;
+  padding:18px;
+  min-height:100px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(6,17,34,.75);
+  box-shadow:0 15px 50px rgba(0,0,0,.25);
+}
+
+.stat:before{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  right:-35px;
+  top:-35px;
+  border-radius:50%;
+  background:rgba(0,234,255,.08);
+  filter:blur(5px);
+}
+
+.stat small{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.stat b{
+  display:block;
+  margin-top:5px;
+  font-size:29px;
+}
+
+/* ================= MAIN NAV ================= */
+
+.main-nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:10px;
+  margin-bottom:18px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(4,12,25,.8);
+  backdrop-filter:blur(18px);
+}
+
+.nav-item{
+  flex:1;
+  min-width:110px;
+  border:1px solid transparent;
+  border-radius:13px;
+  padding:12px 10px;
+  color:#9db0c0;
+  background:transparent;
+  font-weight:900;
+  transition:.2s;
+}
+
+.nav-item:hover,
+.nav-item.active{
+  color:#fff;
+  border-color:rgba(0,234,255,.24);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(0,234,255,.12),
+      rgba(155,92,255,.12)
+    );
+  box-shadow:
+    inset 0 -2px var(--cyan),
+    0 0 20px rgba(0,234,255,.06);
+}
+
+/* ================= PANELS ================= */
+
+.panel{
+  display:none;
+}
+
+.panel.active{
+  display:block;
+}
+
+.card{
+  border:1px solid var(--line);
+  border-radius:25px;
+  padding:22px;
+  margin-bottom:17px;
+  background:
+    linear-gradient(145deg,rgba(7,22,43,.88),rgba(3,9,20,.86));
+  box-shadow:var(--shadow);
+}
+
+.head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.head h2{
+  margin:0;
+  font-size:22px;
 }
 
 .muted{
@@ -473,427 +501,314 @@ h1{
   font-size:12px;
 }
 
-/* STATS */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin:4px 0 18px;
-}
-
-.stat{
-  position:relative;
-
-  padding:17px;
-
-  border-radius:19px;
-
-  border:1px solid var(--line);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(6,28,54,.82),
-      rgba(3,14,29,.86)
-    );
-
-  box-shadow:
-    inset 0 0 30px rgba(0,246,255,.025);
-}
-
-.stat small{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-}
-
-.stat strong{
-  display:block;
-  font-size:29px;
-  margin-top:5px;
-}
-
-/* LAYOUT */
-
-.dashboard{
-  display:grid;
-  grid-template-columns:245px 1fr;
-  gap:17px;
-  padding-bottom:60px;
-}
-
-.sidebar{
-  height:max-content;
-  position:sticky;
-  top:92px;
-  padding:12px;
-}
-
-.side-label{
-  color:var(--muted);
-  font-size:10px;
-  font-weight:1000;
-  letter-spacing:2px;
-  padding:10px 12px;
-}
-
-.menu{
-  width:100%;
-  padding:13px;
-
-  margin:2px 0;
-
-  border:0;
-  border-radius:13px;
-
-  color:#dceaf3;
-
-  background:transparent;
-
-  text-align:left;
-
-  font-weight:900;
-
-  transition:.18s;
-}
-
-.menu:hover,
-.menu.active{
-  color:white;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(0,246,255,.13),
-      rgba(155,77,255,.10)
-    );
-
-  box-shadow:
-    inset 3px 0 var(--cyan),
-    0 0 25px rgba(0,246,255,.04);
-}
-
-.content{
-  min-width:0;
-}
-
-.view{
-  display:none;
-}
-
-.view.active{
-  display:block;
-}
-
-/* CARDS */
-
-.card{
-  position:relative;
-
-  padding:23px;
-  margin-bottom:16px;
-
-  border:1px solid var(--line);
-  border-radius:24px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(7,24,47,.91),
-      rgba(2,12,26,.91)
-    );
-
-  box-shadow:var(--shadow);
-}
-
-.head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-
-  margin-bottom:18px;
-}
-
-.head h2{
-  margin:0;
-}
-
-.head p{
-  margin:5px 0 0;
-}
-
-/* GRADE SELECTOR */
+/* ================= GRADE SELECTOR ================= */
 
 .grade-selector{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-bottom:16px;
+  gap:15px;
 }
 
-.grade{
+.grade-card{
   position:relative;
-
-  min-height:115px;
-
-  border-radius:20px;
-
-  border:1px solid rgba(0,246,255,.16);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(6,29,56,.95),
-      rgba(2,14,29,.95)
-    );
-
-  color:white;
-
-  text-align:left;
-
-  padding:18px;
-
+  min-height:175px;
+  padding:23px;
   overflow:hidden;
-
-  transition:.25s;
+  border-radius:24px;
+  border:1px solid rgba(0,234,255,.15);
+  background:
+    linear-gradient(145deg,#081a33,#040b19);
+  cursor:pointer;
+  transition:.3s;
 }
 
-.grade:after{
+.grade-card:before{
   content:"";
-
   position:absolute;
-  width:120px;
-  height:120px;
-  right:-45px;
-  bottom:-55px;
-
-  border-radius:50%;
-
-  border:1px solid rgba(0,246,255,.15);
-
-  box-shadow:
-    0 0 40px rgba(0,246,255,.10);
+  inset:-2px;
+  border-radius:25px;
+  background:linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(0,234,255,.35),
+    transparent 70%
+  );
+  opacity:.35;
+  transform:translateX(-100%);
+  transition:.7s;
 }
 
-.grade:hover{
-  transform:
-    perspective(600px)
-    rotateX(3deg)
-    translateY(-4px);
-
-  border-color:
-    rgba(0,246,255,.55);
-
+.grade-card:hover{
+  transform:translateY(-7px) perspective(700px) rotateX(2deg);
+  border-color:rgba(0,234,255,.5);
   box-shadow:
-    0 18px 50px rgba(0,0,0,.35),
-    0 0 30px rgba(0,246,255,.08);
+    0 20px 70px rgba(0,0,0,.5),
+    0 0 35px rgba(0,234,255,.09);
 }
 
-.grade.active{
-  border-color:var(--cyan);
-
-  box-shadow:
-    0 0 35px rgba(0,246,255,.13),
-    inset 0 0 25px rgba(0,246,255,.04);
+.grade-card:hover:before{
+  transform:translateX(100%);
 }
 
 .grade-icon{
-  font-size:28px;
+  font-size:38px;
 }
 
-.grade-name{
+.grade-card h3{
+  margin:12px 0 4px;
+  font-size:22px;
+}
+
+.grade-card p{
+  color:var(--muted);
+  margin:0;
+  font-size:12px;
+}
+
+/* ================= LESSONS ================= */
+
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.lesson{
+  position:relative;
+  padding:18px;
+  min-height:175px;
+  border-radius:19px;
+  border:1px solid rgba(0,234,255,.13);
+  background:linear-gradient(145deg,#081b36,#040c1b);
+  transition:.25s;
+  cursor:pointer;
+  overflow:hidden;
+}
+
+.lesson:hover{
+  transform:translateY(-5px);
+  border-color:rgba(0,234,255,.48);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.38),
+    0 0 28px rgba(0,234,255,.08);
+}
+
+.lesson-number{
+  color:var(--cyan);
+  font-size:10px;
+  letter-spacing:2px;
   font-weight:1000;
+}
+
+.lesson h3{
+  margin:9px 0 6px;
+}
+
+.lesson p{
+  margin:0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.5;
+}
+
+.lesson-arrow{
+  position:absolute;
+  right:15px;
+  bottom:13px;
+  color:var(--cyan);
+  font-size:18px;
+}
+
+/* ================= MATERIAL HUB ================= */
+
+.material-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:11px;
+}
+
+.material{
+  min-height:115px;
+  border-radius:18px;
+  border:1px solid rgba(0,234,255,.13);
+  background:#06172d;
+  color:white;
+  padding:17px;
+  text-align:left;
+  transition:.2s;
+}
+
+.material:hover{
+  transform:translateY(-4px);
+  border-color:var(--cyan);
+  box-shadow:0 0 30px rgba(0,234,255,.08);
+}
+
+.material-icon{
+  font-size:27px;
+}
+
+.material b{
+  display:block;
+  margin-top:8px;
+}
+
+.material small{
+  color:var(--muted);
+}
+
+/* ================= CONTENT ================= */
+
+.content-box{
+  padding:20px;
+  border-radius:18px;
+  border:1px solid rgba(0,234,255,.13);
+  background:#041226;
+  margin-top:12px;
+}
+
+.content-box h3{
+  margin-top:0;
+}
+
+.content-text{
+  color:#c5d4df;
+  line-height:1.75;
+  white-space:pre-wrap;
+}
+
+.example{
+  padding:10px 13px;
+  margin:7px 0;
+  border-left:3px solid var(--cyan);
+  background:rgba(0,234,255,.05);
+  border-radius:7px;
+}
+
+.phrase{
+  padding:12px;
+  margin:7px 0;
+  border:1px solid rgba(155,92,255,.18);
+  background:rgba(155,92,255,.06);
+  border-radius:10px;
+}
+
+.exercise{
+  padding:14px;
+  margin:8px 0;
+  border-radius:12px;
+  background:#061a32;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.quiz-question{
+  padding:15px;
+  margin:10px 0;
+  border-radius:14px;
+  background:#061a32;
+  border:1px solid rgba(0,234,255,.12);
+}
+
+.option{
+  display:block;
+  width:100%;
+  margin-top:7px;
+  text-align:left;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;
+  background:#0a2542;
+  color:white;
+}
+
+.option:hover{
+  border-color:var(--cyan);
+}
+
+.correct{
+  border-color:var(--green)!important;
+  background:rgba(0,245,160,.12)!important;
+}
+
+.wrong{
+  border-color:var(--red)!important;
+  background:rgba(255,56,100,.12)!important;
+}
+
+/* ================= WORDS ================= */
+
+.words{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.word{
+  padding:15px;
+  border-radius:15px;
+  border:1px solid rgba(0,234,255,.12);
+  background:#06182f;
+}
+
+.word-emoji{
+  font-size:27px;
+}
+
+.word b{
+  display:block;
   margin-top:7px;
 }
 
-.grade-info{
+.word small{
   color:var(--muted);
-  font-size:11px;
-  margin-top:3px;
 }
 
-/* SEARCH */
+/* ================= STUDENTS ================= */
 
-.search{
+.form-grid{
   display:grid;
-  grid-template-columns:1fr auto;
-  gap:8px;
-  margin-bottom:15px;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.field label{
+  display:block;
+  color:#a7bac9;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:6px;
 }
 
 .input,
 select{
   width:100%;
-  min-height:45px;
-
-  padding:10px 12px;
-
-  border-radius:13px;
-
-  border:1px solid rgba(0,246,255,.17);
-
+  min-height:44px;
+  padding:9px 11px;
+  border-radius:11px;
+  border:1px solid rgba(0,234,255,.16);
   outline:none;
-
-  color:white;
-
-  background:#041426;
+  color:#fff;
+  background:#041327;
 }
 
 .input:focus,
 select:focus{
   border-color:var(--cyan);
-
-  box-shadow:
-    0 0 0 3px rgba(0,246,255,.07);
+  box-shadow:0 0 0 3px rgba(0,234,255,.07);
 }
-
-/* LESSONS */
-
-.lesson-grid{
-  display:grid;
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(240px,1fr)
-    );
-
-  gap:13px;
-}
-
-.lesson{
-  position:relative;
-
-  min-height:190px;
-
-  padding:19px;
-
-  border-radius:21px;
-
-  border:1px solid rgba(0,246,255,.14);
-
-  background:
-    linear-gradient(
-      145deg,
-      #071f3d,
-      #031326
-    );
-
-  cursor:pointer;
-
-  transition:
-    transform .22s,
-    border-color .22s,
-    box-shadow .22s;
-}
-
-.lesson:hover{
-  transform:
-    perspective(700px)
-    rotateX(3deg)
-    translateY(-5px);
-
-  border-color:
-    rgba(0,246,255,.55);
-
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.40),
-    0 0 35px rgba(0,246,255,.08);
-}
-
-.lesson-number{
-  display:inline-flex;
-
-  padding:5px 9px;
-
-  border-radius:9px;
-
-  font-size:10px;
-  font-weight:1000;
-
-  color:var(--cyan);
-
-  background:rgba(0,246,255,.08);
-
-  border:1px solid rgba(0,246,255,.14);
-}
-
-.lesson h3{
-  margin:14px 0 7px;
-}
-
-.lesson-topic{
-  color:var(--cyan);
-  font-size:12px;
-  font-weight:900;
-}
-
-.lesson-description{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-  margin-top:8px;
-}
-
-.lesson-footer{
-  position:absolute;
-  left:19px;
-  right:19px;
-  bottom:16px;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.open-label{
-  color:white;
-  font-size:11px;
-  font-weight:1000;
-}
-
-/* EMPTY */
-
-.empty{
-  padding:40px 20px;
-
-  text-align:center;
-
-  border-radius:18px;
-
-  border:1px dashed rgba(255,255,255,.12);
-
-  color:var(--muted);
-
-  background:rgba(255,255,255,.015);
-}
-
-/* STUDENTS */
 
 .student-grid{
   display:grid;
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(280px,1fr)
-    );
-  gap:13px;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+  margin-top:15px;
 }
 
 .student{
   padding:17px;
-
-  border-radius:19px;
-
-  border:1px solid rgba(0,246,255,.14);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(7,29,55,.9),
-      rgba(3,15,31,.9)
-    );
+  border-radius:18px;
+  border:1px solid rgba(0,234,255,.13);
+  background:#06172d;
 }
 
 .student-top{
@@ -902,95 +817,120 @@ select:focus{
   gap:10px;
 }
 
-.student-name{
-  font-size:17px;
-  font-weight:1000;
+.avatar{
+  width:43px;
+  height:43px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  background:linear-gradient(135deg,#083b62,#482278);
+  font-size:21px;
 }
 
-.student-email{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:5px;
+.student-name{
+  font-weight:1000;
 }
 
 .badge{
-  display:inline-flex;
+  display:inline-block;
   padding:5px 8px;
   border-radius:8px;
-
   font-size:10px;
   font-weight:1000;
-
   color:var(--cyan);
-  background:rgba(0,246,255,.08);
+  background:rgba(0,234,255,.08);
 }
 
-/* ATTENDANCE */
+.student-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:13px;
+}
 
-.attendance{
+/* ================= ATTENDANCE ================= */
+
+.attendance-grid{
   display:grid;
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(300px,1fr)
-    );
+  grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
 
 .att-row{
+  padding:14px;
+  border-radius:15px;
+  border:1px solid rgba(255,255,255,.07);
+  background:#06172d;
+}
+
+.att-top{
   display:flex;
   justify-content:space-between;
-  align-items:center;
   gap:10px;
-
-  padding:13px;
-
-  border-radius:15px;
-
-  background:#04172c;
-
-  border:1px solid rgba(255,255,255,.07);
+  margin-bottom:10px;
 }
 
 .att-buttons{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
   gap:5px;
-  flex-wrap:wrap;
 }
 
 .att{
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:9px;
-
-  padding:8px 9px;
-
+  padding:8px 4px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,.08);
   color:white;
-  background:#09233f;
-
+  background:#0a2541;
   font-size:10px;
-  font-weight:1000;
+  font-weight:900;
 }
 
 .att:hover{
   border-color:var(--cyan);
 }
 
-/* MODAL */
+.att.present{background:#075b47}
+.att.absent{background:#681e38}
+.att.late{background:#705600}
+.att.rest{background:#39435b}
+.att.left{background:#253b56}
+
+/* ================= TABLE-LIKE ================= */
+
+.rows{
+  display:grid;
+  gap:8px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 110px 140px;
+  align-items:center;
+  gap:10px;
+  padding:13px;
+  border-radius:12px;
+  background:#06172d;
+  border:1px solid rgba(255,255,255,.06);
+}
+
+.score{
+  text-align:center;
+  color:var(--yellow);
+  font-weight:1000;
+}
+
+/* ================= MODAL ================= */
 
 .modal{
   position:fixed;
   inset:0;
-
-  z-index:9000;
-
+  z-index:5000;
   display:none;
   align-items:center;
   justify-content:center;
-
-  padding:18px;
-
+  padding:15px;
   background:rgba(0,0,0,.78);
-
   backdrop-filter:blur(12px);
 }
 
@@ -1002,275 +942,118 @@ select:focus{
   width:min(1050px,100%);
   max-height:92vh;
   overflow:auto;
-
-  padding:24px;
-
-  border-radius:27px;
-
-  border:1px solid rgba(0,246,255,.35);
-
-  background:
-    linear-gradient(
-      145deg,
-      #041a32,
-      #020b18
-    );
-
-  box-shadow:
-    0 30px 110px rgba(0,0,0,.65),
-    0 0 50px rgba(0,246,255,.08);
+  padding:22px;
+  border-radius:25px;
+  border:1px solid rgba(0,234,255,.35);
+  background:#031023;
+  box-shadow:0 30px 100px rgba(0,0,0,.65);
 }
 
 .modal-head{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-
-  gap:12px;
-
-  margin-bottom:20px;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:16px;
 }
 
 .modal-head h2{
   margin:0;
 }
 
-.material-tabs{
-  display:grid;
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(120px,1fr)
-    );
-
-  gap:8px;
-
-  margin-bottom:18px;
-}
-
-.tab{
-  min-height:55px;
-
-  border-radius:14px;
-
-  border:1px solid rgba(0,246,255,.13);
-
-  color:#d9edf5;
-
-  background:#05182d;
-
-  font-weight:1000;
-
-  transition:.18s;
-}
-
-.tab:hover,
-.tab.active{
-  color:white;
-
-  border-color:var(--cyan);
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0,246,255,.14),
-      rgba(155,77,255,.12)
-    );
-
-  box-shadow:
-    0 0 25px rgba(0,246,255,.07);
-}
-
-.material{
-  display:none;
-}
-
-.material.active{
-  display:block;
-}
-
-.material-card{
-  padding:20px;
-
-  border-radius:18px;
-
-  border:1px solid rgba(0,246,255,.12);
-
-  background:#031428;
-
-  margin-bottom:12px;
-}
-
-.material-card h3{
-  margin-top:0;
-}
-
-.material-text{
-  white-space:pre-wrap;
-
-  color:#c8dbe5;
-
-  line-height:1.75;
-}
-
-.words-grid{
-  display:grid;
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(150px,1fr)
-    );
-
-  gap:8px;
-}
-
-.word{
-  padding:12px;
-
-  border-radius:13px;
-
-  border:1px solid rgba(0,246,255,.10);
-
-  background:#061b32;
-}
-
-.word b{
-  color:var(--cyan);
-}
-
-.quiz-question{
-  padding:15px;
-
-  border-radius:15px;
-
-  background:#061a31;
-
-  border:1px solid rgba(255,255,255,.07);
-
-  margin-bottom:8px;
-}
-
-.audio-box{
-  padding:16px;
-
-  border-radius:16px;
-
-  background:#061c34;
-
-  border:1px solid rgba(0,246,255,.15);
-}
-
-audio{
-  width:100%;
-  margin-top:10px;
-}
-
-/* TOAST */
+/* ================= TOAST ================= */
 
 .toast{
   position:fixed;
-  right:18px;
-  bottom:18px;
-
-  z-index:99999;
-
-  max-width:420px;
-
+  right:17px;
+  bottom:17px;
+  z-index:10000;
+  max-width:390px;
   padding:14px 17px;
-
   border-radius:14px;
-
-  border:1px solid rgba(0,246,255,.3);
-
-  background:#061b33;
-
+  border:1px solid rgba(0,234,255,.3);
+  background:#061a31;
   box-shadow:0 20px 60px rgba(0,0,0,.5);
-
-  opacity:0;
   transform:translateY(25px);
-
+  opacity:0;
   pointer-events:none;
-
   transition:.25s;
 }
 
 .toast.show{
-  opacity:1;
   transform:translateY(0);
+  opacity:1;
 }
 
 .toast.ok{
-  border-color:rgba(0,255,166,.5);
+  border-color:rgba(0,245,160,.45);
 }
 
 .toast.err{
-  border-color:rgba(255,59,104,.5);
+  border-color:rgba(255,56,100,.45);
 }
 
-/* LOADER */
+/* ================= LOADING ================= */
 
-.loader{
-  min-height:120px;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
+.loading{
+  padding:40px;
+  text-align:center;
   color:var(--muted);
 }
 
 .spinner{
+  display:inline-block;
   width:22px;
   height:22px;
-
-  border:3px solid rgba(255,255,255,.1);
-
+  margin-right:8px;
+  vertical-align:middle;
+  border:3px solid rgba(255,255,255,.08);
   border-top-color:var(--cyan);
-
   border-radius:50%;
-
   animation:spin .8s linear infinite;
-
-  margin-right:9px;
 }
 
 @keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
+  to{transform:rotate(360deg)}
 }
 
-/* RESPONSIVE */
+.empty{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed rgba(255,255,255,.1);
+  border-radius:15px;
+}
 
-@media(max-width:1050px){
+/* ================= RESPONSIVE ================= */
 
-  .hero-grid{
+@media(max-width:1100px){
+  .home{
     grid-template-columns:1fr;
-  }
-
-  .dashboard{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    position:static;
   }
 
   .stats{
-    grid-template-columns:
-      repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .lesson-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .material-grid,
+  .words{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grade-selector{
+    grid-template-columns:1fr;
   }
 }
 
-@media(max-width:700px){
-
-  .wrap,
+@media(max-width:720px){
+  .app,
   .nav{
     width:calc(100% - 16px);
-  }
-
-  .nav{
-    min-height:65px;
   }
 
   .brand-sub{
@@ -1279,658 +1062,715 @@ audio{
 
   .nav-actions .btn{
     font-size:0;
-    padding:10px;
+    padding:9px;
   }
 
-  .nav-actions .btn:first-child:after{
-    content:"↻";
+  .nav-actions .btn:after{
+    content:"";
     font-size:18px;
   }
 
-  .nav-actions .btn:last-child:after{
-    content:"🚪";
-    font-size:18px;
+  #homeBtn:after{content:"🏠"}
+  #logoutBtn:after{content:"🚪"}
+
+  .hero{
+    padding:21px;
   }
 
-  .hero-main{
-    padding:23px;
-  }
-
-  h1{
-    font-size:2.6rem;
+  .hero h1{
+    font-size:2.45rem;
   }
 
   .stats{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .grade-selector{
-    grid-template-columns:1fr;
+  .main-nav{
+    overflow-x:auto;
+    flex-wrap:nowrap;
   }
 
-  .search{
-    grid-template-columns:1fr;
+  .nav-item{
+    min-width:120px;
   }
 
-  .att-row{
-    align-items:flex-start;
-    flex-direction:column;
+  .lesson-grid,
+  .material-grid,
+  .words,
+  .student-grid,
+  .attendance-grid,
+  .form-grid{
+    grid-template-columns:1fr;
   }
 
   .att-buttons{
-    width:100%;
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .att{
-    flex:1;
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:15px;
   }
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="grid"></div>
-<div class="scan"></div>
-<div class="orb a"></div>
-<div class="orb b"></div>
+<div class="space">
+  <div class="grid"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="orb c"></div>
+</div>
 
 <header class="top">
   <div class="nav">
 
-    <div class="brand">
+```
+<div class="brand">
+  <div class="logo">🧠</div>
+  <div>
+    <div class="brand-title">ENGLISH WITH MARIAMI</div>
+    <div class="brand-sub">XENON TEACHER OPERATING SYSTEM</div>
+  </div>
+</div>
 
-      <div class="logo">🧠</div>
-
-      <div>
-        <div class="brand-title">
-          English with Mariami
-        </div>
-
-        <div class="brand-sub">
-          TEACHER XENON COMMAND CENTER
-        </div>
-      </div>
-
-    </div>
-
-    <div class="nav-actions">
-
-      <button
-        class="btn dark"
-        id="homeBtn">
-        🏠 მთავარი
-      </button>
-
-      <button
-        class="btn dark"
-        id="syncBtn">
-        ↻ Sync
-      </button>
-
-      <button
-        class="btn red"
-        id="logoutBtn">
-        🚪 გამოსვლა
-      </button>
-
-    </div>
+<div class="nav-actions">
+  <button class="btn" id="homeBtn">🏠 მთავარი</button>
+  <button class="btn red" id="logoutBtn">🚪 გამოსვლა</button>
+</div>
+```
 
   </div>
 </header>
 
-<main class="wrap">
+<main class="app">
 
-<section class="hero">
+<!-- ================= HOME ================= -->
 
-  <div class="hero-grid">
+<section class="home">
 
-    <div class="panel hero-main">
+  <div class="hero">
 
-      <div class="kicker">
-        ⚡ TEACHER COMMAND CENTER
-      </div>
+```
+<div class="kicker">⚡ TEACHER COMMAND CENTER</div>
 
-      <h1>
-        მართე შენი
-        <span class="gradient-text">
-          ინგლისურის სამყარო
-        </span>
-      </h1>
+<h1>
+  მართე შენი
+  <span class="gradient-text">English Universe</span>
+</h1>
 
-      <div class="hero-text">
-        ერთი მარტივი მენიუ მასწავლებლისთვის —
-        აირჩიე Grade, გახსენი Lesson და მართე
-        Words, Grammar, Reading, Listening,
-        Speaking, Exercises და Quiz.
-      </div>
+<p>
+  ერთი სივრცე მთელი კლასისთვის —
+  გაკვეთილები, სიტყვები, Grammar, Listening,
+  Speaking, Reading, Exercises, Quiz,
+  მოსწავლეები, დასწრება და Progress.
+</p>
 
-      <div class="hero-actions">
+<div class="command">
+  <button class="btn cyan" onclick="openGrade(2)">
+    🌱 Grade 2
+  </button>
 
-        <button
-          class="btn cyan"
-          data-view="lessons">
-          📚 Lessons
-        </button>
+  <button class="btn violet" onclick="openGrade(3)">
+    🚀 Grade 3
+  </button>
 
-        <button
-          class="btn purple"
-          data-view="students">
-          👥 Students
-        </button>
+  <button class="btn yellow" onclick="openGrade(4)">
+    ⭐ Grade 4
+  </button>
 
-        <button
-          class="btn green"
-          data-view="attendance">
-          🧑‍🎓 Attendance
-        </button>
+  <button class="btn green" onclick="openPanel('students')">
+    👥 მოსწავლეები
+  </button>
+</div>
+```
 
-      </div>
+  </div>
 
-    </div>
+  <div class="system">
 
-    <div class="panel system">
+```
+<div class="online">
+  <span class="pulse"></span>
+  SYSTEM ONLINE
+</div>
 
-      <div class="online">
-        <span class="dot"></span>
-        SYSTEM ONLINE
-      </div>
+<h2 id="teacherName">Teacher</h2>
 
-      <h2 id="teacherName">
-        Teacher
-      </h2>
+<div class="email" id="teacherEmail">
+  loading...
+</div>
 
-      <div
-        class="muted"
-        id="teacherEmail">
-        loading...
-      </div>
-
-      <div
-        class="small muted"
-        style="margin-top:14px">
-
-        Supabase:
-        <b id="connection">
-          checking...
-        </b>
-
-      </div>
-
-    </div>
+<div class="small muted" style="margin-top:15px">
+  DATABASE STATUS:
+  <b id="dbStatus">CONNECTING...</b>
+</div>
+```
 
   </div>
 
 </section>
+
+<!-- ================= STATS ================= -->
 
 <section class="stats">
 
   <div class="stat">
-    <small>👥 Students</small>
-    <strong id="statStudents">0</strong>
+    <small>👥 მოსწავლეები</small>
+    <b id="statStudents">0</b>
   </div>
 
   <div class="stat">
     <small>🌱 Grade 2</small>
-    <strong id="statG2">0</strong>
+    <b id="statG2">0</b>
   </div>
 
   <div class="stat">
     <small>🚀 Grade 3</small>
-    <strong id="statG3">0</strong>
+    <b id="statG3">0</b>
   </div>
 
   <div class="stat">
     <small>⭐ Grade 4</small>
-    <strong id="statG4">0</strong>
+    <b id="statG4">0</b>
   </div>
 
   <div class="stat">
-    <small>📚 Lessons</small>
-    <strong id="statLessons">0</strong>
+    <small>📚 ნასწავლი სიტყვები</small>
+    <b id="statWords">0</b>
   </div>
 
 </section>
 
-<section class="dashboard">
+<!-- ================= NAV ================= -->
 
-<aside class="panel sidebar">
+<nav class="main-nav">
 
-  <div class="side-label">
-    MAIN CONTROL
-  </div>
-
-  <button
-    class="menu active"
-    data-view="lessons">
-    📚 Lessons & Materials
+  <button class="nav-item active" data-panel="home">
+    🏠 მთავარი
   </button>
 
-  <button
-    class="menu"
-    data-view="students">
+  <button class="nav-item" data-panel="lessons">
+    📚 Lessons
+  </button>
+
+  <button class="nav-item" data-panel="students">
     👥 Students
   </button>
 
-  <button
-    class="menu"
-    data-view="attendance">
+  <button class="nav-item" data-panel="attendance">
     🧑‍🎓 Attendance
   </button>
 
-</aside>
+  <button class="nav-item" data-panel="grades">
+    ⭐ Grades
+  </button>
 
-<div class="content">
+  <button class="nav-item" data-panel="progress">
+    📊 Progress
+  </button>
 
-<!-- LESSONS -->
+</nav>
 
-<section
-  class="view active"
-  id="view-lessons">
+<!-- ================= HOME PANEL ================= -->
 
-  <div class="card">
-
-    <div class="head">
-
-      <div>
-        <h2>
-          📚 English Learning Universe
-        </h2>
-
-        <p class="muted small">
-          აირჩიე Grade → აირჩიე Lesson → გახსენი ყველა მასალა.
-        </p>
-      </div>
-
-      <button
-        class="btn dark"
-        id="reloadLessons">
-        ↻ Reload
-      </button>
-
-    </div>
-
-    <div class="grade-selector">
-
-      <button
-        class="grade active"
-        data-grade="2">
-
-        <div class="grade-icon">
-          🌱
-        </div>
-
-        <div class="grade-name">
-          Grade 2
-        </div>
-
-        <div class="grade-info">
-          Beginner English
-        </div>
-
-      </button>
-
-      <button
-        class="grade"
-        data-grade="3">
-
-        <div class="grade-icon">
-          🚀
-        </div>
-
-        <div class="grade-name">
-          Grade 3
-        </div>
-
-        <div class="grade-info">
-          Everyday English
-        </div>
-
-      </button>
-
-      <button
-        class="grade"
-        data-grade="4">
-
-        <div class="grade-icon">
-          ⭐
-        </div>
-
-        <div class="grade-name">
-          Grade 4
-        </div>
-
-        <div class="grade-info">
-          Advanced English
-        </div>
-
-      </button>
-
-    </div>
-
-    <div class="search">
-
-      <input
-        class="input"
-        id="lessonSearch"
-        placeholder="🔎 მოძებნე Lesson ან Topic...">
-
-      <button
-        class="btn dark"
-        id="clearSearch">
-        ✕
-      </button>
-
-    </div>
-
-    <div
-      id="lessonGrid"
-      class="lesson-grid">
-
-      <div class="loader">
-        <span class="spinner"></span>
-        Lessons იტვირთება...
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- STUDENTS -->
-
-<section
-  class="view"
-  id="view-students">
+<section class="panel active" id="panel-home">
 
   <div class="card">
 
-    <div class="head">
-
-      <div>
-        <h2>
-          👥 Student Command
-        </h2>
-
-        <p class="muted small">
-          მოსწავლეების მართვა და კლასის შეცვლა.
-        </p>
-      </div>
-
-      <button
-        class="btn dark"
-        id="reloadStudents">
-        ↻ Reload
-      </button>
-
+```
+<div class="head">
+  <div>
+    <h2>🎓 აირჩიე კლასი</h2>
+    <div class="small muted">
+      შემდეგ გახსენი კონკრეტული გაკვეთილი და მისი მასალა.
     </div>
+  </div>
+</div>
 
-    <div class="search">
+<div class="grade-selector">
 
-      <input
-        class="input"
-        id="studentSearch"
-        placeholder="🔎 მოძებნე მოსწავლე...">
-
-    </div>
-
-    <div
-      id="studentGrid"
-      class="student-grid">
-
-      <div class="loader">
-        <span class="spinner"></span>
-        იტვირთება...
-      </div>
-
-    </div>
-
+  <div class="grade-card" onclick="openGrade(2)">
+    <div class="grade-icon">🌱</div>
+    <h3>Grade 2</h3>
+    <p>Foundation English • Vocabulary • Grammar</p>
   </div>
 
-</section>
-
-<!-- ATTENDANCE -->
-
-<section
-  class="view"
-  id="view-attendance">
-
-  <div class="card">
-
-    <div class="head">
-
-      <div>
-        <h2>
-          🧑‍🎓 Attendance
-        </h2>
-
-        <p class="muted small">
-          მონიშნე მოსწავლის დღევანდელი მდგომარეობა.
-        </p>
-      </div>
-
-      <input
-        class="input"
-        style="max-width:180px"
-        type="date"
-        id="attendanceDate">
-
-    </div>
-
-    <div
-      id="attendanceGrid"
-      class="attendance">
-
-      <div class="loader">
-        <span class="spinner"></span>
-        იტვირთება...
-      </div>
-
-    </div>
-
+  <div class="grade-card" onclick="openGrade(3)">
+    <div class="grade-icon">🚀</div>
+    <h3>Grade 3</h3>
+    <p>Everyday English • Reading • Grammar</p>
   </div>
 
-</section>
+  <div class="grade-card" onclick="openGrade(4)">
+    <div class="grade-icon">⭐</div>
+    <h3>Grade 4</h3>
+    <p>Advanced English • Speaking • Challenge</p>
+  </div>
 
 </div>
+```
+
+  </div>
+
+</section>
+
+<!-- ================= LESSONS ================= -->
+
+<section class="panel" id="panel-lessons">
+
+  <div class="card">
+
+```
+<div class="head">
+
+  <div>
+    <h2 id="lessonPanelTitle">📚 Lessons</h2>
+    <div class="small muted">
+      აირჩიე Grade და შემდეგ გაკვეთილი.
+    </div>
+  </div>
+
+  <div style="display:flex;gap:7px">
+
+    <button class="btn small cyan" onclick="openGrade(2)">
+      🌱 G2
+    </button>
+
+    <button class="btn small violet" onclick="openGrade(3)">
+      🚀 G3
+    </button>
+
+    <button class="btn small yellow" onclick="openGrade(4)">
+      ⭐ G4
+    </button>
+
+  </div>
+
+</div>
+
+<div id="lessonsGrid" class="lesson-grid">
+  <div class="empty">
+    აირჩიე Grade.
+  </div>
+</div>
+```
+
+  </div>
+
+  <div id="lessonMaterialCard" class="card" style="display:none">
+
+```
+<div class="head">
+
+  <div>
+    <h2 id="selectedLessonTitle">
+      📖 Lesson
+    </h2>
+
+    <div class="small muted" id="selectedLessonMeta"></div>
+  </div>
+
+  <button class="btn" onclick="closeLesson()">
+    ✕ დახურვა
+  </button>
+
+</div>
+
+<div class="material-grid">
+
+  <button class="material" onclick="showMaterial('words')">
+    <div class="material-icon">🔤</div>
+    <b>Words</b>
+    <small>Vocabulary</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('grammar')">
+    <div class="material-icon">🧠</div>
+    <b>Grammar</b>
+    <small>Rules & examples</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('listening')">
+    <div class="material-icon">🎧</div>
+    <b>Listening</b>
+    <small>Listen & read</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('speaking')">
+    <div class="material-icon">🗣️</div>
+    <b>Speaking</b>
+    <small>Practice phrases</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('reading')">
+    <div class="material-icon">📖</div>
+    <b>Reading</b>
+    <small>Reading text</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('exercises')">
+    <div class="material-icon">✍️</div>
+    <b>Exercises</b>
+    <small>Practice tasks</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('quiz')">
+    <div class="material-icon">🎯</div>
+    <b>Quiz</b>
+    <small>Questions</small>
+  </button>
+
+  <button class="material" onclick="showMaterial('overview')">
+    <div class="material-icon">🌐</div>
+    <b>Overview</b>
+    <small>Lesson summary</small>
+  </button>
+
+</div>
+
+<div id="materialContent"></div>
+```
+
+  </div>
+
+</section>
+
+<!-- ================= STUDENTS ================= -->
+
+<section class="panel" id="panel-students">
+
+  <div class="card">
+
+```
+<div class="head">
+  <div>
+    <h2>👥 Student Command Center</h2>
+    <div class="small muted">
+      მოსწავლეების კლასი, ანგარიში და Progress.
+    </div>
+  </div>
+
+  <button class="btn cyan" onclick="loadStudents()">
+    ↻ Sync
+  </button>
+</div>
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>მოსწავლის Email</label>
+    <input
+      class="input"
+      id="studentEmail"
+      type="email"
+      placeholder="student@email.com"
+    >
+  </div>
+
+  <div class="field">
+    <label>კლასი</label>
+
+    <select id="studentGrade">
+      <option value="2">🌱 Grade 2</option>
+      <option value="3">🚀 Grade 3</option>
+      <option value="4">⭐ Grade 4</option>
+    </select>
+
+  </div>
+
+  <div class="field">
+    <label>მოქმედება</label>
+
+    <button
+      class="btn cyan"
+      id="addStudentBtn"
+      style="width:100%"
+    >
+      ➕ დამატება
+    </button>
+
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <div class="card">
+
+```
+<div class="head">
+
+  <div>
+    <h2>🎓 მოსწავლეები</h2>
+  </div>
+
+  <div style="display:flex;gap:7px">
+
+    <input
+      class="input"
+      id="studentSearch"
+      placeholder="🔎 ძებნა..."
+      style="width:220px"
+    >
+
+    <select id="gradeFilter" style="width:140px">
+      <option value="all">ყველა</option>
+      <option value="2">Grade 2</option>
+      <option value="3">Grade 3</option>
+      <option value="4">Grade 4</option>
+    </select>
+
+  </div>
+
+</div>
+
+<div id="studentsList" class="student-grid">
+  <div class="loading">
+    <span class="spinner"></span>
+    იტვირთება...
+  </div>
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- ================= ATTENDANCE ================= -->
+
+<section class="panel" id="panel-attendance">
+
+  <div class="card">
+
+```
+<div class="head">
+
+  <div>
+    <h2>🧑‍🎓 Attendance Control</h2>
+
+    <div class="small muted">
+      მოვიდა • გაცდენა • დააგვიანა • დასვენება • წავიდა
+    </div>
+  </div>
+
+  <div>
+    <input
+      class="input"
+      id="attendanceDate"
+      type="date"
+    >
+  </div>
+
+</div>
+
+<div id="attendanceList" class="attendance-grid">
+  <div class="loading">
+    <span class="spinner"></span>
+    იტვირთება...
+  </div>
+</div>
+```
+
+  </div>
+
+</section>
+
+<!-- ================= GRADES ================= -->
+
+<section class="panel" id="panel-grades">
+
+  <div class="card">
+
+```
+<div class="head">
+
+  <div>
+    <h2>⭐ Student Grades</h2>
+    <div class="small muted">
+      შეფასება 0–10.
+    </div>
+  </div>
+
+</div>
+
+<div class="form-grid">
+
+  <div class="field">
+    <label>მოსწავლე</label>
+
+    <select id="gradeStudent">
+      <option value="">აირჩიე მოსწავლე</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>ქულა</label>
+
+    <input
+      class="input"
+      id="gradeScore"
+      type="number"
+      min="0"
+      max="10"
+      step="1"
+      placeholder="10"
+    >
+  </div>
+
+  <div class="field">
+    <label>კომენტარი</label>
+
+    <input
+      class="input"
+      id="gradeComment"
+      placeholder="ძალიან კარგი მუშაობა"
+    >
+  </div>
+
+</div>
+
+<div style="margin-top:12px">
+
+  <button class="btn yellow" id="saveGradeBtn">
+    ⭐ შეფასების შენახვა
+  </button>
+
+</div>
+```
+
+  </div>
+
+  <div class="card">
+
+```
+<div class="head">
+  <h2>📋 შეფასებების ისტორია</h2>
+</div>
+
+<div id="gradesList" class="rows"></div>
+```
+
+  </div>
+
+</section>
+
+<!-- ================= PROGRESS ================= -->
+
+<section class="panel" id="panel-progress">
+
+  <div class="card">
+
+```
+<div class="head">
+
+  <div>
+    <h2>📊 Progress Intelligence</h2>
+
+    <div class="small muted">
+      სიტყვები • Quiz • Best Score • Activity
+    </div>
+  </div>
+
+  <button class="btn cyan" onclick="loadProgress()">
+    ↻ განახლება
+  </button>
+
+</div>
+
+<div id="progressList"></div>
+```
+
+  </div>
 
 </section>
 
 </main>
 
-<!-- LESSON MODAL -->
+<!-- ================= MODAL ================= -->
 
-<div
-  class="modal"
-  id="lessonModal">
+<div class="modal" id="studentModal">
 
   <div class="modal-box">
 
-    <div class="modal-head">
+```
+<div class="modal-head">
 
-      <div>
-        <h2 id="modalTitle">
-          Lesson
-        </h2>
+  <h2 id="studentModalTitle">
+    📊 Student
+  </h2>
 
-        <div
-          class="muted small"
-          id="modalSubtitle">
-        </div>
-      </div>
+  <button class="btn" onclick="closeStudentModal()">
+    ✕
+  </button>
 
-      <button
-        class="btn dark"
-        id="closeModal">
-        ✕ დახურვა
-      </button>
+</div>
 
-    </div>
-
-    <div
-      class="material-tabs">
-
-      <button
-        class="tab active"
-        data-material="overview">
-        🏠 Overview
-      </button>
-
-      <button
-        class="tab"
-        data-material="words">
-        🔤 Words
-      </button>
-
-      <button
-        class="tab"
-        data-material="grammar">
-        🧠 Grammar
-      </button>
-
-      <button
-        class="tab"
-        data-material="listening">
-        🎧 Listening
-      </button>
-
-      <button
-        class="tab"
-        data-material="speaking">
-        🗣 Speaking
-      </button>
-
-      <button
-        class="tab"
-        data-material="reading">
-        📖 Reading
-      </button>
-
-      <button
-        class="tab"
-        data-material="exercises">
-        ✏️ Exercises
-      </button>
-
-      <button
-        class="tab"
-        data-material="quiz">
-        🎯 Quiz
-      </button>
-
-    </div>
-
-    <div
-      id="material-overview"
-      class="material active">
-    </div>
-
-    <div
-      id="material-words"
-      class="material">
-    </div>
-
-    <div
-      id="material-grammar"
-      class="material">
-    </div>
-
-    <div
-      id="material-listening"
-      class="material">
-    </div>
-
-    <div
-      id="material-speaking"
-      class="material">
-    </div>
-
-    <div
-      id="material-reading"
-      class="material">
-    </div>
-
-    <div
-      id="material-exercises"
-      class="material">
-    </div>
-
-    <div
-      id="material-quiz"
-      class="material">
-    </div>
+<div id="studentModalBody"></div>
+```
 
   </div>
 
 </div>
 
-<div
-  class="toast"
-  id="toast">
-</div>
+<div class="toast" id="toast"></div>
 
 <script>
 'use strict';
 
 /* =========================================================
    ENGLISH WITH MARIAMI
-   TEACHER XENON DASHBOARD
+   XENON TEACHER OS
+   REAL DATABASE SCHEMA
 ========================================================= */
 
 const DB =
   window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-  window.supabaseClient ||
-  window.supabase;
+  window.supabaseClient;
 
 let currentUser = null;
 let teacherProfile = null;
 
 let students = [];
 let lessons = [];
+let currentGrade = null;
+let currentLesson = null;
 
-let selectedGrade = 2;
-let selectedLesson = null;
+const $ = id => document.getElementById(id);
 
-/* =========================================================
-   HELPERS
-========================================================= */
-
-const $ = id =>
-  document.getElementById(id);
+/* ================= HELPERS ================= */
 
 function esc(value){
-
-  return String(value ?? '')
-    .replace(/[&<>"']/g,char=>({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#039;'
-    }[char]));
-
+  return String(value ?? '').replace(/[&<>"']/g,c=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  }[c]));
 }
 
 function toast(message,type=''){
-
   const el=$('toast');
 
   el.textContent=message;
-
-  el.className=
-    'toast show '+type;
+  el.className='toast show '+type;
 
   clearTimeout(toast.timer);
 
   toast.timer=setTimeout(()=>{
     el.className='toast';
-  },3200);
-
+  },3000);
 }
 
 function today(){
-
   const d=new Date();
 
   return [
@@ -1938,108 +1778,106 @@ function today(){
     String(d.getMonth()+1).padStart(2,'0'),
     String(d.getDate()).padStart(2,'0')
   ].join('-');
-
 }
 
 function gradeName(g){
+  g=Number(g);
 
-  return Number(g)===2
-    ? '🌱 Grade 2'
-    : Number(g)===3
-    ? '🚀 Grade 3'
-    : '⭐ Grade 4';
+  if(g===2)return '🌱 Grade 2';
+  if(g===3)return '🚀 Grade 3';
+  if(g===4)return '⭐ Grade 4';
 
+  return 'Grade';
 }
 
-/* =========================================================
-   NAVIGATION
-========================================================= */
+function jsonArray(value){
 
-function openView(name){
+  if(Array.isArray(value))return value;
 
-  document
-    .querySelectorAll('.view')
-    .forEach(v=>{
-      v.classList.remove('active');
-    });
+  if(value===null || value===undefined)return [];
 
-  document
-    .querySelectorAll('.menu')
-    .forEach(v=>{
-      v.classList.remove('active');
-    });
+  try{
+    const parsed=
+      typeof value==='string'
+        ?JSON.parse(value)
+        :value;
 
-  const view=
-    $('view-'+name);
-
-  if(view){
-    view.classList.add('active');
+    return Array.isArray(parsed)
+      ?parsed
+      :[];
+  }catch{
+    return [];
   }
-
-  document
-    .querySelectorAll(`[data-view="${name}"]`)
-    .forEach(v=>{
-      v.classList.add('active');
-    });
-
-  if(name==='students'){
-    renderStudents();
-  }
-
-  if(name==='attendance'){
-    renderAttendance();
-  }
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
 }
 
-document.addEventListener(
-  'click',
-  e=>{
+function safeText(value){
 
-    const btn=
-      e.target.closest('[data-view]');
+  if(value===null || value===undefined)return '';
 
-    if(!btn)return;
+  if(typeof value==='string')return value;
 
-    openView(btn.dataset.view);
-
+  try{
+    return JSON.stringify(value,null,2);
+  }catch{
+    return String(value);
   }
-);
+}
+
+/* ================= NAVIGATION ================= */
+
+function openPanel(name){
+
+  document.querySelectorAll('.panel')
+    .forEach(p=>p.classList.remove('active'));
+
+  document.querySelectorAll('.nav-item')
+    .forEach(b=>b.classList.remove('active'));
+
+  const panel=$('panel-'+name);
+
+  if(panel){
+    panel.classList.add('active');
+  }
+
+  document
+    .querySelectorAll(`[data-panel="${name}"]`)
+    .forEach(b=>b.classList.add('active'));
+
+  if(name==='students')loadStudents();
+  if(name==='attendance')loadAttendance();
+  if(name==='grades')loadGrades();
+  if(name==='progress')loadProgress();
+}
+
+document.addEventListener('click',e=>{
+
+  const btn=e.target.closest('[data-panel]');
+
+  if(!btn)return;
+
+  openPanel(btn.dataset.panel);
+});
 
 $('homeBtn').onclick=()=>{
-  openView('lessons');
+  openPanel('home');
+  window.scrollTo({top:0,behavior:'smooth'});
 };
 
-/* =========================================================
-   AUTH
-========================================================= */
+/* ================= AUTH ================= */
 
 async function checkTeacher(){
 
   if(!DB){
-
-    $('connection').textContent='ERROR';
-
-    toast(
-      'Supabase client ვერ მოიძებნა. შეამოწმე config.js',
-      'err'
-    );
-
+    $('dbStatus').textContent='NO CLIENT';
+    toast('Supabase client ვერ მოიძებნა','err');
     return false;
   }
 
   try{
 
-    const result=
-      await DB.auth.getUser();
+    const result=await DB.auth.getUser();
 
-    currentUser=
-      result?.data?.user || null;
+    currentUser=result?.data?.user || null;
 
     if(!currentUser){
 
@@ -2050,42 +1888,25 @@ async function checkTeacher(){
       return false;
     }
 
-    const profile=
-      await DB
-        .from('profiles')
-        .select('*')
-        .eq(
-          'user_id',
-          currentUser.id
-        )
-        .maybeSingle();
+    const {data,error}=await DB
+      .from('profiles')
+      .select('*')
+      .eq('user_id',currentUser.id)
+      .maybeSingle();
 
-    if(profile.error){
+    if(error)throw error;
 
-      console.error(profile.error);
-
-      toast(
-        'Teacher profile ვერ ჩაიტვირთა',
-        'err'
-      );
-
-      return false;
-    }
-
-    teacherProfile=
-      profile.data || {};
+    teacherProfile=data;
 
     const role=
-      String(
-        teacherProfile.role || ''
-      )
+      String(data?.role||'')
       .trim()
       .toLowerCase();
 
     if(role!=='teacher'){
 
       toast(
-        'ეს გვერდი მხოლოდ Teacher-ისთვისაა',
+        'ამ გვერდზე მხოლოდ Teacher-ს აქვს წვდომა',
         'err'
       );
 
@@ -2093,21 +1914,19 @@ async function checkTeacher(){
         location.replace(
           'login.html?reason=forbidden'
         );
-      },1000);
+      },800);
 
       return false;
     }
 
     $('teacherName').textContent=
-      teacherProfile.full_name ||
-      teacherProfile.name ||
+      data.full_name ||
       'Teacher';
 
     $('teacherEmail').textContent=
       currentUser.email || '';
 
-    $('connection').textContent=
-      'LIVE';
+    $('dbStatus').textContent='LIVE';
 
     return true;
 
@@ -2115,247 +1934,213 @@ async function checkTeacher(){
 
     console.error(error);
 
-    $('connection').textContent=
-      'ERROR';
+    $('dbStatus').textContent='ERROR';
+
+    toast(
+      'Teacher პროფილი ვერ ჩაიტვირთა: '+error.message,
+      'err'
+    );
 
     return false;
   }
-
 }
 
-/* =========================================================
-   STUDENTS
-========================================================= */
+/* ================= STUDENTS ================= */
 
 async function loadStudents(){
 
+  const box=$('studentsList');
+
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
+
   try{
 
-    const result=
-      await DB
-        .from('profiles')
-        .select('*')
-        .eq('role','student')
-        .order(
-          'full_name',
-          {ascending:true}
-        );
+    const {data,error}=await DB
+      .from('profiles')
+      .select('*')
+      .eq('role','student')
+      .order('full_name',{ascending:true});
 
-    if(result.error)
-      throw result.error;
+    if(error)throw error;
 
-    students=
-      result.data || [];
-
-    updateStats();
+    students=data||[];
 
     renderStudents();
-    renderAttendance();
+    populateStudentSelect();
+    updateStats();
 
   }catch(error){
 
     console.error(error);
 
-    $('studentGrid').innerHTML=`
+    box.innerHTML=`
       <div class="empty">
-        ❌ Students ვერ ჩაიტვირთა.
-        <br>
+        ❌ მოსწავლეების ჩატვირთვა ვერ მოხერხდა.<br>
         <small>${esc(error.message)}</small>
       </div>
     `;
-
   }
+}
 
+function filteredStudents(){
+
+  const q=
+    $('studentSearch')?.value
+      ?.trim()
+      .toLowerCase() || '';
+
+  const grade=
+    $('gradeFilter')?.value || 'all';
+
+  return students.filter(s=>{
+
+    const text=(
+      s.full_name||
+      s.user_id||
+      ''
+    ).toLowerCase();
+
+    return (
+      (!q || text.includes(q)) &&
+      (
+        grade==='all' ||
+        String(s.grade||'')===grade
+      )
+    );
+  });
 }
 
 function renderStudents(){
 
-  const box=
-    $('studentGrid');
+  const box=$('studentsList');
 
-  const q=
-    ($('studentSearch')?.value || '')
-      .trim()
-      .toLowerCase();
-
-  const arr=
-    students.filter(s=>{
-
-      const text=
-        [
-          s.full_name,
-          s.name,
-          s.email
-        ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-
-      return !q ||
-        text.includes(q);
-
-    });
+  const arr=filteredStudents();
 
   if(!arr.length){
 
     box.innerHTML=
-      '<div class="empty">👤 მოსწავლე ვერ მოიძებნა.</div>';
+      '<div class="empty">👤 მოსწავლეები ვერ მოიძებნა.</div>';
 
     return;
   }
 
-  box.innerHTML=
-    arr.map(s=>{
+  box.innerHTML=arr.map(s=>{
 
-      const g=
-        Number(s.grade || 0);
+    const grade=Number(s.grade||0);
 
-      return `
+    return `
+      <div class="student">
 
-        <div class="student">
+        <div class="student-top">
 
-          <div class="student-top">
+          <div style="display:flex;gap:10px">
+
+            <div class="avatar">🧑‍🎓</div>
 
             <div>
 
               <div class="student-name">
-                ${esc(
-                  s.full_name ||
-                  s.name ||
-                  'მოსწავლე'
-                )}
+                ${esc(s.full_name||'მოსწავლე')}
               </div>
 
-              <div class="student-email">
-                ${esc(s.email || '')}
+              <div class="small muted">
+                ${esc(s.user_id)}
               </div>
 
             </div>
 
-            <span class="badge">
-              ${g ? gradeName(g) : 'კლასი არაა'}
-            </span>
-
           </div>
 
-          <div style="
-            display:flex;
-            gap:7px;
-            flex-wrap:wrap;
-            margin-top:15px">
-
-            <button
-              class="btn cyan"
-              onclick="changeGrade('${esc(s.user_id)}',2)">
-              🌱 G2
-            </button>
-
-            <button
-              class="btn cyan"
-              onclick="changeGrade('${esc(s.user_id)}',3)">
-              🚀 G3
-            </button>
-
-            <button
-              class="btn yellow"
-              onclick="changeGrade('${esc(s.user_id)}',4)">
-              ⭐ G4
-            </button>
-
-          </div>
+          <span class="badge">
+            ${gradeName(grade)}
+          </span>
 
         </div>
 
-      `;
+        <div class="student-actions">
 
-    }).join('');
+          <button
+            class="btn small cyan"
+            onclick="changeGrade('${esc(s.user_id)}',2)"
+          >
+            🌱 G2
+          </button>
 
+          <button
+            class="btn small violet"
+            onclick="changeGrade('${esc(s.user_id)}',3)"
+          >
+            🚀 G3
+          </button>
+
+          <button
+            class="btn small yellow"
+            onclick="changeGrade('${esc(s.user_id)}',4)"
+          >
+            ⭐ G4
+          </button>
+
+          <button
+            class="btn small"
+            onclick="showStudent('${esc(s.user_id)}')"
+          >
+            📊 დეტალურად
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  }).join('');
 }
 
-$('studentSearch')
-  ?.addEventListener(
-    'input',
-    renderStudents
-  );
+$('studentSearch').addEventListener(
+  'input',
+  renderStudents
+);
 
-/* =========================================================
-   CHANGE GRADE
-========================================================= */
+$('gradeFilter').addEventListener(
+  'change',
+  renderStudents
+);
+
+/* ================= CLASS CHANGE ================= */
 
 async function changeGrade(uid,grade){
 
   const student=
-    students.find(
-      s=>s.user_id===uid
-    );
+    students.find(x=>x.user_id===uid);
 
   if(!student)return;
 
   if(!confirm(
-    `დავაყენოთ ${student.full_name || student.name || 'მოსწავლის'} კლასი ${gradeName(grade)}-ზე?`
-  ))return;
+    `${student.full_name||'მოსწავლე'} გადავიყვანოთ ${gradeName(grade)}-ზე?`
+  )){
+    return;
+  }
 
   try{
 
     /*
-      FIRST:
-      project RPC if it exists.
+      We update profiles.grade directly.
+      teacher_students remains the teacher/student relation.
+      RLS must permit the authenticated teacher.
     */
 
-    let rpc=
-      await DB.rpc(
-        'teacher_assign_student_grade',
-        {
-          p_user_id:uid,
-          p_grade:grade
-        }
-      );
+    const {error}=await DB
+      .from('profiles')
+      .update({
+        grade:grade
+      })
+      .eq('user_id',uid)
+      .eq('role','student');
 
-    /*
-      SECOND:
-      old RPC.
-    */
-
-    if(rpc.error){
-
-      rpc=
-        await DB.rpc(
-          'teacher_assign_student',
-          {
-            p_user_id:uid,
-            p_grade:grade
-          }
-        );
-
-    }
-
-    /*
-      THIRD:
-      direct profile update.
-      This works only if RLS allows teacher
-      to update profiles.
-    */
-
-    if(rpc.error){
-
-      const direct=
-        await DB
-          .from('profiles')
-          .update({
-            grade:grade
-          })
-          .eq(
-            'user_id',
-            uid
-          );
-
-      if(direct.error)
-        throw direct.error;
-
-    }
+    if(error)throw error;
 
     toast(
-      `✅ ${gradeName(grade)} მიენიჭა`,
+      `🎓 კლასი შეიცვალა → ${gradeName(grade)}`,
       'ok'
     );
 
@@ -2366,485 +2151,585 @@ async function changeGrade(uid,grade){
     console.error(error);
 
     toast(
-      'კლასის შეცვლა ვერ მოხერხდა: '+
-      error.message,
+      'კლასის შეცვლა ვერ მოხერხდა: '+error.message,
+      'err'
+    );
+  }
+}
+
+/* ================= ADD STUDENT ================= */
+
+$('addStudentBtn').onclick=async()=>{
+
+  const email=
+    $('studentEmail').value.trim();
+
+  const grade=
+    Number($('studentGrade').value);
+
+  if(!email){
+
+    toast(
+      'მიუთითე მოსწავლის Email',
       'err'
     );
 
+    return;
   }
 
-}
-
-/* =========================================================
-   LESSONS
-========================================================= */
-
-async function loadLessons(){
-
-  const grid=
-    $('lessonGrid');
-
-  grid.innerHTML=`
-    <div class="loader">
-      <span class="spinner"></span>
-      Grade ${selectedGrade} Lessons იტვირთება...
-    </div>
-  `;
+  /*
+    Existing project RPC if available.
+    No fake table is used.
+  */
 
   try{
 
     const result=
-      await DB
-        .from('lessons')
-        .select('*')
-        .eq(
-          'grade',
-          selectedGrade
-        )
-        .order(
-          'lesson_number',
-          {ascending:true}
-        );
+      await DB.rpc(
+        'teacher_assign_student',
+        {
+          p_email:email,
+          p_grade:grade
+        }
+      );
 
-    if(result.error)
-      throw result.error;
+    if(result.error)throw result.error;
 
-    lessons=
-      result.data || [];
+    toast(
+      `✅ ${email} მიენიჭა ${gradeName(grade)}`,
+      'ok'
+    );
 
-    updateStats();
+    $('studentEmail').value='';
 
-    renderLessons();
+    await loadStudents();
 
   }catch(error){
 
     console.error(error);
 
-    grid.innerHTML=`
-
-      <div class="empty">
-
-        ❌ Grade ${selectedGrade}
-        Lessons ვერ ჩაიტვირთა.
-
-        <br><br>
-
-        <small>
-          ${esc(error.message)}
-        </small>
-
-      </div>
-
-    `;
-
+    toast(
+      'მოსწავლის დამატება ვერ მოხერხდა: '+error.message,
+      'err'
+    );
   }
+};
 
+/* ================= STATS ================= */
+
+async function updateStats(){
+
+  $('statStudents').textContent=
+    students.length;
+
+  $('statG2').textContent=
+    students.filter(x=>Number(x.grade)===2).length;
+
+  $('statG3').textContent=
+    students.filter(x=>Number(x.grade)===3).length;
+
+  $('statG4').textContent=
+    students.filter(x=>Number(x.grade)===4).length;
+
+  try{
+
+    const {data,error}=await DB
+      .from('student_progress')
+      .select('words_learned,learned_words');
+
+    if(error)throw error;
+
+    const words=(data||[]).reduce(
+      (sum,x)=>sum+
+        Number(
+          x.words_learned ??
+          (
+            Array.isArray(x.learned_words)
+              ?x.learned_words.length
+              :0
+          )
+        ),
+      0
+    );
+
+    $('statWords').textContent=words;
+
+  }catch{
+
+    $('statWords').textContent='0';
+  }
 }
 
-function renderLessons(){
+/* ================= SELECT ================= */
 
-  const grid=
-    $('lessonGrid');
+function populateStudentSelect(){
 
-  const q=
-    $('lessonSearch')
-      .value
-      .trim()
-      .toLowerCase();
+  const select=$('gradeStudent');
 
-  const arr=
-    lessons.filter(l=>{
+  if(!select)return;
 
-      const text=
-        [
-          l.title,
-          l.topic,
-          l.description,
-          l.lesson_number
-        ]
-        .filter(v=>v!==null && v!==undefined)
-        .join(' ')
-        .toLowerCase();
+  select.innerHTML=
+    '<option value="">აირჩიე მოსწავლე</option>'+
+    students.map(s=>`
+      <option value="${esc(s.user_id)}">
+        ${esc(s.full_name||'მოსწავლე')}
+      </option>
+    `).join('');
+}
 
-      return !q ||
-        text.includes(q);
+/* ================= GRADES ================= */
 
-    });
+async function loadGrades(){
 
-  if(!arr.length){
+  const box=$('gradesList');
 
-    grid.innerHTML=`
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
 
-      <div class="empty">
+  try{
 
-        📚 ამ Grade-ში Lesson
-        ვერ მოიძებნა.
+    const {data,error}=await DB
+      .from('student_grades')
+      .select('*')
+      .order('created_at',{ascending:false})
+      .limit(100);
 
-        <br><br>
+    if(error)throw error;
 
-        <span class="small">
-          Grade ${selectedGrade}
-        </span>
+    if(!data?.length){
 
-      </div>
+      box.innerHTML=
+        '<div class="empty">⭐ შეფასებები ჯერ არ არის.</div>';
 
-    `;
+      return;
+    }
 
-    return;
-  }
+    box.innerHTML=data.map(x=>{
 
-  grid.innerHTML=
-    arr.map(l=>{
-
-      const num=
-        l.lesson_number ??
-        '';
+      const student=
+        students.find(
+          s=>s.user_id===x.student_id
+        );
 
       return `
+        <div class="row">
 
-        <div
-          class="lesson"
-          onclick="openLesson('${esc(l.id)}')">
+          <div>
 
-          <span class="lesson-number">
-            LESSON ${esc(num)}
-          </span>
+            <b>
+              ${esc(
+                student?.full_name ||
+                'მოსწავლე'
+              )}
+            </b>
 
-          <h3>
-            ${esc(
-              l.title ||
-              'Untitled Lesson'
-            )}
-          </h3>
+            <div class="small muted">
+              ${esc(x.comment||'')}
+            </div>
 
-          <div class="lesson-topic">
-            ${esc(
-              l.topic ||
-              'English'
-            )}
           </div>
 
-          <div class="lesson-description">
-            ${esc(
-              l.description ||
-              'გახსენი გაკვეთილი და ნახე ყველა მასალა.'
-            )}
+          <div class="score">
+            ${Number(x.grade||0)}/10
           </div>
 
-          <div class="lesson-footer">
-
-            <span class="open-label">
-              ⚡ OPEN MATERIALS
-            </span>
-
-            <span>
-              →
-            </span>
-
+          <div class="small muted">
+            ${x.created_at
+              ?new Date(x.created_at)
+                .toLocaleString('ka-GE')
+              :''
+            }
           </div>
 
         </div>
-
       `;
 
     }).join('');
 
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=`
+      <div class="empty">
+        ❌ შეფასებები ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>
+    `;
+  }
 }
 
-/* =========================================================
-   GRADE BUTTONS
-========================================================= */
+$('saveGradeBtn').onclick=async()=>{
 
-document
-  .querySelectorAll('.grade')
-  .forEach(btn=>{
+  const student_id=
+    $('gradeStudent').value;
 
-    btn.addEventListener(
-      'click',
-      async()=>{
+  const grade=
+    Number($('gradeScore').value);
 
-        document
-          .querySelectorAll('.grade')
-          .forEach(x=>{
-            x.classList.remove('active');
-          });
+  const comment=
+    $('gradeComment').value.trim();
 
-        btn.classList.add('active');
-
-        selectedGrade=
-          Number(btn.dataset.grade);
-
-        await loadLessons();
-
-      }
-    );
-
-  });
-
-$('lessonSearch')
-  .addEventListener(
-    'input',
-    renderLessons
-  );
-
-$('clearSearch').onclick=()=>{
-  $('lessonSearch').value='';
-  renderLessons();
-};
-
-$('reloadLessons').onclick=
-  loadLessons;
-
-/* =========================================================
-   OPEN LESSON
-========================================================= */
-
-async function openLesson(id){
-
-  const lesson=
-    lessons.find(
-      l=>String(l.id)===String(id)
-    );
-
-  if(!lesson){
+  if(!student_id){
 
     toast(
-      'Lesson ვერ მოიძებნა',
+      'აირჩიე მოსწავლე',
       'err'
     );
 
     return;
   }
 
-  selectedLesson=
-    lesson;
+  if(!Number.isFinite(grade)||grade<0||grade>10){
 
-  $('lessonModal')
-    .classList.add('open');
-
-  $('modalTitle').textContent=
-    `${lesson.lesson_number ? 'Lesson '+lesson.lesson_number+' — ' : ''}${lesson.title || 'Lesson'}`;
-
-  $('modalSubtitle').textContent=
-    `${gradeName(lesson.grade)} • ${lesson.topic || 'English'}`;
-
-  setMaterialTab('overview');
-
-  renderOverview(lesson);
-
-  renderWords(lesson);
-
-  renderGrammar(lesson);
-
-  renderListening(lesson);
-
-  renderSpeaking(lesson);
-
-  renderReading(lesson);
-
-  renderExercises(lesson);
-
-  await renderQuiz(lesson);
-
-}
-
-/* =========================================================
-   MATERIAL TABS
-========================================================= */
-
-function setMaterialTab(name){
-
-  document
-    .querySelectorAll('.tab')
-    .forEach(x=>{
-      x.classList.remove('active');
-    });
-
-  document
-    .querySelectorAll('.material')
-    .forEach(x=>{
-      x.classList.remove('active');
-    });
-
-  const tab=
-    document.querySelector(
-      `[data-material="${name}"]`
+    toast(
+      'ქულა უნდა იყოს 0-დან 10-მდე',
+      'err'
     );
 
-  const material=
-    $('material-'+name);
-
-  if(tab)
-    tab.classList.add('active');
-
-  if(material)
-    material.classList.add('active');
-
-}
-
-document.addEventListener(
-  'click',
-  e=>{
-
-    const tab=
-      e.target.closest('[data-material]');
-
-    if(!tab)return;
-
-    setMaterialTab(
-      tab.dataset.material
-    );
-
+    return;
   }
-);
-
-/* =========================================================
-   OVERVIEW
-========================================================= */
-
-function renderOverview(l){
-
-  $('material-overview').innerHTML=`
-
-    <div class="material-card">
-
-      <h3>
-        📚 ${esc(l.title || 'Lesson')}
-      </h3>
-
-      <div class="material-text">
-        ${esc(
-          l.description ||
-          'ამ გაკვეთილის აღწერა ჯერ არ არის დამატებული.'
-        )}
-      </div>
-
-    </div>
-
-    <div class="material-card">
-
-      <b>
-        🎓 ${gradeName(l.grade)}
-      </b>
-
-      <div class="muted small" style="margin-top:7px">
-        Topic:
-        ${esc(l.topic || '—')}
-      </div>
-
-      <div class="muted small" style="margin-top:5px">
-        Lesson:
-        ${esc(l.lesson_number || '—')}
-      </div>
-
-    </div>
-
-    ${
-      l.image_url
-      ?`
-        <div class="material-card">
-
-          <img
-            src="${esc(l.image_url)}"
-            alt=""
-            style="
-              width:100%;
-              max-height:350px;
-              object-fit:cover;
-              border-radius:15px;
-              border:1px solid rgba(0,246,255,.15)
-            ">
-
-        </div>
-      `
-      :''
-    }
-
-  `;
-
-}
-
-/* =========================================================
-   WORDS
-========================================================= */
-
-async function renderWords(l){
-
-  const box=
-    $('material-words');
-
-  box.innerHTML=`
-    <div class="loader">
-      <span class="spinner"></span>
-      Words იტვირთება...
-    </div>
-  `;
 
   try{
 
-    const result=
-      await DB
-        .from('lesson_words')
-        .select('*')
-        .eq(
-          'lesson_id',
-          l.id
-        );
+    const {error}=await DB
+      .from('student_grades')
+      .insert({
+        student_id:student_id,
+        teacher_id:currentUser.id,
+        grade:grade,
+        comment:comment
+      });
 
-    if(result.error)
-      throw result.error;
+    if(error)throw error;
 
-    const rows=
-      result.data || [];
+    toast(
+      '⭐ შეფასება შენახულია',
+      'ok'
+    );
 
-    if(!rows.length){
+    $('gradeScore').value='';
+    $('gradeComment').value='';
+
+    await loadGrades();
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      'შეფასება ვერ შეინახა: '+error.message,
+      'err'
+    );
+  }
+};
+
+/* ================= GRADE / LESSONS ================= */
+
+async function openGrade(grade){
+
+  currentGrade=Number(grade);
+
+  openPanel('lessons');
+
+  $('lessonPanelTitle').textContent=
+    `📚 ${gradeName(grade)} — Lessons`;
+
+  await loadLessons(grade);
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+}
+
+async function loadLessons(grade){
+
+  const box=$('lessonsGrid');
+
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>Lessons იტვირთება...</div>';
+
+  try{
+
+    const {data,error}=await DB
+      .from('lessons')
+      .select('*')
+      .eq('grade',Number(grade))
+      .order('lesson_number',{ascending:true});
+
+    if(error)throw error;
+
+    lessons=data||[];
+
+    if(!lessons.length){
 
       box.innerHTML=`
         <div class="empty">
-          🔤 ამ Lesson-ში Words ჯერ არ არის.
+          ${gradeName(grade)}-ში Lessons ჯერ არ არის.
         </div>
       `;
 
       return;
     }
 
-    box.innerHTML=`
+    box.innerHTML=lessons.map(l=>`
 
-      <div class="material-card">
+      <div
+        class="lesson"
+        onclick="openLesson('${esc(l.id)}')"
+      >
+
+        <div class="lesson-number">
+          LESSON ${esc(l.lesson_number)}
+        </div>
 
         <h3>
-          🔤 Vocabulary
+          ${esc(l.title||l.topic||'Lesson')}
         </h3>
 
-        <div class="words-grid">
+        <p>
+          ${esc(
+            l.description ||
+            l.topic ||
+            'English lesson'
+          )}
+        </p>
 
-          ${rows.map(w=>`
+        <div class="lesson-arrow">
+          →
+        </div>
+
+      </div>
+
+    `).join('');
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=`
+      <div class="empty">
+        ❌ Lessons ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>
+    `;
+  }
+}
+
+/* ================= LESSON ================= */
+
+async function openLesson(id){
+
+  const lesson=
+    lessons.find(
+      x=>String(x.id)===String(id)
+    );
+
+  if(!lesson)return;
+
+  currentLesson=lesson;
+
+  $('lessonMaterialCard').style.display='block';
+
+  $('selectedLessonTitle').textContent=
+    `📖 Lesson ${lesson.lesson_number}: ${lesson.title||lesson.topic||''}`;
+
+  $('selectedLessonMeta').textContent=
+    `${gradeName(lesson.grade)} • ${lesson.topic||''}`;
+
+  $('materialContent').innerHTML=`
+    <div class="content-box">
+      <h3>🌐 ${esc(lesson.title||'Lesson Overview')}</h3>
+      <div class="content-text">
+        ${esc(
+          lesson.description||
+          'აირჩიე ზემოთ მოცემული მასალა.'
+        )}
+      </div>
+    </div>
+  `;
+
+  $('lessonMaterialCard').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+}
+
+function closeLesson(){
+
+  currentLesson=null;
+
+  $('lessonMaterialCard').style.display='none';
+
+  $('materialContent').innerHTML='';
+}
+
+/* ================= MATERIALS ================= */
+
+async function showMaterial(type){
+
+  if(!currentLesson){
+
+    toast(
+      'ჯერ აირჩიე Lesson',
+      'err'
+    );
+
+    return;
+  }
+
+  const l=currentLesson;
+  const box=$('materialContent');
+
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
+
+  if(type==='overview'){
+
+    box.innerHTML=`
+      <div class="content-box">
+
+        <h3>🌐 Lesson Overview</h3>
+
+        <div class="content-text">
+          ${esc(l.description||'აღწერა არ არის.')}
+        </div>
+
+        ${
+          l.image_url
+          ?`
+          <img
+            src="${esc(l.image_url)}"
+            style="
+              max-width:100%;
+              max-height:350px;
+              border-radius:15px;
+              margin-top:15px
+            "
+            alt=""
+          >
+          `
+          :''
+        }
+
+        ${
+          l.audio_url
+          ?`
+          <div style="margin-top:15px">
+            <audio controls style="width:100%">
+              <source src="${esc(l.audio_url)}">
+            </audio>
+          </div>
+          `
+          :''
+        }
+
+      </div>
+    `;
+
+    return;
+  }
+
+  if(type==='words'){
+
+    await renderWords(l.id);
+    return;
+  }
+
+  if(type==='grammar'){
+
+    renderGrammar(l);
+    return;
+  }
+
+  if(type==='listening'){
+
+    renderListening(l);
+    return;
+  }
+
+  if(type==='speaking'){
+
+    renderSpeaking(l);
+    return;
+  }
+
+  if(type==='reading'){
+
+    renderReading(l);
+    return;
+  }
+
+  if(type==='exercises'){
+
+    renderExercises(l);
+    return;
+  }
+
+  if(type==='quiz'){
+
+    await renderQuiz(l.id);
+    return;
+  }
+}
+
+/* ================= WORDS ================= */
+
+async function renderWords(lessonId){
+
+  const box=$('materialContent');
+
+  try{
+
+    const {data,error}=await DB
+      .from('lesson_words')
+      .select('*')
+      .eq('lesson_id',lessonId)
+      .order('sort_order',{ascending:true});
+
+    if(error)throw error;
+
+    if(!data?.length){
+
+      box.innerHTML=
+        '<div class="empty">🔤 ამ Lesson-ში Words ჯერ არ არის.</div>';
+
+      return;
+    }
+
+    box.innerHTML=`
+      <div class="content-box">
+
+        <h3>🔤 Vocabulary</h3>
+
+        <div class="words">
+
+          ${data.map(w=>`
 
             <div class="word">
 
-              <b>
-                ${esc(
-                  w.word ||
-                  w.english ||
-                  w.term ||
-                  w.title ||
-                  'Word'
-                )}
-              </b>
-
-              <div
-                class="small muted"
-                style="margin-top:5px">
-
-                ${esc(
-                  w.translation ||
-                  w.georgian ||
-                  w.meaning ||
-                  w.definition ||
-                  ''
-                )}
-
+              <div class="word-emoji">
+                ${esc(w.emoji||'🔤')}
               </div>
+
+              <b>${esc(w.word)}</b>
+
+              <small>
+                ${esc(w.translation||'')}
+              </small>
+
+              ${
+                w.audio_url
+                ?`
+                <div style="margin-top:8px">
+                  <audio controls style="width:100%">
+                    <source src="${esc(w.audio_url)}">
+                  </audio>
+                </div>
+                `
+                :''
+              }
 
             </div>
 
@@ -2853,7 +2738,6 @@ async function renderWords(l){
         </div>
 
       </div>
-
     `;
 
   }catch(error){
@@ -2861,289 +2745,301 @@ async function renderWords(l){
     console.error(error);
 
     box.innerHTML=`
-
       <div class="empty">
-
-        ❌ Words ვერ ჩაიტვირთა.
-
-        <br>
-
-        <small>
-          ${esc(error.message)}
-        </small>
-
+        ❌ Words ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
       </div>
-
     `;
-
   }
-
 }
 
-/* =========================================================
-   GRAMMAR
-========================================================= */
+/* ================= GRAMMAR ================= */
 
 function renderGrammar(l){
 
-  $('material-grammar').innerHTML=`
+  const examples=
+    jsonArray(l.grammar_examples);
 
-    <div class="material-card">
+  $('materialContent').innerHTML=`
 
-      <h3>
-        🧠 Grammar Rule
-      </h3>
+    <div class="content-box">
 
-      <div class="material-text">
-        ${esc(
-          l.grammar_rule ||
-          'Grammar rule ჯერ არ არის დამატებული.'
-        )}
-      </div>
+      <h3>🧠 Grammar</h3>
+
+      ${
+        l.grammar_rule
+        ?`
+        <div class="content-text">
+          ${esc(l.grammar_rule)}
+        </div>
+        `
+        :
+        '<div class="empty">Grammar rule არ არის.</div>'
+      }
+
+      ${
+        examples.length
+        ?`
+        <h3 style="margin-top:22px">
+          💡 Examples
+        </h3>
+
+        ${examples.map(x=>`
+
+          <div class="example">
+            ${esc(
+              typeof x==='string'
+                ?x
+                :(
+                  x.example||
+                  x.text||
+                  JSON.stringify(x)
+                )
+            )}
+          </div>
+
+        `).join('')}
+        `
+        :''
+      }
 
     </div>
-
-    <div class="material-card">
-
-      <h3>
-        ✍️ Grammar Examples
-      </h3>
-
-      <div class="material-text">
-        ${esc(
-          l.grammar_examples ||
-          'Grammar examples ჯერ არ არის დამატებული.'
-        )}
-      </div>
-
-    </div>
-
   `;
-
 }
 
-/* =========================================================
-   LISTENING
-========================================================= */
+/* ================= LISTENING ================= */
 
 function renderListening(l){
 
-  $('material-listening').innerHTML=`
+  $('materialContent').innerHTML=`
 
-    <div class="material-card">
+    <div class="content-box">
 
-      <h3>
-        🎧 Listening
-      </h3>
+      <h3>🎧 Listening Lab</h3>
 
-      <div class="material-text">
+      ${
+        l.audio_url
+        ?`
+        <audio controls style="width:100%;margin:10px 0 20px">
+          <source src="${esc(l.audio_url)}">
+        </audio>
+        `
+        :
+        '<div class="small muted">Audio ფაილი არ არის დამატებული.</div>'
+      }
+
+      <div class="content-text">
         ${esc(
-          l.listening_text ||
-          'Listening ტექსტი ჯერ არ არის დამატებული.'
+          l.listening_text||
+          'Listening ტექსტი არ არის დამატებული.'
         )}
       </div>
 
     </div>
-
-    ${
-      l.audio_url
-      ?`
-
-        <div class="audio-box">
-
-          🔊 Audio Lesson
-
-          <audio
-            controls
-            preload="metadata"
-            src="${esc(l.audio_url)}">
-          </audio>
-
-        </div>
-
-      `
-      :`
-
-        <div class="empty">
-          🔊 Audio ფაილი ამ Lesson-ში არ არის.
-        </div>
-
-      `
-    }
-
   `;
-
 }
 
-/* =========================================================
-   SPEAKING
-========================================================= */
+/* ================= SPEAKING ================= */
 
 function renderSpeaking(l){
 
-  $('material-speaking').innerHTML=`
+  const phrases=
+    jsonArray(l.speaking_phrases);
 
-    <div class="material-card">
+  $('materialContent').innerHTML=`
 
-      <h3>
-        🗣 Speaking Phrases
-      </h3>
+    <div class="content-box">
 
-      <div class="material-text">
-        ${esc(
-          l.speaking_phrases ||
-          'Speaking phrases ჯერ არ არის დამატებული.'
-        )}
-      </div>
+      <h3>🗣️ Speaking Lab</h3>
+
+      ${
+        phrases.length
+        ?phrases.map(x=>`
+
+          <div class="phrase">
+            🗣️ ${esc(
+              typeof x==='string'
+                ?x
+                :(
+                  x.phrase||
+                  x.text||
+                  JSON.stringify(x)
+                )
+            )}
+          </div>
+
+        `).join('')
+        :
+        '<div class="empty">Speaking phrases ჯერ არ არის.</div>'
+      }
 
     </div>
-
   `;
-
 }
 
-/* =========================================================
-   READING
-========================================================= */
+/* ================= READING ================= */
 
 function renderReading(l){
 
-  $('material-reading').innerHTML=`
+  $('materialContent').innerHTML=`
 
-    <div class="material-card">
+    <div class="content-box">
 
-      <h3>
-        📖 Reading Text
-      </h3>
+      <h3>📖 Reading Lab</h3>
 
-      <div class="material-text">
+      <div class="content-text">
         ${esc(
-          l.reading_text ||
-          'Reading ტექსტი ჯერ არ არის დამატებული.'
+          l.reading_text||
+          'Reading ტექსტი არ არის დამატებული.'
         )}
       </div>
 
     </div>
-
   `;
-
 }
 
-/* =========================================================
-   EXERCISES
-========================================================= */
+/* ================= EXERCISES ================= */
 
 function renderExercises(l){
 
-  $('material-exercises').innerHTML=`
+  const exercises=
+    jsonArray(l.exercises);
 
-    <div class="material-card">
+  $('materialContent').innerHTML=`
 
-      <h3>
-        ✏️ Exercises
-      </h3>
+    <div class="content-box">
 
-      <div class="material-text">
-        ${esc(
-          l.exercises ||
-          'Exercises ჯერ არ არის დამატებული.'
-        )}
-      </div>
+      <h3>✍️ Exercises</h3>
+
+      ${
+        exercises.length
+        ?exercises.map((x,i)=>`
+
+          <div class="exercise">
+
+            <b>
+              Exercise ${i+1}
+            </b>
+
+            <div class="content-text" style="margin-top:7px">
+              ${esc(
+                typeof x==='string'
+                  ?x
+                  :(
+                    x.question||
+                    x.text||
+                    x.exercise||
+                    JSON.stringify(x)
+                  )
+              )}
+            </div>
+
+          </div>
+
+        `).join('')
+        :
+        '<div class="empty">Exercises ჯერ არ არის.</div>'
+      }
 
     </div>
-
   `;
-
 }
 
-/* =========================================================
-   QUIZ
-========================================================= */
+/* ================= QUIZ ================= */
 
-async function renderQuiz(l){
+async function renderQuiz(lessonId){
 
-  const box=
-    $('material-quiz');
-
-  box.innerHTML=`
-    <div class="loader">
-      <span class="spinner"></span>
-      Quiz იტვირთება...
-    </div>
-  `;
+  const box=$('materialContent');
 
   try{
 
-    const result=
-      await DB
-        .from('lesson_quizzes')
-        .select('*')
-        .eq(
-          'lesson_id',
-          l.id
-        );
+    const {data,error}=await DB
+      .from('lesson_quizzes')
+      .select('*')
+      .eq('lesson_id',lessonId)
+      .order('sort_order',{ascending:true});
 
-    if(result.error)
-      throw result.error;
+    if(error)throw error;
 
-    const rows=
-      result.data || [];
+    if(!data?.length){
 
-    if(!rows.length){
-
-      box.innerHTML=`
-        <div class="empty">
-          🎯 ამ Lesson-ში Quiz ჯერ არ არის.
-        </div>
-      `;
+      box.innerHTML=
+        '<div class="empty">🎯 Quiz კითხვები ჯერ არ არის.</div>';
 
       return;
     }
 
     box.innerHTML=`
 
-      <div class="material-card">
+      <div class="content-box">
 
-        <h3>
-          🎯 Quiz Questions
-        </h3>
+        <h3>🎯 Quiz</h3>
 
-        ${rows.map((q,i)=>`
+        <div id="quizContainer">
 
-          <div class="quiz-question">
+          ${data.map((q,i)=>{
 
-            <b>
-              ${i+1}.
-              ${esc(
-                q.question ||
-                q.question_text ||
-                q.title ||
-                'Question'
-              )}
-            </b>
+            const options=
+              jsonArray(q.options);
 
-            ${
-              q.options
-              ?`
-                <div
-                  class="muted small"
-                  style="margin-top:8px">
-                  ${esc(
-                    Array.isArray(q.options)
-                    ? q.options.join(' • ')
-                    : q.options
-                  )}
+            return `
+
+              <div
+                class="quiz-question"
+                data-question="${esc(q.id)}"
+              >
+
+                <b>
+                  ${i+1}. ${esc(q.question)}
+                </b>
+
+                <div>
+
+                  ${
+                    options.map((option,j)=>`
+
+                      <button
+                        class="option"
+                        onclick="
+                          answerQuestion(
+                            this,
+                            '${esc(q.correct_answer)}',
+                            '${esc(
+                              typeof option==='string'
+                                ?option
+                                :(
+                                  option.text||
+                                  option.value||
+                                  ''
+                                )
+                            )}'
+                          )
+                        "
+                      >
+                        ${esc(
+                          typeof option==='string'
+                            ?option
+                            :(
+                              option.text||
+                              option.value||
+                              ''
+                            )
+                        )}
+                      </button>
+
+                    `).join('')
+                  }
+
                 </div>
-              `
-              :''
-            }
 
-          </div>
+              </div>
+            `;
 
-        `).join('')}
+          }).join('')}
+
+        </div>
 
       </div>
-
     `;
 
   }catch(error){
@@ -3151,76 +3047,75 @@ async function renderQuiz(l){
     console.error(error);
 
     box.innerHTML=`
-
       <div class="empty">
-
-        ❌ Quiz ვერ ჩაიტვირთა.
-
-        <br>
-
-        <small>
-          ${esc(error.message)}
-        </small>
-
+        ❌ Quiz ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
       </div>
-
     `;
-
   }
-
 }
 
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
+function answerQuestion(button,correct,selected){
 
-$('closeModal').onclick=()=>{
-  $('lessonModal')
-    .classList.remove('open');
-};
+  const parent=
+    button.closest('.quiz-question');
 
-$('lessonModal').addEventListener(
-  'click',
-  e=>{
+  parent
+    .querySelectorAll('.option')
+    .forEach(x=>x.disabled=true);
 
-    if(
-      e.target===
-      $('lessonModal')
-    ){
+  const normalize=x=>
+    String(x||'')
+      .trim()
+      .toLowerCase();
 
-      $('lessonModal')
-        .classList.remove('open');
+  if(normalize(selected)===normalize(correct)){
 
-    }
+    button.classList.add('correct');
 
+    toast(
+      '✅ სწორი პასუხია!',
+      'ok'
+    );
+
+  }else{
+
+    button.classList.add('wrong');
+
+    toast(
+      '❌ არასწორი პასუხია',
+      'err'
+    );
+
+    parent
+      .querySelectorAll('.option')
+      .forEach(x=>{
+
+        const text=
+          x.textContent.trim();
+
+        if(
+          normalize(text)===
+          normalize(correct)
+        ){
+          x.classList.add('correct');
+        }
+
+      });
   }
-);
+}
 
-document.addEventListener(
-  'keydown',
-  e=>{
+/* ================= ATTENDANCE ================= */
 
-    if(e.key==='Escape'){
+$('attendanceDate').value=today();
 
-      $('lessonModal')
-        .classList.remove('open');
+async function loadAttendance(){
 
-    }
+  const box=$('attendanceList');
 
+  if(!students.length){
+    await loadStudents();
   }
-);
-
-/* =========================================================
-   ATTENDANCE
-========================================================= */
-
-$('attendanceDate').value=
-  today();
-
-function renderAttendance(){
-
-  const box=
-    $('attendanceGrid');
 
   if(!students.length){
 
@@ -3230,228 +3125,614 @@ function renderAttendance(){
     return;
   }
 
-  box.innerHTML=
-    students.map(s=>`
+  const date=
+    $('attendanceDate').value||today();
+
+  let existing=[];
+
+  try{
+
+    const {data,error}=await DB
+      .from('teacher_attendance')
+      .select('*')
+      .eq('teacher_id',currentUser.id)
+      .eq('attendance_date',date);
+
+    if(error)throw error;
+
+    existing=data||[];
+
+  }catch(error){
+
+    console.warn(
+      'teacher_attendance:',
+      error.message
+    );
+  }
+
+  box.innerHTML=students.map(s=>{
+
+    const row=
+      existing.find(
+        x=>x.student_id===s.user_id
+      );
+
+    return `
 
       <div class="att-row">
 
-        <div>
+        <div class="att-top">
 
-          <b>
-            ${esc(
-              s.full_name ||
-              s.name ||
-              'მოსწავლე'
-            )}
-          </b>
+          <div>
+            <b>
+              ${esc(s.full_name||'მოსწავლე')}
+            </b>
 
-          <div class="small muted">
-            ${gradeName(
-              Number(s.grade) || 2
-            )}
+            <div class="small muted">
+              ${gradeName(s.grade)}
+            </div>
           </div>
+
+          <span class="badge">
+            ${row?.status||'—'}
+          </span>
 
         </div>
 
         <div class="att-buttons">
 
           <button
-            class="att"
-            onclick="saveAttendance('${esc(s.user_id)}','present')">
+            class="att present"
+            onclick="
+              saveAttendance(
+                '${esc(s.user_id)}',
+                'present'
+              )
+            "
+          >
             ✅ მოვიდა
           </button>
 
           <button
-            class="att"
-            onclick="saveAttendance('${esc(s.user_id)}','absent')">
+            class="att absent"
+            onclick="
+              saveAttendance(
+                '${esc(s.user_id)}',
+                'absent'
+              )
+            "
+          >
             ❌ გაცდენა
           </button>
 
           <button
-            class="att"
-            onclick="saveAttendance('${esc(s.user_id)}','late')">
-            ⏰ დააგვიანა
+            class="att late"
+            onclick="
+              saveAttendance(
+                '${esc(s.user_id)}',
+                'late'
+              )
+            "
+          >
+            ⏰ დაგვიანდა
           </button>
 
           <button
-            class="att"
-            onclick="saveAttendance('${esc(s.user_id)}','left')">
+            class="att rest"
+            onclick="
+              saveAttendance(
+                '${esc(s.user_id)}',
+                'rest'
+              )
+            "
+          >
+            ☕ დასვენება
+          </button>
+
+          <button
+            class="att left"
+            onclick="
+              saveAttendance(
+                '${esc(s.user_id)}',
+                'left'
+              )
+            "
+          >
             🚪 წავიდა
-          </button>
-
-          <button
-            class="att"
-            onclick="saveAttendance('${esc(s.user_id)}','rest')">
-            💤 დასვენება
           </button>
 
         </div>
 
       </div>
+    `;
 
-    `).join('');
-
+  }).join('');
 }
 
-async function saveAttendance(
-  uid,
-  status
-){
+$('attendanceDate').addEventListener(
+  'change',
+  loadAttendance
+);
+
+async function saveAttendance(uid,status){
 
   const date=
-    $('attendanceDate').value ||
-    today();
+    $('attendanceDate').value||today();
 
   try{
 
     /*
-      First try the existing attendance table.
+      teacher_attendance:
+      id
+      teacher_id
+      student_id
+      attendance_date
+      status
+      marked_at
+      created_at
     */
 
-    const result=
-      await DB
-        .from('attendance')
-        .upsert(
-          {
-            user_id:uid,
-            teacher_id:currentUser.id,
-            date:date,
-            status:status
-          },
-          {
-            onConflict:
-              'user_id,date'
-          }
-        );
+    const {error}=await DB
+      .from('teacher_attendance')
+      .upsert({
+        teacher_id:currentUser.id,
+        student_id:uid,
+        attendance_date:date,
+        status:status,
+        marked_at:new Date().toISOString()
+      },{
+        onConflict:'teacher_id,student_id,attendance_date'
+      });
 
-    if(result.error)
-      throw result.error;
-
-    const names={
-      present:'მოვიდა',
-      absent:'გაცდენა',
-      late:'დააგვიანა',
-      left:'წავიდა',
-      rest:'დასვენება'
-    };
+    if(error)throw error;
 
     toast(
-      `✅ ${names[status] || status} ჩაიწერა`,
+      `🧑‍🎓 ${status} ჩაიწერა`,
       'ok'
     );
+
+    await loadAttendance();
 
   }catch(error){
 
     console.error(error);
 
     toast(
-      'Attendance ვერ ჩაიწერა: '+
-      error.message,
+      'დასწრების შენახვა ვერ მოხერხდა: '+error.message,
       'err'
     );
-
   }
-
 }
 
-/* =========================================================
-   STATS
-========================================================= */
+/* ================= PROGRESS ================= */
 
-function updateStats(){
+async function loadProgress(){
 
-  $('statStudents').textContent=
-    students.length;
+  const box=$('progressList');
 
-  $('statG2').textContent=
-    students.filter(
-      s=>Number(s.grade)===2
-    ).length;
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>Progress იტვირთება...</div>';
 
-  $('statG3').textContent=
-    students.filter(
-      s=>Number(s.grade)===3
-    ).length;
+  try{
 
-  $('statG4').textContent=
-    students.filter(
-      s=>Number(s.grade)===4
-    ).length;
+    if(!students.length){
+      await loadStudents();
+    }
 
-  $('statLessons').textContent=
-    lessons.length;
+    const {data,error}=await DB
+      .from('student_progress')
+      .select('*');
 
-}
+    if(error)throw error;
 
-/* =========================================================
-   SYNC
-========================================================= */
+    const rows=data||[];
 
-$('syncBtn').onclick=
-  async()=>{
+    if(!students.length){
 
-    toast(
-      '🔄 მონაცემები ახლდება...'
-    );
+      box.innerHTML=
+        '<div class="empty">მოსწავლეები არ არიან.</div>';
 
-    await Promise.all([
-      loadStudents(),
-      loadLessons()
-    ]);
-
-    toast(
-      '✅ Sync დასრულდა',
-      'ok'
-    );
-
-  };
-
-$('reloadStudents').onclick=
-  loadStudents;
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-$('logoutBtn').onclick=
-  async()=>{
-
-    if(
-      !confirm(
-        'ნამდვილად გინდა გამოსვლა?'
-      )
-    ){
       return;
     }
 
-    try{
+    box.innerHTML=students.map(s=>{
 
-      await DB.auth.signOut({
-        scope:'global'
-      });
+      const r=
+        rows.find(
+          x=>x.user_id===s.user_id &&
+             Number(x.grade)===Number(s.grade)
+        )||
+        rows.find(
+          x=>x.user_id===s.user_id
+        )||
+        {};
 
-    }catch(error){
+      const words=Number(
+        r.words_learned ??
+        (
+          Array.isArray(r.learned_words)
+            ?r.learned_words.length
+            :0
+        )
+      );
 
-      console.warn(error);
+      const quiz=Number(
+        r.quiz_completed||0
+      );
 
+      const best=Number(
+        r.best_quiz ??
+        r.score ??
+        0
+      );
+
+      const target=
+        Number(s.grade)===2
+          ?300
+          :250;
+
+      const percent=
+        Math.min(
+          100,
+          Math.round(words/target*100)
+        );
+
+      return `
+
+        <div class="student" style="margin-bottom:10px">
+
+          <div class="student-top">
+
+            <div>
+              <div class="student-name">
+                ${esc(s.full_name||'მოსწავლე')}
+              </div>
+
+              <div class="small muted">
+                ${gradeName(s.grade)}
+              </div>
+            </div>
+
+            <b style="color:var(--yellow)">
+              ${percent}%
+            </b>
+
+          </div>
+
+          <div
+            style="
+              height:9px;
+              margin-top:12px;
+              border-radius:20px;
+              overflow:hidden;
+              background:#020b18
+            "
+          >
+            <div
+              style="
+                height:100%;
+                width:${percent}%;
+                border-radius:20px;
+                background:linear-gradient(
+                  90deg,
+                  var(--blue),
+                  var(--cyan),
+                  var(--yellow)
+                )
+              "
+            ></div>
+          </div>
+
+          <div class="small muted" style="margin-top:10px">
+
+            📚 ${words} words
+            • 📝 ${quiz} quiz
+            • 🏆 Best ${best}%
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join('');
+
+    updateStats();
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=`
+      <div class="empty">
+        ❌ Progress ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>
+    `;
+  }
+}
+
+/* ================= STUDENT DETAIL ================= */
+
+async function showStudent(uid){
+
+  const student=
+    students.find(
+      x=>x.user_id===uid
+    );
+
+  if(!student)return;
+
+  $('studentModalTitle').textContent=
+    `📊 ${student.full_name||'Student'}`;
+
+  $('studentModalBody').innerHTML=
+    '<div class="loading"><span class="spinner"></span>ანალიზი...</div>';
+
+  $('studentModal').classList.add('open');
+
+  try{
+
+    const [
+      progress,
+      quiz,
+      grades,
+      activity
+    ]=await Promise.all([
+
+      DB
+        .from('student_progress')
+        .select('*')
+        .eq('user_id',uid),
+
+      DB
+        .from('quiz_results')
+        .select('*')
+        .eq('student_id',uid)
+        .order('created_at',{ascending:false})
+        .limit(50),
+
+      DB
+        .from('student_grades')
+        .select('*')
+        .eq('student_id',uid)
+        .order('created_at',{ascending:false})
+        .limit(20),
+
+      DB
+        .from('academy_activity')
+        .select('*')
+        .eq('student_id',uid)
+        .order('created_at',{ascending:false})
+        .limit(30)
+
+    ]);
+
+    const pRows=
+      progress.data||[];
+
+    const quizzes=
+      quiz.data||[];
+
+    const gradeRows=
+      grades.data||[];
+
+    const activities=
+      activity.data||[];
+
+    const words=
+      pRows.reduce(
+        (sum,x)=>sum+
+          Number(
+            x.words_learned ??
+            (
+              Array.isArray(x.learned_words)
+                ?x.learned_words.length
+                :0
+            )
+          ),
+        0
+      );
+
+    const best=Math.max(
+      0,
+      ...quizzes.map(x=>
+        Number(x.total)
+          ?Math.round(
+            Number(x.score||0)/
+            Number(x.total)*100
+          )
+          :0
+      )
+    );
+
+    $('studentModalBody').innerHTML=`
+
+      <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+
+        <div class="stat">
+          <small>📚 Words</small>
+          <b>${words}</b>
+        </div>
+
+        <div class="stat">
+          <small>🎯 Quiz</small>
+          <b>${quizzes.length}</b>
+        </div>
+
+        <div class="stat">
+          <small>🏆 Best</small>
+          <b>${best}%</b>
+        </div>
+
+        <div class="stat">
+          <small>⚡ Activity</small>
+          <b>${activities.length}</b>
+        </div>
+
+      </div>
+
+      <div class="content-box">
+
+        <h3>⭐ შეფასებები</h3>
+
+        ${
+          gradeRows.length
+          ?gradeRows.map(x=>`
+
+            <div class="row">
+
+              <div>
+                <b>
+                  ${gradeName(x.grade)}
+                </b>
+
+                <div class="small muted">
+                  ${esc(x.comment||'')}
+                </div>
+              </div>
+
+              <div class="score">
+                ${Number(x.grade||0)}/10
+              </div>
+
+              <div class="small muted">
+                ${x.created_at
+                  ?new Date(x.created_at)
+                    .toLocaleString('ka-GE')
+                  :''
+                }
+              </div>
+
+            </div>
+
+          `).join('')
+          :
+          '<div class="empty">შეფასებები არ არის.</div>'
+        }
+
+      </div>
+
+      <div class="content-box">
+
+        <h3>🎯 Quiz Results</h3>
+
+        ${
+          quizzes.length
+          ?quizzes.map(x=>{
+
+            const percent=
+              Number(x.total)
+              ?Math.round(
+                Number(x.score||0)/
+                Number(x.total)*100
+              )
+              :0;
+
+            return `
+
+              <div class="row">
+
+                <div>
+                  <b>
+                    Quiz
+                  </b>
+
+                  <div class="small muted">
+                    ${gradeName(x.grade)}
+                  </div>
+                </div>
+
+                <div class="score">
+                  ${percent}%
+                </div>
+
+                <div class="small muted">
+                  ${x.completed_at
+                    ?new Date(x.completed_at)
+                      .toLocaleString('ka-GE')
+                    :''
+                  }
+                </div>
+
+              </div>
+
+            `;
+
+          }).join('')
+          :
+          '<div class="empty">Quiz შედეგები არ არის.</div>'
+        }
+
+      </div>
+
+    `;
+
+  }catch(error){
+
+    console.error(error);
+
+    $('studentModalBody').innerHTML=`
+      <div class="empty">
+        ❌ მონაცემები ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>
+    `;
+  }
+}
+
+function closeStudentModal(){
+
+  $('studentModal')
+    .classList
+    .remove('open');
+}
+
+$('studentModal').addEventListener(
+  'click',
+  e=>{
+    if(e.target===$('studentModal')){
+      closeStudentModal();
     }
+  }
+);
+
+/* ================= LOGOUT ================= */
+
+$('logoutBtn').onclick=async()=>{
+
+  if(!confirm(
+    'ნამდვილად გინდა გამოსვლა?'
+  )){
+    return;
+  }
+
+  try{
+
+    await DB.auth.signOut({
+      scope:'global'
+    });
+
+  }catch(error){
+
+    console.warn(error);
+
+  }finally{
 
     location.replace(
       'teacher-login.html?logout=1'
     );
+  }
+};
 
-  };
-
-/* =========================================================
-   BOOT
-========================================================= */
+/* ================= BOOT ================= */
 
 async function boot(){
 
   if(!DB){
 
     toast(
-      'Supabase client ვერ მოიძებნა.',
+      'Supabase client ვერ მოიძებნა. შეამოწმე config.js',
       'err'
     );
 
@@ -3463,19 +3744,13 @@ async function boot(){
 
   if(!ok)return;
 
-  await Promise.all([
-    loadStudents(),
-    loadLessons()
-  ]);
+  $('attendanceDate').value=today();
 
-  updateStats();
+  await loadStudents();
 
 }
 
-if(
-  document.readyState===
-  'loading'
-){
+if(document.readyState==='loading'){
 
   document.addEventListener(
     'DOMContentLoaded',
@@ -3489,17 +3764,19 @@ if(
 
 }
 
-/* =========================================================
-   GLOBAL API
-========================================================= */
+/* ================= GLOBAL API ================= */
 
 window.ENGLISH_MARIAMI_TEACHER={
-  openView,
-  loadLessons,
-  loadStudents,
+  openPanel,
+  openGrade,
   openLesson,
+  showMaterial,
+  loadStudents,
+  loadLessons,
+  loadAttendance,
+  saveAttendance,
   changeGrade,
-  saveAttendance
+  showStudent
 };
 
 </script>
