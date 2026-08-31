@@ -3,23 +3,1755 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>English with Mariami — Grade 2</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
+
+<title>English with Mariami — Grade 1</title>
+
 <style>
-:root{--bg:#02040d;--panel:rgba(7,16,36,.9);--line:rgba(0,239,255,.2);--cyan:#00efff;--blue:#287dff;--violet:#a855f7;--pink:#ff35ca;--green:#00ffad;--red:#ff416c;--text:#f5fbff;--muted:#91a8bb}
-*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,rgba(0,239,255,.14),transparent 28%),radial-gradient(circle at 90% 15%,rgba(168,85,247,.14),transparent 30%),linear-gradient(135deg,#01030a,#061024 50%,#02040d);overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-2;opacity:.14;background-image:linear-gradient(rgba(0,239,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,239,255,.08) 1px,transparent 1px);background-size:44px 44px}.orb{position:fixed;width:280px;height:280px;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:-1;opacity:.35}.orb.a{left:-100px;top:160px;background:var(--cyan)}.orb.b{right:-110px;top:430px;background:var(--violet)}header{position:sticky;top:0;z-index:50;background:rgba(2,4,13,.78);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}.nav,.wrap{width:min(1450px,calc(100% - 22px));margin:auto}.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:11px;font-weight:1000}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue),var(--violet));box-shadow:0 0 28px rgba(0,239,255,.3);font-size:23px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.5px;margin-top:3px}.actions{display:flex;gap:7px}.btn{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;min-height:42px;color:white;background:rgba(255,255,255,.055);font-weight:900;cursor:pointer;transition:.18s}.btn:hover{transform:translateY(-2px);border-color:rgba(0,239,255,.5);box-shadow:0 0 22px rgba(0,239,255,.12)}.home{background:linear-gradient(135deg,#0874ff,#00cfe8)}.logout{background:linear-gradient(135deg,#c01b4e,#ff416c)}.cyan{background:linear-gradient(135deg,#0878ff,#00cfe8)}.hero{padding:30px 0 18px}.hero-card{padding:32px;border:1px solid var(--line);border-radius:27px;background:linear-gradient(145deg,rgba(8,22,48,.92),rgba(2,9,22,.9));box-shadow:0 25px 80px rgba(0,0,0,.45)}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;letter-spacing:2.5px}.hero h1{font-size:clamp(3rem,7vw,6.5rem);line-height:.88;letter-spacing:-5px;margin:12px 0}.gradient{background:linear-gradient(90deg,#fff,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;color:transparent}.hero p{max-width:900px;color:#b4c8d6;line-height:1.65}.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}.hudBox{padding:15px;border:1px solid rgba(0,239,255,.15);border-radius:16px;background:rgba(2,19,40,.7)}.hudBox small{display:block;color:var(--muted);font-size:9px}.hudBox b{display:block;margin-top:4px;font-size:24px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 16px;flex-wrap:wrap}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{border:1px solid rgba(0,239,255,.15);background:rgba(4,17,34,.8);color:#c9d9e5;border-radius:10px;padding:9px 11px;font-weight:900;cursor:pointer}.filter.active,.filter:hover{color:white;border-color:var(--cyan);box-shadow:0 0 18px rgba(0,239,255,.12)}.search{min-width:240px;flex:1;max-width:420px;padding:11px;border-radius:11px;border:1px solid rgba(0,239,255,.16);background:#031226;color:white;outline:none}.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;padding-bottom:55px}.lesson-card{padding:20px;border:1px solid rgba(0,239,255,.15);border-radius:21px;background:linear-gradient(145deg,rgba(9,28,56,.9),rgba(3,11,26,.92));min-height:250px;transition:.23s}.lesson-card:hover{transform:translateY(-5px);border-color:rgba(0,239,255,.55);box-shadow:0 20px 50px rgba(0,0,0,.35)}.lesson-icon{font-size:34px}.lesson-number{float:right;color:#7890a7;font-size:10px;font-weight:1000}.lesson-card h3{margin:11px 0 5px;font-size:19px}.lesson-topic{color:var(--cyan);font-size:11px;font-weight:900}.lesson-card p{color:var(--muted);font-size:12px;line-height:1.55;min-height:38px}.lesson-meta{display:flex;gap:12px;color:#b9cad7;font-size:11px;margin:12px 0}.section-pills{display:flex;gap:5px;flex-wrap:wrap;min-height:26px}.section-pills span{font-size:9px;padding:5px 7px;border-radius:7px;background:rgba(0,239,255,.07);color:var(--cyan)}.open-lesson{margin-top:14px;width:100%;padding:11px;border:1px solid rgba(0,239,255,.2);border-radius:10px;background:linear-gradient(135deg,rgba(8,120,255,.2),rgba(0,239,255,.08));color:white;font-weight:1000;cursor:pointer}.open-lesson:hover{border-color:var(--cyan)}.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.82);backdrop-filter:blur(12px)}.modal.open{display:flex}.box{width:min(1100px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:24px;border:1px solid rgba(0,239,255,.3);background:#020b1c;box-shadow:0 30px 100px rgba(0,0,0,.65)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;background:#020b1c;padding-bottom:12px;z-index:2}.modal-head h2{margin:0}.lesson-summary{color:var(--muted);padding:8px 0}.lesson-tabs{display:flex;gap:6px;overflow:auto;padding:10px 0;position:sticky;top:48px;background:#020b1c;z-index:2}.lesson-tab{white-space:nowrap;border:1px solid rgba(0,239,255,.15);border-radius:10px;padding:9px 11px;background:#06182d;color:white;font-weight:900;cursor:pointer}.lesson-tab.active{background:linear-gradient(135deg,#0878ff,#00cfe8)}.material-card{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:#04152a;margin-top:8px}.material-card h3{margin-top:0}.large-text,.reading-text{color:#bed0dc;line-height:1.8;white-space:pre-wrap}.material-list,.phrase-list,.exercise-list{display:grid;gap:8px}.material-item{padding:12px;border-radius:12px;background:#061a31;border:1px solid rgba(255,255,255,.07);line-height:1.5}.material-index{display:inline-grid;place-items:center;width:25px;height:25px;margin-right:8px;border-radius:50%;background:rgba(0,239,255,.1);color:var(--cyan);font-size:11px}.words-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.word-card{padding:11px;border-radius:12px;background:#061a31;border:1px solid rgba(0,239,255,.1)}.word-top{display:flex;justify-content:space-between;gap:8px}.word-card span{display:block;color:#c5d3dd;margin-top:5px;font-size:12px}.word-card img{width:100%;max-height:130px;object-fit:cover;border-radius:9px;margin-top:8px}.mini-audio{border:0;border-radius:8px;background:#0a2946;color:white;cursor:pointer}.audio-wrap{margin-top:15px}.audio-wrap audio{width:100%}.count-chip,.quiz-score{color:var(--cyan)}.quiz-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.quiz-question{padding:15px;margin:10px 0;border-radius:14px;background:#061a31;border:1px solid rgba(255,255,255,.07)}.quiz-question b{display:block;margin-bottom:9px}.quiz-option{display:block;width:100%;text-align:left;margin:5px 0;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#09233f;color:white;cursor:pointer}.quiz-option.selected{border-color:var(--cyan)}.quiz-option.correct{border-color:var(--green);background:rgba(0,255,173,.12)}.quiz-option.wrong{border-color:var(--red);background:rgba(255,65,108,.1)}.submit-quiz{margin-top:12px;padding:12px 18px;border:0;border-radius:11px;background:linear-gradient(135deg,#0878ff,#00cfe8);color:white;font-weight:1000;cursor:pointer}.quiz-result{margin-top:12px;padding:13px;border-radius:12px;background:rgba(0,255,173,.08);color:var(--green)}.loading-state,.empty-state{padding:35px;text-align:center;color:var(--muted);grid-column:1/-1}.error{color:#ff8aa2}.grade-toast{position:fixed;right:18px;bottom:18px;z-index:99999;padding:12px 16px;border-radius:12px;background:#071a30;border:1px solid rgba(0,239,255,.25);color:white;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}.grade-toast.show{opacity:1;transform:none}.grade-toast.error{border-color:rgba(255,65,108,.4)}@media(max-width:950px){.lesson-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.nav,.wrap{width:calc(100% - 14px)}.brand small{display:none}.actions .btn{font-size:0;padding:10px}.actions .home:after{content:"🏠";font-size:18px}.actions .logout:after{content:"🚪";font-size:18px}.hero-card{padding:22px}.hero h1{font-size:3.2rem;letter-spacing:-2px}.hud{grid-template-columns:1fr 1fr}.lesson-grid,.words-grid{grid-template-columns:1fr}.search{min-width:100%;max-width:none}.lesson-tabs{top:42px}}
+:root{
+  --bg:#02040d;
+  --panel:rgba(7,16,36,.92);
+  --cyan:#00efff;
+  --blue:#287dff;
+  --violet:#a855f7;
+  --pink:#ff35ca;
+  --green:#00ffad;
+  --yellow:#ffe66d;
+  --text:#f5fbff;
+  --muted:#91a8bb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(0,239,255,.16),transparent 28%),
+    radial-gradient(circle at 90% 15%,rgba(168,85,247,.16),transparent 30%),
+    linear-gradient(135deg,#01030a,#061024 50%,#02040d);
+  overflow-x:hidden;
+}
+
+/* NEON GRID */
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  opacity:.18;
+  background-image:
+    linear-gradient(rgba(0,239,255,.10) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,239,255,.10) 1px,transparent 1px);
+  background-size:42px 42px;
+  transform:perspective(600px) rotateX(58deg) scale(1.8);
+  transform-origin:center bottom;
+  animation:gridMove 14s linear infinite;
+}
+
+@keyframes gridMove{
+  from{
+    background-position:0 0,0 0;
+  }
+  to{
+    background-position:0 42px,42px 0;
+  }
+}
+
+/* LIGHT ORBS */
+.orb{
+  position:fixed;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  filter:blur(90px);
+  pointer-events:none;
+  z-index:-2;
+  opacity:.30;
+}
+
+.orb.a{
+  left:-100px;
+  top:150px;
+  background:var(--cyan);
+}
+
+.orb.b{
+  right:-120px;
+  top:500px;
+  background:var(--violet);
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(2,4,13,.78);
+  backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(0,239,255,.22);
+}
+
+.nav{
+  width:min(1400px,calc(100% - 22px));
+  margin:auto;
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:1000;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:16px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--cyan),var(--blue),var(--violet));
+  box-shadow:
+    0 0 20px rgba(0,239,255,.35),
+    inset 0 0 20px rgba(255,255,255,.15);
+  font-size:25px;
+  transform:rotateX(8deg) rotateY(-8deg);
+}
+
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:1.8px;
+  margin-top:3px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+}
+
+.btn{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  padding:10px 14px;
+  min-height:42px;
+  color:white;
+  background:rgba(255,255,255,.055);
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  border-color:var(--cyan);
+  box-shadow:0 0 25px rgba(0,239,255,.18);
+}
+
+.home{
+  background:linear-gradient(135deg,#0874ff,#00cfe8);
+}
+
+.logout{
+  background:linear-gradient(135deg,#c01b4e,#ff416c);
+}
+
+/* MAIN */
+.wrap{
+  width:min(1400px,calc(100% - 22px));
+  margin:auto;
+}
+
+/* HERO */
+.hero{
+  padding:32px 0 18px;
+}
+
+.hero-card{
+  position:relative;
+  overflow:hidden;
+  padding:34px;
+  border:1px solid rgba(0,239,255,.28);
+  border-radius:30px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8,22,48,.94),
+      rgba(2,9,22,.92)
+    );
+  box-shadow:
+    0 25px 90px rgba(0,0,0,.45),
+    inset 0 0 50px rgba(0,239,255,.035);
+  transform-style:preserve-3d;
+}
+
+.hero-card:after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:30px;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(0,239,255,.16),
+      transparent
+    );
+  transform:translateX(-100%);
+  animation:scan 5s infinite;
+}
+
+@keyframes scan{
+  0%,60%{
+    transform:translateX(-100%);
+  }
+  100%{
+    transform:translateX(100%);
+  }
+}
+
+.kicker{
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:2.5px;
+}
+
+.hero h1{
+  font-size:clamp(3.2rem,8vw,7rem);
+  line-height:.88;
+  letter-spacing:-5px;
+  margin:12px 0;
+}
+
+.gradient{
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      var(--cyan),
+      var(--violet),
+      var(--pink)
+    );
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  max-width:850px;
+  color:#b4c8d6;
+  line-height:1.7;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:22px;
+}
+
+.stat{
+  padding:15px;
+  border:1px solid rgba(0,239,255,.15);
+  border-radius:17px;
+  background:rgba(2,19,40,.7);
+}
+
+.stat small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.stat b{
+  display:block;
+  margin-top:5px;
+  font-size:24px;
+}
+
+/* LESSON GRID */
+.section-title{
+  margin:25px 0 14px;
+  color:white;
+  font-size:24px;
+}
+
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+  padding-bottom:60px;
+}
+
+.lesson{
+  position:relative;
+  min-height:280px;
+  padding:22px;
+  border-radius:23px;
+  border:1px solid rgba(0,239,255,.15);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9,28,56,.94),
+      rgba(3,11,26,.94)
+    );
+  transform-style:preserve-3d;
+  transition:.25s;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
+.lesson:hover{
+  transform:
+    perspective(900px)
+    rotateX(4deg)
+    rotateY(-4deg)
+    translateY(-7px);
+  border-color:rgba(0,239,255,.65);
+  box-shadow:
+    0 25px 65px rgba(0,0,0,.45),
+    0 0 30px rgba(0,239,255,.10);
+}
+
+.lesson-number{
+  position:absolute;
+  right:18px;
+  top:18px;
+  color:#7890a7;
+  font-size:10px;
+  font-weight:1000;
+}
+
+.lesson-icon{
+  font-size:40px;
+  margin-bottom:10px;
+  filter:drop-shadow(0 0 10px rgba(0,239,255,.3));
+}
+
+.lesson h2{
+  margin:8px 0 4px;
+  font-size:21px;
+}
+
+.lesson-topic{
+  color:var(--cyan);
+  font-size:11px;
+  font-weight:900;
+}
+
+.lesson p{
+  color:var(--muted);
+  line-height:1.55;
+  font-size:13px;
+}
+
+.pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin:13px 0;
+}
+
+.pill{
+  padding:5px 8px;
+  border-radius:8px;
+  background:rgba(0,239,255,.07);
+  border:1px solid rgba(0,239,255,.10);
+  color:var(--cyan);
+  font-size:9px;
+  font-weight:900;
+}
+
+.open{
+  width:100%;
+  padding:12px;
+  border:1px solid rgba(0,239,255,.22);
+  border-radius:11px;
+  background:linear-gradient(
+    135deg,
+    rgba(8,120,255,.28),
+    rgba(0,239,255,.08)
+  );
+  color:white;
+  font-weight:1000;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.open:hover{
+  border-color:var(--cyan);
+  box-shadow:0 0 22px rgba(0,239,255,.16);
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:14px;
+  background:rgba(0,0,0,.84);
+  backdrop-filter:blur(14px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-box{
+  width:min(1050px,100%);
+  max-height:92vh;
+  overflow:auto;
+  padding:22px;
+  border-radius:25px;
+  border:1px solid rgba(0,239,255,.32);
+  background:#020b1c;
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.7),
+    0 0 35px rgba(0,239,255,.08);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  position:sticky;
+  top:0;
+  background:#020b1c;
+  padding-bottom:12px;
+  z-index:5;
+}
+
+.modal-head h2{
+  margin:0;
+  font-size:24px;
+}
+
+.tabs{
+  display:flex;
+  gap:6px;
+  overflow:auto;
+  padding:10px 0;
+  position:sticky;
+  top:50px;
+  background:#020b1c;
+  z-index:4;
+}
+
+.tab{
+  white-space:nowrap;
+  border:1px solid rgba(0,239,255,.15);
+  border-radius:10px;
+  padding:9px 11px;
+  background:#06182d;
+  color:white;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.tab.active{
+  background:linear-gradient(135deg,#0878ff,#00cfe8);
+}
+
+.content{
+  padding-top:5px;
+}
+
+.card{
+  padding:18px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#04152a;
+  margin-top:10px;
+}
+
+.card h3{
+  margin-top:0;
+}
+
+.big{
+  color:#c5d5df;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.word-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.word{
+  padding:14px;
+  border-radius:13px;
+  background:#061a31;
+  border:1px solid rgba(0,239,255,.10);
+  transition:.18s;
+}
+
+.word:hover{
+  transform:translateY(-3px);
+  border-color:var(--cyan);
+}
+
+.word strong{
+  font-size:16px;
+}
+
+.word span{
+  display:block;
+  color:#aebfcb;
+  margin-top:5px;
+}
+
+.example{
+  padding:12px;
+  margin:7px 0;
+  border-radius:11px;
+  background:#061a31;
+  border-left:3px solid var(--cyan);
+  color:#d7e5ed;
+}
+
+.exercise{
+  padding:15px;
+  margin:9px 0;
+  border-radius:14px;
+  background:#061a31;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.exercise button{
+  margin:5px 4px 0 0;
+  padding:9px 12px;
+  border-radius:9px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#09233f;
+  color:white;
+  cursor:pointer;
+}
+
+.exercise button:hover{
+  border-color:var(--cyan);
+}
+
+.quiz-question{
+  padding:15px;
+  margin:10px 0;
+  border-radius:14px;
+  background:#061a31;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.quiz-option{
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:6px 0;
+  padding:11px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#09233f;
+  color:white;
+  cursor:pointer;
+}
+
+.quiz-option:hover{
+  border-color:var(--cyan);
+}
+
+.good{
+  border-color:var(--green)!important;
+  background:rgba(0,255,173,.10)!important;
+}
+
+.bad{
+  border-color:#ff416c!important;
+  background:rgba(255,65,108,.10)!important;
+}
+
+.score{
+  margin-top:15px;
+  padding:14px;
+  border-radius:12px;
+  background:rgba(0,255,173,.08);
+  color:var(--green);
+  font-weight:900;
+}
+
+/* MOBILE */
+@media(max-width:950px){
+  .lesson-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:650px){
+
+  .nav,
+  .wrap{
+    width:calc(100% - 14px);
+  }
+
+  .brand small{
+    display:none;
+  }
+
+  .hero-card{
+    padding:22px;
+  }
+
+  .hero h1{
+    font-size:3.5rem;
+    letter-spacing:-2px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .lesson-grid,
+  .word-grid{
+    grid-template-columns:1fr;
+  }
+
+  .tabs{
+    top:45px;
+  }
+}
 </style>
 </head>
-<body data-grade="2">
-<div class="orb a"></div><div class="orb b"></div>
-<header><div class="nav"><div class="brand"><div class="logo">🌱</div><div>ENGLISH WITH MARIAMI<small>LIVE SUPABASE CURRICULUM • GRADE 02</small></div></div><div class="actions"><button class="btn home" id="homeBtn">🏠 მთავარი</button><button class="btn logout" id="logoutBtn">🚪 გამოსვლა</button></div></div></header>
+
+<body>
+
+<div class="orb a"></div>
+<div class="orb b"></div>
+
+<header>
+  <div class="nav">
+
+    <div class="brand">
+      <div class="logo">🌱</div>
+
+      <div>
+        ENGLISH WITH MARIAMI
+        <small>FUTURISTIC ENGLISH ACADEMY • GRADE 01</small>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn home"
+        onclick="location.href='student-dashboard.html'">
+        🏠 მთავარი
+      </button>
+
+      <button class="btn logout"
+        onclick="location.href='login.html'">
+        🚪 გამოსვლა
+      </button>
+    </div>
+
+  </div>
+</header>
+
 <main class="wrap">
-<section class="hero"><div class="hero-card"><div class="kicker">⚡ REAL SUPABASE LEARNING SYSTEM</div><h1>GRADE <span class="gradient">2</span></h1><p>აქ ნაჩვენები ყველა გაკვეთილი და სასწავლო მასალა პირდაპირ Supabase-იდან იტვირთება. თითოეულ Lesson-ში ნახავ Grammar, Listening, Speaking, Reading, Exercises, Words და Quiz-ს.</p><div class="hud"><div class="hudBox"><small>LESSONS</small><b id="lessonCount">—</b></div><div class="hudBox"><small>WORDS</small><b id="wordCount">—</b></div><div class="hudBox"><small>QUIZ QUESTIONS</small><b id="quizCount">—</b></div><div class="hudBox"><small>LIVE CONTENT</small><b id="contentCount">—</b></div></div></div></section>
-<div class="toolbar"><div class="filters"><button class="filter active" data-filter="all">ALL</button><button class="filter" data-filter="vocabulary">WORDS</button><button class="filter" data-filter="grammar">GRAMMAR</button><button class="filter" data-filter="listening">LISTENING</button><button class="filter" data-filter="speaking">SPEAKING</button><button class="filter" data-filter="reading">READING</button><button class="filter" data-filter="exercises">EXERCISES</button><button class="filter" data-filter="quiz">QUIZ</button></div><input id="search" class="search" placeholder="🔎 Search lessons..."><button class="btn cyan" id="reload">↻ Sync</button></div>
-<section id="lessonGrid" class="lesson-grid"></section>
+
+<section class="hero">
+
+  <div class="hero-card">
+
+    <div class="kicker">
+      🌟 WELCOME TO YOUR FIRST ENGLISH WORLD
+    </div>
+
+    <h1>
+      GRADE <span class="gradient">1</span>
+    </h1>
+
+    <p>
+      Welcome! 👋
+      აქ ინგლისურს ძალიან მარტივად ვისწავლით.
+      თითოეული გაკვეთილი პატარა ნაბიჯია.
+      ისწავლე სიტყვები, გაიმეორე ფრაზები,
+      წაიკითხე პატარა ტექსტი და ითამაშე Quiz.
+    </p>
+
+    <div class="stats">
+
+      <div class="stat">
+        <small>LESSONS</small>
+        <b>12</b>
+      </div>
+
+      <div class="stat">
+        <small>WORDS</small>
+        <b>72+</b>
+      </div>
+
+      <div class="stat">
+        <small>QUIZ</small>
+        <b>12</b>
+      </div>
+
+      <div class="stat">
+        <small>LEVEL</small>
+        <b>⭐ EASY</b>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<h2 class="section-title">
+  🚀 START YOUR ENGLISH JOURNEY
+</h2>
+
+<section id="lessons" class="lesson-grid"></section>
+
 </main>
-<div class="modal" id="lessonModal"><div class="box"><div class="modal-head"><h2 id="modalTitle"></h2><button class="btn logout" id="closeModal">✕</button></div><div id="modalContent"></div></div></div>
-<script src="grade-lessons.js"></script>
+
+
+<!-- LESSON MODAL -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2 id="modalTitle"></h2>
+
+      <button
+        class="btn logout"
+        onclick="closeLesson()">
+        ✕
+      </button>
+
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+
+    <div class="content" id="content"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const lessons = [
+
+{
+ id:1,
+ icon:"👋",
+ title:"Hello! My First English",
+ topic:"Greetings",
+ description:"Learn how to say hello and introduce yourself.",
+ words:[
+  ["👋","hello","გამარჯობა"],
+  ["😊","hi","სალამი"],
+  ["🌞","good morning","დილა მშვიდობისა"],
+  ["🌙","good night","ღამე მშვიდობისა"],
+  ["🙏","thank you","მადლობა"],
+  ["❤️","please","გთხოვ"]
+ ],
+ grammar:"I am + name.",
+ examples:[
+  "I am Mariami.",
+  "I am Luka.",
+  "My name is Ana."
+ ],
+ listening:"Hello! My name is Mariami. I am happy.",
+ speaking:[
+  "Hello!",
+  "Hi!",
+  "My name is ___.",
+  "I am ___."
+ ],
+ reading:"Hello! My name is Ana. I am a girl. I am happy.",
+ exercises:[
+  "Say: Hello!",
+  "Say your name.",
+  "Complete: My name is ____."
+ ],
+ quiz:[
+  ["How do we say გამარჯობა?","hello","hi","cat",0],
+  ["How do we say მადლობა?","please","thank you","good night",1]
+ ]
+},
+
+{
+ id:2,
+ icon:"🔢",
+ title:"Numbers 1–10",
+ topic:"Numbers",
+ description:"Learn your first English numbers.",
+ words:[
+  ["1️⃣","one","ერთი"],
+  ["2️⃣","two","ორი"],
+  ["3️⃣","three","სამი"],
+  ["4️⃣","four","ოთხი"],
+  ["5️⃣","five","ხუთი"],
+  ["6️⃣","six","ექვსი"],
+  ["7️⃣","seven","შვიდი"],
+  ["8️⃣","eight","რვა"],
+  ["9️⃣","nine","ცხრა"],
+  ["🔟","ten","ათი"]
+ ],
+ grammar:"I have + number.",
+ examples:[
+  "I have one book.",
+  "I have two pens.",
+  "I have three apples."
+ ],
+ listening:"One, two, three. I have three apples.",
+ speaking:[
+  "One!",
+  "Two!",
+  "I have two.",
+  "I have five."
+ ],
+ reading:"I have three apples. I have two books.",
+ exercises:[
+  "Count from 1 to 10.",
+  "Show two fingers.",
+  "Say: I have five."
+ ],
+ quiz:[
+  ["What is 3?","two","three","five",1],
+  ["What is 10?","ten","one","seven",0]
+ ]
+},
+
+{
+ id:3,
+ icon:"🎨",
+ title:"Colors",
+ topic:"Colors",
+ description:"Learn the most important colors.",
+ words:[
+  ["🔴","red","წითელი"],
+  ["🔵","blue","ლურჯი"],
+  ["🟢","green","მწვანე"],
+  ["🟡","yellow","ყვითელი"],
+  ["⚫","black","შავი"],
+  ["⚪","white","თეთრი"]
+ ],
+ grammar:"It is + color.",
+ examples:[
+  "It is red.",
+  "It is blue.",
+  "It is green."
+ ],
+ listening:"The ball is red. The sky is blue.",
+ speaking:[
+  "It is red.",
+  "It is blue.",
+  "My favorite color is blue."
+ ],
+ reading:"I see a red ball. I see a blue sky.",
+ exercises:[
+  "Find something red.",
+  "Find something blue.",
+  "Say your favorite color."
+ ],
+ quiz:[
+  ["What color is the sky?","blue","red","black",0],
+  ["What color is grass?","yellow","green","white",1]
+ ]
+},
+
+{
+ id:4,
+ icon:"👨‍👩‍👧",
+ title:"My Family",
+ topic:"Family",
+ description:"Meet the family in English.",
+ words:[
+  ["👨","father","მამა"],
+  ["👩","mother","დედა"],
+  ["👦","brother","ძმა"],
+  ["👧","sister","და"],
+  ["👶","baby","ბავშვი"],
+  ["❤️","family","ოჯახი"]
+ ],
+ grammar:"This is my + family word.",
+ examples:[
+  "This is my mother.",
+  "This is my father.",
+  "This is my sister."
+ ],
+ listening:"This is my family. This is my mother.",
+ speaking:[
+  "My mother.",
+  "My father.",
+  "This is my sister.",
+  "This is my family."
+ ],
+ reading:"This is my family. I love my family.",
+ exercises:[
+  "Say mother.",
+  "Say father.",
+  "Say: This is my family."
+ ],
+ quiz:[
+  ["Who is დედა?","mother","father","brother",0],
+  ["Who is ძმა?","sister","brother","baby",1]
+ ]
+},
+
+{
+ id:5,
+ icon:"🏠",
+ title:"My Home",
+ topic:"Home",
+ description:"Learn easy words about your home.",
+ words:[
+  ["🏠","house","სახლი"],
+  ["🚪","door","კარი"],
+  ["🪟","window","ფანჯარა"],
+  ["🛏️","bed","საწოლი"],
+  ["🪑","chair","სკამი"],
+  ["📚","book","წიგნი"]
+ ],
+ grammar:"This is a + thing.",
+ examples:[
+  "This is a house.",
+  "This is a door.",
+  "This is a book."
+ ],
+ listening:"This is my house. I see a door and a window.",
+ speaking:[
+  "My house.",
+  "A door.",
+  "A window.",
+  "This is my book."
+ ],
+ reading:"This is my house. My book is on the table.",
+ exercises:[
+  "Point to a door.",
+  "Point to a window.",
+  "Say: This is my house."
+ ],
+ quiz:[
+  ["What is კარი?","window","door","bed",1],
+  ["What is საწოლი?","chair","bed","book",1]
+ ]
+},
+
+{
+ id:6,
+ icon:"🐶",
+ title:"Animals",
+ topic:"Animals",
+ description:"Meet some friendly animals.",
+ words:[
+  ["🐶","dog","ძაღლი"],
+  ["🐱","cat","კატა"],
+  ["🐭","mouse","თაგვი"],
+  ["🐟","fish","თევზი"],
+  ["🐦","bird","ჩიტი"],
+  ["🐰","rabbit","კურდღელი"]
+ ],
+ grammar:"I see a + animal.",
+ examples:[
+  "I see a dog.",
+  "I see a cat.",
+  "I see a bird."
+ ],
+ listening:"I see a dog. I see a cat.",
+ speaking:[
+  "A dog.",
+  "A cat.",
+  "I see a bird.",
+  "I like cats."
+ ],
+ reading:"I see a dog and a cat. The dog is big.",
+ exercises:[
+  "Make a dog sound.",
+  "Say cat.",
+  "Say: I see a dog."
+ ],
+ quiz:[
+  ["What is ძაღლი?","cat","dog","fish",1],
+  ["What is კატა?","cat","bird","rabbit",0]
+ ]
+},
+
+{
+ id:7,
+ icon:"🍎",
+ title:"Food",
+ topic:"Food",
+ description:"Learn simple food words.",
+ words:[
+  ["🍎","apple","ვაშლი"],
+  ["🍌","banana","ბანანი"],
+  ["🍞","bread","პური"],
+  ["🥛","milk","რძე"],
+  ["🍕","pizza","პიცა"],
+  ["💧","water","წყალი"]
+ ],
+ grammar:"I like + food.",
+ examples:[
+  "I like apples.",
+  "I like pizza.",
+  "I like milk."
+ ],
+ listening:"I like apples. I like pizza. I drink water.",
+ speaking:[
+  "I like apples.",
+  "I like pizza.",
+  "Water, please.",
+  "I like milk."
+ ],
+ reading:"I like apples and bananas. I drink water.",
+ exercises:[
+  "Say your favorite food.",
+  "Say: Water, please.",
+  "Say: I like pizza."
+ ],
+ quiz:[
+  ["What is წყალი?","milk","water","bread",1],
+  ["What is ვაშლი?","apple","banana","pizza",0]
+ ]
+},
+
+{
+ id:8,
+ icon:"🏫",
+ title:"At School",
+ topic:"School",
+ description:"Learn your first school words.",
+ words:[
+  ["🏫","school","სკოლა"],
+  ["👩‍🏫","teacher","მასწავლებელი"],
+  ["👨‍🎓","student","მოსწავლე"],
+  ["📖","book","წიგნი"],
+  ["✏️","pencil","ფანქარი"],
+  ["🎒","bag","ჩანთა"]
+ ],
+ grammar:"I have a + school thing.",
+ examples:[
+  "I have a book.",
+  "I have a pencil.",
+  "I have a bag."
+ ],
+ listening:"I am at school. I have a book and a pencil.",
+ speaking:[
+  "I am a student.",
+  "I have a book.",
+  "I have a pencil."
+ ],
+ reading:"I am a student. I go to school with my bag.",
+ exercises:[
+  "Show your pencil.",
+  "Say book.",
+  "Say: I am a student."
+ ],
+ quiz:[
+  ["What is სკოლა?","school","home","house",0],
+  ["Who teaches?","student","teacher","baby",1]
+ ]
+},
+
+{
+ id:9,
+ icon:"☀️",
+ title:"Weather",
+ topic:"Weather",
+ description:"Learn easy words about the weather.",
+ words:[
+  ["☀️","sun","მზე"],
+  ["🌧️","rain","წვიმა"],
+  ["☁️","cloud","ღრუბელი"],
+  ["❄️","snow","თოვლი"],
+  ["🌈","rainbow","ცისარტყელა"],
+  ["🔥","hot","ცხელი"]
+ ],
+ grammar:"It is + weather.",
+ examples:[
+  "It is sunny.",
+  "It is rainy.",
+  "It is hot."
+ ],
+ listening:"The sun is bright. It is sunny today.",
+ speaking:[
+  "It is sunny.",
+  "It is rainy.",
+  "It is hot.",
+  "I like the sun."
+ ],
+ reading:"It is sunny today. The sky is blue.",
+ exercises:[
+  "Look outside.",
+  "Say the weather.",
+  "Say: It is sunny."
+ ],
+ quiz:[
+  ["What is მზე?","sun","rain","snow",0],
+  ["What is თოვლი?","cloud","snow","rain",1]
+ ]
+},
+
+{
+ id:10,
+ icon:"🧍",
+ title:"My Body",
+ topic:"Body",
+ description:"Learn simple body words.",
+ words:[
+  ["👁️","eye","თვალი"],
+  ["👂","ear","ყური"],
+  ["👃","nose","ცხვირი"],
+  ["👄","mouth","პირი"],
+  ["✋","hand","ხელი"],
+  ["🦶","foot","ფეხი"]
+ ],
+ grammar:"This is my + body part.",
+ examples:[
+  "This is my eye.",
+  "This is my hand.",
+  "This is my nose."
+ ],
+ listening:"This is my head. These are my eyes.",
+ speaking:[
+  "My eyes.",
+  "My hand.",
+  "My nose.",
+  "My foot."
+ ],
+ reading:"I have two eyes. I have two hands.",
+ exercises:[
+  "Touch your nose.",
+  "Show your hand.",
+  "Say: My eyes."
+ ],
+ quiz:[
+  ["What is თვალი?","eye","ear","nose",0],
+  ["What is ხელი?","foot","hand","mouth",1]
+ ]
+},
+
+{
+ id:11,
+ icon:"😀",
+ title:"Feelings",
+ topic:"Feelings",
+ description:"Learn how to say how you feel.",
+ words:[
+  ["😀","happy","ბედნიერი"],
+  ["😢","sad","სევდიანი"],
+  ["😴","tired","დაღლილი"],
+  ["😡","angry","გაბრაზებული"],
+  ["😍","love","სიყვარული"],
+  ["😊","good","კარგად"]
+ ],
+ grammar:"I am + feeling.",
+ examples:[
+  "I am happy.",
+  "I am tired.",
+  "I am good."
+ ],
+ listening:"I am happy today. I love English!",
+ speaking:[
+  "I am happy.",
+  "I am good.",
+  "I am tired.",
+  "I love English."
+ ],
+ reading:"I am happy. I like my school and my friends.",
+ exercises:[
+  "Show a happy face.",
+  "Say: I am happy.",
+  "Say: I love English."
+ ],
+ quiz:[
+  ["What is ბედნიერი?","sad","happy","tired",1],
+  ["What is დაღლილი?","tired","good","angry",0]
+ ]
+},
+
+{
+ id:12,
+ icon:"⭐",
+ title:"My First English Review",
+ topic:"Review",
+ description:"Review the most important Grade 1 words and phrases.",
+ words:[
+  ["👋","hello","გამარჯობა"],
+  ["❤️","love","სიყვარული"],
+  ["📚","book","წიგნი"],
+  ["🐶","dog","ძაღლი"],
+  ["🍎","apple","ვაშლი"],
+  ["🏠","house","სახლი"],
+  ["🌞","sun","მზე"],
+  ["😊","happy","ბედნიერი"]
+ ],
+ grammar:"I am. I have. I like. This is.",
+ examples:[
+  "I am happy.",
+  "I have a book.",
+  "I like apples.",
+  "This is my house."
+ ],
+ listening:"Hello! I am happy. I have a book. I like apples.",
+ speaking:[
+  "Hello!",
+  "My name is ___.",
+  "I am happy.",
+  "I like English.",
+  "Thank you!"
+ ],
+ reading:"Hello! My name is Luka. I am happy. I have a book. I like English.",
+ exercises:[
+  "Say your name.",
+  "Say one English word.",
+  "Say: I am happy.",
+  "Say: I like English."
+ ],
+ quiz:[
+  ["What does 'hello' mean?","გამარჯობა","მადლობა","ნახვამდის",0],
+  ["What does 'book' mean?","სკოლა","წიგნი","სახლი",1],
+  ["What does 'happy' mean?","ბედნიერი","დაღლილი","სევდიანი",0],
+  ["Complete: I ___ happy.","am","is","are",0]
+ ]
+}
+
+];
+
+
+let currentLesson=null;
+let currentTab="overview";
+
+
+function renderLessons(){
+
+  const host=document.getElementById("lessons");
+
+  host.innerHTML=lessons.map((lesson,index)=>`
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        LESSON ${lesson.id}
+      </div>
+
+      <div class="lesson-icon">
+        ${lesson.icon}
+      </div>
+
+      <div class="lesson-topic">
+        ${lesson.topic}
+      </div>
+
+      <h2>
+        ${lesson.title}
+      </h2>
+
+      <p>
+        ${lesson.description}
+      </p>
+
+      <div class="pills">
+        <span class="pill">WORDS</span>
+        <span class="pill">GRAMMAR</span>
+        <span class="pill">LISTENING</span>
+        <span class="pill">SPEAKING</span>
+        <span class="pill">READING</span>
+        <span class="pill">EXERCISES</span>
+        <span class="pill">QUIZ</span>
+      </div>
+
+      <button
+        class="open"
+        onclick="openLesson(${lesson.id})">
+
+        🚀 OPEN LESSON
+
+      </button>
+
+    </article>
+
+  `).join("");
+
+}
+
+
+function openLesson(id){
+
+  currentLesson=lessons.find(x=>x.id===id);
+
+  if(!currentLesson)return;
+
+  currentTab="overview";
+
+  document.getElementById("modalTitle").textContent=
+    `LESSON ${currentLesson.id} — ${currentLesson.title}`;
+
+  renderTabs();
+
+  renderContent();
+
+  document.getElementById("modal").classList.add("open");
+
+}
+
+
+function closeLesson(){
+
+  document.getElementById("modal").classList.remove("open");
+
+}
+
+
+function renderTabs(){
+
+  const tabs=[
+    ["overview","🌟 START"],
+    ["words","🔤 WORDS"],
+    ["grammar","📘 GRAMMAR"],
+    ["listening","🎧 LISTENING"],
+    ["speaking","🗣️ SPEAKING"],
+    ["reading","📖 READING"],
+    ["exercises","📝 EXERCISES"],
+    ["quiz","🎯 QUIZ"]
+  ];
+
+  document.getElementById("tabs").innerHTML=
+
+    tabs.map(tab=>`
+
+      <button
+        class="tab ${currentTab===tab[0]?"active":""}"
+        onclick="switchTab('${tab[0]}')">
+
+        ${tab[1]}
+
+      </button>
+
+    `).join("");
+
+}
+
+
+function switchTab(tab){
+
+  currentTab=tab;
+
+  renderTabs();
+
+  renderContent();
+
+}
+
+
+function renderContent(){
+
+  const l=currentLesson;
+
+  if(!l)return;
+
+  const content=document.getElementById("content");
+
+
+  if(currentTab==="overview"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>🌟 Welcome!</h3>
+
+        <p class="big">
+          ${l.description}
+        </p>
+
+        <p class="big">
+          დღეს ვისწავლით:
+          <br><br>
+          🔤 ახალ სიტყვებს<br>
+          📘 მარტივ Grammar-ს<br>
+          🎧 Listening-ს<br>
+          🗣️ Speaking-ს<br>
+          📖 Reading-ს<br>
+          📝 Exercises-ს<br>
+          🎯 Quiz-ს
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="words"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          🔤 New Words
+        </h3>
+
+        <div class="word-grid">
+
+          ${l.words.map(w=>`
+
+            <div class="word">
+
+              <strong>
+                ${w[0]} ${w[1]}
+              </strong>
+
+              <span>
+                ${w[2]}
+              </span>
+
+            </div>
+
+          `).join("")}
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="grammar"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          📘 Grammar
+        </h3>
+
+        <p class="big">
+          ${l.grammar}
+        </p>
+
+        <h3>
+          ✏️ Examples
+        </h3>
+
+        ${l.examples.map(x=>`
+
+          <div class="example">
+            ${x}
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="listening"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          🎧 Listening
+        </h3>
+
+        <p class="big">
+          ${l.listening}
+        </p>
+
+        <button
+          class="btn home"
+          onclick="speakText()">
+
+          🔊 Listen
+
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="speaking"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          🗣️ Speaking
+        </h3>
+
+        ${l.speaking.map(x=>`
+
+          <div class="example">
+            ${x}
+          </div>
+
+        `).join("")}
+
+        <br>
+
+        <button
+          class="btn home"
+          onclick="speakText()">
+
+          🔊 Hear the lesson
+
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="reading"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          📖 Reading
+        </h3>
+
+        <p class="big">
+          ${l.reading}
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="exercises"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          📝 Easy Exercises
+        </h3>
+
+        ${l.exercises.map((x,i)=>`
+
+          <div class="exercise">
+
+            <b>
+              ${i+1}. ${x}
+            </b>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+  }
+
+
+  if(currentTab==="quiz"){
+
+    content.innerHTML=`
+
+      <div class="card">
+
+        <h3>
+          🎯 Mini Quiz
+        </h3>
+
+        <div id="quiz">
+
+          ${l.quiz.map((q,i)=>`
+
+            <div class="quiz-question">
+
+              <b>
+                ${i+1}. ${q[0]}
+              </b>
+
+              <button
+                class="quiz-option"
+                onclick="answerQuiz(this,${i},0)">
+                ${q[1]}
+              </button>
+
+              <button
+                class="quiz-option"
+                onclick="answerQuiz(this,${i},1)">
+                ${q[2]}
+              </button>
+
+              <button
+                class="quiz-option"
+                onclick="answerQuiz(this,${i},2)">
+                ${q[3]}
+              </button>
+
+            </div>
+
+          `).join("")}
+
+        </div>
+
+        <div id="score"></div>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+let quizScore=0;
+let quizAnswered=0;
+let answeredQuestions={};
+
+
+function answerQuiz(button,index,answer){
+
+  if(answeredQuestions[index])return;
+
+  answeredQuestions[index]=true;
+
+  const correct=currentLesson.quiz[index][4];
+
+  if(answer===correct){
+
+    button.classList.add("good");
+
+    quizScore++;
+
+  }else{
+
+    button.classList.add("bad");
+
+  }
+
+  quizAnswered++;
+
+  if(quizAnswered===currentLesson.quiz.length){
+
+    document.getElementById("score").innerHTML=`
+
+      <div class="score">
+
+        ⭐ YOUR SCORE:
+        ${quizScore}/${currentLesson.quiz.length}
+
+        <br><br>
+
+        ${
+          quizScore===currentLesson.quiz.length
+          ?"🏆 Perfect! Amazing!"
+          :"🌱 Great try! Keep learning!"
+        }
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+function speakText(){
+
+  if(!currentLesson)return;
+
+  const text=
+
+    currentLesson.listening+
+    " "+
+    currentLesson.speaking.join(". ");
+
+  if("speechSynthesis" in window){
+
+    speechSynthesis.cancel();
+
+    const utterance=
+      new SpeechSynthesisUtterance(text);
+
+    utterance.lang="en-US";
+    utterance.rate=.78;
+    utterance.pitch=1.05;
+
+    speechSynthesis.speak(utterance);
+
+  }
+
+}
+
+
+document.getElementById("modal").addEventListener(
+  "click",
+  function(e){
+
+    if(e.target===this){
+      closeLesson();
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key==="Escape"){
+      closeLesson();
+    }
+
+  }
+);
+
+
+renderLessons();
+
+</script>
+
 </body>
 </html>
