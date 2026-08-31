@@ -1,7 +1,7 @@
 /* English with Mariami — public Supabase browser configuration.
    This uses the publishable key, never a service_role/secret key. */
 
-window.SUPABASE_URL = 'https://vtdhvsfqhwesxtwmduew.supabase.co';
+window.SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue.supabase.co';
 
 window.SUPABASE_PUBLISHABLE_KEY =
   'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
@@ -154,4 +154,30 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
   const src='dashboard-progress.js';
   if(document.querySelector('script[data-english-mariami-dashboard-progress]'))return;
   const s=document.createElement('script');s.src=src;s.async=true;s.dataset.englishMariamiDashboardProgress='1';document.head.appendChild(s);
+})();
+
+/* =========================================================
+   DIRECT MATERIAL BROWSER
+   Loaded only on Grade 2/3/4 pages, after the document exists.
+   It does not modify lessons, progress, profiles or quiz results.
+========================================================= */
+(function(){
+  'use strict';
+  const path=(location.pathname||'').toLowerCase();
+  if(!/grade[234]\.html$/.test(path)) return;
+
+  function loadAccessible(){
+    if(document.querySelector('script[data-english-mariami-accessible]')) return;
+    const s=document.createElement('script');
+    s.src='grade-accessible.js';
+    s.async=true;
+    s.dataset.englishMariamiAccessible='1';
+    document.body.appendChild(s);
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',loadAccessible,{once:true});
+  }else{
+    loadAccessible();
+  }
 })();
