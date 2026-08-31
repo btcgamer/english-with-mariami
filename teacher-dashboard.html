@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#020617">
 <title>English with Mariami — Teacher Command Center</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -10,21 +11,20 @@
 
 <style>
 :root{
-  --bg:#02050d;
-  --panel:rgba(7,16,32,.88);
-  --panel2:rgba(10,25,48,.92);
-  --cyan:#00f0ff;
-  --blue:#237cff;
-  --purple:#9d4edd;
-  --pink:#ff2bd6;
-  --green:#00ffa6;
+  --bg:#020617;
+  --bg2:#07152b;
+  --card:rgba(7,20,42,.82);
+  --line:rgba(0,234,255,.22);
+  --cyan:#00eaff;
+  --blue:#2878ff;
+  --purple:#9b5cff;
+  --pink:#ff3cac;
+  --green:#00f5a0;
   --yellow:#ffe600;
-  --red:#ff315d;
-  --orange:#ff9d00;
-  --text:#f4fbff;
-  --muted:#8ca8ba;
-  --line:rgba(0,240,255,.17);
-  --shadow:0 20px 80px rgba(0,0,0,.5);
+  --red:#ff426d;
+  --text:#f5fbff;
+  --muted:#91a9bc;
+  --shadow:0 25px 80px rgba(0,0,0,.5);
 }
 
 *{box-sizing:border-box}
@@ -37,78 +37,73 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--text);
-  font-family:Inter,Arial,system-ui,sans-serif;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   background:
-    radial-gradient(circle at 10% 5%,rgba(0,240,255,.14),transparent 25%),
-    radial-gradient(circle at 90% 8%,rgba(255,43,214,.13),transparent 25%),
-    radial-gradient(circle at 50% 100%,rgba(35,124,255,.14),transparent 35%),
-    #02050d;
+    radial-gradient(circle at 10% 5%,rgba(0,234,255,.14),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(155,92,255,.16),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(255,60,172,.08),transparent 35%),
+    linear-gradient(135deg,#01040b,#031126 55%,#020617);
   overflow-x:hidden;
 }
 
-/* ---------- FUTURISTIC BACKGROUND ---------- */
-
-.grid{
+body:before{
+  content:"";
   position:fixed;
   inset:0;
-  z-index:-5;
-  opacity:.18;
-  background-image:
-    linear-gradient(rgba(0,240,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,240,255,.07) 1px,transparent 1px);
-  background-size:42px 42px;
-  transform:perspective(700px) rotateX(55deg) scale(1.8);
-  transform-origin:center bottom;
-  animation:gridMove 15s linear infinite;
-}
-
-@keyframes gridMove{
-  from{background-position:0 0,0 0}
-  to{background-position:0 420px,420px 0}
-}
-
-.orb{
-  position:fixed;
-  width:320px;
-  height:320px;
-  border-radius:50%;
-  filter:blur(90px);
-  z-index:-4;
   pointer-events:none;
-  animation:float 8s ease-in-out infinite;
+  z-index:-2;
+  opacity:.25;
+  background-image:
+    linear-gradient(rgba(0,234,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.07) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,#000,transparent 90%);
 }
 
-.orb.a{
-  background:rgba(0,240,255,.10);
-  left:-120px;
-  top:20%;
+body:after{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  border-radius:50%;
+  right:-200px;
+  top:200px;
+  background:rgba(0,234,255,.08);
+  filter:blur(100px);
+  pointer-events:none;
+  z-index:-1;
 }
 
-.orb.b{
-  background:rgba(255,43,214,.09);
-  right:-120px;
-  top:45%;
-  animation-delay:-3s;
+button,input,select,textarea{
+  font:inherit;
 }
 
-@keyframes float{
-  50%{transform:translateY(-35px) scale(1.08)}
+button{
+  cursor:pointer;
 }
 
-/* ---------- HEADER ---------- */
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
 
-header{
+.wrap{
+  width:min(1480px,calc(100% - 28px));
+  margin:auto;
+}
+
+/* TOP */
+
+.top{
   position:sticky;
   top:0;
-  z-index:1000;
-  backdrop-filter:blur(22px);
-  background:rgba(2,5,13,.78);
+  z-index:5000;
   border-bottom:1px solid var(--line);
+  background:rgba(1,6,18,.78);
+  backdrop-filter:blur(22px);
 }
 
 .nav{
-  width:min(1500px,calc(100% - 28px));
-  margin:auto;
   min-height:74px;
   display:flex;
   align-items:center;
@@ -126,24 +121,27 @@ header{
 .logo{
   width:48px;
   height:48px;
+  border-radius:15px;
   display:grid;
   place-items:center;
-  border-radius:15px;
   font-size:25px;
-  background:linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
+  background:
+    linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
   box-shadow:
-    0 0 20px rgba(0,240,255,.3),
-    0 0 50px rgba(157,78,221,.15);
+    0 0 25px rgba(0,234,255,.25),
+    inset 0 0 20px rgba(255,255,255,.1);
+  animation:logoFloat 4s ease-in-out infinite;
 }
 
-.brand-title{
-  font-size:15px;
+@keyframes logoFloat{
+  50%{transform:translateY(-3px) rotate(2deg)}
 }
 
-.brand-sub{
-  font-size:9px;
-  letter-spacing:1.8px;
+.brand small{
+  display:block;
   color:var(--muted);
+  font-size:9px;
+  letter-spacing:1.5px;
   margin-top:3px;
 }
 
@@ -152,124 +150,99 @@ header{
   gap:8px;
 }
 
-/* ---------- BUTTONS ---------- */
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+/* BUTTONS */
 
 .btn{
-  min-height:42px;
-  padding:10px 14px;
-  border-radius:12px;
   border:1px solid rgba(255,255,255,.12);
-  color:#fff;
-  background:rgba(255,255,255,.06);
+  border-radius:13px;
+  padding:10px 14px;
+  min-height:43px;
+  color:white;
+  background:rgba(255,255,255,.055);
   font-weight:850;
   transition:.2s;
 }
 
 .btn:hover{
   transform:translateY(-2px);
-  border-color:var(--cyan);
-  box-shadow:0 0 25px rgba(0,240,255,.13);
+  border-color:rgba(0,234,255,.5);
+  box-shadow:0 0 28px rgba(0,234,255,.12);
 }
 
-.primary{
-  background:linear-gradient(135deg,#0874ff,#00cfe8);
+.btn.cyan{
+  background:linear-gradient(135deg,#0878ff,#00c8e8);
 }
 
-.green{
-  background:linear-gradient(135deg,#009c6a,#00e99d);
+.btn.green{
+  background:linear-gradient(135deg,#00a86b,#00e19d);
 }
 
-.purple{
-  background:linear-gradient(135deg,#6b35d7,#b04cff);
+.btn.purple{
+  background:linear-gradient(135deg,#6731d0,#a855f7);
 }
 
-.yellow{
-  color:#08101b;
-  background:linear-gradient(135deg,#ffe600,#ffb700);
+.btn.yellow{
+  color:#07111e;
+  background:linear-gradient(135deg,#ffe600,#ffb800);
 }
 
-.red{
-  background:linear-gradient(135deg,#d31c4c,#ff315d);
+.btn.red{
+  background:linear-gradient(135deg,#c7194b,#ff3864);
 }
 
-.orange{
-  color:#08101b;
-  background:linear-gradient(135deg,#ffbd00,#ff7b00);
+.btn.blue{
+  background:linear-gradient(135deg,#1755db,#398aff);
 }
 
-.small-btn{
-  min-height:35px;
-  padding:7px 10px;
-  font-size:11px;
-}
-
-/* ---------- WRAPPER ---------- */
-
-.wrap{
-  width:min(1500px,calc(100% - 28px));
-  margin:auto;
-}
-
-/* ---------- HERO ---------- */
+/* HERO */
 
 .hero{
-  padding:35px 0 20px;
+  padding:38px 0 18px;
 }
 
 .hero-grid{
   display:grid;
   grid-template-columns:1.4fr .6fr;
-  gap:16px;
+  gap:18px;
 }
 
+.hero-card,
 .card{
   position:relative;
-  background:
-    linear-gradient(145deg,rgba(9,27,51,.94),rgba(3,12,25,.91));
-  border:1px solid var(--line);
-  border-radius:24px;
-  box-shadow:var(--shadow);
   overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:
+    linear-gradient(145deg,rgba(8,27,54,.9),rgba(2,13,29,.88));
+  box-shadow:var(--shadow);
 }
 
+.hero-card:after,
 .card:after{
   content:"";
   position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(
-    120deg,
-    transparent 25%,
-    rgba(255,255,255,.035),
-    transparent 65%
-  );
+  width:250px;
+  height:1px;
+  left:-50px;
+  top:0;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  opacity:.7;
 }
 
-.hero-card{
-  padding:30px;
-  min-height:245px;
+.hero-main{
+  padding:32px;
 }
 
 .kicker{
   color:var(--cyan);
   font-size:11px;
   font-weight:1000;
-  letter-spacing:2px;
+  letter-spacing:2.5px;
 }
 
 .hero h1{
-  margin:12px 0;
-  font-size:clamp(2.2rem,5vw,4.8rem);
+  margin:11px 0;
+  font-size:clamp(2.2rem,5vw,4.7rem);
   line-height:.95;
   letter-spacing:-3px;
 }
@@ -285,29 +258,23 @@ button{
   );
   -webkit-background-clip:text;
   color:transparent;
-  background-size:300%;
-  animation:gradient 5s linear infinite;
-}
-
-@keyframes gradient{
-  to{background-position:300%}
 }
 
 .hero p{
-  color:#aac1ce;
-  line-height:1.65;
   max-width:850px;
+  line-height:1.7;
+  color:#b8ccda;
 }
 
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
-  margin-top:18px;
+  gap:9px;
+  margin-top:20px;
 }
 
 .system{
-  padding:25px;
+  padding:28px;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -321,13 +288,13 @@ button{
   font-weight:1000;
 }
 
-.dot{
+.online-dot{
   width:10px;
   height:10px;
   border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 20px var(--green);
-  animation:pulse 1.3s infinite;
+  box-shadow:0 0 18px var(--green);
+  animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
@@ -335,71 +302,73 @@ button{
 }
 
 .system h2{
-  margin:12px 0 3px;
+  margin:14px 0 4px;
 }
 
-/* ---------- STATS ---------- */
+/* STATS */
 
 .stats{
   display:grid;
   grid-template-columns:repeat(6,1fr);
-  gap:10px;
-  margin:8px 0 18px;
+  gap:11px;
+  margin:15px 0;
 }
 
 .stat{
-  padding:16px;
-  border-radius:17px;
+  padding:17px;
+  min-height:100px;
   border:1px solid var(--line);
-  background:rgba(5,20,39,.76);
+  border-radius:19px;
+  background:rgba(5,21,42,.72);
 }
 
 .stat small{
-  display:block;
   color:var(--muted);
   font-size:10px;
+  font-weight:800;
 }
 
 .stat b{
   display:block;
-  margin-top:5px;
-  font-size:25px;
+  margin-top:6px;
+  font-size:28px;
 }
 
-/* ---------- MAIN ---------- */
+/* LAYOUT */
 
-.main{
+.dashboard{
   display:grid;
-  grid-template-columns:250px 1fr;
+  grid-template-columns:245px 1fr;
   gap:17px;
   padding-bottom:60px;
 }
 
 .sidebar{
-  padding:11px;
   height:max-content;
+  padding:12px;
   position:sticky;
-  top:90px;
+  top:91px;
 }
 
 .side-label{
-  padding:12px 10px 7px;
   color:var(--muted);
   font-size:10px;
-  letter-spacing:1.5px;
   font-weight:1000;
+  letter-spacing:2px;
+  padding:12px;
 }
 
 .menu{
   width:100%;
-  text-align:left;
   border:0;
-  color:#c9dce6;
-  background:transparent;
-  border-radius:12px;
-  padding:12px;
+  border-radius:13px;
+  padding:13px;
   margin:2px 0;
-  font-weight:800;
+  text-align:left;
+  color:#c9d9e2;
+  background:transparent;
+  font-weight:850;
+  transition:.2s;
 }
 
 .menu:hover,
@@ -407,14 +376,10 @@ button{
   color:#fff;
   background:linear-gradient(
     90deg,
-    rgba(0,240,255,.14),
-    rgba(157,78,221,.12)
+    rgba(0,234,255,.15),
+    rgba(155,92,255,.1)
   );
   box-shadow:inset 3px 0 var(--cyan);
-}
-
-.content{
-  min-width:0;
 }
 
 .panel{
@@ -425,20 +390,20 @@ button{
   display:block;
 }
 
-.section{
-  padding:23px;
-  margin-bottom:16px;
+.card{
+  padding:22px;
+  margin-bottom:17px;
 }
 
 .section-head{
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:flex-start;
   gap:15px;
   margin-bottom:18px;
 }
 
-.section h2{
+.section-head h2{
   margin:0;
   font-size:22px;
 }
@@ -448,70 +413,77 @@ button{
 }
 
 .small{
-  font-size:11px;
+  font-size:12px;
 }
 
-/* ---------- FORMS ---------- */
+/* FORM */
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:12px;
 }
 
 .field label{
   display:block;
-  color:#9db8c7;
-  font-size:11px;
-  font-weight:800;
   margin-bottom:6px;
+  color:#a8bfcc;
+  font-size:11px;
+  font-weight:850;
 }
 
 .input,
-select{
+select,
+textarea{
   width:100%;
-  min-height:44px;
-  padding:9px 11px;
-  border-radius:11px;
+  min-height:45px;
+  border:1px solid rgba(0,234,255,.16);
+  border-radius:12px;
   outline:none;
-  border:1px solid rgba(0,240,255,.15);
+  padding:10px 12px;
+  color:#fff;
   background:#041326;
-  color:white;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
 }
 
 .input:focus,
-select:focus{
+select:focus,
+textarea:focus{
   border-color:var(--cyan);
-  box-shadow:0 0 0 3px rgba(0,240,255,.08);
+  box-shadow:0 0 0 3px rgba(0,234,255,.08);
 }
 
-/* ---------- STUDENTS ---------- */
+/* STUDENTS */
 
-.search{
+.search-row{
   display:grid;
-  grid-template-columns:1fr 170px auto;
+  grid-template-columns:1fr 180px auto;
   gap:8px;
 }
 
 .students{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:11px;
-  margin-top:15px;
+  gap:12px;
+  margin-top:16px;
 }
 
 .student{
-  padding:17px;
-  border-radius:18px;
-  border:1px solid rgba(0,240,255,.14);
-  background:linear-gradient(145deg,#071e38,#041326);
+  padding:18px;
+  border:1px solid rgba(0,234,255,.14);
+  border-radius:20px;
+  background:linear-gradient(145deg,#071e3a,#041326);
   transition:.2s;
 }
 
 .student:hover{
   transform:translateY(-3px);
-  border-color:rgba(0,240,255,.42);
-  box-shadow:0 15px 40px rgba(0,0,0,.3);
+  border-color:rgba(0,234,255,.45);
+  box-shadow:0 18px 50px rgba(0,0,0,.3);
 }
 
 .student-top{
@@ -526,206 +498,211 @@ select:focus{
 }
 
 .avatar{
-  width:45px;
-  height:45px;
+  width:46px;
+  height:46px;
   border-radius:14px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#083d62,#47237c);
+  background:linear-gradient(135deg,#08416c,#56258b);
   font-size:21px;
 }
 
 .name{
   font-weight:1000;
-  font-size:16px;
+  font-size:17px;
+}
+
+.email{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
 }
 
 .badge{
   height:max-content;
-  padding:5px 8px;
-  border-radius:8px;
-  background:rgba(0,240,255,.08);
+  padding:6px 9px;
+  border-radius:9px;
   color:var(--cyan);
+  background:rgba(0,234,255,.08);
   font-size:10px;
   font-weight:1000;
 }
 
-.student-info{
-  margin:10px 0;
-  color:var(--muted);
-  font-size:11px;
-}
+.g2{color:#5cff9d;background:rgba(0,245,160,.08)}
+.g3{color:#00eaff;background:rgba(0,234,255,.08)}
+.g4{color:#ffe600;background:rgba(255,230,0,.08)}
 
 .student-actions{
   display:flex;
   flex-wrap:wrap;
+  gap:6px;
+  margin-top:14px;
+}
+
+.student-actions .btn{
+  min-height:37px;
+  padding:7px 10px;
+  font-size:11px;
+}
+
+/* ATTENDANCE */
+
+.attendance-toolbar{
+  display:flex;
+  gap:8px;
+  align-items:end;
+}
+
+.attendance-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.attendance-row{
+  padding:14px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;
+  background:#04162b;
+}
+
+.att-name{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.att-buttons{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
   gap:5px;
 }
 
-/* ---------- ATTENDANCE ---------- */
-
-.attendance{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
+.att-btn{
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:9px;
+  padding:8px 5px;
+  color:white;
+  background:#09223d;
+  font-size:10px;
+  font-weight:900;
 }
 
-.att-row{
-  padding:13px;
-  border:1px solid rgba(255,255,255,.07);
-  background:#04152a;
-  border-radius:14px;
+.att-btn:hover{
+  border-color:var(--cyan);
 }
 
-.att-top{
+.att-btn.present{background:#075f49}
+.att-btn.late{background:#725600}
+.att-btn.absent{background:#6b2038}
+.att-btn.break{background:#293b54}
+.att-btn.left{background:#45285d}
+
+/* TOPICS */
+
+.topic-toolbar{
   display:flex;
-  justify-content:space-between;
   gap:8px;
   align-items:center;
 }
 
-.att-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin-top:10px;
-}
-
-.att{
-  flex:1;
-  min-width:90px;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:9px;
-  padding:8px;
-  color:white;
-  background:#09233e;
-  font-size:11px;
-  font-weight:900;
-}
-
-.att:hover{
-  border-color:var(--cyan);
-}
-
-.att.present{background:#075f49}
-.att.absent{background:#681e37}
-.att.late{background:#745800}
-.att.left{background:#263c54}
-.att.break{background:#4b2370}
-
-/* ---------- LESSONS ---------- */
-
-.lesson-tools{
+.topic-grid{
   display:grid;
-  grid-template-columns:170px 1fr auto;
-  gap:9px;
-  margin-bottom:15px;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
 }
 
-.lessons{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-
-.lesson{
+.topic{
   position:relative;
-  min-height:175px;
+  min-height:165px;
   padding:18px;
-  border-radius:18px;
-  border:1px solid rgba(0,240,255,.15);
-  background:
-    linear-gradient(145deg,#082747,#04162d);
+  border:1px solid rgba(0,234,255,.13);
+  border-radius:20px;
   cursor:pointer;
-  transition:.2s;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(155,92,255,.15),transparent 45%),
+    linear-gradient(145deg,#092544,#041326);
+  transition:.25s;
 }
 
-.lesson:hover{
-  transform:translateY(-5px) rotateX(2deg);
-  border-color:var(--cyan);
-  box-shadow:0 15px 45px rgba(0,240,255,.09);
-}
-
-.lesson-icon{
-  font-size:29px;
-}
-
-.lesson h3{
-  margin:10px 0 6px;
-}
-
-.lesson p{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.5;
-}
-
-.lesson-grade{
+.topic:before{
+  content:"";
   position:absolute;
-  top:13px;
-  right:13px;
-  font-size:10px;
-  color:var(--yellow);
+  inset:-100%;
+  background:linear-gradient(
+    110deg,
+    transparent 40%,
+    rgba(0,234,255,.09) 50%,
+    transparent 60%
+  );
+  transform:rotate(20deg);
+  transition:.5s;
 }
 
-/* ---------- MATERIALS ---------- */
-
-.material-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
+.topic:hover:before{
+  inset:-30%;
 }
 
-.material{
-  padding:18px;
-  border-radius:17px;
-  border:1px solid var(--line);
-  background:#061a31;
+.topic:hover{
+  transform:translateY(-6px) perspective(700px) rotateX(3deg);
+  border-color:rgba(0,234,255,.5);
+  box-shadow:0 20px 55px rgba(0,234,255,.1);
 }
 
-.material h3{
-  margin:0 0 8px;
+.topic-icon{
+  font-size:31px;
 }
 
-.material-content{
-  color:#c3d8e2;
-  font-size:13px;
-  line-height:1.7;
-  white-space:pre-wrap;
+.topic b{
+  display:block;
+  margin:10px 0 5px;
+  font-size:16px;
 }
 
-.material-content:empty:after{
-  content:"მასალა ჯერ არ არის ჩაწერილი";
+.topic small{
   color:var(--muted);
+  line-height:1.45;
 }
 
-/* ---------- PROGRESS ---------- */
+.topic .lesson-count{
+  position:absolute;
+  right:12px;
+  top:12px;
+  color:var(--cyan);
+  font-size:9px;
+  font-weight:1000;
+}
+
+/* PROGRESS */
 
 .progress-card{
-  padding:16px;
-  margin-bottom:9px;
-  border:1px solid rgba(0,240,255,.13);
-  border-radius:16px;
+  padding:17px;
+  border:1px solid rgba(0,234,255,.12);
+  border-radius:17px;
   background:#04162b;
+  margin-bottom:9px;
 }
 
-.progress-head{
+.progress-top{
   display:flex;
   justify-content:space-between;
   gap:10px;
 }
 
-.bar{
+.progress{
   height:9px;
-  margin-top:9px;
-  border-radius:20px;
-  background:#020d1b;
   overflow:hidden;
+  border-radius:20px;
+  margin-top:10px;
+  background:#020d1c;
 }
 
-.bar i{
+.progress i{
   display:block;
   height:100%;
+  border-radius:20px;
   background:linear-gradient(
     90deg,
     var(--blue),
@@ -735,18 +712,70 @@ select:focus{
   );
 }
 
-/* ---------- MODAL ---------- */
+/* GRADES */
+
+.grade-row,
+.history-row{
+  display:grid;
+  grid-template-columns:1fr 100px 180px;
+  gap:10px;
+  align-items:center;
+  padding:13px;
+  border-radius:13px;
+  background:#04162b;
+  margin-bottom:7px;
+}
+
+.score{
+  text-align:center;
+  color:var(--yellow);
+  font-weight:1000;
+}
+
+/* LOADING */
+
+.loading{
+  min-height:100px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:var(--muted);
+}
+
+.spinner{
+  width:22px;
+  height:22px;
+  margin-right:8px;
+  border:3px solid rgba(255,255,255,.1);
+  border-top-color:var(--cyan);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.empty{
+  padding:35px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed rgba(255,255,255,.12);
+  border-radius:15px;
+}
+
+/* MODAL */
 
 .modal{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:99999;
   display:none;
   align-items:center;
   justify-content:center;
   padding:16px;
   background:rgba(0,0,0,.78);
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(14px);
 }
 
 .modal.open{
@@ -754,36 +783,162 @@ select:focus{
 }
 
 .modal-box{
-  width:min(1000px,100%);
-  max-height:92vh;
+  width:min(1100px,100%);
+  max-height:94vh;
   overflow:auto;
-  padding:23px;
-  border-radius:24px;
-  border:1px solid rgba(0,240,255,.3);
-  background:#031326;
-  box-shadow:0 30px 100px rgba(0,0,0,.7);
+  padding:24px;
+  border:1px solid rgba(0,234,255,.35);
+  border-radius:27px;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(155,92,255,.13),transparent 30%),
+    #031326;
+  box-shadow:0 35px 120px rgba(0,0,0,.7);
 }
 
 .modal-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  gap:12px;
+  margin-bottom:20px;
 }
 
-/* ---------- TOAST ---------- */
+.modal-head h2{
+  margin:0;
+}
+
+.lesson-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:15px;
+}
+
+.pill{
+  padding:7px 10px;
+  border-radius:10px;
+  color:var(--cyan);
+  background:rgba(0,234,255,.08);
+  border:1px solid rgba(0,234,255,.13);
+  font-size:10px;
+  font-weight:900;
+}
+
+.material-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:13px;
+}
+
+.material{
+  padding:18px;
+  border:1px solid rgba(0,234,255,.12);
+  border-radius:18px;
+  background:#04162b;
+}
+
+.material.full{
+  grid-column:1/-1;
+}
+
+.material h3{
+  margin:0 0 12px;
+}
+
+.material p{
+  color:#c3d4de;
+  line-height:1.7;
+  white-space:pre-wrap;
+}
+
+.word-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+
+.word{
+  padding:12px;
+  border-radius:13px;
+  border:1px solid rgba(0,234,255,.1);
+  background:#061d37;
+}
+
+.word b{
+  display:block;
+  color:#fff;
+}
+
+.word span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.word button{
+  margin-top:7px;
+}
+
+.quiz-item{
+  padding:14px;
+  margin-bottom:8px;
+  border-radius:14px;
+  background:#061d37;
+  border:1px solid rgba(155,92,255,.15);
+}
+
+.quiz-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:9px;
+}
+
+.option{
+  padding:7px 9px;
+  border-radius:8px;
+  background:#09223d;
+  color:#cfe1eb;
+  font-size:11px;
+}
+
+.exercise{
+  padding:12px;
+  border-radius:12px;
+  background:#061d37;
+  margin-bottom:7px;
+  line-height:1.6;
+}
+
+.audio-box{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+
+.audio-box audio{
+  width:min(500px,100%);
+}
+
+.reading-controls{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+/* TOAST */
 
 .toast{
   position:fixed;
   right:18px;
   bottom:18px;
-  z-index:99999;
-  max-width:400px;
+  z-index:100000;
+  max-width:420px;
   padding:14px 17px;
   border-radius:14px;
-  border:1px solid rgba(0,240,255,.3);
-  background:#061c34;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  border:1px solid rgba(0,234,255,.3);
+  background:#061b33;
+  box-shadow:0 15px 60px rgba(0,0,0,.5);
   transform:translateY(30px);
   opacity:0;
   pointer-events:none;
@@ -796,35 +951,25 @@ select:focus{
 }
 
 .toast.ok{
-  border-color:rgba(0,255,166,.5);
+  border-color:rgba(0,245,160,.45);
 }
 
 .toast.err{
-  border-color:rgba(255,49,93,.55);
+  border-color:rgba(255,56,100,.5);
 }
 
-/* ---------- EMPTY ---------- */
-
-.empty{
-  padding:35px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed rgba(255,255,255,.12);
-  border-radius:15px;
-}
-
-/* ---------- RESPONSIVE ---------- */
+/* MOBILE */
 
 @media(max-width:1100px){
   .stats{
     grid-template-columns:repeat(3,1fr);
   }
 
-  .hero-grid{
-    grid-template-columns:1fr;
+  .topic-grid{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .main{
+  .dashboard{
     grid-template-columns:1fr;
   }
 
@@ -832,63 +977,85 @@ select:focus{
     position:static;
   }
 
-  .lessons{
-    grid-template-columns:repeat(2,1fr);
+  .hero-grid{
+    grid-template-columns:1fr;
   }
 }
 
-@media(max-width:700px){
-
-  .wrap,
-  .nav{
-    width:calc(100% - 16px);
-  }
-
-  .brand-sub{
-    display:none;
-  }
-
-  .hero h1{
-    font-size:2.6rem;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
+@media(max-width:800px){
   .students,
-  .attendance,
-  .lessons,
+  .attendance-grid,
   .material-grid{
     grid-template-columns:1fr;
+  }
+
+  .topic-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
   .form-grid{
     grid-template-columns:1fr;
   }
 
-  .search,
-  .lesson-tools{
+  .word-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .search-row{
     grid-template-columns:1fr;
   }
 
-  .section{
-    padding:15px;
+  .grade-row,
+  .history-row{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .wrap{
+    width:calc(100% - 14px);
+  }
+
+  .brand small{
+    display:none;
+  }
+
+  .hero-main{
+    padding:22px;
+  }
+
+  .hero h1{
+    font-size:2.45rem;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .topic-grid{
+    grid-template-columns:1fr;
+  }
+
+  .word-grid{
+    grid-template-columns:1fr;
+  }
+
+  .att-buttons{
+    grid-template-columns:repeat(2,1fr);
   }
 
   .nav-actions .btn{
     font-size:0;
-    padding:10px;
+    padding:9px;
   }
 
-  .nav-actions .btn:first-child:after{
+  .nav-actions .btn:after{
     content:"↻";
     font-size:18px;
   }
 
-  .nav-actions .btn:last-child:after{
+  .nav-actions .btn.red:after{
     content:"🚪";
-    font-size:18px;
   }
 }
 </style>
@@ -896,29 +1063,19 @@ select:focus{
 
 <body>
 
-<div class="grid"></div>
-<div class="orb a"></div>
-<div class="orb b"></div>
-
-<header>
-  <div class="nav">
+<header class="top">
+  <div class="wrap nav">
 
     <div class="brand">
       <div class="logo">🧠</div>
-
       <div>
-        <div class="brand-title">
-          English with Mariami
-        </div>
-
-        <div class="brand-sub">
-          FUTURISTIC TEACHER COMMAND CENTER
-        </div>
+        English with Mariami
+        <small>TEACHER COMMAND CENTER • LIVE SUPABASE</small>
       </div>
     </div>
 
     <div class="nav-actions">
-      <button class="btn" id="syncBtn">↻ Sync</button>
+      <button class="btn" id="refreshBtn">↻ Sync</button>
       <button class="btn red" id="logoutBtn">🚪 გამოსვლა</button>
     </div>
 
@@ -931,63 +1088,59 @@ select:focus{
 
   <div class="hero-grid">
 
-    <div class="card hero-card">
+    <div class="hero-card hero-main">
 
       <div class="kicker">
-        ⚡ TEACHER CONTROL SYSTEM
+        ⚡ FUTURISTIC EDUCATION CONTROL SYSTEM
       </div>
 
       <h1>
-        მართე შენი
-        <span>English Universe</span>
+        TEACHER<br>
+        <span>COMMAND CENTER</span>
       </h1>
 
       <p>
-        Students • Classes • Attendance • Lessons •
-        Listening • Grammar • Reading • Speaking •
-        Questions • Quiz • Exercises • Progress
+        Manage students, grades, attendance, classes and the complete
+        English Learning Universe from one powerful control center.
+        Vocabulary • Grammar • Reading • Listening • Speaking • Exercises • Quiz.
       </p>
 
       <div class="hero-actions">
-
-        <button class="btn primary" data-panel="students">
+        <button class="btn cyan" data-panel="students">
           👥 Students
         </button>
 
-        <button class="btn purple" data-panel="lessons">
-          📚 Lessons
+        <button class="btn purple" data-panel="topics">
+          📚 Learning Universe
         </button>
 
-        <button class="btn green" data-panel="attendance">
+        <button class="btn yellow" data-panel="attendance">
           🧑‍🎓 Attendance
         </button>
 
-        <button class="btn yellow" data-panel="progress">
-          📊 Progress
+        <button class="btn green" data-panel="progress">
+          📊 Intelligence
         </button>
-
       </div>
 
     </div>
 
-    <div class="card system">
+    <div class="hero-card system">
 
       <div class="online">
-        <span class="dot"></span>
+        <span class="online-dot"></span>
         SYSTEM ONLINE
       </div>
 
-      <h2 id="teacherName">
-        Teacher
-      </h2>
+      <h2 id="teacherName">Teacher</h2>
 
       <div class="muted" id="teacherEmail">
         loading...
       </div>
 
-      <div class="small muted" style="margin-top:13px">
-        DATABASE:
-        <b id="dbStatus">CONNECTING...</b>
+      <div class="small muted" style="margin-top:15px">
+        Database:
+        <b id="connectionStatus">checking...</b>
       </div>
 
     </div>
@@ -1030,154 +1183,76 @@ select:focus{
 
 </section>
 
-<section class="main">
+<section class="dashboard">
 
 <aside class="card sidebar">
 
   <div class="side-label">
-    TEACHER CONTROL
+    CONTROL SYSTEM
   </div>
 
   <button class="menu active" data-panel="students">
-    👥 მოსწავლეები
-  </button>
-
-  <button class="menu" data-panel="classes">
-    🎓 კლასის მართვა
+    👥 Student Management
   </button>
 
   <button class="menu" data-panel="attendance">
-    🧑‍🎓 დასწრება
+    🧑‍🎓 Attendance Center
   </button>
 
-  <button class="menu" data-panel="lessons">
-    📚 ყველა თემა
+  <button class="menu" data-panel="topics">
+    🌌 Learning Universe
   </button>
 
-  <button class="menu" data-panel="listening">
-    🎧 Listening
-  </button>
-
-  <button class="menu" data-panel="grammar">
-    ✍️ Grammar
-  </button>
-
-  <button class="menu" data-panel="reading">
-    📖 Reading
-  </button>
-
-  <button class="menu" data-panel="speaking">
-    🗣️ Speaking
-  </button>
-
-  <button class="menu" data-panel="questions">
-    ❓ Questions
-  </button>
-
-  <button class="menu" data-panel="quiz">
-    🎯 Quiz
-  </button>
-
-  <button class="menu" data-panel="exercises">
-    📝 Exercises
+  <button class="menu" data-panel="grades">
+    ⭐ Grade Journal
   </button>
 
   <button class="menu" data-panel="progress">
-    📊 Progress
+    📊 Student Intelligence
+  </button>
+
+  <button class="menu" data-panel="history">
+    📋 Activity History
   </button>
 
 </aside>
 
 <div class="content">
 
-<!-- =====================================================
-     STUDENTS
-===================================================== -->
+<!-- STUDENTS -->
 
 <section class="panel active" id="panel-students">
 
-  <div class="card section">
+<div class="card">
 
-    <div class="section-head">
+  <div class="section-head">
 
-      <div>
-        <h2>👥 Student Management</h2>
+    <div>
+      <h2>👥 Student Management</h2>
 
-        <div class="muted small">
-          დაამატე მოსწავლე და მართე მისი კლასი.
-        </div>
+      <div class="muted small">
+        Add students, assign classes and change Grade instantly.
       </div>
-
-    </div>
-
-    <div class="form-grid">
-
-      <div class="field">
-        <label>Student Email</label>
-        <input
-          class="input"
-          id="newStudentEmail"
-          type="email"
-          placeholder="student@email.com"
-        >
-      </div>
-
-      <div class="field">
-        <label>Grade</label>
-
-        <select id="newStudentGrade">
-          <option value="2">🌱 Grade 2</option>
-          <option value="3">🚀 Grade 3</option>
-          <option value="4">⭐ Grade 4</option>
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>Action</label>
-
-        <button
-          class="btn primary"
-          id="addStudent"
-          style="width:100%"
-        >
-          ➕ მოსწავლის დამატება
-        </button>
-
-      </div>
-
     </div>
 
   </div>
 
-  <div class="card section">
+  <div class="form-grid">
 
-    <div class="section-head">
-
-      <div>
-        <h2>🎓 Students Database</h2>
-
-        <div class="muted small">
-          მოძებნე სახელით, Email-ით ან აირჩიე Grade.
-        </div>
-      </div>
-
-    </div>
-
-    <div class="search">
-
+    <div class="field">
+      <label>STUDENT EMAIL</label>
       <input
         class="input"
-        id="studentSearch"
-        placeholder="🔎 Search student..."
-      >
+        id="studentEmail"
+        type="email"
+        placeholder="student@email.com">
+    </div>
 
-      <select id="studentGradeFilter">
+    <div class="field">
 
-        <option value="all">
-          ყველა Grade
-        </option>
+      <label>SELECT GRADE</label>
+
+      <select id="studentGrade">
 
         <option value="2">
           🌱 Grade 2
@@ -1193,382 +1268,298 @@ select:focus{
 
       </select>
 
+    </div>
+
+    <div class="field">
+
+      <label>ACTION</label>
+
       <button
-        class="btn"
-        id="reloadStudents"
-      >
-        ↻
+        class="btn cyan"
+        id="addStudentBtn"
+        style="width:100%">
+        ➕ Add / Assign Student
       </button>
 
     </div>
 
-    <div
-      class="students"
-      id="studentsList"
-    >
-      <div class="empty">
-        იტვირთება...
+  </div>
+
+</div>
+
+<div class="card">
+
+  <div class="section-head">
+
+    <div>
+      <h2>🎓 Student Directory</h2>
+
+      <div class="muted small">
+        Search students and manage their class.
       </div>
     </div>
 
   </div>
 
-</section>
+  <div class="search-row">
 
-<!-- =====================================================
-     CLASSES
-===================================================== -->
+    <input
+      class="input"
+      id="studentSearch"
+      placeholder="🔎 Search name or email...">
 
-<section class="panel" id="panel-classes">
+    <select id="gradeFilter">
 
-  <div class="card section">
+      <option value="all">
+        All Grades
+      </option>
 
-    <div class="section-head">
+      <option value="2">
+        🌱 Grade 2
+      </option>
 
-      <div>
-        <h2>🎓 Class Control Center</h2>
+      <option value="3">
+        🚀 Grade 3
+      </option>
 
-        <div class="muted small">
-          აირჩიე მოსწავლე და პირდაპირ შეუცვალე კლასი.
-        </div>
-      </div>
+      <option value="4">
+        ⭐ Grade 4
+      </option>
 
-    </div>
+    </select>
 
-    <div class="form-grid">
-
-      <div class="field">
-
-        <label>Student</label>
-
-        <select id="classStudent">
-          <option value="">
-            აირჩიე მოსწავლე
-          </option>
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>New Class</label>
-
-        <select id="classValue">
-
-          <option value="2">
-            🌱 Grade 2
-          </option>
-
-          <option value="3">
-            🚀 Grade 3
-          </option>
-
-          <option value="4">
-            ⭐ Grade 4
-          </option>
-
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>Action</label>
-
-        <button
-          class="btn yellow"
-          id="changeClass"
-          style="width:100%"
-        >
-          🔄 კლასის შეცვლა
-        </button>
-
-      </div>
-
-    </div>
-
-    <div
-      id="classList"
-      style="margin-top:18px"
-    ></div>
+    <button class="btn" id="reloadStudents">
+      ↻
+    </button>
 
   </div>
 
+  <div id="studentsList" class="students">
+    <div class="loading">
+      <span class="spinner"></span>
+      Loading students...
+    </div>
+  </div>
+
+</div>
+
 </section>
 
-<!-- =====================================================
-     ATTENDANCE
-===================================================== -->
+<!-- ATTENDANCE -->
 
 <section class="panel" id="panel-attendance">
 
-  <div class="card section">
+<div class="card">
 
-    <div class="section-head">
+  <div class="section-head">
 
-      <div>
-        <h2>🧑‍🎓 Daily Attendance</h2>
+    <div>
+      <h2>🧑‍🎓 Attendance Center</h2>
 
-        <div class="muted small">
-          თითოეულ მოსწავლეს მიუთითე დღევანდელი მდგომარეობა.
-        </div>
+      <div class="muted small">
+        მოვიდა • დააგვიანა • გაცდენა • დასვენება • წავიდა
       </div>
+    </div>
+
+    <div>
+      <label class="small muted">
+        DATE
+      </label>
 
       <input
         class="input"
         id="attendanceDate"
-        type="date"
-        style="max-width:170px"
-      >
-
+        type="date">
     </div>
-
-    <div
-      class="attendance"
-      id="attendanceList"
-    ></div>
 
   </div>
 
+  <div id="attendanceList" class="attendance-grid">
+    <div class="loading">
+      <span class="spinner"></span>
+      Loading...
+    </div>
+  </div>
+
+</div>
+
 </section>
 
-<!-- =====================================================
-     LESSONS
-===================================================== -->
+<!-- TOPICS -->
 
-<section class="panel" id="panel-lessons">
+<section class="panel" id="panel-topics">
 
-  <div class="card section">
+<div class="card">
 
-    <div class="section-head">
+  <div class="section-head">
 
-      <div>
-        <h2>📚 English Learning Universe</h2>
+    <div>
+      <h2>🌌 English Learning Universe</h2>
 
-        <div class="muted small">
-          რეალური Lessons ცხრილიდან წამოღებული სასწავლო მასალა.
-        </div>
+      <div class="muted small">
+        აირჩიე კლასი და გახსენი რეალური lesson materials.
       </div>
+    </div>
+
+    <select id="topicGrade" style="max-width:180px">
+
+      <option value="2">
+        🌱 Grade 2
+      </option>
+
+      <option value="3">
+        🚀 Grade 3
+      </option>
+
+      <option value="4">
+        ⭐ Grade 4
+      </option>
+
+    </select>
+
+  </div>
+
+  <div id="topicsGrid" class="topic-grid">
+    <div class="loading">
+      <span class="spinner"></span>
+      Loading lessons...
+    </div>
+  </div>
+
+</div>
+
+</section>
+
+<!-- GRADES -->
+
+<section class="panel" id="panel-grades">
+
+<div class="card">
+
+  <div class="section-head">
+
+    <div>
+      <h2>⭐ Grade Journal</h2>
+
+      <div class="muted small">
+        შეფასება 0–10 ქულამდე.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-grid">
+
+    <div class="field">
+
+      <label>STUDENT</label>
+
+      <select id="gradeStudent">
+        <option value="">
+          Select student
+        </option>
+      </select>
 
     </div>
 
-    <div class="lesson-tools">
+    <div class="field">
 
-      <select id="lessonGrade">
-
-        <option value="all">
-          All Grades
-        </option>
-
-        <option value="2">
-          🌱 Grade 2
-        </option>
-
-        <option value="3">
-          🚀 Grade 3
-        </option>
-
-        <option value="4">
-          ⭐ Grade 4
-        </option>
-
-      </select>
+      <label>SCORE</label>
 
       <input
         class="input"
-        id="lessonSearch"
-        placeholder="🔎 Search lesson / topic..."
-      >
-
-      <button
-        class="btn"
-        id="reloadLessons"
-      >
-        ↻ Load
-      </button>
+        id="gradeScore"
+        type="number"
+        min="0"
+        max="10"
+        placeholder="10">
 
     </div>
 
-    <div
-      class="lessons"
-      id="lessonsList"
-    >
-      <div class="empty">
-        იტვირთება...
-      </div>
+    <div class="field">
+
+      <label>COMMENT</label>
+
+      <input
+        class="input"
+        id="gradeComment"
+        placeholder="Excellent work!">
+
     </div>
 
   </div>
 
-</section>
+  <div style="margin-top:13px">
 
-<!-- =====================================================
-     MATERIAL PANELS
-===================================================== -->
-
-<section class="panel" id="panel-listening">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>🎧 Listening Lab</h2>
-        <div class="muted small">
-          Listening materials from lessons.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="listeningContent"
-    ></div>
+    <button class="btn yellow" id="saveGradeBtn">
+      ⭐ Save Grade
+    </button>
 
   </div>
+
+  <div id="gradesList" style="margin-top:18px"></div>
+
+</div>
+
 </section>
 
-<section class="panel" id="panel-grammar">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>✍️ Grammar Lab</h2>
-        <div class="muted small">
-          Grammar rules and examples.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="grammarContent"
-    ></div>
-
-  </div>
-</section>
-
-<section class="panel" id="panel-reading">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>📖 Reading Lab</h2>
-        <div class="muted small">
-          Reading texts from lessons.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="readingContent"
-    ></div>
-
-  </div>
-</section>
-
-<section class="panel" id="panel-speaking">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>🗣️ Speaking Lab</h2>
-        <div class="muted small">
-          Speaking phrases and conversation materials.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="speakingContent"
-    ></div>
-
-  </div>
-</section>
-
-<section class="panel" id="panel-questions">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>❓ Questions Lab</h2>
-        <div class="muted small">
-          Lesson questions and exercises.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="questionsContent"
-    ></div>
-
-  </div>
-</section>
-
-<section class="panel" id="panel-quiz">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>🎯 Quiz Center</h2>
-        <div class="muted small">
-          Quiz materials and student results.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="quizContent"
-    ></div>
-
-  </div>
-</section>
-
-<section class="panel" id="panel-exercises">
-  <div class="card section">
-
-    <div class="section-head">
-      <div>
-        <h2>📝 Exercise Center</h2>
-        <div class="muted small">
-          Lesson exercises.
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="material-grid"
-      id="exercisesContent"
-    ></div>
-
-  </div>
-</section>
-
-<!-- =====================================================
-     PROGRESS
-===================================================== -->
+<!-- PROGRESS -->
 
 <section class="panel" id="panel-progress">
 
-  <div class="card section">
+<div class="card">
 
-    <div class="section-head">
+  <div class="section-head">
 
-      <div>
-        <h2>📊 Student Progress Intelligence</h2>
+    <div>
+      <h2>📊 Student Intelligence</h2>
 
-        <div class="muted small">
-          Student progress from student_progress.
-        </div>
+      <div class="muted small">
+        Words • Quiz • Best Score • Activity
       </div>
-
     </div>
 
-    <div id="progressList"></div>
+  </div>
+
+  <div id="progressList">
+
+    <div class="loading">
+      <span class="spinner"></span>
+      Loading intelligence...
+    </div>
 
   </div>
+
+</div>
+
+</section>
+
+<!-- HISTORY -->
+
+<section class="panel" id="panel-history">
+
+<div class="card">
+
+  <div class="section-head">
+
+    <div>
+      <h2>📋 Activity History</h2>
+
+      <div class="muted small">
+        Grades and Quiz results.
+      </div>
+    </div>
+
+  </div>
+
+  <div id="historyList">
+    <div class="loading">
+      <span class="spinner"></span>
+      Loading...
+    </div>
+  </div>
+
+</div>
 
 </section>
 
@@ -1577,48 +1568,71 @@ select:focus{
 
 </main>
 
-<!-- =====================================================
-     MODAL
-===================================================== -->
+<!-- LESSON MODAL -->
 
-<div
-  class="modal"
-  id="lessonModal"
->
+<div class="modal" id="lessonModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-head">
+  <div class="modal-head">
 
-      <h2 id="modalTitle">
+    <div>
+      <h2 id="lessonTitle">
         Lesson
       </h2>
 
-      <button
-        class="btn"
-        id="closeModal"
-      >
-        ✕
-      </button>
-
+      <div
+        class="muted small"
+        id="lessonSubtitle">
+      </div>
     </div>
 
-    <div id="modalBody"></div>
+    <button class="btn" id="closeLesson">
+      ✕
+    </button>
 
+  </div>
+
+  <div id="lessonBody">
   </div>
 
 </div>
 
-<div
-  class="toast"
-  id="toast"
-></div>
+</div>
+
+<!-- STUDENT DETAIL -->
+
+<div class="modal" id="studentModal">
+
+<div class="modal-box">
+
+  <div class="modal-head">
+
+    <h2 id="studentDetailTitle">
+      Student Intelligence
+    </h2>
+
+    <button class="btn" id="closeStudent">
+      ✕
+    </button>
+
+  </div>
+
+  <div id="studentDetailBody"></div>
+
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 'use strict';
 
 /* =========================================================
-   SUPABASE
+   ENGLISH WITH MARIAMI
+   TEACHER DASHBOARD
+   REAL DATABASE SCHEMA
 ========================================================= */
 
 const DB =
@@ -1630,7 +1644,10 @@ let teacherProfile = null;
 
 let students = [];
 let lessons = [];
-let progress = [];
+let lessonWords = [];
+let lessonQuizzes = [];
+let progressRows = [];
+let gradeRows = [];
 
 /* =========================================================
    HELPERS
@@ -1638,33 +1655,23 @@ let progress = [];
 
 const $ = id => document.getElementById(id);
 
-function esc(v){
-  return String(v ?? '')
-    .replace(/[&<>"']/g,c=>({
+function esc(value){
+
+  return String(value ?? '').replace(
+    /[&<>"']/g,
+    char => ({
       '&':'&amp;',
       '<':'&lt;',
       '>':'&gt;',
       '"':'&quot;',
       "'":'&#039;'
-    }[c]));
-}
-
-function toast(text,type=''){
-  const el=$('toast');
-
-  el.textContent=text;
-  el.className='toast show '+type;
-
-  clearTimeout(toast.timer);
-
-  toast.timer=setTimeout(()=>{
-    el.className='toast';
-  },3500);
+    }[char])
+  );
 }
 
 function today(){
 
-  const d=new Date();
+  const d = new Date();
 
   return [
     d.getFullYear(),
@@ -1675,38 +1682,43 @@ function today(){
 
 function gradeName(g){
 
-  g=Number(g);
+  g = Number(g);
 
-  if(g===2)return '🌱 Grade 2';
-  if(g===3)return '🚀 Grade 3';
-  if(g===4)return '⭐ Grade 4';
+  if(g===2) return '🌱 Grade 2';
+  if(g===3) return '🚀 Grade 3';
+  if(g===4) return '⭐ Grade 4';
 
   return 'No Grade';
 }
 
-function studentName(s){
+function toast(message,type=''){
 
-  return (
-    s?.full_name ||
-    s?.name ||
-    s?.email ||
-    'Student'
-  );
+  const el=$('toast');
+
+  el.textContent=message;
+
+  el.className='toast show '+type;
+
+  clearTimeout(toast.timer);
+
+  toast.timer=setTimeout(()=>{
+    el.className='toast';
+  },3500);
 }
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
-function openPanel(name){
+function activatePanel(name){
 
   document
     .querySelectorAll('.panel')
-    .forEach(x=>x.classList.remove('active'));
+    .forEach(p=>p.classList.remove('active'));
 
   document
     .querySelectorAll('.menu')
-    .forEach(x=>x.classList.remove('active'));
+    .forEach(b=>b.classList.remove('active'));
 
   const panel=$('panel-'+name);
 
@@ -1716,29 +1728,36 @@ function openPanel(name){
 
   document
     .querySelectorAll(`[data-panel="${name}"]`)
-    .forEach(x=>x.classList.add('active'));
+    .forEach(b=>b.classList.add('active'));
 
-  if(name==='students')renderStudents();
-  if(name==='classes')renderClassPanel();
-  if(name==='attendance')renderAttendance();
-  if(name==='lessons')loadLessons();
-  if(name==='listening')renderMaterial('listening');
-  if(name==='grammar')renderMaterial('grammar');
-  if(name==='reading')renderMaterial('reading');
-  if(name==='speaking')renderMaterial('speaking');
-  if(name==='questions')renderMaterial('questions');
-  if(name==='quiz')renderMaterial('quiz');
-  if(name==='exercises')renderMaterial('exercises');
-  if(name==='progress')renderProgress();
+  if(name==='attendance'){
+    loadAttendance();
+  }
+
+  if(name==='topics'){
+    loadLessons();
+  }
+
+  if(name==='grades'){
+    loadGrades();
+  }
+
+  if(name==='progress'){
+    renderProgress();
+  }
+
+  if(name==='history'){
+    loadHistory();
+  }
 }
 
 document.addEventListener('click',e=>{
 
-  const b=e.target.closest('[data-panel]');
+  const btn=e.target.closest('[data-panel]');
 
-  if(!b)return;
+  if(!btn)return;
 
-  openPanel(b.dataset.panel);
+  activatePanel(btn.dataset.panel);
 });
 
 /* =========================================================
@@ -1748,7 +1767,14 @@ document.addEventListener('click',e=>{
 async function checkTeacher(){
 
   if(!DB){
-    $('dbStatus').textContent='NO CLIENT';
+
+    $('connectionStatus').textContent='NO CLIENT';
+
+    toast(
+      'Supabase client ვერ მოიძებნა. შეამოწმე config.js',
+      'err'
+    );
+
     return false;
   }
 
@@ -1769,24 +1795,25 @@ async function checkTeacher(){
       return false;
     }
 
-    const profile=await DB
+    const result=await DB
       .from('profiles')
       .select('*')
       .eq('user_id',currentUser.id)
       .maybeSingle();
 
-    if(profile.error)throw profile.error;
+    if(result.error)throw result.error;
 
-    teacherProfile=profile.data;
+    teacherProfile=result.data;
 
-    const role=String(
-      teacherProfile?.role||''
-    ).toLowerCase().trim();
+    const role=
+      String(
+        teacherProfile?.role || ''
+      ).toLowerCase().trim();
 
     if(role!=='teacher'){
 
       toast(
-        'Teacher access required',
+        'Teacher access required.',
         'err'
       );
 
@@ -1794,31 +1821,31 @@ async function checkTeacher(){
         location.replace(
           'login.html?reason=forbidden'
         );
-      },900);
+      },800);
 
       return false;
     }
 
     $('teacherName').textContent=
       teacherProfile.full_name ||
-      teacherProfile.name ||
       'Teacher';
 
     $('teacherEmail').textContent=
       currentUser.email || '';
 
-    $('dbStatus').textContent='LIVE';
+    $('connectionStatus').textContent=
+      'LIVE';
 
     return true;
 
-  }catch(err){
+  }catch(error){
 
-    console.error(err);
+    console.error(error);
 
-    $('dbStatus').textContent='ERROR';
+    $('connectionStatus').textContent='ERROR';
 
     toast(
-      'Auth error: '+err.message,
+      error.message || 'Authentication error',
       'err'
     );
 
@@ -1832,8 +1859,10 @@ async function checkTeacher(){
 
 async function loadStudents(){
 
-  $('studentsList').innerHTML=
-    '<div class="empty">Loading students...</div>';
+  const box=$('studentsList');
+
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>Loading students...</div>';
 
   try{
 
@@ -1841,75 +1870,82 @@ async function loadStudents(){
       .from('profiles')
       .select('*')
       .eq('role','student')
-      .order('full_name',{ascending:true});
+      .order('full_name');
 
     if(error)throw error;
 
-    students=data||[];
+    students=data || [];
 
     renderStudents();
-    fillStudentSelects();
+
+    populateStudentSelect();
+
     updateStats();
 
-  }catch(err){
+    await loadProgress();
 
-    console.error(err);
+  }catch(error){
 
-    $('studentsList').innerHTML=
+    console.error(error);
+
+    box.innerHTML=
       `<div class="empty">
-        ❌ Students error<br>
-        <small>${esc(err.message)}</small>
+        ❌ Students ვერ ჩაიტვირთა.
+        <br>
+        <small>${esc(error.message)}</small>
       </div>`;
   }
 }
 
-function getFilteredStudents(){
-
-  const q=$('studentSearch')
-    .value
-    .trim()
-    .toLowerCase();
-
-  const grade=$('studentGradeFilter').value;
-
-  return students.filter(s=>{
-
-    const text=(
-      studentName(s)+' '+
-      (s.email||'')
-    ).toLowerCase();
-
-    return (
-      (!q || text.includes(q)) &&
-      (
-        grade==='all' ||
-        String(s.grade||'')===grade
-      )
-    );
-  });
-}
-
 function renderStudents(){
 
-  const list=$('studentsList');
+  const q=
+    $('studentSearch')
+      .value
+      .trim()
+      .toLowerCase();
 
-  if(!list)return;
+  const filter=$('gradeFilter').value;
 
-  const arr=getFilteredStudents();
+  const arr=students.filter(s=>{
+
+    const text=(
+      s.full_name ||
+      ''
+    ).toLowerCase();
+
+    const email=(
+      s.email ||
+      ''
+    ).toLowerCase();
+
+    const searchOk=
+      !q ||
+      text.includes(q) ||
+      email.includes(q);
+
+    const gradeOk=
+      filter==='all' ||
+      String(s.grade)===filter;
+
+    return searchOk && gradeOk;
+  });
 
   if(!arr.length){
 
-    list.innerHTML=
-      '<div class="empty">👤 მოსწავლე ვერ მოიძებნა.</div>';
+    $('studentsList').innerHTML=
+      '<div class="empty">👤 Student not found.</div>';
 
     return;
   }
 
-  list.innerHTML=arr.map(s=>{
+  $('studentsList').innerHTML=
+    arr.map(s=>{
 
-    const g=Number(s.grade||0);
+      const g=Number(s.grade||0);
 
-    return `
+      return `
+
       <div class="student">
 
         <div class="student-top">
@@ -1923,19 +1959,19 @@ function renderStudents(){
             <div>
 
               <div class="name">
-                ${esc(studentName(s))}
+                ${esc(s.full_name)}
               </div>
 
-              <div class="student-info">
-                ${esc(s.email||'')}
+              <div class="email">
+                ${esc(s.email || '')}
               </div>
 
             </div>
 
           </div>
 
-          <span class="badge">
-            ${esc(gradeName(g))}
+          <span class="badge g${g}">
+            ${gradeName(g)}
           </span>
 
         </div>
@@ -1943,206 +1979,52 @@ function renderStudents(){
         <div class="student-actions">
 
           <button
-            class="btn small-btn primary"
-            onclick="quickClass('${esc(s.user_id)}',2)"
-          >
+            class="btn blue"
+            onclick="changeGrade('${s.user_id}',2)">
             🌱 G2
           </button>
 
           <button
-            class="btn small-btn primary"
-            onclick="quickClass('${esc(s.user_id)}',3)"
-          >
+            class="btn cyan"
+            onclick="changeGrade('${s.user_id}',3)">
             🚀 G3
           </button>
 
           <button
-            class="btn small-btn yellow"
-            onclick="quickClass('${esc(s.user_id)}',4)"
-          >
+            class="btn yellow"
+            onclick="changeGrade('${s.user_id}',4)">
             ⭐ G4
           </button>
 
           <button
-            class="btn small-btn green"
-            onclick="studentProgress('${esc(s.user_id)}')"
-          >
-            📊 Progress
+            class="btn purple"
+            onclick="showStudent('${s.user_id}')">
+            📊 Details
           </button>
 
         </div>
 
       </div>
-    `;
 
-  }).join('');
+      `;
+
+    }).join('');
 }
 
 /* =========================================================
-   CLASS MANAGEMENT
+   ADD / ASSIGN STUDENT
 ========================================================= */
 
-function fillStudentSelects(){
+async function addStudent(){
 
-  const selects=[
-    $('classStudent')
-  ];
+  const email=
+    $('studentEmail')
+      .value
+      .trim()
+      .toLowerCase();
 
-  selects.forEach(select=>{
-
-    if(!select)return;
-
-    select.innerHTML=
-      '<option value="">აირჩიე მოსწავლე</option>'+
-      students.map(s=>`
-        <option value="${esc(s.user_id)}">
-          ${esc(studentName(s))}
-          — ${esc(gradeName(s.grade))}
-        </option>
-      `).join('');
-  });
-}
-
-function renderClassPanel(){
-
-  const box=$('classList');
-
-  if(!box)return;
-
-  const counts=[2,3,4].map(g=>({
-
-    grade:g,
-    count:students.filter(
-      s=>Number(s.grade)===g
-    ).length
-
-  }));
-
-  box.innerHTML=counts.map(x=>`
-
-    <div class="progress-card">
-
-      <div class="progress-head">
-        <b>${gradeName(x.grade)}</b>
-        <b>${x.count}</b>
-      </div>
-
-      <div class="muted small">
-        მოსწავლე
-      </div>
-
-    </div>
-
-  `).join('');
-}
-
-async function changeStudentClass(uid,grade){
-
-  const student=students.find(
-    s=>s.user_id===uid
-  );
-
-  if(!student)return;
-
-  if(
-    !confirm(
-      `${studentName(student)} → ${gradeName(grade)}?`
-    )
-  )return;
-
-  try{
-
-    /*
-      რეალური profiles update.
-      შემდეგ teacher_students-ის ჩანაწერის შექმნასაც
-      ვცდილობთ, თუ ცხრილი ხელმისაწვდომია.
-    */
-
-    const update=await DB
-      .from('profiles')
-      .update({
-        grade:grade
-      })
-      .eq('user_id',uid);
-
-    if(update.error)throw update.error;
-
-    /*
-      teacher_students:
-      თუ თქვენს პროექტში RLS უშვებს insert-ს,
-      შეიქმნება teacher-student კავშირიც.
-    */
-
-    const link=await DB
-      .from('teacher_students')
-      .upsert({
-        teacher_id:currentUser.id,
-        student_id:uid
-      },{
-        onConflict:'teacher_id,student_id'
-      });
-
-    if(link.error){
-      console.warn(
-        'teacher_students:',
-        link.error.message
-      );
-    }
-
-    toast(
-      `✅ ${studentName(student)} → ${gradeName(grade)}`,
-      'ok'
-    );
-
-    await loadStudents();
-
-    renderClassPanel();
-
-  }catch(err){
-
-    console.error(err);
-
-    toast(
-      'კლასის შეცვლა ვერ მოხერხდა: '+err.message,
-      'err'
-    );
-  }
-}
-
-window.quickClass=
-  (uid,g)=>changeStudentClass(uid,g);
-
-$('changeClass').onclick=()=>{
-
-  const uid=$('classStudent').value;
-  const grade=Number($('classValue').value);
-
-  if(!uid){
-
-    toast(
-      'ჯერ აირჩიე მოსწავლე',
-      'err'
-    );
-
-    return;
-  }
-
-  changeStudentClass(uid,grade);
-};
-
-/* =========================================================
-   ADD STUDENT
-========================================================= */
-
-$('addStudent').onclick=async()=>{
-
-  const email=$('newStudentEmail')
-    .value
-    .trim();
-
-  const grade=Number(
-    $('newStudentGrade').value
-  );
+  const grade=
+    Number($('studentGrade').value);
 
   if(!email){
 
@@ -2154,78 +2036,185 @@ $('addStudent').onclick=async()=>{
     return;
   }
 
-  /*
-    ვცდილობთ არსებული teacher RPC.
-    შემდეგ fallback — profiles update.
-  */
-
   try{
 
-    const rpc=await DB.rpc(
-      'teacher_assign_student_grade',
-      {
-        p_email:email,
-        p_grade:grade
-      }
-    );
-
-    if(!rpc.error){
-
-      toast(
-        `✅ ${email} → ${gradeName(grade)}`,
-        'ok'
-      );
-
-      $('newStudentEmail').value='';
-
-      await loadStudents();
-
-      return;
-    }
-
-    console.warn(
-      'RPC unavailable:',
-      rpc.error.message
-    );
-
     /*
-      მეორე ვარიანტი:
-      email-ით არსებული student profile.
+      Existing project RPC.
+      This is preferred because the teacher
+      operation is performed server-side.
     */
 
-    const find=await DB
-      .from('profiles')
-      .select('*')
-      .eq('email',email)
-      .eq('role','student')
-      .maybeSingle();
-
-    if(find.error)throw find.error;
-
-    if(!find.data){
-
-      throw new Error(
-        'Student profile ვერ მოიძებნა. საჭიროა ჯერ student account შეიქმნას.'
+    let result=
+      await DB.rpc(
+        'teacher_assign_student_grade',
+        {
+          p_email:email,
+          p_grade:grade
+        }
       );
+
+    /*
+      Some versions of the project use
+      teacher_assign_student instead.
+    */
+
+    if(result.error){
+
+      result=
+        await DB.rpc(
+          'teacher_assign_student',
+          {
+            p_email:email,
+            p_grade:grade
+          }
+        );
     }
 
-    await changeStudentClass(
-      find.data.user_id,
-      grade
-    );
+    if(result.error){
 
-    $('newStudentEmail').value='';
+      throw result.error;
+    }
 
-  }catch(err){
-
-    console.error(err);
+    $('studentEmail').value='';
 
     toast(
-      'მოსწავლის დამატება ვერ მოხერხდა: '+err.message,
+      `✅ ${email} → ${gradeName(grade)}`,
+      'ok'
+    );
+
+    await loadStudents();
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      'Student assignment failed: '+
+      error.message,
       'err'
     );
   }
-};
+}
+
+$('addStudentBtn').onclick=addStudent;
+
+/* =========================================================
+   CHANGE GRADE
+========================================================= */
+
+async function changeGrade(uid,grade){
+
+  const student=
+    students.find(
+      s=>s.user_id===uid
+    );
+
+  if(!student)return;
+
+  if(!confirm(
+    `${student.full_name}\n\nChange class to ${gradeName(grade)}?`
+  )){
+    return;
+  }
+
+  try{
+
+    /*
+      Use the existing teacher RPC first.
+    */
+
+    let result=
+      await DB.rpc(
+        'teacher_assign_student_grade',
+        {
+          p_student_id:uid,
+          p_grade:grade
+        }
+      );
+
+    if(result.error){
+
+      /*
+        Fallback: direct profile update.
+        RLS must allow teacher update.
+      */
+
+      result=
+        await DB
+          .from('profiles')
+          .update({
+            grade:grade
+          })
+          .eq('user_id',uid);
+    }
+
+    if(result.error){
+
+      throw result.error;
+    }
+
+    /*
+      Make sure teacher_students contains
+      teacher ↔ student relation.
+    */
+
+    const link=
+      await DB
+        .from('teacher_students')
+        .upsert(
+          {
+            teacher_id:currentUser.id,
+            student_id:uid
+          },
+          {
+            onConflict:
+              'teacher_id,student_id',
+            ignoreDuplicates:true
+          }
+        );
+
+    if(link.error){
+      console.warn(
+        'teacher_students:',
+        link.error
+      );
+    }
+
+    toast(
+      `🎓 ${student.full_name} → ${gradeName(grade)}`,
+      'ok'
+    );
+
+    await loadStudents();
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      'Class change failed: '+
+      error.message,
+      'err'
+    );
+  }
+}
+
+/* =========================================================
+   STUDENT SELECT
+========================================================= */
+
+function populateStudentSelect(){
+
+  $('gradeStudent').innerHTML=
+    '<option value="">Select student</option>'+
+    students.map(s=>`
+
+      <option value="${s.user_id}">
+        ${esc(s.full_name)}
+      </option>
+
+    `).join('');
+}
 
 /* =========================================================
    ATTENDANCE
@@ -2233,34 +2222,35 @@ $('addStudent').onclick=async()=>{
 
 $('attendanceDate').value=today();
 
-function renderAttendance(){
+async function loadAttendance(){
 
   const box=$('attendanceList');
 
   if(!students.length){
+    await loadStudents();
+  }
+
+  if(!students.length){
 
     box.innerHTML=
-      '<div class="empty">მოსწავლეები არ არის.</div>';
+      '<div class="empty">Students არ არის.</div>';
 
     return;
   }
 
-  box.innerHTML=students.map(s=>`
+  box.innerHTML=
+    students.map(s=>`
 
-    <div class="att-row">
+    <div class="attendance-row">
 
-      <div class="att-top">
+      <div class="att-name">
 
         <div>
+          <b>${esc(s.full_name)}</b>
 
-          <b>
-            ${esc(studentName(s))}
-          </b>
-
-          <div class="muted small">
-            ${esc(gradeName(s.grade))}
+          <div class="small muted">
+            ${gradeName(s.grade)}
           </div>
-
         </div>
 
       </div>
@@ -2268,119 +2258,171 @@ function renderAttendance(){
       <div class="att-buttons">
 
         <button
-          class="att present"
-          onclick="saveAttendance('${esc(s.user_id)}','present')"
-        >
+          class="att-btn present"
+          onclick="saveAttendance('${s.user_id}','present')">
           ✅ მოვიდა
         </button>
 
         <button
-          class="att absent"
-          onclick="saveAttendance('${esc(s.user_id)}','absent')"
-        >
-          ❌ გაცდენა
-        </button>
-
-        <button
-          class="att late"
-          onclick="saveAttendance('${esc(s.user_id)}','late')"
-        >
+          class="att-btn late"
+          onclick="saveAttendance('${s.user_id}','late')">
           ⏰ დააგვიანა
         </button>
 
         <button
-          class="att left"
-          onclick="saveAttendance('${esc(s.user_id)}','left')"
-        >
-          🚪 წავიდა
+          class="att-btn absent"
+          onclick="saveAttendance('${s.user_id}','absent')">
+          ❌ გაცდენა
         </button>
 
         <button
-          class="att break"
-          onclick="saveAttendance('${esc(s.user_id)}','break')"
-        >
+          class="att-btn break"
+          onclick="saveAttendance('${s.user_id}','break')">
           ☕ დასვენება
+        </button>
+
+        <button
+          class="att-btn left"
+          onclick="saveAttendance('${s.user_id}','left')">
+          🚪 წავიდა
         </button>
 
       </div>
 
     </div>
 
-  `).join('');
+    `).join('');
 }
 
-async function saveAttendance(uid,status){
+/*
+  IMPORTANT:
+  Your real attendance schema is:
 
-  const date=$('attendanceDate').value||today();
+  teacher_attendance
+  teacher_id
+  student_id
+  attendance_date
+  status
+  marked_at
+  created_at
 
-  /*
-    პირველ რიგში teacher_attendance.
-    თუ არ გამოვიდა, attendance.
-  */
+  NOT:
+  attendance.user_id
+  attendance.date
+*/
 
-  const payload={
-    teacher_id:currentUser.id,
-    student_id:uid,
-    date:date,
-    status:status
-  };
+async function saveAttendance(studentId,status){
+
+  const date=
+    $('attendanceDate').value ||
+    today();
 
   try{
 
-    let result=await DB
+    /*
+      Do not use "date".
+      Do not use "user_id".
+    */
+
+    const {error}=await DB
       .from('teacher_attendance')
       .upsert(
-        payload,
         {
-          onConflict:'teacher_id,student_id,date'
+          teacher_id:currentUser.id,
+          student_id:studentId,
+          attendance_date:date,
+          status:status,
+          marked_at:new Date().toISOString()
+        },
+        {
+          onConflict:
+            'teacher_id,student_id,attendance_date'
         }
       );
 
-    if(result.error){
+    if(error){
 
       /*
-        fallback attendance
+        If there is no unique constraint,
+        update existing row or insert.
       */
 
-      result=await DB
-        .from('attendance')
-        .upsert({
-          teacher_id:currentUser.id,
-          user_id:uid,
-          date:date,
-          status:status
-        },{
-          onConflict:'user_id,date'
-        });
+      const existing=
+        await DB
+          .from('teacher_attendance')
+          .select('id')
+          .eq('teacher_id',currentUser.id)
+          .eq('student_id',studentId)
+          .eq('attendance_date',date)
+          .maybeSingle();
+
+      if(existing.error){
+        throw existing.error;
+      }
+
+      if(existing.data?.id){
+
+        const updated=
+          await DB
+            .from('teacher_attendance')
+            .update({
+              status:status,
+              marked_at:new Date().toISOString()
+            })
+            .eq('id',existing.data.id);
+
+        if(updated.error){
+          throw updated.error;
+        }
+
+      }else{
+
+        const inserted=
+          await DB
+            .from('teacher_attendance')
+            .insert({
+              teacher_id:currentUser.id,
+              student_id:studentId,
+              attendance_date:date,
+              status:status,
+              marked_at:new Date().toISOString()
+            });
+
+        if(inserted.error){
+          throw inserted.error;
+        }
+      }
     }
 
-    if(result.error)throw result.error;
-
-    const labels={
+    const names={
       present:'მოვიდა',
-      absent:'გაცდენა',
       late:'დაგვიანება',
-      left:'წავიდა',
-      break:'დასვენება'
+      absent:'გაცდენა',
+      break:'დასვენება',
+      left:'წავიდა'
     };
 
+    const student=
+      students.find(
+        s=>s.user_id===studentId
+      );
+
     toast(
-      `🧑‍🎓 ${labels[status]} ჩაიწერა`,
+      `✅ ${student?.full_name || ''}: ${names[status]}`,
       'ok'
     );
 
-  }catch(err){
+  }catch(error){
 
-    console.error(err);
+    console.error(error);
 
     toast(
-      'დასწრება ვერ ჩაიწერა: '+err.message,
+      'Attendance error: '+
+      error.message,
       'err'
     );
   }
 }
-
-window.saveAttendance=saveAttendance;
 
 /* =========================================================
    LESSONS
@@ -2388,450 +2430,728 @@ window.saveAttendance=saveAttendance;
 
 async function loadLessons(){
 
-  $('lessonsList').innerHTML=
-    '<div class="empty">Loading lessons...</div>';
+  const box=$('topicsGrid');
+
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>Loading Learning Universe...</div>';
 
   try{
+
+    const grade=
+      Number($('topicGrade').value);
 
     const {data,error}=await DB
       .from('lessons')
       .select('*')
-      .order('grade',{ascending:true})
-      .order('lesson_number',{ascending:true});
+      .eq('grade',grade)
+      .order('lesson_number');
 
     if(error)throw error;
 
-    lessons=data||[];
+    lessons=data || [];
+
+    renderTopics();
 
     updateStats();
 
-    renderLessons();
+  }catch(error){
 
-  }catch(err){
+    console.error(error);
 
-    console.error(err);
-
-    $('lessonsList').innerHTML=
+    box.innerHTML=
       `<div class="empty">
-        ❌ Lessons ვერ ჩაიტვირთა.<br>
-        <small>${esc(err.message)}</small>
+        ❌ Lessons ვერ ჩაიტვირთა.
+        <br>
+        <small>${esc(error.message)}</small>
       </div>`;
   }
 }
 
-function filteredLessons(){
+function renderTopics(){
 
-  const grade=$('lessonGrade').value;
+  const grade=
+    Number($('topicGrade').value);
 
-  const q=$('lessonSearch')
-    .value
-    .trim()
-    .toLowerCase();
-
-  return lessons.filter(l=>{
-
-    const text=(
-      l.title||''+
-      ' '+
-      (l.topic||'')+
-      ' '+
-      (l.description||'')
-    ).toLowerCase();
-
-    return (
-      (
-        grade==='all' ||
-        String(l.grade)===grade
-      ) &&
-      (!q || text.includes(q))
+  const arr=
+    lessons.filter(
+      l=>Number(l.grade)===grade
     );
-
-  });
-}
-
-function renderLessons(){
-
-  const box=$('lessonsList');
-
-  const arr=filteredLessons();
 
   if(!arr.length){
 
-    box.innerHTML=
-      '<div class="empty">📚 Lessons ვერ მოიძებნა.</div>';
+    $('topicsGrid').innerHTML=
+      '<div class="empty">ამ Grade-ში lessons არ არის.</div>';
 
     return;
   }
 
-  box.innerHTML=arr.map((l,i)=>`
+  $('topicsGrid').innerHTML=
+    arr.map((lesson,index)=>{
 
-    <div
-      class="lesson"
-      onclick="openLesson(${i},${JSON.stringify(arr.map(x=>x.id))})"
-    >
+      const icon=
+        lesson.topic?.toLowerCase().includes('grammar')
+        ?'🧠'
+        :lesson.topic?.toLowerCase().includes('reading')
+        ?'📖'
+        :lesson.topic?.toLowerCase().includes('listen')
+        ?'🎧'
+        :lesson.topic?.toLowerCase().includes('speak')
+        ?'🗣️'
+        :lesson.topic?.toLowerCase().includes('quiz')
+        ?'🎯'
+        :'🚀';
 
-      <div class="lesson-grade">
-        ${esc(gradeName(l.grade))}
+      return `
+
+      <div
+        class="topic"
+        onclick="openLesson('${lesson.id}')">
+
+        <div class="lesson-count">
+          LESSON ${esc(lesson.lesson_number)}
+        </div>
+
+        <div class="topic-icon">
+          ${icon}
+        </div>
+
+        <b>
+          ${esc(lesson.title)}
+        </b>
+
+        <small>
+          ${esc(
+            lesson.topic ||
+            'English Learning'
+          )}
+        </small>
+
+        <div
+          class="small muted"
+          style="margin-top:10px">
+
+          ${
+            lesson.description
+            ?esc(
+              lesson.description
+            ).slice(0,90)+'...'
+            :'Open complete lesson →'
+          }
+
+        </div>
+
       </div>
 
-      <div class="lesson-icon">
-        📚
+      `;
+
+    }).join('');
+}
+
+/* =========================================================
+   OPEN LESSON
+========================================================= */
+
+async function openLesson(id){
+
+  const lesson=
+    lessons.find(
+      l=>String(l.id)===String(id)
+    );
+
+  if(!lesson){
+
+    toast(
+      'Lesson ვერ მოიძებნა',
+      'err'
+    );
+
+    return;
+  }
+
+  $('lessonTitle').textContent=
+    lesson.title;
+
+  $('lessonSubtitle').textContent=
+    `${gradeName(lesson.grade)} • Lesson ${lesson.lesson_number} • ${lesson.topic || ''}`;
+
+  $('lessonModal')
+    .classList.add('open');
+
+  $('lessonBody').innerHTML=
+    '<div class="loading"><span class="spinner"></span>Loading complete lesson...</div>';
+
+  try{
+
+    const [wordsResult,quizResult]=
+      await Promise.all([
+
+        DB
+          .from('lesson_words')
+          .select('*')
+          .eq('lesson_id',lesson.id)
+          .order('sort_order'),
+
+        DB
+          .from('lesson_quizzes')
+          .select('*')
+          .eq('lesson_id',lesson.id)
+          .order('sort_order')
+
+      ]);
+
+    if(wordsResult.error){
+      throw wordsResult.error;
+    }
+
+    if(quizResult.error){
+      throw quizResult.error;
+    }
+
+    const words=
+      wordsResult.data || [];
+
+    const quizzes=
+      quizResult.data || [];
+
+    renderLesson(
+      lesson,
+      words,
+      quizzes
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    $('lessonBody').innerHTML=
+      `<div class="empty">
+        ❌ Lesson material ვერ ჩაიტვირთა.
+        <br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+/* =========================================================
+   LESSON RENDER
+========================================================= */
+
+function renderLesson(
+  lesson,
+  words,
+  quizzes
+){
+
+  const grammarExamples=
+    Array.isArray(lesson.grammar_examples)
+    ?lesson.grammar_examples
+    :[];
+
+  const speaking=
+    Array.isArray(lesson.speaking_phrases)
+    ?lesson.speaking_phrases
+    :[];
+
+  const exercises=
+    Array.isArray(lesson.exercises)
+    ?lesson.exercises
+    :[];
+
+  const image=
+    lesson.image_url
+    ?`
+      <div class="material full">
+
+        <img
+          src="${esc(lesson.image_url)}"
+          style="
+            max-width:100%;
+            max-height:350px;
+            display:block;
+            margin:auto;
+            border-radius:17px;
+          "
+          alt="Lesson image">
+
       </div>
+    `
+    :'';
 
-      <h3>
-        ${esc(
-          l.title ||
-          l.topic ||
-          'Lesson'
-        )}
-      </h3>
+  const audio=
+    lesson.audio_url
+    ?`
+      <div class="audio-box">
 
-      <p>
-        ${esc(
-          l.description ||
-          l.topic ||
-          'English lesson'
-        )}
-      </p>
+        <audio
+          controls
+          preload="metadata"
+          src="${esc(lesson.audio_url)}">
+        </audio>
 
-      <div class="muted small">
-        Lesson ${esc(l.lesson_number||'—')}
+        <button
+          class="btn cyan"
+          onclick="speakText(${JSON.stringify(
+            lesson.listening_text ||
+            lesson.title ||
+            ''
+          )})">
+          🔊 Read Aloud
+        </button>
+
       </div>
+    `
+    :`
+      <div class="audio-box">
+
+        <button
+          class="btn cyan"
+          onclick="speakText(${JSON.stringify(
+            lesson.listening_text ||
+            lesson.reading_text ||
+            lesson.title ||
+            ''
+          )})">
+          🔊 Listen / Read Aloud
+        </button>
+
+      </div>
+    `;
+
+  $('lessonBody').innerHTML=`
+
+    <div class="lesson-meta">
+
+      <span class="pill">
+        ${gradeName(lesson.grade)}
+      </span>
+
+      <span class="pill">
+        Lesson ${esc(lesson.lesson_number)}
+      </span>
+
+      <span class="pill">
+        ${esc(lesson.topic || 'English')}
+      </span>
+
+      <span class="pill">
+        ${words.length} Vocabulary
+      </span>
+
+      <span class="pill">
+        ${quizzes.length} Quiz Questions
+      </span>
 
     </div>
 
-  `).join('');
-}
-
-window.openLesson=async(index,ids)=>{
-
-  const id=ids[index];
-
-  const lesson=lessons.find(
-    x=>String(x.id)===String(id)
-  );
-
-  if(!lesson)return;
-
-  $('lessonModal').classList.add('open');
-
-  $('modalTitle').textContent=
-    lesson.title ||
-    lesson.topic ||
-    'Lesson';
-
-  $('modalBody').innerHTML=`
+    ${image}
 
     <div class="material-grid">
 
-      <div class="material">
-        <h3>📚 Topic</h3>
-        <div class="material-content">
-          ${esc(lesson.topic||'')}
-        </div>
+      <!-- OVERVIEW -->
+
+      <div class="material full">
+
+        <h3>
+          🚀 Lesson Overview
+        </h3>
+
+        <p>
+          ${esc(
+            lesson.description ||
+            'Complete English lesson.'
+          )}
+        </p>
+
       </div>
 
-      <div class="material">
-        <h3>🔤 Grammar Rule</h3>
-        <div class="material-content">
-          ${esc(lesson.grammar_rule||'')}
-        </div>
-      </div>
+      <!-- VOCABULARY -->
 
-      <div class="material">
-        <h3>✍️ Grammar Examples</h3>
-        <div class="material-content">
-          ${esc(lesson.grammar_examples||'')}
-        </div>
-      </div>
+      <div class="material full">
 
-      <div class="material">
-        <h3>🎧 Listening</h3>
-        <div class="material-content">
-          ${esc(lesson.listening_text||'')}
-        </div>
+        <h3>
+          📚 Vocabulary
+        </h3>
 
         ${
-          lesson.audio_url
+          words.length
           ?`
-          <audio
-            controls
-            src="${esc(lesson.audio_url)}"
-            style="width:100%;margin-top:12px"
-          ></audio>
+            <div class="word-grid">
+
+              ${
+                words.map(w=>`
+
+                  <div class="word">
+
+                    <b>
+                      ${esc(
+                        w.emoji || '🔤'
+                      )}
+                      ${esc(w.word)}
+                    </b>
+
+                    <span>
+                      ${esc(
+                        w.translation || ''
+                      )}
+                    </span>
+
+                    ${
+                      w.audio_url
+                      ?`
+                        <br>
+                        <audio
+                          controls
+                          style="width:100%;margin-top:7px"
+                          src="${esc(w.audio_url)}">
+                        </audio>
+                      `
+                      :`
+                        <br>
+
+                        <button
+                          class="btn"
+                          style="font-size:10px"
+                          onclick="speakText(${JSON.stringify(w.word)})">
+                          🔊 Pronounce
+                        </button>
+                      `
+                    }
+
+                  </div>
+
+                `).join('')
+              }
+
+            </div>
           `
-          :''
+          :`
+            <div class="empty">
+              Vocabulary არ არის.
+            </div>
+          `
         }
 
       </div>
 
-      <div class="material">
-        <h3>📖 Reading</h3>
-        <div class="material-content">
-          ${esc(lesson.reading_text||'')}
-        </div>
-      </div>
-
-      <div class="material">
-        <h3>🗣️ Speaking</h3>
-        <div class="material-content">
-          ${esc(lesson.speaking_phrases||'')}
-        </div>
-      </div>
-
-      <div class="material">
-        <h3>📝 Exercises</h3>
-        <div class="material-content">
-          ${esc(lesson.exercises||'')}
-        </div>
-      </div>
-
-    </div>
-
-  `;
-};
-
-/* =========================================================
-   MATERIAL FILTERS
-========================================================= */
-
-function lessonHas(type,l){
-
-  if(type==='listening'){
-    return !!(
-      l.listening_text ||
-      l.audio_url
-    );
-  }
-
-  if(type==='grammar'){
-    return !!(
-      l.grammar_rule ||
-      l.grammar_examples
-    );
-  }
-
-  if(type==='reading'){
-    return !!l.reading_text;
-  }
-
-  if(type==='speaking'){
-    return !!l.speaking_phrases;
-  }
-
-  if(type==='questions'){
-    return !!(
-      l.exercises ||
-      l.description
-    );
-  }
-
-  if(type==='quiz'){
-    return !!l.quiz_id;
-  }
-
-  if(type==='exercises'){
-    return !!l.exercises;
-  }
-
-  return false;
-}
-
-function renderMaterial(type){
-
-  const box=$(
-    type==='listening'
-      ?'listeningContent'
-      :type==='grammar'
-      ?'grammarContent'
-      :type==='reading'
-      ?'readingContent'
-      :type==='speaking'
-      ?'speakingContent'
-      :type==='questions'
-      ?'questionsContent'
-      :type==='quiz'
-      ?'quizContent'
-      :'exercisesContent'
-  );
-
-  if(!box)return;
-
-  const arr=lessons.filter(
-    l=>lessonHas(type,l)
-  );
-
-  if(!arr.length){
-
-    box.innerHTML=`
-      <div class="empty">
-        ჯერ არ არის ჩაწერილი ${esc(type)} მასალა.
-        <br><br>
-        <button
-          class="btn primary"
-          onclick="openPanel('lessons')"
-        >
-          📚 ყველა Lesson
-        </button>
-      </div>
-    `;
-
-    return;
-  }
-
-  box.innerHTML=arr.map(l=>{
-
-    let content='';
-
-    if(type==='listening'){
-      content=l.listening_text||'';
-    }
-
-    if(type==='grammar'){
-      content=
-        (l.grammar_rule||'')+
-        '\n'+
-        (l.grammar_examples||'');
-    }
-
-    if(type==='reading'){
-      content=l.reading_text||'';
-    }
-
-    if(type==='speaking'){
-      content=l.speaking_phrases||'';
-    }
-
-    if(type==='questions'){
-      content=l.exercises||l.description||'';
-    }
-
-    if(type==='quiz'){
-      content=
-        l.quiz_id
-        ?'Quiz is connected to this lesson.'
-        :'Quiz material';
-    }
-
-    if(type==='exercises'){
-      content=l.exercises||'';
-    }
-
-    return `
+      <!-- GRAMMAR -->
 
       <div class="material">
 
         <h3>
-          ${esc(l.title||l.topic||'Lesson')}
+          🧠 Grammar
         </h3>
 
-        <div class="muted small">
-          ${esc(gradeName(l.grade))}
-          • Lesson ${esc(l.lesson_number||'—')}
-        </div>
-
-        <div
-          class="material-content"
-          style="margin-top:10px"
-        >
-          ${esc(content)}
-        </div>
+        <p>
+          ${
+            esc(
+              lesson.grammar_rule ||
+              'Grammar rule is not provided.'
+            )
+          }
+        </p>
 
         ${
-          type==='listening' && l.audio_url
+          grammarExamples.length
           ?`
-          <audio
-            controls
-            src="${esc(l.audio_url)}"
-            style="width:100%;margin-top:10px"
-          ></audio>
+            <div>
+              <b>Examples:</b>
+
+              ${
+                grammarExamples
+                  .map(x=>`
+                    <div class="exercise">
+                      ${esc(
+                        typeof x==='string'
+                        ?x
+                        :JSON.stringify(x)
+                      )}
+                    </div>
+                  `)
+                  .join('')
+              }
+
+            </div>
           `
           :''
         }
 
-        <button
-          class="btn small-btn purple"
-          style="margin-top:12px"
-          onclick="openLessonById('${esc(l.id)}')"
-        >
-          🚀 Open Lesson
-        </button>
-
-      </div>
-    `;
-
-  }).join('');
-}
-
-window.openLessonById=function(id){
-
-  const lesson=lessons.find(
-    l=>String(l.id)===String(id)
-  );
-
-  if(!lesson)return;
-
-  $('lessonModal').classList.add('open');
-
-  $('modalTitle').textContent=
-    lesson.title||lesson.topic||'Lesson';
-
-  $('modalBody').innerHTML=`
-
-    <div class="material-grid">
-
-      <div class="material">
-        <h3>🔤 Grammar</h3>
-        <div class="material-content">
-          ${esc(lesson.grammar_rule||'')}
-          ${esc(lesson.grammar_examples||'')}
-        </div>
       </div>
 
+      <!-- LISTENING -->
+
       <div class="material">
-        <h3>🎧 Listening</h3>
-        <div class="material-content">
-          ${esc(lesson.listening_text||'')}
-        </div>
+
+        <h3>
+          🎧 Listening
+        </h3>
+
+        ${audio}
 
         ${
-          lesson.audio_url
+          lesson.listening_text
           ?`
-          <audio
-            controls
-            src="${esc(lesson.audio_url)}"
-            style="width:100%"
-          ></audio>
+            <p>
+              ${esc(
+                lesson.listening_text
+              )}
+            </p>
           `
-          :''
+          :`
+            <div class="muted small">
+              Listening text not provided.
+            </div>
+          `
         }
+
       </div>
 
-      <div class="material">
-        <h3>📖 Reading</h3>
-        <div class="material-content">
-          ${esc(lesson.reading_text||'')}
-        </div>
+      <!-- READING -->
+
+      <div class="material full">
+
+        <h3>
+          📖 Reading
+        </h3>
+
+        ${
+          lesson.reading_text
+          ?`
+            <div class="reading-controls">
+
+              <button
+                class="btn cyan"
+                onclick="speakText(${JSON.stringify(
+                  lesson.reading_text
+                )})">
+                🔊 Read Reading
+              </button>
+
+              <button
+                class="btn"
+                onclick="stopSpeaking()">
+                ⏹ Stop
+              </button>
+
+            </div>
+
+            <p>
+              ${esc(
+                lesson.reading_text
+              )}
+            </p>
+          `
+          :`
+            <div class="empty">
+              Reading text not provided.
+            </div>
+          `
+        }
+
       </div>
 
-      <div class="material">
-        <h3>🗣️ Speaking</h3>
-        <div class="material-content">
-          ${esc(lesson.speaking_phrases||'')}
-        </div>
-      </div>
+      <!-- SPEAKING -->
 
       <div class="material">
-        <h3>📝 Exercises</h3>
-        <div class="material-content">
-          ${esc(lesson.exercises||'')}
-        </div>
+
+        <h3>
+          🗣️ Speaking
+        </h3>
+
+        ${
+          speaking.length
+          ?`
+            ${
+              speaking.map(x=>`
+
+                <div class="exercise">
+
+                  ${esc(
+                    typeof x==='string'
+                    ?x
+                    :JSON.stringify(x)
+                  )}
+
+                  <br>
+
+                  <button
+                    class="btn"
+                    style="margin-top:7px;font-size:10px"
+                    onclick="speakText(${JSON.stringify(
+                      typeof x==='string'
+                      ?x
+                      :JSON.stringify(x)
+                    )})">
+                    🔊 Hear Phrase
+                  </button>
+
+                </div>
+
+              `).join('')
+            }
+          `
+          :`
+            <div class="empty">
+              Speaking phrases not provided.
+            </div>
+          `
+        }
+
+      </div>
+
+      <!-- EXERCISES -->
+
+      <div class="material">
+
+        <h3>
+          ✍️ Exercises
+        </h3>
+
+        ${
+          exercises.length
+          ?`
+            ${
+              exercises.map((x,i)=>`
+
+                <div class="exercise">
+
+                  <b>
+                    Exercise ${i+1}
+                  </b>
+
+                  <br>
+
+                  ${esc(
+                    typeof x==='string'
+                    ?x
+                    :JSON.stringify(x)
+                  )}
+
+                </div>
+
+              `).join('')
+            }
+          `
+          :`
+            <div class="empty">
+              Exercises not provided.
+            </div>
+          `
+        }
+
+      </div>
+
+      <!-- QUIZ -->
+
+      <div class="material full">
+
+        <h3>
+          🎯 Quiz
+        </h3>
+
+        ${
+          quizzes.length
+          ?`
+            ${
+              quizzes.map((q,i)=>{
+
+                let options=[];
+
+                if(Array.isArray(q.options)){
+                  options=q.options;
+                }
+
+                return `
+
+                <div class="quiz-item">
+
+                  <b>
+                    ${i+1}. ${esc(q.question)}
+                  </b>
+
+                  <div class="quiz-options">
+
+                    ${
+                      options.map(o=>`
+
+                        <span class="option">
+                          ${esc(
+                            typeof o==='string'
+                            ?o
+                            :JSON.stringify(o)
+                          )}
+                        </span>
+
+                      `).join('')
+                    }
+
+                  </div>
+
+                  <div
+                    class="small"
+                    style="margin-top:8px;color:var(--green)">
+                    ✓ Correct:
+                    ${esc(q.correct_answer)}
+                  </div>
+
+                </div>
+
+                `;
+
+              }).join('')
+            }
+          `
+          :`
+            <div class="empty">
+              Quiz questions არ არის.
+            </div>
+          `
+        }
+
       </div>
 
     </div>
 
   `;
-};
+}
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+function speakText(text){
+
+  stopSpeaking();
+
+  if(!('speechSynthesis' in window)){
+
+    toast(
+      'Browser speech is not supported.',
+      'err'
+    );
+
+    return;
+  }
+
+  const utterance=
+    new SpeechSynthesisUtterance(
+      String(text || '')
+    );
+
+  utterance.lang='en-US';
+  utterance.rate=.88;
+  utterance.pitch=1;
+
+  speechSynthesis.speak(
+    utterance
+  );
+}
+
+function stopSpeaking(){
+
+  if('speechSynthesis' in window){
+    speechSynthesis.cancel();
+  }
+}
 
 /* =========================================================
    PROGRESS
@@ -2847,129 +3167,20 @@ async function loadProgress(){
 
     if(error)throw error;
 
-    progress=data||[];
+    progressRows=data || [];
 
     updateStats();
 
-  }catch(err){
+  }catch(error){
 
     console.warn(
       'student_progress:',
-      err.message
+      error.message
     );
 
-    progress=[];
+    progressRows=[];
   }
 }
-
-function renderProgress(){
-
-  const box=$('progressList');
-
-  if(!students.length){
-
-    box.innerHTML=
-      '<div class="empty">მოსწავლეები არ არიან.</div>';
-
-    return;
-  }
-
-  box.innerHTML=students.map(s=>{
-
-    const rows=progress.filter(
-      x=>x.user_id===s.user_id
-    );
-
-    const words=rows.reduce(
-      (sum,x)=>sum+
-        Number(
-          x.words_learned||
-          (
-            Array.isArray(x.learned_words)
-            ?x.learned_words.length
-            :0
-          )
-        ),
-      0
-    );
-
-    const grade=Number(s.grade||2);
-
-    const target=
-      grade===2
-      ?300
-      :grade===3
-      ?400
-      :500;
-
-    const percent=Math.min(
-      100,
-      Math.round(words/target*100)
-    );
-
-    return `
-
-      <div class="progress-card">
-
-        <div class="progress-head">
-
-          <div>
-            <b>
-              ${esc(studentName(s))}
-            </b>
-
-            <div class="muted small">
-              ${esc(gradeName(grade))}
-            </div>
-          </div>
-
-          <b>
-            ${percent}%
-          </b>
-
-        </div>
-
-        <div class="bar">
-          <i style="width:${percent}%"></i>
-        </div>
-
-        <div
-          class="muted small"
-          style="margin-top:7px"
-        >
-          📚 ${words} learned words
-        </div>
-
-      </div>
-
-    `;
-
-  }).join('');
-}
-
-window.studentProgress=function(uid){
-
-  const s=students.find(
-    x=>x.user_id===uid
-  );
-
-  if(!s)return;
-
-  openPanel('progress');
-
-  setTimeout(()=>{
-
-    toast(
-      `📊 ${studentName(s)} — Progress`,
-      'ok'
-    );
-
-  },100);
-};
-
-/* =========================================================
-   STATS
-========================================================= */
 
 function updateStats(){
 
@@ -2994,60 +3205,609 @@ function updateStats(){
   $('statLessons').textContent=
     lessons.length;
 
-  const words=progress.reduce(
-    (sum,x)=>sum+
-      Number(
-        x.words_learned||
-        (
-          Array.isArray(x.learned_words)
-          ?x.learned_words.length
-          :0
-        )
-      ),
-    0
-  );
+  $('statWords').textContent=
+    progressRows.reduce(
+      (sum,x)=>
+        sum+
+        Number(
+          x.words_learned || 0
+        ),
+      0
+    );
+}
 
-  $('statWords').textContent=words;
+function renderProgress(){
+
+  if(!students.length){
+
+    $('progressList').innerHTML=
+      '<div class="empty">Students არ არის.</div>';
+
+    return;
+  }
+
+  $('progressList').innerHTML=
+    students.map(s=>{
+
+      const row=
+        progressRows.find(
+          p=>p.user_id===s.user_id &&
+          Number(p.grade)===Number(s.grade)
+        ) ||
+        progressRows.find(
+          p=>p.user_id===s.user_id
+        ) ||
+        {};
+
+      const words=
+        Number(row.words_learned || 0);
+
+      const quiz=
+        Number(row.quiz_completed || 0);
+
+      const best=
+        Number(row.best_quiz || row.score || 0);
+
+      const target=
+        Number(s.grade)===2
+        ?300
+        :250;
+
+      const percent=
+        Math.min(
+          100,
+          Math.round(
+            words/target*100
+          )
+        );
+
+      return `
+
+      <div class="progress-card">
+
+        <div class="progress-top">
+
+          <div>
+
+            <b>
+              ${esc(s.full_name)}
+            </b>
+
+            <div class="small muted">
+              ${gradeName(s.grade)}
+            </div>
+
+          </div>
+
+          <b style="color:var(--cyan)">
+            ${percent}%
+          </b>
+
+        </div>
+
+        <div class="progress">
+
+          <i style="width:${percent}%"></i>
+
+        </div>
+
+        <div
+          class="small muted"
+          style="margin-top:9px">
+
+          📚 ${words} words
+          • 📝 ${quiz} quizzes
+          • 🏆 ${best}% best
+
+        </div>
+
+      </div>
+
+      `;
+
+    }).join('');
 }
 
 /* =========================================================
-   SEARCH
+   GRADES
 ========================================================= */
 
-$('studentSearch').addEventListener(
-  'input',
-  renderStudents
-);
+async function loadGrades(){
 
-$('studentGradeFilter').addEventListener(
-  'change',
-  renderStudents
-);
+  const box=$('gradesList');
 
-$('lessonSearch').addEventListener(
-  'input',
-  renderLessons
-);
+  try{
 
-$('lessonGrade').addEventListener(
-  'change',
-  renderLessons
-);
+    const {data,error}=await DB
+      .from('student_grades')
+      .select('*')
+      .order('created_at',{
+        ascending:false
+      })
+      .limit(50);
+
+    if(error)throw error;
+
+    gradeRows=data || [];
+
+    if(!gradeRows.length){
+
+      box.innerHTML=
+        '<div class="empty">⭐ Grades ჯერ არ არის.</div>';
+
+      return;
+    }
+
+    box.innerHTML=
+      gradeRows.map(g=>{
+
+        const student=
+          students.find(
+            s=>s.user_id===g.student_id
+          );
+
+        return `
+
+        <div class="grade-row">
+
+          <div>
+
+            <b>
+              ${esc(
+                student?.full_name ||
+                g.student_id
+              )}
+            </b>
+
+            <div class="small muted">
+              ${esc(g.comment || '')}
+            </div>
+
+          </div>
+
+          <div class="score">
+            ${Number(g.grade)}/10
+          </div>
+
+          <div class="small muted">
+            ${
+              g.created_at
+              ?new Date(
+                g.created_at
+              ).toLocaleString('ka-GE')
+              :''
+            }
+          </div>
+
+        </div>
+
+        `;
+
+      }).join('');
+
+  }catch(error){
+
+    box.innerHTML=
+      `<div class="empty">
+        ❌ Grades error.
+        <br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+$('saveGradeBtn').onclick=async()=>{
+
+  const studentId=
+    $('gradeStudent').value;
+
+  const grade=
+    Number(
+      $('gradeScore').value
+    );
+
+  const comment=
+    $('gradeComment')
+      .value
+      .trim();
+
+  if(!studentId){
+
+    toast(
+      'აირჩიე მოსწავლე',
+      'err'
+    );
+
+    return;
+  }
+
+  if(
+    !Number.isFinite(grade) ||
+    grade<0 ||
+    grade>10
+  ){
+
+    toast(
+      'ქულა უნდა იყოს 0–10',
+      'err'
+    );
+
+    return;
+  }
+
+  try{
+
+    const {error}=await DB
+      .from('student_grades')
+      .insert({
+        student_id:studentId,
+        teacher_id:currentUser.id,
+        grade:grade,
+        comment:comment
+      });
+
+    if(error)throw error;
+
+    $('gradeScore').value='';
+    $('gradeComment').value='';
+
+    toast(
+      '⭐ შეფასება შენახულია',
+      'ok'
+    );
+
+    await loadGrades();
+
+  }catch(error){
+
+    console.error(error);
+
+    toast(
+      'Grade save failed: '+
+      error.message,
+      'err'
+    );
+  }
+};
+
+/* =========================================================
+   STUDENT DETAIL
+========================================================= */
+
+async function showStudent(uid){
+
+  const student=
+    students.find(
+      s=>s.user_id===uid
+    );
+
+  if(!student)return;
+
+  $('studentDetailTitle').textContent=
+    `📊 ${student.full_name}`;
+
+  $('studentModal')
+    .classList.add('open');
+
+  $('studentDetailBody').innerHTML=
+    '<div class="loading"><span class="spinner"></span>Loading intelligence...</div>';
+
+  try{
+
+    const progress=
+      progressRows.filter(
+        p=>p.user_id===uid
+      );
+
+    const results=
+      await DB
+        .from('quiz_results')
+        .select('*')
+        .eq('student_id',uid)
+        .order('created_at',{
+          ascending:false
+        })
+        .limit(50);
+
+    if(results.error){
+      throw results.error;
+    }
+
+    const quizzes=
+      results.data || [];
+
+    const words=
+      progress.reduce(
+        (n,p)=>
+          n+
+          Number(
+            p.words_learned || 0
+          ),
+        0
+      );
+
+    const best=
+      Math.max(
+        0,
+        ...progress.map(
+          p=>Number(
+            p.best_quiz ||
+            p.score ||
+            0
+          )
+        ),
+        ...quizzes.map(q=>{
+
+          const total=
+            Number(q.total || 0);
+
+          const score=
+            Number(q.score || 0);
+
+          return total
+            ?Math.round(
+              score/total*100
+            )
+            :score;
+        })
+      );
+
+    $('studentDetailBody').innerHTML=`
+
+      <div class="material-grid">
+
+        <div class="material">
+
+          <h3>👤 Student</h3>
+
+          <p>
+            ${esc(student.full_name)}
+            <br>
+            ${esc(student.email || '')}
+            <br>
+            ${gradeName(student.grade)}
+          </p>
+
+        </div>
+
+        <div class="material">
+
+          <h3>📚 Words Learned</h3>
+
+          <p style="font-size:30px;color:var(--cyan)">
+            ${words}
+          </p>
+
+        </div>
+
+        <div class="material">
+
+          <h3>🎯 Quiz Attempts</h3>
+
+          <p style="font-size:30px;color:var(--purple)">
+            ${quizzes.length}
+          </p>
+
+        </div>
+
+        <div class="material">
+
+          <h3>🏆 Best Score</h3>
+
+          <p style="font-size:30px;color:var(--yellow)">
+            ${best}%
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }catch(error){
+
+    console.error(error);
+
+    $('studentDetailBody').innerHTML=
+      `<div class="empty">
+        ❌ Student data ვერ ჩაიტვირთა.
+        <br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+async function loadHistory(){
+
+  const box=$('historyList');
+
+  box.innerHTML=
+    '<div class="loading"><span class="spinner"></span>Loading...</div>';
+
+  try{
+
+    const [grades,quiz]=await Promise.all([
+
+      DB
+        .from('student_grades')
+        .select('*')
+        .order('created_at',{
+          ascending:false
+        })
+        .limit(30),
+
+      DB
+        .from('quiz_results')
+        .select('*')
+        .order('created_at',{
+          ascending:false
+        })
+        .limit(30)
+
+    ]);
+
+    if(grades.error){
+      throw grades.error;
+    }
+
+    if(quiz.error){
+      throw quiz.error;
+    }
+
+    const events=[];
+
+    (grades.data || [])
+      .forEach(x=>{
+
+        events.push({
+          type:'⭐ Grade',
+          id:x.student_id,
+          score:
+            Number(x.grade)+'/10',
+          date:x.created_at
+        });
+
+      });
+
+    (quiz.data || [])
+      .forEach(x=>{
+
+        const total=
+          Number(x.total || 0);
+
+        const score=
+          Number(x.score || 0);
+
+        const percent=
+          total
+          ?Math.round(score/total*100)
+          :score;
+
+        events.push({
+          type:'🎯 Quiz',
+          id:x.student_id,
+          score:percent+'%',
+          date:
+            x.completed_at ||
+            x.created_at
+        });
+
+      });
+
+    events.sort(
+      (a,b)=>
+        new Date(b.date||0) -
+        new Date(a.date||0)
+    );
+
+    if(!events.length){
+
+      box.innerHTML=
+        '<div class="empty">History ცარიელია.</div>';
+
+      return;
+    }
+
+    box.innerHTML=
+      events.map(x=>{
+
+        const student=
+          students.find(
+            s=>s.user_id===x.id
+          );
+
+        return `
+
+        <div class="history-row">
+
+          <div>
+
+            <b>
+              ${esc(
+                student?.full_name ||
+                'Student'
+              )}
+            </b>
+
+            <div class="small muted">
+              ${x.type}
+            </div>
+
+          </div>
+
+          <div class="score">
+            ${esc(x.score)}
+          </div>
+
+          <div class="small muted">
+            ${
+              x.date
+              ?new Date(
+                x.date
+              ).toLocaleString('ka-GE')
+              :''
+            }
+          </div>
+
+        </div>
+
+        `;
+
+      }).join('');
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      `<div class="empty">
+        ❌ History error.
+        <br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+$('studentSearch')
+  .addEventListener(
+    'input',
+    renderStudents
+  );
+
+$('gradeFilter')
+  .addEventListener(
+    'change',
+    renderStudents
+  );
 
 $('reloadStudents').onclick=
   loadStudents;
 
-$('reloadLessons').onclick=
+$('topicGrade').onchange=
   loadLessons;
 
 /* =========================================================
-   MODAL
+   MODALS
 ========================================================= */
 
-$('closeModal').onclick=()=>{
+$('closeLesson').onclick=()=>{
   $('lessonModal')
-    .classList
-    .remove('open');
+    .classList.remove('open');
+
+  stopSpeaking();
+};
+
+$('closeStudent').onclick=()=>{
+  $('studentModal')
+    .classList.remove('open');
 };
 
 $('lessonModal').addEventListener(
@@ -3055,30 +3815,33 @@ $('lessonModal').addEventListener(
   e=>{
     if(e.target===$('lessonModal')){
       $('lessonModal')
-        .classList
-        .remove('open');
+        .classList.remove('open');
+
+      stopSpeaking();
     }
   }
 );
 
-document.addEventListener(
-  'keydown',
+$('studentModal').addEventListener(
+  'click',
   e=>{
-    if(e.key==='Escape'){
-      $('lessonModal')
-        .classList
-        .remove('open');
+    if(e.target===$('studentModal')){
+      $('studentModal')
+        .classList.remove('open');
     }
   }
 );
 
 /* =========================================================
-   SYNC
+   REFRESH
 ========================================================= */
 
-$('syncBtn').onclick=async()=>{
+$('refreshBtn').onclick=async()=>{
 
-  toast('🔄 Syncing...');
+  toast(
+    '🔄 Synchronizing...',
+    ''
+  );
 
   await Promise.all([
     loadStudents(),
@@ -3087,7 +3850,7 @@ $('syncBtn').onclick=async()=>{
   ]);
 
   toast(
-    '✅ Sync completed',
+    '✅ System synchronized',
     'ok'
   );
 };
@@ -3098,18 +3861,21 @@ $('syncBtn').onclick=async()=>{
 
 $('logoutBtn').onclick=async()=>{
 
-  if(
-    !confirm(
-      'ნამდვილად გინდა გამოსვლა?'
-    )
-  )return;
+  if(!confirm(
+    'ნამდვილად გინდა გამოსვლა?'
+  )){
+    return;
+  }
 
   try{
+
     await DB.auth.signOut({
       scope:'global'
     });
-  }catch(err){
-    console.warn(err);
+
+  }catch(error){
+
+    console.warn(error);
   }
 
   location.replace(
@@ -3118,29 +3884,40 @@ $('logoutBtn').onclick=async()=>{
 };
 
 /* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+  'keydown',
+  e=>{
+
+    if(e.key==='Escape'){
+
+      $('lessonModal')
+        .classList.remove('open');
+
+      $('studentModal')
+        .classList.remove('open');
+
+      stopSpeaking();
+    }
+
+  }
+);
+
+/* =========================================================
    BOOT
 ========================================================= */
 
 async function boot(){
 
-  if(!DB){
-
-    $('dbStatus').textContent=
-      'CONFIG ERROR';
-
-    toast(
-      'Supabase client ვერ მოიძებნა. შეამოწმე config.js',
-      'err'
-    );
-
-    return;
-  }
-
-  const ok=await checkTeacher();
+  const ok=
+    await checkTeacher();
 
   if(!ok)return;
 
-  $('attendanceDate').value=today();
+  $('attendanceDate').value=
+    today();
 
   await Promise.all([
     loadStudents(),
@@ -3149,27 +3926,35 @@ async function boot(){
   ]);
 
   renderStudents();
-  renderClassPanel();
-  renderAttendance();
-  renderProgress();
-
-  toast(
-    '🚀 Teacher Command Center ready',
-    'ok'
-  );
 }
 
 if(
-  document.readyState==='loading'
+  document.readyState===
+  'loading'
 ){
+
   document.addEventListener(
     'DOMContentLoaded',
     boot,
     {once:true}
   );
+
 }else{
+
   boot();
+
 }
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+window.changeGrade=changeGrade;
+window.saveAttendance=saveAttendance;
+window.openLesson=openLesson;
+window.showStudent=showStudent;
+window.speakText=speakText;
+window.stopSpeaking=stopSpeaking;
 
 </script>
 
