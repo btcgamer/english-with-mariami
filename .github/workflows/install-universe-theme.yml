@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   install:
@@ -27,14 +28,53 @@ jobs:
             fi
           }
           patch_page "index.html"
-          patch_page "grade3.html"
           patch_page "grade2/index.html"
-          if git diff --quiet; then
-            echo "Universe theme already installed."
-            exit 0
+          patch_page "grade3/index.html"
+          patch_page "grade4/index.html"
+          patch_page "grade3.html"
+          patch_page "grade4.html"
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add index.html grade2/index.html grade3/index.html grade4/index.html grade3.html grade4.html
+            git commit -m "Apply futuristic learning universe to grade pages [skip ci]"
+            git push
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html grade3.html grade2/index.html
-          git commit -m "Add shared futuristic learning universe theme [skip ci]"
-          git push
+
+      - name: Build complete project ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf package
+          mkdir -p package/english-with-mariami-futuristic
+          cp -a . package/english-with-mariami-futuristic/
+          rm -rf package/english-with-mariami-futuristic/.git
+          rm -rf package/english-with-mariami-futuristic/package
+          cat > package/english-with-mariami-futuristic/README-FUTURISTIC.md <<'EOF'
+# English with Mariami — Futuristic Learning Universe
+
+Complete project package from the GitHub repository with the shared 3D/Neon Learning Universe layer.
+
+Included:
+- Home Universe Hub
+- Grade 2, Grade 3 and Grade 4 pages
+- Holographic cards
+- 3D/parallax tilt
+- Perspective grid
+- Glow and shine effects
+- Responsive layout
+- Reduced-motion support
+- Existing Supabase/application files preserved
+
+Manual install: copy the package contents into the GitHub repository root, preserving folders.
+EOF
+          cd package
+          zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
+
+      - name: Upload complete project ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-with-mariami-futuristic
+          path: english-with-mariami-futuristic.zip
+          if-no-files-found: error
+          retention-days: 30
