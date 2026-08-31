@@ -1,206 +1,38 @@
-/* =========================================================
-   ENGLISH WITH MARIAMI — GRADE 2 DASHBOARD
-   Safe UI layer. Supabase sync remains in the bridge files.
-========================================================= */
-(function () {
-  'use strict';
-
-  const KEY = 'grade2_neon_progress_v3';
-
-  const lessons = [
-    { number:'01', title:'Animals', theme:'Hologram Zoo', icon:'🐾' },
-    { number:'02', title:'Numbers', theme:'Space Numbers', icon:'🔢' },
-    { number:'03', title:'Colors', theme:'Neon Color Lab', icon:'🎨' },
-    { number:'04', title:'Family', theme:'Family Galaxy', icon:'👨‍👩‍👧' },
-    { number:'05', title:'Home', theme:'Smart Home', icon:'🏠' },
-    { number:'06', title:'Food', theme:'Food Planet', icon:'🍎' },
-    { number:'07', title:'Clothes', theme:'Fashion Station', icon:'👕' },
-    { number:'08', title:'Weather', theme:'Weather Lab', icon:'🌦️' },
-    { number:'09', title:'School', theme:'Future School', icon:'🎒' },
-    { number:'10', title:'Transport', theme:'Transport Zone', icon:'🚀' },
-    { number:'11', title:'Nature', theme:'Nature World', icon:'🌳' },
-    { number:'12', title:'Review', theme:'Final Challenge', icon:'🏆' }
-  ];
-
-  const defaultProgress = { xp:0, stars:0, done:[], daily:'' };
-
-  function readProgress() {
-    try {
-      const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
-      return Object.assign({}, defaultProgress, saved || {});
-    } catch (_) {
-      return Object.assign({}, defaultProgress);
-    }
-  }
-
-  function writeProgress(data) {
-    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (_) {}
-  }
-
-  function getDone() {
-    const p = readProgress();
-    return Array.isArray(p.done) ? p.done : [];
-  }
-
-  function updateStats() {
-    const p = readProgress();
-    const done = getDone();
-    const xp = Number(p.xp || 0);
-    const stars = Number(p.stars || 0);
-    const progress = Math.min(100, Math.round((done.length / lessons.length) * 100));
-    const level = Math.max(1, Math.floor(xp / 100) + 1);
-    const streak = Math.min(30, done.length ? Math.max(1, done.length) : 0);
-    const badges = Math.min(12, Math.floor(done.length / 3));
-
-    const xpEl = document.getElementById('xpValue');
-    const starsEl = document.getElementById('badgeValue');
-    const streakEl = document.getElementById('streakValue');
-    const levelEl = document.getElementById('level');
-    const progressText = document.getElementById('progressText');
-    const progressBar = document.getElementById('progressBar');
-
-    if (xpEl) xpEl.textContent = xp;
-    if (starsEl) starsEl.textContent = badges;
-    if (streakEl) streakEl.textContent = streak;
-    if (levelEl) levelEl.textContent = level;
-    if (progressText) progressText.textContent = progress + '%';
-    if (progressBar) progressBar.style.width = progress + '%';
-
-    return { p, done, xp, stars, progress, level };
-  }
-
-  function renderLessons() {
-    const grid = document.getElementById('lessonGrid');
-    if (!grid) return;
-
-    const done = getDone();
-
-    grid.innerHTML = lessons.map(function (lesson, index) {
-      const completed = done.indexOf(index) !== -1;
-      const finalClass = lesson.number === '12' ? ' final-lesson' : '';
-      const status = completed ? '✓ COMPLETED' : 'ENTER →';
-
-      return `
-        <article class="lesson${finalClass}" data-lesson="${lesson.number}" tabindex="0" role="button" aria-label="Open Lesson ${lesson.number} ${lesson.title}">
-          <div class="lesson-number">${lesson.number === '12' ? 'FINAL MISSION' : 'LESSON ' + lesson.number}</div>
-          <div class="lesson-icon">${lesson.icon}</div>
-          <h3>${lesson.title}</h3>
-          <p>${lesson.theme}</p>
-          <div class="lesson-bottom">
-            <div class="stars">${completed ? '★★★★★' : '☆☆☆☆☆'}</div>
-            <button class="enter-btn" type="button">${status}</button>
-          </div>
-        </article>`;
-    }).join('');
-  }
-
-  function showModal(title, theme, number) {
-    const modal = document.getElementById('modal');
-    const content = document.getElementById('content');
-    if (!modal || !content) return;
-
-    content.innerHTML = `
-      <div class="mission">GRADE 2 • MISSION ${number}</div>
-      <h3>${title}</h3>
-      <p>${theme}</p>
-      <p style="margin-top:10px">The visual mission hub is ready. Your existing lesson content and Supabase progress system are kept separate and safe.</p>
-      <button class="mission-button" type="button" id="missionDoneButton">MARK MISSION COMPLETE</button>
-    `;
-
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-
-    const doneButton = document.getElementById('missionDoneButton');
-    if (doneButton) {
-      doneButton.addEventListener('click', function () {
-        const p = readProgress();
-        const index = lessons.findIndex(x => x.number === number);
-        if (index >= 0) {
-          if (!Array.isArray(p.done)) p.done = [];
-          if (!p.done.includes(index)) {
-            p.done.push(index);
-            p.xp = Number(p.xp || 0) + 25;
-            p.stars = Number(p.stars || 0) + 1;
-            writeProgress(p);
-          }
-        }
-        closeModal();
-        renderLessons();
-        updateStats();
-      });
-    }
-  }
-
-  function closeModal() {
-    const modal = document.getElementById('modal');
-    if (!modal) return;
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-
-  function openLesson(number) {
-    const lesson = lessons.find(x => x.number === number);
-    if (!lesson) return;
-    showModal(lesson.title, lesson.theme, lesson.number);
-  }
-
-  function continueMission() {
-    const done = getDone();
-    const next = lessons.find((_, index) => done.indexOf(index) === -1) || lessons[11];
-    openLesson(next.number);
-  }
-
-  function finalReview() {
-    openLesson('12');
-  }
-
-  function dailyChallenge() {
-    const p = readProgress();
-    const today = new Date().toISOString().slice(0,10);
-    if (p.daily === today) {
-      alert('Daily Boost already completed today. Come back tomorrow!');
-      return;
-    }
-    p.daily = today;
-    p.xp = Number(p.xp || 0) + 10;
-    writeProgress(p);
-    updateStats();
-    alert('🎯 Daily Boost complete! +10 XP');
-  }
-
-  function bindEvents() {
-    const grid = document.getElementById('lessonGrid');
-    if (grid) {
-      grid.addEventListener('click', function (event) {
-        const card = event.target.closest('[data-lesson]');
-        if (card) openLesson(card.dataset.lesson);
-      });
-      grid.addEventListener('keydown', function (event) {
-        if (event.key !== 'Enter' && event.key !== ' ') return;
-        const card = event.target.closest('[data-lesson]');
-        if (card) { event.preventDefault(); openLesson(card.dataset.lesson); }
-      });
-    }
-
-    const close = document.getElementById('closeModal');
-    if (close) close.addEventListener('click', closeModal);
-
-    const modal = document.getElementById('modal');
-    if (modal) modal.addEventListener('click', function (event) {
-      if (event.target === modal) closeModal();
-    });
-
-    const daily = document.getElementById('dailyButton');
-    if (daily) daily.addEventListener('click', dailyChallenge);
-  }
-
-  window.closeModal = closeModal;
-  window.continueMission = continueMission;
-  window.finalReview = finalReview;
-  window.dailyChallenge = dailyChallenge;
-  window.Grade2Dashboard = { lessons, openLesson, continueMission, finalReview, dailyChallenge, updateStats };
-
-  renderLessons();
-  updateStats();
-  bindEvents();
+(()=>{'use strict';
+const KEY='grade2_complete_v1';
+const worlds=[
+['01','Animals','ცხოველები','🐾','Hologram Zoo','#00efff',[['cat','კატა','This is a cat.'],['dog','ძაღლი','I have a dog.'],['bird','ჩიტი','The bird can fly.'],['fish','თევზი','The fish can swim.'],['lion','ლომი','The lion is big.'],['elephant','სპილო','The elephant is big.'],['monkey','მაიმუნი','The monkey can jump.'],['rabbit','კურდღელი','The rabbit is small.']]],
+['02','Numbers','რიცხვები','🔢','Space Numbers','#7c7cff',[['one','ერთი','I have one book.'],['two','ორი','Two red balls.'],['three','სამი','Three cats.'],['four','ოთხი','Four pencils.'],['five','ხუთი','Five stars.'],['six','ექვსი','Six apples.'],['seven','შვიდი','Seven days.'],['ten','ათი','Ten fingers.']]],
+['03','Colors','ფერები','🎨','Neon Color Lab','#ff4fcf',[['red','წითელი','The apple is red.'],['blue','ლურჯი','The sky is blue.'],['green','მწვანე','The tree is green.'],['yellow','ყვითელი','The sun is yellow.'],['black','შავი','My bag is black.'],['white','თეთრი','The snow is white.'],['orange','ნარინჯისფერი','The orange is orange.'],['purple','იისფერი','The flower is purple.']]],
+['04','Family','ოჯახი','👨‍👩‍👧','Family Galaxy','#a66cff',[['mother','დედა','My mother is kind.'],['father','მამა','My father is strong.'],['sister','და','My sister is young.'],['brother','ძმა','My brother can run.'],['grandma','ბებია','My grandma is nice.'],['grandpa','ბაბუა','My grandpa is happy.'],['family','ოჯახი','I love my family.']]],
+['05','Home','სახლი','🏠','Smart Home','#00d9a6',[['house','სახლი','This is my house.'],['room','ოთახი','My room is clean.'],['door','კარი','Open the door.'],['window','ფანჯარა','Close the window.'],['bed','საწოლი','My bed is soft.'],['table','მაგიდა','The book is on the table.'],['chair','სკამი','Sit on the chair.'],['kitchen','სამზარეულო','We cook in the kitchen.']]],
+['06','Food','საჭმელი','🍎','Food Planet','#ff9d3d',[['apple','ვაშლი','I eat an apple.'],['banana','ბანანი','The banana is yellow.'],['bread','პური','I like bread.'],['milk','რძე','I drink milk.'],['water','წყალი','I drink water.'],['cheese','ყველი','I like cheese.'],['rice','ბრინჯი','We eat rice.'],['cake','ნამცხვარი','The cake is sweet.']]],
+['07','Clothes','ტანსაცმელი','👕','Fashion Station','#ff5f8a',[['shirt','პერანგი','My shirt is blue.'],['dress','კაბა','Her dress is red.'],['shoes','ფეხსაცმელი','My shoes are new.'],['hat','ქუდი','Put on your hat.'],['coat','ქურთუკი','My coat is warm.'],['socks','წინდები','My socks are white.'],['jeans','ჯინსი','I wear jeans.']]],
+['08','Weather','ამინდი','🌦️','Weather Lab','#39b7ff',[['sunny','მზიანი','It is sunny today.'],['rainy','წვიმიანი','It is rainy today.'],['cloudy','ღრუბლიანი','It is cloudy.'],['windy','ქარიანი','It is windy.'],['snowy','თოვლიანი','It is snowy.'],['hot','ცხელი','It is hot today.'],['cold','ცივი','It is cold today.']]],
+['09','School','სკოლა','🎒','Future School','#9b7cff',[['school','სკოლა','I go to school.'],['teacher','მასწავლებელი','My teacher is kind.'],['student','მოსწავლე','I am a student.'],['book','წიგნი','I read a book.'],['pen','კალამი','This is my pen.'],['pencil','ფანქარი','I have a pencil.'],['desk','მერხი','My book is on the desk.']]],
+['10','Transport','ტრანსპორტი','🚀','Transport Zone','#4de7ff',[['car','მანქანა','The car is fast.'],['bus','ავტობუსი','I go by bus.'],['train','მატარებელი','The train is long.'],['bike','ველოსიპედი','I ride a bike.'],['plane','თვითმფრინავი','The plane can fly.'],['boat','ნავი','The boat is on the water.']]],
+['11','Nature','ბუნება','🌳','Nature World','#49ff9a',[['tree','ხე','The tree is tall.'],['flower','ყვავილი','The flower is beautiful.'],['river','მდინარე','The river is long.'],['mountain','მთა','The mountain is high.'],['sun','მზე','The sun is bright.'],['moon','მთვარე','The moon is white.'],['star','ვარსკვლავი','I see a star.']]],
+['12','Review','გამეორება','🏆','Final Challenge','#ffd84d',[]]
+];
+const quizBank=[['What is "cat"?','კატა',['ძაღლი','კატა','თევზი','ჩიტი']],['What color is the sky?','blue',['red','green','blue','black']],['How many is "three"?','3',['2','3','5','10']],['Who teaches at school?','teacher',['student','teacher','doctor','pilot']],['What do you drink?','water',['water','chair','shoe','book']],['Which can fly?','bird',['fish','bird','cat','rabbit']],['What is "mother"?','დედა',['და','დედა','ძმა','ბაბუა']],['What weather has rain?','rainy',['sunny','windy','rainy','hot']]];
+let p=load();let current=null;let tab='words';let flashIndex=0;let quizIndex=0;let quizScore=0;let matchA=null;let matchDone=0;let sentence=[];
+function load(){try{return Object.assign({xp:0,stars:0,done:[],daily:'',words:[]},JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){return {xp:0,stars:0,done:[],daily:'',words:[]}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(p));}catch(e){};document.dispatchEvent(new CustomEvent('grade2progress',{detail:p}));}
+function speak(t){if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function stats(){const done=p.done.length;document.querySelector('#xpValue').textContent=p.xp;document.querySelector('#starValue').textContent=p.stars;document.querySelector('#streakValue').textContent=Math.min(30,done);document.querySelector('#levelValue').textContent=Math.max(1,Math.floor(p.xp/100)+1);const pct=Math.round(done/12*100);document.querySelector('#progressText').textContent=pct+'%';document.querySelector('#progressBar').style.width=pct+'%'}
+function render(){const g=document.querySelector('#lessonGrid');g.innerHTML=worlds.map((w,i)=>{const done=p.done.includes(i);return `<article class="lesson ${done?'completed':''}" style="--c:${w[5]}" data-i="${i}"><div class="mission-no">${w[0]==='12'?'FINAL MISSION':'MISSION '+w[0]}</div><div class="scene">${w[3]}</div><h3>${w[1]}</h3><p class="ka">${w[2]}</p><p class="desc">${w[4]} • ${w[6].length||'8'} learning words</p><div class="lesson-foot"><span class="stars">${done?'★★★★★':'☆☆☆☆☆'}</span><button class="enter">${done?'REPLAY':'ENTER →'}</button></div></article>`}).join('');stats()}
+function open(i){current=i;tab='words';flashIndex=0;quizIndex=0;quizScore=0;matchA=null;matchDone=0;sentence=[];modal(true);draw()}
+function modal(show){const m=document.querySelector('#modal');m.classList.toggle('open',show);m.setAttribute('aria-hidden',String(!show))}
+function draw(){const w=worlds[current];const c=document.querySelector('#modalContent');c.innerHTML=`<div class="mission">GRADE 2 • ${w[0]} • ${esc(w[4])}</div><h2 class="modal-title">${w[3]} ${esc(w[1])}</h2><p class="modal-ka">${esc(w[2])}</p><div class="tabs"><button class="tab ${tab==='words'?'active':''}" data-tab="words">📚 WORDS</button><button class="tab ${tab==='flash'?'active':''}" data-tab="flash">🧠 FLASHCARDS</button><button class="tab ${tab==='quiz'?'active':''}" data-tab="quiz">🎯 QUIZ</button><button class="tab ${tab==='match'?'active':''}" data-tab="match">🧩 MATCH</button><button class="tab ${tab==='sentence'?'active':''}" data-tab="sentence">✍️ SENTENCE</button></div><div id="activity"></div>`;const a=document.querySelector('#activity');if(tab==='words')words(a,w);if(tab==='flash')flash(a,w);if(tab==='quiz')quiz(a);if(tab==='match')match(a,w);if(tab==='sentence')builder(a,w)}
+function words(a,w){if(!w[6].length){a.innerHTML='<div class="result"><strong>🏆</strong><h3>Final Review</h3><p>გაიარე ყველა წინა მისია და შეამოწმე შენი ცოდნა.</p><button class="action" id="startReview">START FINAL QUIZ</button></div>';return}a.innerHTML=`<div class="words">${w[6].map(x=>`<div class="word-card"><b>${esc(x[0])}</b><div class="ka">${esc(x[1])}</div><p>${esc(x[2])}</p><button class="listen" data-speak="${esc(x[0])}">🔊 LISTEN</button></div>`).join('')}</div><div class="center"><button class="action" id="complete">✓ COMPLETE MISSION • +25 XP</button></div>`}
+function flash(a,w){const x=w[6][flashIndex%w[6].length];a.innerHTML=`<div class="flash-wrap"><p>FLASHCARD ${flashIndex%w[6].length+1}/${w[6].length}</p><div class="flashcard" id="flashcard"><b>${esc(x[0])}</b><span>${esc(x[1])}</span></div><p>დააჭირე ბარათს სიტყვის მოსასმენად.</p><button class="action" id="nextFlash">NEXT →</button></div>`}
+function quiz(a){const q=quizBank[quizIndex%quizBank.length];a.innerHTML=`<p>QUESTION ${quizIndex+1}/${quizBank.length}</p><div class="quiz-question">${esc(q[0])}</div><div class="answers">${q[2].map(x=>`<button class="answer" data-answer="${esc(x)}">${esc(x)}</button>`).join('')}</div><p id="quizFeedback"></p>`}
+function match(a,w){const arr=w[6].slice(0,Math.min(6,w[6].length));if(!arr.length){a.innerHTML='<div class="result"><strong>🏆</strong><p>Final mission uses the Review Quiz.</p></div>';return}const left=arr.map((x,i)=>`<button data-match="l${i}">${esc(x[0])}</button>`).join('');const right=arr.map((x,i)=>`<button data-match="r${i}">${esc(x[1])}</button>`).join('');a.innerHTML=`<p>შეაერთე ინგლისური სიტყვა ქართულ მნიშვნელობასთან.</p><div class="match-grid"><div>${left}</div><div>${right}</div></div><p id="matchFeedback">Matched: ${matchDone}/${arr.length}</p>`}
+function builder(a,w){const bank=w[6].slice(0,6);const target=bank.length?[bank[0][0], 'is', bank[0][0]].join(' '):'I love English.';const words=(bank.length?['I','like',bank[0][0],'very','much','.']:['I','love','English','.']);a.innerHTML=`<p>დაალაგე სიტყვები სწორ წინადადებად.</p><div class="sentence-box">${sentence.map(x=>`<b>${esc(x)}</b> `).join('')}</div><div class="tokens">${words.map(x=>`<button data-token="${esc(x)}">${esc(x)}</button>`).join('')}</div><br><button class="action" id="checkSentence">CHECK SENTENCE</button><p id="sentenceFeedback"></p>`}
+function complete(){const i=current;if(!p.done.includes(i)){p.done.push(i);p.xp+=25;p.stars+=5;save();stats();render()}document.querySelector('#activity').insertAdjacentHTML('beforeend','<p style="color:#21ff9a;font-weight:900">✓ Mission complete! +25 XP +5 Stars</p>')}
+function daily(){const d=new Date().toISOString().slice(0,10);if(p.daily===d){alert('🎯 Daily Boost already completed today.');return}p.daily=d;p.xp+=10;save();stats();alert('🎯 Daily Boost complete! +10 XP')}
+function finalReview(){current=11;tab='quiz';quizIndex=0;quizScore=0;modal(true);draw()}
+document.addEventListener('click',e=>{const card=e.target.closest('.lesson');if(card)open(+card.dataset.i);if(e.target.id==='closeModal'||e.target===document.querySelector('#modal'))modal(false);if(e.target.id==='continueBtn'){const n=worlds.findIndex((_,i)=>!p.done.includes(i));open(n<0?11:n)}if(e.target.id==='reviewBtn')finalReview();if(e.target.id==='dailyBtn')daily();const t=e.target.closest('[data-tab]');if(t){tab=t.dataset.tab;draw()}if(e.target.dataset.speak)speak(e.target.dataset.speak);if(e.target.id==='complete')complete();if(e.target.id==='nextFlash'){flashIndex++;draw()}if(e.target.id==='flashcard'){const x=worlds[current][6][flashIndex%worlds[current][6].length];speak(x[0]);}if(e.target.dataset.answer){const q=quizBank[quizIndex%quizBank.length];const ok=e.target.dataset.answer===q[1];document.querySelectorAll('.answer').forEach(b=>b.disabled=true);e.target.classList.add(ok?'correct':'wrong');document.querySelector('#quizFeedback').textContent=ok?'✓ Correct! +10 XP':'✗ Try the next one.';if(ok){p.xp+=10;quizScore++;save();stats()}setTimeout(()=>{quizIndex++;if(quizIndex>=quizBank.length){document.querySelector('#activity').innerHTML=`<div class="result"><strong>${quizScore}/${quizBank.length}</strong><p>Final quiz complete! ${quizScore>=6?'Excellent! 🌟':'Keep practicing! 💪'}</p><button class="action" id="complete">CLAIM REWARD</button></div>`}else draw()},650)}if(e.target.dataset.match){const id=e.target.dataset.match;const idx=+id.slice(1);if(!matchA&&id[0]==='l')matchA=idx;else if(matchA!==null&&id[0]==='r'){if(matchA===idx){matchDone++;matchA=null;p.xp+=5;p.stars+=1;save();stats();draw()}else{document.querySelector('#matchFeedback').textContent='❌ Not a match — try again.';matchA=null}}}if(e.target.dataset.token){sentence.push(e.target.dataset.token);draw()}if(e.target.id==='checkSentence'){const text=sentence.join('');const good=/^Ilike.+verymuch\.$/.test(text);document.querySelector('#sentenceFeedback').textContent=good?'✓ Great sentence! +10 XP':'Try again — build: I like [word] very much.';if(good){p.xp+=10;p.stars+=1;save();stats()}}if(e.target.id==='startReview')finalReview();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal(false)});render();
 })();
