@@ -4,27 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#020617">
-<title>English with Mariami — Teacher Command Center</title>
+<title>English with Mariami — Teacher Nexus</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 
 <style>
 :root{
-  --bg:#020617;
-  --bg2:#07152b;
-  --card:rgba(7,20,42,.82);
-  --line:rgba(0,234,255,.22);
+  --bg:#01040b;
+  --panel:rgba(5,13,28,.88);
+  --panel2:rgba(8,20,42,.94);
   --cyan:#00eaff;
-  --blue:#2878ff;
-  --purple:#9b5cff;
-  --pink:#ff3cac;
-  --green:#00f5a0;
+  --blue:#2684ff;
+  --violet:#9b5cff;
+  --pink:#ff36d1;
+  --green:#00ff9d;
   --yellow:#ffe600;
-  --red:#ff426d;
+  --red:#ff416c;
+  --orange:#ff9d00;
   --text:#f5fbff;
-  --muted:#91a9bc;
-  --shadow:0 25px 80px rgba(0,0,0,.5);
+  --muted:#8ca5ba;
+  --line:rgba(0,234,255,.18);
+  --shadow:0 25px 90px rgba(0,0,0,.5);
 }
 
 *{box-sizing:border-box}
@@ -37,44 +38,16 @@ body{
   margin:0;
   min-height:100vh;
   color:var(--text);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
   background:
-    radial-gradient(circle at 10% 5%,rgba(0,234,255,.14),transparent 25%),
-    radial-gradient(circle at 90% 15%,rgba(155,92,255,.16),transparent 28%),
-    radial-gradient(circle at 50% 100%,rgba(255,60,172,.08),transparent 35%),
-    linear-gradient(135deg,#01040b,#031126 55%,#020617);
+    radial-gradient(circle at 15% 5%,rgba(0,234,255,.13),transparent 25%),
+    radial-gradient(circle at 90% 10%,rgba(155,92,255,.14),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(255,54,209,.07),transparent 30%),
+    linear-gradient(135deg,#01030a,#020b19 48%,#01040b);
   overflow-x:hidden;
 }
 
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-2;
-  opacity:.25;
-  background-image:
-    linear-gradient(rgba(0,234,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,234,255,.07) 1px,transparent 1px);
-  background-size:42px 42px;
-  mask-image:linear-gradient(to bottom,#000,transparent 90%);
-}
-
-body:after{
-  content:"";
-  position:fixed;
-  width:500px;
-  height:500px;
-  border-radius:50%;
-  right:-200px;
-  top:200px;
-  background:rgba(0,234,255,.08);
-  filter:blur(100px);
-  pointer-events:none;
-  z-index:-1;
-}
-
-button,input,select,textarea{
+button,input,select{
   font:inherit;
 }
 
@@ -83,31 +56,115 @@ button{
 }
 
 button:disabled{
-  opacity:.5;
+  opacity:.45;
   cursor:not-allowed;
 }
 
-.wrap{
-  width:min(1480px,calc(100% - 28px));
-  margin:auto;
+::-webkit-scrollbar{
+  width:8px;
 }
 
-/* TOP */
+::-webkit-scrollbar-track{
+  background:#01050c;
+}
 
-.top{
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--cyan),var(--violet));
+  border-radius:20px;
+}
+
+/* =========================
+   3D BACKGROUND
+========================= */
+
+.space{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.grid3d{
+  position:absolute;
+  left:-20%;
+  width:140%;
+  height:70%;
+  bottom:-24%;
+  transform:perspective(500px) rotateX(62deg);
+  transform-origin:center;
+  background-image:
+    linear-gradient(rgba(0,234,255,.11) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.11) 1px,transparent 1px);
+  background-size:50px 50px;
+  animation:gridMove 7s linear infinite;
+  mask-image:linear-gradient(to top,black,transparent);
+}
+
+@keyframes gridMove{
+  from{background-position:0 0}
+  to{background-position:0 50px}
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(75px);
+  opacity:.45;
+  animation:float 12s ease-in-out infinite;
+}
+
+.orb.a{
+  width:300px;
+  height:300px;
+  background:rgba(0,234,255,.15);
+  top:10%;
+  left:-100px;
+}
+
+.orb.b{
+  width:350px;
+  height:350px;
+  background:rgba(155,92,255,.13);
+  right:-130px;
+  top:30%;
+  animation-delay:-4s;
+}
+
+.orb.c{
+  width:260px;
+  height:260px;
+  background:rgba(255,54,209,.10);
+  left:40%;
+  bottom:-100px;
+  animation-delay:-7s;
+}
+
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(30px,-25px) scale(1.12)}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
   position:sticky;
   top:0;
   z-index:5000;
   border-bottom:1px solid var(--line);
-  background:rgba(1,6,18,.78);
+  background:rgba(1,5,14,.78);
   backdrop-filter:blur(22px);
 }
 
-.nav{
-  min-height:74px;
+.header-inner{
+  width:min(1500px,calc(100% - 24px));
+  min-height:76px;
+  margin:auto;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
 }
 
@@ -115,122 +172,148 @@ button:disabled{
   display:flex;
   align-items:center;
   gap:12px;
-  font-weight:1000;
 }
 
 .logo{
   width:48px;
   height:48px;
-  border-radius:15px;
   display:grid;
   place-items:center;
+  border-radius:15px;
   font-size:25px;
   background:
-    linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
+    linear-gradient(135deg,#00eaff,#267cff,#9b5cff);
   box-shadow:
-    0 0 25px rgba(0,234,255,.25),
-    inset 0 0 20px rgba(255,255,255,.1);
-  animation:logoFloat 4s ease-in-out infinite;
+    0 0 18px rgba(0,234,255,.35),
+    0 0 45px rgba(155,92,255,.18);
+  animation:logoPulse 3s ease-in-out infinite;
 }
 
-@keyframes logoFloat{
-  50%{transform:translateY(-3px) rotate(2deg)}
+@keyframes logoPulse{
+  50%{
+    box-shadow:
+      0 0 25px rgba(0,234,255,.55),
+      0 0 65px rgba(155,92,255,.28);
+  }
 }
 
-.brand small{
-  display:block;
+.brand-title{
+  font-weight:1000;
+  letter-spacing:.3px;
+}
+
+.brand-sub{
   color:var(--muted);
   font-size:9px;
-  letter-spacing:1.5px;
+  letter-spacing:1.7px;
   margin-top:3px;
 }
 
-.nav-actions{
+.header-actions{
   display:flex;
+  align-items:center;
   gap:8px;
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 
 .btn{
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:13px;
+  min-height:42px;
   padding:10px 14px;
-  min-height:43px;
   color:white;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
   background:rgba(255,255,255,.055);
   font-weight:850;
-  transition:.2s;
+  transition:.18s;
 }
 
 .btn:hover{
   transform:translateY(-2px);
-  border-color:rgba(0,234,255,.5);
-  box-shadow:0 0 28px rgba(0,234,255,.12);
+  border-color:rgba(0,234,255,.45);
+  box-shadow:0 0 25px rgba(0,234,255,.12);
 }
 
-.btn.cyan{
-  background:linear-gradient(135deg,#0878ff,#00c8e8);
+.btn-cyan{
+  background:linear-gradient(135deg,#0878ff,#00c9e8);
 }
 
-.btn.green{
-  background:linear-gradient(135deg,#00a86b,#00e19d);
+.btn-green{
+  background:linear-gradient(135deg,#00895d,#00dfa0);
 }
 
-.btn.purple{
-  background:linear-gradient(135deg,#6731d0,#a855f7);
+.btn-purple{
+  background:linear-gradient(135deg,#6332cc,#a855f7);
 }
 
-.btn.yellow{
-  color:#07111e;
+.btn-yellow{
+  color:#07101b;
   background:linear-gradient(135deg,#ffe600,#ffb800);
 }
 
-.btn.red{
-  background:linear-gradient(135deg,#c7194b,#ff3864);
+.btn-red{
+  background:linear-gradient(135deg,#d21e4c,#ff416c);
 }
 
-.btn.blue{
-  background:linear-gradient(135deg,#1755db,#398aff);
+.btn-orange{
+  background:linear-gradient(135deg,#e86b00,#ffb000);
 }
 
-/* HERO */
+/* =========================
+   MAIN
+========================= */
+
+.wrap{
+  width:min(1500px,calc(100% - 24px));
+  margin:auto;
+}
 
 .hero{
-  padding:38px 0 18px;
+  padding:34px 0 18px;
 }
 
 .hero-grid{
   display:grid;
   grid-template-columns:1.4fr .6fr;
-  gap:18px;
+  gap:16px;
 }
 
-.hero-card,
 .card{
   position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:26px;
   background:
-    linear-gradient(145deg,rgba(8,27,54,.9),rgba(2,13,29,.88));
+    linear-gradient(145deg,rgba(7,20,43,.91),rgba(2,10,23,.91));
+  border:1px solid var(--line);
+  border-radius:24px;
   box-shadow:var(--shadow);
+  overflow:hidden;
 }
 
-.hero-card:after,
-.card:after{
+.card:before{
   content:"";
   position:absolute;
-  width:250px;
-  height:1px;
-  left:-50px;
-  top:0;
-  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-  opacity:.7;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255,255,255,.035) 50%,
+      transparent 80%
+    );
+  transform:translateX(-100%);
+  animation:shine 8s infinite;
+}
+
+@keyframes shine{
+  0%,70%,100%{transform:translateX(-100%)}
+  85%{transform:translateX(100%)}
 }
 
 .hero-main{
-  padding:32px;
+  padding:34px;
+  min-height:260px;
 }
 
 .kicker{
@@ -241,40 +324,39 @@ button:disabled{
 }
 
 .hero h1{
-  margin:11px 0;
-  font-size:clamp(2.2rem,5vw,4.7rem);
-  line-height:.95;
+  font-size:clamp(2.2rem,5vw,5rem);
+  line-height:.98;
   letter-spacing:-3px;
+  margin:12px 0;
 }
 
-.hero h1 span{
+.gradient-text{
   background:linear-gradient(
     90deg,
     #fff,
     var(--cyan),
-    var(--purple),
-    var(--pink),
-    var(--yellow)
+    #fff,
+    var(--violet),
+    var(--pink)
   );
+  background-size:300% 100%;
   -webkit-background-clip:text;
   color:transparent;
+  animation:textFlow 5s linear infinite;
+}
+
+@keyframes textFlow{
+  to{background-position:300% 0}
 }
 
 .hero p{
-  max-width:850px;
-  line-height:1.7;
-  color:#b8ccda;
+  color:#abc0cf;
+  line-height:1.65;
+  max-width:800px;
 }
 
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  margin-top:20px;
-}
-
-.system{
-  padding:28px;
+.live-card{
+  padding:27px;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -285,7 +367,7 @@ button:disabled{
   align-items:center;
   gap:8px;
   color:var(--green);
-  font-weight:1000;
+  font-weight:950;
 }
 
 .online-dot{
@@ -294,60 +376,147 @@ button:disabled{
   border-radius:50%;
   background:var(--green);
   box-shadow:0 0 18px var(--green);
-  animation:pulse 1.5s infinite;
+  animation:blink 1.3s infinite;
 }
 
-@keyframes pulse{
-  50%{opacity:.3;transform:scale(.7)}
+@keyframes blink{
+  50%{opacity:.3;transform:scale(.65)}
 }
 
-.system h2{
-  margin:14px 0 4px;
+.teacher-name{
+  font-size:28px;
+  font-weight:1000;
+  margin-top:14px;
 }
 
-/* STATS */
+.status{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:4px;
+}
+
+/* =========================
+   GRADE SELECTOR
+========================= */
+
+.grade-zone{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+  margin:10px 0 18px;
+}
+
+.grade-card{
+  position:relative;
+  min-height:145px;
+  padding:22px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.09);
+  background:linear-gradient(145deg,#071a34,#030c1b);
+  overflow:hidden;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.grade-card:after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  right:-70px;
+  bottom:-80px;
+  filter:blur(25px);
+  background:rgba(0,234,255,.18);
+}
+
+.grade-card:hover{
+  transform:translateY(-5px) rotateX(2deg);
+  border-color:rgba(0,234,255,.45);
+}
+
+.grade-card.active{
+  border-color:var(--cyan);
+  box-shadow:
+    0 0 30px rgba(0,234,255,.13),
+    inset 0 0 25px rgba(0,234,255,.04);
+}
+
+.grade2.active{
+  border-color:var(--green);
+  box-shadow:0 0 30px rgba(0,255,157,.12);
+}
+
+.grade3.active{
+  border-color:var(--cyan);
+  box-shadow:0 0 30px rgba(0,234,255,.12);
+}
+
+.grade4.active{
+  border-color:var(--yellow);
+  box-shadow:0 0 30px rgba(255,230,0,.12);
+}
+
+.grade-icon{
+  font-size:32px;
+}
+
+.grade-card b{
+  display:block;
+  font-size:20px;
+  margin-top:8px;
+}
+
+.grade-card small{
+  color:var(--muted);
+}
+
+/* =========================
+   STATS
+========================= */
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(6,1fr);
+  grid-template-columns:repeat(5,1fr);
   gap:11px;
-  margin:15px 0;
+  margin-bottom:18px;
 }
 
 .stat{
   padding:17px;
-  min-height:100px;
+  border-radius:18px;
   border:1px solid var(--line);
-  border-radius:19px;
-  background:rgba(5,21,42,.72);
+  background:rgba(5,19,39,.75);
 }
 
 .stat small{
   color:var(--muted);
-  font-size:10px;
-  font-weight:800;
-}
-
-.stat b{
   display:block;
-  margin-top:6px;
-  font-size:28px;
+  font-size:10px;
 }
 
-/* LAYOUT */
+.stat strong{
+  display:block;
+  font-size:28px;
+  margin-top:5px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
 
 .dashboard{
   display:grid;
-  grid-template-columns:245px 1fr;
-  gap:17px;
+  grid-template-columns:245px minmax(0,1fr);
+  gap:16px;
   padding-bottom:60px;
 }
 
 .sidebar{
   height:max-content;
-  padding:12px;
   position:sticky;
-  top:91px;
+  top:94px;
+  padding:11px;
 }
 
 .side-label{
@@ -358,28 +527,32 @@ button:disabled{
   padding:12px;
 }
 
-.menu{
+.nav-btn{
   width:100%;
-  border:0;
-  border-radius:13px;
-  padding:13px;
-  margin:2px 0;
   text-align:left;
-  color:#c9d9e2;
+  border:0;
   background:transparent;
+  color:#d9e7ef;
+  padding:13px 12px;
+  border-radius:12px;
+  margin:2px 0;
   font-weight:850;
-  transition:.2s;
 }
 
-.menu:hover,
-.menu.active{
-  color:#fff;
-  background:linear-gradient(
-    90deg,
-    rgba(0,234,255,.15),
-    rgba(155,92,255,.1)
-  );
+.nav-btn:hover,
+.nav-btn.active{
+  color:white;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,234,255,.13),
+      rgba(155,92,255,.09)
+    );
   box-shadow:inset 3px 0 var(--cyan);
+}
+
+.content{
+  min-width:0;
 }
 
 .panel{
@@ -390,15 +563,15 @@ button:disabled{
   display:block;
 }
 
-.card{
+.section{
   padding:22px;
-  margin-bottom:17px;
+  margin-bottom:16px;
 }
 
 .section-head{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:flex-start;
   gap:15px;
   margin-bottom:18px;
 }
@@ -413,53 +586,50 @@ button:disabled{
 }
 
 .small{
-  font-size:12px;
+  font-size:11px;
 }
 
-/* FORM */
+/* =========================
+   FORMS
+========================= */
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  gap:11px;
 }
 
 .field label{
   display:block;
-  margin-bottom:6px;
-  color:#a8bfcc;
+  color:#a9bdc9;
   font-size:11px;
   font-weight:850;
+  margin-bottom:6px;
 }
 
 .input,
-select,
-textarea{
+select{
   width:100%;
-  min-height:45px;
-  border:1px solid rgba(0,234,255,.16);
-  border-radius:12px;
+  min-height:44px;
+  border:1px solid rgba(0,234,255,.15);
+  border-radius:11px;
+  background:#031226;
+  color:white;
   outline:none;
-  padding:10px 12px;
-  color:#fff;
-  background:#041326;
-}
-
-textarea{
-  min-height:100px;
-  resize:vertical;
+  padding:9px 11px;
 }
 
 .input:focus,
-select:focus,
-textarea:focus{
+select:focus{
   border-color:var(--cyan);
-  box-shadow:0 0 0 3px rgba(0,234,255,.08);
+  box-shadow:0 0 0 3px rgba(0,234,255,.07);
 }
 
-/* STUDENTS */
+/* =========================
+   STUDENTS
+========================= */
 
-.search-row{
+.search{
   display:grid;
   grid-template-columns:1fr 180px auto;
   gap:8px;
@@ -468,22 +638,21 @@ textarea:focus{
 .students{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin-top:16px;
+  gap:11px;
+  margin-top:14px;
 }
 
 .student{
-  padding:18px;
-  border:1px solid rgba(0,234,255,.14);
-  border-radius:20px;
-  background:linear-gradient(145deg,#071e3a,#041326);
+  padding:17px;
+  border-radius:18px;
+  border:1px solid rgba(0,234,255,.13);
+  background:linear-gradient(145deg,#071b36,#031023);
   transition:.2s;
 }
 
 .student:hover{
   transform:translateY(-3px);
-  border-color:rgba(0,234,255,.45);
-  box-shadow:0 18px 50px rgba(0,0,0,.3);
+  border-color:rgba(0,234,255,.4);
 }
 
 .student-top{
@@ -492,99 +661,115 @@ textarea:focus{
   gap:10px;
 }
 
-.identity{
+.student-left{
   display:flex;
   gap:10px;
 }
 
 .avatar{
-  width:46px;
-  height:46px;
-  border-radius:14px;
+  width:45px;
+  height:45px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,#08416c,#56258b);
+  border-radius:14px;
+  background:linear-gradient(135deg,#073c62,#51258a);
   font-size:21px;
 }
 
-.name{
+.student-name{
   font-weight:1000;
-  font-size:17px;
 }
 
-.email{
+.student-email{
   color:var(--muted);
   font-size:11px;
-  margin-top:4px;
+  margin-top:3px;
+  word-break:break-all;
 }
 
 .badge{
   height:max-content;
   padding:6px 9px;
-  border-radius:9px;
-  color:var(--cyan);
-  background:rgba(0,234,255,.08);
+  border-radius:8px;
   font-size:10px;
   font-weight:1000;
+  white-space:nowrap;
 }
 
-.g2{color:#5cff9d;background:rgba(0,245,160,.08)}
-.g3{color:#00eaff;background:rgba(0,234,255,.08)}
-.g4{color:#ffe600;background:rgba(255,230,0,.08)}
+.b2{
+  color:var(--green);
+  background:rgba(0,255,157,.08);
+}
+
+.b3{
+  color:var(--cyan);
+  background:rgba(0,234,255,.08);
+}
+
+.b4{
+  color:var(--yellow);
+  background:rgba(255,230,0,.08);
+}
+
+.no-grade{
+  color:#ff9baf;
+  background:rgba(255,65,108,.08);
+}
 
 .student-actions{
   display:flex;
-  flex-wrap:wrap;
   gap:6px;
+  flex-wrap:wrap;
   margin-top:14px;
 }
 
 .student-actions .btn{
-  min-height:37px;
-  padding:7px 10px;
-  font-size:11px;
+  min-height:36px;
+  padding:7px 9px;
+  font-size:10px;
 }
 
-/* ATTENDANCE */
+/* =========================
+   ATTENDANCE
+========================= */
 
-.attendance-toolbar{
-  display:flex;
-  gap:8px;
-  align-items:end;
-}
-
-.attendance-grid{
+.attendance-list{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
 
-.attendance-row{
+.att-row{
   padding:14px;
-  border:1px solid rgba(255,255,255,.07);
   border-radius:15px;
-  background:#04162b;
+  border:1px solid rgba(255,255,255,.07);
+  background:#04152a;
+}
+
+.att-info{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
 }
 
 .att-name{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
+  font-weight:950;
 }
 
 .att-buttons{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:5px;
+  margin-top:10px;
 }
 
 .att-btn{
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:9px;
-  padding:8px 5px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:8px;
+  padding:8px 4px;
   color:white;
-  background:#09223d;
+  background:#09203a;
   font-size:10px;
   font-weight:900;
 }
@@ -593,178 +778,104 @@ textarea:focus{
   border-color:var(--cyan);
 }
 
-.att-btn.present{background:#075f49}
-.att-btn.late{background:#725600}
-.att-btn.absent{background:#6b2038}
-.att-btn.break{background:#293b54}
-.att-btn.left{background:#45285d}
+.att-btn.present{background:#075c46}
+.att-btn.absent{background:#681d36}
+.att-btn.late{background:#705300}
+.att-btn.left{background:#273e58}
+.att-btn.break{background:#4c2871}
 
-/* TOPICS */
+/* =========================
+   LESSONS
+========================= */
 
-.topic-toolbar{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.topic-grid{
+.lesson-toolbar{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+  grid-template-columns:170px 1fr;
+  gap:10px;
+  margin-bottom:15px;
 }
 
-.topic{
+.lesson-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:11px;
+}
+
+.lesson{
   position:relative;
-  min-height:165px;
+  min-height:175px;
   padding:18px;
-  border:1px solid rgba(0,234,255,.13);
-  border-radius:20px;
-  cursor:pointer;
-  overflow:hidden;
+  border-radius:19px;
+  border:1px solid rgba(0,234,255,.14);
   background:
-    radial-gradient(circle at 100% 0%,rgba(155,92,255,.15),transparent 45%),
-    linear-gradient(145deg,#092544,#041326);
-  transition:.25s;
+    linear-gradient(145deg,#071e3c,#031021);
+  cursor:pointer;
+  transition:.22s;
+  overflow:hidden;
 }
 
-.topic:before{
+.lesson:before{
   content:"";
   position:absolute;
-  inset:-100%;
-  background:linear-gradient(
-    110deg,
-    transparent 40%,
-    rgba(0,234,255,.09) 50%,
-    transparent 60%
-  );
-  transform:rotate(20deg);
-  transition:.5s;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(0,234,255,.08);
+  right:-50px;
+  top:-50px;
+  filter:blur(20px);
 }
 
-.topic:hover:before{
-  inset:-30%;
+.lesson:hover{
+  transform:translateY(-5px) scale(1.01);
+  border-color:rgba(0,234,255,.48);
+  box-shadow:0 15px 50px rgba(0,234,255,.08);
 }
 
-.topic:hover{
-  transform:translateY(-6px) perspective(700px) rotateX(3deg);
-  border-color:rgba(0,234,255,.5);
-  box-shadow:0 20px 55px rgba(0,234,255,.1);
+.lesson-number{
+  color:var(--cyan);
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:1.5px;
 }
 
-.topic-icon{
-  font-size:31px;
+.lesson-title{
+  font-size:18px;
+  font-weight:1000;
+  margin:9px 0 5px;
 }
 
-.topic b{
-  display:block;
-  margin:10px 0 5px;
-  font-size:16px;
+.lesson-topic{
+  color:#b9cddd;
+  font-size:11px;
 }
 
-.topic small{
+.lesson-desc{
   color:var(--muted);
+  font-size:11px;
   line-height:1.45;
+  margin-top:10px;
 }
 
-.topic .lesson-count{
-  position:absolute;
-  right:12px;
-  top:12px;
+.lesson-footer{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.lesson-pill{
+  padding:5px 7px;
+  border-radius:7px;
+  background:rgba(0,234,255,.07);
   color:var(--cyan);
   font-size:9px;
-  font-weight:1000;
+  font-weight:900;
 }
 
-/* PROGRESS */
-
-.progress-card{
-  padding:17px;
-  border:1px solid rgba(0,234,255,.12);
-  border-radius:17px;
-  background:#04162b;
-  margin-bottom:9px;
-}
-
-.progress-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.progress{
-  height:9px;
-  overflow:hidden;
-  border-radius:20px;
-  margin-top:10px;
-  background:#020d1c;
-}
-
-.progress i{
-  display:block;
-  height:100%;
-  border-radius:20px;
-  background:linear-gradient(
-    90deg,
-    var(--blue),
-    var(--cyan),
-    var(--purple),
-    var(--yellow)
-  );
-}
-
-/* GRADES */
-
-.grade-row,
-.history-row{
-  display:grid;
-  grid-template-columns:1fr 100px 180px;
-  gap:10px;
-  align-items:center;
-  padding:13px;
-  border-radius:13px;
-  background:#04162b;
-  margin-bottom:7px;
-}
-
-.score{
-  text-align:center;
-  color:var(--yellow);
-  font-weight:1000;
-}
-
-/* LOADING */
-
-.loading{
-  min-height:100px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:var(--muted);
-}
-
-.spinner{
-  width:22px;
-  height:22px;
-  margin-right:8px;
-  border:3px solid rgba(255,255,255,.1);
-  border-top-color:var(--cyan);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.empty{
-  padding:35px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed rgba(255,255,255,.12);
-  border-radius:15px;
-}
-
-/* MODAL */
+/* =========================
+   MATERIAL MODAL
+========================= */
 
 .modal{
   position:fixed;
@@ -773,9 +884,9 @@ textarea:focus{
   display:none;
   align-items:center;
   justify-content:center;
-  padding:16px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(14px);
+  padding:15px;
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(12px);
 }
 
 .modal.open{
@@ -786,159 +897,208 @@ textarea:focus{
   width:min(1100px,100%);
   max-height:94vh;
   overflow:auto;
-  padding:24px;
-  border:1px solid rgba(0,234,255,.35);
-  border-radius:27px;
+  border-radius:25px;
+  border:1px solid rgba(0,234,255,.32);
   background:
-    radial-gradient(circle at 90% 0%,rgba(155,92,255,.13),transparent 30%),
-    #031326;
-  box-shadow:0 35px 120px rgba(0,0,0,.7);
+    linear-gradient(145deg,#061a34,#020b19);
+  box-shadow:
+    0 30px 120px rgba(0,0,0,.7),
+    0 0 60px rgba(0,234,255,.08);
+  padding:22px;
 }
 
 .modal-head{
   display:flex;
   justify-content:space-between;
+  gap:10px;
   align-items:center;
-  gap:12px;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 
 .modal-head h2{
   margin:0;
 }
 
-.lesson-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-bottom:15px;
-}
-
-.pill{
-  padding:7px 10px;
-  border-radius:10px;
-  color:var(--cyan);
-  background:rgba(0,234,255,.08);
-  border:1px solid rgba(0,234,255,.13);
-  font-size:10px;
-  font-weight:900;
-}
-
 .material-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:13px;
+  gap:12px;
 }
 
 .material{
   padding:18px;
+  border-radius:17px;
   border:1px solid rgba(0,234,255,.12);
-  border-radius:18px;
-  background:#04162b;
+  background:#04152a;
+}
+
+.material h3{
+  margin:0 0 10px;
+}
+
+.material-content{
+  color:#c7d8e4;
+  line-height:1.65;
+  white-space:pre-wrap;
 }
 
 .material.full{
   grid-column:1/-1;
 }
 
-.material h3{
-  margin:0 0 12px;
+.audio-box{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
 }
 
-.material p{
-  color:#c3d4de;
-  line-height:1.7;
-  white-space:pre-wrap;
+audio{
+  width:100%;
 }
 
-.word-grid{
+/* =========================
+   TOPICS
+========================= */
+
+.topic-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.topic{
+  padding:16px;
+  min-height:130px;
+  border-radius:17px;
+  border:1px solid rgba(0,234,255,.12);
+  background:linear-gradient(145deg,#071c38,#031022);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.topic:hover{
+  transform:translateY(-4px);
+  border-color:rgba(0,234,255,.42);
+}
+
+.topic-icon{
+  font-size:28px;
+}
+
+.topic b{
+  display:block;
+  margin-top:8px;
+}
+
+.topic small{
+  display:block;
+  color:var(--muted);
+  margin-top:5px;
+  line-height:1.4;
+}
+
+/* =========================
+   GRADES
+========================= */
+
+.grade-table{
+  display:grid;
   gap:8px;
 }
 
-.word{
+.grade-line{
+  display:grid;
+  grid-template-columns:1fr 90px 160px;
+  gap:10px;
+  align-items:center;
   padding:12px;
-  border-radius:13px;
-  border:1px solid rgba(0,234,255,.1);
-  background:#061d37;
+  border-radius:11px;
+  background:#04152a;
 }
 
-.word b{
-  display:block;
-  color:#fff;
+.score{
+  text-align:center;
+  color:var(--yellow);
+  font-weight:1000;
 }
 
-.word span{
-  color:var(--muted);
-  font-size:11px;
+/* =========================
+   PROGRESS
+========================= */
+
+.progress-card{
+  padding:17px;
+  border-radius:17px;
+  border:1px solid rgba(0,234,255,.12);
+  background:#04152a;
+  margin-bottom:10px;
 }
 
-.word button{
-  margin-top:7px;
-}
-
-.quiz-item{
-  padding:14px;
-  margin-bottom:8px;
-  border-radius:14px;
-  background:#061d37;
-  border:1px solid rgba(155,92,255,.15);
-}
-
-.quiz-options{
+.progress-top{
   display:flex;
-  flex-wrap:wrap;
-  gap:6px;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.progress-bar{
+  height:9px;
+  background:#01101e;
+  border-radius:20px;
+  overflow:hidden;
   margin-top:9px;
 }
 
-.option{
-  padding:7px 9px;
-  border-radius:8px;
-  background:#09223d;
-  color:#cfe1eb;
-  font-size:11px;
+.progress-bar i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,var(--blue),var(--cyan),var(--violet));
 }
 
-.exercise{
-  padding:12px;
-  border-radius:12px;
-  background:#061d37;
-  margin-bottom:7px;
-  line-height:1.6;
+/* =========================
+   EMPTY / LOADING / TOAST
+========================= */
+
+.empty{
+  padding:35px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed rgba(255,255,255,.1);
+  border-radius:15px;
 }
 
-.audio-box{
+.loading{
   display:flex;
-  flex-wrap:wrap;
-  gap:8px;
+  justify-content:center;
   align-items:center;
+  gap:8px;
+  min-height:100px;
+  color:var(--muted);
 }
 
-.audio-box audio{
-  width:min(500px,100%);
+.spinner{
+  width:20px;
+  height:20px;
+  border:3px solid rgba(255,255,255,.1);
+  border-top-color:var(--cyan);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
 }
 
-.reading-controls{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
-
-/* TOAST */
 
 .toast{
   position:fixed;
+  z-index:100000;
   right:18px;
   bottom:18px;
-  z-index:100000;
   max-width:420px;
   padding:14px 17px;
-  border-radius:14px;
-  border:1px solid rgba(0,234,255,.3);
-  background:#061b33;
-  box-shadow:0 15px 60px rgba(0,0,0,.5);
+  border-radius:13px;
+  background:#061c34;
+  border:1px solid rgba(0,234,255,.35);
+  box-shadow:0 20px 70px rgba(0,0,0,.5);
   transform:translateY(30px);
   opacity:0;
   pointer-events:none;
@@ -951,21 +1111,23 @@ textarea:focus{
 }
 
 .toast.ok{
-  border-color:rgba(0,245,160,.45);
+  border-color:rgba(0,255,157,.45);
 }
 
 .toast.err{
-  border-color:rgba(255,56,100,.5);
+  border-color:rgba(255,65,108,.5);
 }
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1100px){
-  .stats{
-    grid-template-columns:repeat(3,1fr);
+  .hero-grid{
+    grid-template-columns:1fr;
   }
 
-  .topic-grid{
+  .stats{
     grid-template-columns:repeat(3,1fr);
   }
 
@@ -977,47 +1139,38 @@ textarea:focus{
     position:static;
   }
 
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:800px){
-  .students,
-  .attendance-grid,
-  .material-grid{
-    grid-template-columns:1fr;
+  .lesson-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
   .topic-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .word-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .search-row{
-    grid-template-columns:1fr;
-  }
-
-  .grade-row,
-  .history-row{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(3,1fr);
   }
 }
 
-@media(max-width:600px){
-  .wrap{
+@media(max-width:750px){
+  .wrap,
+  .header-inner{
     width:calc(100% - 14px);
   }
 
-  .brand small{
+  .brand-sub{
     display:none;
+  }
+
+  .header-actions .btn{
+    font-size:0;
+    padding:10px;
+  }
+
+  .header-actions .btn:first-child:after{
+    content:"↻";
+    font-size:18px;
+  }
+
+  .header-actions .btn:last-child:after{
+    content:"🚪";
+    font-size:18px;
   }
 
   .hero-main{
@@ -1025,18 +1178,28 @@ textarea:focus{
   }
 
   .hero h1{
-    font-size:2.45rem;
+    font-size:2.5rem;
   }
 
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .topic-grid{
+  .grade-zone,
+  .stats,
+  .students,
+  .attendance-list,
+  .lesson-grid,
+  .topic-grid,
+  .material-grid{
     grid-template-columns:1fr;
   }
 
-  .word-grid{
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .search{
+    grid-template-columns:1fr;
+  }
+
+  .lesson-toolbar{
     grid-template-columns:1fr;
   }
 
@@ -1044,18 +1207,16 @@ textarea:focus{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .nav-actions .btn{
-    font-size:0;
-    padding:9px;
+  .grade-line{
+    grid-template-columns:1fr;
   }
 
-  .nav-actions .btn:after{
-    content:"↻";
-    font-size:18px;
+  .material.full{
+    grid-column:auto;
   }
 
-  .nav-actions .btn.red:after{
-    content:"🚪";
+  .section{
+    padding:15px;
   }
 }
 </style>
@@ -1063,20 +1224,29 @@ textarea:focus{
 
 <body>
 
-<header class="top">
-  <div class="wrap nav">
+<div class="space">
+  <div class="grid3d"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="orb c"></div>
+</div>
+
+<header class="header">
+  <div class="header-inner">
 
     <div class="brand">
       <div class="logo">🧠</div>
       <div>
-        English with Mariami
-        <small>TEACHER COMMAND CENTER • LIVE SUPABASE</small>
+        <div class="brand-title">ENGLISH WITH MARIAMI</div>
+        <div class="brand-sub">
+          TEACHER NEXUS • LIVE EDUCATION CONTROL SYSTEM
+        </div>
       </div>
     </div>
 
-    <div class="nav-actions">
-      <button class="btn" id="refreshBtn">↻ Sync</button>
-      <button class="btn red" id="logoutBtn">🚪 გამოსვლა</button>
+    <div class="header-actions">
+      <button class="btn btn-cyan" id="syncBtn">↻ SYNC</button>
+      <button class="btn btn-red" id="logoutBtn">🚪 LOGOUT</button>
     </div>
 
   </div>
@@ -1084,63 +1254,83 @@ textarea:focus{
 
 <main class="wrap">
 
+<!-- ================= HERO ================= -->
+
 <section class="hero">
 
   <div class="hero-grid">
 
-    <div class="hero-card hero-main">
+    <div class="card hero-main">
 
       <div class="kicker">
-        ⚡ FUTURISTIC EDUCATION CONTROL SYSTEM
+        ⚡ FUTURISTIC TEACHER COMMAND CENTER
       </div>
 
       <h1>
-        TEACHER<br>
-        <span>COMMAND CENTER</span>
+        CONTROL YOUR
+        <span class="gradient-text">
+          ENGLISH UNIVERSE
+        </span>
       </h1>
 
       <p>
-        Manage students, grades, attendance, classes and the complete
-        English Learning Universe from one powerful control center.
-        Vocabulary • Grammar • Reading • Listening • Speaking • Exercises • Quiz.
+        Students • Grades • Lessons • Reading • Listening • Speaking •
+        Grammar • Exercises • Quiz • Attendance • Progress • Scores.
+        ყველაფერი ერთ სივრცეში — მარტივად და გასაგებად.
       </p>
 
-      <div class="hero-actions">
-        <button class="btn cyan" data-panel="students">
-          👥 Students
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+        <button class="btn btn-cyan"
+                onclick="openPanel('students')">
+          👥 STUDENTS
         </button>
 
-        <button class="btn purple" data-panel="topics">
-          📚 Learning Universe
+        <button class="btn btn-purple"
+                onclick="openPanel('lessons')">
+          📚 LESSONS
         </button>
 
-        <button class="btn yellow" data-panel="attendance">
-          🧑‍🎓 Attendance
+        <button class="btn btn-green"
+                onclick="openPanel('attendance')">
+          ✅ ATTENDANCE
         </button>
 
-        <button class="btn green" data-panel="progress">
-          📊 Intelligence
+        <button class="btn btn-yellow"
+                onclick="openPanel('progress')">
+          📊 PROGRESS
         </button>
+
       </div>
 
     </div>
 
-    <div class="hero-card system">
+    <div class="card live-card">
 
       <div class="online">
         <span class="online-dot"></span>
         SYSTEM ONLINE
       </div>
 
-      <h2 id="teacherName">Teacher</h2>
+      <div class="teacher-name" id="teacherName">
+        Teacher
+      </div>
 
-      <div class="muted" id="teacherEmail">
+      <div class="status" id="teacherEmail">
         loading...
       </div>
 
-      <div class="small muted" style="margin-top:15px">
-        Database:
-        <b id="connectionStatus">checking...</b>
+      <div class="status">
+        Supabase:
+        <b id="connection">CONNECTING...</b>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="small muted">ACTIVE GRADE</div>
+        <strong id="activeGradeText"
+                style="font-size:25px;color:var(--cyan)">
+          Grade 2
+        </strong>
       </div>
 
     </div>
@@ -1149,39 +1339,83 @@ textarea:focus{
 
 </section>
 
+<!-- ================= GRADE SELECTOR ================= -->
+
+<section class="grade-zone">
+
+  <div class="grade-card grade2 active"
+       data-grade="2">
+
+    <div class="grade-icon">🌱</div>
+
+    <b>GRADE 2</b>
+
+    <small>
+      Foundation English • Vocabulary • Basics
+    </small>
+
+  </div>
+
+  <div class="grade-card grade3"
+       data-grade="3">
+
+    <div class="grade-icon">🚀</div>
+
+    <b>GRADE 3</b>
+
+    <small>
+      Smart English • Grammar • Communication
+    </small>
+
+  </div>
+
+  <div class="grade-card grade4"
+       data-grade="4">
+
+    <div class="grade-icon">⭐</div>
+
+    <b>GRADE 4</b>
+
+    <small>
+      Advanced English • Reading • Speaking
+    </small>
+
+  </div>
+
+</section>
+
+<!-- ================= STATS ================= -->
+
 <section class="stats">
 
   <div class="stat">
     <small>👥 STUDENTS</small>
-    <b id="statStudents">0</b>
+    <strong id="statStudents">0</strong>
   </div>
 
   <div class="stat">
     <small>🌱 GRADE 2</small>
-    <b id="statG2">0</b>
+    <strong id="statG2">0</strong>
   </div>
 
   <div class="stat">
     <small>🚀 GRADE 3</small>
-    <b id="statG3">0</b>
+    <strong id="statG3">0</strong>
   </div>
 
   <div class="stat">
     <small>⭐ GRADE 4</small>
-    <b id="statG4">0</b>
+    <strong id="statG4">0</strong>
   </div>
 
   <div class="stat">
     <small>📚 LESSONS</small>
-    <b id="statLessons">0</b>
-  </div>
-
-  <div class="stat">
-    <small>🧠 WORDS</small>
-    <b id="statWords">0</b>
+    <strong id="statLessons">0</strong>
   </div>
 
 </section>
+
+<!-- ================= DASHBOARD ================= -->
 
 <section class="dashboard">
 
@@ -1191,375 +1425,397 @@ textarea:focus{
     CONTROL SYSTEM
   </div>
 
-  <button class="menu active" data-panel="students">
+  <button class="nav-btn active"
+          data-panel="students">
     👥 Student Management
   </button>
 
-  <button class="menu" data-panel="attendance">
-    🧑‍🎓 Attendance Center
+  <button class="nav-btn"
+          data-panel="lessons">
+    📚 Lessons & Materials
   </button>
 
-  <button class="menu" data-panel="topics">
-    🌌 Learning Universe
+  <button class="nav-btn"
+          data-panel="topics">
+    🧠 Topics
   </button>
 
-  <button class="menu" data-panel="grades">
-    ⭐ Grade Journal
+  <button class="nav-btn"
+          data-panel="attendance">
+    ✅ Attendance
   </button>
 
-  <button class="menu" data-panel="progress">
-    📊 Student Intelligence
+  <button class="nav-btn"
+          data-panel="grades">
+    ⭐ Student Grades
   </button>
 
-  <button class="menu" data-panel="history">
-    📋 Activity History
+  <button class="nav-btn"
+          data-panel="progress">
+    📊 Progress Intelligence
+  </button>
+
+  <button class="nav-btn"
+          data-panel="results">
+    🏆 Quiz Results
   </button>
 
 </aside>
 
 <div class="content">
 
-<!-- STUDENTS -->
+<!-- ================= STUDENTS ================= -->
 
-<section class="panel active" id="panel-students">
+<section class="panel active"
+         id="panel-students">
 
-<div class="card">
+  <div class="card section">
 
-  <div class="section-head">
+    <div class="section-head">
 
-    <div>
-      <h2>👥 Student Management</h2>
-
-      <div class="muted small">
-        Add students, assign classes and change Grade instantly.
+      <div>
+        <h2>👥 Student Management</h2>
+        <div class="muted small">
+          Add students and assign Grade 2 / Grade 3 / Grade 4.
+        </div>
       </div>
+
+      <span class="badge b3"
+            id="studentGradeIndicator">
+        Grade 2
+      </span>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Student Email</label>
+        <input class="input"
+               id="newStudentEmail"
+               type="email"
+               placeholder="student@email.com">
+      </div>
+
+      <div class="field">
+        <label>Grade</label>
+        <select id="newStudentGrade">
+          <option value="2">🌱 Grade 2</option>
+          <option value="3">🚀 Grade 3</option>
+          <option value="4">⭐ Grade 4</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Action</label>
+        <button class="btn btn-cyan"
+                style="width:100%"
+                id="addStudentBtn">
+          ➕ ADD STUDENT
+        </button>
+      </div>
+
     </div>
 
   </div>
 
-  <div class="form-grid">
+  <div class="card section">
 
-    <div class="field">
-      <label>STUDENT EMAIL</label>
-      <input
-        class="input"
-        id="studentEmail"
-        type="email"
-        placeholder="student@email.com">
+    <div class="section-head">
+
+      <div>
+        <h2>🎓 Students</h2>
+        <div class="muted small">
+          Search, assign, change or inspect a student.
+        </div>
+      </div>
+
     </div>
 
-    <div class="field">
+    <div class="search">
 
-      <label>SELECT GRADE</label>
+      <input class="input"
+             id="studentSearch"
+             placeholder="🔎 Search student...">
 
-      <select id="studentGrade">
-
-        <option value="2">
-          🌱 Grade 2
-        </option>
-
-        <option value="3">
-          🚀 Grade 3
-        </option>
-
-        <option value="4">
-          ⭐ Grade 4
-        </option>
-
+      <select id="studentFilter">
+        <option value="all">All Grades</option>
+        <option value="2">🌱 Grade 2</option>
+        <option value="3">🚀 Grade 3</option>
+        <option value="4">⭐ Grade 4</option>
       </select>
 
-    </div>
-
-    <div class="field">
-
-      <label>ACTION</label>
-
-      <button
-        class="btn cyan"
-        id="addStudentBtn"
-        style="width:100%">
-        ➕ Add / Assign Student
+      <button class="btn"
+              id="reloadStudents">
+        ↻
       </button>
 
     </div>
 
-  </div>
-
-</div>
-
-<div class="card">
-
-  <div class="section-head">
-
-    <div>
-      <h2>🎓 Student Directory</h2>
-
-      <div class="muted small">
-        Search students and manage their class.
+    <div id="studentsList"
+         class="students">
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading students...
       </div>
     </div>
 
   </div>
-
-  <div class="search-row">
-
-    <input
-      class="input"
-      id="studentSearch"
-      placeholder="🔎 Search name or email...">
-
-    <select id="gradeFilter">
-
-      <option value="all">
-        All Grades
-      </option>
-
-      <option value="2">
-        🌱 Grade 2
-      </option>
-
-      <option value="3">
-        🚀 Grade 3
-      </option>
-
-      <option value="4">
-        ⭐ Grade 4
-      </option>
-
-    </select>
-
-    <button class="btn" id="reloadStudents">
-      ↻
-    </button>
-
-  </div>
-
-  <div id="studentsList" class="students">
-    <div class="loading">
-      <span class="spinner"></span>
-      Loading students...
-    </div>
-  </div>
-
-</div>
 
 </section>
 
-<!-- ATTENDANCE -->
+<!-- ================= LESSONS ================= -->
 
-<section class="panel" id="panel-attendance">
+<section class="panel"
+         id="panel-lessons">
 
-<div class="card">
+  <div class="card section">
 
-  <div class="section-head">
+    <div class="section-head">
 
-    <div>
-      <h2>🧑‍🎓 Attendance Center</h2>
+      <div>
+        <h2>
+          📚 Lesson & Material Universe
+        </h2>
 
-      <div class="muted small">
-        მოვიდა • დააგვიანა • გაცდენა • დასვენება • წავიდა
+        <div class="muted small">
+          Select Grade → choose lesson → open Reading,
+          Listening, Speaking, Grammar, Exercise or Quiz.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="lesson-toolbar">
+
+      <select id="lessonGrade">
+        <option value="2">🌱 Grade 2</option>
+        <option value="3">🚀 Grade 3</option>
+        <option value="4">⭐ Grade 4</option>
+      </select>
+
+      <input class="input"
+             id="lessonSearch"
+             placeholder="🔎 Search lesson / topic...">
+
+    </div>
+
+    <div id="lessonsGrid"
+         class="lesson-grid">
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading lessons...
       </div>
     </div>
 
-    <div>
-      <label class="small muted">
-        DATE
-      </label>
-
-      <input
-        class="input"
-        id="attendanceDate"
-        type="date">
-    </div>
-
   </div>
-
-  <div id="attendanceList" class="attendance-grid">
-    <div class="loading">
-      <span class="spinner"></span>
-      Loading...
-    </div>
-  </div>
-
-</div>
 
 </section>
 
-<!-- TOPICS -->
+<!-- ================= TOPICS ================= -->
 
-<section class="panel" id="panel-topics">
+<section class="panel"
+         id="panel-topics">
 
-<div class="card">
+  <div class="card section">
 
-  <div class="section-head">
+    <div class="section-head">
 
-    <div>
-      <h2>🌌 English Learning Universe</h2>
+      <div>
+        <h2>🧠 English Topic Universe</h2>
 
-      <div class="muted small">
-        აირჩიე კლასი და გახსენი რეალური lesson materials.
+        <div class="muted small">
+          ყველა Grade-ს აქვს თავისი თემების სისტემა.
+        </div>
       </div>
-    </div>
 
-    <select id="topicGrade" style="max-width:180px">
+      <select id="topicGrade"
+              style="max-width:170px">
 
-      <option value="2">
-        🌱 Grade 2
-      </option>
+        <option value="2">🌱 Grade 2</option>
+        <option value="3">🚀 Grade 3</option>
+        <option value="4">⭐ Grade 4</option>
 
-      <option value="3">
-        🚀 Grade 3
-      </option>
-
-      <option value="4">
-        ⭐ Grade 4
-      </option>
-
-    </select>
-
-  </div>
-
-  <div id="topicsGrid" class="topic-grid">
-    <div class="loading">
-      <span class="spinner"></span>
-      Loading lessons...
-    </div>
-  </div>
-
-</div>
-
-</section>
-
-<!-- GRADES -->
-
-<section class="panel" id="panel-grades">
-
-<div class="card">
-
-  <div class="section-head">
-
-    <div>
-      <h2>⭐ Grade Journal</h2>
-
-      <div class="muted small">
-        შეფასება 0–10 ქულამდე.
-      </div>
-    </div>
-
-  </div>
-
-  <div class="form-grid">
-
-    <div class="field">
-
-      <label>STUDENT</label>
-
-      <select id="gradeStudent">
-        <option value="">
-          Select student
-        </option>
       </select>
 
     </div>
 
-    <div class="field">
-
-      <label>SCORE</label>
-
-      <input
-        class="input"
-        id="gradeScore"
-        type="number"
-        min="0"
-        max="10"
-        placeholder="10">
-
-    </div>
-
-    <div class="field">
-
-      <label>COMMENT</label>
-
-      <input
-        class="input"
-        id="gradeComment"
-        placeholder="Excellent work!">
-
+    <div id="topicsGrid"
+         class="topic-grid">
     </div>
 
   </div>
-
-  <div style="margin-top:13px">
-
-    <button class="btn yellow" id="saveGradeBtn">
-      ⭐ Save Grade
-    </button>
-
-  </div>
-
-  <div id="gradesList" style="margin-top:18px"></div>
-
-</div>
 
 </section>
 
-<!-- PROGRESS -->
+<!-- ================= ATTENDANCE ================= -->
 
-<section class="panel" id="panel-progress">
+<section class="panel"
+         id="panel-attendance">
 
-<div class="card">
+  <div class="card section">
 
-  <div class="section-head">
+    <div class="section-head">
 
-    <div>
-      <h2>📊 Student Intelligence</h2>
+      <div>
+        <h2>✅ Daily Attendance</h2>
 
-      <div class="muted small">
-        Words • Quiz • Best Score • Activity
+        <div class="muted small">
+          მოვიდა • გაცდენა • დაგვიანება • წავიდა • დასვენება
+        </div>
+      </div>
+
+      <input class="input"
+             id="attendanceDate"
+             type="date"
+             style="max-width:170px">
+
+    </div>
+
+    <div id="attendanceList"
+         class="attendance-list">
+
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading attendance...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= GRADES ================= -->
+
+<section class="panel"
+         id="panel-grades">
+
+  <div class="card section">
+
+    <div class="section-head">
+
+      <div>
+        <h2>⭐ Student Grades</h2>
+
+        <div class="muted small">
+          შეაფასე მოსწავლე 0–10 ქულით.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Student</label>
+
+        <select id="gradeStudent">
+          <option value="">
+            Select student
+          </option>
+        </select>
+
+      </div>
+
+      <div class="field">
+        <label>Score</label>
+
+        <input class="input"
+               id="gradeScore"
+               type="number"
+               min="0"
+               max="10"
+               placeholder="10">
+
+      </div>
+
+      <div class="field">
+        <label>Comment</label>
+
+        <input class="input"
+               id="gradeComment"
+               placeholder="Excellent work!">
+
+      </div>
+
+    </div>
+
+    <div style="margin-top:12px">
+
+      <button class="btn btn-yellow"
+              id="saveGradeBtn">
+        ⭐ SAVE GRADE
+      </button>
+
+    </div>
+
+    <div id="gradesList"
+         class="grade-table"
+         style="margin-top:18px">
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= PROGRESS ================= -->
+
+<section class="panel"
+         id="panel-progress">
+
+  <div class="card section">
+
+    <div class="section-head">
+
+      <div>
+        <h2>📊 Progress Intelligence</h2>
+
+        <div class="muted small">
+          Words • Lessons • Quiz • Student Performance.
+        </div>
+      </div>
+
+    </div>
+
+    <div id="progressList">
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading progress...
       </div>
     </div>
 
   </div>
 
-  <div id="progressList">
-
-    <div class="loading">
-      <span class="spinner"></span>
-      Loading intelligence...
-    </div>
-
-  </div>
-
-</div>
-
 </section>
 
-<!-- HISTORY -->
+<!-- ================= RESULTS ================= -->
 
-<section class="panel" id="panel-history">
+<section class="panel"
+         id="panel-results">
 
-<div class="card">
+  <div class="card section">
 
-  <div class="section-head">
+    <div class="section-head">
 
-    <div>
-      <h2>📋 Activity History</h2>
+      <div>
+        <h2>🏆 Quiz Results</h2>
 
-      <div class="muted small">
-        Grades and Quiz results.
+        <div class="muted small">
+          Latest quiz performance from students.
+        </div>
+      </div>
+
+    </div>
+
+    <div id="resultsList">
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading results...
       </div>
     </div>
 
   </div>
-
-  <div id="historyList">
-    <div class="loading">
-      <span class="spinner"></span>
-      Loading...
-    </div>
-  </div>
-
-</div>
 
 </section>
 
@@ -1568,71 +1824,52 @@ textarea:focus{
 
 </main>
 
-<!-- LESSON MODAL -->
+<!-- ================= MATERIAL MODAL ================= -->
 
-<div class="modal" id="lessonModal">
+<div class="modal"
+     id="lessonModal">
 
-<div class="modal-box">
+  <div class="modal-box">
 
-  <div class="modal-head">
+    <div class="modal-head">
 
-    <div>
-      <h2 id="lessonTitle">
-        Lesson
-      </h2>
+      <div>
+        <h2 id="modalTitle">
+          Lesson
+        </h2>
 
-      <div
-        class="muted small"
-        id="lessonSubtitle">
+        <div class="muted small"
+             id="modalSubtitle">
+        </div>
       </div>
+
+      <button class="btn"
+              id="closeLessonModal">
+        ✕
+      </button>
+
     </div>
 
-    <button class="btn" id="closeLesson">
-      ✕
-    </button>
+    <div id="modalMaterials"
+         class="material-grid">
+    </div>
 
   </div>
 
-  <div id="lessonBody">
-  </div>
-
 </div>
 
+<!-- ================= TOAST ================= -->
+
+<div class="toast"
+     id="toast">
 </div>
-
-<!-- STUDENT DETAIL -->
-
-<div class="modal" id="studentModal">
-
-<div class="modal-box">
-
-  <div class="modal-head">
-
-    <h2 id="studentDetailTitle">
-      Student Intelligence
-    </h2>
-
-    <button class="btn" id="closeStudent">
-      ✕
-    </button>
-
-  </div>
-
-  <div id="studentDetailBody"></div>
-
-</div>
-
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
 'use strict';
 
 /* =========================================================
    ENGLISH WITH MARIAMI
-   TEACHER DASHBOARD
-   REAL DATABASE SCHEMA
+   TEACHER NEXUS
 ========================================================= */
 
 const DB =
@@ -1644,59 +1881,31 @@ let teacherProfile = null;
 
 let students = [];
 let lessons = [];
-let lessonWords = [];
-let lessonQuizzes = [];
-let progressRows = [];
-let gradeRows = [];
+let grades = [];
+let quizResults = [];
+let currentGrade = 2;
+
+const $ = id => document.getElementById(id);
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-const $ = id => document.getElementById(id);
-
-function esc(value){
-
-  return String(value ?? '').replace(
-    /[&<>"']/g,
-    char => ({
+function esc(v){
+  return String(v ?? '')
+    .replace(/[&<>"']/g,c=>({
       '&':'&amp;',
       '<':'&lt;',
       '>':'&gt;',
       '"':'&quot;',
       "'":'&#039;'
-    }[char])
-  );
-}
-
-function today(){
-
-  const d = new Date();
-
-  return [
-    d.getFullYear(),
-    String(d.getMonth()+1).padStart(2,'0'),
-    String(d.getDate()).padStart(2,'0')
-  ].join('-');
-}
-
-function gradeName(g){
-
-  g = Number(g);
-
-  if(g===2) return '🌱 Grade 2';
-  if(g===3) return '🚀 Grade 3';
-  if(g===4) return '⭐ Grade 4';
-
-  return 'No Grade';
+    }[c]));
 }
 
 function toast(message,type=''){
-
   const el=$('toast');
 
   el.textContent=message;
-
   el.className='toast show '+type;
 
   clearTimeout(toast.timer);
@@ -1706,19 +1915,67 @@ function toast(message,type=''){
   },3500);
 }
 
+function today(){
+  const d=new Date();
+
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,'0'),
+    String(d.getDate()).padStart(2,'0')
+  ].join('-');
+}
+
+function gradeLabel(g){
+
+  if(Number(g)===2)return '🌱 Grade 2';
+
+  if(Number(g)===3)return '🚀 Grade 3';
+
+  if(Number(g)===4)return '⭐ Grade 4';
+
+  return 'No Grade';
+}
+
+function gradeBadge(g){
+
+  if(Number(g)===2)
+    return '<span class="badge b2">🌱 GRADE 2</span>';
+
+  if(Number(g)===3)
+    return '<span class="badge b3">🚀 GRADE 3</span>';
+
+  if(Number(g)===4)
+    return '<span class="badge b4">⭐ GRADE 4</span>';
+
+  return '<span class="badge no-grade">NO GRADE</span>';
+}
+
+function studentName(s){
+  return s?.full_name ||
+         s?.name ||
+         s?.display_name ||
+         s?.username ||
+         s?.email ||
+         'Student';
+}
+
+function studentId(s){
+  return s?.user_id ||
+         s?.student_id ||
+         s?.id;
+}
+
 /* =========================================================
-   NAVIGATION
+   PANEL NAVIGATION
 ========================================================= */
 
-function activatePanel(name){
+function openPanel(name){
 
-  document
-    .querySelectorAll('.panel')
-    .forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.panel')
+    .forEach(x=>x.classList.remove('active'));
 
-  document
-    .querySelectorAll('.menu')
-    .forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.nav-btn')
+    .forEach(x=>x.classList.remove('active'));
 
   const panel=$('panel-'+name);
 
@@ -1728,27 +1985,25 @@ function activatePanel(name){
 
   document
     .querySelectorAll(`[data-panel="${name}"]`)
-    .forEach(b=>b.classList.add('active'));
+    .forEach(x=>x.classList.add('active'));
 
-  if(name==='attendance'){
-    loadAttendance();
-  }
-
-  if(name==='topics'){
+  if(name==='lessons')
     loadLessons();
-  }
 
-  if(name==='grades'){
+  if(name==='topics')
+    renderTopics();
+
+  if(name==='attendance')
+    loadAttendance();
+
+  if(name==='grades')
     loadGrades();
-  }
 
-  if(name==='progress'){
-    renderProgress();
-  }
+  if(name==='progress')
+    loadProgress();
 
-  if(name==='history'){
-    loadHistory();
-  }
+  if(name==='results')
+    loadQuizResults();
 }
 
 document.addEventListener('click',e=>{
@@ -1757,8 +2012,58 @@ document.addEventListener('click',e=>{
 
   if(!btn)return;
 
-  activatePanel(btn.dataset.panel);
+  openPanel(btn.dataset.panel);
+
 });
+
+/* =========================================================
+   GRADE SWITCH
+========================================================= */
+
+document.querySelectorAll('.grade-card')
+  .forEach(card=>{
+
+    card.addEventListener('click',()=>{
+
+      currentGrade=Number(card.dataset.grade);
+
+      document
+        .querySelectorAll('.grade-card')
+        .forEach(x=>x.classList.remove('active'));
+
+      card.classList.add('active');
+
+      $('activeGradeText').textContent=
+        gradeLabel(currentGrade);
+
+      $('studentGradeIndicator').textContent=
+        gradeLabel(currentGrade);
+
+      $('newStudentGrade').value=
+        String(currentGrade);
+
+      $('lessonGrade').value=
+        String(currentGrade);
+
+      $('topicGrade').value=
+        String(currentGrade);
+
+      $('studentFilter').value=
+        String(currentGrade);
+
+      renderStudents();
+
+      loadLessons();
+      renderTopics();
+
+      toast(
+        `${gradeLabel(currentGrade)} activated`,
+        'ok'
+      );
+
+    });
+
+  });
 
 /* =========================================================
    AUTH
@@ -1767,24 +2072,18 @@ document.addEventListener('click',e=>{
 async function checkTeacher(){
 
   if(!DB){
-
-    $('connectionStatus').textContent='NO CLIENT';
-
-    toast(
-      'Supabase client ვერ მოიძებნა. შეამოწმე config.js',
-      'err'
-    );
-
+    $('connection').textContent='NO CLIENT';
+    toast('Supabase client ვერ მოიძებნა','err');
     return false;
   }
 
   try{
 
-    const {data,error}=await DB.auth.getUser();
+    const auth=
+      await DB.auth.getUser();
 
-    if(error)throw error;
-
-    currentUser=data?.user;
+    currentUser=
+      auth?.data?.user;
 
     if(!currentUser){
 
@@ -1795,25 +2094,30 @@ async function checkTeacher(){
       return false;
     }
 
-    const result=await DB
-      .from('profiles')
-      .select('*')
-      .eq('user_id',currentUser.id)
-      .maybeSingle();
+    const profile=
+      await DB
+        .from('profiles')
+        .select('*')
+        .eq('user_id',currentUser.id)
+        .maybeSingle();
 
-    if(result.error)throw result.error;
+    if(profile.error)
+      throw profile.error;
 
-    teacherProfile=result.data;
+    teacherProfile=
+      profile.data;
 
     const role=
       String(
         teacherProfile?.role || ''
       ).toLowerCase().trim();
 
-    if(role!=='teacher'){
+    if(role &&
+       role!=='teacher' &&
+       role!=='admin'){
 
       toast(
-        'Teacher access required.',
+        'Teacher access required',
         'err'
       );
 
@@ -1821,20 +2125,20 @@ async function checkTeacher(){
         location.replace(
           'login.html?reason=forbidden'
         );
-      },800);
+      },900);
 
       return false;
     }
 
     $('teacherName').textContent=
-      teacherProfile.full_name ||
+      teacherProfile?.full_name ||
+      teacherProfile?.name ||
       'Teacher';
 
     $('teacherEmail').textContent=
       currentUser.email || '';
 
-    $('connectionStatus').textContent=
-      'LIVE';
+    $('connection').textContent='LIVE';
 
     return true;
 
@@ -1842,10 +2146,10 @@ async function checkTeacher(){
 
     console.error(error);
 
-    $('connectionStatus').textContent='ERROR';
+    $('connection').textContent='ERROR';
 
     toast(
-      error.message || 'Authentication error',
+      'Authentication error: '+error.message,
       'err'
     );
 
@@ -1862,27 +2166,29 @@ async function loadStudents(){
   const box=$('studentsList');
 
   box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>Loading students...</div>';
+    `<div class="loading">
+      <span class="spinner"></span>
+      Loading students...
+    </div>`;
 
   try{
 
-    const {data,error}=await DB
-      .from('profiles')
-      .select('*')
-      .eq('role','student')
-      .order('full_name');
+    const result=
+      await DB
+        .from('profiles')
+        .select('*')
+        .eq('role','student')
+        .order('full_name',{ascending:true});
 
-    if(error)throw error;
+    if(result.error)
+      throw result.error;
 
-    students=data || [];
+    students=
+      result.data || [];
 
     renderStudents();
-
     populateStudentSelect();
-
     updateStats();
-
-    await loadProgress();
 
   }catch(error){
 
@@ -1890,8 +2196,7 @@ async function loadStudents(){
 
     box.innerHTML=
       `<div class="empty">
-        ❌ Students ვერ ჩაიტვირთა.
-        <br>
+        ❌ Students could not be loaded.<br>
         <small>${esc(error.message)}</small>
       </div>`;
   }
@@ -1899,149 +2204,146 @@ async function loadStudents(){
 
 function renderStudents(){
 
+  const box=$('studentsList');
+
   const q=
     $('studentSearch')
       .value
       .trim()
       .toLowerCase();
 
-  const filter=$('gradeFilter').value;
+  const filter=
+    $('studentFilter').value;
 
-  const arr=students.filter(s=>{
+  const arr=
+    students.filter(s=>{
 
-    const text=(
-      s.full_name ||
-      ''
-    ).toLowerCase();
+      const text=
+        (
+          studentName(s)+' '+
+          (s.email||'')
+        ).toLowerCase();
 
-    const email=(
-      s.email ||
-      ''
-    ).toLowerCase();
+      const searchOK=
+        !q || text.includes(q);
 
-    const searchOk=
-      !q ||
-      text.includes(q) ||
-      email.includes(q);
+      const gradeOK=
+        filter==='all' ||
+        String(s.grade||'')===filter;
 
-    const gradeOk=
-      filter==='all' ||
-      String(s.grade)===filter;
-
-    return searchOk && gradeOk;
-  });
+      return searchOK && gradeOK;
+    });
 
   if(!arr.length){
 
-    $('studentsList').innerHTML=
+    box.innerHTML=
       '<div class="empty">👤 Student not found.</div>';
 
     return;
   }
 
-  $('studentsList').innerHTML=
+  box.innerHTML=
     arr.map(s=>{
 
-      const g=Number(s.grade||0);
+      const uid=
+        studentId(s);
+
+      const grade=
+        Number(s.grade||0);
 
       return `
+        <div class="student">
 
-      <div class="student">
+          <div class="student-top">
 
-        <div class="student-top">
+            <div class="student-left">
 
-          <div class="identity">
-
-            <div class="avatar">
-              🧑‍🎓
-            </div>
-
-            <div>
-
-              <div class="name">
-                ${esc(s.full_name)}
+              <div class="avatar">
+                🧑‍🎓
               </div>
 
-              <div class="email">
-                ${esc(s.email || '')}
+              <div>
+
+                <div class="student-name">
+                  ${esc(studentName(s))}
+                </div>
+
+                <div class="student-email">
+                  ${esc(s.email||'')}
+                </div>
+
               </div>
 
             </div>
+
+            ${gradeBadge(grade)}
 
           </div>
 
-          <span class="badge g${g}">
-            ${gradeName(g)}
-          </span>
+          <div class="student-actions">
+
+            <button class="btn btn-green"
+              onclick="changeGrade('${esc(uid)}',2)">
+              🌱 G2
+            </button>
+
+            <button class="btn btn-cyan"
+              onclick="changeGrade('${esc(uid)}',3)">
+              🚀 G3
+            </button>
+
+            <button class="btn btn-yellow"
+              onclick="changeGrade('${esc(uid)}',4)">
+              ⭐ G4
+            </button>
+
+            <button class="btn btn-purple"
+              onclick="studentInfo('${esc(uid)}')">
+              📊 INFO
+            </button>
+
+          </div>
 
         </div>
-
-        <div class="student-actions">
-
-          <button
-            class="btn blue"
-            onclick="changeGrade('${s.user_id}',2)">
-            🌱 G2
-          </button>
-
-          <button
-            class="btn cyan"
-            onclick="changeGrade('${s.user_id}',3)">
-            🚀 G3
-          </button>
-
-          <button
-            class="btn yellow"
-            onclick="changeGrade('${s.user_id}',4)">
-            ⭐ G4
-          </button>
-
-          <button
-            class="btn purple"
-            onclick="showStudent('${s.user_id}')">
-            📊 Details
-          </button>
-
-        </div>
-
-      </div>
-
       `;
 
     }).join('');
 }
 
 /* =========================================================
-   ADD / ASSIGN STUDENT
+   ADD STUDENT
 ========================================================= */
 
 async function addStudent(){
 
   const email=
-    $('studentEmail')
+    $('newStudentEmail')
       .value
-      .trim()
-      .toLowerCase();
+      .trim();
 
   const grade=
-    Number($('studentGrade').value);
+    Number($('newStudentGrade').value);
 
   if(!email){
 
     toast(
-      'მიუთითე Student Email',
+      'Student email შეიყვანე',
       'err'
     );
 
     return;
   }
 
+  const btn=$('addStudentBtn');
+
+  btn.disabled=true;
+
   try{
 
     /*
-      Existing project RPC.
-      This is preferred because the teacher
-      operation is performed server-side.
+      IMPORTANT:
+      use the function that was created/fixed
+      in the Supabase project.
     */
 
     let result=
@@ -2054,33 +2356,31 @@ async function addStudent(){
       );
 
     /*
-      Some versions of the project use
-      teacher_assign_student instead.
+      If project function uses p_student_email
+      instead, try that form.
     */
 
     if(result.error){
 
       result=
         await DB.rpc(
-          'teacher_assign_student',
+          'teacher_assign_student_grade',
           {
-            p_email:email,
+            p_student_email:email,
             p_grade:grade
           }
         );
     }
 
-    if(result.error){
-
+    if(result.error)
       throw result.error;
-    }
-
-    $('studentEmail').value='';
 
     toast(
-      `✅ ${email} → ${gradeName(grade)}`,
+      `✅ ${email} → ${gradeLabel(grade)}`,
       'ok'
     );
+
+    $('newStudentEmail').value='';
 
     await loadStudents();
 
@@ -2089,14 +2389,18 @@ async function addStudent(){
     console.error(error);
 
     toast(
-      'Student assignment failed: '+
-      error.message,
+      'Student assignment failed: '+error.message,
       'err'
     );
+
+  }finally{
+
+    btn.disabled=false;
   }
 }
 
-$('addStudentBtn').onclick=addStudent;
+$('addStudentBtn')
+  .addEventListener('click',addStudent);
 
 /* =========================================================
    CHANGE GRADE
@@ -2106,22 +2410,20 @@ async function changeGrade(uid,grade){
 
   const student=
     students.find(
-      s=>s.user_id===uid
+      s=>String(studentId(s))===String(uid)
     );
 
   if(!student)return;
 
-  if(!confirm(
-    `${student.full_name}\n\nChange class to ${gradeName(grade)}?`
-  )){
-    return;
-  }
+  const ok=
+    confirm(
+      `${studentName(student)}\n\n`+
+      `Change class to ${gradeLabel(grade)}?`
+    );
+
+  if(!ok)return;
 
   try{
-
-    /*
-      Use the existing teacher RPC first.
-    */
 
     let result=
       await DB.rpc(
@@ -2134,10 +2436,17 @@ async function changeGrade(uid,grade){
 
     if(result.error){
 
-      /*
-        Fallback: direct profile update.
-        RLS must allow teacher update.
-      */
+      result=
+        await DB.rpc(
+          'teacher_assign_student_grade',
+          {
+            p_user_id:uid,
+            p_grade:grade
+          }
+        );
+    }
+
+    if(result.error){
 
       result=
         await DB
@@ -2148,40 +2457,11 @@ async function changeGrade(uid,grade){
           .eq('user_id',uid);
     }
 
-    if(result.error){
-
+    if(result.error)
       throw result.error;
-    }
-
-    /*
-      Make sure teacher_students contains
-      teacher ↔ student relation.
-    */
-
-    const link=
-      await DB
-        .from('teacher_students')
-        .upsert(
-          {
-            teacher_id:currentUser.id,
-            student_id:uid
-          },
-          {
-            onConflict:
-              'teacher_id,student_id',
-            ignoreDuplicates:true
-          }
-        );
-
-    if(link.error){
-      console.warn(
-        'teacher_students:',
-        link.error
-      );
-    }
 
     toast(
-      `🎓 ${student.full_name} → ${gradeName(grade)}`,
+      `🎓 ${studentName(student)} → ${gradeLabel(grade)}`,
       'ok'
     );
 
@@ -2192,8 +2472,7 @@ async function changeGrade(uid,grade){
     console.error(error);
 
     toast(
-      'Class change failed: '+
-      error.message,
+      'Grade change failed: '+error.message,
       'err'
     );
   }
@@ -2205,982 +2484,30 @@ async function changeGrade(uid,grade){
 
 function populateStudentSelect(){
 
-  $('gradeStudent').innerHTML=
+  const select=
+    $('gradeStudent');
+
+  select.innerHTML=
     '<option value="">Select student</option>'+
-    students.map(s=>`
-
-      <option value="${s.user_id}">
-        ${esc(s.full_name)}
-      </option>
-
-    `).join('');
-}
-
-/* =========================================================
-   ATTENDANCE
-========================================================= */
-
-$('attendanceDate').value=today();
-
-async function loadAttendance(){
-
-  const box=$('attendanceList');
-
-  if(!students.length){
-    await loadStudents();
-  }
-
-  if(!students.length){
-
-    box.innerHTML=
-      '<div class="empty">Students არ არის.</div>';
-
-    return;
-  }
-
-  box.innerHTML=
-    students.map(s=>`
-
-    <div class="attendance-row">
-
-      <div class="att-name">
-
-        <div>
-          <b>${esc(s.full_name)}</b>
-
-          <div class="small muted">
-            ${gradeName(s.grade)}
-          </div>
-        </div>
-
-      </div>
-
-      <div class="att-buttons">
-
-        <button
-          class="att-btn present"
-          onclick="saveAttendance('${s.user_id}','present')">
-          ✅ მოვიდა
-        </button>
-
-        <button
-          class="att-btn late"
-          onclick="saveAttendance('${s.user_id}','late')">
-          ⏰ დააგვიანა
-        </button>
-
-        <button
-          class="att-btn absent"
-          onclick="saveAttendance('${s.user_id}','absent')">
-          ❌ გაცდენა
-        </button>
-
-        <button
-          class="att-btn break"
-          onclick="saveAttendance('${s.user_id}','break')">
-          ☕ დასვენება
-        </button>
-
-        <button
-          class="att-btn left"
-          onclick="saveAttendance('${s.user_id}','left')">
-          🚪 წავიდა
-        </button>
-
-      </div>
-
-    </div>
-
-    `).join('');
-}
-
-/*
-  IMPORTANT:
-  Your real attendance schema is:
-
-  teacher_attendance
-  teacher_id
-  student_id
-  attendance_date
-  status
-  marked_at
-  created_at
-
-  NOT:
-  attendance.user_id
-  attendance.date
-*/
-
-async function saveAttendance(studentId,status){
-
-  const date=
-    $('attendanceDate').value ||
-    today();
-
-  try{
-
-    /*
-      Do not use "date".
-      Do not use "user_id".
-    */
-
-    const {error}=await DB
-      .from('teacher_attendance')
-      .upsert(
-        {
-          teacher_id:currentUser.id,
-          student_id:studentId,
-          attendance_date:date,
-          status:status,
-          marked_at:new Date().toISOString()
-        },
-        {
-          onConflict:
-            'teacher_id,student_id,attendance_date'
-        }
-      );
-
-    if(error){
-
-      /*
-        If there is no unique constraint,
-        update existing row or insert.
-      */
-
-      const existing=
-        await DB
-          .from('teacher_attendance')
-          .select('id')
-          .eq('teacher_id',currentUser.id)
-          .eq('student_id',studentId)
-          .eq('attendance_date',date)
-          .maybeSingle();
-
-      if(existing.error){
-        throw existing.error;
-      }
-
-      if(existing.data?.id){
-
-        const updated=
-          await DB
-            .from('teacher_attendance')
-            .update({
-              status:status,
-              marked_at:new Date().toISOString()
-            })
-            .eq('id',existing.data.id);
-
-        if(updated.error){
-          throw updated.error;
-        }
-
-      }else{
-
-        const inserted=
-          await DB
-            .from('teacher_attendance')
-            .insert({
-              teacher_id:currentUser.id,
-              student_id:studentId,
-              attendance_date:date,
-              status:status,
-              marked_at:new Date().toISOString()
-            });
-
-        if(inserted.error){
-          throw inserted.error;
-        }
-      }
-    }
-
-    const names={
-      present:'მოვიდა',
-      late:'დაგვიანება',
-      absent:'გაცდენა',
-      break:'დასვენება',
-      left:'წავიდა'
-    };
-
-    const student=
-      students.find(
-        s=>s.user_id===studentId
-      );
-
-    toast(
-      `✅ ${student?.full_name || ''}: ${names[status]}`,
-      'ok'
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      'Attendance error: '+
-      error.message,
-      'err'
-    );
-  }
-}
-
-/* =========================================================
-   LESSONS
-========================================================= */
-
-async function loadLessons(){
-
-  const box=$('topicsGrid');
-
-  box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>Loading Learning Universe...</div>';
-
-  try{
-
-    const grade=
-      Number($('topicGrade').value);
-
-    const {data,error}=await DB
-      .from('lessons')
-      .select('*')
-      .eq('grade',grade)
-      .order('lesson_number');
-
-    if(error)throw error;
-
-    lessons=data || [];
-
-    renderTopics();
-
-    updateStats();
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=
-      `<div class="empty">
-        ❌ Lessons ვერ ჩაიტვირთა.
-        <br>
-        <small>${esc(error.message)}</small>
-      </div>`;
-  }
-}
-
-function renderTopics(){
-
-  const grade=
-    Number($('topicGrade').value);
-
-  const arr=
-    lessons.filter(
-      l=>Number(l.grade)===grade
-    );
-
-  if(!arr.length){
-
-    $('topicsGrid').innerHTML=
-      '<div class="empty">ამ Grade-ში lessons არ არის.</div>';
-
-    return;
-  }
-
-  $('topicsGrid').innerHTML=
-    arr.map((lesson,index)=>{
-
-      const icon=
-        lesson.topic?.toLowerCase().includes('grammar')
-        ?'🧠'
-        :lesson.topic?.toLowerCase().includes('reading')
-        ?'📖'
-        :lesson.topic?.toLowerCase().includes('listen')
-        ?'🎧'
-        :lesson.topic?.toLowerCase().includes('speak')
-        ?'🗣️'
-        :lesson.topic?.toLowerCase().includes('quiz')
-        ?'🎯'
-        :'🚀';
+    students.map(s=>{
 
       return `
-
-      <div
-        class="topic"
-        onclick="openLesson('${lesson.id}')">
-
-        <div class="lesson-count">
-          LESSON ${esc(lesson.lesson_number)}
-        </div>
-
-        <div class="topic-icon">
-          ${icon}
-        </div>
-
-        <b>
-          ${esc(lesson.title)}
-        </b>
-
-        <small>
-          ${esc(
-            lesson.topic ||
-            'English Learning'
-          )}
-        </small>
-
-        <div
-          class="small muted"
-          style="margin-top:10px">
-
+        <option value="${esc(studentId(s))}">
+          ${esc(studentName(s))}
           ${
-            lesson.description
-            ?esc(
-              lesson.description
-            ).slice(0,90)+'...'
-            :'Open complete lesson →'
+            s.grade
+              ?' — '+gradeLabel(s.grade)
+              :''
           }
-
-        </div>
-
-      </div>
-
+        </option>
       `;
 
     }).join('');
 }
 
 /* =========================================================
-   OPEN LESSON
+   STATS
 ========================================================= */
-
-async function openLesson(id){
-
-  const lesson=
-    lessons.find(
-      l=>String(l.id)===String(id)
-    );
-
-  if(!lesson){
-
-    toast(
-      'Lesson ვერ მოიძებნა',
-      'err'
-    );
-
-    return;
-  }
-
-  $('lessonTitle').textContent=
-    lesson.title;
-
-  $('lessonSubtitle').textContent=
-    `${gradeName(lesson.grade)} • Lesson ${lesson.lesson_number} • ${lesson.topic || ''}`;
-
-  $('lessonModal')
-    .classList.add('open');
-
-  $('lessonBody').innerHTML=
-    '<div class="loading"><span class="spinner"></span>Loading complete lesson...</div>';
-
-  try{
-
-    const [wordsResult,quizResult]=
-      await Promise.all([
-
-        DB
-          .from('lesson_words')
-          .select('*')
-          .eq('lesson_id',lesson.id)
-          .order('sort_order'),
-
-        DB
-          .from('lesson_quizzes')
-          .select('*')
-          .eq('lesson_id',lesson.id)
-          .order('sort_order')
-
-      ]);
-
-    if(wordsResult.error){
-      throw wordsResult.error;
-    }
-
-    if(quizResult.error){
-      throw quizResult.error;
-    }
-
-    const words=
-      wordsResult.data || [];
-
-    const quizzes=
-      quizResult.data || [];
-
-    renderLesson(
-      lesson,
-      words,
-      quizzes
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    $('lessonBody').innerHTML=
-      `<div class="empty">
-        ❌ Lesson material ვერ ჩაიტვირთა.
-        <br>
-        <small>${esc(error.message)}</small>
-      </div>`;
-  }
-}
-
-/* =========================================================
-   LESSON RENDER
-========================================================= */
-
-function renderLesson(
-  lesson,
-  words,
-  quizzes
-){
-
-  const grammarExamples=
-    Array.isArray(lesson.grammar_examples)
-    ?lesson.grammar_examples
-    :[];
-
-  const speaking=
-    Array.isArray(lesson.speaking_phrases)
-    ?lesson.speaking_phrases
-    :[];
-
-  const exercises=
-    Array.isArray(lesson.exercises)
-    ?lesson.exercises
-    :[];
-
-  const image=
-    lesson.image_url
-    ?`
-      <div class="material full">
-
-        <img
-          src="${esc(lesson.image_url)}"
-          style="
-            max-width:100%;
-            max-height:350px;
-            display:block;
-            margin:auto;
-            border-radius:17px;
-          "
-          alt="Lesson image">
-
-      </div>
-    `
-    :'';
-
-  const audio=
-    lesson.audio_url
-    ?`
-      <div class="audio-box">
-
-        <audio
-          controls
-          preload="metadata"
-          src="${esc(lesson.audio_url)}">
-        </audio>
-
-        <button
-          class="btn cyan"
-          onclick="speakText(${JSON.stringify(
-            lesson.listening_text ||
-            lesson.title ||
-            ''
-          )})">
-          🔊 Read Aloud
-        </button>
-
-      </div>
-    `
-    :`
-      <div class="audio-box">
-
-        <button
-          class="btn cyan"
-          onclick="speakText(${JSON.stringify(
-            lesson.listening_text ||
-            lesson.reading_text ||
-            lesson.title ||
-            ''
-          )})">
-          🔊 Listen / Read Aloud
-        </button>
-
-      </div>
-    `;
-
-  $('lessonBody').innerHTML=`
-
-    <div class="lesson-meta">
-
-      <span class="pill">
-        ${gradeName(lesson.grade)}
-      </span>
-
-      <span class="pill">
-        Lesson ${esc(lesson.lesson_number)}
-      </span>
-
-      <span class="pill">
-        ${esc(lesson.topic || 'English')}
-      </span>
-
-      <span class="pill">
-        ${words.length} Vocabulary
-      </span>
-
-      <span class="pill">
-        ${quizzes.length} Quiz Questions
-      </span>
-
-    </div>
-
-    ${image}
-
-    <div class="material-grid">
-
-      <!-- OVERVIEW -->
-
-      <div class="material full">
-
-        <h3>
-          🚀 Lesson Overview
-        </h3>
-
-        <p>
-          ${esc(
-            lesson.description ||
-            'Complete English lesson.'
-          )}
-        </p>
-
-      </div>
-
-      <!-- VOCABULARY -->
-
-      <div class="material full">
-
-        <h3>
-          📚 Vocabulary
-        </h3>
-
-        ${
-          words.length
-          ?`
-            <div class="word-grid">
-
-              ${
-                words.map(w=>`
-
-                  <div class="word">
-
-                    <b>
-                      ${esc(
-                        w.emoji || '🔤'
-                      )}
-                      ${esc(w.word)}
-                    </b>
-
-                    <span>
-                      ${esc(
-                        w.translation || ''
-                      )}
-                    </span>
-
-                    ${
-                      w.audio_url
-                      ?`
-                        <br>
-                        <audio
-                          controls
-                          style="width:100%;margin-top:7px"
-                          src="${esc(w.audio_url)}">
-                        </audio>
-                      `
-                      :`
-                        <br>
-
-                        <button
-                          class="btn"
-                          style="font-size:10px"
-                          onclick="speakText(${JSON.stringify(w.word)})">
-                          🔊 Pronounce
-                        </button>
-                      `
-                    }
-
-                  </div>
-
-                `).join('')
-              }
-
-            </div>
-          `
-          :`
-            <div class="empty">
-              Vocabulary არ არის.
-            </div>
-          `
-        }
-
-      </div>
-
-      <!-- GRAMMAR -->
-
-      <div class="material">
-
-        <h3>
-          🧠 Grammar
-        </h3>
-
-        <p>
-          ${
-            esc(
-              lesson.grammar_rule ||
-              'Grammar rule is not provided.'
-            )
-          }
-        </p>
-
-        ${
-          grammarExamples.length
-          ?`
-            <div>
-              <b>Examples:</b>
-
-              ${
-                grammarExamples
-                  .map(x=>`
-                    <div class="exercise">
-                      ${esc(
-                        typeof x==='string'
-                        ?x
-                        :JSON.stringify(x)
-                      )}
-                    </div>
-                  `)
-                  .join('')
-              }
-
-            </div>
-          `
-          :''
-        }
-
-      </div>
-
-      <!-- LISTENING -->
-
-      <div class="material">
-
-        <h3>
-          🎧 Listening
-        </h3>
-
-        ${audio}
-
-        ${
-          lesson.listening_text
-          ?`
-            <p>
-              ${esc(
-                lesson.listening_text
-              )}
-            </p>
-          `
-          :`
-            <div class="muted small">
-              Listening text not provided.
-            </div>
-          `
-        }
-
-      </div>
-
-      <!-- READING -->
-
-      <div class="material full">
-
-        <h3>
-          📖 Reading
-        </h3>
-
-        ${
-          lesson.reading_text
-          ?`
-            <div class="reading-controls">
-
-              <button
-                class="btn cyan"
-                onclick="speakText(${JSON.stringify(
-                  lesson.reading_text
-                )})">
-                🔊 Read Reading
-              </button>
-
-              <button
-                class="btn"
-                onclick="stopSpeaking()">
-                ⏹ Stop
-              </button>
-
-            </div>
-
-            <p>
-              ${esc(
-                lesson.reading_text
-              )}
-            </p>
-          `
-          :`
-            <div class="empty">
-              Reading text not provided.
-            </div>
-          `
-        }
-
-      </div>
-
-      <!-- SPEAKING -->
-
-      <div class="material">
-
-        <h3>
-          🗣️ Speaking
-        </h3>
-
-        ${
-          speaking.length
-          ?`
-            ${
-              speaking.map(x=>`
-
-                <div class="exercise">
-
-                  ${esc(
-                    typeof x==='string'
-                    ?x
-                    :JSON.stringify(x)
-                  )}
-
-                  <br>
-
-                  <button
-                    class="btn"
-                    style="margin-top:7px;font-size:10px"
-                    onclick="speakText(${JSON.stringify(
-                      typeof x==='string'
-                      ?x
-                      :JSON.stringify(x)
-                    )})">
-                    🔊 Hear Phrase
-                  </button>
-
-                </div>
-
-              `).join('')
-            }
-          `
-          :`
-            <div class="empty">
-              Speaking phrases not provided.
-            </div>
-          `
-        }
-
-      </div>
-
-      <!-- EXERCISES -->
-
-      <div class="material">
-
-        <h3>
-          ✍️ Exercises
-        </h3>
-
-        ${
-          exercises.length
-          ?`
-            ${
-              exercises.map((x,i)=>`
-
-                <div class="exercise">
-
-                  <b>
-                    Exercise ${i+1}
-                  </b>
-
-                  <br>
-
-                  ${esc(
-                    typeof x==='string'
-                    ?x
-                    :JSON.stringify(x)
-                  )}
-
-                </div>
-
-              `).join('')
-            }
-          `
-          :`
-            <div class="empty">
-              Exercises not provided.
-            </div>
-          `
-        }
-
-      </div>
-
-      <!-- QUIZ -->
-
-      <div class="material full">
-
-        <h3>
-          🎯 Quiz
-        </h3>
-
-        ${
-          quizzes.length
-          ?`
-            ${
-              quizzes.map((q,i)=>{
-
-                let options=[];
-
-                if(Array.isArray(q.options)){
-                  options=q.options;
-                }
-
-                return `
-
-                <div class="quiz-item">
-
-                  <b>
-                    ${i+1}. ${esc(q.question)}
-                  </b>
-
-                  <div class="quiz-options">
-
-                    ${
-                      options.map(o=>`
-
-                        <span class="option">
-                          ${esc(
-                            typeof o==='string'
-                            ?o
-                            :JSON.stringify(o)
-                          )}
-                        </span>
-
-                      `).join('')
-                    }
-
-                  </div>
-
-                  <div
-                    class="small"
-                    style="margin-top:8px;color:var(--green)">
-                    ✓ Correct:
-                    ${esc(q.correct_answer)}
-                  </div>
-
-                </div>
-
-                `;
-
-              }).join('')
-            }
-          `
-          :`
-            <div class="empty">
-              Quiz questions არ არის.
-            </div>
-          `
-        }
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-/* =========================================================
-   SPEECH
-========================================================= */
-
-function speakText(text){
-
-  stopSpeaking();
-
-  if(!('speechSynthesis' in window)){
-
-    toast(
-      'Browser speech is not supported.',
-      'err'
-    );
-
-    return;
-  }
-
-  const utterance=
-    new SpeechSynthesisUtterance(
-      String(text || '')
-    );
-
-  utterance.lang='en-US';
-  utterance.rate=.88;
-  utterance.pitch=1;
-
-  speechSynthesis.speak(
-    utterance
-  );
-}
-
-function stopSpeaking(){
-
-  if('speechSynthesis' in window){
-    speechSynthesis.cancel();
-  }
-}
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-async function loadProgress(){
-
-  try{
-
-    const {data,error}=await DB
-      .from('student_progress')
-      .select('*');
-
-    if(error)throw error;
-
-    progressRows=data || [];
-
-    updateStats();
-
-  }catch(error){
-
-    console.warn(
-      'student_progress:',
-      error.message
-    );
-
-    progressRows=[];
-  }
-}
 
 function updateStats(){
 
@@ -3204,108 +2531,823 @@ function updateStats(){
 
   $('statLessons').textContent=
     lessons.length;
-
-  $('statWords').textContent=
-    progressRows.reduce(
-      (sum,x)=>
-        sum+
-        Number(
-          x.words_learned || 0
-        ),
-      0
-    );
 }
 
-function renderProgress(){
+/* =========================================================
+   LESSONS
+========================================================= */
+
+async function loadLessons(){
+
+  const box=$('lessonsGrid');
+
+  box.innerHTML=
+    `<div class="loading">
+      <span class="spinner"></span>
+      Loading lessons...
+    </div>`;
+
+  const grade=
+    Number($('lessonGrade').value);
+
+  const search=
+    $('lessonSearch')
+      .value
+      .trim()
+      .toLowerCase();
+
+  try{
+
+    let query=
+      DB
+        .from('lessons')
+        .select('*')
+        .eq('grade',grade)
+        .order('lesson_number',{
+          ascending:true
+        });
+
+    const result=
+      await query;
+
+    if(result.error)
+      throw result.error;
+
+    lessons=
+      result.data || [];
+
+    const filtered=
+      lessons.filter(l=>{
+
+        const text=
+          (
+            l.title||''+
+            ' '+
+            (l.topic||'')+
+            ' '+
+            (l.description||'')
+          ).toLowerCase();
+
+        return !search ||
+          text.includes(search);
+      });
+
+    if(!filtered.length){
+
+      box.innerHTML=
+        `<div class="empty">
+          📚 ${gradeLabel(grade)}
+          lessons ვერ მოიძებნა.
+        </div>`;
+
+      updateStats();
+
+      return;
+    }
+
+    box.innerHTML=
+      filtered.map(lessonCard).join('');
+
+    updateStats();
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      `<div class="empty">
+        ❌ Lessons ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+function lessonCard(l){
+
+  const number=
+    l.lesson_number ??
+    l.number ??
+    '';
+
+  const title=
+    l.title ||
+    'Lesson';
+
+  const topic=
+    l.topic ||
+    l.topic_name ||
+    'English';
+
+  const desc=
+    l.description ||
+    'Open lesson materials';
+
+  const hasReading=
+    !!l.reading_text;
+
+  const hasListening=
+    !!l.listening_text ||
+    !!l.audio_url;
+
+  const hasSpeaking=
+    !!l.speaking_phrases;
+
+  const hasGrammar=
+    !!l.grammar_rule ||
+    !!l.grammar_examples;
+
+  const hasExercises=
+    !!l.exercises;
+
+  return `
+    <div class="lesson"
+      onclick="openLesson('${esc(l.id)}')">
+
+      <div class="lesson-number">
+        LESSON ${esc(number)}
+      </div>
+
+      <div class="lesson-title">
+        ${esc(title)}
+      </div>
+
+      <div class="lesson-topic">
+        ${esc(topic)}
+      </div>
+
+      <div class="lesson-desc">
+        ${esc(desc)}
+      </div>
+
+      <div class="lesson-footer">
+
+        ${
+          hasReading
+          ?'<span class="lesson-pill">📖 READING</span>'
+          :''
+        }
+
+        ${
+          hasListening
+          ?'<span class="lesson-pill">🎧 LISTENING</span>'
+          :''
+        }
+
+        ${
+          hasSpeaking
+          ?'<span class="lesson-pill">🗣️ SPEAKING</span>'
+          :''
+        }
+
+        ${
+          hasGrammar
+          ?'<span class="lesson-pill">✏️ GRAMMAR</span>'
+          :''
+        }
+
+        ${
+          hasExercises
+          ?'<span class="lesson-pill">🧩 EXERCISE</span>'
+          :''
+        }
+
+        <span class="lesson-pill">
+          📝 OPEN
+        </span>
+
+      </div>
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   OPEN LESSON
+========================================================= */
+
+async function openLesson(id){
+
+  const lesson=
+    lessons.find(
+      l=>String(l.id)===String(id)
+    );
+
+  if(!lesson){
+
+    toast(
+      'Lesson ვერ მოიძებნა',
+      'err'
+    );
+
+    return;
+  }
+
+  $('lessonModal').classList.add('open');
+
+  $('modalTitle').textContent=
+    `${lesson.lesson_number
+      ?'Lesson '+lesson.lesson_number+' — '
+      :''
+    }${lesson.title||'Lesson'}`;
+
+  $('modalSubtitle').textContent=
+    `${gradeLabel(lesson.grade)} • ${
+      lesson.topic ||
+      lesson.topic_name ||
+      ''
+    }`;
+
+  const box=
+    $('modalMaterials');
+
+  box.innerHTML='';
+
+  /*
+    Reading
+  */
+
+  if(lesson.reading_text){
+
+    box.innerHTML+=`
+      <div class="material full">
+
+        <h3>📖 READING</h3>
+
+        <div class="material-content">
+          ${esc(lesson.reading_text)}
+        </div>
+
+      </div>
+    `;
+  }
+
+  /*
+    Listening text
+  */
+
+  if(lesson.listening_text){
+
+    box.innerHTML+=`
+      <div class="material">
+
+        <h3>🎧 LISTENING</h3>
+
+        <div class="material-content">
+          ${esc(lesson.listening_text)}
+        </div>
+
+      </div>
+    `;
+  }
+
+  /*
+    Audio
+  */
+
+  if(lesson.audio_url){
+
+    box.innerHTML+=`
+      <div class="material">
+
+        <h3>🔊 AUDIO</h3>
+
+        <div class="audio-box">
+
+          <audio controls preload="none">
+            <source
+              src="${esc(lesson.audio_url)}">
+          </audio>
+
+          <button class="btn btn-cyan"
+            onclick="playLessonAudio()">
+            🔊 PLAY
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  /*
+    Speaking
+  */
+
+  if(lesson.speaking_phrases){
+
+    box.innerHTML+=`
+      <div class="material">
+
+        <h3>🗣️ SPEAKING</h3>
+
+        <div class="material-content">
+          ${esc(lesson.speaking_phrases)}
+        </div>
+
+        <button class="btn btn-purple"
+          style="margin-top:12px"
+          onclick="speakText(
+            document.querySelector(
+              '#modalMaterials .material-content'
+            )?.textContent || ''
+          )">
+          🔊 SPEAK
+        </button>
+
+      </div>
+    `;
+  }
+
+  /*
+    Grammar
+  */
+
+  if(lesson.grammar_rule){
+
+    box.innerHTML+=`
+      <div class="material">
+
+        <h3>✏️ GRAMMAR</h3>
+
+        <div class="material-content">
+          ${esc(lesson.grammar_rule)}
+        </div>
+
+      </div>
+    `;
+  }
+
+  /*
+    Grammar examples
+  */
+
+  if(lesson.grammar_examples){
+
+    box.innerHTML+=`
+      <div class="material">
+
+        <h3>💡 GRAMMAR EXAMPLES</h3>
+
+        <div class="material-content">
+          ${esc(lesson.grammar_examples)}
+        </div>
+
+      </div>
+    `;
+  }
+
+  /*
+    Exercises
+  */
+
+  if(lesson.exercises){
+
+    box.innerHTML+=`
+      <div class="material full">
+
+        <h3>🧩 EXERCISES</h3>
+
+        <div class="material-content">
+          ${esc(
+            typeof lesson.exercises==='string'
+              ?lesson.exercises
+              :JSON.stringify(
+                lesson.exercises,
+                null,
+                2
+              )
+          )}
+        </div>
+
+      </div>
+    `;
+  }
+
+  /*
+    Image
+  */
+
+  if(lesson.image_url){
+
+    box.innerHTML+=`
+      <div class="material">
+
+        <h3>🖼️ VISUAL</h3>
+
+        <img
+          src="${esc(lesson.image_url)}"
+          alt="Lesson image"
+          style="
+            width:100%;
+            max-height:350px;
+            object-fit:contain;
+            border-radius:13px;
+          "
+        >
+
+      </div>
+    `;
+  }
+
+  /*
+    If no content
+  */
+
+  if(!box.innerHTML){
+
+    box.innerHTML=`
+      <div class="material full">
+
+        <h3>📚 MATERIAL</h3>
+
+        <div class="empty">
+          ამ Lesson-ში მასალა ჯერ არ არის
+          ჩაწერილი.
+        </div>
+
+      </div>
+    `;
+  }
+}
+
+/* =========================================================
+   TEXT TO SPEECH
+========================================================= */
+
+function speakText(text){
+
+  if(!text){
+
+    toast(
+      'სასაუბრო ტექსტი არ არის',
+      'err'
+    );
+
+    return;
+  }
+
+  if(!('speechSynthesis' in window)){
+
+    toast(
+      'Browser Text-to-Speech არ უჭერს მხარს',
+      'err'
+    );
+
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utter=
+    new SpeechSynthesisUtterance(text);
+
+  utter.lang='en-US';
+  utter.rate=.88;
+  utter.pitch=1;
+
+  speechSynthesis.speak(utter);
+
+  toast(
+    '🔊 English voice started',
+    'ok'
+  );
+}
+
+function playLessonAudio(){
+
+  const audio=
+    document.querySelector(
+      '#modalMaterials audio'
+    );
+
+  if(audio){
+
+    audio.play().catch(error=>{
+      console.warn(error);
+
+      toast(
+        'Audio ვერ ჩაირთო',
+        'err'
+      );
+    });
+  }
+}
+
+/* =========================================================
+   TOPICS
+========================================================= */
+
+const TOPICS={
+
+2:[
+['🔤','Alphabet','Letters & Sounds'],
+['🔢','Numbers','Counting & Numbers'],
+['🎨','Colors','Colors Around Us'],
+['👨‍👩‍👧','Family','Family Members'],
+['🐶','Animals','Pets & Wild Animals'],
+['🍎','Food','Food & Drinks'],
+['🏫','School','Classroom English'],
+['🏠','Home','Rooms & Objects'],
+['👕','Clothes','Clothes & Accessories'],
+['👁️','Body','Body Parts'],
+['🌳','Nature','Nature & Environment'],
+['📅','Days & Months','Calendar English'],
+['😊','Feelings','Happy, Sad, Angry...'],
+['🏃','Actions','Run, Jump, Read...'],
+['🚗','Transport','Cars, Buses, Trains'],
+['🌦️','Weather','Sunny, Rainy, Cloudy'],
+['🛍️','Shopping','Simple Shopping'],
+['🎯','Quiz','Vocabulary Challenge']
+],
+
+3:[
+['📚','Vocabulary','Everyday English'],
+['🏫','School Life','Subjects & Classroom'],
+['👥','People','Descriptions'],
+['🏠','My Home','Rooms & Furniture'],
+['🍕','Food & Drinks','Meals & Preferences'],
+['🛍️','Shopping','Prices & Objects'],
+['🚌','Transport','Travel & Directions'],
+['🌍','Countries','Nationalities & Languages'],
+['🌦️','Weather','Seasons & Forecasts'],
+['⏰','Time','Clock & Daily Routine'],
+['🏃','Daily Actions','Present Simple'],
+['❤️','Feelings','Emotions & Opinions'],
+['🐾','Animals','Wild & Domestic'],
+['🌳','Nature','Environment'],
+['📖','Reading','Stories & Questions'],
+['✏️','Grammar','Core Grammar'],
+['🗣️','Speaking','Conversation Practice'],
+['🎯','Quiz','Mixed Challenge']
+],
+
+4:[
+['🚀','Vocabulary Mastery','High Frequency Words'],
+['🧠','Smart Grammar','Core English Grammar'],
+['📖','Reading Lab','Reading Comprehension'],
+['✍️','Writing Lab','Sentences & Paragraphs'],
+['🗣️','Speaking','Conversation English'],
+['🎧','Listening','Spoken English'],
+['🌍','World English','Countries & Cultures'],
+['🏫','Education','School & Learning'],
+['💼','Future Jobs','Jobs & Ambitions'],
+['🛒','Shopping','Real Life English'],
+['✈️','Travel','Airport & Hotel'],
+['🍽️','Restaurant','Ordering Food'],
+['❤️','Emotions','Advanced Feelings'],
+['🌦️','Weather','Climate & Nature'],
+['🔬','Science','Science Vocabulary'],
+['💻','Technology','Computers & Internet'],
+['🏆','Challenge','Advanced Quiz']
+]
+
+};
+
+function renderTopics(){
+
+  const grade=
+    Number($('topicGrade').value);
+
+  const box=
+    $('topicsGrid');
+
+  box.innerHTML=
+    (TOPICS[grade]||[])
+      .map(t=>`
+
+        <div class="topic"
+          onclick="topicClicked(
+            '${esc(t[1])}',
+            ${grade}
+          )">
+
+          <div class="topic-icon">
+            ${t[0]}
+          </div>
+
+          <b>${esc(t[1])}</b>
+
+          <small>
+            ${esc(t[2])}
+          </small>
+
+        </div>
+
+      `)
+      .join('');
+}
+
+function topicClicked(title,grade){
+
+  $('lessonGrade').value=
+    String(grade);
+
+  $('lessonSearch').value=
+    title;
+
+  openPanel('lessons');
+
+  loadLessons();
+
+}
+
+/* =========================================================
+   ATTENDANCE
+========================================================= */
+
+$('attendanceDate').value=
+  today();
+
+async function loadAttendance(){
+
+  const box=
+    $('attendanceList');
+
+  if(!students.length)
+    await loadStudents();
 
   if(!students.length){
 
-    $('progressList').innerHTML=
+    box.innerHTML=
       '<div class="empty">Students არ არის.</div>';
 
     return;
   }
 
-  $('progressList').innerHTML=
+  /*
+    We intentionally do not assume a "status"
+    column here.
+
+    The project already has an attendance table,
+    but its schema must be respected.
+  */
+
+  box.innerHTML=
     students.map(s=>{
 
-      const row=
-        progressRows.find(
-          p=>p.user_id===s.user_id &&
-          Number(p.grade)===Number(s.grade)
-        ) ||
-        progressRows.find(
-          p=>p.user_id===s.user_id
-        ) ||
-        {};
-
-      const words=
-        Number(row.words_learned || 0);
-
-      const quiz=
-        Number(row.quiz_completed || 0);
-
-      const best=
-        Number(row.best_quiz || row.score || 0);
-
-      const target=
-        Number(s.grade)===2
-        ?300
-        :250;
-
-      const percent=
-        Math.min(
-          100,
-          Math.round(
-            words/target*100
-          )
-        );
+      const uid=
+        studentId(s);
 
       return `
+        <div class="att-row">
 
-      <div class="progress-card">
+          <div class="att-info">
 
-        <div class="progress-top">
+            <div>
+              <div class="att-name">
+                ${esc(studentName(s))}
+              </div>
 
-          <div>
-
-            <b>
-              ${esc(s.full_name)}
-            </b>
-
-            <div class="small muted">
-              ${gradeName(s.grade)}
+              <div class="small muted">
+                ${gradeLabel(s.grade||2)}
+              </div>
             </div>
+
+            <span class="badge b3">
+              TODAY
+            </span>
 
           </div>
 
-          <b style="color:var(--cyan)">
-            ${percent}%
-          </b>
+          <div class="att-buttons">
+
+            <button class="att-btn present"
+              onclick="attendanceAction(
+                '${esc(uid)}',
+                'present'
+              )">
+              ✅ მოვიდა
+            </button>
+
+            <button class="att-btn absent"
+              onclick="attendanceAction(
+                '${esc(uid)}',
+                'absent'
+              )">
+              ❌ გაცდენა
+            </button>
+
+            <button class="att-btn late"
+              onclick="attendanceAction(
+                '${esc(uid)}',
+                'late'
+              )">
+              ⏰ დააგვიანა
+            </button>
+
+            <button class="att-btn left"
+              onclick="attendanceAction(
+                '${esc(uid)}',
+                'left'
+              )">
+              🚪 წავიდა
+            </button>
+
+            <button class="att-btn break"
+              onclick="attendanceAction(
+                '${esc(uid)}',
+                'break'
+              )">
+              ☕ დასვენება
+            </button>
+
+          </div>
 
         </div>
-
-        <div class="progress">
-
-          <i style="width:${percent}%"></i>
-
-        </div>
-
-        <div
-          class="small muted"
-          style="margin-top:9px">
-
-          📚 ${words} words
-          • 📝 ${quiz} quizzes
-          • 🏆 ${best}% best
-
-        </div>
-
-      </div>
-
       `;
 
     }).join('');
+}
+
+/*
+  Attendance compatibility layer.
+
+  Tries common schemas instead of crashing
+  the whole dashboard.
+*/
+
+async function attendanceAction(uid,status){
+
+  const date=
+    $('attendanceDate').value ||
+    today();
+
+  const attempts=[
+
+    {
+      user_id:uid,
+      teacher_id:currentUser.id,
+      date:date,
+      attendance:status
+    },
+
+    {
+      student_id:uid,
+      teacher_id:currentUser.id,
+      date:date,
+      attendance:status
+    },
+
+    {
+      user_id:uid,
+      teacher_id:currentUser.id,
+      attendance_date:date,
+      attendance:status
+    },
+
+    {
+      student_id:uid,
+      teacher_id:currentUser.id,
+      attendance_date:date,
+      attendance:status
+    }
+
+  ];
+
+  let lastError=null;
+
+  for(const payload of attempts){
+
+    try{
+
+      const result=
+        await DB
+          .from('attendance')
+          .insert(payload);
+
+      if(!result.error){
+
+        const names={
+          present:'მოვიდა',
+          absent:'გაცდენა',
+          late:'დააგვიანა',
+          left:'წავიდა',
+          break:'დასვენება'
+        };
+
+        toast(
+          `✅ ${names[status]} ჩაიწერა`,
+          'ok'
+        );
+
+        return;
+      }
+
+      lastError=result.error;
+
+    }catch(error){
+
+      lastError=error;
+    }
+  }
+
+  console.error(lastError);
+
+  toast(
+    'Attendance schema ვერ დაემთხვა. '+
+    'მომწერე attendance-ის columns და ზუსტად მოვარგებ.',
+    'err'
+  );
 }
 
 /* =========================================================
@@ -3314,447 +3356,90 @@ function renderProgress(){
 
 async function loadGrades(){
 
-  const box=$('gradesList');
-
-  try{
-
-    const {data,error}=await DB
-      .from('student_grades')
-      .select('*')
-      .order('created_at',{
-        ascending:false
-      })
-      .limit(50);
-
-    if(error)throw error;
-
-    gradeRows=data || [];
-
-    if(!gradeRows.length){
-
-      box.innerHTML=
-        '<div class="empty">⭐ Grades ჯერ არ არის.</div>';
-
-      return;
-    }
-
-    box.innerHTML=
-      gradeRows.map(g=>{
-
-        const student=
-          students.find(
-            s=>s.user_id===g.student_id
-          );
-
-        return `
-
-        <div class="grade-row">
-
-          <div>
-
-            <b>
-              ${esc(
-                student?.full_name ||
-                g.student_id
-              )}
-            </b>
-
-            <div class="small muted">
-              ${esc(g.comment || '')}
-            </div>
-
-          </div>
-
-          <div class="score">
-            ${Number(g.grade)}/10
-          </div>
-
-          <div class="small muted">
-            ${
-              g.created_at
-              ?new Date(
-                g.created_at
-              ).toLocaleString('ka-GE')
-              :''
-            }
-          </div>
-
-        </div>
-
-        `;
-
-      }).join('');
-
-  }catch(error){
-
-    box.innerHTML=
-      `<div class="empty">
-        ❌ Grades error.
-        <br>
-        <small>${esc(error.message)}</small>
-      </div>`;
-  }
-}
-
-$('saveGradeBtn').onclick=async()=>{
-
-  const studentId=
-    $('gradeStudent').value;
-
-  const grade=
-    Number(
-      $('gradeScore').value
-    );
-
-  const comment=
-    $('gradeComment')
-      .value
-      .trim();
-
-  if(!studentId){
-
-    toast(
-      'აირჩიე მოსწავლე',
-      'err'
-    );
-
-    return;
-  }
-
-  if(
-    !Number.isFinite(grade) ||
-    grade<0 ||
-    grade>10
-  ){
-
-    toast(
-      'ქულა უნდა იყოს 0–10',
-      'err'
-    );
-
-    return;
-  }
-
-  try{
-
-    const {error}=await DB
-      .from('student_grades')
-      .insert({
-        student_id:studentId,
-        teacher_id:currentUser.id,
-        grade:grade,
-        comment:comment
-      });
-
-    if(error)throw error;
-
-    $('gradeScore').value='';
-    $('gradeComment').value='';
-
-    toast(
-      '⭐ შეფასება შენახულია',
-      'ok'
-    );
-
-    await loadGrades();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      'Grade save failed: '+
-      error.message,
-      'err'
-    );
-  }
-};
-
-/* =========================================================
-   STUDENT DETAIL
-========================================================= */
-
-async function showStudent(uid){
-
-  const student=
-    students.find(
-      s=>s.user_id===uid
-    );
-
-  if(!student)return;
-
-  $('studentDetailTitle').textContent=
-    `📊 ${student.full_name}`;
-
-  $('studentModal')
-    .classList.add('open');
-
-  $('studentDetailBody').innerHTML=
-    '<div class="loading"><span class="spinner"></span>Loading intelligence...</div>';
-
-  try{
-
-    const progress=
-      progressRows.filter(
-        p=>p.user_id===uid
-      );
-
-    const results=
-      await DB
-        .from('quiz_results')
-        .select('*')
-        .eq('student_id',uid)
-        .order('created_at',{
-          ascending:false
-        })
-        .limit(50);
-
-    if(results.error){
-      throw results.error;
-    }
-
-    const quizzes=
-      results.data || [];
-
-    const words=
-      progress.reduce(
-        (n,p)=>
-          n+
-          Number(
-            p.words_learned || 0
-          ),
-        0
-      );
-
-    const best=
-      Math.max(
-        0,
-        ...progress.map(
-          p=>Number(
-            p.best_quiz ||
-            p.score ||
-            0
-          )
-        ),
-        ...quizzes.map(q=>{
-
-          const total=
-            Number(q.total || 0);
-
-          const score=
-            Number(q.score || 0);
-
-          return total
-            ?Math.round(
-              score/total*100
-            )
-            :score;
-        })
-      );
-
-    $('studentDetailBody').innerHTML=`
-
-      <div class="material-grid">
-
-        <div class="material">
-
-          <h3>👤 Student</h3>
-
-          <p>
-            ${esc(student.full_name)}
-            <br>
-            ${esc(student.email || '')}
-            <br>
-            ${gradeName(student.grade)}
-          </p>
-
-        </div>
-
-        <div class="material">
-
-          <h3>📚 Words Learned</h3>
-
-          <p style="font-size:30px;color:var(--cyan)">
-            ${words}
-          </p>
-
-        </div>
-
-        <div class="material">
-
-          <h3>🎯 Quiz Attempts</h3>
-
-          <p style="font-size:30px;color:var(--purple)">
-            ${quizzes.length}
-          </p>
-
-        </div>
-
-        <div class="material">
-
-          <h3>🏆 Best Score</h3>
-
-          <p style="font-size:30px;color:var(--yellow)">
-            ${best}%
-          </p>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }catch(error){
-
-    console.error(error);
-
-    $('studentDetailBody').innerHTML=
-      `<div class="empty">
-        ❌ Student data ვერ ჩაიტვირთა.
-        <br>
-        <small>${esc(error.message)}</small>
-      </div>`;
-  }
-}
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-async function loadHistory(){
-
-  const box=$('historyList');
+  const box=
+    $('gradesList');
 
   box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>Loading...</div>';
+    '<div class="loading">Loading grades...</div>';
 
   try{
 
-    const [grades,quiz]=await Promise.all([
-
-      DB
+    const result=
+      await DB
         .from('student_grades')
         .select('*')
         .order('created_at',{
           ascending:false
         })
-        .limit(30),
+        .limit(100);
 
-      DB
-        .from('quiz_results')
-        .select('*')
-        .order('created_at',{
-          ascending:false
-        })
-        .limit(30)
+    if(result.error)
+      throw result.error;
 
-    ]);
+    grades=
+      result.data || [];
 
-    if(grades.error){
-      throw grades.error;
-    }
-
-    if(quiz.error){
-      throw quiz.error;
-    }
-
-    const events=[];
-
-    (grades.data || [])
-      .forEach(x=>{
-
-        events.push({
-          type:'⭐ Grade',
-          id:x.student_id,
-          score:
-            Number(x.grade)+'/10',
-          date:x.created_at
-        });
-
-      });
-
-    (quiz.data || [])
-      .forEach(x=>{
-
-        const total=
-          Number(x.total || 0);
-
-        const score=
-          Number(x.score || 0);
-
-        const percent=
-          total
-          ?Math.round(score/total*100)
-          :score;
-
-        events.push({
-          type:'🎯 Quiz',
-          id:x.student_id,
-          score:percent+'%',
-          date:
-            x.completed_at ||
-            x.created_at
-        });
-
-      });
-
-    events.sort(
-      (a,b)=>
-        new Date(b.date||0) -
-        new Date(a.date||0)
-    );
-
-    if(!events.length){
+    if(!grades.length){
 
       box.innerHTML=
-        '<div class="empty">History ცარიელია.</div>';
+        '<div class="empty">⭐ შეფასებები ჯერ არ არის.</div>';
 
       return;
     }
 
     box.innerHTML=
-      events.map(x=>{
+      grades.map(g=>{
 
         const student=
           students.find(
-            s=>s.user_id===x.id
+            s=>String(studentId(s))===
+               String(
+                 g.user_id ||
+                 g.student_id
+               )
           );
 
         return `
+          <div class="grade-line">
 
-        <div class="history-row">
+            <div>
+              <b>
+                ${esc(
+                  studentName(student)||
+                  g.user_id||
+                  g.student_id||
+                  'Student'
+                )}
+              </b>
 
-          <div>
+              <div class="small muted">
+                ${esc(
+                  g.comment||
+                  g.feedback||
+                  ''
+                )}
+              </div>
+            </div>
 
-            <b>
+            <div class="score">
               ${esc(
-                student?.full_name ||
-                'Student'
-              )}
-            </b>
+                g.score ??
+                g.grade ??
+                0
+              )}/10
+            </div>
 
             <div class="small muted">
-              ${x.type}
+              ${
+                g.created_at
+                ?new Date(
+                  g.created_at
+                ).toLocaleString('ka-GE')
+                :''
+              }
             </div>
 
           </div>
-
-          <div class="score">
-            ${esc(x.score)}
-          </div>
-
-          <div class="small muted">
-            ${
-              x.date
-              ?new Date(
-                x.date
-              ).toLocaleString('ka-GE')
-              :''
-            }
-          </div>
-
-        </div>
-
         `;
 
       }).join('');
@@ -3765,15 +3450,336 @@ async function loadHistory(){
 
     box.innerHTML=
       `<div class="empty">
-        ❌ History error.
-        <br>
+        ❌ student_grades ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+$('saveGradeBtn')
+  .addEventListener('click',async()=>{
+
+    const uid=
+      $('gradeStudent').value;
+
+    const score=
+      Number($('gradeScore').value);
+
+    const comment=
+      $('gradeComment').value.trim();
+
+    if(!uid){
+
+      toast(
+        'აირჩიე მოსწავლე',
+        'err'
+      );
+
+      return;
+    }
+
+    if(!Number.isFinite(score)||
+       score<0||
+       score>10){
+
+      toast(
+        'ქულა უნდა იყოს 0–10',
+        'err'
+      );
+
+      return;
+    }
+
+    try{
+
+      const result=
+        await DB
+          .from('student_grades')
+          .insert({
+            student_id:uid,
+            teacher_id:currentUser.id,
+            score:score,
+            comment:comment
+          });
+
+      if(result.error)
+        throw result.error;
+
+      toast(
+        '⭐ შეფასება შენახულია',
+        'ok'
+      );
+
+      $('gradeScore').value='';
+      $('gradeComment').value='';
+
+      await loadGrades();
+
+    }catch(error){
+
+      console.error(error);
+
+      toast(
+        'Grade save failed: '+error.message,
+        'err'
+      );
+    }
+
+  });
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+async function loadProgress(){
+
+  const box=
+    $('progressList');
+
+  box.innerHTML=
+    '<div class="loading">Loading progress...</div>';
+
+  try{
+
+    const result=
+      await DB
+        .from('student_progress')
+        .select('*');
+
+    if(result.error)
+      throw result.error;
+
+    const rows=
+      result.data || [];
+
+    if(!students.length)
+      await loadStudents();
+
+    box.innerHTML=
+      students.map(s=>{
+
+        const uid=
+          studentId(s);
+
+        const r=
+          rows.find(
+            x=>String(
+              x.user_id ||
+              x.student_id
+            )===String(uid)
+          ) || {};
+
+        const words=
+          Number(
+            r.words_learned||
+            (
+              Array.isArray(
+                r.learned_words
+              )
+              ?r.learned_words.length
+              :0
+            )
+          );
+
+        const quiz=
+          Number(
+            r.quiz_completed||
+            r.quizzes_completed||
+            0
+          );
+
+        const pct=
+          Math.min(
+            100,
+            Math.round(
+              words/
+              (
+                Number(s.grade)===2
+                ?100
+                :150
+              )*100
+            )
+          );
+
+        return `
+          <div class="progress-card">
+
+            <div class="progress-top">
+
+              <div>
+                <b>
+                  ${esc(studentName(s))}
+                </b>
+
+                <div class="small muted">
+                  ${gradeLabel(s.grade||2)}
+                </div>
+              </div>
+
+              <strong
+                style="color:var(--cyan)">
+                ${pct}%
+              </strong>
+
+            </div>
+
+            <div class="progress-bar">
+              <i style="width:${pct}%"></i>
+            </div>
+
+            <div class="small muted"
+                 style="margin-top:9px">
+              📚 ${words} words
+              • 📝 ${quiz} quizzes
+            </div>
+
+          </div>
+        `;
+
+      }).join('');
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      `<div class="empty">
+        ❌ Progress ვერ ჩაიტვირთა.<br>
         <small>${esc(error.message)}</small>
       </div>`;
   }
 }
 
 /* =========================================================
-   FILTERS
+   QUIZ RESULTS
+========================================================= */
+
+async function loadQuizResults(){
+
+  const box=
+    $('resultsList');
+
+  box.innerHTML=
+    '<div class="loading">Loading quiz results...</div>';
+
+  try{
+
+    const result=
+      await DB
+        .from('quiz_results')
+        .select('*')
+        .order('created_at',{
+          ascending:false
+        })
+        .limit(100);
+
+    if(result.error)
+      throw result.error;
+
+    quizResults=
+      result.data || [];
+
+    if(!quizResults.length){
+
+      box.innerHTML=
+        '<div class="empty">🏆 Quiz results ჯერ არ არის.</div>';
+
+      return;
+    }
+
+    box.innerHTML=
+      quizResults.map(r=>{
+
+        const uid=
+          r.user_id ||
+          r.student_id;
+
+        const student=
+          students.find(
+            s=>String(studentId(s))===
+               String(uid)
+          );
+
+        const score=
+          r.score ??
+          r.percentage ??
+          r.result ??
+          0;
+
+        return `
+          <div class="grade-line">
+
+            <div>
+              <b>
+                ${esc(
+                  studentName(student)
+                )}
+              </b>
+
+              <div class="small muted">
+                ${
+                  r.created_at
+                  ?new Date(
+                    r.created_at
+                  ).toLocaleString('ka-GE')
+                  :''
+                }
+              </div>
+            </div>
+
+            <div class="score">
+              ${esc(score)}%
+            </div>
+
+            <div class="small muted">
+              ${
+                r.grade
+                ?gradeLabel(r.grade)
+                :'QUIZ'
+              }
+            </div>
+
+          </div>
+        `;
+
+      }).join('');
+
+  }catch(error){
+
+    console.error(error);
+
+    box.innerHTML=
+      `<div class="empty">
+        ❌ quiz_results ვერ ჩაიტვირთა.<br>
+        <small>${esc(error.message)}</small>
+      </div>`;
+  }
+}
+
+/* =========================================================
+   STUDENT INFO
+========================================================= */
+
+function studentInfo(uid){
+
+  const s=
+    students.find(
+      x=>String(studentId(x))===
+         String(uid)
+    );
+
+  if(!s)return;
+
+  alert(
+    'STUDENT\n\n'+
+    'Name: '+studentName(s)+'\n'+
+    'Email: '+(s.email||'')+'\n'+
+    'Grade: '+gradeLabel(s.grade)
+  );
+}
+
+/* =========================================================
+   SEARCH
 ========================================================= */
 
 $('studentSearch')
@@ -3782,110 +3788,87 @@ $('studentSearch')
     renderStudents
   );
 
-$('gradeFilter')
+$('studentFilter')
   .addEventListener(
     'change',
     renderStudents
   );
 
-$('reloadStudents').onclick=
-  loadStudents;
+$('reloadStudents')
+  .addEventListener(
+    'click',
+    loadStudents
+  );
 
-$('topicGrade').onchange=
-  loadLessons;
+$('lessonGrade')
+  .addEventListener(
+    'change',
+    loadLessons
+  );
+
+$('lessonSearch')
+  .addEventListener(
+    'input',
+    loadLessons
+  );
+
+$('topicGrade')
+  .addEventListener(
+    'change',
+    renderTopics
+  );
 
 /* =========================================================
-   MODALS
+   SYNC
 ========================================================= */
 
-$('closeLesson').onclick=()=>{
-  $('lessonModal')
-    .classList.remove('open');
+$('syncBtn')
+  .addEventListener(
+    'click',
+    async()=>{
 
-  stopSpeaking();
-};
+      toast(
+        '🔄 Synchronizing...',
+        ''
+      );
 
-$('closeStudent').onclick=()=>{
-  $('studentModal')
-    .classList.remove('open');
-};
+      await loadStudents();
+      await loadLessons();
 
-$('lessonModal').addEventListener(
-  'click',
-  e=>{
-    if(e.target===$('lessonModal')){
+      toast(
+        '✅ SYSTEM SYNC COMPLETE',
+        'ok'
+      );
+
+    }
+  );
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+$('closeLessonModal')
+  .addEventListener(
+    'click',
+    ()=>{
       $('lessonModal')
         .classList.remove('open');
-
-      stopSpeaking();
     }
-  }
-);
+  );
 
-$('studentModal').addEventListener(
-  'click',
-  e=>{
-    if(e.target===$('studentModal')){
-      $('studentModal')
-        .classList.remove('open');
+$('lessonModal')
+  .addEventListener(
+    'click',
+    e=>{
+      if(
+        e.target===
+        $('lessonModal')
+      ){
+        $('lessonModal')
+          .classList.remove('open');
+      }
     }
-  }
-);
-
-/* =========================================================
-   REFRESH
-========================================================= */
-
-$('refreshBtn').onclick=async()=>{
-
-  toast(
-    '🔄 Synchronizing...',
-    ''
   );
-
-  await Promise.all([
-    loadStudents(),
-    loadLessons(),
-    loadProgress()
-  ]);
-
-  toast(
-    '✅ System synchronized',
-    'ok'
-  );
-};
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-$('logoutBtn').onclick=async()=>{
-
-  if(!confirm(
-    'ნამდვილად გინდა გამოსვლა?'
-  )){
-    return;
-  }
-
-  try{
-
-    await DB.auth.signOut({
-      scope:'global'
-    });
-
-  }catch(error){
-
-    console.warn(error);
-  }
-
-  location.replace(
-    'teacher-login.html?logout=1'
-  );
-};
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
 
 document.addEventListener(
   'keydown',
@@ -3896,20 +3879,62 @@ document.addEventListener(
       $('lessonModal')
         .classList.remove('open');
 
-      $('studentModal')
-        .classList.remove('open');
-
-      stopSpeaking();
     }
 
   }
 );
 
 /* =========================================================
+   LOGOUT
+========================================================= */
+
+$('logoutBtn')
+  .addEventListener(
+    'click',
+    async()=>{
+
+      if(
+        !confirm(
+          'ნამდვილად გინდა გამოსვლა?'
+        )
+      ){
+        return;
+      }
+
+      try{
+
+        await DB.auth.signOut({
+          scope:'global'
+        });
+
+      }catch(error){
+
+        console.warn(error);
+
+      }
+
+      location.replace(
+        'teacher-login.html?logout=1'
+      );
+
+    }
+  );
+
+/* =========================================================
    BOOT
 ========================================================= */
 
 async function boot(){
+
+  if(!DB){
+
+    toast(
+      'config.js / Supabase client ვერ მოიძებნა',
+      'err'
+    );
+
+    return;
+  }
 
   const ok=
     await checkTeacher();
@@ -3919,13 +3944,14 @@ async function boot(){
   $('attendanceDate').value=
     today();
 
-  await Promise.all([
-    loadStudents(),
-    loadLessons(),
-    loadProgress()
-  ]);
+  renderTopics();
 
-  renderStudents();
+  await loadStudents();
+
+  await loadLessons();
+
+  updateStats();
+
 }
 
 if(
@@ -3946,15 +3972,24 @@ if(
 }
 
 /* =========================================================
-   GLOBAL
+   GLOBAL API
 ========================================================= */
 
-window.changeGrade=changeGrade;
-window.saveAttendance=saveAttendance;
-window.openLesson=openLesson;
-window.showStudent=showStudent;
-window.speakText=speakText;
-window.stopSpeaking=stopSpeaking;
+window.TeacherNexus={
+
+  openPanel,
+  loadStudents,
+  loadLessons,
+  loadAttendance,
+  loadGrades,
+  loadProgress,
+  loadQuizResults,
+  changeGrade,
+  openLesson,
+  attendanceAction,
+  speakText
+
+};
 
 </script>
 
