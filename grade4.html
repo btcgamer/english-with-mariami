@@ -1,830 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ka">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>English with Mariami — Grade 4</title>
-
+<meta name="theme-color" content="#020617">
+<title>English with Mariami — Grade 4 XENON</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 <style>
-:root{
-  --bg:#02030b;
-  --panel:rgba(9,13,35,.82);
-  --line:rgba(0,234,255,.25);
-  --cyan:#00f6ff;
-  --blue:#247cff;
-  --purple:#9d4edd;
-  --pink:#ff35c7;
-  --green:#00ffae;
-  --yellow:#ffe600;
-  --text:#f4fbff;
-  --muted:#91a4bd;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-  background:
-    radial-gradient(circle at 15% 15%,rgba(0,246,255,.13),transparent 25%),
-    radial-gradient(circle at 85% 20%,rgba(157,78,221,.16),transparent 28%),
-    radial-gradient(circle at 50% 90%,rgba(36,124,255,.13),transparent 35%),
-    linear-gradient(135deg,#01020a,#05091c,#02030b);
-  overflow-x:hidden;
-}
-
-/* 3D GRID */
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.17;
-  background:
-    linear-gradient(rgba(0,246,255,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,246,255,.08) 1px,transparent 1px);
-  background-size:45px 45px;
-  mask-image:linear-gradient(to bottom,black,transparent);
-}
-
-.orb{
-  position:fixed;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  filter:blur(70px);
-  pointer-events:none;
-  animation:float 8s ease-in-out infinite alternate;
-}
-
-.orb1{
-  background:rgba(0,246,255,.12);
-  left:-100px;
-  top:180px;
-}
-
-.orb2{
-  background:rgba(255,53,199,.10);
-  right:-100px;
-  top:420px;
-  animation-delay:2s;
-}
-
-@keyframes float{
-  from{transform:translateY(-20px)}
-  to{transform:translateY(30px)}
-}
-
-/* HEADER */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(2,3,11,.78);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
-}
-
-.nav{
-  width:min(1400px,calc(100% - 24px));
-  min-height:72px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.logo{
-  width:46px;
-  height:46px;
-  border-radius:15px;
-  display:grid;
-  place-items:center;
-  font-size:23px;
-  background:linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
-  box-shadow:
-    0 0 15px rgba(0,246,255,.35),
-    0 0 45px rgba(157,78,221,.18);
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  font-weight:1000;
-}
-
-.brand small{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:1.4px;
-  margin-top:3px;
-}
-
-.navButtons{
-  display:flex;
-  gap:8px;
-}
-
-/* BUTTON */
-
-button{
-  font:inherit;
-  cursor:pointer;
-}
-
-.btn{
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:13px;
-  padding:11px 15px;
-  color:white;
-  background:rgba(255,255,255,.06);
-  font-weight:900;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 25px rgba(0,246,255,.18);
-}
-
-.home{
-  background:linear-gradient(135deg,#0874ff,#00cfff);
-}
-
-.logout{
-  background:linear-gradient(135deg,#b81752,#ff2f68);
-}
-
-/* MAIN */
-
-.wrap{
-  width:min(1400px,calc(100% - 24px));
-  margin:auto;
-}
-
-.hero{
-  padding:42px 0 25px;
-}
-
-.heroCard{
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:30px;
-  padding:35px;
-  background:
-    linear-gradient(145deg,rgba(7,20,48,.92),rgba(4,7,25,.88));
-  box-shadow:0 25px 90px rgba(0,0,0,.45);
-}
-
-.heroCard:after{
-  content:"GRADE 04";
-  position:absolute;
-  right:-30px;
-  bottom:-35px;
-  font-size:130px;
-  font-weight:1000;
-  color:rgba(0,246,255,.025);
-  transform:rotate(-8deg);
-}
-
-.kicker{
-  color:var(--cyan);
-  font-size:12px;
-  font-weight:1000;
-  letter-spacing:3px;
-}
-
-h1{
-  margin:12px 0;
-  font-size:clamp(2.7rem,6vw,6rem);
-  line-height:.92;
-  letter-spacing:-4px;
-}
-
-h1 span{
-  background:linear-gradient(
-    90deg,
-    white,
-    var(--cyan),
-    var(--purple),
-    var(--pink)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:850px;
-  color:#aec1d5;
-  line-height:1.7;
-}
-
-/* HUD */
-
-.hud{
-  margin-top:25px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.hudBox{
-  padding:17px;
-  border:1px solid rgba(0,246,255,.16);
-  border-radius:17px;
-  background:rgba(3,18,40,.72);
-}
-
-.hudBox small{
-  color:var(--muted);
-  display:block;
-  font-size:10px;
-}
-
-.hudBox b{
-  display:block;
-  margin-top:5px;
-  font-size:24px;
-}
-
-/* TOPICS */
-
-.sectionTitle{
-  margin:25px 0 14px;
-}
-
-.sectionTitle h2{
-  margin:0;
-  font-size:26px;
-}
-
-.sectionTitle p{
-  color:var(--muted);
-  margin:5px 0;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-  padding-bottom:50px;
-}
-
-.topic{
-  position:relative;
-  min-height:205px;
-  padding:22px;
-  overflow:hidden;
-  border-radius:23px;
-  border:1px solid rgba(0,246,255,.16);
-  background:
-    linear-gradient(145deg,rgba(10,29,58,.9),rgba(4,10,27,.92));
-  transition:.25s;
-  transform-style:preserve-3d;
-}
-
-.topic:hover{
-  transform:
-    perspective(700px)
-    rotateX(3deg)
-    rotateY(-3deg)
-    translateY(-6px);
-  border-color:rgba(0,246,255,.55);
-  box-shadow:
-    0 20px 60px rgba(0,0,0,.4),
-    0 0 35px rgba(0,246,255,.08);
-}
-
-.topic:before{
-  content:"";
-  position:absolute;
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  right:-40px;
-  top:-40px;
-  background:rgba(0,246,255,.08);
-  filter:blur(25px);
-}
-
-.icon{
-  font-size:38px;
-}
-
-.topic h3{
-  margin:12px 0 7px;
-  font-size:20px;
-}
-
-.topic p{
-  color:var(--muted);
-  line-height:1.5;
-  font-size:13px;
-}
-
-.topic button{
-  margin-top:8px;
-  width:100%;
-  padding:10px;
-  border-radius:11px;
-  border:1px solid rgba(0,246,255,.18);
-  background:rgba(0,246,255,.07);
-  color:var(--cyan);
-  font-weight:900;
-}
-
-.topic button:hover{
-  background:rgba(0,246,255,.16);
-}
-
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  background:rgba(0,0,0,.82);
-  backdrop-filter:blur(12px);
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modalBox{
-  width:min(900px,100%);
-  max-height:90vh;
-  overflow:auto;
-  padding:25px;
-  border-radius:25px;
-  border:1px solid rgba(0,246,255,.35);
-  background:#030a1b;
-  box-shadow:0 30px 100px rgba(0,0,0,.65);
-}
-
-.modalTop{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-
-.modalTop h2{
-  margin:0;
-}
-
-.lesson{
-  margin-top:18px;
-  padding:18px;
-  border-radius:18px;
-  background:#06152b;
-  border:1px solid rgba(255,255,255,.08);
-}
-
-.lesson h3{
-  margin-top:0;
-}
-
-.lesson p{
-  color:#b9cadd;
-  line-height:1.65;
-}
-
-.word{
-  display:inline-block;
-  margin:4px;
-  padding:7px 10px;
-  border-radius:9px;
-  color:var(--cyan);
-  background:rgba(0,246,255,.07);
-  border:1px solid rgba(0,246,255,.15);
-}
-
-/* MOBILE */
-
-@media(max-width:950px){
-  .grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hud{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:650px){
-  .brand small{
-    display:none;
-  }
-
-  .navButtons .btn{
-    font-size:0;
-    padding:10px 12px;
-  }
-
-  .navButtons .home:after{
-    content:"🏠";
-    font-size:18px;
-  }
-
-  .navButtons .logout:after{
-    content:"🚪";
-    font-size:18px;
-  }
-
-  .heroCard{
-    padding:23px;
-  }
-
-  h1{
-    font-size:3rem;
-    letter-spacing:-2px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .hud{
-    grid-template-columns:1fr 1fr;
-  }
-}
+:root{--bg:#02040d;--panel:rgba(7,16,36,.88);--line:rgba(0,239,255,.2);--cyan:#00efff;--blue:#287dff;--violet:#a855f7;--pink:#ff35ca;--green:#00ffad;--yellow:#ffe600;--red:#ff416c;--text:#f5fbff;--muted:#91a8bb}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,rgba(0,239,255,.14),transparent 28%),radial-gradient(circle at 90% 15%,rgba(168,85,247,.14),transparent 30%),linear-gradient(135deg,#01030a,#061024 50%,#02040d);overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-3;opacity:.16;background-image:linear-gradient(rgba(0,239,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(0,239,255,.09) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 90%)}.orb{position:fixed;width:280px;height:280px;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:-2;animation:float 10s ease-in-out infinite alternate}.orb.a{left:-100px;top:150px;background:rgba(0,239,255,.11)}.orb.b{right:-110px;top:420px;background:rgba(168,85,247,.1);animation-delay:-4s}@keyframes float{to{transform:translate(25px,-25px) scale(1.1)}}header{position:sticky;top:0;z-index:50;background:rgba(2,4,13,.78);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}.nav{width:min(1450px,calc(100% - 22px));min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:11px;font-weight:1000}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue),var(--violet));box-shadow:0 0 28px rgba(0,239,255,.3);font-size:23px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.5px;margin-top:3px}.actions{display:flex;gap:7px;flex-wrap:wrap}.btn{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;min-height:42px;color:white;background:rgba(255,255,255,.055);font-weight:900;cursor:pointer;transition:.18s}.btn:hover{transform:translateY(-2px);border-color:rgba(0,239,255,.45);box-shadow:0 0 22px rgba(0,239,255,.12)}.home{background:linear-gradient(135deg,#0874ff,#00cfe8)}.logout{background:linear-gradient(135deg,#c01b4e,#ff416c)}.cyan{background:linear-gradient(135deg,#0878ff,#00cfe8)}.green{background:linear-gradient(135deg,#00875c,#00dfa0)}.purple{background:linear-gradient(135deg,#6332cc,#a855f7)}.yellow{color:#07101b;background:linear-gradient(135deg,#ffe600,#ffb900)}.wrap{width:min(1450px,calc(100% - 22px));margin:auto}.hero{padding:30px 0 18px}.heroCard{padding:30px;border:1px solid var(--line);border-radius:27px;background:linear-gradient(145deg,rgba(8,22,48,.92),rgba(2,9,22,.9));box-shadow:0 25px 80px rgba(0,0,0,.45);position:relative;overflow:hidden}.heroCard:after{content:"04";position:absolute;right:20px;bottom:-60px;font-size:190px;font-weight:1000;color:rgba(0,239,255,.025);font-style:italic}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;letter-spacing:2.5px}.hero h1{font-size:clamp(3rem,7vw,6.5rem);line-height:.88;letter-spacing:-5px;margin:12px 0}.gradient{background:linear-gradient(90deg,#fff,var(--cyan),var(--violet),var(--pink));background-size:300% 100%;-webkit-background-clip:text;color:transparent;animation:flow 5s linear infinite}@keyframes flow{to{background-position:300% 0}}.hero p{max-width:900px;color:#b4c8d6;line-height:1.65}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}.hudBox{padding:15px;border:1px solid rgba(0,239,255,.15);border-radius:16px;background:rgba(2,19,40,.7)}.hudBox small{display:block;color:var(--muted);font-size:9px}.hudBox b{display:block;margin-top:4px;font-size:24px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 14px;flex-wrap:wrap}.search{min-width:240px;flex:1;max-width:550px}.input,select{width:100%;min-height:43px;padding:9px 11px;border-radius:11px;border:1px solid rgba(0,239,255,.16);background:#031226;color:white;outline:none}.input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,239,255,.07)}.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;padding-bottom:50px}.topic{padding:20px;border:1px solid rgba(0,239,255,.15);border-radius:21px;background:linear-gradient(145deg,rgba(9,28,56,.9),rgba(3,11,26,.92));min-height:175px;cursor:pointer;transition:.23s;transform-style:preserve-3d}.topic:hover{transform:perspective(700px) rotateX(3deg) rotateY(-3deg) translateY(-5px);border-color:rgba(0,239,255,.55);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 30px rgba(0,239,255,.08)}.topic .icon{font-size:34px}.topic h3{margin:10px 0 5px}.topic p{color:var(--muted);font-size:12px;line-height:1.5}.pill{display:inline-flex;padding:5px 8px;border-radius:8px;font-size:9px;font-weight:1000;background:rgba(0,239,255,.08);color:var(--cyan)}.lessonGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.lessonCard{padding:16px;border:1px solid rgba(0,239,255,.13);border-radius:16px;background:#04162b}.lessonCard:hover{border-color:rgba(0,239,255,.4)}.lessonCard h3{margin:8px 0}.lessonCard p{color:var(--muted);font-size:12px}.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.82);backdrop-filter:blur(12px)}.modal.open{display:flex}.box{width:min(1050px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:24px;border:1px solid rgba(0,239,255,.3);background:#020b1c;box-shadow:0 30px 100px rgba(0,0,0,.65)}.modalHead{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;background:#020b1c;padding-bottom:12px;z-index:2}.modalHead h2{margin:0}.tabs{display:flex;gap:6px;overflow:auto;padding:10px 0}.tab{white-space:nowrap}.tab.active{background:linear-gradient(135deg,#0878ff,#00cfe8)}.material{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:#04152a;margin-top:8px}.material h3{margin-top:0}.material p{color:#bed0dc;line-height:1.7;white-space:pre-wrap}.words{display:flex;flex-wrap:wrap;gap:6px}.word{padding:7px 9px;border-radius:9px;background:rgba(0,239,255,.07);border:1px solid rgba(0,239,255,.14);color:var(--cyan)}.audioRow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.quizQ{padding:15px;margin:10px 0;border-radius:14px;background:#061a31;border:1px solid rgba(255,255,255,.07)}.quizQ b{display:block;margin-bottom:9px}.option{display:block;width:100%;text-align:left;margin:5px 0;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#09233f;color:white}.option.correct{border-color:var(--green);background:rgba(0,255,173,.12)}.option.wrong{border-color:var(--red);background:rgba(255,65,108,.1)}.notice{padding:14px;border-radius:13px;background:#071a30;color:var(--muted);border:1px dashed rgba(255,255,255,.1)}.loading{text-align:center;padding:30px;color:var(--muted)}.error{color:#ff8aa2}.progress{height:9px;border-radius:20px;background:#020b16;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--yellow))}.footerNav{display:flex;justify-content:space-between;gap:8px;margin-top:18px;flex-wrap:wrap}@media(max-width:900px){.topics{grid-template-columns:repeat(2,1fr)}.hud{grid-template-columns:repeat(3,1fr)}}@media(max-width:620px){.brand small{display:none}.nav .actions .btn{font-size:0;padding:10px 12px}.nav .actions .home:after{content:"🏠";font-size:18px}.nav .actions .logout:after{content:"🚪";font-size:18px}.heroCard{padding:22px}.hero h1{font-size:3.2rem;letter-spacing:-2px}.topics,.lessonGrid{grid-template-columns:1fr}.hud{grid-template-columns:1fr 1fr}.search{min-width:100%;max-width:none}}
 </style>
 </head>
-
 <body>
-
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-
-<header>
-  <div class="nav">
-
-    <div class="brand">
-      <div class="logo">🧠</div>
-
-      <div>
-        ENGLISH WITH MARIAMI
-        <small>NEON XENON LEARNING SYSTEM • GRADE 04</small>
-      </div>
-    </div>
-
-    <div class="navButtons">
-
-      <button class="btn home" onclick="goHome()">
-        🏠 მთავარზე დაბრუნება
-      </button>
-
-      <button class="btn logout" onclick="logout()">
-        🚪 გამოსვლა
-      </button>
-
-    </div>
-
-  </div>
-</header>
-
+<div class="orb a"></div><div class="orb b"></div>
+<header><div class="nav"><div class="brand"><div class="logo">🧠</div><div>ENGLISH WITH MARIAMI<small>XENON LEARNING CORE • GRADE 04</small></div></div><div class="actions"><button class="btn home" id="homeBtn">🏠 მთავარზე დაბრუნება</button><button class="btn logout" id="logoutBtn">🚪 გამოსვლა</button></div></div></header>
 <main class="wrap">
-
-<section class="hero">
-
-  <div class="heroCard">
-
-    <div class="kicker">
-      ⚡ XENON LEARNING CORE / LEVEL 04
-    </div>
-
-    <h1>
-      GRADE <span>4</span>
-    </h1>
-
-    <p>
-      Welcome to the next generation of English learning.
-      Vocabulary, Grammar, Reading, Writing, Listening and Speaking —
-      everything inside one futuristic learning universe.
-    </p>
-
-    <div class="hud">
-
-      <div class="hudBox">
-        <small>LEVEL</small>
-        <b>04</b>
-      </div>
-
-      <div class="hudBox">
-        <small>MODULES</small>
-        <b>17</b>
-      </div>
-
-      <div class="hudBox">
-        <small>MODE</small>
-        <b>SMART</b>
-      </div>
-
-      <div class="hudBox">
-        <small>SYSTEM</small>
-        <b style="color:var(--green)">ONLINE</b>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section>
-
-  <div class="sectionTitle">
-    <h2>🚀 Grade 4 Learning Universe</h2>
-    <p>აირჩიე ნებისმიერი მოდული და დაიწყე სწავლა.</p>
-  </div>
-
-  <div class="grid" id="topics"></div>
-
-</section>
-
+<section class="hero"><div class="heroCard"><div class="kicker">⚡ REAL SUPABASE LEARNING SYSTEM</div><h1>GRADE <span class="gradient">4</span></h1><p>Welcome to Grade 4. აირჩიე თემა, გახსენი რეალური გაკვეთილი და იმუშავე Vocabulary, Grammar, Reading, Listening, Speaking, Exercises და Quiz მასალებზე.</p><div class="hud"><div class="hudBox"><small>GRADE</small><b>04</b></div><div class="hudBox"><small>LESSONS</small><b id="lessonCount">—</b></div><div class="hudBox"><small>WORDS</small><b id="wordCount">—</b></div><div class="hudBox"><small>QUIZZES</small><b id="quizCount">—</b></div><div class="hudBox"><small>STATUS</small><b style="color:var(--green)">LIVE</b></div></div></div></section>
+<div class="toolbar"><input id="search" class="input search" placeholder="🔎 Search Grade 4 topics or lessons..."><select id="topicSelect" style="max-width:260px"><option value="all">ყველა თემა</option></select><button class="btn cyan" id="reload">↻ Sync</button></div>
+<section><div class="topics" id="topics"><div class="loading">Loading Grade 4...</div></div></section>
 </main>
-
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-  <div class="modalBox">
-
-    <div class="modalTop">
-
-      <h2 id="modalTitle"></h2>
-
-      <button class="btn logout" onclick="closeModal()">
-        ✕
-      </button>
-
-    </div>
-
-    <div id="modalContent"></div>
-
-  </div>
-
-</div>
-
+<div class="modal" id="modal"><div class="box"><div class="modalHead"><h2 id="modalTitle">Learning Module</h2><button class="btn logout" id="close">✕</button></div><div id="modalBody"></div></div></div>
 <script>
-
-const topics = [
-
-{
-icon:"🚀",
-title:"Vocabulary Mastery",
-text:"Master powerful everyday English vocabulary.",
-words:"discover • improve • create • explore • future • journey"
-},
-
-{
-icon:"🧠",
-title:"Smart Grammar",
-text:"Build strong English grammar skills.",
-words:"present simple • present continuous • past simple • questions"
-},
-
-{
-icon:"📖",
-title:"Reading Lab",
-text:"Read stories and understand important details.",
-words:"story • character • problem • solution • idea • information"
-},
-
-{
-icon:"✍️",
-title:"Writing Lab",
-text:"Create sentences, paragraphs and short stories.",
-words:"sentence • paragraph • description • opinion • message"
-},
-
-{
-icon:"🗣️",
-title:"Speaking",
-text:"Practice real English conversations.",
-words:"hello • introduce • explain • answer • ask • describe"
-},
-
-{
-icon:"🎧",
-title:"Listening",
-text:"Train your ears to understand spoken English.",
-words:"listen • hear • understand • repeat • conversation"
-},
-
-{
-icon:"🌍",
-title:"World English",
-text:"Explore countries, cultures and languages.",
-words:"country • capital • culture • language • people"
-},
-
-{
-icon:"🏫",
-title:"Education",
-text:"English for school and learning.",
-words:"lesson • subject • homework • classroom • teacher"
-},
-
-{
-icon:"💼",
-title:"Future Jobs",
-text:"Learn English about careers and ambitions.",
-words:"doctor • engineer • teacher • designer • pilot • scientist"
-},
-
-{
-icon:"🛒",
-title:"Shopping",
-text:"Learn useful real-life shopping English.",
-words:"price • cheap • expensive • size • buy • sell"
-},
-
-{
-icon:"✈️",
-title:"Travel",
-text:"Airport, hotel and travel communication.",
-words:"airport • passport • ticket • hotel • luggage • journey"
-},
-
-{
-icon:"🍽️",
-title:"Restaurant",
-text:"Order food and communicate naturally.",
-words:"menu • order • water • meal • bill • delicious"
-},
-
-{
-icon:"❤️",
-title:"Emotions",
-text:"Talk about feelings and opinions.",
-words:"happy • nervous • excited • worried • proud • surprised"
-},
-
-{
-icon:"🌦️",
-title:"Weather",
-text:"Understand weather and climate vocabulary.",
-words:"sunny • cloudy • rainy • windy • storm • temperature"
-},
-
-{
-icon:"🔬",
-title:"Science",
-text:"Discover simple scientific English.",
-words:"experiment • planet • energy • water • earth • animal"
-},
-
-{
-icon:"💻",
-title:"Technology",
-text:"Learn modern digital English.",
-words:"computer • internet • website • screen • password • software"
-},
-
-{
-icon:"🏆",
-title:"Challenge",
-text:"Final Grade 4 vocabulary and grammar challenge.",
-words:"challenge • complete • score • answer • correct • champion"
+'use strict';
+const DB=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
+const $=id=>document.getElementById(id);
+let lessons=[],words=[],quizzes=[],currentUser=null,currentLesson=null;
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));}
+function arr(v){if(Array.isArray(v))return v;if(v&&typeof v==='object')return Object.values(v);if(typeof v==='string'){try{const x=JSON.parse(v);return Array.isArray(x)?x:[x]}catch{return v?[v]:[]}}return []}
+function toast(msg){console.log(msg)}
+async function boot(){
+ if(!DB){$('topics').innerHTML='<div class="notice error">Supabase client ვერ მოიძებნა. შეამოწმე config.js</div>';return}
+ try{currentUser=(await DB.auth.getUser())?.data?.user||null}catch(e){currentUser=null}
+ await loadData();
 }
-
-];
-
-const grid=document.getElementById("topics");
-
-grid.innerHTML=topics.map((t,i)=>`
-
-<div class="topic">
-
-  <div class="icon">${t.icon}</div>
-
-  <h3>${t.title}</h3>
-
-  <p>${t.text}</p>
-
-  <button onclick="openTopic(${i})">
-    ▶ OPEN MODULE
-  </button>
-
-</div>
-
-`).join("");
-
-function openTopic(index){
-
-  const t=topics[index];
-
-  document.getElementById("modalTitle").textContent=
-    `${t.icon} ${t.title}`;
-
-  document.getElementById("modalContent").innerHTML=`
-
-    <div class="lesson">
-
-      <h3>📚 Learning Module</h3>
-
-      <p>${t.text}</p>
-
-      <h3>🧠 Key Vocabulary</h3>
-
-      <div>
-        ${t.words.split(" • ").map(w=>
-          `<span class="word">${w}</span>`
-        ).join("")}
-      </div>
-
-    </div>
-
-    <div class="lesson">
-
-      <h3>🎯 Mission</h3>
-
-      <p>
-        Read the vocabulary, pronounce each word,
-        create your own sentence and practice speaking.
-      </p>
-
-      <button class="btn home" onclick="startLesson()">
-        🚀 START LESSON
-      </button>
-
-    </div>
-
-  `;
-
-  document.getElementById("modal").classList.add("open");
-}
-
-function closeModal(){
-  document.getElementById("modal").classList.remove("open");
-}
-
-function startLesson(){
-  alert("🚀 Lesson module is ready!");
-}
-
-document.getElementById("modal").addEventListener("click",e=>{
-  if(e.target.id==="modal"){
-    closeModal();
+async function loadData(){
+ $('topics').innerHTML='<div class="loading">⚡ Syncing Grade 4...</div>';
+ try{
+  const l=await DB.from('lessons').select('*').eq('grade',4).order('lesson_number',{ascending:true});
+  if(l.error)throw l.error;
+  lessons=l.data||[];
+  const ids=lessons.map(x=>x.id);
+  words=[];quizzes=[];
+  if(ids.length){
+   const [w,q]=await Promise.all([
+    DB.from('lesson_words').select('*').in('lesson_id',ids).order('sort_order',{ascending:true}),
+    DB.from('lesson_quizzes').select('*').in('lesson_id',ids).order('sort_order',{ascending:true})
+   ]);
+   if(w.error)throw w.error;if(q.error)throw q.error;
+   words=w.data||[];quizzes=q.data||[];
   }
-});
-
-/* HOME */
-
-function goHome(){
-
-  /*
-    თუ შენი მთავარი გვერდი სხვა სახელითაა,
-    მხოლოდ ეს ფაილის სახელი შეცვალე.
-  */
-
-  window.location.href="index.html";
+  $('lessonCount').textContent=lessons.length;$('wordCount').textContent=words.length;$('quizCount').textContent=quizzes.length;
+  buildTopicFilter();renderTopics();
+ }catch(e){console.error(e);$('topics').innerHTML='<div class="notice error">❌ მასალების ჩატვირთვა ვერ მოხერხდა: '+esc(e.message)+'</div>'}
 }
-
-/* LOGOUT */
-
-function logout(){
-
-  if(!confirm("ნამდვილად გინდა გამოსვლა?")){
-    return;
-  }
-
-  try{
-
-    localStorage.clear();
-    sessionStorage.clear();
-
-  }catch(e){}
-
-  /*
-    თუ Login გვერდს სხვა სახელი აქვს,
-    შეცვალე teacher-login.html
-  */
-
-  window.location.href="teacher-login.html?logout=1";
+function topicName(x){return String(x.topic||'General').trim()||'General'}
+function buildTopicFilter(){const names=[...new Set(lessons.map(topicName))].sort();$('topicSelect').innerHTML='<option value="all">ყველა თემა</option>'+names.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('')}
+function renderTopics(){
+ const q=$('search').value.trim().toLowerCase(),tf=$('topicSelect').value;
+ const groups=new Map();
+ lessons.forEach(l=>{const t=topicName(l);if(tf!=='all'&&t!==tf)return;if(q&&!((l.title||'')+' '+t+' '+(l.description||'')).toLowerCase().includes(q))return;if(!groups.has(t))groups.set(t,[]);groups.get(t).push(l)});
+ if(!groups.size){$('topics').innerHTML='<div class="notice">📭 შესაბამისი მასალა ვერ მოიძებნა.</div>';return}
+ $('topics').innerHTML=[...groups.entries()].map(([t,ls],i)=>'<article class="topic" onclick="openTopic('+JSON.stringify(t).replace(/</g,'\\u003c')+')"><span class="pill">TOPIC '+String(i+1).padStart(2,'0')+'</span><div class="icon">'+topicIcon(t)+'</div><h3>'+esc(t)+'</h3><p>'+ls.length+' real lessons • Vocabulary • Grammar • Reading • Listening • Speaking • Quiz</p><button class="btn cyan" style="width:100%">▶ OPEN TOPIC</button></article>').join('')}
+function topicIcon(t){const s=t.toLowerCase();if(s.includes('family'))return'👨‍👩‍👧';if(s.includes('school'))return'🏫';if(s.includes('food'))return'🍎';if(s.includes('animal'))return'🐾';if(s.includes('travel'))return'✈️';if(s.includes('weather'))return'🌦️';if(s.includes('color'))return'🎨';if(s.includes('number'))return'🔢';return'🚀'}
+window.openTopic=function(topic){
+ const ls=lessons.filter(l=>topicName(l)===topic);$('modalTitle').textContent='📚 '+topic;$('modalBody').innerHTML='<div class="lessonGrid">'+ls.map(l=>'<div class="lessonCard"><span class="pill">LESSON '+esc(l.lesson_number)+'</span><h3>'+esc(l.title)+'</h3><p>'+esc(l.description||'English learning module')+'</p><button class="btn purple" onclick="openLesson(\''+l.id+'\')">OPEN LESSON →</button></div>').join('')+'</div>';$('modal').classList.add('open')}
+window.openLesson=async function(id){
+ const l=lessons.find(x=>x.id===id);if(!l)return;currentLesson=l;
+ const ws=words.filter(x=>x.lesson_id===id),qs=quizzes.filter(x=>x.lesson_id===id);
+ $('modalTitle').textContent='LESSON '+l.lesson_number+' • '+l.title;
+ $('modalBody').innerHTML='<div class="tabs"><button class="btn tab active" data-tab="overview">📚 Overview</button><button class="btn tab" data-tab="vocabulary">🔤 Vocabulary</button><button class="btn tab" data-tab="grammar">🧠 Grammar</button><button class="btn tab" data-tab="reading">📖 Reading</button><button class="btn tab" data-tab="listening">🎧 Listening</button><button class="btn tab" data-tab="speaking">🗣️ Speaking</button><button class="btn tab" data-tab="exercise">✍️ Exercises</button><button class="btn tab" data-tab="quiz">🎯 Quiz</button></div><div id="material"></div>';
+ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMaterial(b.dataset.tab,l,ws,qs)});renderMaterial('overview',l,ws,qs);
 }
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"){
-    closeModal();
-  }
-});
-
+function renderMaterial(tab,l,ws,qs){
+ const m=$('material');
+ if(tab==='overview'){m.innerHTML='<div class="material"><h3>🚀 '+esc(l.title)+'</h3><p>'+esc(l.description||'')+'</p><div class="footerNav"><span class="pill">GRADE 4</span><span class="pill">LESSON '+esc(l.lesson_number)+'</span></div></div>';return}
+ if(tab==='vocabulary'){m.innerHTML='<div class="material"><h3>🔤 Vocabulary</h3><div class="words">'+(ws.length?ws.map(w=>'<span class="word">'+esc(w.emoji||'')+' '+esc(w.word)+(w.translation?' — '+esc(w.translation):'')+'</span>').join(''):'<div class="notice">ამ გაკვეთილს სიტყვები ჯერ არ აქვს.</div>')+'</div></div>';return}
+ if(tab==='grammar'){const ex=arr(l.grammar_examples);m.innerHTML='<div class="material"><h3>🧠 Grammar Rule</h3><p>'+esc(l.grammar_rule||'Grammar rule is not available yet.')+'</p><h3>Examples</h3><p>'+esc(ex.join('\n'))+'</p></div>';return}
+ if(tab==='reading'){m.innerHTML='<div class="material"><h3>📖 Reading Lab</h3><p>'+esc(l.reading_text||'Reading text is not available yet.')+'</p></div>';return}
+ if(tab==='listening'){const text=l.listening_text||'';m.innerHTML='<div class="material"><h3>🎧 Listening Lab</h3><div class="audioRow">'+(l.audio_url?'<audio controls preload="none" src="'+esc(l.audio_url)+'"></audio>':'<span class="notice">Audio file არ არის — გამოიყენე Read Aloud.</span>')+'<button class="btn cyan" onclick="speakText('+JSON.stringify(text).replace(/</g,'\\u003c')+')">🔊 Read Aloud</button></div><p>'+esc(text)+'</p></div>';return}
+ if(tab==='speaking'){const ps=arr(l.speaking_phrases);m.innerHTML='<div class="material"><h3>🗣️ Speaking Lab</h3><p>Listen, repeat and create your own sentence.</p>'+ps.map(x=>'<div class="word">'+esc(x)+'</div>').join('')+'</div>';return}
+ if(tab==='exercise'){const es=arr(l.exercises);m.innerHTML='<div class="material"><h3>✍️ Exercises</h3>'+(es.length?es.map((x,i)=>'<div class="quizQ"><b>Exercise '+(i+1)+'</b><p>'+esc(x)+'</p></div>').join(''):'<div class="notice">Exercises არ არის დამატებული.</div>')+'</div>';return}
+ if(tab==='quiz'){renderQuiz(l,qs);return}
+}
+function renderQuiz(l,qs){const m=$('material');if(!qs.length){m.innerHTML='<div class="material"><div class="notice">🎯 ამ გაკვეთილში Quiz ჯერ არ არის.</div></div>';return}m.innerHTML='<div class="material"><h3>🎯 Lesson Quiz</h3><div id="quizArea">'+qs.map((q,i)=>{const opts=arr(q.options);return '<div class="quizQ" data-correct="'+esc(q.correct_answer)+'"><b>'+String(i+1)+'. '+esc(q.question)+'</b>'+opts.map(o=>'<button class="option" data-value="'+esc(o)+'">'+esc(o)+'</button>').join('')+'</div>'}).join('')+'</div><button class="btn yellow" id="finishQuiz">🏆 Finish Quiz</button><div id="quizResult" style="margin-top:12px"></div></div>';document.querySelectorAll('.option').forEach(o=>o.onclick=()=>{const q=o.parentElement;q.querySelectorAll('.option').forEach(x=>x.classList.remove('correct','wrong'));o.classList.add(o.dataset.value===q.dataset.correct?'correct':'wrong')});$('finishQuiz').onclick=()=>finishQuiz(l,qs)}
+async function finishQuiz(l,qs){let score=0;document.querySelectorAll('.quizQ').forEach(q=>{const c=q.dataset.correct,sel=q.querySelector('.option.correct');if(sel&&sel.dataset.value===c)score++});const pct=Math.round(score/qs.length*100);$('quizResult').innerHTML='<div class="notice">🏆 Score: <b>'+pct+'%</b> ('+score+'/'+qs.length+')</div>';if(!currentUser)return;try{await DB.from('quiz_results').insert({student_id:currentUser.id,quiz_id:String(l.id),grade:4,score,total:qs.length,completed_at:new Date().toISOString()});await saveLessonProgress(l,pct)}catch(e){console.warn('progress save',e.message)}}
+async function saveLessonProgress(l,score){try{const old=await DB.from('lesson_progress').select('id').eq('student_id',currentUser.id).eq('grade',4).eq('lesson_id',String(l.id)).maybeSingle();if(old.error)throw old.error;if(old.data){const r=await DB.from('lesson_progress').update({completed:score>=70,score,completed_at:new Date().toISOString(),updated_at:new Date().toISOString()}).eq('id',old.data.id);if(r.error)throw r.error}else{const r=await DB.from('lesson_progress').insert({student_id:currentUser.id,grade:4,lesson_id:String(l.id),completed:score>=70,score,completed_at:new Date().toISOString()});if(r.error)throw r.error}}catch(e){console.warn(e.message)}}
+window.speakText=function(text){if(!text)return;if(!('speechSynthesis'in window)){alert('ამ ბრაუზერს Read Aloud არ აქვს.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.82;u.pitch=1; speechSynthesis.speak(u)};
+$('search').oninput=renderTopics;$('topicSelect').onchange=renderTopics;$('reload').onclick=loadData;$('close').onclick=()=>$('modal').classList.remove('open');$('modal').onclick=e=>{if(e.target===$('modal'))$('modal').classList.remove('open')};document.addEventListener('keydown',e=>{if(e.key==='Escape')$('modal').classList.remove('open')});
+$('homeBtn').onclick=()=>location.href='academy.html';
+$('logoutBtn').onclick=async()=>{if(!confirm('ნამდვილად გინდა გამოსვლა?'))return;try{if(DB)await DB.auth.signOut({scope:'global'})}catch(e){}location.href='teacher-login.html?logout=1'};
+boot();
 </script>
-
 </body>
 </html>
