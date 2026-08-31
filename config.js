@@ -1,7 +1,7 @@
 /* English with Mariami — public Supabase browser configuration.
    This uses the publishable key, never a service_role/secret key. */
 
-window.SUPABASE_URL = 'https://vtdhvsfqhwesxtwmdue.supabase.co';
+window.SUPABASE_URL = 'https://vtdhvsfqhwesxtwmduew.supabase.co';
 
 window.SUPABASE_PUBLISHABLE_KEY =
   'sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
