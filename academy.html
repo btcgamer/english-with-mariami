@@ -18,8 +18,6 @@
       --pink:#ff36d9;
       --yellow:#ffe600;
       --dark:#010712;
-      --glass:rgba(3,18,39,.62);
-      --line:rgba(0,234,255,.35);
     }
 
     *{
@@ -42,12 +40,17 @@
       perspective:1200px;
     }
 
+    body.is-loading{
+      overflow:hidden;
+    }
+
     a{
       color:inherit;
       text-decoration:none;
     }
 
-    button,a{
+    button,
+    a{
       touch-action:manipulation;
     }
 
@@ -56,9 +59,87 @@
       margin:auto;
     }
 
-    /* =========================================================
-       FUTURISTIC BACKGROUND
-    ========================================================= */
+    /* =====================================================
+       LOADING SCREEN
+    ===================================================== */
+
+    #academyLoader{
+      position:fixed;
+      inset:0;
+      z-index:99999;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 50% 40%,#123c68 0,#061a35 30%,#020918 65%,#00030a 100%);
+      transition:opacity .35s ease,visibility .35s ease;
+    }
+
+    #academyLoader.hidden{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .loader-box{
+      width:min(430px,calc(100% - 40px));
+      padding:35px 25px;
+      text-align:center;
+      border:1px solid rgba(0,234,255,.5);
+      border-radius:25px;
+      background:rgba(2,15,32,.8);
+      box-shadow:
+        0 0 40px rgba(0,234,255,.18),
+        inset 0 0 30px rgba(0,234,255,.05);
+      backdrop-filter:blur(15px);
+    }
+
+    .loader-icon{
+      font-size:65px;
+      margin-bottom:15px;
+      filter:drop-shadow(0 0 20px var(--cyan));
+      animation:loaderFloat 2s ease-in-out infinite;
+    }
+
+    .loader-box h2{
+      margin-bottom:10px;
+      text-shadow:0 0 15px var(--cyan);
+    }
+
+    .loader-box p{
+      color:#bdebf7;
+    }
+
+    .loader-bar{
+      height:6px;
+      margin-top:22px;
+      overflow:hidden;
+      border-radius:20px;
+      background:#02101e;
+    }
+
+    .loader-bar i{
+      display:block;
+      width:35%;
+      height:100%;
+      border-radius:20px;
+      background:linear-gradient(90deg,#00eaff,#008cff,#8b5cff);
+      box-shadow:0 0 15px var(--cyan);
+      animation:loaderBar 1.2s ease-in-out infinite;
+    }
+
+    @keyframes loaderFloat{
+      50%{transform:translateY(-8px) scale(1.05)}
+    }
+
+    @keyframes loaderBar{
+      0%{transform:translateX(-130%)}
+      100%{transform:translateX(390%)}
+    }
+
+    /* =====================================================
+       BACKGROUND
+    ===================================================== */
 
     .space{
       position:fixed;
@@ -99,7 +180,12 @@
     }
 
     @keyframes starsMove{
-      to{background-position:500px 800px,900px 500px,-400px 700px}
+      to{
+        background-position:
+          500px 800px,
+          900px 500px,
+          -400px 700px
+      }
     }
 
     .nebula{
@@ -124,12 +210,10 @@
     }
 
     @keyframes nebulaFloat{
-      to{transform:translate(150px,-100px) scale(1.3)}
+      to{
+        transform:translate(150px,-100px) scale(1.3)
+      }
     }
-
-    /* =========================================================
-       3D GRID
-    ========================================================= */
 
     .grid-floor{
       position:absolute;
@@ -151,12 +235,10 @@
     }
 
     @keyframes gridMove{
-      to{background-position:0 55px,55px 0}
+      to{
+        background-position:0 55px,55px 0
+      }
     }
-
-    /* =========================================================
-       FLOATING ALPHABET
-    ========================================================= */
 
     .alphabet{
       position:absolute;
@@ -211,10 +293,6 @@
       50%{opacity:.45}
     }
 
-    /* =========================================================
-       SCANLINES
-    ========================================================= */
-
     .scanlines{
       position:fixed;
       inset:0;
@@ -229,9 +307,9 @@
       );
     }
 
-    /* =========================================================
+    /* =====================================================
        NAV
-    ========================================================= */
+    ===================================================== */
 
     .top{
       position:sticky;
@@ -265,7 +343,12 @@
     }
 
     @keyframes brandGlow{
-      to{text-shadow:0 0 5px #fff,0 0 30px var(--cyan),0 0 60px var(--blue)}
+      to{
+        text-shadow:
+          0 0 5px #fff,
+          0 0 30px var(--cyan),
+          0 0 60px var(--blue)
+      }
     }
 
     .navlinks{
@@ -286,30 +369,15 @@
       transition:.3s;
     }
 
-    .navlinks a::before{
-      content:"";
-      position:absolute;
-      left:-100%;
-      top:0;
-      width:100%;
-      height:100%;
-      background:linear-gradient(90deg,transparent,rgba(0,234,255,.25),transparent);
-      transition:.4s;
-    }
-
     .navlinks a:hover{
-      transform:translateY(-3px) translateZ(20px);
+      transform:translateY(-3px);
       border-color:var(--cyan);
       box-shadow:0 0 20px rgba(0,234,255,.3);
     }
 
-    .navlinks a:hover::before{
-      left:100%;
-    }
-
-    /* =========================================================
+    /* =====================================================
        GENERAL
-    ========================================================= */
+    ===================================================== */
 
     .section{
       padding:75px 0;
@@ -375,22 +443,6 @@
       transform:translateY(-5px) translateZ(25px);
     }
 
-    .btn::after{
-      content:"";
-      position:absolute;
-      width:40px;
-      height:180%;
-      top:-40%;
-      left:-70px;
-      transform:rotate(25deg);
-      background:rgba(255,255,255,.4);
-      transition:.5s;
-    }
-
-    .btn:hover::after{
-      left:120%;
-    }
-
     .primary{
       color:#00131a;
       background:linear-gradient(135deg,#00eaff,#008cff);
@@ -405,16 +457,18 @@
       box-shadow:0 0 20px rgba(255,230,0,.35);
     }
 
-    /* =========================================================
-       GLASS HOLOGRAM CARD
-    ========================================================= */
+    /* =====================================================
+       CARDS
+    ===================================================== */
 
     .neon-card{
       position:relative;
       background:
-        linear-gradient(145deg,
+        linear-gradient(
+          145deg,
           rgba(5,30,57,.75),
-          rgba(1,9,22,.78));
+          rgba(1,9,22,.78)
+        );
       border:1px solid rgba(0,234,255,.4);
       border-radius:25px;
       box-shadow:
@@ -433,7 +487,12 @@
       border-radius:inherit;
       pointer-events:none;
       background:
-        linear-gradient(90deg,transparent,rgba(0,234,255,.12),transparent);
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(0,234,255,.12),
+          transparent
+        );
       opacity:.4;
       animation:hologramSweep 6s linear infinite;
     }
@@ -443,9 +502,9 @@
       100%{transform:translateX(100%)}
     }
 
-    /* =========================================================
+    /* =====================================================
        HERO
-    ========================================================= */
+    ===================================================== */
 
     .hero{
       min-height:720px;
@@ -467,7 +526,6 @@
       font-size:clamp(44px,7vw,82px);
       line-height:.98;
       letter-spacing:-3px;
-      text-shadow:0 0 30px rgba(0,234,255,.12);
     }
 
     .hero h1 span{
@@ -477,17 +535,6 @@
         0 0 15px var(--cyan),
         0 0 40px var(--blue),
         0 0 70px var(--purple);
-      animation:neonText 2.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes neonText{
-      to{
-        text-shadow:
-          0 0 8px #fff,
-          0 0 25px var(--cyan),
-          0 0 55px var(--blue),
-          0 0 90px var(--purple);
-      }
     }
 
     .lead{
@@ -497,9 +544,9 @@
       line-height:1.75;
     }
 
-    /* =========================================================
-       HOLOGRAM TEACHER
-    ========================================================= */
+    /* =====================================================
+       TEACHER
+    ===================================================== */
 
     .teacher{
       min-height:430px;
@@ -532,10 +579,12 @@
       place-items:center;
       margin-bottom:20px;
       background:
-        radial-gradient(circle,
+        radial-gradient(
+          circle,
           rgba(0,234,255,.2),
           rgba(0,140,255,.05) 45%,
-          transparent 65%);
+          transparent 65%
+        );
       border:1px solid rgba(0,234,255,.6);
       box-shadow:
         0 0 20px rgba(0,234,255,.5),
@@ -566,11 +615,15 @@
     }
 
     @keyframes ringFloat{
-      50%{transform:translateY(-12px) rotateY(12deg)}
+      50%{
+        transform:translateY(-12px) rotateY(12deg)
+      }
     }
 
     @keyframes ringRotate{
-      to{transform:rotateZ(360deg) rotateX(50deg)}
+      to{
+        transform:rotateZ(360deg) rotateX(50deg)
+      }
     }
 
     .avatar{
@@ -597,9 +650,9 @@
       box-shadow:inset 0 0 12px rgba(0,234,255,.06);
     }
 
-    /* =========================================================
+    /* =====================================================
        GRADES
-    ========================================================= */
+    ===================================================== */
 
     .grid{
       display:grid;
@@ -614,10 +667,6 @@
     }
 
     .grade:hover{
-      transform:
-        translateY(-14px)
-        rotateX(3deg)
-        rotateY(-3deg);
       box-shadow:
         0 40px 90px rgba(0,0,0,.7),
         0 0 50px rgba(0,234,255,.25);
@@ -628,10 +677,12 @@
       height:240px;
       overflow:hidden;
       background:
-        radial-gradient(circle at 50% 50%,
+        radial-gradient(
+          circle at 50% 50%,
           #086ca4,
           #063355 38%,
-          #020817 80%);
+          #020817 80%
+        );
       border-bottom:1px solid rgba(0,234,255,.35);
     }
 
@@ -676,7 +727,6 @@
       color:var(--yellow);
       font-size:12px;
       font-weight:900;
-      box-shadow:0 0 15px rgba(0,234,255,.15);
     }
 
     .float-letter{
@@ -692,7 +742,11 @@
     }
 
     @keyframes miniFloat{
-      to{transform:translate3d(20px,-30px,60px) rotateY(30deg)}
+      to{
+        transform:
+          translate3d(20px,-30px,60px)
+          rotateY(30deg)
+      }
     }
 
     .plant{
@@ -705,7 +759,9 @@
     }
 
     @keyframes plantFloat{
-      50%{transform:translateY(-10px) rotate(-5deg)}
+      50%{
+        transform:translateY(-10px) rotate(-5deg)
+      }
     }
 
     .book{
@@ -714,7 +770,10 @@
       top:52%;
       width:145px;
       height:90px;
-      transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-3deg);
+      transform:
+        translate(-50%,-50%)
+        rotateX(58deg)
+        rotateZ(-3deg);
       background:linear-gradient(135deg,#fff,#9defff);
       border:2px solid var(--cyan);
       box-shadow:
@@ -735,7 +794,12 @@
     }
 
     @keyframes bookFloat{
-      50%{transform:translate(-50%,-65%) rotateX(58deg) rotateZ(3deg)}
+      50%{
+        transform:
+          translate(-50%,-65%)
+          rotateX(58deg)
+          rotateZ(3deg)
+      }
     }
 
     .rocket{
@@ -752,7 +816,10 @@
 
     @keyframes rocketFly{
       50%{
-        transform:translate(-45%,-65%) rotate(-18deg) scale(1.08);
+        transform:
+          translate(-45%,-65%)
+          rotate(-18deg)
+          scale(1.08);
       }
     }
 
@@ -771,8 +838,12 @@
       right:15%;
       top:35%;
       background:
-        radial-gradient(circle at 30% 25%,
-          #ffe600,#ff7a00 45%,#9d2700);
+        radial-gradient(
+          circle at 30% 25%,
+          #ffe600,
+          #ff7a00 45%,
+          #9d2700
+        );
     }
 
     .planet.small{
@@ -781,13 +852,22 @@
       left:14%;
       top:25%;
       background:
-        radial-gradient(circle at 30% 30%,
-          #fff,#00eaff 45%,#006cff);
+        radial-gradient(
+          circle at 30% 30%,
+          #fff,
+          #00eaff 45%,
+          #006cff
+        );
       animation-delay:-2s;
     }
 
     @keyframes planetFloat{
-      50%{transform:translateY(-20px) translateX(15px) rotate(15deg)}
+      50%{
+        transform:
+          translateY(-20px)
+          translateX(15px)
+          rotate(15deg)
+      }
     }
 
     .globe{
@@ -802,8 +882,13 @@
       place-items:center;
       font-size:70px;
       background:
-        radial-gradient(circle at 30% 25%,
-          #dffcff,#00c9f2 25%,#007cff 60%,#023b75);
+        radial-gradient(
+          circle at 30% 25%,
+          #dffcff,
+          #00c9f2 25%,
+          #007cff 60%,
+          #023b75
+        );
       box-shadow:
         inset -25px -25px 35px #001a3a,
         0 0 25px var(--cyan),
@@ -812,7 +897,11 @@
     }
 
     @keyframes globeSpin{
-      to{transform:translate(-50%,-50%) rotateY(360deg)}
+      to{
+        transform:
+          translate(-50%,-50%)
+          rotateY(360deg)
+      }
     }
 
     .word{
@@ -828,7 +917,11 @@
     }
 
     @keyframes wordFloat{
-      to{transform:translateY(-10px) translateZ(30px)}
+      to{
+        transform:
+          translateY(-10px)
+          translateZ(30px)
+      }
     }
 
     .grade-content{
@@ -838,7 +931,6 @@
     .grade h3{
       color:var(--yellow);
       font-size:25px;
-      text-shadow:0 0 12px rgba(255,230,0,.25);
       margin-bottom:10px;
     }
 
@@ -848,9 +940,9 @@
       line-height:1.65;
     }
 
-    /* =========================================================
+    /* =====================================================
        LEARNING
-    ========================================================= */
+    ===================================================== */
 
     .feature-grid{
       display:grid;
@@ -865,9 +957,11 @@
     }
 
     .feature:hover{
-      transform:translateY(-10px) rotateX(4deg);
+      transform:translateY(-10px);
       border-color:var(--cyan);
-      box-shadow:0 20px 45px rgba(0,0,0,.5),0 0 35px rgba(0,234,255,.2);
+      box-shadow:
+        0 20px 45px rgba(0,0,0,.5),
+        0 0 35px rgba(0,234,255,.2);
     }
 
     .feature-icon{
@@ -888,9 +982,9 @@
       line-height:1.6;
     }
 
-    /* =========================================================
+    /* =====================================================
        COURSE
-    ========================================================= */
+    ===================================================== */
 
     .course{
       display:grid;
@@ -903,27 +997,22 @@
       padding:25px;
       min-height:240px;
       border-radius:20px;
-      background:linear-gradient(145deg,rgba(10,49,88,.75),rgba(2,15,32,.8));
+      background:
+        linear-gradient(
+          145deg,
+          rgba(10,49,88,.75),
+          rgba(2,15,32,.8)
+        );
       border:1px solid rgba(0,234,255,.3);
       overflow:hidden;
       transition:.35s;
     }
 
     .course-card:hover{
-      transform:translateY(-9px) rotateX(4deg);
-      box-shadow:0 25px 60px rgba(0,0,0,.6),0 0 30px rgba(0,234,255,.2);
-    }
-
-    .course-card::after{
-      content:"";
-      position:absolute;
-      width:150px;
-      height:150px;
-      right:-70px;
-      top:-70px;
-      border-radius:50%;
-      background:rgba(0,234,255,.12);
-      filter:blur(10px);
+      transform:translateY(-9px);
+      box-shadow:
+        0 25px 60px rgba(0,0,0,.6),
+        0 0 30px rgba(0,234,255,.2);
     }
 
     .course-card b{
@@ -937,9 +1026,9 @@
       margin:18px 0;
     }
 
-    /* =========================================================
+    /* =====================================================
        PROGRESS
-    ========================================================= */
+    ===================================================== */
 
     .progress-box{
       padding:28px;
@@ -962,25 +1051,11 @@
       overflow:hidden;
     }
 
-    .stat::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(120deg,transparent,rgba(0,234,255,.08),transparent);
-      animation:statSweep 4s linear infinite;
-    }
-
-    @keyframes statSweep{
-      from{transform:translateX(-100%)}
-      to{transform:translateX(100%)}
-    }
-
     .stat b{
       position:relative;
       display:block;
       color:var(--yellow);
       font-size:28px;
-      text-shadow:0 0 15px rgba(255,230,0,.25);
       margin-bottom:5px;
     }
 
@@ -1000,38 +1075,22 @@
       height:100%;
       border-radius:30px;
       background:
-        linear-gradient(90deg,
+        linear-gradient(
+          90deg,
           #00eaff,
           #008cff,
           #8b5cff,
-          #ffe600);
+          #ffe600
+        );
       box-shadow:
         0 0 15px var(--cyan),
         0 0 30px rgba(139,92,255,.4);
       transition:width .8s cubic-bezier(.2,.8,.2,1);
-      position:relative;
-      overflow:hidden;
     }
 
-    .progress i::after{
-      content:"";
-      position:absolute;
-      top:0;
-      left:-100px;
-      width:80px;
-      height:100%;
-      background:rgba(255,255,255,.8);
-      filter:blur(10px);
-      animation:progressLight 2s linear infinite;
-    }
-
-    @keyframes progressLight{
-      to{left:110%}
-    }
-
-    /* =========================================================
-       FAMILY HOLOGRAM
-    ========================================================= */
+    /* =====================================================
+       FAMILY
+    ===================================================== */
 
     .family-parent{
       position:relative;
@@ -1041,10 +1100,12 @@
       justify-content:center;
       overflow:hidden;
       background:
-        radial-gradient(circle at 50% 45%,
+        radial-gradient(
+          circle at 50% 45%,
           rgba(0,115,180,.7),
           rgba(3,35,65,.8) 38%,
-          rgba(1,8,20,.95) 78%);
+          rgba(1,8,20,.95) 78%
+        );
     }
 
     .family-glow{
@@ -1052,12 +1113,20 @@
       width:550px;
       height:550px;
       border-radius:50%;
-      background:radial-gradient(circle,rgba(0,234,255,.2),transparent 68%);
+      background:
+        radial-gradient(
+          circle,
+          rgba(0,234,255,.2),
+          transparent 68%
+        );
       animation:familyGlow 4s ease-in-out infinite alternate;
     }
 
     @keyframes familyGlow{
-      to{transform:scale(1.15);opacity:.7}
+      to{
+        transform:scale(1.15);
+        opacity:.7
+      }
     }
 
     .family-scene{
@@ -1078,7 +1147,11 @@
     }
 
     @keyframes familyFloat{
-      50%{transform:translate(-50%,-54%) scale(1.03)}
+      50%{
+        transform:
+          translate(-50%,-54%)
+          scale(1.03)
+      }
     }
 
     .person{
@@ -1102,11 +1175,16 @@
         0 0 5px #fff,
         0 0 15px var(--cyan),
         0 0 35px var(--blue);
-      animation:familyLetter 6s ease-in-out infinite alternate;
+      animation:
+        familyLetter 6s ease-in-out infinite alternate;
     }
 
     @keyframes familyLetter{
-      to{transform:translate3d(30px,-35px,70px) rotateY(25deg)}
+      to{
+        transform:
+          translate3d(30px,-35px,70px)
+          rotateY(25deg)
+      }
     }
 
     .family-floor{
@@ -1164,9 +1242,9 @@
       margin-bottom:20px;
     }
 
-    /* =========================================================
+    /* =====================================================
        FOOTER
-    ========================================================= */
+    ===================================================== */
 
     .footer{
       margin-top:30px;
@@ -1184,9 +1262,9 @@
       border-top:1px solid rgba(0,234,255,.15);
     }
 
-    /* =========================================================
-       CURSOR ENERGY
-    ========================================================= */
+    /* =====================================================
+       CURSOR
+    ===================================================== */
 
     .cursor-glow{
       position:fixed;
@@ -1195,16 +1273,21 @@
       border-radius:50%;
       pointer-events:none;
       z-index:-1;
-      background:radial-gradient(circle,rgba(0,234,255,.11),transparent 65%);
+      background:
+        radial-gradient(
+          circle,
+          rgba(0,234,255,.11),
+          transparent 65%
+        );
       transform:translate(-50%,-50%);
-      transition:opacity .3s;
     }
 
-    /* =========================================================
+    /* =====================================================
        MOBILE
-    ========================================================= */
+    ===================================================== */
 
     @media(max-width:900px){
+
       .hero-grid,
       .grid,
       .course{
@@ -1228,6 +1311,7 @@
     }
 
     @media(max-width:650px){
+
       .wrap{
         width:calc(100% - 22px);
       }
@@ -1273,11 +1357,9 @@
 
       .family{
         gap:4px;
-        transform:translate(-50%,-50%) scale(.68);
-      }
-
-      .family-content{
-        width:94%;
+        transform:
+          translate(-50%,-50%)
+          scale(.68);
       }
 
       .letter{
@@ -1290,6 +1372,7 @@
     }
 
     @media(max-width:430px){
+
       .hero h1{
         font-size:40px;
       }
@@ -1299,7 +1382,9 @@
       }
 
       .family{
-        transform:translate(-50%,-50%) scale(.55);
+        transform:
+          translate(-50%,-50%)
+          scale(.55);
       }
 
       .parent-content{
@@ -1312,6 +1397,7 @@
     }
 
     @media(prefers-reduced-motion:reduce){
+
       *,
       *::before,
       *::after{
@@ -1323,14 +1409,32 @@
   </style>
 </head>
 
-<body>
+<body class="is-loading">
 
-  <!-- =========================================================
-       FUTURISTIC WORLD
-  ========================================================== -->
+  <!-- =====================================================
+       AUTH LOADER
+  ====================================================== -->
+
+  <div id="academyLoader">
+    <div class="loader-box">
+      <div class="loader-icon">⚡</div>
+      <h2>English with Mariami</h2>
+      <p id="loaderText">ვამოწმებთ შენს ანგარიშს...</p>
+
+      <div class="loader-bar">
+        <i></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       FUTURE WORLD
+  ====================================================== -->
 
   <div class="space" aria-hidden="true">
+
     <div class="stars"></div>
+
     <div class="nebula"></div>
     <div class="nebula two"></div>
 
@@ -1350,39 +1454,75 @@
     </div>
 
     <div class="grid-floor"></div>
+
   </div>
 
   <div class="scanlines"></div>
-  <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- =========================================================
+  <div
+    class="cursor-glow"
+    id="cursorGlow"
+  ></div>
+
+  <!-- =====================================================
        NAVIGATION
-  ========================================================== -->
+  ====================================================== -->
 
   <header class="top">
+
     <div class="wrap nav">
 
-      <a class="brand" href="index.html">
+      <a
+        class="brand"
+        href="index.html"
+      >
         ⚡ ENGLISH WITH MARIAMI
       </a>
 
       <nav class="navlinks">
-        <a href="#grades">🎓 კლასები</a>
-        <a href="#course">🗺️ კურსი</a>
-        <a href="#learn">📚 სწავლა</a>
-        <a href="#progress">🏆 პროგრესი</a>
-        <a href="#parents">👨‍👩‍👧 მშობელი</a>
-        <a href="login.html">🚪 გამოსვლა</a>
+
+        <a href="#grades">
+          🎓 კლასები
+        </a>
+
+        <a href="#course">
+          🗺️ კურსი
+        </a>
+
+        <a href="#learn">
+          📚 სწავლა
+        </a>
+
+        <a href="#progress">
+          🏆 პროგრესი
+        </a>
+
+        <a href="#parents">
+          👨‍👩‍👧 მშობელი
+        </a>
+
+        <!-- IMPORTANT:
+             JS intercepts this and performs real logout -->
+        <a
+          href="login.html"
+          id="logoutLink"
+        >
+          🚪 გამოსვლა
+        </a>
+
       </nav>
 
     </div>
+
   </header>
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
 
   <main class="wrap">
 
-    <!-- =======================================================
-         HERO
-    ======================================================== -->
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -1409,11 +1549,17 @@
 
           <div class="buttons">
 
-            <a class="btn primary" href="#grades">
+            <a
+              class="btn primary"
+              href="#grades"
+            >
               🎓 აირჩიე კლასი
             </a>
 
-            <a class="btn yellow" href="#learn">
+            <a
+              class="btn yellow"
+              href="#learn"
+            >
               🚀 დავიწყოთ სწავლა
             </a>
 
@@ -1421,26 +1567,44 @@
 
         </div>
 
-        <!-- HOLOGRAM TEACHER -->
-
         <div class="neon-card teacher">
 
           <div class="avatar-ring">
-            <div class="avatar">👩‍🏫</div>
+            <div class="avatar">
+              👩‍🏫
+            </div>
           </div>
 
-          <h2>მასწავლებელი მარიამი</h2>
+          <h2>
+            მასწავლებელი მარიამი
+          </h2>
 
           <p class="muted">
             შენი ინგლისურის ჰოლოგრამული გზამკვლევი ✨
           </p>
 
           <div style="margin-top:12px">
-            <span class="pill">🧠 Vocabulary</span>
-            <span class="pill">🔊 Listening</span>
-            <span class="pill">🗣️ Speaking</span>
-            <span class="pill">📖 Reading</span>
-            <span class="pill">✍️ Grammar</span>
+
+            <span class="pill">
+              🧠 Vocabulary
+            </span>
+
+            <span class="pill">
+              🔊 Listening
+            </span>
+
+            <span class="pill">
+              🗣️ Speaking
+            </span>
+
+            <span class="pill">
+              📖 Reading
+            </span>
+
+            <span class="pill">
+              ✍️ Grammar
+            </span>
+
           </div>
 
         </div>
@@ -1449,21 +1613,31 @@
 
     </section>
 
-    <!-- =======================================================
+    <!-- =====================================================
          GRADES
-    ======================================================== -->
+    ====================================================== -->
 
-    <section id="grades" class="section">
+    <section
+      id="grades"
+      class="section"
+    >
 
       <div class="section-title">
 
-        <span class="badge">CLASSROOM SYSTEM</span>
+        <span class="badge">
+          CLASSROOM SYSTEM
+        </span>
 
-        <h2>🎓 აირჩიე შენი კლასი</h2>
+        <h2>
+          🎓 აირჩიე შენი კლასი
+        </h2>
 
-        <p class="muted" id="grade-message">
-          მასწავლებლის მიერ მინიჭებული კლასი ავტომატურად
-          განსაზღვრავს შენს სასწავლო სივრცეს.
+        <p
+          class="muted"
+          id="grade-message"
+        >
+          მასწავლებლის მიერ მინიჭებული კლასი
+          ავტომატურად განსაზღვრავს შენს სასწავლო სივრცეს.
         </p>
 
       </div>
@@ -1483,14 +1657,20 @@
             <div
               class="float-letter"
               style="left:12%;top:20%"
-            >A</div>
+            >
+              A
+            </div>
 
             <div
               class="float-letter"
               style="right:13%;top:27%"
-            >B</div>
+            >
+              B
+            </div>
 
-            <div class="plant">🌱</div>
+            <div class="plant">
+              🌱
+            </div>
 
             <div class="book"></div>
 
@@ -1500,12 +1680,15 @@
 
           <div class="grade-content">
 
-            <h3>🌱 მე-2 კლასი</h3>
+            <h3>
+              🌱 მე-2 კლასი
+            </h3>
 
             <p>
-              პირველი ნაბიჯები ინგლისურში: ფერები, ოჯახი,
-              სკოლა, ცხოველები, საკვები, სხეულის ნაწილები,
-              სახლი, რიცხვები და მარტივი წინადადებები.
+              პირველი ნაბიჯები ინგლისურში:
+              ფერები, ოჯახი, სკოლა, ცხოველები,
+              საკვები, სხეულის ნაწილები, სახლი,
+              რიცხვები და მარტივი წინადადებები.
             </p>
 
             <a
@@ -1533,7 +1716,9 @@
             <div class="planet big"></div>
             <div class="planet small"></div>
 
-            <div class="rocket">🚀</div>
+            <div class="rocket">
+              🚀
+            </div>
 
             <div class="scene-floor"></div>
 
@@ -1541,12 +1726,15 @@
 
           <div class="grade-content">
 
-            <h3>🚀 მე-3 კლასი</h3>
+            <h3>
+              🚀 მე-3 კლასი
+            </h3>
 
             <p>
-              ყოველდღიური ცხოვრება, დღეები, თვეები,
-              ამინდი, მოქმედებები, ქალაქი, საკვები,
-              Speaking, Reading და მარტივი გრამატიკა.
+              ყოველდღიური ცხოვრება, დღეები,
+              თვეები, ამინდი, მოქმედებები,
+              ქალაქი, საკვები, Speaking,
+              Reading და მარტივი გრამატიკა.
             </p>
 
             <a
@@ -1609,12 +1797,16 @@
 
           <div class="grade-content">
 
-            <h3>⭐ მე-4 კლასი</h3>
+            <h3>
+              ⭐ მე-4 კლასი
+            </h3>
 
             <p>
-              გაფართოებული Vocabulary, Present Simple,
-              კითხვები, Prepositions, Reading, Dialogues,
-              Writing, Listening და Practice.
+              გაფართოებული Vocabulary,
+              Present Simple, კითხვები,
+              Prepositions, Reading,
+              Dialogues, Writing, Listening
+              და Practice.
             </p>
 
             <a
@@ -1633,17 +1825,24 @@
 
     </section>
 
-    <!-- =======================================================
+    <!-- =====================================================
          LEARNING
-    ======================================================== -->
+    ====================================================== -->
 
-    <section id="learn" class="section">
+    <section
+      id="learn"
+      class="section"
+    >
 
       <div class="section-title">
 
-        <span class="badge">LEARNING TECHNOLOGY</span>
+        <span class="badge">
+          LEARNING TECHNOLOGY
+        </span>
 
-        <h2>📚 როგორ ვისწავლით?</h2>
+        <h2>
+          📚 როგორ ვისწავლით?
+        </h2>
 
       </div>
 
@@ -1653,8 +1852,8 @@
           <div class="feature-icon">🧠</div>
           <b>Vocabulary</b>
           <span>
-            სიტყვა + ქართული თარგმანი + გამოთქმა +
-            მაგალითი.
+            სიტყვა + ქართული თარგმანი +
+            გამოთქმა + მაგალითი.
           </span>
         </div>
 
@@ -1689,17 +1888,24 @@
 
     </section>
 
-    <!-- =======================================================
+    <!-- =====================================================
          COURSE
-    ======================================================== -->
+    ====================================================== -->
 
-    <section id="course" class="section">
+    <section
+      id="course"
+      class="section"
+    >
 
       <div class="section-title">
 
-        <span class="badge">FULL HOLOGRAPHIC COURSE</span>
+        <span class="badge">
+          FULL HOLOGRAPHIC COURSE
+        </span>
 
-        <h2>🗺️ სრული სასწავლო კურსი</h2>
+        <h2>
+          🗺️ სრული სასწავლო კურსი
+        </h2>
 
       </div>
 
@@ -1707,12 +1913,14 @@
 
         <div class="course-card">
 
-          <b>🌱 მე-2 კლასი</b>
+          <b>
+            🌱 მე-2 კლასი
+          </b>
 
           <p>
-            სიტყვები, ფერები, ოჯახი, სკოლა,
-            ცხოველები, საკვები და მარტივი
-            წინადადებები.
+            სიტყვები, ფერები, ოჯახი,
+            სკოლა, ცხოველები, საკვები
+            და მარტივი წინადადებები.
           </p>
 
           <a
@@ -1727,7 +1935,9 @@
 
         <div class="course-card">
 
-          <b>🚀 მე-3 კლასი</b>
+          <b>
+            🚀 მე-3 კლასი
+          </b>
 
           <p>
             დრო, დღეები, თვეები, ამინდი,
@@ -1747,12 +1957,15 @@
 
         <div class="course-card">
 
-          <b>⭐ მე-4 კლასი</b>
+          <b>
+            ⭐ მე-4 კლასი
+          </b>
 
           <p>
             Present Simple, კითხვები,
-            Prepositions, Reading, Dialogues,
-            Writing, Listening და Practice.
+            Prepositions, Reading,
+            Dialogues, Writing,
+            Listening და Practice.
           </p>
 
           <a
@@ -1769,17 +1982,24 @@
 
     </section>
 
-    <!-- =======================================================
+    <!-- =====================================================
          PROGRESS
-    ======================================================== -->
+    ====================================================== -->
 
-    <section id="progress" class="section">
+    <section
+      id="progress"
+      class="section"
+    >
 
       <div class="section-title">
 
-        <span class="badge">MY HOLOGRAPHIC PROGRESS</span>
+        <span class="badge">
+          MY HOLOGRAPHIC PROGRESS
+        </span>
 
-        <h2>🏆 შენი პროგრესი</h2>
+        <h2>
+          🏆 შენი პროგრესი
+        </h2>
 
         <p class="muted">
           აქ გამოჩნდება შენი სწავლის შედეგები.
@@ -1817,7 +2037,10 @@
           <i id="progress-bar"></i>
         </div>
 
-        <p class="muted" id="progress-message">
+        <p
+          class="muted"
+          id="progress-message"
+        >
           დაიწყე სწავლა და შენი შედეგები აქ გამოჩნდება.
         </p>
 
@@ -1825,17 +2048,24 @@
 
     </section>
 
-    <!-- =======================================================
-         PARENT SPACE
-    ======================================================== -->
+    <!-- =====================================================
+         PARENT
+    ====================================================== -->
 
-    <section id="parents" class="section">
+    <section
+      id="parents"
+      class="section"
+    >
 
       <div class="section-title">
 
-        <span class="badge">FAMILY HOLOGRAM</span>
+        <span class="badge">
+          FAMILY HOLOGRAM
+        </span>
 
-        <h2>👨‍👩‍👧 მშობლის სივრცე</h2>
+        <h2>
+          👨‍👩‍👧 მშობლის სივრცე
+        </h2>
 
         <p class="muted">
           ოჯახი და სწავლა ერთ სივრცეში ❤️
@@ -1902,7 +2132,9 @@
             👨‍👩‍👧
           </div>
 
-          <h2>მშობლის სივრცე</h2>
+          <h2>
+            მშობლის სივრცე
+          </h2>
 
           <p>
             აქ მშობელს შეუძლია თვალყური ადევნოს
@@ -1912,10 +2144,21 @@
 
           <div class="parent-features">
 
-            <span class="pill">📊 პროგრესი</span>
-            <span class="pill">📝 Quiz შედეგები</span>
-            <span class="pill">❓ კითხვები</span>
-            <span class="pill">💬 პასუხები</span>
+            <span class="pill">
+              📊 პროგრესი
+            </span>
+
+            <span class="pill">
+              📝 Quiz შედეგები
+            </span>
+
+            <span class="pill">
+              ❓ კითხვები
+            </span>
+
+            <span class="pill">
+              💬 პასუხები
+            </span>
 
           </div>
 
@@ -1932,17 +2175,21 @@
 
     </section>
 
-    <!-- =======================================================
+    <!-- =====================================================
          READY
-    ======================================================== -->
+    ====================================================== -->
 
     <section class="section">
 
       <div class="section-title">
 
-        <span class="badge">SYSTEM READY</span>
+        <span class="badge">
+          SYSTEM READY
+        </span>
 
-        <h2>🚀 მზად ხარ?</h2>
+        <h2>
+          🚀 მზად ხარ?
+        </h2>
 
         <p class="muted">
           შენი კლასი ავტომატურად არის განსაზღვრული
@@ -1986,583 +2233,906 @@
 
   </main>
 
-  <!-- =========================================================
+  <!-- =====================================================
        FOOTER
-  ========================================================== -->
+    ====================================================== -->
 
   <footer class="footer">
+
     <div class="wrap">
-      ⚡ English with Mariami • Holographic English Academy •
+
+      ⚡ English with Mariami •
+      Holographic English Academy •
       სწავლა, თამაში და პროგრესი ❤️
+
     </div>
+
   </footer>
 
   <footer class="site-copyright">
+
     © 2026 English with Mariami —
     ყველა უფლება დაცულია • Developed by btcgamer
+
   </footer>
 
-  <!-- =========================================================
-       SUPABASE / AUTH / EFFECTS
-  ========================================================== -->
+  <!-- =====================================================
+       AUTH + APP
+  ====================================================== -->
 
   <script>
-    (() => {
-      "use strict";
+  (() => {
 
-      /* =======================================================
-         SUPABASE CLIENT
-      ======================================================== */
+    "use strict";
 
-      function getClient(){
-        return (
-          window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-          window.supabaseClient ||
-          null
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    const $ = selector =>
+      document.querySelector(selector);
+
+    const $$ = selector =>
+      document.querySelectorAll(selector);
+
+    const loader =
+      $("#academyLoader");
+
+    const loaderText =
+      $("#loaderText");
+
+    function setLoaderText(text){
+      if(loaderText){
+        loaderText.textContent = text;
+      }
+    }
+
+    function hideLoader(){
+      document.body.classList.remove("is-loading");
+
+      if(loader){
+        loader.classList.add("hidden");
+      }
+    }
+
+    function redirectToLogin(){
+      const current =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
+
+      const redirect =
+        "login.html?redirect=" +
+        encodeURIComponent(current);
+
+      window.location.replace(redirect);
+    }
+
+    /* =====================================================
+       SUPABASE CLIENT
+    ===================================================== */
+
+    function getClient(){
+
+      return (
+        window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+        window.supabaseClient ||
+        null
+      );
+
+    }
+
+    async function waitForClient(){
+
+      let client =
+        getClient();
+
+      if(client){
+        return client;
+      }
+
+      await new Promise(resolve => {
+
+        let done = false;
+
+        function finish(){
+
+          if(done){
+            return;
+          }
+
+          done = true;
+          resolve();
+
+        }
+
+        window.addEventListener(
+          "englishMariamiSupabaseReady",
+          finish,
+          {once:true}
         );
+
+        setTimeout(
+          finish,
+          5000
+        );
+
+      });
+
+      return getClient();
+
+    }
+
+    /* =====================================================
+       GRADE VISIBILITY
+    ===================================================== */
+
+    function hideWrongGrades(grade){
+
+      $$(".grade-link").forEach(link => {
+
+        const linkGrade =
+          Number(link.dataset.grade);
+
+        if(linkGrade !== grade){
+
+          link.style.display = "none";
+
+          link.removeAttribute("href");
+
+          link.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+          link.setAttribute(
+            "tabindex",
+            "-1"
+          );
+
+        }
+
+      });
+
+    }
+
+    function showAllGrades(){
+
+      $$(".grade-link").forEach(link => {
+
+        link.style.display = "";
+
+        link.removeAttribute(
+          "aria-hidden"
+        );
+
+        link.removeAttribute(
+          "tabindex"
+        );
+
+      });
+
+    }
+
+    function updateStudentMessage(grade){
+
+      const message =
+        $("#grade-message");
+
+      if(
+        message &&
+        [2,3,4].includes(grade)
+      ){
+
+        message.textContent =
+          "შენი მინიჭებული კლასი: მე-" +
+          grade +
+          " კლასი 🎓";
+
       }
 
-      function redirectToLogin(){
-        const redirect =
-          "login.html?redirect=" +
-          encodeURIComponent("academy.html");
+    }
 
-        window.location.replace(redirect);
+    /* =====================================================
+       PROGRESS
+    ===================================================== */
+
+    function setProgress(
+      words = 0,
+      quizzes = 0,
+      percent = 0,
+      level = "⭐"
+    ){
+
+      const safeWords =
+        Number.isFinite(Number(words))
+          ? Math.max(0,Number(words))
+          : 0;
+
+      const safeQuizzes =
+        Number.isFinite(Number(quizzes))
+          ? Math.max(0,Number(quizzes))
+          : 0;
+
+      const safePercent =
+        Number.isFinite(Number(percent))
+          ? Math.min(
+              100,
+              Math.max(0,Number(percent))
+            )
+          : 0;
+
+      const wordsEl =
+        $("#words-count");
+
+      const quizEl =
+        $("#quiz-count");
+
+      const percentEl =
+        $("#progress-percent");
+
+      const levelEl =
+        $("#student-level");
+
+      const barEl =
+        $("#progress-bar");
+
+      if(wordsEl){
+        wordsEl.textContent =
+          Math.round(safeWords);
       }
 
-      /* =======================================================
-         GRADE VISIBILITY
-      ======================================================== */
+      if(quizEl){
+        quizEl.textContent =
+          Math.round(safeQuizzes);
+      }
 
-      function hideWrongGrades(grade){
+      if(percentEl){
+        percentEl.textContent =
+          Math.round(safePercent) +
+          "%";
+      }
 
-        document.querySelectorAll(".grade-link").forEach(link => {
+      if(levelEl){
+        levelEl.textContent =
+          level || "⭐";
+      }
 
-          const linkGrade =
-            Number(link.dataset.grade);
+      if(barEl){
+        barEl.style.width =
+          Math.round(safePercent) +
+          "%";
+      }
 
-          if(linkGrade !== grade){
+    }
 
-            link.style.display = "none";
-            link.removeAttribute("href");
-            link.setAttribute(
-              "aria-hidden",
-              "true"
+    /* =====================================================
+       PROFILE
+    ===================================================== */
+
+    async function loadProfile(
+      client,
+      user
+    ){
+
+      const result =
+        await client
+          .from("profiles")
+          .select(
+            "role,grade,full_name"
+          )
+          .eq(
+            "user_id",
+            user.id
+          )
+          .maybeSingle();
+
+      if(result.error){
+
+        console.error(
+          "Profile loading error:",
+          result.error
+        );
+
+        throw result.error;
+
+      }
+
+      return result.data || null;
+
+    }
+
+    /* =====================================================
+       AUTH INITIALIZATION
+    ===================================================== */
+
+    async function initAcademy(){
+
+      setLoaderText(
+        "ვუკავშირდებით სასწავლო სისტემას..."
+      );
+
+      const client =
+        await waitForClient();
+
+      if(!client){
+
+        console.error(
+          "Supabase client was not initialized."
+        );
+
+        setLoaderText(
+          "სისტემასთან დაკავშირება ვერ მოხერხდა."
+        );
+
+        setTimeout(
+          redirectToLogin,
+          700
+        );
+
+        return;
+
+      }
+
+      try{
+
+        setLoaderText(
+          "ვამოწმებთ შენს ანგარიშს..."
+        );
+
+        /* ---------------------------------------------
+           GET CURRENT SESSION
+        --------------------------------------------- */
+
+        const {
+          data:sessionData,
+          error:sessionError
+        } =
+          await client.auth.getSession();
+
+        if(sessionError){
+
+          console.error(
+            "Session error:",
+            sessionError
+          );
+
+          await client.auth.signOut({
+            scope:"local"
+          });
+
+          redirectToLogin();
+          return;
+
+        }
+
+        const session =
+          sessionData?.session;
+
+        const user =
+          session?.user;
+
+        /* ---------------------------------------------
+           NO SESSION
+        --------------------------------------------- */
+
+        if(!session || !user){
+
+          redirectToLogin();
+          return;
+
+        }
+
+        /* ---------------------------------------------
+           PROFILE
+        --------------------------------------------- */
+
+        setLoaderText(
+          "ვტვირთავთ შენს სასწავლო სივრცეს..."
+        );
+
+        const profile =
+          await loadProfile(
+            client,
+            user
+          );
+
+        const role =
+          String(
+            profile?.role ??
+            user.user_metadata?.role ??
+            "student"
+          ).toLowerCase();
+
+        const grade =
+          Number(
+            profile?.grade ??
+            user.user_metadata?.grade ??
+            0
+          );
+
+        const validGrades =
+          [2,3,4];
+
+        const privilegedRoles =
+          [
+            "teacher",
+            "admin",
+            "parent"
+          ];
+
+        /* ---------------------------------------------
+           STUDENT WITHOUT GRADE
+        --------------------------------------------- */
+
+        if(
+          role === "student" &&
+          !validGrades.includes(grade)
+        ){
+
+          alert(
+            "შენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს."
+          );
+
+          await client.auth.signOut({
+            scope:"local"
+          });
+
+          redirectToLogin();
+          return;
+
+        }
+
+        /* ---------------------------------------------
+           INVALID ROLE
+        --------------------------------------------- */
+
+        if(
+          !privilegedRoles.includes(role) &&
+          role !== "student"
+        ){
+
+          console.error(
+            "Unknown profile role:",
+            role
+          );
+
+          await client.auth.signOut({
+            scope:"local"
+          });
+
+          redirectToLogin();
+          return;
+
+        }
+
+        /* ---------------------------------------------
+           STUDENT
+        --------------------------------------------- */
+
+        if(role === "student"){
+
+          hideWrongGrades(grade);
+
+          updateStudentMessage(
+            grade
+          );
+
+          const progressMessage =
+            $("#progress-message");
+
+          if(progressMessage){
+
+            progressMessage.textContent =
+              "შენი სასწავლო სივრცე: მე-" +
+              grade +
+              " კლასი. წარმატებები! 🚀";
+
+          }
+
+        }else{
+
+          showAllGrades();
+
+          const message =
+            $("#grade-message");
+
+          if(message){
+
+            message.textContent =
+              "აკადემიის სრული მართვის რეჟიმი აქტიურია. 🎓";
+
+          }
+
+        }
+
+        /* ---------------------------------------------
+           SAFE DEFAULT PROGRESS
+        --------------------------------------------- */
+
+        setProgress(
+          0,
+          0,
+          0,
+          "⭐"
+        );
+
+        /* ---------------------------------------------
+           AUTH STATE LISTENER
+           If session disappears, leave academy.
+        --------------------------------------------- */
+
+        client.auth.onAuthStateChange(
+          (event, changedSession) => {
+
+            if(
+              event === "SIGNED_OUT" ||
+              !changedSession
+            ){
+
+              window.location.replace(
+                "login.html"
+              );
+
+            }
+
+          }
+        );
+
+        hideLoader();
+
+      }catch(error){
+
+        console.error(
+          "Academy initialization error:",
+          error
+        );
+
+        setLoaderText(
+          "ანგარიშის შემოწმება ვერ მოხერხდა."
+        );
+
+        /*
+         * Security-first:
+         * clear only local browser session.
+         */
+
+        try{
+
+          await client.auth.signOut({
+            scope:"local"
+          });
+
+        }catch(signOutError){
+
+          console.error(
+            "Emergency signOut error:",
+            signOutError
+          );
+
+        }
+
+        setTimeout(
+          redirectToLogin,
+          500
+        );
+
+      }
+
+    }
+
+    /* =====================================================
+       REAL LOGOUT
+    ===================================================== */
+
+    async function logout(){
+
+      const client =
+        await waitForClient();
+
+      if(!client){
+
+        /*
+         * If Supabase isn't available,
+         * still remove the known local auth storage
+         * only for this site and leave the page.
+         */
+
+        redirectToLogin();
+        return;
+
+      }
+
+      try{
+
+        setLoaderText(
+          "ანგარიშიდან გამოვდივართ..."
+        );
+
+        if(loader){
+          loader.classList.remove(
+            "hidden"
+          );
+        }
+
+        document.body.classList.add(
+          "is-loading"
+        );
+
+        /*
+         * LOCAL LOGOUT ONLY
+         *
+         * Does NOT log the user out
+         * from every device.
+         */
+
+        const {
+          error
+        } =
+          await client.auth.signOut({
+            scope:"local"
+          });
+
+        if(error){
+
+          console.error(
+            "Logout error:",
+            error
+          );
+
+          /*
+           * We still leave the protected page.
+           * Never keep the user inside academy
+           * after a failed logout attempt.
+           */
+
+          redirectToLogin();
+          return;
+
+        }
+
+        /*
+         * Small delay lets Supabase finish
+         * its local cleanup before navigation.
+         */
+
+        window.location.replace(
+          "login.html"
+        );
+
+      }catch(error){
+
+        console.error(
+          "Unexpected logout error:",
+          error
+        );
+
+        redirectToLogin();
+
+      }
+
+    }
+
+    /* =====================================================
+       LOGOUT CLICK
+    ===================================================== */
+
+    document.addEventListener(
+      "click",
+      event => {
+
+        const logoutLink =
+          event.target.closest(
+            "#logoutLink"
+          );
+
+        if(!logoutLink){
+          return;
+        }
+
+        event.preventDefault();
+
+        logout();
+
+      }
+    );
+
+    /* =====================================================
+       CURSOR GLOW
+    ===================================================== */
+
+    const glow =
+      $("#cursorGlow");
+
+    document.addEventListener(
+      "mousemove",
+      event => {
+
+        if(glow){
+
+          glow.style.left =
+            event.clientX + "px";
+
+          glow.style.top =
+            event.clientY + "px";
+
+        }
+
+        if(window.innerWidth < 850){
+          return;
+        }
+
+        const cards =
+          document.querySelectorAll(
+            ".neon-card"
+          );
+
+        cards.forEach(card => {
+
+          const rect =
+            card.getBoundingClientRect();
+
+          const x =
+            event.clientX -
+            (rect.left + rect.width / 2);
+
+          const y =
+            event.clientY -
+            (rect.top + rect.height / 2);
+
+          const distance =
+            Math.sqrt(
+              x*x + y*y
             );
+
+          if(distance < 500){
+
+            const rotateY =
+              (x / rect.width) * 4;
+
+            const rotateX =
+              -(y / rect.height) * 4;
+
+            card.style.transform =
+              `perspective(900px)
+               rotateX(${rotateX}deg)
+               rotateY(${rotateY}deg)
+               translateZ(8px)`;
+
+          }else{
+
+            card.style.transform = "";
 
           }
 
         });
 
       }
+    );
 
-      function showAllGrades(){
+    /* =====================================================
+       CLICK RIPPLE
+    ===================================================== */
 
-        document.querySelectorAll(".grade-link")
-          .forEach(link => {
+    document.addEventListener(
+      "click",
+      event => {
 
-            link.style.display = "";
-            link.removeAttribute("aria-hidden");
-
-          });
-
-      }
-
-      function updateStudentMessage(grade){
-
-        const message =
-          document.getElementById("grade-message");
-
-        if(
-          message &&
-          [2,3,4].includes(grade)
-        ){
-
-          message.textContent =
-            "შენი მინიჭებული კლასი: მე-" +
-            grade +
-            " კლასი 🎓";
-
-        }
-
-      }
-
-      /* =======================================================
-         PROGRESS
-      ======================================================== */
-
-      function setProgress(
-        words = 0,
-        quizzes = 0,
-        percent = 0,
-        level = "⭐"
-      ){
-
-        const safeWords =
-          Number.isFinite(Number(words))
-            ? Math.max(0,Number(words))
-            : 0;
-
-        const safeQuizzes =
-          Number.isFinite(Number(quizzes))
-            ? Math.max(0,Number(quizzes))
-            : 0;
-
-        const safePercent =
-          Number.isFinite(Number(percent))
-            ? Math.min(
-                100,
-                Math.max(0,Number(percent))
-              )
-            : 0;
-
-        const wordsEl =
-          document.getElementById(
-            "words-count"
+        const target =
+          event.target.closest(
+            ".btn,.navlinks a"
           );
 
-        const quizEl =
-          document.getElementById(
-            "quiz-count"
-          );
-
-        const percentEl =
-          document.getElementById(
-            "progress-percent"
-          );
-
-        const levelEl =
-          document.getElementById(
-            "student-level"
-          );
-
-        const barEl =
-          document.getElementById(
-            "progress-bar"
-          );
-
-        if(wordsEl)
-          wordsEl.textContent =
-            safeWords;
-
-        if(quizEl)
-          quizEl.textContent =
-            safeQuizzes;
-
-        if(percentEl)
-          percentEl.textContent =
-            Math.round(safePercent) + "%";
-
-        if(levelEl)
-          levelEl.textContent =
-            level || "⭐";
-
-        if(barEl)
-          barEl.style.width =
-            Math.round(safePercent) + "%";
-      }
-
-      /* =======================================================
-         SUPABASE INITIALIZATION
-      ======================================================== */
-
-      async function initAcademy(){
-
-        let client = getClient();
-
-        if(!client){
-
-          await new Promise(resolve => {
-
-            let finished = false;
-
-            const finish = () => {
-
-              if(finished)
-                return;
-
-              finished = true;
-              resolve();
-
-            };
-
-            window.addEventListener(
-              "englishMariamiSupabaseReady",
-              finish,
-              {once:true}
-            );
-
-            setTimeout(
-              finish,
-              5000
-            );
-
-          });
-
-          client = getClient();
-
-        }
-
-        if(!client){
-
-          console.error(
-            "Supabase client was not initialized."
-          );
-
-          redirectToLogin();
+        if(!target){
           return;
         }
 
-        try{
+        if(target.id === "logoutLink"){
+          return;
+        }
 
-          /* ---------------------------------------------
-             AUTH SESSION
-          --------------------------------------------- */
+        if(
+          getComputedStyle(target).position ===
+          "static"
+        ){
 
-          const {
-            data:sessionData,
-            error:sessionError
-          } =
-            await client.auth.getSession();
-
-          if(
-            sessionError ||
-            !sessionData ||
-            !sessionData.session ||
-            !sessionData.session.user
-          ){
-
-            redirectToLogin();
-            return;
-
-          }
-
-          const user =
-            sessionData.session.user;
-
-          /* ---------------------------------------------
-             PROFILE
-          --------------------------------------------- */
-
-          const {
-            data:profile,
-            error:profileError
-          } =
-            await client
-              .from("profiles")
-              .select(
-                "role,grade,full_name"
-              )
-              .eq(
-                "user_id",
-                user.id
-              )
-              .maybeSingle();
-
-          if(profileError){
-
-            console.error(
-              "Profile loading error:",
-              profileError
-            );
-
-            redirectToLogin();
-            return;
-
-          }
-
-          const role =
-            String(
-              profile?.role ??
-              user.user_metadata?.role ??
-              "student"
-            ).toLowerCase();
-
-          const grade =
-            Number(
-              profile?.grade ??
-              user.user_metadata?.grade ??
-              0
-            );
-
-          const validGrades =
-            [2,3,4];
-
-          const privilegedRoles =
-            [
-              "teacher",
-              "admin",
-              "parent"
-            ];
-
-          /* ---------------------------------------------
-             STUDENT VALIDATION
-          --------------------------------------------- */
-
-          if(
-            role === "student" &&
-            !validGrades.includes(grade)
-          ){
-
-            alert(
-              "შენს ანგარიშზე კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს."
-            );
-
-            redirectToLogin();
-            return;
-
-          }
-
-          /* ---------------------------------------------
-             ROLE VALIDATION
-          --------------------------------------------- */
-
-          if(
-            !privilegedRoles.includes(role) &&
-            role !== "student"
-          ){
-
-            console.error(
-              "Unknown profile role:",
-              role
-            );
-
-            await client.auth.signOut();
-
-            redirectToLogin();
-            return;
-
-          }
-
-          /* ---------------------------------------------
-             STUDENT VIEW
-          --------------------------------------------- */
-
-          if(role === "student"){
-
-            hideWrongGrades(grade);
-
-            updateStudentMessage(grade);
-
-            const progressMessage =
-              document.getElementById(
-                "progress-message"
-              );
-
-            if(progressMessage){
-
-              progressMessage.textContent =
-                "შენი სასწავლო სივრცე: მე-" +
-                grade +
-                " კლასი. წარმატებები! 🚀";
-
-            }
-
-          }else{
-
-            showAllGrades();
-
-          }
-
-          /*
-           * Safe defaults.
-           * Actual progress can later be connected
-           * to the Supabase progress tables.
-           */
-
-          setProgress(
-            0,
-            0,
-            0,
-            "⭐"
-          );
-
-        }catch(error){
-
-          console.error(
-            "Academy initialization error:",
-            error
-          );
-
-          redirectToLogin();
+          target.style.position =
+            "relative";
 
         }
 
-      }
+        const ripple =
+          document.createElement(
+            "span"
+          );
 
-      /* =======================================================
-         MOUSE 3D EFFECT
-      ======================================================== */
+        ripple.style.position =
+          "absolute";
 
-      const glow =
-        document.getElementById(
-          "cursorGlow"
+        ripple.style.width =
+          "10px";
+
+        ripple.style.height =
+          "10px";
+
+        ripple.style.borderRadius =
+          "50%";
+
+        ripple.style.background =
+          "rgba(255,255,255,.8)";
+
+        ripple.style.left =
+          (
+            event.offsetX - 5
+          ) + "px";
+
+        ripple.style.top =
+          (
+            event.offsetY - 5
+          ) + "px";
+
+        ripple.style.pointerEvents =
+          "none";
+
+        ripple.style.animation =
+          "ripple .6s ease-out forwards";
+
+        target.appendChild(
+          ripple
         );
 
-      document.addEventListener(
-        "mousemove",
-        event => {
-
-          if(glow){
-
-            glow.style.left =
-              event.clientX + "px";
-
-            glow.style.top =
-              event.clientY + "px";
-
-          }
-
-          const cards =
-            document.querySelectorAll(
-              ".neon-card"
-            );
-
-          cards.forEach(card => {
-
-            if(
-              window.innerWidth < 850
-            )
-              return;
-
-            const rect =
-              card.getBoundingClientRect();
-
-            const x =
-              event.clientX -
-              (rect.left + rect.width / 2);
-
-            const y =
-              event.clientY -
-              (rect.top + rect.height / 2);
-
-            const distance =
-              Math.sqrt(x*x + y*y);
-
-            if(distance < 500){
-
-              const rotateY =
-                (x / rect.width) * 4;
-
-              const rotateX =
-                -(y / rect.height) * 4;
-
-              card.style.transform =
-                `perspective(900px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)
-                 translateZ(8px)`;
-
-            }else{
-
-              card.style.transform = "";
-
-            }
-
-          });
-
-        }
-      );
-
-      /* =======================================================
-         CLICK RIPPLE
-      ======================================================== */
-
-      document.addEventListener(
-        "click",
-        event => {
-
-          const target =
-            event.target.closest(
-              ".btn,.navlinks a"
-            );
-
-          if(!target)
-            return;
-
-          const ripple =
-            document.createElement(
-              "span"
-            );
-
-          ripple.style.position =
-            "absolute";
-
-          ripple.style.width =
-            "10px";
-
-          ripple.style.height =
-            "10px";
-
-          ripple.style.borderRadius =
-            "50%";
-
-          ripple.style.background =
-            "rgba(255,255,255,.8)";
-
-          ripple.style.left =
-            (event.offsetX - 5) + "px";
-
-          ripple.style.top =
-            (event.offsetY - 5) + "px";
-
-          ripple.style.pointerEvents =
-            "none";
-
-          ripple.style.animation =
-            "ripple .6s ease-out forwards";
-
-          target.appendChild(ripple);
-
-          setTimeout(
-            () => ripple.remove(),
-            700
-          );
-
-        }
-      );
-
-      const rippleStyle =
-        document.createElement("style");
-
-      rippleStyle.textContent = `
-        @keyframes ripple{
-          from{
-            transform:scale(1);
-            opacity:.8;
-          }
-          to{
-            transform:scale(25);
-            opacity:0;
-          }
-        }
-      `;
-
-      document.head.appendChild(
-        rippleStyle
-      );
-
-      /* =======================================================
-         START
-      ======================================================== */
-
-      if(
-        document.readyState === "loading"
-      ){
-
-        document.addEventListener(
-          "DOMContentLoaded",
-          initAcademy,
-          {once:true}
+        setTimeout(
+          () => ripple.remove(),
+          700
         );
 
-      }else{
-
-        initAcademy();
-
       }
+    );
 
-    })();
+    const rippleStyle =
+      document.createElement(
+        "style"
+      );
+
+    rippleStyle.textContent = `
+      @keyframes ripple{
+        from{
+          transform:scale(1);
+          opacity:.8;
+        }
+        to{
+          transform:scale(25);
+          opacity:0;
+        }
+      }
+    `;
+
+    document.head.appendChild(
+      rippleStyle
+    );
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    if(
+      document.readyState ===
+      "loading"
+    ){
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        initAcademy,
+        {once:true}
+      );
+
+    }else{
+
+      initAcademy();
+
+    }
+
+  })();
   </script>
 
 </body>
