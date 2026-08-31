@@ -2,14 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>English with Mariami — Grade 2</title><link rel="stylesheet" href="grade2.css">
+<meta name="theme-color" content="#02040c">
+<title>English with Mariami — Grade 2</title>
+<link rel="stylesheet" href="grade2.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
 </head>
 <body>
-<header><div class="brand"><div class="logo">E2</div><div><b>ENGLISH WITH MARIAMI</b><small>GRADE 2 • NEON LEARNING SYSTEM</small></div></div><div class="hud"><span>⚡ XP <b id="xp">0</b></span><span>⭐ <b id="stars">0</b></span><span>🏆 LV <b id="level">1</b></span></div></header>
+<header><div class="brand"><div class="logo">E2</div><div><b>ENGLISH WITH MARIAMI</b><small>GRADE 2 • NEON LEARNING SYSTEM</small></div></div><div class="hud"><span>⚡ XP <b id="xp">0</b></span><span>⭐ <b id="stars">0</b></span><span>🏆 LV <b id="level">1</b></span><span id="grade2SyncBadge">⏳ Syncing...</span></div></header>
 <main>
 <section class="hero"><div><small class="cyan">SYSTEM ONLINE • MISSION CONTROL</small><h1>GRADE <em>02</em></h1><p>Learn English. Play missions. Level up.</p><p class="ka">ინგლისური ისწავლე თამაშით — სიტყვები, მოსმენა, ქვიზები და გამოწვევები.</p><button onclick="continueMission()">🚀 CONTINUE MISSION</button><button class="purple" onclick="finalReview()">🏆 FINAL REVIEW</button><div class="progress"><i id="progress"></i></div></div><div class="core">02<small>ENGLISH</small></div></section>
 <section class="daily"><b>🎯 DAILY BOOST</b><span>დღეს დამატებითი XP გელოდება.</span><button onclick="dailyChallenge()">START</button></section>
 <h2>🌌 NEON ENGLISH MAP</h2><div id="lessons" class="lesson-grid"></div>
 </main>
 <div id="modal" class="modal"><div class="panel"><button class="close" onclick="closeModal()">×</button><div id="content"></div></div></div>
-<script src="grade2.js"></script></body></html>
+<script src="grade2.js"></script>
+<script src="grade2-supabase-bridge.js"></script>
+</body></html>
