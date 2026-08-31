@@ -26,8 +26,8 @@
   };
 
   function esc(value) {
-    return String(value ?? '').replace(/[&<>"']/g, (c) => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    return String(value ?? '').replace(/[&<>\"']/g, (c) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#039;'
     }[c]));
   }
 
@@ -420,16 +420,38 @@
     if (auth.error) throw auth.error;
     state.user = auth.data && auth.data.user ? auth.data.user : null;
 
-    if (state.user) {
-      const profile = await DB.from('profiles').select('full_name,grade,role').eq('user_id', state.user.id).maybeSingle();
-      if (!profile.error) state.profile = profile.data;
-      if (state.profile && String(state.profile.role || '').toLowerCase() === 'student' && Number(state.profile.grade) !== grade) {
-        const assignedGrade = Number(state.profile.grade);
-        if ([2, 3, 4].includes(assignedGrade)) {
-          window.location.replace(`grade${assignedGrade}.html`);
-          return;
-        }
-      }
+    /* Defense layer 2: the page itself refuses non-student accounts
+       and refuses a grade different from profiles.grade. */
+    if (!state.user) {
+      window.location.replace('login.html?reason=unauthorized');
+      return;
+    }
+
+    const profileResult = await DB
+      .from('profiles')
+      .select('full_name,grade,role')
+      .eq('user_id', state.user.id)
+      .maybeSingle();
+
+    if (profileResult.error) throw profileResult.error;
+    state.profile = profileResult.data;
+
+    const role = String(state.profile?.role || '').trim().toLowerCase();
+    const assignedGrade = Number(state.profile?.grade || 0);
+
+    if (role !== 'student') {
+      window.location.replace(role === 'teacher' ? 'teacher-dashboard.html' : 'login.html?reason=wrong-role');
+      return;
+    }
+
+    if (![2, 3, 4].includes(assignedGrade)) {
+      window.location.replace('student-dashboard.html?reason=no-grade');
+      return;
+    }
+
+    if (assignedGrade !== grade) {
+      window.location.replace(`grade${assignedGrade}.html?reason=grade-locked`);
+      return;
     }
 
     const lessonsResult = await DB.from('lessons').select('id,grade,lesson_number,title,topic,description,image_url,audio_url,created_at,grammar_rule,grammar_examples,listening_text,speaking_phrases,reading_text,exercises').eq('grade', grade).order('lesson_number', { ascending: true });
