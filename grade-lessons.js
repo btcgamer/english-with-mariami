@@ -18,6 +18,7 @@
     words: [],
     quizzes: [],
     filter: 'all',
+    topic: 'all',
     search: '',
     currentLesson: null,
     quizAnswers: {},
@@ -62,6 +63,17 @@
     return arr(value).map(text).filter(Boolean);
   }
 
+  function correctOption(q, options) {
+    const raw = q && q.correct_answer;
+    if (raw == null) return '';
+    const value = String(raw);
+    if (options.includes(value)) return value;
+    const index = Number(raw);
+    if (Number.isInteger(index) && index >= 0 && index < options.length) return options[index];
+    if (Number.isInteger(index) && index >= 1 && index <= options.length) return options[index - 1];
+    return value;
+  }
+
   function iconFor(index) {
     return ['🚀', '🌱', '🧠', '📚', '🎯', '⭐', '🌍', '💡', '🔥', '🏆'][index % 10];
   }
@@ -103,13 +115,28 @@
     setStat('lessonCount', state.lessons.length);
     setStat('wordCount', state.words.length);
     setStat('quizCount', state.quizzes.length);
-    setStat('contentCount', state.lessons.length * 7);
+    setStat('contentCount', state.lessons.length * 8);
   }
 
   function lessonMatches(lesson) {
-    const haystack = [lesson.title, lesson.topic, lesson.description, lesson.grammar_rule, lesson.listening_text, lesson.reading_text].join(' ').toLowerCase();
+    const haystack = [
+      lesson.title,
+      lesson.topic,
+      lesson.description,
+      lesson.grammar_rule,
+      lesson.grammar_examples,
+      lesson.listening_text,
+      lesson.speaking_phrases,
+      lesson.reading_text,
+      lesson.exercises
+    ].map(text).join(' ').toLowerCase();
+
     const searchOk = !state.search || haystack.includes(state.search);
     if (!searchOk) return false;
+
+    const topicOk = state.topic === 'all' || String(lesson.topic || '').trim() === state.topic;
+    if (!topicOk) return false;
+
     if (state.filter === 'all') return true;
     if (state.filter === 'vocabulary') return lessonWords(lesson.id).length > 0;
     if (state.filter === 'grammar') return !!lesson.grammar_rule || arr(lesson.grammar_examples).length > 0;
@@ -230,15 +257,19 @@
   function renderQuiz(quizzes) {
     if (!quizzes.length) return '<div class="material-card"><div class="empty-state">No quiz questions for this lesson.</div></div>';
     const answered = Object.keys(state.quizAnswers).length;
-    const score = state.quizSubmitted ? quizzes.reduce((sum, q) => sum + (state.quizAnswers[q.id] === String(q.correct_answer) ? 1 : 0), 0) : 0;
+    const score = state.quizSubmitted ? quizzes.reduce((sum, q) => {
+      const options = normalizeOptions(q.options);
+      return sum + (state.quizAnswers[q.id] === correctOption(q, options) ? 1 : 0);
+    }, 0) : 0;
 
     return `<div class="material-card"><div class="quiz-head"><div><h3>🎯 Quiz</h3><p>${answered}/${quizzes.length} answered</p></div>${state.quizSubmitted ? `<strong class="quiz-score">${score}/${quizzes.length} • ${Math.round(score / quizzes.length * 100)}%</strong>` : ''}</div>
       ${quizzes.map((q, qi) => {
         const options = normalizeOptions(q.options);
         const selected = state.quizAnswers[q.id];
+        const correct = correctOption(q, options);
         return `<div class="quiz-question"><b>${qi + 1}. ${esc(q.question)}</b>${options.map((option) => {
           const isSelected = selected === option;
-          const isCorrect = state.quizSubmitted && option === String(q.correct_answer);
+          const isCorrect = state.quizSubmitted && option === correct;
           const isWrong = state.quizSubmitted && isSelected && !isCorrect;
           return `<button class="quiz-option ${isCorrect ? 'correct' : ''} ${isWrong ? 'wrong' : ''}" data-qid="${esc(q.id)}" data-answer="${esc(option)}" ${state.quizSubmitted ? 'disabled' : ''}>${isSelected ? '◉ ' : '○ '}${esc(option)}</button>`;
         }).join('')}</div>`;
@@ -307,7 +338,10 @@
       return;
     }
     state.quizSubmitted = true;
-    const score = quizzes.reduce((sum, q) => sum + (state.quizAnswers[q.id] === String(q.correct_answer) ? 1 : 0), 0);
+    const score = quizzes.reduce((sum, q) => {
+      const options = normalizeOptions(q.options);
+      return sum + (state.quizAnswers[q.id] === correctOption(q, options) ? 1 : 0);
+    }, 0);
     switchTab('quiz');
     toast(`Quiz დასრულდა: ${score}/${quizzes.length}`);
 
@@ -332,10 +366,7 @@
     if (!select) return;
     const topics = [...new Set(state.lessons.map((l) => String(l.topic || '').trim()).filter(Boolean))];
     select.innerHTML = '<option value="all">ყველა თემა</option>' + topics.map((topic) => `<option value="${esc(topic)}">${esc(topic)}</option>`).join('');
-    select.addEventListener('change', () => {
-      state.search = select.value === 'all' ? state.search : state.search;
-      renderTopics();
-    });
+    select.value = state.topic;
   }
 
   function bindControls() {
@@ -355,7 +386,7 @@
 
     const select = $('topicSelect');
     if (select) select.addEventListener('change', () => {
-      state.topic = select.value;
+      state.topic = select.value || 'all';
       renderTopics();
     });
 
@@ -393,8 +424,11 @@
       const profile = await DB.from('profiles').select('full_name,grade,role').eq('user_id', state.user.id).maybeSingle();
       if (!profile.error) state.profile = profile.data;
       if (state.profile && String(state.profile.role || '').toLowerCase() === 'student' && Number(state.profile.grade) !== grade) {
-        window.location.replace(`grade${Number(state.profile.grade)}.html`);
-        return;
+        const assignedGrade = Number(state.profile.grade);
+        if ([2, 3, 4].includes(assignedGrade)) {
+          window.location.replace(`grade${assignedGrade}.html`);
+          return;
+        }
       }
     }
 
