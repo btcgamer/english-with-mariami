@@ -1,307 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#030711" />
-  <meta name="description" content="English with Mariami — Grade 2 futuristic English learning mission." />
-  <title>English with Mariami | Grade 2</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <title>English with Mariami — Grade 2</title>
 
-  <link rel="stylesheet" href="grade2.css" />
+  <link rel="stylesheet" href="grade2.css">
 </head>
 
 <body>
 
-  <div id="bootScreen" class="boot-screen">
-    <div class="boot-core">
-      <div class="boot-ring ring-a"></div>
-      <div class="boot-ring ring-b"></div>
-      <div class="boot-ring ring-c"></div>
+  <div class="app">
 
-      <div class="boot-center">
-        <span>G2</span>
-      </div>
-    </div>
+    <!-- =========================
+         TOP NAVIGATION
+    ========================== -->
+    <header class="topbar">
 
-    <div class="boot-title">ENGLISH WITH MARIAMI</div>
-    <div class="boot-subtitle">GRADE 02 // NEURAL ENGLISH SYSTEM</div>
+      <div class="brand">
 
-    <div class="boot-progress">
-      <div id="bootProgress"></div>
-    </div>
+        <div class="logo">
+          M
+        </div>
 
-    <div id="bootStatus">INITIALIZING...</div>
-  </div>
+        <div class="brand-text">
+          <h1>ENGLISH WITH MARIAMI</h1>
+          <p>GRADE 2 • FUTURE LEARNING WORLD</p>
+        </div>
 
-  <div id="toastLayer" class="toast-layer"></div>
-
-  <div id="particles" class="particles"></div>
-
-  <div class="scanlines"></div>
-
-  <header class="topbar">
-
-    <div class="brand">
-
-      <div class="brand-orb">
-        <span>G2</span>
       </div>
 
-      <div class="brand-text">
-        <strong>ENGLISH WITH MARIAMI</strong>
-        <small>GRADE 02 // ACTION LEARNING SYSTEM</small>
+
+      <div class="stats">
+
+        <div class="stat">
+          <b>⭐ <span id="xpValue">120</span></b>
+          <span>XP</span>
+        </div>
+
+        <div class="stat">
+          <b>🔥 <span id="streakValue">7</span></b>
+          <span>STREAK</span>
+        </div>
+
+        <div class="stat">
+          <b>🏆 <span id="badgeValue">4</span></b>
+          <span>BADGES</span>
+        </div>
+
       </div>
 
-    </div>
+    </header>
 
-    <div class="player-hud">
 
-      <div class="hud-item">
-        <span>LEVEL</span>
-        <strong id="levelValue">1</strong>
-      </div>
-
-      <div class="hud-item xp-hud">
-        <span>XP</span>
-        <strong id="xpValue">0</strong>
-      </div>
-
-      <div class="hud-item stars-hud">
-        <span>STARS</span>
-        <strong id="starsValue">0</strong>
-      </div>
-
-      <div class="hud-item streak-hud">
-        <span>STREAK</span>
-        <strong id="streakValue">0 🔥</strong>
-      </div>
-
-    </div>
-
-    <button id="soundToggle" class="icon-button" title="Toggle sound">
-      🔊
-    </button>
-
-  </header>
-
-  <main class="app-shell">
-
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================== -->
 
     <section class="hero">
 
-      <div class="hero-copy">
-
-        <div class="system-tag">
-          <span class="live-dot"></span>
-          SYSTEM ONLINE
-        </div>
-
-        <h1>
-          <span>GRADE</span>
-          <strong>02</strong>
-        </h1>
-
-        <p class="hero-subtitle">
-          ENTER THE
-          <span>ENGLISH MISSION</span>
-        </p>
-
-        <p class="hero-description">
-          ისწავლე ინგლისური სიტყვები, წინადადებები და მარტივი გრამატიკა
-          თამაშის სტილში.
-          <br>
-          <b>Learn. Listen. Play. Level Up.</b>
-        </p>
-
-        <div class="hero-actions">
-
-          <button id="continueBtn" class="neon-btn primary">
-            🚀 CONTINUE MISSION
-          </button>
-
-          <button id="reviewBtn" class="neon-btn secondary">
-            🏆 FINAL REVIEW
-          </button>
-
-        </div>
-
-        <div class="hero-mini-stats">
-
-          <div>
-            <span>MISSIONS</span>
-            <strong id="missionCount">0/12</strong>
-          </div>
-
-          <div>
-            <span>WORDS</span>
-            <strong id="wordCount">0</strong>
-          </div>
-
-          <div>
-            <span>ACHIEVEMENTS</span>
-            <strong id="achievementCount">0</strong>
-          </div>
-
-        </div>
-
+      <div class="hero-badge">
+        WELCOME TO YOUR LEARNING UNIVERSE
       </div>
 
-      <div class="hero-reactor">
+      <h2>
+        <span>GRADE 2</span>
+      </h2>
 
-        <div class="reactor-scene">
+      <p>
+        Choose your next English mission
+      </p>
 
-          <div class="reactor-ring reactor-one"></div>
-          <div class="reactor-ring reactor-two"></div>
-          <div class="reactor-ring reactor-three"></div>
 
-          <div class="reactor-core">
+      <div class="progress-wrap">
 
-            <div class="core-light"></div>
+        <div class="progress-label">
 
-            <div class="core-text">
-              <small>ENGLISH</small>
-              <strong>G2</strong>
-              <span>ONLINE</span>
-            </div>
+          <span>
+            YOUR PROGRESS
+          </span>
 
-          </div>
+          <strong id="progressText">
+            34%
+          </strong>
 
-          <div class="orbit-dot dot-one"></div>
-          <div class="orbit-dot dot-two"></div>
-          <div class="orbit-dot dot-three"></div>
+        </div>
 
+        <div class="progress">
+          <i id="progressBar"></i>
         </div>
 
       </div>
 
     </section>
 
-    <!-- PLAYER PROGRESS -->
 
-    <section class="progress-panel">
+    <!-- =========================
+         LESSONS
+    ========================== -->
 
-      <div class="progress-header">
+    <main id="lessonGrid" class="lessons">
 
-        <div>
-          <span class="eyebrow">PLAYER PROGRESS</span>
-          <h2 id="rankTitle">ROOKIE EXPLORER</h2>
+
+      <!-- LESSON 1 -->
+
+      <article
+        class="lesson"
+        data-lesson="01"
+      >
+
+        <div class="lesson-number">
+          LESSON 01
         </div>
 
-        <div class="next-level">
-          <span>NEXT LEVEL</span>
-          <strong id="nextLevelXp">100 XP</strong>
+        <div class="lesson-icon">
+          🐾
         </div>
 
-      </div>
-
-      <div class="xp-track">
-
-        <div id="xpBar" class="xp-bar"></div>
-
-      </div>
-
-      <div class="xp-labels">
-
-        <span id="currentXpLabel">0 XP</span>
-        <span id="levelProgressLabel">0%</span>
-        <span id="targetXpLabel">100 XP</span>
-
-      </div>
-
-    </section>
-
-    <!-- DAILY MISSION -->
-
-    <section class="daily-panel">
-
-      <div class="daily-icon">⚡</div>
-
-      <div class="daily-content">
-        <span class="eyebrow">DAILY MISSION</span>
-        <h3 id="dailyTitle">Complete one English activity</h3>
-        <p id="dailyDescription">
-          Complete any activity to earn bonus XP.
-        </p>
-      </div>
-
-      <div class="daily-reward">
-        <span>REWARD</span>
-        <strong>+50 XP</strong>
-      </div>
-
-    </section>
-
-    <!-- MISSIONS -->
-
-    <section class="missions-section">
-
-      <div class="section-heading">
-
-        <div>
-          <span class="eyebrow">MISSION MAP</span>
-          <h2>12 ENGLISH WORLDS</h2>
-        </div>
+        <h3>
+          Animals
+        </h3>
 
         <p>
-          Unlock every mission and become an
-          <strong>English Master.</strong>
+          Hologram Zoo
         </p>
 
-      </div>
+        <div class="lesson-bottom">
 
-      <div id="missionGrid" class="mission-grid"></div>
+          <div class="stars">
+            ★★★★★
+          </div>
 
-    </section>
+          <button class="enter-btn">
+            ENTER →
+          </button>
 
-    <!-- ACHIEVEMENTS -->
-
-    <section class="achievement-section">
-
-      <div class="section-heading">
-
-        <div>
-          <span class="eyebrow">ACHIEVEMENTS</span>
-          <h2>UNLOCK YOUR BADGES</h2>
         </div>
 
-      </div>
+      </article>
 
-      <div id="achievementGrid" class="achievement-grid"></div>
 
-    </section>
+      <!-- LESSON 2 -->
 
-    <footer>
+      <article
+        class="lesson"
+        data-lesson="02"
+      >
+
+        <div class="lesson-number">
+          LESSON 02
+        </div>
+
+        <div class="lesson-icon">
+          🔢
+        </div>
+
+        <h3>
+          Numbers
+        </h3>
+
+        <p>
+          Space Numbers
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 3 -->
+
+      <article
+        class="lesson"
+        data-lesson="03"
+      >
+
+        <div class="lesson-number">
+          LESSON 03
+        </div>
+
+        <div class="lesson-icon">
+          🎨
+        </div>
+
+        <h3>
+          Colors
+        </h3>
+
+        <p>
+          Neon Color Lab
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 4 -->
+
+      <article
+        class="lesson"
+        data-lesson="04"
+      >
+
+        <div class="lesson-number">
+          LESSON 04
+        </div>
+
+        <div class="lesson-icon">
+          👨‍👩‍👧
+        </div>
+
+        <h3>
+          Family
+        </h3>
+
+        <p>
+          Family Galaxy
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 5 -->
+
+      <article
+        class="lesson"
+        data-lesson="05"
+      >
+
+        <div class="lesson-number">
+          LESSON 05
+        </div>
+
+        <div class="lesson-icon">
+          🏠
+        </div>
+
+        <h3>
+          Home
+        </h3>
+
+        <p>
+          Smart Home
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 6 -->
+
+      <article
+        class="lesson"
+        data-lesson="06"
+      >
+
+        <div class="lesson-number">
+          LESSON 06
+        </div>
+
+        <div class="lesson-icon">
+          🍎
+        </div>
+
+        <h3>
+          Food
+        </h3>
+
+        <p>
+          Food Planet
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 7 -->
+
+      <article
+        class="lesson"
+        data-lesson="07"
+      >
+
+        <div class="lesson-number">
+          LESSON 07
+        </div>
+
+        <div class="lesson-icon">
+          👕
+        </div>
+
+        <h3>
+          Clothes
+        </h3>
+
+        <p>
+          Fashion Station
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 8 -->
+
+      <article
+        class="lesson"
+        data-lesson="08"
+      >
+
+        <div class="lesson-number">
+          LESSON 08
+        </div>
+
+        <div class="lesson-icon">
+          🌦️
+        </div>
+
+        <h3>
+          Weather
+        </h3>
+
+        <p>
+          Weather Lab
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 9 -->
+
+      <article
+        class="lesson"
+        data-lesson="09"
+      >
+
+        <div class="lesson-number">
+          LESSON 09
+        </div>
+
+        <div class="lesson-icon">
+          🎒
+        </div>
+
+        <h3>
+          School
+        </h3>
+
+        <p>
+          Future School
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 10 -->
+
+      <article
+        class="lesson"
+        data-lesson="10"
+      >
+
+        <div class="lesson-number">
+          LESSON 10
+        </div>
+
+        <div class="lesson-icon">
+          🚀
+        </div>
+
+        <h3>
+          Transport
+        </h3>
+
+        <p>
+          Transport Zone
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 11 -->
+
+      <article
+        class="lesson"
+        data-lesson="11"
+      >
+
+        <div class="lesson-number">
+          LESSON 11
+        </div>
+
+        <div class="lesson-icon">
+          🌳
+        </div>
+
+        <h3>
+          Nature
+        </h3>
+
+        <p>
+          Nature World
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+      <!-- LESSON 12 -->
+
+      <article
+        class="lesson final-lesson"
+        data-lesson="12"
+      >
+
+        <div class="lesson-number">
+          FINAL MISSION
+        </div>
+
+        <div class="lesson-icon">
+          🏆
+        </div>
+
+        <h3>
+          Review
+        </h3>
+
+        <p>
+          Final Challenge
+        </p>
+
+        <div class="lesson-bottom">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <button class="enter-btn">
+            ENTER →
+          </button>
+
+        </div>
+
+      </article>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
       ENGLISH WITH MARIAMI
-      <span>◆</span>
+      <span>•</span>
       GRADE 2
-      <span>◆</span>
-      LEARN • PLAY • LEVEL UP
+      <span>•</span>
+      INTERACTIVE LEARNING
+
     </footer>
 
-  </main>
-
-  <!-- MAIN MODAL -->
-
-  <div id="modal" class="modal">
-
-    <div class="modal-backdrop"></div>
-
-    <div class="modal-window">
-
-      <button id="modalClose" class="modal-close">
-        ×
-      </button>
-
-      <div id="modalContent"></div>
-
-    </div>
-
   </div>
+
 
   <script src="grade2.js"></script>
 
