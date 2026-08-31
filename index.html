@@ -1,2645 +1,309 @@
 <!DOCTYPE html>
-<html lang="ka">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-<meta name="theme-color" content="#020817">
-<meta name="description" content="English with Mariami — ინგლისურის აკადემია ბავშვებისთვის">
-
-<title>English with Mariami — English Academy</title>
-
-<style>
-/* =========================================================
-   ENGLISH WITH MARIAMI
-   FUTURISTIC 3D INDEX PAGE
-   ========================================================= */
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  min-height:100vh;
-  overflow-x:hidden;
-  font-family:
-    Arial,
-    "Noto Sans Georgian",
-    sans-serif;
-  color:#fff;
-  background:#01050d;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button{
-  font-family:inherit;
-}
-
-/* =========================================================
-   3D WORLD
-   ========================================================= */
-
-.neon-world{
-  position:fixed;
-  inset:0;
-  z-index:-10;
-  overflow:hidden;
-
-  background:
-    radial-gradient(
-      circle at 50% 28%,
-      #dffaff 0%,
-      #8ed9f5 16%,
-      #236b9d 42%,
-      #061b34 68%,
-      #01050d 100%
-    );
-}
-
-.neon-world::before{
-  content:"";
-  position:absolute;
-  inset:-20%;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 18%,
-      rgba(0,20,45,.25) 45%,
-      rgba(0,5,15,.88) 85%
-    );
-
-  pointer-events:none;
-}
-
-.neon-world::after{
-  content:"";
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(0,234,255,.18),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 80% 30%,
-      rgba(130,0,255,.14),
-      transparent 25%
-    );
-
-  animation:
-    worldPulse 8s ease-in-out infinite alternate;
-
-  pointer-events:none;
-}
-
-@keyframes worldPulse{
-  from{
-    opacity:.55;
-    transform:scale(1);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1.08);
-  }
-}
-
-/* =========================================================
-   3D GRID
-   ========================================================= */
-
-.grid-floor{
-  position:absolute;
-  left:-30%;
-  right:-30%;
-  bottom:-28%;
-  height:70%;
-
-  transform:
-    perspective(500px)
-    rotateX(64deg);
-
-  transform-origin:center bottom;
-
-  background-image:
-    linear-gradient(
-      rgba(0,234,255,.28) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(0,234,255,.28) 1px,
-      transparent 1px
-    );
-
-  background-size:65px 65px;
-
-  mask-image:
-    linear-gradient(
-      to top,
-      #000 10%,
-      rgba(0,0,0,.7) 45%,
-      transparent 100%
-    );
-
-  animation:
-    gridMove 8s linear infinite;
-
-  opacity:.75;
-}
-
-@keyframes gridMove{
-  from{
-    background-position:
-      0 0,
-      0 0;
-  }
-
-  to{
-    background-position:
-      0 65px,
-      65px 0;
-  }
-}
-
-/* =========================================================
-   FLOATING LETTERS
-   ========================================================= */
-
-.letters{
-  position:absolute;
-  inset:0;
-  perspective:1200px;
-  overflow:hidden;
-}
-
-.letter{
-  position:absolute;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  width:clamp(55px,8vw,115px);
-  height:clamp(55px,8vw,115px);
-
-  font-size:clamp(45px,7vw,105px);
-  font-weight:1000;
-
-  font-family:
-    Arial,
-    sans-serif;
-
-  color:#fff;
-
-  text-shadow:
-    0 0 5px #fff,
-    0 0 12px #00eaff,
-    0 0 28px #00bfff,
-    0 0 60px #007cff;
-
-  filter:
-    drop-shadow(0 18px 20px rgba(0,20,50,.8));
-
-  transform-style:preserve-3d;
-
-  user-select:none;
-  pointer-events:none;
-
-  animation:
-    letterFloat
-    var(--duration,8s)
-    ease-in-out
-    infinite;
-
-  animation-delay:
-    var(--delay,0s);
-}
-
-.letter::before{
-  content:"";
-  position:absolute;
-
-  width:65%;
-  height:20%;
-
-  bottom:-8px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(0,234,255,.5),
-      transparent 70%
-    );
-
-  filter:blur(10px);
-
-  transform:
-    translateZ(-30px);
-}
-
-@keyframes letterFloat{
-
-  0%{
-    transform:
-      translate3d(0,0,0)
-      rotateX(-8deg)
-      rotateY(-18deg)
-      rotateZ(-3deg)
-      scale(.92);
-  }
-
-  25%{
-    transform:
-      translate3d(20px,-28px,70px)
-      rotateX(15deg)
-      rotateY(20deg)
-      rotateZ(3deg)
-      scale(1.05);
-  }
-
-  50%{
-    transform:
-      translate3d(-18px,-55px,110px)
-      rotateX(-15deg)
-      rotateY(32deg)
-      rotateZ(-4deg)
-      scale(1.12);
-  }
-
-  75%{
-    transform:
-      translate3d(25px,-20px,55px)
-      rotateX(10deg)
-      rotateY(-25deg)
-      rotateZ(4deg)
-      scale(1);
-  }
-
-  100%{
-    transform:
-      translate3d(0,0,0)
-      rotateX(-8deg)
-      rotateY(-18deg)
-      rotateZ(-3deg)
-      scale(.92);
-  }
-}
-
-/* =========================================================
-   PARTICLES
-   ========================================================= */
-
-.particles{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.particle{
-  position:absolute;
-
-  width:4px;
-  height:4px;
-
-  border-radius:50%;
-
-  background:#fff;
-
-  box-shadow:
-    0 0 8px #00eaff,
-    0 0 18px #00eaff;
-
-  animation:
-    particleMove
-    var(--p-duration,7s)
-    linear infinite;
-
-  animation-delay:
-    var(--p-delay,0s);
-}
-
-@keyframes particleMove{
-  0%{
-    transform:
-      translate3d(0,30px,0)
-      scale(.4);
-
-    opacity:0;
-  }
-
-  15%{
-    opacity:1;
-  }
-
-  70%{
-    opacity:.8;
-  }
-
-  100%{
-    transform:
-      translate3d(
-        var(--x,40px),
-        -110vh,
-        var(--z,50px)
-      )
-      scale(1.5);
-
-    opacity:0;
-  }
-}
-
-/* =========================================================
-   WRAPPER
-   ========================================================= */
-
-.wrap{
-  width:min(1250px,calc(100% - 28px));
-  margin:auto;
-}
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-.top{
-  position:sticky;
-  top:0;
-  z-index:100;
-
-  background:
-    rgba(2,21,45,.82);
-
-  border-bottom:
-    1px solid rgba(0,234,255,.4);
-
-  backdrop-filter:
-    blur(18px);
-
-  box-shadow:
-    0 8px 35px rgba(0,0,0,.35);
-}
-
-.nav{
-  min-height:70px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:18px;
-}
-
-.brand{
-  font-size:18px;
-  font-weight:1000;
-
-  color:#fff;
-
-  text-shadow:
-    0 0 10px #00eaff,
-    0 0 25px #00eaff;
-
-  white-space:nowrap;
-}
-
-.navlinks{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-}
-
-.navlinks a{
-  position:relative;
-
-  padding:10px 14px;
-
-  border-radius:13px;
-
-  background:
-    rgba(5,38,68,.8);
-
-  border:
-    1px solid rgba(0,234,255,.28);
-
-  font-size:13px;
-  font-weight:700;
-
-  transition:
-    .25s ease;
-
-  overflow:hidden;
-}
-
-.navlinks a::before{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent,
-      rgba(255,255,255,.25),
-      transparent
-    );
-
-  transform:
-    translateX(-120%);
-
-  transition:.5s;
-}
-
-.navlinks a:hover::before{
-  transform:
-    translateX(120%);
-}
-
-.navlinks a:hover{
-  transform:
-    translateY(-3px);
-
-  background:#00c9f2;
-  color:#00131a;
-
-  box-shadow:
-    0 0 25px #00eaff,
-    0 10px 25px rgba(0,0,0,.4);
-}
-
-.academy-button{
-  background:
-    linear-gradient(
-      135deg,
-      #00eaff,
-      #007cff
-    ) !important;
-
-  color:#00131a !important;
-  font-weight:1000 !important;
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero{
-  min-height:760px;
-
-  display:flex;
-  align-items:center;
-
-  padding:
-    80px 0
-    60px;
-}
-
-.hero-grid{
-  display:grid;
-
-  grid-template-columns:
-    1.15fr .85fr;
-
-  gap:40px;
-
-  align-items:center;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-
-  padding:9px 15px;
-
-  border-radius:30px;
-
-  background:
-    rgba(3,28,55,.82);
-
-  border:
-    1px solid rgba(0,234,255,.55);
-
-  color:#ffe600;
-
-  font-weight:900;
-
-  box-shadow:
-    0 0 25px rgba(0,234,255,.15);
-
-  backdrop-filter:
-    blur(10px);
-}
-
-.hero h1{
-  margin:22px 0;
-
-  font-size:
-    clamp(44px,7vw,82px);
-
-  line-height:.98;
-
-  letter-spacing:-2px;
-
-  text-shadow:
-    0 0 25px rgba(0,234,255,.4);
-}
-
-.hero h1 span{
-  color:#00eaff;
-
-  text-shadow:
-    0 0 12px #00eaff,
-    0 0 35px #00eaff,
-    0 0 70px #008cff;
-}
-
-.lead{
-  max-width:720px;
-
-  color:#ecfcff;
-
-  font-size:19px;
-
-  line-height:1.75;
-
-  text-shadow:
-    0 3px 12px #001b2d;
-}
-
-.buttons{
-  display:flex;
-  flex-wrap:wrap;
-
-  gap:12px;
-
-  margin-top:27px;
-}
-
-.btn{
-  position:relative;
-
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  min-height:48px;
-
-  padding:13px 19px;
-
-  border:0;
-  border-radius:14px;
-
-  cursor:pointer;
-
-  font-weight:900;
-
-  transition:
-    .25s ease;
-
-  overflow:hidden;
-}
-
-.btn::after{
-  content:"";
-
-  position:absolute;
-
-  top:-100%;
-  left:-30%;
-
-  width:25%;
-  height:300%;
-
-  background:
-    rgba(255,255,255,.45);
-
-  transform:
-    rotate(25deg);
-
-  transition:
-    .6s;
-}
-
-.btn:hover::after{
-  left:120%;
-}
-
-.btn:hover{
-  transform:
-    translateY(-4px)
-    scale(1.03);
-}
-
-.primary{
-  background:
-    linear-gradient(
-      135deg,
-      #00eaff,
-      #007cff
-    );
-
-  color:#00131a;
-
-  box-shadow:
-    0 0 25px rgba(0,234,255,.5);
-}
-
-.yellow{
-  background:#ffe600;
-
-  color:#181500;
-
-  box-shadow:
-    0 0 25px rgba(255,230,0,.35);
-}
-
-/* =========================================================
-   3D TEACHER CARD
-   ========================================================= */
-
-.neon-card{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(4,26,49,.9),
-      rgba(2,11,25,.9)
-    );
-
-  border:
-    1px solid rgba(0,234,255,.38);
-
-  border-radius:25px;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.6),
-    0 0 35px rgba(0,234,255,.12);
-
-  backdrop-filter:
-    blur(15px);
-
-  transform-style:preserve-3d;
-}
-
-.teacher{
-  position:relative;
-
-  padding:38px 28px;
-
-  text-align:center;
-
-  transform:
-    perspective(1000px)
-    rotateY(-7deg)
-    rotateX(3deg);
-
-  transition:
-    transform .15s ease;
-}
-
-.teacher::before{
-  content:"";
-
-  position:absolute;
-  inset:1px;
-
-  border-radius:24px;
-
-  background:
-    linear-gradient(
-      120deg,
-      transparent 20%,
-      rgba(0,234,255,.12),
-      transparent 70%
-    );
-
-  pointer-events:none;
-}
-
-.avatar{
-  position:relative;
-
-  font-size:105px;
-
-  transform:translateZ(55px);
-
-  filter:
-    drop-shadow(
-      0 0 28px #00eaff
-    );
-
-  animation:
-    teacherFloat 4s ease-in-out infinite;
-}
-
-@keyframes teacherFloat{
-  0%,100%{
-    transform:
-      translateZ(55px)
-      translateY(0)
-      rotateZ(0);
-  }
-
-  50%{
-    transform:
-      translateZ(80px)
-      translateY(-15px)
-      rotateZ(2deg);
-  }
-}
-
-.teacher h2{
-  margin:17px 0 8px;
-
-  font-size:29px;
-
-  transform:
-    translateZ(40px);
-}
-
-.muted{
-  color:#bfe8f3;
-}
-
-.pill{
-  display:inline-block;
-
-  margin:4px;
-
-  padding:8px 11px;
-
-  border-radius:20px;
-
-  background:
-    rgba(10,45,80,.8);
-
-  border:
-    1px solid rgba(0,234,255,.3);
-
-  font-size:13px;
-}
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
-
-.section{
-  padding:65px 0;
-}
-
-.section-title{
-  margin-bottom:32px;
-  text-align:center;
-}
-
-.section-title h2{
-  margin:14px 0;
-
-  font-size:36px;
-
-  text-shadow:
-    0 0 20px rgba(0,234,255,.25);
-}
-
-/* =========================================================
-   FEATURES
-   ========================================================= */
-
-.feature-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:17px;
-}
-
-.feature{
-  min-height:165px;
-
-  padding:25px;
-
-  text-align:center;
-
-  transition:
-    .3s ease;
-}
-
-.feature:hover{
-  transform:
-    translateY(-10px)
-    rotateX(3deg);
-
-  box-shadow:
-    0 25px 55px rgba(0,0,0,.6),
-    0 0 35px rgba(0,234,255,.2);
-}
-
-.feature b{
-  display:block;
-
-  margin-bottom:11px;
-
-  color:#ffe600;
-
-  font-size:20px;
-}
-
-.feature span{
-  color:#d9f7ff;
-
-  line-height:1.6;
-}
-
-/* =========================================================
-   CLASSES
-   ========================================================= */
-
-.classes{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:18px;
-}
-
-.class-card{
-  padding:29px;
-
-  transition:
-    .3s ease;
-}
-
-.class-card:hover{
-  transform:
-    translateY(-9px)
-    perspective(800px)
-    rotateX(2deg);
-
-  box-shadow:
-    0 30px 70px rgba(0,0,0,.7),
-    0 0 40px rgba(0,234,255,.2);
-}
-
-.class-card h3{
-  margin-bottom:13px;
-
-  color:#ffe600;
-
-  font-size:25px;
-}
-
-.class-card p{
-  margin-bottom:20px;
-
-  color:#d9f7ff;
-
-  line-height:1.7;
-}
-
-/* =========================================================
-   INFO
-   ========================================================= */
-
-.info-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:18px;
-}
-
-.info-card{
-  padding:28px;
-
-  text-align:center;
-
-  transition:
-    .3s ease;
-}
-
-.info-card:hover{
-  transform:
-    translateY(-8px);
-}
-
-.info-icon{
-  font-size:52px;
-
-  filter:
-    drop-shadow(
-      0 0 18px #00eaff
-    );
-}
-
-.info-card h3{
-  margin:12px 0;
-
-  color:#ffe600;
-}
-
-.info-card p{
-  color:#d9f7ff;
-
-  line-height:1.6;
-}
-
-/* =========================================================
-   PARENT SPACE
-   ========================================================= */
-
-.parent-preview{
-  position:relative;
-
-  min-height:440px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  overflow:hidden;
-
-  padding:25px;
-
-  background:
-    radial-gradient(
-      circle at center,
-      #08669c,
-      #032d50 42%,
-      #020f20 75%,
-      #010711
-    );
-}
-
-.parent-preview::before{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      transparent 20%,
-      rgba(0,0,0,.5) 100%
-    );
-}
-
-.family{
-  position:absolute;
-
-  left:50%;
-  top:43%;
-
-  transform:
-    translate(-50%,-50%);
-
-  display:flex;
-
-  align-items:flex-end;
-
-  gap:25px;
-
-  font-size:70px;
-
-  filter:
-    drop-shadow(
-      0 0 22px #00eaff
-    );
-
-  animation:
-    familyMove 5s ease-in-out infinite;
-}
-
-@keyframes familyMove{
-  0%,100%{
-    transform:
-      translate(-50%,-50%)
-      translateY(0)
-      rotateY(-6deg);
-  }
-
-  50%{
-    transform:
-      translate(-50%,-55%)
-      translateY(-15px)
-      rotateY(8deg);
-  }
-}
-
-.family-person{
-  animation:
-    personMove 3s ease-in-out infinite;
-}
-
-.family-person:nth-child(2){
-  animation-delay:-1s;
-}
-
-.family-person:nth-child(3){
-  animation-delay:-2s;
-}
-
-@keyframes personMove{
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-12px);
-  }
-}
-
-.parent-content{
-  position:relative;
-  z-index:5;
-
-  width:min(700px,92%);
-
-  padding:34px 27px;
-
-  text-align:center;
-
-  background:
-    rgba(2,24,45,.84);
-
-  border:
-    1px solid rgba(0,234,255,.4);
-
-  border-radius:26px;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.7);
-
-  backdrop-filter:
-    blur(12px);
-}
-
-.parent-content .icon{
-  font-size:60px;
-
-  animation:
-    iconMove 3s ease-in-out infinite;
-}
-
-@keyframes iconMove{
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:
-      translateY(-9px)
-      scale(1.08);
-  }
-}
-
-.parent-content h2{
-  margin:10px 0 15px;
-
-  color:#00eaff;
-
-  font-size:33px;
-
-  text-shadow:
-    0 0 20px #00eaff88;
-}
-
-.parent-content p{
-  color:#d9f7ff;
-
-  line-height:1.7;
-}
-
-.parent-button{
-  font-size:17px;
-}
-
-/* =========================================================
-   CTA
-   ========================================================= */
-
-.cta{
-  position:relative;
-
-  padding:50px 25px;
-
-  text-align:center;
-
-  overflow:hidden;
-}
-
-.cta::before{
-  content:"";
-
-  position:absolute;
-
-  width:350px;
-  height:350px;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(0,234,255,.2),
-      transparent 70%
-    );
-
-  animation:
-    ctaPulse 4s ease-in-out infinite;
-}
-
-@keyframes ctaPulse{
-  0%,100%{
-    transform:
-      translate(-50%,-50%)
-      scale(.8);
-  }
-
-  50%{
-    transform:
-      translate(-50%,-50%)
-      scale(1.25);
-  }
-}
-
-.cta > *{
-  position:relative;
-  z-index:2;
-}
-
-.cta h2{
-  margin:18px 0;
-
-  font-size:
-    clamp(27px,5vw,38px);
-}
-
-.cta p{
-  font-size:17px;
-
-  line-height:1.7;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
-.footer{
-  margin-top:35px;
-
-  padding:35px 0;
-
-  text-align:center;
-
-  color:#9dc7d5;
-
-  border-top:
-    1px solid rgba(0,234,255,.2);
-}
-
-.site-copyright{
-  padding:18px 12px;
-
-  text-align:center;
-
-  color:#8fb8c5;
-
-  font-size:13px;
-
-  border-top:
-    1px solid rgba(0,234,255,.2);
-
-  background:
-    linear-gradient(
-      180deg,
-      transparent,
-      rgba(2,11,25,.75)
-    );
-}
-
-/* =========================================================
-   MOBILE NAV
-   ========================================================= */
-
-.mobile-nav{
-  display:none;
-}
-
-/* =========================================================
-   REVEAL
-   ========================================================= */
-
-.reveal{
-  opacity:0;
-  transform:translateY(30px);
-
-  transition:
-    opacity .8s ease,
-    transform .8s ease;
-}
-
-.reveal.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media(max-width:950px){
-
-  .hero-grid{
-    grid-template-columns:1fr;
-  }
-
-  .teacher{
-    max-width:620px;
-    width:100%;
-    margin:auto;
-  }
-
-  .feature-grid{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .classes{
-    grid-template-columns:1fr;
-  }
-
-  .info-grid{
-    grid-template-columns:
-      repeat(3,1fr);
-  }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:600px){
-
-  body{
-    padding-bottom:74px;
-  }
-
-  .wrap{
-    width:
-      min(
-        calc(100% - 20px),
-        480px
-      );
-  }
-
-  .top{
-    position:sticky;
-  }
-
-  .nav{
-    min-height:auto;
-
-    padding:
-      9px 0;
-
-    flex-direction:column;
-
-    gap:8px;
-  }
-
-  .brand{
-    width:100%;
-
-    text-align:center;
-
-    font-size:15px;
-  }
-
-  .navlinks{
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:
-      repeat(4,1fr);
-
-    gap:5px;
-  }
-
-  .navlinks a{
-    min-height:41px;
-
-    padding:
-      6px 3px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    font-size:10px;
-  }
-
-  .hero{
-    min-height:auto;
-
-    padding:
-      45px 0
-      30px;
-  }
-
-  .hero h1{
-    font-size:
-      clamp(
-        35px,
-        10vw,
-        46px
-      );
-
-    letter-spacing:-1px;
-  }
-
-  .lead{
-    font-size:16px;
-
-    line-height:1.6;
-  }
-
-  .buttons{
-    margin-top:19px;
-  }
-
-  .btn{
-    width:100%;
-
-    min-height:49px;
-  }
-
-  .teacher{
-    padding:27px 15px;
-
-    transform:none !important;
-  }
-
-  .avatar{
-    font-size:75px;
-  }
-
-  .teacher h2{
-    font-size:24px;
-  }
-
-  .section{
-    padding:
-      40px 0;
-  }
-
-  .section-title{
-    margin-bottom:21px;
-  }
-
-  .section-title h2{
-    font-size:28px;
-  }
-
-  .feature-grid,
-  .classes,
-  .info-grid{
-    grid-template-columns:1fr;
-
-    gap:13px;
-  }
-
-  .feature{
-    min-height:0;
-
-    padding:20px;
-  }
-
-  .class-card{
-    padding:22px;
-  }
-
-  .info-card{
-    padding:22px;
-  }
-
-  .parent-preview{
-    min-height:490px;
-
-    padding:14px;
-  }
-
-  .family{
-    top:29%;
-
-    gap:5px;
-
-    font-size:43px;
-  }
-
-  .parent-content{
-    width:100%;
-
-    padding:
-      24px 14px;
-  }
-
-  .parent-content .icon{
-    font-size:50px;
-  }
-
-  .parent-content h2{
-    font-size:26px;
-  }
-
-  .parent-content p{
-    font-size:14px;
-
-    line-height:1.6;
-  }
-
-  .pill{
-    font-size:11px;
-
-    padding:
-      7px 8px;
-  }
-
-  .cta{
-    padding:
-      38px 17px;
-  }
-
-  .cta h2{
-    font-size:27px;
-  }
-
-  .cta p{
-    font-size:14px;
-  }
-
-  .footer{
-    padding:
-      27px 0;
-
-    font-size:13px;
-  }
-
-  .site-copyright{
-    font-size:11px;
-
-    padding-bottom:92px;
-  }
-
-  /* mobile floating letters */
-
-  .letter{
-    width:45px;
-    height:45px;
-
-    font-size:38px !important;
-
-    opacity:.55;
-  }
-
-  .letter:nth-child(n+7){
-    display:none;
-  }
-
-  .grid-floor{
-    height:55%;
-
-    bottom:-18%;
-
-    opacity:.38;
-
-    background-size:
-      45px 45px;
-  }
-
-  /* mobile navigation */
-
-  .mobile-nav{
-    position:fixed;
-
-    display:grid;
-
-    grid-template-columns:
-      repeat(4,1fr);
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    z-index:200;
-
-    height:70px;
-
-    padding:
-      7px 8px
-      calc(
-        7px +
-        env(safe-area-inset-bottom)
-      );
-
-    background:
-      rgba(2,21,45,.94);
-
-    border-top:
-      1px solid rgba(0,234,255,.4);
-
-    backdrop-filter:
-      blur(18px);
-
-    box-shadow:
-      0 -10px 35px rgba(0,0,0,.65);
-  }
-
-  .mobile-nav a{
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:2px;
-
-    border-radius:12px;
-
-    color:#bdebf5;
-
-    font-size:10px;
-  }
-
-  .mobile-nav a:first-child{
-    background:#063455;
-
-    color:#fff;
-
-    box-shadow:
-      inset 0 0 15px rgba(0,234,255,.12);
-  }
-
-  .mobile-nav .mi{
-    font-size:21px;
-
-    line-height:1;
-  }
-}
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
-    transition-duration:.01ms !important;
-  }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#030711" />
+  <meta name="description" content="English with Mariami — Grade 2 futuristic English learning mission." />
+  <title>English with Mariami | Grade 2</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="grade2.css" />
 </head>
 
 <body>
 
-<!-- =======================================================
-     FUTURISTIC BACKGROUND
-     ======================================================= -->
+  <div id="bootScreen" class="boot-screen">
+    <div class="boot-core">
+      <div class="boot-ring ring-a"></div>
+      <div class="boot-ring ring-b"></div>
+      <div class="boot-ring ring-c"></div>
 
-<div class="neon-world">
+      <div class="boot-center">
+        <span>G2</span>
+      </div>
+    </div>
 
-  <div class="letters">
+    <div class="boot-title">ENGLISH WITH MARIAMI</div>
+    <div class="boot-subtitle">GRADE 02 // NEURAL ENGLISH SYSTEM</div>
 
-    <span class="letter"
-      style="left:4%;top:15%;--duration:8s;--delay:-1s">
-      A
-    </span>
+    <div class="boot-progress">
+      <div id="bootProgress"></div>
+    </div>
 
-    <span class="letter"
-      style="left:17%;top:62%;--duration:10s;--delay:-4s">
-      B
-    </span>
-
-    <span class="letter"
-      style="left:30%;top:11%;--duration:7s;--delay:-2s">
-      C
-    </span>
-
-    <span class="letter"
-      style="left:43%;top:68%;--duration:9s;--delay:-5s">
-      D
-    </span>
-
-    <span class="letter"
-      style="left:55%;top:14%;--duration:8s;--delay:-3s">
-      E
-    </span>
-
-    <span class="letter"
-      style="left:68%;top:57%;--duration:11s;--delay:-6s">
-      F
-    </span>
-
-    <span class="letter"
-      style="left:80%;top:18%;--duration:9s;--delay:-1.5s">
-      G
-    </span>
-
-    <span class="letter"
-      style="left:91%;top:70%;--duration:10s;--delay:-4.5s">
-      H
-    </span>
-
-    <span class="letter"
-      style="left:12%;top:34%;font-size:55px;--duration:8s;--delay:-3.5s">
-      I
-    </span>
-
-    <span class="letter"
-      style="left:74%;top:38%;font-size:55px;--duration:7s;--delay:-2.5s">
-      J
-    </span>
-
+    <div id="bootStatus">INITIALIZING...</div>
   </div>
 
-  <!-- Floating particles -->
+  <div id="toastLayer" class="toast-layer"></div>
 
-  <div class="particles">
+  <div id="particles" class="particles"></div>
 
-    <i class="particle"
-       style="left:8%;bottom:-10%;--x:30px;--p-duration:8s;--p-delay:-2s"></i>
+  <div class="scanlines"></div>
 
-    <i class="particle"
-       style="left:18%;bottom:-5%;--x:-25px;--p-duration:11s;--p-delay:-5s"></i>
+  <header class="topbar">
 
-    <i class="particle"
-       style="left:29%;bottom:-10%;--x:40px;--p-duration:9s;--p-delay:-1s"></i>
+    <div class="brand">
 
-    <i class="particle"
-       style="left:42%;bottom:-10%;--x:-40px;--p-duration:12s;--p-delay:-7s"></i>
+      <div class="brand-orb">
+        <span>G2</span>
+      </div>
 
-    <i class="particle"
-       style="left:53%;bottom:-10%;--x:25px;--p-duration:8s;--p-delay:-3s"></i>
-
-    <i class="particle"
-       style="left:64%;bottom:-10%;--x:-30px;--p-duration:10s;--p-delay:-6s"></i>
-
-    <i class="particle"
-       style="left:77%;bottom:-10%;--x:45px;--p-duration:9s;--p-delay:-4s"></i>
-
-    <i class="particle"
-       style="left:88%;bottom:-10%;--x:-35px;--p-duration:12s;--p-delay:-8s"></i>
-
-  </div>
-
-  <div class="grid-floor"></div>
-
-</div>
-
-
-<!-- =======================================================
-     NAV
-     ======================================================= -->
-
-<header class="top">
-
-  <div class="wrap nav">
-
-    <a
-      class="brand"
-      href="index.html"
-    >
-      ⚡ ENGLISH WITH MARIAMI
-    </a>
-
-    <nav class="navlinks">
-
-      <a
-        href="academy.html"
-        class="academy-button"
-      >
-        🎓 ცენტრი
-      </a>
-
-      <a href="#classes">
-        📚 კლასები
-      </a>
-
-      <a href="#learn">
-        🧠 სწავლა
-      </a>
-
-      <a href="#parents">
-        👨‍👩‍👧 მშობელი
-      </a>
-
-    </nav>
-
-  </div>
-
-</header>
-
-
-<!-- =======================================================
-     MAIN
-     ======================================================= -->
-
-<main class="wrap">
-
-
-<!-- HERO -->
-
-<section class="hero reveal">
-
-  <div class="hero-grid">
-
-    <div>
-
-      <span class="badge">
-        🇬🇧 ქართული ↔ English • 2026
-      </span>
-
-      <h1>
-        ინგლისური
-        <br>
-
-        <span>
-          მარტივად და სახალისოდ
-        </span>
-
-        <br>
-
-        ბავშვებისთვის!
-      </h1>
-
-      <p class="lead">
-        კეთილი იყოს შენი მობრძანება
-        English with Mariami-ში! 🌟
-        <br>
-
-        აქ ბავშვები ინგლისურს სწავლობენ
-        თამაშით, საინტერესო დავალებებით,
-        Vocabulary-ით, Speaking-ით,
-        Reading-ით, Listening-ით და Quiz-ებით.
-      </p>
-
-      <div class="buttons">
-
-        <a
-          class="btn primary"
-          href="academy.html"
-        >
-          🎓 სასწავლო ცენტრში შესვლა →
-        </a>
-
+      <div class="brand-text">
+        <strong>ENGLISH WITH MARIAMI</strong>
+        <small>GRADE 02 // ACTION LEARNING SYSTEM</small>
       </div>
 
     </div>
 
+    <div class="player-hud">
 
-    <!-- 3D TEACHER -->
-
-    <div
-      class="neon-card teacher"
-      id="teacherCard"
-    >
-
-      <div class="avatar">
-        👩‍🏫
+      <div class="hud-item">
+        <span>LEVEL</span>
+        <strong id="levelValue">1</strong>
       </div>
 
-      <h2>
-        მასწავლებელი მარიამი
-      </h2>
+      <div class="hud-item xp-hud">
+        <span>XP</span>
+        <strong id="xpValue">0</strong>
+      </div>
 
-      <p class="muted">
-        ინგლისურის სამყაროში
-        შენი გზამკვლევი ✨
-      </p>
+      <div class="hud-item stars-hud">
+        <span>STARS</span>
+        <strong id="starsValue">0</strong>
+      </div>
 
-      <div style="margin-top:15px">
+      <div class="hud-item streak-hud">
+        <span>STREAK</span>
+        <strong id="streakValue">0 🔥</strong>
+      </div>
 
-        <span class="pill">
-          🧠 Vocabulary
-        </span>
+    </div>
 
-        <span class="pill">
-          🔊 Listening
-        </span>
+    <button id="soundToggle" class="icon-button" title="Toggle sound">
+      🔊
+    </button>
 
-        <span class="pill">
-          🗣️ Speaking
-        </span>
+  </header>
 
-        <span class="pill">
-          📖 Reading
-        </span>
+  <main class="app-shell">
 
-        <span class="pill">
-          ✍️ Grammar
-        </span>
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="hero-copy">
+
+        <div class="system-tag">
+          <span class="live-dot"></span>
+          SYSTEM ONLINE
+        </div>
+
+        <h1>
+          <span>GRADE</span>
+          <strong>02</strong>
+        </h1>
+
+        <p class="hero-subtitle">
+          ENTER THE
+          <span>ENGLISH MISSION</span>
+        </p>
+
+        <p class="hero-description">
+          ისწავლე ინგლისური სიტყვები, წინადადებები და მარტივი გრამატიკა
+          თამაშის სტილში.
+          <br>
+          <b>Learn. Listen. Play. Level Up.</b>
+        </p>
+
+        <div class="hero-actions">
+
+          <button id="continueBtn" class="neon-btn primary">
+            🚀 CONTINUE MISSION
+          </button>
+
+          <button id="reviewBtn" class="neon-btn secondary">
+            🏆 FINAL REVIEW
+          </button>
+
+        </div>
+
+        <div class="hero-mini-stats">
+
+          <div>
+            <span>MISSIONS</span>
+            <strong id="missionCount">0/12</strong>
+          </div>
+
+          <div>
+            <span>WORDS</span>
+            <strong id="wordCount">0</strong>
+          </div>
+
+          <div>
+            <span>ACHIEVEMENTS</span>
+            <strong id="achievementCount">0</strong>
+          </div>
+
+        </div>
 
       </div>
+
+      <div class="hero-reactor">
+
+        <div class="reactor-scene">
+
+          <div class="reactor-ring reactor-one"></div>
+          <div class="reactor-ring reactor-two"></div>
+          <div class="reactor-ring reactor-three"></div>
+
+          <div class="reactor-core">
+
+            <div class="core-light"></div>
+
+            <div class="core-text">
+              <small>ENGLISH</small>
+              <strong>G2</strong>
+              <span>ONLINE</span>
+            </div>
+
+          </div>
+
+          <div class="orbit-dot dot-one"></div>
+          <div class="orbit-dot dot-two"></div>
+          <div class="orbit-dot dot-three"></div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PLAYER PROGRESS -->
+
+    <section class="progress-panel">
+
+      <div class="progress-header">
+
+        <div>
+          <span class="eyebrow">PLAYER PROGRESS</span>
+          <h2 id="rankTitle">ROOKIE EXPLORER</h2>
+        </div>
+
+        <div class="next-level">
+          <span>NEXT LEVEL</span>
+          <strong id="nextLevelXp">100 XP</strong>
+        </div>
+
+      </div>
+
+      <div class="xp-track">
+
+        <div id="xpBar" class="xp-bar"></div>
+
+      </div>
+
+      <div class="xp-labels">
+
+        <span id="currentXpLabel">0 XP</span>
+        <span id="levelProgressLabel">0%</span>
+        <span id="targetXpLabel">100 XP</span>
+
+      </div>
+
+    </section>
+
+    <!-- DAILY MISSION -->
+
+    <section class="daily-panel">
+
+      <div class="daily-icon">⚡</div>
+
+      <div class="daily-content">
+        <span class="eyebrow">DAILY MISSION</span>
+        <h3 id="dailyTitle">Complete one English activity</h3>
+        <p id="dailyDescription">
+          Complete any activity to earn bonus XP.
+        </p>
+      </div>
+
+      <div class="daily-reward">
+        <span>REWARD</span>
+        <strong>+50 XP</strong>
+      </div>
+
+    </section>
+
+    <!-- MISSIONS -->
+
+    <section class="missions-section">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">MISSION MAP</span>
+          <h2>12 ENGLISH WORLDS</h2>
+        </div>
+
+        <p>
+          Unlock every mission and become an
+          <strong>English Master.</strong>
+        </p>
+
+      </div>
+
+      <div id="missionGrid" class="mission-grid"></div>
+
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+
+    <section class="achievement-section">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">ACHIEVEMENTS</span>
+          <h2>UNLOCK YOUR BADGES</h2>
+        </div>
+
+      </div>
+
+      <div id="achievementGrid" class="achievement-grid"></div>
+
+    </section>
+
+    <footer>
+      ENGLISH WITH MARIAMI
+      <span>◆</span>
+      GRADE 2
+      <span>◆</span>
+      LEARN • PLAY • LEVEL UP
+    </footer>
+
+  </main>
+
+  <!-- MAIN MODAL -->
+
+  <div id="modal" class="modal">
+
+    <div class="modal-backdrop"></div>
+
+    <div class="modal-window">
+
+      <button id="modalClose" class="modal-close">
+        ×
+      </button>
+
+      <div id="modalContent"></div>
 
     </div>
 
   </div>
 
-</section>
-
-
-<!-- CLASSES -->
-
-<section
-  id="classes"
-  class="section reveal"
->
-
-  <div class="section-title">
-
-    <span class="badge">
-      CLASSROOM
-    </span>
-
-    <h2>
-      🎓 სასწავლო კლასები
-    </h2>
-
-    <p class="muted">
-      მე-2, მე-3 და მე-4 კლასის
-      სასწავლო პროგრამები
-    </p>
-
-  </div>
-
-
-  <div class="classes">
-
-    <div class="neon-card class-card">
-
-      <h3>
-        🌱 მე-2 კლასი
-      </h3>
-
-      <p>
-        ფერები, ოჯახი, სკოლა,
-        ცხოველები, საკვები,
-        სხეულის ნაწილები,
-        რიცხვები და მარტივი სიტყვები.
-      </p>
-
-      <a
-        class="btn primary"
-        href="academy.html#grades"
-      >
-        კურსის ნახვა →
-      </a>
-
-    </div>
-
-
-    <div class="neon-card class-card">
-
-      <h3>
-        🚀 მე-3 კლასი
-      </h3>
-
-      <p>
-        ყოველდღიური ცხოვრება,
-        დღეები, თვეები, ამინდი,
-        მოქმედებები, ქალაქი,
-        Speaking და Reading.
-      </p>
-
-      <a
-        class="btn primary"
-        href="academy.html#grades"
-      >
-        კურსის ნახვა →
-      </a>
-
-    </div>
-
-
-    <div class="neon-card class-card">
-
-      <h3>
-        ⭐ მე-4 კლასი
-      </h3>
-
-      <p>
-        Present Simple, კითხვები,
-        Prepositions, Reading,
-        Writing, Dialogues
-        და Practice.
-      </p>
-
-      <a
-        class="btn primary"
-        href="academy.html#grades"
-      >
-        კურსის ნახვა →
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- LEARNING -->
-
-<section
-  id="learn"
-  class="section reveal"
->
-
-  <div class="section-title">
-
-    <span class="badge">
-      LEARN
-    </span>
-
-    <h2>
-      📚 როგორ ვისწავლით?
-    </h2>
-
-  </div>
-
-
-  <div class="feature-grid">
-
-    <div class="neon-card feature">
-
-      <b>
-        🧠 Vocabulary
-      </b>
-
-      <span>
-        ახალი ინგლისური სიტყვები,
-        ქართული თარგმანი,
-        გამოთქმა და მაგალითები.
-      </span>
-
-    </div>
-
-
-    <div class="neon-card feature">
-
-      <b>
-        🔊 Listening
-      </b>
-
-      <span>
-        მოსმენა, გამეორება
-        და სიტყვების სწორად
-        წარმოთქმა.
-      </span>
-
-    </div>
-
-
-    <div class="neon-card feature">
-
-      <b>
-        🗣️ Speaking
-      </b>
-
-      <span>
-        მოკლე დიალოგები,
-        ფრაზები და საუბრის
-        პრაქტიკა.
-      </span>
-
-    </div>
-
-
-    <div class="neon-card feature">
-
-      <b>
-        📝 Quiz
-      </b>
-
-      <span>
-        საინტერესო ტესტები,
-        ქულები და სწავლის
-        პროგრესი.
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- WHY -->
-
-<section class="section reveal">
-
-  <div class="section-title">
-
-    <span class="badge">
-      WHY MARIAMI?
-    </span>
-
-    <h2>
-      💙 რატომ ჩვენ?
-    </h2>
-
-  </div>
-
-
-  <div class="info-grid">
-
-    <div class="neon-card info-card">
-
-      <div class="info-icon">
-        🎮
-      </div>
-
-      <h3>
-        სწავლა თამაშით
-      </h3>
-
-      <p>
-        ბავშვები სწავლობენ
-        საინტერესო და სახალისო
-        სავარჯიშოებით.
-      </p>
-
-    </div>
-
-
-    <div class="neon-card info-card">
-
-      <div class="info-icon">
-        🏆
-      </div>
-
-      <h3>
-        პროგრესის კონტროლი
-      </h3>
-
-      <p>
-        ქულები, Quiz-ები
-        და სწავლის შედეგები
-        ერთ სივრცეში.
-      </p>
-
-    </div>
-
-
-    <div class="neon-card info-card">
-
-      <div class="info-icon">
-        👨‍👩‍👧
-      </div>
-
-      <h3>
-        ოჯახის ჩართულობა
-      </h3>
-
-      <p>
-        მშობელს შეუძლია
-        თვალყური ადევნოს
-        ბავშვის სწავლის პროცესს.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- PARENTS -->
-
-<section
-  id="parents"
-  class="section reveal"
->
-
-  <div class="section-title">
-
-    <span class="badge">
-      FAMILY SPACE
-    </span>
-
-    <h2>
-      👨‍👩‍👧 მშობლის სივრცე
-    </h2>
-
-    <p class="muted">
-      ბავშვის სწავლა და ოჯახი
-      ერთ სივრცეში ❤️
-    </p>
-
-  </div>
-
-
-  <div class="parent-preview neon-card">
-
-    <div class="family">
-
-      <div class="family-person">
-        👨
-      </div>
-
-      <div class="family-person">
-        👩
-      </div>
-
-      <div class="family-person">
-        🧒
-      </div>
-
-    </div>
-
-
-    <div class="parent-content">
-
-      <div class="icon">
-        👨‍👩‍👧
-      </div>
-
-      <h2>
-        მშობლის სივრცე
-      </h2>
-
-      <p>
-        მშობლის დაცულ სივრცეში
-        შეგიძლიათ ნახოთ ბავშვის
-        სწავლის პროგრესი,
-        Quiz-ის შედეგები და
-        დასვათ კითხვა მასწავლებელთან.
-      </p>
-
-      <div style="margin-top:15px">
-
-        <span class="pill">
-          📊 პროგრესი
-        </span>
-
-        <span class="pill">
-          📝 Quiz
-        </span>
-
-        <span class="pill">
-          ❓ კითხვები
-        </span>
-
-        <span class="pill">
-          💬 პასუხები
-        </span>
-
-      </div>
-
-      <div
-        class="buttons"
-        style="justify-content:center"
-      >
-
-        <a
-          href="academy.html#parents"
-          class="btn primary parent-button"
-        >
-          👨‍👩‍👧 მშობლის სივრცე →
-        </a>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- CTA -->
-
-<section class="section reveal">
-
-  <div class="neon-card cta">
-
-    <span class="badge">
-      ENGLISH ACADEMY
-    </span>
-
-    <h2>
-      🚀 მზად ხარ ინგლისურის
-      სამყაროში შესასვლელად?
-    </h2>
-
-    <p class="muted">
-      გადადი სასწავლო ცენტრში,
-      აირჩიე კლასი და დაიწყე სწავლა.
-    </p>
-
-    <div
-      class="buttons"
-      style="justify-content:center"
-    >
-
-      <a
-        class="btn primary"
-        href="academy.html"
-      >
-        🎓 სასწავლო ცენტრში შესვლა
-      </a>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer class="footer">
-
-  <div class="wrap">
-    ⚡ English with Mariami •
-    English Academy •
-    სწავლა, თამაში და პროგრესი ❤️
-  </div>
-
-</footer>
-
-
-<div class="site-copyright">
-
-  © 2026 English with Mariami —
-  ყველა უფლება დაცულია •
-  Developed by btcgamer
-
-</div>
-
-
-<!-- MOBILE NAV -->
-
-<nav
-  class="mobile-nav"
-  aria-label="მობილური მენიუ"
->
-
-  <a href="index.html">
-
-    <span class="mi">
-      🏠
-    </span>
-
-    მთავარი
-
-  </a>
-
-
-  <a href="academy.html#grades">
-
-    <span class="mi">
-      📚
-    </span>
-
-    კლასები
-
-  </a>
-
-
-  <a href="academy.html">
-
-    <span class="mi">
-      🎓
-    </span>
-
-    ცენტრი
-
-  </a>
-
-
-  <a href="academy.html#parents">
-
-    <span class="mi">
-      👤
-    </span>
-
-    პროფილი
-
-  </a>
-
-</nav>
-
-
-<script>
-/* =========================================================
-   INTERACTIVE 3D EFFECTS
-   ========================================================= */
-
-(function(){
-
-  "use strict";
-
-  /* -------------------------------------------------------
-     SCROLL REVEAL
-     ------------------------------------------------------- */
-
-  const revealItems =
-    document.querySelectorAll(".reveal");
-
-  if("IntersectionObserver" in window){
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if(entry.isIntersecting){
-
-              entry.target.classList.add(
-                "visible"
-              );
-
-              observer.unobserve(
-                entry.target
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold:.12
-        }
-      );
-
-    revealItems.forEach(
-      element =>
-        observer.observe(element)
-    );
-
-  }else{
-
-    revealItems.forEach(
-      element =>
-        element.classList.add("visible")
-    );
-
-  }
-
-
-  /* -------------------------------------------------------
-     3D TEACHER MOUSE PARALLAX
-     ------------------------------------------------------- */
-
-  const teacher =
-    document.getElementById(
-      "teacherCard"
-    );
-
-  const canHover =
-    window.matchMedia(
-      "(hover:hover)"
-    ).matches;
-
-  if(
-    teacher &&
-    canHover
-  ){
-
-    let frame = null;
-
-    document.addEventListener(
-      "mousemove",
-      event => {
-
-        if(frame) return;
-
-        frame =
-          requestAnimationFrame(
-            () => {
-
-              const x =
-                event.clientX /
-                window.innerWidth -
-                .5;
-
-              const y =
-                event.clientY /
-                window.innerHeight -
-                .5;
-
-              const rotateY =
-                x * 12;
-
-              const rotateX =
-                y * -8;
-
-              teacher.style.transform =
-                `
-                perspective(1000px)
-                rotateY(${rotateY}deg)
-                rotateX(${rotateX}deg)
-                translateZ(8px)
-                `;
-
-              frame = null;
-
-            }
-          );
-
-      }
-    );
-
-    teacher.addEventListener(
-      "mouseleave",
-      () => {
-
-        teacher.style.transform =
-          `
-          perspective(1000px)
-          rotateY(-7deg)
-          rotateX(3deg)
-          `;
-
-      }
-    );
-
-  }
-
-
-  /* -------------------------------------------------------
-     FLOATING LETTER MOUSE PARALLAX
-     ------------------------------------------------------- */
-
-  const letters =
-    document.querySelectorAll(
-      ".letter"
-    );
-
-  if(
-    canHover &&
-    letters.length
-  ){
-
-    let frame = null;
-
-    document.addEventListener(
-      "mousemove",
-      event => {
-
-        if(frame) return;
-
-        frame =
-          requestAnimationFrame(
-            () => {
-
-              const x =
-                event.clientX /
-                window.innerWidth -
-                .5;
-
-              const y =
-                event.clientY /
-                window.innerHeight -
-                .5;
-
-              letters.forEach(
-                (letter,index) => {
-
-                  const depth =
-                    (index % 5 + 1) * 3;
-
-                  const moveX =
-                    x * depth * 5;
-
-                  const moveY =
-                    y * depth * 4;
-
-                  letter.style.marginLeft =
-                    moveX + "px";
-
-                  letter.style.marginTop =
-                    moveY + "px";
-
-                }
-              );
-
-              frame = null;
-
-            }
-          );
-
-      }
-    );
-
-  }
-
-
-  /* -------------------------------------------------------
-     SMOOTH ACTIVE MOBILE NAV
-     ------------------------------------------------------- */
-
-  const mobileLinks =
-    document.querySelectorAll(
-      ".mobile-nav a"
-    );
-
-  mobileLinks.forEach(link => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        mobileLinks.forEach(
-          item =>
-            item.style.background =
-              "transparent"
-        );
-
-        link.style.background =
-          "#063455";
-
-      }
-    );
-
-  });
-
-
-  /* -------------------------------------------------------
-     PERFORMANCE:
-     pause heavy background animation
-     when page is hidden
-     ------------------------------------------------------- */
-
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-
-      const world =
-        document.querySelector(
-          ".neon-world"
-        );
-
-      if(!world) return;
-
-      if(document.hidden){
-
-        world.style.animationPlayState =
-          "paused";
-
-      }else{
-
-        world.style.animationPlayState =
-          "running";
-
-      }
-
-    }
-  );
-
-})();
-</script>
+  <script src="grade2.js"></script>
 
 </body>
 </html>
