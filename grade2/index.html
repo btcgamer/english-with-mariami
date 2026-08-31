@@ -8,20 +8,12 @@
 <link rel="stylesheet" href="grade2.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../config.js"></script>
-<link rel="stylesheet" href="/universe-theme.css"><script src="/universe-theme.js" defer></script>
+<link rel="stylesheet" href="../universe-theme.css?v=20260901"><script src="../universe-theme.js?v=20260901" defer></script>
 </head>
 <body>
 <div class="app">
-
 <header class="topbar">
-  <div class="brand">
-    <div class="logo">M</div>
-    <div class="brand-text">
-      <h1>ENGLISH WITH MARIAMI</h1>
-      <p>GRADE 2 • FUTURE LEARNING WORLD</p>
-    </div>
-  </div>
-
+  <div class="brand"><div class="logo">M</div><div class="brand-text"><h1>ENGLISH WITH MARIAMI</h1><p>GRADE 2 • FUTURE LEARNING WORLD</p></div></div>
   <div class="stats">
     <div class="stat"><b>⭐ <span id="xpValue">0</span></b><span>XP</span></div>
     <div class="stat"><b>🔥 <span id="streakValue">0</span></b><span>STREAK</span></div>
@@ -29,43 +21,18 @@
     <div class="stat"><b>LV <span id="level">1</span></b><span>LEVEL</span></div>
   </div>
 </header>
-
 <section class="hero">
   <div class="hero-badge">WELCOME TO YOUR LEARNING UNIVERSE</div>
   <h2><span>GRADE 2</span></h2>
   <p>Learn English. Play missions. Level up.</p>
-
-  <div class="progress-wrap">
-    <div class="progress-label">
-      <span>YOUR PROGRESS</span>
-      <strong id="progressText">0%</strong>
-    </div>
-    <div class="progress"><i id="progressBar"></i></div>
-  </div>
+  <div class="progress-wrap"><div class="progress-label"><span>YOUR PROGRESS</span><strong id="progressText">0%</strong></div><div class="progress"><i id="progressBar"></i></div></div>
 </section>
-
-<section class="daily">
-  <b>🎯 DAILY BOOST</b>
-  <span>Complete today's challenge and earn extra XP.</span>
-  <button id="dailyButton" type="button">START</button>
-</section>
-
+<section class="daily"><b>🎯 DAILY BOOST</b><span>Complete today's challenge and earn extra XP.</span><button id="dailyButton" type="button">START</button></section>
 <h2 class="map-title">🌌 NEON ENGLISH MAP</h2>
 <div id="lessonGrid" class="lessons"></div>
-
-<footer class="footer">
-  ENGLISH WITH MARIAMI <span>•</span> GRADE 2 <span>•</span> INTERACTIVE LEARNING
-</footer>
-
+<footer class="footer">ENGLISH WITH MARIAMI <span>•</span> GRADE 2 <span>•</span> INTERACTIVE LEARNING</footer>
 </div>
-
-<div id="modal" class="modal" aria-hidden="true">
-  <div class="panel">
-    <button class="close" id="closeModal" type="button" aria-label="Close">×</button>
-    <div id="content"></div>
-  </div>
-</div>
-
+<div id="modal" class="modal" aria-hidden="true"><div class="panel"><button class="close" id="closeModal" type="button" aria-label="Close">×</button><div id="content"></div></div></div>
 <script src="grade2.js"></script>
 <script src="grade2-supabase-bridge.js"></script>
 <script src="grade2-dashboard-bridge.js"></script>
