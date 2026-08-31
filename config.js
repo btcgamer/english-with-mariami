@@ -67,3 +67,18 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
 
   syncStudentGrade();
 })();
+
+/* =========================================================
+   SHARED GRADE 2/3/4 PROGRESS SYNC
+   Loaded from the public repo. This keeps the config above
+   unchanged while adding durable Supabase progress sync.
+========================================================= */
+(function(){
+  const src = 'progress-sync.js';
+  if(document.querySelector('script[data-english-mariami-progress-sync]')) return;
+  const s = document.createElement('script');
+  s.src = src;
+  s.async = true;
+  s.dataset.englishMariamiProgressSync = '1';
+  document.head.appendChild(s);
+})();
