@@ -8,7 +8,6 @@
   const path = (location.pathname || '').toLowerCase();
   const gradeMatch = path.match(/(?:^|\/)grade([234])\.html$/);
   const currentGrade = gradeMatch ? Number(gradeMatch[1]) : null;
-
   const key = (grade, suffix) => `grade${grade}${suffix}`;
 
   function readJson(name, fallback){
@@ -72,6 +71,7 @@
     const p = localProgress(grade);
     if(!forceLocal && p.words_learned === 0 && p.quiz_completed === 0 && p.best_quiz === 0) return;
 
+    const now = new Date().toISOString();
     const payload = {
       user_id: user.id,
       grade,
@@ -80,8 +80,8 @@
       score: p.best_quiz,
       learned_words: p.learned_words,
       best_quiz: p.best_quiz,
-      last_active_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
+      last_active_at: now,
+      updated_at: now
     };
 
     const {error} = await client
@@ -94,18 +94,57 @@
     if(!currentGrade) return;
     const remote = await loadGrade(currentGrade);
     const restored = restoreLocal(currentGrade, remote);
-
     if(restored){
       sessionStorage.setItem(`grade${currentGrade}ProgressRestored`, '1');
       location.reload();
       return;
     }
-
     await saveGrade(currentGrade, false);
+  }
+
+  function ensureGrade3And4Tracking(){
+    if(!currentGrade || currentGrade === 2) return;
+
+    const seen = new Set(readJson(key(currentGrade,'LearnedWords'), []));
+
+    const attach = () => {
+      document.querySelectorAll('.word:not([data-progress-bound]), .vocab .word:not([data-progress-bound])').forEach(el=>{
+        el.dataset.progressBound='1';
+        el.style.cursor='pointer';
+        el.addEventListener('click',()=>{
+          const text=(el.querySelector('b')?.textContent || el.textContent || '').trim();
+          if(!text) return;
+          seen.add(text.replace(/\s+/g,' '));
+          localStorage.setItem(key(currentGrade,'LearnedWords'), JSON.stringify([...seen]));
+        });
+      });
+    };
+
+    attach();
+    const observer = new MutationObserver(attach);
+    observer.observe(document.body,{subtree:true,childList:true});
+
+    const quizObserver = new MutationObserver(()=>{
+      const result=document.getElementById('quizResult');
+      if(!result) return;
+      const scoreText=result.textContent || '';
+      const m=scoreText.match(/(\d+)\s*\/\s*(\d+)/);
+      if(!m) return;
+      const score=Number(m[1]);
+      const total=Number(m[2]);
+      if(!total) return;
+      const percent=Math.round(score/total*100);
+      const attempts=Number(localStorage.getItem(key(currentGrade,'QuizAttempts'))||0)+1;
+      const oldBest=Number(localStorage.getItem(key(currentGrade,'BestScore'))||0);
+      localStorage.setItem(key(currentGrade,'QuizAttempts'),String(attempts));
+      localStorage.setItem(key(currentGrade,'BestScore'),String(Math.max(oldBest,percent)));
+    });
+    quizObserver.observe(document.body,{subtree:true,childList:true,characterData:true});
   }
 
   function watchLocalChanges(){
     if(!currentGrade) return;
+    ensureGrade3And4Tracking();
     let last = JSON.stringify(localProgress(currentGrade));
     setInterval(async ()=>{
       const now = JSON.stringify(localProgress(currentGrade));
@@ -138,8 +177,8 @@
 
     const words = Number(row.words_learned || (Array.isArray(row.learned_words) ? row.learned_words.length : 0));
     const quiz = Number(row.quiz_completed || 0);
-    const percent = Number(activeGrade === 2 ? Math.round(words / 300 * 100) : 0);
     const best = Number(row.best_quiz || 0);
+    const percent = activeGrade === 2 ? Math.round(words / 300 * 100) : Math.min(100, Math.round(words / 50 * 100));
     const level = best >= 90 ? '🏆' : best >= 70 ? '🌟' : words >= 100 ? '🔥' : '⭐';
 
     if(typeof window.setProgress === 'function'){
@@ -178,9 +217,9 @@
 
     const byStudent=new Map();
     (data||[]).forEach(row=>{
-      const key=String(row.user_id);
-      const old=byStudent.get(key);
-      if(!old || new Date(row.updated_at||0)>new Date(old.updated_at||0)) byStudent.set(key,row);
+      const k=String(row.user_id);
+      const old=byStudent.get(k);
+      if(!old || new Date(row.updated_at||0)>new Date(old.updated_at||0)) byStudent.set(k,row);
     });
 
     cards.forEach(card=>{
@@ -208,7 +247,10 @@
       await syncCurrentGrade();
       watchLocalChanges();
     }
-    if(path.includes('academy.html')) await loadAcademyProgress();
+    if(path.includes('academy.html')){
+      setTimeout(loadAcademyProgress,1200);
+      setTimeout(loadAcademyProgress,3000);
+    }
     if(path.includes('teacher-dashboard.html')){
       setTimeout(loadTeacherProgress,1200);
       setTimeout(loadTeacherProgress,3500);
