@@ -1,0 +1,41 @@
+name: Package Futuristic Learning Universe
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Create ZIP
+        run: |
+          set -e
+          rm -rf package english-with-mariami-futuristic.zip
+          mkdir -p package/english-with-mariami-futuristic
+          cp -a . package/english-with-mariami-futuristic/
+          rm -rf package/english-with-mariami-futuristic/.git package/english-with-mariami-futuristic/package
+          cat > package/english-with-mariami-futuristic/README-FUTURISTIC.md <<'EOF'
+# English with Mariami — Futuristic Learning Universe
+
+Complete repository package with the shared 3D/Neon/Holographic Learning Universe layer.
+
+Preserved: existing Grade 2 design, Supabase configuration/application files, Grade 3 and Grade 4 systems, teacher/student pages and supporting assets.
+
+Visual layer: holographic cards, 3D tilt/parallax, perspective grid, glow/shine, cosmic orbs, responsive layout and reduced-motion support.
+EOF
+          cd package
+          zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
+      - name: Upload ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-with-mariami-futuristic
+          path: english-with-mariami-futuristic.zip
+          if-no-files-found: error
+          retention-days: 30
