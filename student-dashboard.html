@@ -1,2239 +1,1259 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#020617">
-  <meta name="description" content="English with Mariami — Futuristic Student Dashboard">
-
-  <title>Student Dashboard — English with Mariami</title>
-
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Your existing config.js — DO NOT CHANGE IT -->
-  <script src="config.js"></script>
-
-  <style>
-    :root{
-      --bg:#020617;
-      --bg2:#061329;
-      --card:rgba(8,25,50,.72);
-      --card2:rgba(7,31,61,.82);
-      --cyan:#00eaff;
-      --blue:#287bff;
-      --purple:#a855f7;
-      --pink:#ff3d9a;
-      --yellow:#ffe600;
-      --green:#35ff9a;
-      --red:#ff496f;
-      --text:#f5fbff;
-      --muted:#91a9bb;
-      --border:rgba(0,234,255,.18);
-      --shadow:0 20px 70px rgba(0,0,0,.45);
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      font-size:16px;
-      scroll-behavior:smooth;
-      -webkit-text-size-adjust:100%;
-    }
-
-    body{
-      min-height:100vh;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 10% 10%,rgba(0,234,255,.12),transparent 28%),
-        radial-gradient(circle at 90% 15%,rgba(168,85,247,.13),transparent 30%),
-        radial-gradient(circle at 50% 100%,rgba(255,61,154,.08),transparent 35%),
-        linear-gradient(135deg,#01040c,#020617 45%,#04152b);
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.22;
-      background-image:
-        linear-gradient(rgba(0,234,255,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(0,234,255,.035) 1px,transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(to bottom,black,transparent);
-    }
-
-    button,
-    a,
-    input{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .app{
-      width:min(1400px,calc(100% - 30px));
-      margin:auto;
-      padding:20px 0 45px;
-      position:relative;
-      z-index:1;
-    }
-
-    /* =====================================================
-       TOP BAR
-    ===================================================== */
-
-    .topbar{
-      position:sticky;
-      top:12px;
-      z-index:100;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      padding:13px 16px;
-      margin-bottom:24px;
-
-      border:1px solid rgba(0,234,255,.18);
-      border-radius:20px;
-
-      background:rgba(2,12,27,.78);
-      backdrop-filter:blur(22px);
-      -webkit-backdrop-filter:blur(22px);
-
-      box-shadow:
-        0 10px 45px rgba(0,0,0,.38),
-        inset 0 0 30px rgba(0,234,255,.025);
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
-
-    .brand-orb{
-      width:43px;
-      height:43px;
-      flex:0 0 43px;
-      display:grid;
-      place-items:center;
-      border-radius:14px;
-
-      background:
-        radial-gradient(circle at 30% 25%,#fff,#00eaff 20%,#155cff 60%,#6c00ff);
-
-      box-shadow:
-        0 0 15px rgba(0,234,255,.65),
-        0 0 40px rgba(40,123,255,.25);
-
-      animation:orbPulse 3s infinite ease-in-out;
-    }
-
-    @keyframes orbPulse{
-      0%,100%{
-        transform:scale(1);
-        box-shadow:0 0 15px rgba(0,234,255,.55);
-      }
-      50%{
-        transform:scale(1.05);
-        box-shadow:0 0 28px rgba(0,234,255,.85);
-      }
-    }
-
-    .brand-text{
-      min-width:0;
-    }
-
-    .brand-text strong{
-      display:block;
-      font-size:15px;
-      letter-spacing:.4px;
-    }
-
-    .brand-text span{
-      display:block;
-      color:var(--muted);
-      font-size:11px;
-      margin-top:3px;
-    }
-
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .status{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      padding:9px 12px;
-      border:1px solid rgba(53,255,154,.18);
-      border-radius:12px;
-      background:rgba(53,255,154,.06);
-      color:#baffd9;
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .status-dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 13px var(--green);
-    }
-
-    .logout{
-      border:1px solid rgba(255,73,111,.35);
-      border-radius:12px;
-      padding:10px 14px;
-      color:#fff;
-      background:linear-gradient(135deg,#e91e63,#ff1744);
-      font-weight:900;
-      box-shadow:0 0 20px rgba(255,23,68,.18);
-      transition:.2s;
-    }
-
-    .logout:hover{
-      transform:translateY(-2px);
-      box-shadow:0 0 30px rgba(255,23,68,.38);
-    }
-
-    /* =====================================================
-       HERO
-    ===================================================== */
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border:1px solid var(--border);
-      border-radius:30px;
-      padding:34px;
-      margin-bottom:20px;
-
-      background:
-        radial-gradient(circle at 85% 25%,rgba(0,234,255,.12),transparent 25%),
-        radial-gradient(circle at 20% 90%,rgba(168,85,247,.12),transparent 28%),
-        linear-gradient(145deg,rgba(6,27,53,.9),rgba(3,13,29,.92));
-
-      box-shadow:var(--shadow);
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:360px;
-      height:360px;
-      right:-120px;
-      top:-170px;
-      border-radius:50%;
-      border:1px solid rgba(0,234,255,.16);
-      box-shadow:
-        0 0 0 30px rgba(0,234,255,.025),
-        0 0 0 60px rgba(0,234,255,.018),
-        0 0 0 90px rgba(0,234,255,.012);
-      pointer-events:none;
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 11px;
-      border-radius:999px;
-      border:1px solid rgba(0,234,255,.22);
-      background:rgba(0,234,255,.06);
-      color:#9ff8ff;
-      font-size:11px;
-      font-weight:900;
-      letter-spacing:1px;
-      text-transform:uppercase;
-    }
-
-    .hero h1{
-      margin-top:16px;
-      font-size:clamp(2.3rem,5vw,5.3rem);
-      line-height:.96;
-      letter-spacing:-3px;
-      max-width:900px;
-    }
-
-    .gradient-text{
-      background:linear-gradient(
-        90deg,
-        #fff,
-        #00eaff,
-        #7c6cff,
-        #ff4fa3
-      );
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .hero p{
-      max-width:760px;
-      margin-top:18px;
-      color:#a8bfd0;
-      font-size:15px;
-      line-height:1.7;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:23px;
-    }
-
-    .primary-btn,
-    .secondary-btn{
-      min-height:45px;
-      padding:11px 17px;
-      border-radius:13px;
-      font-weight:900;
-      border:1px solid transparent;
-      transition:.2s;
-    }
-
-    .primary-btn{
-      color:#00131a;
-      background:linear-gradient(135deg,#00eaff,#72f6ff);
-      box-shadow:0 0 24px rgba(0,234,255,.24);
-    }
-
-    .secondary-btn{
-      color:#dffaff;
-      background:rgba(0,234,255,.05);
-      border-color:rgba(0,234,255,.2);
-    }
-
-    .primary-btn:hover,
-    .secondary-btn:hover{
-      transform:translateY(-2px);
-    }
-
-    /* =====================================================
-       STATS
-    ===================================================== */
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:13px;
-      margin-bottom:20px;
-    }
-
-    .stat{
-      position:relative;
-      overflow:hidden;
-      padding:19px;
-      border-radius:20px;
-      border:1px solid rgba(0,234,255,.13);
-      background:linear-gradient(145deg,rgba(7,28,55,.8),rgba(4,15,31,.85));
-      box-shadow:0 14px 40px rgba(0,0,0,.2);
-    }
-
-    .stat::before{
-      content:"";
-      position:absolute;
-      left:0;
-      right:0;
-      top:0;
-      height:2px;
-      background:linear-gradient(90deg,transparent,var(--cyan),transparent);
-      opacity:.8;
-    }
-
-    .stat-label{
-      color:var(--muted);
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .stat-value{
-      margin-top:8px;
-      font-size:28px;
-      font-weight:1000;
-      letter-spacing:-1px;
-    }
-
-    .stat-sub{
-      margin-top:5px;
-      color:#6f8998;
-      font-size:10px;
-    }
-
-    /* =====================================================
-       LAYOUT
-    ===================================================== */
-
-    .dashboard-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.65fr) minmax(280px,.85fr);
-      gap:18px;
-    }
-
-    .panel{
-      border:1px solid rgba(0,234,255,.13);
-      border-radius:23px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(7,29,57,.76),
-          rgba(3,14,29,.88)
-        );
-      box-shadow:0 18px 60px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-
-    .panel-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:19px 20px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-
-    .panel-head h2{
-      font-size:18px;
-    }
-
-    .panel-head span{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .panel-body{
-      padding:20px;
-    }
-
-    /* =====================================================
-       GRADE CARDS
-    ===================================================== */
-
-    .grades{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .grade-card{
-      position:relative;
-      overflow:hidden;
-      min-height:220px;
-      padding:19px;
-      border-radius:19px;
-      border:1px solid rgba(255,255,255,.08);
-      background:linear-gradient(145deg,#071c35,#041124);
-      transition:.25s;
-    }
-
-    .grade-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(0,234,255,.35);
-      box-shadow:0 15px 45px rgba(0,234,255,.08);
-    }
-
-    .grade-card.active{
-      border-color:rgba(0,234,255,.4);
-      box-shadow:
-        inset 0 0 35px rgba(0,234,255,.035),
-        0 0 30px rgba(0,234,255,.08);
-    }
-
-    .grade-icon{
-      font-size:37px;
-    }
-
-    .grade-name{
-      margin-top:8px;
-      font-size:18px;
-      font-weight:1000;
-    }
-
-    .grade-description{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .grade-progress{
-      height:9px;
-      margin-top:18px;
-      overflow:hidden;
-      border-radius:999px;
-      background:#020b17;
-    }
-
-    .grade-progress i{
-      display:block;
-      height:100%;
-      width:0;
-      border-radius:inherit;
-      background:linear-gradient(90deg,#0874ff,#00eaff,#ffe600);
-      box-shadow:0 0 15px rgba(0,234,255,.4);
-      transition:width 1s ease;
-    }
-
-    .grade-meta{
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
-      margin-top:9px;
-      color:#8ca8b6;
-      font-size:10px;
-    }
-
-    .open-grade{
-      width:100%;
-      margin-top:15px;
-      padding:10px;
-      border-radius:11px;
-      border:1px solid rgba(0,234,255,.2);
-      background:rgba(0,234,255,.05);
-      color:#cfffff;
-      font-size:11px;
-      font-weight:900;
-    }
-
-    .open-grade:hover{
-      background:rgba(0,234,255,.11);
-    }
-
-    /* =====================================================
-       PROFILE
-    ===================================================== */
-
-    .profile{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      margin-bottom:18px;
-    }
-
-    .avatar{
-      width:61px;
-      height:61px;
-      display:grid;
-      place-items:center;
-      flex:0 0 61px;
-      border-radius:19px;
-
-      background:
-        radial-gradient(circle at 30% 20%,#fff,#00eaff 24%,#365eff 60%,#9b00ff);
-
-      font-size:29px;
-      box-shadow:0 0 25px rgba(0,234,255,.28);
-    }
-
-    .profile h3{
-      font-size:17px;
-    }
-
-    .profile p{
-      color:var(--muted);
-      margin-top:4px;
-      font-size:11px;
-    }
-
-    .info-list{
-      display:grid;
-      gap:8px;
-    }
-
-    .info-row{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      padding:11px 12px;
-      border-radius:12px;
-      background:rgba(255,255,255,.025);
-      border:1px solid rgba(255,255,255,.045);
-      font-size:11px;
-    }
-
-    .info-row span{
-      color:var(--muted);
-    }
-
-    .info-row b{
-      text-align:right;
-    }
-
-    /* =====================================================
-       ACTIVITY
-    ===================================================== */
-
-    .activity{
-      display:grid;
-      gap:8px;
-    }
-
-    .activity-item{
-      display:flex;
-      align-items:center;
-      gap:11px;
-      padding:12px;
-      border-radius:13px;
-      background:rgba(255,255,255,.025);
-      border:1px solid rgba(255,255,255,.045);
-    }
-
-    .activity-icon{
-      width:35px;
-      height:35px;
-      display:grid;
-      place-items:center;
-      border-radius:11px;
-      background:rgba(0,234,255,.08);
-      font-size:17px;
-    }
-
-    .activity-main{
-      min-width:0;
-      flex:1;
-    }
-
-    .activity-main strong{
-      display:block;
-      font-size:11px;
-    }
-
-    .activity-main span{
-      display:block;
-      margin-top:3px;
-      color:var(--muted);
-      font-size:9px;
-    }
-
-    .activity-score{
-      font-weight:1000;
-      color:var(--yellow);
-      font-size:12px;
-    }
-
-    /* =====================================================
-       WORDS
-    ===================================================== */
-
-    .words{
-      display:flex;
-      flex-wrap:wrap;
-      gap:7px;
-    }
-
-    .word{
-      padding:7px 9px;
-      border-radius:9px;
-      color:#bcefff;
-      background:#082746;
-      border:1px solid rgba(0,234,255,.08);
-      font-size:10px;
-    }
-
-    /* =====================================================
-       ACHIEVEMENTS
-    ===================================================== */
-
-    .achievements{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:8px;
-    }
-
-    .badge{
-      padding:12px 6px;
-      text-align:center;
-      border-radius:13px;
-      background:#071f3a;
-      border:1px solid rgba(0,234,255,.1);
-    }
-
-    .badge.locked{
-      opacity:.3;
-      filter:grayscale(1);
-    }
-
-    .badge-icon{
-      display:block;
-      font-size:25px;
-    }
-
-    .badge b{
-      display:block;
-      margin-top:4px;
-      font-size:9px;
-    }
-
-    .badge small{
-      display:block;
-      margin-top:3px;
-      color:#6f8998;
-      font-size:8px;
-    }
-
-    /* =====================================================
-       LOADING / ERROR
-    ===================================================== */
-
-    .loading{
-      position:fixed;
-      inset:0;
-      z-index:999999;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#010712;
-    }
-
-    .loader-box{
-      width:min(430px,calc(100% - 30px));
-      padding:30px;
-      text-align:center;
-      border:1px solid rgba(0,234,255,.2);
-      border-radius:25px;
-      background:#04152a;
-      box-shadow:0 0 60px rgba(0,234,255,.1);
-    }
-
-    .loader-orb{
-      width:65px;
-      height:65px;
-      margin:auto;
-      border-radius:50%;
-      border:2px solid rgba(0,234,255,.18);
-      border-top-color:var(--cyan);
-      border-right-color:var(--purple);
-      animation:spin 1s linear infinite;
-    }
-
-    @keyframes spin{
-      to{transform:rotate(360deg)}
-    }
-
-    .loader-box h2{
-      margin-top:18px;
-      font-size:20px;
-    }
-
-    .loader-box p{
-      margin-top:7px;
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .toast{
-      position:fixed;
-      right:20px;
-      bottom:20px;
-      z-index:999998;
-      max-width:360px;
-      padding:14px 17px;
-      border-radius:14px;
-      border:1px solid rgba(0,234,255,.2);
-      background:#061b34;
-      box-shadow:0 15px 45px rgba(0,0,0,.4);
-      color:#dffaff;
-      font-size:12px;
-      font-weight:800;
-      transform:translateY(30px);
-      opacity:0;
-      pointer-events:none;
-      transition:.25s;
-    }
-
-    .toast.show{
-      transform:translateY(0);
-      opacity:1;
-    }
-
-    .toast.error{
-      border-color:rgba(255,73,111,.35);
-    }
-
-    /* =====================================================
-       MOBILE
-    ===================================================== */
-
-    @media(max-width:1000px){
-      .dashboard-grid{
-        grid-template-columns:1fr;
-      }
-
-      .stats{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:700px){
-      .app{
-        width:calc(100% - 18px);
-        padding-top:10px;
-      }
-
-      .topbar{
-        top:5px;
-        padding:9px;
-      }
-
-      .status{
-        display:none;
-      }
-
-      .logout{
-        width:45px;
-        height:43px;
-        padding:0;
-        font-size:0;
-      }
-
-      .logout::after{
-        content:"🚪";
-        font-size:17px;
-      }
-
-      .hero{
-        padding:25px 20px;
-        border-radius:23px;
-      }
-
-      .hero h1{
-        font-size:clamp(2.2rem,13vw,4rem);
-        letter-spacing:-2px;
-      }
-
-      .hero p{
-        font-size:13px;
-      }
-
-      .hero-actions{
-        display:grid;
-        grid-template-columns:1fr;
-      }
-
-      .hero-actions button{
-        width:100%;
-      }
-
-      .stats{
-        grid-template-columns:repeat(2,1fr);
-        gap:8px;
-      }
-
-      .stat{
-        padding:14px;
-      }
-
-      .stat-value{
-        font-size:23px;
-      }
-
-      .grades{
-        grid-template-columns:1fr;
-      }
-
-      .achievements{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .panel-body{
-        padding:14px;
-      }
-
-      .panel-head{
-        padding:15px;
-      }
-    }
-
-    @media(max-width:380px){
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .brand-text span{
-        display:none;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- LOADING -->
-  <div class="loading" id="loading">
-    <div class="loader-box">
-      <div class="loader-orb"></div>
-      <h2>Connecting to EWM...</h2>
-      <p>Secure student environment is loading</p>
-    </div>
-  </div>
-
-  <div class="app" id="app" hidden>
-
-    <!-- TOPBAR -->
-    <header class="topbar">
-
-      <div class="brand">
-        <div class="brand-orb">🧠</div>
-
-        <div class="brand-text">
-          <strong>English with Mariami</strong>
-          <span>STUDENT LEARNING SYSTEM • SECURE NODE</span>
-        </div>
-      </div>
-
-      <div class="top-actions">
-
-        <div class="status">
-          <span class="status-dot"></span>
-          <span>SUPABASE ONLINE</span>
-        </div>
-
-        <button class="logout" id="logoutBtn" type="button">
-          🚪 გამოსვლა
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     ENGLISH WITH MARIAMI
+     FUTURISTIC STUDENT DASHBOARD
+     
+     Uses existing Supabase tables:
+     profiles
+     lessons
+     lesson_words
+     lesson_quizzes
+     student_progress
+     quiz_results
+     lesson_progress
+     academy_activity
+     academy_streaks
+     ========================================================= */
+
+  const DB =
+    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+    window.supabaseClient ||
+    null;
+
+  if (!DB) {
+    console.error('Supabase client not found.');
+    showFatal('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');
+    return;
+  }
+
+  const state = {
+    user: null,
+    profile: null,
+    lessons: [],
+    words: [],
+    quizzes: [],
+    progress: [],
+    quizResults: []
+  };
+
+  const $ = (id) => document.getElementById(id);
+
+  /* =========================================================
+     HELPERS
+     ========================================================= */
+
+  function escapeHTML(value) {
+    return String(value ?? '')
+      .replace(/[&<>"']/g, function (char) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[char];
+      });
+  }
+
+  function toast(message, error = false) {
+    const el = $('toast');
+
+    if (!el) return;
+
+    el.textContent = message;
+    el.classList.toggle('error', error);
+    el.classList.add('show');
+
+    clearTimeout(toast.timer);
+
+    toast.timer = setTimeout(function () {
+      el.classList.remove('show');
+    }, 3000);
+  }
+
+  function showFatal(message) {
+    const loading = $('loading');
+
+    if (!loading) return;
+
+    loading.innerHTML = `
+      <div class="loader-box">
+        <div style="font-size:48px">⚠️</div>
+        <h2>Dashboard Error</h2>
+        <p>${escapeHTML(message)}</p>
+
+        <button
+          class="primary-btn"
+          style="margin-top:18px"
+          onclick="location.reload()">
+          🔄 Try Again
         </button>
-
       </div>
+    `;
+  }
 
-    </header>
+  function number(value) {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  function gradeIsValid(grade) {
+    return [2, 3, 4].includes(number(grade));
+  }
+
+  function dateText(value) {
+    if (!value) return '—';
+
+    try {
+      return new Date(value).toLocaleString('ka-GE', {
+        dateStyle: 'short',
+        timeStyle: 'short'
+      });
+    } catch (_) {
+      return '—';
+    }
+  }
 
-    <!-- HERO -->
-    <section class="hero">
+  function wordCount(row) {
+    if (!row) return 0;
 
-      <div class="hero-content">
-
-        <div class="eyebrow">
-          ✦ STUDENT COMMAND CENTER
-        </div>
-
-        <h1>
-          Welcome,
-          <span class="gradient-text" id="studentName">
-            Student
-          </span>
-          👋
-        </h1>
-
-        <p>
-          Your futuristic English learning command center.
-          Explore vocabulary, grammar, reading, quizzes and
-          interactive Grade missions. Every completed lesson
-          becomes part of your personal learning progress.
-        </p>
-
-        <div class="hero-actions">
-
-          <button
-            class="primary-btn"
-            id="continueBtn"
-            type="button">
-            🚀 Continue Learning
-          </button>
-
-          <button
-            class="secondary-btn"
-            id="refreshBtn"
-            type="button">
-            🔄 Refresh Progress
-          </button>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- STATS -->
-    <section class="stats">
-
-      <div class="stat">
-        <div class="stat-label">📚 WORDS LEARNED</div>
-        <div class="stat-value" id="totalWords">0</div>
-        <div class="stat-sub">Across your grades</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">📝 QUIZZES</div>
-        <div class="stat-value" id="totalQuizzes">0</div>
-        <div class="stat-sub">Completed attempts</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">🏆 BEST SCORE</div>
-        <div class="stat-value" id="bestScore">0%</div>
-        <div class="stat-sub">Your highest result</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">🔥 ACTIVE GRADE</div>
-        <div class="stat-value" id="activeGrade">—</div>
-        <div class="stat-sub">Teacher assigned grade</div>
-      </div>
-
-    </section>
-
-    <!-- MAIN GRID -->
-    <section class="dashboard-grid">
-
-      <main>
-
-        <!-- GRADES -->
-        <div class="panel">
-
-          <div class="panel-head">
-            <div>
-              <h2>🎓 Your Learning Levels</h2>
-              <span>Grade 2 • Grade 3 • Grade 4</span>
-            </div>
-
-            <span id="gradeSyncStatus">
-              Syncing...
-            </span>
-          </div>
-
-          <div class="panel-body">
-
-            <div class="grades" id="gradesContainer">
-
-              <!-- Grade 2 -->
-              <article class="grade-card" data-grade="2">
-
-                <div class="grade-icon">🌱</div>
-
-                <div class="grade-name">
-                  Grade 2
-                </div>
-
-                <div class="grade-description">
-                  Foundations • Vocabulary • Grammar
-                </div>
-
-                <div class="grade-progress">
-                  <i id="bar2"></i>
-                </div>
-
-                <div class="grade-meta">
-                  <span id="words2">0 words</span>
-                  <b id="pct2">0%</b>
-                </div>
-
-                <button
-                  class="open-grade"
-                  data-open-grade="2"
-                  type="button">
-                  🚀 Open Grade 2
-                </button>
-
-              </article>
-
-              <!-- Grade 3 -->
-              <article class="grade-card" data-grade="3">
-
-                <div class="grade-icon">🚀</div>
-
-                <div class="grade-name">
-                  Grade 3
-                </div>
-
-                <div class="grade-description">
-                  Communication • Reading • Grammar
-                </div>
-
-                <div class="grade-progress">
-                  <i id="bar3"></i>
-                </div>
-
-                <div class="grade-meta">
-                  <span id="words3">0 words</span>
-                  <b id="pct3">0%</b>
-                </div>
-
-                <button
-                  class="open-grade"
-                  data-open-grade="3"
-                  type="button">
-                  🚀 Open Grade 3
-                </button>
-
-              </article>
-
-              <!-- Grade 4 -->
-              <article class="grade-card" data-grade="4">
-
-                <div class="grade-icon">⭐</div>
-
-                <div class="grade-name">
-                  Grade 4
-                </div>
-
-                <div class="grade-description">
-                  Advanced Vocabulary • Reading • Skills
-                </div>
-
-                <div class="grade-progress">
-                  <i id="bar4"></i>
-                </div>
-
-                <div class="grade-meta">
-                  <span id="words4">0 words</span>
-                  <b id="pct4">0%</b>
-                </div>
-
-                <button
-                  class="open-grade"
-                  data-open-grade="4"
-                  type="button">
-                  🚀 Open Grade 4
-                </button>
-
-              </article>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- LEARNED WORDS -->
-        <div class="panel" style="margin-top:18px">
-
-          <div class="panel-head">
-            <div>
-              <h2>🔤 Recently Learned Words</h2>
-              <span>Your vocabulary memory</span>
-            </div>
-          </div>
-
-          <div class="panel-body">
-
-            <div class="words" id="wordsContainer">
-              <span class="word">
-                Start learning to unlock words...
-              </span>
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- ACHIEVEMENTS -->
-        <div class="panel" style="margin-top:18px">
-
-          <div class="panel-head">
-            <div>
-              <h2>🏆 Achievement Matrix</h2>
-              <span>Your learning milestones</span>
-            </div>
-          </div>
-
-          <div class="panel-body">
-
-            <div class="achievements" id="achievements"></div>
-
-          </div>
-
-        </div>
-
-      </main>
-
-      <!-- SIDEBAR -->
-      <aside>
-
-        <!-- PROFILE -->
-        <div class="panel">
-
-          <div class="panel-head">
-            <h2>👤 Student Profile</h2>
-          </div>
-
-          <div class="panel-body">
-
-            <div class="profile">
-
-              <div class="avatar">
-                🎓
-              </div>
-
-              <div>
-                <h3 id="profileName">
-                  Student
-                </h3>
-
-                <p id="profileEmail">
-                  Loading...
-                </p>
-              </div>
-
-            </div>
-
-            <div class="info-list">
-
-              <div class="info-row">
-                <span>Role</span>
-                <b id="profileRole">Student</b>
-              </div>
-
-              <div class="info-row">
-                <span>Assigned Grade</span>
-                <b id="profileGrade">—</b>
-              </div>
-
-              <div class="info-row">
-                <span>Account</span>
-                <b style="color:#5cffb0">
-                  ● Active
-                </b>
-              </div>
-
-              <div class="info-row">
-                <span>Security</span>
-                <b style="color:#5cffb0">
-                  Protected
-                </b>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- ACTIVITY -->
-        <div class="panel" style="margin-top:18px">
-
-          <div class="panel-head">
-            <div>
-              <h2>⚡ Recent Quiz Activity</h2>
-              <span>Latest results</span>
-            </div>
-          </div>
-
-          <div class="panel-body">
-
-            <div
-              class="activity"
-              id="activity">
-              <div class="activity-item">
-                <div class="activity-icon">⏳</div>
-                <div class="activity-main">
-                  <strong>Loading activity...</strong>
-                  <span>Please wait</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-      </aside>
-
-    </section>
-
-  </div>
-
-  <div class="toast" id="toast"></div>
-
-  <script>
-  (function(){
-
-    'use strict';
-
-    const DB =
-      window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-      window.supabaseClient ||
-      null;
-
-    if(!DB){
-      console.error('Supabase client not found.');
+    const learned = Array.isArray(row.learned_words)
+      ? row.learned_words.length
+      : 0;
+
+    return Math.max(
+      number(row.words_learned),
+      learned
+    );
+  }
+
+  /* =========================================================
+     AUTH
+     ========================================================= */
+
+  async function loadUser() {
+
+    const result = await DB.auth.getUser();
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    if (!result.data || !result.data.user) {
+      window.location.replace(
+        'login.html?reason=unauthorized'
+      );
+
+      return false;
+    }
+
+    state.user = result.data.user;
+
+    return true;
+  }
+
+  /* =========================================================
+     PROFILE
+     ========================================================= */
+
+  async function loadProfile() {
+
+    const result = await DB
+      .from('profiles')
+      .select('*')
+      .eq('user_id', state.user.id)
+      .maybeSingle();
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    if (!result.data) {
+      throw new Error(
+        'Student profile ვერ მოიძებნა.'
+      );
+    }
+
+    state.profile = result.data;
+
+    const role = String(
+      result.data.role || ''
+    )
+      .trim()
+      .toLowerCase();
+
+    if (role !== 'student') {
+
+      toast(
+        'ამ გვერდზე მხოლოდ Student account-ს აქვს წვდომა.',
+        true
+      );
+
+      setTimeout(function () {
+
+        if (role === 'teacher') {
+          window.location.replace(
+            'teacher-dashboard.html'
+          );
+        } else {
+          window.location.replace(
+            'login.html?reason=wrong-role'
+          );
+        }
+
+      }, 700);
+
+      return false;
+    }
+
+    return true;
+  }
+
+  /* =========================================================
+     LOAD STUDENT PROGRESS
+     ========================================================= */
+
+  async function loadProgress() {
+
+    const result = await DB
+      .from('student_progress')
+      .select(`
+        user_id,
+        grade,
+        words_learned,
+        quiz_completed,
+        score,
+        learned_words,
+        best_quiz,
+        quiz_attempts,
+        last_active_at,
+        updated_at
+      `)
+      .eq('user_id', state.user.id)
+      .in('grade', [2, 3, 4])
+      .order('grade', {
+        ascending: true
+      });
+
+    if (result.error) {
+      console.warn(
+        'student_progress:',
+        result.error.message
+      );
+
+      state.progress = [];
       return;
     }
 
-    const state = {
-      user:null,
-      profile:null,
-      progress:[],
-      quizzes:[]
-    };
+    state.progress = result.data || [];
+  }
 
-    const $ = id => document.getElementById(id);
+  /* =========================================================
+     LOAD QUIZ RESULTS
+     
+     IMPORTANT:
+     quiz_attempts DOES NOT EXIST.
+     Real table = quiz_results
+     ========================================================= */
 
-    function escapeHTML(value){
-      return String(value ?? '')
-        .replace(/[&<>"']/g, char => ({
-          '&':'&amp;',
-          '<':'&lt;',
-          '>':'&gt;',
-          '"':'&quot;',
-          "'":'&#039;'
-        }[char]));
-    }
+  async function loadQuizResults() {
 
-    function toast(message,error=false){
-      const el=$('toast');
+    const result = await DB
+      .from('quiz_results')
+      .select(`
+        id,
+        student_id,
+        quiz_id,
+        grade,
+        score,
+        total,
+        completed_at,
+        created_at
+      `)
+      .eq('student_id', state.user.id)
+      .in('grade', [2, 3, 4])
+      .order('created_at', {
+        ascending: false
+      })
+      .limit(100);
 
-      el.textContent=message;
-      el.classList.toggle('error',error);
-      el.classList.add('show');
+    if (result.error) {
 
-      clearTimeout(toast.timer);
-
-      toast.timer=setTimeout(()=>{
-        el.classList.remove('show');
-      },3000);
-    }
-
-    function wordCount(row){
-      const learned =
-        Array.isArray(row?.learned_words)
-          ? row.learned_words.length
-          : 0;
-
-      return Math.max(
-        Number(row?.words_learned || 0),
-        learned
+      console.warn(
+        'quiz_results:',
+        result.error.message
       );
+
+      state.quizResults = [];
+      return;
     }
 
-    function maxWords(grade){
-      if(Number(grade)===2) return 300;
-      if(Number(grade)===3) return 250;
-      return 250;
-    }
+    state.quizResults = result.data || [];
+  }
 
-    function percentage(words,grade){
-      const max=maxWords(grade);
+  /* =========================================================
+     LOAD LESSONS
+     ========================================================= */
 
-      return Math.min(
-        100,
-        Math.round(
-          (Number(words||0)/max)*100
-        )
+  async function loadLessons() {
+
+    const result = await DB
+      .from('lessons')
+      .select(`
+        id,
+        grade,
+        lesson_number,
+        title,
+        topic,
+        description,
+        image_url,
+        audio_url,
+        created_at,
+        grammar_rule,
+        grammar_examples,
+        listening_text,
+        speaking_phrases,
+        reading_text,
+        exercises
+      `)
+      .in('grade', [2, 3, 4])
+      .order('grade', {
+        ascending: true
+      })
+      .order('lesson_number', {
+        ascending: true
+      });
+
+    if (result.error) {
+
+      console.warn(
+        'lessons:',
+        result.error.message
       );
+
+      state.lessons = [];
+      return;
     }
 
-    function quizScore(row){
-      return Number(
-        row?.score ??
-        row?.best_score ??
-        row?.percentage ??
-        0
+    state.lessons = result.data || [];
+  }
+
+  /* =========================================================
+     LOAD WORDS
+     ========================================================= */
+
+  async function loadWords() {
+
+    if (!state.lessons.length) {
+      state.words = [];
+      return;
+    }
+
+    const lessonIds = state.lessons
+      .map(function (lesson) {
+        return lesson.id;
+      })
+      .filter(Boolean);
+
+    if (!lessonIds.length) {
+      state.words = [];
+      return;
+    }
+
+    const result = await DB
+      .from('lesson_words')
+      .select(`
+        id,
+        lesson_id,
+        word,
+        translation,
+        emoji,
+        image_url,
+        audio_url,
+        sort_order,
+        created_at
+      `)
+      .in('lesson_id', lessonIds)
+      .order('sort_order', {
+        ascending: true
+      });
+
+    if (result.error) {
+
+      console.warn(
+        'lesson_words:',
+        result.error.message
       );
+
+      state.words = [];
+      return;
     }
 
-    function dateText(value){
+    state.words = result.data || [];
+  }
 
-      if(!value) return 'Unknown time';
+  /* =========================================================
+     LOAD QUIZ QUESTIONS
+     ========================================================= */
 
-      try{
-        return new Date(value)
-          .toLocaleString('ka-GE',{
-            dateStyle:'short',
-            timeStyle:'short'
-          });
-      }catch(_){
-        return '';
-      }
+  async function loadQuizzes() {
+
+    if (!state.lessons.length) {
+      state.quizzes = [];
+      return;
     }
 
-    /* =====================================================
-       AUTH
-    ===================================================== */
+    const lessonIds = state.lessons
+      .map(function (lesson) {
+        return lesson.id;
+      })
+      .filter(Boolean);
 
-    async function loadUser(){
-
-      const result =
-        await DB.auth.getUser();
-
-      if(result.error || !result.data?.user){
-
-        window.location.replace(
-          'login.html?reason=unauthorized'
-        );
-
-        return false;
-      }
-
-      state.user=result.data.user;
-
-      return true;
+    if (!lessonIds.length) {
+      state.quizzes = [];
+      return;
     }
 
-    /* =====================================================
-       PROFILE
-    ===================================================== */
+    const result = await DB
+      .from('lesson_quizzes')
+      .select(`
+        id,
+        lesson_id,
+        question,
+        options,
+        correct_answer,
+        sort_order,
+        created_at
+      `)
+      .in('lesson_id', lessonIds)
+      .order('sort_order', {
+        ascending: true
+      });
 
-    async function loadProfile(){
+    if (result.error) {
 
-      const {data,error} =
-        await DB
-          .from('profiles')
-          .select('*')
-          .eq('user_id',state.user.id)
-          .maybeSingle();
+      console.warn(
+        'lesson_quizzes:',
+        result.error.message
+      );
 
-      if(error){
-        console.error(error);
-        toast(
-          'პროფილის ჩატვირთვა ვერ მოხერხდა.',
-          true
-        );
-        return false;
-      }
-
-      if(!data){
-        toast(
-          'Student profile ვერ მოიძებნა.',
-          true
-        );
-        return false;
-      }
-
-      state.profile=data;
-
-      const role =
-        String(data.role || '')
-          .trim()
-          .toLowerCase();
-
-      /*
-       * SECURITY GUARD
-       *
-       * Student Dashboard-ზე სხვა როლს
-       * შესვლის უფლება არ აქვს.
-       */
-
-      if(role !== 'student'){
-
-        toast(
-          'Access denied — Student account required.',
-          true
-        );
-
-        setTimeout(()=>{
-          window.location.replace(
-            role === 'teacher'
-              ? 'teacher-dashboard.html'
-              : 'login.html?reason=wrong-role'
-          );
-        },700);
-
-        return false;
-      }
-
-      return true;
+      state.quizzes = [];
+      return;
     }
 
-    /* =====================================================
-       PROGRESS
-    ===================================================== */
+    state.quizzes = result.data || [];
+  }
 
-    async function loadProgress(){
+  /* =========================================================
+     PROFILE UI
+     ========================================================= */
 
-      const {data,error} =
-        await DB
-          .from('student_progress')
-          .select(
-            'grade,words_learned,quiz_completed,best_quiz,learned_words,updated_at'
-          )
-          .eq('user_id',state.user.id)
-          .in('grade',[2,3,4])
-          .order('grade');
+  function renderProfile() {
 
-      if(error){
+    const profile = state.profile || {};
 
-        console.error(error);
+    const name =
+      profile.full_name ||
+      state.user.email?.split('@')[0] ||
+      'Student';
 
-        toast(
-          'პროგრესის ჩატვირთვისას შეცდომაა.',
-          true
-        );
+    const grade = number(profile.grade);
 
-        state.progress=[];
-
-        return;
-      }
-
-      state.progress=data || [];
+    if ($('studentName')) {
+      $('studentName').textContent = name;
     }
 
-    /* =====================================================
-       QUIZ HISTORY
-    ===================================================== */
-
-    async function loadQuizzes(){
-
-      const {data,error} =
-        await DB
-          .from('quiz_attempts')
-          .select('*')
-          .eq('user_id',state.user.id)
-          .order('created_at',{
-            ascending:false
-          })
-          .limit(30);
-
-      if(error){
-
-        console.warn(
-          'Quiz history unavailable:',
-          error.message
-        );
-
-        state.quizzes=[];
-
-        return;
-      }
-
-      state.quizzes=data || [];
+    if ($('profileName')) {
+      $('profileName').textContent = name;
     }
 
-    /* =====================================================
-       RENDER PROFILE
-    ===================================================== */
-
-    function renderProfile(){
-
-      const profile=state.profile || {};
-
-      const name =
-        profile.full_name ||
-        profile.name ||
-        profile.username ||
-        state.user.email?.split('@')[0] ||
-        'Student';
-
-      const grade =
-        Number(profile.grade || 0);
-
-      $('studentName').textContent=name;
-      $('profileName').textContent=name;
-
+    if ($('profileEmail')) {
       $('profileEmail').textContent =
         state.user.email || 'Student account';
+    }
 
-      $('profileRole').textContent =
-        'Student';
+    if ($('profileRole')) {
+      $('profileRole').textContent = 'Student';
+    }
 
+    if ($('profileGrade')) {
       $('profileGrade').textContent =
-        [2,3,4].includes(grade)
+        gradeIsValid(grade)
           ? `Grade ${grade}`
           : 'Not assigned';
+    }
 
+    if ($('activeGrade')) {
       $('activeGrade').textContent =
-        [2,3,4].includes(grade)
+        gradeIsValid(grade)
           ? `G${grade}`
           : '—';
     }
+  }
 
-    /* =====================================================
-       RENDER STATS
-    ===================================================== */
+  /* =========================================================
+     STATS
+     ========================================================= */
 
-    function renderStats(){
+  function renderStats() {
 
-      const totalWords =
-        state.progress.reduce(
-          (sum,row)=>sum+wordCount(row),
-          0
-        );
+    const totalWords =
+      state.progress.reduce(
+        function (sum, row) {
+          return sum + wordCount(row);
+        },
+        0
+      );
 
-      const bestFromProgress =
-        Math.max(
-          0,
-          ...state.progress.map(
-            row=>Number(row.best_quiz || 0)
+    const bestProgress =
+      Math.max(
+        0,
+        ...state.progress.map(function (row) {
+          return number(row.best_quiz);
+        }),
+        ...state.progress.map(function (row) {
+          return number(row.score);
+        })
+      );
+
+    const bestResults =
+      Math.max(
+        0,
+        ...state.quizResults.map(function (row) {
+
+          const score = number(row.score);
+          const total = number(row.total);
+
+          if (total > 0) {
+            return Math.round(
+              (score / total) * 100
+            );
+          }
+
+          return score;
+        })
+      );
+
+    const best =
+      Math.max(
+        bestProgress,
+        bestResults
+      );
+
+    if ($('totalWords')) {
+      $('totalWords').textContent =
+        totalWords;
+    }
+
+    if ($('totalQuizzes')) {
+      $('totalQuizzes').textContent =
+        state.quizResults.length;
+    }
+
+    if ($('bestScore')) {
+      $('bestScore').textContent =
+        `${best}%`;
+    }
+  }
+
+  /* =========================================================
+     GRADE PROGRESS
+     ========================================================= */
+
+  function maxWords(grade) {
+
+    /*
+     * These are UI progress targets only.
+     * They DO NOT modify database data.
+     */
+
+    if (grade === 2) return 300;
+    if (grade === 3) return 400;
+    if (grade === 4) return 500;
+
+    return 300;
+  }
+
+  function renderGrades() {
+
+    [2, 3, 4].forEach(function (grade) {
+
+      const row =
+        state.progress.find(function (item) {
+          return number(item.grade) === grade;
+        }) || {};
+
+      const words =
+        wordCount(row);
+
+      const percentage =
+        Math.min(
+          100,
+          Math.round(
+            words / maxWords(grade) * 100
           )
         );
 
-      const bestFromQuizzes =
-        Math.max(
-          0,
-          ...state.quizzes.map(quizScore)
-        );
+      const bar = $(`bar${grade}`);
 
-      $('totalWords').textContent =
-        totalWords;
-
-      $('totalQuizzes').textContent =
-        state.quizzes.length;
-
-      $('bestScore').textContent =
-        Math.max(
-          bestFromProgress,
-          bestFromQuizzes
-        ) + '%';
-    }
-
-    /* =====================================================
-       RENDER GRADES
-    ===================================================== */
-
-    function renderGrades(){
-
-      [2,3,4].forEach(grade=>{
-
-        const row =
-          state.progress.find(
-            x=>Number(x.grade)===grade
-          ) || {};
-
-        const words=wordCount(row);
-        const pct=percentage(words,grade);
-
-        $(`bar${grade}`).style.width =
-          pct + '%';
-
-        $(`words${grade}`).textContent =
-          `${words} words`;
-
-        $(`pct${grade}`).textContent =
-          pct + '%';
-
-        const card =
-          document.querySelector(
-            `.grade-card[data-grade="${grade}"]`
-          );
-
-        const assigned =
-          Number(state.profile?.grade)===grade;
-
-        card.classList.toggle(
-          'active',
-          assigned
-        );
-
-        const button =
-          card.querySelector(
-            '[data-open-grade]'
-          );
-
-        if(assigned){
-
-          button.textContent =
-            `🚀 Continue Grade ${grade}`;
-
-        }else{
-
-          button.textContent =
-            `📚 Preview Grade ${grade}`;
-
-        }
-
-      });
-
-      $('gradeSyncStatus').textContent =
-        '✓ Live synced';
-    }
-
-    /* =====================================================
-       WORDS
-    ===================================================== */
-
-    function renderWords(){
-
-      const all=[];
-
-      state.progress.forEach(row=>{
-
-        if(Array.isArray(row.learned_words)){
-
-          row.learned_words.forEach(word=>{
-            all.push({
-              word:String(word),
-              grade:Number(row.grade)
-            });
-          });
-
-        }
-
-      });
-
-      const unique=[];
-
-      const seen=new Set();
-
-      all.reverse().forEach(item=>{
-
-        const key=item.word.toLowerCase();
-
-        if(seen.has(key)) return;
-
-        seen.add(key);
-        unique.push(item);
-
-      });
-
-      const words=unique.slice(0,80);
-
-      $('wordsContainer').innerHTML =
-        words.length
-          ? words.map(item =>
-              `<span class="word">
-                ${escapeHTML(item.word)}
-              </span>`
-            ).join('')
-          : `
-            <span class="word">
-              🌱 Start learning to build your vocabulary
-            </span>
-          `;
-    }
-
-    /* =====================================================
-       QUIZ ACTIVITY
-    ===================================================== */
-
-    function renderActivity(){
-
-      const activity=
-        state.quizzes.slice(0,7);
-
-      if(!activity.length){
-
-        $('activity').innerHTML=`
-          <div class="activity-item">
-            <div class="activity-icon">🎯</div>
-            <div class="activity-main">
-              <strong>No quiz attempts yet</strong>
-              <span>Complete your first quiz</span>
-            </div>
-          </div>
-        `;
-
-        return;
+      if (bar) {
+        bar.style.width =
+          `${percentage}%`;
       }
 
-      $('activity').innerHTML =
-        activity.map(item=>{
+      const wordsEl =
+        $(`words${grade}`);
 
-          const grade=
-            Number(item.grade || 0);
+      if (wordsEl) {
+        wordsEl.textContent =
+          `${words} words`;
+      }
 
-          const score=
-            quizScore(item);
+      const pct =
+        $(`pct${grade}`);
 
-          return `
-            <div class="activity-item">
+      if (pct) {
+        pct.textContent =
+          `${percentage}%`;
+      }
 
-              <div class="activity-icon">
-                ${grade===2?'🌱':
-                  grade===3?'🚀':'⭐'}
-              </div>
-
-              <div class="activity-main">
-
-                <strong>
-                  Grade ${grade || '—'} Quiz
-                </strong>
-
-                <span>
-                  ${escapeHTML(
-                    dateText(item.created_at)
-                  )}
-                </span>
-
-              </div>
-
-              <div class="activity-score">
-                ${score}%
-              </div>
-
-            </div>
-          `;
-
-        }).join('');
-    }
-
-    /* =====================================================
-       ACHIEVEMENTS
-    ===================================================== */
-
-    function renderAchievements(){
-
-      const totalWords =
-        state.progress.reduce(
-          (sum,row)=>sum+wordCount(row),
-          0
+      const card =
+        document.querySelector(
+          `.grade-card[data-grade="${grade}"]`
         );
 
-      const best=
-        Math.max(
-          0,
-          ...state.progress.map(
-            x=>Number(x.best_quiz || 0)
-          ),
-          ...state.quizzes.map(quizScore)
-        );
-
-      const completedGrades=
-        state.progress.filter(row=>{
-          return percentage(
-            wordCount(row),
-            Number(row.grade)
-          )>=100;
-        }).length;
-
-      const defs=[
-
-        ['🌱','First Word','Learn 1 word',
-          totalWords>=1],
-
-        ['📚','50 Words','Learn 50 words',
-          totalWords>=50],
-
-        ['📖','100 Words','Learn 100 words',
-          totalWords>=100],
-
-        ['🔥','200 Words','Learn 200 words',
-          totalWords>=200],
-
-        ['🎯','First Quiz','Complete 1 quiz',
-          state.quizzes.length>=1],
-
-        ['🏆','10 Quizzes','Complete 10 quizzes',
-          state.quizzes.length>=10],
-
-        ['💯','Perfect','Score 100%',
-          best>=100],
-
-        ['🥇','Elite','Best score 90%+',
-          best>=90],
-
-        ['🌟','Grade Complete','Complete a grade',
-          completedGrades>=1],
-
-        ['🏅','Two Grades','Complete two grades',
-          completedGrades>=2],
-
-        ['👑','Master','Complete all grades',
-          completedGrades>=3],
-
-        ['🚀','High Achiever','Score 80%+',
-          best>=80]
-
-      ];
-
-      $('achievements').innerHTML =
-        defs.map(def=>`
-
-          <div class="badge ${def[3]?'':'locked'}">
-
-            <span class="badge-icon">
-              ${def[0]}
-            </span>
-
-            <b>
-              ${def[1]}
-            </b>
-
-            <small>
-              ${def[3]
-                ? '✓ UNLOCKED'
-                : '🔒 '+def[2]}
-            </small>
-
-          </div>
-
-        `).join('');
-    }
-
-    /* =====================================================
-       OPEN GRADE
-    ===================================================== */
-
-    function openGrade(grade){
+      if (!card) return;
 
       const assigned =
-        Number(state.profile?.grade);
+        number(state.profile?.grade) === grade;
 
-      /*
-       * Student is always sent to their assigned
-       * grade. This prevents manually opening another
-       * grade as a student.
-       */
+      card.classList.toggle(
+        'active',
+        assigned
+      );
 
-      if(assigned !== grade){
-
-        toast(
-          `შენი მიმდინარე კლასი არის Grade ${assigned}.`,
-          true
+      const button =
+        card.querySelector(
+          '[data-open-grade]'
         );
 
-        setTimeout(()=>{
-          if([2,3,4].includes(assigned)){
-            window.location.href =
-              `grade${assigned}.html`;
-          }
-        },700);
+      if (!button) return;
 
-        return;
-      }
+      button.textContent =
+        assigned
+          ? `🚀 Continue Grade ${grade}`
+          : `📚 Open Grade ${grade}`;
+    });
 
-      window.location.href =
-        `grade${grade}.html`;
+    if ($('gradeSyncStatus')) {
+      const grade =
+        number(state.profile?.grade);
+
+      $('gradeSyncStatus').textContent =
+        gradeIsValid(grade)
+          ? `✓ Grade ${grade} synced`
+          : '⚠ Grade not assigned';
     }
+  }
 
-    document
-      .querySelectorAll('[data-open-grade]')
-      .forEach(button=>{
+  /* =========================================================
+     RECENT WORDS
+     ========================================================= */
 
-        button.addEventListener(
-          'click',
-          ()=>{
-            openGrade(
-              Number(
-                button.dataset.openGrade
-              )
-            );
-          }
-        );
+  function renderWords() {
 
+    const words = [];
+
+    state.words.forEach(function (item) {
+
+      if (!item.word) return;
+
+      words.push({
+        word: item.word,
+        translation: item.translation || '',
+        emoji: item.emoji || ''
       });
+    });
 
-    /* =====================================================
-       CONTINUE
-    ===================================================== */
+    const unique = [];
+    const seen = new Set();
 
-    $('continueBtn').addEventListener(
-      'click',
-      ()=>{
+    words.forEach(function (item) {
 
-        const grade=
-          Number(state.profile?.grade);
-
-        if([2,3,4].includes(grade)){
-
-          window.location.href=
-            `grade${grade}.html`;
-
-        }else{
-
-          toast(
-            'Teacher-ს ჯერ არ აქვს Grade მინიჭებული.',
-            true
-          );
-
-        }
-
-      }
-    );
-
-    /* =====================================================
-       REFRESH
-    ===================================================== */
-
-    $('refreshBtn').addEventListener(
-      'click',
-      async ()=>{
-
-        $('refreshBtn').textContent=
-          '⏳ Syncing...';
-
-        await loadProgress();
-        await loadQuizzes();
-
-        renderStats();
-        renderGrades();
-        renderWords();
-        renderActivity();
-        renderAchievements();
-
-        $('refreshBtn').textContent=
-          '🔄 Refresh Progress';
-
-        toast(
-          '✓ Progress successfully synchronized'
-        );
-      }
-    );
-
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
-
-    $('logoutBtn').addEventListener(
-      'click',
-      async ()=>{
-
-        const button=$('logoutBtn');
-
-        button.disabled=true;
-        button.textContent=
-          '⏳';
-
-        try{
-
-          await DB.auth.signOut({
-            scope:'global'
-          });
-
-        }catch(error){
-
-          console.warn(
-            'Logout error:',
-            error
-          );
-
-        }finally{
-
-          try{
-
-            [
-              localStorage,
-              sessionStorage
-            ].forEach(store=>{
-
-              const keys=[];
-
-              for(
-                let i=0;
-                i<store.length;
-                i++
-              ){
-
-                const key=store.key(i);
-
-                if(
-                  key &&
-                  (
-                    /^sb-/i.test(key) ||
-                    /supabase/i.test(key) ||
-                    /auth-token/i.test(key)
-                  )
-                ){
-                  keys.push(key);
-                }
-
-              }
-
-              keys.forEach(
-                key=>{
-                  try{
-                    store.removeItem(key);
-                  }catch(_){}
-                }
-              );
-
-            });
-
-          }catch(_){}
-
-          window.location.replace(
-            'login.html?logout=1'
-          );
-        }
-
-      }
-    );
-
-    /* =====================================================
-       SECURITY / GRADE SYNC
-    ===================================================== */
-
-    async function verifyGradeAndRole(){
-
-      const grade=
-        Number(state.profile?.grade || 0);
-
-      const role=
-        String(state.profile?.role || '')
+      const key =
+        item.word
           .trim()
           .toLowerCase();
 
-      if(role!=='student'){
+      if (!key || seen.has(key)) {
         return;
       }
 
-      /*
-       * Teacher changed the student's grade?
-       * Dashboard remains synced with profiles.grade.
-       */
+      seen.add(key);
+      unique.push(item);
+    });
 
-      if(![2,3,4].includes(grade)){
+    const visible =
+      unique.slice(0, 100);
 
-        $('gradeSyncStatus').textContent=
-          '⚠ Grade not assigned';
+    if (!$('wordsContainer')) return;
 
-        return;
-      }
+    if (!visible.length) {
 
-      $('gradeSyncStatus').textContent=
-        `✓ Grade ${grade} assigned`;
+      $('wordsContainer').innerHTML = `
+        <span class="word">
+          🌱 Lessons-ის სიტყვები ჯერ არ მოიძებნა
+        </span>
+      `;
+
+      return;
     }
 
-    /* =====================================================
-       REALTIME PROFILE GRADE WATCH
-       ===================================================== */
+    $('wordsContainer').innerHTML =
+      visible.map(function (item) {
 
-    function subscribeRealtime(){
+        return `
+          <span
+            class="word"
+            title="${escapeHTML(item.translation)}">
 
-      try{
+            ${escapeHTML(item.emoji)}
+            ${escapeHTML(item.word)}
 
-        DB
-          .channel(
-            'student-profile-sync-' +
-            state.user.id
-          )
-          .on(
-            'postgres_changes',
-            {
-              event:'UPDATE',
-              schema:'public',
-              table:'profiles',
-              filter:
-                `user_id=eq.${state.user.id}`
-            },
-            async payload=>{
+          </span>
+        `;
 
-              if(
-                payload.new &&
-                payload.new.grade !==
-                state.profile?.grade
-              ){
+      }).join('');
+  }
 
-                state.profile=
-                  payload.new;
+  /* =========================================================
+     QUIZ ACTIVITY
+     ========================================================= */
 
-                renderProfile();
+  function resultPercentage(row) {
 
-                await loadProgress();
-                await loadQuizzes();
+    const score = number(row.score);
+    const total = number(row.total);
 
-                renderStats();
-                renderGrades();
-                renderWords();
-                renderActivity();
-                renderAchievements();
-
-                toast(
-                  `🔄 Teacher updated your Grade to ${payload.new.grade}`
-                );
-              }
-
-            }
-          )
-          .subscribe();
-
-      }catch(error){
-
-        console.warn(
-          'Realtime sync unavailable:',
-          error
-        );
-
-      }
+    if (total > 0) {
+      return Math.round(
+        score / total * 100
+      );
     }
 
-    /* =====================================================
-       BOOT
-    ===================================================== */
+    return score;
+  }
 
-    async function boot(){
+  function renderActivity() {
 
-      try{
+    if (!$('activity')) return;
 
-        const ok=
-          await loadUser();
+    const activity =
+      state.quizResults.slice(0, 8);
 
-        if(!ok) return;
+    if (!activity.length) {
 
-        const profileOk=
-          await loadProfile();
+      $('activity').innerHTML = `
+        <div class="activity-item">
 
-        if(!profileOk) return;
+          <div class="activity-icon">
+            🎯
+          </div>
 
-        await Promise.all([
-          loadProgress(),
-          loadQuizzes()
-        ]);
+          <div class="activity-main">
 
-        renderProfile();
-        renderStats();
-        renderGrades();
-        renderWords();
-        renderActivity();
-        renderAchievements();
+            <strong>
+              No quiz attempts yet
+            </strong>
 
-        await verifyGradeAndRole();
+            <span>
+              Start your first lesson quiz
+            </span>
 
-        subscribeRealtime();
+          </div>
 
-        $('loading').style.display='none';
-        $('app').hidden=false;
+        </div>
+      `;
 
-      }catch(error){
+      return;
+    }
 
-        console.error(
-          'Student Dashboard boot error:',
-          error
-        );
+    $('activity').innerHTML =
+      activity.map(function (item) {
 
-        $('loading').innerHTML=`
+        const grade =
+          number(item.grade);
 
-          <div class="loader-box">
+        const score =
+          resultPercentage(item);
 
-            <div style="font-size:45px">
-              ⚠️
+        const icon =
+          grade === 2
+            ? '🌱'
+            : grade === 3
+              ? '🚀'
+              : '⭐';
+
+        return `
+          <div class="activity-item">
+
+            <div class="activity-icon">
+              ${icon}
             </div>
 
-            <h2>
-              Dashboard Error
-            </h2>
+            <div class="activity-main">
 
-            <p>
-              ${escapeHTML(
-                error?.message ||
-                'Unknown error'
-              )}
-            </p>
+              <strong>
+                Grade ${grade || '—'} Quiz
+              </strong>
 
-            <button
-              onclick="location.reload()"
-              class="primary-btn"
-              style="margin-top:18px">
-              🔄 Try Again
-            </button>
+              <span>
+                ${escapeHTML(
+                  dateText(
+                    item.completed_at ||
+                    item.created_at
+                  )
+                )}
+              </span>
+
+            </div>
+
+            <div class="activity-score">
+              ${score}%
+            </div>
 
           </div>
         `;
-      }
+
+      }).join('');
+  }
+
+  /* =========================================================
+     ACHIEVEMENTS
+     ========================================================= */
+
+  function renderAchievements() {
+
+    const totalWords =
+      state.progress.reduce(
+        function (sum, row) {
+          return sum + wordCount(row);
+        },
+        0
+      );
+
+    const best =
+      Math.max(
+        0,
+        ...state.progress.map(function (x) {
+          return number(x.best_quiz);
+        }),
+        ...state.quizResults.map(resultPercentage)
+      );
+
+    const definitions = [
+
+      [
+        '🌱',
+        'First Word',
+        'Learn 1 word',
+        totalWords >= 1
+      ],
+
+      [
+        '📚',
+        '50 Words',
+        'Learn 50 words',
+        totalWords >= 50
+      ],
+
+      [
+        '📖',
+        '100 Words',
+        'Learn 100 words',
+        totalWords >= 100
+      ],
+
+      [
+        '🔥',
+        '200 Words',
+        'Learn 200 words',
+        totalWords >= 200
+      ],
+
+      [
+        '🎯',
+        'First Quiz',
+        'Complete 1 quiz',
+        state.quizResults.length >= 1
+      ],
+
+      [
+        '🏆',
+        '10 Quizzes',
+        'Complete 10 quizzes',
+        state.quizResults.length >= 10
+      ],
+
+      [
+        '💯',
+        'Perfect',
+        'Score 100%',
+        best >= 100
+      ],
+
+      [
+        '🥇',
+        'Elite',
+        'Score 90%+',
+        best >= 90
+      ],
+
+      [
+        '🚀',
+        'High Achiever',
+        'Score 80%+',
+        best >= 80
+      ]
+
+    ];
+
+    if (!$('achievements')) return;
+
+    $('achievements').innerHTML =
+      definitions.map(function (item) {
+
+        const unlocked = item[3];
+
+        return `
+          <div
+            class="badge ${unlocked ? '' : 'locked'}">
+
+            <span class="badge-icon">
+              ${item[0]}
+            </span>
+
+            <b>
+              ${escapeHTML(item[1])}
+            </b>
+
+            <small>
+              ${
+                unlocked
+                  ? '✓ UNLOCKED'
+                  : '🔒 ' + escapeHTML(item[2])
+              }
+            </small>
+
+          </div>
+        `;
+
+      }).join('');
+  }
+
+  /* =========================================================
+     GRADE OPEN
+     
+     IMPORTANT:
+     Does NOT use database writes.
+     Does NOT change student's grade.
+     ========================================================= */
+
+  function openGrade(grade) {
+
+    grade = number(grade);
+
+    if (!gradeIsValid(grade)) {
+      toast(
+        'არასწორი Grade.',
+        true
+      );
+      return;
     }
 
-    boot();
+    /*
+     * If your project has grade2.html,
+     * grade3.html and grade4.html,
+     * this opens them directly.
+     */
 
-  })();
-  </script>
+    const target =
+      `grade${grade}.html`;
 
-</body>
-</html>
+    window.location.href = target;
+  }
+
+  document
+    .querySelectorAll('[data-open-grade]')
+    .forEach(function (button) {
+
+      button.addEventListener(
+        'click',
+        function () {
+
+          openGrade(
+            number(
+              button.dataset.openGrade
+            )
+          );
+
+        }
+      );
+
+    });
+
+  /* =========================================================
+     CONTINUE
+     ========================================================= */
+
+  if ($('continueBtn')) {
+
+    $('continueBtn')
+      .addEventListener(
+        'click',
+        function () {
+
+          const grade =
+            number(
+              state.profile?.grade
+            );
+
+          if (!gradeIsValid(grade)) {
+
+            toast(
+              'Teacher-ს ჯერ Grade არ აქვს მინიჭებული.',
+              true
+            );
+
+            return;
+          }
+
+          openGrade(grade);
+        }
+      );
+  }
+
+  /* =========================================================
+     REFRESH
+     ========================================================= */
+
+  if ($('refreshBtn')) {
+
+    $('refreshBtn')
+      .addEventListener(
+        'click',
+        async function () {
+
+          const button =
+            $('refreshBtn');
+
+          button.disabled = true;
+          button.textContent =
+            '⏳ Syncing...';
+
+          try {
+
+            await Promise.all([
+              loadProgress(),
+              loadQuizResults(),
+              loadLessons()
+            ]);
+
+            await Promise.all([
+              loadWords(),
+              loadQuizzes()
+            ]);
+
+            renderProfile();
+            renderStats();
+            renderGrades();
+            renderWords();
+            renderActivity();
+            renderAchievements();
+
+            toast(
+              '✓ მონაცემები განახლებულია'
+            );
+
+          } catch (error) {
+
+            console.error(error);
+
+            toast(
+              'განახლება ვერ მოხერხდა.',
+              true
+            );
+
+          } finally {
+
+            button.disabled = false;
+
+            button.textContent =
+              '🔄 Refresh Progress';
+          }
+        }
+      );
+  }
+
+  /* =========================================================
+     LOGOUT
+     ========================================================= */
+
+  if ($('logoutBtn')) {
+
+    $('logoutBtn')
+      .addEventListener(
+        'click',
+        async function () {
+
+          const button =
+            $('logoutBtn');
+
+          button.disabled = true;
+          button.textContent = '⏳';
+
+          try {
+
+            await DB.auth.signOut({
+              scope: 'global'
+            });
+
+          } catch (error) {
+
+            console.warn(
+              'Logout:',
+              error
+            );
+
+          } finally {
+
+            window.location.replace(
+              'login.html?logout=1'
+            );
+          }
+        }
+      );
+  }
+
+  /* =========================================================
+     REALTIME PROFILE GRADE SYNC
+     ========================================================= */
+
+  function subscribeRealtime() {
+
+    try {
+
+      DB
+        .channel(
+          `student-profile-${state.user.id}`
+        )
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'profiles',
+            filter:
+              `user_id=eq.${state.user.id}`
+          },
+          async function (payload) {
+
+            if (!payload.new) return;
+
+            state.profile =
+              payload.new;
+
+            renderProfile();
+            renderGrades();
+
+            toast(
+              `🔄 Grade განახლდა: ${payload.new.grade}`
+            );
+          }
+        )
+        .subscribe();
+
+    } catch (error) {
+
+      console.warn(
+        'Realtime unavailable:',
+        error
+      );
+    }
+  }
+
+  /* =========================================================
+     BOOT
+     ========================================================= */
+
+  async function boot() {
+
+    try {
+
+      const authenticated =
+        await loadUser();
+
+      if (!authenticated) return;
+
+      const profileLoaded =
+        await loadProfile();
+
+      if (!profileLoaded) return;
+
+      /*
+       * Lessons are loaded from the REAL lessons table.
+       * Words are loaded from lesson_words.
+       * Quiz questions are loaded from lesson_quizzes.
+       * Quiz history is loaded from quiz_results.
+       */
+
+      await Promise.all([
+        loadProgress(),
+        loadQuizResults(),
+        loadLessons()
+      ]);
+
+      await Promise.all([
+        loadWords(),
+        loadQuizzes()
+      ]);
+
+      renderProfile();
+      renderStats();
+      renderGrades();
+      renderWords();
+      renderActivity();
+      renderAchievements();
+
+      subscribeRealtime();
+
+      if ($('loading')) {
+        $('loading').style.display =
+          'none';
+      }
+
+      if ($('app')) {
+        $('app').hidden = false;
+      }
+
+    } catch (error) {
+
+      console.error(
+        'Student Dashboard:',
+        error
+      );
+
+      showFatal(
+        error?.message ||
+        'Unknown dashboard error'
+      );
+    }
+  }
+
+  boot();
+
+})();
+</script>
