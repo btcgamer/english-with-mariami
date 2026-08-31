@@ -1,24 +1,1686 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ka">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>English with Mariami — Grade 3</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
+
 <style>
-:root{--bg:#02040d;--line:rgba(0,239,255,.2);--cyan:#00efff;--blue:#287dff;--violet:#a855f7;--pink:#ff35ca;--green:#00ffad;--red:#ff416c;--text:#f5fbff;--muted:#91a8bb}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 10% 0%,rgba(0,239,255,.14),transparent 28%),radial-gradient(circle at 90% 15%,rgba(168,85,247,.14),transparent 30%),linear-gradient(135deg,#01030a,#061024 50%,#02040d);overflow-x:hidden}body:before{content:"";position:fixed;inset:0;z-index:-2;opacity:.14;background-image:linear-gradient(rgba(0,239,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,239,255,.08) 1px,transparent 1px);background-size:44px 44px}.orb{position:fixed;width:280px;height:280px;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:-1;opacity:.35}.orb.a{left:-100px;top:160px;background:var(--cyan)}.orb.b{right:-110px;top:430px;background:var(--violet)}header{position:sticky;top:0;z-index:50;background:rgba(2,4,13,.78);backdrop-filter:blur(22px);border-bottom:1px solid var(--line)}.nav,.wrap{width:min(1450px,calc(100% - 22px));margin:auto}.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:11px;font-weight:1000}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue),var(--violet));box-shadow:0 0 28px rgba(0,239,255,.3);font-size:23px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.5px;margin-top:3px}.actions{display:flex;gap:7px}.btn{border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 14px;min-height:42px;color:white;background:rgba(255,255,255,.055);font-weight:900;cursor:pointer;transition:.18s}.btn:hover{transform:translateY(-2px);border-color:rgba(0,239,255,.5);box-shadow:0 0 22px rgba(0,239,255,.12)}.home{background:linear-gradient(135deg,#0874ff,#00cfe8)}.logout{background:linear-gradient(135deg,#c01b4e,#ff416c)}.cyan{background:linear-gradient(135deg,#0878ff,#00cfe8)}.hero{padding:30px 0 18px}.hero-card{padding:32px;border:1px solid var(--line);border-radius:27px;background:linear-gradient(145deg,rgba(8,22,48,.92),rgba(2,9,22,.9));box-shadow:0 25px 80px rgba(0,0,0,.45)}.kicker{color:var(--cyan);font-size:11px;font-weight:1000;letter-spacing:2.5px}.hero h1{font-size:clamp(3rem,7vw,6.5rem);line-height:.88;letter-spacing:-5px;margin:12px 0}.gradient{background:linear-gradient(90deg,#fff,var(--cyan),var(--violet),var(--pink));-webkit-background-clip:text;color:transparent}.hero p{max-width:900px;color:#b4c8d6;line-height:1.65}.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}.hudBox{padding:15px;border:1px solid rgba(0,239,255,.15);border-radius:16px;background:rgba(2,19,40,.7)}.hudBox small{display:block;color:var(--muted);font-size:9px}.hudBox b{display:block;margin-top:4px;font-size:24px}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0 16px;flex-wrap:wrap}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{border:1px solid rgba(0,239,255,.15);background:rgba(4,17,34,.8);color:#c9d9e5;border-radius:10px;padding:9px 11px;font-weight:900;cursor:pointer}.filter.active,.filter:hover{color:white;border-color:var(--cyan);box-shadow:0 0 18px rgba(0,239,255,.12)}.search{min-width:240px;flex:1;max-width:420px;padding:11px;border-radius:11px;border:1px solid rgba(0,239,255,.16);background:#031226;color:white;outline:none}.lesson-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;padding-bottom:55px}.lesson-card{padding:20px;border:1px solid rgba(0,239,255,.15);border-radius:21px;background:linear-gradient(145deg,rgba(9,28,56,.9),rgba(3,11,26,.92));min-height:250px;transition:.23s}.lesson-card:hover{transform:translateY(-5px);border-color:rgba(0,239,255,.55);box-shadow:0 20px 50px rgba(0,0,0,.35)}.lesson-icon{font-size:34px}.lesson-number{float:right;color:#7890a7;font-size:10px;font-weight:1000}.lesson-card h3{margin:11px 0 5px;font-size:19px}.lesson-topic{color:var(--cyan);font-size:11px;font-weight:900}.lesson-card p{color:var(--muted);font-size:12px;line-height:1.55;min-height:38px}.lesson-meta{display:flex;gap:12px;color:#b9cad7;font-size:11px;margin:12px 0}.section-pills{display:flex;gap:5px;flex-wrap:wrap;min-height:26px}.section-pills span{font-size:9px;padding:5px 7px;border-radius:7px;background:rgba(0,239,255,.07);color:var(--cyan)}.open-lesson{margin-top:14px;width:100%;padding:11px;border:1px solid rgba(0,239,255,.2);border-radius:10px;background:linear-gradient(135deg,rgba(8,120,255,.2),rgba(0,239,255,.08));color:white;font-weight:1000;cursor:pointer}.open-lesson:hover{border-color:var(--cyan)}.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:14px;background:rgba(0,0,0,.82);backdrop-filter:blur(12px)}.modal.open{display:flex}.box{width:min(1100px,100%);max-height:92vh;overflow:auto;padding:22px;border-radius:24px;border:1px solid rgba(0,239,255,.3);background:#020b1c;box-shadow:0 30px 100px rgba(0,0,0,.65)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;background:#020b1c;padding-bottom:12px;z-index:2}.modal-head h2{margin:0}.lesson-summary{color:var(--muted);padding:8px 0}.lesson-tabs{display:flex;gap:6px;overflow:auto;padding:10px 0;position:sticky;top:48px;background:#020b1c;z-index:2}.lesson-tab{white-space:nowrap;border:1px solid rgba(0,239,255,.15);border-radius:10px;padding:9px 11px;background:#06182d;color:white;font-weight:900;cursor:pointer}.lesson-tab.active{background:linear-gradient(135deg,#0878ff,#00cfe8)}.material-card{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:#04152a;margin-top:8px}.material-card h3{margin-top:0}.large-text,.reading-text{color:#bed0dc;line-height:1.8;white-space:pre-wrap}.material-list,.phrase-list,.exercise-list{display:grid;gap:8px}.material-item{padding:12px;border-radius:12px;background:#061a31;border:1px solid rgba(255,255,255,.07);line-height:1.5}.material-index{display:inline-grid;place-items:center;width:25px;height:25px;margin-right:8px;border-radius:50%;background:rgba(0,239,255,.1);color:var(--cyan);font-size:11px}.words-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.word-card{padding:11px;border-radius:12px;background:#061a31;border:1px solid rgba(0,239,255,.1)}.word-top{display:flex;justify-content:space-between;gap:8px}.word-card span{display:block;color:#c5d3dd;margin-top:5px;font-size:12px}.word-card img{width:100%;max-height:130px;object-fit:cover;border-radius:9px;margin-top:8px}.mini-audio{border:0;border-radius:8px;background:#0a2946;color:white;cursor:pointer}.audio-wrap{margin-top:15px}.audio-wrap audio{width:100%}.count-chip,.quiz-score{color:var(--cyan)}.quiz-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.quiz-question{padding:15px;margin:10px 0;border-radius:14px;background:#061a31;border:1px solid rgba(255,255,255,.07)}.quiz-question b{display:block;margin-bottom:9px}.quiz-option{display:block;width:100%;text-align:left;margin:5px 0;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#09233f;color:white;cursor:pointer}.quiz-option.selected{border-color:var(--cyan)}.quiz-option.correct{border-color:var(--green);background:rgba(0,255,173,.12)}.quiz-option.wrong{border-color:var(--red);background:rgba(255,65,108,.1)}.submit-quiz{margin-top:12px;padding:12px 18px;border:0;border-radius:11px;background:linear-gradient(135deg,#0878ff,#00cfe8);color:white;font-weight:1000;cursor:pointer}.quiz-result{margin-top:12px;padding:13px;border-radius:12px;background:rgba(0,255,173,.08);color:var(--green)}.loading-state,.empty-state{padding:35px;text-align:center;color:var(--muted);grid-column:1/-1}.error{color:#ff8aa2}.grade-toast{position:fixed;right:18px;bottom:18px;z-index:99999;padding:12px 16px;border-radius:12px;background:#071a30;border:1px solid rgba(0,239,255,.25);color:white;opacity:0;transform:translateY(10px);pointer-events:none;transition:.2s}.grade-toast.show{opacity:1;transform:none}.grade-toast.error{border-color:rgba(255,65,108,.4)}@media(max-width:950px){.lesson-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.nav,.wrap{width:calc(100% - 14px)}.brand small{display:none}.actions .btn{font-size:0;padding:10px}.actions .home:after{content:"🏠";font-size:18px}.actions .logout:after{content:"🚪";font-size:18px}.hero-card{padding:22px}.hero h1{font-size:3.2rem;letter-spacing:-2px}.hud{grid-template-columns:1fr 1fr}.lesson-grid,.words-grid{grid-template-columns:1fr}.search{min-width:100%;max-width:none}.lesson-tabs{top:42px}}
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  color:#fff;
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 8%,
+      #9ff8ff 0%,
+      #269ec8 18%,
+      #07527b 42%,
+      #020817 76%
+    );
+}
+
+/* =====================================
+   ANIMATED SKY
+===================================== */
+
+.sky{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+}
+
+.moon{
+  position:absolute;
+
+  width:150px;
+  height:150px;
+
+  right:8%;
+  top:8%;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff,
+      #b9faff 40%,
+      #55dfff 70%,
+      transparent 72%
+    );
+
+  box-shadow:
+    0 0 30px #00eaff,
+    0 0 80px rgba(0,234,255,.7);
+
+  animation:
+    moonFloat 6s ease-in-out infinite;
+}
+
+@keyframes moonFloat{
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(15px);
+  }
+}
+
+/* stars */
+
+.star{
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 8px #fff,
+    0 0 15px #00eaff;
+
+  animation:
+    twinkle 2s ease-in-out infinite;
+}
+
+.s1{left:8%;top:12%;}
+.s2{left:20%;top:22%;animation-delay:.4s;}
+.s3{left:35%;top:10%;animation-delay:.8s;}
+.s4{left:48%;top:25%;animation-delay:1.2s;}
+.s5{left:63%;top:14%;animation-delay:.2s;}
+.s6{left:78%;top:30%;animation-delay:1s;}
+.s7{left:88%;top:15%;animation-delay:1.5s;}
+.s8{left:15%;top:48%;animation-delay:.7s;}
+.s9{left:72%;top:50%;animation-delay:1.3s;}
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:.25;
+    transform:scale(.7);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.5);
+  }
+}
+
+/* =====================================
+   FOREST
+===================================== */
+
+.forest{
+  position:fixed;
+  bottom:0;
+  left:0;
+
+  width:100%;
+  height:190px;
+
+  z-index:1;
+
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      to top,
+      #010711 0%,
+      rgba(1,7,17,.9) 45%,
+      transparent 100%
+    );
+}
+
+.tree{
+  position:absolute;
+  bottom:20px;
+
+  width:0;
+  height:0;
+
+  border-left:45px solid transparent;
+  border-right:45px solid transparent;
+  border-bottom:130px solid #031b28;
+
+  filter:
+    drop-shadow(0 0 8px rgba(0,234,255,.15));
+}
+
+.tree::after{
+  content:"";
+
+  position:absolute;
+
+  left:-34px;
+  top:45px;
+
+  width:0;
+  height:0;
+
+  border-left:34px solid transparent;
+  border-right:34px solid transparent;
+  border-bottom:95px solid #052d3c;
+}
+
+.t1{left:2%;transform:scale(.7);}
+.t2{left:13%;transform:scale(1);}
+.t3{left:25%;transform:scale(.65);}
+.t4{left:72%;transform:scale(.85);}
+.t5{left:84%;transform:scale(1.15);}
+.t6{left:94%;transform:scale(.7);}
+
+/* =====================================
+   PARTICLES
+===================================== */
+
+.particle{
+  position:fixed;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:#00eaff;
+
+  box-shadow:
+    0 0 10px #00eaff,
+    0 0 20px #00eaff;
+
+  pointer-events:none;
+
+  z-index:1;
+
+  animation:
+    particleMove 9s linear infinite;
+}
+
+.p1{left:10%;bottom:-10px;animation-delay:0s;}
+.p2{left:30%;bottom:-10px;animation-delay:2s;}
+.p3{left:50%;bottom:-10px;animation-delay:4s;}
+.p4{left:70%;bottom:-10px;animation-delay:1s;}
+.p5{left:90%;bottom:-10px;animation-delay:3s;}
+
+@keyframes particleMove{
+  0%{
+    transform:
+      translateY(0)
+      translateX(0)
+      scale(.4);
+
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  50%{
+    transform:
+      translateY(-45vh)
+      translateX(40px)
+      scale(1);
+  }
+
+  100%{
+    transform:
+      translateY(-100vh)
+      translateX(-30px)
+      scale(.2);
+
+    opacity:0;
+  }
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+header{
+  position:relative;
+  z-index:10;
+
+  width:100%;
+
+  padding:
+    15px 5%;
+
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  background:
+    rgba(2,12,28,.65);
+
+  border-bottom:
+    1px solid
+    rgba(0,234,255,.25);
+
+  backdrop-filter:blur(18px);
+}
+
+.logo{
+  font-size:21px;
+  font-weight:1000;
+
+  color:#00eaff;
+
+  text-shadow:
+    0 0 10px #00eaff,
+    0 0 25px #0077ff;
+}
+
+.header-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.top-btn{
+  display:inline-block;
+
+  padding:
+    9px 15px;
+
+  border-radius:13px;
+
+  text-decoration:none;
+
+  color:#dffcff;
+
+  font-size:13px;
+  font-weight:900;
+
+  background:
+    rgba(0,65,95,.75);
+
+  border:
+    1px solid
+    rgba(0,234,255,.35);
+
+  transition:.25s;
+}
+
+.top-btn:hover{
+  transform:translateY(-2px);
+
+  background:#00bfe9;
+
+  color:#00131a;
+
+  box-shadow:
+    0 0 20px
+    rgba(0,234,255,.55);
+}
+
+/* =====================================
+   MAIN
+===================================== */
+
+main{
+  position:relative;
+  z-index:5;
+
+  width:min(1180px,94%);
+
+  margin:
+    35px auto 180px;
+}
+
+/* =====================================
+   HERO
+===================================== */
+
+.hero{
+  position:relative;
+
+  min-height:330px;
+
+  padding:
+    35px 25px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  border-radius:35px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(2,30,52,.88),
+      rgba(2,9,23,.94)
+    );
+
+  border:
+    1px solid
+    rgba(0,234,255,.55);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.65),
+    0 0 60px rgba(0,234,255,.15);
+
+  backdrop-filter:blur(15px);
+}
+
+/* moving glow */
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:500px;
+  height:500px;
+
+  left:-250px;
+  top:-250px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,234,255,.22),
+      transparent 70%
+    );
+
+  animation:
+    heroGlow 7s ease-in-out infinite;
+}
+
+@keyframes heroGlow{
+  0%,100%{
+    transform:translate(0,0);
+  }
+
+  50%{
+    transform:translate(700px,300px);
+  }
+}
+
+/* =====================================
+   ANIMATED ANIMALS
+===================================== */
+
+.animal{
+  position:absolute;
+
+  font-size:105px;
+
+  filter:
+    drop-shadow(0 0 10px rgba(0,234,255,.5))
+    drop-shadow(0 0 30px rgba(0,140,255,.4));
+
+  user-select:none;
+
+  animation:
+    animalFloat 4s ease-in-out infinite;
+}
+
+.wolf{
+  left:4%;
+  bottom:20px;
+}
+
+.lion{
+  right:4%;
+  bottom:20px;
+
+  animation-delay:1s;
+}
+
+@keyframes animalFloat{
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(-2deg);
+  }
+
+  50%{
+    transform:
+      translateY(-15px)
+      rotate(2deg);
+  }
+}
+
+.hero-content{
+  position:relative;
+  z-index:3;
+
+  max-width:700px;
+}
+
+.grade-badge{
+  display:inline-block;
+
+  padding:
+    8px 16px;
+
+  margin-bottom:12px;
+
+  border-radius:50px;
+
+  color:#00131a;
+
+  font-size:13px;
+  font-weight:1000;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #4affc1
+    );
+
+  box-shadow:
+    0 0 25px
+    rgba(0,234,255,.5);
+}
+
+h1{
+  margin:5px 0;
+
+  font-size:
+    clamp(35px,6vw,65px);
+
+  font-weight:1000;
+
+  color:#00eaff;
+
+  text-shadow:
+    0 0 10px #00eaff,
+    0 0 30px #008cff,
+    0 0 60px rgba(0,140,255,.8);
+}
+
+.hero-subtitle{
+  font-size:
+    clamp(17px,3vw,24px);
+
+  color:#fff;
+
+  font-weight:800;
+}
+
+.hero-text{
+  max-width:600px;
+
+  margin:
+    15px auto;
+
+  color:#bdefff;
+
+  line-height:1.6;
+
+  font-size:15px;
+}
+
+/* =====================================
+   STATS
+===================================== */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:15px;
+
+  margin-top:20px;
+}
+
+.stat{
+  padding:18px;
+
+  border-radius:20px;
+
+  background:
+    rgba(3,31,55,.72);
+
+  border:
+    1px solid
+    rgba(0,234,255,.25);
+
+  box-shadow:
+    inset 0 0 20px
+    rgba(0,234,255,.03);
+
+  transition:.25s;
+}
+
+.stat:hover{
+  transform:translateY(-5px);
+
+  box-shadow:
+    0 0 25px
+    rgba(0,234,255,.2);
+}
+
+.stat-icon{
+  font-size:30px;
+}
+
+.stat-number{
+  margin-top:5px;
+
+  color:#00eaff;
+
+  font-size:24px;
+
+  font-weight:1000;
+}
+
+.stat-text{
+  color:#a8d8e5;
+
+  font-size:12px;
+}
+
+/* =====================================
+   LESSONS
+===================================== */
+
+.section-title{
+  margin:
+    40px 0 18px;
+
+  text-align:center;
+
+  font-size:28px;
+
+  color:#00eaff;
+
+  text-shadow:
+    0 0 15px #00eaff;
+}
+
+.lessons{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:18px;
+}
+
+.lesson{
+  position:relative;
+
+  min-height:205px;
+
+  padding:22px;
+
+  border-radius:25px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(4,37,64,.86),
+      rgba(2,15,30,.92)
+    );
+
+  border:
+    1px solid
+    rgba(0,234,255,.25);
+
+  box-shadow:
+    0 15px 40px
+    rgba(0,0,0,.35);
+
+  transition:
+    transform .3s,
+    box-shadow .3s,
+    border-color .3s;
+}
+
+.lesson::before{
+  content:"";
+
+  position:absolute;
+
+  width:150px;
+  height:150px;
+
+  right:-70px;
+  top:-70px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,234,255,.18),
+      transparent 70%
+    );
+}
+
+.lesson:hover{
+  transform:
+    translateY(-10px)
+    scale(1.02);
+
+  border-color:
+    rgba(0,234,255,.7);
+
+  box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.55),
+
+    0 0 30px
+    rgba(0,234,255,.2);
+}
+
+.lesson-number{
+  color:#ffe600;
+
+  font-size:12px;
+
+  font-weight:1000;
+
+  text-transform:uppercase;
+}
+
+.lesson-icon{
+  font-size:48px;
+
+  margin:
+    8px 0;
+
+  filter:
+    drop-shadow(0 0 8px rgba(0,234,255,.5));
+}
+
+.lesson-title{
+  font-size:20px;
+
+  font-weight:1000;
+
+  color:#fff;
+}
+
+.lesson-description{
+  margin-top:8px;
+
+  color:#9ec9d7;
+
+  font-size:12px;
+
+  line-height:1.5;
+}
+
+.lesson-button{
+  display:inline-block;
+
+  margin-top:13px;
+
+  padding:
+    8px 13px;
+
+  border-radius:11px;
+
+  color:#00131a;
+
+  text-decoration:none;
+
+  font-size:12px;
+
+  font-weight:1000;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #008cff
+    );
+
+  transition:.2s;
+}
+
+.lesson-button:hover{
+  transform:scale(1.05);
+
+  box-shadow:
+    0 0 20px
+    rgba(0,234,255,.6);
+}
+
+/* =====================================
+   ADVENTURE BANNER
+===================================== */
+
+.adventure{
+  position:relative;
+
+  margin-top:25px;
+
+  padding:
+    30px 25px;
+
+  text-align:center;
+
+  border-radius:27px;
+
+  background:
+    linear-gradient(
+      120deg,
+      rgba(0,110,150,.5),
+      rgba(15,30,90,.6)
+    );
+
+  border:
+    1px solid
+    rgba(0,234,255,.35);
+
+  overflow:hidden;
+}
+
+.adventure h2{
+  margin:0;
+
+  color:#fff;
+
+  font-size:25px;
+}
+
+.adventure p{
+  color:#bdefff;
+
+  font-size:14px;
+}
+
+.start{
+  display:inline-block;
+
+  margin-top:8px;
+
+  padding:
+    13px 25px;
+
+  border-radius:15px;
+
+  text-decoration:none;
+
+  color:#00131a;
+
+  font-weight:1000;
+
+  background:
+    linear-gradient(
+      135deg,
+      #00eaff,
+      #4affc1
+    );
+
+  box-shadow:
+    0 0 25px
+    rgba(0,234,255,.4);
+
+  transition:.25s;
+}
+
+.start:hover{
+  transform:
+    translateY(-4px)
+    scale(1.04);
+
+  box-shadow:
+    0 0 40px
+    rgba(0,234,255,.75);
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer{
+  position:relative;
+
+  z-index:10;
+
+  padding:25px 15px;
+
+  text-align:center;
+
+  color:#7fa9b8;
+
+  font-size:11px;
+
+  background:
+    rgba(0,5,15,.8);
+
+  border-top:
+    1px solid
+    rgba(0,234,255,.18);
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:850px){
+
+  .animal{
+    font-size:75px;
+  }
+
+  .wolf{
+    left:-5px;
+  }
+
+  .lion{
+    right:-5px;
+  }
+
+  .lessons{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:600px){
+
+  header{
+    padding:12px;
+  }
+
+  .logo{
+    font-size:16px;
+  }
+
+  .top-btn{
+    padding:8px 10px;
+    font-size:11px;
+  }
+
+  main{
+    width:94%;
+    margin-top:18px;
+  }
+
+  .hero{
+    min-height:380px;
+
+    padding:
+      30px 15px;
+  }
+
+  .animal{
+    font-size:58px;
+
+    opacity:.75;
+  }
+
+  .wolf{
+    bottom:10px;
+    left:3px;
+  }
+
+  .lion{
+    bottom:10px;
+    right:3px;
+  }
+
+  .stats{
+    grid-template-columns:
+      1fr;
+  }
+
+  .lessons{
+    grid-template-columns:
+      1fr;
+  }
+
+  .moon{
+    width:90px;
+    height:90px;
+  }
+
+}
+
+@media(max-width:380px){
+
+  h1{
+    font-size:32px;
+  }
+
+  .hero{
+    min-height:350px;
+  }
+
+  .animal{
+    font-size:48px;
+  }
+
+  .lesson{
+    min-height:190px;
+  }
+
+}
 </style>
 </head>
-<body data-grade="3">
-<div class="orb a"></div><div class="orb b"></div>
-<header><div class="nav"><div class="brand"><div class="logo">🚀</div><div>ENGLISH WITH MARIAMI<small>LIVE SUPABASE CURRICULUM • GRADE 03</small></div></div><div class="actions"><button class="btn home" id="homeBtn">🏠 მთავარი</button><button class="btn logout" id="logoutBtn">🚪 გამოსვლა</button></div></div></header>
-<main class="wrap">
-<section class="hero"><div class="hero-card"><div class="kicker">⚡ REAL SUPABASE LEARNING SYSTEM</div><h1>GRADE <span class="gradient">3</span></h1><p>აქ ნაჩვენები ყველა გაკვეთილი და სასწავლო მასალა პირდაპირ Supabase-იდან იტვირთება. თითოეულ Lesson-ში ნახავ Grammar, Listening, Speaking, Reading, Exercises, Words და Quiz-ს.</p><div class="hud"><div class="hudBox"><small>LESSONS</small><b id="lessonCount">—</b></div><div class="hudBox"><small>WORDS</small><b id="wordCount">—</b></div><div class="hudBox"><small>QUIZ QUESTIONS</small><b id="quizCount">—</b></div><div class="hudBox"><small>LIVE CONTENT</small><b id="contentCount">—</b></div></div></div></section>
-<div class="toolbar"><div class="filters"><button class="filter active" data-filter="all">ALL</button><button class="filter" data-filter="vocabulary">WORDS</button><button class="filter" data-filter="grammar">GRAMMAR</button><button class="filter" data-filter="listening">LISTENING</button><button class="filter" data-filter="speaking">SPEAKING</button><button class="filter" data-filter="reading">READING</button><button class="filter" data-filter="exercises">EXERCISES</button><button class="filter" data-filter="quiz">QUIZ</button></div><input id="search" class="search" placeholder="🔎 Search lessons..."><button class="btn cyan" id="reload">↻ Sync</button></div>
-<section id="lessonGrid" class="lesson-grid"></section>
+
+<body>
+
+<!-- ================================
+     BACKGROUND
+================================ -->
+
+<div class="sky">
+
+  <div class="moon"></div>
+
+  <div class="star s1"></div>
+  <div class="star s2"></div>
+  <div class="star s3"></div>
+  <div class="star s4"></div>
+  <div class="star s5"></div>
+  <div class="star s6"></div>
+  <div class="star s7"></div>
+  <div class="star s8"></div>
+  <div class="star s9"></div>
+
+</div>
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+<div class="particle p4"></div>
+<div class="particle p5"></div>
+
+
+<!-- FOREST -->
+
+<div class="forest">
+
+  <div class="tree t1"></div>
+  <div class="tree t2"></div>
+  <div class="tree t3"></div>
+  <div class="tree t4"></div>
+  <div class="tree t5"></div>
+  <div class="tree t6"></div>
+
+</div>
+
+
+<!-- ================================
+     HEADER
+================================ -->
+
+<header>
+
+  <div class="logo">
+    🌈 English with Mariami
+  </div>
+
+  <div class="header-buttons">
+
+    <a
+      class="top-btn"
+      href="../index.html"
+    >
+      🏠 მთავარი
+    </a>
+
+    <a
+      class="top-btn"
+      href="../login.html"
+    >
+      🔐 ავტორიზაცია
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- ================================
+     MAIN
+================================ -->
+
+<main>
+
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="animal wolf">
+      🐺
+    </div>
+
+    <div class="animal lion">
+      🦁
+    </div>
+
+
+    <div class="hero-content">
+
+      <div class="grade-badge">
+        🎓 GRADE 3
+      </div>
+
+      <h1>
+        მე-3 კლასი
+      </h1>
+
+      <div class="hero-subtitle">
+        English Adventure World 🌎
+      </div>
+
+      <p class="hero-text">
+        კეთილი იყოს შენი მობრძანება ინგლისურის
+        ჯადოსნურ სამყაროში! აქ ყოველი გაკვეთილი
+        ახალი თავგადასავალია. 🐺🦁🦅
+      </p>
+
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            📚
+          </div>
+
+          <div class="stat-number">
+            12
+          </div>
+
+          <div class="stat-text">
+            ინტერაქტიული გაკვეთილი
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🧠
+          </div>
+
+          <div class="stat-number">
+            100+
+          </div>
+
+          <div class="stat-text">
+            ახალი სიტყვა
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-icon">
+            🏆
+          </div>
+
+          <div class="stat-number">
+            ⭐
+          </div>
+
+          <div class="stat-text">
+            ქულები და პროგრესი
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LESSONS -->
+
+  <h2 class="section-title">
+    🚀 შენი 12 გაკვეთილი
+  </h2>
+
+
+  <section class="lessons">
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 01
+      </div>
+
+      <div class="lesson-icon">
+        🐺
+      </div>
+
+      <div class="lesson-title">
+        Animals
+      </div>
+
+      <div class="lesson-description">
+        ისწავლე ცხოველების სახელები
+        და აღწერე ისინი ინგლისურად.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson1.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 02
+      </div>
+
+      <div class="lesson-icon">
+        🦁
+      </div>
+
+      <div class="lesson-title">
+        Wild Animals
+      </div>
+
+      <div class="lesson-description">
+        ლომები, მგლები, ვეფხვები და
+        სხვა ველური ცხოველები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson2.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 03
+      </div>
+
+      <div class="lesson-icon">
+        🦅
+      </div>
+
+      <div class="lesson-title">
+        Nature
+      </div>
+
+      <div class="lesson-description">
+        ბუნება, ტყე, ცა და სამყაროს
+        საოცარი სიტყვები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson3.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 04
+      </div>
+
+      <div class="lesson-icon">
+        🚀
+      </div>
+
+      <div class="lesson-title">
+        Space
+      </div>
+
+      <div class="lesson-description">
+        გაემგზავრე კოსმოსში და
+        ისწავლე პლანეტების სახელები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson4.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 05
+      </div>
+
+      <div class="lesson-icon">
+        🌦️
+      </div>
+
+      <div class="lesson-title">
+        Weather
+      </div>
+
+      <div class="lesson-description">
+        Sunny, rainy, cloudy და
+        ამინდის სხვა სიტყვები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson5.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 06
+      </div>
+
+      <div class="lesson-icon">
+        🏠
+      </div>
+
+      <div class="lesson-title">
+        My Home
+      </div>
+
+      <div class="lesson-description">
+        ოთახები, ნივთები და შენი
+        სახლის აღწერა ინგლისურად.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson6.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 07
+      </div>
+
+      <div class="lesson-icon">
+        👨‍👩‍👧
+      </div>
+
+      <div class="lesson-title">
+        Family
+      </div>
+
+      <div class="lesson-description">
+        ოჯახის წევრების სახელები
+        და მარტივი წინადადებები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson7.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 08
+      </div>
+
+      <div class="lesson-icon">
+        🍎
+      </div>
+
+      <div class="lesson-title">
+        Food
+      </div>
+
+      <div class="lesson-description">
+        საკვები, სასმელები და
+        ყოველდღიური ფრაზები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson8.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 09
+      </div>
+
+      <div class="lesson-icon">
+        ⚽
+      </div>
+
+      <div class="lesson-title">
+        Hobbies
+      </div>
+
+      <div class="lesson-description">
+        ჰობი, სპორტი და საყვარელი
+        საქმიანობები.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson9.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 10
+      </div>
+
+      <div class="lesson-icon">
+        👕
+      </div>
+
+      <div class="lesson-title">
+        Clothes
+      </div>
+
+      <div class="lesson-description">
+        ტანსაცმელი და მისი აღწერა
+        მარტივი ინგლისურით.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson10.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 11
+      </div>
+
+      <div class="lesson-icon">
+        🕐
+      </div>
+
+      <div class="lesson-title">
+        Time
+      </div>
+
+      <div class="lesson-description">
+        საათი, დრო და ყოველდღიური
+        რუტინა.
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson11.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+
+    <article class="lesson">
+
+      <div class="lesson-number">
+        Lesson 12
+      </div>
+
+      <div class="lesson-icon">
+        🏆
+      </div>
+
+      <div class="lesson-title">
+        Final Challenge
+      </div>
+
+      <div class="lesson-description">
+        შეამოწმე მთელი ცოდნა
+        საბოლოო გამოწვევაში!
+      </div>
+
+      <a
+        class="lesson-button"
+        href="lesson12.html"
+      >
+        ▶ დაწყება
+      </a>
+
+    </article>
+
+  </section>
+
+
+  <!-- ADVENTURE -->
+
+  <section class="adventure">
+
+    <h2>
+      🐺 მზად ხარ თავგადასავლისთვის?
+    </h2>
+
+    <p>
+      აირჩიე გაკვეთილი და დაიწყე შენი
+      ინგლისური მოგზაურობა! 🚀
+    </p>
+
+    <a
+      class="start"
+      href="lesson1.html"
+    >
+      🚀 პირველი გაკვეთილის დაწყება
+    </a>
+
+  </section>
+
+
 </main>
-<div class="modal" id="lessonModal"><div class="box"><div class="modal-head"><h2 id="modalTitle"></h2><button class="btn logout" id="closeModal">✕</button></div><div id="modalContent"></div></div></div>
-<script src="grade-lessons.js"></script>
+
+
+<footer>
+
+  © 2026 English with Mariami
+  — ყველა უფლება დაცულია
+  <br>
+  Developed by btcgamer
+
+</footer>
+
+
+<script>
+/* =====================================
+   EXTRA PARTICLE MOTION
+===================================== */
+
+(function(){
+
+  const particles =
+    document.querySelectorAll(".particle");
+
+  particles.forEach(function(particle,index){
+
+    const duration =
+      7 + Math.random() * 5;
+
+    const delay =
+      Math.random() * 5;
+
+    particle.style.animationDuration =
+      duration + "s";
+
+    particle.style.animationDelay =
+      "-" + delay + "s";
+
+  });
+
+})();
+
+
+/* =====================================
+   3D TILT EFFECT
+===================================== */
+
+(function(){
+
+  const cards =
+    document.querySelectorAll(".lesson");
+
+  cards.forEach(function(card){
+
+    card.addEventListener(
+      "mousemove",
+      function(e){
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const x =
+          e.clientX - rect.left;
+
+        const y =
+          e.clientY - rect.top;
+
+        const centerX =
+          rect.width / 2;
+
+        const centerY =
+          rect.height / 2;
+
+        const rotateX =
+          ((y-centerY)/centerY) * -4;
+
+        const rotateY =
+          ((x-centerX)/centerX) * 4;
+
+        card.style.transform =
+          "perspective(700px) " +
+          "rotateX(" + rotateX + "deg) " +
+          "rotateY(" + rotateY + "deg) " +
+          "translateY(-8px) " +
+          "scale(1.02)";
+
+      }
+    );
+
+
+    card.addEventListener(
+      "mouseleave",
+      function(){
+
+        card.style.transform = "";
+
+      }
+    );
+
+  });
+
+})();
+
+
+/* =====================================
+   PARALLAX ANIMALS
+===================================== */
+
+document.addEventListener(
+  "mousemove",
+  function(e){
+
+    const x =
+      (e.clientX / window.innerWidth - .5);
+
+    const y =
+      (e.clientY / window.innerHeight - .5);
+
+    document.querySelectorAll(".animal")
+      .forEach(function(animal,index){
+
+        const strength =
+          index === 0 ? 18 : -18;
+
+        animal.style.transform =
+          "translate(" +
+          (x * strength) +
+          "px," +
+          (y * strength) +
+          "px)";
+
+      });
+
+  }
+);
+
+</script>
+
 </body>
 </html>
