@@ -23,62 +23,41 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
 
 /* =========================================================
    STUDENT GRADE SYNC
-   If a teacher changes profiles.grade (2/3/4), any student
-   who opens an old grade page is automatically redirected to
-   the newly assigned grade page. Teachers and parents keep
-   preview access to all three grades.
 ========================================================= */
 (function(){
   'use strict';
-
-  const path = (location.pathname || '').toLowerCase();
-  const match = path.match(/(?:^|\/)grade([234])\.html$/);
+  const path=(location.pathname||'').toLowerCase();
+  const match=path.match(/(?:^|\/)grade([234])\.html$/);
   if(!match) return;
-
-  const currentGrade = Number(match[1]);
-  const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
+  const currentGrade=Number(match[1]);
+  const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
   if(!client) return;
-
   async function syncStudentGrade(){
     try{
-      const {data:{user}, error:userError} = await client.auth.getUser();
-      if(userError || !user) return;
-
-      const {data:profile, error:profileError} = await client
-        .from('profiles')
-        .select('role,grade')
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if(profileError || !profile) return;
-
-      const role = String(profile.role || '').trim().toLowerCase();
-      if(role !== 'student') return;
-
-      const grade = Number(profile.grade || 0);
-      if(![2,3,4].includes(grade)) return;
-      if(grade === currentGrade) return;
-
-      location.replace('grade' + grade + '.html');
-    }catch(error){
-      console.warn('Student grade sync error:', error);
-    }
+      const {data:{user},error:userError}=await client.auth.getUser();
+      if(userError||!user)return;
+      const {data:profile,error:profileError}=await client.from('profiles').select('role,grade').eq('user_id',user.id).maybeSingle();
+      if(profileError||!profile)return;
+      const role=String(profile.role||'').trim().toLowerCase();
+      if(role!=='student')return;
+      const grade=Number(profile.grade||0);
+      if(![2,3,4].includes(grade)||grade===currentGrade)return;
+      location.replace('grade'+grade+'.html');
+    }catch(error){console.warn('Student grade sync error:',error);}
   }
-
   syncStudentGrade();
 })();
 
-/* =========================================================
-   SHARED GRADE 2/3/4 PROGRESS SYNC
-   Loaded from the public repo. This keeps the config above
-   unchanged while adding durable Supabase progress sync.
-========================================================= */
+/* Shared durable progress sync */
 (function(){
-  const src = 'progress-sync.js';
-  if(document.querySelector('script[data-english-mariami-progress-sync]')) return;
-  const s = document.createElement('script');
-  s.src = src;
-  s.async = true;
-  s.dataset.englishMariamiProgressSync = '1';
-  document.head.appendChild(s);
+  const src='progress-sync.js';
+  if(document.querySelector('script[data-english-mariami-progress-sync]'))return;
+  const s=document.createElement('script');s.src=src;s.async=true;s.dataset.englishMariamiProgressSync='1';document.head.appendChild(s);
+})();
+
+/* Teacher + Student Grade 2/3/4 dashboard panels */
+(function(){
+  const src='dashboard-progress.js';
+  if(document.querySelector('script[data-english-mariami-dashboard-progress]'))return;
+  const s=document.createElement('script');s.src=src;s.async=true;s.dataset.englishMariamiDashboardProgress='1';document.head.appendChild(s);
 })();
