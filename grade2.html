@@ -1,27 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>English with Mariami — Grade 1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050816">
+<title>English with Mariami — Grade 2</title>
 
 <style>
-:root{
-  --bg:#02040d;
-  --panel:rgba(7,16,36,.92);
-  --cyan:#00efff;
-  --blue:#287dff;
-  --violet:#a855f7;
-  --pink:#ff35ca;
-  --green:#00ffad;
-  --yellow:#ffe66d;
-  --text:#f5fbff;
-  --muted:#91a8bb;
-}
-
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#03050d;
+  --panel:rgba(9,15,35,.82);
+  --panel2:rgba(15,24,52,.88);
+  --cyan:#00f6ff;
+  --blue:#2787ff;
+  --purple:#a855f7;
+  --pink:#ff3cac;
+  --green:#21ff9a;
+  --yellow:#ffe600;
+  --text:#f5f9ff;
+  --muted:#8fa3c7;
+  --danger:#ff416c;
+  --border:rgba(0,246,255,.25);
+  --shadow:0 0 30px rgba(0,246,255,.13);
 }
 
 html{
@@ -29,31 +35,43 @@ html{
 }
 
 body{
-  margin:0;
   min-height:100vh;
-  color:var(--text);
-  font-family:Inter,Segoe UI,Arial,sans-serif;
   background:
-    radial-gradient(circle at 10% 0%,rgba(0,239,255,.16),transparent 28%),
-    radial-gradient(circle at 90% 15%,rgba(168,85,247,.16),transparent 30%),
-    linear-gradient(135deg,#01030a,#061024 50%,#02040d);
+    radial-gradient(circle at 15% 10%,rgba(0,246,255,.10),transparent 28%),
+    radial-gradient(circle at 85% 15%,rgba(168,85,247,.13),transparent 30%),
+    radial-gradient(circle at 50% 90%,rgba(255,60,172,.08),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 
-/* NEON GRID */
-body:before{
+/* ================= GRID ================= */
+
+body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-3;
-  opacity:.18;
+  pointer-events:none;
+  opacity:.20;
   background-image:
-    linear-gradient(rgba(0,239,255,.10) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,239,255,.10) 1px,transparent 1px);
-  background-size:42px 42px;
-  transform:perspective(600px) rotateX(58deg) scale(1.8);
+    linear-gradient(rgba(0,246,255,.14) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,246,255,.14) 1px,transparent 1px);
+  background-size:45px 45px;
+  transform:perspective(500px) rotateX(55deg) scale(2.2);
   transform-origin:center bottom;
-  animation:gridMove 14s linear infinite;
+  animation:gridMove 12s linear infinite;
+  z-index:-3;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at center,transparent 35%,rgba(0,0,0,.7) 100%);
+  z-index:-2;
 }
 
 @keyframes gridMove{
@@ -61,578 +79,837 @@ body:before{
     background-position:0 0,0 0;
   }
   to{
-    background-position:0 42px,42px 0;
+    background-position:0 45px,45px 0;
   }
 }
 
-/* LIGHT ORBS */
-.orb{
+/* ================= PARTICLES ================= */
+
+#particles{
   position:fixed;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  filter:blur(90px);
+  inset:0;
   pointer-events:none;
-  z-index:-2;
-  opacity:.30;
+  overflow:hidden;
+  z-index:-1;
 }
 
-.orb.a{
-  left:-100px;
-  top:150px;
+.particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
   background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);
+  animation:floatParticle linear infinite;
 }
 
-.orb.b{
-  right:-120px;
-  top:500px;
-  background:var(--violet);
+@keyframes floatParticle{
+  from{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+  20%{opacity:1}
+  80%{opacity:1}
+  to{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
 }
 
-/* HEADER */
-header{
+/* ================= HEADER ================= */
+
+.header{
   position:sticky;
   top:0;
-  z-index:50;
-  background:rgba(2,4,13,.78);
-  backdrop-filter:blur(22px);
-  border-bottom:1px solid rgba(0,239,255,.22);
+  z-index:100;
+  backdrop-filter:blur(18px);
+  background:rgba(3,5,13,.75);
+  border-bottom:1px solid rgba(0,246,255,.15);
 }
 
-.nav{
-  width:min(1400px,calc(100% - 22px));
+.header-inner{
+  max-width:1450px;
   margin:auto;
-  min-height:72px;
+  min-height:76px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:12px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  font-weight:1000;
+  gap:20px;
+  padding:12px 22px;
 }
 
 .logo{
-  width:48px;
-  height:48px;
-  border-radius:16px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--cyan),var(--blue),var(--violet));
-  box-shadow:
-    0 0 20px rgba(0,239,255,.35),
-    inset 0 0 20px rgba(255,255,255,.15);
-  font-size:25px;
-  transform:rotateX(8deg) rotateY(-8deg);
+  display:flex;
+  align-items:center;
+  gap:13px;
 }
 
-.brand small{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
+.logo-orb{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at 35% 30%,#fff,transparent 10%),
+    linear-gradient(135deg,var(--cyan),var(--purple));
+  color:#02040a;
+  font-size:23px;
+  font-weight:900;
+  box-shadow:
+    0 0 15px rgba(0,246,255,.8),
+    0 0 45px rgba(168,85,247,.35);
+  transform:perspective(500px) rotateX(12deg) rotateY(-12deg);
+}
+
+.logo h1{
+  font-size:17px;
   letter-spacing:1.8px;
+}
+
+.logo span{
+  display:block;
+  color:var(--cyan);
+  font-size:11px;
+  letter-spacing:3px;
   margin-top:3px;
 }
 
-.actions{
-  display:flex;
-  gap:8px;
-}
-
-.btn{
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:12px;
-  padding:10px 14px;
-  min-height:42px;
-  color:white;
-  background:rgba(255,255,255,.055);
-  font-weight:900;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-  border-color:var(--cyan);
-  box-shadow:0 0 25px rgba(0,239,255,.18);
-}
-
-.home{
-  background:linear-gradient(135deg,#0874ff,#00cfe8);
-}
-
-.logout{
-  background:linear-gradient(135deg,#c01b4e,#ff416c);
-}
-
-/* MAIN */
-.wrap{
-  width:min(1400px,calc(100% - 22px));
-  margin:auto;
-}
-
-/* HERO */
-.hero{
-  padding:32px 0 18px;
-}
-
-.hero-card{
-  position:relative;
-  overflow:hidden;
-  padding:34px;
-  border:1px solid rgba(0,239,255,.28);
-  border-radius:30px;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(8,22,48,.94),
-      rgba(2,9,22,.92)
-    );
-  box-shadow:
-    0 25px 90px rgba(0,0,0,.45),
-    inset 0 0 50px rgba(0,239,255,.035);
-  transform-style:preserve-3d;
-}
-
-.hero-card:after{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:30px;
-  pointer-events:none;
-  background:
-    linear-gradient(
-      120deg,
-      transparent,
-      rgba(0,239,255,.16),
-      transparent
-    );
-  transform:translateX(-100%);
-  animation:scan 5s infinite;
-}
-
-@keyframes scan{
-  0%,60%{
-    transform:translateX(-100%);
-  }
-  100%{
-    transform:translateX(100%);
-  }
-}
-
-.kicker{
-  color:var(--cyan);
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:2.5px;
-}
-
-.hero h1{
-  font-size:clamp(3.2rem,8vw,7rem);
-  line-height:.88;
-  letter-spacing:-5px;
-  margin:12px 0;
-}
-
-.gradient{
-  background:
-    linear-gradient(
-      90deg,
-      #fff,
-      var(--cyan),
-      var(--violet),
-      var(--pink)
-    );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:850px;
-  color:#b4c8d6;
-  line-height:1.7;
-}
-
 .stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
+  display:flex;
   gap:10px;
-  margin-top:22px;
+  align-items:center;
 }
 
 .stat{
-  padding:15px;
-  border:1px solid rgba(0,239,255,.15);
-  border-radius:17px;
-  background:rgba(2,19,40,.7);
+  min-width:90px;
+  padding:8px 12px;
+  border:1px solid var(--border);
+  background:rgba(0,246,255,.045);
+  border-radius:12px;
+  text-align:center;
+  box-shadow:inset 0 0 18px rgba(0,246,255,.025);
 }
 
 .stat small{
   display:block;
   color:var(--muted);
   font-size:9px;
+  letter-spacing:1px;
+  text-transform:uppercase;
 }
 
-.stat b{
+.stat strong{
   display:block;
-  margin-top:5px;
-  font-size:24px;
+  margin-top:2px;
+  font-size:17px;
 }
 
-/* LESSON GRID */
-.section-title{
-  margin:25px 0 14px;
-  color:white;
-  font-size:24px;
+.stat.xp strong{color:var(--cyan)}
+.stat.star strong{color:var(--yellow)}
+.stat.level strong{color:var(--green)}
+
+/* ================= MAIN ================= */
+
+.container{
+  width:min(1450px,94%);
+  margin:0 auto;
+  padding:35px 0 70px;
 }
 
-.lesson-grid{
+/* ================= HERO ================= */
+
+.hero{
+  min-height:330px;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  padding-bottom:60px;
+  grid-template-columns:1.25fr .75fr;
+  align-items:center;
+  gap:30px;
+  margin-bottom:35px;
+}
+
+.hero-text{
+  position:relative;
+  padding:35px 10px;
+}
+
+.kicker{
+  color:var(--cyan);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin-bottom:15px;
+}
+
+.hero h2{
+  font-size:clamp(40px,7vw,82px);
+  line-height:.88;
+  text-transform:uppercase;
+  letter-spacing:-4px;
+  text-shadow:
+    0 0 15px rgba(0,246,255,.55),
+    0 0 50px rgba(168,85,247,.25);
+}
+
+.hero h2 span{
+  display:block;
+  background:linear-gradient(90deg,var(--cyan),#fff,var(--purple),var(--pink));
+  -webkit-background-clip:text;
+  color:transparent;
+  background-size:250%;
+  animation:neonText 5s linear infinite;
+}
+
+@keyframes neonText{
+  from{background-position:0%}
+  to{background-position:250%}
+}
+
+.hero p{
+  max-width:680px;
+  color:var(--muted);
+  margin-top:22px;
+  font-size:16px;
+  line-height:1.7;
+}
+
+.hero-buttons{
+  margin-top:25px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  border:1px solid var(--border);
+  background:rgba(0,246,255,.06);
+  color:#fff;
+  border-radius:12px;
+  padding:12px 18px;
+  cursor:pointer;
+  font-weight:800;
+  transition:.25s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  border-color:var(--cyan);
+  box-shadow:0 0 22px rgba(0,246,255,.25);
+}
+
+.btn.primary{
+  color:#001015;
+  background:linear-gradient(90deg,var(--cyan),#58f5ff);
+  border:none;
+}
+
+.btn.purple{
+  background:linear-gradient(90deg,var(--purple),var(--pink));
+  border:none;
+}
+
+.btn.green{
+  background:linear-gradient(90deg,var(--green),#00c9ff);
+  color:#001015;
+  border:none;
+}
+
+.btn.danger{
+  border-color:rgba(255,65,108,.4);
+  color:#ff7895;
+}
+
+/* ================= 3D CORE ================= */
+
+.hero-core{
+  min-height:290px;
+  display:grid;
+  place-items:center;
+  perspective:900px;
+}
+
+.core{
+  width:230px;
+  height:230px;
+  position:relative;
+  transform-style:preserve-3d;
+  animation:coreFloat 6s ease-in-out infinite;
+}
+
+@keyframes coreFloat{
+  0%,100%{transform:rotateX(12deg) rotateY(0deg) translateY(0)}
+  50%{transform:rotateX(-8deg) rotateY(180deg) translateY(-18px)}
+}
+
+.core-ring{
+  position:absolute;
+  inset:20px;
+  border:2px solid var(--cyan);
+  border-radius:50%;
+  box-shadow:
+    0 0 20px var(--cyan),
+    inset 0 0 25px rgba(0,246,255,.4);
+}
+
+.core-ring:nth-child(2){
+  inset:0;
+  border-color:var(--purple);
+  transform:rotateX(70deg);
+}
+
+.core-ring:nth-child(3){
+  inset:35px;
+  border-color:var(--pink);
+  transform:rotateY(70deg);
+}
+
+.core-ball{
+  position:absolute;
+  inset:70px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 30%,#fff,transparent 10%),
+    radial-gradient(circle,var(--cyan),var(--purple) 50%,#070013 75%);
+  box-shadow:
+    0 0 30px var(--cyan),
+    0 0 80px var(--purple);
+}
+
+.core-label{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  top:105px;
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:4px;
+  text-shadow:0 0 10px #fff;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-box{
+  margin:20px 0 35px;
+  padding:18px;
+  border:1px solid rgba(0,246,255,.18);
+  background:rgba(6,12,28,.68);
+  border-radius:18px;
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.progress-track{
+  height:10px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#0a1022;
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  box-shadow:0 0 15px var(--cyan);
+  transition:width .5s;
+}
+
+/* ================= LESSONS ================= */
+
+.section-title{
+  margin:25px 0 18px;
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.section-title h3{
+  font-size:25px;
+  letter-spacing:1px;
+}
+
+.section-title p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.lessons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
 }
 
 .lesson{
   position:relative;
-  min-height:280px;
+  min-height:185px;
   padding:22px;
-  border-radius:23px;
-  border:1px solid rgba(0,239,255,.15);
+  border-radius:18px;
+  border:1px solid rgba(0,246,255,.18);
   background:
-    linear-gradient(
-      145deg,
-      rgba(9,28,56,.94),
-      rgba(3,11,26,.94)
-    );
+    linear-gradient(145deg,rgba(17,27,59,.85),rgba(4,8,20,.92));
+  overflow:hidden;
+  cursor:pointer;
   transform-style:preserve-3d;
-  transition:.25s;
-  box-shadow:0 15px 45px rgba(0,0,0,.25);
+  transition:.3s;
+}
+
+.lesson::before{
+  content:"";
+  position:absolute;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:var(--lesson-color);
+  filter:blur(60px);
+  opacity:.10;
+  right:-50px;
+  bottom:-50px;
 }
 
 .lesson:hover{
-  transform:
-    perspective(900px)
-    rotateX(4deg)
-    rotateY(-4deg)
-    translateY(-7px);
-  border-color:rgba(0,239,255,.65);
+  transform:translateY(-7px) perspective(700px) rotateX(3deg);
+  border-color:var(--lesson-color);
   box-shadow:
-    0 25px 65px rgba(0,0,0,.45),
-    0 0 30px rgba(0,239,255,.10);
+    0 0 25px color-mix(in srgb,var(--lesson-color),transparent 75%),
+    inset 0 0 30px rgba(255,255,255,.025);
+}
+
+.lesson.locked{
+  opacity:.42;
+  filter:saturate(.4);
+}
+
+.lesson.completed{
+  border-color:var(--green);
 }
 
 .lesson-number{
-  position:absolute;
-  right:18px;
-  top:18px;
-  color:#7890a7;
+  color:var(--lesson-color);
   font-size:10px;
-  font-weight:1000;
+  letter-spacing:3px;
+  font-weight:900;
 }
 
 .lesson-icon{
-  font-size:40px;
-  margin-bottom:10px;
-  filter:drop-shadow(0 0 10px rgba(0,239,255,.3));
+  font-size:34px;
+  margin:12px 0;
+  filter:drop-shadow(0 0 8px var(--lesson-color));
 }
 
-.lesson h2{
-  margin:8px 0 4px;
-  font-size:21px;
-}
-
-.lesson-topic{
-  color:var(--cyan);
-  font-size:11px;
-  font-weight:900;
+.lesson h4{
+  font-size:17px;
 }
 
 .lesson p{
   color:var(--muted);
-  line-height:1.55;
-  font-size:13px;
+  font-size:12px;
+  margin-top:7px;
+  line-height:1.5;
 }
 
-.pills{
+.lesson-status{
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:12px;
+}
+
+.lesson-bottom{
   display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin:13px 0;
+  justify-content:space-between;
+  margin-top:15px;
+  color:var(--muted);
+  font-size:10px;
 }
 
-.pill{
-  padding:5px 8px;
-  border-radius:8px;
-  background:rgba(0,239,255,.07);
-  border:1px solid rgba(0,239,255,.10);
-  color:var(--cyan);
-  font-size:9px;
-  font-weight:900;
-}
+/* ================= MODAL ================= */
 
-.open{
-  width:100%;
-  padding:12px;
-  border:1px solid rgba(0,239,255,.22);
-  border-radius:11px;
-  background:linear-gradient(
-    135deg,
-    rgba(8,120,255,.28),
-    rgba(0,239,255,.08)
-  );
-  color:white;
-  font-weight:1000;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.open:hover{
-  border-color:var(--cyan);
-  box-shadow:0 0 22px rgba(0,239,255,.16);
-}
-
-/* MODAL */
 .modal{
   position:fixed;
   inset:0;
-  z-index:100;
+  z-index:500;
   display:none;
-  align-items:center;
-  justify-content:center;
-  padding:14px;
-  background:rgba(0,0,0,.84);
-  backdrop-filter:blur(14px);
+  place-items:center;
+  padding:20px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
 }
 
-.modal.open{
-  display:flex;
+.modal.show{
+  display:grid;
 }
 
-.modal-box{
-  width:min(1050px,100%);
+.modal-card{
+  width:min(1000px,100%);
   max-height:92vh;
   overflow:auto;
-  padding:22px;
-  border-radius:25px;
-  border:1px solid rgba(0,239,255,.32);
-  background:#020b1c;
+  border:1px solid var(--cyan);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(0,246,255,.10),transparent 30%),
+    rgba(4,8,20,.97);
+  border-radius:24px;
   box-shadow:
-    0 30px 100px rgba(0,0,0,.7),
-    0 0 35px rgba(0,239,255,.08);
+    0 0 50px rgba(0,246,255,.2),
+    0 0 120px rgba(168,85,247,.12);
+  padding:28px;
+  position:relative;
 }
 
-.modal-head{
+.close{
+  position:absolute;
+  right:20px;
+  top:16px;
+  border:none;
+  background:none;
+  color:#fff;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.modal-title{
+  padding-right:45px;
+}
+
+.modal-title small{
+  color:var(--cyan);
+  letter-spacing:3px;
+}
+
+.modal-title h2{
+  margin-top:7px;
+  font-size:32px;
+}
+
+/* ================= WORDS ================= */
+
+.words-grid{
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.word-card{
+  min-height:125px;
+  border:1px solid rgba(0,246,255,.18);
+  background:rgba(11,20,43,.75);
+  border-radius:16px;
+  padding:16px;
+  transition:.25s;
+}
+
+.word-card:hover{
+  border-color:var(--cyan);
+  transform:translateY(-3px);
+}
+
+.word-en{
+  font-size:21px;
+  font-weight:900;
+  color:#fff;
+}
+
+.word-ka{
+  margin-top:6px;
+  color:var(--cyan);
+  font-size:15px;
+}
+
+.word-example{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.5;
+}
+
+.speak{
+  margin-top:10px;
+  border:1px solid rgba(0,246,255,.3);
+  background:rgba(0,246,255,.06);
+  color:var(--cyan);
+  border-radius:8px;
+  padding:5px 9px;
+  cursor:pointer;
+}
+
+/* ================= ACTIVITY NAV ================= */
+
+.activity-nav{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  position:sticky;
-  top:0;
-  background:#020b1c;
-  padding-bottom:12px;
-  z-index:5;
-}
-
-.modal-head h2{
-  margin:0;
-  font-size:24px;
-}
-
-.tabs{
-  display:flex;
-  gap:6px;
-  overflow:auto;
-  padding:10px 0;
-  position:sticky;
-  top:50px;
-  background:#020b1c;
-  z-index:4;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:25px;
 }
 
 .tab{
-  white-space:nowrap;
-  border:1px solid rgba(0,239,255,.15);
-  border-radius:10px;
-  padding:9px 11px;
-  background:#06182d;
-  color:white;
-  font-weight:900;
+  border:1px solid rgba(0,246,255,.18);
+  background:rgba(0,246,255,.035);
+  color:var(--muted);
+  padding:9px 13px;
+  border-radius:9px;
   cursor:pointer;
 }
 
 .tab.active{
-  background:linear-gradient(135deg,#0878ff,#00cfe8);
+  color:#001015;
+  background:var(--cyan);
 }
 
-.content{
-  padding-top:5px;
-}
+/* ================= QUIZ ================= */
 
-.card{
-  padding:18px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.08);
-  background:#04152a;
-  margin-top:10px;
-}
-
-.card h3{
-  margin-top:0;
-}
-
-.big{
-  color:#c5d5df;
-  line-height:1.8;
-  font-size:15px;
-}
-
-.word-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-}
-
-.word{
-  padding:14px;
-  border-radius:13px;
-  background:#061a31;
-  border:1px solid rgba(0,239,255,.10);
-  transition:.18s;
-}
-
-.word:hover{
-  transform:translateY(-3px);
-  border-color:var(--cyan);
-}
-
-.word strong{
-  font-size:16px;
-}
-
-.word span{
-  display:block;
-  color:#aebfcb;
-  margin-top:5px;
-}
-
-.example{
-  padding:12px;
-  margin:7px 0;
-  border-radius:11px;
-  background:#061a31;
-  border-left:3px solid var(--cyan);
-  color:#d7e5ed;
-}
-
-.exercise{
-  padding:15px;
-  margin:9px 0;
-  border-radius:14px;
-  background:#061a31;
-  border:1px solid rgba(255,255,255,.07);
-}
-
-.exercise button{
-  margin:5px 4px 0 0;
-  padding:9px 12px;
-  border-radius:9px;
-  border:1px solid rgba(255,255,255,.1);
-  background:#09233f;
-  color:white;
-  cursor:pointer;
-}
-
-.exercise button:hover{
-  border-color:var(--cyan);
+.activity{
+  margin-top:25px;
 }
 
 .quiz-question{
-  padding:15px;
-  margin:10px 0;
-  border-radius:14px;
-  background:#061a31;
-  border:1px solid rgba(255,255,255,.07);
+  font-size:25px;
+  font-weight:900;
+  margin:15px 0 22px;
+  line-height:1.3;
 }
 
-.quiz-option{
-  display:block;
-  width:100%;
+.quiz-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.option{
   text-align:left;
-  margin:6px 0;
-  padding:11px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,.1);
-  background:#09233f;
-  color:white;
+  padding:15px;
+  border-radius:13px;
+  border:1px solid rgba(0,246,255,.18);
+  background:rgba(12,22,48,.8);
+  color:#fff;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.option:hover{
+  border-color:var(--cyan);
+  transform:translateX(3px);
+}
+
+.option.correct{
+  border-color:var(--green);
+  background:rgba(33,255,154,.1);
+}
+
+.option.wrong{
+  border-color:var(--danger);
+  background:rgba(255,65,108,.1);
+}
+
+/* ================= MATCH ================= */
+
+.match-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.match-column{
+  display:grid;
+  gap:10px;
+}
+
+.match-item{
+  padding:14px;
+  border:1px solid rgba(0,246,255,.18);
+  border-radius:12px;
+  background:rgba(11,20,43,.8);
   cursor:pointer;
 }
 
-.quiz-option:hover{
-  border-color:var(--cyan);
+.match-item.selected{
+  border-color:var(--yellow);
+  box-shadow:0 0 15px rgba(255,230,0,.15);
 }
 
-.good{
-  border-color:var(--green)!important;
-  background:rgba(0,255,173,.10)!important;
+.match-item.matched{
+  border-color:var(--green);
+  opacity:.6;
 }
 
-.bad{
-  border-color:#ff416c!important;
-  background:rgba(255,65,108,.10)!important;
+/* ================= SENTENCE ================= */
+
+.sentence-area{
+  min-height:110px;
+  padding:15px;
+  border:1px dashed rgba(0,246,255,.4);
+  border-radius:15px;
+  background:rgba(0,246,255,.025);
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-content:flex-start;
 }
 
-.score{
+.token{
+  padding:8px 12px;
+  border-radius:9px;
+  background:rgba(168,85,247,.18);
+  border:1px solid rgba(168,85,247,.4);
+  cursor:pointer;
+}
+
+.token:hover{
+  transform:translateY(-2px);
+}
+
+.word-bank{
   margin-top:15px;
-  padding:14px;
-  border-radius:12px;
-  background:rgba(0,255,173,.08);
-  color:var(--green);
-  font-weight:900;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
 }
 
-/* MOBILE */
-@media(max-width:950px){
-  .lesson-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+/* ================= REVIEW ================= */
+
+.review-box{
+  text-align:center;
+  padding:35px 10px;
 }
 
-@media(max-width:650px){
+.score-ring{
+  width:180px;
+  height:180px;
+  margin:0 auto 25px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  border:5px solid var(--cyan);
+  box-shadow:
+    0 0 25px var(--cyan),
+    inset 0 0 25px rgba(0,246,255,.2);
+}
 
-  .nav,
-  .wrap{
-    width:calc(100% - 14px);
+.score-ring strong{
+  font-size:45px;
+}
+
+.review-box h3{
+  font-size:30px;
+}
+
+.review-box p{
+  color:var(--muted);
+  margin:12px auto 25px;
+  max-width:600px;
+  line-height:1.6;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  text-align:center;
+  color:#536783;
+  font-size:11px;
+  padding:30px 0;
+  letter-spacing:1px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+  .lessons{
+    grid-template-columns:repeat(3,1fr);
   }
 
-  .brand small{
-    display:none;
-  }
-
-  .hero-card{
-    padding:22px;
-  }
-
-  .hero h1{
-    font-size:3.5rem;
-    letter-spacing:-2px;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .lesson-grid,
-  .word-grid{
+  .hero{
     grid-template-columns:1fr;
   }
 
-  .tabs{
-    top:45px;
+  .hero-core{
+    display:none;
+  }
+}
+
+@media(max-width:750px){
+  .header-inner{
+    padding:10px 12px;
+  }
+
+  .stats{
+    gap:5px;
+  }
+
+  .stat{
+    min-width:60px;
+    padding:7px 5px;
+  }
+
+  .stat small{
+    font-size:7px;
+  }
+
+  .stat strong{
+    font-size:13px;
+  }
+
+  .logo h1{
+    font-size:12px;
+  }
+
+  .logo span{
+    font-size:8px;
+  }
+
+  .logo-orb{
+    width:40px;
+    height:40px;
+  }
+
+  .container{
+    width:92%;
+  }
+
+  .hero{
+    min-height:auto;
+    margin-top:10px;
+  }
+
+  .hero h2{
+    font-size:48px;
+    letter-spacing:-3px;
+  }
+
+  .lessons{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .words-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .quiz-options{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:500px){
+  .lessons{
+    grid-template-columns:1fr;
+  }
+
+  .words-grid{
+    grid-template-columns:1fr;
+  }
+
+  .modal-card{
+    padding:20px 15px;
+    border-radius:17px;
+  }
+
+  .modal-title h2{
+    font-size:25px;
   }
 }
 </style>
@@ -640,1116 +917,1757 @@ header{
 
 <body>
 
-<div class="orb a"></div>
-<div class="orb b"></div>
+<div id="particles"></div>
 
-<header>
-  <div class="nav">
+<header class="header">
+  <div class="header-inner">
 
-    <div class="brand">
-      <div class="logo">🌱</div>
-
+    <div class="logo">
+      <div class="logo-orb">E</div>
       <div>
-        ENGLISH WITH MARIAMI
-        <small>FUTURISTIC ENGLISH ACADEMY • GRADE 01</small>
+        <h1>ENGLISH WITH MARIAMI</h1>
+        <span>GRADE 2 // NEON MISSION</span>
       </div>
     </div>
 
-    <div class="actions">
-      <button class="btn home"
-        onclick="location.href='student-dashboard.html'">
-        🏠 მთავარი
-      </button>
+    <div class="stats">
+      <div class="stat xp">
+        <small>XP</small>
+        <strong id="xp">0</strong>
+      </div>
 
-      <button class="btn logout"
-        onclick="location.href='login.html'">
-        🚪 გამოსვლა
-      </button>
+      <div class="stat star">
+        <small>STARS</small>
+        <strong id="stars">0</strong>
+      </div>
+
+      <div class="stat level">
+        <small>LEVEL</small>
+        <strong id="playerLevel">1</strong>
+      </div>
     </div>
 
   </div>
 </header>
 
-<main class="wrap">
+<main class="container">
 
-<section class="hero">
+  <section class="hero">
 
-  <div class="hero-card">
+    <div class="hero-text">
 
-    <div class="kicker">
-      🌟 WELCOME TO YOUR FIRST ENGLISH WORLD
-    </div>
+      <div class="kicker">SYSTEM ONLINE // ENGLISH TRAINING</div>
 
-    <h1>
-      GRADE <span class="gradient">1</span>
-    </h1>
+      <h2>
+        GRADE
+        <span>02</span>
+      </h2>
 
-    <p>
-      Welcome! 👋
-      აქ ინგლისურს ძალიან მარტივად ვისწავლით.
-      თითოეული გაკვეთილი პატარა ნაბიჯია.
-      ისწავლე სიტყვები, გაიმეორე ფრაზები,
-      წაიკითხე პატარა ტექსტი და ითამაშე Quiz.
-    </p>
+      <p>
+        Welcome to your futuristic English mission.
+        Learn new words, build sentences, listen, play,
+        answer questions and unlock every level.
+        <br>
+        <strong style="color:#fff">
+          ისწავლე ინგლისური თამაშით — Learn English by playing!
+        </strong>
+      </p>
 
-    <div class="stats">
+      <div class="hero-buttons">
+        <button class="btn primary" onclick="startFirstLesson()">
+          🚀 START MISSION
+        </button>
 
-      <div class="stat">
-        <small>LESSONS</small>
-        <b>12</b>
-      </div>
+        <button class="btn purple" onclick="openReview()">
+          🏆 FINAL REVIEW
+        </button>
 
-      <div class="stat">
-        <small>WORDS</small>
-        <b>72+</b>
-      </div>
-
-      <div class="stat">
-        <small>QUIZ</small>
-        <b>12</b>
-      </div>
-
-      <div class="stat">
-        <small>LEVEL</small>
-        <b>⭐ EASY</b>
+        <button class="btn" onclick="resetProgress()">
+          ↻ RESET
+        </button>
       </div>
 
     </div>
 
+    <div class="hero-core">
+      <div class="core">
+        <div class="core-ring"></div>
+        <div class="core-ring"></div>
+        <div class="core-ring"></div>
+        <div class="core-ball"></div>
+        <div class="core-label">ENGLISH</div>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="progress-box">
+    <div class="progress-top">
+      <span>MISSION PROGRESS</span>
+      <span id="progressText">0 / 12</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
   </div>
 
-</section>
+  <div class="section-title">
+    <div>
+      <h3>⚡ ENGLISH MISSIONS</h3>
+      <p>12 futuristic learning levels</p>
+    </div>
+  </div>
 
-<h2 class="section-title">
-  🚀 START YOUR ENGLISH JOURNEY
-</h2>
+  <section class="lessons" id="lessons"></section>
 
-<section id="lessons" class="lesson-grid"></section>
+  <footer>
+    ENGLISH WITH MARIAMI // GRADE 2 // LEARN • PLAY • LEVEL UP
+  </footer>
 
 </main>
 
-
-<!-- LESSON MODAL -->
+<!-- ================= MODAL ================= -->
 
 <div class="modal" id="modal">
 
-  <div class="modal-box">
+  <div class="modal-card">
 
-    <div class="modal-head">
+    <button class="close" onclick="closeModal()">×</button>
 
-      <h2 id="modalTitle"></h2>
-
-      <button
-        class="btn logout"
-        onclick="closeLesson()">
-        ✕
-      </button>
-
-    </div>
-
-    <div class="tabs" id="tabs"></div>
-
-    <div class="content" id="content"></div>
+    <div id="modalContent"></div>
 
   </div>
 
 </div>
 
-
 <script>
+"use strict";
+
+/* =========================================================
+   GRADE 2 DATA
+========================================================= */
 
 const lessons = [
 
 {
  id:1,
  icon:"👋",
- title:"Hello! My First English",
- topic:"Greetings",
- description:"Learn how to say hello and introduce yourself.",
+ color:"#00f6ff",
+ title:"Hello & Introductions",
+ ka:"მისალმება და გაცნობა",
+ description:"Say hello, introduce yourself and ask simple questions.",
  words:[
-  ["👋","hello","გამარჯობა"],
-  ["😊","hi","სალამი"],
-  ["🌞","good morning","დილა მშვიდობისა"],
-  ["🌙","good night","ღამე მშვიდობისა"],
-  ["🙏","thank you","მადლობა"],
-  ["❤️","please","გთხოვ"]
- ],
- grammar:"I am + name.",
- examples:[
-  "I am Mariami.",
-  "I am Luka.",
-  "My name is Ana."
- ],
- listening:"Hello! My name is Mariami. I am happy.",
- speaking:[
-  "Hello!",
-  "Hi!",
-  "My name is ___.",
-  "I am ___."
- ],
- reading:"Hello! My name is Ana. I am a girl. I am happy.",
- exercises:[
-  "Say: Hello!",
-  "Say your name.",
-  "Complete: My name is ____."
+  ["hello","გამარჯობა","Hello, Anna!"],
+  ["hi","სალამი","Hi, Tom!"],
+  ["good morning","დილა მშვიდობისა","Good morning, teacher."],
+  ["good afternoon","შუადღე მშვიდობისა","Good afternoon!"],
+  ["goodbye","ნახვამდის","Goodbye, friends!"],
+  ["name","სახელი","My name is Leo."],
+  ["boy","ბიჭი","He is a boy."],
+  ["girl","გოგო","She is a girl."],
+  ["friend","მეგობარი","This is my friend."],
+  ["teacher","მასწავლებელი","She is my teacher."],
+  ["student","მოსწავლე","I am a student."],
+  ["welcome","კეთილი იყოს შენი მობრძანება","Welcome to our class."]
  ],
  quiz:[
-  ["How do we say გამარჯობა?","hello","hi","cat",0],
-  ["How do we say მადლობა?","please","thank you","good night",1]
+  ["What is your name?","რა გქვია?",["My name is Nika.","I am blue.","It is a cat."],0],
+  ["Which word means „გამარჯობა“?","",["Goodbye","Hello","Thanks"],1],
+  ["Who teaches students?","ვინ ასწავლის მოსწავლეებს?",["Teacher","Friend","Boy"],0],
+  ["Choose the correct sentence.","აირჩიე სწორი წინადადება.",["My name are Ana.","My name is Ana.","My names Ana."],1]
+ ],
+ sentences:[
+  {
+   answer:"My name is Nika",
+   words:["My","name","is","Nika"]
+  },
+  {
+   answer:"Hello my friend",
+   words:["Hello","my","friend"]
+  }
  ]
 },
 
 {
  id:2,
  icon:"🔢",
- title:"Numbers 1–10",
- topic:"Numbers",
- description:"Learn your first English numbers.",
+ color:"#2787ff",
+ title:"Numbers & Counting",
+ ka:"რიცხვები და თვლა",
+ description:"Count objects and use numbers in simple sentences.",
  words:[
-  ["1️⃣","one","ერთი"],
-  ["2️⃣","two","ორი"],
-  ["3️⃣","three","სამი"],
-  ["4️⃣","four","ოთხი"],
-  ["5️⃣","five","ხუთი"],
-  ["6️⃣","six","ექვსი"],
-  ["7️⃣","seven","შვიდი"],
-  ["8️⃣","eight","რვა"],
-  ["9️⃣","nine","ცხრა"],
-  ["🔟","ten","ათი"]
- ],
- grammar:"I have + number.",
- examples:[
-  "I have one book.",
-  "I have two pens.",
-  "I have three apples."
- ],
- listening:"One, two, three. I have three apples.",
- speaking:[
-  "One!",
-  "Two!",
-  "I have two.",
-  "I have five."
- ],
- reading:"I have three apples. I have two books.",
- exercises:[
-  "Count from 1 to 10.",
-  "Show two fingers.",
-  "Say: I have five."
+  ["one","ერთი","I have one book."],
+  ["two","ორი","I have two pencils."],
+  ["three","სამი","Three cats are here."],
+  ["four","ოთხი","I see four birds."],
+  ["five","ხუთი","I have five apples."],
+  ["six","ექვსი","Six students are here."],
+  ["seven","შვიდი","I see seven stars."],
+  ["eight","რვა","Eight books are on the table."],
+  ["nine","ცხრა","Nine balls are here."],
+  ["ten","ათი","I have ten fingers."],
+  ["twenty","ოცი","Twenty students are here."],
+  ["hundred","ასი","One hundred stars."]
  ],
  quiz:[
-  ["What is 3?","two","three","five",1],
-  ["What is 10?","ten","one","seven",0]
+  ["How many fingers are on one hand?","რამდენი თითია ერთ ხელზე?",["Five","Ten","Two"],0],
+  ["What number comes after seven?","",["Six","Eight","Nine"],1],
+  ["What does TEN mean?","",["5","10","20"],1],
+  ["Which is bigger?","რომელია მეტი?",["Three","Ten","Two"],1]
+ ],
+ sentences:[
+  {
+   answer:"I have two books",
+   words:["I","have","two","books"]
+  },
+  {
+   answer:"I see five cats",
+   words:["I","see","five","cats"]
+  }
  ]
 },
 
 {
  id:3,
  icon:"🎨",
- title:"Colors",
- topic:"Colors",
- description:"Learn the most important colors.",
+ color:"#a855f7",
+ title:"Colors & Shapes",
+ ka:"ფერები და ფორმები",
+ description:"Learn colors and basic shapes around you.",
  words:[
-  ["🔴","red","წითელი"],
-  ["🔵","blue","ლურჯი"],
-  ["🟢","green","მწვანე"],
-  ["🟡","yellow","ყვითელი"],
-  ["⚫","black","შავი"],
-  ["⚪","white","თეთრი"]
- ],
- grammar:"It is + color.",
- examples:[
-  "It is red.",
-  "It is blue.",
-  "It is green."
- ],
- listening:"The ball is red. The sky is blue.",
- speaking:[
-  "It is red.",
-  "It is blue.",
-  "My favorite color is blue."
- ],
- reading:"I see a red ball. I see a blue sky.",
- exercises:[
-  "Find something red.",
-  "Find something blue.",
-  "Say your favorite color."
+  ["red","წითელი","The apple is red."],
+  ["blue","ლურჯი","The sky is blue."],
+  ["green","მწვანე","The grass is green."],
+  ["yellow","ყვითელი","The sun is yellow."],
+  ["orange","ნარინჯისფერი","The orange is orange."],
+  ["pink","ვარდისფერი","The flower is pink."],
+  ["black","შავი","The cat is black."],
+  ["white","თეთრი","The snow is white."],
+  ["circle","წრე","This is a circle."],
+  ["square","კვადრატი","This is a square."],
+  ["triangle","სამკუთხედი","This is a triangle."],
+  ["star","ვარსკვლავი","I see a star."]
  ],
  quiz:[
-  ["What color is the sky?","blue","red","black",0],
-  ["What color is grass?","yellow","green","white",1]
+  ["What color is grass?","რა ფერია ბალახი?",["Blue","Green","Pink"],1],
+  ["Which shape has three sides?","რომელ ფორმას აქვს სამი გვერდი?",["Circle","Square","Triangle"],2],
+  ["What color is the sun usually shown as?","",["Yellow","Black","Purple"],0],
+  ["Which word means „ვარსკვლავი“?","",["Circle","Star","Square"],1]
+ ],
+ sentences:[
+  {
+   answer:"The sky is blue",
+   words:["The","sky","is","blue"]
+  },
+  {
+   answer:"This is a circle",
+   words:["This","is","a","circle"]
+  }
  ]
 },
 
 {
  id:4,
  icon:"👨‍👩‍👧",
+ color:"#ff3cac",
  title:"My Family",
- topic:"Family",
- description:"Meet the family in English.",
+ ka:"ჩემი ოჯახი",
+ description:"Talk about your family and people you love.",
  words:[
-  ["👨","father","მამა"],
-  ["👩","mother","დედა"],
-  ["👦","brother","ძმა"],
-  ["👧","sister","და"],
-  ["👶","baby","ბავშვი"],
-  ["❤️","family","ოჯახი"]
- ],
- grammar:"This is my + family word.",
- examples:[
-  "This is my mother.",
-  "This is my father.",
-  "This is my sister."
- ],
- listening:"This is my family. This is my mother.",
- speaking:[
-  "My mother.",
-  "My father.",
-  "This is my sister.",
-  "This is my family."
- ],
- reading:"This is my family. I love my family.",
- exercises:[
-  "Say mother.",
-  "Say father.",
-  "Say: This is my family."
+  ["family","ოჯახი","I love my family."],
+  ["mother","დედა","My mother is kind."],
+  ["father","მამა","My father is tall."],
+  ["mum","დედიკო","My mum is happy."],
+  ["dad","მამიკო","My dad is funny."],
+  ["sister","და","I have one sister."],
+  ["brother","ძმა","I have a brother."],
+  ["grandmother","ბებია","My grandmother is nice."],
+  ["grandfather","ბაბუა","My grandfather is funny."],
+  ["baby","ბავშვი","The baby is small."],
+  ["parents","მშობლები","My parents are kind."],
+  ["love","სიყვარული","I love my family."]
  ],
  quiz:[
-  ["Who is დედა?","mother","father","brother",0],
-  ["Who is ძმა?","sister","brother","baby",1]
+  ["Who is your mother's child?","",["Brother or sister","Teacher","Dog"],0],
+  ["What does FATHER mean?","",["ბებია","მამა","ძმა"],1],
+  ["Choose the correct sentence.","",["I have one sister.","I has one sister.","I having sister."],0],
+  ["Who is your father's father?","",["Grandmother","Grandfather","Brother"],1]
+ ],
+ sentences:[
+  {
+   answer:"I love my family",
+   words:["I","love","my","family"]
+  },
+  {
+   answer:"This is my mother",
+   words:["This","is","my","mother"]
+  }
  ]
 },
 
 {
  id:5,
  icon:"🏠",
+ color:"#21ff9a",
  title:"My Home",
- topic:"Home",
- description:"Learn easy words about your home.",
+ ka:"ჩემი სახლი",
+ description:"Explore rooms, furniture and things at home.",
  words:[
-  ["🏠","house","სახლი"],
-  ["🚪","door","კარი"],
-  ["🪟","window","ფანჯარა"],
-  ["🛏️","bed","საწოლი"],
-  ["🪑","chair","სკამი"],
-  ["📚","book","წიგნი"]
- ],
- grammar:"This is a + thing.",
- examples:[
-  "This is a house.",
-  "This is a door.",
-  "This is a book."
- ],
- listening:"This is my house. I see a door and a window.",
- speaking:[
-  "My house.",
-  "A door.",
-  "A window.",
-  "This is my book."
- ],
- reading:"This is my house. My book is on the table.",
- exercises:[
-  "Point to a door.",
-  "Point to a window.",
-  "Say: This is my house."
+  ["home","სახლი","This is my home."],
+  ["house","სახლი","My house is big."],
+  ["room","ოთახი","This is my room."],
+  ["bedroom","საძინებელი","I sleep in my bedroom."],
+  ["kitchen","სამზარეულო","Mum is in the kitchen."],
+  ["bathroom","აბაზანა","The bathroom is clean."],
+  ["door","კარი","Open the door."],
+  ["window","ფანჯარა","The window is open."],
+  ["table","მაგიდა","The book is on the table."],
+  ["chair","სკამი","Sit on the chair."],
+  ["bed","საწოლი","My bed is soft."],
+  ["garden","ბაღი","I play in the garden."]
  ],
  quiz:[
-  ["What is კარი?","window","door","bed",1],
-  ["What is საწოლი?","chair","bed","book",1]
+  ["Where do you sleep?","სად გძინავს?",["Kitchen","Bedroom","Garden"],1],
+  ["Where do you cook food?","",["Kitchen","Bathroom","Bedroom"],0],
+  ["What do you sit on?","",["Bed","Chair","Window"],1],
+  ["What is „ფანჯარა“?","",["Door","Window","Table"],1]
+ ],
+ sentences:[
+  {
+   answer:"This is my home",
+   words:["This","is","my","home"]
+  },
+  {
+   answer:"The book is on the table",
+   words:["The","book","is","on","the","table"]
+  }
  ]
 },
 
 {
  id:6,
- icon:"🐶",
+ icon:"🐾",
+ color:"#ffe600",
  title:"Animals",
- topic:"Animals",
- description:"Meet some friendly animals.",
+ ka:"ცხოველები",
+ description:"Meet animals and describe them with simple words.",
  words:[
-  ["🐶","dog","ძაღლი"],
-  ["🐱","cat","კატა"],
-  ["🐭","mouse","თაგვი"],
-  ["🐟","fish","თევზი"],
-  ["🐦","bird","ჩიტი"],
-  ["🐰","rabbit","კურდღელი"]
- ],
- grammar:"I see a + animal.",
- examples:[
-  "I see a dog.",
-  "I see a cat.",
-  "I see a bird."
- ],
- listening:"I see a dog. I see a cat.",
- speaking:[
-  "A dog.",
-  "A cat.",
-  "I see a bird.",
-  "I like cats."
- ],
- reading:"I see a dog and a cat. The dog is big.",
- exercises:[
-  "Make a dog sound.",
-  "Say cat.",
-  "Say: I see a dog."
+  ["dog","ძაღლი","The dog is happy."],
+  ["cat","კატა","The cat is small."],
+  ["bird","ჩიტი","The bird can fly."],
+  ["fish","თევზი","The fish can swim."],
+  ["horse","ცხენი","The horse is big."],
+  ["cow","ძროხა","The cow is white."],
+  ["lion","ლომი","The lion is strong."],
+  ["tiger","ვეფხვი","The tiger is fast."],
+  ["elephant","სპილო","The elephant is big."],
+  ["monkey","მაიმუნი","The monkey is funny."],
+  ["rabbit","კურდღელი","The rabbit is small."],
+  ["bear","დათვი","The bear is strong."]
  ],
  quiz:[
-  ["What is ძაღლი?","cat","dog","fish",1],
-  ["What is კატა?","cat","bird","rabbit",0]
+  ["Which animal can fly?","",["Fish","Bird","Horse"],1],
+  ["Which animal is very big?","",["Elephant","Rabbit","Cat"],0],
+  ["What is „ძაღლი“?","",["Dog","Cow","Bear"],0],
+  ["Which animal can swim?","",["Fish","Lion","Horse"],0]
+ ],
+ sentences:[
+  {
+   answer:"The dog is happy",
+   words:["The","dog","is","happy"]
+  },
+  {
+   answer:"The elephant is big",
+   words:["The","elephant","is","big"]
+  }
  ]
 },
 
 {
  id:7,
  icon:"🍎",
- title:"Food",
- topic:"Food",
- description:"Learn simple food words.",
+ color:"#ff6547",
+ title:"Food & Drinks",
+ ka:"საკვები და სასმელები",
+ description:"Talk about food, drinks and what you like.",
  words:[
-  ["🍎","apple","ვაშლი"],
-  ["🍌","banana","ბანანი"],
-  ["🍞","bread","პური"],
-  ["🥛","milk","რძე"],
-  ["🍕","pizza","პიცა"],
-  ["💧","water","წყალი"]
- ],
- grammar:"I like + food.",
- examples:[
-  "I like apples.",
-  "I like pizza.",
-  "I like milk."
- ],
- listening:"I like apples. I like pizza. I drink water.",
- speaking:[
-  "I like apples.",
-  "I like pizza.",
-  "Water, please.",
-  "I like milk."
- ],
- reading:"I like apples and bananas. I drink water.",
- exercises:[
-  "Say your favorite food.",
-  "Say: Water, please.",
-  "Say: I like pizza."
+  ["apple","ვაშლი","I like apples."],
+  ["banana","ბანანი","The banana is yellow."],
+  ["orange","ფორთოხალი","I eat an orange."],
+  ["bread","პური","I like bread."],
+  ["cheese","ყველი","The cheese is good."],
+  ["egg","კვერცხი","I eat an egg."],
+  ["rice","ბრინჯი","I like rice."],
+  ["milk","რძე","I drink milk."],
+  ["water","წყალი","I drink water."],
+  ["juice","წვენი","I like orange juice."],
+  ["cake","ნამცხვარი","The cake is sweet."],
+  ["hungry","მშიერი","I am hungry."]
  ],
  quiz:[
-  ["What is წყალი?","milk","water","bread",1],
-  ["What is ვაშლი?","apple","banana","pizza",0]
+  ["What do you drink?","რას სვამ?",["Water","Bread","Apple"],0],
+  ["Which food is usually yellow?","",["Banana","Milk","Rice"],0],
+  ["Choose the correct sentence.","",["I like apples.","I likes apples.","I liking apples."],0],
+  ["What does HUNGRY mean?","",["მშიერი","დაღლილი","ბედნიერი"],0]
+ ],
+ sentences:[
+  {
+   answer:"I like apples",
+   words:["I","like","apples"]
+  },
+  {
+   answer:"I drink water",
+   words:["I","drink","water"]
+  }
  ]
 },
 
 {
  id:8,
- icon:"🏫",
- title:"At School",
- topic:"School",
- description:"Learn your first school words.",
+ icon:"🎒",
+ color:"#00c9ff",
+ title:"My School",
+ ka:"ჩემი სკოლა",
+ description:"Learn classroom objects and school words.",
  words:[
-  ["🏫","school","სკოლა"],
-  ["👩‍🏫","teacher","მასწავლებელი"],
-  ["👨‍🎓","student","მოსწავლე"],
-  ["📖","book","წიგნი"],
-  ["✏️","pencil","ფანქარი"],
-  ["🎒","bag","ჩანთა"]
- ],
- grammar:"I have a + school thing.",
- examples:[
-  "I have a book.",
-  "I have a pencil.",
-  "I have a bag."
- ],
- listening:"I am at school. I have a book and a pencil.",
- speaking:[
-  "I am a student.",
-  "I have a book.",
-  "I have a pencil."
- ],
- reading:"I am a student. I go to school with my bag.",
- exercises:[
-  "Show your pencil.",
-  "Say book.",
-  "Say: I am a student."
+  ["school","სკოლა","I go to school."],
+  ["classroom","საკლასო ოთახი","This is my classroom."],
+  ["book","წიგნი","I have a book."],
+  ["pen","კალამი","This is my pen."],
+  ["pencil","ფანქარი","I have a pencil."],
+  ["bag","ჩანთა","My bag is blue."],
+  ["desk","მერხი","My book is on the desk."],
+  ["board","დაფა","The teacher writes on the board."],
+  ["lesson","გაკვეთილი","The lesson is fun."],
+  ["read","კითხვა","I can read."],
+  ["write","წერა","I can write."],
+  ["learn","სწავლა","I like to learn."]
  ],
  quiz:[
-  ["What is სკოლა?","school","home","house",0],
-  ["Who teaches?","student","teacher","baby",1]
+  ["Where do children learn?","",["School","Garden","Kitchen"],0],
+  ["What do you write with?","",["Pencil","Chair","Bag"],0],
+  ["Where does the teacher write?","",["Board","Bed","Door"],0],
+  ["What does READ mean?","",["წერა","კითხვა","თამაში"],1]
+ ],
+ sentences:[
+  {
+   answer:"I go to school",
+   words:["I","go","to","school"]
+  },
+  {
+   answer:"I can read",
+   words:["I","can","read"]
+  }
  ]
 },
 
 {
  id:9,
  icon:"☀️",
- title:"Weather",
- topic:"Weather",
- description:"Learn easy words about the weather.",
+ color:"#ffb000",
+ title:"Weather & Seasons",
+ ka:"ამინდი და სეზონები",
+ description:"Talk about the weather and four seasons.",
  words:[
-  ["☀️","sun","მზე"],
-  ["🌧️","rain","წვიმა"],
-  ["☁️","cloud","ღრუბელი"],
-  ["❄️","snow","თოვლი"],
-  ["🌈","rainbow","ცისარტყელა"],
-  ["🔥","hot","ცხელი"]
- ],
- grammar:"It is + weather.",
- examples:[
-  "It is sunny.",
-  "It is rainy.",
-  "It is hot."
- ],
- listening:"The sun is bright. It is sunny today.",
- speaking:[
-  "It is sunny.",
-  "It is rainy.",
-  "It is hot.",
-  "I like the sun."
- ],
- reading:"It is sunny today. The sky is blue.",
- exercises:[
-  "Look outside.",
-  "Say the weather.",
-  "Say: It is sunny."
+  ["sunny","მზიანი","It is sunny today."],
+  ["rainy","წვიმიანი","It is rainy today."],
+  ["cloudy","ღრუბლიანი","The sky is cloudy."],
+  ["windy","ქარიანი","It is windy."],
+  ["snowy","თოვლიანი","It is snowy."],
+  ["hot","ცხელი","It is hot today."],
+  ["cold","ცივი","It is cold today."],
+  ["spring","გაზაფხული","Spring is beautiful."],
+  ["summer","ზაფხული","Summer is hot."],
+  ["autumn","შემოდგომა","Autumn is colorful."],
+  ["winter","ზამთარი","Winter is cold."],
+  ["weather","ამინდი","The weather is nice."]
  ],
  quiz:[
-  ["What is მზე?","sun","rain","snow",0],
-  ["What is თოვლი?","cloud","snow","rain",1]
+  ["Which season is cold?","",["Summer","Winter","Spring"],1],
+  ["What weather has rain?","",["Rainy","Sunny","Hot"],0],
+  ["Which season comes after spring?","",["Summer","Winter","Autumn"],0],
+  ["What does COLD mean?","",["ცხელი","ცივი","მზიანი"],1]
+ ],
+ sentences:[
+  {
+   answer:"It is sunny today",
+   words:["It","is","sunny","today"]
+  },
+  {
+   answer:"Winter is cold",
+   words:["Winter","is","cold"]
+  }
  ]
 },
 
 {
  id:10,
  icon:"🧍",
+ color:"#7c5cff",
  title:"My Body",
- topic:"Body",
- description:"Learn simple body words.",
+ ka:"ჩემი სხეული",
+ description:"Learn body parts and describe yourself.",
  words:[
-  ["👁️","eye","თვალი"],
-  ["👂","ear","ყური"],
-  ["👃","nose","ცხვირი"],
-  ["👄","mouth","პირი"],
-  ["✋","hand","ხელი"],
-  ["🦶","foot","ფეხი"]
- ],
- grammar:"This is my + body part.",
- examples:[
-  "This is my eye.",
-  "This is my hand.",
-  "This is my nose."
- ],
- listening:"This is my head. These are my eyes.",
- speaking:[
-  "My eyes.",
-  "My hand.",
-  "My nose.",
-  "My foot."
- ],
- reading:"I have two eyes. I have two hands.",
- exercises:[
-  "Touch your nose.",
-  "Show your hand.",
-  "Say: My eyes."
+  ["head","თავი","This is my head."],
+  ["hair","თმა","My hair is brown."],
+  ["eye","თვალი","I have two eyes."],
+  ["ear","ყური","I have two ears."],
+  ["nose","ცხვირი","This is my nose."],
+  ["mouth","პირი","Open your mouth."],
+  ["hand","ხელი","Raise your hand."],
+  ["finger","თითი","I have ten fingers."],
+  ["leg","ფეხი","My leg is strong."],
+  ["foot","ტერფი","My foot is small."],
+  ["arm","მკლავი","My arm is strong."],
+  ["body","სხეული","This is my body."]
  ],
  quiz:[
-  ["What is თვალი?","eye","ear","nose",0],
-  ["What is ხელი?","foot","hand","mouth",1]
+  ["How many eyes do you have?","",["One","Two","Five"],1],
+  ["What do you use to see?","რით ხედავ?",["Eyes","Ears","Hands"],0],
+  ["What is „ცხვირი“?","",["Mouth","Nose","Head"],1],
+  ["What do you raise in class?","",["Hand","Foot","Ear"],0]
+ ],
+ sentences:[
+  {
+   answer:"I have two eyes",
+   words:["I","have","two","eyes"]
+  },
+  {
+   answer:"This is my hand",
+   words:["This","is","my","hand"]
+  }
  ]
 },
 
 {
  id:11,
- icon:"😀",
- title:"Feelings",
- topic:"Feelings",
- description:"Learn how to say how you feel.",
+ icon:"❤️",
+ color:"#ff416c",
+ title:"Feelings & Daily Life",
+ ka:"გრძნობები და ყოველდღიური ცხოვრება",
+ description:"Say how you feel and talk about daily actions.",
  words:[
-  ["😀","happy","ბედნიერი"],
-  ["😢","sad","სევდიანი"],
-  ["😴","tired","დაღლილი"],
-  ["😡","angry","გაბრაზებული"],
-  ["😍","love","სიყვარული"],
-  ["😊","good","კარგად"]
- ],
- grammar:"I am + feeling.",
- examples:[
-  "I am happy.",
-  "I am tired.",
-  "I am good."
- ],
- listening:"I am happy today. I love English!",
- speaking:[
-  "I am happy.",
-  "I am good.",
-  "I am tired.",
-  "I love English."
- ],
- reading:"I am happy. I like my school and my friends.",
- exercises:[
-  "Show a happy face.",
-  "Say: I am happy.",
-  "Say: I love English."
+  ["happy","ბედნიერი","I am happy."],
+  ["sad","სევდიანი","I am sad."],
+  ["tired","დაღლილი","I am tired."],
+  ["angry","გაბრაზებული","He is angry."],
+  ["scared","შეშინებული","She is scared."],
+  ["excited","აღელვებული","I am excited."],
+  ["sleep","ძილი","I sleep at night."],
+  ["wake up","გაღვიძება","I wake up early."],
+  ["eat","ჭამა","I eat breakfast."],
+  ["drink","სმა","I drink water."],
+  ["play","თამაში","I play with friends."],
+  ["help","დახმარება","I help my mum."]
  ],
  quiz:[
-  ["What is ბედნიერი?","sad","happy","tired",1],
-  ["What is დაღლილი?","tired","good","angry",0]
+  ["How do you feel after a long day?","",["Tired","Blue","Table"],0],
+  ["What does HAPPY mean?","",["სევდიანი","ბედნიერი","გაბრაზებული"],1],
+  ["What do you do at night?","",["Sleep","Play school","Eat a pencil"],0],
+  ["Choose the correct sentence.","",["I am happy.","I are happy.","I is happy."],0]
+ ],
+ sentences:[
+  {
+   answer:"I am happy",
+   words:["I","am","happy"]
+  },
+  {
+   answer:"I play with friends",
+   words:["I","play","with","friends"]
+  }
  ]
 },
 
 {
  id:12,
- icon:"⭐",
- title:"My First English Review",
- topic:"Review",
- description:"Review the most important Grade 1 words and phrases.",
+ icon:"🏆",
+ color:"#ffffff",
+ title:"Final Mission",
+ ka:"საბოლოო მისია",
+ description:"Review everything you learned in Grade 2.",
  words:[
-  ["👋","hello","გამარჯობა"],
-  ["❤️","love","სიყვარული"],
-  ["📚","book","წიგნი"],
-  ["🐶","dog","ძაღლი"],
-  ["🍎","apple","ვაშლი"],
-  ["🏠","house","სახლი"],
-  ["🌞","sun","მზე"],
-  ["😊","happy","ბედნიერი"]
- ],
- grammar:"I am. I have. I like. This is.",
- examples:[
-  "I am happy.",
-  "I have a book.",
-  "I like apples.",
-  "This is my house."
- ],
- listening:"Hello! I am happy. I have a book. I like apples.",
- speaking:[
-  "Hello!",
-  "My name is ___.",
-  "I am happy.",
-  "I like English.",
-  "Thank you!"
- ],
- reading:"Hello! My name is Luka. I am happy. I have a book. I like English.",
- exercises:[
-  "Say your name.",
-  "Say one English word.",
-  "Say: I am happy.",
-  "Say: I like English."
+  ["hello","გამარჯობა","Hello, my friend!"],
+  ["family","ოჯახი","I love my family."],
+  ["school","სკოლა","I go to school."],
+  ["book","წიგნი","I read a book."],
+  ["dog","ძაღლი","The dog is happy."],
+  ["apple","ვაშლი","I like apples."],
+  ["blue","ლურჯი","The sky is blue."],
+  ["sunny","მზიანი","It is sunny."],
+  ["happy","ბედნიერი","I am happy."],
+  ["water","წყალი","I drink water."]
  ],
  quiz:[
-  ["What does 'hello' mean?","გამარჯობა","მადლობა","ნახვამდის",0],
-  ["What does 'book' mean?","სკოლა","წიგნი","სახლი",1],
-  ["What does 'happy' mean?","ბედნიერი","დაღლილი","სევდიანი",0],
-  ["Complete: I ___ happy.","am","is","are",0]
+  ["What is „სკოლა“?","",["School","Family","Home"],0],
+  ["What color is the sky?","",["Blue","Green","Black"],0],
+  ["What does HAPPY mean?","",["ბედნიერი","მშიერი","დაღლილი"],0],
+  ["What do you drink?","",["Water","Book","Pencil"],0],
+  ["Which animal can fly?","",["Bird","Fish","Dog"],0],
+  ["Which season is cold?","",["Winter","Summer","Spring"],0],
+  ["What is „დედა“?","",["Mother","Brother","Sister"],0],
+  ["What is five + five?","",["8","10","15"],1]
+ ],
+ sentences:[
+  {
+   answer:"I love my family",
+   words:["I","love","my","family"]
+  },
+  {
+   answer:"I go to school",
+   words:["I","go","to","school"]
+  }
  ]
 }
 
 ];
 
 
-let currentLesson=null;
-let currentTab="overview";
+/* =========================================================
+   STATE
+========================================================= */
 
+const STORAGE_KEY = "englishWithMariamiGrade2";
+
+let state = {
+  xp:0,
+  stars:0,
+  completed:[],
+  quizScores:{},
+  wordsLearned:[],
+  finalScore:0
+};
+
+try{
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(saved) state = {...state,...saved};
+}catch(e){}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+function createParticles(){
+
+  const holder = document.getElementById("particles");
+
+  for(let i=0;i<55;i++){
+
+    const p = document.createElement("div");
+
+    p.className="particle";
+
+    p.style.left = Math.random()*100+"%";
+    p.style.animationDuration = (5+Math.random()*12)+"s";
+    p.style.animationDelay = (-Math.random()*15)+"s";
+    p.style.opacity = Math.random();
+
+    holder.appendChild(p);
+  }
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+function saveState(){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+  updateStats();
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  document.getElementById("xp").textContent = state.xp;
+
+  document.getElementById("stars").textContent = state.stars;
+
+  const level = Math.max(1,Math.floor(state.xp/100)+1);
+
+  document.getElementById("playerLevel").textContent = level;
+
+  const completed = state.completed.length;
+
+  document.getElementById("progressText").textContent =
+    completed+" / "+lessons.length;
+
+  document.getElementById("progressFill").style.width =
+    ((completed/lessons.length)*100)+"%";
+}
+
+
+/* =========================================================
+   LESSON CARDS
+========================================================= */
 
 function renderLessons(){
 
-  const host=document.getElementById("lessons");
+  const container = document.getElementById("lessons");
 
-  host.innerHTML=lessons.map((lesson,index)=>`
+  container.innerHTML="";
 
-    <article class="lesson">
+  lessons.forEach((lesson,index)=>{
 
+    const unlocked =
+      index===0 ||
+      state.completed.includes(lessons[index-1].id);
+
+    const completed =
+      state.completed.includes(lesson.id);
+
+    const card = document.createElement("article");
+
+    card.className =
+      "lesson "+
+      (!unlocked ? "locked ":"")+
+      (completed ? "completed":"");
+
+    card.style.setProperty("--lesson-color",lesson.color);
+
+    card.innerHTML = `
       <div class="lesson-number">
-        LESSON ${lesson.id}
+        MISSION ${String(lesson.id).padStart(2,"0")}
       </div>
 
-      <div class="lesson-icon">
-        ${lesson.icon}
+      <div class="lesson-status">
+        ${completed ? "✅" : unlocked ? "▶" : "🔒"}
       </div>
 
-      <div class="lesson-topic">
-        ${lesson.topic}
+      <div class="lesson-icon">${lesson.icon}</div>
+
+      <h4>${lesson.title}</h4>
+
+      <p>${lesson.ka}</p>
+
+      <div class="lesson-bottom">
+        <span>${lesson.words.length} WORDS</span>
+        <span>${lesson.quiz.length} QUIZ</span>
       </div>
+    `;
 
-      <h2>
-        ${lesson.title}
-      </h2>
+    if(unlocked){
+      card.onclick=()=>openLesson(lesson.id);
+    }
 
-      <p>
-        ${lesson.description}
-      </p>
-
-      <div class="pills">
-        <span class="pill">WORDS</span>
-        <span class="pill">GRAMMAR</span>
-        <span class="pill">LISTENING</span>
-        <span class="pill">SPEAKING</span>
-        <span class="pill">READING</span>
-        <span class="pill">EXERCISES</span>
-        <span class="pill">QUIZ</span>
-      </div>
-
-      <button
-        class="open"
-        onclick="openLesson(${lesson.id})">
-
-        🚀 OPEN LESSON
-
-      </button>
-
-    </article>
-
-  `).join("");
-
+    container.appendChild(card);
+  });
 }
 
+
+/* =========================================================
+   OPEN LESSON
+========================================================= */
 
 function openLesson(id){
 
-  currentLesson=lessons.find(x=>x.id===id);
+  const lesson = lessons.find(x=>x.id===id);
 
-  if(!currentLesson)return;
+  if(!lesson) return;
 
-  currentTab="overview";
+  const completed = state.completed.includes(id);
 
-  document.getElementById("modalTitle").textContent=
-    `LESSON ${currentLesson.id} — ${currentLesson.title}`;
+  document.getElementById("modalContent").innerHTML = `
 
-  renderTabs();
+    <div class="modal-title">
+      <small>MISSION ${String(lesson.id).padStart(2,"0")}</small>
 
-  renderContent();
+      <h2>
+        ${lesson.icon}
+        ${lesson.title}
+      </h2>
 
-  document.getElementById("modal").classList.add("open");
+      <p style="color:var(--cyan);margin-top:6px">
+        ${lesson.ka}
+      </p>
 
+      <p style="color:var(--muted);margin-top:10px">
+        ${lesson.description}
+      </p>
+    </div>
+
+    <div class="activity-nav">
+
+      <button class="tab active"
+        onclick="showActivity(${id},'words',this)">
+        📚 WORDS
+      </button>
+
+      <button class="tab"
+        onclick="showActivity(${id},'quiz',this)">
+        🎯 QUIZ
+      </button>
+
+      <button class="tab"
+        onclick="showActivity(${id},'match',this)">
+        🧩 MATCH
+      </button>
+
+      <button class="tab"
+        onclick="showActivity(${id},'sentence',this)">
+        ✍️ SENTENCE
+      </button>
+
+    </div>
+
+    <div class="activity" id="activity"></div>
+
+    ${
+      completed
+      ?
+      `<div style="
+        margin-top:20px;
+        padding:12px;
+        border:1px solid var(--green);
+        border-radius:10px;
+        color:var(--green);
+        text-align:center">
+        ✅ MISSION COMPLETED
+      </div>`
+      :
+      ""
+    }
+  `;
+
+  document.getElementById("modal").classList.add("show");
+
+  showActivity(id,"words");
 }
 
 
-function closeLesson(){
+/* =========================================================
+   ACTIVITY
+========================================================= */
 
-  document.getElementById("modal").classList.remove("open");
+function showActivity(id,type,button){
 
+  const lesson = lessons.find(x=>x.id===id);
+
+  if(button){
+
+    document
+      .querySelectorAll(".tab")
+      .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+  }
+
+  const area=document.getElementById("activity");
+
+  if(type==="words") renderWords(lesson,area);
+
+  if(type==="quiz") renderQuiz(lesson,area);
+
+  if(type==="match") renderMatch(lesson,area);
+
+  if(type==="sentence") renderSentence(lesson,area);
 }
 
 
-function renderTabs(){
+/* =========================================================
+   WORDS
+========================================================= */
 
-  const tabs=[
-    ["overview","🌟 START"],
-    ["words","🔤 WORDS"],
-    ["grammar","📘 GRAMMAR"],
-    ["listening","🎧 LISTENING"],
-    ["speaking","🗣️ SPEAKING"],
-    ["reading","📖 READING"],
-    ["exercises","📝 EXERCISES"],
-    ["quiz","🎯 QUIZ"]
-  ];
+function renderWords(lesson,area){
 
-  document.getElementById("tabs").innerHTML=
+  area.innerHTML=`
 
-    tabs.map(tab=>`
+    <div class="words-grid">
 
-      <button
-        class="tab ${currentTab===tab[0]?"active":""}"
-        onclick="switchTab('${tab[0]}')">
+      ${lesson.words.map((word,index)=>`
 
-        ${tab[1]}
+        <div class="word-card">
+
+          <div class="word-en">${word[0]}</div>
+
+          <div class="word-ka">${word[1]}</div>
+
+          <div class="word-example">
+            ${word[2]}
+          </div>
+
+          <button class="speak"
+            onclick="speakWord('${escapeSpeech(word[0])}')">
+            🔊 Listen
+          </button>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+    <div style="
+      margin-top:25px;
+      text-align:center">
+
+      <button class="btn green"
+        onclick="completeLesson(${lesson.id})">
+
+        ✅ I LEARNED THIS MISSION
 
       </button>
 
-    `).join("");
-
+    </div>
+  `;
 }
 
 
-function switchTab(tab){
+/* =========================================================
+   SPEECH
+========================================================= */
 
-  currentTab=tab;
+function escapeSpeech(text){
 
-  renderTabs();
-
-  renderContent();
-
+  return String(text)
+    .replaceAll("'","")
+    .replaceAll('"',"");
 }
 
+function speakWord(text){
 
-function renderContent(){
-
-  const l=currentLesson;
-
-  if(!l)return;
-
-  const content=document.getElementById("content");
-
-
-  if(currentTab==="overview"){
-
-    content.innerHTML=`
-
-      <div class="card">
-
-        <h3>🌟 Welcome!</h3>
-
-        <p class="big">
-          ${l.description}
-        </p>
-
-        <p class="big">
-          დღეს ვისწავლით:
-          <br><br>
-          🔤 ახალ სიტყვებს<br>
-          📘 მარტივ Grammar-ს<br>
-          🎧 Listening-ს<br>
-          🗣️ Speaking-ს<br>
-          📖 Reading-ს<br>
-          📝 Exercises-ს<br>
-          🎯 Quiz-ს
-        </p>
-
-      </div>
-
-    `;
-
+  if(!("speechSynthesis" in window)){
+    alert("Speech is not supported on this device.");
+    return;
   }
 
+  speechSynthesis.cancel();
 
-  if(currentTab==="words"){
+  const utterance =
+    new SpeechSynthesisUtterance(text);
 
-    content.innerHTML=`
+  utterance.lang="en-US";
+  utterance.rate=.8;
+  utterance.pitch=1.05;
 
-      <div class="card">
+  speechSynthesis.speak(utterance);
+}
 
-        <h3>
-          🔤 New Words
-        </h3>
 
-        <div class="word-grid">
+/* =========================================================
+   QUIZ
+========================================================= */
 
-          ${l.words.map(w=>`
+function renderQuiz(lesson,area){
 
-            <div class="word">
+  let index=0;
+  let score=0;
 
-              <strong>
-                ${w[0]} ${w[1]}
-              </strong>
+  function drawQuestion(){
 
-              <span>
-                ${w[2]}
-              </span>
+    if(index>=lesson.quiz.length){
 
-            </div>
+      state.quizScores[lesson.id]=score;
 
-          `).join("")}
+      const earned = score*10;
+
+      state.xp += earned;
+
+      if(score>=Math.ceil(lesson.quiz.length*.7)){
+        state.stars += 1;
+      }
+
+      saveState();
+
+      area.innerHTML=`
+
+        <div class="review-box">
+
+          <div class="score-ring">
+
+            <strong>
+              ${score}/${lesson.quiz.length}
+            </strong>
+
+          </div>
+
+          <h3>
+            ${score>=Math.ceil(lesson.quiz.length*.7)
+              ? "🚀 MISSION PASSED!"
+              : "KEEP TRAINING!"}
+          </h3>
+
+          <p>
+            ${
+              score>=Math.ceil(lesson.quiz.length*.7)
+              ? "Excellent work! You are ready for the next mission."
+              : "Try again and improve your score."
+            }
+          </p>
+
+          <button class="btn primary"
+            onclick="showActivity(${lesson.id},'quiz')">
+            🔄 TRY AGAIN
+          </button>
+
+          <button class="btn green"
+            onclick="completeLesson(${lesson.id})">
+            ✅ COMPLETE
+          </button>
 
         </div>
+      `;
 
+      return;
+    }
+
+    const q=lesson.quiz[index];
+
+    area.innerHTML=`
+
+      <div style="color:var(--cyan);font-size:12px">
+        QUESTION ${index+1} / ${lesson.quiz.length}
       </div>
 
-    `;
+      <div class="quiz-question">
+        ${q[0]}
+      </div>
 
+      ${
+        q[1]
+        ?
+        `<div style="
+          color:var(--muted);
+          margin-bottom:18px">
+          ${q[1]}
+        </div>`
+        :
+        ""
+      }
+
+      <div class="quiz-options">
+
+        ${q[2].map((answer,i)=>`
+
+          <button class="option"
+            onclick="answerQuiz(
+              this,
+              ${i},
+              ${q[3]},
+              ${lesson.id},
+              ${index}
+            )">
+
+            ${String.fromCharCode(65+i)}.
+            ${answer}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+    `;
   }
 
+  window.answerQuiz=function(
+    element,
+    selected,
+    correct,
+    lessonId,
+    questionIndex
+  ){
 
-  if(currentTab==="grammar"){
+    const buttons =
+      element.parentElement.querySelectorAll(".option");
 
-    content.innerHTML=`
+    buttons.forEach(b=>b.disabled=true);
 
-      <div class="card">
+    if(selected===correct){
 
-        <h3>
-          📘 Grammar
-        </h3>
+      element.classList.add("correct");
+      score++;
 
-        <p class="big">
-          ${l.grammar}
-        </p>
+    }else{
 
-        <h3>
-          ✏️ Examples
-        </h3>
+      element.classList.add("wrong");
 
-        ${l.examples.map(x=>`
+      buttons[correct].classList.add("correct");
+    }
 
-          <div class="example">
-            ${x}
+    setTimeout(()=>{
+
+      index++;
+
+      drawQuestion();
+
+    },700);
+  };
+
+  drawQuestion();
+}
+
+
+/* =========================================================
+   MATCH
+========================================================= */
+
+function renderMatch(lesson,area){
+
+  const selectedWords =
+    [...lesson.words]
+      .sort(()=>Math.random()-.5)
+      .slice(0,Math.min(8,lesson.words.length));
+
+  const left = selectedWords
+    .map(x=>x[0]);
+
+  const right = selectedWords
+    .map(x=>x[1])
+    .sort(()=>Math.random()-.5);
+
+  let selectedEnglish=null;
+  let matched=0;
+
+  area.innerHTML=`
+
+    <p style="color:var(--muted);margin-bottom:18px">
+      Match each English word with the correct Georgian meaning.
+      <br>
+      შეუსაბამე ინგლისური სიტყვა ქართულ მნიშვნელობას.
+    </p>
+
+    <div class="match-grid">
+
+      <div class="match-column" id="matchEnglish">
+
+        ${left.map((word,i)=>`
+
+          <div
+            class="match-item"
+            data-word="${word}"
+            onclick="selectEnglish(this)">
+
+            🇬🇧 ${word}
+
           </div>
 
         `).join("")}
 
       </div>
 
-    `;
+      <div class="match-column" id="matchGeorgian">
 
-  }
+        ${right.map(word=>`
+
+          <div
+            class="match-item"
+            data-ka="${word}"
+            onclick="selectGeorgian(this)">
+
+            🇬🇪 ${word}
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    </div>
+
+    <div id="matchResult"
+      style="margin-top:20px;text-align:center">
+    </div>
+  `;
+
+  window.selectEnglish=function(el){
+
+    document
+      .querySelectorAll("#matchEnglish .match-item")
+      .forEach(x=>x.classList.remove("selected"));
+
+    el.classList.add("selected");
+
+    selectedEnglish=el;
+  };
+
+  window.selectGeorgian=function(el){
+
+    if(!selectedEnglish) return;
+
+    const en=selectedEnglish.dataset.word;
+    const ka=el.dataset.ka;
+
+    const original=selectedWords.find(x=>x[0]===en);
+
+    if(original && original[1]===ka){
+
+      selectedEnglish.classList.add("matched");
+      el.classList.add("matched");
+
+      selectedEnglish.style.pointerEvents="none";
+      el.style.pointerEvents="none";
+
+      matched++;
+
+      selectedEnglish=null;
+
+      if(matched===selectedWords.length){
+
+        state.xp+=50;
+        state.stars+=1;
+
+        saveState();
+
+        document.getElementById("matchResult").innerHTML=`
+          <div style="color:var(--green);font-size:20px;font-weight:900">
+            🎉 PERFECT MATCH!
+          </div>
+        `;
+      }
+
+    }else{
+
+      el.style.borderColor="var(--danger)";
+
+      setTimeout(()=>{
+        el.style.borderColor="";
+      },500);
+
+    }
+  };
+}
 
 
-  if(currentTab==="listening"){
+/* =========================================================
+   SENTENCE BUILDER
+========================================================= */
 
-    content.innerHTML=`
+function renderSentence(lesson,area){
 
-      <div class="card">
+  const sentences=lesson.sentences || [];
 
-        <h3>
-          🎧 Listening
-        </h3>
+  let current=0;
+  let selected=[];
 
-        <p class="big">
-          ${l.listening}
-        </p>
+  function draw(){
 
-        <button
-          class="btn home"
-          onclick="speakText()">
+    if(current>=sentences.length){
 
-          🔊 Listen
+      state.xp+=30;
+      state.stars+=1;
+
+      saveState();
+
+      area.innerHTML=`
+
+        <div class="review-box">
+
+          <div style="font-size:60px">
+            🧠
+          </div>
+
+          <h3>GREAT JOB!</h3>
+
+          <p>
+            You built the sentences correctly.
+            <br>
+            ძალიან კარგად ააწყვე წინადადებები!
+          </p>
+
+        </div>
+      `;
+
+      return;
+    }
+
+    selected=[];
+
+    const sentence=sentences[current];
+
+    const shuffled=
+      [...sentence.words]
+      .sort(()=>Math.random()-.5);
+
+    area.innerHTML=`
+
+      <div style="color:var(--cyan);font-size:12px">
+        SENTENCE ${current+1} / ${sentences.length}
+      </div>
+
+      <h3 style="margin:12px 0">
+        Build the sentence:
+      </h3>
+
+      <p style="color:var(--muted);margin-bottom:15px">
+        ააწყვე სწორი ინგლისური წინადადება.
+      </p>
+
+      <div class="sentence-area" id="sentenceArea">
+      </div>
+
+      <div class="word-bank" id="wordBank">
+
+        ${shuffled.map((word,i)=>`
+
+          <button
+            class="token"
+            data-word="${word}"
+            onclick="addToken(this)">
+
+            ${word}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+
+      <div style="margin-top:20px">
+
+        <button class="btn primary"
+          onclick="checkSentence()">
+
+          CHECK ✓
 
         </button>
 
       </div>
 
-    `;
-
-  }
-
-
-  if(currentTab==="speaking"){
-
-    content.innerHTML=`
-
-      <div class="card">
-
-        <h3>
-          🗣️ Speaking
-        </h3>
-
-        ${l.speaking.map(x=>`
-
-          <div class="example">
-            ${x}
-          </div>
-
-        `).join("")}
-
-        <br>
-
-        <button
-          class="btn home"
-          onclick="speakText()">
-
-          🔊 Hear the lesson
-
-        </button>
-
+      <div id="sentenceFeedback"
+        style="margin-top:15px">
       </div>
-
     `;
 
+    window.addToken=function(el){
+
+      if(el.disabled) return;
+
+      el.disabled=true;
+
+      selected.push(el.dataset.word);
+
+      const area2=
+        document.getElementById("sentenceArea");
+
+      const token=
+        document.createElement("div");
+
+      token.className="token";
+      token.textContent=el.dataset.word;
+
+      area2.appendChild(token);
+    };
+
+    window.checkSentence=function(){
+
+      const expected=sentence.words.join(" ");
+      const actual=selected.join(" ");
+
+      const feedback=
+        document.getElementById("sentenceFeedback");
+
+      if(actual===expected){
+
+        feedback.innerHTML=`
+          <span style="color:var(--green);font-weight:900">
+            ✅ Correct! ${sentence.answer}
+          </span>
+        `;
+
+        setTimeout(()=>{
+          current++;
+          draw();
+        },800);
+
+      }else{
+
+        feedback.innerHTML=`
+          <span style="color:var(--danger);font-weight:900">
+            ❌ Try again!
+          </span>
+        `;
+      }
+    };
   }
 
-
-  if(currentTab==="reading"){
-
-    content.innerHTML=`
-
-      <div class="card">
-
-        <h3>
-          📖 Reading
-        </h3>
-
-        <p class="big">
-          ${l.reading}
-        </p>
-
-      </div>
-
-    `;
-
-  }
-
-
-  if(currentTab==="exercises"){
-
-    content.innerHTML=`
-
-      <div class="card">
-
-        <h3>
-          📝 Easy Exercises
-        </h3>
-
-        ${l.exercises.map((x,i)=>`
-
-          <div class="exercise">
-
-            <b>
-              ${i+1}. ${x}
-            </b>
-
-          </div>
-
-        `).join("")}
-
-      </div>
-
-    `;
-
-  }
-
-
-  if(currentTab==="quiz"){
-
-    content.innerHTML=`
-
-      <div class="card">
-
-        <h3>
-          🎯 Mini Quiz
-        </h3>
-
-        <div id="quiz">
-
-          ${l.quiz.map((q,i)=>`
-
-            <div class="quiz-question">
-
-              <b>
-                ${i+1}. ${q[0]}
-              </b>
-
-              <button
-                class="quiz-option"
-                onclick="answerQuiz(this,${i},0)">
-                ${q[1]}
-              </button>
-
-              <button
-                class="quiz-option"
-                onclick="answerQuiz(this,${i},1)">
-                ${q[2]}
-              </button>
-
-              <button
-                class="quiz-option"
-                onclick="answerQuiz(this,${i},2)">
-                ${q[3]}
-              </button>
-
-            </div>
-
-          `).join("")}
-
-        </div>
-
-        <div id="score"></div>
-
-      </div>
-
-    `;
-
-  }
-
+  draw();
 }
 
 
-let quizScore=0;
-let quizAnswered=0;
-let answeredQuestions={};
+/* =========================================================
+   COMPLETE LESSON
+========================================================= */
 
+function completeLesson(id){
 
-function answerQuiz(button,index,answer){
+  if(!state.completed.includes(id)){
 
-  if(answeredQuestions[index])return;
+    state.completed.push(id);
 
-  answeredQuestions[index]=true;
+    state.xp+=50;
 
-  const correct=currentLesson.quiz[index][4];
+    state.stars+=1;
 
-  if(answer===correct){
+    saveState();
 
-    button.classList.add("good");
-
-    quizScore++;
-
-  }else{
-
-    button.classList.add("bad");
+    renderLessons();
 
   }
 
-  quizAnswered++;
+  closeModal();
 
-  if(quizAnswered===currentLesson.quiz.length){
+  setTimeout(()=>{
 
-    document.getElementById("score").innerHTML=`
+    const next=
+      lessons.find(x=>x.id===id+1);
 
-      <div class="score">
+    if(next){
 
-        ⭐ YOUR SCORE:
-        ${quizScore}/${currentLesson.quiz.length}
+      openLesson(next.id);
 
+    }else{
+
+      openReview();
+
+    }
+
+  },300);
+}
+
+
+/* =========================================================
+   FIRST LESSON
+========================================================= */
+
+function startFirstLesson(){
+
+  const firstIncomplete=
+    lessons.find(x=>!state.completed.includes(x.id));
+
+  openLesson(
+    firstIncomplete
+    ? firstIncomplete.id
+    : 1
+  );
+}
+
+
+/* =========================================================
+   FINAL REVIEW
+========================================================= */
+
+function openReview(){
+
+  const total=lessons.length;
+
+  const completed=state.completed.length;
+
+  const percentage=
+    Math.round((completed/total)*100);
+
+  document.getElementById("modalContent").innerHTML=`
+
+    <div class="modal-title">
+
+      <small>FINAL SYSTEM</small>
+
+      <h2>🏆 GRADE 2 FINAL MISSION</h2>
+
+      <p style="color:var(--cyan);margin-top:6px">
+        საბოლოო გამეორება
+      </p>
+
+    </div>
+
+    <div class="review-box">
+
+      <div class="score-ring">
+
+        <strong>
+          ${percentage}%
+        </strong>
+
+      </div>
+
+      <h3>
+        ${percentage===100
+          ? "🚀 GRADE 2 MASTER!"
+          : "⚡ KEEP GOING!"}
+      </h3>
+
+      <p>
+        You completed
+        <strong>${completed}</strong>
+        out of
+        <strong>${total}</strong>
+        missions.
         <br><br>
+        შენ დაასრულე
+        <strong>${completed}</strong>
+        / ${total}
+        გაკვეთილი.
+      </p>
 
-        ${
-          quizScore===currentLesson.quiz.length
-          ?"🏆 Perfect! Amazing!"
-          :"🌱 Great try! Keep learning!"
-        }
+      <div style="
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:10px">
+
+        <button class="btn primary"
+          onclick="startFirstLesson()">
+          🚀 CONTINUE
+        </button>
+
+        <button class="btn green"
+          onclick="finalChallenge()">
+          🎯 FINAL QUIZ
+        </button>
 
       </div>
 
-    `;
+    </div>
+  `;
 
-  }
-
+  document.getElementById("modal").classList.add("show");
 }
 
 
-function speakText(){
+/* =========================================================
+   FINAL CHALLENGE
+========================================================= */
 
-  if(!currentLesson)return;
+function finalChallenge(){
 
-  const text=
+  const lesson=lessons[11];
 
-    currentLesson.listening+
-    " "+
-    currentLesson.speaking.join(". ");
+  document.getElementById("modalContent").innerHTML=`
+
+    <div class="modal-title">
+
+      <small>FINAL BOSS</small>
+
+      <h2>🏆 ULTIMATE ENGLISH QUIZ</h2>
+
+      <p style="color:var(--muted);margin-top:8px">
+        The final challenge of Grade 2.
+      </p>
+
+    </div>
+
+    <div class="activity" id="activity"></div>
+
+  `;
+
+  renderFinalQuiz(lesson);
+}
+
+
+function renderFinalQuiz(lesson){
+
+  const area=document.getElementById("activity");
+
+  let questions=
+    [...lesson.quiz,...lessons.slice(0,11)
+      .flatMap(x=>x.quiz)
+    ]
+    .sort(()=>Math.random()-.5)
+    .slice(0,15);
+
+  let index=0;
+  let score=0;
+
+  function draw(){
+
+    if(index>=questions.length){
+
+      const percent=
+        Math.round(score/questions.length*100);
+
+      state.finalScore=percent;
+
+      state.xp+=score*20;
+
+      if(percent>=70) state.stars+=3;
+
+      saveState();
+
+      area.innerHTML=`
+
+        <div class="review-box">
+
+          <div class="score-ring">
+
+            <strong>
+              ${percent}%
+            </strong>
+
+          </div>
+
+          <h3>
+            ${
+              percent>=90
+              ? "🏆 ENGLISH MASTER!"
+              : percent>=70
+              ? "🚀 GREAT JOB!"
+              : "⚡ TRAIN MORE!"
+            }
+          </h3>
+
+          <p>
+            You scored
+            <strong>${score}/${questions.length}</strong>.
+            <br>
+            შენი შედეგია
+            <strong>${score}/${questions.length}</strong>.
+          </p>
+
+          <button class="btn primary"
+            onclick="closeModal()">
+
+            RETURN TO BASE
+
+          </button>
+
+        </div>
+      `;
+
+      return;
+    }
+
+    const q=questions[index];
+
+    area.innerHTML=`
+
+      <div style="color:var(--cyan)">
+        FINAL QUESTION ${index+1}/${questions.length}
+      </div>
+
+      <div class="quiz-question">
+        ${q[0]}
+      </div>
+
+      <div style="
+        color:var(--muted);
+        margin-bottom:20px">
+        ${q[1]||""}
+      </div>
+
+      <div class="quiz-options">
+
+        ${q[2].map((a,i)=>`
+
+          <button class="option"
+            onclick="finalAnswer(this,${i},${q[3]})">
+
+            ${a}
+
+          </button>
+
+        `).join("")}
+
+      </div>
+    `;
+  }
+
+  window.finalAnswer=function(el,selected,correct){
+
+    const buttons=
+      el.parentElement.querySelectorAll(".option");
+
+    buttons.forEach(x=>x.disabled=true);
+
+    if(selected===correct){
+
+      el.classList.add("correct");
+      score++;
+
+    }else{
+
+      el.classList.add("wrong");
+      buttons[correct].classList.add("correct");
+
+    }
+
+    setTimeout(()=>{
+
+      index++;
+      draw();
+
+    },650);
+  };
+
+  draw();
+}
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+function closeModal(){
+
+  document.getElementById("modal").classList.remove("show");
 
   if("speechSynthesis" in window){
-
     speechSynthesis.cancel();
+  }
+}
 
-    const utterance=
-      new SpeechSynthesisUtterance(text);
+document.getElementById("modal").addEventListener("click",function(e){
 
-    utterance.lang="en-US";
-    utterance.rate=.78;
-    utterance.pitch=1.05;
-
-    speechSynthesis.speak(utterance);
-
+  if(e.target===this){
+    closeModal();
   }
 
+});
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetProgress(){
+
+  const ok=
+    confirm(
+      "Reset Grade 2 progress?\n\nყველა პროგრესი წაიშლება."
+    );
+
+  if(!ok) return;
+
+  state={
+    xp:0,
+    stars:0,
+    completed:[],
+    quizScores:{},
+    wordsLearned:[],
+    finalScore:0
+  };
+
+  saveState();
+
+  renderLessons();
+
+  alert("Grade 2 progress has been reset.");
 }
 
 
-document.getElementById("modal").addEventListener(
-  "click",
-  function(e){
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
-    if(e.target===this){
-      closeLesson();
-    }
+document.addEventListener("keydown",function(e){
 
+  if(e.key==="Escape"){
+    closeModal();
   }
-);
+
+});
 
 
-document.addEventListener(
-  "keydown",
-  function(e){
+/* =========================================================
+   INIT
+========================================================= */
 
-    if(e.key==="Escape"){
-      closeLesson();
-    }
-
-  }
-);
-
-
+createParticles();
 renderLessons();
+updateStats();
 
 </script>
 
