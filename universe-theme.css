@@ -1,0 +1,20 @@
+/* English with Mariami — shared Futuristic Learning Universe layer */
+:root{--u-cyan:#00f6ff;--u-purple:#9b5cff;--u-green:#21ff9a;--u-bg:#020611}
+html{background:var(--u-bg)}
+body{background-color:var(--u-bg)!important;background-image:radial-gradient(circle at 15% 10%,rgba(0,246,255,.14),transparent 28%),radial-gradient(circle at 85% 15%,rgba(155,92,255,.14),transparent 30%)!important}
+body.u-universe{perspective:1200px}
+body.u-universe:before{content:"";position:fixed;inset:auto -15% -25vh;z-index:-2;height:75vh;pointer-events:none;background:linear-gradient(rgba(0,246,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(0,246,255,.12) 1px,transparent 1px);background-size:52px 52px;transform:perspective(600px) rotateX(62deg);transform-origin:center bottom;animation:uGrid 11s linear infinite;mask-image:linear-gradient(to top,black,transparent 92%)}
+body.u-universe:after{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:radial-gradient(circle at 50% 55%,transparent 0,rgba(0,0,0,.12) 55%,rgba(0,0,0,.58) 100%)}
+@keyframes uGrid{to{background-position:0 52px,52px 0}}
+.u-holo{position:relative;overflow:hidden;isolation:isolate;transform-style:preserve-3d;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.u-holo:before{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(115deg,transparent 25%,rgba(0,246,255,.13) 42%,rgba(255,255,255,.12) 50%,rgba(155,92,255,.12) 58%,transparent 75%);background-size:240% 100%;animation:uShine 6s linear infinite;pointer-events:none}
+.u-holo:after{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:linear-gradient(145deg,rgba(0,246,255,.08),transparent 38%,rgba(155,92,255,.07));pointer-events:none}
+.u-holo:hover{transform:translateY(-7px) rotateX(2deg) rotateY(-2deg);border-color:rgba(0,246,255,.72)!important;box-shadow:0 22px 55px rgba(0,0,0,.45),0 0 32px rgba(0,246,255,.13)!important}
+@keyframes uShine{0%{background-position:200% 0}100%{background-position:-40% 0}}
+.u-portal{position:relative;transform-style:preserve-3d}
+.u-portal .u-ring{position:absolute;inset:-8%;border:1px solid rgba(0,246,255,.25);border-radius:50%;pointer-events:none;animation:uSpin 12s linear infinite}
+.u-portal .u-ring:nth-child(2){inset:7%;border-color:rgba(155,92,255,.25);animation-duration:17s;animation-direction:reverse}
+@keyframes uSpin{to{transform:rotate(360deg)}}
+.u-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid rgba(0,246,255,.25);border-radius:999px;background:rgba(0,246,255,.05);color:#7df8ff;font-size:9px;font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+@media(max-width:650px){body.u-universe:before{background-size:34px 34px}.u-holo:hover{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){body.u-universe:before,.u-holo:before,.u-portal .u-ring{animation:none!important}.u-holo{transition:none}}
