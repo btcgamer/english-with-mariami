@@ -1,3785 +1,907 @@
-<!DOCTYPE html>
-
-<html lang="ka">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#030711">
-<title>English with Mariami — Xenon Teacher OS</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="config.js"></script>
-
-<style>
-:root{
-  --bg:#02040b;
-  --panel:rgba(7,13,28,.78);
-  --panel2:rgba(10,20,40,.88);
-  --cyan:#00eaff;
-  --blue:#2777ff;
-  --violet:#9b5cff;
-  --pink:#ff36c8;
-  --green:#00f5a0;
-  --yellow:#ffe600;
-  --red:#ff426d;
-  --white:#f5fbff;
-  --muted:#8295ad;
-  --line:rgba(0,234,255,.18);
-  --shadow:0 25px 80px rgba(0,0,0,.5);
-}
-
-*{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--white);
-  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  background:
-    radial-gradient(circle at 15% 10%,rgba(0,234,255,.12),transparent 25%),
-    radial-gradient(circle at 85% 15%,rgba(155,92,255,.15),transparent 28%),
-    radial-gradient(circle at 50% 100%,rgba(39,119,255,.10),transparent 35%),
-    #02040b;
-  overflow-x:hidden;
-}
-
-button,input,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-::-webkit-scrollbar{
-  width:8px;
-}
-
-::-webkit-scrollbar-track{
-  background:#02050d;
-}
-
-::-webkit-scrollbar-thumb{
-  background:linear-gradient(var(--cyan),var(--violet));
-  border-radius:20px;
-}
-
-/* ================= BACKGROUND ================= */
-
-.space{
-  position:fixed;
-  inset:0;
-  z-index:-10;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.grid{
-  position:absolute;
-  inset:-20%;
-  opacity:.18;
-  background-image:
-    linear-gradient(rgba(0,234,255,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,234,255,.08) 1px,transparent 1px);
-  background-size:55px 55px;
-  transform:perspective(700px) rotateX(60deg) translateY(120px) scale(1.4);
-  animation:gridMove 16s linear infinite;
-}
-
-@keyframes gridMove{
-  from{background-position:0 0,0 0}
-  to{background-position:0 550px,550px 0}
-}
-
-.orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(70px);
-  animation:float 9s ease-in-out infinite alternate;
-}
-
-.orb.a{
-  width:360px;
-  height:360px;
-  left:-150px;
-  top:120px;
-  background:rgba(0,234,255,.12);
-}
-
-.orb.b{
-  width:420px;
-  height:420px;
-  right:-180px;
-  top:280px;
-  background:rgba(155,92,255,.13);
-  animation-delay:-3s;
-}
-
-.orb.c{
-  width:260px;
-  height:260px;
-  left:45%;
-  bottom:-150px;
-  background:rgba(255,54,200,.08);
-  animation-delay:-5s;
-}
-
-@keyframes float{
-  to{
-    transform:translate(40px,-35px) scale(1.1);
-  }
-}
-
-/* ================= HEADER ================= */
-
-.top{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  border-bottom:1px solid var(--line);
-  background:rgba(2,5,14,.72);
-  backdrop-filter:blur(22px);
-}
-
-.nav{
-  width:min(1500px,calc(100% - 28px));
-  margin:auto;
-  min-height:72px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.logo{
-  width:47px;
-  height:47px;
-  display:grid;
-  place-items:center;
-  border-radius:15px;
-  font-size:24px;
-  background:
-    linear-gradient(135deg,#00eaff,#276eff,#a855f7);
-  box-shadow:
-    0 0 20px rgba(0,234,255,.35),
-    inset 0 0 18px rgba(255,255,255,.2);
-  animation:logoPulse 3s infinite;
-}
-
-@keyframes logoPulse{
-  50%{
-    box-shadow:
-      0 0 35px rgba(0,234,255,.6),
-      inset 0 0 18px rgba(255,255,255,.25);
-  }
-}
-
-.brand-title{
-  font-weight:1000;
-  letter-spacing:.4px;
-}
-
-.brand-sub{
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:2px;
-  margin-top:3px;
-}
-
-.nav-actions{
-  display:flex;
-  gap:8px;
-}
-
-.btn{
-  min-height:42px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:13px;
-  padding:10px 14px;
-  color:#fff;
-  background:rgba(255,255,255,.055);
-  font-weight:850;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  border-color:rgba(0,234,255,.5);
-  box-shadow:0 0 25px rgba(0,234,255,.13);
-}
-
-.btn.cyan{
-  background:linear-gradient(135deg,#057aff,#00cbe8);
-}
-
-.btn.violet{
-  background:linear-gradient(135deg,#6937d9,#a855f7);
-}
-
-.btn.green{
-  background:linear-gradient(135deg,#009d69,#00e0a0);
-}
-
-.btn.yellow{
-  color:#07111b;
-  background:linear-gradient(135deg,#ffe600,#ffb900);
-}
-
-.btn.red{
-  background:linear-gradient(135deg,#c91949,#ff3865);
-}
-
-.btn.small{
-  min-height:36px;
-  padding:7px 10px;
-  font-size:12px;
-}
-
-/* ================= APP ================= */
-
-.app{
-  width:min(1500px,calc(100% - 28px));
-  margin:auto;
-  padding:25px 0 60px;
-}
-
-/* ================= HOME ================= */
-
-.home{
-  display:grid;
-  grid-template-columns:1.35fr .65fr;
-  gap:18px;
-  margin-bottom:18px;
-}
-
-.hero{
-  min-height:290px;
-  padding:30px;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  border-radius:28px;
-  background:
-    linear-gradient(145deg,rgba(7,25,48,.88),rgba(4,9,21,.88));
-  box-shadow:var(--shadow);
-}
-
-.hero:after{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  right:-100px;
-  top:-100px;
-  border-radius:50%;
-  border:1px solid rgba(0,234,255,.18);
-  box-shadow:
-    0 0 50px rgba(0,234,255,.1),
-    inset 0 0 50px rgba(155,92,255,.08);
-}
-
-.kicker{
-  color:var(--cyan);
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:3px;
-}
-
-.hero h1{
-  margin:13px 0 10px;
-  font-size:clamp(2.2rem,5vw,4.8rem);
-  line-height:.98;
-  letter-spacing:-3px;
-}
-
-.gradient-text{
-  background:linear-gradient(
-    90deg,
-    #fff,
-    var(--cyan),
-    var(--violet),
-    var(--pink)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:760px;
-  color:#a9bbca;
-  line-height:1.65;
-}
-
-.command{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:22px;
-}
-
-.system{
-  min-height:290px;
-  padding:26px;
-  border:1px solid var(--line);
-  border-radius:28px;
-  background:linear-gradient(145deg,rgba(7,25,48,.88),rgba(4,9,21,.88));
-  box-shadow:var(--shadow);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.online{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:var(--green);
-  font-weight:1000;
-  letter-spacing:1px;
-}
-
-.pulse{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 18px var(--green);
-  animation:pulse 1.4s infinite;
-}
-
-@keyframes pulse{
-  50%{transform:scale(.65);opacity:.45}
-}
-
-.system h2{
-  font-size:27px;
-  margin:15px 0 5px;
-}
-
-.system .email{
-  color:var(--muted);
-}
-
-/* ================= STATS ================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:11px;
-  margin-bottom:18px;
-}
-
-.stat{
-  position:relative;
-  overflow:hidden;
-  padding:18px;
-  min-height:100px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:rgba(6,17,34,.75);
-  box-shadow:0 15px 50px rgba(0,0,0,.25);
-}
-
-.stat:before{
-  content:"";
-  position:absolute;
-  width:80px;
-  height:80px;
-  right:-35px;
-  top:-35px;
-  border-radius:50%;
-  background:rgba(0,234,255,.08);
-  filter:blur(5px);
-}
-
-.stat small{
-  color:var(--muted);
-  font-size:11px;
-}
-
-.stat b{
-  display:block;
-  margin-top:5px;
-  font-size:29px;
-}
-
-/* ================= MAIN NAV ================= */
-
-.main-nav{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  padding:10px;
-  margin-bottom:18px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:rgba(4,12,25,.8);
-  backdrop-filter:blur(18px);
-}
-
-.nav-item{
-  flex:1;
-  min-width:110px;
-  border:1px solid transparent;
-  border-radius:13px;
-  padding:12px 10px;
-  color:#9db0c0;
-  background:transparent;
-  font-weight:900;
-  transition:.2s;
-}
-
-.nav-item:hover,
-.nav-item.active{
-  color:#fff;
-  border-color:rgba(0,234,255,.24);
-  background:
-    linear-gradient(
-      135deg,
-      rgba(0,234,255,.12),
-      rgba(155,92,255,.12)
-    );
-  box-shadow:
-    inset 0 -2px var(--cyan),
-    0 0 20px rgba(0,234,255,.06);
-}
-
-/* ================= PANELS ================= */
-
-.panel{
-  display:none;
-}
-
-.panel.active{
-  display:block;
-}
-
-.card{
-  border:1px solid var(--line);
-  border-radius:25px;
-  padding:22px;
-  margin-bottom:17px;
-  background:
-    linear-gradient(145deg,rgba(7,22,43,.88),rgba(3,9,20,.86));
-  box-shadow:var(--shadow);
-}
-
-.head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:18px;
-}
-
-.head h2{
-  margin:0;
-  font-size:22px;
-}
-
-.muted{
-  color:var(--muted);
-}
-
-.small{
-  font-size:12px;
-}
-
-/* ================= GRADE SELECTOR ================= */
-
-.grade-selector{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.grade-card{
-  position:relative;
-  min-height:175px;
-  padding:23px;
-  overflow:hidden;
-  border-radius:24px;
-  border:1px solid rgba(0,234,255,.15);
-  background:
-    linear-gradient(145deg,#081a33,#040b19);
-  cursor:pointer;
-  transition:.3s;
-}
-
-.grade-card:before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:25px;
-  background:linear-gradient(
-    120deg,
-    transparent 20%,
-    rgba(0,234,255,.35),
-    transparent 70%
-  );
-  opacity:.35;
-  transform:translateX(-100%);
-  transition:.7s;
-}
-
-.grade-card:hover{
-  transform:translateY(-7px) perspective(700px) rotateX(2deg);
-  border-color:rgba(0,234,255,.5);
-  box-shadow:
-    0 20px 70px rgba(0,0,0,.5),
-    0 0 35px rgba(0,234,255,.09);
-}
-
-.grade-card:hover:before{
-  transform:translateX(100%);
-}
-
-.grade-icon{
-  font-size:38px;
-}
-
-.grade-card h3{
-  margin:12px 0 4px;
-  font-size:22px;
-}
-
-.grade-card p{
-  color:var(--muted);
-  margin:0;
-  font-size:12px;
-}
-
-/* ================= LESSONS ================= */
-
-.lesson-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.lesson{
-  position:relative;
-  padding:18px;
-  min-height:175px;
-  border-radius:19px;
-  border:1px solid rgba(0,234,255,.13);
-  background:linear-gradient(145deg,#081b36,#040c1b);
-  transition:.25s;
-  cursor:pointer;
-  overflow:hidden;
-}
-
-.lesson:hover{
-  transform:translateY(-5px);
-  border-color:rgba(0,234,255,.48);
-  box-shadow:
-    0 18px 55px rgba(0,0,0,.38),
-    0 0 28px rgba(0,234,255,.08);
-}
-
-.lesson-number{
-  color:var(--cyan);
-  font-size:10px;
-  letter-spacing:2px;
-  font-weight:1000;
-}
-
-.lesson h3{
-  margin:9px 0 6px;
-}
-
-.lesson p{
-  margin:0;
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.5;
-}
-
-.lesson-arrow{
-  position:absolute;
-  right:15px;
-  bottom:13px;
-  color:var(--cyan);
-  font-size:18px;
-}
-
-/* ================= MATERIAL HUB ================= */
-
-.material-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:11px;
-}
-
-.material{
-  min-height:115px;
-  border-radius:18px;
-  border:1px solid rgba(0,234,255,.13);
-  background:#06172d;
-  color:white;
-  padding:17px;
-  text-align:left;
-  transition:.2s;
-}
-
-.material:hover{
-  transform:translateY(-4px);
-  border-color:var(--cyan);
-  box-shadow:0 0 30px rgba(0,234,255,.08);
-}
-
-.material-icon{
-  font-size:27px;
-}
-
-.material b{
-  display:block;
-  margin-top:8px;
-}
-
-.material small{
-  color:var(--muted);
-}
-
-/* ================= CONTENT ================= */
-
-.content-box{
-  padding:20px;
-  border-radius:18px;
-  border:1px solid rgba(0,234,255,.13);
-  background:#041226;
-  margin-top:12px;
-}
-
-.content-box h3{
-  margin-top:0;
-}
-
-.content-text{
-  color:#c5d4df;
-  line-height:1.75;
-  white-space:pre-wrap;
-}
-
-.example{
-  padding:10px 13px;
-  margin:7px 0;
-  border-left:3px solid var(--cyan);
-  background:rgba(0,234,255,.05);
-  border-radius:7px;
-}
-
-.phrase{
-  padding:12px;
-  margin:7px 0;
-  border:1px solid rgba(155,92,255,.18);
-  background:rgba(155,92,255,.06);
-  border-radius:10px;
-}
-
-.exercise{
-  padding:14px;
-  margin:8px 0;
-  border-radius:12px;
-  background:#061a32;
-  border:1px solid rgba(255,255,255,.07);
-}
-
-.quiz-question{
-  padding:15px;
-  margin:10px 0;
-  border-radius:14px;
-  background:#061a32;
-  border:1px solid rgba(0,234,255,.12);
-}
-
-.option{
-  display:block;
-  width:100%;
-  margin-top:7px;
-  text-align:left;
-  padding:10px;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:9px;
-  background:#0a2542;
-  color:white;
-}
-
-.option:hover{
-  border-color:var(--cyan);
-}
-
-.correct{
-  border-color:var(--green)!important;
-  background:rgba(0,245,160,.12)!important;
-}
-
-.wrong{
-  border-color:var(--red)!important;
-  background:rgba(255,56,100,.12)!important;
-}
-
-/* ================= WORDS ================= */
-
-.words{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.word{
-  padding:15px;
-  border-radius:15px;
-  border:1px solid rgba(0,234,255,.12);
-  background:#06182f;
-}
-
-.word-emoji{
-  font-size:27px;
-}
-
-.word b{
-  display:block;
-  margin-top:7px;
-}
-
-.word small{
-  color:var(--muted);
-}
-
-/* ================= STUDENTS ================= */
-
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:11px;
-}
-
-.field label{
-  display:block;
-  color:#a7bac9;
-  font-size:11px;
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-.input,
-select{
-  width:100%;
-  min-height:44px;
-  padding:9px 11px;
-  border-radius:11px;
-  border:1px solid rgba(0,234,255,.16);
-  outline:none;
-  color:#fff;
-  background:#041327;
-}
-
-.input:focus,
-select:focus{
-  border-color:var(--cyan);
-  box-shadow:0 0 0 3px rgba(0,234,255,.07);
-}
-
-.student-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
-  margin-top:15px;
-}
-
-.student{
-  padding:17px;
-  border-radius:18px;
-  border:1px solid rgba(0,234,255,.13);
-  background:#06172d;
-}
-
-.student-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.avatar{
-  width:43px;
-  height:43px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:linear-gradient(135deg,#083b62,#482278);
-  font-size:21px;
-}
-
-.student-name{
-  font-weight:1000;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:8px;
-  font-size:10px;
-  font-weight:1000;
-  color:var(--cyan);
-  background:rgba(0,234,255,.08);
-}
-
-.student-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:13px;
-}
-
-/* ================= ATTENDANCE ================= */
-
-.attendance-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.att-row{
-  padding:14px;
-  border-radius:15px;
-  border:1px solid rgba(255,255,255,.07);
-  background:#06172d;
-}
-
-.att-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.att-buttons{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:5px;
-}
-
-.att{
-  padding:8px 4px;
-  border-radius:8px;
-  border:1px solid rgba(255,255,255,.08);
-  color:white;
-  background:#0a2541;
-  font-size:10px;
-  font-weight:900;
-}
-
-.att:hover{
-  border-color:var(--cyan);
-}
-
-.att.present{background:#075b47}
-.att.absent{background:#681e38}
-.att.late{background:#705600}
-.att.rest{background:#39435b}
-.att.left{background:#253b56}
-
-/* ================= TABLE-LIKE ================= */
-
-.rows{
-  display:grid;
-  gap:8px;
-}
-
-.row{
-  display:grid;
-  grid-template-columns:1fr 110px 140px;
-  align-items:center;
-  gap:10px;
-  padding:13px;
-  border-radius:12px;
-  background:#06172d;
-  border:1px solid rgba(255,255,255,.06);
-}
-
-.score{
-  text-align:center;
-  color:var(--yellow);
-  font-weight:1000;
-}
-
-/* ================= MODAL ================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(12px);
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modal-box{
-  width:min(1050px,100%);
-  max-height:92vh;
-  overflow:auto;
-  padding:22px;
-  border-radius:25px;
-  border:1px solid rgba(0,234,255,.35);
-  background:#031023;
-  box-shadow:0 30px 100px rgba(0,0,0,.65);
-}
-
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:16px;
-}
-
-.modal-head h2{
-  margin:0;
-}
-
-/* ================= TOAST ================= */
-
-.toast{
-  position:fixed;
-  right:17px;
-  bottom:17px;
-  z-index:10000;
-  max-width:390px;
-  padding:14px 17px;
-  border-radius:14px;
-  border:1px solid rgba(0,234,255,.3);
-  background:#061a31;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  transform:translateY(25px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast.ok{
-  border-color:rgba(0,245,160,.45);
-}
-
-.toast.err{
-  border-color:rgba(255,56,100,.45);
-}
-
-/* ================= LOADING ================= */
-
-.loading{
-  padding:40px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.spinner{
-  display:inline-block;
-  width:22px;
-  height:22px;
-  margin-right:8px;
-  vertical-align:middle;
-  border:3px solid rgba(255,255,255,.08);
-  border-top-color:var(--cyan);
-  border-radius:50%;
-  animation:spin .8s linear infinite;
-}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
-}
-
-.empty{
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed rgba(255,255,255,.1);
-  border-radius:15px;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1100px){
-  .home{
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .lesson-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .material-grid,
-  .words{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .grade-selector{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:720px){
-  .app,
-  .nav{
-    width:calc(100% - 16px);
-  }
-
-  .brand-sub{
-    display:none;
-  }
-
-  .nav-actions .btn{
-    font-size:0;
-    padding:9px;
-  }
-
-  .nav-actions .btn:after{
-    content:"";
-    font-size:18px;
-  }
-
-  #homeBtn:after{content:"🏠"}
-  #logoutBtn:after{content:"🚪"}
-
-  .hero{
-    padding:21px;
-  }
-
-  .hero h1{
-    font-size:2.45rem;
-  }
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .main-nav{
-    overflow-x:auto;
-    flex-wrap:nowrap;
-  }
-
-  .nav-item{
-    min-width:120px;
-  }
-
-  .lesson-grid,
-  .material-grid,
-  .words,
-  .student-grid,
-  .attendance-grid,
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .att-buttons{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .row{
-    grid-template-columns:1fr;
-  }
-
-  .card{
-    padding:15px;
-  }
-}
-</style>
-
-</head>
-
-<body>
-
-<div class="space">
-  <div class="grid"></div>
-  <div class="orb a"></div>
-  <div class="orb b"></div>
-  <div class="orb c"></div>
-</div>
-
-<header class="top">
-  <div class="nav">
-
-```
-<div class="brand">
-  <div class="logo">🧠</div>
-  <div>
-    <div class="brand-title">ENGLISH WITH MARIAMI</div>
-    <div class="brand-sub">XENON TEACHER OPERATING SYSTEM</div>
-  </div>
-</div>
-
-<div class="nav-actions">
-  <button class="btn" id="homeBtn">🏠 მთავარი</button>
-  <button class="btn red" id="logoutBtn">🚪 გამოსვლა</button>
-</div>
-```
-
-  </div>
-</header>
-
-<main class="app">
-
-<!-- ================= HOME ================= -->
-
-<section class="home">
-
-  <div class="hero">
-
-```
-<div class="kicker">⚡ TEACHER COMMAND CENTER</div>
-
-<h1>
-  მართე შენი
-  <span class="gradient-text">English Universe</span>
-</h1>
-
-<p>
-  ერთი სივრცე მთელი კლასისთვის —
-  გაკვეთილები, სიტყვები, Grammar, Listening,
-  Speaking, Reading, Exercises, Quiz,
-  მოსწავლეები, დასწრება და Progress.
-</p>
-
-<div class="command">
-  <button class="btn cyan" onclick="openGrade(2)">
-    🌱 Grade 2
-  </button>
-
-  <button class="btn violet" onclick="openGrade(3)">
-    🚀 Grade 3
-  </button>
-
-  <button class="btn yellow" onclick="openGrade(4)">
-    ⭐ Grade 4
-  </button>
-
-  <button class="btn green" onclick="openPanel('students')">
-    👥 მოსწავლეები
-  </button>
-</div>
-```
-
-  </div>
-
-  <div class="system">
-
-```
-<div class="online">
-  <span class="pulse"></span>
-  SYSTEM ONLINE
-</div>
-
-<h2 id="teacherName">Teacher</h2>
-
-<div class="email" id="teacherEmail">
-  loading...
-</div>
-
-<div class="small muted" style="margin-top:15px">
-  DATABASE STATUS:
-  <b id="dbStatus">CONNECTING...</b>
-</div>
-```
-
-  </div>
-
-</section>
-
-<!-- ================= STATS ================= -->
-
-<section class="stats">
-
-  <div class="stat">
-    <small>👥 მოსწავლეები</small>
-    <b id="statStudents">0</b>
-  </div>
-
-  <div class="stat">
-    <small>🌱 Grade 2</small>
-    <b id="statG2">0</b>
-  </div>
-
-  <div class="stat">
-    <small>🚀 Grade 3</small>
-    <b id="statG3">0</b>
-  </div>
-
-  <div class="stat">
-    <small>⭐ Grade 4</small>
-    <b id="statG4">0</b>
-  </div>
-
-  <div class="stat">
-    <small>📚 ნასწავლი სიტყვები</small>
-    <b id="statWords">0</b>
-  </div>
-
-</section>
-
-<!-- ================= NAV ================= -->
-
-<nav class="main-nav">
-
-  <button class="nav-item active" data-panel="home">
-    🏠 მთავარი
-  </button>
-
-  <button class="nav-item" data-panel="lessons">
-    📚 Lessons
-  </button>
-
-  <button class="nav-item" data-panel="students">
-    👥 Students
-  </button>
-
-  <button class="nav-item" data-panel="attendance">
-    🧑‍🎓 Attendance
-  </button>
-
-  <button class="nav-item" data-panel="grades">
-    ⭐ Grades
-  </button>
-
-  <button class="nav-item" data-panel="progress">
-    📊 Progress
-  </button>
-
-</nav>
-
-<!-- ================= HOME PANEL ================= -->
-
-<section class="panel active" id="panel-home">
-
-  <div class="card">
-
-```
-<div class="head">
-  <div>
-    <h2>🎓 აირჩიე კლასი</h2>
-    <div class="small muted">
-      შემდეგ გახსენი კონკრეტული გაკვეთილი და მისი მასალა.
-    </div>
-  </div>
-</div>
-
-<div class="grade-selector">
-
-  <div class="grade-card" onclick="openGrade(2)">
-    <div class="grade-icon">🌱</div>
-    <h3>Grade 2</h3>
-    <p>Foundation English • Vocabulary • Grammar</p>
-  </div>
-
-  <div class="grade-card" onclick="openGrade(3)">
-    <div class="grade-icon">🚀</div>
-    <h3>Grade 3</h3>
-    <p>Everyday English • Reading • Grammar</p>
-  </div>
-
-  <div class="grade-card" onclick="openGrade(4)">
-    <div class="grade-icon">⭐</div>
-    <h3>Grade 4</h3>
-    <p>Advanced English • Speaking • Challenge</p>
-  </div>
-
-</div>
-```
-
-  </div>
-
-</section>
-
-<!-- ================= LESSONS ================= -->
-
-<section class="panel" id="panel-lessons">
-
-  <div class="card">
-
-```
-<div class="head">
-
-  <div>
-    <h2 id="lessonPanelTitle">📚 Lessons</h2>
-    <div class="small muted">
-      აირჩიე Grade და შემდეგ გაკვეთილი.
-    </div>
-  </div>
-
-  <div style="display:flex;gap:7px">
-
-    <button class="btn small cyan" onclick="openGrade(2)">
-      🌱 G2
-    </button>
-
-    <button class="btn small violet" onclick="openGrade(3)">
-      🚀 G3
-    </button>
-
-    <button class="btn small yellow" onclick="openGrade(4)">
-      ⭐ G4
-    </button>
-
-  </div>
-
-</div>
-
-<div id="lessonsGrid" class="lesson-grid">
-  <div class="empty">
-    აირჩიე Grade.
-  </div>
-</div>
-```
-
-  </div>
-
-  <div id="lessonMaterialCard" class="card" style="display:none">
-
-```
-<div class="head">
-
-  <div>
-    <h2 id="selectedLessonTitle">
-      📖 Lesson
-    </h2>
-
-    <div class="small muted" id="selectedLessonMeta"></div>
-  </div>
-
-  <button class="btn" onclick="closeLesson()">
-    ✕ დახურვა
-  </button>
-
-</div>
-
-<div class="material-grid">
-
-  <button class="material" onclick="showMaterial('words')">
-    <div class="material-icon">🔤</div>
-    <b>Words</b>
-    <small>Vocabulary</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('grammar')">
-    <div class="material-icon">🧠</div>
-    <b>Grammar</b>
-    <small>Rules & examples</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('listening')">
-    <div class="material-icon">🎧</div>
-    <b>Listening</b>
-    <small>Listen & read</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('speaking')">
-    <div class="material-icon">🗣️</div>
-    <b>Speaking</b>
-    <small>Practice phrases</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('reading')">
-    <div class="material-icon">📖</div>
-    <b>Reading</b>
-    <small>Reading text</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('exercises')">
-    <div class="material-icon">✍️</div>
-    <b>Exercises</b>
-    <small>Practice tasks</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('quiz')">
-    <div class="material-icon">🎯</div>
-    <b>Quiz</b>
-    <small>Questions</small>
-  </button>
-
-  <button class="material" onclick="showMaterial('overview')">
-    <div class="material-icon">🌐</div>
-    <b>Overview</b>
-    <small>Lesson summary</small>
-  </button>
-
-</div>
-
-<div id="materialContent"></div>
-```
-
-  </div>
-
-</section>
-
-<!-- ================= STUDENTS ================= -->
-
-<section class="panel" id="panel-students">
-
-  <div class="card">
-
-```
-<div class="head">
-  <div>
-    <h2>👥 Student Command Center</h2>
-    <div class="small muted">
-      მოსწავლეების კლასი, ანგარიში და Progress.
-    </div>
-  </div>
-
-  <button class="btn cyan" onclick="loadStudents()">
-    ↻ Sync
-  </button>
-</div>
-
-<div class="form-grid">
-
-  <div class="field">
-    <label>მოსწავლის Email</label>
-    <input
-      class="input"
-      id="studentEmail"
-      type="email"
-      placeholder="student@email.com"
-    >
-  </div>
-
-  <div class="field">
-    <label>კლასი</label>
-
-    <select id="studentGrade">
-      <option value="2">🌱 Grade 2</option>
-      <option value="3">🚀 Grade 3</option>
-      <option value="4">⭐ Grade 4</option>
-    </select>
-
-  </div>
-
-  <div class="field">
-    <label>მოქმედება</label>
-
-    <button
-      class="btn cyan"
-      id="addStudentBtn"
-      style="width:100%"
-    >
-      ➕ დამატება
-    </button>
-
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <div class="card">
-
-```
-<div class="head">
-
-  <div>
-    <h2>🎓 მოსწავლეები</h2>
-  </div>
-
-  <div style="display:flex;gap:7px">
-
-    <input
-      class="input"
-      id="studentSearch"
-      placeholder="🔎 ძებნა..."
-      style="width:220px"
-    >
-
-    <select id="gradeFilter" style="width:140px">
-      <option value="all">ყველა</option>
-      <option value="2">Grade 2</option>
-      <option value="3">Grade 3</option>
-      <option value="4">Grade 4</option>
-    </select>
-
-  </div>
-
-</div>
-
-<div id="studentsList" class="student-grid">
-  <div class="loading">
-    <span class="spinner"></span>
-    იტვირთება...
-  </div>
-</div>
-```
-
-  </div>
-
-</section>
-
-<!-- ================= ATTENDANCE ================= -->
-
-<section class="panel" id="panel-attendance">
-
-  <div class="card">
-
-```
-<div class="head">
-
-  <div>
-    <h2>🧑‍🎓 Attendance Control</h2>
-
-    <div class="small muted">
-      მოვიდა • გაცდენა • დააგვიანა • დასვენება • წავიდა
-    </div>
-  </div>
-
-  <div>
-    <input
-      class="input"
-      id="attendanceDate"
-      type="date"
-    >
-  </div>
-
-</div>
-
-<div id="attendanceList" class="attendance-grid">
-  <div class="loading">
-    <span class="spinner"></span>
-    იტვირთება...
-  </div>
-</div>
-```
-
-  </div>
-
-</section>
-
-<!-- ================= GRADES ================= -->
-
-<section class="panel" id="panel-grades">
-
-  <div class="card">
-
-```
-<div class="head">
-
-  <div>
-    <h2>⭐ Student Grades</h2>
-    <div class="small muted">
-      შეფასება 0–10.
-    </div>
-  </div>
-
-</div>
-
-<div class="form-grid">
-
-  <div class="field">
-    <label>მოსწავლე</label>
-
-    <select id="gradeStudent">
-      <option value="">აირჩიე მოსწავლე</option>
-    </select>
-  </div>
-
-  <div class="field">
-    <label>ქულა</label>
-
-    <input
-      class="input"
-      id="gradeScore"
-      type="number"
-      min="0"
-      max="10"
-      step="1"
-      placeholder="10"
-    >
-  </div>
-
-  <div class="field">
-    <label>კომენტარი</label>
-
-    <input
-      class="input"
-      id="gradeComment"
-      placeholder="ძალიან კარგი მუშაობა"
-    >
-  </div>
-
-</div>
-
-<div style="margin-top:12px">
-
-  <button class="btn yellow" id="saveGradeBtn">
-    ⭐ შეფასების შენახვა
-  </button>
-
-</div>
-```
-
-  </div>
-
-  <div class="card">
-
-```
-<div class="head">
-  <h2>📋 შეფასებების ისტორია</h2>
-</div>
-
-<div id="gradesList" class="rows"></div>
-```
-
-  </div>
-
-</section>
-
-<!-- ================= PROGRESS ================= -->
-
-<section class="panel" id="panel-progress">
-
-  <div class="card">
-
-```
-<div class="head">
-
-  <div>
-    <h2>📊 Progress Intelligence</h2>
-
-    <div class="small muted">
-      სიტყვები • Quiz • Best Score • Activity
-    </div>
-  </div>
-
-  <button class="btn cyan" onclick="loadProgress()">
-    ↻ განახლება
-  </button>
-
-</div>
-
-<div id="progressList"></div>
-```
-
-  </div>
-
-</section>
-
-</main>
-
-<!-- ================= MODAL ================= -->
-
-<div class="modal" id="studentModal">
-
-  <div class="modal-box">
-
-```
-<div class="modal-head">
-
-  <h2 id="studentModalTitle">
-    📊 Student
-  </h2>
-
-  <button class="btn" onclick="closeStudentModal()">
-    ✕
-  </button>
-
-</div>
-
-<div id="studentModalBody"></div>
-```
-
-  </div>
-
-</div>
-
-<div class="toast" id="toast"></div>
-
 <script>
-'use strict';
-
 /* =========================================================
-   ENGLISH WITH MARIAMI
-   XENON TEACHER OS
-   REAL DATABASE SCHEMA
-========================================================= */
+   TEACHER DASHBOARD — SAFE LESSON MATERIAL FIX
+   Uses ONLY existing tables:
+   lessons
+   lesson_words
+   lesson_quizzes
+   teacher_students
+   student_grades
+   topic_controls
+   ========================================================= */
 
-const DB =
-  window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-  window.supabaseClient;
+(function () {
+  "use strict";
 
-let currentUser = null;
-let teacherProfile = null;
+  /* ---------- helpers ---------- */
 
-let students = [];
-let lessons = [];
-let currentGrade = null;
-let currentLesson = null;
+  const $ = (s, root = document) => root.querySelector(s);
 
-const $ = id => document.getElementById(id);
-
-/* ================= HELPERS ================= */
-
-function esc(value){
-  return String(value ?? '').replace(/[&<>"']/g,c=>({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#039;'
-  }[c]));
-}
-
-function toast(message,type=''){
-  const el=$('toast');
-
-  el.textContent=message;
-  el.className='toast show '+type;
-
-  clearTimeout(toast.timer);
-
-  toast.timer=setTimeout(()=>{
-    el.className='toast';
-  },3000);
-}
-
-function today(){
-  const d=new Date();
-
-  return [
-    d.getFullYear(),
-    String(d.getMonth()+1).padStart(2,'0'),
-    String(d.getDate()).padStart(2,'0')
-  ].join('-');
-}
-
-function gradeName(g){
-  g=Number(g);
-
-  if(g===2)return '🌱 Grade 2';
-  if(g===3)return '🚀 Grade 3';
-  if(g===4)return '⭐ Grade 4';
-
-  return 'Grade';
-}
-
-function jsonArray(value){
-
-  if(Array.isArray(value))return value;
-
-  if(value===null || value===undefined)return [];
-
-  try{
-    const parsed=
-      typeof value==='string'
-        ?JSON.parse(value)
-        :value;
-
-    return Array.isArray(parsed)
-      ?parsed
-      :[];
-  }catch{
-    return [];
-  }
-}
-
-function safeText(value){
-
-  if(value===null || value===undefined)return '';
-
-  if(typeof value==='string')return value;
-
-  try{
-    return JSON.stringify(value,null,2);
-  }catch{
-    return String(value);
-  }
-}
-
-/* ================= NAVIGATION ================= */
-
-function openPanel(name){
-
-  document.querySelectorAll('.panel')
-    .forEach(p=>p.classList.remove('active'));
-
-  document.querySelectorAll('.nav-item')
-    .forEach(b=>b.classList.remove('active'));
-
-  const panel=$('panel-'+name);
-
-  if(panel){
-    panel.classList.add('active');
+  function esc(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 
-  document
-    .querySelectorAll(`[data-panel="${name}"]`)
-    .forEach(b=>b.classList.add('active'));
+  function arr(value) {
+    if (Array.isArray(value)) return value;
 
-  if(name==='students')loadStudents();
-  if(name==='attendance')loadAttendance();
-  if(name==='grades')loadGrades();
-  if(name==='progress')loadProgress();
-}
+    if (value == null) return [];
 
-document.addEventListener('click',e=>{
-
-  const btn=e.target.closest('[data-panel]');
-
-  if(!btn)return;
-
-  openPanel(btn.dataset.panel);
-});
-
-$('homeBtn').onclick=()=>{
-  openPanel('home');
-  window.scrollTo({top:0,behavior:'smooth'});
-};
-
-/* ================= AUTH ================= */
-
-async function checkTeacher(){
-
-  if(!DB){
-    $('dbStatus').textContent='NO CLIENT';
-    toast('Supabase client ვერ მოიძებნა','err');
-    return false;
-  }
-
-  try{
-
-    const result=await DB.auth.getUser();
-
-    currentUser=result?.data?.user || null;
-
-    if(!currentUser){
-
-      location.replace(
-        'teacher-login.html?reason=login'
-      );
-
-      return false;
+    if (typeof value === "string") {
+      try {
+        const x = JSON.parse(value);
+        return Array.isArray(x) ? x : [x];
+      } catch {
+        return value
+          .split(/\r?\n/)
+          .map(x => x.trim())
+          .filter(Boolean);
+      }
     }
 
-    const {data,error}=await DB
-      .from('profiles')
-      .select('*')
-      .eq('user_id',currentUser.id)
+    return [value];
+  }
+
+  function speak(text) {
+    if (!("speechSynthesis" in window)) {
+      alert("ამ მოწყობილობაზე ხმის ფუნქცია არ არის მხარდაჭერილი.");
+      return;
+    }
+
+    speechSynthesis.cancel();
+
+    const u = new SpeechSynthesisUtterance(String(text));
+    u.lang = "en-US";
+    u.rate = 0.85;
+    u.pitch = 1;
+
+    speechSynthesis.speak(u);
+  }
+
+  /* ---------- find Supabase ---------- */
+
+  function getSupabase() {
+    if (window.supabaseClient) return window.supabaseClient;
+    if (window.supabase) {
+      if (typeof window.supabase.from === "function") {
+        return window.supabase;
+      }
+    }
+
+    for (const key of Object.keys(window)) {
+      try {
+        const v = window[key];
+
+        if (
+          v &&
+          typeof v.from === "function" &&
+          typeof v.auth === "object"
+        ) {
+          return v;
+        }
+      } catch {}
+    }
+
+    return null;
+  }
+
+  const db = getSupabase();
+
+  if (!db) {
+    console.error("Supabase client ვერ მოიძებნა.");
+    return;
+  }
+
+  /* =========================================================
+     LESSON LOADER
+     ========================================================= */
+
+  async function loadLessonsFixed(grade) {
+
+    const container =
+      document.querySelector("#lessonsContainer") ||
+      document.querySelector(".lessons-container") ||
+      document.querySelector("#lessonList") ||
+      document.querySelector(".lesson-list");
+
+    if (!container) {
+      console.warn("Lessons container ვერ მოიძებნა.");
+      return;
+    }
+
+    container.innerHTML = `
+      <div style="
+        padding:30px;
+        text-align:center;
+        color:#9ff;
+        font-size:18px;
+      ">
+        ⟳ იტვირთება Grade ${grade}...
+      </div>
+    `;
+
+    const { data, error } = await db
+      .from("lessons")
+      .select(`
+        id,
+        grade,
+        lesson_number,
+        title,
+        topic,
+        description,
+        image_url,
+        audio_url,
+        created_at,
+        grammar_rule,
+        grammar_examples,
+        listening_text,
+        speaking_phrases,
+        reading_text,
+        exercises
+      `)
+      .eq("grade", Number(grade))
+      .order("lesson_number", { ascending: true });
+
+    if (error) {
+      console.error("LESSONS ERROR:", error);
+
+      container.innerHTML = `
+        <div style="
+          padding:25px;
+          border:1px solid #f44;
+          border-radius:16px;
+          color:#ff8a8a;
+          background:rgba(255,0,0,.08);
+        ">
+          <b>Lesson-ის ჩატვირთვა ვერ მოხერხდა</b>
+          <br><br>
+          ${esc(error.message)}
+        </div>
+      `;
+
+      return;
+    }
+
+    if (!data || !data.length) {
+      container.innerHTML = `
+        <div style="
+          padding:30px;
+          text-align:center;
+          color:#aaa;
+        ">
+          Grade ${grade}-ში გაკვეთილები ვერ მოიძებნა.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = data.map((lesson, i) => `
+      <button
+        type="button"
+        class="safe-lesson-card"
+        data-lesson-id="${esc(lesson.id)}"
+        data-grade="${Number(grade)}"
+        style="
+          width:100%;
+          display:block;
+          margin:12px 0;
+          padding:20px;
+          border-radius:18px;
+          border:1px solid rgba(0,255,255,.35);
+          background:
+            linear-gradient(
+              135deg,
+              rgba(0,255,255,.10),
+              rgba(130,0,255,.12)
+            );
+          color:white;
+          text-align:left;
+          cursor:pointer;
+          box-shadow:
+            0 0 18px rgba(0,255,255,.08),
+            inset 0 0 20px rgba(255,255,255,.02);
+          transition:.25s;
+        "
+      >
+        <div style="
+          font-size:13px;
+          color:#6ff;
+          margin-bottom:7px;
+          letter-spacing:1px;
+        ">
+          LESSON ${esc(lesson.lesson_number ?? i + 1)}
+        </div>
+
+        <div style="
+          font-size:20px;
+          font-weight:700;
+        ">
+          ${esc(lesson.title || "Untitled Lesson")}
+        </div>
+
+        ${
+          lesson.topic
+            ? `<div style="margin-top:7px;color:#bbb;">
+                 ${esc(lesson.topic)}
+               </div>`
+            : ""
+        }
+      </button>
+    `).join("");
+
+    container.querySelectorAll(".safe-lesson-card")
+      .forEach(card => {
+
+        card.addEventListener("click", async () => {
+
+          const id = card.dataset.lessonId;
+
+          if (!id) return;
+
+          await openLessonFixed(id);
+        });
+
+      });
+  }
+
+  /* =========================================================
+     OPEN COMPLETE LESSON
+     ========================================================= */
+
+  async function openLessonFixed(lessonId) {
+
+    const { data: lesson, error } = await db
+      .from("lessons")
+      .select("*")
+      .eq("id", lessonId)
       .maybeSingle();
 
-    if(error)throw error;
-
-    teacherProfile=data;
-
-    const role=
-      String(data?.role||'')
-      .trim()
-      .toLowerCase();
-
-    if(role!=='teacher'){
-
-      toast(
-        'ამ გვერდზე მხოლოდ Teacher-ს აქვს წვდომა',
-        'err'
-      );
-
-      setTimeout(()=>{
-        location.replace(
-          'login.html?reason=forbidden'
-        );
-      },800);
-
-      return false;
-    }
-
-    $('teacherName').textContent=
-      data.full_name ||
-      'Teacher';
-
-    $('teacherEmail').textContent=
-      currentUser.email || '';
-
-    $('dbStatus').textContent='LIVE';
-
-    return true;
-
-  }catch(error){
-
-    console.error(error);
-
-    $('dbStatus').textContent='ERROR';
-
-    toast(
-      'Teacher პროფილი ვერ ჩაიტვირთა: '+error.message,
-      'err'
-    );
-
-    return false;
-  }
-}
-
-/* ================= STUDENTS ================= */
-
-async function loadStudents(){
-
-  const box=$('studentsList');
-
-  box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
-
-  try{
-
-    const {data,error}=await DB
-      .from('profiles')
-      .select('*')
-      .eq('role','student')
-      .order('full_name',{ascending:true});
-
-    if(error)throw error;
-
-    students=data||[];
-
-    renderStudents();
-    populateStudentSelect();
-    updateStats();
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=`
-      <div class="empty">
-        ❌ მოსწავლეების ჩატვირთვა ვერ მოხერხდა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
-
-function filteredStudents(){
-
-  const q=
-    $('studentSearch')?.value
-      ?.trim()
-      .toLowerCase() || '';
-
-  const grade=
-    $('gradeFilter')?.value || 'all';
-
-  return students.filter(s=>{
-
-    const text=(
-      s.full_name||
-      s.user_id||
-      ''
-    ).toLowerCase();
-
-    return (
-      (!q || text.includes(q)) &&
-      (
-        grade==='all' ||
-        String(s.grade||'')===grade
-      )
-    );
-  });
-}
-
-function renderStudents(){
-
-  const box=$('studentsList');
-
-  const arr=filteredStudents();
-
-  if(!arr.length){
-
-    box.innerHTML=
-      '<div class="empty">👤 მოსწავლეები ვერ მოიძებნა.</div>';
-
-    return;
-  }
-
-  box.innerHTML=arr.map(s=>{
-
-    const grade=Number(s.grade||0);
-
-    return `
-      <div class="student">
-
-        <div class="student-top">
-
-          <div style="display:flex;gap:10px">
-
-            <div class="avatar">🧑‍🎓</div>
-
-            <div>
-
-              <div class="student-name">
-                ${esc(s.full_name||'მოსწავლე')}
-              </div>
-
-              <div class="small muted">
-                ${esc(s.user_id)}
-              </div>
-
-            </div>
-
-          </div>
-
-          <span class="badge">
-            ${gradeName(grade)}
-          </span>
-
-        </div>
-
-        <div class="student-actions">
-
-          <button
-            class="btn small cyan"
-            onclick="changeGrade('${esc(s.user_id)}',2)"
-          >
-            🌱 G2
-          </button>
-
-          <button
-            class="btn small violet"
-            onclick="changeGrade('${esc(s.user_id)}',3)"
-          >
-            🚀 G3
-          </button>
-
-          <button
-            class="btn small yellow"
-            onclick="changeGrade('${esc(s.user_id)}',4)"
-          >
-            ⭐ G4
-          </button>
-
-          <button
-            class="btn small"
-            onclick="showStudent('${esc(s.user_id)}')"
-          >
-            📊 დეტალურად
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join('');
-}
-
-$('studentSearch').addEventListener(
-  'input',
-  renderStudents
-);
-
-$('gradeFilter').addEventListener(
-  'change',
-  renderStudents
-);
-
-/* ================= CLASS CHANGE ================= */
-
-async function changeGrade(uid,grade){
-
-  const student=
-    students.find(x=>x.user_id===uid);
-
-  if(!student)return;
-
-  if(!confirm(
-    `${student.full_name||'მოსწავლე'} გადავიყვანოთ ${gradeName(grade)}-ზე?`
-  )){
-    return;
-  }
-
-  try{
-
-    /*
-      We update profiles.grade directly.
-      teacher_students remains the teacher/student relation.
-      RLS must permit the authenticated teacher.
-    */
-
-    const {error}=await DB
-      .from('profiles')
-      .update({
-        grade:grade
-      })
-      .eq('user_id',uid)
-      .eq('role','student');
-
-    if(error)throw error;
-
-    toast(
-      `🎓 კლასი შეიცვალა → ${gradeName(grade)}`,
-      'ok'
-    );
-
-    await loadStudents();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      'კლასის შეცვლა ვერ მოხერხდა: '+error.message,
-      'err'
-    );
-  }
-}
-
-/* ================= ADD STUDENT ================= */
-
-$('addStudentBtn').onclick=async()=>{
-
-  const email=
-    $('studentEmail').value.trim();
-
-  const grade=
-    Number($('studentGrade').value);
-
-  if(!email){
-
-    toast(
-      'მიუთითე მოსწავლის Email',
-      'err'
-    );
-
-    return;
-  }
-
-  /*
-    Existing project RPC if available.
-    No fake table is used.
-  */
-
-  try{
-
-    const result=
-      await DB.rpc(
-        'teacher_assign_student',
-        {
-          p_email:email,
-          p_grade:grade
-        }
-      );
-
-    if(result.error)throw result.error;
-
-    toast(
-      `✅ ${email} მიენიჭა ${gradeName(grade)}`,
-      'ok'
-    );
-
-    $('studentEmail').value='';
-
-    await loadStudents();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      'მოსწავლის დამატება ვერ მოხერხდა: '+error.message,
-      'err'
-    );
-  }
-};
-
-/* ================= STATS ================= */
-
-async function updateStats(){
-
-  $('statStudents').textContent=
-    students.length;
-
-  $('statG2').textContent=
-    students.filter(x=>Number(x.grade)===2).length;
-
-  $('statG3').textContent=
-    students.filter(x=>Number(x.grade)===3).length;
-
-  $('statG4').textContent=
-    students.filter(x=>Number(x.grade)===4).length;
-
-  try{
-
-    const {data,error}=await DB
-      .from('student_progress')
-      .select('words_learned,learned_words');
-
-    if(error)throw error;
-
-    const words=(data||[]).reduce(
-      (sum,x)=>sum+
-        Number(
-          x.words_learned ??
-          (
-            Array.isArray(x.learned_words)
-              ?x.learned_words.length
-              :0
-          )
-        ),
-      0
-    );
-
-    $('statWords').textContent=words;
-
-  }catch{
-
-    $('statWords').textContent='0';
-  }
-}
-
-/* ================= SELECT ================= */
-
-function populateStudentSelect(){
-
-  const select=$('gradeStudent');
-
-  if(!select)return;
-
-  select.innerHTML=
-    '<option value="">აირჩიე მოსწავლე</option>'+
-    students.map(s=>`
-      <option value="${esc(s.user_id)}">
-        ${esc(s.full_name||'მოსწავლე')}
-      </option>
-    `).join('');
-}
-
-/* ================= GRADES ================= */
-
-async function loadGrades(){
-
-  const box=$('gradesList');
-
-  box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
-
-  try{
-
-    const {data,error}=await DB
-      .from('student_grades')
-      .select('*')
-      .order('created_at',{ascending:false})
-      .limit(100);
-
-    if(error)throw error;
-
-    if(!data?.length){
-
-      box.innerHTML=
-        '<div class="empty">⭐ შეფასებები ჯერ არ არის.</div>';
-
+    if (error) {
+      console.error(error);
+      alert("Lesson ვერ გაიხსნა: " + error.message);
       return;
     }
 
-    box.innerHTML=data.map(x=>{
-
-      const student=
-        students.find(
-          s=>s.user_id===x.student_id
-        );
-
-      return `
-        <div class="row">
-
-          <div>
-
-            <b>
-              ${esc(
-                student?.full_name ||
-                'მოსწავლე'
-              )}
-            </b>
-
-            <div class="small muted">
-              ${esc(x.comment||'')}
-            </div>
-
-          </div>
-
-          <div class="score">
-            ${Number(x.grade||0)}/10
-          </div>
-
-          <div class="small muted">
-            ${x.created_at
-              ?new Date(x.created_at)
-                .toLocaleString('ka-GE')
-              :''
-            }
-          </div>
-
-        </div>
-      `;
-
-    }).join('');
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=`
-      <div class="empty">
-        ❌ შეფასებები ვერ ჩაიტვირთა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
-
-$('saveGradeBtn').onclick=async()=>{
-
-  const student_id=
-    $('gradeStudent').value;
-
-  const grade=
-    Number($('gradeScore').value);
-
-  const comment=
-    $('gradeComment').value.trim();
-
-  if(!student_id){
-
-    toast(
-      'აირჩიე მოსწავლე',
-      'err'
-    );
-
-    return;
-  }
-
-  if(!Number.isFinite(grade)||grade<0||grade>10){
-
-    toast(
-      'ქულა უნდა იყოს 0-დან 10-მდე',
-      'err'
-    );
-
-    return;
-  }
-
-  try{
-
-    const {error}=await DB
-      .from('student_grades')
-      .insert({
-        student_id:student_id,
-        teacher_id:currentUser.id,
-        grade:grade,
-        comment:comment
-      });
-
-    if(error)throw error;
-
-    toast(
-      '⭐ შეფასება შენახულია',
-      'ok'
-    );
-
-    $('gradeScore').value='';
-    $('gradeComment').value='';
-
-    await loadGrades();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      'შეფასება ვერ შეინახა: '+error.message,
-      'err'
-    );
-  }
-};
-
-/* ================= GRADE / LESSONS ================= */
-
-async function openGrade(grade){
-
-  currentGrade=Number(grade);
-
-  openPanel('lessons');
-
-  $('lessonPanelTitle').textContent=
-    `📚 ${gradeName(grade)} — Lessons`;
-
-  await loadLessons(grade);
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-}
-
-async function loadLessons(grade){
-
-  const box=$('lessonsGrid');
-
-  box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>Lessons იტვირთება...</div>';
-
-  try{
-
-    const {data,error}=await DB
-      .from('lessons')
-      .select('*')
-      .eq('grade',Number(grade))
-      .order('lesson_number',{ascending:true});
-
-    if(error)throw error;
-
-    lessons=data||[];
-
-    if(!lessons.length){
-
-      box.innerHTML=`
-        <div class="empty">
-          ${gradeName(grade)}-ში Lessons ჯერ არ არის.
-        </div>
-      `;
-
+    if (!lesson) {
+      alert("Lesson ვერ მოიძებნა.");
       return;
     }
 
-    box.innerHTML=lessons.map(l=>`
+    /* WORDS */
 
-      <div
-        class="lesson"
-        onclick="openLesson('${esc(l.id)}')"
-      >
+    const { data: words, error: wordsError } = await db
+      .from("lesson_words")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("sort_order", { ascending: true });
 
-        <div class="lesson-number">
-          LESSON ${esc(l.lesson_number)}
-        </div>
-
-        <h3>
-          ${esc(l.title||l.topic||'Lesson')}
-        </h3>
-
-        <p>
-          ${esc(
-            l.description ||
-            l.topic ||
-            'English lesson'
-          )}
-        </p>
-
-        <div class="lesson-arrow">
-          →
-        </div>
-
-      </div>
-
-    `).join('');
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=`
-      <div class="empty">
-        ❌ Lessons ვერ ჩაიტვირთა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
-
-/* ================= LESSON ================= */
-
-async function openLesson(id){
-
-  const lesson=
-    lessons.find(
-      x=>String(x.id)===String(id)
-    );
-
-  if(!lesson)return;
-
-  currentLesson=lesson;
-
-  $('lessonMaterialCard').style.display='block';
-
-  $('selectedLessonTitle').textContent=
-    `📖 Lesson ${lesson.lesson_number}: ${lesson.title||lesson.topic||''}`;
-
-  $('selectedLessonMeta').textContent=
-    `${gradeName(lesson.grade)} • ${lesson.topic||''}`;
-
-  $('materialContent').innerHTML=`
-    <div class="content-box">
-      <h3>🌐 ${esc(lesson.title||'Lesson Overview')}</h3>
-      <div class="content-text">
-        ${esc(
-          lesson.description||
-          'აირჩიე ზემოთ მოცემული მასალა.'
-        )}
-      </div>
-    </div>
-  `;
-
-  $('lessonMaterialCard').scrollIntoView({
-    behavior:'smooth',
-    block:'start'
-  });
-}
-
-function closeLesson(){
-
-  currentLesson=null;
-
-  $('lessonMaterialCard').style.display='none';
-
-  $('materialContent').innerHTML='';
-}
-
-/* ================= MATERIALS ================= */
-
-async function showMaterial(type){
-
-  if(!currentLesson){
-
-    toast(
-      'ჯერ აირჩიე Lesson',
-      'err'
-    );
-
-    return;
-  }
-
-  const l=currentLesson;
-  const box=$('materialContent');
-
-  box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
-
-  if(type==='overview'){
-
-    box.innerHTML=`
-      <div class="content-box">
-
-        <h3>🌐 Lesson Overview</h3>
-
-        <div class="content-text">
-          ${esc(l.description||'აღწერა არ არის.')}
-        </div>
-
-        ${
-          l.image_url
-          ?`
-          <img
-            src="${esc(l.image_url)}"
-            style="
-              max-width:100%;
-              max-height:350px;
-              border-radius:15px;
-              margin-top:15px
-            "
-            alt=""
-          >
-          `
-          :''
-        }
-
-        ${
-          l.audio_url
-          ?`
-          <div style="margin-top:15px">
-            <audio controls style="width:100%">
-              <source src="${esc(l.audio_url)}">
-            </audio>
-          </div>
-          `
-          :''
-        }
-
-      </div>
-    `;
-
-    return;
-  }
-
-  if(type==='words'){
-
-    await renderWords(l.id);
-    return;
-  }
-
-  if(type==='grammar'){
-
-    renderGrammar(l);
-    return;
-  }
-
-  if(type==='listening'){
-
-    renderListening(l);
-    return;
-  }
-
-  if(type==='speaking'){
-
-    renderSpeaking(l);
-    return;
-  }
-
-  if(type==='reading'){
-
-    renderReading(l);
-    return;
-  }
-
-  if(type==='exercises'){
-
-    renderExercises(l);
-    return;
-  }
-
-  if(type==='quiz'){
-
-    await renderQuiz(l.id);
-    return;
-  }
-}
-
-/* ================= WORDS ================= */
-
-async function renderWords(lessonId){
-
-  const box=$('materialContent');
-
-  try{
-
-    const {data,error}=await DB
-      .from('lesson_words')
-      .select('*')
-      .eq('lesson_id',lessonId)
-      .order('sort_order',{ascending:true});
-
-    if(error)throw error;
-
-    if(!data?.length){
-
-      box.innerHTML=
-        '<div class="empty">🔤 ამ Lesson-ში Words ჯერ არ არის.</div>';
-
-      return;
+    if (wordsError) {
+      console.warn("WORDS:", wordsError);
     }
 
-    box.innerHTML=`
-      <div class="content-box">
-
-        <h3>🔤 Vocabulary</h3>
-
-        <div class="words">
-
-          ${data.map(w=>`
-
-            <div class="word">
-
-              <div class="word-emoji">
-                ${esc(w.emoji||'🔤')}
-              </div>
-
-              <b>${esc(w.word)}</b>
-
-              <small>
-                ${esc(w.translation||'')}
-              </small>
-
-              ${
-                w.audio_url
-                ?`
-                <div style="margin-top:8px">
-                  <audio controls style="width:100%">
-                    <source src="${esc(w.audio_url)}">
-                  </audio>
-                </div>
-                `
-                :''
-              }
-
-            </div>
-
-          `).join('')}
-
-        </div>
-
-      </div>
-    `;
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=`
-      <div class="empty">
-        ❌ Words ვერ ჩაიტვირთა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
-
-/* ================= GRAMMAR ================= */
-
-function renderGrammar(l){
-
-  const examples=
-    jsonArray(l.grammar_examples);
-
-  $('materialContent').innerHTML=`
-
-    <div class="content-box">
-
-      <h3>🧠 Grammar</h3>
-
-      ${
-        l.grammar_rule
-        ?`
-        <div class="content-text">
-          ${esc(l.grammar_rule)}
-        </div>
-        `
-        :
-        '<div class="empty">Grammar rule არ არის.</div>'
-      }
-
-      ${
-        examples.length
-        ?`
-        <h3 style="margin-top:22px">
-          💡 Examples
-        </h3>
-
-        ${examples.map(x=>`
-
-          <div class="example">
-            ${esc(
-              typeof x==='string'
-                ?x
-                :(
-                  x.example||
-                  x.text||
-                  JSON.stringify(x)
-                )
-            )}
-          </div>
-
-        `).join('')}
-        `
-        :''
-      }
-
-    </div>
-  `;
-}
-
-/* ================= LISTENING ================= */
-
-function renderListening(l){
-
-  $('materialContent').innerHTML=`
-
-    <div class="content-box">
-
-      <h3>🎧 Listening Lab</h3>
-
-      ${
-        l.audio_url
-        ?`
-        <audio controls style="width:100%;margin:10px 0 20px">
-          <source src="${esc(l.audio_url)}">
-        </audio>
-        `
-        :
-        '<div class="small muted">Audio ფაილი არ არის დამატებული.</div>'
-      }
-
-      <div class="content-text">
-        ${esc(
-          l.listening_text||
-          'Listening ტექსტი არ არის დამატებული.'
-        )}
-      </div>
-
-    </div>
-  `;
-}
-
-/* ================= SPEAKING ================= */
-
-function renderSpeaking(l){
-
-  const phrases=
-    jsonArray(l.speaking_phrases);
-
-  $('materialContent').innerHTML=`
-
-    <div class="content-box">
-
-      <h3>🗣️ Speaking Lab</h3>
-
-      ${
-        phrases.length
-        ?phrases.map(x=>`
-
-          <div class="phrase">
-            🗣️ ${esc(
-              typeof x==='string'
-                ?x
-                :(
-                  x.phrase||
-                  x.text||
-                  JSON.stringify(x)
-                )
-            )}
-          </div>
-
-        `).join('')
-        :
-        '<div class="empty">Speaking phrases ჯერ არ არის.</div>'
-      }
-
-    </div>
-  `;
-}
-
-/* ================= READING ================= */
-
-function renderReading(l){
-
-  $('materialContent').innerHTML=`
-
-    <div class="content-box">
-
-      <h3>📖 Reading Lab</h3>
-
-      <div class="content-text">
-        ${esc(
-          l.reading_text||
-          'Reading ტექსტი არ არის დამატებული.'
-        )}
-      </div>
-
-    </div>
-  `;
-}
-
-/* ================= EXERCISES ================= */
-
-function renderExercises(l){
-
-  const exercises=
-    jsonArray(l.exercises);
-
-  $('materialContent').innerHTML=`
-
-    <div class="content-box">
-
-      <h3>✍️ Exercises</h3>
-
-      ${
-        exercises.length
-        ?exercises.map((x,i)=>`
-
-          <div class="exercise">
-
-            <b>
-              Exercise ${i+1}
-            </b>
-
-            <div class="content-text" style="margin-top:7px">
-              ${esc(
-                typeof x==='string'
-                  ?x
-                  :(
-                    x.question||
-                    x.text||
-                    x.exercise||
-                    JSON.stringify(x)
-                  )
-              )}
-            </div>
-
-          </div>
-
-        `).join('')
-        :
-        '<div class="empty">Exercises ჯერ არ არის.</div>'
-      }
-
-    </div>
-  `;
-}
-
-/* ================= QUIZ ================= */
-
-async function renderQuiz(lessonId){
-
-  const box=$('materialContent');
-
-  try{
-
-    const {data,error}=await DB
-      .from('lesson_quizzes')
-      .select('*')
-      .eq('lesson_id',lessonId)
-      .order('sort_order',{ascending:true});
-
-    if(error)throw error;
-
-    if(!data?.length){
-
-      box.innerHTML=
-        '<div class="empty">🎯 Quiz კითხვები ჯერ არ არის.</div>';
-
-      return;
+    /* QUIZ */
+
+    const { data: quizzes, error: quizError } = await db
+      .from("lesson_quizzes")
+      .select("*")
+      .eq("lesson_id", lessonId)
+      .order("sort_order", { ascending: true });
+
+    if (quizError) {
+      console.warn("QUIZ:", quizError);
     }
 
-    box.innerHTML=`
-
-      <div class="content-box">
-
-        <h3>🎯 Quiz</h3>
-
-        <div id="quizContainer">
-
-          ${data.map((q,i)=>{
-
-            const options=
-              jsonArray(q.options);
-
-            return `
-
-              <div
-                class="quiz-question"
-                data-question="${esc(q.id)}"
-              >
-
-                <b>
-                  ${i+1}. ${esc(q.question)}
-                </b>
-
-                <div>
-
-                  ${
-                    options.map((option,j)=>`
-
-                      <button
-                        class="option"
-                        onclick="
-                          answerQuestion(
-                            this,
-                            '${esc(q.correct_answer)}',
-                            '${esc(
-                              typeof option==='string'
-                                ?option
-                                :(
-                                  option.text||
-                                  option.value||
-                                  ''
-                                )
-                            )}'
-                          )
-                        "
-                      >
-                        ${esc(
-                          typeof option==='string'
-                            ?option
-                            :(
-                              option.text||
-                              option.value||
-                              ''
-                            )
-                        )}
-                      </button>
-
-                    `).join('')
-                  }
-
-                </div>
-
-              </div>
-            `;
-
-          }).join('')}
-
-        </div>
-
-      </div>
-    `;
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=`
-      <div class="empty">
-        ❌ Quiz ვერ ჩაიტვირთა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
-
-function answerQuestion(button,correct,selected){
-
-  const parent=
-    button.closest('.quiz-question');
-
-  parent
-    .querySelectorAll('.option')
-    .forEach(x=>x.disabled=true);
-
-  const normalize=x=>
-    String(x||'')
-      .trim()
-      .toLowerCase();
-
-  if(normalize(selected)===normalize(correct)){
-
-    button.classList.add('correct');
-
-    toast(
-      '✅ სწორი პასუხია!',
-      'ok'
-    );
-
-  }else{
-
-    button.classList.add('wrong');
-
-    toast(
-      '❌ არასწორი პასუხია',
-      'err'
-    );
-
-    parent
-      .querySelectorAll('.option')
-      .forEach(x=>{
-
-        const text=
-          x.textContent.trim();
-
-        if(
-          normalize(text)===
-          normalize(correct)
-        ){
-          x.classList.add('correct');
-        }
-
-      });
-  }
-}
-
-/* ================= ATTENDANCE ================= */
-
-$('attendanceDate').value=today();
-
-async function loadAttendance(){
-
-  const box=$('attendanceList');
-
-  if(!students.length){
-    await loadStudents();
-  }
-
-  if(!students.length){
-
-    box.innerHTML=
-      '<div class="empty">მოსწავლეები არ არის.</div>';
-
-    return;
-  }
-
-  const date=
-    $('attendanceDate').value||today();
-
-  let existing=[];
-
-  try{
-
-    const {data,error}=await DB
-      .from('teacher_attendance')
-      .select('*')
-      .eq('teacher_id',currentUser.id)
-      .eq('attendance_date',date);
-
-    if(error)throw error;
-
-    existing=data||[];
-
-  }catch(error){
-
-    console.warn(
-      'teacher_attendance:',
-      error.message
+    renderCompleteLesson(
+      lesson,
+      words || [],
+      quizzes || []
     );
   }
 
-  box.innerHTML=students.map(s=>{
+  /* =========================================================
+     RENDER
+     ========================================================= */
 
-    const row=
-      existing.find(
-        x=>x.student_id===s.user_id
-      );
+  function renderCompleteLesson(lesson, words, quizzes) {
 
-    return `
+    const container =
+      document.querySelector("#lessonsContainer") ||
+      document.querySelector(".lessons-container") ||
+      document.querySelector("#lessonList") ||
+      document.querySelector(".lesson-list");
 
-      <div class="att-row">
+    if (!container) return;
 
-        <div class="att-top">
+    const grammarExamples = arr(lesson.grammar_examples);
+    const speaking = arr(lesson.speaking_phrases);
+    const exercises = arr(lesson.exercises);
 
-          <div>
-            <b>
-              ${esc(s.full_name||'მოსწავლე')}
-            </b>
+    container.innerHTML = `
+      <div class="complete-lesson-view"
+           style="
+             max-width:1100px;
+             margin:auto;
+             color:white;
+           ">
 
-            <div class="small muted">
-              ${gradeName(s.grade)}
-            </div>
+        <button
+          type="button"
+          id="backToLessonsBtn"
+          style="
+            padding:11px 18px;
+            margin-bottom:20px;
+            border-radius:12px;
+            border:1px solid #0ff;
+            background:rgba(0,255,255,.08);
+            color:#7ff;
+            cursor:pointer;
+          "
+        >
+          ← გაკვეთილებზე დაბრუნება
+        </button>
+
+        <div style="
+          padding:25px;
+          border-radius:24px;
+          border:1px solid rgba(0,255,255,.35);
+          background:linear-gradient(
+            135deg,
+            rgba(0,255,255,.09),
+            rgba(130,0,255,.12)
+          );
+          box-shadow:0 0 30px rgba(0,255,255,.08);
+        ">
+
+          ${
+            lesson.image_url
+              ? `
+                <img
+                  src="${esc(lesson.image_url)}"
+                  alt=""
+                  style="
+                    width:100%;
+                    max-height:350px;
+                    object-fit:cover;
+                    border-radius:18px;
+                    margin-bottom:20px;
+                  "
+                >
+              `
+              : ""
+          }
+
+          <div style="color:#6ff;font-size:13px;">
+            GRADE ${esc(lesson.grade)}
+            · LESSON ${esc(lesson.lesson_number)}
           </div>
 
-          <span class="badge">
-            ${row?.status||'—'}
-          </span>
+          <h1 style="
+            font-size:34px;
+            margin:8px 0;
+          ">
+            ${esc(lesson.title)}
+          </h1>
+
+          ${
+            lesson.topic
+              ? `<div style="color:#aaa;">${esc(lesson.topic)}</div>`
+              : ""
+          }
+
+          ${
+            lesson.description
+              ? `
+                <p style="
+                  color:#ddd;
+                  line-height:1.7;
+                ">
+                  ${esc(lesson.description)}
+                </p>
+              `
+              : ""
+          }
+
+          ${
+            lesson.audio_url
+              ? `
+                <audio
+                  controls
+                  preload="metadata"
+                  src="${esc(lesson.audio_url)}"
+                  style="width:100%;margin:15px 0;"
+                ></audio>
+              `
+              : ""
+          }
 
         </div>
 
-        <div class="att-buttons">
+        <!-- WORDS -->
 
-          <button
-            class="att present"
-            onclick="
-              saveAttendance(
-                '${esc(s.user_id)}',
-                'present'
-              )
-            "
-          >
-            ✅ მოვიდა
-          </button>
+        <section class="material-section">
+          <h2>📚 Words</h2>
 
-          <button
-            class="att absent"
-            onclick="
-              saveAttendance(
-                '${esc(s.user_id)}',
-                'absent'
-              )
-            "
-          >
-            ❌ გაცდენა
-          </button>
+          ${
+            words.length
+              ? words.map(word => `
+                <div class="material-card">
 
-          <button
-            class="att late"
-            onclick="
-              saveAttendance(
-                '${esc(s.user_id)}',
-                'late'
-              )
-            "
-          >
-            ⏰ დაგვიანდა
-          </button>
-
-          <button
-            class="att rest"
-            onclick="
-              saveAttendance(
-                '${esc(s.user_id)}',
-                'rest'
-              )
-            "
-          >
-            ☕ დასვენება
-          </button>
-
-          <button
-            class="att left"
-            onclick="
-              saveAttendance(
-                '${esc(s.user_id)}',
-                'left'
-              )
-            "
-          >
-            🚪 წავიდა
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join('');
-}
-
-$('attendanceDate').addEventListener(
-  'change',
-  loadAttendance
-);
-
-async function saveAttendance(uid,status){
-
-  const date=
-    $('attendanceDate').value||today();
-
-  try{
-
-    /*
-      teacher_attendance:
-      id
-      teacher_id
-      student_id
-      attendance_date
-      status
-      marked_at
-      created_at
-    */
-
-    const {error}=await DB
-      .from('teacher_attendance')
-      .upsert({
-        teacher_id:currentUser.id,
-        student_id:uid,
-        attendance_date:date,
-        status:status,
-        marked_at:new Date().toISOString()
-      },{
-        onConflict:'teacher_id,student_id,attendance_date'
-      });
-
-    if(error)throw error;
-
-    toast(
-      `🧑‍🎓 ${status} ჩაიწერა`,
-      'ok'
-    );
-
-    await loadAttendance();
-
-  }catch(error){
-
-    console.error(error);
-
-    toast(
-      'დასწრების შენახვა ვერ მოხერხდა: '+error.message,
-      'err'
-    );
-  }
-}
-
-/* ================= PROGRESS ================= */
-
-async function loadProgress(){
-
-  const box=$('progressList');
-
-  box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>Progress იტვირთება...</div>';
-
-  try{
-
-    if(!students.length){
-      await loadStudents();
-    }
-
-    const {data,error}=await DB
-      .from('student_progress')
-      .select('*');
-
-    if(error)throw error;
-
-    const rows=data||[];
-
-    if(!students.length){
-
-      box.innerHTML=
-        '<div class="empty">მოსწავლეები არ არიან.</div>';
-
-      return;
-    }
-
-    box.innerHTML=students.map(s=>{
-
-      const r=
-        rows.find(
-          x=>x.user_id===s.user_id &&
-             Number(x.grade)===Number(s.grade)
-        )||
-        rows.find(
-          x=>x.user_id===s.user_id
-        )||
-        {};
-
-      const words=Number(
-        r.words_learned ??
-        (
-          Array.isArray(r.learned_words)
-            ?r.learned_words.length
-            :0
-        )
-      );
-
-      const quiz=Number(
-        r.quiz_completed||0
-      );
-
-      const best=Number(
-        r.best_quiz ??
-        r.score ??
-        0
-      );
-
-      const target=
-        Number(s.grade)===2
-          ?300
-          :250;
-
-      const percent=
-        Math.min(
-          100,
-          Math.round(words/target*100)
-        );
-
-      return `
-
-        <div class="student" style="margin-bottom:10px">
-
-          <div class="student-top">
-
-            <div>
-              <div class="student-name">
-                ${esc(s.full_name||'მოსწავლე')}
-              </div>
-
-              <div class="small muted">
-                ${gradeName(s.grade)}
-              </div>
-            </div>
-
-            <b style="color:var(--yellow)">
-              ${percent}%
-            </b>
-
-          </div>
-
-          <div
-            style="
-              height:9px;
-              margin-top:12px;
-              border-radius:20px;
-              overflow:hidden;
-              background:#020b18
-            "
-          >
-            <div
-              style="
-                height:100%;
-                width:${percent}%;
-                border-radius:20px;
-                background:linear-gradient(
-                  90deg,
-                  var(--blue),
-                  var(--cyan),
-                  var(--yellow)
-                )
-              "
-            ></div>
-          </div>
-
-          <div class="small muted" style="margin-top:10px">
-
-            📚 ${words} words
-            • 📝 ${quiz} quiz
-            • 🏆 Best ${best}%
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join('');
-
-    updateStats();
-
-  }catch(error){
-
-    console.error(error);
-
-    box.innerHTML=`
-      <div class="empty">
-        ❌ Progress ვერ ჩაიტვირთა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
-
-/* ================= STUDENT DETAIL ================= */
-
-async function showStudent(uid){
-
-  const student=
-    students.find(
-      x=>x.user_id===uid
-    );
-
-  if(!student)return;
-
-  $('studentModalTitle').textContent=
-    `📊 ${student.full_name||'Student'}`;
-
-  $('studentModalBody').innerHTML=
-    '<div class="loading"><span class="spinner"></span>ანალიზი...</div>';
-
-  $('studentModal').classList.add('open');
-
-  try{
-
-    const [
-      progress,
-      quiz,
-      grades,
-      activity
-    ]=await Promise.all([
-
-      DB
-        .from('student_progress')
-        .select('*')
-        .eq('user_id',uid),
-
-      DB
-        .from('quiz_results')
-        .select('*')
-        .eq('student_id',uid)
-        .order('created_at',{ascending:false})
-        .limit(50),
-
-      DB
-        .from('student_grades')
-        .select('*')
-        .eq('student_id',uid)
-        .order('created_at',{ascending:false})
-        .limit(20),
-
-      DB
-        .from('academy_activity')
-        .select('*')
-        .eq('student_id',uid)
-        .order('created_at',{ascending:false})
-        .limit(30)
-
-    ]);
-
-    const pRows=
-      progress.data||[];
-
-    const quizzes=
-      quiz.data||[];
-
-    const gradeRows=
-      grades.data||[];
-
-    const activities=
-      activity.data||[];
-
-    const words=
-      pRows.reduce(
-        (sum,x)=>sum+
-          Number(
-            x.words_learned ??
-            (
-              Array.isArray(x.learned_words)
-                ?x.learned_words.length
-                :0
-            )
-          ),
-        0
-      );
-
-    const best=Math.max(
-      0,
-      ...quizzes.map(x=>
-        Number(x.total)
-          ?Math.round(
-            Number(x.score||0)/
-            Number(x.total)*100
-          )
-          :0
-      )
-    );
-
-    $('studentModalBody').innerHTML=`
-
-      <div class="stats" style="grid-template-columns:repeat(4,1fr)">
-
-        <div class="stat">
-          <small>📚 Words</small>
-          <b>${words}</b>
-        </div>
-
-        <div class="stat">
-          <small>🎯 Quiz</small>
-          <b>${quizzes.length}</b>
-        </div>
-
-        <div class="stat">
-          <small>🏆 Best</small>
-          <b>${best}%</b>
-        </div>
-
-        <div class="stat">
-          <small>⚡ Activity</small>
-          <b>${activities.length}</b>
-        </div>
-
-      </div>
-
-      <div class="content-box">
-
-        <h3>⭐ შეფასებები</h3>
-
-        ${
-          gradeRows.length
-          ?gradeRows.map(x=>`
-
-            <div class="row">
-
-              <div>
-                <b>
-                  ${gradeName(x.grade)}
-                </b>
-
-                <div class="small muted">
-                  ${esc(x.comment||'')}
-                </div>
-              </div>
-
-              <div class="score">
-                ${Number(x.grade||0)}/10
-              </div>
-
-              <div class="small muted">
-                ${x.created_at
-                  ?new Date(x.created_at)
-                    .toLocaleString('ka-GE')
-                  :''
-                }
-              </div>
-
-            </div>
-
-          `).join('')
-          :
-          '<div class="empty">შეფასებები არ არის.</div>'
-        }
-
-      </div>
-
-      <div class="content-box">
-
-        <h3>🎯 Quiz Results</h3>
-
-        ${
-          quizzes.length
-          ?quizzes.map(x=>{
-
-            const percent=
-              Number(x.total)
-              ?Math.round(
-                Number(x.score||0)/
-                Number(x.total)*100
-              )
-              :0;
-
-            return `
-
-              <div class="row">
-
-                <div>
-                  <b>
-                    Quiz
-                  </b>
-
-                  <div class="small muted">
-                    ${gradeName(x.grade)}
+                  <div style="font-size:26px;">
+                    ${esc(word.emoji || "📖")}
                   </div>
+
+                  <div style="flex:1;">
+                    <b style="font-size:20px;">
+                      ${esc(word.word)}
+                    </b>
+
+                    <div style="color:#aaa;">
+                      ${esc(word.translation)}
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="speak-btn"
+                    data-speak="${esc(word.word)}"
+                  >
+                    🔊
+                  </button>
+
                 </div>
+              `).join("")
+              : `<div class="empty-material">
+                   ამ Lesson-ში სიტყვები ჯერ არ არის.
+                 </div>`
+          }
 
-                <div class="score">
-                  ${percent}%
+        </section>
+
+        <!-- GRAMMAR -->
+
+        <section class="material-section">
+          <h2>🧠 Grammar</h2>
+
+          ${
+            lesson.grammar_rule
+              ? `
+                <div class="material-card block">
+                  <b>Rule</b>
+                  <p>${esc(lesson.grammar_rule)}</p>
                 </div>
+              `
+              : ""
+          }
 
-                <div class="small muted">
-                  ${x.completed_at
-                    ?new Date(x.completed_at)
-                      .toLocaleString('ka-GE')
-                    :''
-                  }
+          ${
+            grammarExamples.length
+              ? `
+                <div class="material-card block">
+                  <b>Examples</b>
+                  ${grammarExamples.map(x => `
+                    <p>• ${esc(
+                      typeof x === "object"
+                        ? JSON.stringify(x)
+                        : x
+                    )}</p>
+                  `).join("")}
                 </div>
+              `
+              : ""
+          }
 
-              </div>
+          ${
+            !lesson.grammar_rule && !grammarExamples.length
+              ? `<div class="empty-material">
+                   Grammar ჯერ არ არის დამატებული.
+                 </div>`
+              : ""
+          }
 
-            `;
+        </section>
 
-          }).join('')
-          :
-          '<div class="empty">Quiz შედეგები არ არის.</div>'
-        }
+        <!-- LISTENING -->
+
+        <section class="material-section">
+          <h2>🎧 Listening</h2>
+
+          ${
+            lesson.listening_text
+              ? `
+                <div class="material-card block">
+                  <p id="listeningText">
+                    ${esc(lesson.listening_text)}
+                  </p>
+
+                  <button
+                    type="button"
+                    class="speak-btn"
+                    data-speak="${esc(lesson.listening_text)}"
+                  >
+                    🔊 მოსმენა
+                  </button>
+                </div>
+              `
+              : `<div class="empty-material">
+                   Listening ტექსტი ჯერ არ არის.
+                 </div>`
+          }
+
+        </section>
+
+        <!-- SPEAKING -->
+
+        <section class="material-section">
+          <h2>🗣️ Speaking</h2>
+
+          ${
+            speaking.length
+              ? speaking.map(x => `
+                <div class="material-card">
+
+                  <div style="flex:1;">
+                    ${esc(
+                      typeof x === "object"
+                        ? JSON.stringify(x)
+                        : x
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    class="speak-btn"
+                    data-speak="${esc(
+                      typeof x === "object"
+                        ? JSON.stringify(x)
+                        : x
+                    )}"
+                  >
+                    🔊
+                  </button>
+
+                </div>
+              `).join("")
+              : `<div class="empty-material">
+                   Speaking ჯერ არ არის.
+                 </div>`
+          }
+
+        </section>
+
+        <!-- READING -->
+
+        <section class="material-section">
+          <h2>📖 Reading</h2>
+
+          ${
+            lesson.reading_text
+              ? `
+                <div class="material-card block">
+
+                  <p style="
+                    white-space:pre-wrap;
+                    line-height:1.9;
+                  ">
+                    ${esc(lesson.reading_text)}
+                  </p>
+
+                  <button
+                    type="button"
+                    class="speak-btn"
+                    data-speak="${esc(lesson.reading_text)}"
+                  >
+                    🔊 წაკითხვა
+                  </button>
+
+                </div>
+              `
+              : `<div class="empty-material">
+                   Reading ტექსტი ჯერ არ არის.
+                 </div>`
+          }
+
+        </section>
+
+        <!-- EXERCISES -->
+
+        <section class="material-section">
+          <h2>✏️ Exercises</h2>
+
+          ${
+            exercises.length
+              ? exercises.map((x, i) => `
+                <div class="material-card block">
+                  <b>Exercise ${i + 1}</b>
+                  <p>
+                    ${esc(
+                      typeof x === "object"
+                        ? JSON.stringify(x)
+                        : x
+                    )}
+                  </p>
+                </div>
+              `).join("")
+              : `<div class="empty-material">
+                   Exercises ჯერ არ არის.
+                 </div>`
+          }
+
+        </section>
+
+        <!-- QUIZ -->
+
+        <section class="material-section">
+          <h2>🧩 Quiz</h2>
+
+          ${
+            quizzes.length
+              ? quizzes.map((q, i) => {
+
+                  const options = arr(q.options);
+
+                  return `
+                    <div
+                      class="material-card block quiz-question"
+                      data-correct="${esc(q.correct_answer)}"
+                    >
+
+                      <b>
+                        ${i + 1}. ${esc(q.question)}
+                      </b>
+
+                      <div style="margin-top:12px;">
+
+                        ${
+                          options.map(option => `
+                            <button
+                              type="button"
+                              class="quiz-option"
+                              data-answer="${esc(
+                                typeof option === "object"
+                                  ? JSON.stringify(option)
+                                  : option
+                              )}"
+                            >
+                              ${esc(
+                                typeof option === "object"
+                                  ? JSON.stringify(option)
+                                  : option
+                              )}
+                            </button>
+                          `).join("")
+                        }
+
+                      </div>
+
+                      <div class="quiz-result"></div>
+
+                    </div>
+                  `;
+                }).join("")
+              : `<div class="empty-material">
+                   Quiz ჯერ არ არის დამატებული.
+                 </div>`
+          }
+
+        </section>
 
       </div>
-
     `;
 
-  }catch(error){
+    injectMaterialStyles();
 
-    console.error(error);
+    $("#backToLessonsBtn")?.addEventListener("click", () => {
 
-    $('studentModalBody').innerHTML=`
-      <div class="empty">
-        ❌ მონაცემები ვერ ჩაიტვირთა.<br>
-        <small>${esc(error.message)}</small>
-      </div>
-    `;
-  }
-}
+      const grade = lesson.grade;
 
-function closeStudentModal(){
-
-  $('studentModal')
-    .classList
-    .remove('open');
-}
-
-$('studentModal').addEventListener(
-  'click',
-  e=>{
-    if(e.target===$('studentModal')){
-      closeStudentModal();
-    }
-  }
-);
-
-/* ================= LOGOUT ================= */
-
-$('logoutBtn').onclick=async()=>{
-
-  if(!confirm(
-    'ნამდვილად გინდა გამოსვლა?'
-  )){
-    return;
-  }
-
-  try{
-
-    await DB.auth.signOut({
-      scope:'global'
+      loadLessonsFixed(grade);
     });
 
-  }catch(error){
+    container.querySelectorAll(".speak-btn")
+      .forEach(btn => {
 
-    console.warn(error);
+        btn.addEventListener("click", () => {
+          speak(btn.dataset.speak);
+        });
 
-  }finally{
+      });
 
-    location.replace(
-      'teacher-login.html?logout=1'
-    );
+    container.querySelectorAll(".quiz-option")
+      .forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+          const question = btn.closest(".quiz-question");
+          const correct = question.dataset.correct;
+          const answer = btn.dataset.answer;
+
+          const result =
+            question.querySelector(".quiz-result");
+
+          question
+            .querySelectorAll(".quiz-option")
+            .forEach(x => {
+              x.disabled = true;
+            });
+
+          if (String(answer) === String(correct)) {
+
+            btn.classList.add("correct");
+
+            result.textContent = "✓ სწორია!";
+            result.style.color = "#6f6";
+
+          } else {
+
+            btn.classList.add("wrong");
+
+            result.textContent = "✕ არასწორია";
+            result.style.color = "#f77";
+          }
+
+        });
+
+      });
   }
-};
 
-/* ================= BOOT ================= */
+  /* =========================================================
+     GRADE BUTTONS
+     ========================================================= */
 
-async function boot(){
+  function installGradeHandlers() {
 
-  if(!DB){
+    document.addEventListener("click", function (e) {
 
-    toast(
-      'Supabase client ვერ მოიძებნა. შეამოწმე config.js',
-      'err'
-    );
+      const btn = e.target.closest(
+        "[data-grade], [data-grade-select]"
+      );
 
-    return;
+      if (!btn) return;
+
+      const raw =
+        btn.dataset.grade ||
+        btn.dataset.gradeSelect;
+
+      const grade = Number(raw);
+
+      if (![2, 3, 4].includes(grade)) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      loadLessonsFixed(grade);
+
+    }, true);
   }
 
-  const ok=
-    await checkTeacher();
+  /* =========================================================
+     CSS
+     ========================================================= */
 
-  if(!ok)return;
+  function injectMaterialStyles() {
 
-  $('attendanceDate').value=today();
+    if (document.getElementById("safe-material-style"))
+      return;
 
-  await loadStudents();
+    const style = document.createElement("style");
 
-}
+    style.id = "safe-material-style";
 
-if(document.readyState==='loading'){
+    style.textContent = `
 
-  document.addEventListener(
-    'DOMContentLoaded',
-    boot,
-    {once:true}
+      .material-section {
+        margin-top:24px;
+      }
+
+      .material-section h2 {
+        font-size:25px;
+        margin-bottom:12px;
+        color:#8fffff;
+        text-shadow:
+          0 0 8px rgba(0,255,255,.5);
+      }
+
+      .material-card {
+        display:flex;
+        align-items:center;
+        gap:14px;
+        margin:10px 0;
+        padding:17px;
+        border-radius:16px;
+        border:1px solid rgba(0,255,255,.18);
+        background:rgba(255,255,255,.035);
+        color:white;
+      }
+
+      .material-card.block {
+        display:block;
+      }
+
+      .material-card p {
+        line-height:1.7;
+        color:#ddd;
+      }
+
+      .speak-btn {
+        border:1px solid rgba(0,255,255,.45);
+        background:rgba(0,255,255,.08);
+        color:#8fffff;
+        border-radius:12px;
+        padding:9px 13px;
+        cursor:pointer;
+      }
+
+      .speak-btn:hover {
+        box-shadow:0 0 15px rgba(0,255,255,.35);
+        transform:translateY(-1px);
+      }
+
+      .quiz-option {
+        display:block;
+        width:100%;
+        text-align:left;
+        margin:8px 0;
+        padding:12px 15px;
+        border-radius:11px;
+        border:1px solid rgba(0,255,255,.2);
+        background:rgba(255,255,255,.04);
+        color:white;
+        cursor:pointer;
+      }
+
+      .quiz-option:hover {
+        border-color:#0ff;
+        background:rgba(0,255,255,.08);
+      }
+
+      .quiz-option.correct {
+        border-color:#5f5;
+        background:rgba(0,255,0,.1);
+      }
+
+      .quiz-option.wrong {
+        border-color:#f55;
+        background:rgba(255,0,0,.1);
+      }
+
+      .empty-material {
+        padding:18px;
+        border-radius:14px;
+        color:#888;
+        background:rgba(255,255,255,.025);
+      }
+
+      .safe-lesson-card:hover {
+        transform:translateY(-2px);
+        border-color:#0ff !important;
+        box-shadow:
+          0 0 25px rgba(0,255,255,.18) !important;
+      }
+
+    `;
+
+    document.head.appendChild(style);
+  }
+
+  /* =========================================================
+     START
+     ========================================================= */
+
+  injectMaterialStyles();
+  installGradeHandlers();
+
+  /* expose for existing dashboard buttons */
+
+  window.loadLessonsFixed = loadLessonsFixed;
+  window.openLessonFixed = openLessonFixed;
+
+  console.log(
+    "✓ Safe Teacher Dashboard Lesson Fix loaded"
   );
 
-}else{
-
-  boot();
-
-}
-
-/* ================= GLOBAL API ================= */
-
-window.ENGLISH_MARIAMI_TEACHER={
-  openPanel,
-  openGrade,
-  openLesson,
-  showMaterial,
-  loadStudents,
-  loadLessons,
-  loadAttendance,
-  saveAttendance,
-  changeGrade,
-  showStudent
-};
-
+})();
 </script>
-
-</body>
-</html>
