@@ -1,262 +1,156 @@
-// ============================================================
-// English with Mariami — UNIFIED SECURITY GUARD v1.0
-// Teacher • Student • Parent • Grade 2/3/4
-// Supabase Auth • Role Protection • Grade Protection
-// Direct URL Protection • Session Validation • Auto Redirect
-// ============================================================
+/* ============================================================
+   ENGLISH WITH MARIAMI
+   FUTURISTIC GLOBAL SECURITY GUARD v3.0
+   ------------------------------------------------------------
+   Auth + Role + Grade + Dashboard Protection
+   Supabase RLS compatible
+   Teacher / Student / Parent
+   Automatic Grade Redirect
+   Anti-Unauthorized Navigation
+   Session Validation
+   ============================================================ */
 
 (function () {
   'use strict';
-
-  // ------------------------------------------------------------
-  // CONFIG
-  // ------------------------------------------------------------
-
-  const path = (location.pathname || '').toLowerCase();
 
   const CLIENT =
     window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
     window.supabaseClient ||
     null;
 
-  const LOGIN_PAGE = 'login.html';
-  const TEACHER_LOGIN = 'teacher-login.html';
-
-  // Prevent multiple guards on same page
-  if (window.__EWM_SECURITY_GUARD_ACTIVE) {
-    return;
-  }
-
-  window.__EWM_SECURITY_GUARD_ACTIVE = true;
-
-  // ------------------------------------------------------------
-  // PUBLIC PAGES
-  // ------------------------------------------------------------
-
-  const PUBLIC_PAGES = [
-    'login.html',
-    'register.html',
-    'reset-password.html',
-    'teacher-login.html',
-    'index.html',
-    ''
-  ];
-
-  const currentFile =
-    path.split('/').pop() || '';
-
-  if (PUBLIC_PAGES.includes(currentFile)) {
-    return;
-  }
-
   if (!CLIENT) {
     console.error(
       'EWM Security Guard: Supabase client not found.'
     );
-
-    redirectToLogin();
     return;
   }
 
-  // ------------------------------------------------------------
-  // PAGE TYPE
-  // ------------------------------------------------------------
+  const path = (
+    window.location.pathname || ''
+  ).toLowerCase();
 
-  function getPageType() {
+  const page = path.split('/').pop() || '';
 
-    if (
-      /teacher-dashboard\.html$/.test(path) ||
-      /teacher-journal\.html$/.test(path)
-    ) {
-      return 'teacher';
-    }
+  const LOGIN = 'login.html';
+  const TEACHER_LOGIN = 'teacher-login.html';
 
-    if (
-      /parent-dashboard\.html$/.test(path) ||
-      /parent-journal\.html$/.test(path)
-    ) {
-      return 'parent';
-    }
+  const GRADE_PAGES = {
+    2: 'grade2.html',
+    3: 'grade3.html',
+    4: 'grade4.html'
+  };
 
-    if (
-      /student-dashboard\.html$/.test(path)
-    ) {
-      return 'student';
-    }
+  const ROLE = {
+    TEACHER: 'teacher',
+    STUDENT: 'student',
+    PARENT: 'parent'
+  };
 
-    const gradeMatch =
-      path.match(/grade([234])\.html$/);
+  let currentUser = null;
+  let currentProfile = null;
+  let guardRunning = false;
 
-    if (gradeMatch) {
-      return 'grade';
-    }
+  /* ==========================================================
+     PAGE DETECTION
+  ========================================================== */
 
-    return null;
+  function isPublicPage() {
+    return [
+      'index.html',
+      'login.html',
+      'register.html',
+      'reset-password.html',
+      'teacher-login.html'
+    ].includes(page);
   }
 
-  const pageType = getPageType();
-
-  // Unknown pages are not blocked by this guard
-  if (!pageType) {
-    return;
-  }
-
-  // ------------------------------------------------------------
-  // GRADE DETECTION
-  // ------------------------------------------------------------
-
-  function getCurrentGrade() {
-
-    const match =
-      path.match(/grade([234])\.html$/);
-
-    if (!match) {
-      return null;
-    }
-
-    return Number(match[1]);
-  }
-
-  const currentGrade =
-    getCurrentGrade();
-
-  // ------------------------------------------------------------
-  // REDIRECT HELPERS
-  // ------------------------------------------------------------
-
-  function redirectToLogin(reason) {
-
-    if (
-      location.pathname
-        .toLowerCase()
-        .endsWith('login.html')
-    ) {
-      return;
-    }
-
-    let url = LOGIN_PAGE;
-
-    if (reason) {
-      url +=
-        '?reason=' +
-        encodeURIComponent(reason);
-    }
-
-    window.location.replace(url);
-  }
-
-  function redirectToTeacherLogin(reason) {
-
-    if (
-      location.pathname
-        .toLowerCase()
-        .endsWith('teacher-login.html')
-    ) {
-      return;
-    }
-
-    let url = TEACHER_LOGIN;
-
-    if (reason) {
-      url +=
-        '?reason=' +
-        encodeURIComponent(reason);
-    }
-
-    window.location.replace(url);
-  }
-
-  function redirectToGrade(grade) {
-
-    if (![2, 3, 4].includes(Number(grade))) {
-      redirectToLogin('invalid-grade');
-      return;
-    }
-
-    window.location.replace(
-      'grade' + Number(grade) + '.html'
+  function isTeacherPage() {
+    return (
+      page === 'teacher-dashboard.html' ||
+      page === 'teacher-journal.html' ||
+      page.startsWith('teacher-')
     );
   }
 
-  // ------------------------------------------------------------
-  // CLEAR AUTH DATA
-  // ------------------------------------------------------------
-
-  function clearAuthStorage() {
-
-    const stores = [];
-
-    try {
-      stores.push(localStorage);
-    } catch (_) {}
-
-    try {
-      stores.push(sessionStorage);
-    } catch (_) {}
-
-    stores.forEach(function (store) {
-
-      try {
-
-        const keys = [];
-
-        for (
-          let i = 0;
-          i < store.length;
-          i++
-        ) {
-
-          const key = store.key(i);
-
-          if (!key) continue;
-
-          if (
-            /^sb-/i.test(key) ||
-            /supabase/i.test(key) ||
-            /auth-token/i.test(key)
-          ) {
-            keys.push(key);
-          }
-        }
-
-        keys.forEach(function (key) {
-
-          try {
-            store.removeItem(key);
-          } catch (_) {}
-
-        });
-
-      } catch (_) {}
-
-    });
+  function isParentPage() {
+    return (
+      page === 'parent-dashboard.html' ||
+      page === 'parent-journal.html' ||
+      page.startsWith('parent-')
+    );
   }
 
-  // ------------------------------------------------------------
-  // SECURITY OVERLAY
-  // ------------------------------------------------------------
+  function isStudentPage() {
+    return (
+      page === 'student-dashboard.html' ||
+      /^grade[234]\.html$/.test(page)
+    );
+  }
 
-  function showSecurityScreen(message) {
+  function getGradeFromPage() {
+    const match = page.match(/^grade([234])\.html$/);
+    return match ? Number(match[1]) : null;
+  }
+
+  /* ==========================================================
+     SAFE REDIRECT
+  ========================================================== */
+
+  function redirect(url) {
+    if (!url) return;
 
     if (
-      document.getElementById(
-        'ewm-security-screen'
-      )
+      window.location.pathname.toLowerCase() ===
+      '/' + url.toLowerCase()
     ) {
       return;
     }
 
-    const style =
-      document.createElement('style');
+    window.location.replace(url);
+  }
 
-    style.id =
-      'ewm-security-screen-style';
+  function loginRedirect() {
+    const target =
+      page && page !== LOGIN
+        ? LOGIN +
+          '?redirect=' +
+          encodeURIComponent(
+            page + window.location.search
+          )
+        : LOGIN;
+
+    redirect(target);
+  }
+
+  function teacherLoginRedirect() {
+    redirect(
+      TEACHER_LOGIN +
+      '?redirect=' +
+      encodeURIComponent(
+        page + window.location.search
+      )
+    );
+  }
+
+  /* ==========================================================
+     LOADING SCREEN
+  ========================================================== */
+
+  function injectSecurityUI() {
+
+    if (document.getElementById('ewm-security-style')) {
+      return;
+    }
+
+    const style = document.createElement('style');
+
+    style.id = 'ewm-security-style';
 
     style.textContent = `
-      #ewm-security-screen {
+      #ewm-security-lock {
         position: fixed;
         inset: 0;
-        z-index: 99999999;
+        z-index: 9999999;
 
         display: flex;
         align-items: center;
@@ -265,80 +159,75 @@
         background:
           radial-gradient(
             circle at center,
-            rgba(0,234,255,.08),
-            transparent 45%
-          ),
-          #020914;
+            rgba(0,234,255,.12),
+            rgba(1,7,18,.98) 65%
+          );
+
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
 
         color: white;
-
-        font-family:
-          Arial,
-          sans-serif;
-
-        text-align: center;
+        font-family: Arial, sans-serif;
       }
 
       .ewm-security-box {
         width: min(420px, calc(100% - 32px));
-        padding: 32px 22px;
+        padding: 28px;
 
-        border-radius: 25px;
+        text-align: center;
 
-        border:
-          1px solid
-          rgba(0,234,255,.25);
+        border-radius: 24px;
 
         background:
           linear-gradient(
             145deg,
-            #061b31,
-            #020a14
+            rgba(5,27,50,.96),
+            rgba(2,11,24,.98)
           );
 
+        border: 1px solid rgba(0,234,255,.3);
+
         box-shadow:
-          0 0 50px
-          rgba(0,234,255,.12),
-          0 25px 80px
-          rgba(0,0,0,.6);
+          0 0 35px rgba(0,234,255,.12),
+          0 20px 70px rgba(0,0,0,.55);
       }
 
-      .ewm-security-icon {
-        font-size: 52px;
-        margin-bottom: 14px;
+      .ewm-security-logo {
+        font-size: 48px;
+        margin-bottom: 12px;
+
+        animation:
+          ewmSecurityPulse 1.8s infinite ease-in-out;
       }
 
       .ewm-security-title {
         font-size: 21px;
         font-weight: 900;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
 
-      .ewm-security-message {
-        color: #91a9b8;
+      .ewm-security-text {
+        color: #8da8b5;
         font-size: 13px;
-        line-height: 1.6;
+        line-height: 1.5;
       }
 
-      .ewm-security-loader {
-        width: 30px;
-        height: 30px;
+      .ewm-security-spinner {
+        width: 34px;
+        height: 34px;
 
-        margin:
-          20px auto 0;
+        margin: 20px auto 0;
 
         border:
-          3px solid
-          rgba(255,255,255,.15);
+          3px solid rgba(255,255,255,.12);
 
-        border-top-color:
-          #00eaff;
+        border-top-color: #00eaff;
+        border-right-color: #ffe600;
 
         border-radius: 50%;
 
         animation:
-          ewmSecuritySpin .7s
-          linear infinite;
+          ewmSecuritySpin .8s linear infinite;
       }
 
       @keyframes ewmSecuritySpin {
@@ -346,601 +235,647 @@
           transform: rotate(360deg);
         }
       }
+
+      @keyframes ewmSecurityPulse {
+        0%,100% {
+          transform: scale(1);
+          filter: drop-shadow(
+            0 0 4px rgba(0,234,255,.2)
+          );
+        }
+
+        50% {
+          transform: scale(1.08);
+          filter: drop-shadow(
+            0 0 18px rgba(0,234,255,.6)
+          );
+        }
+      }
+
+      @media(prefers-reduced-motion:reduce) {
+        .ewm-security-logo,
+        .ewm-security-spinner {
+          animation: none !important;
+        }
+      }
     `;
 
     document.head.appendChild(style);
+  }
 
-    const screen =
-      document.createElement('div');
+  function showLock(message) {
 
-    screen.id =
-      'ewm-security-screen';
+    injectSecurityUI();
 
-    screen.innerHTML = `
+    if (document.getElementById('ewm-security-lock')) {
+      return;
+    }
+
+    const lock = document.createElement('div');
+
+    lock.id = 'ewm-security-lock';
+
+    lock.innerHTML = `
       <div class="ewm-security-box">
-
-        <div class="ewm-security-icon">
-          🔐
-        </div>
+        <div class="ewm-security-logo">🛡️</div>
 
         <div class="ewm-security-title">
-          უსაფრთხოების შემოწმება
+          English with Mariami
         </div>
 
-        <div class="ewm-security-message">
-          ${escapeHTML(
-            message ||
-            'მიმდინარეობს ანგარიშის შემოწმება...'
-          )}
+        <div class="ewm-security-text">
+          ${escapeHTML(message || 'უსაფრთხოების შემოწმება...')}
         </div>
 
-        <div class="ewm-security-loader"></div>
-
+        <div class="ewm-security-spinner"></div>
       </div>
     `;
 
-    document.body.appendChild(screen);
+    document.body.appendChild(lock);
+  }
+
+  function hideLock() {
+    document
+      .getElementById('ewm-security-lock')
+      ?.remove();
   }
 
   function escapeHTML(value) {
-
-    return String(value || '')
-      .replace(
-        /[&<>"']/g,
-        function (char) {
-
-          return {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#039;'
-          }[char];
-
-        }
-      );
+    return String(value ?? '')
+      .replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[char]));
   }
 
-  // ------------------------------------------------------------
-  // ROLE NORMALIZATION
-  // ------------------------------------------------------------
+  /* ==========================================================
+     GET CURRENT USER
+  ========================================================== */
 
-  function normalizeRole(role) {
-
-    return String(
-      role || ''
-    )
-      .trim()
-      .toLowerCase();
-  }
-
-  // ------------------------------------------------------------
-  // FETCH PROFILE
-  // ------------------------------------------------------------
-
-  async function getProfile(userId) {
-
-    const result =
-      await CLIENT
-        .from('profiles')
-        .select(
-          'user_id,role,grade'
-        )
-        .eq(
-          'user_id',
-          userId
-        )
-        .maybeSingle();
-
-    if (result.error) {
-      throw result.error;
-    }
-
-    return result.data;
-  }
-
-  // ------------------------------------------------------------
-  // AUTHENTICATION CHECK
-  // ------------------------------------------------------------
-
-  async function verify() {
+  async function getUser() {
 
     try {
 
-      showSecurityScreen(
-        'ვადასტურებთ თქვენს ანგარიშს...'
-      );
-
-      // IMPORTANT:
-      // getUser() validates with Supabase Auth server.
-      const {
-        data,
-        error
-      } =
+      const result =
         await CLIENT.auth.getUser();
 
-      if (
-        error ||
-        !data ||
-        !data.user
-      ) {
-
-        clearAuthStorage();
-
-        redirectToLogin(
-          'session-expired'
-        );
-
-        return;
+      if (result.error || !result.data?.user) {
+        return null;
       }
 
-      const user =
-        data.user;
-
-      // --------------------------------------------------------
-      // PROFILE
-      // --------------------------------------------------------
-
-      const profile =
-        await getProfile(
-          user.id
-        );
-
-      if (!profile) {
-
-        console.warn(
-          'EWM Security Guard: profile not found.'
-        );
-
-        redirectToLogin(
-          'profile-not-found'
-        );
-
-        return;
-      }
-
-      const role =
-        normalizeRole(
-          profile.role
-        );
-
-      const grade =
-        Number(
-          profile.grade || 0
-        );
-
-      // --------------------------------------------------------
-      // TEACHER PAGE
-      // --------------------------------------------------------
-
-      if (pageType === 'teacher') {
-
-        if (role !== 'teacher') {
-
-          redirectByRole(
-            role,
-            grade
-          );
-
-          return;
-        }
-
-        allowPage(
-          user,
-          profile
-        );
-
-        return;
-      }
-
-      // --------------------------------------------------------
-      // PARENT PAGE
-      // --------------------------------------------------------
-
-      if (pageType === 'parent') {
-
-        if (role !== 'parent') {
-
-          redirectByRole(
-            role,
-            grade
-          );
-
-          return;
-        }
-
-        allowPage(
-          user,
-          profile
-        );
-
-        return;
-      }
-
-      // --------------------------------------------------------
-      // STUDENT DASHBOARD
-      // --------------------------------------------------------
-
-      if (pageType === 'student') {
-
-        if (role !== 'student') {
-
-          redirectByRole(
-            role,
-            grade
-          );
-
-          return;
-        }
-
-        allowPage(
-          user,
-          profile
-        );
-
-        return;
-      }
-
-      // --------------------------------------------------------
-      // GRADE 2 / 3 / 4
-      // --------------------------------------------------------
-
-      if (pageType === 'grade') {
-
-        // Only students can open student grades
-        if (role === 'student') {
-
-          if (
-            ![2, 3, 4].includes(
-              grade
-            )
-          ) {
-
-            redirectToLogin(
-              'invalid-grade'
-            );
-
-            return;
-          }
-
-          // Student opened old/wrong grade
-          if (
-            grade !== currentGrade
-          ) {
-
-            redirectToGrade(
-              grade
-            );
-
-            return;
-          }
-
-          allowPage(
-            user,
-            profile
-          );
-
-          return;
-        }
-
-        // Teacher and parent may preview grades
-        if (
-          role === 'teacher' ||
-          role === 'parent'
-        ) {
-
-          allowPage(
-            user,
-            profile
-          );
-
-          return;
-        }
-
-        redirectToLogin(
-          'unauthorized'
-        );
-
-        return;
-      }
-
-      // Unknown
-      redirectToLogin(
-        'unauthorized'
-      );
-
-    } catch (error) {
-
-      console.error(
-        'EWM Security Guard error:',
-        error
-      );
-
-      redirectToLogin(
-        'security-error'
-      );
-    }
-  }
-
-  // ------------------------------------------------------------
-  // ROLE REDIRECT
-  // ------------------------------------------------------------
-
-  function redirectByRole(
-    role,
-    grade
-  ) {
-
-    if (role === 'teacher') {
-
-      window.location.replace(
-        'teacher-dashboard.html'
-      );
-
-      return;
-    }
-
-    if (role === 'parent') {
-
-      window.location.replace(
-        'parent-dashboard.html'
-      );
-
-      return;
-    }
-
-    if (role === 'student') {
-
-      if (
-        [2, 3, 4].includes(
-          Number(grade)
-        )
-      ) {
-
-        window.location.replace(
-          'grade' +
-          Number(grade) +
-          '.html'
-        );
-
-      } else {
-
-        window.location.replace(
-          'student-dashboard.html'
-        );
-
-      }
-
-      return;
-    }
-
-    redirectToLogin(
-      'unauthorized'
-    );
-  }
-
-  // ------------------------------------------------------------
-  // ALLOW PAGE
-  // ------------------------------------------------------------
-
-  function allowPage(
-    user,
-    profile
-  ) {
-
-    window.__EWM_AUTHORIZED_USER =
-      user;
-
-    window.__EWM_AUTHORIZED_PROFILE =
-      profile;
-
-    window.__EWM_AUTHORIZED_ROLE =
-      normalizeRole(
-        profile.role
-      );
-
-    window.__EWM_AUTHORIZED_GRADE =
-      Number(
-        profile.grade || 0
-      );
-
-    const screen =
-      document.getElementById(
-        'ewm-security-screen'
-      );
-
-    if (screen) {
-      screen.remove();
-    }
-
-    document.documentElement
-      .setAttribute(
-        'data-ewm-auth',
-        'verified'
-      );
-
-    document.documentElement
-      .setAttribute(
-        'data-ewm-role',
-        normalizeRole(
-          profile.role
-        )
-      );
-  }
-
-  // ------------------------------------------------------------
-  // AUTH STATE MONITOR
-  // ------------------------------------------------------------
-
-  function watchAuth() {
-
-    try {
-
-      CLIENT.auth.onAuthStateChange(
-        function (event) {
-
-          if (
-            event === 'SIGNED_OUT'
-          ) {
-
-            clearAuthStorage();
-
-            redirectToLogin(
-              'signed-out'
-            );
-
-            return;
-          }
-
-          if (
-            event === 'TOKEN_REFRESHED'
-          ) {
-
-            // Session remains valid.
-            return;
-          }
-
-          if (
-            event === 'USER_DELETED'
-          ) {
-
-            clearAuthStorage();
-
-            redirectToLogin(
-              'account-removed'
-            );
-          }
-
-        }
-      );
+      return result.data.user;
 
     } catch (error) {
 
       console.warn(
-        'EWM auth listener error:',
+        'EWM Security: getUser failed',
+        error
+      );
+
+      return null;
+    }
+  }
+
+  /* ==========================================================
+     GET PROFILE
+  ========================================================== */
+
+  async function getProfile(userId) {
+
+    if (!userId) {
+      return null;
+    }
+
+    try {
+
+      const result =
+        await CLIENT
+          .from('profiles')
+          .select(
+            'user_id,full_name,role,grade,points'
+          )
+          .eq('user_id', userId)
+          .maybeSingle();
+
+      if (result.error) {
+
+        console.warn(
+          'EWM Security: profile error',
+          result.error
+        );
+
+        return null;
+      }
+
+      return result.data || null;
+
+    } catch (error) {
+
+      console.warn(
+        'EWM Security: profile exception',
+        error
+      );
+
+      return null;
+    }
+  }
+
+  /* ==========================================================
+     ROLE NORMALIZATION
+  ========================================================== */
+
+  function normalizeRole(role) {
+
+    return String(role || '')
+      .trim()
+      .toLowerCase();
+  }
+
+  /* ==========================================================
+     DASHBOARD AUTHORIZATION
+  ========================================================== */
+
+  function authorizePage(profile) {
+
+    if (!profile) {
+      loginRedirect();
+      return false;
+    }
+
+    const role =
+      normalizeRole(profile.role);
+
+    /* --------------------------------------------------------
+       TEACHER AREA
+    -------------------------------------------------------- */
+
+    if (isTeacherPage()) {
+
+      if (role !== ROLE.TEACHER) {
+
+        if (role === ROLE.STUDENT) {
+          redirect(
+            GRADE_PAGES[
+              Number(profile.grade)
+            ] || 'student-dashboard.html'
+          );
+
+        } else if (role === ROLE.PARENT) {
+          redirect('parent-dashboard.html');
+
+        } else {
+          loginRedirect();
+        }
+
+        return false;
+      }
+
+      return true;
+    }
+
+    /* --------------------------------------------------------
+       PARENT AREA
+    -------------------------------------------------------- */
+
+    if (isParentPage()) {
+
+      if (role !== ROLE.PARENT) {
+
+        if (role === ROLE.TEACHER) {
+          redirect('teacher-dashboard.html');
+
+        } else if (role === ROLE.STUDENT) {
+          redirect(
+            GRADE_PAGES[
+              Number(profile.grade)
+            ] || 'student-dashboard.html'
+          );
+
+        } else {
+          loginRedirect();
+        }
+
+        return false;
+      }
+
+      return true;
+    }
+
+    /* --------------------------------------------------------
+       STUDENT AREA
+    -------------------------------------------------------- */
+
+    if (isStudentPage()) {
+
+      if (role !== ROLE.STUDENT) {
+
+        if (role === ROLE.TEACHER) {
+          redirect('teacher-dashboard.html');
+
+        } else if (role === ROLE.PARENT) {
+          redirect('parent-dashboard.html');
+
+        } else {
+          loginRedirect();
+        }
+
+        return false;
+      }
+
+      return true;
+    }
+
+    return true;
+  }
+
+  /* ==========================================================
+     GRADE PROTECTION
+  ========================================================== */
+
+  function enforceGrade(profile) {
+
+    if (!profile) {
+      return false;
+    }
+
+    if (
+      normalizeRole(profile.role) !==
+      ROLE.STUDENT
+    ) {
+      return true;
+    }
+
+    const assignedGrade =
+      Number(profile.grade || 0);
+
+    const pageGrade =
+      getGradeFromPage();
+
+    if (
+      ![2, 3, 4].includes(assignedGrade)
+    ) {
+      console.warn(
+        'EWM Security: invalid student grade.'
+      );
+
+      redirect('student-dashboard.html');
+
+      return false;
+    }
+
+    if (
+      pageGrade &&
+      pageGrade !== assignedGrade
+    ) {
+
+      console.info(
+        `EWM Security: redirect Grade ${pageGrade} → Grade ${assignedGrade}`
+      );
+
+      redirect(
+        GRADE_PAGES[assignedGrade]
+      );
+
+      return false;
+    }
+
+    return true;
+  }
+
+  /* ==========================================================
+     STUDENT DASHBOARD → ASSIGNED GRADE
+  ========================================================== */
+
+  function enforceStudentDashboard(profile) {
+
+    if (
+      !isStudentPage() ||
+      !profile
+    ) {
+      return true;
+    }
+
+    if (
+      normalizeRole(profile.role) !==
+      ROLE.STUDENT
+    ) {
+      return true;
+    }
+
+    if (
+      page === 'student-dashboard.html'
+    ) {
+      return true;
+    }
+
+    return enforceGrade(profile);
+  }
+
+  /* ==========================================================
+     REALTIME PROFILE CHECK
+     ----------------------------------------------------------
+     If teacher changes student's grade while page is open,
+     the student gets redirected automatically.
+  ========================================================== */
+
+  function subscribeToProfileChanges(profile) {
+
+    if (!profile?.user_id) {
+      return;
+    }
+
+    if (
+      normalizeRole(profile.role) !==
+      ROLE.STUDENT
+    ) {
+      return;
+    }
+
+    try {
+
+      CLIENT
+        .channel(
+          'ewm-security-profile-' +
+          profile.user_id
+        )
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'profiles',
+            filter:
+              'user_id=eq.' +
+              profile.user_id
+          },
+          payload => {
+
+            const next =
+              payload?.new || {};
+
+            const newGrade =
+              Number(next.grade || 0);
+
+            const oldGrade =
+              Number(profile.grade || 0);
+
+            const newRole =
+              normalizeRole(next.role);
+
+            /* Role changed */
+
+            if (
+              newRole !==
+              normalizeRole(profile.role)
+            ) {
+
+              window.location.reload();
+              return;
+            }
+
+            /* Grade changed */
+
+            if (
+              [2,3,4].includes(newGrade) &&
+              newGrade !== oldGrade
+            ) {
+
+              console.info(
+                'EWM Security: live grade change',
+                oldGrade,
+                '→',
+                newGrade
+              );
+
+              redirect(
+                GRADE_PAGES[newGrade]
+              );
+            }
+          }
+        )
+        .subscribe();
+
+    } catch (error) {
+
+      console.warn(
+        'EWM Security realtime error:',
         error
       );
     }
   }
 
-  // ------------------------------------------------------------
-  // TAB / WINDOW VISIBILITY CHECK
-  // ------------------------------------------------------------
+  /* ==========================================================
+     AUTH STATE MONITOR
+  ========================================================== */
 
-  function installVisibilityGuard() {
+  function installAuthListener() {
 
-    let checking = false;
-
-    document.addEventListener(
-      'visibilitychange',
-      async function () {
+    CLIENT.auth.onAuthStateChange(
+      async (event, session) => {
 
         if (
-          document.visibilityState !==
-          'visible'
+          event === 'SIGNED_OUT'
         ) {
-          return;
-        }
 
-        if (checking) {
-          return;
-        }
-
-        checking = true;
-
-        try {
-
-          const {
-            data,
-            error
-          } =
-            await CLIENT.auth.getUser();
-
-          if (
-            error ||
-            !data ||
-            !data.user
-          ) {
-
-            clearAuthStorage();
-
-            redirectToLogin(
-              'session-expired'
-            );
+          if (!isPublicPage()) {
+            loginRedirect();
           }
 
-        } catch (_) {
+          return;
+        }
 
-        } finally {
+        if (
+          event === 'SIGNED_IN' ||
+          event === 'TOKEN_REFRESHED'
+        ) {
 
-          checking = false;
+          if (!session?.user) {
+            return;
+          }
 
+          currentUser =
+            session.user;
+
+          currentProfile =
+            await getProfile(
+              session.user.id
+            );
+
+          if (
+            currentProfile &&
+            !authorizePage(
+              currentProfile
+            )
+          ) {
+            return;
+          }
+
+          if (
+            currentProfile
+          ) {
+            enforceGrade(
+              currentProfile
+            );
+          }
         }
       }
     );
   }
 
-  // ------------------------------------------------------------
-  // BACK BUTTON PROTECTION
-  // ------------------------------------------------------------
+  /* ==========================================================
+     INITIAL SECURITY CHECK
+  ========================================================== */
 
-  function installHistoryGuard() {
+  async function runGuard() {
+
+    if (guardRunning) {
+      return;
+    }
+
+    guardRunning = true;
+
+    if (isPublicPage()) {
+      installAuthListener();
+      return;
+    }
+
+    showLock(
+      'ვოწმებთ თქვენს ანგარიშს და წვდომის უფლებებს...'
+    );
 
     try {
 
-      history.pushState(
-        null,
-        '',
-        location.href
+      currentUser =
+        await getUser();
+
+      if (!currentUser) {
+
+        loginRedirect();
+        return;
+      }
+
+      currentProfile =
+        await getProfile(
+          currentUser.id
+        );
+
+      if (!currentProfile) {
+
+        console.error(
+          'EWM Security: profile not found.'
+        );
+
+        loginRedirect();
+        return;
+      }
+
+      const authorized =
+        authorizePage(
+          currentProfile
+        );
+
+      if (!authorized) {
+        return;
+      }
+
+      if (
+        !enforceStudentDashboard(
+          currentProfile
+        )
+      ) {
+        return;
+      }
+
+      subscribeToProfileChanges(
+        currentProfile
       );
 
-      window.addEventListener(
-        'popstate',
-        function () {
+      installAuthListener();
 
-          history.pushState(
-            null,
-            '',
-            location.href
+      hideLock();
+
+      document.documentElement
+        .setAttribute(
+          'data-ewm-authenticated',
+          'true'
+        );
+
+      document.documentElement
+        .setAttribute(
+          'data-ewm-role',
+          normalizeRole(
+            currentProfile.role
+          )
+        );
+
+      if (
+        currentProfile.grade
+      ) {
+        document.documentElement
+          .setAttribute(
+            'data-ewm-grade',
+            String(
+              currentProfile.grade
+            )
           );
+      }
 
-          verify();
+      window.ENGLISH_MARIAMI_SECURITY = {
+        user: currentUser,
+        profile: currentProfile,
+        role: normalizeRole(
+          currentProfile.role
+        ),
+        grade: Number(
+          currentProfile.grade || 0
+        ),
 
-        }
+        isTeacher:
+          normalizeRole(
+            currentProfile.role
+          ) === ROLE.TEACHER,
+
+        isStudent:
+          normalizeRole(
+            currentProfile.role
+          ) === ROLE.STUDENT,
+
+        isParent:
+          normalizeRole(
+            currentProfile.role
+          ) === ROLE.PARENT
+      };
+
+    } catch (error) {
+
+      console.error(
+        'EWM Security Guard fatal error:',
+        error
       );
 
-    } catch (_) {}
+      loginRedirect();
+
+    } finally {
+
+      guardRunning = false;
+    }
   }
 
-  // ------------------------------------------------------------
-  // INITIALIZATION
-  // ------------------------------------------------------------
+  /* ==========================================================
+     START
+  ========================================================== */
 
-  async function boot() {
+  function boot() {
 
-    // Add a loading screen before checking auth
-    if (
-      document.body
-    ) {
-
-      showSecurityScreen(
-        'უსაფრთხო სესიის შემოწმება...'
-      );
-
+    if (!document.body) {
+      return;
     }
 
-    watchAuth();
-
-    installVisibilityGuard();
-
-    installHistoryGuard();
-
-    await verify();
+    runGuard();
   }
-
-  // ------------------------------------------------------------
-  // START
-  // ------------------------------------------------------------
 
   if (
     document.readyState ===
@@ -956,45 +891,6 @@
   } else {
 
     boot();
-
   }
-
-  // ------------------------------------------------------------
-  // PUBLIC SECURITY API
-  // ------------------------------------------------------------
-
-  window.ENGLISH_MARIAMI_SECURITY = {
-
-    verify: verify,
-
-    getUser: function () {
-      return (
-        window.__EWM_AUTHORIZED_USER ||
-        null
-      );
-    },
-
-    getProfile: function () {
-      return (
-        window.__EWM_AUTHORIZED_PROFILE ||
-        null
-      );
-    },
-
-    getRole: function () {
-      return (
-        window.__EWM_AUTHORIZED_ROLE ||
-        null
-      );
-    },
-
-    getGrade: function () {
-      return (
-        window.__EWM_AUTHORIZED_GRADE ||
-        null
-      );
-    }
-
-  };
 
 })();
