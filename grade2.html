@@ -1,912 +1,1100 @@
 <!DOCTYPE html>
-<html lang="ka">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#020617">
-<title>English with Mariami — Grade 2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<!-- Supabase -->
+<title>English with Mariami — Grade 2 XENON</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-<script src="security-guard.js"></script>
 
 <style>
 :root{
-  --bg:#020617;
-  --panel:rgba(5,18,40,.72);
-  --panel2:rgba(7,30,58,.78);
-  --cyan:#00eaff;
-  --blue:#387cff;
-  --purple:#9b5cff;
+  --bg:#02030a;
+  --panel:rgba(7,12,28,.78);
+  --panel2:rgba(12,20,43,.82);
+  --cyan:#00f6ff;
+  --blue:#2788ff;
+  --violet:#9d4edd;
   --pink:#ff3cac;
+  --green:#00ffa3;
   --yellow:#ffe600;
-  --green:#42ff9b;
-  --text:#f4fbff;
-  --muted:#91aabb;
-  --border:rgba(0,234,255,.20);
+  --red:#ff3b68;
+  --white:#f5fbff;
+  --muted:#91a6bd;
+  --line:rgba(0,246,255,.18);
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   min-height:100vh;
-  overflow-x:hidden;
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
+  color:var(--white);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
   background:
-    radial-gradient(circle at 15% 10%,rgba(0,234,255,.12),transparent 25%),
-    radial-gradient(circle at 85% 20%,rgba(155,92,255,.12),transparent 28%),
-    radial-gradient(circle at 50% 90%,rgba(255,60,172,.08),transparent 25%),
-    #020617;
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(0,246,255,.16),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(157,78,221,.17),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(255,60,172,.10),
+      transparent 30%
+    ),
+    #02030a;
+
+  overflow-x:hidden;
 }
 
-button,input,select{font:inherit}
-
-button{
-  border:0;
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-/* =========================================================
-   ANIMATED SPACE BACKGROUND
-========================================================= */
+/* =========================
+   SPACE BACKGROUND
+========================= */
 
 .space{
   position:fixed;
   inset:0;
-  z-index:-5;
-  pointer-events:none;
+  z-index:-10;
   overflow:hidden;
 }
 
-.star{
+.grid{
   position:absolute;
-  width:2px;
-  height:2px;
-  background:#fff;
-  border-radius:50%;
-  opacity:.7;
-  animation:twinkle 3s infinite alternate;
-}
-
-@keyframes twinkle{
-  from{opacity:.15;transform:scale(.7)}
-  to{opacity:1;transform:scale(1.5)}
-}
-
-.grid-floor{
-  position:fixed;
-  left:-20%;
-  right:-20%;
-  bottom:-25%;
-  height:55%;
-  z-index:-3;
+  inset:-50%;
   background:
-    linear-gradient(rgba(0,234,255,.15) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,234,255,.15) 1px,transparent 1px);
-  background-size:50px 50px;
-  transform:perspective(500px) rotateX(65deg);
-  mask-image:linear-gradient(to top,black,transparent);
-  opacity:.5;
+    linear-gradient(
+      rgba(0,246,255,.07) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,246,255,.07) 1px,
+      transparent 1px
+    );
+
+  background-size:45px 45px;
+  transform:
+    perspective(600px)
+    rotateX(60deg)
+    translateY(180px);
+
+  animation:gridMove 18s linear infinite;
 }
 
-/* =========================================================
-   HEADER
-========================================================= */
+@keyframes gridMove{
+  from{
+    transform:
+      perspective(600px)
+      rotateX(60deg)
+      translateY(0);
+  }
 
-.top{
+  to{
+    transform:
+      perspective(600px)
+      rotateX(60deg)
+      translateY(90px);
+  }
+}
+
+.orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.45;
+  animation:orbFloat 8s ease-in-out infinite alternate;
+}
+
+.orb.a{
+  width:300px;
+  height:300px;
+  background:var(--cyan);
+  left:-120px;
+  top:15%;
+}
+
+.orb.b{
+  width:340px;
+  height:340px;
+  background:var(--violet);
+  right:-150px;
+  top:35%;
+  animation-delay:2s;
+}
+
+.orb.c{
+  width:220px;
+  height:220px;
+  background:var(--pink);
+  left:45%;
+  bottom:-120px;
+  animation-delay:4s;
+}
+
+@keyframes orbFloat{
+  from{
+    transform:translate3d(0,0,0) scale(1);
+  }
+  to{
+    transform:translate3d(30px,-35px,0) scale(1.12);
+  }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
   position:sticky;
   top:0;
   z-index:1000;
-  backdrop-filter:blur(18px);
-  background:rgba(2,6,23,.72);
-  border-bottom:1px solid rgba(0,234,255,.14);
+
+  background:
+    rgba(2,3,10,.72);
+
+  backdrop-filter:blur(22px);
+
+  border-bottom:
+    1px solid var(--line);
+
+  box-shadow:
+    0 0 40px rgba(0,246,255,.06);
 }
 
-.nav{
-  width:min(1250px,calc(100% - 30px));
+.header-inner{
+  width:min(1450px,calc(100% - 28px));
   margin:auto;
-  min-height:68px;
+
+  min-height:76px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:20px;
+  gap:15px;
+}
+
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:15px;
+
+  font-size:25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--cyan),
+      var(--blue),
+      var(--violet)
+    );
+
+  box-shadow:
+    0 0 18px rgba(0,246,255,.45),
+    0 0 50px rgba(157,78,221,.25);
+
+  animation:logoPulse 3s infinite;
+}
+
+@keyframes logoPulse{
+  50%{
+    box-shadow:
+      0 0 30px rgba(0,246,255,.7),
+      0 0 70px rgba(157,78,221,.35);
+  }
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
   font-weight:1000;
-  letter-spacing:.4px;
+  letter-spacing:.5px;
 }
 
-.brand-orb{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border-radius:14px;
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:2px;
+  margin-top:3px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  border:1px solid rgba(255,255,255,.12);
+
+  border-radius:13px;
+
+  min-height:43px;
+
+  padding:
+    10px
+    15px;
+
+  color:white;
+
   background:
-    radial-gradient(circle at 30% 25%,#fff,transparent 10%),
-    linear-gradient(135deg,#00eaff,#6c2cff,#ff3cac);
+    rgba(255,255,255,.06);
+
+  font-weight:900;
+
+  transition:
+    transform .2s,
+    box-shadow .2s,
+    border-color .2s;
+
+  cursor:pointer;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+
+  border-color:
+    rgba(0,246,255,.55);
+
   box-shadow:
-    0 0 15px rgba(0,234,255,.6),
-    0 0 40px rgba(155,92,255,.3);
-  animation:orb 4s ease-in-out infinite;
+    0 0 25px rgba(0,246,255,.15);
 }
 
-@keyframes orb{
-  50%{transform:rotateY(180deg) rotateZ(8deg)}
+.btn-home{
+  background:
+    linear-gradient(
+      135deg,
+      #0874ff,
+      #00d9ff
+    );
 }
 
-.nav-links{
-  display:flex;
-  gap:8px;
-  overflow:auto;
+.btn-exit{
+  background:
+    linear-gradient(
+      135deg,
+      #d51f50,
+      #ff3b68
+    );
 }
 
-.nav-links a{
-  padding:10px 13px;
-  border-radius:11px;
-  color:#b9d0da;
-  font-size:13px;
-  white-space:nowrap;
+.btn-teacher{
+  background:
+    linear-gradient(
+      135deg,
+      #7136d9,
+      #a855f7
+    );
 }
 
-.nav-links a:hover,
-.nav-links a.active{
-  color:#fff;
-  background:rgba(0,234,255,.08);
-  box-shadow:inset 0 -2px var(--cyan);
-}
+/* =========================
+   MAIN
+========================= */
 
-/* =========================================================
-   HERO
-========================================================= */
-
-.wrap{
-  width:min(1250px,calc(100% - 30px));
+.container{
+  width:min(1450px,calc(100% - 28px));
   margin:auto;
 }
 
+/* =========================
+   HERO
+========================= */
+
 .hero{
-  min-height:650px;
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:50px;
-  align-items:center;
-  padding:65px 0 45px;
+  padding:
+    48px
+    0
+    25px;
 }
 
-.badge{
-  display:inline-flex;
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid rgba(0,234,255,.28);
-  background:rgba(0,234,255,.06);
+.hero-card{
+  position:relative;
+
+  padding:38px;
+
+  min-height:310px;
+
+  border:
+    1px solid
+    rgba(0,246,255,.22);
+
+  border-radius:30px;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(7,18,40,.88),
+      rgba(10,6,30,.82)
+    );
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.5),
+    inset 0 0 50px rgba(0,246,255,.025);
+}
+
+.hero-card:after{
+  content:"";
+
+  position:absolute;
+  width:400px;
+  height:400px;
+
+  right:-150px;
+  top:-150px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(0,246,255,.18);
+
+  box-shadow:
+    0 0 80px rgba(0,246,255,.08);
+
+  animation:
+    ringSpin 14s linear infinite;
+}
+
+@keyframes ringSpin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.kicker{
   color:var(--cyan);
-  font-size:11px;
+
+  font-size:12px;
+
+  letter-spacing:3px;
+
   font-weight:1000;
-  letter-spacing:1.5px;
 }
 
 .hero h1{
-  margin:18px 0 12px;
-  font-size:clamp(3rem,7vw,6.7rem);
-  line-height:.9;
-  letter-spacing:-5px;
+  margin:
+    13px
+    0;
+
+  max-width:850px;
+
+  font-size:
+    clamp(
+      2.4rem,
+      6vw,
+      5.8rem
+    );
+
+  line-height:.95;
+
+  letter-spacing:-4px;
 }
 
 .gradient-text{
   background:
     linear-gradient(
-      100deg,
+      90deg,
       #fff,
-      #00eaff 28%,
-      #9b5cff 52%,
-      #ff3cac 75%,
-      #ffe600
+      var(--cyan),
+      #6e8cff,
+      var(--violet),
+      var(--pink)
     );
+
   -webkit-background-clip:text;
-  background-clip:text;
   color:transparent;
-  background-size:250%;
-  animation:gradientMove 7s linear infinite;
+
+  background-size:300%;
+
+  animation:
+    textFlow 7s ease infinite;
 }
 
-@keyframes gradientMove{
-  to{background-position:250% center}
+@keyframes textFlow{
+  0%,100%{
+    background-position:0%;
+  }
+
+  50%{
+    background-position:100%;
+  }
 }
 
 .hero p{
-  color:#b6cad5;
+  max-width:800px;
+
+  color:#a9bdd0;
+
   line-height:1.7;
-  max-width:680px;
-  font-size:17px;
+
+  font-size:16px;
 }
 
-.hero-buttons{
+.grade-chip{
+  display:inline-flex;
+
+  margin-top:12px;
+
+  padding:
+    9px
+    13px;
+
+  border-radius:999px;
+
+  color:var(--cyan);
+
+  border:
+    1px solid
+    rgba(0,246,255,.25);
+
+  background:
+    rgba(0,246,255,.06);
+
+  box-shadow:
+    0 0 25px
+    rgba(0,246,255,.08);
+}
+
+/* =========================
+   QUICK NAV
+========================= */
+
+.quick-nav{
   display:flex;
+  gap:10px;
   flex-wrap:wrap;
-  gap:12px;
+
   margin-top:25px;
 }
 
-.btn{
-  min-height:48px;
-  padding:12px 18px;
-  border-radius:14px;
-  color:#fff;
-  font-weight:900;
-  background:#09233e;
-  border:1px solid rgba(255,255,255,.12);
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 30px rgba(0,234,255,.15);
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,#0874ff,#00d9ff);
-  box-shadow:0 0 25px rgba(0,234,255,.25);
-}
-
-.btn-purple{
-  background:linear-gradient(135deg,#693cff,#b32cff);
-}
-
-.btn-yellow{
-  background:linear-gradient(135deg,#ffb800,#ffe600);
-  color:#07101d;
-}
-
-/* =========================================================
-   3D PLANET
-========================================================= */
-
-.hero-visual{
-  min-height:520px;
-  display:grid;
-  place-items:center;
-  perspective:1200px;
-}
-
-.planet-scene{
-  position:relative;
-  width:min(470px,90vw);
-  aspect-ratio:1;
-  transform-style:preserve-3d;
-  animation:sceneFloat 6s ease-in-out infinite;
-}
-
-@keyframes sceneFloat{
-  50%{transform:translateY(-15px) rotateY(8deg)}
-}
-
-.planet{
-  position:absolute;
-  width:58%;
-  aspect-ratio:1;
-  left:21%;
-  top:21%;
-  border-radius:50%;
-  background:
-    radial-gradient(circle at 32% 27%,#fff 0 2%,transparent 3%),
-    radial-gradient(circle at 60% 35%,#00eaff 0 7%,transparent 8%),
-    radial-gradient(circle at 35% 65%,#693cff 0 10%,transparent 11%),
-    radial-gradient(circle at 70% 72%,#ff3cac 0 8%,transparent 9%),
-    radial-gradient(circle at 35% 30%,#4cecff,#1948d9 38%,#180d62 70%,#030617);
-  box-shadow:
-    inset -35px -25px 70px rgba(0,0,0,.75),
-    inset 15px 10px 35px rgba(255,255,255,.2),
-    0 0 40px rgba(0,234,255,.7),
-    0 0 100px rgba(96,44,255,.45);
-  transform:translateZ(60px);
-  animation:planetSpin 15s linear infinite;
-}
-
-@keyframes planetSpin{
-  to{transform:translateZ(60px) rotateY(360deg)}
-}
-
-.ring{
-  position:absolute;
-  width:90%;
-  height:27%;
-  left:5%;
-  top:37%;
-  border:9px solid rgba(0,234,255,.6);
-  border-left-color:rgba(255,60,172,.5);
-  border-right-color:rgba(255,230,0,.5);
-  border-radius:50%;
-  transform:rotateX(70deg) rotateZ(-15deg);
-  box-shadow:0 0 25px rgba(0,234,255,.6);
-}
-
-.orbit{
-  position:absolute;
-  inset:5%;
-  border:1px solid rgba(0,234,255,.25);
-  border-radius:50%;
-  transform:rotateX(65deg) rotateY(15deg);
-  animation:orbit 8s linear infinite;
-}
-
-.orbit:nth-child(2){
-  transform:rotateX(65deg) rotateY(75deg);
-  animation-duration:11s;
-}
-
-@keyframes orbit{
-  to{transform:rotateX(65deg) rotateY(375deg)}
-}
-
-.floating-word{
-  position:absolute;
-  padding:8px 11px;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:10px;
-  background:rgba(3,15,34,.7);
-  backdrop-filter:blur(8px);
-  font-weight:1000;
-  font-size:12px;
-  color:#fff;
-  box-shadow:0 0 20px rgba(0,234,255,.13);
-  animation:wordFloat 4s ease-in-out infinite;
-}
-
-@keyframes wordFloat{
-  50%{transform:translateY(-13px) rotateZ(2deg)}
-}
-
-.w1{left:0;top:18%}
-.w2{right:0;top:28%;animation-delay:.7s}
-.w3{left:5%;bottom:20%;animation-delay:1.3s}
-.w4{right:2%;bottom:17%;animation-delay:2s}
-.w5{left:36%;top:0;animation-delay:1s}
-
-/* =========================================================
+/* =========================
    STATS
-========================================================= */
+========================= */
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  margin:10px 0 35px;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:13px;
+
+  margin:
+    10px
+    0
+    25px;
 }
 
 .stat{
-  padding:20px;
-  border-radius:20px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  backdrop-filter:blur(14px);
-  text-align:center;
+  padding:19px;
+
+  border-radius:19px;
+
+  background:
+    rgba(7,18,38,.72);
+
+  border:
+    1px solid
+    var(--line);
+
+  box-shadow:
+    inset 0 0 30px
+    rgba(0,246,255,.025);
+}
+
+.stat small{
+  color:var(--muted);
+  font-size:11px;
 }
 
 .stat b{
   display:block;
+
+  margin-top:6px;
+
   font-size:30px;
-  margin-bottom:4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      white,
+      var(--cyan)
+    );
+
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.stat span{
-  color:var(--muted);
-  font-size:12px;
-}
+/* =========================
+   TOPICS
+========================= */
 
-/* =========================================================
-   SECTION
-========================================================= */
-
-.section{
-  padding:45px 0;
-}
-
-.section-head{
-  margin-bottom:22px;
-}
-
-.section-head .mini{
-  color:var(--cyan);
-  font-size:11px;
-  font-weight:1000;
-  letter-spacing:2px;
-}
-
-.section-head h2{
-  margin:8px 0;
-  font-size:34px;
-}
-
-.section-head p{
-  color:var(--muted);
-}
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-.toolbar{
+.section-title{
   display:flex;
-  gap:10px;
-  margin-bottom:18px;
+  justify-content:space-between;
+  align-items:end;
+
+  gap:15px;
+
+  margin:
+    35px
+    0
+    17px;
 }
 
-.search{
-  flex:1;
-  min-height:50px;
-  border-radius:15px;
-  border:1px solid rgba(0,234,255,.2);
-  background:rgba(3,17,35,.85);
-  color:#fff;
-  padding:0 16px;
-  outline:none;
+.section-title h2{
+  margin:0;
+
+  font-size:27px;
 }
 
-.search:focus{
-  border-color:var(--cyan);
-  box-shadow:0 0 25px rgba(0,234,255,.12);
+.section-title p{
+  margin:5px 0 0;
+
+  color:var(--muted);
+
+  font-size:13px;
 }
 
-.filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:20px;
-}
-
-.filter{
-  padding:10px 13px;
-  border-radius:11px;
-  background:#071d36;
-  border:1px solid rgba(255,255,255,.09);
-  color:#a9c0cb;
-  cursor:pointer;
-}
-
-.filter.active{
-  color:#fff;
-  border-color:var(--cyan);
-  box-shadow:0 0 18px rgba(0,234,255,.15);
-}
-
-/* =========================================================
-   WORD GRID
-========================================================= */
-
-.word-grid{
+.topics{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+
+  padding-bottom:40px;
 }
 
-.word-card{
+.topic{
   position:relative;
-  min-height:180px;
-  padding:17px;
+
+  min-height:190px;
+
+  padding:21px;
+
+  border-radius:22px;
+
   overflow:hidden;
-  border-radius:20px;
-  border:1px solid rgba(0,234,255,.16);
+
+  cursor:pointer;
+
   background:
     linear-gradient(
       145deg,
-      rgba(8,31,59,.9),
-      rgba(3,13,28,.95)
+      rgba(10,27,53,.9),
+      rgba(7,9,28,.9)
     );
+
+  border:
+    1px solid
+    rgba(0,246,255,.15);
+
+  transition:
+    transform .25s,
+    border-color .25s,
+    box-shadow .25s;
+
   transform-style:preserve-3d;
-  transition:transform .25s,box-shadow .25s,border-color .25s;
 }
 
-.word-card::before{
-  content:"";
-  position:absolute;
-  width:130px;
-  height:130px;
-  right:-55px;
-  top:-55px;
-  border-radius:50%;
-  background:rgba(0,234,255,.08);
-  filter:blur(5px);
-}
+.topic:hover{
+  transform:
+    perspective(700px)
+    rotateX(4deg)
+    rotateY(-4deg)
+    translateY(-7px);
 
-.word-card:hover{
-  transform:translateY(-7px) rotateX(3deg) rotateY(-3deg);
-  border-color:rgba(0,234,255,.5);
+  border-color:
+    rgba(0,246,255,.55);
+
   box-shadow:
-    0 15px 35px rgba(0,0,0,.35),
-    0 0 25px rgba(0,234,255,.12);
+    0 20px 50px rgba(0,0,0,.4),
+    0 0 35px rgba(0,246,255,.08);
 }
 
-.word-emoji{
+.topic:before{
+  content:"";
+
+  position:absolute;
+
+  width:110px;
+  height:110px;
+
+  right:-40px;
+  top:-40px;
+
+  border-radius:50%;
+
+  background:
+    var(--cyan);
+
+  filter:blur(55px);
+
+  opacity:.12;
+}
+
+.topic-icon{
+  font-size:38px;
+
+  filter:
+    drop-shadow(
+      0 0 12px
+      rgba(0,246,255,.45)
+    );
+}
+
+.topic-number{
+  position:absolute;
+
+  top:17px;
+  right:18px;
+
+  color:
+    rgba(255,255,255,.28);
+
+  font-size:11px;
+
+  font-weight:1000;
+}
+
+.topic h3{
+  margin:
+    13px
+    0
+    7px;
+
+  font-size:18px;
+}
+
+.topic p{
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  line-height:1.55;
+}
+
+.topic-tag{
+  display:inline-block;
+
+  margin-top:14px;
+
+  padding:
+    5px
+    8px;
+
+  border-radius:7px;
+
+  background:
+    rgba(0,246,255,.07);
+
+  color:
+    var(--cyan);
+
+  font-size:9px;
+
+  font-weight:1000;
+
+  letter-spacing:1px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+
+  z-index:9999;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:18px;
+
+  background:
+    rgba(0,0,0,.78);
+
+  backdrop-filter:
+    blur(14px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-box{
+  width:
+    min(1050px,100%);
+
+  max-height:
+    92vh;
+
+  overflow:auto;
+
+  border:
+    1px solid
+    rgba(0,246,255,.35);
+
+  border-radius:28px;
+
+  padding:25px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #061329,
+      #08051d
+    );
+
+  box-shadow:
+    0 40px 120px
+    rgba(0,0,0,.7),
+    0 0 50px
+    rgba(0,246,255,.08);
+}
+
+.modal-head{
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:20px;
+}
+
+.modal-head h2{
+  margin:0;
+
   font-size:28px;
 }
 
-.word-card h3{
-  margin:8px 0 3px;
-  font-size:24px;
+.lesson-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:12px;
 }
 
-.pron{
-  color:#7eeeff;
-  font-size:12px;
+.lesson-btn{
+  min-height:100px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  border:
+    1px solid
+    rgba(0,246,255,.15);
+
+  background:
+    rgba(0,246,255,.045);
+
+  color:white;
+
+  text-align:left;
+
+  cursor:pointer;
+
+  transition:.2s;
 }
 
-.translation{
-  margin-top:7px;
-  color:#d9e7ec;
-  font-weight:800;
+.lesson-btn:hover{
+  transform:translateY(-4px);
+
+  border-color:
+    var(--cyan);
+
+  box-shadow:
+    0 0 30px
+    rgba(0,246,255,.1);
 }
 
-.example{
-  margin-top:8px;
-  color:#829ba7;
-  font-size:12px;
+.lesson-btn b{
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:16px;
+}
+
+.lesson-btn small{
+  color:var(--muted);
+
   line-height:1.45;
 }
 
-.listen{
-  position:absolute;
-  right:12px;
-  bottom:12px;
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#0874ff,#00d9ff);
-  color:#fff;
-  box-shadow:0 0 15px rgba(0,234,255,.2);
-}
+/* =========================
+   LESSON CONTENT
+========================= */
 
-/* =========================================================
-   LEARNING CARDS
-========================================================= */
+.lesson-content{
+  margin-top:18px;
 
-.learning-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.learn-card{
-  min-height:190px;
-  padding:23px;
-  border-radius:22px;
-  background:linear-gradient(145deg,#071e39,#030d20);
-  border:1px solid rgba(155,92,255,.18);
-  position:relative;
-  overflow:hidden;
-}
-
-.learn-icon{
-  font-size:38px;
-}
-
-.learn-card h3{
-  margin:12px 0 7px;
-}
-
-.learn-card p{
-  color:#8da7b2;
-  line-height:1.6;
-  font-size:13px;
-}
-
-/* =========================================================
-   ALPHABET
-========================================================= */
-
-.alphabet{
-  display:grid;
-  grid-template-columns:repeat(13,1fr);
-  gap:7px;
-}
-
-.letter{
-  min-height:58px;
-  border-radius:13px;
-  background:#071e38;
-  border:1px solid rgba(0,234,255,.13);
-  color:#fff;
-  font-size:21px;
-  font-weight:1000;
-  transition:.2s;
-}
-
-.letter:hover{
-  transform:translateY(-5px) scale(1.04);
-  background:#0b355d;
-  border-color:var(--cyan);
-  box-shadow:0 0 20px rgba(0,234,255,.18);
-}
-
-/* =========================================================
-   GRAMMAR
-========================================================= */
-
-.grammar{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-}
-
-.grammar-card{
   padding:22px;
+
   border-radius:20px;
-  background:var(--panel);
-  border:1px solid rgba(255,230,0,.15);
-}
 
-.formula{
-  display:inline-block;
-  margin:10px 0;
-  padding:10px 13px;
-  border-radius:10px;
-  background:#020b18;
-  color:var(--yellow);
-  font-weight:1000;
-}
-
-.grammar-card p{
-  color:#9eb4bd;
-  line-height:1.6;
-}
-
-/* =========================================================
-   READING
-========================================================= */
-
-.reading{
-  padding:28px;
-  border-radius:24px;
   background:
-    linear-gradient(
-      135deg,
-      rgba(0,234,255,.07),
-      rgba(155,92,255,.08),
-      rgba(255,60,172,.05)
-    );
-  border:1px solid rgba(0,234,255,.2);
+    rgba(0,0,0,.2);
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
 }
 
-.reading h3{
-  font-size:28px;
-}
-
-.reading-text{
-  font-size:18px;
-  line-height:2;
-  color:#d8e9ee;
-}
-
-.reading-text span{
-  cursor:pointer;
-  border-bottom:1px dotted rgba(0,234,255,.45);
-}
-
-/* =========================================================
-   QUIZ
-========================================================= */
-
-.quiz-box{
-  padding:26px;
-  border-radius:24px;
-  background:linear-gradient(145deg,#061a32,#030b19);
-  border:1px solid rgba(0,234,255,.2);
-}
-
-.quiz-question{
-  font-size:22px;
-  font-weight:900;
-  margin-bottom:18px;
-}
-
-.options{
+.word-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap:10px;
 }
 
-.option{
-  padding:15px;
+.word{
+  padding:14px;
+
   border-radius:14px;
-  text-align:left;
-  color:#fff;
-  background:#092340;
-  border:1px solid rgba(255,255,255,.08);
+
+  background:
+    #071a32;
+
+  border:
+    1px solid
+    rgba(0,246,255,.1);
+
+  cursor:pointer;
+
   transition:.2s;
 }
 
-.option:hover{
+.word:hover{
   border-color:var(--cyan);
-  transform:translateY(-2px);
+
+  transform:translateY(-3px);
 }
 
-.option.correct{
-  background:rgba(0,180,120,.25);
-  border-color:#42ff9b;
+.word b{
+  color:var(--cyan);
+
+  display:block;
+
+  margin-bottom:4px;
 }
 
-.option.wrong{
-  background:rgba(255,50,80,.2);
-  border-color:#ff5570;
+.word small{
+  color:var(--muted);
 }
 
-.quiz-result{
-  margin-top:18px;
-  padding:16px;
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+
+  right:18px;
+  bottom:18px;
+
+  z-index:10000;
+
+  max-width:380px;
+
+  padding:
+    14px
+    17px;
+
   border-radius:14px;
-  background:#04182e;
-  color:#bcd1d9;
+
+  background:
+    #06182d;
+
+  border:
+    1px solid
+    rgba(0,246,255,.35);
+
+  box-shadow:
+    0 20px 60px
+    rgba(0,0,0,.5);
+
+  opacity:0;
+
+  transform:
+    translateY(25px);
+
+  pointer-events:none;
+
+  transition:.25s;
 }
 
-.score-big{
-  font-size:42px;
-  color:var(--yellow);
-  font-weight:1000;
+.toast.show{
+  opacity:1;
+
+  transform:
+    translateY(0);
 }
 
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-card{
-  padding:25px;
-  border-radius:24px;
-  background:linear-gradient(145deg,#071f3a,#030c1c);
-  border:1px solid rgba(66,255,155,.18);
-}
-
-.progress-line{
-  height:15px;
-  border-radius:99px;
-  background:#020a15;
-  overflow:hidden;
-  margin:15px 0;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  border-radius:inherit;
-  background:linear-gradient(90deg,#0874ff,#00eaff,#42ff9b,#ffe600);
-  box-shadow:0 0 15px rgba(0,234,255,.4);
-  transition:width .7s ease;
-}
-
-.progress-info{
-  display:flex;
-  justify-content:space-between;
-  color:#9fb5be;
-  font-size:13px;
-}
-
-/* =========================================================
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
-footer{
-  margin-top:40px;
-  padding:45px 0;
+.footer{
   text-align:center;
-  color:#718b97;
-  border-top:1px solid rgba(255,255,255,.06);
+
+  padding:
+    25px
+    0
+    50px;
+
+  color:
+    rgba(145,166,189,.7);
+
+  font-size:11px;
+
+  letter-spacing:1px;
 }
 
-/* =========================================================
+/* =========================
    RESPONSIVE
-========================================================= */
+========================= */
 
 @media(max-width:1050px){
-  .hero{
-    grid-template-columns:1fr;
-    text-align:center;
+
+  .topics{
+    grid-template-columns:
+      repeat(3,1fr);
   }
 
-  .hero p{
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .hero-buttons{
-    justify-content:center;
-  }
-
-  .word-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .alphabet{
-    grid-template-columns:repeat(9,1fr);
-  }
-}
-
-@media(max-width:800px){
   .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .word-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .learning-grid,
-  .grammar{
-    grid-template-columns:1fr;
-  }
-
-  .alphabet{
-    grid-template-columns:repeat(7,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 }
 
-@media(max-width:560px){
-  .wrap{
-    width:calc(100% - 20px);
+@media(max-width:720px){
+
+  .header-inner{
+    min-height:64px;
   }
 
-  .nav{
-    width:calc(100% - 16px);
+  .brand small{
+    display:none;
   }
 
-  .nav-links{
-    max-width:52%;
+  .header-inner .btn{
+    font-size:0;
+    padding:9px 11px;
+  }
+
+  .header-inner .btn:first-letter{
+    font-size:18px;
   }
 
   .hero{
-    min-height:auto;
-    padding:40px 0 20px;
+    padding-top:25px;
+  }
+
+  .hero-card{
+    padding:24px;
   }
 
   .hero h1{
-    font-size:clamp(2.8rem,15vw,4.5rem);
-    letter-spacing:-3px;
+    font-size:3rem;
+    letter-spacing:-2px;
   }
 
-  .planet-scene{
-    width:320px;
+  .topics{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .topic{
+    min-height:170px;
+    padding:16px;
+  }
+
+  .lesson-grid{
+    grid-template-columns:1fr;
+  }
+
+  .word-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+}
+
+@media(max-width:470px){
+
+  .container,
+  .header-inner{
+    width:calc(100% - 18px);
+  }
+
+  .topics{
+    grid-template-columns:1fr;
   }
 
   .stats{
-    gap:8px;
+    grid-template-columns:1fr 1fr;
   }
 
-  .stat{
-    padding:14px 7px;
+  .hero h1{
+    font-size:2.5rem;
   }
 
-  .stat b{
-    font-size:23px;
+  .quick-nav{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .quick-nav .btn{
+    width:100%;
   }
 
   .word-grid{
     grid-template-columns:1fr;
-  }
-
-  .alphabet{
-    grid-template-columns:repeat(6,1fr);
-  }
-
-  .options{
-    grid-template-columns:1fr;
-  }
-
-  .toolbar{
-    display:block;
-  }
-
-  .search{
-    width:100%;
   }
 }
 </style>
@@ -914,84 +1102,100 @@ footer{
 
 <body>
 
-<div class="space" id="space"></div>
-<div class="grid-floor"></div>
+<div class="space">
+  <div class="grid"></div>
+  <div class="orb a"></div>
+  <div class="orb b"></div>
+  <div class="orb c"></div>
+</div>
 
-<header class="top">
-  <div class="nav">
+<header class="header">
 
-    <a href="student-dashboard.html" class="brand">
-      <span class="brand-orb">🌎</span>
-      <span>English with Mariami</span>
-    </a>
+  <div class="header-inner">
 
-    <nav class="nav-links">
-      <a href="#vocabulary">Vocabulary</a>
-      <a href="#alphabet">Alphabet</a>
-      <a href="#grammar">Grammar</a>
-      <a href="#reading">Reading</a>
-      <a href="#quiz">Quiz</a>
-      <a href="#progress">Progress</a>
-    </nav>
+    <div class="logo-area">
+
+      <div class="logo">⚡</div>
+
+      <div class="brand">
+        ENGLISH WITH MARIAMI
+        <small>XENON LEARNING SYSTEM</small>
+      </div>
+
+    </div>
+
+    <div style="display:flex;gap:7px;flex-wrap:wrap">
+
+      <button
+        class="btn btn-home"
+        onclick="goHome()">
+        🏠 მთავარი
+      </button>
+
+      <button
+        class="btn btn-teacher"
+        onclick="goTeacher()">
+        👩‍🏫 Teacher
+      </button>
+
+      <button
+        class="btn btn-exit"
+        onclick="logout()">
+        🚪 გამოსვლა
+      </button>
+
+    </div>
 
   </div>
+
 </header>
 
-<main>
+<main class="container">
 
-<section class="hero wrap">
+<section class="hero">
 
-  <div>
+  <div class="hero-card">
 
-    <span class="badge">
-      ✦ FUTURE ENGLISH ACADEMY • GRADE 2
-    </span>
+    <div class="kicker">
+      XENON ACADEMY • LEVEL 02
+    </div>
 
     <h1>
-      <span class="gradient-text">ENGLISH</span><br>
-      FOR THE<br>
-      <span class="gradient-text">FUTURE.</span>
+      Welcome to
+      <span class="gradient-text">
+        Grade 2
+      </span>
     </h1>
 
     <p>
-      კეთილი იყოს შენი მობრძანება Grade 2-ის
-      ფუტურისტულ ინგლისურის სამყაროში.
-      აქ ისწავლი სიტყვებს, წინადადებებს,
-      კითხვას, გრამატიკას, გამოთქმას და
-      ყოველდღიურ ინგლისურს თამაშის სტილში.
+      Explore English through vocabulary,
+      grammar, listening, speaking, reading,
+      questions, exercises and interactive quizzes.
     </p>
 
-    <div class="hero-buttons">
-      <a class="btn btn-primary" href="#vocabulary">
-        🚀 დაწყება
-      </a>
+    <div class="grade-chip">
+      🌱 GRADE 2 • FOUNDATION ENGLISH
+    </div>
 
-      <a class="btn btn-purple" href="#quiz">
-        🧠 Quiz
-      </a>
+    <div class="quick-nav">
 
-      <button class="btn btn-yellow" onclick="speak('Welcome to Grade Two English')">
-        🔊 Listen
+      <button
+        class="btn btn-home"
+        onclick="goHome()">
+        🏠 მთავარზე დაბრუნება
       </button>
-    </div>
 
-  </div>
+      <button
+        class="btn btn-teacher"
+        onclick="goTeacher()">
+        👩‍🏫 Teacher Dashboard
+      </button>
 
-  <div class="hero-visual">
-
-    <div class="planet-scene">
-
-      <div class="orbit"></div>
-      <div class="orbit"></div>
-
-      <div class="planet"></div>
-      <div class="ring"></div>
-
-      <div class="floating-word w1">HELLO 👋</div>
-      <div class="floating-word w2">FRIEND 🤝</div>
-      <div class="floating-word w3">LEARN 🧠</div>
-      <div class="floating-word w4">SCHOOL 🎒</div>
-      <div class="floating-word w5">ENGLISH 🚀</div>
+      <button
+        class="btn"
+        onclick="openAllTopics()">
+        📚 ყველა თემა
+      </button>
 
     </div>
 
@@ -999,1381 +1203,1245 @@ footer{
 
 </section>
 
-<section class="wrap stats">
+<section class="stats">
 
   <div class="stat">
-    <b id="wordCount">0</b>
-    <span>English Words</span>
+    <small>📚 TOPICS</small>
+    <b id="topicCount">22</b>
   </div>
 
   <div class="stat">
-    <b>26</b>
-    <span>Letters</span>
+    <small>🧠 VOCABULARY</small>
+    <b>300+</b>
   </div>
 
   <div class="stat">
-    <b id="quizBest">0%</b>
-    <span>Best Quiz</span>
+    <small>🎯 ACTIVITIES</small>
+    <b>100+</b>
   </div>
 
   <div class="stat">
-    <b id="learnedCount">0</b>
-    <span>Learned</span>
+    <small>⚡ LEVEL</small>
+    <b>02</b>
   </div>
 
 </section>
 
-<!-- =======================================================
-     VOCABULARY
-======================================================== -->
+<div class="section-title">
 
-<section id="vocabulary" class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">VOCABULARY CORE</div>
-    <h2>🧠 English Word Universe</h2>
+  <div>
+    <h2>🚀 Learning Universe</h2>
     <p>
-      ასობით ყოველდღიური ინგლისური სიტყვა —
-      დაყოფილი თემებად.
+      აირჩიე ნებისმიერი თემა და დაიწყე სწავლა.
     </p>
   </div>
 
-  <div class="toolbar">
-    <input
-      id="search"
-      class="search"
-      placeholder="🔎 მოძებნე English word ან ქართული მნიშვნელობა..."
-    >
-  </div>
+</div>
 
-  <div class="filters" id="filters"></div>
+<section class="topics" id="topics"></section>
 
-  <div class="word-grid" id="wordGrid"></div>
-
-</section>
-
-<!-- =======================================================
-     ALPHABET
-======================================================== -->
-
-<section id="alphabet" class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">FOUNDATION</div>
-    <h2>🔤 Alphabet Universe</h2>
-    <p>დააჭირე ასოს და მოისმინე მისი გამოთქმა.</p>
-  </div>
-
-  <div class="alphabet" id="alphabetGrid"></div>
-
-</section>
-
-<!-- =======================================================
-     LEARNING MODULES
-======================================================== -->
-
-<section class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">LEARNING MODULES</div>
-    <h2>🌌 Learning Zones</h2>
-  </div>
-
-  <div class="learning-grid">
-
-    <article class="learn-card">
-      <div class="learn-icon">🎨</div>
-      <h3>Colors</h3>
-      <p>
-        red, blue, green, yellow, orange, purple,
-        pink, black, white, brown, gray, gold...
-      </p>
-    </article>
-
-    <article class="learn-card">
-      <div class="learn-icon">👨‍👩‍👧</div>
-      <h3>Family</h3>
-      <p>
-        mother, father, sister, brother, grandmother,
-        grandfather, aunt, uncle, cousin, baby...
-      </p>
-    </article>
-
-    <article class="learn-card">
-      <div class="learn-icon">🐾</div>
-      <h3>Animals</h3>
-      <p>
-        dog, cat, bird, horse, cow, sheep, rabbit,
-        lion, tiger, elephant, monkey, bear...
-      </p>
-    </article>
-
-    <article class="learn-card">
-      <div class="learn-icon">🍎</div>
-      <h3>Food</h3>
-      <p>
-        apple, banana, bread, cheese, milk, egg,
-        rice, chicken, fish, soup, cake...
-      </p>
-    </article>
-
-    <article class="learn-card">
-      <div class="learn-icon">🏫</div>
-      <h3>School</h3>
-      <p>
-        teacher, student, classroom, book, pencil,
-        pen, desk, chair, lesson, homework...
-      </p>
-    </article>
-
-    <article class="learn-card">
-      <div class="learn-icon">🏠</div>
-      <h3>Home</h3>
-      <p>
-        house, room, kitchen, bedroom, bathroom,
-        door, window, table, bed, chair...
-      </p>
-    </article>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     GRAMMAR
-======================================================== -->
-
-<section id="grammar" class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">SMART GRAMMAR</div>
-    <h2>✏️ Grammar Lab</h2>
-  </div>
-
-  <div class="grammar">
-
-    <article class="grammar-card">
-      <h3>🔵 To Be</h3>
-
-      <div class="formula">
-        I am • You are • He is • She is
-      </div>
-
-      <p>
-        I am happy.<br>
-        You are my friend.<br>
-        He is a student.<br>
-        She is nice.
-      </p>
-    </article>
-
-    <article class="grammar-card">
-      <h3>🟣 Have / Has</h3>
-
-      <div class="formula">
-        I have • He has
-      </div>
-
-      <p>
-        I have a book.<br>
-        You have a pencil.<br>
-        She has a cat.<br>
-        He has a bike.
-      </p>
-    </article>
-
-    <article class="grammar-card">
-      <h3>🟢 Present Simple</h3>
-
-      <div class="formula">
-        I play • He plays
-      </div>
-
-      <p>
-        I play football.<br>
-        She likes apples.<br>
-        He reads books.
-      </p>
-    </article>
-
-    <article class="grammar-card">
-      <h3>🟡 Questions</h3>
-
-      <div class="formula">
-        What? Where? Who? How?
-      </div>
-
-      <p>
-        What is your name?<br>
-        Where do you live?<br>
-        Who is she?<br>
-        How are you?
-      </p>
-    </article>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     READING
-======================================================== -->
-
-<section id="reading" class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">READING MISSION</div>
-    <h2>📚 Reading Station</h2>
-  </div>
-
-  <div class="reading">
-
-    <h3>🚀 My Little English Day</h3>
-
-    <div class="reading-text">
-      Hello! My name is Alex.
-      I am eight years old.
-      I live in a small house with my family.
-      I have a mother, a father and a little sister.
-      Every morning I wake up, wash my face
-      and eat breakfast.
-      Then I go to school.
-      I love my teacher and my friends.
-      We read books, write words and play games.
-      After school I go home.
-      I do my homework and play with my dog.
-      In the evening I eat dinner with my family.
-      Then I read a book and go to bed.
-      I love my happy day!
-    </div>
-
-    <br>
-
-    <button
-      class="btn btn-primary"
-      onclick="speak(document.querySelector('.reading-text').innerText)"
-    >
-      🔊 Listen to Story
-    </button>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     QUIZ
-======================================================== -->
-
-<section id="quiz" class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">AI TRAINING ZONE</div>
-    <h2>🎯 Grade 2 Quiz</h2>
-    <p>შეამოწმე რამდენად კარგად გახსოვს ნასწავლი.</p>
-  </div>
-
-  <div class="quiz-box">
-
-    <div id="quizQuestion" class="quiz-question">
-      Quiz მზად არის 🚀
-    </div>
-
-    <div id="quizOptions" class="options"></div>
-
-    <div id="quizResult"></div>
-
-    <br>
-
-    <button
-      class="btn btn-primary"
-      id="nextQuiz"
-      onclick="nextQuizQuestion()"
-    >
-      შემდეგი კითხვა →
-    </button>
-
-  </div>
-
-</section>
-
-<!-- =======================================================
-     PROGRESS
-======================================================== -->
-
-<section id="progress" class="section wrap">
-
-  <div class="section-head">
-    <div class="mini">YOUR LEARNING CORE</div>
-    <h2>🏆 My Progress</h2>
-  </div>
-
-  <div class="progress-card">
-
-    <h3>🌱 Grade 2 Vocabulary Progress</h3>
-
-    <div class="progress-line">
-      <div
-        id="progressFill"
-        class="progress-fill"
-      ></div>
-    </div>
-
-    <div class="progress-info">
-      <span id="progressText">
-        0 learned
-      </span>
-
-      <span>
-        300 words
-      </span>
-    </div>
-
-    <br>
-
-    <button
-      class="btn btn-purple"
-      onclick="resetLocalProgress()"
-    >
-      ♻️ Reset Local Progress
-    </button>
-
-  </div>
-
-</section>
+<div class="footer">
+  ENGLISH WITH MARIAMI • XENON NEON LEARNING SYSTEM • GRADE 2
+</div>
 
 </main>
 
-<footer>
-  <strong>English with Mariami</strong><br>
-  Grade 2 • Learn • Speak • Read • Dream 🚀
-</footer>
+<!-- TOPIC MODAL -->
+
+<div
+  class="modal"
+  id="topicModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+        <h2 id="modalTitle">
+          📚 Topic
+        </h2>
+
+        <div
+          id="modalSubtitle"
+          style="color:var(--muted);font-size:12px;margin-top:5px">
+        </div>
+      </div>
+
+      <button
+        class="btn"
+        onclick="closeModal()">
+        ✕
+      </button>
+
+    </div>
+
+    <div
+      class="lesson-grid"
+      id="lessonGrid">
+    </div>
+
+    <div
+      class="lesson-content"
+      id="lessonContent">
+
+      <div style="color:var(--muted)">
+        აირჩიე სასწავლო რეჟიმი.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div
+  class="toast"
+  id="toast">
+</div>
 
 <script>
-/* ============================================================
-   SPACE PARTICLES
-============================================================ */
+'use strict';
 
-(function(){
+/* ==========================================
+   SUPABASE
+========================================== */
 
-  const space =
-    document.getElementById('space');
+const DB =
+  window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+  window.supabaseClient ||
+  window.supabase;
 
-  for(let i=0;i<110;i++){
+/* ==========================================
+   TOPICS
+========================================== */
 
-    const star =
-      document.createElement('span');
+const TOPICS = [
 
-    star.className='star';
+  {
+    icon:'🔤',
+    title:'Alphabet',
+    desc:'Letters, sounds and spelling',
+    tag:'FOUNDATION'
+  },
 
-    star.style.left =
-      Math.random()*100+'%';
+  {
+    icon:'🔢',
+    title:'Numbers',
+    desc:'Numbers from 1 to 100',
+    tag:'VOCABULARY'
+  },
 
-    star.style.top =
-      Math.random()*100+'%';
+  {
+    icon:'🎨',
+    title:'Colors',
+    desc:'Learn colors and describe things',
+    tag:'WORDS'
+  },
 
-    star.style.animationDelay =
-      Math.random()*4+'s';
+  {
+    icon:'👨‍👩‍👧',
+    title:'My Family',
+    desc:'Family members and simple sentences',
+    tag:'SPEAKING'
+  },
 
-    star.style.animationDuration =
-      (2+Math.random()*4)+'s';
+  {
+    icon:'🐶',
+    title:'Animals',
+    desc:'Pets, wild animals and sounds',
+    tag:'VOCABULARY'
+  },
 
-    space.appendChild(star);
+  {
+    icon:'🍎',
+    title:'Food',
+    desc:'Food, drinks and simple preferences',
+    tag:'VOCABULARY'
+  },
+
+  {
+    icon:'🏫',
+    title:'School',
+    desc:'Classroom objects and school life',
+    tag:'EVERYDAY ENGLISH'
+  },
+
+  {
+    icon:'🏠',
+    title:'My Home',
+    desc:'Rooms, furniture and objects',
+    tag:'VOCABULARY'
+  },
+
+  {
+    icon:'👕',
+    title:'Clothes',
+    desc:'Clothes and what we wear',
+    tag:'WORDS'
+  },
+
+  {
+    icon:'👤',
+    title:'My Body',
+    desc:'Head, hands, eyes, nose and more',
+    tag:'VOCABULARY'
+  },
+
+  {
+    icon:'😊',
+    title:'Feelings',
+    desc:'Happy, sad, tired, angry and more',
+    tag:'SPEAKING'
+  },
+
+  {
+    icon:'🏃',
+    title:'Actions',
+    desc:'Run, jump, walk, read and play',
+    tag:'VERBS'
+  },
+
+  {
+    icon:'🌳',
+    title:'Nature',
+    desc:'Trees, flowers, rivers and the sky',
+    tag:'VOCABULARY'
+  },
+
+  {
+    icon:'🌦️',
+    title:'Weather',
+    desc:'Sunny, rainy, cloudy and windy',
+    tag:'EVERYDAY ENGLISH'
+  },
+
+  {
+    icon:'📅',
+    title:'Days & Months',
+    desc:'Days of the week and months',
+    tag:'TIME'
+  },
+
+  {
+    icon:'⏰',
+    title:'Time',
+    desc:'Learn simple clock vocabulary',
+    tag:'EVERYDAY ENGLISH'
+  },
+
+  {
+    icon:'🚗',
+    title:'Transport',
+    desc:'Cars, buses, trains and planes',
+    tag:'VOCABULARY'
+  },
+
+  {
+    icon:'🏙️',
+    title:'Places',
+    desc:'Park, shop, school and city places',
+    tag:'VOCABULARY'
+  },
+
+  {
+    icon:'🧸',
+    title:'Toys',
+    desc:'Ball, doll, kite, car and more',
+    tag:'WORDS'
+  },
+
+  {
+    icon:'📖',
+    title:'Reading',
+    desc:'Short stories and comprehension',
+    tag:'READING'
+  },
+
+  {
+    icon:'🧠',
+    title:'Grammar',
+    desc:'To be, have, can and plurals',
+    tag:'GRAMMAR'
+  },
+
+  {
+    icon:'🎯',
+    title:'Mega Quiz',
+    desc:'Test everything you have learned',
+    tag:'QUIZ'
   }
 
-})();
+];
 
-/* ============================================================
+document.getElementById('topicCount').textContent =
+  TOPICS.length;
+
+/* ==========================================
+   RENDER TOPICS
+========================================== */
+
+function renderTopics(){
+
+  const box =
+    document.getElementById('topics');
+
+  box.innerHTML =
+    TOPICS.map((topic,index)=>`
+
+      <article
+        class="topic"
+        onclick="openTopic(${index})">
+
+        <span class="topic-number">
+          ${String(index+1).padStart(2,'0')}
+        </span>
+
+        <div class="topic-icon">
+          ${topic.icon}
+        </div>
+
+        <h3>
+          ${escapeHTML(topic.title)}
+        </h3>
+
+        <p>
+          ${escapeHTML(topic.desc)}
+        </p>
+
+        <span class="topic-tag">
+          ${escapeHTML(topic.tag)}
+        </span>
+
+      </article>
+
+    `).join('');
+}
+
+/* ==========================================
+   LESSON MODES
+========================================== */
+
+const MODES = [
+
+  {
+    icon:'🎧',
+    title:'Listening',
+    desc:'Listen and understand English.'
+  },
+
+  {
+    icon:'🧠',
+    title:'Grammar',
+    desc:'Learn the grammar rule.'
+  },
+
+  {
+    icon:'📖',
+    title:'Reading',
+    desc:'Read a short English text.'
+  },
+
+  {
+    icon:'🗣️',
+    title:'Speaking',
+    desc:'Practice speaking phrases.'
+  },
+
+  {
+    icon:'❓',
+    title:'Questions',
+    desc:'Answer topic questions.'
+  },
+
+  {
+    icon:'✏️',
+    title:'Exercises',
+    desc:'Practice what you learned.'
+  },
+
+  {
+    icon:'🎯',
+    title:'Quiz',
+    desc:'Challenge yourself.'
+  },
+
+  {
+    icon:'📚',
+    title:'Vocabulary',
+    desc:'Learn important words.'
+  }
+
+];
+
+/* ==========================================
+   OPEN TOPIC
+========================================== */
+
+function openTopic(index){
+
+  const topic =
+    TOPICS[index];
+
+  document.getElementById('modalTitle')
+    .textContent =
+      `${topic.icon} ${topic.title}`;
+
+  document.getElementById('modalSubtitle')
+    .textContent =
+      `Grade 2 • ${topic.tag}`;
+
+  document.getElementById('lessonGrid')
+    .innerHTML =
+      MODES.map((mode,i)=>`
+
+        <button
+          class="lesson-btn"
+          onclick="openMode(${index},${i})">
+
+          <b>
+            ${mode.icon}
+            ${mode.title}
+          </b>
+
+          <small>
+            ${mode.desc}
+          </small>
+
+        </button>
+
+      `).join('');
+
+  document.getElementById('lessonContent')
+    .innerHTML = `
+      <div style="
+        font-size:15px;
+        color:var(--cyan);
+        font-weight:900">
+        ⚡ Choose a learning mode
+      </div>
+
+      <p style="
+        color:var(--muted);
+        line-height:1.6">
+        აირჩიე Listening, Grammar, Reading,
+        Speaking, Questions, Exercises,
+        Quiz ან Vocabulary.
+      </p>
+    `;
+
+  document.getElementById('topicModal')
+    .classList.add('open');
+}
+
+/* ==========================================
+   OPEN MODE
+========================================== */
+
+function openMode(topicIndex,modeIndex){
+
+  const topic =
+    TOPICS[topicIndex];
+
+  const mode =
+    MODES[modeIndex];
+
+  const content =
+    document.getElementById('lessonContent');
+
+  if(mode.title === 'Listening'){
+
+    content.innerHTML = `
+
+      <h3>🎧 Listening Lab</h3>
+
+      <p style="color:var(--muted)">
+        Listen carefully and repeat the words.
+      </p>
+
+      <div class="word-grid">
+
+        ${getWords(topic.title)
+          .slice(0,6)
+          .map(word=>`
+
+            <div
+              class="word"
+              onclick="speakWord('${escapeAttr(word.en)}')">
+
+              <b>
+                🔊 ${escapeHTML(word.en)}
+              </b>
+
+              <small>
+                ${escapeHTML(word.ka)}
+              </small>
+
+            </div>
+
+          `).join('')}
+
+      </div>
+
+      <button
+        class="btn btn-home"
+        style="margin-top:18px"
+        onclick="speakText(
+          'Welcome to ${escapeAttr(topic.title)}'
+        )">
+
+        🔊 Play Lesson
+
+      </button>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Vocabulary'){
+
+    content.innerHTML = `
+
+      <h3>📚 ${escapeHTML(topic.title)}
+      Vocabulary</h3>
+
+      <div class="word-grid">
+
+        ${getWords(topic.title)
+          .map(word=>`
+
+            <div
+              class="word"
+              onclick="speakWord('${escapeAttr(word.en)}')">
+
+              <b>
+                ${escapeHTML(word.en)}
+              </b>
+
+              <small>
+                ${escapeHTML(word.ka)}
+              </small>
+
+            </div>
+
+          `).join('')}
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Grammar'){
+
+    content.innerHTML = `
+
+      <h3>🧠 Grammar Lab</h3>
+
+      <p>
+        <strong>
+          Simple English Grammar
+        </strong>
+      </p>
+
+      <p style="color:var(--muted);line-height:1.7">
+        Learn simple sentences and basic
+        English structures.
+      </p>
+
+      <div class="word-grid">
+
+        <div class="word">
+          <b>I am</b>
+          <small>მე ვარ</small>
+        </div>
+
+        <div class="word">
+          <b>You are</b>
+          <small>შენ ხარ</small>
+        </div>
+
+        <div class="word">
+          <b>He is</b>
+          <small>ის არის</small>
+        </div>
+
+        <div class="word">
+          <b>She is</b>
+          <small>ის არის</small>
+        </div>
+
+        <div class="word">
+          <b>I have</b>
+          <small>მე მაქვს</small>
+        </div>
+
+        <div class="word">
+          <b>I can</b>
+          <small>მე შემიძლია</small>
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Reading'){
+
+    content.innerHTML = `
+
+      <h3>📖 Reading Lab</h3>
+
+      <div class="word">
+
+        <b>
+          My ${escapeHTML(topic.title)}
+        </b>
+
+        <p style="
+          line-height:1.8;
+          color:#d9e9f3">
+
+          This is my English lesson.
+          I like learning new words.
+          I can read simple English sentences.
+          English is fun!
+
+        </p>
+
+      </div>
+
+      <div style="margin-top:15px">
+
+        <button
+          class="btn btn-home"
+          onclick="speakText(
+            'This is my English lesson. I like learning new words. English is fun.'
+          )">
+
+          🔊 Read Aloud
+
+        </button>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Speaking'){
+
+    content.innerHTML = `
+
+      <h3>🗣️ Speaking Lab</h3>
+
+      <p style="color:var(--muted)">
+        გაიმეორე ხმამაღლა:
+      </p>
+
+      <div class="word-grid">
+
+        <div
+          class="word"
+          onclick="speakText('Hello! How are you?')">
+
+          <b>Hello! How are you?</b>
+          <small>გამარჯობა! როგორ ხარ?</small>
+
+        </div>
+
+        <div
+          class="word"
+          onclick="speakText('My name is Mariami.')">
+
+          <b>My name is Mariami.</b>
+          <small>მე მქვია მარიამი.</small>
+
+        </div>
+
+        <div
+          class="word"
+          onclick="speakText('I like English.')">
+
+          <b>I like English.</b>
+          <small>მე მომწონს ინგლისური.</small>
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Questions'){
+
+    content.innerHTML = `
+
+      <h3>❓ Questions</h3>
+
+      <div class="word-grid">
+
+        <div class="word">
+          <b>What is your name?</b>
+          <small>My name is ...</small>
+        </div>
+
+        <div class="word">
+          <b>How are you?</b>
+          <small>I am fine.</small>
+        </div>
+
+        <div class="word">
+          <b>What color do you like?</b>
+          <small>I like blue.</small>
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Exercises'){
+
+    content.innerHTML = `
+
+      <h3>✏️ Exercises</h3>
+
+      <p style="color:var(--muted)">
+        Complete the sentence.
+      </p>
+
+      <div class="word">
+
+        <b>
+          I ___ happy.
+        </b>
+
+        <div style="
+          display:flex;
+          gap:8px;
+          flex-wrap:wrap;
+          margin-top:12px">
+
+          <button
+            class="btn"
+            onclick="exerciseAnswer(this,false)">
+            are
+          </button>
+
+          <button
+            class="btn btn-home"
+            onclick="exerciseAnswer(this,true)">
+            am
+          </button>
+
+          <button
+            class="btn"
+            onclick="exerciseAnswer(this,false)">
+            is
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+  if(mode.title === 'Quiz'){
+
+    content.innerHTML = `
+
+      <h3>🎯 Mini Quiz</h3>
+
+      <div class="word">
+
+        <b>
+          What does "apple" mean?
+        </b>
+
+        <div style="
+          display:grid;
+          gap:8px;
+          margin-top:14px">
+
+          <button
+            class="btn"
+            onclick="quizAnswer(false)">
+            🐶 ძაღლი
+          </button>
+
+          <button
+            class="btn btn-home"
+            onclick="quizAnswer(true)">
+            🍎 ვაშლი
+          </button>
+
+          <button
+            class="btn"
+            onclick="quizAnswer(false)">
+            🚗 მანქანა
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+/* ==========================================
+   WORD DATABASE
+========================================== */
+
+function getWords(topic){
+
+  const data = {
+
+    Alphabet:[
+      ['A','ეი'],
+      ['B','ბი'],
+      ['C','სი'],
+      ['D','დი'],
+      ['E','ი']
+    ],
+
+    Numbers:[
+      ['one','ერთი'],
+      ['two','ორი'],
+      ['three','სამი'],
+      ['four','ოთხი'],
+      ['five','ხუთი']
+    ],
+
+    Colors:[
+      ['red','წითელი'],
+      ['blue','ლურჯი'],
+      ['green','მწვანე'],
+      ['yellow','ყვითელი'],
+      ['black','შავი']
+    ],
+
+    'My Family':[
+      ['mother','დედა'],
+      ['father','მამა'],
+      ['sister','და'],
+      ['brother','ძმა'],
+      ['family','ოჯახი']
+    ],
+
+    Animals:[
+      ['dog','ძაღლი'],
+      ['cat','კატა'],
+      ['lion','ლომი'],
+      ['tiger','ვეფხვი'],
+      ['bird','ჩიტი']
+    ],
+
+    Food:[
+      ['apple','ვაშლი'],
+      ['bread','პური'],
+      ['milk','რძე'],
+      ['cheese','ყველი'],
+      ['water','წყალი']
+    ],
+
+    School:[
+      ['book','წიგნი'],
+      ['pen','კალამი'],
+      ['teacher','მასწავლებელი'],
+      ['desk','მერხი'],
+      ['school','სკოლა']
+    ],
+
+    'My Home':[
+      ['house','სახლი'],
+      ['room','ოთახი'],
+      ['door','კარი'],
+      ['window','ფანჯარა'],
+      ['kitchen','სამზარეულო']
+    ],
+
+    Clothes:[
+      ['shirt','პერანგი'],
+      ['shoes','ფეხსაცმელი'],
+      ['dress','კაბა'],
+      ['hat','ქუდი'],
+      ['trousers','შარვალი']
+    ],
+
+    'My Body':[
+      ['head','თავი'],
+      ['hand','ხელი'],
+      ['eye','თვალი'],
+      ['nose','ცხვირი'],
+      ['mouth','პირი']
+    ],
+
+    Feelings:[
+      ['happy','ბედნიერი'],
+      ['sad','სევდიანი'],
+      ['angry','გაბრაზებული'],
+      ['tired','დაღლილი'],
+      ['good','კარგად']
+    ],
+
+    Actions:[
+      ['run','სირბილი'],
+      ['jump','ხტომა'],
+      ['walk','სიარული'],
+      ['read','კითხვა'],
+      ['play','თამაში']
+    ],
+
+    Nature:[
+      ['tree','ხე'],
+      ['flower','ყვავილი'],
+      ['river','მდინარე'],
+      ['sun','მზე'],
+      ['sky','ცა']
+    ],
+
+    Weather:[
+      ['sunny','მზიანი'],
+      ['rainy','წვიმიანი'],
+      ['cloudy','მოღრუბლული'],
+      ['windy','ქარიანი'],
+      ['snowy','თოვლიანი']
+    ],
+
+    'Days & Months':[
+      ['Monday','ორშაბათი'],
+      ['Tuesday','სამშაბათი'],
+      ['Friday','პარასკევი'],
+      ['January','იანვარი'],
+      ['June','ივნისი']
+    ],
+
+    Time:[
+      ['morning','დილა'],
+      ['afternoon','შუადღე'],
+      ['evening','საღამო'],
+      ['night','ღამე'],
+      ['today','დღეს']
+    ],
+
+    Transport:[
+      ['car','მანქანა'],
+      ['bus','ავტობუსი'],
+      ['train','მატარებელი'],
+      ['plane','თვითმფრინავი'],
+      ['bike','ველოსიპედი']
+    ],
+
+    Places:[
+      ['park','პარკი'],
+      ['shop','მაღაზია'],
+      ['school','სკოლა'],
+      ['hospital','საავადმყოფო'],
+      ['home','სახლი']
+    ],
+
+    Toys:[
+      ['ball','ბურთი'],
+      ['doll','თოჯინა'],
+      ['kite','ქაღალდის ფრანი'],
+      ['car','მანქანა'],
+      ['game','თამაში']
+    ],
+
+    Reading:[
+      ['story','ისტორია'],
+      ['book','წიგნი'],
+      ['read','კითხვა'],
+      ['word','სიტყვა'],
+      ['sentence','წინადადება']
+    ],
+
+    Grammar:[
+      ['I am','მე ვარ'],
+      ['you are','შენ ხარ'],
+      ['he is','ის არის'],
+      ['she is','ის არის'],
+      ['I can','მე შემიძლია']
+    ],
+
+    'Mega Quiz':[
+      ['apple','ვაშლი'],
+      ['dog','ძაღლი'],
+      ['blue','ლურჯი'],
+      ['book','წიგნი'],
+      ['house','სახლი']
+    ]
+
+  };
+
+  return (data[topic] || [
+    ['English','ინგლისური'],
+    ['learn','სწავლა'],
+    ['word','სიტყვა']
+  ]).map(x=>({
+    en:x[0],
+    ka:x[1]
+  }));
+}
+
+/* ==========================================
    SPEECH
-============================================================ */
+========================================== */
 
-function speak(text){
+function speakWord(word){
+
+  speakText(word);
+
+}
+
+function speakText(text){
 
   if(!('speechSynthesis' in window)){
-    alert('ამ მოწყობილობაზე ხმის ფუნქცია მიუწვდომელია.');
+
+    showToast(
+      '🔊 ამ მოწყობილობაზე ხმის ფუნქცია მიუწვდომელია.'
+    );
+
     return;
   }
 
   speechSynthesis.cancel();
 
-  const utterance =
-    new SpeechSynthesisUtterance(
-      String(text)
+  const utter =
+    new SpeechSynthesisUtterance(text);
+
+  utter.lang='en-US';
+  utter.rate=.82;
+  utter.pitch=1;
+
+  speechSynthesis.speak(utter);
+
+}
+
+/* ==========================================
+   EXERCISE
+========================================== */
+
+function exerciseAnswer(button,correct){
+
+  if(correct){
+
+    button.textContent='✅ Correct!';
+
+    showToast(
+      '🎉 სწორია! ძალიან კარგი!',
+      'ok'
     );
-
-  utterance.lang='en-US';
-  utterance.rate=.82;
-  utterance.pitch=1.05;
-
-  speechSynthesis.speak(
-    utterance
-  );
-}
-
-/* ============================================================
-   VOCABULARY DATABASE
-============================================================ */
-
-const WORDS = [
-
-/* COLORS */
-['red','წითელი','/red/','🎨','Colors','The apple is red.'],
-['blue','ლურჯი','/bluː/','🎨','Colors','The sky is blue.'],
-['green','მწვანე','/ɡriːn/','🎨','Colors','The grass is green.'],
-['yellow','ყვითელი','/ˈjel.oʊ/','🎨','Colors','The sun is yellow.'],
-['orange','ნარინჯისფერი','/ˈɒr.ɪndʒ/','🎨','Colors','I have an orange bag.'],
-['purple','იისფერი','/ˈpɜːr.pəl/','🎨','Colors','My dress is purple.'],
-['pink','ვარდისფერი','/pɪŋk/','🎨','Colors','The flower is pink.'],
-['black','შავი','/blæk/','🎨','Colors','The cat is black.'],
-['white','თეთრი','/waɪt/','🎨','Colors','The snow is white.'],
-['brown','ყავისფერი','/braʊn/','🎨','Colors','The dog is brown.'],
-['gray','ნაცრისფერი','/ɡreɪ/','🎨','Colors','The elephant is gray.'],
-['gold','ოქროსფერი','/ɡoʊld/','🎨','Colors','The star is gold.'],
-
-/* FAMILY */
-['mother','დედა','/ˈmʌðər/','👩','Family','My mother is kind.'],
-['father','მამა','/ˈfɑːðər/','👨','Family','My father is strong.'],
-['sister','და','/ˈsɪstər/','👧','Family','My sister is young.'],
-['brother','ძმა','/ˈbrʌðər/','👦','Family','My brother likes games.'],
-['baby','ჩვილი','/ˈbeɪbi/','👶','Family','The baby is sleeping.'],
-['grandmother','ბებია','/ˈɡrænˌmʌðər/','👵','Family','My grandmother cooks well.'],
-['grandfather','ბაბუა','/ˈɡrænˌfɑːðər/','👴','Family','My grandfather reads books.'],
-['aunt','დეიდა/მამიდა','/ænt/','👩','Family','My aunt lives here.'],
-['uncle','ბიძა','/ˈʌŋkəl/','👨','Family','My uncle has a car.'],
-['cousin','ბიძაშვილი','/ˈkʌzən/','🧒','Family','My cousin is funny.'],
-['family','ოჯახი','/ˈfæməli/','👨‍👩‍👧','Family','I love my family.'],
-['parents','მშობლები','/ˈperənts/','👨‍👩‍👧','Family','My parents are happy.'],
-
-/* ANIMALS */
-['dog','ძაღლი','/dɔːɡ/','🐶','Animals','The dog can run.'],
-['cat','კატა','/kæt/','🐱','Animals','The cat is small.'],
-['bird','ჩიტი','/bɜːrd/','🐦','Animals','The bird can fly.'],
-['fish','თევზი','/fɪʃ/','🐟','Animals','The fish can swim.'],
-['horse','ცხენი','/hɔːrs/','🐴','Animals','The horse is fast.'],
-['cow','ძროხა','/kaʊ/','🐮','Animals','The cow eats grass.'],
-['sheep','ცხვარი','/ʃiːp/','🐑','Animals','The sheep is white.'],
-['goat','თხა','/ɡoʊt/','🐐','Animals','The goat can jump.'],
-['rabbit','კურდღელი','/ˈræbɪt/','🐰','Animals','The rabbit is cute.'],
-['lion','ლომი','/ˈlaɪən/','🦁','Animals','The lion is strong.'],
-['tiger','ვეფხვი','/ˈtaɪɡər/','🐯','Animals','The tiger is big.'],
-['elephant','სპილო','/ˈelɪfənt/','🐘','Animals','The elephant is huge.'],
-['monkey','მაიმუნი','/ˈmʌŋki/','🐒','Animals','The monkey can climb.'],
-['bear','დათვი','/ber/','🐻','Animals','The bear is big.'],
-['fox','მელა','/fɑːks/','🦊','Animals','The fox is clever.'],
-['mouse','თაგვი','/maʊs/','🐭','Animals','The mouse is small.'],
-['frog','ბაყაყი','/frɑːɡ/','🐸','Animals','The frog can jump.'],
-['snake','გველი','/sneɪk/','🐍','Animals','The snake is long.'],
-
-/* FOOD */
-['apple','ვაშლი','/ˈæpəl/','🍎','Food','I eat an apple.'],
-['banana','ბანანი','/bəˈnænə/','🍌','Food','The banana is yellow.'],
-['orange','ფორთოხალი','/ˈɔːrɪndʒ/','🍊','Food','I like oranges.'],
-['bread','პური','/bred/','🍞','Food','I eat bread.'],
-['cheese','ყველი','/tʃiːz/','🧀','Food','The cheese is good.'],
-['milk','რძე','/mɪlk/','🥛','Food','I drink milk.'],
-['egg','კვერცხი','/eɡ/','🥚','Food','I eat an egg.'],
-['rice','ბრინჯი','/raɪs/','🍚','Food','We eat rice.'],
-['chicken','ქათამი','/ˈtʃɪkɪn/','🍗','Food','I like chicken.'],
-['soup','სუპი','/suːp/','🍲','Food','The soup is hot.'],
-['cake','ნამცხვარი','/keɪk/','🍰','Food','The cake is sweet.'],
-['pizza','პიცა','/ˈpiːtsə/','🍕','Food','I love pizza.'],
-['water','წყალი','/ˈwɔːtər/','💧','Food','I drink water.'],
-['juice','წვენი','/dʒuːs/','🧃','Food','I drink orange juice.'],
-['potato','კარტოფილი','/pəˈteɪtoʊ/','🥔','Food','The potato is good.'],
-['tomato','პომიდორი','/təˈmeɪtoʊ/','🍅','Food','The tomato is red.'],
-
-/* SCHOOL */
-['school','სკოლა','/skuːl/','🏫','School','I go to school.'],
-['teacher','მასწავლებელი','/ˈtiːtʃər/','👩‍🏫','School','My teacher is nice.'],
-['student','მოსწავლე','/ˈstuːdənt/','🧑‍🎓','School','I am a student.'],
-['classroom','საკლასო ოთახი','/ˈklæsruːm/','🏫','School','Our classroom is big.'],
-['book','წიგნი','/bʊk/','📕','School','I read a book.'],
-['pencil','ფანქარი','/ˈpensəl/','✏️','School','I have a pencil.'],
-['pen','კალამი','/pen/','🖊️','School','This is my pen.'],
-['desk','მერხი','/desk/','🪑','School','My book is on the desk.'],
-['chair','სკამი','/tʃer/','🪑','School','Sit on the chair.'],
-['lesson','გაკვეთილი','/ˈlesən/','📚','School','The lesson is easy.'],
-['homework','საშინაო დავალება','/ˈhoʊmwɜːrk/','📖','School','I do my homework.'],
-['question','კითხვა','/ˈkwestʃən/','❓','School','I have a question.'],
-['answer','პასუხი','/ˈænsər/','✅','School','This is the answer.'],
-['word','სიტყვა','/wɜːrd/','🔤','School','This is a new word.'],
-['letter','ასო','/ˈletər/','🔤','School','A is a letter.'],
-
-/* HOME */
-['house','სახლი','/haʊs/','🏠','Home','This is my house.'],
-['room','ოთახი','/ruːm/','🚪','Home','My room is clean.'],
-['kitchen','სამზარეულო','/ˈkɪtʃən/','🍳','Home','Mom is in the kitchen.'],
-['bedroom','საძინებელი','/ˈbedruːm/','🛏️','Home','My bedroom is small.'],
-['bathroom','აბაზანა','/ˈbæθruːm/','🛁','Home','The bathroom is clean.'],
-['door','კარი','/dɔːr/','🚪','Home','Open the door.'],
-['window','ფანჯარა','/ˈwɪndoʊ/','🪟','Home','Look at the window.'],
-['table','მაგიდა','/ˈteɪbəl/','🪑','Home','The book is on the table.'],
-['bed','საწოლი','/bed/','🛏️','Home','I sleep in my bed.'],
-['sofa','დივანი','/ˈsoʊfə/','🛋️','Home','Sit on the sofa.'],
-['lamp','ლამპა','/læmp/','💡','Home','The lamp is bright.'],
-['garden','ბაღი','/ˈɡɑːrdən/','🌳','Home','I play in the garden.'],
-
-/* BODY */
-['head','თავი','/hed/','🙂','Body','My head is big.'],
-['eye','თვალი','/aɪ/','👁️','Body','I have two eyes.'],
-['ear','ყური','/ɪr/','👂','Body','My ear hurts.'],
-['nose','ცხვირი','/noʊz/','👃','Body','Touch your nose.'],
-['mouth','პირი','/maʊθ/','👄','Body','Open your mouth.'],
-['tooth','კბილი','/tuːθ/','🦷','Body','I have a tooth.'],
-['hand','ხელი','/hænd/','✋','Body','Raise your hand.'],
-['arm','მკლავი','/ɑːrm/','💪','Body','My arm is strong.'],
-['leg','ფეხი','/leɡ/','🦵','Body','My leg is strong.'],
-['foot','ტერფი','/fʊt/','🦶','Body','My foot is small.'],
-['hair','თმა','/her/','💇','Body','My hair is brown.'],
-['face','სახე','/feɪs/','🙂','Body','Wash your face.'],
-
-/* CLOTHES */
-['shirt','პერანგი','/ʃɜːrt/','👕','Clothes','My shirt is blue.'],
-['T-shirt','მაისური','/ˈtiː ʃɜːrt/','👕','Clothes','I wear a T-shirt.'],
-['dress','კაბა','/dres/','👗','Clothes','Her dress is pink.'],
-['skirt','ქვედაკაბა','/skɜːrt/','👗','Clothes','The skirt is red.'],
-['pants','შარვალი','/pænts/','👖','Clothes','My pants are black.'],
-['shoes','ფეხსაცმელი','/ʃuːz/','👟','Clothes','My shoes are new.'],
-['socks','წინდები','/sɑːks/','🧦','Clothes','My socks are white.'],
-['hat','ქუდი','/hæt/','🧢','Clothes','Put on your hat.'],
-['coat','ქურთუკი','/koʊt/','🧥','Clothes','My coat is warm.'],
-['jacket','ქურთუკი','/ˈdʒækɪt/','🧥','Clothes','I have a jacket.'],
-['gloves','ხელთათმანები','/ɡlʌvz/','🧤','Clothes','My gloves are warm.'],
-['scarf','შარფი','/skɑːrf/','🧣','Clothes','The scarf is long.'],
-
-/* NATURE */
-['sun','მზე','/sʌn/','☀️','Nature','The sun is bright.'],
-['moon','მთვარე','/muːn/','🌙','Nature','The moon is white.'],
-['star','ვარსკვლავი','/stɑːr/','⭐','Nature','I see a star.'],
-['sky','ცა','/skaɪ/','🌌','Nature','The sky is blue.'],
-['cloud','ღრუბელი','/klaʊd/','☁️','Nature','The cloud is white.'],
-['rain','წვიმა','/reɪn/','🌧️','Nature','I like the rain.'],
-['snow','თოვლი','/snoʊ/','❄️','Nature','The snow is cold.'],
-['tree','ხე','/triː/','🌳','Nature','The tree is tall.'],
-['flower','ყვავილი','/ˈflaʊər/','🌸','Nature','The flower is beautiful.'],
-['grass','ბალახი','/ɡræs/','🌱','Nature','The grass is green.'],
-['river','მდინარე','/ˈrɪvər/','🏞️','Nature','The river is long.'],
-['mountain','მთა','/ˈmaʊntən/','⛰️','Nature','The mountain is high.'],
-
-/* ACTIONS */
-['run','სირბილი','/rʌn/','🏃','Actions','I can run.'],
-['walk','სიარული','/wɔːk/','🚶','Actions','I walk to school.'],
-['jump','ხტომა','/dʒʌmp/','🤸','Actions','I can jump.'],
-['sit','ჯდომა','/sɪt/','🪑','Actions','Please sit down.'],
-['stand','დგომა','/stænd/','🧍','Actions','Please stand up.'],
-['read','კითხვა','/riːd/','📖','Actions','I read books.'],
-['write','წერა','/raɪt/','✍️','Actions','I write words.'],
-['draw','ხატვა','/drɔː/','🎨','Actions','I draw a picture.'],
-['sing','სიმღერა','/sɪŋ/','🎤','Actions','I can sing.'],
-['dance','ცეკვა','/dæns/','💃','Actions','I like to dance.'],
-['play','თამაში','/pleɪ/','🎮','Actions','I play football.'],
-['eat','ჭამა','/iːt/','🍽️','Actions','I eat breakfast.'],
-['drink','სმა','/drɪŋk/','🥤','Actions','I drink water.'],
-['sleep','ძილი','/sliːp/','😴','Actions','I sleep at night.'],
-['open','გახსნა','/ˈoʊpən/','📖','Actions','Open the book.'],
-['close','დახურვა','/kloʊz/','📕','Actions','Close the door.'],
-['look','ყურება','/lʊk/','👀','Actions','Look at me.'],
-['listen','მოსმენა','/ˈlɪsən/','👂','Actions','Listen to me.'],
-
-/* FEELINGS */
-['happy','ბედნიერი','/ˈhæpi/','😊','Feelings','I am happy.'],
-['sad','სევდიანი','/sæd/','😢','Feelings','She is sad.'],
-['angry','გაბრაზებული','/ˈæŋɡri/','😠','Feelings','He is angry.'],
-['tired','დაღლილი','/ˈtaɪərd/','😴','Feelings','I am tired.'],
-['hungry','მშიერი','/ˈhʌŋɡri/','😋','Feelings','I am hungry.'],
-['thirsty','მწყურვალი','/ˈθɜːrsti/','🥤','Feelings','I am thirsty.'],
-['good','კარგი','/ɡʊd/','👍','Feelings','This is good.'],
-['great','შესანიშნავი','/ɡreɪt/','🌟','Feelings','You are great.'],
-['funny','სასაცილო','/ˈfʌni/','😂','Feelings','The story is funny.'],
-['kind','კეთილი','/kaɪnd/','❤️','Feelings','She is kind.'],
-
-/* NUMBERS */
-['one','ერთი','/wʌn/','1️⃣','Numbers','I have one book.'],
-['two','ორი','/tuː/','2️⃣','Numbers','I have two eyes.'],
-['three','სამი','/θriː/','3️⃣','Numbers','Three cats are here.'],
-['four','ოთხი','/fɔːr/','4️⃣','Numbers','I have four books.'],
-['five','ხუთი','/faɪv/','5️⃣','Numbers','Five apples are red.'],
-['six','ექვსი','/sɪks/','6️⃣','Numbers','I see six stars.'],
-['seven','შვიდი','/ˈsevən/','7️⃣','Numbers','Seven days are in a week.'],
-['eight','რვა','/eɪt/','8️⃣','Numbers','I am eight years old.'],
-['nine','ცხრა','/naɪn/','9️⃣','Numbers','Nine birds can fly.'],
-['ten','ათი','/ten/','🔟','Numbers','I have ten fingers.'],
-['eleven','თერთმეტი','/ɪˈlevən/','1️⃣1️⃣','Numbers','Eleven students are here.'],
-['twelve','თორმეტი','/twelv/','1️⃣2️⃣','Numbers','There are twelve months.'],
-
-/* DAYS */
-['Monday','ორშაბათი','/ˈmʌndeɪ/','📅','Days','Today is Monday.'],
-['Tuesday','სამშაბათი','/ˈtuːzdeɪ/','📅','Days','Tuesday is tomorrow.'],
-['Wednesday','ოთხშაბათი','/ˈwenzdeɪ/','📅','Days','Wednesday is a school day.'],
-['Thursday','ხუთშაბათი','/ˈθɜːrzdeɪ/','📅','Days','Thursday is today.'],
-['Friday','პარასკევი','/ˈfraɪdeɪ/','📅','Days','Friday is fun.'],
-['Saturday','შაბათი','/ˈsætərdeɪ/','📅','Days','Saturday is a weekend day.'],
-['Sunday','კვირა','/ˈsʌndeɪ/','📅','Days','Sunday is quiet.'],
-
-/* MONTHS */
-['January','იანვარი','/ˈdʒænjuəri/','❄️','Months','January is cold.'],
-['February','თებერვალი','/ˈfebruəri/','❤️','Months','February is short.'],
-['March','მარტი','/mɑːrtʃ/','🌱','Months','March is spring.'],
-['April','აპრილი','/ˈeɪprəl/','🌸','Months','April is beautiful.'],
-['May','მაისი','/meɪ/','🌼','Months','May is warm.'],
-['June','ივნისი','/dʒuːn/','☀️','Months','June is sunny.'],
-['July','ივლისი','/dʒuˈlaɪ/','🏖️','Months','July is hot.'],
-['August','აგვისტო','/ˈɔːɡəst/','🌞','Months','August is hot.'],
-['September','სექტემბერი','/sepˈtembər/','🎒','Months','School starts in September.'],
-['October','ოქტომბერი','/ɑːkˈtoʊbər/','🎃','Months','October is cool.'],
-['November','ნოემბერი','/noʊˈvembər/','🍂','Months','November is autumn.'],
-['December','დეკემბერი','/dɪˈsembər/','🎄','Months','December is cold.'],
-
-/* EVERYDAY */
-['hello','გამარჯობა','/həˈloʊ/','👋','Everyday','Hello, my friend!'],
-['goodbye','ნახვამდის','/ˌɡʊdˈbaɪ/','👋','Everyday','Goodbye, teacher!'],
-['please','გთხოვ','/pliːz/','🙏','Everyday','Please help me.'],
-['thanks','მადლობა','/θæŋks/','🙏','Everyday','Thanks for your help.'],
-['sorry','ბოდიში','/ˈsɑːri/','🙂','Everyday','Sorry, teacher.'],
-['yes','კი','/jes/','✅','Everyday','Yes, I can.'],
-['no','არა','/noʊ/','❌','Everyday','No, thank you.'],
-['friend','მეგობარი','/frend/','🤝','Everyday','You are my friend.'],
-['name','სახელი','/neɪm/','🏷️','Everyday','My name is Alex.'],
-['home','სახლი','/hoʊm/','🏠','Everyday','I am at home.'],
-['today','დღეს','/təˈdeɪ/','📅','Everyday','Today is Monday.'],
-['tomorrow','ხვალ','/təˈmɑːroʊ/','➡️','Everyday','See you tomorrow.'],
-['morning','დილა','/ˈmɔːrnɪŋ/','🌅','Everyday','Good morning!'],
-['night','ღამე','/naɪt/','🌙','Everyday','Good night!'],
-['day','დღე','/deɪ/','☀️','Everyday','Have a nice day.'],
-['time','დრო','/taɪm/','⏰','Everyday','What time is it?']
-
-];
-
-/* ============================================================
-   RENDER VOCABULARY
-============================================================ */
-
-const categories = [
-  'All',
-  ...new Set(
-    WORDS.map(w=>w[4])
-  )
-];
-
-let activeCategory='All';
-
-const learnedKey='grade2LearnedWords';
-const quizKey='grade2QuizAttempts';
-const bestKey='grade2BestScore';
-
-function getLearned(){
-
-  try{
-    return new Set(
-      JSON.parse(
-        localStorage.getItem(
-          learnedKey
-        ) || '[]'
-      )
-    );
-  }catch{
-    return new Set();
-  }
-}
-
-function saveLearned(set){
-
-  localStorage.setItem(
-    learnedKey,
-    JSON.stringify([...set])
-  );
-
-  updateProgress();
-}
-
-function renderFilters(){
-
-  const box =
-    document.getElementById('filters');
-
-  box.innerHTML =
-    categories.map(cat=>`
-      <button
-        class="filter ${cat===activeCategory?'active':''}"
-        onclick="setCategory('${cat.replace(/'/g,"\\'")}')"
-      >
-        ${cat==='All'?'🌌 All':cat}
-      </button>
-    `).join('');
-}
-
-function renderWords(){
-
-  const search =
-    document
-      .getElementById('search')
-      .value
-      .trim()
-      .toLowerCase();
-
-  const learned =
-    getLearned();
-
-  const filtered =
-    WORDS.filter(w=>{
-
-      const matchesCategory =
-        activeCategory==='All' ||
-        w[4]===activeCategory;
-
-      const matchesSearch =
-        !search ||
-        w[0].toLowerCase().includes(search) ||
-        w[1].toLowerCase().includes(search);
-
-      return (
-        matchesCategory &&
-        matchesSearch
-      );
-    });
-
-  document.getElementById('wordGrid').innerHTML =
-    filtered.map(w=>{
-
-      const learnedClass =
-        learned.has(w[0])
-          ? ' learned'
-          : '';
-
-      return `
-        <article
-          class="word-card${learnedClass}"
-          onclick="learnWord('${w[0].replace(/'/g,"\\'")}')"
-        >
-
-          <div class="word-emoji">
-            ${w[3]}
-          </div>
-
-          <h3>${w[0]}</h3>
-
-          <div class="pron">
-            ${w[2]}
-          </div>
-
-          <div class="translation">
-            ${w[1]}
-          </div>
-
-          <div class="example">
-            ${w[5]}
-          </div>
-
-          <button
-            class="listen"
-            onclick="event.stopPropagation();speak('${w[0].replace(/'/g,"\\'")}')"
-          >
-            🔊
-          </button>
-
-        </article>
-      `;
-
-    }).join('');
-
-  document.getElementById(
-    'wordCount'
-  ).textContent =
-    WORDS.length;
-
-}
-
-function setCategory(category){
-
-  activeCategory=category;
-
-  renderFilters();
-  renderWords();
-}
-
-function learnWord(word){
-
-  const learned =
-    getLearned();
-
-  learned.add(word);
-
-  saveLearned(learned);
-
-  const data =
-    WORDS.find(w=>w[0]===word);
-
-  if(data){
-    speak(data[0]);
-  }
-}
-
-/* ============================================================
-   ALPHABET
-============================================================ */
-
-function renderAlphabet(){
-
-  const letters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
-  document.getElementById(
-    'alphabetGrid'
-  ).innerHTML =
-    letters.map(letter=>`
-      <button
-        class="letter"
-        onclick="speak('${letter}')"
-      >
-        ${letter}
-      </button>
-    `).join('');
-}
-
-/* ============================================================
-   QUIZ ENGINE
-============================================================ */
-
-const quizQuestions = [
-  {
-    q:'What is "apple" in Georgian?',
-    options:['ვაშლი','პური','რძე','ბანანი'],
-    answer:'ვაშლი'
-  },
-  {
-    q:'What color is "red"?',
-    options:['ლურჯი','წითელი','მწვანე','ყვითელი'],
-    answer:'წითელი'
-  },
-  {
-    q:'What is "mother"?',
-    options:['ძმა','მამა','დედა','და'],
-    answer:'დედა'
-  },
-  {
-    q:'What is "dog"?',
-    options:['კატა','ძაღლი','ცხენი','ლომი'],
-    answer:'ძაღლი'
-  },
-  {
-    q:'What is "book"?',
-    options:['კალამი','წიგნი','მერხი','სკოლა'],
-    answer:'წიგნი'
-  },
-  {
-    q:'What is "happy"?',
-    options:['სევდიანი','ბედნიერი','დაღლილი','მშიერი'],
-    answer:'ბედნიერი'
-  },
-  {
-    q:'What is "water"?',
-    options:['რძე','წვენი','წყალი','სუპი'],
-    answer:'წყალი'
-  },
-  {
-    q:'What is "school"?',
-    options:['სახლი','სკოლა','ბაღი','ოთახი'],
-    answer:'სკოლა'
-  },
-  {
-    q:'What is "blue"?',
-    options:['ლურჯი','წითელი','შავი','თეთრი'],
-    answer:'ლურჯი'
-  },
-  {
-    q:'What is "run"?',
-    options:['წერა','სირბილი','ძილი','ჭამა'],
-    answer:'სირბილი'
-  },
-  {
-    q:'What is "one"?',
-    options:['ერთი','ორი','სამი','ათი'],
-    answer:'ერთი'
-  },
-  {
-    q:'What is "Monday"?',
-    options:['კვირა','შაბათი','ორშაბათი','პარასკევი'],
-    answer:'ორშაბათი'
-  }
-];
-
-let quizIndex=0;
-let quizScore=0;
-let quizAnswered=false;
-
-function shuffle(array){
-
-  return [...array]
-    .sort(
-      ()=>Math.random()-.5
-    );
-}
-
-function startQuiz(){
-
-  quizIndex=0;
-  quizScore=0;
-  quizAnswered=false;
-
-  renderQuiz();
-}
-
-function renderQuiz(){
-
-  const q =
-    quizQuestions[
-      quizIndex
-    ];
-
-  document.getElementById(
-    'quizQuestion'
-  ).textContent =
-    `${quizIndex+1}/${quizQuestions.length} — ${q.q}`;
-
-  const options =
-    shuffle(q.options);
-
-  document.getElementById(
-    'quizOptions'
-  ).innerHTML =
-    options.map(option=>`
-      <button
-        class="option"
-        onclick="answerQuiz(this,'${option.replace(/'/g,"\\'")}')"
-      >
-        ${option}
-      </button>
-    `).join('');
-
-  document.getElementById(
-    'quizResult'
-  ).innerHTML='';
-
-  quizAnswered=false;
-}
-
-function answerQuiz(button,answer){
-
-  if(quizAnswered) return;
-
-  quizAnswered=true;
-
-  const q =
-    quizQuestions[
-      quizIndex
-    ];
-
-  const buttons =
-    document.querySelectorAll(
-      '#quizOptions .option'
-    );
-
-  buttons.forEach(b=>{
-
-    if(
-      b.textContent.trim()===
-      q.answer
-    ){
-      b.classList.add('correct');
-    }
-
-  });
-
-  if(answer===q.answer){
-
-    quizScore++;
-
-    button.classList.add(
-      'correct'
-    );
-
-    document.getElementById(
-      'quizResult'
-    ).innerHTML =
-      '✅ შესანიშნავია! სწორი პასუხია.';
 
   }else{
 
-    button.classList.add(
-      'wrong'
+    button.textContent='❌ Try again';
+
+    showToast(
+      'ცადე კიდევ ერთხელ 🙂'
     );
 
-    document.getElementById(
-      'quizResult'
-    ).innerHTML =
-      `❌ სწორი პასუხია: <b>${q.answer}</b>`;
   }
 
 }
 
-function nextQuizQuestion(){
+/* ==========================================
+   QUIZ
+========================================== */
 
-  if(!quizAnswered){
-    document.getElementById(
-      'quizResult'
-    ).innerHTML =
-      '⚠️ ჯერ აირჩიე პასუხი.';
-    return;
+function quizAnswer(correct){
+
+  if(correct){
+
+    showToast(
+      '🏆 Correct answer! +10 XP',
+      'ok'
+    );
+
+  }else{
+
+    showToast(
+      '❌ Not quite. Try again!'
+    );
+
   }
 
-  quizIndex++;
-
-  if(
-    quizIndex>=
-    quizQuestions.length
-  ){
-
-    finishQuiz();
-    return;
-  }
-
-  renderQuiz();
 }
 
-function finishQuiz(){
+/* ==========================================
+   MODAL
+========================================== */
 
-  const percentage =
-    Math.round(
-      quizScore /
-      quizQuestions.length *
-      100
-    );
+function closeModal(){
 
-  const best =
-    Math.max(
-      percentage,
-      Number(
-        localStorage.getItem(
-          bestKey
-        ) || 0
-      )
-    );
+  document
+    .getElementById('topicModal')
+    .classList
+    .remove('open');
 
-  localStorage.setItem(
-    bestKey,
-    best
-  );
-
-  const history =
-    JSON.parse(
-      localStorage.getItem(
-        quizKey
-      ) || '[]'
-    );
-
-  history.push({
-    score:percentage,
-    correct:quizScore,
-    total:quizQuestions.length,
-    created_at:new Date().toISOString()
-  });
-
-  localStorage.setItem(
-    quizKey,
-    JSON.stringify(
-      history.slice(-50)
-    )
-  );
-
-  document.getElementById(
-    'quizQuestion'
-  ).innerHTML =
-    '🏆 Quiz Complete!';
-
-  document.getElementById(
-    'quizOptions'
-  ).innerHTML='';
-
-  document.getElementById(
-    'quizResult'
-  ).innerHTML =
-    `
-      <div class="score-big">
-        ${percentage}%
-      </div>
-
-      <p>
-        ${quizScore}
-        / ${quizQuestions.length}
-        სწორი პასუხი
-      </p>
-
-      <p>
-        🏆 Best Score:
-        <b>${best}%</b>
-      </p>
-    `;
-
-  document.getElementById(
-    'quizBest'
-  ).textContent =
-    best+'%';
-
-  saveQuizToSupabase(
-    percentage
-  );
 }
 
-async function saveQuizToSupabase(score){
+document
+  .getElementById('topicModal')
+  .addEventListener(
+    'click',
+    function(e){
 
-  const db =
-    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-    window.supabaseClient;
+      if(e.target === this){
+        closeModal();
+      }
 
-  if(!db) return;
-
-  try{
-
-    const {
-      data:{user}
-    } =
-      await db.auth.getUser();
-
-    if(!user) return;
-
-    /*
-      აქ ვცდილობთ quiz_attempts-ში ჩაწერას.
-      თუ შენს ცხრილში დამატებითი სავალდებულო
-      ველები გაქვს, RLS/schema შესაბამისობას
-      თავად Supabase განსაზღვრავს.
-    */
-
-    const result =
-      await db
-        .from('quiz_attempts')
-        .insert({
-          user_id:user.id,
-          grade:2,
-          score:score,
-          percentage:score,
-          created_at:new Date().toISOString()
-        });
-
-    if(result.error){
-
-      console.warn(
-        'Grade 2 quiz sync:',
-        result.error.message
-      );
     }
-
-  }catch(error){
-
-    console.warn(
-      'Grade 2 quiz sync error:',
-      error
-    );
-  }
-}
-
-/* ============================================================
-   PROGRESS
-============================================================ */
-
-function updateProgress(){
-
-  const learned =
-    getLearned();
-
-  const count =
-    Math.min(
-      learned.size,
-      300
-    );
-
-  const percentage =
-    Math.min(
-      100,
-      Math.round(
-        count / 300 * 100
-      )
-    );
-
-  document.getElementById(
-    'learnedCount'
-  ).textContent =
-    count;
-
-  document.getElementById(
-    'progressText'
-  ).textContent =
-    `${count} learned • ${percentage}%`;
-
-  document.getElementById(
-    'progressFill'
-  ).style.width =
-    percentage+'%';
-
-  document.getElementById(
-    'quizBest'
-  ).textContent =
-    (
-      localStorage.getItem(
-        bestKey
-      ) || 0
-    )+'%';
-}
-
-function resetLocalProgress(){
-
-  if(
-    !confirm(
-      'ნამდვილად გინდა Grade 2-ის ადგილობრივი პროგრესის წაშლა?'
-    )
-  ){
-    return;
-  }
-
-  localStorage.removeItem(
-    learnedKey
   );
 
-  localStorage.removeItem(
-    quizKey
-  );
+/* ==========================================
+   ALL TOPICS
+========================================== */
 
-  localStorage.removeItem(
-    bestKey
-  );
+function openAllTopics(){
 
-  updateProgress();
-  renderWords();
+  document
+    .getElementById('topics')
+    .scrollIntoView({
+      behavior:'smooth'
+    });
+
 }
 
-/* ============================================================
-   SUPABASE PROGRESS SYNC
-============================================================ */
+/* ==========================================
+   NAVIGATION
+========================================== */
 
-async function syncProgress(){
+function goHome(){
 
-  const db =
-    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
-    window.supabaseClient;
+  /*
+    შეცვალე home.html შენი მთავარი გვერდის
+    რეალური სახელით, თუ სხვა სახელია.
+  */
 
-  if(!db) return;
+  location.href='index.html';
+
+}
+
+function goTeacher(){
+
+  location.href='teacher-dashboard.html';
+
+}
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+async function logout(){
 
   try{
 
-    const {
-      data:{user}
-    } =
-      await db.auth.getUser();
+    if(DB && DB.auth){
 
-    if(!user) return;
-
-    const learned =
-      [...getLearned()];
-
-    const best =
-      Number(
-        localStorage.getItem(
-          bestKey
-        ) || 0
-      );
-
-    /*
-      მთავარი progress ჩანაწერი.
-    */
-
-    const payload = {
-      user_id:user.id,
-      grade:2,
-      words_learned:learned.length,
-      learned_words:learned,
-      best_quiz:best,
-      quiz_completed:
-        JSON.parse(
-          localStorage.getItem(
-            quizKey
-          ) || '[]'
-        ).length,
-      updated_at:
-        new Date().toISOString()
-    };
-
-    const result =
-      await db
-        .from('student_progress')
-        .upsert(
-          payload,
-          {
-            onConflict:
-              'user_id,grade'
-          }
-        );
-
-    if(result.error){
-
-      console.warn(
-        'Grade 2 progress sync:',
-        result.error.message
-      );
+      await DB.auth.signOut({
+        scope:'global'
+      });
 
     }
 
   }catch(error){
 
-    console.warn(
-      'Grade 2 progress sync error:',
-      error
-    );
+    console.warn(error);
+
   }
+
+  /*
+    Login გვერდის სახელი შეგიძლია შეცვალო,
+    თუ შენთან სხვა სახელია.
+  */
+
+  location.href='login.html';
+
 }
 
-/*
-  Sync whenever the page goes to background.
-*/
-document.addEventListener(
-  'visibilitychange',
-  ()=>{
-    if(
-      document.visibilityState===
-      'hidden'
-    ){
-      syncProgress();
-    }
-  }
-);
+/* ==========================================
+   SECURITY / ESCAPE
+========================================== */
 
-window.addEventListener(
-  'beforeunload',
-  ()=>{
-    syncProgress();
-  }
-);
+function escapeHTML(value){
 
-/* ============================================================
-   SEARCH
-============================================================ */
+  return String(value ?? '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#039;');
 
-document.getElementById(
-  'search'
-).addEventListener(
-  'input',
-  renderWords
-);
+}
 
-/* ============================================================
-   START
-============================================================ */
+function escapeAttr(value){
 
-renderFilters();
-renderWords();
-renderAlphabet();
-startQuiz();
-updateProgress();
+  return String(value ?? '')
+    .replace(/\\/g,'\\\\')
+    .replace(/'/g,"\\'");
+}
 
-setTimeout(
-  syncProgress,
-  1500
-);
+/* ==========================================
+   TOAST
+========================================== */
 
-/* Public API */
+function showToast(message,type=''){
+
+  const toast =
+    document.getElementById('toast');
+
+  toast.textContent=message;
+
+  toast.className='toast show '+type;
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(()=>{
+
+      toast.className='toast';
+
+    },3000);
+
+}
+
+/* ==========================================
+   BOOT
+========================================== */
+
+renderTopics();
+
+/* ==========================================
+   GLOBAL API
+========================================== */
+
 window.GRADE2 = {
-  words:WORDS,
-  speak,
-  learnWord,
-  syncProgress,
-  startQuiz
+  openTopic,
+  openMode,
+  closeModal,
+  speakWord,
+  speakText,
+  goHome,
+  goTeacher,
+  logout
 };
 
 </script>
