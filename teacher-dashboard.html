@@ -3,90 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#061225">
-<title>English with Mariami — Teacher Control Center</title>
+<meta name="theme-color" content="#030712">
+<title>English with Mariami — Teacher Command Center</title>
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
 
 <style>
 :root{
-  --bg:#020713;
-  --bg2:#061225;
-  --card:rgba(7,24,48,.82);
-  --card2:rgba(10,34,63,.78);
-  --line:rgba(0,234,255,.18);
+  --bg:#02040b;
+  --panel:#07111f;
+  --panel2:#0a1729;
+  --line:rgba(0,234,255,.16);
   --cyan:#00eaff;
-  --blue:#237cff;
-  --yellow:#ffe600;
-  --green:#00f5a0;
-  --red:#ff3864;
+  --blue:#3185ff;
   --purple:#a855f7;
-  --text:#f5fbff;
-  --muted:#8fa9bb;
-  --shadow:0 20px 70px rgba(0,0,0,.42);
+  --pink:#ff3cac;
+  --green:#00f5a0;
+  --yellow:#ffe600;
+  --red:#ff3864;
+  --white:#f4fbff;
+  --muted:#8299aa;
+  --shadow:0 25px 90px rgba(0,0,0,.5);
 }
 
 *{box-sizing:border-box}
-html{font-size:16px;scroll-behavior:smooth}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   min-height:100vh;
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--white);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   background:
-    radial-gradient(circle at 10% 0%,rgba(0,234,255,.13),transparent 28%),
-    radial-gradient(circle at 90% 10%,rgba(168,85,247,.14),transparent 30%),
-    radial-gradient(circle at 50% 100%,rgba(35,124,255,.12),transparent 35%),
-    linear-gradient(145deg,#01040c,#031022 55%,#020713);
+    radial-gradient(circle at 15% 5%,rgba(0,234,255,.14),transparent 25%),
+    radial-gradient(circle at 85% 10%,rgba(168,85,247,.16),transparent 27%),
+    radial-gradient(circle at 50% 100%,rgba(49,133,255,.12),transparent 35%),
+    linear-gradient(145deg,#010208,#030b17 55%,#02040b);
   overflow-x:hidden;
 }
 
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.55;cursor:not-allowed}
+button,input,select{
+  font:inherit;
+}
 
-::-webkit-scrollbar{width:9px;height:9px}
-::-webkit-scrollbar-track{background:#020914}
+button{
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#02050b;
+}
+
 ::-webkit-scrollbar-thumb{
   background:linear-gradient(var(--cyan),var(--purple));
   border-radius:20px;
 }
 
-.bg-grid{
+/* BACKGROUND */
+
+.grid{
   position:fixed;
   inset:0;
-  z-index:-2;
-  pointer-events:none;
-  opacity:.18;
+  z-index:-3;
+  opacity:.16;
   background-image:
     linear-gradient(rgba(0,234,255,.08) 1px,transparent 1px),
     linear-gradient(90deg,rgba(0,234,255,.08) 1px,transparent 1px);
-  background-size:45px 45px;
-  mask-image:linear-gradient(to bottom,black,transparent 90%);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,#000,transparent 90%);
 }
 
 .orb{
   position:fixed;
   border-radius:50%;
-  filter:blur(70px);
+  filter:blur(90px);
   pointer-events:none;
-  z-index:-1;
-}
-.orb.one{
-  width:280px;height:280px;
-  background:rgba(0,234,255,.08);
-  left:-100px;top:150px;
-}
-.orb.two{
-  width:300px;height:300px;
-  background:rgba(168,85,247,.09);
-  right:-100px;top:400px;
+  z-index:-2;
 }
 
+.orb.a{
+  width:350px;
+  height:350px;
+  background:rgba(0,234,255,.07);
+  left:-160px;
+  top:200px;
+}
+
+.orb.b{
+  width:400px;
+  height:400px;
+  background:rgba(168,85,247,.07);
+  right:-180px;
+  top:500px;
+}
+
+/* LAYOUT */
+
 .wrap{
-  width:min(1440px,calc(100% - 30px));
+  width:min(1480px,calc(100% - 28px));
   margin:auto;
 }
 
@@ -94,230 +121,323 @@ button:disabled{opacity:.55;cursor:not-allowed}
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(2,7,19,.78);
   border-bottom:1px solid var(--line);
-  backdrop-filter:blur(20px);
+  background:rgba(2,5,13,.78);
+  backdrop-filter:blur(24px);
 }
 
 .nav{
-  min-height:74px;
+  min-height:76px;
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:15px;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
-  font-weight:1000;
-  letter-spacing:.3px;
+  gap:12px;
 }
 
 .logo{
-  width:45px;height:45px;
-  border-radius:14px;
+  width:48px;
+  height:48px;
+  border-radius:16px;
   display:grid;
   place-items:center;
-  font-size:24px;
-  background:linear-gradient(135deg,#00eaff,#246bff,#9b4dff);
-  box-shadow:0 0 30px rgba(0,234,255,.25);
+  font-size:25px;
+  background:
+    linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
+  box-shadow:
+    0 0 25px rgba(0,234,255,.25),
+    inset 0 0 20px rgba(255,255,255,.15);
 }
 
-.brand small{
-  display:block;
+.brand-title{
+  font-size:16px;
+  font-weight:1000;
+}
+
+.brand-sub{
   color:var(--muted);
-  font-size:10px;
+  font-size:9px;
+  letter-spacing:1.4px;
   margin-top:3px;
 }
 
-.nav-right{
+.nav-actions{
   display:flex;
-  align-items:center;
   gap:8px;
 }
 
+/* BUTTONS */
+
 .btn{
   border:1px solid rgba(255,255,255,.12);
-  border-radius:13px;
-  padding:11px 15px;
-  min-height:43px;
+  background:rgba(255,255,255,.055);
   color:white;
-  background:rgba(255,255,255,.06);
-  transition:.18s ease;
+  border-radius:13px;
+  padding:10px 14px;
+  min-height:43px;
   font-weight:850;
+  transition:.2s;
 }
 
 .btn:hover{
   transform:translateY(-2px);
   border-color:rgba(0,234,255,.45);
-  box-shadow:0 0 25px rgba(0,234,255,.12);
+  box-shadow:0 10px 30px rgba(0,234,255,.1);
 }
 
-.btn.primary{background:linear-gradient(135deg,#0874ff,#00bce8)}
-.btn.green{background:linear-gradient(135deg,#00a86b,#00dca0)}
-.btn.red{background:linear-gradient(135deg,#d81b4d,#ff315d)}
-.btn.yellow{color:#07101d;background:linear-gradient(135deg,#ffe600,#ffbd00)}
-.btn.purple{background:linear-gradient(135deg,#7136d9,#a855f7)}
-.btn.gray{background:rgba(255,255,255,.08)}
+.btn.primary{
+  background:linear-gradient(135deg,#0877ff,#00bce8);
+}
+
+.btn.purple{
+  background:linear-gradient(135deg,#7138dc,#a855f7);
+}
+
+.btn.green{
+  background:linear-gradient(135deg,#00a86b,#00e0a0);
+}
+
+.btn.yellow{
+  color:#06101a;
+  background:linear-gradient(135deg,#ffe600,#ffb700);
+}
+
+.btn.red{
+  background:linear-gradient(135deg,#c91548,#ff3864);
+}
+
+.btn.dark{
+  background:rgba(255,255,255,.07);
+}
+
+/* HERO */
 
 .hero{
-  padding:42px 0 24px;
+  padding:38px 0 18px;
 }
 
 .hero-grid{
   display:grid;
-  grid-template-columns:1.35fr .65fr;
+  grid-template-columns:1.4fr .6fr;
   gap:18px;
 }
 
-.hero-card,.card{
+.hero-card,
+.card{
   position:relative;
-  background:linear-gradient(145deg,rgba(7,24,48,.9),rgba(3,15,32,.8));
-  border:1px solid var(--line);
-  border-radius:25px;
-  box-shadow:var(--shadow);
   overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:27px;
+  background:
+    linear-gradient(145deg,rgba(8,24,46,.92),rgba(3,12,26,.9));
+  box-shadow:var(--shadow);
 }
 
 .hero-card{
-  padding:30px;
-  min-height:230px;
+  padding:31px;
+  min-height:245px;
 }
 
-.hero-card:before,.card:before{
+.hero-card:after,
+.card:after{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  background:linear-gradient(115deg,transparent,rgba(255,255,255,.025),transparent);
+  background:linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255,255,255,.035) 50%,
+    transparent 75%
+  );
 }
 
 .kicker{
   color:var(--cyan);
-  font-size:12px;
+  font-size:11px;
   font-weight:1000;
   letter-spacing:2px;
   text-transform:uppercase;
 }
 
 .hero h1{
-  margin:10px 0;
-  font-size:clamp(2rem,4vw,4.3rem);
-  line-height:1;
-  letter-spacing:-2px;
+  margin:12px 0 10px;
+  max-width:900px;
+  font-size:clamp(2.1rem,5vw,4.7rem);
+  line-height:.98;
+  letter-spacing:-3px;
 }
 
 .hero h1 span{
-  background:linear-gradient(90deg,#fff,var(--cyan),#a855f7,var(--yellow));
+  background:linear-gradient(
+    90deg,
+    #fff,
+    var(--cyan),
+    var(--blue),
+    var(--purple),
+    var(--pink)
+  );
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
 
 .hero p{
-  max-width:760px;
-  color:#b7ccda;
+  max-width:850px;
+  color:#abc0ce;
   line-height:1.65;
 }
 
-.live{
-  padding:25px;
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:20px;
+}
+
+.system{
   display:flex;
   flex-direction:column;
   justify-content:center;
 }
 
-.live-status{
+.online{
   display:flex;
   align-items:center;
   gap:8px;
   color:var(--green);
-  font-weight:900;
+  font-weight:1000;
 }
 
 .dot{
-  width:10px;height:10px;
+  width:10px;
+  height:10px;
   border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 16px var(--green);
-  animation:pulse 1.5s infinite;
+  box-shadow:0 0 18px var(--green);
+  animation:pulse 1.4s infinite;
 }
 
 @keyframes pulse{
   50%{opacity:.35;transform:scale(.7)}
 }
 
+.system h2{
+  margin:14px 0 4px;
+  font-size:28px;
+}
+
+.system-line{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px;
+}
+
+/* STATS */
+
 .stats{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-  margin:16px 0;
+  grid-template-columns:repeat(6,1fr);
+  gap:11px;
+  margin:15px 0 18px;
 }
 
 .stat{
-  padding:18px;
+  position:relative;
+  overflow:hidden;
+  padding:17px;
+  border-radius:20px;
   border:1px solid var(--line);
-  border-radius:19px;
-  background:rgba(5,24,47,.7);
+  background:rgba(6,21,40,.72);
+}
+
+.stat:before{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  right:-35px;
+  top:-35px;
+  border-radius:50%;
+  background:rgba(0,234,255,.08);
+  filter:blur(4px);
 }
 
 .stat small{
-  color:var(--muted);
   display:block;
-  font-size:11px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
 }
 
 .stat b{
   display:block;
-  font-size:28px;
   margin-top:5px;
+  font-size:27px;
 }
+
+/* DASHBOARD */
 
 .dashboard{
   display:grid;
   grid-template-columns:245px 1fr;
   gap:17px;
-  padding-bottom:50px;
+  padding-bottom:70px;
 }
 
 .sidebar{
+  padding:12px;
   height:max-content;
   position:sticky;
-  top:92px;
-  padding:12px;
+  top:93px;
 }
 
-.side-title{
-  padding:12px 12px 8px;
+.side-label{
   color:var(--muted);
-  font-size:11px;
+  padding:10px 11px 7px;
+  font-size:10px;
   font-weight:1000;
-  letter-spacing:1px;
+  letter-spacing:1.5px;
 }
 
 .menu{
+  display:block;
   width:100%;
   border:0;
-  color:#dceaf1;
   background:transparent;
-  text-align:left;
+  color:#cfe0e8;
   padding:13px;
-  border-radius:13px;
   margin:2px 0;
-  font-weight:800;
+  text-align:left;
+  border-radius:13px;
+  font-weight:850;
+  transition:.18s;
 }
 
-.menu:hover,.menu.active{
+.menu:hover,
+.menu.active{
   color:white;
-  background:linear-gradient(90deg,rgba(0,234,255,.13),rgba(124,58,237,.10));
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0,234,255,.13),
+      rgba(168,85,247,.08)
+    );
   box-shadow:inset 3px 0 var(--cyan);
 }
 
-.content{min-width:0}
+.panel{
+  display:none;
+}
 
-.panel{display:none}
-.panel.active{display:block}
+.panel.active{
+  display:block;
+}
 
 .card{
   padding:23px;
@@ -326,9 +446,9 @@ button:disabled{opacity:.55;cursor:not-allowed}
 
 .section-head{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:15px;
+  align-items:center;
+  gap:14px;
   margin-bottom:18px;
 }
 
@@ -337,14 +457,15 @@ button:disabled{opacity:.55;cursor:not-allowed}
   font-size:22px;
 }
 
-.muted{color:var(--muted)}
-.small{font-size:12px}
-
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
+.muted{
+  color:var(--muted);
 }
+
+.small{
+  font-size:12px;
+}
+
+/* FORMS */
 
 .form-grid{
   display:grid;
@@ -360,25 +481,29 @@ button:disabled{opacity:.55;cursor:not-allowed}
   font-weight:800;
 }
 
-.input,select{
+.input,
+select{
   width:100%;
   min-height:45px;
-  border:1px solid rgba(0,234,255,.16);
+  padding:10px 12px;
   border-radius:12px;
   outline:none;
-  padding:10px 12px;
   color:white;
   background:#041326;
+  border:1px solid rgba(0,234,255,.15);
 }
 
-.input:focus,select:focus{
+.input:focus,
+select:focus{
   border-color:var(--cyan);
-  box-shadow:0 0 0 3px rgba(0,234,255,.08);
+  box-shadow:0 0 0 3px rgba(0,234,255,.07);
 }
 
-.search-row{
+/* STUDENTS */
+
+.search{
   display:grid;
-  grid-template-columns:1fr auto auto;
+  grid-template-columns:1fr 180px auto;
   gap:8px;
 }
 
@@ -386,35 +511,42 @@ button:disabled{opacity:.55;cursor:not-allowed}
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:12px;
-  margin-top:16px;
+  margin-top:15px;
 }
 
-.student-card{
-  border:1px solid rgba(0,234,255,.15);
-  border-radius:19px;
-  padding:17px;
-  background:linear-gradient(145deg,rgba(7,29,56,.85),rgba(3,16,33,.85));
+.student{
+  padding:18px;
+  border-radius:20px;
+  border:1px solid rgba(0,234,255,.13);
+  background:linear-gradient(145deg,#071d37,#041020);
   transition:.2s;
 }
 
-.student-card:hover{
+.student:hover{
   transform:translateY(-3px);
   border-color:rgba(0,234,255,.4);
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
+  box-shadow:0 18px 45px rgba(0,0,0,.28);
 }
 
-.student-top{
+.student-head{
   display:flex;
   justify-content:space-between;
   gap:10px;
 }
 
+.student-info{
+  display:flex;
+  gap:11px;
+}
+
 .avatar{
-  width:45px;height:45px;
+  width:46px;
+  height:46px;
+  flex:none;
   display:grid;
   place-items:center;
-  border-radius:14px;
-  background:linear-gradient(135deg,#083b61,#46207d);
+  border-radius:15px;
+  background:linear-gradient(135deg,#083b61,#492078);
   font-size:22px;
 }
 
@@ -423,264 +555,330 @@ button:disabled{opacity:.55;cursor:not-allowed}
   font-size:17px;
 }
 
+.email{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+  word-break:break-all;
+}
+
 .badge{
   display:inline-flex;
-  padding:5px 8px;
-  border-radius:8px;
+  align-items:center;
+  height:26px;
+  padding:0 9px;
+  border-radius:9px;
   font-size:10px;
   font-weight:1000;
-  background:rgba(0,234,255,.1);
+  color:var(--cyan);
+  background:rgba(0,234,255,.09);
+}
+
+.badge.g2{
+  color:var(--green);
+  background:rgba(0,245,160,.08);
+}
+
+.badge.g3{
   color:var(--cyan);
 }
 
-.badge.g2{color:#5cff9d;background:rgba(0,245,160,.08)}
-.badge.g3{color:#00eaff}
-.badge.g4{color:#ffe600;background:rgba(255,230,0,.08)}
-
-.student-meta{
-  color:var(--muted);
-  font-size:12px;
-  margin:10px 0;
+.badge.g4{
+  color:var(--yellow);
+  background:rgba(255,230,0,.08);
 }
 
-.student-actions{
+.student-meta{
+  margin:12px 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.actions{
   display:flex;
   gap:6px;
   flex-wrap:wrap;
 }
 
-.student-actions .btn{
+.actions .btn{
   font-size:11px;
   padding:8px 10px;
-  min-height:38px;
+  min-height:37px;
 }
 
-.attendance-grid{
+/* ATTENDANCE */
+
+.attendance{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
 
-.attendance-row{
+.att-row{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:10px;
-  padding:13px;
-  border-radius:14px;
+  padding:14px;
+  border-radius:15px;
   background:#04162b;
   border:1px solid rgba(255,255,255,.07);
 }
 
-.attendance-buttons{
+.att-buttons{
   display:flex;
-  gap:5px;
   flex-wrap:wrap;
+  gap:5px;
 }
 
-.att-btn{
+.att{
   border:1px solid rgba(255,255,255,.1);
-  background:#09223d;
-  color:white;
   border-radius:9px;
   padding:8px 9px;
-  font-size:11px;
+  color:white;
+  background:#09223d;
+  font-size:10px;
   font-weight:900;
 }
 
-.att-btn:hover{border-color:var(--cyan)}
-.att-btn.present{background:#075f49}
-.att-btn.absent{background:#682037}
-.att-btn.late{background:#735700}
-.att-btn.left{background:#243b55}
+.att:hover{
+  border-color:var(--cyan);
+}
 
-.topic-grid{
+.att.present{background:#075b47}
+.att.absent{background:#681f37}
+.att.late{background:#725700}
+.att.left{background:#263b54}
+
+/* TOPICS */
+
+.topic-toolbar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.topics{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:11px;
 }
 
 .topic{
-  padding:17px;
-  min-height:130px;
-  border-radius:18px;
-  border:1px solid rgba(0,234,255,.14);
-  background:linear-gradient(145deg,#082344,#06162d);
+  min-height:155px;
+  padding:18px;
+  border-radius:19px;
+  border:1px solid rgba(0,234,255,.13);
+  background:
+    linear-gradient(145deg,#082544,#06152a);
   transition:.2s;
+  cursor:pointer;
 }
 
 .topic:hover{
-  transform:translateY(-4px) rotateX(2deg);
-  border-color:rgba(0,234,255,.42);
-  box-shadow:0 15px 40px rgba(0,234,255,.08);
+  transform:translateY(-5px) perspective(500px) rotateX(2deg);
+  border-color:rgba(0,234,255,.45);
+  box-shadow:
+    0 20px 50px rgba(0,234,255,.08);
 }
 
-.topic .icon{font-size:28px}
-.topic b{display:block;margin:9px 0 5px}
-.topic small{color:var(--muted);line-height:1.45}
+.topic-icon{
+  font-size:30px;
+}
 
-.grades-list,.history-list{
+.topic b{
+  display:block;
+  margin-top:10px;
+  font-size:15px;
+}
+
+.topic small{
+  display:block;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:6px;
+}
+
+/* GRADES / HISTORY */
+
+.list{
   display:grid;
   gap:8px;
 }
 
-.grade-row,.history-row{
+.row{
   display:grid;
-  grid-template-columns:1fr 100px 120px;
-  align-items:center;
+  grid-template-columns:1fr 110px 150px;
   gap:10px;
-  padding:12px;
-  border-radius:12px;
+  align-items:center;
+  padding:13px;
+  border-radius:13px;
   background:#04162b;
 }
 
 .score{
+  text-align:center;
   font-weight:1000;
   color:var(--yellow);
-  text-align:center;
 }
 
-.progress-wrap{
-  margin-top:8px;
+/* PROGRESS */
+
+.progress-card{
+  padding:17px;
+  margin-bottom:10px;
+  border-radius:19px;
+  background:linear-gradient(145deg,#071d37,#041020);
+  border:1px solid rgba(0,234,255,.13);
+}
+
+.progress-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
 }
 
 .progress{
   height:9px;
+  margin:9px 0;
+  border-radius:20px;
   overflow:hidden;
   background:#02101e;
-  border-radius:20px;
 }
 
 .progress i{
   display:block;
   height:100%;
   border-radius:20px;
-  background:linear-gradient(90deg,var(--blue),var(--cyan),var(--yellow));
+  background:linear-gradient(
+    90deg,
+    var(--blue),
+    var(--cyan),
+    var(--yellow)
+  );
 }
+
+/* EMPTY / LOADING */
 
 .empty{
   padding:35px;
   text-align:center;
   color:var(--muted);
   border:1px dashed rgba(255,255,255,.1);
-  border-radius:15px;
+  border-radius:16px;
 }
-
-.toast{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  z-index:99999;
-  max-width:390px;
-  padding:14px 17px;
-  border-radius:14px;
-  border:1px solid rgba(0,234,255,.3);
-  background:#061b33;
-  box-shadow:0 15px 50px rgba(0,0,0,.45);
-  transform:translateY(30px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-}
-
-.toast.show{
-  transform:translateY(0);
-  opacity:1;
-}
-
-.toast.ok{border-color:rgba(0,245,160,.45)}
-.toast.err{border-color:rgba(255,56,100,.45)}
 
 .loading{
+  min-height:90px;
   display:flex;
-  justify-content:center;
   align-items:center;
-  min-height:100px;
+  justify-content:center;
   color:var(--muted);
 }
 
 .spinner{
-  width:22px;height:22px;
+  width:22px;
+  height:22px;
+  margin-right:9px;
   border:3px solid rgba(255,255,255,.1);
   border-top-color:var(--cyan);
   border-radius:50%;
   animation:spin .8s linear infinite;
-  margin-right:8px;
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* MODAL */
 
 .modal{
   position:fixed;
   inset:0;
-  z-index:99998;
-  background:rgba(0,0,0,.76);
-  backdrop-filter:blur(10px);
+  z-index:9999;
   display:none;
   align-items:center;
   justify-content:center;
   padding:18px;
+  background:rgba(0,0,0,.78);
+  backdrop-filter:blur(12px);
 }
 
-.modal.open{display:flex}
+.modal.open{
+  display:flex;
+}
 
 .modal-box{
-  width:min(1000px,100%);
+  width:min(1050px,100%);
   max-height:92vh;
   overflow:auto;
-  border:1px solid rgba(0,234,255,.3);
+  padding:24px;
   border-radius:25px;
+  border:1px solid rgba(0,234,255,.3);
   background:#031326;
-  box-shadow:0 30px 100px rgba(0,0,0,.6);
-  padding:23px;
+  box-shadow:0 30px 100px rgba(0,0,0,.65);
 }
 
 .modal-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
   margin-bottom:18px;
 }
 
-.modal-head h2{margin:0}
+.modal-head h2{
+  margin:0;
+}
 
 .detail-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
 
-.detail-stat{
+.detail{
   padding:17px;
-  border-radius:15px;
+  border-radius:16px;
   background:#061d37;
   border:1px solid rgba(0,234,255,.12);
 }
 
-.detail-stat small{color:var(--muted)}
-.detail-stat b{display:block;font-size:26px;margin-top:4px}
+.detail small{
+  color:var(--muted);
+}
+
+.detail b{
+  display:block;
+  margin-top:5px;
+  font-size:25px;
+}
 
 .chart{
-  margin-top:15px;
+  margin-top:14px;
   padding:17px;
   border-radius:18px;
   background:#04152a;
 }
 
-.bar-chart{
-  height:180px;
+.bars{
+  height:190px;
   display:flex;
   align-items:end;
-  gap:8px;
-  padding:15px 5px 0;
+  gap:7px;
+  padding:20px 5px 0;
 }
 
 .bar{
   flex:1;
-  min-width:8px;
+  min-width:7px;
+  max-width:35px;
   border-radius:8px 8px 2px 2px;
-  background:linear-gradient(to top,#0874ff,#00eaff,#ffe600);
+  background:linear-gradient(
+    to top,
+    #0874ff,
+    #00eaff,
+    #ffe600
+  );
   position:relative;
 }
 
@@ -690,141 +888,302 @@ button:disabled{opacity:.55;cursor:not-allowed}
   left:50%;
   transform:translateX(-50%);
   font-size:9px;
-  color:#ccecf4;
   margin-bottom:3px;
 }
 
-@media(max-width:1050px){
-  .stats{grid-template-columns:repeat(3,1fr)}
-  .hero-grid{grid-template-columns:1fr}
-  .dashboard{grid-template-columns:1fr}
-  .sidebar{position:static}
-  .topic-grid{grid-template-columns:repeat(2,1fr)}
+/* TOAST */
+
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:99999;
+  max-width:400px;
+  padding:14px 17px;
+  border-radius:15px;
+  background:#061b33;
+  border:1px solid rgba(0,234,255,.3);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  opacity:0;
+  transform:translateY(25px);
+  pointer-events:none;
+  transition:.25s;
 }
 
-@media(max-width:700px){
-  .wrap{width:calc(100% - 18px)}
-  .nav{min-height:64px}
-  .brand small{display:none}
-  .nav-right .btn{font-size:0;padding:10px}
-  .nav-right .btn:after{content:"🚪";font-size:18px}
-  .hero{padding:25px 0 15px}
-  .hero-card{padding:21px}
-  .hero h1{font-size:2.4rem}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .form-grid,.students,.attendance-grid,.topic-grid,.detail-grid{grid-template-columns:1fr}
-  .search-row{grid-template-columns:1fr}
-  .card{padding:15px}
-  .section-head{align-items:flex-start;flex-direction:column}
-  .grade-row,.history-row{grid-template-columns:1fr}
-  .attendance-row{align-items:flex-start;flex-direction:column}
-  .attendance-buttons{width:100%}
-  .att-btn{flex:1}
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.toast.ok{
+  border-color:rgba(0,245,160,.45);
+}
+
+.toast.err{
+  border-color:rgba(255,56,100,.45);
+}
+
+/* MOBILE */
+
+@media(max-width:1100px){
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .sidebar{
+    position:static;
+  }
+
+  .topics{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:750px){
+  .wrap{
+    width:calc(100% - 14px);
+  }
+
+  .nav{
+    min-height:65px;
+  }
+
+  .brand-sub{
+    display:none;
+  }
+
+  .nav-actions .btn{
+    font-size:0;
+    padding:10px;
+  }
+
+  .nav-actions .btn:after{
+    content:"⚙️";
+    font-size:17px;
+  }
+
+  .nav-actions .btn:last-child:after{
+    content:"🚪";
+  }
+
+  .hero{
+    padding-top:22px;
+  }
+
+  .hero-card{
+    padding:21px;
+  }
+
+  .hero h1{
+    font-size:2.45rem;
+    letter-spacing:-2px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .form-grid,
+  .students,
+  .attendance,
+  .topics,
+  .detail-grid{
+    grid-template-columns:1fr;
+  }
+
+  .search{
+    grid-template-columns:1fr;
+  }
+
+  .section-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .att-row{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .att-buttons{
+    width:100%;
+  }
+
+  .att{
+    flex:1;
+  }
+
+  .card{
+    padding:15px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-grid"></div>
-<div class="orb one"></div>
-<div class="orb two"></div>
+<div class="grid"></div>
+<div class="orb a"></div>
+<div class="orb b"></div>
 
 <header class="top">
-  <div class="wrap nav">
-    <div class="brand">
-      <div class="logo">🧠</div>
-      <div>
-        English with Mariami
-        <small>TEACHER CONTROL CENTER • SUPABASE LIVE</small>
+<div class="wrap nav">
+
+  <div class="brand">
+    <div class="logo">🧠</div>
+    <div>
+      <div class="brand-title">English with Mariami</div>
+      <div class="brand-sub">
+        FUTURISTIC TEACHER COMMAND CENTER • SUPABASE LIVE
       </div>
     </div>
-
-    <div class="nav-right">
-      <button class="btn gray" id="refreshBtn">↻ Sync</button>
-      <button class="btn red" id="logoutBtn">🚪 გამოსვლა</button>
-    </div>
   </div>
+
+  <div class="nav-actions">
+    <button class="btn dark" id="refreshBtn">↻ Sync</button>
+    <button class="btn red" id="logoutBtn">🚪 გამოსვლა</button>
+  </div>
+
+</div>
 </header>
 
 <main class="wrap">
 
 <section class="hero">
-  <div class="hero-grid">
 
-    <div class="hero-card">
-      <div class="kicker">⚡ Teacher Command Center</div>
-      <h1>მართე შენი <span>ინგლისურის კლასი</span></h1>
-      <p>
-        მოსწავლეები • კლასები • დასწრება • შეფასებები • თემები •
-        Progress • Quiz • რეალური Supabase Sync.
-      </p>
+<div class="hero-grid">
 
-      <div class="actions">
-        <button class="btn primary" data-panel="students">👥 მოსწავლეები</button>
-        <button class="btn purple" data-panel="attendance">🧑‍🎓 დასწრება</button>
-        <button class="btn yellow" data-panel="progress">📊 Progress</button>
-      </div>
-    </div>
+  <div class="hero-card">
 
-    <div class="hero-card live">
-      <div class="live-status">
-        <span class="dot"></span>
-        SYSTEM ONLINE
-      </div>
-      <h2 id="teacherName">Teacher</h2>
-      <div class="muted" id="teacherEmail">loading...</div>
-      <div class="small muted" style="margin-top:12px">
-        Supabase connection: <b id="connectionStatus">checking...</b>
-      </div>
+    <div class="kicker">⚡ Teacher Command Center</div>
+
+    <h1>
+      მართე შენი
+      <span>English Universe</span>
+    </h1>
+
+    <p>
+      Students • Grades • Attendance • Late • Progress • Quiz •
+      Learning Topics • Performance • Analytics • Secure Supabase Sync
+    </p>
+
+    <div class="hero-actions">
+
+      <button class="btn primary" data-panel="students">
+        👥 Students
+      </button>
+
+      <button class="btn purple" data-panel="attendance">
+        🧑‍🎓 Attendance
+      </button>
+
+      <button class="btn yellow" data-panel="progress">
+        📊 Progress Intelligence
+      </button>
+
+      <button class="btn green" data-panel="topics">
+        📚 Learning Universe
+      </button>
+
     </div>
 
   </div>
+
+  <div class="hero-card system">
+
+    <div class="online">
+      <span class="dot"></span>
+      SYSTEM ONLINE
+    </div>
+
+    <h2 id="teacherName">Teacher</h2>
+
+    <div id="teacherEmail" class="muted">
+      loading...
+    </div>
+
+    <div class="system-line">
+      Supabase:
+      <b id="connectionStatus">Checking...</b>
+    </div>
+
+    <div class="system-line">
+      Security:
+      <b id="securityStatus">Checking...</b>
+    </div>
+
+  </div>
+
+</div>
+
 </section>
 
 <section class="stats">
+
   <div class="stat">
-    <small>👥 მოსწავლეები</small>
+    <small>👥 TOTAL STUDENTS</small>
     <b id="statStudents">0</b>
   </div>
+
   <div class="stat">
-    <small>🌱 Grade 2</small>
+    <small>🌱 GRADE 2</small>
     <b id="statG2">0</b>
   </div>
+
   <div class="stat">
-    <small>🚀 Grade 3</small>
+    <small>🚀 GRADE 3</small>
     <b id="statG3">0</b>
   </div>
+
   <div class="stat">
-    <small>⭐ Grade 4</small>
+    <small>⭐ GRADE 4</small>
     <b id="statG4">0</b>
   </div>
+
   <div class="stat">
-    <small>📚 ნასწავლი სიტყვები</small>
+    <small>📚 LEARNED WORDS</small>
     <b id="statWords">0</b>
   </div>
+
+  <div class="stat">
+    <small>📝 QUIZ ATTEMPTS</small>
+    <b id="statQuiz">0</b>
+  </div>
+
 </section>
 
 <section class="dashboard">
 
 <aside class="card sidebar">
 
-  <div class="side-title">CONTROL</div>
+  <div class="side-label">TEACHER CONTROL</div>
 
   <button class="menu active" data-panel="students">
-    👥 მოსწავლეები
+    👥 Students
   </button>
 
   <button class="menu" data-panel="attendance">
-    🧑‍🎓 დასწრება
+    🧑‍🎓 Attendance
   </button>
 
   <button class="menu" data-panel="topics">
-    📚 თემები
+    📚 Learning Topics
   </button>
 
   <button class="menu" data-panel="grades">
-    ⭐ შეფასებები
+    ⭐ Grades
   </button>
 
   <button class="menu" data-panel="progress">
@@ -832,7 +1191,7 @@ button:disabled{opacity:.55;cursor:not-allowed}
   </button>
 
   <button class="menu" data-panel="history">
-    📋 ისტორია
+    📋 Activity History
   </button>
 
 </aside>
@@ -846,72 +1205,128 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <div class="card">
 
 <div class="section-head">
-  <div>
-    <h2>👥 მოსწავლეების მართვა</h2>
-    <div class="muted small">
-      დაამატე მოსწავლე, მიანიჭე კლასი და მართე მისი ანგარიში.
-    </div>
-  </div>
+
+<div>
+<h2>👥 Student Management</h2>
+
+<div class="muted small">
+Add a student and assign the correct learning grade.
+</div>
+</div>
+
 </div>
 
 <div class="form-grid">
 
 <div class="field">
-<label>მოსწავლის Email</label>
-<input class="input" id="studentEmail" type="email" placeholder="student@email.com">
+<label>Student Email</label>
+<input
+  class="input"
+  id="studentEmail"
+  type="email"
+  placeholder="student@email.com">
 </div>
 
 <div class="field">
-<label>კლასი</label>
+<label>Learning Grade</label>
+
 <select id="studentGrade">
-<option value="2">🌱 Grade 2</option>
-<option value="3">🚀 Grade 3</option>
-<option value="4">⭐ Grade 4</option>
+
+<option value="2">
+🌱 Grade 2
+</option>
+
+<option value="3">
+🚀 Grade 3
+</option>
+
+<option value="4">
+⭐ Grade 4
+</option>
+
 </select>
 </div>
 
 <div class="field">
-<label>მოქმედება</label>
-<button class="btn primary" id="addStudentBtn" style="width:100%">
-➕ მოსწავლის დამატება
+
+<label>Action</label>
+
+<button
+  class="btn primary"
+  id="addStudentBtn"
+  style="width:100%">
+  ➕ Add Student
 </button>
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 
 <div class="card">
 
 <div class="section-head">
-  <div>
-    <h2>🎓 Student Management</h2>
-    <div class="muted small">
-      მოძებნე მოსწავლე სახელით ან Email-ით.
-    </div>
-  </div>
+
+<div>
+<h2>🎓 Student Database</h2>
+
+<div class="muted small">
+Search students and instantly change their Grade.
+</div>
 </div>
 
-<div class="search-row">
-<input class="input" id="studentSearch" placeholder="🔎 მოძებნე მოსწავლე...">
+</div>
+
+<div class="search">
+
+<input
+  class="input"
+  id="studentSearch"
+  placeholder="🔎 Search name or email...">
+
 <select id="gradeFilter">
-<option value="all">ყველა Grade</option>
-<option value="2">Grade 2</option>
-<option value="3">Grade 3</option>
-<option value="4">Grade 4</option>
+
+<option value="all">
+All Grades
+</option>
+
+<option value="2">
+Grade 2
+</option>
+
+<option value="3">
+Grade 3
+</option>
+
+<option value="4">
+Grade 4
+</option>
+
 </select>
-<button class="btn gray" id="reloadStudents">↻</button>
+
+<button
+  class="btn dark"
+  id="reloadStudents">
+  ↻
+</button>
+
 </div>
 
 <div id="studentsList" class="students">
+
 <div class="loading">
-<span class="spinner"></span>იტვირთება...
+<span class="spinner"></span>
+Loading students...
 </div>
+
 </div>
 
 </div>
 
 </section>
+
 
 <!-- ATTENDANCE -->
 
@@ -920,28 +1335,41 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <div class="card">
 
 <div class="section-head">
+
 <div>
-<h2>🧑‍🎓 დღიური დასწრება</h2>
+<h2>🧑‍🎓 Daily Attendance</h2>
+
 <div class="muted small">
-მონიშნე თითოეული მოსწავლის მიმდინარე მდგომარეობა.
+Mark attendance status for every student.
 </div>
 </div>
 
-<div>
-<label class="small muted">📅 თარიღი</label>
-<input class="input" id="attendanceDate" type="date">
-</div>
+<div class="field">
+
+<label>📅 Date</label>
+
+<input
+  class="input"
+  id="attendanceDate"
+  type="date">
+
 </div>
 
-<div id="attendanceList" class="attendance-grid">
+</div>
+
+<div id="attendanceList" class="attendance">
+
 <div class="loading">
-<span class="spinner"></span>იტვირთება...
+<span class="spinner"></span>
+Loading...
 </div>
+
 </div>
 
 </div>
 
 </section>
+
 
 <!-- TOPICS -->
 
@@ -950,25 +1378,39 @@ button:disabled{opacity:.55;cursor:not-allowed}
 <div class="card">
 
 <div class="section-head">
+
 <div>
 <h2>📚 English Learning Universe</h2>
+
 <div class="muted small">
-Grade 2 • Grade 3 • Grade 4 — თემების მართვის ცენტრი.
+Explore vocabulary, grammar, speaking, reading and challenges.
 </div>
 </div>
 
 <select id="topicGrade" style="max-width:180px">
-<option value="2">🌱 Grade 2</option>
-<option value="3">🚀 Grade 3</option>
-<option value="4">⭐ Grade 4</option>
+
+<option value="2">
+🌱 Grade 2
+</option>
+
+<option value="3">
+🚀 Grade 3
+</option>
+
+<option value="4">
+⭐ Grade 4
+</option>
+
 </select>
+
 </div>
 
-<div id="topicsGrid" class="topic-grid"></div>
+<div id="topicsGrid" class="topics"></div>
 
 </div>
 
 </section>
+
 
 <!-- GRADES -->
 
@@ -977,46 +1419,77 @@ Grade 2 • Grade 3 • Grade 4 — თემების მართვის 
 <div class="card">
 
 <div class="section-head">
+
 <div>
-<h2>⭐ შეფასების ჟურნალი</h2>
+
+<h2>⭐ Gradebook</h2>
+
 <div class="muted small">
-შეიყვანე მოსწავლის შეფასება 0–10 ქულამდე.
+Give students a score from 0 to 10.
 </div>
+
 </div>
+
 </div>
 
 <div class="form-grid">
 
 <div class="field">
-<label>მოსწავლე</label>
+
+<label>Student</label>
+
 <select id="gradeStudent">
-<option value="">აირჩიე მოსწავლე</option>
+<option value="">
+Choose student
+</option>
 </select>
+
 </div>
 
 <div class="field">
-<label>ქულა</label>
-<input class="input" id="gradeScore" type="number" min="0" max="10" step="1" placeholder="10">
+
+<label>Score</label>
+
+<input
+  class="input"
+  id="gradeScore"
+  type="number"
+  min="0"
+  max="10"
+  step="1"
+  placeholder="10">
+
 </div>
 
 <div class="field">
-<label>კომენტარი</label>
-<input class="input" id="gradeComment" placeholder="ძალიან კარგი მუშაობა">
+
+<label>Teacher Comment</label>
+
+<input
+  class="input"
+  id="gradeComment"
+  placeholder="Excellent work!">
+
 </div>
 
 </div>
 
 <div class="actions" style="margin-top:13px">
-<button class="btn yellow" id="saveGradeBtn">
-⭐ შეფასების შენახვა
+
+<button
+  class="btn yellow"
+  id="saveGradeBtn">
+  ⭐ Save Grade
 </button>
+
 </div>
 
-<div id="gradesList" style="margin-top:18px"></div>
+<div id="gradesList" class="list" style="margin-top:18px"></div>
 
 </div>
 
 </section>
+
 
 <!-- PROGRESS -->
 
@@ -1025,23 +1498,32 @@ Grade 2 • Grade 3 • Grade 4 — თემების მართვის 
 <div class="card">
 
 <div class="section-head">
+
 <div>
-<h2>📊 Student Progress Intelligence</h2>
+
+<h2>📊 Progress Intelligence</h2>
+
 <div class="muted small">
-სრული პროგრესი • სიტყვები • Quiz • საუკეთესო შედეგი.
+Vocabulary • Quiz • Best Score • Learning Progress.
 </div>
+
 </div>
+
 </div>
 
 <div id="progressList">
+
 <div class="loading">
-<span class="spinner"></span>იტვირთება...
+<span class="spinner"></span>
+Loading intelligence...
 </div>
+
 </div>
 
 </div>
 
 </section>
+
 
 <!-- HISTORY -->
 
@@ -1050,18 +1532,26 @@ Grade 2 • Grade 3 • Grade 4 — თემების მართვის 
 <div class="card">
 
 <div class="section-head">
+
 <div>
-<h2>📋 Teacher Activity History</h2>
+
+<h2>📋 Activity History</h2>
+
 <div class="muted small">
-შეფასებები და Quiz შედეგები.
-</div>
-</div>
+Recent grades and quiz activity.
 </div>
 
-<div id="historyList" class="history-list">
-<div class="loading">
-<span class="spinner"></span>იტვირთება...
 </div>
+
+</div>
+
+<div id="historyList" class="list">
+
+<div class="loading">
+<span class="spinner"></span>
+Loading history...
+</div>
+
 </div>
 
 </div>
@@ -1069,11 +1559,14 @@ Grade 2 • Grade 3 • Grade 4 — თემების მართვის 
 </section>
 
 </div>
+
 </section>
 
 </main>
 
+
 <div class="toast" id="toast"></div>
+
 
 <!-- DETAIL MODAL -->
 
@@ -1082,45 +1575,50 @@ Grade 2 • Grade 3 • Grade 4 — თემების მართვის 
 <div class="modal-box">
 
 <div class="modal-head">
-<h2 id="detailTitle">📊 Student Progress</h2>
-<button class="btn gray" id="closeModal">✕</button>
+
+<h2 id="detailTitle">
+📊 Student Intelligence
+</h2>
+
+<button
+  class="btn dark"
+  id="closeModal">
+  ✕
+</button>
+
 </div>
 
 <div id="detailBody"></div>
 
 </div>
+
 </div>
+
 
 <script>
 'use strict';
 
 /* =========================================================
    ENGLISH WITH MARIAMI
-   FUTURISTIC TEACHER DASHBOARD
+   TEACHER COMMAND CENTER
 ========================================================= */
 
 const DB =
   window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
   window.supabaseClient;
 
-if(!DB){
-  alert('Supabase client ვერ მოიძებნა. შეამოწმე config.js');
-}
-
-/* ---------------------------------------------------------
-   STATE
---------------------------------------------------------- */
-
 let currentUser = null;
 let teacherProfile = null;
+
 let students = [];
 let progressRows = [];
 let quizRows = [];
 let gradeRows = [];
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    HELPERS
---------------------------------------------------------- */
+========================================================= */
 
 const $ = id => document.getElementById(id);
 
@@ -1134,58 +1632,89 @@ function esc(value){
   }[char]));
 }
 
-function showToast(message,type=''){
+function toast(message,type=''){
   const el=$('toast');
+
   el.textContent=message;
   el.className='toast show '+type;
 
-  clearTimeout(showToast.timer);
+  clearTimeout(toast.timer);
 
-  showToast.timer=setTimeout(()=>{
+  toast.timer=setTimeout(()=>{
     el.className='toast';
   },3200);
 }
 
 function today(){
+
   const d=new Date();
-  const y=d.getFullYear();
-  const m=String(d.getMonth()+1).padStart(2,'0');
-  const day=String(d.getDate()).padStart(2,'0');
-  return `${y}-${m}-${day}`;
+
+  return [
+    d.getFullYear(),
+    String(d.getMonth()+1).padStart(2,'0'),
+    String(d.getDate()).padStart(2,'0')
+  ].join('-');
 }
 
 function gradeName(g){
-  return g==2?'🌱 Grade 2':g==3?'🚀 Grade 3':'⭐ Grade 4';
+
+  if(Number(g)===2)return '🌱 Grade 2';
+  if(Number(g)===3)return '🚀 Grade 3';
+  if(Number(g)===4)return '⭐ Grade 4';
+
+  return 'No Grade';
 }
 
-function progressPercent(words,grade){
-  const target=grade==2?300:grade==3?250:250;
-  return Math.min(100,Math.round(Number(words||0)/target*100));
-}
+function scoreOf(row){
 
-function scoreOf(x){
   return Number(
-    x?.score ??
-    x?.best_score ??
-    x?.percentage ??
-    x?.best_quiz ??
+    row?.score ??
+    row?.best_score ??
+    row?.percentage ??
+    row?.best_quiz ??
     0
   );
 }
 
-/* ---------------------------------------------------------
+function wordsOf(row){
+
+  return Number(
+    row?.words_learned ??
+    (
+      Array.isArray(row?.learned_words)
+      ?row.learned_words.length
+      :0
+    )
+  );
+}
+
+function progressPercent(words,grade){
+
+  const target =
+    Number(grade)===2 ? 300 :
+    Number(grade)===3 ? 350 :
+    400;
+
+  return Math.min(
+    100,
+    Math.round(
+      Number(words||0)/target*100
+    )
+  );
+}
+
+
+/* =========================================================
    PANEL NAVIGATION
---------------------------------------------------------- */
+========================================================= */
 
 function activatePanel(name){
 
-  document.querySelectorAll('.panel').forEach(x=>{
-    x.classList.remove('active');
-  });
+  document.querySelectorAll('.panel')
+    .forEach(x=>x.classList.remove('active'));
 
-  document.querySelectorAll('.menu').forEach(x=>{
-    x.classList.remove('active');
-  });
+  document.querySelectorAll('.menu')
+    .forEach(x=>x.classList.remove('active'));
 
   const panel=$('panel-'+name);
 
@@ -1193,76 +1722,119 @@ function activatePanel(name){
     panel.classList.add('active');
   }
 
-  document.querySelectorAll(`[data-panel="${name}"]`)
+  document
+    .querySelectorAll(`[data-panel="${name}"]`)
     .forEach(x=>x.classList.add('active'));
 
-  if(name==='attendance') loadAttendance();
-  if(name==='progress') renderProgress();
-  if(name==='grades') loadGrades();
-  if(name==='history') loadHistory();
-  if(name==='topics') renderTopics();
+  if(name==='attendance')loadAttendance();
+  if(name==='topics')renderTopics();
+  if(name==='grades')loadGrades();
+  if(name==='progress')renderProgress();
+  if(name==='history')loadHistory();
 }
 
-document.addEventListener('click',e=>{
-  const btn=e.target.closest('[data-panel]');
-  if(!btn)return;
-  activatePanel(btn.dataset.panel);
+document.addEventListener('click',event=>{
+
+  const button=event.target.closest('[data-panel]');
+
+  if(!button)return;
+
+  activatePanel(button.dataset.panel);
+
 });
 
-/* ---------------------------------------------------------
-   AUTH / SECURITY
---------------------------------------------------------- */
+
+/* =========================================================
+   SECURITY GUARD
+========================================================= */
 
 async function checkTeacher(){
 
-  if(!DB)return false;
+  if(!DB){
+
+    $('connectionStatus').textContent='NO CLIENT';
+    $('securityStatus').textContent='ERROR';
+
+    alert(
+      'Supabase client ვერ მოიძებნა. შეამოწმე config.js'
+    );
+
+    return false;
+  }
 
   try{
 
-    const result=await DB.auth.getUser();
+    const auth=await DB.auth.getUser();
 
-    currentUser=result?.data?.user;
+    currentUser=auth?.data?.user;
 
     if(!currentUser){
-      location.replace('teacher-login.html?reason=login');
+
+      location.replace(
+        'teacher-login.html?reason=login'
+      );
+
       return false;
     }
 
-    const {data,error}=await DB
+
+    const profile=await DB
       .from('profiles')
       .select('*')
       .eq('user_id',currentUser.id)
       .maybeSingle();
 
-    if(error){
-      console.error(error);
-      showToast('Profile ვერ ჩაიტვირთა','err');
+    if(profile.error){
+
+      console.error(profile.error);
+
+      $('connectionStatus').textContent='ERROR';
+      $('securityStatus').textContent='BLOCKED';
+
+      toast(
+        'Teacher profile ვერ ჩაიტვირთა',
+        'err'
+      );
+
       return false;
     }
 
-    teacherProfile=data;
+    teacherProfile=profile.data;
 
-    const role=String(data?.role||'').trim().toLowerCase();
+    const role=String(
+      teacherProfile?.role||''
+    ).trim().toLowerCase();
+
 
     if(role!=='teacher'){
-      showToast('ამ გვერდზე მხოლოდ Teacher-ს აქვს წვდომა','err');
+
+      $('securityStatus').textContent='BLOCKED';
+
+      toast(
+        'ACCESS DENIED — Teacher only',
+        'err'
+      );
 
       setTimeout(()=>{
-        location.replace('login.html?reason=forbidden');
+        location.replace(
+          'login.html?reason=forbidden'
+        );
       },900);
 
       return false;
     }
 
+
     $('teacherName').textContent=
-      data.full_name ||
-      data.name ||
+      teacherProfile.full_name ||
+      teacherProfile.name ||
       'Teacher';
 
     $('teacherEmail').textContent=
       currentUser.email || '';
 
     $('connectionStatus').textContent='LIVE';
+    $('securityStatus').textContent='TEACHER VERIFIED';
 
     return true;
 
@@ -1271,35 +1843,42 @@ async function checkTeacher(){
     console.error(error);
 
     $('connectionStatus').textContent='ERROR';
+    $('securityStatus').textContent='BLOCKED';
 
-    location.replace('teacher-login.html?reason=auth');
+    location.replace(
+      'teacher-login.html?reason=auth'
+    );
 
     return false;
   }
 }
 
-/* ---------------------------------------------------------
-   LOAD STUDENTS
---------------------------------------------------------- */
+
+/* =========================================================
+   STUDENTS
+========================================================= */
 
 async function loadStudents(){
 
   const list=$('studentsList');
 
   list.innerHTML=
-    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
+    `<div class="loading">
+      <span class="spinner"></span>
+      Loading students...
+    </div>`;
 
   try{
 
-    const {data,error}=await DB
+    const result=await DB
       .from('profiles')
       .select('*')
       .eq('role','student')
       .order('full_name',{ascending:true});
 
-    if(error)throw error;
+    if(result.error)throw result.error;
 
-    students=data||[];
+    students=result.data||[];
 
     renderStudents();
     populateStudentSelect();
@@ -1311,133 +1890,178 @@ async function loadStudents(){
 
     list.innerHTML=
       `<div class="empty">
-        ❌ მოსწავლეების ჩატვირთვა ვერ მოხერხდა.<br>
+        ❌ Student database could not be loaded.<br>
         <small>${esc(error.message)}</small>
       </div>`;
   }
 }
 
+
 function filteredStudents(){
 
-  const q=$('studentSearch').value.trim().toLowerCase();
+  const q=$('studentSearch')
+    .value
+    .trim()
+    .toLowerCase();
+
   const grade=$('gradeFilter').value;
 
-  return students.filter(s=>{
+  return students.filter(student=>{
 
     const text=(
-      s.full_name ||
-      s.name ||
-      s.email ||
+      student.full_name ||
+      student.name ||
+      student.email ||
       ''
     ).toLowerCase();
 
-    const okSearch=!q || text.includes(q);
-    const okGrade=
-      grade==='all' ||
-      String(s.grade||'')===grade;
+    const searchOK=
+      !q ||
+      text.includes(q);
 
-    return okSearch && okGrade;
+    const gradeOK=
+      grade==='all' ||
+      String(student.grade||'')===grade;
+
+    return searchOK && gradeOK;
   });
 }
+
 
 function renderStudents(){
 
   const list=$('studentsList');
+
   const arr=filteredStudents();
 
   if(!arr.length){
+
     list.innerHTML=
-      '<div class="empty">👤 მოსწავლე ვერ მოიძებნა.</div>';
+      `<div class="empty">
+        👤 Student not found.
+      </div>`;
+
     return;
   }
 
-  list.innerHTML=arr.map(s=>{
+  list.innerHTML=arr.map(student=>{
 
-    const grade=Number(s.grade||0);
+    const grade=Number(student.grade||0);
 
     return `
-      <div class="student-card">
+      <article class="student">
 
-        <div class="student-top">
+        <div class="student-head">
 
-          <div style="display:flex;gap:10px">
-            <div class="avatar">🧑‍🎓</div>
+          <div class="student-info">
+
+            <div class="avatar">
+              🧑‍🎓
+            </div>
 
             <div>
+
               <div class="student-name">
-                ${esc(s.full_name||s.name||'მოსწავლე')}
+                ${esc(
+                  student.full_name ||
+                  student.name ||
+                  'Student'
+                )}
               </div>
 
-              <div class="student-meta">
-                ${esc(s.email||'')}
+              <div class="email">
+                ${esc(student.email||'')}
               </div>
+
             </div>
+
           </div>
 
           <span class="badge ${grade?'g'+grade:''}">
-            ${grade?gradeName(grade):'კლასი არაა'}
+            ${grade?gradeName(grade):'No Grade'}
           </span>
 
         </div>
 
-        <div class="student-actions">
+        <div class="student-meta">
+          🎓 Learning Level:
+          ${gradeName(grade)}
+        </div>
 
-          <button class="btn primary"
-            onclick="assignGrade('${esc(s.user_id)}',2)">
+        <div class="actions">
+
+          <button
+            class="btn primary"
+            onclick="assignGrade('${esc(student.user_id)}',2)">
             🌱 G2
           </button>
 
-          <button class="btn primary"
-            onclick="assignGrade('${esc(s.user_id)}',3)">
+          <button
+            class="btn primary"
+            onclick="assignGrade('${esc(student.user_id)}',3)">
             🚀 G3
           </button>
 
-          <button class="btn yellow"
-            onclick="assignGrade('${esc(s.user_id)}',4)">
+          <button
+            class="btn yellow"
+            onclick="assignGrade('${esc(student.user_id)}',4)">
             ⭐ G4
           </button>
 
-          <button class="btn purple"
-            onclick="showStudentDetail('${esc(s.user_id)}')">
-            📊 დეტალურად
-          </button>
-
-          <button class="btn gray"
-            onclick="resetStudentProgress('${esc(s.user_id)}')">
-            ♻️ Reset
+          <button
+            class="btn purple"
+            onclick="showStudentDetail('${esc(student.user_id)}')">
+            📊 Intelligence
           </button>
 
         </div>
 
-      </div>
+      </article>
     `;
 
   }).join('');
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    ADD STUDENT
---------------------------------------------------------- */
+========================================================= */
 
 async function addStudent(){
 
-  const email=$('studentEmail').value.trim();
-  const grade=Number($('studentGrade').value);
+  const email=
+    $('studentEmail').value.trim();
+
+  const grade=
+    Number($('studentGrade').value);
 
   if(!email){
-    showToast('მიუთითე მოსწავლის Email','err');
+
+    toast(
+      'მიუთითე Student Email',
+      'err'
+    );
+
     return;
   }
+
+  const button=$('addStudentBtn');
+
+  button.disabled=true;
+  button.textContent='⏳ Adding...';
 
   try{
 
     /*
-      Preferred project RPC.
-      This keeps the operation server-side and compatible
-      with the teacher workflow.
+      Your Supabase project should contain
+      teacher_assign_student RPC.
+
+      Supported preferred parameters:
+      p_email
+      p_grade
     */
 
-    const {data,error}=await DB.rpc(
+    const result=await DB.rpc(
       'teacher_assign_student',
       {
         p_email:email,
@@ -1445,10 +2069,13 @@ async function addStudent(){
       }
     );
 
-    if(error)throw error;
+    if(result.error){
 
-    showToast(
-      `✅ ${email} მიენიჭა ${gradeName(grade)}`,
+      throw result.error;
+    }
+
+    toast(
+      `✅ ${email} → ${gradeName(grade)}`,
       'ok'
     );
 
@@ -1460,34 +2087,49 @@ async function addStudent(){
 
     console.error(error);
 
-    showToast(
-      'მოსწავლის დამატება ვერ მოხერხდა: '+error.message,
+    toast(
+      'Student addition failed: '+error.message,
       'err'
     );
+
+  }finally{
+
+    button.disabled=false;
+    button.textContent='➕ Add Student';
   }
 }
 
 $('addStudentBtn').onclick=addStudent;
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    ASSIGN GRADE
---------------------------------------------------------- */
+========================================================= */
 
 async function assignGrade(uid,grade){
 
   if(!uid)return;
 
+  const student=
+    students.find(x=>x.user_id===uid);
+
+  const name=
+    student?.full_name ||
+    student?.name ||
+    student?.email ||
+    'Student';
+
   if(!confirm(
-    `დავაყენოთ მოსწავლის კლასი ${gradeName(grade)}-ზე?`
+    `${name}\n\nდავაყენოთ ${gradeName(grade)}?`
   ))return;
 
   try{
 
     /*
-      First attempt: existing project RPC.
+      First try user_id RPC.
     */
 
-    const {error}=await DB.rpc(
+    let result=await DB.rpc(
       'teacher_assign_student',
       {
         p_user_id:uid,
@@ -1495,29 +2137,32 @@ async function assignGrade(uid,grade){
       }
     );
 
-    if(error){
+    /*
+      If project RPC uses email instead,
+      retry using student email.
+    */
 
-      /*
-        Fallback for projects where RPC accepts only email.
-      */
+    if(result.error){
 
-      const student=students.find(x=>x.user_id===uid);
+      if(!student?.email){
+        throw result.error;
+      }
 
-      if(!student?.email)throw error;
-
-      const fallback=await DB.rpc(
+      result=await DB.rpc(
         'teacher_assign_student',
         {
           p_email:student.email,
           p_grade:grade
         }
       );
-
-      if(fallback.error)throw fallback.error;
     }
 
-    showToast(
-      `🎓 კლასი შეიცვალა: ${gradeName(grade)}`,
+    if(result.error){
+      throw result.error;
+    }
+
+    toast(
+      `🎓 ${name} → ${gradeName(grade)}`,
       'ok'
     );
 
@@ -1527,119 +2172,136 @@ async function assignGrade(uid,grade){
 
     console.error(error);
 
-    showToast(
-      'კლასის შეცვლა ვერ მოხერხდა: '+error.message,
+    toast(
+      'კლასის შეცვლა ვერ მოხერხდა: '+
+      error.message,
       'err'
     );
   }
 }
 
-/* ---------------------------------------------------------
-   RESET STUDENT
---------------------------------------------------------- */
 
-async function resetStudentProgress(uid){
-
-  if(!confirm(
-    'ნამდვილად გინდა ამ მოსწავლის Progress-ის განულება?'
-  ))return;
-
-  try{
-
-    const {error}=await DB
-      .from('student_progress')
-      .delete()
-      .eq('user_id',uid);
-
-    if(error)throw error;
-
-    showToast('♻️ Progress განულდა','ok');
-
-    await loadProgress();
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-      'Reset ვერ შესრულდა: '+error.message,
-      'err'
-    );
-  }
-}
-
-/* ---------------------------------------------------------
-   STATS
---------------------------------------------------------- */
+/* =========================================================
+   STATS / PROGRESS
+========================================================= */
 
 async function loadProgress(){
 
   try{
 
-    const {data,error}=await DB
+    const result=await DB
       .from('student_progress')
-      .select('*')
-      .in('grade',[2,3,4]);
+      .select('*');
 
-    if(error)throw error;
+    if(result.error){
+      throw result.error;
+    }
 
-    progressRows=data||[];
-
-    updateStats();
+    progressRows=result.data||[];
 
   }catch(error){
 
-    console.warn('Progress:',error.message);
+    console.warn(
+      'student_progress:',
+      error.message
+    );
+
     progressRows=[];
   }
+
+  try{
+
+    const result=await DB
+      .from('quiz_attempts')
+      .select('*');
+
+    if(result.error){
+      throw result.error;
+    }
+
+    quizRows=result.data||[];
+
+  }catch(error){
+
+    console.warn(
+      'quiz_attempts:',
+      error.message
+    );
+
+    quizRows=[];
+  }
+
+  updateStats();
 }
+
 
 function updateStats(){
 
-  $('statStudents').textContent=students.length;
+  $('statStudents').textContent=
+    students.length;
 
   $('statG2').textContent=
-    students.filter(x=>Number(x.grade)===2).length;
+    students.filter(
+      x=>Number(x.grade)===2
+    ).length;
 
   $('statG3').textContent=
-    students.filter(x=>Number(x.grade)===3).length;
+    students.filter(
+      x=>Number(x.grade)===3
+    ).length;
 
   $('statG4').textContent=
-    students.filter(x=>Number(x.grade)===4).length;
+    students.filter(
+      x=>Number(x.grade)===4
+    ).length;
 
-  const words=progressRows.reduce(
-    (sum,x)=>sum+Number(
-      x.words_learned ??
-      (Array.isArray(x.learned_words)?x.learned_words.length:0)
-    ),
-    0
-  );
+  const words=
+    progressRows.reduce(
+      (sum,row)=>
+        sum+wordsOf(row),
+      0
+    );
 
   $('statWords').textContent=words;
+
+  $('statQuiz').textContent=
+    quizRows.length;
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    STUDENT SELECT
---------------------------------------------------------- */
+========================================================= */
 
 function populateStudentSelect(){
 
   const select=$('gradeStudent');
 
   select.innerHTML=
-    '<option value="">აირჩიე მოსწავლე</option>'+
-    students.map(s=>`
-      <option value="${esc(s.user_id)}">
-        ${esc(s.full_name||s.name||s.email||'მოსწავლე')}
+    `<option value="">
+      Choose student
+    </option>`+
+    students.map(student=>`
+
+      <option value="${esc(student.user_id)}">
+        ${esc(
+          student.full_name ||
+          student.name ||
+          student.email ||
+          'Student'
+        )}
       </option>
+
     `).join('');
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    ATTENDANCE
---------------------------------------------------------- */
+========================================================= */
 
 $('attendanceDate').value=today();
+
 
 async function loadAttendance(){
 
@@ -1649,83 +2311,118 @@ async function loadAttendance(){
     await loadStudents();
   }
 
-  list.innerHTML=students.map(s=>`
+  if(!students.length){
 
-    <div class="attendance-row">
+    list.innerHTML=
+      '<div class="empty">Students არ არის.</div>';
 
-      <div>
-        <b>${esc(s.full_name||s.name||'მოსწავლე')}</b>
-        <div class="small muted">
-          ${gradeName(Number(s.grade)||2)}
+    return;
+  }
+
+  list.innerHTML=
+    students.map(student=>`
+
+      <div class="att-row">
+
+        <div>
+
+          <b>
+            ${esc(
+              student.full_name ||
+              student.name ||
+              'Student'
+            )}
+          </b>
+
+          <div class="small muted">
+            ${gradeName(
+              Number(student.grade)||2
+            )}
+          </div>
+
         </div>
+
+        <div class="att-buttons">
+
+          <button
+            class="att present"
+            onclick="saveAttendance(
+              '${esc(student.user_id)}',
+              'present'
+            )">
+            ✅ მოვიდა
+          </button>
+
+          <button
+            class="att absent"
+            onclick="saveAttendance(
+              '${esc(student.user_id)}',
+              'absent'
+            )">
+            ❌ გაცდენა
+          </button>
+
+          <button
+            class="att late"
+            onclick="saveAttendance(
+              '${esc(student.user_id)}',
+              'late'
+            )">
+            ⏰ დაგვიანება
+          </button>
+
+          <button
+            class="att left"
+            onclick="saveAttendance(
+              '${esc(student.user_id)}',
+              'left'
+            )">
+            🚪 წავიდა
+          </button>
+
+        </div>
+
       </div>
 
-      <div class="attendance-buttons">
-
-        <button class="att-btn present"
-          onclick="saveAttendance('${esc(s.user_id)}','present')">
-          ✅ მოვიდა
-        </button>
-
-        <button class="att-btn absent"
-          onclick="saveAttendance('${esc(s.user_id)}','absent')">
-          ❌ გაცდენა
-        </button>
-
-        <button class="att-btn late"
-          onclick="saveAttendance('${esc(s.user_id)}','late')">
-          ⏰ დააგვიანა
-        </button>
-
-        <button class="att-btn left"
-          onclick="saveAttendance('${esc(s.user_id)}','left')">
-          🚪 წავიდა
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join('');
+    `).join('');
 }
+
 
 async function saveAttendance(uid,status){
 
-  const date=$('attendanceDate').value || today();
+  const date=
+    $('attendanceDate').value ||
+    today();
 
   try{
 
-    /*
-      Expected table:
-      attendance
-      user_id
-      teacher_id
-      date
-      status
-    */
-
-    const {error}=await DB
+    const result=await DB
       .from('attendance')
-      .upsert({
-        user_id:uid,
-        teacher_id:currentUser.id,
-        date:date,
-        status:status
-      },{
-        onConflict:'user_id,date'
-      });
+      .upsert(
+        {
+          user_id:uid,
+          teacher_id:currentUser.id,
+          date:date,
+          status:status
+        },
+        {
+          onConflict:'user_id,date'
+        }
+      );
 
-    if(error)throw error;
+    if(result.error){
+      throw result.error;
+    }
 
-    const names={
+    const labels={
       present:'მოვიდა',
       absent:'გაცდენა',
       late:'დაგვიანება',
       left:'წავიდა'
     };
 
-    showToast(
-      `🧑‍🎓 ${names[status]||status} ჩაიწერა`,
+    toast(
+      `🧑‍🎓 ${labels[status]}`,
       'ok'
     );
 
@@ -1733,213 +2430,283 @@ async function saveAttendance(uid,status){
 
     console.error(error);
 
-    showToast(
-      'დასწრების შენახვა ვერ მოხერხდა: '+error.message,
+    toast(
+      'Attendance ვერ შეინახა: '+
+      error.message,
       'err'
     );
   }
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    TOPICS
---------------------------------------------------------- */
+========================================================= */
 
 const TOPICS={
 
 2:[
-['🔤','Alphabet','Letters, sounds, spelling'],
-['🔢','Numbers','1–100 and counting'],
-['🎨','Colors','red, blue, green, yellow...'],
-['👨‍👩‍👧','Family','mother, father, sister, brother...'],
-['🐶','Animals','dog, cat, lion, tiger...'],
-['🍎','Food','apple, bread, milk, cheese...'],
-['🏫','School','book, pen, teacher, desk...'],
-['🏠','Home','room, kitchen, door, window...'],
-['👕','Clothes','shirt, trousers, shoes...'],
-['👤','Body','head, hand, eye, nose...'],
-['🌳','Nature','tree, flower, river, sun...'],
-['📅','Days & Months','Monday, January...'],
-['😊','Feelings','happy, sad, angry, tired...'],
-['🏃','Actions','run, jump, walk, read...'],
-['🍽️','Meals','breakfast, lunch, dinner...'],
-['🚗','Transport','car, bus, train, plane...'],
-['🏙️','Places','park, shop, hospital...'],
-['🌦️','Weather','sunny, rainy, cloudy...'],
-['🧸','Toys','ball, doll, car, kite...'],
-['📖','Reading','short stories and comprehension'],
-['✏️','Grammar','to be, have, can, plurals'],
-['🎯','Quiz','vocabulary challenge']
+['🔤','Alphabet','Letters, sounds and spelling'],
+['🔢','Numbers','Numbers 1–100'],
+['🎨','Colors','Basic colors and descriptions'],
+['👨‍👩‍👧','Family','Mother, father, sister, brother'],
+['🐶','Animals','Pets, wild animals and nature'],
+['🍎','Food','Food, drinks and simple preferences'],
+['🏫','School','Classroom objects and school life'],
+['🏠','Home','Rooms, furniture and objects'],
+['👕','Clothes','Clothes and everyday descriptions'],
+['👤','Body','Head, eyes, hands, feet'],
+['🌳','Nature','Trees, flowers, weather and nature'],
+['📅','Days & Months','Calendar vocabulary'],
+['😊','Feelings','Happy, sad, angry, tired'],
+['🏃','Actions','Run, jump, walk, read'],
+['🍽️','Meals','Breakfast, lunch and dinner'],
+['🚗','Transport','Cars, buses, trains and planes'],
+['🏙️','Places','Park, shop, hospital, school'],
+['🌦️','Weather','Sunny, rainy, cloudy, windy'],
+['🧸','Toys','Ball, doll, car, kite'],
+['📖','Reading','Short stories and comprehension'],
+['✏️','Grammar','To be, have, can, plurals'],
+['🎯','Quiz','Vocabulary challenge']
 ],
 
 3:[
-['🔤','Advanced Alphabet','spelling and pronunciation'],
-['📚','Vocabulary','everyday English'],
-['🏫','School Life','subjects and classroom'],
-['👥','People','friends and descriptions'],
-['🏠','My Home','rooms and furniture'],
-['🍕','Food & Drinks','meals and preferences'],
-['🛍️','Shopping','prices and objects'],
-['🚌','Transport','travel and directions'],
-['🌍','Countries','nationalities and languages'],
-['🌦️','Weather','seasons and forecasts'],
-['⏰','Time','clock and daily routines'],
-['🏃','Daily Actions','present simple'],
-['❤️','Feelings','emotions and opinions'],
-['🐾','Animals','wild and domestic'],
-['🌳','Nature','environment'],
-['📖','Reading','stories and questions'],
-['✏️','Grammar','present simple and continuous'],
-['🎯','Quiz','mixed challenge']
+['🔤','Smart Spelling','Spelling and pronunciation'],
+['📚','Vocabulary Lab','Everyday English vocabulary'],
+['🏫','School Life','Subjects, classroom and routines'],
+['👥','People','Descriptions and personalities'],
+['🏠','My Home','Rooms and furniture'],
+['🍕','Food & Drinks','Meals and preferences'],
+['🛍️','Shopping','Prices, objects and conversations'],
+['🚌','Transport','Travel and directions'],
+['🌍','Countries','Countries, nationalities, languages'],
+['🌦️','Weather','Seasons and forecasts'],
+['⏰','Time','Clock and daily routines'],
+['🏃','Daily Routine','Present simple'],
+['❤️','Feelings','Emotions and opinions'],
+['🐾','Animals','Wild and domestic animals'],
+['🌳','Environment','Nature and environment'],
+['📖','Reading Lab','Stories and questions'],
+['✏️','Grammar Lab','Present simple and continuous'],
+['🗣️','Speaking','Conversation practice'],
+['🎧','Listening','Listening comprehension'],
+['🎯','Quiz Arena','Mixed challenge']
 ],
 
 4:[
-['🚀','Vocabulary Mastery','high-frequency vocabulary'],
-['🧠','Smart Grammar','core English grammar'],
-['📖','Reading Lab','reading comprehension'],
-['✍️','Writing Lab','sentences and paragraphs'],
-['🗣️','Speaking','conversation practice'],
-['🎧','Listening','understanding spoken English'],
-['🌍','World English','countries and cultures'],
-['🏫','Education','school and learning'],
-['💼','Future Jobs','jobs and ambitions'],
-['🛒','Shopping','real-life conversations'],
-['✈️','Travel','airport, hotel, directions'],
-['🍽️','Restaurant','ordering food'],
-['❤️','Emotions','advanced feelings'],
-['🌦️','Weather','climate and nature'],
-['🔬','Science','simple science vocabulary'],
-['💻','Technology','computer and internet words'],
-['🏆','Challenge','advanced vocabulary quiz']
+['🚀','Vocabulary Mastery','High-frequency vocabulary'],
+['🧠','Smart Grammar','Core English grammar'],
+['📖','Reading Lab','Reading comprehension'],
+['✍️','Writing Lab','Sentences and paragraphs'],
+['🗣️','Speaking','Conversation practice'],
+['🎧','Listening','Understanding spoken English'],
+['🌍','World English','Countries and cultures'],
+['🏫','Education','School and learning'],
+['💼','Future Jobs','Jobs and ambitions'],
+['🛒','Shopping','Real-life conversations'],
+['✈️','Travel','Airport, hotel and directions'],
+['🍽️','Restaurant','Ordering food'],
+['❤️','Emotions','Advanced feelings'],
+['🌦️','Climate','Weather and climate'],
+['🔬','Science','Science vocabulary'],
+['💻','Technology','Computers and internet'],
+['🎨','Creative English','Creative descriptions'],
+['🏆','Challenge','Advanced vocabulary challenge'],
+['🎯','Final Quiz','Ultimate English challenge']
 ]
 
 };
 
+
 function renderTopics(){
 
-  const grade=Number($('topicGrade').value);
-  const grid=$('topicsGrid');
+  const grade=
+    Number($('topicGrade').value);
 
-  grid.innerHTML=(TOPICS[grade]||[]).map(t=>`
+  const grid=
+    $('topicsGrid');
 
-    <div class="topic"
-      onclick="openTopic('${esc(t[1])}',${grade})">
+  grid.innerHTML=
+    (TOPICS[grade]||[])
+      .map(topic=>`
 
-      <div class="icon">${t[0]}</div>
-      <b>${esc(t[1])}</b>
-      <small>${esc(t[2])}</small>
+        <div
+          class="topic"
+          onclick="openTopic(
+            '${esc(topic[1])}',
+            ${grade}
+          )">
 
-    </div>
+          <div class="topic-icon">
+            ${topic[0]}
+          </div>
 
-  `).join('');
+          <b>
+            ${esc(topic[1])}
+          </b>
+
+          <small>
+            ${esc(topic[2])}
+          </small>
+
+        </div>
+
+      `).join('');
 }
 
 $('topicGrade').onchange=renderTopics;
 
+
 function openTopic(title,grade){
 
-  showToast(
-    `📚 ${title} • Grade ${grade} მზადაა გაკვეთილისთვის`,
+  toast(
+    `📚 ${title} • ${gradeName(grade)} selected`,
     'ok'
   );
-
-  activatePanel('students');
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    GRADES
---------------------------------------------------------- */
+========================================================= */
 
 async function loadGrades(){
 
   const list=$('gradesList');
 
+  list.innerHTML=
+    `<div class="loading">
+      <span class="spinner"></span>
+      Loading grades...
+    </div>`;
+
   try{
 
-    const {data,error}=await DB
+    const result=await DB
       .from('grades')
       .select('*')
-      .order('created_at',{ascending:false})
-      .limit(50);
+      .order(
+        'created_at',
+        {ascending:false}
+      )
+      .limit(100);
 
-    if(error)throw error;
+    if(result.error){
+      throw result.error;
+    }
 
-    gradeRows=data||[];
+    gradeRows=result.data||[];
 
     if(!gradeRows.length){
+
       list.innerHTML=
         '<div class="empty">⭐ შეფასებები ჯერ არ არის.</div>';
+
       return;
     }
 
-    list.innerHTML=gradeRows.map(x=>{
+    list.innerHTML=
+      gradeRows.map(row=>{
 
-      const student=students.find(
-        s=>s.user_id===x.user_id
-      );
+        const student=
+          students.find(
+            x=>x.user_id===row.user_id
+          );
 
-      return `
-        <div class="grade-row">
+        return `
 
-          <div>
-            <b>
-              ${esc(
-                student?.full_name ||
-                student?.name ||
-                x.user_id ||
-                'მოსწავლე'
-              )}
-            </b>
+          <div class="row">
+
+            <div>
+
+              <b>
+                ${esc(
+                  student?.full_name ||
+                  student?.name ||
+                  row.user_id ||
+                  'Student'
+                )}
+              </b>
+
+              <div class="small muted">
+                ${esc(row.comment||'')}
+              </div>
+
+            </div>
+
+            <div class="score">
+              ${Number(row.score||0)}/10
+            </div>
 
             <div class="small muted">
-              ${esc(x.comment||'')}
+              ${
+                row.created_at
+                ?new Date(
+                  row.created_at
+                ).toLocaleString('ka-GE')
+                :''
+              }
             </div>
+
           </div>
 
-          <div class="score">
-            ${Number(x.score||0)}/10
-          </div>
+        `;
 
-          <div class="small muted">
-            ${x.created_at
-              ?new Date(x.created_at).toLocaleString('ka-GE')
-              :''
-            }
-          </div>
-
-        </div>
-      `;
-
-    }).join('');
+      }).join('');
 
   }catch(error){
 
+    console.error(error);
+
     list.innerHTML=
       `<div class="empty">
-        ⚠️ შეფასებების ცხრილი ვერ ჩაიტვირთა.<br>
+        ❌ Grades ვერ ჩაიტვირთა.<br>
         <small>${esc(error.message)}</small>
       </div>`;
   }
 }
 
+
 $('saveGradeBtn').onclick=async()=>{
 
-  const uid=$('gradeStudent').value;
-  const score=Number($('gradeScore').value);
-  const comment=$('gradeComment').value.trim();
+  const uid=
+    $('gradeStudent').value;
+
+  const score=
+    Number($('gradeScore').value);
+
+  const comment=
+    $('gradeComment')
+      .value
+      .trim();
 
   if(!uid){
-    showToast('აირჩიე მოსწავლე','err');
+
+    toast(
+      'აირჩიე Student',
+      'err'
+    );
+
     return;
   }
 
-  if(!Number.isFinite(score)||score<0||score>10){
-    showToast('ქულა უნდა იყოს 0-დან 10-მდე','err');
+  if(
+    !Number.isFinite(score) ||
+    score<0 ||
+    score>10
+  ){
+
+    toast(
+      'Score უნდა იყოს 0–10',
+      'err'
+    );
+
     return;
   }
 
   try{
 
-    const {error}=await DB
+    const result=await DB
       .from('grades')
       .insert({
         user_id:uid,
@@ -1948,9 +2715,14 @@ $('saveGradeBtn').onclick=async()=>{
         comment:comment
       });
 
-    if(error)throw error;
+    if(result.error){
+      throw result.error;
+    }
 
-    showToast('⭐ შეფასება შენახულია','ok');
+    toast(
+      '⭐ Grade saved successfully',
+      'ok'
+    );
 
     $('gradeScore').value='';
     $('gradeComment').value='';
@@ -1961,16 +2733,18 @@ $('saveGradeBtn').onclick=async()=>{
 
     console.error(error);
 
-    showToast(
-      'შეფასების შენახვა ვერ მოხერხდა: '+error.message,
+    toast(
+      'Grade save failed: '+
+      error.message,
       'err'
     );
   }
 };
 
-/* ---------------------------------------------------------
-   PROGRESS
---------------------------------------------------------- */
+
+/* =========================================================
+   PROGRESS INTELLIGENCE
+========================================================= */
 
 async function renderProgress(){
 
@@ -1978,477 +2752,697 @@ async function renderProgress(){
     await loadProgress();
   }
 
-  const box=$('progressList');
+  const box=
+    $('progressList');
 
   if(!students.length){
-    box.innerHTML='<div class="empty">მოსწავლეები არ არის.</div>';
+
+    box.innerHTML=
+      '<div class="empty">Students არ არის.</div>';
+
     return;
   }
 
-  box.innerHTML=students.map(s=>{
+  box.innerHTML=
+    students.map(student=>{
 
-    const rows=progressRows.filter(
-      x=>x.user_id===s.user_id
-    );
+      const rows=
+        progressRows.filter(
+          x=>x.user_id===student.user_id
+        );
 
-    const row=rows.find(
-      x=>Number(x.grade)===Number(s.grade)
-    )||rows[0]||{};
+      const row=
+        rows.find(
+          x=>Number(x.grade)===
+             Number(student.grade)
+        ) ||
+        rows[0] ||
+        {};
 
-    const grade=Number(s.grade||2);
+      const grade=
+        Number(student.grade)||2;
 
-    const words=Number(
-      row.words_learned ??
-      (Array.isArray(row.learned_words)
-        ?row.learned_words.length
-        :0)
-    );
+      const words=
+        wordsOf(row);
 
-    const best=Number(
-      row.best_quiz ??
-      row.score ??
-      0
-    );
+      const quizCount=
+        quizRows.filter(
+          x=>x.user_id===student.user_id
+        ).length;
 
-    const quiz=Number(row.quiz_completed||0);
+      const best=
+        Math.max(
+          0,
+          ...quizRows
+            .filter(
+              x=>x.user_id===student.user_id
+            )
+            .map(scoreOf),
+          ...rows.map(scoreOf)
+        );
 
-    const pct=progressPercent(words,grade);
+      const pct=
+        progressPercent(words,grade);
 
-    return `
+      return `
 
-      <div class="student-card" style="margin-bottom:10px">
+        <div class="progress-card">
 
-        <div class="student-top">
+          <div class="progress-head">
 
-          <div>
-            <div class="student-name">
-              ${esc(s.full_name||s.name||'მოსწავლე')}
+            <div>
+
+              <b>
+                ${esc(
+                  student.full_name ||
+                  student.name ||
+                  'Student'
+                )}
+              </b>
+
+              <div class="small muted">
+                ${gradeName(grade)}
+              </div>
+
             </div>
 
-            <div class="student-meta">
-              ${gradeName(grade)}
-            </div>
+            <b style="color:var(--yellow)">
+              ${pct}%
+            </b>
+
           </div>
 
-          <b style="color:var(--yellow)">
-            ${pct}%
-          </b>
-
-        </div>
-
-        <div class="progress-wrap">
           <div class="progress">
             <i style="width:${pct}%"></i>
           </div>
+
+          <div class="student-meta">
+
+            📚 ${words} words •
+            📝 ${quizCount} quizzes •
+            🏆 Best ${best}%
+
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="btn purple"
+              onclick="showStudentDetail(
+                '${esc(student.user_id)}'
+              )">
+              📊 Full Intelligence
+            </button>
+
+          </div>
+
         </div>
 
-        <div class="student-meta">
-          📚 ${words} სიტყვა •
-          📝 ${quiz} Quiz •
-          🏆 Best ${best}%
-        </div>
+      `;
 
-        <div class="student-actions">
-
-          <button class="btn purple"
-            onclick="showStudentDetail('${esc(s.user_id)}')">
-            📊 სრული ანალიზი
-          </button>
-
-        </div>
-
-      </div>
-    `;
-
-  }).join('');
+    }).join('');
 }
 
-/* ---------------------------------------------------------
+
+/* =========================================================
    STUDENT DETAIL
---------------------------------------------------------- */
+========================================================= */
 
 async function showStudentDetail(uid){
 
-  const student=students.find(
-    x=>x.user_id===uid
-  );
+  const student=
+    students.find(
+      x=>x.user_id===uid
+    );
 
-  const modal=$('detailModal');
-  const body=$('detailBody');
+  const modal=
+    $('detailModal');
+
+  const body=
+    $('detailBody');
 
   $('detailTitle').textContent=
-    `📊 ${student?.full_name||student?.name||'მოსწავლე'}`;
+    `📊 ${
+      student?.full_name ||
+      student?.name ||
+      'Student'
+    }`;
 
   modal.classList.add('open');
 
   body.innerHTML=
-    '<div class="loading"><span class="spinner"></span>ანალიზი...</div>';
+    `<div class="loading">
+      <span class="spinner"></span>
+      Building intelligence...
+    </div>`;
 
   try{
 
-    const [pr,qr]=await Promise.all([
-
-      DB.from('student_progress')
+    const progress=
+      await DB
+        .from('student_progress')
         .select('*')
         .eq('user_id',uid)
-        .order('grade'),
+        .order('grade');
 
-      DB.from('quiz_attempts')
+    const quizzes=
+      await DB
+        .from('quiz_attempts')
         .select('*')
         .eq('user_id',uid)
-        .order('created_at',{ascending:true})
-        .limit(100)
+        .order(
+          'created_at',
+          {ascending:true}
+        )
+        .limit(100);
 
-    ]);
+    if(progress.error){
+      throw progress.error;
+    }
 
-    const rows=pr.data||[];
-    const quizzes=qr.data||[];
+    if(quizzes.error){
+      throw quizzes.error;
+    }
 
-    const totalWords=rows.reduce(
-      (n,x)=>n+Number(
-        x.words_learned ??
-        (Array.isArray(x.learned_words)
-          ?x.learned_words.length
-          :0)
-      ),
-      0
-    );
+    const rows=
+      progress.data||[];
 
-    const best=Math.max(
-      0,
-      ...rows.map(scoreOf),
-      ...quizzes.map(scoreOf)
-    );
+    const quizData=
+      quizzes.data||[];
+
+    const totalWords=
+      rows.reduce(
+        (sum,row)=>
+          sum+wordsOf(row),
+        0
+      );
+
+    const best=
+      Math.max(
+        0,
+        ...rows.map(scoreOf),
+        ...quizData.map(scoreOf)
+      );
 
     body.innerHTML=`
 
       <div class="detail-grid">
 
-        <div class="detail-stat">
-          <small>📚 სიტყვები</small>
+        <div class="detail">
+          <small>📚 Learned Words</small>
           <b>${totalWords}</b>
         </div>
 
-        <div class="detail-stat">
+        <div class="detail">
           <small>📝 Quiz Attempts</small>
-          <b>${quizzes.length}</b>
+          <b>${quizData.length}</b>
         </div>
 
-        <div class="detail-stat">
+        <div class="detail">
           <small>🏆 Best Score</small>
           <b>${best}%</b>
         </div>
 
+        <div class="detail">
+          <small>🎓 Current Grade</small>
+          <b>
+            ${Number(student?.grade)||'-'}
+          </b>
+        </div>
+
       </div>
+
 
       <div class="chart">
 
-        <h3>📈 Quiz Performance</h3>
+        <h3>
+          📈 Quiz Performance
+        </h3>
 
         ${
-          quizzes.length
-          ?`
-          <div class="bar-chart">
-            ${quizzes.slice(-20).map(q=>{
+          quizData.length
+          ?
+          `
+          <div class="bars">
 
-              const v=Math.max(
-                0,
-                Math.min(100,scoreOf(q))
-              );
+            ${
+              quizData
+                .slice(-20)
+                .map(q=>{
 
-              return `
-                <div
-                  class="bar"
-                  style="height:${Math.max(4,v)}%"
-                  title="${v}%"
-                >
-                  <span>${v}</span>
-                </div>
-              `;
+                  const value=
+                    Math.max(
+                      0,
+                      Math.min(
+                        100,
+                        scoreOf(q)
+                      )
+                    );
 
-            }).join('')}
+                  return `
+                    <div
+                      class="bar"
+                      style="
+                        height:${Math.max(
+                          4,
+                          value
+                        )}%;
+                      ">
+
+                      <span>
+                        ${value}
+                      </span>
+
+                    </div>
+                  `;
+
+                })
+                .join('')
+            }
+
           </div>
           `
           :
-          '<div class="empty">Quiz მონაცემები ჯერ არ არის.</div>'
+          `
+          <div class="empty">
+            Quiz data not available yet.
+          </div>
+          `
         }
 
       </div>
 
+
       <div class="chart">
 
-        <h3>📚 Grade Progress</h3>
+        <h3>
+          🎓 Grade Progress
+        </h3>
 
         ${
-          [2,3,4].map(g=>{
+          [2,3,4]
+            .map(grade=>{
 
-            const r=rows.find(
-              x=>Number(x.grade)===g
-            )||{};
+              const row=
+                rows.find(
+                  x=>Number(x.grade)===grade
+                )||{};
 
-            const words=Number(
-              r.words_learned ??
-              (Array.isArray(r.learned_words)
-                ?r.learned_words.length
-                :0)
-            );
+              const words=
+                wordsOf(row);
 
-            const p=progressPercent(words,g);
+              const pct=
+                progressPercent(
+                  words,
+                  grade
+                );
 
-            return `
+              return `
 
-              <div style="margin:15px 0">
+                <div style="margin:15px 0">
 
-                <div style="
-                  display:flex;
-                  justify-content:space-between;
-                  margin-bottom:7px
-                ">
-                  <b>${gradeName(g)}</b>
-                  <b>${p}%</b>
+                  <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    margin-bottom:7px;
+                  ">
+
+                    <b>
+                      ${gradeName(grade)}
+                    </b>
+
+                    <b>
+                      ${pct}%
+                    </b>
+
+                  </div>
+
+                  <div class="progress">
+
+                    <i
+                      style="width:${pct}%">
+                    </i>
+
+                  </div>
+
+                  <div class="small muted">
+                    ${words} learned words
+                  </div>
+
                 </div>
 
-                <div class="progress">
-                  <i style="width:${p}%"></i>
+              `;
+
+            })
+            .join('')
+        }
+
+      </div>
+
+
+      <div class="chart">
+
+        <h3>
+          📝 Quiz History
+        </h3>
+
+        ${
+          quizData.length
+          ?
+          quizData
+            .slice()
+            .reverse()
+            .map(q=>`
+
+              <div class="row">
+
+                <div>
+                  <b>
+                    ${gradeName(
+                      Number(q.grade)||2
+                    )}
+                  </b>
+                </div>
+
+                <div class="score">
+                  ${scoreOf(q)}%
                 </div>
 
                 <div class="small muted">
-                  ${words} learned words
+                  ${
+                    q.created_at
+                    ?new Date(
+                      q.created_at
+                    ).toLocaleString('ka-GE')
+                    :''
+                  }
                 </div>
 
               </div>
 
-            `;
-
-          }).join('')
-        }
-
-      </div>
-
-      <div class="chart">
-
-        <h3>📝 Quiz History</h3>
-
-        ${
-          quizzes.length
-          ?quizzes.slice().reverse().map((q,i)=>`
-
-            <div class="history-row">
-
-              <div>
-                <b>
-                  ${gradeName(Number(q.grade)||2)}
-                </b>
-              </div>
-
-              <div class="score">
-                ${scoreOf(q)}%
-              </div>
-
-              <div class="small muted">
-                ${q.created_at
-                  ?new Date(q.created_at)
-                    .toLocaleString('ka-GE')
-                  :''
-                }
-              </div>
-
-            </div>
-
-          `).join('')
+            `)
+            .join('')
           :
-          '<div class="empty">Quiz history ცარიელია.</div>'
+          `
+          <div class="empty">
+            Quiz history is empty.
+          </div>
+          `
         }
 
       </div>
+
     `;
 
   }catch(error){
 
     console.error(error);
 
-    body.innerHTML=`
-      <div class="empty">
-        ❌ მონაცემების ჩატვირთვა ვერ მოხერხდა.<br>
+    body.innerHTML=
+      `<div class="empty">
+        ❌ Student intelligence ვერ ჩაიტვირთა.<br>
         <small>${esc(error.message)}</small>
-      </div>
-    `;
+      </div>`;
   }
 }
 
-$('closeModal').onclick=()=>
-  $('detailModal').classList.remove('open');
 
-$('detailModal').addEventListener('click',e=>{
-  if(e.target===$('detailModal')){
-    $('detailModal').classList.remove('open');
-  }
-});
-
-/* ---------------------------------------------------------
+/* =========================================================
    HISTORY
---------------------------------------------------------- */
+========================================================= */
 
 async function loadHistory(){
 
-  const box=$('historyList');
+  const box=
+    $('historyList');
 
   box.innerHTML=
-    '<div class="loading"><span class="spinner"></span>იტვირთება...</div>';
+    `<div class="loading">
+      <span class="spinner"></span>
+      Loading history...
+    </div>`;
 
   try{
 
-    const [grades,quizzes]=await Promise.all([
-
-      DB.from('grades')
+    const grades=
+      await DB
+        .from('grades')
         .select('*')
-        .order('created_at',{ascending:false})
-        .limit(30),
+        .order(
+          'created_at',
+          {ascending:false}
+        )
+        .limit(30);
 
-      DB.from('quiz_attempts')
+    const quizzes=
+      await DB
+        .from('quiz_attempts')
         .select('*')
-        .order('created_at',{ascending:false})
-        .limit(30)
+        .order(
+          'created_at',
+          {ascending:false}
+        )
+        .limit(30);
 
-    ]);
+    if(grades.error){
+      throw grades.error;
+    }
+
+    if(quizzes.error){
+      throw quizzes.error;
+    }
 
     const events=[];
 
-    (grades.data||[]).forEach(x=>{
+    (grades.data||[]).forEach(row=>{
+
       events.push({
-        type:'⭐ შეფასება',
-        score:Number(x.score||0)+'/10',
-        date:x.created_at,
-        uid:x.user_id
+
+        type:'⭐ Grade',
+
+        score:
+          Number(row.score||0)+'/10',
+
+        date:row.created_at,
+
+        uid:row.user_id
+
       });
+
     });
 
-    (quizzes.data||[]).forEach(x=>{
+    (quizzes.data||[]).forEach(row=>{
+
       events.push({
+
         type:'📝 Quiz',
-        score:scoreOf(x)+'%',
-        date:x.created_at,
-        uid:x.user_id
+
+        score:
+          scoreOf(row)+'%',
+
+        date:row.created_at,
+
+        uid:row.user_id
+
       });
+
     });
 
     events.sort(
-      (a,b)=>new Date(b.date||0)-new Date(a.date||0)
+      (a,b)=>
+        new Date(b.date||0)-
+        new Date(a.date||0)
     );
 
     if(!events.length){
+
       box.innerHTML=
-        '<div class="empty">📋 ისტორია ჯერ არ არის.</div>';
+        '<div class="empty">📋 History is empty.</div>';
+
       return;
     }
 
-    box.innerHTML=events.map(x=>{
+    box.innerHTML=
+      events.map(event=>{
 
-      const student=students.find(
-        s=>s.user_id===x.uid
-      );
+        const student=
+          students.find(
+            x=>x.user_id===event.uid
+          );
 
-      return `
-        <div class="history-row">
+        return `
 
-          <div>
-            <b>
-              ${esc(
-                student?.full_name ||
-                student?.name ||
-                'მოსწავლე'
-              )}
-            </b>
-            <div class="small muted">${x.type}</div>
+          <div class="row">
+
+            <div>
+
+              <b>
+                ${esc(
+                  student?.full_name ||
+                  student?.name ||
+                  'Student'
+                )}
+              </b>
+
+              <div class="small muted">
+                ${event.type}
+              </div>
+
+            </div>
+
+            <div class="score">
+              ${esc(event.score)}
+            </div>
+
+            <div class="small muted">
+
+              ${
+                event.date
+                ?new Date(
+                  event.date
+                ).toLocaleString('ka-GE')
+                :''
+              }
+
+            </div>
+
           </div>
 
-          <div class="score">${esc(x.score)}</div>
+        `;
 
-          <div class="small muted">
-            ${x.date
-              ?new Date(x.date)
-                .toLocaleString('ka-GE')
-              :''
-            }
-          </div>
-
-        </div>
-      `;
-
-    }).join('');
+      }).join('');
 
   }catch(error){
 
-    box.innerHTML=`
-      <div class="empty">
-        ⚠️ ისტორიის ჩატვირთვა ვერ მოხერხდა.<br>
+    console.error(error);
+
+    box.innerHTML=
+      `<div class="empty">
+        ⚠️ History ვერ ჩაიტვირთა.<br>
         <small>${esc(error.message)}</small>
-      </div>
-    `;
+      </div>`;
   }
 }
 
-/* ---------------------------------------------------------
-   SEARCH / FILTER
---------------------------------------------------------- */
 
-$('studentSearch').addEventListener(
-  'input',
-  renderStudents
-);
+/* =========================================================
+   SEARCH
+========================================================= */
 
-$('gradeFilter').addEventListener(
-  'change',
-  renderStudents
-);
+$('studentSearch')
+  .addEventListener(
+    'input',
+    renderStudents
+  );
+
+$('gradeFilter')
+  .addEventListener(
+    'change',
+    renderStudents
+  );
 
 $('reloadStudents').onclick=
   loadStudents;
 
+
+/* =========================================================
+   GLOBAL SYNC
+========================================================= */
+
 $('refreshBtn').onclick=async()=>{
 
-  showToast('🔄 მონაცემები ახლდება...');
+  toast(
+    '🔄 Supabase synchronization...'
+  );
 
   await Promise.all([
     loadStudents(),
     loadProgress()
   ]);
 
-  showToast('✅ Sync დასრულდა','ok');
+  toast(
+    '✅ System synchronized',
+    'ok'
+  );
 };
 
-/* ---------------------------------------------------------
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+$('closeModal').onclick=()=>{
+  $('detailModal')
+    .classList
+    .remove('open');
+};
+
+$('detailModal').addEventListener(
+  'click',
+  event=>{
+
+    if(
+      event.target===
+      $('detailModal')
+    ){
+
+      $('detailModal')
+        .classList
+        .remove('open');
+    }
+
+  }
+);
+
+
+/* =========================================================
    LOGOUT
---------------------------------------------------------- */
+========================================================= */
 
 $('logoutBtn').onclick=async()=>{
 
-  const btn=$('logoutBtn');
-
-  if(!confirm('ნამდვილად გინდა ანგარიშიდან გამოსვლა?')){
+  if(!confirm(
+    'ნამდვილად გინდა გამოსვლა?'
+  )){
     return;
   }
 
-  btn.disabled=true;
-  btn.textContent='⏳ გამოდის...';
+  const button=
+    $('logoutBtn');
+
+  button.disabled=true;
+  button.textContent=
+    '⏳ ...';
 
   try{
+
     await DB.auth.signOut({
       scope:'global'
     });
+
   }catch(error){
+
     console.warn(error);
+
   }
 
   try{
 
-    [localStorage,sessionStorage].forEach(store=>{
+    [
+      localStorage,
+      sessionStorage
+    ].forEach(store=>{
 
       const remove=[];
 
-      for(let i=0;i<store.length;i++){
+      for(
+        let i=0;
+        i<store.length;
+        i++
+      ){
 
-        const key=store.key(i);
+        const key=
+          store.key(i);
 
         if(
           key &&
@@ -2458,12 +3452,17 @@ $('logoutBtn').onclick=async()=>{
             /auth-token/i.test(key)
           )
         ){
+
           remove.push(key);
         }
       }
 
       remove.forEach(key=>{
-        try{store.removeItem(key)}catch(_){}
+
+        try{
+          store.removeItem(key);
+        }catch(_){}
+
       });
 
     });
@@ -2475,37 +3474,53 @@ $('logoutBtn').onclick=async()=>{
   );
 };
 
-/* ---------------------------------------------------------
-   KEYBOARD SHORTCUTS
---------------------------------------------------------- */
 
-document.addEventListener('keydown',e=>{
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
-  if(e.key==='Escape'){
-    $('detailModal').classList.remove('open');
+document.addEventListener(
+  'keydown',
+  event=>{
+
+    if(event.key==='Escape'){
+
+      $('detailModal')
+        .classList
+        .remove('open');
+    }
+
+    if(
+      event.ctrlKey &&
+      event.key.toLowerCase()==='k'
+    ){
+
+      event.preventDefault();
+
+      activatePanel('students');
+
+      $('studentSearch').focus();
+    }
+
   }
+);
 
-  if(e.ctrlKey && e.key.toLowerCase()==='k'){
-    e.preventDefault();
-    activatePanel('students');
-    $('studentSearch').focus();
-  }
 
-});
-
-/* ---------------------------------------------------------
+/* =========================================================
    BOOT
---------------------------------------------------------- */
+========================================================= */
 
 async function boot(){
 
   if(!DB)return;
 
-  const ok=await checkTeacher();
+  const allowed=
+    await checkTeacher();
 
-  if(!ok)return;
+  if(!allowed)return;
 
-  $('attendanceDate').value=today();
+  $('attendanceDate').value=
+    today();
 
   renderTopics();
 
@@ -2515,10 +3530,31 @@ async function boot(){
   ]);
 
   renderStudents();
-
 }
 
-if(document.readyState==='loading'){
+
+/* =========================================================
+   GLOBAL API
+========================================================= */
+
+window.ENGLISH_MARIAMI_TEACHER={
+
+  assignGrade,
+  saveAttendance,
+  showStudentDetail,
+  activatePanel,
+  loadStudents,
+  loadProgress,
+  loadAttendance,
+  renderTopics
+
+};
+
+
+if(
+  document.readyState===
+  'loading'
+){
 
   document.addEventListener(
     'DOMContentLoaded',
@@ -2531,20 +3567,6 @@ if(document.readyState==='loading'){
   boot();
 
 }
-
-/* ---------------------------------------------------------
-   GLOBAL API
---------------------------------------------------------- */
-
-window.ENGLISH_MARIAMI_TEACHER={
-  assignGrade,
-  resetStudentProgress,
-  showStudentDetail,
-  saveAttendance,
-  activatePanel,
-  loadStudents,
-  loadProgress
-};
 
 </script>
 
