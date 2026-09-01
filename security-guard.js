@@ -31,13 +31,13 @@
 
   const page = path.split('/').pop() || '';
 
-  const LOGIN = 'login.html';
-  const TEACHER_LOGIN = 'teacher-login.html';
+  const LOGIN = '/login.html';
+  const TEACHER_LOGIN = '/teacher-login.html';
 
   const GRADE_PAGES = {
-    2: 'grade2.html',
-    3: 'grade3.html',
-    4: 'grade4.html'
+    2: '/grade2/index.html',
+    3: '/grade3.html',
+    4: '/grade4.html'
   };
 
   const ROLE = {
@@ -83,12 +83,12 @@
   function isStudentPage() {
     return (
       page === 'student-dashboard.html' ||
-      /^grade[234]\.html$/.test(page)
+      /(?:^|\/)grade[234](?:\.html|\/index\.html)$/.test(path)
     );
   }
 
   function getGradeFromPage() {
-    const match = page.match(/^grade([234])\.html$/);
+    const match = path.match(/(?:^|\/)grade([234])(?:\.html|\/index\.html)$/i);
     return match ? Number(match[1]) : null;
   }
 
@@ -101,7 +101,7 @@
 
     if (
       window.location.pathname.toLowerCase() ===
-      '/' + url.toLowerCase()
+      url.toLowerCase()
     ) {
       return;
     }
@@ -111,11 +111,13 @@
 
   function loginRedirect() {
     const target =
-      page && page !== LOGIN
+      page && page !== LOGIN.replace(/^\//, '')
         ? LOGIN +
           '?redirect=' +
           encodeURIComponent(
-            page + window.location.search
+            window.location.pathname +
+            window.location.search +
+            window.location.hash
           )
         : LOGIN;
 
@@ -127,7 +129,9 @@
       TEACHER_LOGIN +
       '?redirect=' +
       encodeURIComponent(
-        page + window.location.search
+        window.location.pathname +
+        window.location.search +
+        window.location.hash
       )
     );
   }
@@ -408,10 +412,6 @@
     const role =
       normalizeRole(profile.role);
 
-    /* --------------------------------------------------------
-       TEACHER AREA
-    -------------------------------------------------------- */
-
     if (isTeacherPage()) {
 
       if (role !== ROLE.TEACHER) {
@@ -420,11 +420,11 @@
           redirect(
             GRADE_PAGES[
               Number(profile.grade)
-            ] || 'student-dashboard.html'
+            ] || '/student-dashboard.html'
           );
 
         } else if (role === ROLE.PARENT) {
-          redirect('parent-dashboard.html');
+          redirect('/parent-dashboard.html');
 
         } else {
           loginRedirect();
@@ -435,23 +435,19 @@
 
       return true;
     }
-
-    /* --------------------------------------------------------
-       PARENT AREA
-    -------------------------------------------------------- */
 
     if (isParentPage()) {
 
       if (role !== ROLE.PARENT) {
 
         if (role === ROLE.TEACHER) {
-          redirect('teacher-dashboard.html');
+          redirect('/teacher-dashboard.html');
 
         } else if (role === ROLE.STUDENT) {
           redirect(
             GRADE_PAGES[
               Number(profile.grade)
-            ] || 'student-dashboard.html'
+            ] || '/student-dashboard.html'
           );
 
         } else {
@@ -464,19 +460,15 @@
       return true;
     }
 
-    /* --------------------------------------------------------
-       STUDENT AREA
-    -------------------------------------------------------- */
-
     if (isStudentPage()) {
 
       if (role !== ROLE.STUDENT) {
 
         if (role === ROLE.TEACHER) {
-          redirect('teacher-dashboard.html');
+          redirect('/teacher-dashboard.html');
 
         } else if (role === ROLE.PARENT) {
-          redirect('parent-dashboard.html');
+          redirect('/parent-dashboard.html');
 
         } else {
           loginRedirect();
@@ -521,7 +513,7 @@
         'EWM Security: invalid student grade.'
       );
 
-      redirect('student-dashboard.html');
+      redirect('/student-dashboard.html');
 
       return false;
     }
@@ -625,8 +617,6 @@
             const newRole =
               normalizeRole(next.role);
 
-            /* Role changed */
-
             if (
               newRole !==
               normalizeRole(profile.role)
@@ -635,8 +625,6 @@
               window.location.reload();
               return;
             }
-
-            /* Grade changed */
 
             if (
               [2,3,4].includes(newGrade) &&

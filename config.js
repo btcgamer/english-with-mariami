@@ -35,8 +35,12 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
   const client = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
   if (!client) return;
 
-  const gradeMatch = path.match(/(?:^|\/)grade([234])\.html$/);
+  const gradeMatch = path.match(/(?:^|\/)grade([234])(?:\.html|\/index\.html)$/);
   const isStudentDashboard = path.endsWith('/student-dashboard.html') || path.endsWith('student-dashboard.html');
+
+  function gradeTarget(grade){
+    return Number(grade) === 2 ? '/grade2/index.html' : '/grade' + Number(grade) + '.html';
+  }
 
   async function getProfile(){
     const { data: { user }, error: userError } = await client.auth.getUser();
@@ -74,7 +78,7 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
       const auth = await getProfile();
 
       if(!auth){
-        location.replace('login.html?reason=unauthorized');
+        location.replace('/login.html?reason=unauthorized');
         return;
       }
 
@@ -82,21 +86,21 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
       const assignedGrade = Number(auth.profile?.grade || 0);
 
       if(role !== 'student'){
-        location.replace(role === 'teacher' ? 'teacher-dashboard.html' : 'login.html?reason=wrong-role');
+        location.replace(role === 'teacher' ? '/teacher-dashboard.html' : '/login.html?reason=wrong-role');
         return;
       }
 
       if(![2,3,4].includes(assignedGrade)){
-        location.replace('student-dashboard.html?reason=no-grade');
+        location.replace('/student-dashboard.html?reason=no-grade');
         return;
       }
 
       if(assignedGrade !== currentGrade){
-        location.replace('grade' + assignedGrade + '.html?reason=grade-locked');
+        location.replace(gradeTarget(assignedGrade) + '?reason=grade-locked');
       }
     }catch(error){
       console.warn('Grade access guard error:', error);
-      location.replace('student-dashboard.html?reason=access-check');
+      location.replace('/student-dashboard.html?reason=access-check');
     }
   }
 
@@ -106,13 +110,13 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT =
     try{
       const auth = await getProfile();
       if(!auth){
-        location.replace('login.html?reason=unauthorized');
+        location.replace('/login.html?reason=unauthorized');
         return;
       }
 
       const role = String(auth.profile?.role || '').trim().toLowerCase();
       if(role !== 'student'){
-        location.replace(role === 'teacher' ? 'teacher-dashboard.html' : 'login.html?reason=wrong-role');
+        location.replace(role === 'teacher' ? '/teacher-dashboard.html' : '/login.html?reason=wrong-role');
         return;
       }
 

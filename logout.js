@@ -52,7 +52,7 @@
 
   const isStudent =
     /student-dashboard/.test(PATH) ||
-    /grade[234]\.html$/.test(PATH);
+    /grade[234](?:\.html|\/index\.html)$/.test(PATH);
 
   // ------------------------------------------------------------
   // REDIRECT
