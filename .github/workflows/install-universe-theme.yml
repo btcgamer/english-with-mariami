@@ -1,23 +1,18 @@
-name: Install shared Learning Universe theme
+name: Validate Learning Universe
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: write
-  actions: read
+  contents: read
 
 jobs:
-  install:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Validate shared assets without rewriting Grade pages
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Validate shared and Grade 4 assets
         shell: bash
         run: |
           set -euo pipefail
@@ -31,26 +26,3 @@ jobs:
           test -f grade4/grade4.css
           test -f grade4/grade4.js
           test -f grade4/grade4-futuristic-content.js
-
-      - name: Build complete project ZIP
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf package
-          mkdir -p package/english-with-mariami-futuristic
-          rsync -a --exclude='.git/' --exclude='package/' ./ package/english-with-mariami-futuristic/
-          cat > package/english-with-mariami-futuristic/README-FUTURISTIC.md <<'EOF'
-# English with Mariami — Futuristic Learning Universe
-
-Complete project package from the GitHub repository with the shared 3D/Neon Learning Universe layer.
-EOF
-          cd package
-          zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
-
-      - name: Upload complete project ZIP
-        uses: actions/upload-artifact@v4
-        with:
-          name: english-with-mariami-futuristic
-          path: english-with-mariami-futuristic.zip
-          if-no-files-found: error
-          retention-days: 30
