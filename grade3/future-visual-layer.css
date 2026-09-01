@@ -1,0 +1,9 @@
+/* Grade 3 — signature cyber/AI visual layer. Visual-only: no content, auth or learning logic changes. */
+.g3-app{isolation:isolate}
+.g3-app::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:repeating-linear-gradient(0deg,transparent 0 5px,rgba(36,231,255,.018) 6px),radial-gradient(circle at 50% 38%,transparent 0 22%,rgba(36,231,255,.045) 23%,transparent 48%);opacity:.8;animation:g3Scan 9s linear infinite}
+.g3-app::after{content:"";position:fixed;left:50%;top:15%;width:min(78vw,920px);height:min(78vw,920px);pointer-events:none;z-index:-1;transform:translateX(-50%);border:1px solid rgba(36,231,255,.08);border-radius:50%;box-shadow:0 0 90px rgba(36,231,255,.04),inset 0 0 90px rgba(155,92,255,.04);animation:g3Core 18s linear infinite}
+.mission{backdrop-filter:blur(10px);transform-style:preserve-3d}
+.mission .icon{transform:translateZ(10px)}
+@keyframes g3Scan{from{background-position:0 0,0 0}to{background-position:0 90px,0 0}}
+@keyframes g3Core{to{transform:translateX(-50%) rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.g3-app::before,.g3-app::after{animation:none!important}.mission{transform-style:flat}}
