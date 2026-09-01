@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#02030d">
+<title>English with Mariami — Logout</title>
+<style>
+html,body{margin:0;min-height:100%;background:#02030d;color:#fff;font-family:Inter,Segoe UI,Arial,sans-serif}body{display:grid;place-items:center;min-height:100vh}.box{text-align:center;padding:35px;border:1px solid rgba(0,245,255,.25);border-radius:24px;background:rgba(10,15,40,.8);box-shadow:0 0 45px rgba(0,245,255,.12)}.spin{font-size:42px;animation:spin 1.2s linear infinite;display:inline-block}@keyframes spin{to{transform:rotate(360deg)}}p{color:#9aa7c7}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+</head>
+<body>
+<div class="box"><div class="spin">✦</div><h2>Logging out…</h2><p>Closing your learning session securely.</p></div>
+<script>
+(async function(){
+'use strict';
+try{
+ const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
+ if(client&&client.auth) await client.auth.signOut();
+}catch(e){console.warn('[Logout]',e)}
+try{localStorage.removeItem('supabase.auth.token')}catch(e){}
+location.replace('academy.html');
+})();
+</script>
+</body>
+</html>
