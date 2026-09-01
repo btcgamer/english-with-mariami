@@ -34,41 +34,13 @@
     }, {once:true});
   }
 
-  /* Chrome/Edge install prompt: only show after the browser says installation is available. */
+  /* Grade 4 install UI was moved to the Academy hub. */
   var deferredPrompt = null;
   var installButton = null;
-
-  function isGrade4(){ return /(^|\/)grade4(?:\/|$)/i.test(location.pathname); }
-
-  function createInstallUI(){
-    if (!isGrade4() || installButton || standalone || iosStandalone) return;
-    var wrap = document.createElement('div');
-    wrap.id = 'g4-install-app';
-    wrap.style.cssText = 'position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:99999;display:flex;justify-content:center;pointer-events:none;';
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.textContent = '📱 INSTALL GRADE 4 APP';
-    btn.setAttribute('aria-label','Install English with Mariami Grade 4 as an app');
-    btn.style.cssText = 'pointer-events:auto;border:1px solid rgba(125,211,252,.65);border-radius:999px;padding:13px 20px;font:700 14px/1 system-ui,sans-serif;letter-spacing:.04em;color:#e0f2fe;background:rgba(2,8,23,.94);box-shadow:0 8px 30px rgba(0,0,0,.35),0 0 24px rgba(56,189,248,.25);backdrop-filter:blur(12px);cursor:pointer;';
-    btn.addEventListener('click', function(){
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function(){ deferredPrompt = null; hideInstallUI(); }).catch(function(){ deferredPrompt = null; });
-    });
-    wrap.appendChild(btn);
-    document.body.appendChild(wrap);
-    installButton = wrap;
-  }
-
-  function showInstallUI(){ if (!installButton) createInstallUI(); if (installButton) installButton.style.display='flex'; }
+  function isGrade4(){ return false; }
+  function createInstallUI(){ return; }
+  function showInstallUI(){ return; }
   function hideInstallUI(){ if (installButton) installButton.style.display='none'; }
-
-  window.addEventListener('beforeinstallprompt', function(e){
-    if (!isGrade4() || standalone || iosStandalone) return;
-    e.preventDefault();
-    deferredPrompt = e;
-    showInstallUI();
-  });
-
+  window.addEventListener('beforeinstallprompt', function(e){ return; });
   window.addEventListener('appinstalled', function(){ deferredPrompt = null; hideInstallUI(); });
 })();
