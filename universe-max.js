@@ -22,7 +22,7 @@ function addRobotCompanion(){
   let tx=window.innerWidth-half,ty=window.innerHeight-half,x=tx,y=ty,active=false,lastFrame=performance.now();
   function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
   function target(px,py){tx=clamp(px,half,window.innerWidth-half);ty=clamp(py,half,window.innerHeight-half);active=true;r.classList.add('u-rc-active')}
-  function follow(now){const dt=Math.min(40,Math.max(8,now-lastFrame));lastFrame=now;if(active){if(reduced){x=tx;y=ty}else{const alpha=1-Math.pow(1-.16,dt/16.67);x+=(tx-x)*alpha;y+=(ty-y)*alpha}r.style.transform='translate3d('+(x-half)+'px,'+(y-half)+'px,0)'}requestAnimationFrame(follow)}
+  function follow(now){const dt=Math.min(40,Math.max(8,now-lastFrame));lastFrame=now;if(active){if(reduced){x=tx;y=ty}else{const alpha=1-Math.pow(1-.28,dt/16.67);x+=(tx-x)*alpha;y+=(ty-y)*alpha}r.style.transform='translate3d('+(x-half)+'px,'+(y-half)+'px,0)'}requestAnimationFrame(follow)}
   function handlePointer(e){if(e.pointerType==='touch'||e.pointerType==='pen'||e.pointerType==='mouse')target(e.clientX,e.clientY)}
   window.addEventListener('pointermove',handlePointer,{passive:true});
   window.addEventListener('pointerdown',handlePointer,{passive:true});
