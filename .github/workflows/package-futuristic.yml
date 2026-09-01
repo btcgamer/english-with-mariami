@@ -14,13 +14,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Create ZIP
+        shell: bash
         run: |
-          set -e
+          set -euo pipefail
           rm -rf package english-with-mariami-futuristic.zip
           mkdir -p package/english-with-mariami-futuristic
-          cp -a . package/english-with-mariami-futuristic/
-          rm -rf package/english-with-mariami-futuristic/.git package/english-with-mariami-futuristic/package
+          rsync -a --exclude='.git/' --exclude='package/' ./ package/english-with-mariami-futuristic/
           cat > package/english-with-mariami-futuristic/README-FUTURISTIC.md <<'EOF'
 # English with Mariami — Futuristic Learning Universe
 
@@ -32,6 +33,7 @@ Visual layer: holographic cards, 3D tilt/parallax, perspective grid, glow/shine,
 EOF
           cd package
           zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
+
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v4
         with:
