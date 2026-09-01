@@ -24,54 +24,20 @@ jobs:
 
           python3 - <<'PY'
           from pathlib import Path
-          import re
 
           path = Path('lesson.html')
-          if path.exists():
-              text = path.read_text(encoding='utf-8')
+          text = path.read_text(encoding='utf-8')
 
-              fixed_loader = r'''async function loadLesson(){
-          if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');
-          const value=String(lessonParam||'').trim();
-          let lesson=null;
-          const isUUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
-          if(isUUID){
-            const r=await client.from('lessons').select('*').eq('id',value).maybeSingle();
-            if(r.error)throw r.error;
-            lesson=r.data;
-          }else if(/^\d+$/.test(value)){
-            const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',Number(value)).maybeSingle();
-            if(r.error)throw r.error;
-            lesson=r.data;
-          }
-          if(!lesson){
-            const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();
-            if(r.error)throw r.error;
-            lesson=r.data;
-          }
-          if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');
-          return lesson;
-          }'''
+          old = "async function loadLesson(){if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');let lesson=null;if(lessonParam){const r=await client.from('lessons').select('*').eq('id',lessonParam).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson){const n=Number(lessonParam);if(Number.isFinite(n)){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',n).maybeSingle();if(!r.error)lesson=r.data;}}if(!lesson){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');return lesson;}"
 
-              pattern = r'async function loadLesson\(\)\{.*?\}\s*async function loadWords'
-              replacement = fixed_loader + '\nasync function loadWords'
-              new_text, count = re.subn(pattern, replacement, text, count=1, flags=re.S)
-              if count:
-                  text = new_text
+          new = "async function loadLesson(){if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');const value=String(lessonParam||'').trim();let lesson=null;const isUUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);if(isUUID){const r=await client.from('lessons').select('*').eq('id',value).maybeSingle();if(r.error)throw r.error;lesson=r.data;}else if(/^\\d+$/.test(value)){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',Number(value)).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');return lesson;}"
 
-              # Student-friendly return path; teacher lessons keeps its own referrer path.
-              marker = "const client=window.supabaseClient;"
-              nav_patch = """
-          const backLink=document.querySelector('.nav-actions a.btn');
-          if(backLink && Number(grade)===2 && !document.referrer.includes('/teacher-lessons.html')){
-            backLink.href='/grade2.html';
-            backLink.textContent='🌱 Grade 2-ზე დაბრუნება';
-          }
-          """
-              if marker in text and 'const backLink=document.querySelector' not in text:
-                  text = text.replace(marker, marker + nav_patch, 1)
+          if old in text:
+              text = text.replace(old, new, 1)
+          else:
+              raise SystemExit('Expected lesson.html loadLesson block was not found; refusing unrelated edits')
 
-              path.write_text(text, encoding='utf-8')
+          path.write_text(text, encoding='utf-8')
           PY
 
           patch_page(){
@@ -103,23 +69,11 @@ jobs:
           rm -rf package
           mkdir -p package/english-with-mariami-futuristic
           cp -a . package/english-with-mariami-futuristic/
-          rm -rf package/english-with-mariami-futuristic/.git
-          rm -rf package/english-with-mariami-futuristic/package
+          rm -rf package/english-with-mariami-futuristic/.git package/english-with-mariami-futuristic/package
           cat > package/english-with-mariami-futuristic/README-FUTURISTIC.md <<'EOF'
 # English with Mariami — Futuristic Learning Universe
 
 Complete project package from the GitHub repository with the shared 3D/Neon Learning Universe layer.
-
-Included:
-- Home Universe Hub
-- Grade 2, Grade 3 and Grade 4 pages
-- Holographic cards
-- 3D/parallax tilt
-- Perspective grid
-- Glow and shine effects
-- Responsive layout
-- Reduced-motion support
-- Existing Supabase/application files preserved
 EOF
           cd package
           zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
