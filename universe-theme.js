@@ -8,4 +8,8 @@ function decorate(root=document){root.querySelectorAll(candidates).forEach((el,i
 decorate(); new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate(n)}))).observe(document.body,{childList:true,subtree:true});
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
 if(!reduce.matches){document.addEventListener('pointermove',e=>{if(innerWidth<800)return;const t=e.target.closest?.('.u-holo');if(!t)return;const r=t.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;t.style.transform=`perspective(800px) rotateX(${(-y*5).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg) translateY(-7px) scale(1.012)`;t.style.setProperty('--u-mx',`${(x+.5)*100}%`);t.style.setProperty('--u-my',`${(y+.5)*100}%`)},{passive:true});document.addEventListener('pointerout',e=>{const t=e.target.closest?.('.u-holo');if(t&&(!e.relatedTarget||!t.contains(e.relatedTarget))){t.style.transform='';t.style.removeProperty('--u-mx');t.style.removeProperty('--u-my')}},{passive:true});}
+/* Shared Core: load the additive MAX layer without replacing page-specific styles. */
+function loadOnce(kind,href){if(kind==='css'){if([...document.styleSheets].some(s=>s.href&&s.href.endsWith(href)))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);return;}if(document.querySelector(`script[src$="${href}"]`))return;const s=document.createElement('script');s.src=href;s.defer=true;document.head.appendChild(s);}
+loadOnce('css','/universe-max.css');
+loadOnce('js','/universe-max.js');
 })();
