@@ -12,4 +12,47 @@ if(!reduce.matches){document.addEventListener('pointermove',e=>{if(innerWidth<80
 function loadOnce(kind,href){if(kind==='css'){if([...document.styleSheets].some(s=>s.href&&s.href.endsWith(href)))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);return;}if(document.querySelector(`script[src$="${href}"]`))return;const s=document.createElement('script');s.src=href;s.defer=true;document.head.appendChild(s);}
 loadOnce('css','/universe-max.css');
 loadOnce('js','/universe-max.js');
+
+/* Main page only: expose the browser's real PWA install action as INSTALL APP. */
+if(grade==='home' && !window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone){
+  let deferredPrompt=null;
+  const addInstallButton=()=>{
+    if(document.getElementById('__ewm-install-app'))return;
+    const buttons=document.querySelector('.hero-buttons');
+    if(!buttons)return;
+    const btn=document.createElement('button');
+    btn.id='__ewm-install-app';
+    btn.type='button';
+    btn.className='primary-button ewm-install-app';
+    btn.textContent='📱 INSTALL APP';
+    btn.style.cursor='pointer';
+    btn.style.border='1px solid #a4ffff';
+    btn.style.font='inherit';
+    btn.hidden=true;
+    btn.addEventListener('click',async()=>{
+      if(!deferredPrompt)return;
+      btn.disabled=true;
+      try{
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+      }catch(e){console.warn('PWA install prompt error:',e)}
+      deferredPrompt=null;
+      btn.hidden=true;
+      btn.disabled=false;
+    });
+    buttons.appendChild(btn);
+  };
+  window.addEventListener('beforeinstallprompt',event=>{
+    event.preventDefault();
+    deferredPrompt=event;
+    addInstallButton();
+    const btn=document.getElementById('__ewm-install-app');
+    if(btn)btn.hidden=false;
+  });
+  window.addEventListener('appinstalled',()=>{
+    deferredPrompt=null;
+    const btn=document.getElementById('__ewm-install-app');
+    if(btn)btn.hidden=true;
+  });
+}
 })();
