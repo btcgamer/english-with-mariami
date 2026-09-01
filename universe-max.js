@@ -10,7 +10,26 @@ function addHud(){if(document.querySelector('.u-max-hud'))return;const hud=docum
 function addNav(){if(grade==='home'||document.querySelector('.u-max-nav'))return;const n=document.createElement('nav');n.className='u-max-nav';n.setAttribute('aria-label','Learning Universe');n.innerHTML='<a href="../index.html">⌂ HUB</a><a href="../grade2/">G2</a><a href="../grade3/">G3</a><a href="../grade4/">G4</a>';document.body.appendChild(n)}
 function decorate(){const q='.lesson,.mission,.card,.grade-card,.grade,.feature-card,.mission-card,.info-card,.daily-card,.stats strong,.hero-core,.planet,.core';document.querySelectorAll(q).forEach((el,i)=>{el.classList.add('u-holo');el.style.setProperty('--u-delay',(i%16)*45+'ms');el.dataset.uDepth='1';});}
 function robotFX(){if(reduced)return;const robot=document.querySelector('.ai-robot');if(!robot)return;robot.style.touchAction='manipulation';function move(x,y){const r=robot.getBoundingClientRect();const px=(x-r.left)/r.width-.5,py=(y-r.top)/r.height-.5;robot.style.setProperty('--robot-rx',(-py*9).toFixed(2)+'deg');robot.style.setProperty('--robot-ry',(px*12).toFixed(2)+'deg');robot.classList.add('robot-interactive')}function reset(){robot.style.removeProperty('--robot-rx');robot.style.removeProperty('--robot-ry');robot.classList.remove('robot-interactive');robot.classList.remove('robot-touched')}robot.addEventListener('pointerenter',()=>robot.classList.add('robot-interactive'),{passive:true});robot.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});robot.addEventListener('pointerleave',reset,{passive:true});robot.addEventListener('pointerdown',e=>{move(e.clientX,e.clientY);robot.classList.add('robot-touched')},{passive:true});robot.addEventListener('pointerup',()=>robot.classList.remove('robot-touched'),{passive:true});robot.addEventListener('pointercancel',reset,{passive:true})}
-function addRobotCompanion(){if(document.querySelector('.u-robot-companion')||grade==='home')return;const r=document.createElement('div');r.className='u-robot-companion';r.setAttribute('aria-hidden','true');r.innerHTML='<span class="u-rc-aura"></span><span class="u-rc-body"><span class="u-rc-eye e1"></span><span class="u-rc-eye e2"></span><span class="u-rc-mouth"></span></span>';document.body.appendChild(r);let tx=window.innerWidth-90,ty=window.innerHeight-100,x=tx,y=ty,active=false,lastTouch=0;function target(px,py){tx=px;ty=py;active=true;r.classList.add('u-rc-active')}function frame(){if(!active){requestAnimationFrame(frame);return}x+=(tx-x)*.16;y+=(ty-y)*.16;r.style.transform='translate3d('+(x-24)+'px,'+(y-24)+'px,0)';requestAnimationFrame(frame)}window.addEventListener('mousemove',e=>target(e.clientX,e.clientY),{passive:true});window.addEventListener('pointermove',e=>{if(e.pointerType==='touch'){lastTouch=Date.now();target(e.clientX,e.clientY)}},{passive:true});window.addEventListener('touchmove',e=>{const t=e.touches&&e.touches[0];if(t){lastTouch=Date.now();target(t.clientX,t.clientY)}},{passive:true});window.addEventListener('pointerdown',e=>{if(e.pointerType==='touch')target(e.clientX,e.clientY)},{passive:true});window.addEventListener('resize',()=>{if(!active){tx=innerWidth-90;ty=innerHeight-100}});frame()}
+function addRobotCompanion(){
+  if(document.querySelector('.u-robot-companion')||grade==='home')return;
+  const r=document.createElement('div');
+  r.className='u-robot-companion';
+  r.setAttribute('aria-hidden','true');
+  r.innerHTML='<span class="u-rc-aura"></span><span class="u-rc-body"><span class="u-rc-eye e1"></span><span class="u-rc-eye e2"></span><span class="u-rc-mouth"></span></span>';
+  document.body.appendChild(r);
+  const half=24;
+  let tx=window.innerWidth-half,ty=window.innerHeight-half,x=tx,y=ty,active=false,lastFrame=performance.now();
+  function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+  function target(px,py){tx=clamp(px,half,window.innerWidth-half);ty=clamp(py,half,window.innerHeight-half);active=true;r.classList.add('u-rc-active')}
+  function follow(now){const dt=Math.min(40,Math.max(8,now-lastFrame));lastFrame=now;if(active){if(reduced){x=tx;y=ty}else{const alpha=1-Math.pow(1-.16,dt/16.67);x+=(tx-x)*alpha;y+=(ty-y)*alpha}r.style.transform='translate3d('+(x-half)+'px,'+(y-half)+'px,0)'}requestAnimationFrame(follow)}
+  function handlePointer(e){if(e.pointerType==='touch'||e.pointerType==='pen'||e.pointerType==='mouse')target(e.clientX,e.clientY)}
+  window.addEventListener('pointermove',handlePointer,{passive:true});
+  window.addEventListener('pointerdown',handlePointer,{passive:true});
+  window.addEventListener('touchmove',e=>{const t=e.touches&&e.touches[0];if(t)target(t.clientX,t.clientY)},{passive:true});
+  window.addEventListener('touchstart',e=>{const t=e.touches&&e.touches[0];if(t)target(t.clientX,t.clientY)},{passive:true});
+  window.addEventListener('resize',()=>{tx=clamp(tx,half,innerWidth-half);ty=clamp(ty,half,innerHeight-half);x=clamp(x,half,innerWidth-half);y=clamp(y,half,innerHeight-half)},{passive:true});
+  requestAnimationFrame(follow);
+}
 function init(){addParticles();addHud();addNav();decorate();addRobotCompanion();new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
