@@ -4,228 +4,76 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#020611">
-
   <title>English with Mariami — Grade 4</title>
-
-  <meta
-    name="description"
-    content="English with Mariami — Grade 4 futuristic English learning universe."
-  >
+  <meta name="description" content="English with Mariami — Grade 4 futuristic English learning universe.">
 
   <!-- Shared Universe -->
-  <link rel="stylesheet" href="../universe-theme.css?v=20260901">
-  <link rel="stylesheet" href="../universe-max.css?v=20260901">
+  <link rel="stylesheet" href="../universe-theme.css?v=20260901-2">
+  <link rel="stylesheet" href="../universe-max.css?v=20260901-2">
 
   <!-- Grade 4 -->
-  <link rel="stylesheet" href="./grade4.css?v=20260901">
+  <link rel="stylesheet" href="./grade4.css?v=20260901-2">
 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../config.js?v=20260901"></script>
+  <script src="../config.js?v=20260901-2"></script>
 </head>
 
 <body class="u-universe u-grade4">
-
-  <!-- Animated energy lines -->
-  <div class="energy" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <div class="energy" aria-hidden="true"><span></span><span></span><span></span></div>
 
   <main class="g4-app">
-
-    <!-- =========================
-         HEADER
-    ========================== -->
     <header class="g4-nav">
-
-      <a
-        href="../academy.html"
-        class="brand"
-        aria-label="Back to Academy"
-      >
+      <a href="../academy.html" class="brand" aria-label="Back to Academy">
         <b>⚡</b>
-
-        <span>
-          ENGLISH WITH MARIAMI
-          <small>GRADE 4 • NEO EXPLORER</small>
-        </span>
+        <span>ENGLISH WITH MARIAMI<small>GRADE 4 • NEO EXPLORER</small></span>
       </a>
-
-      <nav
-        class="g4-actions"
-        aria-label="Grade navigation"
-      >
-        <a
-          href="../academy.html"
-          class="g4-home"
-        >
-          🏠 HOME
-        </a>
+      <nav class="g4-actions" aria-label="Grade navigation">
+        <a href="../academy.html" class="g4-home">🏠 HOME</a>
       </nav>
-
-      <div
-        class="stats"
-        aria-label="Learning progress"
-      >
-        <strong>
-          ⚡
-          <i id="xp">0</i>
-          XP
-        </strong>
-
-        <strong>
-          ⭐
-          <i id="stars">0</i>
-        </strong>
-
-        <strong>
-          🏆
-          <i id="done">0</i>/12
-        </strong>
+      <div class="stats" aria-label="Learning progress">
+        <strong>⚡ <i id="xp">0</i> XP</strong>
+        <strong>⭐ <i id="stars">0</i></strong>
+        <strong>🏆 <i id="done">0</i>/12</strong>
       </div>
-
     </header>
 
-
-    <!-- =========================
-         HERO
-    ========================== -->
     <section class="g4-hero">
-
       <div class="hero-content">
-
-        <span class="u-badge">
-          ✦ NEO EXPLORER ONLINE
-        </span>
-
-        <h1>
-          GRADE
-          <em>04</em>
-        </h1>
-
-        <p>
-          Enter the next level of English.
-          Solve missions, master vocabulary,
-          improve your grammar and unlock
-          the Neo Worlds.
-        </p>
-
+        <span class="u-badge">✦ NEO EXPLORER ONLINE</span>
+        <h1>GRADE <em>04</em></h1>
+        <p>Enter the next level of English. Solve missions, master vocabulary, improve your grammar and unlock the Neo Worlds.</p>
         <div class="actions">
-
-          <button
-            id="start"
-            type="button"
-          >
-            ⚡ ENTER UNIVERSE
-          </button>
-
-          <button
-            id="review"
-            class="secondary"
-            type="button"
-          >
-            🏆 MISSION STATUS
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- 3D Core -->
-      <div
-        class="core u-portal"
-        aria-hidden="true"
-      >
-        <i class="u-ring"></i>
-        <i class="u-ring"></i>
-
-        <div>
-          04
-          <small>
-            NEO<br>
-            EXPLORER
-          </small>
+          <button id="start" type="button">⚡ ENTER UNIVERSE</button>
+          <button id="review" class="secondary" type="button">🏆 MISSION STATUS</button>
         </div>
       </div>
 
+      <div class="core u-portal" aria-hidden="true">
+        <i class="u-ring"></i><i class="u-ring"></i>
+        <div>04<small>NEO<br>EXPLORER</small></div>
+      </div>
     </section>
 
-
-    <!-- =========================
-         WORLDS HEADER
-    ========================== -->
     <section class="head">
-
       <div>
-
-        <span class="u-badge">
-          12 NEO WORLDS • 84 WORDS
-        </span>
-
-        <h2>
-          Select your
-          <span>challenge</span>
-        </h2>
-
+        <span class="u-badge">12 NEO WORLDS • 84 WORDS</span>
+        <h2>Select your <span>challenge</span></h2>
       </div>
-
-      <p>
-        Every completed world powers your XP core.
-      </p>
-
+      <p>Every completed world powers your XP core.</p>
     </section>
 
+    <section id="missions" class="missions" aria-live="polite"></section>
 
-    <!-- =========================
-         MISSIONS
-    ========================== -->
-    <section
-      id="missions"
-      class="missions"
-      aria-live="polite"
-    ></section>
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
     <footer>
-
-      <a href="../academy.html">
-        🏠 BACK TO ACADEMY
-      </a>
-
-      <span>
-        • ENGLISH WITH MARIAMI
-        • GRADE 4
-        • LEARN
-        • PLAY
-        • LEVEL UP
-      </span>
-
+      <a href="../academy.html">🏠 BACK TO ACADEMY</a>
+      <span>• ENGLISH WITH MARIAMI • GRADE 4 • LEARN • PLAY • LEVEL UP</span>
     </footer>
-
   </main>
 
-
-  <!-- =========================
-       GRADE 4 CONTENT
-  ========================== -->
-  <script src="./grade4-futuristic-content.js?v=20260901"></script>
-
-  <!-- =========================
-       GRADE 4 APPLICATION
-  ========================== -->
-  <script src="./grade4.js?v=20260901"></script>
-
-  <!-- =========================
-       SHARED UNIVERSE
-  ========================== -->
-  <script src="../universe-theme.js?v=20260901"></script>
-  <script src="../universe-max.js?v=20260901"></script>
-
+  <script src="./grade4-futuristic-content.js?v=20260901-2"></script>
+  <script src="./grade4.js?v=20260901-2"></script>
+  <script src="../universe-theme.js?v=20260901-2"></script>
+  <script src="../universe-max.js?v=20260901-2"></script>
 </body>
 </html>
