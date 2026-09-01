@@ -11,29 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../config.js"></script>
 <script>
-(function(){
-  'use strict';
-  async function checkGrade3Route(){
-    try{
-      var db=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
-      if(!db || !db.auth || !db.from) return;
-      var result=await db.auth.getUser();
-      var user=result&&result.data&&result.data.user;
-      if(!user){location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));return;}
-      var profile=await db.from('profiles').select('user_id,role,grade').eq('user_id',user.id).maybeSingle();
-      if(profile.error || !profile.data) return;
-      var role=String(profile.data.role||'').trim().toLowerCase();
-      if(role==='student'){
-        var grade=Number(profile.data.grade||0);
-        if(grade===2){location.replace('../grade2.html');return;}
-        if(grade===4){location.replace('../grade4.html');return;}
-        if(grade!==3){location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));return;}
-      }else if(role!=='teacher' && role!=='parent'){location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));}
-    }catch(e){console.error('[Grade 3 Direct Route]',e);}
-  }
-  window.addEventListener('DOMContentLoaded',checkGrade3Route);
-  document.addEventListener('visibilitychange',function(){if(!document.hidden)checkGrade3Route();});
-})();
+(function(){'use strict';async function guard(){try{const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;if(!client)return;const {data:{user}}=await client.auth.getUser();if(!user){location.replace('../login.html?reason=unauthorized');return}const {data:profile,error}=await client.from('profiles').select('role,grade').eq('user_id',user.id).maybeSingle();if(error||!profile)return;const role=String(profile.role||'').trim().toLowerCase(),grade=Number(profile.grade||0);if(role!=='student'){location.replace(role==='teacher'?'../teacher-dashboard.html':'../login.html?reason=wrong-role');return}if(![2,3,4].includes(grade)){location.replace('../student-dashboard.html?reason=no-grade');return}if(grade!==3)location.replace('../grade'+grade+'/index.html?reason=grade-locked')}catch(e){console.warn('Grade 3 route guard:',e)}}document.addEventListener('DOMContentLoaded',guard)})();
 </script>
 </head>
 <body class="u-universe u-grade3">
@@ -45,5 +23,8 @@
 <section id="missions" class="missions"></section>
 <footer>ENGLISH WITH MARIAMI • GRADE 3 • LEARN • PLAY • LEVEL UP</footer>
 </main>
-<script src="grade3-futuristic-content.js?v=20260901"></script><script src="grade3.js?v=20260901"></script><script src="../universe-theme.js?v=20260901"></script><script src="../universe-max.js?v=20260901"></script>
+<script src="grade3-futuristic-content.js?v=20260901"></script>
+<script src="grade3.js?v=20260901"></script>
+<script src="../universe-theme.js?v=20260901"></script>
+<script src="../universe-max.js?v=20260901"></script>
 </body></html>
