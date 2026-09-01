@@ -3,7 +3,11 @@
 'use strict';
 const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
 const KEY='grade2_complete_v1';
+const LEGACY_KEY='grade2_neon_progress_v3';
 if(!client)return;
+function migrateLegacy(){try{const current=localStorage.getItem(KEY),legacy=localStorage.getItem(LEGACY_KEY);if(!current&&legacy)localStorage.setItem(KEY,legacy)}catch(_){}
+}
+migrateLegacy();
 const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{"xp":0,"stars":0,"done":[],"daily":"","words":[]}')}catch(_){return {xp:0,stars:0,done:[],daily:'',words:[]}}};
 const write=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(_){} };
 const badge=msg=>{const e=document.getElementById('grade2SyncBadge');if(e)e.textContent=msg};
