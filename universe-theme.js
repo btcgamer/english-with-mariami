@@ -13,6 +13,21 @@ function loadOnce(kind,href){if(kind==='css'){if([...document.styleSheets].some(
 loadOnce('css','/universe-max.css');
 loadOnce('js','/universe-max.js');
 
+/* Root page only: make the PWA manifest discoverable and register the existing root service worker. */
+if(grade==='home'){
+  if(!document.querySelector('link[rel="manifest"]')){
+    const manifest=document.createElement('link');
+    manifest.rel='manifest';
+    manifest.href='/manifest.webmanifest';
+    document.head.appendChild(manifest);
+  }
+  if('serviceWorker' in navigator){
+    window.addEventListener('load',()=>{
+      navigator.serviceWorker.register('/sw.js',{scope:'/'}).then(reg=>{if(reg.update)reg.update()}).catch(err=>console.warn('[PWA] Service Worker unavailable:',err));
+    },{once:true});
+  }
+}
+
 /* Main page only: expose the browser's real PWA install action as INSTALL APP. */
 if(grade==='home' && !window.matchMedia('(display-mode: standalone)').matches && !window.navigator.standalone){
   let deferredPrompt=null;
