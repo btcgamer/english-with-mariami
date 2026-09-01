@@ -16,10 +16,64 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Inject shared theme into existing pages
+
+      - name: Fix lesson routing and install shared theme
         shell: bash
         run: |
           set -euo pipefail
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('lesson.html')
+          if path.exists():
+              text = path.read_text(encoding='utf-8')
+
+              fixed_loader = r'''async function loadLesson(){
+          if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');
+          const value=String(lessonParam||'').trim();
+          let lesson=null;
+          const isUUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+          if(isUUID){
+            const r=await client.from('lessons').select('*').eq('id',value).maybeSingle();
+            if(r.error)throw r.error;
+            lesson=r.data;
+          }else if(/^\d+$/.test(value)){
+            const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',Number(value)).maybeSingle();
+            if(r.error)throw r.error;
+            lesson=r.data;
+          }
+          if(!lesson){
+            const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();
+            if(r.error)throw r.error;
+            lesson=r.data;
+          }
+          if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');
+          return lesson;
+          }'''
+
+              pattern = r'async function loadLesson\(\)\{.*?\}\s*async function loadWords'
+              replacement = fixed_loader + '\nasync function loadWords'
+              new_text, count = re.subn(pattern, replacement, text, count=1, flags=re.S)
+              if count:
+                  text = new_text
+
+              # Student-friendly return path; teacher lessons keeps its own referrer path.
+              marker = "const client=window.supabaseClient;"
+              nav_patch = """
+          const backLink=document.querySelector('.nav-actions a.btn');
+          if(backLink && Number(grade)===2 && !document.referrer.includes('/teacher-lessons.html')){
+            backLink.href='/grade2.html';
+            backLink.textContent='🌱 Grade 2-ზე დაბრუნება';
+          }
+          """
+              if marker in text and 'const backLink=document.querySelector' not in text:
+                  text = text.replace(marker, marker + nav_patch, 1)
+
+              path.write_text(text, encoding='utf-8')
+          PY
+
           patch_page(){
             local file="$1"
             [ -f "$file" ] || return 0
@@ -33,11 +87,12 @@ jobs:
           patch_page "grade4/index.html"
           patch_page "grade3.html"
           patch_page "grade4.html"
+
           if ! git diff --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.html grade2/index.html grade3/index.html grade4/index.html grade3.html grade4.html
-            git commit -m "Apply futuristic learning universe to grade pages [skip ci]"
+            git add lesson.html index.html grade2/index.html grade3/index.html grade4/index.html grade3.html grade4.html
+            git commit -m "Fix lesson routing for numeric and UUID lesson IDs [skip ci]"
             git push
           fi
 
@@ -65,8 +120,6 @@ Included:
 - Responsive layout
 - Reduced-motion support
 - Existing Supabase/application files preserved
-
-Manual install: copy the package contents into the GitHub repository root, preserving folders.
 EOF
           cd package
           zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
