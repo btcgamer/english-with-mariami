@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v4';
+const CACHE_NAME = 'english-with-mariami-v5';
 
 const APP_SHELL = [
   './',
@@ -34,9 +34,6 @@ const APP_SHELL = [
   './grade2/index.html',
   './grade3/index.html',
   './grade4/index.html',
-  './grade4/manifest.webmanifest',
-  './grade4/app-icon-192.svg',
-  './grade4/app-icon-512.svg',
   './grade4/grade4.css',
   './grade4/grade4.js',
   './grade2/grade2.css',
@@ -48,10 +45,6 @@ const APP_SHELL = [
   './grade3/grade3.js'
 ];
 
-/* =========================
-   INSTALL
-========================= */
-
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -62,10 +55,6 @@ self.addEventListener('install', event => {
       .then(() => self.skipWaiting())
   );
 });
-
-/* =========================
-   ACTIVATE
-========================= */
 
 self.addEventListener('activate', event => {
   event.waitUntil(
@@ -85,15 +74,9 @@ self.addEventListener('activate', event => {
   );
 });
 
-/* =========================
-   FETCH
-========================= */
-
 self.addEventListener('fetch', event => {
   const request = event.request;
-
   if (request.method !== 'GET') return;
-
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
@@ -123,31 +106,20 @@ self.addEventListener('fetch', event => {
           return response;
         })
         .catch(() => cachedResponse);
-
       return cachedResponse || networkFetch;
     })
   );
 });
 
-/* =========================
-   MESSAGE
-========================= */
-
 self.addEventListener('message', event => {
   if (!event.data) return;
-
   if (event.data.type === 'SKIP_WAITING') self.skipWaiting();
-
   if (event.data.type === 'CLEAR_CACHE') {
     event.waitUntil(
       caches.keys().then(cacheNames => Promise.all(cacheNames.map(cacheName => caches.delete(cacheName))))
     );
   }
 });
-
-/* =========================
-   PUSH NOTIFICATIONS
-========================= */
 
 self.addEventListener('push', event => {
   let data = {
@@ -156,13 +128,11 @@ self.addEventListener('push', event => {
     icon: './app-icon.svg',
     badge: './app-icon.svg'
   };
-
   try {
     if (event.data) data = { ...data, ...event.data.json() };
   } catch (error) {
     console.log('[SW] Push data error:', error);
   }
-
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
@@ -174,15 +144,9 @@ self.addEventListener('push', event => {
   );
 });
 
-/* =========================
-   NOTIFICATION CLICK
-========================= */
-
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-
   const targetUrl = event.notification?.data?.url || './academy.html';
-
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true })
       .then(clientList => {
@@ -192,22 +156,13 @@ self.addEventListener('notificationclick', event => {
             return client.focus();
           }
         }
-
         if (clients.openWindow) return clients.openWindow(targetUrl);
       })
   );
 });
 
-/* =========================
-   ERROR LOG
-========================= */
-
 self.addEventListener('error', event => {
   console.error('[SW] Error:', event.error);
 });
 
-console.log(
-  '%c English with Mariami Service Worker %c READY 🚀 ',
-  'background:#075eff;color:white;padding:5px 10px;border-radius:5px;',
-  'background:#ffe600;color:#020817;padding:5px 10px;border-radius:5px;'
-);
+console.log('%c English with Mariami Service Worker %c READY 🚀 ', 'background:#075eff;color:white;padding:5px 10px;border-radius:5px;', 'background:#ffe600;color:#020817;padding:5px 10px;border-radius:5px;');
