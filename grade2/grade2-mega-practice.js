@@ -1,11 +1,12 @@
 /* English with Mariami — Grade 2 Mega Practice
-   Safe additive layer. Uses shared vocabulary when exported; otherwise fallback words.
+   Safe additive layer. Reads the shared vocabulary UI when available; otherwise fallback words.
    No auth, Supabase, or main Grade 2 progress writes.
 */
 (()=>{'use strict';
 const KEY='grade2MegaPractice_v1';
 const fallback=[['Animals','ant','ჭიანჭველა'],['Animals','bear','დათვი'],['Animals','bee','ფუტკარი'],['Animals','duck','იხვი'],['Numbers','eight','რვა'],['Numbers','nine','ცხრა'],['Colors','pink','ვარდისფერი'],['Colors','brown','ყავისფერი'],['Family','baby','ჩვილი'],['Home','sofa','დივანი'],['Food','egg','კვერცხი'],['Clothes','jacket','ჟაკეტი'],['Weather','stormy','ქარიშხლიანი'],['School','ruler','სახაზავი'],['Transport','taxi','ტაქსი'],['Nature','forest','ტყე'],['Actions','run','სირბილი'],['Adjectives','happy','ბედნიერი']];
-function words(){try{const x=window.MEGA_VOCABULARY&&window.MEGA_VOCABULARY.G2;if(Array.isArray(x)&&x.length)return x.filter(v=>Array.isArray(v)&&v.length>=3)}catch(e){}return fallback}
+let sharedCache=null;
+function words(){if(sharedCache&&sharedCache.length)return sharedCache;try{const launch=document.getElementById('megaLaunch');if(launch)launch.click();const list=document.querySelectorAll('#megaVocab .mega-card');const rows=[];list.forEach(card=>{const e=card.querySelector('b'),k=card.querySelector('span'),c=card.querySelector('small');if(e&&k&&c){const row=[c.textContent.trim(),e.textContent.trim(),k.textContent.trim()];if(row[1]&&row[2])rows.push(row)}});const close=document.getElementById('megaClose');if(close)close.click();if(rows.length){sharedCache=rows;return rows}}catch(e){}return fallback}
 let data={xp:0,correct:0,round:0};try{const saved=JSON.parse(localStorage.getItem(KEY)||'{}');if(saved&&typeof saved==='object')data=Object.assign(data,saved)}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
 function speak(t){if('speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}}
