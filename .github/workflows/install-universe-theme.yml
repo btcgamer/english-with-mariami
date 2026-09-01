@@ -17,49 +17,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fix lesson routing and install shared theme
+      - name: Validate shared assets without rewriting Grade pages
         shell: bash
         run: |
           set -euo pipefail
-
-          python3 - <<'PY'
-          from pathlib import Path
-
-          path = Path('lesson.html')
-          text = path.read_text(encoding='utf-8')
-
-          old = "async function loadLesson(){if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');let lesson=null;if(lessonParam){const r=await client.from('lessons').select('*').eq('id',lessonParam).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson){const n=Number(lessonParam);if(Number.isFinite(n)){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',n).maybeSingle();if(!r.error)lesson=r.data;}}if(!lesson){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');return lesson;}"
-          new = "async function loadLesson(){if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');const value=String(lessonParam||'').trim();const isUUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);let lesson=null;if(isUUID){const r=await client.from('lessons').select('*').eq('id',value).maybeSingle();if(r.error)throw r.error;lesson=r.data;}else if(/^\\d+$/.test(value)){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',Number(value)).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');return lesson;}"
-
-          if old in text:
-              text = text.replace(old, new, 1)
-          else:
-              raise SystemExit('Expected lesson.html loadLesson block was not found; refusing unrelated edits')
-
-          path.write_text(text, encoding='utf-8')
-          PY
-
-          patch_page(){
-            local file="$1"
-            [ -f "$file" ] || return 0
-            if ! grep -q 'universe-theme.css' "$file"; then
-              sed -i 's#</head>#<link rel="stylesheet" href="/universe-theme.css"><script src="/universe-theme.js" defer></script>\n</head>#i' "$file"
-            fi
-          }
-          patch_page "index.html"
-          patch_page "grade2/index.html"
-          patch_page "grade3/index.html"
-          patch_page "grade4/index.html"
-          patch_page "grade3.html"
-          patch_page "grade4.html"
-
-          if ! git diff --quiet; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add lesson.html index.html grade2/index.html grade3/index.html grade4/index.html grade3.html grade4.html
-            git commit -m "Fix lesson routing for numeric and UUID lesson IDs [skip ci]"
-            git push
-          fi
+          test -f index.html
+          test -f config.js
+          test -f universe-theme.css
+          test -f universe-theme.js
+          test -f universe-max.css
+          test -f universe-max.js
+          test -f grade4/index.html
+          test -f grade4/grade4.css
+          test -f grade4/grade4.js
+          test -f grade4/grade4-futuristic-content.js
 
       - name: Build complete project ZIP
         shell: bash
