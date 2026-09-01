@@ -14,7 +14,7 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   const isLoginPage=path.endsWith('/login.html')||path==='login.html';
   const clearStaleAuthTokens=(storage)=>{
     try{
-      const prefix='sb-vtdhvsfqhwesxtwmdue-auth-token';
+      const prefix='sb-vtdhvsfqhwesxtwmduew-auth-token';
       for(let i=storage.length-1;i>=0;i--){
         const key=storage.key(i);
         if(key===prefix||key?.startsWith(prefix+'-'))storage.removeItem(key);
@@ -138,4 +138,17 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     event.preventDefault();event.stopImmediatePropagation();window.__EWM_ACADEMY_LOGGING_OUT=true;link.setAttribute('aria-busy','true');
     try{await client.auth.signOut({scope:'local'})}catch(error){console.warn('Academy logout error:',error)}finally{window.location.replace('/index.html')}
   },true);
+})();
+
+/* Academy-only grade navigation and Grade 4 app installer. */
+(function(){
+  'use strict';
+  const path=(window.location.pathname||'').toLowerCase().replace(/\/+$/,'');
+  if(!(path.endsWith('/academy.html')||path==='academy.html'))return;
+  if(document.querySelector('script[data-ewm-academy-nav]'))return;
+  const s=document.createElement('script');
+  s.src='/academy-nav.js?v=20260901';
+  s.defer=true;
+  s.dataset.ewmAcademyNav='1';
+  document.head.appendChild(s);
 })();
