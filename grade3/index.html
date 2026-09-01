@@ -8,13 +8,34 @@
 <link rel="stylesheet" href="../universe-theme.css?v=20260901">
 <link rel="stylesheet" href="../universe-max.css?v=20260901">
 <link rel="stylesheet" href="grade3.css?v=20260901">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+<script>
+(function(){'use strict';
+  async function guard(){
+    try{
+      const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
+      if(!client)return;
+      const {data:{user}}=await client.auth.getUser();
+      if(!user){location.replace('../login.html?reason=unauthorized');return;}
+      const {data:profile,error}=await client.from('profiles').select('role,grade').eq('user_id',user.id).maybeSingle();
+      if(error||!profile)return;
+      const role=String(profile.role||'').trim().toLowerCase();
+      const grade=Number(profile.grade||0);
+      if(role!=='student'){location.replace(role==='teacher'?'../teacher-dashboard.html':'../login.html?reason=wrong-role');return;}
+      if(![2,3,4].includes(grade)){location.replace('../student-dashboard.html?reason=no-grade');return;}
+      if(grade!==3)location.replace('../grade'+grade+'/index.html?reason=grade-locked');
+    }catch(e){console.warn('Grade 3 route guard:',e);}
+  }
+  document.addEventListener('DOMContentLoaded',guard);
+})();
+</script>
 </head>
 <body class="u-universe u-grade3">
 <div class="cosmos"><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <main class="g3-app">
 <header class="g3-nav"><a href="../index.html" class="brand"><b>✦</b><span>ENGLISH WITH MARIAMI<small>GRADE 3 • PURPLE GALAXY</small></span></a><div class="stats"><strong>⭐ <i id="stars">0</i></strong><strong>🔥 <i id="streak">0</i></strong><strong>⚡ <i id="xp">0</i> XP</strong></div></header>
-<section class="g3-hero">
-<div><span class="u-badge">✦ GALAXY ACCESS GRANTED</span><h1>GRADE <em>03</em></h1><p>Explore the Purple Galaxy. Learn English through missions, challenges and discovery.</p><div class="actions"><button id="start">🚀 START MISSION</button><button class="secondary" id="review">🏆 REVIEW</button></div></div>
+<section class="g3-hero"><div><span class="u-badge">✦ GALAXY ACCESS GRANTED</span><h1>GRADE <em>03</em></h1><p>Explore the Purple Galaxy. Learn English through missions, challenges and discovery.</p><div class="actions"><button id="start">🚀 START MISSION</button><button class="secondary" id="review">🏆 REVIEW</button></div></div>
 <div class="planet u-portal"><i class="u-ring"></i><i class="u-ring"></i><div class="planet-core">03<small>ENGLISH<br>GALAXY</small></div></div>
 </section>
 <section class="mission-head"><div><span class="u-badge">12 WORLDS</span><h2>Choose your <span>mission</span></h2></div><p>Complete a world to earn XP and stars.</p></section>
