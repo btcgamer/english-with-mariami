@@ -7,7 +7,7 @@
   const ALLOWED=[2,3,4];
   const client=()=>window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
   const login=()=>location.replace('/login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
-  const target=g=>Number(g)===2?'/grade2/index.html':'/grade'+Number(g)+'.html';
+  const target=g=>({2:'/grade2/index.html',3:'/grade3/index.html',4:'/grade4/index.html'})[Number(g)]||'/academy.html';
   async function check(){
     const db=client(); if(!db)return;
     try{
