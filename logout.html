@@ -1,27 +1,91 @@
 <!doctype html>
-<html lang="en">
+<html lang="ka">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#02030d">
-<title>English with Mariami — Logout</title>
+<title>ანგარიშიდან გამოსვლა — English with Mariami</title>
 <style>
-html,body{margin:0;min-height:100%;background:#02030d;color:#fff;font-family:Inter,Segoe UI,Arial,sans-serif}body{display:grid;place-items:center;min-height:100vh}.box{text-align:center;padding:35px;border:1px solid rgba(0,245,255,.25);border-radius:24px;background:rgba(10,15,40,.8);box-shadow:0 0 45px rgba(0,245,255,.12)}.spin{font-size:42px;animation:spin 1.2s linear infinite;display:inline-block}@keyframes spin{to{transform:rotate(360deg)}}p{color:#9aa7c7}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,Arial,"Noto Sans Georgian",sans-serif;background:#02030d;color:#f7fbff;overflow:hidden}
+body{display:grid;place-items:center;min-height:100vh;background:radial-gradient(circle at 20% 15%,rgba(0,245,255,.16),transparent 28%),radial-gradient(circle at 80% 20%,rgba(255,53,208,.15),transparent 30%),radial-gradient(circle at 50% 100%,rgba(77,124,255,.16),transparent 38%),#02030d}
+.space{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.grid{position:absolute;width:190%;height:75%;left:-45%;bottom:-16%;transform:perspective(650px) rotateX(64deg);transform-origin:center bottom;background:linear-gradient(rgba(0,245,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(155,92,255,.18) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(to top,black,transparent 90%);animation:grid 5s linear infinite}
+@keyframes grid{to{background-position:0 52px,52px 0}}
+.energy{position:absolute;width:80vw;left:-20vw;height:2px;animation:move linear infinite}.energy:after{content:"";display:block;height:100%;background:linear-gradient(90deg,transparent,var(--c),white,var(--c),transparent);box-shadow:0 0 12px var(--c),0 0 30px var(--c)}
+.e1{top:23%;--c:#00f5ff;animation-duration:7s}.e2{top:43%;--c:#ff35d0;animation-duration:9s;animation-delay:-3s}.e3{top:67%;--c:#8b5cff;animation-duration:11s;animation-delay:-5s}
+@keyframes move{from{transform:translateX(-10vw) rotate(-4deg)}to{transform:translateX(160vw) rotate(-4deg)}}
+.card{position:relative;width:min(540px,calc(100% - 30px));padding:38px 30px 30px;border-radius:30px;text-align:center;background:linear-gradient(145deg,rgba(10,20,49,.94),rgba(4,8,25,.96));border:1px solid rgba(0,245,255,.24);box-shadow:0 25px 90px rgba(0,0,0,.55),0 0 55px rgba(0,245,255,.1),inset 0 1px rgba(255,255,255,.06);backdrop-filter:blur(20px);transform:translateY(0);animation:cardIn .65s ease-out}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+.icon{font-size:56px;line-height:1;filter:drop-shadow(0 0 18px rgba(255,53,208,.45));animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(3deg)}}
+.badge{display:inline-block;margin-top:16px;padding:8px 13px;border-radius:999px;border:1px solid rgba(0,245,255,.32);color:#8efaff;background:rgba(0,245,255,.05);font-size:10px;font-weight:950;letter-spacing:1.6px}
+h1{margin:18px 0 10px;font-size:clamp(28px,7vw,46px);letter-spacing:-1px}
+p{margin:0;color:#9fb2ca;line-height:1.65}.secure{margin:23px 0 22px;padding:12px 14px;border-radius:14px;border:1px solid rgba(0,245,255,.18);background:rgba(0,245,255,.04);color:#8efaff;font-size:11px;font-weight:950;letter-spacing:1.6px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+button,.stay,.exit{min-height:50px;border-radius:14px;padding:13px 15px;font:inherit;font-weight:950;cursor:pointer;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:.22s}
+.stay{color:#eafcff;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.05)}.stay:hover{transform:translateY(-2px);border-color:#00f5ff;box-shadow:0 0 25px rgba(0,245,255,.15)}
+.exit{border:1px solid rgba(255,53,208,.34);background:linear-gradient(135deg,#ff35d0,#8b5cff);color:white;box-shadow:0 0 28px rgba(255,53,208,.18)}.exit:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(255,53,208,.3)}
+.status{min-height:24px;margin-top:16px;color:#8194ad;font-size:12px}.status.ok{color:#63ffb7}.status.err{color:#ff8fa5}
+.spinner{display:none;width:16px;height:16px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite}.busy .spinner{display:inline-block}.busy .exitText{display:none}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:520px){.card{padding:30px 18px 22px}.actions{grid-template-columns:1fr}.icon{font-size:48px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
+<script src="config.js?v=20260901"></script>
 </head>
 <body>
-<div class="box"><div class="spin">✦</div><h2>Logging out…</h2><p>Closing your learning session securely.</p></div>
+<div class="space"><div class="grid"></div><div class="energy e1"></div><div class="energy e2"></div><div class="energy e3"></div></div>
+<main class="card" aria-labelledby="logoutTitle">
+  <div class="icon">🚪</div>
+  <span class="badge">SECURE SESSION</span>
+  <h1 id="logoutTitle">ანგარიშიდან გამოსვლა?</h1>
+  <p>ნამდვილად გსურს მიმდინარე სესიის დასრულება? უსაფრთხოების მიზნით ანგარიშიდან სრულად გამოხვალ.</p>
+  <div class="secure">🔐 SECURE SESSION • END CURRENT ACCESS</div>
+  <div class="actions">
+    <a class="stay" id="stayBtn" href="academy.html">↩️ დარჩენა</a>
+    <button class="exit" id="logoutBtn" type="button"><span class="exitText">🚪 გამოსვლა</span><span class="spinner" aria-hidden="true"></span></button>
+  </div>
+  <div id="status" class="status" aria-live="polite"></div>
+</main>
 <script>
 (async function(){
 'use strict';
-try{
- const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
- if(client&&client.auth) await client.auth.signOut();
-}catch(e){console.warn('[Logout]',e)}
-try{localStorage.removeItem('supabase.auth.token')}catch(e){}
-location.replace('academy.html');
+const params=new URLSearchParams(location.search);
+const returnTo=params.get('return')||params.get('redirect')||'academy.html';
+const stay=document.getElementById('stayBtn');
+const logout=document.getElementById('logoutBtn');
+const status=document.getElementById('status');
+stay.href=returnTo;
+function safeRemove(key){try{localStorage.removeItem(key)}catch(e){}}
+async function doLogout(){
+ logout.classList.add('busy');
+ logout.disabled=true;
+ status.textContent='სესია სრულდება...';
+ try{
+   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
+   if(client&&client.auth&&typeof client.auth.signOut==='function'){
+     const result=await client.auth.signOut();
+     if(result&&result.error) throw result.error;
+   }
+   safeRemove('supabase.auth.token');
+   safeRemove('sb-access-token');
+   safeRemove('sb-refresh-token');
+   status.className='status ok';
+   status.textContent='✅ ანგარიშიდან წარმატებით გამოხვედი.';
+   setTimeout(function(){ location.replace(returnTo); },450);
+ }catch(error){
+   console.error('[Logout]',error);
+   status.className='status err';
+   status.textContent='⚠️ გამოსვლა ვერ დასრულდა. კიდევ ერთხელ სცადე.';
+   logout.classList.remove('busy');
+   logout.disabled=false;
+ }
+}
+logout.addEventListener('click',doLogout);
+document.addEventListener('keydown',function(e){
+ if(e.key==='Escape') location.href=returnTo;
+});
 })();
 </script>
 </body>
