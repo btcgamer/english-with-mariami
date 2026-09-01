@@ -9,5 +9,5 @@ const packs=[
 [['price','ფასი','💰'],['cheap','იაფი','🏷️'],['expensive','ძვირი','💎'],['customer','მყიდველი','🛍️'],['choose','არჩევა','🎯'],['need','საჭიროება','📌'],['would like','მსურს','🙏'],['receipt','ქვითარი','🧾']]
 ];
 const c=window.GRADE4_FUTURISTIC_CONTENT;if(!c||!Array.isArray(c.worlds))return;
-let i=0;c.worlds.forEach(w=>{if(!Array.isArray(w.lessons))return;w.lessons.forEach(l=>{l[3]=Array.isArray(l[3])?l[3]:[];const seen=new Set(l[3].map(v=>String(v[0]||'').toLowerCase()));(packs[i%packs.length]).forEach(v=>{if(!seen.has(v[0])){l[3].push(v);seen.add(v[0]);}});i++;});});
+let i=0;c.worlds.forEach(w=>{if(!Array.isArray(w.lessons))return;w.lessons.forEach(l=>{l[3]=Array.isArray(l[3])?l[3]:[];const seen=new Set(l[3].map(v=>String(v[0]||'').toLowerCase()));(packs[i%packs.length]).forEach(v=>{if(!seen.has(v[0].toLowerCase())){l[3].push(v);seen.add(v[0].toLowerCase());}});i++;});});
 })();
