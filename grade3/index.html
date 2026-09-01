@@ -19,25 +19,20 @@
       if(!db || !db.auth || !db.from) return;
       var result=await db.auth.getUser();
       var user=result&&result.data&&result.data.user;
-      if(!user){
-        location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
-        return;
-      }
+      if(!user){location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));return;}
       var profile=await db.from('profiles').select('user_id,role,grade').eq('user_id',user.id).maybeSingle();
       if(profile.error || !profile.data) return;
       var role=String(profile.data.role||'').trim().toLowerCase();
       if(role==='student'){
         var grade=Number(profile.data.grade||0);
-        if(grade===2){ location.replace('../grade2.html'); return; }
-        if(grade===4){ location.replace('../grade4.html'); return; }
-        if(grade!==3){ location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash)); return; }
-      }else if(role!=='teacher' && role!=='parent'){
-        location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
-      }
-    }catch(e){ console.error('[Grade 3 Direct Route]',e); }
+        if(grade===2){location.replace('../grade2.html');return;}
+        if(grade===4){location.replace('../grade4.html');return;}
+        if(grade!==3){location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));return;}
+      }else if(role!=='teacher' && role!=='parent'){location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));}
+    }catch(e){console.error('[Grade 3 Direct Route]',e);}
   }
   window.addEventListener('DOMContentLoaded',checkGrade3Route);
-  document.addEventListener('visibilitychange',function(){ if(!document.hidden) checkGrade3Route(); });
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)checkGrade3Route();});
 })();
 </script>
 </head>
@@ -45,13 +40,10 @@
 <div class="cosmos"><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <main class="g3-app">
 <header class="g3-nav"><a href="../index.html" class="brand"><b>✦</b><span>ENGLISH WITH MARIAMI<small>GRADE 3 • PURPLE GALAXY</small></span></a><div class="stats"><strong>⭐ <i id="stars">0</i></strong><strong>🔥 <i id="streak">0</i></strong><strong>⚡ <i id="xp">0</i> XP</strong></div></header>
-<section class="g3-hero">
-<div><span class="u-badge">✦ GALAXY ACCESS GRANTED</span><h1>GRADE <em>03</em></h1><p>Explore the Purple Galaxy. Learn English through missions, challenges and discovery.</p><div class="actions"><button id="start">🚀 START MISSION</button><button class="secondary" id="review">🏆 REVIEW</button></div></div>
-<div class="planet u-portal"><i class="u-ring"></i><i class="u-ring"></i><div class="planet-core">03<small>ENGLISH<br>GALAXY</small></div></div>
-</section>
+<section class="g3-hero"><div><span class="u-badge">✦ GALAXY ACCESS GRANTED</span><h1>GRADE <em>03</em></h1><p>Explore the Purple Galaxy. Learn English through missions, challenges and discovery.</p><div class="actions"><button id="start">🚀 START MISSION</button><button class="secondary" id="review">🏆 REVIEW</button></div></div><div class="planet u-portal"><i class="u-ring"></i><i class="u-ring"></i><div class="planet-core">03<small>ENGLISH<br>GALAXY</small></div></div></section>
 <section class="mission-head"><div><span class="u-badge">12 WORLDS</span><h2>Choose your <span>mission</span></h2></div><p>Complete a world to earn XP and stars.</p></section>
 <section id="missions" class="missions"></section>
 <footer>ENGLISH WITH MARIAMI • GRADE 3 • LEARN • PLAY • LEVEL UP</footer>
 </main>
-<script src="grade3.js?v=20260901"></script><script src="../universe-theme.js?v=20260901"></script><script src="../universe-max.js?v=20260901"></script>
+<script src="grade3-futuristic-content.js?v=20260901"></script><script src="grade3.js?v=20260901"></script><script src="../universe-theme.js?v=20260901"></script><script src="../universe-max.js?v=20260901"></script>
 </body></html>
