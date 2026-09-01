@@ -3,10 +3,12 @@
   "short_name": "English Mariami",
   "lang": "ka",
   "start_url": "./index.html",
+  "scope": "/",
+  "display_override": ["standalone", "minimal-ui"],
   "display": "standalone",
   "background_color": "#020817",
   "theme_color": "#020817",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "icons": [
     {
       "src": "./app-icon.svg",
