@@ -36,8 +36,8 @@
 
   const GRADE_PAGES = {
     2: '/grade2/index.html',
-    3: '/grade3/index.html',
-    4: '/grade4/index.html'
+    3: '/grade3.html',
+    4: '/grade4.html'
   };
 
   const ROLE = {
