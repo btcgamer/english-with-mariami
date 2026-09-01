@@ -15,25 +15,28 @@
 <div class="energy" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
 <main class="g4-app">
 <header class="g4-nav">
-<a class="brand" href="../academy.html" aria-label="Back to Academy"><b>⚡</b><span>ENGLISH WITH MARIAMI<small>GRADE 4 • NEO EXPLORER</small></span></a>
+<a class="brand" href="../academy.html" aria-label="Back to Academy"><b>⚡</b><span>ENGLISH WITH MARIAMI<small>GRADE 4 • NEO EXPLORER • LIVE CURRICULUM</small></span></a>
 <a class="g4-home" href="../academy.html">🏠 HOME</a>
 <div class="stats" aria-label="Learning progress">
-<strong>⚡ <i id="xp">0</i> XP</strong><strong>⭐ <i id="stars">0</i></strong><strong>🔥 <i id="streak">0</i></strong><strong>🏆 <i id="done">0</i>/12</strong>
+<strong>⚡ <i id="xp">0</i> XP</strong><strong>⭐ <i id="stars">0</i></strong><strong>🔥 <i id="streak">0</i></strong><strong>🏆 <i id="done">0</i>/60</strong>
 </div>
 </header>
 <section class="g4-hero">
 <div>
-<span class="u-badge">✦ NEO EXPLORER ONLINE</span>
+<span class="u-badge">✦ NEO EXPLORER ONLINE • SUPABASE LIVE</span>
 <h1>GRADE <em>04</em></h1>
-<p>Enter the next level of English. Master vocabulary, grammar, reading, speaking, listening and challenges across 12 futuristic learning worlds.</p>
+<p>Enter the next level of English. Explore real Grade 4 lessons powered by Supabase — vocabulary, grammar, reading, speaking, listening, exercises and quizzes inside a futuristic learning universe.</p>
 <div class="actions"><button id="start" type="button">⚡ ENTER UNIVERSE</button><button id="review" class="secondary" type="button">🏆 MISSION STATUS</button></div>
+<div id="liveStats" class="g4-live-stats" aria-live="polite">CONNECTING TO LIVE CURRICULUM…</div>
 </div>
 <div class="core" aria-hidden="true"><i class="u-ring"></i><i class="u-ring"></i><div>04<small>NEO<br>EXPLORER</small></div></div>
 </section>
-<section class="head"><div><span class="u-badge">12 NEO WORLDS • 84+ WORDS</span><h2>Select your <span>challenge</span></h2></div><p>Complete worlds to power your XP core.</p></section>
-<section id="missions" class="missions" aria-live="polite"></section>
+<section class="head"><div><span class="u-badge">12 NEO WORLDS • 60 LIVE LESSONS</span><h2>Select your <span>challenge</span></h2></div><p>Every world contains real Grade 4 material from Supabase.</p></section>
+<section id="missions" class="missions" aria-live="polite"><div class="mission"><span class="num">SYSTEM</span><h3>Loading curriculum…</h3><p>Connecting securely to the live Grade 4 curriculum.</p></div></section>
 <footer><a href="../academy.html">🏠 BACK TO ACADEMY</a><br><br>• ENGLISH WITH MARIAMI • GRADE 4 • LEARN • PLAY • LEVEL UP</footer>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js?v=20260901"></script>
 <script src="./grade4-futuristic-content.js?v=20260901"></script>
 <script src="./grade4.js?v=20260901"></script>
 <script src="../universe-theme.js?v=20260901"></script>
