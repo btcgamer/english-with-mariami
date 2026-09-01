@@ -15,6 +15,23 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT=window.supabaseClient;
 
   window.__EWM_ACADEMY_LOGGING_OUT=false;
 
+  /* The Academy brand is NOT a home/logout link. While authenticated,
+     clicking it must keep the student inside Academy. The only route out
+     is the explicit Logout button. */
+  document.addEventListener('click',function(event){
+    const brand=event.target.closest('.brand');
+    if(!brand)return;
+    const currentPath=(window.location.pathname||'').toLowerCase();
+    const target=(brand.getAttribute('href')||'').toLowerCase();
+    const isAcademy=currentPath.endsWith('/academy.html')||currentPath==='academy.html';
+    const pointsToPublicHome=target==='index.html'||target==='/index.html'||target.endsWith('/index.html');
+    if(isAcademy&&pointsToPublicHome){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  },true);
+
   /* Wrap future auth listeners so Academy's SIGNED_OUT handler cannot
      redirect to login.html during an intentional Academy logout. */
   const originalOnAuthStateChange=client.auth.onAuthStateChange.bind(client.auth);
