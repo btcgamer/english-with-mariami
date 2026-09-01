@@ -1,30 +1,17 @@
-/* Grade 2 lesson bridge — opens the REAL Grade 2 interactive lesson pages.
-   Mapping is aligned with the Supabase Grade 2 curriculum.
+/* Grade 2 REAL LESSON NAVIGATION
+   This file intentionally wins over the decorative demo/modal handlers
+   embedded in grade2.html. Every mission opens the existing interactive
+   lesson engine at /lesson.html using the real Supabase Grade 2 lesson number.
 */
 (function () {
   'use strict';
 
-  /*
-    Grade 2 Supabase curriculum currently contains:
-      1  Hello!
-      2  My Family
-      3  My Colors
-      4  Numbers
-      5  My Body
-      6  Animals
-      7  Food
-      8  My Toys
-      9  My School
-      10 Weather
-      11 My Clothes
-      12 My Day
-  */
-  var lessonNumbers = {
+  var lessonNumbers = Object.freeze({
     animals: 6,
     numbers: 4,
     colors: 3,
     family: 2,
-    home: 8,
+    home: 14,
     food: 7,
     clothes: 11,
     weather: 10,
@@ -32,71 +19,90 @@
     transport: 1,
     nature: 12,
     final: 12
-  };
+  });
 
-  function getLessonUrl(id) {
-    var number = lessonNumbers[String(id || '').toLowerCase()];
-    if (!number) return null;
-    return 'lesson.html?grade=2&lesson=' + encodeURIComponent(number) + '&v=20260901';
+  function normalizeId(value) {
+    return String(value || '').trim().toLowerCase();
   }
 
-  function openRealLesson(id) {
-    var url = getLessonUrl(id);
+  function lessonUrl(id) {
+    var number = lessonNumbers[normalizeId(id)];
+    if (!number) return null;
+    return '/lesson.html?grade=2&lesson=' + encodeURIComponent(number) + '&v=20260901';
+  }
+
+  function navigate(id) {
+    var url = lessonUrl(id);
     if (!url) return false;
 
-    /* Use location.assign so the browser performs a real document navigation. */
-    window.location.assign(url);
+    /* Hard document navigation: no modal, no SPA interception. */
+    window.location.replace(url);
     return true;
   }
 
-  function findLessonButton(target) {
+  function getLessonFromTarget(target) {
     if (!target) return null;
-    if (target.closest) return target.closest('[data-lesson]');
-    return null;
+    var element = target.closest ? target.closest('[data-lesson]') : null;
+    return element ? element.getAttribute('data-lesson') : null;
   }
 
-  function intercept(event) {
-    var button = findLessonButton(event.target);
-    if (!button) return;
-
-    var id = button.getAttribute('data-lesson');
-    var url = getLessonUrl(id);
-    if (!url) return;
+  /* Pointer events fire before the later click handlers in grade2.html. */
+  document.addEventListener('pointerup', function (event) {
+    var id = getLessonFromTarget(event.target);
+    if (!id || !lessonUrl(id)) return;
 
     event.preventDefault();
     event.stopPropagation();
     if (event.stopImmediatePropagation) event.stopImmediatePropagation();
 
-    window.location.assign(url);
-  }
+    navigate(id);
+  }, true);
 
-  /* Capture phase guarantees the real lesson navigation wins over decorative UI listeners. */
-  document.addEventListener('click', intercept, true);
+  /* Keyboard activation / fallback. */
+  document.addEventListener('click', function (event) {
+    var id = getLessonFromTarget(event.target);
+    if (!id || !lessonUrl(id)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+
+    navigate(id);
+  }, true);
 
   document.addEventListener('DOMContentLoaded', function () {
     var continueButton = document.getElementById('continueBtn');
     if (continueButton) {
+      continueButton.addEventListener('pointerup', function (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        navigate('animals');
+      }, true);
+
       continueButton.addEventListener('click', function (event) {
         event.preventDefault();
-        event.stopPropagation();
-        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-        openRealLesson('animals');
+        event.stopImmediatePropagation();
+        navigate('animals');
       }, true);
     }
 
     var reviewButton = document.getElementById('reviewBtn');
     if (reviewButton) {
+      reviewButton.addEventListener('pointerup', function (event) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        navigate('final');
+      }, true);
+
       reviewButton.addEventListener('click', function (event) {
         event.preventDefault();
-        event.stopPropagation();
-        if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-        openRealLesson('final');
+        event.stopImmediatePropagation();
+        navigate('final');
       }, true);
     }
   });
 
-  /* Expose a safe helper for debugging from the console. */
   window.EnglishWithMariamiGrade2 = window.EnglishWithMariamiGrade2 || {};
-  window.EnglishWithMariamiGrade2.openLesson = openRealLesson;
+  window.EnglishWithMariamiGrade2.openLesson = navigate;
   window.EnglishWithMariamiGrade2.lessonNumbers = lessonNumbers;
 })();
