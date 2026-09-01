@@ -7,54 +7,72 @@ window.__ENGLISH_MARIAMI_SUPABASE_CLIENT=window.supabaseClient;
 (function(){if(document.querySelector('script[data-english-mariami-progress-sync]'))return;const s=document.createElement('script');s.src='/progress-sync.js';s.async=true;s.dataset.englishMariamiProgressSync='1';document.head.appendChild(s)})();
 (function(){if(document.querySelector('script[data-english-mariami-dashboard-progress]'))return;const s=document.createElement('script');s.src='/dashboard-progress.js';s.async=true;s.dataset.englishMariamiDashboardProgress='1';document.head.appendChild(s)})();
 
-/* Academy logout: mark the flow before sign-out and always return directly to public home. */
+/* Academy navigation + logout. */
 (function(){
   'use strict';
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
   if(!client)return;
 
+  const isAcademyPage=()=>{
+    const p=(window.location.pathname||'').toLowerCase().replace(/\/+$/,'');
+    return p==='/academy.html'||p==='academy.html';
+  };
+
   window.__EWM_ACADEMY_LOGGING_OUT=false;
 
-  /* The Academy brand is NOT a home/logout link. While authenticated,
-     clicking it must keep the student inside Academy. The only route out
-     is the explicit Logout button. */
-  document.addEventListener('click',function(event){
-    const brand=event.target.closest('.brand');
+  /* HARD BLOCK: the Academy brand is NOT a home button.
+     On academy.html it must never navigate to index.html.
+     We also remove its href so normal browser navigation cannot occur. */
+  functionlockAcademyBrand(){
+    if(!isAcademyPage())return;
+    const brand=document.querySelector('.brand');
     if(!brand)return;
-    const currentPath=(window.location.pathname||'').toLowerCase();
-    const target=(brand.getAttribute('href')||'').toLowerCase();
-    const isAcademy=currentPath.endsWith('/academy.html')||currentPath==='academy.html';
-    const pointsToPublicHome=target==='index.html'||target==='/index.html'||target.endsWith('/index.html');
-    if(isAcademy&&pointsToPublicHome){
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      window.scrollTo({top:0,behavior:'smooth'});
+    if(brand.dataset.ewmAcademyLocked==='1')return;
+    brand.dataset.ewmAcademyLocked='1';
+    brand.dataset.originalHref=brand.getAttribute('href')||'';
+    brand.setAttribute('href','#academy-top');
+    brand.setAttribute('role','button');
+    brand.setAttribute('aria-label','English with Mariami Academy');
+  }
+
+  function installAcademyBrandLock(){
+    function run(){
+      functionlockAcademyBrand();
+      const observer=new MutationObserver(function(){functionlockAcademyBrand()});
+      if(document.body)observer.observe(document.body,{childList:true,subtree:true});
     }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});
+    else run();
+  }
+  installAcademyBrandLock();
+
+  window.addEventListener('click',function(event){
+    const brand=event.target.closest&&event.target.closest('.brand');
+    if(!brand||!isAcademyPage())return;
+    event.preventDefault();
+    event.stopPropagation();
+    if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+    window.history.replaceState(null,'','#academy-top');
+    window.scrollTo({top:0,behavior:'smooth'});
   },true);
 
-  /* Wrap future auth listeners so Academy's SIGNED_OUT handler cannot
-     redirect to login.html during an intentional Academy logout. */
   const originalOnAuthStateChange=client.auth.onAuthStateChange.bind(client.auth);
   client.auth.onAuthStateChange=function(callback){
     return originalOnAuthStateChange(function(event,session){
-      if(window.__EWM_ACADEMY_LOGGING_OUT && event==='SIGNED_OUT')return;
+      if(window.__EWM_ACADEMY_LOGGING_OUT&&event==='SIGNED_OUT')return;
       return callback(event,session);
     });
   };
 
-  document.addEventListener('click',async function(event){
-    const link=event.target.closest('#logoutLink');
+  window.addEventListener('click',async function(event){
+    const link=event.target.closest&&event.target.closest('#logoutLink');
     if(!link)return;
     event.preventDefault();
-    event.stopImmediatePropagation();
+    event.stopPropagation();
+    if(event.stopImmediatePropagation)event.stopImmediatePropagation();
     window.__EWM_ACADEMY_LOGGING_OUT=true;
     link.setAttribute('aria-busy','true');
-    try{
-      await client.auth.signOut({scope:'local'});
-    }catch(error){
-      console.warn('Academy logout error:',error);
-    }finally{
-      window.location.replace('/index.html');
-    }
+    try{await client.auth.signOut({scope:'local'});}catch(error){console.warn('Academy logout error:',error)}
+    finally{window.location.replace('/index.html');}
   },true);
 })();
