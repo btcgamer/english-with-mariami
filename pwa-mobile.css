@@ -1,37 +1,108 @@
-/* English with Mariami — mobile/PWA safety layer. Additive only. */
-:root{--pwa-safe-top:env(safe-area-inset-top,0px);--pwa-safe-right:env(safe-area-inset-right,0px);--pwa-safe-bottom:env(safe-area-inset-bottom,0px);--pwa-safe-left:env(safe-area-inset-left,0px)}
-html{width:100%;min-height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-x:none}
-body{width:100%;min-height:100dvh;overflow-x:hidden;overscroll-behavior-x:none;-webkit-tap-highlight-color:transparent}
+/* English with Mariami — premium mobile/PWA app layer. Additive and safe. */
+:root{
+  --pwa-safe-top:env(safe-area-inset-top,0px);
+  --pwa-safe-right:env(safe-area-inset-right,0px);
+  --pwa-safe-bottom:env(safe-area-inset-bottom,0px);
+  --pwa-safe-left:env(safe-area-inset-left,0px);
+  --pwa-app-height:100dvh;
+}
+*{box-sizing:border-box}
+html{
+  width:100%;min-height:100%;
+  -webkit-text-size-adjust:100%;text-size-adjust:100%;
+  overscroll-behavior-x:none;
+  scrollbar-gutter:stable;
+}
+body{
+  width:100%;min-height:100dvh;min-height:var(--pwa-app-height);
+  overflow-x:hidden;overscroll-behavior-x:none;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+}
 button,a,input,select,textarea{touch-action:manipulation}
 input,textarea,select{font-size:16px}
+button,a{-webkit-user-select:none;user-select:none}
+img,svg,video,canvas{max-width:100%}
+
 @media(max-width:900px){
- body{padding-top:max(0px,var(--pwa-safe-top));padding-left:max(0px,var(--pwa-safe-left));padding-right:max(0px,var(--pwa-safe-right));padding-bottom:max(0px,var(--pwa-safe-bottom));}
- main,.app,.g3-app,.g4-app{width:100%;max-width:100%;}
- img,svg,video,canvas{max-width:100%;height:auto}
- .g3-nav,.g4-nav,.topbar{padding-top:calc(10px + var(--pwa-safe-top));}
- .g3-nav,.g4-nav{padding-left:max(12px,var(--pwa-safe-left));padding-right:max(12px,var(--pwa-safe-right));}
- .g3-home,.g4-home{min-height:44px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation}
- .actions button,.hero-actions button,.g4-tools button,.enter-btn,.mission button{min-height:46px;touch-action:manipulation}
- .missions,.lessons{touch-action:pan-y}
- .u-robot-companion{width:42px;height:42px;z-index:2147483000;pointer-events:none;}
- .u-max-hud{bottom:calc(10px + var(--pwa-safe-bottom));}
- .u-max-nav{bottom:calc(10px + var(--pwa-safe-bottom));}
- .modal{padding:calc(12px + var(--pwa-safe-top)) calc(12px + var(--pwa-safe-right)) calc(12px + var(--pwa-safe-bottom)) calc(12px + var(--pwa-safe-left));}
+  body{
+    padding-top:max(0px,var(--pwa-safe-top));
+    padding-left:max(0px,var(--pwa-safe-left));
+    padding-right:max(0px,var(--pwa-safe-right));
+    padding-bottom:max(0px,var(--pwa-safe-bottom));
+  }
+  main,.app,.g3-app,.g4-app{width:100%;max-width:100%;}
+  .g3-nav,.g4-nav,.topbar{
+    padding-top:calc(10px + var(--pwa-safe-top));
+  }
+  .g3-nav,.g4-nav{
+    padding-left:max(12px,var(--pwa-safe-left));
+    padding-right:max(12px,var(--pwa-safe-right));
+  }
+  .g3-home,.g4-home{
+    min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+    touch-action:manipulation;
+  }
+  .actions button,.hero-actions button,.g4-tools button,.enter-btn,.mission button{
+    min-height:48px;touch-action:manipulation;
+  }
+  .missions,.lessons{touch-action:pan-y}
+  .u-robot-companion{
+    width:44px;height:44px;z-index:2147483000;pointer-events:none;
+    will-change:transform;
+  }
+  .u-max-hud{bottom:calc(10px + var(--pwa-safe-bottom));}
+  .u-max-nav{bottom:calc(10px + var(--pwa-safe-bottom));}
+  .modal{
+    padding:calc(12px + var(--pwa-safe-top)) calc(12px + var(--pwa-safe-right))
+             calc(12px + var(--pwa-safe-bottom)) calc(12px + var(--pwa-safe-left));
+  }
 }
+
 @media(max-width:600px){
- .g3-nav,.g4-nav{gap:8px;}
- .g3-nav .stats,.g4-nav .stats{max-width:100%;}
- .g3-hero,.g4-hero{min-height:auto;}
- .g3-hero p,.g4-hero p{font-size:15px;line-height:1.55;}
- .g3-hero .actions,.g4-hero .actions{display:grid;grid-template-columns:1fr;gap:9px;}
- .g3-hero .actions button,.g4-hero .actions button{width:100%;}
- .g4-command{margin-left:0;margin-right:0;}
- .g4-tools{grid-template-columns:1fr!important;}
- .g4-tools input{min-height:46px;}
+  html{scroll-padding-top:72px}
+  body{font-size:15px}
+  .g3-nav,.g4-nav{gap:8px;}
+  .g3-nav .stats,.g4-nav .stats{max-width:100%;}
+  .g3-hero,.g4-hero{min-height:auto;}
+  .g3-hero p,.g4-hero p{font-size:15px;line-height:1.55;}
+  .g3-hero .actions,.g4-hero .actions{display:grid;grid-template-columns:1fr;gap:9px;}
+  .g3-hero .actions button,.g4-hero .actions button{width:100%;}
+  .g4-command{margin-left:0;margin-right:0;}
+  .g4-tools{grid-template-columns:1fr!important;}
+  .g4-tools input{min-height:48px;}
+  .mission,.card,.feature,.grade{overflow:hidden;}
 }
+
+@media(max-width:420px){
+  .wrap{width:calc(100% - 14px)}
+  .g3-nav,.g4-nav{padding-left:9px;padding-right:9px}
+  .brand small{font-size:8px;letter-spacing:.06em}
+  .stats strong{font-size:10px}
+}
+
+@media(max-width:360px){
+  .g3-hero h1,.g4-hero h1{font-size:34px}
+  .g3-nav .stats,.g4-nav .stats{gap:4px}
+  .g3-nav .stats strong,.g4-nav .stats strong{padding:5px 6px}
+}
+
+/* Installed PWA: use the whole viewport and respect modern phone cutouts. */
 @media(display-mode:standalone){
- body{min-height:100dvh;}
- .u-max-hud{bottom:calc(10px + var(--pwa-safe-bottom));}
- .u-max-nav{bottom:calc(10px + var(--pwa-safe-bottom));}
+  html,body{width:100%;min-height:100dvh;}
+  body{overscroll-behavior-y:none;}
+  .u-max-hud{bottom:calc(10px + var(--pwa-safe-bottom));}
+  .u-max-nav{bottom:calc(10px + var(--pwa-safe-bottom));}
+  .mobile-bottom-nav{bottom:calc(8px + var(--pwa-safe-bottom));}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.u-robot-companion{transition:none!important}}
+
+/* iOS home-screen mode */
+@supports(-webkit-touch-callout:none){
+  body{min-height:-webkit-fill-available;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .u-robot-companion{transition:none!important}
+}
