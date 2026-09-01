@@ -1,8 +1,6 @@
-name: Package Futuristic Learning Universe
+name: Futuristic project package
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -12,29 +10,28 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Create ZIP
+      - name: Validate project files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html
+          test -f config.js
+          test -f grade4/index.html
+          test -f grade4/grade4.css
+          test -f grade4/grade4.js
+          test -f grade4/grade4-futuristic-content.js
+      - name: Create project package
         shell: bash
         run: |
           set -euo pipefail
           rm -rf package english-with-mariami-futuristic.zip
           mkdir -p package/english-with-mariami-futuristic
           rsync -a --exclude='.git/' --exclude='package/' ./ package/english-with-mariami-futuristic/
-          cat > package/english-with-mariami-futuristic/README-FUTURISTIC.md <<'EOF'
-# English with Mariami — Futuristic Learning Universe
-
-Complete repository package with the shared 3D/Neon/Holographic Learning Universe layer.
-
-Preserved: existing Grade 2 design, Supabase configuration/application files, Grade 3 and Grade 4 systems, teacher/student pages and supporting assets.
-
-Visual layer: holographic cards, 3D tilt/parallax, perspective grid, glow/shine, cosmic orbs, responsive layout and reduced-motion support.
-EOF
           cd package
           zip -qr ../english-with-mariami-futuristic.zip english-with-mariami-futuristic
-
-      - name: Upload ZIP artifact
+      - name: Upload package
         uses: actions/upload-artifact@v4
         with:
           name: english-with-mariami-futuristic
