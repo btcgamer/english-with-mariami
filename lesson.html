@@ -1,40 +1,2675 @@
 <!doctype html>
+
 <html lang="ka">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#020817">
 <title>გაკვეთილი — English with Mariami</title>
+
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:#ecfeff;font-family:Arial,"Noto Sans Georgian",sans-serif;background:radial-gradient(circle at 10% 10%,#00eaff30,transparent 25%),radial-gradient(circle at 90% 20%,#7c3cff28,transparent 30%),radial-gradient(circle at 50% 100%,#006eff22,transparent 40%),linear-gradient(135deg,#01030b,#03152e 48%,#010713);overflow-x:hidden}#visual3d{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;perspective:1200px}.grid{position:absolute;width:180%;height:180%;left:-40%;top:35%;opacity:.2;background-image:linear-gradient(#00eaff22 1px,transparent 1px),linear-gradient(90deg,#00eaff22 1px,transparent 1px);background-size:70px 70px;transform:perspective(700px) rotateX(67deg) translateZ(-100px);animation:gridMove 16s linear infinite}@keyframes gridMove{to{transform:perspective(700px) rotateX(67deg) translateY(70px) translateZ(-100px)}}.orb{position:absolute;border-radius:50%;filter:blur(2px);mix-blend-mode:screen}.orb.one{width:300px;height:300px;left:-90px;top:15%;background:radial-gradient(circle,#00eaff66 0,#00eaff10 45%,transparent 70%);animation:orb1 9s ease-in-out infinite alternate}.orb.two{width:400px;height:400px;right:-130px;top:5%;background:radial-gradient(circle,#7c3cff66 0,#7c3cff10 45%,transparent 70%);animation:orb2 12s ease-in-out infinite alternate}.orb.three{width:350px;height:350px;left:35%;bottom:-180px;background:radial-gradient(circle,#006eff55 0,#006eff08 50%,transparent 70%);animation:orb3 10s ease-in-out infinite alternate}@keyframes orb1{to{transform:translate3d(120px,60px,100px) scale(1.25)}}@keyframes orb2{to{transform:translate3d(-100px,100px,150px) scale(1.3)}}@keyframes orb3{to{transform:translate3d(70px,-80px,100px)}}.particles{position:absolute;inset:0}.particles span{position:absolute;width:3px;height:3px;border-radius:50%;background:#00eaff;box-shadow:0 0 12px #00eaff;animation:particleFloat linear infinite;opacity:.7}.particles span:nth-child(1){left:5%;top:70%;animation-duration:8s}.particles span:nth-child(2){left:12%;top:40%;animation-duration:12s}.particles span:nth-child(3){left:22%;top:85%;animation-duration:10s}.particles span:nth-child(4){left:31%;top:25%;animation-duration:9s}.particles span:nth-child(5){left:43%;top:65%;animation-duration:13s}.particles span:nth-child(6){left:55%;top:35%;animation-duration:11s}.particles span:nth-child(7){left:66%;top:80%;animation-duration:8s}.particles span:nth-child(8){left:74%;top:20%;animation-duration:14s}.particles span:nth-child(9){left:84%;top:60%;animation-duration:10s}.particles span:nth-child(10){left:93%;top:35%;animation-duration:12s}.particles span:nth-child(11){left:18%;top:10%;animation-duration:15s}.particles span:nth-child(12){left:48%;top:15%;animation-duration:9s}.particles span:nth-child(13){left:63%;top:50%;animation-duration:13s}.particles span:nth-child(14){left:88%;top:85%;animation-duration:11s}.particles span:nth-child(15){left:37%;top:90%;animation-duration:14s}@keyframes particleFloat{0%{transform:translate3d(0,80px,0) scale(.5);opacity:0}20%,80%{opacity:.8}100%{transform:translate3d(30px,-180px,200px) scale(1.5);opacity:0}}.wrap{width:min(1180px,calc(100% - 28px));margin:auto}main{padding:35px 0 70px}.top{position:sticky;top:0;z-index:100;background:#020817dd;border-bottom:1px solid #00eaff35;backdrop-filter:blur(18px)}.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{color:#fff;text-decoration:none;font-weight:1000;text-shadow:0 0 15px #00eaff55}.nav-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #00eaff55;border-radius:13px;padding:10px 14px;background:linear-gradient(135deg,#075eff,#00c8e8);color:#fff;text-decoration:none;font-weight:1000;cursor:pointer}.hero{position:relative;overflow:hidden;padding:32px;border:1px solid #00eaff45;border-radius:28px;background:linear-gradient(135deg,#061a36dd,#031027cc);box-shadow:0 25px 80px #000b,0 0 50px #00eaff10,inset 0 1px #ffffff12;transform-style:preserve-3d}.hero h1{position:relative;margin:15px 0 8px;font-size:clamp(30px,6vw,58px);line-height:1.05;text-shadow:0 0 12px #00eaff44,0 0 35px #7c3cff22}.hero p{color:#b9dce7}.badge{display:inline-flex;padding:7px 12px;border-radius:999px;border:1px solid #00eaff55;color:#8cefff;background:#00eaff0d;font-size:11px;font-weight:1000}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.meta span{padding:8px 12px;border-radius:12px;background:#020b1caa;border:1px solid #ffffff10}.progress-wrap{margin-top:18px}.progress{height:9px;background:#020b1c;border-radius:99px;overflow:hidden}.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#00eaff,#7c3cff,#ffe600);transition:width .35s}.section{margin-top:18px;padding:24px;border-radius:24px;border:1px solid #00eaff30;background:rgba(3,15,35,.82);box-shadow:0 20px 60px #0008,inset 0 1px #ffffff0b}.section h2{margin:0 0 18px}.words-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.word-card{position:relative;min-height:150px;padding:18px;border-radius:18px;border:1px solid #00eaff28;background:linear-gradient(145deg,#061b39,#031027);box-shadow:0 12px 30px #0008,inset 0 1px #ffffff0b;transition:.3s;transform-style:preserve-3d}.word-card:hover{transform:perspective(700px) rotateX(4deg) rotateY(-4deg) translateY(-5px);border-color:#00eaff77;box-shadow:0 20px 40px #000a,0 0 25px #00eaff18}.word-number{color:#ffe600;font-weight:1000;font-size:12px}.word{margin-top:10px;font-size:23px;font-weight:1000}.translation{margin-top:5px;color:#82d8e7}.example{margin-top:12px;color:#bcd8e1;font-size:12px;line-height:1.45}.speak{position:absolute;right:12px;bottom:12px;width:40px;height:40px;border-radius:12px;border:1px solid #00eaff55;background:#00eaff12;color:#fff;cursor:pointer;font-size:18px;box-shadow:0 0 15px #00eaff12}.speak:hover{background:#00eaff25;box-shadow:0 0 22px #00eaff45;transform:scale(1.06)}.speak.speaking{animation:speaking .7s ease-in-out infinite alternate;background:#7c3cff33;border-color:#7c3cff}.speak.example-speak{right:58px}@keyframes speaking{to{box-shadow:0 0 28px #7c3cff88;transform:scale(1.08)}}.grammar{display:grid;grid-template-columns:1fr 1fr;gap:15px}.grammar-box{padding:20px;border-radius:18px;background:#020b1dcc;border:1px solid #7c3cff30}.grammar-box h3{margin-top:0;color:#ffe600}.formula{padding:14px;border-radius:12px;background:#00eaff0b;border:1px solid #00eaff20;color:#9befff;font-weight:900}.example-line{margin-top:10px;padding:10px 12px;border-left:3px solid #00eaff;background:#ffffff05;color:#d8faff}.exercise{display:grid;gap:12px}.exercise-item{padding:17px;border-radius:16px;background:#020b1c;border:1px solid #ffffff10}.exercise-item b{display:block;margin-bottom:10px}.exercise-options{display:flex;flex-wrap:wrap;gap:8px}.option{border:1px solid #00eaff38;border-radius:11px;padding:9px 13px;background:#061a35;color:#fff;cursor:pointer}.option.correct{background:#0b633c;border-color:#43ffad}.option.wrong{background:#6e1d2d;border-color:#ff6179}.listening{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center}.audio-text{padding:18px;border-radius:16px;background:#020b1c;border:1px solid #00eaff25;line-height:1.7;color:#dffbff}.audio-controls{display:flex;gap:10px;flex-wrap:wrap}.game-options{display:flex;gap:10px;flex-wrap:wrap}.game-result{margin-top:12px;font-weight:1000}.quiz-item{padding:18px;border-radius:17px;background:#020b1c;border:1px solid #ffffff10;margin-top:12px}.quiz-options{display:flex;gap:8px;flex-wrap:wrap}.hidden{display:none!important}#loading{text-align:center;padding:80px 20px}.loader{width:65px;height:65px;margin:auto;border:3px solid #00eaff18;border-top-color:#00eaff;border-right-color:#7c3cff;border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}#error{margin-top:25px;padding:25px;border-radius:20px;background:#3a0d18;border:1px solid #ff617955;color:#ffd9de}footer{text-align:center;padding:25px;color:#7fa9b5}@media(max-width:900px){.words-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.hero{padding:23px 18px;border-radius:20px}.section{padding:17px;border-radius:19px}.words-grid{grid-template-columns:1fr}.grammar{grid-template-columns:1fr}.listening{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.nav-actions{width:100%}.nav-actions .btn{flex:1;text-align:center}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+*{box-sizing:border-box}
+
+:root{
+  --cyan:#00eaff;
+  --blue:#397cff;
+  --purple:#8b5cff;
+  --pink:#ff39d4;
+  --green:#39ffa3;
+  --yellow:#ffe65c;
+  --bg:#020817;
+  --bg2:#04162e;
+  --text:#ecfeff;
+  --muted:#9ab2c2;
+  --glass:rgba(4,18,43,.76);
+  --border:rgba(0,234,255,.18);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:Arial,"Noto Sans Georgian",sans-serif;
+  background:
+    radial-gradient(circle at 10% 10%,rgba(0,234,255,.18),transparent 27%),
+    radial-gradient(circle at 90% 15%,rgba(139,92,255,.16),transparent 29%),
+    radial-gradient(circle at 50% 100%,rgba(57,124,255,.13),transparent 40%),
+    linear-gradient(135deg,var(--bg),var(--bg2) 52%,#010610);
+  overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+#space{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.stars{
+  position:absolute;
+  inset:-100px;
+  opacity:.3;
+  background-image:
+    radial-gradient(circle,#fff 1px,transparent 1px),
+    radial-gradient(circle,var(--cyan) 1px,transparent 1px),
+    radial-gradient(circle,var(--pink) 1px,transparent 1px);
+  background-size:110px 110px,175px 175px,255px 255px;
+  animation:starMove 40s linear infinite;
+}
+
+@keyframes starMove{
+  to{transform:translateY(180px)}
+}
+
+.grid{
+  position:absolute;
+  width:190%;
+  height:70%;
+  left:-45%;
+  bottom:-10%;
+  transform:perspective(650px) rotateX(64deg);
+  transform-origin:center bottom;
+  background:
+    linear-gradient(rgba(0,234,255,.21) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,255,.2) 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:linear-gradient(to top,black,transparent 88%);
+  animation:gridMove 5s linear infinite;
+}
+
+@keyframes gridMove{
+  to{background-position:0 55px,55px 0}
+}
+
+.energy{
+  position:absolute;
+  width:80vw;
+  left:-30vw;
+  height:2px;
+  animation:energyMove linear infinite;
+}
+
+.energy:after{
+  content:"";
+  display:block;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--c),
+      white,
+      var(--c),
+      transparent
+    );
+  box-shadow:
+    0 0 10px var(--c),
+    0 0 25px var(--c);
+}
+
+.energy.e1{top:18%;--c:var(--cyan);animation-duration:8s}
+.energy.e2{top:34%;--c:var(--pink);animation-duration:11s;animation-delay:-4s}
+.energy.e3{top:52%;--c:var(--purple);animation-duration:9s;animation-delay:-2s}
+.energy.e4{top:70%;--c:var(--green);animation-duration:12s;animation-delay:-6s}
+
+@keyframes energyMove{
+  from{transform:translateX(-10vw) rotate(-4deg)}
+  to{transform:translateX(170vw) rotate(-4deg)}
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.wrap{
+  width:min(1180px,calc(100% - 28px));
+  margin:auto;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(2,8,22,.84);
+  border-bottom:1px solid rgba(0,234,255,.16);
+  backdrop-filter:blur(18px);
+}
+
+.nav{
+  min-height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.brand{
+  color:#fff;
+  text-decoration:none;
+  font-weight:1000;
+  letter-spacing:.5px;
+  text-shadow:0 0 15px rgba(0,234,255,.25);
+}
+
+.nav-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:1px solid rgba(0,234,255,.32);
+  border-radius:12px;
+  padding:10px 14px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(20,81,255,.95),
+      rgba(0,200,232,.95)
+    );
+  color:#fff;
+  text-decoration:none;
+  font-weight:950;
+  cursor:pointer;
+  transition:.22s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 25px rgba(0,234,255,.22);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+  padding:30px 0 70px;
+}
+
+#loading{
+  padding:90px 20px;
+  text-align:center;
+}
+
+.loader{
+  width:65px;
+  height:65px;
+  margin:auto;
+  border-radius:50%;
+  border:3px solid rgba(0,234,255,.12);
+  border-top-color:var(--cyan);
+  border-right-color:var(--purple);
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   ERROR
+========================= */
+
+#error{
+  margin-top:25px;
+  padding:24px;
+  border-radius:20px;
+  background:rgba(75,10,28,.88);
+  border:1px solid rgba(255,86,116,.4);
+  color:#ffdce2;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:30px;
+  border-radius:28px;
+  border:1px solid rgba(0,234,255,.24);
+  background:
+    linear-gradient(
+      140deg,
+      rgba(7,31,65,.92),
+      rgba(3,13,31,.88)
+    );
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.45),
+    inset 0 1px rgba(255,255,255,.07);
+  transform-style:preserve-3d;
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+  width:320px;
+  height:320px;
+  right:-150px;
+  top:-150px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,234,255,.2),transparent 68%);
+  filter:blur(20px);
+}
+
+.badge{
+  display:inline-flex;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(0,234,255,.35);
+  color:#92f9ff;
+  background:rgba(0,234,255,.06);
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:1px;
+}
+
+.hero h1{
+  margin:16px 0 10px;
+  font-size:clamp(34px,7vw,68px);
+  line-height:1;
+  text-shadow:
+    0 0 15px rgba(0,234,255,.22),
+    0 0 35px rgba(139,92,255,.12);
+}
+
+.hero p{
+  color:#b9d5df;
+  line-height:1.65;
+}
+
+.meta{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.meta span{
+  padding:9px 12px;
+  border-radius:12px;
+  background:rgba(2,11,28,.72);
+  border:1px solid rgba(255,255,255,.08);
+  color:#d9f9ff;
+}
+
+.progress-wrap{
+  margin-top:20px;
+}
+
+.progress{
+  height:9px;
+  border-radius:999px;
+  background:#010712;
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--purple),
+      var(--yellow)
+    );
+  transition:width .35s ease;
+  box-shadow:0 0 18px rgba(0,234,255,.35);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+  margin-top:18px;
+  padding:24px;
+  border-radius:24px;
+  border:1px solid var(--border);
+  background:rgba(3,15,35,.82);
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.34),
+    inset 0 1px rgba(255,255,255,.04);
+}
+
+.section h2{
+  margin:0 0 18px;
+}
+
+/* =========================
+   WORDS
+========================= */
+
+.words-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.word-card{
+  position:relative;
+  min-height:145px;
+  padding:17px;
+  border-radius:18px;
+  border:1px solid rgba(0,234,255,.15);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8,30,62,.96),
+      rgba(3,13,32,.96)
+    );
+  transition:.25s;
+  transform-style:preserve-3d;
+}
+
+.word-card:hover{
+  transform:
+    perspective(750px)
+    rotateX(3deg)
+    rotateY(-4deg)
+    translateY(-5px);
+  border-color:rgba(0,234,255,.55);
+  box-shadow:0 18px 40px rgba(0,0,0,.42);
+}
+
+.word-number{
+  color:var(--yellow);
+  font-size:11px;
+  font-weight:1000;
+}
+
+.word{
+  margin-top:9px;
+  font-size:22px;
+  font-weight:1000;
+}
+
+.translation{
+  margin-top:5px;
+  color:#78d8ea;
+}
+
+.example{
+  margin-top:11px;
+  color:#b8d2dc;
+  font-size:12px;
+  line-height:1.45;
+}
+
+.speak{
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  width:39px;
+  height:39px;
+  border-radius:11px;
+  border:1px solid rgba(0,234,255,.35);
+  background:rgba(0,234,255,.06);
+  color:#fff;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.speak:hover{
+  box-shadow:0 0 20px rgba(0,234,255,.28);
+}
+
+/* =========================
+   GRAMMAR
+========================= */
+
+.grammar{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.grammar-box{
+  padding:20px;
+  border-radius:18px;
+  border:1px solid rgba(139,92,255,.2);
+  background:rgba(1,9,25,.76);
+}
+
+.grammar-box h3{
+  margin-top:0;
+  color:var(--yellow);
+}
+
+.formula{
+  padding:14px;
+  border-radius:12px;
+  background:rgba(0,234,255,.05);
+  border:1px solid rgba(0,234,255,.18);
+  color:#9afaff;
+  font-weight:900;
+}
+
+.example-line{
+  margin-top:10px;
+  padding:10px 12px;
+  border-left:3px solid var(--cyan);
+  background:rgba(255,255,255,.025);
+  color:#d7faff;
+}
+
+/* =========================
+   LISTENING
+========================= */
+
+.listening{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:center;
+}
+
+.audio-text{
+  padding:18px;
+  border-radius:17px;
+  border:1px solid rgba(0,234,255,.17);
+  background:#020b1c;
+  color:#dffaff;
+  line-height:1.7;
+}
+
+/* =========================
+   EXERCISE
+========================= */
+
+.exercise{
+  display:grid;
+  gap:12px;
+}
+
+.exercise-item{
+  padding:17px;
+  border-radius:17px;
+  background:#020b1c;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.exercise-item b{
+  display:block;
+  margin-bottom:12px;
+}
+
+.options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.option{
+  border:1px solid rgba(0,234,255,.25);
+  border-radius:11px;
+  padding:9px 13px;
+  background:#071a35;
+  color:#fff;
+  cursor:pointer;
+}
+
+.option:hover{
+  border-color:var(--cyan);
+}
+
+.option.correct{
+  background:#0a5c3a;
+  border-color:#43ffad;
+}
+
+.option.wrong{
+  background:#641c2d;
+  border-color:#ff627e;
+}
+
+/* =========================
+   GAME
+========================= */
+
+.game-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.game-result,
+.quiz-result{
+  margin-top:13px;
+  font-weight:1000;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz-item{
+  margin-top:12px;
+  padding:18px;
+  border-radius:18px;
+  background:#020b1c;
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.quiz-item strong{
+  display:block;
+  margin-bottom:12px;
+}
+
+.quiz-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+/* =========================
+   COMPLETE
+========================= */
+
+.complete{
+  margin-top:18px;
+  padding:16px;
+  border:0;
+  width:100%;
+  border-radius:14px;
+  color:#001116;
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--purple)
+    );
+  font-weight:1000;
+  cursor:pointer;
+  box-shadow:0 0 28px rgba(0,234,255,.16);
+}
+
+.complete:hover{
+  box-shadow:0 0 45px rgba(0,234,255,.3);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  text-align:center;
+  padding:30px 0 10px;
+  color:#6f8e9d;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+  .words-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grammar{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+  .nav{
+    flex-direction:column;
+    align-items:stretch;
+    padding:10px 0;
+  }
+
+  .nav-actions{
+    width:100%;
+  }
+
+  .nav-actions .btn{
+    flex:1;
+    text-align:center;
+  }
+
+  .hero{
+    padding:22px;
+    border-radius:21px;
+  }
+
+  .section{
+    padding:17px;
+    border-radius:19px;
+  }
+
+  .words-grid{
+    grid-template-columns:1fr;
+  }
+
+  .listening{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
 </style>
+
 </head>
+
 <body>
-<div id="visual3d"><div class="grid"></div><div class="orb one"></div><div class="orb two"></div><div class="orb three"></div><div class="particles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
-<header class="top"><div class="nav wrap"><a class="brand" href="teacher-lessons.html">⚡ ENGLISH WITH MARIAMI</a><div class="nav-actions"><a class="btn" href="teacher-lessons.html">📚 გაკვეთილებზე დაბრუნება</a><button class="btn" id="stopSpeech" type="button">🔇 ხმის გაჩერება</button></div></div></header>
-<main class="wrap"><div id="loading"><div class="loader"></div><h2>📚 გაკვეთილი იტვირთება...</h2><p>English with Mariami</p></div><div id="error" class="hidden"></div><div id="lessonContent" class="hidden"><section class="hero"><span id="gradeBadge" class="badge">GRADE</span><h1 id="lessonTitle">გაკვეთილი</h1><p id="lessonDescription">ინგლისურის ახალი გაკვეთილი</p><div class="meta"><span id="lessonNumber">📘 Lesson</span><span id="wordCount">🔤 0 სიტყვა</span><span>🎯 პრაქტიკა</span><span>⭐ პროგრესი</span></div><div class="progress-wrap"><div class="progress"><div id="progressBar" class="progress-bar"></div></div></div></section><section class="section"><h2>🔤 ახალი სიტყვები</h2><div id="wordsGrid" class="words-grid"></div></section><section class="section"><h2>📖 გრამატიკა</h2><div id="grammar" class="grammar"><div class="grammar-box"><h3>📌 მთავარი წესი</h3><div id="grammarRule" class="formula">Loading...</div><div id="grammarExamples"></div></div><div class="grammar-box"><h3>💡 დაიმახსოვრე</h3><div class="example-line">Practice the rule with the new vocabulary.</div><button class="btn" id="speakGrammar" type="button">🔊 გრამატიკის მოსმენა</button></div></div></section><section class="section"><h2>🎧 მოსმენა და გამეორება</h2><div class="listening"><div id="audioText" class="audio-text">მოსასმენი ტექსტი იტვირთება...</div><div class="audio-controls"><button class="btn" id="listen" type="button">▶️ მოსმენა</button><button class="btn" id="repeat" type="button">🔁 გამეორება</button></div></div></section><section class="section"><h2>✍️ სავარჯიშო</h2><div id="exercise" class="exercise"></div></section><section class="section"><h2>🎮 თამაში</h2><p id="gameQuestion">იტვირთება...</p><div id="gameOptions" class="game-options"></div><div id="gameResult" class="game-result"></div></section><section class="section"><h2>🧠 ქვიზი</h2><div id="quiz"></div><button id="finishQuiz" class="btn" type="button" style="margin-top:15px">🏆 შედეგის ნახვა</button><div id="quizResult" class="game-result"></div></section></div></main><footer>© 2026 English with Mariami — ყველა უფლება დაცულია</footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js?v=20260828-6"></script>
+
+<div id="space">
+  <div class="stars"></div>
+  <div class="grid"></div>
+  <div class="energy e1"></div>
+  <div class="energy e2"></div>
+  <div class="energy e3"></div>
+  <div class="energy e4"></div>
+</div>
+
+<header class="top">
+  <div class="nav wrap">
+
+```
+<a class="brand" id="brandLink" href="teacher-lessons.html">
+  ⚡ ENGLISH WITH MARIAMI
+</a>
+
+<div class="nav-actions">
+
+  <a
+    class="btn"
+    id="backButton"
+    href="teacher-lessons.html"
+  >
+    📚 გაკვეთილებზე დაბრუნება
+  </a>
+
+  <button
+    class="btn"
+    id="stopSpeech"
+    type="button"
+  >
+    🔇 ხმის გაჩერება
+  </button>
+
+</div>
+```
+
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div id="loading">
+    <div class="loader"></div>
+    <h2>📚 გაკვეთილი იტვირთება...</h2>
+    <p>English with Mariami</p>
+  </div>
+
+  <div id="error" class="hidden"></div>
+
+  <div id="lessonContent" class="hidden">
+
+```
+<section class="hero">
+
+  <span id="gradeBadge" class="badge">
+    GRADE
+  </span>
+
+  <h1 id="lessonTitle">
+    გაკვეთილი
+  </h1>
+
+  <p id="lessonDescription">
+    ინგლისურის სასწავლო გაკვეთილი
+  </p>
+
+  <div class="meta">
+
+    <span id="lessonNumber">
+      📘 Lesson
+    </span>
+
+    <span id="wordCount">
+      🔤 0 სიტყვა
+    </span>
+
+    <span>
+      🎯 პრაქტიკა
+    </span>
+
+    <span>
+      ⭐ პროგრესი
+    </span>
+
+  </div>
+
+  <div class="progress-wrap">
+
+    <div class="progress">
+      <div
+        id="progressBar"
+        class="progress-bar"
+      ></div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>
+    🔤 ახალი სიტყვები
+  </h2>
+
+  <div
+    id="wordsGrid"
+    class="words-grid"
+  ></div>
+
+</section>
+
+<section class="section">
+
+  <h2>
+    📖 გრამატიკა
+  </h2>
+
+  <div class="grammar">
+
+    <div class="grammar-box">
+
+      <h3>
+        📌 მთავარი წესი
+      </h3>
+
+      <div
+        id="grammarRule"
+        class="formula"
+      >
+        იტვირთება...
+      </div>
+
+      <div id="grammarExamples"></div>
+
+    </div>
+
+    <div class="grammar-box">
+
+      <h3>
+        💡 დაიმახსოვრე
+      </h3>
+
+      <div class="example-line">
+        Practice the grammar rule with the new words.
+      </div>
+
+      <button
+        class="btn"
+        id="speakGrammar"
+        type="button"
+      >
+        🔊 გრამატიკის მოსმენა
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>
+    🎧 მოსმენა და გამეორება
+  </h2>
+
+  <div class="listening">
+
+    <div
+      id="audioText"
+      class="audio-text"
+    >
+      მოსასმენი ტექსტი იტვირთება...
+    </div>
+
+    <div class="options">
+
+      <button
+        class="btn"
+        id="listen"
+        type="button"
+      >
+        ▶️ მოსმენა
+      </button>
+
+      <button
+        class="btn"
+        id="repeat"
+        type="button"
+      >
+        🔁 გამეორება
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>
+    ✍️ სავარჯიშო
+  </h2>
+
+  <div
+    id="exercise"
+    class="exercise"
+  ></div>
+
+</section>
+
+<section class="section">
+
+  <h2>
+    🎮 Mini Game
+  </h2>
+
+  <p id="gameQuestion">
+    აირჩიე სწორი პასუხი.
+  </p>
+
+  <div
+    id="gameOptions"
+    class="game-options"
+  ></div>
+
+  <div
+    id="gameResult"
+    class="game-result"
+  ></div>
+
+</section>
+
+<section class="section">
+
+  <h2>
+    🧠 Quiz
+  </h2>
+
+  <div id="quiz"></div>
+
+  <button
+    class="btn"
+    id="finishQuiz"
+    type="button"
+    style="margin-top:15px"
+  >
+    🏆 შედეგის ნახვა
+  </button>
+
+  <div
+    id="quizResult"
+    class="quiz-result"
+  ></div>
+
+</section>
+
+<button
+  id="completeLesson"
+  class="complete"
+  type="button"
+>
+  ⭐ გაკვეთილის დასრულება +10 XP
+</button>
+```
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 English with Mariami — Learn • Play • Level Up
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js?v=20260901"></script>
+
 <script>
-(function(){'use strict';
-const params=new URLSearchParams(location.search);const grade=params.get('grade')||params.get('class')||'2';const lessonParam=params.get('lesson')||params.get('id');const loading=document.getElementById('loading');const errorBox=document.getElementById('error');const content=document.getElementById('lessonContent');const client=window.supabaseClient;let progressValue=0;let activeSpeechButton=null;
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function gradeLabel(g){return ({'2':'🌱 მე-2 კლასი','3':'🚀 მე-3 კლასი','4':'⭐ მე-4 კლასი'})[String(g)]||('კლასი '+g);}
-function getEnglishVoice(){const voices=window.speechSynthesis?.getVoices?.()||[];return voices.find(v=>/^en-US$/i.test(v.lang))||voices.find(v=>/^en-/i.test(v.lang))||voices[0]||null;}
-function speak(text,button){if(!('speechSynthesis' in window)){alert('ამ მოწყობილობაზე ხმის ფუნქცია არ არის ხელმისაწვდომი.');return;}const value=String(text||'').trim();if(!value)return;window.speechSynthesis.cancel();if(activeSpeechButton){activeSpeechButton.classList.remove('speaking');activeSpeechButton=null;}const utter=new SpeechSynthesisUtterance(value);utter.lang='en-US';utter.rate=.82;utter.pitch=1;const voice=getEnglishVoice();if(voice)utter.voice=voice;if(button){button.classList.add('speaking');activeSpeechButton=button;}utter.onend=()=>{if(button)button.classList.remove('speaking');if(activeSpeechButton===button)activeSpeechButton=null;};utter.onerror=()=>{if(button)button.classList.remove('speaking');if(activeSpeechButton===button)activeSpeechButton=null;};window.speechSynthesis.speak(utter);}
-window.speak=speak;
-window.speechSynthesis?.addEventListener?.('voiceschanged',()=>window.speechSynthesis.getVoices());
-document.getElementById('stopSpeech').onclick=()=>{window.speechSynthesis?.cancel();if(activeSpeechButton){activeSpeechButton.classList.remove('speaking');activeSpeechButton=null;}};
-function parseJson(v,f){if(v==null)return f;if(typeof v==='object')return v;try{return JSON.parse(v)}catch(e){return f}}
-async function loadLesson(){if(!client)throw new Error('Supabase client ვერ მოიძებნა. შეამოწმე config.js.');let lesson=null;if(lessonParam){const r=await client.from('lessons').select('*').eq('id',lessonParam).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson){const n=Number(lessonParam);if(Number.isFinite(n)){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).eq('lesson_number',n).maybeSingle();if(!r.error)lesson=r.data;}}if(!lesson){const r=await client.from('lessons').select('*').eq('grade',Number(grade)).order('lesson_number').limit(1).maybeSingle();if(r.error)throw r.error;lesson=r.data;}if(!lesson)throw new Error('ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.');return lesson;}
-async function loadWords(lesson){const r=await client.from('lesson_words').select('*').eq('lesson_id',lesson.id).order('sort_order');if(r.error)throw r.error;if(r.data?.length)return r.data;const embedded=parseJson(lesson.words,[]);return Array.isArray(embedded)?embedded:[];}
-async function loadQuizzes(lesson){const r=await client.from('lesson_quizzes').select('*').eq('lesson_id',lesson.id).order('sort_order');if(r.error)throw r.error;if(r.data?.length)return r.data;const embedded=parseJson(lesson.quizzes,[]);return Array.isArray(embedded)?embedded:[];}
-function updateProgress(amount){progressValue=Math.min(100,progressValue+amount);document.getElementById('progressBar').style.width=progressValue+'%';}
-function renderWords(words){const grid=document.getElementById('wordsGrid');if(!words.length){grid.innerHTML='<div>🔤 ამ გაკვეთილში სიტყვები ჯერ არ არის დამატებული.</div>';return;}grid.innerHTML=words.map((w,i)=>{const english=w.word||w.english||w.term||'';const georgian=w.translation||w.georgian||w.meaning||w.ka||'';const example=w.example||w.sentence||'';return `<article class="word-card"><div class="word-number">#${esc(w.word_number??w.number??i+1)}</div><div class="word">${esc(english)}</div><div class="translation">${esc(georgian)}</div>${example?`<div class="example">${esc(example)}</div>`:''}<button class="speak" type="button" aria-label="მოსმენა" data-speak="${esc(english)}">🔊</button>${example?`<button class="speak example-speak" type="button" aria-label="მაგალითის მოსმენა" data-speak="${esc(example)}">🗣️</button>`:''}</article>`}).join('');grid.querySelectorAll('[data-speak]').forEach(b=>b.addEventListener('click',()=>speak(b.dataset.speak,b)));}
-function renderGrammar(lesson){const rule=lesson.grammar||lesson.grammar_rule||lesson.rule||'გრამატიკის წესი ამ გაკვეთილისთვის.';document.getElementById('grammarRule').textContent=rule;const examples=parseJson(lesson.grammar_examples,[]);const box=document.getElementById('grammarExamples');box.innerHTML=Array.isArray(examples)&&examples.length?examples.map(x=>`<div class="example-line">${esc(typeof x==='string'?x:x.example||x.text||'')}</div>`).join(''):'<div class="example-line">Practice the rule with the new vocabulary.</div>';document.getElementById('speakGrammar').onclick=()=>speak((rule+' '+(Array.isArray(examples)?examples.map(x=>typeof x==='string'?x:x.example||x.text||'').join('. '):'')),document.getElementById('speakGrammar'));}
-function renderExercises(lesson,words){const c=document.getElementById('exercise');let ex=parseJson(lesson.exercises,[]);if(!Array.isArray(ex))ex=[];if(!ex.length)ex=words.slice(0,8).map(w=>{const word=w.word||w.english||'';const correct=w.translation||w.georgian||w.meaning||'';return{question:`რას ნიშნავს "${word}"?`,options:[correct,'სკოლა','სახლი','წიგნი'],answer:correct}});c.innerHTML=ex.length?ex.map((x,i)=>{const q=x.question||x.prompt||'';const opts=Array.isArray(x.options||x.choices)?(x.options||x.choices):[];const ans=x.answer||x.correct||'';return `<div class="exercise-item" data-answer="${esc(ans)}"><b>${i+1}. ${esc(q)}</b><div class="exercise-options">${opts.map(o=>`<button class="option" type="button" data-value="${esc(o)}">${esc(o)}</button>`).join('')}</div></div>`}).join(''):'<div>სავარჯიშოები მალე დაემატება.</div>';c.querySelectorAll('.exercise-item').forEach(item=>item.querySelectorAll('.option').forEach(btn=>btn.onclick=()=>{item.querySelectorAll('.option').forEach(x=>x.disabled=true);if(btn.dataset.value===item.dataset.answer){btn.classList.add('correct');updateProgress(10)}else{btn.classList.add('wrong');item.querySelectorAll('.option').forEach(x=>{if(x.dataset.value===item.dataset.answer)x.classList.add('correct')})}}));}
-function setupListening(lesson,words){const text=document.getElementById('audioText');const lessonText=lesson.listening_text||lesson.audio_text||words.slice(0,8).map(w=>w.word||w.english||'').filter(Boolean).join('. ')||'Hello! Welcome to English with Mariami.';text.textContent=lessonText;document.getElementById('listen').onclick=()=>{speak(lessonText,document.getElementById('listen'));updateProgress(5)};document.getElementById('repeat').onclick=()=>{speak(lessonText,document.getElementById('repeat'));updateProgress(5)};}
-async function render(){try{if(!client)throw new Error('Supabase client ვერ მოიძებნა.');const lesson=await loadLesson();const words=await loadWords(lesson);const quizzes=await loadQuizzes(lesson);document.getElementById('gradeBadge').textContent=gradeLabel(lesson.grade??grade);document.getElementById('lessonTitle').textContent=lesson.title||lesson.name||`მე-${grade} კლასის გაკვეთილი`;document.getElementById('lessonDescription').textContent=lesson.description||lesson.subtitle||'ინგლისურის სასწავლო გაკვეთილი';document.getElementById('lessonNumber').textContent=`📘 გაკვეთილი ${lesson.lesson_number??lesson.number??''}`;document.getElementById('wordCount').textContent=`🔤 ${words.length} სიტყვა`;renderWords(words);renderGrammar(lesson);renderExercises(lesson,words);setupListening(lesson,words);loading.classList.add('hidden');content.classList.remove('hidden');}catch(err){console.error(err);loading.classList.add('hidden');errorBox.classList.remove('hidden');errorBox.innerHTML=`<h2>⚠️ გაკვეთილის ჩატვირთვა ვერ მოხერხდა</h2><p>${esc(err?.message||'უცნობი შეცდომა')}</p><a class="btn" href="teacher-lessons.html">📚 გაკვეთილებზე დაბრუნება</a>`;}}
-render();document.addEventListener('mousemove',e=>{if(innerWidth<800)return;const x=(e.clientX/innerWidth-.5)*20,y=(e.clientY/innerHeight-.5)*20;document.getElementById('visual3d').style.transform=`translate3d(${x*-.12}px,${y*-.12}px,0)`});document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='f'&&!e.ctrlKey&&!e.altKey&&!e.shiftKey){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.()}});
+(function(){
+
+'use strict';
+
+/* =====================================================
+   URL
+===================================================== */
+
+const params =
+  new URLSearchParams(location.search);
+
+const grade =
+  Number(
+    params.get('grade') ||
+    params.get('class') ||
+    '2'
+  );
+
+const lessonParam =
+  String(
+    params.get('lesson') ||
+    params.get('id') ||
+    ''
+  ).trim();
+
+/* =====================================================
+   DOM
+===================================================== */
+
+const loading =
+  document.getElementById('loading');
+
+const errorBox =
+  document.getElementById('error');
+
+const content =
+  document.getElementById('lessonContent');
+
+const client =
+  window.supabaseClient;
+
+/* =====================================================
+   BACK NAVIGATION
+===================================================== */
+
+(function setupBackButton(){
+
+  const back =
+    document.getElementById('backButton');
+
+  const brand =
+    document.getElementById('brandLink');
+
+  const fromTeacher =
+    document.referrer.includes(
+      '/teacher-lessons.html'
+    );
+
+  if(!fromTeacher && grade===2){
+
+    back.href =
+      '/grade2.html';
+
+    back.textContent =
+      '🌱 Grade 2-ზე დაბრუნება';
+
+    brand.href =
+      '/grade2.html';
+
+  }
+
+})();
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/[&<>"']/g,function(char){
+
+      return {
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#39;'
+
+      }[char];
+
+    });
+
+}
+
+function parseJson(value,fallback){
+
+  if(value==null){
+    return fallback;
+  }
+
+  if(typeof value==='object'){
+    return value;
+  }
+
+  try{
+    return JSON.parse(value);
+  }catch(e){
+    return fallback;
+  }
+
+}
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+let activeSpeechButton =
+  null;
+
+function getVoice(){
+
+  if(!window.speechSynthesis){
+    return null;
+  }
+
+  const voices =
+    window.speechSynthesis.getVoices();
+
+  return (
+    voices.find(v =>
+      /^en-US$/i.test(v.lang)
+    ) ||
+
+    voices.find(v =>
+      /^en-/i.test(v.lang)
+    ) ||
+
+    voices[0] ||
+
+    null
+  );
+
+}
+
+function speak(text,button){
+
+  if(!('speechSynthesis' in window)){
+
+    alert(
+      'ამ მოწყობილობაზე ხმის ფუნქცია მიუწვდომელია.'
+    );
+
+    return;
+
+  }
+
+  const value =
+    String(text||'').trim();
+
+  if(!value){
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  if(activeSpeechButton){
+
+    activeSpeechButton
+      .classList
+      .remove('speaking');
+
+    activeSpeechButton =
+      null;
+
+  }
+
+  const utterance =
+    new SpeechSynthesisUtterance(value);
+
+  utterance.lang =
+    'en-US';
+
+  utterance.rate =
+    .82;
+
+  utterance.pitch =
+    1;
+
+  const voice =
+    getVoice();
+
+  if(voice){
+    utterance.voice =
+      voice;
+  }
+
+  if(button){
+
+    button.classList.add(
+      'speaking'
+    );
+
+    activeSpeechButton =
+      button;
+
+  }
+
+  utterance.onend =
+    function(){
+
+      if(button){
+
+        button.classList.remove(
+          'speaking'
+        );
+
+      }
+
+      if(
+        activeSpeechButton===button
+      ){
+
+        activeSpeechButton =
+          null;
+
+      }
+
+    };
+
+  utterance.onerror =
+    function(){
+
+      if(button){
+
+        button.classList.remove(
+          'speaking'
+        );
+
+      }
+
+      if(
+        activeSpeechButton===button
+      ){
+
+        activeSpeechButton =
+          null;
+
+      }
+
+    };
+
+  window.speechSynthesis
+    .speak(utterance);
+
+}
+
+document
+  .getElementById('stopSpeech')
+  .addEventListener(
+    'click',
+    function(){
+
+      if(window.speechSynthesis){
+
+        window.speechSynthesis.cancel();
+
+      }
+
+      if(activeSpeechButton){
+
+        activeSpeechButton
+          .classList
+          .remove('speaking');
+
+        activeSpeechButton =
+          null;
+
+      }
+
+    }
+  );
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+let progress =
+  0;
+
+function updateProgress(amount){
+
+  progress =
+    Math.min(
+      100,
+      progress + amount
+    );
+
+  document
+    .getElementById('progressBar')
+    .style
+    .width =
+      progress+'%';
+
+}
+
+/* =====================================================
+   LOAD LESSON
+   IMPORTANT:
+   UUID -> id
+   NUMBER -> grade + lesson_number
+===================================================== */
+
+async function loadLesson(){
+
+  if(!client){
+
+    throw new Error(
+      'Supabase client ვერ მოიძებნა. შეამოწმე config.js.'
+    );
+
+  }
+
+  let lesson =
+    null;
+
+  const value =
+    lessonParam;
+
+  /*
+   * UUID validation
+   *
+   * Prevents:
+   * .eq('id','1')
+   */
+  const isUUID =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+      .test(value);
+
+  /*
+   * 1) UUID
+   */
+
+  if(isUUID){
+
+    const result =
+      await client
+        .from('lessons')
+        .select('*')
+        .eq('id',value)
+        .maybeSingle();
+
+    if(result.error){
+      throw result.error;
+    }
+
+    lesson =
+      result.data;
+
+  }
+
+  /*
+   * 2) Numeric lesson number
+   */
+
+  else if(/^\d+$/.test(value)){
+
+    const lessonNumber =
+      Number(value);
+
+    const result =
+      await client
+        .from('lessons')
+        .select('*')
+        .eq('grade',grade)
+        .eq(
+          'lesson_number',
+          lessonNumber
+        )
+        .maybeSingle();
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+    lesson =
+      result.data;
+
+  }
+
+  /*
+   * 3) No valid lesson parameter
+   *    -> first lesson of grade
+   */
+
+  if(!lesson){
+
+    const result =
+      await client
+        .from('lessons')
+        .select('*')
+        .eq('grade',grade)
+        .order('lesson_number')
+        .limit(1)
+        .maybeSingle();
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+    lesson =
+      result.data;
+
+  }
+
+  if(!lesson){
+
+    throw new Error(
+      'ამ კლასისთვის გაკვეთილი ვერ მოიძებნა.'
+    );
+
+  }
+
+  return lesson;
+
+}
+
+/* =====================================================
+   WORDS
+===================================================== */
+
+async function loadWords(lesson){
+
+  const result =
+    await client
+      .from('lesson_words')
+      .select('*')
+      .eq(
+        'lesson_id',
+        lesson.id
+      )
+      .order('sort_order');
+
+  if(result.error){
+
+    throw result.error;
+
+  }
+
+  if(
+    Array.isArray(result.data) &&
+    result.data.length
+  ){
+
+    return result.data;
+
+  }
+
+  const embedded =
+    parseJson(
+      lesson.words,
+      []
+    );
+
+  return Array.isArray(embedded)
+    ? embedded
+    : [];
+
+}
+
+/* =====================================================
+   QUIZZES
+===================================================== */
+
+async function loadQuizzes(lesson){
+
+  const result =
+    await client
+      .from('lesson_quizzes')
+      .select('*')
+      .eq(
+        'lesson_id',
+        lesson.id
+      )
+      .order('sort_order');
+
+  if(result.error){
+
+    throw result.error;
+
+  }
+
+  if(
+    Array.isArray(result.data) &&
+    result.data.length
+  ){
+
+    return result.data;
+
+  }
+
+  const embedded =
+    parseJson(
+      lesson.quizzes,
+      []
+    );
+
+  return Array.isArray(embedded)
+    ? embedded
+    : [];
+
+}
+
+/* =====================================================
+   RENDER WORDS
+===================================================== */
+
+function renderWords(words){
+
+  const grid =
+    document.getElementById(
+      'wordsGrid'
+    );
+
+  if(!words.length){
+
+    grid.innerHTML =
+      '<div>🔤 ამ გაკვეთილში სიტყვები ჯერ არ არის დამატებული.</div>';
+
+    return;
+
+  }
+
+  grid.innerHTML =
+    words.map(
+      function(word,index){
+
+        const english =
+          word.word ||
+          word.english ||
+          word.term ||
+          word.word_text ||
+          '';
+
+        const translation =
+          word.translation ||
+          word.georgian ||
+          word.meaning ||
+          word.ka ||
+          '';
+
+        const example =
+          word.example ||
+          word.sentence ||
+          '';
+
+        return `
+          <article class="word-card">
+
+            <div class="word-number">
+              #${esc(
+                word.word_number ??
+                word.number ??
+                index+1
+              )}
+            </div>
+
+            <div class="word">
+              ${esc(english)}
+            </div>
+
+            <div class="translation">
+              ${esc(translation)}
+            </div>
+
+            ${
+              example
+                ? `
+                  <div class="example">
+                    ${esc(example)}
+                  </div>
+                `
+                : ''
+            }
+
+            <button
+              class="speak"
+              type="button"
+              data-speak="${esc(english)}"
+              aria-label="მოსმენა"
+            >
+              🔊
+            </button>
+
+          </article>
+        `;
+
+      }
+    ).join('');
+
+  grid
+    .querySelectorAll(
+      '[data-speak]'
+    )
+    .forEach(
+      function(button){
+
+        button.addEventListener(
+          'click',
+          function(){
+
+            speak(
+              this.dataset.speak,
+              this
+            );
+
+            updateProgress(3);
+
+          }
+        );
+
+      }
+    );
+
+}
+
+/* =====================================================
+   GRAMMAR
+===================================================== */
+
+function renderGrammar(lesson){
+
+  const rule =
+    lesson.grammar ||
+    lesson.grammar_rule ||
+    lesson.rule ||
+    'ამ გაკვეთილში მთავარი გრამატიკული წესი ჯერ არ არის დამატებული.';
+
+  document
+    .getElementById(
+      'grammarRule'
+    )
+    .textContent =
+      rule;
+
+  const examples =
+    parseJson(
+      lesson.grammar_examples,
+      []
+    );
+
+  const target =
+    document.getElementById(
+      'grammarExamples'
+    );
+
+  if(
+    Array.isArray(examples) &&
+    examples.length
+  ){
+
+    target.innerHTML =
+      examples.map(
+        function(item){
+
+          const value =
+            typeof item==='string'
+              ? item
+              : (
+                item.example ||
+                item.text ||
+                ''
+              );
+
+          return `
+            <div class="example-line">
+              ${esc(value)}
+            </div>
+          `;
+
+        }
+      ).join('');
+
+  }else{
+
+    target.innerHTML =
+      `
+        <div class="example-line">
+          Practice with the new vocabulary.
+        </div>
+      `;
+
+  }
+
+  document
+    .getElementById(
+      'speakGrammar'
+    )
+    .onclick =
+      function(){
+
+        const text =
+          rule+
+          ' '+
+          (
+            Array.isArray(examples)
+              ? examples
+                  .map(
+                    x =>
+                      typeof x==='string'
+                        ? x
+                        : (
+                          x.example ||
+                          x.text ||
+                          ''
+                        )
+                  )
+                  .join('. ')
+              : ''
+          );
+
+        speak(
+          text,
+          this
+        );
+
+      };
+
+}
+
+/* =====================================================
+   EXERCISES
+===================================================== */
+
+function renderExercises(
+  lesson,
+  words
+){
+
+  const target =
+    document.getElementById(
+      'exercise'
+    );
+
+  let exercises =
+    parseJson(
+      lesson.exercises,
+      []
+    );
+
+  if(!Array.isArray(exercises)){
+
+    exercises =
+      [];
+
+  }
+
+  /*
+   * Safe fallback exercises
+   * if the lesson has no embedded exercises.
+   */
+
+  if(!exercises.length){
+
+    exercises =
+      words
+        .slice(0,6)
+        .map(
+          function(word){
+
+            const english =
+              word.word ||
+              word.english ||
+              '';
+
+            const correct =
+              word.translation ||
+              word.georgian ||
+              word.meaning ||
+              '';
+
+            return {
+
+              question:
+                `რას ნიშნავს "${english}"?`,
+
+              options:[
+                correct,
+                'სკოლა',
+                'სახლი',
+                'წიგნი'
+              ],
+
+              answer:
+                correct
+
+            };
+
+          }
+        );
+
+  }
+
+  if(!exercises.length){
+
+    target.innerHTML =
+      '<div>✍️ ამ გაკვეთილში სავარჯიშოები ჯერ არ არის.</div>';
+
+    return;
+
+  }
+
+  target.innerHTML =
+    exercises.map(
+      function(exercise,index){
+
+        const question =
+          exercise.question ||
+          exercise.prompt ||
+          exercise.text ||
+          '';
+
+        const options =
+          Array.isArray(
+            exercise.options
+          )
+            ? exercise.options
+            : (
+              Array.isArray(
+                exercise.choices
+              )
+                ? exercise.choices
+                : []
+            );
+
+        const answer =
+          exercise.answer ||
+          exercise.correct ||
+          exercise.correct_answer ||
+          '';
+
+        return `
+          <div
+            class="exercise-item"
+            data-answer="${esc(answer)}"
+          >
+
+            <b>
+              ${index+1}. ${esc(question)}
+            </b>
+
+            <div class="options">
+
+              ${
+                options
+                  .map(
+                    function(option){
+
+                      return `
+                        <button
+                          class="option"
+                          type="button"
+                          data-value="${esc(option)}"
+                        >
+                          ${esc(option)}
+                        </button>
+                      `;
+
+                    }
+                  )
+                  .join('')
+              }
+
+            </div>
+
+          </div>
+        `;
+
+      }
+    ).join('');
+
+  target
+    .querySelectorAll(
+      '.exercise-item'
+    )
+    .forEach(
+      function(item){
+
+        item
+          .querySelectorAll(
+            '.option'
+          )
+          .forEach(
+            function(button){
+
+              button.addEventListener(
+                'click',
+                function(){
+
+                  const buttons =
+                    item.querySelectorAll(
+                      '.option'
+                    );
+
+                  buttons.forEach(
+                    function(btn){
+                      btn.disabled=true;
+                    }
+                  );
+
+                  const correct =
+                    this.dataset.value ===
+                    item.dataset.answer;
+
+                  if(correct){
+
+                    this.classList.add(
+                      'correct'
+                    );
+
+                    updateProgress(12);
+
+                  }else{
+
+                    this.classList.add(
+                      'wrong'
+                    );
+
+                    buttons.forEach(
+                      function(btn){
+
+                        if(
+                          btn.dataset.value ===
+                          item.dataset.answer
+                        ){
+
+                          btn.classList.add(
+                            'correct'
+                          );
+
+                        }
+
+                      }
+                    );
+
+                  }
+
+                }
+              );
+
+            }
+          );
+
+      }
+    );
+
+}
+
+/* =====================================================
+   LISTENING
+===================================================== */
+
+function setupListening(
+  lesson,
+  words
+){
+
+  const text =
+    document.getElementById(
+      'audioText'
+    );
+
+  const lessonText =
+    lesson.listening_text ||
+    lesson.audio_text ||
+    lesson.listening ||
+    words
+      .slice(0,8)
+      .map(
+        word =>
+          word.word ||
+          word.english ||
+          ''
+      )
+      .filter(Boolean)
+      .join('. ') ||
+    'Hello! Welcome to English with Mariami.';
+
+  text.textContent =
+    lessonText;
+
+  document
+    .getElementById('listen')
+    .onclick =
+      function(){
+
+        speak(
+          lessonText,
+          this
+        );
+
+        updateProgress(5);
+
+      };
+
+  document
+    .getElementById('repeat')
+    .onclick =
+      function(){
+
+        speak(
+          lessonText,
+          this
+        );
+
+        updateProgress(5);
+
+      };
+
+}
+
+/* =====================================================
+   GAME
+===================================================== */
+
+function setupGame(
+  lesson,
+  words
+){
+
+  const question =
+    document.getElementById(
+      'gameQuestion'
+    );
+
+  const options =
+    document.getElementById(
+      'gameOptions'
+    );
+
+  const result =
+    document.getElementById(
+      'gameResult'
+    );
+
+  if(!words.length){
+
+    question.textContent =
+      'ამ გაკვეთილში თამაში ვერ შეიქმნა.';
+
+    return;
+
+  }
+
+  const source =
+    words[
+      Math.floor(
+        Math.random()*words.length
+      )
+    ];
+
+  const english =
+    source.word ||
+    source.english ||
+    '';
+
+  const answer =
+    source.translation ||
+    source.georgian ||
+    source.meaning ||
+    '';
+
+  question.textContent =
+    `რას ნიშნავს "${english}"?`;
+
+  const distractors =
+    words
+      .map(
+        word =>
+          word.translation ||
+          word.georgian ||
+          word.meaning ||
+          ''
+      )
+      .filter(
+        value =>
+          value &&
+          value!==answer
+      )
+      .slice(0,3);
+
+  const choices =
+    [answer,...distractors]
+      .sort(
+        () =>
+          Math.random()-.5
+      );
+
+  options.innerHTML =
+    choices
+      .map(
+        function(choice){
+
+          return `
+            <button
+              class="option"
+              type="button"
+              data-choice="${esc(choice)}"
+            >
+              ${esc(choice)}
+            </button>
+          `;
+
+        }
+      )
+      .join('');
+
+  result.textContent =
+    '';
+
+  options
+    .querySelectorAll(
+      '[data-choice]'
+    )
+    .forEach(
+      function(button){
+
+        button.addEventListener(
+          'click',
+          function(){
+
+            options
+              .querySelectorAll(
+                '.option'
+              )
+              .forEach(
+                x =>
+                  x.disabled=true
+              );
+
+            if(
+              this.dataset.choice===
+              answer
+            ){
+
+              this.classList.add(
+                'correct'
+              );
+
+              result.textContent =
+                '🎉 სწორია! +10 XP';
+
+              updateProgress(15);
+
+            }else{
+
+              this.classList.add(
+                'wrong'
+              );
+
+              result.textContent =
+                '💡 სცადე შემდეგი სიტყვა.';
+
+              options
+                .querySelectorAll(
+                  '.option'
+                )
+                .forEach(
+                  x => {
+
+                    if(
+                      x.dataset.choice===
+                      answer
+                    ){
+
+                      x.classList.add(
+                        'correct'
+                      );
+
+                    }
+
+                  }
+                );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+}
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+function renderQuiz(
+  quizzes,
+  words
+){
+
+  const target =
+    document.getElementById(
+      'quiz'
+    );
+
+  let data =
+    quizzes;
+
+  /*
+   * Fallback quiz from vocabulary
+   */
+
+  if(
+    !Array.isArray(data) ||
+    !data.length
+  ){
+
+    data =
+      words
+        .slice(0,5)
+        .map(
+          function(word){
+
+            const english =
+              word.word ||
+              word.english ||
+              '';
+
+            const answer =
+              word.translation ||
+              word.georgian ||
+              word.meaning ||
+              '';
+
+            return {
+
+              question:
+                `რას ნიშნავს "${english}"?`,
+
+              options:[
+                answer,
+                'სკოლა',
+                'მეგობარი',
+                'სახლი'
+              ],
+
+              answer:
+                answer
+
+            };
+
+          }
+        );
+
+  }
+
+  if(!data.length){
+
+    target.innerHTML =
+      '<div>🧠 ქვიზის კითხვები ჯერ არ არის დამატებული.</div>';
+
+    return;
+
+  }
+
+  target.innerHTML =
+    data.map(
+      function(item,index){
+
+        const question =
+          item.question ||
+          item.prompt ||
+          item.text ||
+          '';
+
+        const options =
+          Array.isArray(item.options)
+            ? item.options
+            : (
+              Array.isArray(item.choices)
+                ? item.choices
+                : []
+            );
+
+        const answer =
+          item.answer ||
+          item.correct ||
+          item.correct_answer ||
+          '';
+
+        return `
+          <div
+            class="quiz-item"
+            data-answer="${esc(answer)}"
+          >
+
+            <strong>
+              ${index+1}. ${esc(question)}
+            </strong>
+
+            <div class="quiz-options">
+
+              ${
+                options
+                  .map(
+                    function(option){
+
+                      return `
+                        <button
+                          class="option"
+                          type="button"
+                          data-value="${esc(option)}"
+                        >
+                          ${esc(option)}
+                        </button>
+                      `;
+
+                    }
+                  )
+                  .join('')
+              }
+
+            </div>
+
+          </div>
+        `;
+
+      }
+    ).join('');
+
+  target
+    .querySelectorAll(
+      '.quiz-item'
+    )
+    .forEach(
+      function(item){
+
+        item
+          .querySelectorAll(
+            '.option'
+          )
+          .forEach(
+            function(button){
+
+              button.addEventListener(
+                'click',
+                function(){
+
+                  item
+                    .querySelectorAll(
+                      '.option'
+                    )
+                    .forEach(
+                      x =>
+                        x.disabled=true
+                    );
+
+                  if(
+                    this.dataset.value===
+                    item.dataset.answer
+                  ){
+
+                    this.classList.add(
+                      'correct'
+                    );
+
+                    updateProgress(10);
+
+                  }else{
+
+                    this.classList.add(
+                      'wrong'
+                    );
+
+                    item
+                      .querySelectorAll(
+                        '.option'
+                      )
+                      .forEach(
+                        x => {
+
+                          if(
+                            x.dataset.value===
+                            item.dataset.answer
+                          ){
+
+                            x.classList.add(
+                              'correct'
+                            );
+
+                          }
+
+                        }
+                      );
+
+                  }
+
+                }
+              );
+
+            }
+          );
+
+      }
+    );
+
+}
+
+/* =====================================================
+   COMPLETE LESSON
+===================================================== */
+
+document
+  .getElementById(
+    'completeLesson'
+  )
+  .addEventListener(
+    'click',
+    function(){
+
+      const XP_KEY =
+        'grade2XP';
+
+      const STAR_KEY =
+        'grade2Stars';
+
+      const currentXP =
+        Number(
+          localStorage.getItem(
+            XP_KEY
+          ) || 0
+        );
+
+      const currentStars =
+        Number(
+          localStorage.getItem(
+            STAR_KEY
+          ) || 0
+        );
+
+      localStorage.setItem(
+        XP_KEY,
+        String(
+          currentXP+10
+        )
+      );
+
+      localStorage.setItem(
+        STAR_KEY,
+        String(
+          currentStars+1
+        )
+      );
+
+      this.textContent =
+        '✅ გაკვეთილი დასრულებულია +10 XP';
+
+      this.disabled =
+        true;
+
+      updateProgress(
+        100-progress
+      );
+
+    }
+  );
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+async function render(){
+
+  try{
+
+    if(!client){
+
+      throw new Error(
+        'Supabase client ვერ მოიძებნა.'
+      );
+
+    }
+
+    const lesson =
+      await loadLesson();
+
+    const words =
+      await loadWords(lesson);
+
+    const quizzes =
+      await loadQuizzes(lesson);
+
+    document
+      .getElementById(
+        'gradeBadge'
+      )
+      .textContent =
+        grade===2
+          ? '🌱 მე-2 კლასი'
+          : grade===3
+            ? '🚀 მე-3 კლასი'
+            : grade===4
+              ? '⭐ მე-4 კლასი'
+              : '📘 Grade '+grade;
+
+    document
+      .getElementById(
+        'lessonTitle'
+      )
+      .textContent =
+        lesson.title ||
+        lesson.name ||
+        `მე-${grade} კლასის გაკვეთილი`;
+
+    document
+      .getElementById(
+        'lessonDescription'
+      )
+      .textContent =
+        lesson.description ||
+        lesson.subtitle ||
+        'ინგლისურის სასწავლო გაკვეთილი';
+
+    document
+      .getElementById(
+        'lessonNumber'
+      )
+      .textContent =
+        '📘 გაკვეთილი '+
+        (
+          lesson.lesson_number ??
+          lesson.number ??
+          ''
+        );
+
+    document
+      .getElementById(
+        'wordCount'
+      )
+      .textContent =
+        '🔤 '+
+        words.length+
+        ' სიტყვა';
+
+    renderWords(words);
+
+    renderGrammar(lesson);
+
+    renderExercises(
+      lesson,
+      words
+    );
+
+    setupListening(
+      lesson,
+      words
+    );
+
+    setupGame(
+      lesson,
+      words
+    );
+
+    renderQuiz(
+      quizzes,
+      words
+    );
+
+    loading.classList.add(
+      'hidden'
+    );
+
+    content.classList.remove(
+      'hidden'
+    );
+
+  }catch(error){
+
+    console.error(
+      '[lesson.html]',
+      error
+    );
+
+    loading.classList.add(
+      'hidden'
+    );
+
+    errorBox.classList.remove(
+      'hidden'
+    );
+
+    errorBox.innerHTML =
+      `
+        <h2>
+          ⚠️ გაკვეთილის ჩატვირთვა ვერ მოხერხდა
+        </h2>
+
+        <p>
+          ${esc(
+            error?.message ||
+            'უცნობი შეცდომა'
+          )}
+        </p>
+
+        <a
+          class="btn"
+          href="${
+            grade===2 &&
+            !document.referrer.includes(
+              '/teacher-lessons.html'
+            )
+              ? '/grade2.html'
+              : '/teacher-lessons.html'
+          }"
+        >
+          ↩️ დაბრუნება
+        </a>
+      `;
+
+  }
+
+}
+
+render();
+
+/* =====================================================
+   HERO PARALLAX
+===================================================== */
+
+if(
+  window.matchMedia(
+    '(pointer:fine)'
+  ).matches
+){
+
+  document.addEventListener(
+    'mousemove',
+    function(event){
+
+      if(window.innerWidth<800){
+        return;
+      }
+
+      const x =
+        (
+          event.clientX /
+          window.innerWidth -
+          .5
+        ) * 10;
+
+      const y =
+        (
+          event.clientY /
+          window.innerHeight -
+          .5
+        ) * 10;
+
+      const hero =
+        document.querySelector(
+          '.hero'
+        );
+
+      if(hero){
+
+        hero.style.transform =
+          `
+            perspective(1000px)
+            rotateX(${y*-1.8}deg)
+            rotateY(${x}deg)
+          `;
+
+      }
+
+    }
+  );
+
+  document.addEventListener(
+    'mouseleave',
+    function(){
+
+      const hero =
+        document.querySelector(
+          '.hero'
+        );
+
+      if(hero){
+        hero.style.transform='';
+      }
+
+    }
+  );
+
+}
+
 })();
 </script>
-</body></html>
+
+</body>
+</html>
