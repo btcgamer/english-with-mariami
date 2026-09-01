@@ -7,7 +7,7 @@ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: red
 const fallback=window.GRADE4_FUTURISTIC_CONTENT||{worlds:[],lessons:[]};
 const worlds=fallback.worlds||[];let lessons=[];
 const arr=v=>Array.isArray(v)?v:[];
-const esc=v=>String(v??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const esc=v=>String(v??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}updateStats()}
 function updateStats(){[['#xp',state.xp],['#stars',state.stars],['#streak',state.streak],['#done',state.done.length]].forEach(([q,v])=>{const e=document.querySelector(q);if(e)e.textContent=v});const total=lessons.length||24,p=Math.min(100,Math.round(state.done.length/total*100));const bar=document.querySelector('#progressBar'),txt=document.querySelector('#progressText');if(bar)bar.style.width=p+'%';if(txt)txt.textContent=p+'%';const next=document.querySelector('#nextMission');if(next){const n=lessons.find(l=>!state.done.includes(l.id));next.textContent=n?'Next mission: '+n.title:'🎉 Universe complete — Champion status unlocked'}}
 function speak(text){if(!('speechSynthesis'in window)||!text)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(text));u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
