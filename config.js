@@ -4,11 +4,27 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
 
 /*
    Keep normal website authentication persistent, but make an installed
-   PWA session temporary. sessionStorage is scoped to the app/browser
-   session, so closing the installed PWA does not keep its auth session.
+   PWA session temporary. A login page must never bootstrap a stale
+   refresh token: clear only Supabase auth-token entries before the client
+   is created, so a revoked token cannot block a fresh password login.
 */
 (function(){
   'use strict';
+  const path=(window.location.pathname||'').toLowerCase();
+  const isLoginPage=path.endsWith('/login.html')||path==='login.html';
+  const clearStaleAuthTokens=(storage)=>{
+    try{
+      const prefix='sb-vtdhvsfqhwesxtwmdue-auth-token';
+      for(let i=storage.length-1;i>=0;i--){
+        const key=storage.key(i);
+        if(key===prefix||key?.startsWith(prefix+'-'))storage.removeItem(key);
+      }
+    }catch(e){console.warn('Auth storage cleanup skipped:',e)}
+  };
+  if(isLoginPage){
+    clearStaleAuthTokens(window.localStorage);
+    clearStaleAuthTokens(window.sessionStorage);
+  }
   const standalone=!!(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true;
   const temporaryStorage=standalone?window.sessionStorage:window.localStorage;
   window.supabaseClient=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY,{auth:{autoRefreshToken:true,persistSession:true,storage:temporaryStorage,detectSessionInUrl:true}});
