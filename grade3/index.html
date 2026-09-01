@@ -8,6 +8,38 @@
 <link rel="stylesheet" href="../universe-theme.css?v=20260901">
 <link rel="stylesheet" href="../universe-max.css?v=20260901">
 <link rel="stylesheet" href="grade3.css?v=20260901">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
+<script>
+(function(){
+  'use strict';
+  async function checkGrade3Route(){
+    try{
+      var db=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
+      if(!db || !db.auth || !db.from) return;
+      var result=await db.auth.getUser();
+      var user=result&&result.data&&result.data.user;
+      if(!user){
+        location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
+        return;
+      }
+      var profile=await db.from('profiles').select('user_id,role,grade').eq('user_id',user.id).maybeSingle();
+      if(profile.error || !profile.data) return;
+      var role=String(profile.data.role||'').trim().toLowerCase();
+      if(role==='student'){
+        var grade=Number(profile.data.grade||0);
+        if(grade===2){ location.replace('../grade2.html'); return; }
+        if(grade===4){ location.replace('../grade4.html'); return; }
+        if(grade!==3){ location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash)); return; }
+      }else if(role!=='teacher' && role!=='parent'){
+        location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
+      }
+    }catch(e){ console.error('[Grade 3 Direct Route]',e); }
+  }
+  window.addEventListener('DOMContentLoaded',checkGrade3Route);
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden) checkGrade3Route(); });
+})();
+</script>
 </head>
 <body class="u-universe u-grade3">
 <div class="cosmos"><span></span><span></span><span></span><span></span><span></span><span></span></div>
