@@ -21,17 +21,14 @@
       if(!db || !db.auth || !db.from) return;
       var result=await db.auth.getUser();
       var user=result&&result.data&&result.data.user;
-      if(!user){
-        location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
-        return;
-      }
+      if(!user){ location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash)); return; }
       var profile=await db.from('profiles').select('user_id,role,grade').eq('user_id',user.id).maybeSingle();
       if(profile.error || !profile.data) return;
       var role=String(profile.data.role||'').trim().toLowerCase();
       if(role==='student'){
         var grade=Number(profile.data.grade||0);
-        if(grade===3){ location.replace('../grade3.html'); return; }
-        if(grade===4){ location.replace('../grade4.html'); return; }
+        if(grade===3){ location.replace('../grade3/index.html'); return; }
+        if(grade===4){ location.replace('../grade4/index.html'); return; }
         if(grade!==2){ location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash)); return; }
       }else if(role!=='teacher' && role!=='parent'){
         location.replace('../login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
@@ -47,7 +44,11 @@
 <div class="space-bg"><div class="stars"></div><div class="grid-floor"></div><div class="scanline"></div></div>
 <div class="app">
 <header class="topbar">
-  <a class="brand" href="../student-dashboard.html"><span class="brand-orb">M</span><span><strong>ENGLISH WITH MARIAMI</strong><small>GRADE 2 • FUTURE LEARNING WORLD</small></span></a>
+  <div class="brand"><span class="brand-orb">M</span><span><strong>ENGLISH WITH MARIAMI</strong><small>GRADE 2 • FUTURE LEARNING WORLD</small></span></div>
+  <nav class="grade-nav" aria-label="Grade navigation">
+    <a class="nav-home" href="../academy.html">🏠 მთავარი</a>
+    <button class="nav-logout" id="grade2Logout" type="button">🚪 გამოსვლა</button>
+  </nav>
   <div class="hud"><div><b id="xpValue">0</b><small>XP</small></div><div><b id="starValue">0</b><small>STARS</small></div><div><b id="streakValue">0</b><small>STREAK</small></div><div><b id="levelValue">1</b><small>LEVEL</small></div></div>
 </header>
 <section class="hero-shell"><div class="hero-copy"><span class="eyebrow">✦ WELCOME TO YOUR LEARNING UNIVERSE ✦</span><h1>GRADE <span>02</span></h1><p class="hero-en">Learn English. Explore worlds. Complete missions. Level up.</p><p class="hero-ka">ინგლისური ისწავლე თამაშით — ისწავლე სიტყვები, მოუსმინე, ითამაშე და შეაგროვე XP.</p><div class="hero-actions"><button id="continueBtn">🚀 CONTINUE MISSION</button><button class="ghost" id="reviewBtn">🏆 FINAL REVIEW</button></div><div class="progress-box"><div><span>YOUR LEARNING PROGRESS</span><b id="progressText">0%</b></div><div class="bar"><i id="progressBar"></i></div></div></div><div class="hero-core"><div class="core-ring ring-a"></div><div class="core-ring ring-b"></div><div class="core-center"><span>02</span><small>ENGLISH</small></div></div></section>
@@ -56,5 +57,23 @@
 <section id="lessonGrid" class="lesson-grid"></section><footer>ENGLISH WITH MARIAMI <i>•</i> GRADE 2 <i>•</i> LEARN • PLAY • LEVEL UP</footer>
 </div>
 <div id="modal" class="modal" aria-hidden="true"><div class="modal-panel"><button class="close" id="closeModal">×</button><div id="modalContent"></div></div></div>
+<script>
+(function(){
+  'use strict';
+  function wireLogout(){
+    var btn=document.getElementById('grade2Logout');
+    if(!btn)return;
+    btn.addEventListener('click',async function(){
+      btn.disabled=true;
+      try{
+        var db=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
+        if(db&&db.auth&&db.auth.signOut) await db.auth.signOut();
+      }catch(e){console.warn('[Grade 2 Logout]',e)}
+      location.replace('../login.html');
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',wireLogout);else wireLogout();
+})();
+</script>
 <script src="grade2.js?v=20260901-final2"></script><script src="grade2-supabase-bridge.js"></script><script src="../universe-max.js?v=20260901"></script>
 </body></html>
