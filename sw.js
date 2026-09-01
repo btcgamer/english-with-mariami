@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v5';
+const CACHE_NAME = 'english-with-mariami-v6';
 
 const APP_SHELL = [
   './',
@@ -36,13 +36,16 @@ const APP_SHELL = [
   './grade4/index.html',
   './grade4/grade4.css',
   './grade4/grade4.js',
+  './grade4/future-visual-layer.css',
   './grade2/grade2.css',
   './grade2/grade2.js',
   './grade2/grade2-3d.css',
   './grade2/grade2-dashboard-bridge.js',
   './grade2/grade2-supabase-bridge.js',
+  './grade2/future-visual-layer.css',
   './grade3/grade3.css',
-  './grade3/grade3.js'
+  './grade3/grade3.js',
+  './grade3/future-visual-layer.css'
 ];
 
 self.addEventListener('install', event => {
