@@ -1,0 +1,32 @@
+/* Grade 2 — structural CTA alignment only. No curriculum, XP, auth or Supabase logic changes. */
+.u-grade2 .missions{align-items:stretch}
+.u-grade2 .mission{min-height:330px;padding:22px 22px 72px;display:flex;flex-direction:column}
+.u-grade2 .mission .num{min-height:18px}
+.u-grade2 .mission .icon{flex:0 0 auto}
+.u-grade2 .mission h3{min-height:27px}
+.u-grade2 .mission p{min-height:58px;margin-bottom:0}
+.u-grade2 .g4-vocab-preview{margin-top:auto;padding-top:12px;min-height:39px}
+.u-grade2 .g4-open{left:22px;right:22px;bottom:20px;height:40px;display:grid;place-items:center;margin:0}
+.u-grade2 .actions{align-items:stretch}
+.u-grade2 .actions button{width:190px;min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+.u-grade2 .g4-tools button{min-height:44px}
+@media(max-width:900px){
+  .u-grade2 .missions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .u-grade2 .mission{min-height:320px}
+}
+@media(max-width:640px){
+  .u-grade2 .g4-nav{grid-template-columns:1fr auto;gap:10px}
+  .u-grade2 .g4-home{grid-column:2;grid-row:1}
+  .u-grade2 .stats{grid-column:1/-1;grid-row:2;justify-content:stretch}
+  .u-grade2 .stats strong{flex:1;text-align:center;min-width:0}
+  .u-grade2 .g4-hero{grid-template-columns:1fr;min-height:auto;padding:42px 0 28px;gap:22px}
+  .u-grade2 .hero-orbit{order:-1;width:min(270px,72vw);height:min(270px,72vw)}
+  .u-grade2 .actions{display:grid;grid-template-columns:1fr;gap:10px}
+  .u-grade2 .actions button{width:100%}
+  .u-grade2 .g4-tools{display:grid;grid-template-columns:1fr}
+  .u-grade2 .g4-tools button{width:100%}
+  .u-grade2 .missions{grid-template-columns:1fr;gap:14px}
+  .u-grade2 .mission{min-height:300px;padding-left:18px;padding-right:18px}
+  .u-grade2 .g4-open{left:18px;right:18px;bottom:17px}
+}
+@media(prefers-reduced-motion:reduce){.u-grade2 .mission{transform:none!important}}
