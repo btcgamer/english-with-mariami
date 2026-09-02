@@ -20,6 +20,14 @@ function installQuizObjectDisplayFix(){
     return native.call(o);
   }});}catch(e){console.warn('[EWM Quiz Display Fix]',e)}
 }
+function installButtonLayout(){
+  if(!['2','3','4'].includes(grade)||document.querySelector('link[data-ewm-grade234-buttons]'))return;
+  const link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href='../shared/grade234-button-layout.css?v=20260902';
+  link.dataset.ewmGrade234Buttons='1';
+  document.head.appendChild(link);
+}
 function addParticles(){if(document.querySelector('.u-max-particles'))return;const box=document.createElement('div');box.className='u-max-particles';box.setAttribute('aria-hidden','true');for(let i=0;i<18;i++)box.appendChild(document.createElement('i'));document.body.appendChild(box)}
 function addHud(){if(document.querySelector('.u-max-hud'))return;const hud=document.createElement('div');hud.className='u-max-hud';hud.innerHTML='<span class="u-max-dot"></span><span>UNIVERSE ONLINE • <b>GRADE '+(grade==='home'?'HUB':grade)+'</b></span>';document.body.appendChild(hud)}
 /* Grade navigation is now centralized on the Academy hub. */
@@ -46,6 +54,6 @@ function addRobotCompanion(){
   window.addEventListener('resize',()=>{tx=clamp(tx,half,innerWidth-half);ty=clamp(ty,half,innerHeight-half);x=clamp(x,half,innerWidth-half);y=clamp(y,half,innerHeight-half)},{passive:true});
   requestAnimationFrame(follow);
 }
-function init(){installQuizObjectDisplayFix();addParticles();addHud();addNav();decorate();addRobotCompanion();new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}
+function init(){installQuizObjectDisplayFix();installButtonLayout();addParticles();addHud();addNav();decorate();addRobotCompanion();new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
