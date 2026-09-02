@@ -1,10 +1,10 @@
 /* Grade 2 — signature holographic future layer. Visual-only: no layout, content, auth or progress logic changes. */
 body{position:relative}
-.g4-app{isolation:isolate}
-.g4-app::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 50% 8%,rgba(82,232,255,.13),transparent 24%),conic-gradient(from 210deg at 50% 50%,transparent 0deg,rgba(168,121,255,.06) 65deg,transparent 125deg,rgba(255,95,210,.05) 220deg,transparent 290deg);mix-blend-mode:screen;animation:g2Aurora 14s ease-in-out infinite alternate}
-.g4-app::after{content:"";position:fixed;left:50%;bottom:-28vh;width:125vw;height:62vh;pointer-events:none;z-index:-1;transform:translateX(-50%) perspective(650px) rotateX(66deg);transform-origin:center bottom;background-image:linear-gradient(rgba(82,232,255,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(168,121,255,.065) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(to top,black,transparent 82%);opacity:.55;animation:g2Grid 10s linear infinite}
-.g4-app .lesson{backdrop-filter:blur(12px);transform-style:preserve-3d}
-.g4-app .lesson-icon{transform:translateZ(8px)}
+.app{isolation:isolate}
+.app::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 50% 8%,rgba(82,232,255,.13),transparent 24%),conic-gradient(from 210deg at 50% 50%,transparent 0deg,rgba(168,121,255,.06) 65deg,transparent 125deg,rgba(255,95,210,.05) 220deg,transparent 290deg);mix-blend-mode:screen;animation:g2Aurora 14s ease-in-out infinite alternate}
+.app::after{content:"";position:fixed;left:50%;bottom:-28vh;width:125vw;height:62vh;pointer-events:none;z-index:-1;transform:translateX(-50%) perspective(650px) rotateX(66deg);transform-origin:center bottom;background-image:linear-gradient(rgba(82,232,255,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(168,121,255,.065) 1px,transparent 1px);background-size:58px 58px;mask-image:linear-gradient(to top,black,transparent 82%);opacity:.55;animation:g2Grid 10s linear infinite}
+.lesson{backdrop-filter:blur(12px);transform-style:preserve-3d}
+.lesson-icon{transform:translateZ(8px)}
 @keyframes g2Aurora{0%{transform:scale(1) rotate(0deg);opacity:.65}100%{transform:scale(1.08) rotate(3deg);opacity:1}}
 @keyframes g2Grid{from{background-position:0 0,0 0}to{background-position:0 58px,58px 0}}
-@media(prefers-reduced-motion:reduce){.g4-app::before,.g4-app::after{animation:none!important}.g4-app .lesson{transform-style:flat}}
+@media(prefers-reduced-motion:reduce){.app::before,.app::after{animation:none!important}.lesson{transform-style:flat}}
