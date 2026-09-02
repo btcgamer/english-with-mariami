@@ -1,0 +1,38 @@
+/* English with Mariami — Grade 2/3/4 shared button layout
+   Keeps each grade's visual theme while standardizing spacing, sizing and responsive placement. */
+.g234-actions,
+.hero-actions,
+.actions,
+.g4-tools{display:flex;align-items:center;justify-content:flex-start;gap:12px;flex-wrap:wrap}
+.hero-actions button,
+.actions button,
+.g4-tools button,
+.g3-open,
+.g3-complete,
+.mission-button{min-height:44px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;line-height:1.15;text-align:center;white-space:nowrap}
+.hero-actions button,.actions button,.g4-tools button{flex:0 0 auto}
+.g3-open{width:100%;margin-top:13px}
+.g3-complete{width:100%;margin-top:14px}
+.g3-q-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+.g3-q-options label{min-height:46px;display:flex;align-items:center;box-sizing:border-box;margin:0!important}
+.g3-q-options input{flex:0 0 auto}
+.g4-tools{align-items:stretch}
+.g4-tools label{min-height:44px;box-sizing:border-box}
+.g4-tools button{min-width:150px}
+.daily button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+.lesson-bottom{gap:12px}
+.enter-btn{min-width:112px;min-height:38px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
+.g3-word button,.g4-word button{flex:0 0 40px;min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+@media(max-width:760px){
+  .hero-actions,.actions,.g4-tools{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .hero-actions button,.actions button,.g4-tools button{width:100%;min-width:0}
+  .g4-tools label{width:100%}
+  .g3-q-options{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-actions,.actions,.g4-tools{grid-template-columns:1fr}
+  .hero-actions button,.actions button,.g4-tools button{min-height:46px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-actions button,.actions button,.g4-tools button,.g3-open,.g3-complete,.enter-btn{transition:none!important}
+}
