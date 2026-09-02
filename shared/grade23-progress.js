@@ -11,7 +11,8 @@
   const write=(name,value)=>{try{localStorage.setItem(name,JSON.stringify(value))}catch(_){}
   };
   const decodeWord=value=>{try{return decodeURIComponent(String(value||''))}catch(_){return String(value||'')}};
-  const words=new Set(Array.isArray(read(key('LearnedWords'),[]))?read(key('LearnedWords'),[]).map(decodeWord).map(String):[]);
+  const normalizeWords=value=>Array.isArray(value)?value.map(decodeWord).map(v=>String(v).trim()).filter(Boolean):[];
+  const words=new Set(normalizeWords(read(key('LearnedWords'),[])));
   let attempts=Number(localStorage.getItem(key('QuizAttempts'))||0)||0;
   let best=Number(localStorage.getItem(key('BestScore'))||0)||0;
   const answered=new WeakMap();
@@ -20,6 +21,7 @@
   let dirty=false;
 
   async function user(){try{const r=await client.auth.getUser();return r.data?.user||null}catch(_){return null}}
+
   async function restore(){
     const u=await user();
     if(!u){restoring=false;return}
@@ -28,19 +30,32 @@
       if(r.error)throw r.error;
       const row=r.data;
       if(row){
-        const remoteWords=Array.isArray(row.learned_words)?row.learned_words.map(decodeWord).map(String):[];
-        remoteWords.forEach(w=>words.add(w));
-        attempts=Math.max(attempts,Number(row.quiz_completed)||0,Number(row.quiz_attempts)||0);
+        const beforeWords=[...words];
+        const beforeAttempts=attempts;
+        const beforeBest=best;
+        normalizeWords(row.learned_words).forEach(w=>words.add(w));
+        attempts=Math.max(attempts,Number(row.quiz_completed)||0);
         best=Math.max(best,Number(row.best_quiz)||0,Number(row.score)||0);
-        write(key('LearnedWords'),[...words]);
-        localStorage.setItem(key('QuizAttempts'),String(attempts));
-        localStorage.setItem(key('BestScore'),String(best));
-        const localWords=read(key('LearnedWords'),[]);
-        dirty=(words.size>(Number(row.words_learned)||0)||attempts>(Number(row.quiz_completed)||0)||best>(Number(row.best_quiz)||Number(row.score)||0));
-        if(localWords.length!==words.size)dirty=true;
+
+        const mergedWords=[...words];
+        const wordsChanged=mergedWords.length!==beforeWords.length||mergedWords.some(w=>!beforeWords.includes(w));
+        const attemptsChanged=attempts!==beforeAttempts;
+        const bestChanged=best!==beforeBest;
+        if(wordsChanged)write(key('LearnedWords'),mergedWords);
+        if(attemptsChanged)localStorage.setItem(key('QuizAttempts'),String(attempts));
+        if(bestChanged)localStorage.setItem(key('BestScore'),String(best));
+
+        const remoteWordCount=Number(row.words_learned)||0;
+        const remoteAttempts=Number(row.quiz_completed)||0;
+        const remoteBest=Math.max(Number(row.best_quiz)||0,Number(row.score)||0);
+        dirty=wordsChanged&&words.size>remoteWordCount||attempts>remoteAttempts||best>remoteBest;
       }
-    }catch(e){console.warn('Grade '+grade+' progress restore error:',e)}finally{restoring=false;if(dirty)save()}
+    }catch(e){console.warn('Grade '+grade+' progress restore error:',e)}finally{
+      restoring=false;
+      if(dirty)save();
+    }
   }
+
   async function save(){
     if(saving||restoring||!dirty)return;
     const u=await user();if(!u)return;
