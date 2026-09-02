@@ -28,9 +28,31 @@
     try{const r=await client.from('student_progress').upsert(payload,{onConflict:'user_id,grade'});if(!r.error)dirty=false;else console.warn('Grade '+grade+' progress sync error:',r.error)}catch(e){console.warn('Grade '+grade+' progress sync error:',e)}finally{saving=false}
   }
 
+  function recordQuiz(percent){
+    const pct=Math.max(0,Math.min(100,Number(percent)||0));
+    attempts+=1;
+    best=Math.max(best,pct);
+    localStorage.setItem(key('QuizAttempts'),String(attempts));
+    localStorage.setItem(key('BestScore'),String(best));
+    dirty=true;
+    save();
+  }
+
   document.addEventListener('click',function(e){
     const wordBtn=e.target.closest('[data-speak]');
     if(wordBtn){const w=String(wordBtn.dataset.speak||'').trim();if(w){words.add(w);write(key('LearnedWords'),[...words]);dirty=true;save()}}
+
+    const submit3=e.target.closest('[data-submit-quiz]');
+    if(submit3 && grade===3){
+      setTimeout(function(){
+        const modal=submit3.closest('.g3-vocab-dialog');
+        const qs=modal?[...modal.querySelectorAll('.g3-question')]:[];
+        if(!qs.length)return;
+        const correct=qs.filter(q=>q.querySelector('[data-feedback][data-ok="1"]')).length;
+        recordQuiz(Math.round(correct/qs.length*100));
+      },0);
+      return;
+    }
 
     const option=e.target.closest('.quiz-q [data-option]');
     if(!option)return;
@@ -42,10 +64,7 @@
     if(qs.some(x=>!answered.has(x)))return;
     const correct=qs.filter(x=>{const selected=answered.get(x);return [...selected][0]?.dataset.option===x.dataset.correct}).length;
     const percent=qs.length?Math.round(correct/qs.length*100):0;
-    attempts+=1;best=Math.max(best,percent);
-    localStorage.setItem(key('QuizAttempts'),String(attempts));
-    localStorage.setItem(key('BestScore'),String(best));
-    dirty=true;save();
+    recordQuiz(percent);
   },true);
 
   window.addEventListener('beforeunload',()=>{if(dirty)save()});
