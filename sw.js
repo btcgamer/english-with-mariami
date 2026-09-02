@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v6';
+const CACHE_NAME = 'english-with-mariami-v7';
 
 const APP_SHELL = [
   './',
@@ -32,20 +32,28 @@ const APP_SHELL = [
   './universe-max.js',
   './app-icon.svg',
   './grade2/index.html',
-  './grade3/index.html',
-  './grade4/index.html',
-  './grade4/grade4.css',
-  './grade4/grade4.js',
-  './grade4/future-visual-layer.css',
   './grade2/grade2.css',
   './grade2/grade2.js',
   './grade2/grade2-3d.css',
   './grade2/grade2-dashboard-bridge.js',
   './grade2/grade2-supabase-bridge.js',
+  './grade2/grade2-content-expansion.js',
+  './grade2/grade2-mega-practice-v2.js',
   './grade2/future-visual-layer.css',
+  './grade3/index.html',
   './grade3/grade3.css',
   './grade3/grade3.js',
-  './grade3/future-visual-layer.css'
+  './grade3/grade3-futuristic-content.js',
+  './grade3/grade3-content-expansion.js',
+  './grade3/grade3-ai-companion.js',
+  './grade3/future-visual-layer.css',
+  './grade4/index.html',
+  './grade4/grade4.css',
+  './grade4/grade4.js',
+  './grade4/grade4-futuristic-content.js',
+  './grade4/grade4-content-expansion.js',
+  './grade4/future-visual-layer.css',
+  './shared/mega-vocabulary.js'
 ];
 
 self.addEventListener('install', event => {
@@ -93,13 +101,13 @@ self.addEventListener('fetch', event => {
           }
           return response;
         })
-        .catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
+        .catch(() => caches.match(request, { ignoreSearch: true }).then(cached => cached || caches.match('./index.html')))
     );
     return;
   }
 
   event.respondWith(
-    caches.match(request).then(cachedResponse => {
+    caches.match(request, { ignoreSearch: true }).then(cachedResponse => {
       const networkFetch = fetch(request)
         .then(response => {
           if (response && response.ok) {
