@@ -30,7 +30,8 @@
       if(r.error)throw r.error;
       const row=r.data;
       if(row){
-        const remoteWords=new Set(normalizeWords(row.learned_words));
+        const remoteWordsList=normalizeWords(row.learned_words);
+        const remoteWords=new Set(remoteWordsList);
         const localWords=[...words];
         localWords.forEach(w=>remoteWords.add(w));
         const mergedWords=[...remoteWords];
@@ -53,8 +54,9 @@
         if(mergedBest!==Number(localStorage.getItem(key('BestScore'))||0))localStorage.setItem(key('BestScore'),String(mergedBest));
 
         const remoteWordCount=Number(row.words_learned)||0;
-        const remoteWordsChanged=mergedWords.length!==remoteWordCount||mergedWords.some(w=>!new Set(normalizeWords(row.learned_words)).has(w));
-        dirty=remoteWordsChanged||mergedAttempts>remoteQuizCount||mergedBest>remoteBest;
+        const remoteWordsMalformed=remoteWordCount>remoteWordsList.length;
+        const remoteWordsChanged=!remoteWordsMalformed&&(mergedWords.length!==remoteWordCount||mergedWords.some(w=>!remoteWords.has(w)));
+        dirty=!remoteWordsMalformed&&(remoteWordsChanged||mergedAttempts>remoteQuizCount||mergedBest>remoteBest);
       }else{
         dirty=words.size>0||attempts>0||best>0;
       }
