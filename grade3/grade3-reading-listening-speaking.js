@@ -10,21 +10,20 @@
   function speak(t){if(!t||!('speechSynthesis'in window))return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
   function quizItems(w,type){return Array.isArray(w.quiz)?w.quiz.filter(function(q){return q&&q.type===type}):[]}
   function qaFor(w,type){var q=quizItems(w,type)[0];if(!q)return null;var answer=Array.isArray(q.options)?q.options[Number(q.answer)]:q.answer;return {question:q.q||q.question||'',answer:String(answer??'')}}
-  function stringQA(w){if(typeof w.quiz!=='string')return null;var s=w.quiz.trim(),i=s.indexOf('?');if(i<0)return null;return {question:s.slice(0,i+1),answer:s.slice(i+1).trim().replace(/^[-:]+\s*/,'')}}
   function mount(modal){
     if(!modal||modal.querySelector('.g3ls-root'))return;
     var w=getWorld();if(!w)return;
     var reading=textOf(w.reading,'text'),speaking=textOf(w.speaking,'prompt');
     var listening=textOf(w.listen,'text');
-    var readingQA=qaFor(w,'reading'),listeningQA=qaFor(w,'listening')||stringQA(w);
+    var readingQA=qaFor(w,'reading'),listeningQA=qaFor(w,'listening');
     if(!reading&&!listening&&!speaking)return;
     var root=document.createElement('section');root.className='g3ls-root';
     var html='<div class="g3ls-title">LEARNING CHALLENGES</div>';
     if(reading){html+='<article class="g3ls-card"><h3>📖 READING CHALLENGE</h3><p class="g3ls-reading">'+esc(reading)+'</p><button type="button" class="g3ls-btn" data-read>🔊 HEAR READING</button>';
-      if(readingQA)html+='<div class="g3ls-task"><p><b>'+esc(readingQA.question)+'</b></p><input class="g3ls-input" data-reading-answer autocomplete="off" placeholder="Type your answer"><button type="button" class="g3ls-btn" data-reading-check>CHECK</button><div class="g3ls-feedback" data-reading-feedback></div></div>';
+      if(readingQA&&readingQA.question&&readingQA.answer)html+='<div class="g3ls-task"><p><b>'+esc(readingQA.question)+'</b></p><input class="g3ls-input" data-reading-answer autocomplete="off" placeholder="Type your answer"><button type="button" class="g3ls-btn" data-reading-check>CHECK</button><div class="g3ls-feedback" data-reading-feedback></div></div>';
       html+='</article>'}
     if(listening){html+='<article class="g3ls-card"><h3>🎧 LISTENING CHALLENGE</h3><p>Listen first, then answer the question.</p><button type="button" class="g3ls-btn" data-listen>▶ PLAY</button>';
-      if(listeningQA)html+='<div class="g3ls-task"><p><b>'+esc(listeningQA.question)+'</b></p><input class="g3ls-input" data-listening-answer autocomplete="off" placeholder="Type what you heard"><button type="button" class="g3ls-btn" data-listening-check>CHECK</button><div class="g3ls-feedback" data-listening-feedback></div></div>';
+      if(listeningQA&&listeningQA.question&&listeningQA.answer)html+='<div class="g3ls-task"><p><b>'+esc(listeningQA.question)+'</b></p><input class="g3ls-input" data-listening-answer autocomplete="off" placeholder="Type what you heard"><button type="button" class="g3ls-btn" data-listening-check>CHECK</button><div class="g3ls-feedback" data-listening-feedback></div></div>';
       else html+='<div class="g3ls-feedback">Listening text available — press PLAY and repeat the key phrase aloud.</div>';
       html+='</article>'}
     if(speaking){html+='<article class="g3ls-card"><h3>🎤 SPEAKING CHALLENGE</h3><p>'+esc(speaking)+'</p><button type="button" class="g3ls-btn" data-model>🔊 HEAR MODEL</button><button type="button" class="g3ls-btn" data-speak>🎙️ SPEAK NOW</button><div class="g3ls-feedback" data-speaking-feedback></div></article>'}
