@@ -5,6 +5,21 @@ const grade=path.includes('grade4')?'4':path.includes('grade3')?'3':path.include
 const root=document.documentElement, body=document.body;
 root.dataset.universeMax=grade; body.classList.add('u-universe','u-grade-'+grade);
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function installQuizObjectDisplayFix(){
+  if(window.__EWM_QUIZ_OBJECT_DISPLAY_FIX__||!['2','3','4'].includes(grade))return;
+  window.__EWM_QUIZ_OBJECT_DISPLAY_FIX__=true;
+  const native=Object.prototype.toString;
+  const keys=['text','label','value','option','answer','word','translation','prompt','name','title'];
+  try{Object.defineProperty(Object.prototype,'toString',{configurable:true,writable:true,value:function(){
+    const o=this;
+    if(o&&typeof o==='object'){
+      for(const k of keys){if(Object.prototype.hasOwnProperty.call(o,k)&&o[k]!==null&&o[k]!==undefined&&(typeof o[k]==='string'||typeof o[k]==='number'||typeof o[k]==='boolean'))return String(o[k]);}
+      const own=Object.keys(o);
+      if(own.length===1){const v=o[own[0]];if(typeof v==='string'||typeof v==='number'||typeof v==='boolean')return String(v);}
+    }
+    return native.call(o);
+  }});}catch(e){console.warn('[EWM Quiz Display Fix]',e)}
+}
 function addParticles(){if(document.querySelector('.u-max-particles'))return;const box=document.createElement('div');box.className='u-max-particles';box.setAttribute('aria-hidden','true');for(let i=0;i<18;i++)box.appendChild(document.createElement('i'));document.body.appendChild(box)}
 function addHud(){if(document.querySelector('.u-max-hud'))return;const hud=document.createElement('div');hud.className='u-max-hud';hud.innerHTML='<span class="u-max-dot"></span><span>UNIVERSE ONLINE • <b>GRADE '+(grade==='home'?'HUB':grade)+'</b></span>';document.body.appendChild(hud)}
 /* Grade navigation is now centralized on the Academy hub. */
@@ -31,6 +46,6 @@ function addRobotCompanion(){
   window.addEventListener('resize',()=>{tx=clamp(tx,half,innerWidth-half);ty=clamp(ty,half,innerHeight-half);x=clamp(x,half,innerWidth-half);y=clamp(y,half,innerHeight-half)},{passive:true});
   requestAnimationFrame(follow);
 }
-function init(){addParticles();addHud();addNav();decorate();addRobotCompanion();new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}
+function init(){installQuizObjectDisplayFix();addParticles();addHud();addNav();decorate();addRobotCompanion();new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
