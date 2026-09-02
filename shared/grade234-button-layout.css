@@ -1,15 +1,14 @@
-/* English with Mariami — Grade 2/3/4 shared button layout
-   Keeps each grade's visual theme while standardizing spacing, sizing and responsive placement. */
+/* English with Mariami — Grade 2/3/4 shared button layout */
 .hero-actions,.actions,.g4-tools{display:flex;align-items:center;justify-content:flex-start;gap:12px;flex-wrap:wrap}
-.hero-actions button,.actions button,.g4-tools button,.g3-open,.g3-complete,.enter-btn,.action,.tab,.listen,.next,.g4-option,.g4-speak-text,.g4-close{min-height:44px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;line-height:1.15;text-align:center}
+.hero-actions button,.actions button,.g4-tools button,.g3-open,.g3-complete,.enter,.enter-btn,.action,.tab,.listen,.next,.g4-option,.g4-speak-text,.g4-close{min-height:44px;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;line-height:1.15;text-align:center}
 .hero-actions button,.actions button,.g4-tools button{flex:0 0 auto;white-space:nowrap}
 .hero-actions,.actions{margin-top:24px}
 .g4-tools{align-items:stretch}
 .g4-tools label{min-height:44px;box-sizing:border-box;display:flex;align-items:center}
 .g4-tools button{min-width:150px}
 .daily button{min-height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap}
-.lesson-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.enter-btn{min-width:112px;min-height:38px;white-space:nowrap}
+.lesson-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto}
+.enter,.enter-btn{min-width:112px;min-height:40px;white-space:nowrap}
 .g3-open,.g3-complete{width:100%;margin-top:13px}
 .g3-complete{margin-top:14px}
 .g3-q-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
@@ -18,12 +17,12 @@
 .g3-word button,.g4-word button{flex:0 0 40px;min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
 .g4-option{width:100%;min-height:44px;padding:10px 12px}
 .g4-speak-text{min-height:42px}
-/* Keep mission CTAs aligned at the bottom even when card text lengths differ. */
-.grade2 .lesson,.lesson-grid .lesson,.missions .mission{display:flex;flex-direction:column}
-.lesson-foot{margin-top:auto}
+/* Mission cards: CTA stays at the same visual level despite different text lengths. */
+.missions .mission,.lesson-grid .lesson{display:flex;flex-direction:column}
 .missions .mission{padding-bottom:62px}
 .missions .mission .g4-open{bottom:18px}
-/* Modal action rows stay predictable instead of stretching with content. */
+.lesson-foot{margin-top:auto}
+/* Activity controls use the same rhythm in all grades. */
 .tabs{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap}
 .tabs .tab{flex:1 1 150px;min-width:120px}
 .quiz-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
@@ -39,8 +38,8 @@
   .hero-actions,.actions,.g4-tools{grid-template-columns:1fr}
   .hero-actions button,.actions button,.g4-tools button{min-height:46px}
   .lesson-bottom{align-items:stretch;flex-direction:column}
-  .enter-btn{width:100%}
+  .enter,.enter-btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){
-  .hero-actions button,.actions button,.g4-tools button,.g3-open,.g3-complete,.enter-btn,.tab,.g4-option{transition:none!important}
+  .hero-actions button,.actions button,.g4-tools button,.g3-open,.g3-complete,.enter,.enter-btn,.tab,.g4-option{transition:none!important}
 }
