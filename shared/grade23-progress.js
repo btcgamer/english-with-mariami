@@ -19,6 +19,7 @@
   let saving=false;
   let restoring=true;
   let dirty=false;
+  let wordSyncBlocked=false;
 
   async function user(){try{const r=await client.auth.getUser();return r.data?.user||null}catch(_){return null}}
 
@@ -54,9 +55,9 @@
         if(mergedBest!==Number(localStorage.getItem(key('BestScore'))||0))localStorage.setItem(key('BestScore'),String(mergedBest));
 
         const remoteWordCount=Number(row.words_learned)||0;
-        const remoteWordsMalformed=remoteWordCount>remoteWordsList.length;
-        const remoteWordsChanged=!remoteWordsMalformed&&(mergedWords.length!==remoteWordCount||mergedWords.some(w=>!remoteWords.has(w)));
-        dirty=!remoteWordsMalformed&&(remoteWordsChanged||mergedAttempts>remoteQuizCount||mergedBest>remoteBest);
+        wordSyncBlocked=remoteWordCount>remoteWordsList.length;
+        const remoteWordsChanged=!wordSyncBlocked&&(mergedWords.length!==remoteWordCount||mergedWords.some(w=>!remoteWords.has(w)));
+        dirty=remoteWordsChanged||mergedAttempts>remoteQuizCount||mergedBest>remoteBest;
       }else{
         dirty=words.size>0||attempts>0||best>0;
       }
@@ -72,7 +73,11 @@
     saving=true;
     const now=new Date().toISOString();
     const learned=[...words];
-    const payload={user_id:u.id,grade,words_learned:learned.length,quiz_completed:attempts,quiz_attempts:attempts,score:best,learned_words:learned,best_quiz:best,last_active_at:now,updated_at:now};
+    const payload={user_id:u.id,grade,quiz_completed:attempts,quiz_attempts:attempts,score:best,best_quiz:best,last_active_at:now,updated_at:now};
+    if(!wordSyncBlocked){
+      payload.words_learned=learned.length;
+      payload.learned_words=learned;
+    }
     try{const r=await client.from('student_progress').upsert(payload,{onConflict:'user_id,grade'});if(!r.error)dirty=false;else console.warn('Grade '+grade+' progress sync error:',r.error)}catch(e){console.warn('Grade '+grade+' progress sync error:',e)}finally{saving=false}
   }
 
