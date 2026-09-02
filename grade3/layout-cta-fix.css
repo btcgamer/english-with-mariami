@@ -1,32 +1,6 @@
 /* Grade 3 — structural CTA alignment only. No curriculum, XP, auth or Supabase logic changes. */
-.u-grade3 .missions{align-items:stretch}
-.u-grade3 .mission{min-height:330px;padding:22px 22px 72px;display:flex;flex-direction:column}
-.u-grade3 .mission .num{min-height:18px}
-.u-grade3 .mission .icon{flex:0 0 auto}
-.u-grade3 .mission h3{min-height:27px}
-.u-grade3 .mission p{min-height:58px;margin-bottom:0}
-.u-grade3 .g4-vocab-preview{margin-top:auto;padding-top:12px;min-height:39px}
-.u-grade3 .g4-open{left:22px;right:22px;bottom:20px;height:40px;display:grid;place-items:center;margin:0}
-.u-grade3 .actions{align-items:stretch}
-.u-grade3 .actions button{width:190px;min-height:48px;display:inline-flex;align-items:center;justify-content:center}
-.u-grade3 .g4-tools button{min-height:44px}
-@media(max-width:900px){
-  .u-grade3 .missions{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .u-grade3 .mission{min-height:320px}
-}
-@media(max-width:640px){
-  .u-grade3 .g4-nav{grid-template-columns:1fr auto;gap:10px}
-  .u-grade3 .g4-home{grid-column:2;grid-row:1}
-  .u-grade3 .stats{grid-column:1/-1;grid-row:2;justify-content:stretch}
-  .u-grade3 .stats strong{flex:1;text-align:center;min-width:0}
-  .u-grade3 .g4-hero{grid-template-columns:1fr;min-height:auto;padding:42px 0 28px;gap:22px}
-  .u-grade3 .hero-orbit{order:-1;width:min(270px,72vw);height:min(270px,72vw)}
-  .u-grade3 .actions{display:grid;grid-template-columns:1fr;gap:10px}
-  .u-grade3 .actions button{width:100%}
-  .u-grade3 .g4-tools{display:grid;grid-template-columns:1fr}
-  .u-grade3 .g4-tools button{width:100%}
-  .u-grade3 .missions{grid-template-columns:1fr;gap:14px}
-  .u-grade3 .mission{min-height:300px;padding-left:18px;padding-right:18px}
-  .u-grade3 .g4-open{left:18px;right:18px;bottom:17px}
-}
+.u-grade3 .missions{align-items:stretch}.u-grade3 .mission{min-height:330px;padding:22px 22px 72px;display:flex;flex-direction:column}.u-grade3 .mission .num{min-height:18px}.u-grade3 .mission .icon{flex:0 0 auto}.u-grade3 .mission h3{min-height:27px}.u-grade3 .mission p{min-height:58px;margin-bottom:0}.u-grade3 .g4-vocab-preview{margin-top:auto;padding-top:12px;min-height:39px}.u-grade3 .g4-open{left:22px;right:22px;bottom:20px;height:40px;display:grid;place-items:center;margin:0}
+.u-grade3 .actions{align-items:center;justify-content:flex-start;max-width:420px}.u-grade3 .actions button{width:190px;min-height:48px;display:inline-flex;align-items:center;justify-content:center}.u-grade3 .g4-tools button{min-height:44px}
+@media(max-width:900px){.u-grade3 .missions{grid-template-columns:repeat(2,minmax(0,1fr))}.u-grade3 .mission{min-height:320px}}
+@media(max-width:640px){.u-grade3 .g4-nav{grid-template-columns:1fr auto;gap:10px}.u-grade3 .g4-home{grid-column:2;grid-row:1}.u-grade3 .stats{grid-column:1/-1;grid-row:2;justify-content:stretch}.u-grade3 .stats strong{flex:1;text-align:center;min-width:0}.u-grade3 .g4-hero{grid-template-columns:1fr;min-height:auto;padding:42px 0 28px;gap:22px}.u-grade3 .hero-orbit{order:-1;width:min(270px,72vw);height:min(270px,72vw)}.u-grade3 .actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px;max-width:none}.u-grade3 .actions button{width:190px}.u-grade3 .g4-tools{display:grid;grid-template-columns:1fr}.u-grade3 .g4-tools button{width:100%}.u-grade3 .missions{grid-template-columns:1fr;gap:14px}.u-grade3 .mission{min-height:300px;padding-left:18px;padding-right:18px}.u-grade3 .g4-open{left:18px;right:18px;bottom:17px}}
 @media(prefers-reduced-motion:reduce){.u-grade3 .mission{transform:none!important}}
