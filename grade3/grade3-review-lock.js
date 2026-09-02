@@ -24,9 +24,7 @@
   }
   window.grade3FinalReviewAllowed=allowed;
   document.addEventListener('click',function(e){
-    const button=e.target.closest('.g3-open');
-    if(!button)return;
-    const card=button.closest('.mission');
+    const card=e.target.closest('.mission[data-i]');
     if(!card)return;
     const i=Number(card.dataset.i);
     if(i===worlds.length-1)guard(e);
