@@ -27,7 +27,7 @@ async function restore(u){
   const mergedWords=[...new Set([...localWords,...remoteWords])];
   const localXp=Number(p.xp)||0,remoteXp=Number(remote.words_learned)||0;
   const localStars=Number(p.stars)||0,remoteStars=Number(remote.quiz_completed)||0;
-  const mergedBest=Math.max(Number(p.bestQuiz)||0,Number(remote.best_quiz)||0,Number(remote.score)||0);
+  const mergedBest=Math.min(100,Math.max(Number(p.bestQuiz)||0,Number(remote.best_quiz)||0,Number(remote.score)||0));
   const mergedAttempts=Math.max(Number(p.quizAttempts)||0,Number(remote.quiz_attempts)||0);
   const merged={...p,done:mergedDone,words:mergedWords,xp:Math.max(localXp,remoteXp),stars:Math.max(localStars,remoteStars),bestQuiz:mergedBest,quizAttempts:mergedAttempts};
   if(mergedDone.length!==localDone.length||merged.xp!==localXp||merged.stars!==localStars||mergedWords.length!==localWords.length||merged.bestQuiz!==Number(p.bestQuiz)||merged.quizAttempts!==Number(p.quizAttempts))write(merged);
@@ -37,7 +37,7 @@ async function save(u){
   const learned=Array.isArray(p.words)?p.words.map(String):[];
   const words=Math.min(300,Math.max(done.length*25+Math.min(25,Number(p.xp||0)%100),learned.length));
   const quiz=Math.max(0,Number(p.stars||0));
-  const best=Math.max(0,Math.min(100,Number(p.bestQuiz||0),Number(p.xp||0)%100));
+  const best=Math.min(100,Math.max(Number(p.bestQuiz)||0,Number(p.xp||0)%100));
   const now=new Date().toISOString();
   const ids=[...new Set([...learned,...done.map(i=>'grade2-mission-'+(i+1))])];
   const r=await client.from('student_progress').upsert({user_id:u.id,grade:2,words_learned:words,quiz_completed:quiz,score:best,learned_words:ids,best_quiz:best,quiz_attempts:Number(p.quizAttempts||0),last_active_at:now,updated_at:now},{onConflict:'user_id,grade'});
