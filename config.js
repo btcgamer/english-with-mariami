@@ -56,8 +56,10 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
       if(!auth){location.replace('/login.html?reason=unauthorized');return}
       const role=String(auth.profile?.role||'').trim().toLowerCase();
       const assigned=Number(auth.profile?.grade||0);
+      /* Teachers and parents may inspect any grade. Students stay grade-locked. */
+      if(role==='teacher'||role==='parent')return;
       if(role!=='student'){
-        location.replace(role==='teacher'?'/teacher-dashboard.html':'/login.html?reason=wrong-role');
+        location.replace('/login.html?reason=wrong-role');
         return;
       }
       if(![2,3,4].includes(assigned)){
