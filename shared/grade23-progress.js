@@ -26,29 +26,37 @@
     const u=await user();
     if(!u){restoring=false;return}
     try{
-      const r=await client.from('student_progress').select('words_learned,quiz_completed,best_quiz,learned_words,score').eq('user_id',u.id).eq('grade',grade).maybeSingle();
+      const r=await client.from('student_progress').select('words_learned,quiz_completed,quiz_attempts,best_quiz,learned_words,score').eq('user_id',u.id).eq('grade',grade).maybeSingle();
       if(r.error)throw r.error;
       const row=r.data;
       if(row){
-        const beforeWords=[...words];
-        const beforeAttempts=attempts;
-        const beforeBest=best;
-        normalizeWords(row.learned_words).forEach(w=>words.add(w));
-        attempts=Math.max(attempts,Number(row.quiz_completed)||0);
-        best=Math.max(best,Number(row.best_quiz)||0,Number(row.score)||0);
+        const remoteWords=new Set(normalizeWords(row.learned_words));
+        const localWords=[...words];
+        localWords.forEach(w=>remoteWords.add(w));
+        const mergedWords=[...remoteWords];
+        const wordsChanged=mergedWords.length!==words.size||mergedWords.some(w=>!words.has(w));
 
-        const mergedWords=[...words];
-        const wordsChanged=mergedWords.length!==beforeWords.length||mergedWords.some(w=>!beforeWords.includes(w));
-        const attemptsChanged=attempts!==beforeAttempts;
-        const bestChanged=best!==beforeBest;
+        const remoteCompleted=Number(row.quiz_completed)||0;
+        const remoteAttempts=Number(row.quiz_attempts)||0;
+        const remoteQuizCount=Math.max(remoteCompleted,remoteAttempts);
+        const remoteBest=Math.max(Number(row.best_quiz)||0,Number(row.score)||0);
+        const mergedAttempts=Math.max(attempts,remoteQuizCount);
+        const mergedBest=Math.max(best,remoteBest);
+
+        words.clear();
+        mergedWords.forEach(w=>words.add(w));
+        attempts=mergedAttempts;
+        best=mergedBest;
+
         if(wordsChanged)write(key('LearnedWords'),mergedWords);
-        if(attemptsChanged)localStorage.setItem(key('QuizAttempts'),String(attempts));
-        if(bestChanged)localStorage.setItem(key('BestScore'),String(best));
+        if(mergedAttempts!==Number(localStorage.getItem(key('QuizAttempts'))||0))localStorage.setItem(key('QuizAttempts'),String(mergedAttempts));
+        if(mergedBest!==Number(localStorage.getItem(key('BestScore'))||0))localStorage.setItem(key('BestScore'),String(mergedBest));
 
         const remoteWordCount=Number(row.words_learned)||0;
-        const remoteAttempts=Number(row.quiz_completed)||0;
-        const remoteBest=Math.max(Number(row.best_quiz)||0,Number(row.score)||0);
-        dirty=wordsChanged&&words.size>remoteWordCount||attempts>remoteAttempts||best>remoteBest;
+        const remoteWordsChanged=mergedWords.length!==remoteWordCount||mergedWords.some(w=>!new Set(normalizeWords(row.learned_words)).has(w));
+        dirty=remoteWordsChanged||mergedAttempts>remoteQuizCount||mergedBest>remoteBest;
+      }else{
+        dirty=words.size>0||attempts>0||best>0;
       }
     }catch(e){console.warn('Grade '+grade+' progress restore error:',e)}finally{
       restoring=false;
@@ -62,7 +70,7 @@
     saving=true;
     const now=new Date().toISOString();
     const learned=[...words];
-    const payload={user_id:u.id,grade,words_learned:learned.length,quiz_completed:attempts,score:best,learned_words:learned,best_quiz:best,last_active_at:now,updated_at:now};
+    const payload={user_id:u.id,grade,words_learned:learned.length,quiz_completed:attempts,quiz_attempts:attempts,score:best,learned_words:learned,best_quiz:best,last_active_at:now,updated_at:now};
     try{const r=await client.from('student_progress').upsert(payload,{onConflict:'user_id,grade'});if(!r.error)dirty=false;else console.warn('Grade '+grade+' progress sync error:',r.error)}catch(e){console.warn('Grade '+grade+' progress sync error:',e)}finally{saving=false}
   }
 
