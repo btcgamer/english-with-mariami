@@ -9,7 +9,21 @@
     if (!raw) return null;
     var match = raw.match(/^(.+?\?)\s*(?:—|–|-|:)\s*(.+)$/);
     if (!match) match = raw.match(/^(.+?\?)\s+(.+)$/);
-    if (!match) return { type:'fill', question:raw, answer:'' };
+    if (!match) {
+      /*
+       * Some legacy Grade 3 sectors store a short prompt/answer as a single
+       * string without a question mark (for example: "He plays football.").
+       * Do not manufacture a blank answer: the native Grade 3 engine treats
+       * an unparsed legacy string as a fill item whose answer is the string.
+       * Keeping that behavior prevents the compatibility layer from turning
+       * otherwise usable legacy quizzes into impossible blank-answer inputs.
+       */
+      return {
+        type:'fill',
+        question:raw,
+        answer:raw.replace(/[.。]+$/,'').trim()
+      };
+    }
     return {
       type:'fill',
       question:match[1].trim(),
