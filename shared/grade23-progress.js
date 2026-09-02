@@ -16,11 +16,33 @@
   let best=Number(localStorage.getItem(key('BestScore'))||0)||0;
   const answered=new WeakMap();
   let saving=false;
+  let restoring=true;
   let dirty=false;
 
   async function user(){try{const r=await client.auth.getUser();return r.data?.user||null}catch(_){return null}}
+  async function restore(){
+    const u=await user();
+    if(!u){restoring=false;return}
+    try{
+      const r=await client.from('student_progress').select('words_learned,quiz_completed,best_quiz,learned_words,score').eq('user_id',u.id).eq('grade',grade).maybeSingle();
+      if(r.error)throw r.error;
+      const row=r.data;
+      if(row){
+        const remoteWords=Array.isArray(row.learned_words)?row.learned_words.map(decodeWord).map(String):[];
+        remoteWords.forEach(w=>words.add(w));
+        attempts=Math.max(attempts,Number(row.quiz_completed)||0,Number(row.quiz_attempts)||0);
+        best=Math.max(best,Number(row.best_quiz)||0,Number(row.score)||0);
+        write(key('LearnedWords'),[...words]);
+        localStorage.setItem(key('QuizAttempts'),String(attempts));
+        localStorage.setItem(key('BestScore'),String(best));
+        const localWords=read(key('LearnedWords'),[]);
+        dirty=(words.size>(Number(row.words_learned)||0)||attempts>(Number(row.quiz_completed)||0)||best>(Number(row.best_quiz)||Number(row.score)||0));
+        if(localWords.length!==words.size)dirty=true;
+      }
+    }catch(e){console.warn('Grade '+grade+' progress restore error:',e)}finally{restoring=false;if(dirty)save()}
+  }
   async function save(){
-    if(saving||!dirty)return;
+    if(saving||restoring||!dirty)return;
     const u=await user();if(!u)return;
     saving=true;
     const now=new Date().toISOString();
@@ -70,5 +92,5 @@
 
   window.addEventListener('beforeunload',()=>{if(dirty)save()});
   setInterval(()=>save(),5000);
-  save();
+  restore();
 })();
