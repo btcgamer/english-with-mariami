@@ -7,7 +7,7 @@ const LEGACY_KEY='grade2_neon_progress_v3';
 if(!client)return;
 function migrateLegacy(){try{const current=localStorage.getItem(KEY),legacy=localStorage.getItem(LEGACY_KEY);if(!current&&legacy)localStorage.setItem(KEY,legacy)}catch(_){} }
 migrateLegacy();
-const defaults={xp:0,stars:0,done:[],daily:'',words:[]};
+const defaults={xp:0,stars:0,done:[],daily:'',words:[],bestQuiz:0,quizAttempts:0};
 const read=()=>{try{return Object.assign({},defaults,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(_){return {...defaults}}};
 const write=v=>{try{localStorage.setItem(KEY,JSON.stringify(v))}catch(_){} };
 const badge=msg=>{const e=document.getElementById('grade2SyncBadge');if(e)e.textContent=msg};
@@ -27,15 +27,15 @@ async function restore(u){
   const mergedWords=[...new Set([...localWords,...remoteWords])];
   const localXp=Number(p.xp)||0,remoteXp=Number(remote.words_learned)||0;
   const localStars=Number(p.stars)||0,remoteStars=Number(remote.quiz_completed)||0;
-  const localBest=Math.max(0,Number(p.xp)||0)%100;
-  const remoteBest=Math.max(Number(remote.best_quiz)||0,Number(remote.score)||0);
-  const merged={...p,done:mergedDone,words:mergedWords,xp:Math.max(localXp,remoteXp),stars:Math.max(localStars,remoteStars)};
-  if(!Array.isArray(p.done)||mergedDone.length!==localDone.length||merged.xp!==localXp||merged.stars!==localStars||mergedWords.length!==localWords.length)write(merged);
+  const mergedBest=Math.max(Number(p.bestQuiz)||0,Number(remote.best_quiz)||0,Number(remote.score)||0);
+  const mergedAttempts=Math.max(Number(p.quizAttempts)||0,Number(remote.quiz_attempts)||0);
+  const merged={...p,done:mergedDone,words:mergedWords,xp:Math.max(localXp,remoteXp),stars:Math.max(localStars,remoteStars),bestQuiz:mergedBest,quizAttempts:mergedAttempts};
+  if(mergedDone.length!==localDone.length||merged.xp!==localXp||merged.stars!==localStars||mergedWords.length!==localWords.length||merged.bestQuiz!==Number(p.bestQuiz)||merged.quizAttempts!==Number(p.quizAttempts))write(merged);
 }
 async function save(u){
   const p=read(),done=Array.isArray(p.done)?p.done.map(Number).filter(Number.isInteger):[];
   const learned=Array.isArray(p.words)?p.words.map(String):[];
-  const words=Math.min(300,Math.max(done.length*25,learned.length,Number(p.xp||0)));
+  const words=Math.min(300,Math.max(done.length*25+Math.min(25,Number(p.xp||0)%100),learned.length));
   const quiz=Math.max(0,Number(p.stars||0));
   const best=Math.max(0,Math.min(100,Number(p.bestQuiz||0),Number(p.xp||0)%100));
   const now=new Date().toISOString();
@@ -44,5 +44,5 @@ async function save(u){
   badge(r.error?'⚠ Local progress safe':'✓ Supabase synced')
 }
 function loadExpansion(){if(document.querySelector('script[data-grade2-content-expansion],script[src*="grade2-content-expansion.js"]'))return;const s=document.createElement('script');s.src='grade2-content-expansion.js?v=20260901';s.async=true;s.dataset.grade2ContentExpansion='1';document.head.appendChild(s)}
-(async()=>{try{const u=await getUser();if(!u){location.replace('../login.html?redirect='+encodeURIComponent('grade2/index.html'));return}if(!(await checkGrade(u)))return;loadExpansion();await restore(u);await save(u);let last=localStorage.getItem(KEY)||'';setInterval(async()=>{const now=localStorage.getItem(KEY)||'';if(now!==last){last=now;await save(u);last=now}},2000)}catch(e){console.warn('[Grade2 Bridge]',e);badge('⚠ Local mode')}})();
+(async()=>{try{const u=await getUser();if(!u){location.replace('../login.html?redirect='+encodeURIComponent('grade2/index.html'));return}if(!(await checkGrade(u)))return;loadExpansion();await restore(u);await save(u);let last=localStorage.getItem(KEY)||'';setInterval(async()=>{const now=localStorage.getItem(KEY)||'';if(now!==last){await save(u);last=now}},2000)}catch(e){console.warn('[Grade2 Bridge]',e);badge('⚠ Local mode')}})();
 })();
