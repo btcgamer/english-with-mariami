@@ -154,3 +154,17 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   s.dataset.ewmAcademyNav='1';
   document.head.appendChild(s);
 })();
+
+/* Shared subject organizer: Numbers, Alphabet, Animals, Family, Colors,
+   Vehicles, Grammar, Speaking, Listening, Reading and Quizzes. */
+(function(){
+  'use strict';
+  const path=(window.location.pathname||'').toLowerCase();
+  if(!/\/grade[234](?:\/index\.html)?$/.test(path))return;
+  if(document.querySelector('script[data-ewm-learning-organizer]'))return;
+  const s=document.createElement('script');
+  s.src='/shared/learning-organizer.js?v=20260902';
+  s.async=true;
+  s.dataset.ewmLearningOrganizer='1';
+  document.head.appendChild(s);
+})();
