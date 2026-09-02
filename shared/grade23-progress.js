@@ -10,7 +10,8 @@
   const read=(name,fallback)=>{try{const v=JSON.parse(localStorage.getItem(name)||'null');return v==null?fallback:v}catch(_){return fallback}};
   const write=(name,value)=>{try{localStorage.setItem(name,JSON.stringify(value))}catch(_){}
   };
-  const words=new Set(Array.isArray(read(key('LearnedWords'),[]))?read(key('LearnedWords'),[]).map(String):[]);
+  const decodeWord=value=>{try{return decodeURIComponent(String(value||''))}catch(_){return String(value||'')}};
+  const words=new Set(Array.isArray(read(key('LearnedWords'),[]))?read(key('LearnedWords'),[]).map(decodeWord).map(String):[]);
   let attempts=Number(localStorage.getItem(key('QuizAttempts'))||0)||0;
   let best=Number(localStorage.getItem(key('BestScore'))||0)||0;
   const answered=new WeakMap();
@@ -40,7 +41,7 @@
 
   document.addEventListener('click',function(e){
     const wordBtn=e.target.closest('[data-speak]');
-    if(wordBtn){const w=String(wordBtn.dataset.speak||'').trim();if(w){words.add(w);write(key('LearnedWords'),[...words]);dirty=true;save()}}
+    if(wordBtn){const w=decodeWord(wordBtn.dataset.speak||'').trim();if(w){words.add(w);write(key('LearnedWords'),[...words]);dirty=true;save()}}
 
     const submit3=e.target.closest('[data-submit-quiz]');
     if(submit3 && grade===3){
