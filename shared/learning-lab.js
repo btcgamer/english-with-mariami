@@ -1,7 +1,9 @@
 /* English With Mariami — additive Learning Lab. No XP/Auth/Supabase writes. */
 (()=>{
 'use strict';
-const grade=document.body.classList.contains('u-grade2')?2:document.body.classList.contains('u-grade3')?3:document.body.classList.contains('u-grade4')?4:0;if(!grade)return;
+const path=String(location.pathname||'').toLowerCase();
+const grade=document.body.classList.contains('u-grade2')||/\/grade2(?:\/|$)/.test(path)?2:document.body.classList.contains('u-grade3')||/\/grade3(?:\/|$)/.test(path)?3:document.body.classList.contains('u-grade4')||/\/grade4(?:\/|$)/.test(path)?4:0;
+if(!grade)return;
 const D={
 2:{level:'Beginner',intro:'მარტივი ტექსტები, დიალოგები, წინადადებები და საფიქრალი კითხვები.',alpha:1,words:['family','school','book','friend','room','chair','apple','bird','kite'],texts:[
 ['My Name Is Nino','Text','Hello! My name is Nino. I am eight years old. I live with my family. I like books and drawing. Every morning I go to school with my brother.','How old is Nino?','eight','Nino likes ______.','drawing'],
