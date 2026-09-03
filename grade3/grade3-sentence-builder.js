@@ -29,6 +29,7 @@
     var built=el('div','g3sb-built');
     var feedback=el('div','g3sb-feedback');
     var next=el('button','g3sb-btn','NEXT SENTENCE →');
+    var reset=el('button','g3sb-btn','↻ RESET');
     var check=el('button','g3sb-btn','✓ CHECK');
     var index=0, answer=[];
     function render(){
@@ -47,9 +48,10 @@
       feedback.textContent=actual===expected?'🎉 Correct sentence!':'Try again — check the word order.';
       if(actual===expected) feedback.classList.add('is-correct'); else feedback.classList.remove('is-correct');
     };
+    reset.onclick=function(){render();};
     next.onclick=function(){index=(index+1)%sentences.length;render();};
     root.appendChild(target);root.appendChild(bank);root.appendChild(el('div','g3sb-label','YOUR SENTENCE'));root.appendChild(built);root.appendChild(feedback);
-    var controls=el('div','g3sb-controls');controls.appendChild(check);controls.appendChild(next);root.appendChild(controls);
+    var controls=el('div','g3sb-controls');controls.appendChild(check);controls.appendChild(reset);controls.appendChild(next);root.appendChild(controls);
     var anchor=modal.querySelector('.g3i-root,.g3-quiz,.quiz,.g3-complete,button');
     if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(root,anchor);else modal.appendChild(root);
     render();mounted=true;
