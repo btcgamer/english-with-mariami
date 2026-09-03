@@ -8,15 +8,14 @@
   function esc(v){return String(v??'').replace(/[&<>\"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'})[c]})}
   function norm(v){return String(v??'').toLowerCase().trim().replace(/[^a-z0-9\s]/g,'').replace(/\s+/g,' ')}
   function speak(t){if(!t||!('speechSynthesis'in window))return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.82;speechSynthesis.speak(u)}
-  function quizItems(w,type){return Array.isArray(w.quiz)?w.quiz.filter(function(q){return q&&q.type===type}):[]}
+  function quizItems(w,type){return Array.isArray(w.quiz)?w.quiz.filter(function(q){return q&&((q.practiceType||q.type)===type)}):[]}
   function qaFor(w,type){var q=quizItems(w,type)[0];if(!q)return null;var answer=Array.isArray(q.options)?q.options[Number(q.answer)]:q.answer;return {question:q.q||q.question||'',answer:String(answer??'')}}
-  function stringQA(w){return null}
   function mount(modal){
     if(!modal||modal.querySelector('.g3ls-root'))return;
     var w=getWorld();if(!w)return;
     var reading=textOf(w.reading,'text'),speaking=textOf(w.speaking,'prompt');
     var listening=textOf(w.listen,'text');
-    var readingQA=qaFor(w,'reading'),listeningQA=qaFor(w,'listening')||stringQA(w);
+    var readingQA=qaFor(w,'reading'),listeningQA=qaFor(w,'listening');
     if(!reading&&!listening&&!speaking)return;
     var root=document.createElement('section');root.className='g3ls-root';
     var html='<div class="g3ls-title">LEARNING CHALLENGES</div>';
