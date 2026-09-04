@@ -1,26 +1,31 @@
 # Futuristic Learning Universe cleanup audit
 
-This marker file documents a safety-first cleanup pass. No existing application logic is deleted in this pass. Legacy visual assets are retained until dependency usage is verified.
-
-Policy: preserve Supabase/auth/dashboard/progress logic; consolidate visual layers only after confirming references.
-
 ## MAGIC NEON AI ACADEMY — 21st Century FUTURE MODE
 
-- Added a living neon grid/depth layer to the Grade 2 / Grade 3 / Grade 4 3D visual container.
-- Added a large floating AI companion with idle, blink, pulse and touch/thinking reactions.
-- Added touch/pointer glow feedback without changing lesson, quiz, Auth, Supabase or progress data logic.
-- Kept mobile-first sizing and `prefers-reduced-motion` protection.
-- Kept Grade 2 and Grade 3 existing 30-question quiz logic intact.
-- Grade 4 receives the new companion through the existing 3D visual injection path.
-- Supabase schema/data was inspected for progress compatibility; no database migration or data mutation was performed.
-- Main branch was not modified; work is isolated on `feat/magic-neon-future-mode`.
+### Completed visual pass
+- Living neon grid/depth layer added to Grade 2 / Grade 3 / Grade 4 3D worlds.
+- Large floating AI Companion added with idle, blink, pulse and touch/thinking reactions.
+- Touch/pointer glow feedback added without changing lesson data APIs.
+- Mobile-first sizing and `prefers-reduced-motion` protection retained.
+- Existing Grade 2 and Grade 3 quiz implementations remain present in the branch.
 
-## Scope
+### Progress QA
+The Supabase schema was checked before changing the progress presentation. The current project contains compatible progress sources:
+- `student_progress`: `words_learned`, `words_learned`, `quiz_completed`, `score`, `best_quiz`, `quiz_attempts`, `last_active_at`.
+- `lesson_progress`: lesson completion and scores by student/grade.
+- `quiz_results`: quiz score/total and completion timestamps.
+- `academy_activity`: activity completion and score/max_score.
+- `academy_streaks`: current/best streak and last active date.
+- `profiles`: grade and points.
 
-Only these requested files are changed in this pass:
+The existing application currently initializes the academy progress UI to safe zero values after authentication. This pass therefore upgrades the progress presentation without inventing values or mutating database data.
 
-- `_cleanup_audit.md`
-- `3d-visuals.css`
-- `3d-visuals.js`
+### Progress presentation
+- Existing `.progress` bars now have holographic neon fill, animated light sweep, depth glow and a stable dark track.
+- Grade-page visual CSS includes a compact `future-command-center` component style for XP / mission / streak / progress HUD integration.
 
-`academy.html` was inspected and its existing homepage progress UI was left untouched because its Auth/Supabase/progress implementation is inline; this avoids replacing a large application file without a complete source rewrite.
+### Safety
+- No Supabase schema, rows, auth settings, or production data were modified.
+- No changes were made to `main`.
+- Work remains isolated on `feat/magic-neon-future-mode`.
+- Scope remains limited to the requested visual/audit files; `academy.html` was inspected but not replaced wholesale because its Auth/Supabase/progress logic is inline and should not be risked without a complete source rewrite.
