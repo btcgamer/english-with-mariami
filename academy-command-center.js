@@ -1,11 +1,7 @@
 (() => {
   'use strict';
 
-  /*
-   * MAGIC NEON ACADEMY — read-only Command Center.
-   * Reads existing Supabase data only. No INSERT / UPDATE / DELETE.
-   */
-
+  /* MAGIC NEON ACADEMY — read-only Command Center. */
   const isAcademy = /(?:^|\/)academy\.html$/.test((window.location.pathname || '').toLowerCase());
   if (!isAcademy || document.documentElement.dataset.ewmCommandCenter === '1') return;
   document.documentElement.dataset.ewmCommandCenter = '1';
@@ -108,7 +104,7 @@
 
     const [lessonsResult, quizzesResult, streakResult] = await Promise.all([
       client.from('lesson_progress').select('lesson_id,completed,score').eq('student_id', user.id).eq('grade', grade),
-      client.from('quiz_results').select('quiz_id,score,total,completed_at').eq('student_id', user.id).eq('grade', grade),
+      client.from('quiz_results').select('quiz_id,score,total,completed_at').eq('student_id', user.id).eq('grade', grade).order('completed_at', { ascending: false }),
       client.from('academy_streaks').select('current_streak,best_streak').eq('student_id', user.id).maybeSingle()
     ]);
 
@@ -118,12 +114,24 @@
 
     const completedLessonIds = new Set(lessons.filter(r => r?.completed === true && r?.lesson_id).map(r => String(r.lesson_id)));
     const lessonIds = new Set(lessons.filter(r => r?.lesson_id).map(r => String(r.lesson_id)));
-    const uniqueQuizIds = new Set(quizzes.filter(r => r?.quiz_id && Number(r?.total) > 0).map(r => String(r.quiz_id)));
 
-    /* Stars are derived from existing achievement signals; no new rows are written. */
-    const perfectQuizzes = quizzes.filter(r => Number(r?.total) > 0 && Number(r?.score) >= Number(r?.total)).length;
+    /* One quiz counts once: use the best existing attempt for each quiz ID. */
+    const bestQuizById = new Map();
+    for (const row of quizzes) {
+      const id = row?.quiz_id ? String(row.quiz_id) : '';
+      const total = Number(row?.total);
+      const score = Number(row?.score);
+      if (!id || total <= 0 || !Number.isFinite(score)) continue;
+      const safeScore = Math.max(0, Math.min(score, total));
+      const previous = bestQuizById.get(id);
+      if (!previous || safeScore / total > previous.score / previous.total) {
+        bestQuizById.set(id, { score: safeScore, total });
+      }
+    }
+
+    const quizCount = bestQuizById.size;
+    const perfectQuizzes = [...bestQuizById.values()].filter(r => r.score >= r.total).length;
     const completedLessons = completedLessonIds.size;
-    const quizCount = uniqueQuizIds.size;
     const stars = (completedLessons * 1) + (perfectQuizzes * 2);
     const xp = Math.round(numberOrZero(profileResult.data?.points));
 
