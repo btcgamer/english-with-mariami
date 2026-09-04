@@ -40,9 +40,7 @@ button{font:inherit}
  .family{gap:2px;transform:translate(-50%,-50%) scale(.62) rotateY(-8deg)}
  .family-letter{font-size:42px}
  .site-copyright{font-size:12px;padding:15px 10px}
- /* Mobile uses the unified bottom app shell; hide duplicate page-level controls. */
  #grade2NavFix,.g3-home,.g4-home{display:none!important}
- /* Grade 4's card owns the open action; avoid one tap firing card + child button. */
  .g4-open{pointer-events:none!important}
  .ewm-mobile-shell{position:fixed;left:8px;right:8px;bottom:8px;z-index:2147483000;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:7px;border:1px solid rgba(0,234,255,.28);border-radius:18px;background:rgba(2,8,23,.96);box-shadow:0 8px 28px rgba(0,0,0,.42);backdrop-filter:blur(10px);}
  .ewm-mobile-shell a,.ewm-mobile-shell button{appearance:none;border:0;background:transparent;color:#d9f7ff;text-decoration:none;min-width:0;min-height:54px;padding:5px 2px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;-webkit-user-select:none;user-select:none}
@@ -80,4 +78,30 @@ button{font:inherit}
 }
 @media(max-width:900px) and (prefers-reduced-motion:no-preference){
  .u-max-particles,.energy,.stars,.nebula{opacity:.55}
+}
+
+/* Mobile interaction hardening for Grades 2–4. */
+@media(max-width:900px){
+ .lesson-grid .enter,.lesson-grid .enter-btn,.lessons .enter-btn,
+ .daily-card button,.daily button,
+ .hero-actions button,.actions button,
+ .g3-open,.g3-complete,.g3-close,.g3-word button,
+ .g4-open,.g4-complete,.g4-close,.g4-option,.g4-speak-text,
+ .modal .close,.modal .action,.panel .mission-button,
+ .quiz-options button,.quiz-options label,
+ .match-grid button,.tokens button{min-height:46px}
+
+ .g3-vocab-modal,.g4-vocab-modal,.modal{padding:calc(10px + env(safe-area-inset-top)) 10px calc(10px + env(safe-area-inset-bottom));}
+ .g3-vocab-dialog,.g4-vocab-dialog,.modal .panel{width:100%;max-width:100%;max-height:calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+ .g3-close,.g4-close{width:46px;height:46px}
+ .g3-word button{width:44px;height:44px}
+ .g3-q-options label{min-height:46px;display:flex;align-items:center}
+ .g3-quiz-input{min-height:46px;font-size:16px}
+ .g4-option{width:100%;padding:11px 12px}
+ .g4-speak-text,.g4-complete{width:100%;padding:11px 14px}
+ .mission:hover,.lesson:hover{transform:none!important;box-shadow:none!important}
+}
+@media(hover:none) and (pointer:coarse){
+ .mission:after,.lesson:after{display:none!important}
+ .ai-robot:active{transform:scale(.88)!important}
 }
