@@ -56,13 +56,20 @@
         return;
       }
 
-      const attempts=Math.max(0,Number(localStorage.getItem(key(grade,'QuizAttempts'))||0))+1;
-      const previousBest=Math.max(0,Number(localStorage.getItem(key(grade,'BestScore'))||0));
-      const best=Math.max(previousBest,percent);
+      /* Grade 2 has no legacy quiz observer; Grade 3/4 are already
+         counted by progress-sync.js, so do not double-count them here. */
+      if(grade===2){
+        const attempts=Math.max(0,Number(localStorage.getItem(key(grade,'QuizAttempts'))||0))+1;
+        const previousBest=Math.max(0,Number(localStorage.getItem(key(grade,'BestScore'))||0));
+        const best=Math.max(previousBest,percent);
+        localStorage.setItem(key(grade,'QuizAttempts'),String(attempts));
+        localStorage.setItem(key(grade,'BestScore'),String(best));
+        result.textContent=`🏆 შედეგი: ${correct}/${total} — ${percent}%. საუკეთესო: ${best}%.`;
+      }else{
+        const previousBest=Math.max(0,Number(localStorage.getItem(key(grade,'BestScore'))||0));
+        result.textContent=`🏆 შედეგი: ${correct}/${total} — ${percent}%. საუკეთესო: ${Math.max(previousBest,percent)}%.`;
+      }
 
-      localStorage.setItem(key(grade,'QuizAttempts'),String(attempts));
-      localStorage.setItem(key(grade,'BestScore'),String(best));
-      result.textContent=`🏆 შედეგი: ${correct}/${total} — ${percent}%. საუკეთესო: ${best}%.`;
       finish.textContent='✅ შედეგი დაფიქსირდა';
       void syncProgress(grade);
     });
