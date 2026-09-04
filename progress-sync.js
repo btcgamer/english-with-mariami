@@ -23,6 +23,20 @@
       polish.dataset.ewmLessonFuturePolish='1';
       document.head.appendChild(polish);
     }
+    if(!document.querySelector('script[data-ewm-lesson-ux-polish]')){
+      const ux=document.createElement('script');
+      ux.src='/lesson-ux-polish.js?v=20260904';
+      ux.defer=true;
+      ux.dataset.ewmLessonUxPolish='1';
+      document.head.appendChild(ux);
+    }
+    if(!document.querySelector('script[data-ewm-lesson-functional-qa]')){
+      const functional=document.createElement('script');
+      functional.src='/lesson-functional-qa.js?v=20260904';
+      functional.defer=true;
+      functional.dataset.ewmLessonFunctionalQa='1';
+      document.head.appendChild(functional);
+    }
   }
 
   const gradeMatch = path.match(/(?:^|\/)grade([234])\.html$/);
