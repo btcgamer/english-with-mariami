@@ -40,6 +40,10 @@ button{font:inherit}
  .family{gap:2px;transform:translate(-50%,-50%) scale(.62) rotateY(-8deg)}
  .family-letter{font-size:42px}
  .site-copyright{font-size:12px;padding:15px 10px}
+ /* Mobile uses the unified bottom app shell; hide duplicate page-level controls. */
+ #grade2NavFix,.g3-home,.g4-home{display:none!important}
+ /* Grade 4's card owns the open action; avoid one tap firing card + child button. */
+ .g4-open{pointer-events:none!important}
  .ewm-mobile-shell{position:fixed;left:8px;right:8px;bottom:8px;z-index:2147483000;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:7px;border:1px solid rgba(0,234,255,.28);border-radius:18px;background:rgba(2,8,23,.96);box-shadow:0 8px 28px rgba(0,0,0,.42);backdrop-filter:blur(10px);}
  .ewm-mobile-shell a,.ewm-mobile-shell button{appearance:none;border:0;background:transparent;color:#d9f7ff;text-decoration:none;min-width:0;min-height:54px;padding:5px 2px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;-webkit-user-select:none;user-select:none}
  .ewm-mobile-shell span{font-size:19px;line-height:1}
