@@ -73,6 +73,36 @@
   if (!target) return;
   target.insertAdjacentHTML(hero ? 'afterend' : 'afterbegin', scenes[grade]);
 
+  const scene = document.getElementById('grade-3d-visual');
+  if (scene) {
+    const companion = document.createElement('div');
+    companion.className = 'ai-companion';
+    companion.setAttribute('aria-label', `AI სასწავლო კომპანიონი — მე-${grade} კლასი`);
+    companion.innerHTML = '<div class="ai-face"><i class="ai-eye left"></i><i class="ai-eye right"></i></div><i class="ai-core"></i>';
+    scene.appendChild(companion);
+
+    const wakeCompanion = (event) => {
+      const rect = scene.getBoundingClientRect();
+      const point = event.touches && event.touches[0] ? event.touches[0] : event;
+      const x = Math.max(0, Math.min(100, ((point.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((point.clientY - rect.top) / rect.height) * 100));
+      scene.style.setProperty('--touch-x', `${x}%`);
+      scene.style.setProperty('--touch-y', `${y}%`);
+      scene.classList.remove('touch-glow', 'touch-wave');
+      companion.classList.remove('is-thinking');
+      void scene.offsetWidth;
+      scene.classList.add('touch-glow', 'touch-wave');
+      companion.classList.add('is-thinking');
+      window.setTimeout(() => {
+        scene.classList.remove('touch-glow', 'touch-wave');
+        companion.classList.remove('is-thinking');
+      }, 900);
+    };
+
+    scene.addEventListener('pointerdown', wakeCompanion, { passive: true });
+    scene.addEventListener('touchstart', wakeCompanion, { passive: true });
+  }
+
   // Grade 2: 30-question quiz.
   if (grade === '2') {
     const quizBox = document.getElementById('quiz');
