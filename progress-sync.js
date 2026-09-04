@@ -6,6 +6,18 @@
   if(!client) return;
 
   const path = (location.pathname || '').toLowerCase();
+
+  /* Lesson vocabulary presentation is visual-only and does not touch progress data. */
+  if(path.endsWith('/lesson.html') || path === 'lesson.html'){
+    if(!document.querySelector('script[data-ewm-lesson-word-neon]')){
+      const neon=document.createElement('script');
+      neon.src='/lesson-word-neon.js?v=20260904';
+      neon.defer=true;
+      neon.dataset.ewmLessonWordNeon='1';
+      document.head.appendChild(neon);
+    }
+  }
+
   const gradeMatch = path.match(/(?:^|\/)grade([234])\.html$/);
   const currentGrade = gradeMatch ? Number(gradeMatch[1]) : null;
   const key = (grade, suffix) => `grade${grade}${suffix}`;
