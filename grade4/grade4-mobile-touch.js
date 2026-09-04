@@ -1,12 +1,14 @@
-/* Grade 4 mobile interaction hardening — no global listeners. */
+/* Grade 4 mobile interaction hardening — scoped to the mission grid. */
 (function(){'use strict';
-  if(!window.matchMedia||!window.matchMedia('(pointer:coarse),(max-width:700px)').matches)return;
-  document.addEventListener('DOMContentLoaded',function(){
+  function init(){
+    if(!window.matchMedia||!window.matchMedia('(pointer:coarse),(max-width:700px)').matches)return;
     var root=document.querySelector('#missions');
     if(!root)return;
-    var cards=root.querySelectorAll('.mission');
-    cards.forEach(function(card){
-      card.style.transform='';
-    });
-  },{once:true});
+    root.addEventListener('pointermove',function(e){
+      var card=e.target&&e.target.closest?e.target.closest('.mission'):null;
+      if(card) e.stopPropagation();
+    },true);
+    root.querySelectorAll('.mission').forEach(function(card){card.style.transform=''});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
