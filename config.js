@@ -168,3 +168,20 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   s.dataset.ewmLearningOrganizer='1';
   document.head.appendChild(s);
 })();
+
+/* Academy live progress + Future Command Center are read-only. */
+(function(){
+  'use strict';
+  const path=(window.location.pathname||'').toLowerCase().replace(/\/+$/,'');
+  if(!(path.endsWith('/academy.html')||path==='academy.html'))return;
+  const load=(src,attr)=>{
+    if(document.querySelector(`script[${attr}]`))return;
+    const s=document.createElement('script');
+    s.src=src;
+    s.defer=true;
+    s.setAttribute(attr,'1');
+    document.head.appendChild(s);
+  };
+  load('/academy-live-progress.js','data-ewm-academy-live-progress');
+  load('/academy-command-center.js','data-ewm-academy-command-center');
+})();
