@@ -53,8 +53,9 @@
 
     const bar = $("#progress-bar");
     if (bar) {
-      bar.style.width = `${Math.round(percent)}%`;
-      bar.setAttribute("aria-valuenow", String(Math.round(percent)));
+      const safePercent = Math.max(0, Math.min(100, Math.round(percent)));
+      bar.style.width = `${safePercent}%`;
+      bar.setAttribute("aria-valuenow", String(safePercent));
       bar.setAttribute("aria-valuemin", "0");
       bar.setAttribute("aria-valuemax", "100");
     }
@@ -124,12 +125,21 @@
 
     const words = numberOrZero(student.words_learned);
 
-    const uniqueCompletedQuizIds = new Set(
-      quizzes
-        .filter((row) => row?.quiz_id && Number(row?.total) > 0)
-        .map((row) => String(row.quiz_id))
-    );
+    /* One quiz counts once: use the best existing attempt for each quiz ID. */
+    const bestQuizById = new Map();
+    for (const row of quizzes) {
+      const id = row?.quiz_id ? String(row.quiz_id) : "";
+      const total = Number(row?.total);
+      const score = Number(row?.score);
+      if (!id || total <= 0 || !Number.isFinite(score)) continue;
+      const safeScore = Math.max(0, Math.min(score, total));
+      const previous = bestQuizById.get(id);
+      if (!previous || safeScore / total > previous.score / previous.total) {
+        bestQuizById.set(id, { score: safeScore, total });
+      }
+    }
 
+    const uniqueCompletedQuizIds = new Set(bestQuizById.keys());
     const quizCount = Math.max(
       numberOrZero(student.quiz_completed),
       uniqueCompletedQuizIds.size
@@ -142,45 +152,52 @@
         .map((row) => String(row.lesson_id))
     );
 
+    const completedLessonIds = new Set(
+      completedLessons
+        .filter((row) => row?.lesson_id)
+        .map((row) => String(row.lesson_id))
+    );
+
     const lessonPercent = lessonIds.size
-      ? (new Set(completedLessons.map((row) => String(row.lesson_id))).size / lessonIds.size) * 100
+      ? (completedLessonIds.size / lessonIds.size) * 100
       : 0;
 
-    const validQuizScores = quizzes
-      .map((row) => {
-        const score = Number(row?.score);
-        const total = Number(row?.total);
-        return total > 0 && Number.isFinite(score) ? Math.max(0, Math.min(score, total)) / total * 100 : null;
-      })
-      .filter((value) => value !== null);
+    const bestQuizScores = [...bestQuizById.values()]
+      .map(({ score, total }) => (score / total) * 100)
+      .filter((value) => Number.isFinite(value));
 
-    const quizPercent = validQuizScores.length
-      ? validQuizScores.reduce((sum, value) => sum + value, 0) / validQuizScores.length
+    const quizPercent = bestQuizScores.length
+      ? bestQuizScores.reduce((sum, value) => sum + value, 0) / bestQuizScores.length
       : 0;
 
     /*
      * Overall progress intentionally uses only real completion signals:
-     * 60% lesson completion + 40% quiz performance.
-     * If neither has data, the UI remains at zero rather than inventing progress.
+     * 60% lesson completion + 40% best-attempt quiz performance.
+     * Repeated attempts cannot inflate the quiz performance metric.
      */
     const overall = Math.round((lessonPercent * 0.6) + (quizPercent * 0.4));
+    const safeOverall = Math.max(0, Math.min(100, overall));
 
-    setProgress(words, quizCount, Math.max(0, Math.min(100, overall)), levelFor(overall));
+    setProgress(words, quizCount, safeOverall, levelFor(safeOverall));
 
     const message = $("#progress-message");
     if (message) {
-      if (overall >= 95) {
+      if (safeOverall >= 95) {
         message.textContent = "🏆 საოცარი შედეგია! აკადემიის უმაღლეს დონეს უახლოვდები.";
-      } else if (overall >= 80) {
+      } else if (safeOverall >= 80) {
         message.textContent = "💎 შესანიშნავი პროგრესია — ასე გააგრძელე!";
-      } else if (overall >= 60) {
+      } else if (safeOverall >= 60) {
         message.textContent = "🚀 ძალიან კარგი ტემპია — შემდეგი მისია გელოდება!";
-      } else if (overall > 0) {
+      } else if (safeOverall > 0) {
         message.textContent = "⚡ პროგრესი ჩაიტვირთა რეალური სასწავლო შედეგებიდან.";
       } else {
         message.textContent = "დაიწყე სწავლა და შენი რეალური შედეგები აქ გამოჩნდება.";
       }
     }
+
+    document.dispatchEvent(new CustomEvent("ewmAcademyLiveProgressReady", {
+      detail: { grade, words, quizzes: quizCount, percent: safeOverall, level: levelFor(safeOverall) }
+    }));
   }
 
   const start = () => {
