@@ -7,7 +7,7 @@
 
   const path = (location.pathname || '').toLowerCase();
 
-  /* Lesson vocabulary presentation is visual-only and does not touch progress data. */
+  /* Lesson presentation layers are visual-only and do not touch progress data. */
   if(path.endsWith('/lesson.html') || path === 'lesson.html'){
     if(!document.querySelector('script[data-ewm-lesson-word-neon]')){
       const neon=document.createElement('script');
@@ -15,6 +15,13 @@
       neon.defer=true;
       neon.dataset.ewmLessonWordNeon='1';
       document.head.appendChild(neon);
+    }
+    if(!document.querySelector('script[data-ewm-lesson-future-polish]')){
+      const polish=document.createElement('script');
+      polish.src='/lesson-future-polish.js?v=20260904';
+      polish.defer=true;
+      polish.dataset.ewmLessonFuturePolish='1';
+      document.head.appendChild(polish);
     }
   }
 
