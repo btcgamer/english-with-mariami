@@ -5,6 +5,7 @@
   var activeMission = -1;
   var mounted = false;
   var observer = null;
+  var mobile = window.matchMedia && window.matchMedia('(pointer:coarse),(max-width:700px)').matches;
 
   function wordsFor(index){
     var worlds = (window.GRADE3_FUTURISTIC_CONTENT && window.GRADE3_FUTURISTIC_CONTENT.worlds) || [];
@@ -141,13 +142,21 @@
   }
 
   function watch(){
-    if(observer) return;
+    if(observer || mobile) return;
     observer=new MutationObserver(function(){
       if(mounted) return;
       var modal=document.querySelector('.g3-vocab-modal');
       if(modal) mount(modal);
     });
     observer.observe(document.body,{childList:true,subtree:true});
+  }
+
+  function mountAfterMissionTap(){
+    window.setTimeout(function(){
+      if(mounted) return;
+      var modal=document.querySelector('.g3-vocab-modal');
+      if(modal) mount(modal);
+    },0);
   }
 
   document.addEventListener('click',function(e){
@@ -157,6 +166,7 @@
       var cards=Array.prototype.slice.call(document.querySelectorAll('.mission'));
       activeMission=cards.indexOf(card);
       mounted=false;
+      if(mobile) mountAfterMissionTap();
     }
   },true);
 
