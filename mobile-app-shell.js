@@ -30,8 +30,10 @@
       scrollToTarget(grade==='2'?'#lessonGrid':'#missions');
     });
     nav.querySelector('[data-action="progress"]').addEventListener('click',function(){
-      var review=document.getElementById('review')||document.getElementById('reviewBtn');
-      if(review) review.click(); else scrollToTarget('.stats');
+      /* Progress is navigation, not a second trigger for Review/Quiz actions. */
+      if(grade==='2') scrollToTarget('.progress-box');
+      else if(document.querySelector('.stats')) scrollToTarget('.stats');
+      else scrollToTarget('#review');
     });
     nav.querySelector('[data-action="top"]').addEventListener('click',function(){
       window.scrollTo({top:0,behavior:'smooth'});
