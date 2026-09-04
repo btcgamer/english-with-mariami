@@ -74,5 +74,24 @@
     ])
   };
   c.worlds.forEach(function(w){if(packs[w.id])w.quiz=packs[w.id];});
-  window.GRADE3_QUIZ_FINAL_COHERENCE_VERSION=3;
+  function text(v){
+    if(v==null)return '';
+    if(typeof v==='string'||typeof v==='number'||typeof v==='boolean')return String(v);
+    if(typeof v==='object'){
+      var candidate=v.text??v.label??v.option??v.value??v.answer??v.name??v.title??v.question??v.content??v.example;
+      return candidate!=null&&typeof candidate!=='object'?String(candidate):'';
+    }
+    return '';
+  }
+  c.worlds.forEach(function(w){
+    if(!w||!Array.isArray(w.quiz))return;
+    w.quiz.forEach(function(item){
+      if(!item||typeof item!=='object')return;
+      if(item.question!=null)item.question=text(item.question);
+      if(Array.isArray(item.options))item.options=item.options.map(text).filter(Boolean);
+      if(item.answer!=null&&typeof item.answer==='object')item.answer=text(item.answer);
+      if(item.explanation!=null&&typeof item.explanation==='object')item.explanation=text(item.explanation);
+    });
+  });
+  window.GRADE3_QUIZ_FINAL_COHERENCE_VERSION=4;
 })();
