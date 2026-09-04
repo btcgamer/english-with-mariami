@@ -17,8 +17,7 @@
 
       .words-grid .word-card.ewm-neon-word{
         border-color:rgba(0,234,255,.28);
-        background:
-          linear-gradient(145deg,rgba(10,39,76,.98),rgba(4,14,35,.97));
+        background:linear-gradient(145deg,rgba(10,39,76,.98),rgba(4,14,35,.97));
         box-shadow:inset 0 0 24px rgba(0,234,255,.035);
       }
 
@@ -70,13 +69,11 @@
 
     cards.forEach(function(card,index){
       const data=card.dataset||{};
-      const explicit=[
-        data.neon,data.highlight,data.featured,data.special,data.isNeon
-      ].some(function(value){
+      const explicit=[data.neon,data.highlight,data.featured,data.special,data.isNeon].some(function(value){
         return /^(1|true|yes|neon|highlight)$/i.test(String(value||''));
       });
 
-      /* If lesson data does not carry a highlight flag, use a stable 2-color rhythm. */
+      /* Explicit lesson flags win. Otherwise alternate ordinary / neon for a stable visual rhythm. */
       const neon=explicit || (!explicit && index%2===1);
       card.classList.toggle('ewm-neon-word',neon);
     });
@@ -96,9 +93,6 @@
     window.setTimeout(function(){observer.disconnect()},10000);
   }
 
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',init,{once:true});
-  }else{
-    init();
-  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
 })();
