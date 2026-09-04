@@ -2,8 +2,9 @@
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button{font:inherit}
 @media(max-width:900px){
- body{padding-bottom:76px}
+ body{padding-bottom:86px;overflow-x:hidden}
  .wrap{width:min(100% - 20px,720px)}
  .top{position:sticky;top:0}
  .nav{padding:9px 0;gap:8px}
@@ -15,7 +16,7 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
  .hero h1{font-size:clamp(38px,11vw,58px)}
  .lead{font-size:16px;line-height:1.6}
  .buttons{gap:8px}
- .btn{min-height:46px;padding:12px 15px;font-size:14px}
+ .btn{min-height:48px;padding:12px 15px;font-size:14px}
  .teacher{padding:22px}
  .avatar{font-size:70px}
  .section{padding:34px 0}
@@ -39,6 +40,12 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
  .family{gap:2px;transform:translate(-50%,-50%) scale(.62) rotateY(-8deg)}
  .family-letter{font-size:42px}
  .site-copyright{font-size:12px;padding:15px 10px}
+ .ewm-mobile-shell{position:fixed;left:8px;right:8px;bottom:8px;z-index:2147483000;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;padding:7px;border:1px solid rgba(0,234,255,.28);border-radius:18px;background:rgba(2,8,23,.96);box-shadow:0 8px 28px rgba(0,0,0,.42);backdrop-filter:blur(10px);}
+ .ewm-mobile-shell a,.ewm-mobile-shell button{appearance:none;border:0;background:transparent;color:#d9f7ff;text-decoration:none;min-width:0;min-height:54px;padding:5px 2px;border-radius:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;-webkit-user-select:none;user-select:none}
+ .ewm-mobile-shell span{font-size:19px;line-height:1}
+ .ewm-mobile-shell b{font-size:10px;line-height:1.15;font-weight:900;white-space:nowrap}
+ .ewm-mobile-shell a:active,.ewm-mobile-shell button:active{transform:scale(.97);background:rgba(0,234,255,.16)}
+ .ewm-mobile-shell a:focus-visible,.ewm-mobile-shell button:focus-visible{outline:2px solid #7dd3fc;outline-offset:1px}
 }
 @media(max-width:520px){
  .wrap{width:calc(100% - 16px)}
@@ -53,17 +60,20 @@ button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
  .word{font-size:10px}
  .parent-features{gap:4px}
  .pill{font-size:12px;padding:6px 8px;margin:2px}
+ .ewm-mobile-shell b{font-size:9px}
 }
 @media(max-width:370px){
  .feature-grid{grid-template-columns:1fr}
  .hero h1{font-size:35px}
  .navlinks a{font-size:10px}
+ .ewm-mobile-shell{left:5px;right:5px;gap:3px;padding:5px}
+ .ewm-mobile-shell span{font-size:17px}
+ .ewm-mobile-shell b{font-size:8px}
 }
-/* mobile app bottom navigation */
-.mobile-bottom-nav{display:none}
-@media(max-width:900px){
- .mobile-bottom-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:8px;right:8px;bottom:8px;z-index:100;padding:7px;border:1px solid #00eaff55;border-radius:20px;background:#03152beF;backdrop-filter:blur(16px);box-shadow:0 10px 35px #000c,0 0 25px #00eaff22}
- .mobile-bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:52px;border-radius:14px;color:#d9f7ff;font-size:10px;font-weight:900}
- .mobile-bottom-nav a:active{background:#00c9f2;color:#00131a;transform:scale(.96)}
- .mobile-bottom-nav .nav-icon{font-size:20px;line-height:1}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+@media(max-width:900px) and (prefers-reduced-motion:no-preference){
+ .u-max-particles,.energy,.stars,.nebula{opacity:.55}
 }
