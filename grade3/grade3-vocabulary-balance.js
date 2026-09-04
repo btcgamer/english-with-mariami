@@ -16,4 +16,4 @@
 '22':[['strong','ძლიერი'],['weak','სუსტი'],['easy','ადვილი'],['difficult','რთული'],['improve','გაუმჯობესება'],['goal','მიზანი'],['practice','ვარჯიში'],['skill','უნარი'],['learn','სწავლა'],['success','წარმატება']],
 '23':[['adapt','მორგება'],['focus','ფოკუსი'],['hint','მინიშნება'],['attempt','მცდელობა'],['master','დაუფლება'],['level','დონე'],['strategy','სტრატეგია'],['memory','მეხსიერება'],['challenge','გამოწვევა'],['ready','მზად']],
 '24':[['grammar','გრამატიკა'],['vocabulary','ლექსიკა'],['reading','კითხვა'],['listening','მოსმენა'],['speaking','საუბარი'],['confidence','თავდაჯერება'],['review','გამეორება'],['practice','ვარჯიში'],['fluency','თავისუფლად საუბარი'],['mastery','დაუფლება']]
-};c.worlds.forEach(function(w){if(packs[w.id]&&Array.isArray(w.words)&&w.words.length<10)w.words=packs[w.id].slice();});})();
+};c.worlds.forEach(function(w){if(packs[w.id]&&Array.isArray(w.words)&&w.words.length!==10)w.words=packs[w.id].slice();});})();
