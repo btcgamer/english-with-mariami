@@ -18,16 +18,6 @@
     if(legacy) legacy.style.setProperty('display','none','important');
   }
 
-  function guardGrade4MissionPointer(){
-    if(grade!=='4'||!isMobile()) return;
-    if(window.__EWM_G4_POINTER_GUARD__) return;
-    window.__EWM_G4_POINTER_GUARD__=true;
-    document.addEventListener('pointermove',function(e){
-      var target=e.target;
-      if(target&&target.closest&&target.closest('.mission')) e.stopPropagation();
-    },true);
-  }
-
   function scrollToTarget(selector){
     var el=document.querySelector(selector);
     if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
@@ -36,7 +26,6 @@
 
   function addShell(){
     hideLegacyGrade2Nav();
-    guardGrade4MissionPointer();
     if(document.getElementById('ewmMobileShell')) return;
     var nav=document.createElement('nav');
     nav.id='ewmMobileShell';
