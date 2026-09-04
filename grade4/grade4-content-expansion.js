@@ -8,10 +8,26 @@ const packs=[
 [['conversation','საუბარი','💬'],['repeat','გამეორება','🔁'],['pronounce','წარმოთქმა','🗣️'],['question','კითხვა','❓'],['answer','პასუხი','✅'],['opinion','აზრი','💭'],['agree','ვეთანხმები','🤝'],['disagree','არ ვეთანხმები','↔️']],
 [['price','ფასი','💰'],['cheap','იაფი','🏷️'],['expensive','ძვირი','💎'],['customer','მყიდველი','🛍️'],['choose','არჩევა','🎯'],['need','საჭიროება','📌'],['would like','მსურს','🙏'],['receipt','ქვითარი','🧾']]
 ];
+function quizText(v){
+  if(v==null)return '';
+  if(typeof v==='string'||typeof v==='number'||typeof v==='boolean')return String(v);
+  if(typeof v==='object')return String(v.text??v.label??v.option??v.value??v.answer??v.name??v.title??'');
+  return '';
+}
+function normalizeQuizData(lesson){
+  const qs=Array.isArray(lesson.quizzes)?lesson.quizzes:[];
+  lesson.quizzes=qs.map(q=>{
+    if(!q||typeof q!=='object')return q;
+    if(Array.isArray(q.options))q.options=q.options.map(quizText).filter(Boolean);
+    if(q.correct_answer&&typeof q.correct_answer==='object')q.correct_answer=quizText(q.correct_answer);
+    return q;
+  });
+}
 window.applyGrade4ContentExpansion=function(lessons){
   if(!Array.isArray(lessons))return lessons;
   lessons.forEach((lesson,i)=>{
     if(!lesson||typeof lesson!=='object')return;
+    normalizeQuizData(lesson);
     const words=Array.isArray(lesson.words)?lesson.words:[];
     const seen=new Set(words.map(w=>String(w&&w.word||'').trim().toLowerCase()).filter(Boolean));
     (packs[i%packs.length]||[]).forEach(([word,translation,emoji])=>{
