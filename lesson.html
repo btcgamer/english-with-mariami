@@ -696,7 +696,6 @@ footer{
 <header class="top">
   <div class="nav wrap">
 
-```
 <a class="brand" id="brandLink" href="teacher-lessons.html">
   ⚡ ENGLISH WITH MARIAMI
 </a>
@@ -720,7 +719,6 @@ footer{
   </button>
 
 </div>
-```
 
   </div>
 </header>
@@ -737,7 +735,6 @@ footer{
 
   <div id="lessonContent" class="hidden">
 
-```
 <section class="hero">
 
   <span id="gradeBadge" class="badge">
@@ -952,7 +949,6 @@ footer{
 >
   ⭐ გაკვეთილის დასრულება +10 XP
 </button>
-```
 
   </div>
 
@@ -978,12 +974,17 @@ footer{
 const params =
   new URLSearchParams(location.search);
 
-const grade =
+const rawGrade =
   Number(
     params.get('grade') ||
     params.get('class') ||
     '2'
   );
+
+const grade =
+  [2,3,4].includes(rawGrade)
+    ? rawGrade
+    : 2;
 
 const lessonParam =
   String(
@@ -1276,7 +1277,7 @@ function updateProgress(amount){
 /* =====================================================
    LOAD LESSON
    IMPORTANT:
-   UUID -> id
+   UUID -> id + grade validation
    NUMBER -> grade + lesson_number
 ===================================================== */
 
@@ -1325,6 +1326,17 @@ async function loadLesson(){
 
     lesson =
       result.data;
+
+    /* A UUID identifies one lesson, but the URL grade must
+       still agree with the lesson row to prevent cross-grade display. */
+    if(
+      lesson &&
+      Number(lesson.grade)!==grade
+    ){
+      throw new Error(
+        'გაკვეთილის კლასი არ ემთხვევა მოთხოვნილ Grade-ს.'
+      );
+    }
 
   }
 
@@ -2395,10 +2407,10 @@ document
     function(){
 
       const XP_KEY =
-        'grade2XP';
+        `grade${grade}XP`;
 
       const STAR_KEY =
-        'grade2Stars';
+        `grade${grade}Stars`;
 
       const currentXP =
         Number(
