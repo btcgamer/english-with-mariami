@@ -26,7 +26,7 @@
     ]),
     '15':q([
       ['Where is the book?',['above the bag','inside the garden','far from the room'],'reading'],
-      ['Complete: The bag is ___ the chair.',['beside','at','to'],'grammar'],
+      ['Complete: The bag is ___ the desk.',['beside','at','to'],'grammar'],
       ['Which word means “შიგნით”?',['inside','outside','opposite'],'vocabulary'],
       ['If the ball is below the table, where is it?',['below the table','above the table','outside the table'],'vocabulary'],
       ['Choose the correct sentence.',['The book is inside the bag.','The book are inside the bag.','The book is inside bag.'],'grammar'],
@@ -74,5 +74,5 @@
     ])
   };
   c.worlds.forEach(function(w){if(packs[w.id])w.quiz=packs[w.id];});
-  window.GRADE3_QUIZ_FINAL_COHERENCE_VERSION=2;
+  window.GRADE3_QUIZ_FINAL_COHERENCE_VERSION=3;
 })();
