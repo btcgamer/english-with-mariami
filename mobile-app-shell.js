@@ -8,6 +8,16 @@
   var grade=path.indexOf('grade2')>-1?'2':path.indexOf('grade3')>-1?'3':path.indexOf('grade4')>-1?'4':null;
   if(!grade) return;
 
+  function isMobile(){
+    return !!(window.matchMedia&&window.matchMedia('(max-width:700px)').matches);
+  }
+
+  function hideLegacyGrade2Nav(){
+    if(grade!=='2'||!isMobile()) return;
+    var legacy=document.getElementById('grade2NavFix');
+    if(legacy) legacy.style.setProperty('display','none','important');
+  }
+
   function scrollToTarget(selector){
     var el=document.querySelector(selector);
     if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
@@ -15,6 +25,7 @@
   }
 
   function addShell(){
+    hideLegacyGrade2Nav();
     if(document.getElementById('ewmMobileShell')) return;
     var nav=document.createElement('nav');
     nav.id='ewmMobileShell';
@@ -30,7 +41,6 @@
       scrollToTarget(grade==='2'?'#lessonGrid':'#missions');
     });
     nav.querySelector('[data-action="progress"]').addEventListener('click',function(){
-      /* Progress is navigation, not a second trigger for Review/Quiz actions. */
       if(grade==='2') scrollToTarget('.progress-box');
       else if(document.querySelector('.stats')) scrollToTarget('.stats');
       else scrollToTarget('#review');
