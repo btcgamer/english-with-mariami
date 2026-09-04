@@ -3,28 +3,160 @@
 /* Hide return-to-main-page links on Grade 3 / Grade 4 navigation */
 a[href="index.html"]{display:none!important}
 
+/* ===== MAGIC NEON AI ACADEMY / FUTURE MODE ===== */
+:root{
+  --future-cyan:#00eaff;
+  --future-blue:#008cff;
+  --future-purple:#8b5cff;
+  --future-pink:#ff36d9;
+  --future-yellow:#ffe600;
+}
+
+body{
+  background:
+    radial-gradient(circle at 50% 10%,rgba(0,234,255,.08),transparent 34%),
+    radial-gradient(circle at 90% 55%,rgba(139,92,255,.08),transparent 30%),
+    #010712;
+}
+
+/* Living grid + holographic depth */
+.grade3d-wrap{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-height:300px;
+  margin:22px 0;
+  border:1px solid rgba(0,234,255,.45);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(0,234,255,.12),transparent 35%),
+    linear-gradient(145deg,rgba(4,31,59,.78),rgba(1,7,18,.92));
+  box-shadow:0 0 40px rgba(0,234,255,.12),inset 0 0 45px rgba(0,234,255,.05);
+  transform-style:preserve-3d;
+}
+
+.grade3d-wrap::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,234,255,.16) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,234,255,.16) 1px,transparent 1px);
+  background-size:34px 34px;
+  mask-image:linear-gradient(to bottom,transparent 0%,black 28%,black 100%);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,black 28%,black 100%);
+  animation:futureGrid 7s linear infinite;
+}
+
+.grade3d-wrap::after{
+  content:"";
+  position:absolute;
+  inset:-35%;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(circle at var(--touch-x,50%) var(--touch-y,50%),rgba(0,234,255,.42),transparent 17%);
+  opacity:0;
+  transform:scale(.45);
+  transition:opacity .25s,transform .65s ease;
+}
+
+.grade3d-wrap.touch-glow::after{opacity:1;transform:scale(1.25)}
+
+@keyframes futureGrid{to{background-position:0 68px,68px 0}}
+
+.grade3d-label{
+  position:relative;
+  z-index:15;
+  display:inline-flex;
+  margin:15px;
+  padding:9px 14px;
+  border:1px solid rgba(0,234,255,.48);
+  border-radius:999px;
+  background:rgba(0,10,25,.58);
+  box-shadow:0 0 18px rgba(0,234,255,.16),inset 0 0 14px rgba(0,234,255,.05);
+  backdrop-filter:blur(10px);
+  font-weight:900;
+  letter-spacing:.02em;
+}
+
+/* AI companion */
+.ai-companion{
+  position:absolute;
+  z-index:12;
+  left:50%;
+  top:52%;
+  width:clamp(118px,18vw,205px);
+  aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  filter:drop-shadow(0 0 18px rgba(0,234,255,.6)) drop-shadow(0 0 55px rgba(139,92,255,.35));
+  animation:aiFloat 4.5s ease-in-out infinite;
+}
+
+.ai-companion::before{
+  content:"";
+  position:absolute;
+  inset:3%;
+  border-radius:42% 42% 48% 48%;
+  background:radial-gradient(circle at 50% 32%,#eaffff 0 4%,#66efff 12%,#0879bd 46%,#08162c 72%);
+  border:2px solid rgba(148,250,255,.9);
+  box-shadow:inset 0 0 28px rgba(0,234,255,.8),0 0 35px rgba(0,234,255,.45);
+}
+
+.ai-companion::after{
+  content:"AI";
+  position:absolute;
+  bottom:4%;
+  padding:4px 9px;
+  border:1px solid rgba(0,234,255,.45);
+  border-radius:999px;
+  background:rgba(1,7,18,.75);
+  color:#fff;
+  font-size:11px;
+  font-weight:1000;
+  letter-spacing:.15em;
+  text-shadow:0 0 10px var(--future-cyan);
+}
+
+.ai-face{position:relative;z-index:2;width:58%;height:42%;border:2px solid rgba(210,255,255,.8);border-radius:42%;background:rgba(1,9,22,.5);box-shadow:inset 0 0 18px rgba(0,234,255,.65)}
+.ai-eye{position:absolute;top:38%;width:18%;height:24%;border-radius:50%;background:#eaffff;box-shadow:0 0 10px #fff,0 0 24px var(--future-cyan);animation:aiBlink 4.8s infinite}
+.ai-eye.left{left:22%}.ai-eye.right{right:22%}
+.ai-core{position:absolute;z-index:2;bottom:18%;width:22%;height:9%;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff,0 0 25px var(--future-pink);animation:aiPulse 1.8s ease-in-out infinite}
+
+@keyframes aiFloat{50%{transform:translate(-50%,-58%) rotateX(4deg) rotateY(-5deg) scale(1.04)}}
+@keyframes aiBlink{0%,44%,48%,100%{transform:scaleY(1)}46%{transform:scaleY(.08)}}
+@keyframes aiPulse{50%{transform:scaleX(1.35);opacity:.7}}
+
+.ai-companion.is-thinking .ai-core{animation:aiThink .7s steps(2,end) infinite}
+@keyframes aiThink{50%{box-shadow:0 0 4px #fff,0 0 38px var(--future-yellow);transform:scaleX(1.6)}}
+
+/* Floating objects sit above the grid but below the companion */
+.grade3d-wrap .obj,.grade3d-wrap .abc-block,.grade3d-wrap .letters3d{z-index:8}
+
 /* ===== MOBILE APP FEEL ===== */
-@media (max-width: 900px){
+@media (max-width:900px){
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   body{padding-bottom:76px;overflow-x:hidden;touch-action:pan-y}
   .wrap{width:min(100% - 22px,720px)}
   button,a,input{touch-action:manipulation}
-  .grade3d-wrap{min-height:230px;border-radius:22px;overflow:hidden}
+  .grade3d-wrap{min-height:230px;border-radius:22px}
 }
 
 /* ===== TOUCH WAVE / LIGHT ===== */
-.grade3d-wrap{position:relative;isolation:isolate;overflow:hidden}
-.grade3d-wrap::before{content:"";position:absolute;inset:-35%;z-index:0;pointer-events:none;background:radial-gradient(circle at var(--touch-x,50%) var(--touch-y,50%),#00eaff55 0,transparent 18%);opacity:0;transform:scale(.45);transition:opacity .25s,transform .65s ease}
-.grade3d-wrap.touch-glow::before{opacity:1;transform:scale(1.25)}
-.grade3d-wrap::after{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;border:2px solid #9effff;border-radius:50%;z-index:20;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.2);box-shadow:0 0 18px #00eaff,0 0 45px #00eaff66}
-.grade3d-wrap.touch-wave::after{animation:touchWave .8s ease-out}
-@keyframes touchWave{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(7)}}
+.grade3d-wrap.touch-wave .ai-companion{animation:aiTouch .8s ease-out}
+@keyframes aiTouch{50%{transform:translate(-50%,-50%) scale(1.1) rotateY(12deg)}}
+.grade3d-wrap.touch-wave .ai-companion::after{content:"HI"}
 
 /* ===== PHONE / TABLET STABILITY ===== */
 @media (max-width:650px){
   .grade3d-wrap{min-height:205px;margin:14px 0;border-radius:20px}
   .grade3d-wrap .obj{max-width:25vw}
   .grade3d-wrap .grade3d-label{font-size:12px;padding:7px 10px}
+  .ai-companion{width:clamp(100px,30vw,150px);left:50%;top:58%}
   #quiz .option{width:100%;min-height:48px;margin:5px 0;padding:12px 14px;border-radius:14px;font-size:16px;line-height:1.35;white-space:normal;word-break:break-word}
   #quiz .lesson{overflow:hidden}
   .tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:5px;-webkit-overflow-scrolling:touch}
@@ -37,6 +169,7 @@ a[href="index.html"]{display:none!important}
   .grade3d-wrap{min-height:190px}
   .grade3d-wrap .obj{font-size:clamp(30px,12vw,58px)!important}
   .grade3d-wrap .abc-block span,.grade3d-wrap .letters3d span{font-size:clamp(28px,10vw,50px)}
+  .ai-companion{width:104px;top:60%}
 }
 
 /* Respect reduced-motion settings */
