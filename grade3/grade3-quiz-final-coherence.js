@@ -25,7 +25,7 @@
       ['Listening: What helps you remember days and times?',['calendar','garden','window'],'listening']
     ]),
     '15':q([
-      ['Where is the book?',['above the desk','inside the garden','far from the room'],'reading'],
+      ['Where is the book?',['above the bag','inside the garden','far from the room'],'reading'],
       ['Complete: The bag is ___ the chair.',['beside','at','to'],'grammar'],
       ['Which word means “შიგნით”?',['inside','outside','opposite'],'vocabulary'],
       ['If the ball is below the table, where is it?',['below the table','above the table','outside the table'],'vocabulary'],
@@ -33,7 +33,7 @@
       ['Listening: Where is the object?',['in front of the desk','far from the school','opposite the garden'],'listening']
     ]),
     '17':q([
-      ['Where is the dog?',['outside','in the classroom','inside the bag'],'reading'],
+      ['Where is the key word?',['in the message','in the classroom','inside the bag'],'reading'],
       ['Complete: Please ___ carefully.',['listen','listens','listening'],'grammar'],
       ['Which word means “ხმა”?',['voice','detail','speaker'],'vocabulary'],
       ['What should you do after you hear a key word?',['repeat it','hide it','forget it'],'speaking'],
@@ -74,5 +74,5 @@
     ])
   };
   c.worlds.forEach(function(w){if(packs[w.id])w.quiz=packs[w.id];});
-  window.GRADE3_QUIZ_FINAL_COHERENCE_VERSION=1;
+  window.GRADE3_QUIZ_FINAL_COHERENCE_VERSION=2;
 })();
