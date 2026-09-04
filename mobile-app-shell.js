@@ -1,0 +1,44 @@
+/* English with Mariami — unified mobile app shell */
+(function(){
+  'use strict';
+  if(window.__EWM_MOBILE_SHELL__) return;
+  window.__EWM_MOBILE_SHELL__=true;
+
+  var path=(location.pathname||'').toLowerCase();
+  var grade=path.indexOf('grade2')>-1?'2':path.indexOf('grade3')>-1?'3':path.indexOf('grade4')>-1?'4':null;
+  if(!grade) return;
+
+  function scrollToTarget(selector){
+    var el=document.querySelector(selector);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    else window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function addShell(){
+    if(document.getElementById('ewmMobileShell')) return;
+    var nav=document.createElement('nav');
+    nav.id='ewmMobileShell';
+    nav.className='ewm-mobile-shell';
+    nav.setAttribute('aria-label','Mobile app navigation');
+    nav.innerHTML=
+      '<a href="../academy.html" data-action="home"><span>⌂</span><b>მთავარი</b></a>'+
+      '<button type="button" data-action="lessons"><span>📚</span><b>გაკვეთილები</b></button>'+
+      '<button type="button" data-action="progress"><span>🏆</span><b>პროგრესი</b></button>'+
+      '<button type="button" data-action="top"><span>☰</span><b>მენიუ</b></button>';
+    document.body.appendChild(nav);
+    nav.querySelector('[data-action="lessons"]').addEventListener('click',function(){
+      scrollToTarget(grade==='2'?'#lessonGrid':'#missions');
+    });
+    nav.querySelector('[data-action="progress"]').addEventListener('click',function(){
+      var review=document.getElementById('review')||document.getElementById('reviewBtn');
+      if(review) review.click(); else scrollToTarget('.stats');
+    });
+    nav.querySelector('[data-action="top"]').addEventListener('click',function(){
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
+
+  function init(){addShell();}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
