@@ -48,7 +48,12 @@
   function text(value) {
     if (value == null) return '';
     if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return String(value);
-    return JSON.stringify(value);
+    if (typeof value === 'object') {
+      const candidate = value.text || value.label || value.option || value.value || value.answer || value.name || value.title || value.question || value.content || value.example;
+      if (candidate != null && typeof candidate !== 'object') return String(candidate);
+      return '';
+    }
+    return '';
   }
 
   function lessonWords(lessonId) {
