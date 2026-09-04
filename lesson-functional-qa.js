@@ -16,6 +16,14 @@
     return `grade${grade}${suffix}`;
   }
 
+  function syncProgress(grade){
+    try{
+      const sync=window.ENGLISH_MARIAMI_PROGRESS_SYNC;
+      if(sync && typeof sync.saveGrade==='function') return sync.saveGrade(grade,true);
+    }catch(_){ }
+    return null;
+  }
+
   function bindQuiz(){
     const finish=document.getElementById('finishQuiz');
     const quiz=document.getElementById('quiz');
@@ -32,7 +40,6 @@
 
       let answered=0;
       let correct=0;
-
       items.forEach(item=>{
         const selected=item.querySelector('.option.correct, .option.wrong');
         if(!selected) return;
@@ -43,20 +50,21 @@
       const total=items.length;
       const percent=Math.round((correct/total)*100);
       const grade=gradeNumber();
-      const attempts=Math.max(0,Number(localStorage.getItem(key(grade,'QuizAttempts'))||0))+1;
-      const previousBest=Math.max(0,Number(localStorage.getItem(key(grade,'BestScore'))||0));
-      const best=Math.max(previousBest,percent);
-
-      localStorage.setItem(key(grade,'QuizAttempts'),String(attempts));
-      localStorage.setItem(key(grade,'BestScore'),String(best));
 
       if(answered<total){
         result.textContent=`🧠 უპასუხე ყველა კითხვას — ${answered}/${total}.`;
         return;
       }
 
+      const attempts=Math.max(0,Number(localStorage.getItem(key(grade,'QuizAttempts'))||0))+1;
+      const previousBest=Math.max(0,Number(localStorage.getItem(key(grade,'BestScore'))||0));
+      const best=Math.max(previousBest,percent);
+
+      localStorage.setItem(key(grade,'QuizAttempts'),String(attempts));
+      localStorage.setItem(key(grade,'BestScore'),String(best));
       result.textContent=`🏆 შედეგი: ${correct}/${total} — ${percent}%. საუკეთესო: ${best}%.`;
       finish.textContent='✅ შედეგი დაფიქსირდა';
+      void syncProgress(grade);
     });
   }
 
@@ -74,7 +82,6 @@
       const starKey=key(grade,'Stars');
       const currentXP=Math.max(0,Number(localStorage.getItem(xpKey)||0));
       const currentStars=Math.max(0,Number(localStorage.getItem(starKey)||0));
-
       if(button.dataset.completed==='1') return;
       button.dataset.completed='1';
 
@@ -85,19 +92,12 @@
 
       const bar=document.getElementById('progressBar');
       if(bar) bar.style.width='100%';
+      void syncProgress(grade);
     },true);
   }
 
-  function boot(){
-    bindQuiz();
-    bindCompletion();
-  }
-
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',boot,{once:true});
-  }else{
-    boot();
-  }
-
+  function boot(){bindQuiz();bindCompletion();}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
+  else boot();
   new MutationObserver(boot).observe(document.body,{childList:true,subtree:true});
 })();
