@@ -83,9 +83,8 @@
 
     const wakeCompanion = (event) => {
       const rect = scene.getBoundingClientRect();
-      const point = event.touches && event.touches[0] ? event.touches[0] : event;
-      const x = Math.max(0, Math.min(100, ((point.clientX - rect.left) / rect.width) * 100));
-      const y = Math.max(0, Math.min(100, ((point.clientY - rect.top) / rect.height) * 100));
+      const x = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(0, Math.min(100, ((event.clientY - rect.top) / rect.height) * 100));
       scene.style.setProperty('--touch-x', `${x}%`);
       scene.style.setProperty('--touch-y', `${y}%`);
       scene.classList.remove('touch-glow', 'touch-wave');
@@ -99,8 +98,8 @@
       }, 900);
     };
 
+    // Pointer Events cover mouse, pen and modern touch without double-firing touchstart.
     scene.addEventListener('pointerdown', wakeCompanion, { passive: true });
-    scene.addEventListener('touchstart', wakeCompanion, { passive: true });
   }
 
   // Grade 2: 30-question quiz.
