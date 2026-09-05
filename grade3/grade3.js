@@ -7,6 +7,7 @@ const key='grade3UniverseProgress';
 let state={xp:0,stars:0,streak:0,done:[]};
 try{state={...state,...JSON.parse(localStorage.getItem(key)||'{}')}}catch(e){}
 if(!Array.isArray(state.done))state.done=[];
+function syncFromRemote(){try{const next=JSON.parse(localStorage.getItem(key)||'{}');state={...state,...next};if(!Array.isArray(state.done))state.done=[];render()}catch(e){console.warn('Grade 3 progress hydration failed',e)}}
 function save(){localStorage.setItem(key,JSON.stringify(state));const x=document.querySelector('#xp'),s=document.querySelector('#stars'),t=document.querySelector('#streak'),d=document.querySelector('#done');if(x)x.textContent=state.xp;if(s)s.textContent=state.stars;if(t)t.textContent=state.streak;if(d)d.textContent=state.done.length;document.dispatchEvent(new CustomEvent('grade3progress',{detail:state}))}
 function esc(v){return String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]))}
 function normalizeQuiz(q){if(typeof q==='string'){const m=q.match(/^(.+?)\?\s*(.+)$/);return{type:'fill',question:m?m[1]+'?':q,options:[],answer:m?m[2].trim().replace(/[.!]+$/,''):q.trim().replace(/[.!]+$/,'')}}if(!q||typeof q!=='object')return null;return{type:q.type||'mcq',question:q.question||q.q||q.prompt||'',options:Array.isArray(q.options)?q.options:[],answer:q.answer??q.correct_answer,explanation:q.explanation||''}}
@@ -23,5 +24,7 @@ function initRobotMotion(){const robot=document.querySelector('.ai-robot');if(!r
 function initCursorBot(){if(document.querySelector('.g3-cursor-bot'))return;const bot=document.createElement('div');bot.className='g3-cursor-bot';bot.setAttribute('aria-hidden','true');bot.innerHTML='<i class="cb-antenna"></i><i class="cb-dot"></i><span class="cb-head"><i class="cb-eye a"></i><i class="cb-eye b"></i></span><span class="cb-body"></span>';document.body.appendChild(bot);if(window.matchMedia&&window.matchMedia('(pointer:coarse),(max-width:700px)').matches)return;let raf=0;document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||raf)return;raf=requestAnimationFrame(()=>{raf=0;bot.style.transform=`translate3d(${e.clientX+14}px,${e.clientY+14}px,0)`;bot.style.opacity='1'})},{passive:true})}
 const start=document.querySelector('#start'),review=document.querySelector('#review');if(start)start.addEventListener('click',()=>{const next=worlds.findIndex((_,i)=>!state.done.includes(i));document.querySelector(`[data-i="${next<0?Math.max(0,worlds.length-1):next}"]`)?.scrollIntoView({behavior:'smooth',block:'center'})});if(review)review.addEventListener('click',()=>alert(`🏆 ${state.done.length}/${worlds.length} missions complete • ${state.xp} XP • ${state.stars} stars`));
 save();render();initRobotMotion();initCursorBot();
+window.addEventListener('englishMariamiRemoteHydrated',e=>{if(!e.detail||Number(e.detail.grade)===3)syncFromRemote()});
+document.addEventListener('englishMariamiRemoteHydrated',e=>{if(!e.detail||Number(e.detail.grade)===3)syncFromRemote()});
 loadSupabase().then(ok=>{if(ok)render()});
 })();
