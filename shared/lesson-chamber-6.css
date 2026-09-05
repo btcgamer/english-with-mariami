@@ -1,0 +1,21 @@
+/* MAGIC NEON AI ACADEMY — LESSON CHAMBER 6.0
+   Visual-only holographic lesson cards. */
+.lesson-chamber-6{position:absolute;inset:0;pointer-events:none;z-index:29;overflow:hidden;border-radius:inherit}
+.lesson-chamber-6 .lc6-aura{position:absolute;inset:4%;border-radius:inherit;background:radial-gradient(circle at 50% 42%,rgba(80,245,255,.07),transparent 34%),radial-gradient(circle at 25% 70%,rgba(166,108,255,.06),transparent 28%),radial-gradient(circle at 80% 25%,rgba(255,79,216,.05),transparent 25%);filter:blur(2px);animation:lc6Aura 8s ease-in-out infinite alternate}
+.lesson-chamber-6 .lc6-sweep{position:absolute;left:5%;right:5%;height:1px;top:18%;background:linear-gradient(90deg,transparent,rgba(95,247,255,.5),rgba(255,255,255,.7),rgba(166,108,255,.5),transparent);box-shadow:0 0 18px rgba(95,247,255,.45);animation:lc6Sweep 5.5s ease-in-out infinite}
+.lesson-chamber-6 .lc6-pulse{position:absolute;width:12px;height:12px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;box-shadow:0 0 10px #fff,0 0 28px rgba(57,239,255,.9),0 0 60px rgba(166,108,255,.55);animation:lc6Pulse 2.8s ease-out infinite}
+@keyframes lc6Aura{to{transform:scale(1.035);opacity:.72}}@keyframes lc6Sweep{0%,100%{transform:translateY(-10vh);opacity:0}18%{opacity:.7}70%{opacity:.5}88%{opacity:0;transform:translateY(72vh)}}@keyframes lc6Pulse{0%{opacity:0;box-shadow:0 0 4px #fff,0 0 12px rgba(57,239,255,.4)}35%{opacity:.9}100%{opacity:0;box-shadow:0 0 18px #fff,0 0 70px rgba(166,108,255,.7),0 0 120px rgba(255,79,216,.3)}}
+/* The card effects deliberately preserve pointer-events on the real cards. */
+#modal .word-card,#modal .quiz-card,.g3-word,.g3-question,.g4-live-words,.g4-quiz,.g4-content-box{transform-style:preserve-3d;will-change:transform,box-shadow;transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s,border-color .28s,filter .28s}
+#modal .word-card:after,#modal .quiz-card:after,.g3-word:after,.g3-question:after,.g4-live-words:after,.g4-quiz:after,.g4-content-box:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,transparent 22%,rgba(255,255,255,.12) 43%,rgba(95,247,255,.08) 50%,transparent 63%);background-size:220% 100%;background-position:120% 0;opacity:0;transition:opacity .25s,background-position .7s;mix-blend-mode:screen}
+#modal .word-card:hover:after,#modal .quiz-card:hover:after,.g3-word:hover:after,.g3-question:hover:after,.g4-live-words:hover:after,.g4-quiz:hover:after,.g4-content-box:hover:after{opacity:1;background-position:-20% 0}
+#modal .word-card:hover,#modal .quiz-card:hover,.g3-word:hover,.g3-question:hover,.g4-live-words:hover,.g4-quiz:hover,.g4-content-box:hover{filter:saturate(1.15);box-shadow:0 18px 48px rgba(0,0,0,.28),0 0 32px rgba(95,247,255,.11),inset 0 1px rgba(255,255,255,.08)}
+/* Answer-state magic: works with existing quiz classes only. */
+.quiz-correct,.g3-question.quiz-correct,.g4-quiz.quiz-correct{animation:lc6Correct .72s ease-out both!important}
+.quiz-wrong,.g3-question.quiz-wrong,.g4-quiz.quiz-wrong{animation:lc6Wrong .55s ease-out both!important}
+@keyframes lc6Correct{0%{transform:scale(.985);box-shadow:0 0 0 rgba(67,240,176,0)}35%{transform:scale(1.018);box-shadow:0 0 38px rgba(67,240,176,.4),0 0 85px rgba(95,247,255,.18)}100%{transform:scale(1);box-shadow:0 14px 40px rgba(0,0,0,.2),0 0 20px rgba(67,240,176,.12)}}
+@keyframes lc6Wrong{0%{transform:translateX(0)}20%{transform:translateX(-5px);box-shadow:0 0 28px rgba(255,70,105,.3)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+body.lc6-mission-complete #modal .modal-panel,body.lc6-mission-complete .g3-vocab-dialog,body.lc6-mission-complete .g4-vocab-dialog{animation:lc6Complete 1.1s ease-out both}
+@keyframes lc6Complete{0%{filter:brightness(1);box-shadow:0 0 0 rgba(255,255,255,0)}28%{filter:brightness(1.25);box-shadow:0 0 70px rgba(95,247,255,.35),0 0 120px rgba(166,108,255,.25)}100%{filter:brightness(1);}}
+@media(max-width:760px){.lesson-chamber-6 .lc6-sweep{left:2%;right:2%}.lesson-chamber-6 .lc6-aura{inset:2%}}
+@media(prefers-reduced-motion:reduce){.lesson-chamber-6 *{animation:none!important}.lesson-chamber-6 .lc6-sweep{display:none}#modal .word-card,#modal .quiz-card,.g3-word,.g3-question,.g4-live-words,.g4-quiz,.g4-content-box{transition:none}}
