@@ -4,6 +4,7 @@
 const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
 const KEY='grade2_complete_v1';
 const LEGACY_KEY='grade2_neon_progress_v3';
+const MAX_MISSIONS=20;
 if(!client)return;
 function migrateLegacy(){try{const current=localStorage.getItem(KEY),legacy=localStorage.getItem(LEGACY_KEY);if(!current&&legacy)localStorage.setItem(KEY,legacy)}catch(_){} }
 migrateLegacy();
@@ -20,7 +21,7 @@ async function restore(u){
   const remote=r.data,p=read();
   const remoteIds=missionIds(remote.learned_words);
   const localDone=Array.isArray(p.done)?p.done.map(Number).filter(Number.isInteger):[];
-  const remoteDone=remoteIds.map(x=>Number(x.replace('grade2-mission-',''))-1).filter(i=>i>=0&&i<12);
+  const remoteDone=remoteIds.map(x=>Number(x.replace('grade2-mission-',''))-1).filter(i=>i>=0&&i<MAX_MISSIONS);
   const mergedDone=[...new Set([...localDone,...remoteDone])].sort((a,b)=>a-b);
   const localWords=Array.isArray(p.words)?p.words.map(String):[];
   const remoteWords=Array.isArray(remote.learned_words)?remote.learned_words.map(String):[];
@@ -35,7 +36,7 @@ async function restore(u){
 async function save(u){
   const p=read(),done=Array.isArray(p.done)?p.done.map(Number).filter(Number.isInteger):[];
   const learned=Array.isArray(p.words)?p.words.map(String):[];
-  const words=Math.min(300,Math.max(done.length*25+Math.min(25,Number(p.xp||0)%100),learned.length));
+  const words=Math.min(300,Math.max(done.length*15+Math.min(15,Number(p.xp||0)%100),learned.length));
   const quiz=Math.max(0,Number(p.stars||0));
   const best=Math.min(100,Math.max(Number(p.bestQuiz)||0,Number(p.xp||0)%100));
   const now=new Date().toISOString();
