@@ -5,9 +5,13 @@ var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduc
 var coarse=window.matchMedia&&window.matchMedia('(pointer: coarse)').matches;
 var root=document.body;if(!root)return;
 /* Shared lesson visual layer — design only, no learning logic. */
-if(!document.querySelector('link[data-ewm-lesson-design]')){var lessonCss=document.createElement('link');lessonCss.rel='stylesheet';lessonCss.href='/shared/lesson-design.css?v=20260906-amazing1';lessonCss.dataset.ewmLessonDesign='true';document.head.appendChild(lessonCss)}
-if(!document.querySelector('link[data-ewm-opening-magic]')){var openingCss=document.createElement('link');openingCss.rel='stylesheet';openingCss.href='/shared/lesson-opening-magic.css?v=20260906-magic1';openingCss.dataset.ewmOpeningMagic='true';document.head.appendChild(openingCss)}
-if(!document.querySelector('script[data-ewm-opening-magic]')){var openingJs=document.createElement('script');openingJs.src='/shared/lesson-opening-magic.js?v=20260906-magic1';openingJs.defer=true;openingJs.dataset.ewmOpeningMagic='true';document.head.appendChild(openingJs)}
+function loadCss(key,href){if(document.querySelector('link[data-ewm-'+key+']'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=href;l.dataset['ewm'+key.charAt(0).toUpperCase()+key.slice(1)]='true';document.head.appendChild(l)}
+function loadJs(key,src){if(document.querySelector('script[data-ewm-'+key+']'))return;var s=document.createElement('script');s.src=src;s.defer=true;s.dataset['ewm'+key.charAt(0).toUpperCase()+key.slice(1)]='true';document.head.appendChild(s)}
+loadCss('lesson-design','/shared/lesson-design.css?v=20260906-amazing1');
+loadCss('opening-magic','/shared/lesson-opening-magic.css?v=20260906-magic1');
+loadCss('mission-hud2','/shared/lesson-mission-hud-2.css?v=20260906-hud2');
+loadJs('opening-magic','/shared/lesson-opening-magic.js?v=20260906-magic1');
+loadJs('mission-hud2','/shared/lesson-mission-hud-2.0.js?v=20260906-hud2');
 var aura=document.createElement('div');aura.className='ai-magic-aura';root.appendChild(aura);
 var label=document.createElement('div');label.className='ai-magic-label';label.textContent='✦ AI MAGIC COMPANION';root.appendChild(label);
 var lastX=-100,lastY=-100,raf=0,hideTimer=0;
