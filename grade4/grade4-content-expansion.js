@@ -23,6 +23,11 @@ function normalizeQuizData(lesson){
     return q;
   });
 }
+function pushUnique(arr,value){
+  const key=String(value).trim().toLowerCase();
+  if(!key)return;
+  if(!arr.some(x=>String(x).trim().toLowerCase()===key))arr.push(value);
+}
 window.applyGrade4ContentExpansion=function(lessons){
   if(!Array.isArray(lessons))return lessons;
   lessons.forEach((lesson,i)=>{
@@ -36,10 +41,10 @@ window.applyGrade4ContentExpansion=function(lessons){
     });
     lesson.words=words;
     lesson.exercises=Array.isArray(lesson.exercises)?lesson.exercises:[];
-    lesson.exercises.push('Write one complete sentence using a new word from this lesson.');
-    lesson.exercises.push('Explain the lesson idea in your own words.');
+    pushUnique(lesson.exercises,'Write one complete sentence using a new word from this lesson.');
+    pushUnique(lesson.exercises,'Explain the lesson idea in your own words.');
     lesson.speaking_phrases=Array.isArray(lesson.speaking_phrases)?lesson.speaking_phrases:[];
-    lesson.speaking_phrases.push('Tell your partner one thing you learned in this mission.');
+    pushUnique(lesson.speaking_phrases,'Tell your partner one thing you learned in this mission.');
   });
   return lessons;
 };
