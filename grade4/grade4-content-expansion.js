@@ -1,4 +1,4 @@
-/* Grade 4 — safe additive content expansion. */
+/* Grade 4 — safe, idempotent additive content expansion. */
 (function(){'use strict';
 const packs=[
 [['routine','რუტინა','📅'],['usually','ჩვეულებრივ','⭐'],['always','ყოველთვის','🔁'],['sometimes','ზოგჯერ','🔄'],['never','არასდროს','🚫'],['often','ხშირად','✨'],['practice','ვარჯიში','🎯'],['remember','დამახსოვრება','🧠']],
@@ -23,11 +23,7 @@ function normalizeQuizData(lesson){
     return q;
   });
 }
-function pushUnique(arr,value){
-  const key=String(value).trim().toLowerCase();
-  if(!key)return;
-  if(!arr.some(x=>String(x).trim().toLowerCase()===key))arr.push(value);
-}
+function hasExact(list,value){return list.some(x=>String(x??'').trim()===value);}
 window.applyGrade4ContentExpansion=function(lessons){
   if(!Array.isArray(lessons))return lessons;
   lessons.forEach((lesson,i)=>{
@@ -41,10 +37,13 @@ window.applyGrade4ContentExpansion=function(lessons){
     });
     lesson.words=words;
     lesson.exercises=Array.isArray(lesson.exercises)?lesson.exercises:[];
-    pushUnique(lesson.exercises,'Write one complete sentence using a new word from this lesson.');
-    pushUnique(lesson.exercises,'Explain the lesson idea in your own words.');
+    const ex1='Write one complete sentence using a new word from this lesson.';
+    const ex2='Explain the lesson idea in your own words.';
+    if(!hasExact(lesson.exercises,ex1))lesson.exercises.push(ex1);
+    if(!hasExact(lesson.exercises,ex2))lesson.exercises.push(ex2);
     lesson.speaking_phrases=Array.isArray(lesson.speaking_phrases)?lesson.speaking_phrases:[];
-    pushUnique(lesson.speaking_phrases,'Tell your partner one thing you learned in this mission.');
+    const sp='Tell your partner one thing you learned in this mission.';
+    if(!hasExact(lesson.speaking_phrases,sp))lesson.speaking_phrases.push(sp);
   });
   return lessons;
 };
