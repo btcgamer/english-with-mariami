@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 190" role="img" aria-label="Magic Neon Live Mission Reactor HUD">
+<defs>
+ <linearGradient id="hudG3" x1="0" x2="1"><stop stop-color="#63f7ff"/><stop offset=".5" stop-color="#8d6bff"/><stop offset="1" stop-color="#ff67df"/></linearGradient>
+ <linearGradient id="energyG3" x1="0" x2="1"><stop stop-color="#62f7ff"/><stop offset=".55" stop-color="#7568ff"/><stop offset="1" stop-color="#ff67df"/></linearGradient>
+ <filter id="glowG3"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <pattern id="gridG3" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#63eaff" stroke-opacity=".09"/></pattern>
+</defs>
+<rect x="7" y="7" width="1186" height="176" rx="30" fill="#071026" fill-opacity=".94" stroke="url(#hudG3)" stroke-width="2"/>
+<rect x="17" y="17" width="1166" height="156" rx="24" fill="url(#gridG3)"/>
+<circle cx="78" cy="95" r="47" fill="#10224a" stroke="#63f7ff" stroke-width="2" filter="url(#glowG3)"/>
+<circle id="reactorRing" cx="78" cy="95" r="35" fill="none" stroke="#8d6bff" stroke-width="3" stroke-dasharray="7 8"><animateTransform attributeName="transform" type="rotate" from="0 78 95" to="360 78 95" dur="6s" repeatCount="indefinite"/></circle>
+<circle id="reactorCore" cx="78" cy="95" r="14" fill="url(#hudG3)" filter="url(#glowG3)"><animate attributeName="r" values="12;16;12" dur="1.8s" repeatCount="indefinite"/></circle>
+<path d="M78 57l7 20 20 7-20 7-7 20-7-20-20-7 20-7z" fill="white" opacity=".9" filter="url(#glowG3)"/>
+<g font-family="system-ui,Segoe UI,sans-serif"><text x="145" y="48" fill="#63f7ff" font-size="13" font-weight="900" letter-spacing="3">MAGIC NEON // LIVE MISSION REACTOR</text><text id="worldMission" x="145" y="86" fill="white" font-size="29" font-weight="900">WORLD 01  ·  MISSION 01</text><text id="reactorStatus" x="145" y="113" fill="#aebbdc" font-size="13" font-weight="700" letter-spacing="1.5">MISSION CORE ONLINE  ·  LESSON ACTIVE</text></g>
+<g transform="translate(660 39)"><text x="0" y="0" fill="#aebbdc" font-family="monospace" font-size="11" letter-spacing="2">ENERGY REACTOR</text><rect y="14" width="350" height="19" rx="10" fill="#111b38" stroke="#5262a0"/><rect id="energyFill" x="3" y="17" width="20" height="13" rx="6" fill="url(#energyG3)" filter="url(#glowG3)"/><text id="energyText" x="362" y="29" fill="#63f7ff" font-family="monospace" font-size="14" font-weight="900">05%</text></g>
+<g transform="translate(660 103)" font-family="monospace" font-size="11" font-weight="900"><circle id="statusDot" cx="7" cy="0" r="5" fill="#63f7ff" filter="url(#glowG3)"/><text id="statusText" x="22" y="4" fill="#63f7ff">● LESSON ACTIVATED</text><text id="stateText" x="225" y="4" fill="#aebbdc">STATUS: ACTIVE</text></g>
+<path d="M1148 28v134" stroke="url(#hudG3)" stroke-width="2" stroke-dasharray="4 8" opacity=".7"/>
+</svg>
