@@ -3,32 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>English with Mariami — Grade 4</title>
+  <meta name="theme-color" content="#070b18">
+  <title>English with Mariami — Grade 4 Future Academy</title>
   <link rel="stylesheet" href="../styles.css?v=20260901">
-  <link rel="stylesheet" href="./grade4-futuristic-content.css?v=20260901">
+  <link rel="stylesheet" href="./grade4-futuristic-content.css?v=20260906-shell1">
 </head>
-<body>
-  <main id="academy">
-    <section class="hero">
-      <h1>🧠 MAGIC NEON AI ACADEMY</h1>
-      <p>Grade 4 • FUTURE MODE</p>
+<body class="g4-page">
+  <main id="academy" class="g4-academy">
+    <header class="g4-topbar">
+      <div class="g4-brand">
+        <span class="g4-brand-orb">🧠</span>
+        <div><strong>MAGIC NEON AI ACADEMY</strong><small>GRADE 4 • FUTURE MODE</small></div>
+      </div>
+      <div class="g4-status"><span class="g4-live-dot"></span> ACADEMY ONLINE</div>
+    </header>
+
+    <section class="g4-hero" aria-labelledby="g4-title">
+      <div class="g4-hero-copy">
+        <span class="g4-kicker">◆ NEURAL LEARNING SYSTEM / LEVEL 04</span>
+        <h1 id="g4-title">Welcome to the <span>Future.</span></h1>
+        <p>Master grammar, vocabulary, reading, listening and speaking through 60 interactive missions.</p>
+        <div class="g4-hero-actions"><button id="review" class="g4-primary" type="button">▶ NEXT MISSION</button><span id="nextMission">Next mission loading…</span></div>
+      </div>
+      <div class="g4-hero-core" aria-hidden="true"><div class="g4-ring r1"></div><div class="g4-ring r2"></div><div class="g4-core">G4</div></div>
     </section>
-    <section id="stats" class="stats">
-      <div>⚡ XP <strong id="xp">0</strong></div>
-      <div>⭐ STARS <strong id="stars">0</strong></div>
-      <div>🔥 STREAK <strong id="streak">0</strong></div>
-      <div>🏆 MISSIONS <strong id="done">0</strong>/60</div>
+
+    <section id="stats" class="g4-stats" aria-label="Grade 4 progress">
+      <div class="g4-stat"><span>⚡</span><div><small>XP</small><strong id="xp">0</strong></div></div>
+      <div class="g4-stat"><span>⭐</span><div><small>STARS</small><strong id="stars">0</strong></div></div>
+      <div class="g4-stat"><span>🔥</span><div><small>STREAK</small><strong id="streak">0</strong></div></div>
+      <div class="g4-stat"><span>🏆</span><div><small>MISSIONS</small><strong><b id="done">0</b><em>/60</em></strong></div></div>
     </section>
-    <section class="progress-wrap">
-      <div id="progressText">0/60 • 0%</div>
-      <div class="progress"><div id="progressBar"></div></div>
-      <div id="nextMission">Next mission loading…</div>
+
+    <section class="g4-progress-card">
+      <div class="g4-progress-head"><div><span class="g4-kicker">MISSION PROGRESS</span><h2>Grade 4 Universe</h2></div><strong id="progressText">0/60 • 0%</strong></div>
+      <div class="g4-progress-track"><div id="progressBar"></div></div>
+      <div class="g4-progress-meta"><span>60 missions across 6 worlds</span><span>Keep going — your next unlock is waiting.</span></div>
     </section>
-    <section id="missions"></section>
-    <section class="actions">
-      <button id="review" type="button">REVIEW / NEXT MISSION</button>
+
+    <section class="g4-world-header"><div><span class="g4-kicker">EXPLORE THE UNIVERSE</span><h2>Choose your world</h2></div><p>Complete missions to unlock the next level of your Grade 4 journey.</p></section>
+    <section id="missions" class="g4-world-grid" aria-label="Grade 4 worlds"></section>
+
+    <section class="g4-footer-card">
+      <div><span class="g4-kicker">ACADEMY TELEMETRY</span><h2>Learning system ready.</h2><p id="liveStats" aria-live="polite">Loading curriculum…</p></div>
+      <div class="g4-footer-badge">AI<br><b>READY</b></div>
     </section>
-    <div id="liveStats" aria-live="polite"></div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
