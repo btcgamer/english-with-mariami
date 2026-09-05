@@ -4,14 +4,15 @@ if(window.__AI_MAGIC_COMPANION__)return;window.__AI_MAGIC_COMPANION__=true;
 var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var coarse=window.matchMedia&&window.matchMedia('(pointer: coarse)').matches;
 var root=document.body;if(!root)return;
-/* Shared lesson visual layer — design only, no learning logic. */
 function loadCss(key,href){if(document.querySelector('link[data-ewm-'+key+']'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=href;l.dataset['ewm'+key.charAt(0).toUpperCase()+key.slice(1)]='true';document.head.appendChild(l)}
 function loadJs(key,src){if(document.querySelector('script[data-ewm-'+key+']'))return;var s=document.createElement('script');s.src=src;s.defer=true;s.dataset['ewm'+key.charAt(0).toUpperCase()+key.slice(1)]='true';document.head.appendChild(s)}
 loadCss('lesson-design','/shared/lesson-design.css?v=20260906-amazing1');
 loadCss('opening-magic','/shared/lesson-opening-magic.css?v=20260906-magic1');
 loadCss('mission-hud2','/shared/lesson-mission-hud-2.css?v=20260906-hud2');
+loadCss('mission-hud3','/shared/lesson-mission-hud-3.css?v=20260906-hud3');
 loadJs('opening-magic','/shared/lesson-opening-magic.js?v=20260906-magic1');
 loadJs('mission-hud2','/shared/lesson-mission-hud-2.0.js?v=20260906-hud2');
+loadJs('mission-hud3','/shared/lesson-mission-hud-3.0.js?v=20260906-hud3');
 var aura=document.createElement('div');aura.className='ai-magic-aura';root.appendChild(aura);
 var label=document.createElement('div');label.className='ai-magic-label';label.textContent='✦ AI MAGIC COMPANION';root.appendChild(label);
 var lastX=-100,lastY=-100,raf=0,hideTimer=0;
