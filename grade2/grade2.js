@@ -1,10 +1,7 @@
 (()=>{'use strict';
 /* Grade 2 frontend: Supabase is the source of truth for L1-L20 curriculum content. */
 const KEY='grade2_complete_v1';
-const FALLBACK=[
- {lesson_number:11,title:'Nature',topic:'Nature',description:'Final foundation topic.',grammar_rule:'Use simple sentences to describe nature.'},
- {lesson_number:12,title:'Final Review',topic:'Review',description:'Review your Grade 2 learning.' ,grammar_rule:'Review the Grade 2 patterns.'}
-];
+const FALLBACK=[];
 const db=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||window.supabase;
 let lessons=[],current=null,tab='overview',quizState=null;
 let p=load();
@@ -23,7 +20,7 @@ async function loadLessons(){
  if(ids.length){const [wr,qr]=await Promise.all([db.from('lesson_words').select('id,lesson_id,word,translation,emoji,image_url,audio_url,sort_order').in('lesson_id',ids).order('sort_order',{ascending:true}),db.from('lesson_quizzes').select('id,lesson_id,question,options,correct_answer,sort_order').in('lesson_id',ids).order('sort_order',{ascending:true})]);if(wr.error)throw wr.error;if(qr.error)throw qr.error;words=wr.data||[];quizzes=qr.data||[]}
  const wm=new Map(),qm=new Map();words.forEach(x=>{const k=String(x.lesson_id);if(!wm.has(k))wm.set(k,[]);wm.get(k).push(x)});quizzes.forEach(x=>{const k=String(x.lesson_id);if(!qm.has(k))qm.set(k,[]);qm.get(k).push(x)});
  lessons=rows.map(x=>({...x,words:wm.get(String(x.id))||[],quizzes:qm.get(String(x.id))||[],_words:(wm.get(String(x.id))||[]).length}));
- if(lessons.length<12){FALLBACK.forEach(f=>{if(!lessons.some(x=>Number(x.lesson_number)===f.lesson_number))lessons.push({...f,words:[],quizzes:[]})});lessons.sort((a,b)=>Number(a.lesson_number)-Number(b.lesson_number))}
+ if(lessons.length<20){FALLBACK.forEach(f=>{if(!lessons.some(x=>Number(x.lesson_number)===f.lesson_number))lessons.push({...f,words:[],quizzes:[]})});lessons.sort((a,b)=>Number(a.lesson_number)-Number(b.lesson_number))}
  render()
 }
 function open(i){current=i;tab='overview';quizState=null;const m=document.querySelector('#modal');m.classList.add('open');m.setAttribute('aria-hidden','false');draw()}
@@ -46,5 +43,5 @@ function finishQuiz(w){const total=(w.quizzes||[]).length,score=quizState.score,
 document.addEventListener('click',e=>{const lesson=e.target.closest('.lesson');if(lesson){open(Number(lesson.dataset.i));return}const tabBtn=e.target.closest('[data-tab]');if(tabBtn&&current!==null){tab=tabBtn.dataset.tab;quizState=tab==='quiz'?quizState:null;draw();return}if(e.target.closest('#closeModal')){close();return}const sp=e.target.closest('[data-speak]');if(sp){speak(sp.dataset.speak);return}const aud=e.target.closest('[data-audio]');if(aud){new Audio(aud.dataset.audio).play().catch(()=>{});return}const ans=e.target.closest('[data-answer]');if(ans&&current!==null){const w=lessons[current],q=w.quizzes?.[quizState.index];if(!q||quizState.answered)return;quizState.answered=true;const ok=String(ans.dataset.answer)===String(q.correct_answer);quizState.score+=ok?1:0;const f=document.querySelector('#quizFeedback');if(f)f.textContent=ok?'✅ Correct!':'❌ Not quite.';setTimeout(()=>{quizState.index++;quizState.answered=false;if(quizState.index>=(w.quizzes||[]).length){finishQuiz(w)}else draw()},650)}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&current!==null)close()});
 async function daily(){const today=new Date().toISOString().slice(0,10);if(p.daily===today)return;if(p.daily!==today){p.daily=today;p.xp=(Number(p.xp)||0)+10;save();stats();const b=document.querySelector('#dailyBtn');if(b)b.textContent='✓ COMPLETED'}}
-document.addEventListener('DOMContentLoaded',async()=>{try{await loadLessons()}catch(e){console.error('[Grade 2 Load]',e);render()}stats();const c=document.querySelector('#continueBtn');if(c)c.onclick=()=>{const i=Math.min(p.done.length,19);open(i)};const r=document.querySelector('#reviewBtn');if(r)r.onclick=()=>open(Math.max(0,lessons.length-1));const d=document.querySelector('#dailyBtn');if(d)d.onclick=daily;const m=document.querySelector('#megaPracticeBtn');if(m)m.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('grade2-open-mega')));document.querySelector('#closeModal')?.addEventListener('click',close)})
+document.addEventListener('DOMContentLoaded',async()=>{try{await loadLessons()}catch(e){console.error('[Grade 2 Load]',e);render()}stats();const c=document.querySelector('#continueBtn');if(c)c.onclick=()=>{const i=lessons.findIndex((_,idx)=>!p.done.includes(idx));open(i<0?lessons.length-1:i)};const r=document.querySelector('#reviewBtn');if(r)r.onclick=()=>open(Math.max(0,lessons.length-1));const d=document.querySelector('#dailyBtn');if(d)d.onclick=daily;const m=document.querySelector('#megaPracticeBtn');if(m)m.addEventListener('click',()=>document.dispatchEvent(new CustomEvent('grade2-open-mega')));document.querySelector('#closeModal')?.addEventListener('click',close)})
 })();
