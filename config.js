@@ -56,7 +56,6 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
       if(!auth){location.replace('/login.html?reason=unauthorized');return}
       const role=String(auth.profile?.role||'').trim().toLowerCase();
       const assigned=Number(auth.profile?.grade||0);
-      /* Teachers and parents may inspect any grade. Students stay grade-locked. */
       if(role==='teacher'||role==='parent')return;
       if(role!=='student'){
         location.replace('/login.html?reason=wrong-role');
@@ -149,7 +148,7 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   if(!(path.endsWith('/academy.html')||path==='academy.html'))return;
   if(document.querySelector('script[data-ewm-academy-nav]'))return;
   const s=document.createElement('script');
-  s.src='/academy-nav.js?v=20260901';
+  s.src='/academy-nav.js?v=20260905';
   s.defer=true;
   s.dataset.ewmAcademyNav='1';
   document.head.appendChild(s);
