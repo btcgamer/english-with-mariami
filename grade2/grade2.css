@@ -23,3 +23,5 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;ba
 @media(max-width:1050px){.lessons{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:760px){.app{padding:12px}.topbar{flex-direction:column;align-items:flex-start}.stats{width:100%;justify-content:flex-start}.hero{padding-top:38px}.daily{align-items:flex-start;flex-wrap:wrap}.daily span{flex-basis:100%}.lessons{grid-template-columns:repeat(2,1fr);gap:12px}.lesson{min-height:190px;padding:16px}.lesson-icon{width:55px;height:55px;font-size:27px}.lesson h3{font-size:18px}}
 @media(max-width:480px){.lessons{grid-template-columns:1fr}.hero h2{font-size:45px}.brand-text h1{font-size:14px}.stats{display:grid;grid-template-columns:repeat(2,1fr);width:100%}.stat{min-width:0}.daily button{margin-left:auto}}
+/* MASTER QA: remove the old Grade 2 fixed navigation overlay. */
+#grade2NavFix{display:none!important}
