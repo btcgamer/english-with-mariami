@@ -4,6 +4,8 @@ if(window.__AI_MAGIC_COMPANION__)return;window.__AI_MAGIC_COMPANION__=true;
 var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var coarse=window.matchMedia&&window.matchMedia('(pointer: coarse)').matches;
 var root=document.body;if(!root)return;
+/* Shared lesson visual layer — design only, no learning logic. */
+if(!document.querySelector('link[data-ewm-lesson-design]')){var lessonCss=document.createElement('link');lessonCss.rel='stylesheet';lessonCss.href='/shared/lesson-design.css?v=20260906-amazing1';lessonCss.dataset.ewmLessonDesign='true';document.head.appendChild(lessonCss)}
 var aura=document.createElement('div');aura.className='ai-magic-aura';root.appendChild(aura);
 var label=document.createElement('div');label.className='ai-magic-label';label.textContent='✦ AI MAGIC COMPANION';root.appendChild(label);
 var lastX=-100,lastY=-100,raf=0,hideTimer=0;
