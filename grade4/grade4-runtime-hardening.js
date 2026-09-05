@@ -10,8 +10,6 @@
   const BOOT_TIMEOUT_MS = 10000;
   const fallback = window.GRADE4_FUTURISTIC_CONTENT;
 
-  // Keep world metadata for the shell, but remove fallback lessons before
-  // grade4.js captures the value. If Supabase fails, runtime lesson count is 0.
   if (fallback && Array.isArray(fallback.lessons)) {
     fallback.lessons = [];
   }
@@ -22,6 +20,23 @@
     source: 'pending',
     error: null
   };
+
+  /* MASTER QA: grade4.js calls academy_record_activity without p_max_score.
+     The canonical RPC requires it. Normalize the legacy frontend payload here
+     before the call reaches Supabase, without changing other RPC calls. */
+  const db = window.__ENGLISH_MARIAMI_SUPABASE_CLIENT || window.supabaseClient;
+  if (db && typeof db.rpc === 'function' && !db.__g4RewardRpcHardened) {
+    const originalRpc = db.rpc.bind(db);
+    db.rpc = function(fn, args, options){
+      if (fn === 'academy_record_activity' && args && typeof args === 'object') {
+        const next = Object.assign({}, args);
+        if (Number(next.p_grade) === 4 && next.p_max_score == null) next.p_max_score = 100;
+        return originalRpc(fn, next, options);
+      }
+      return originalRpc(fn, args, options);
+    };
+    db.__g4RewardRpcHardened = true;
+  }
 
   function showError(reason) {
     const detail = reason ? String(reason) : 'Supabase did not return the required 60 Grade 4 lessons.';
@@ -84,8 +99,6 @@
     new MutationObserver(inspect).observe(stats, {childList:true, characterData:true, subtree:true});
   }
 
-  // Prevent the pre-existing MISSION STATUS handler from reporting “/24”
-  // while the runtime is offline or still unresolved.
   const review = document.querySelector('#review');
   if (review) {
     review.addEventListener('click', function(event){
