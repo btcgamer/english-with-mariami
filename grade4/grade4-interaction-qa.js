@@ -10,7 +10,43 @@ function openAndFocus(card){
   card.click();
   setTimeout(()=>scrollToNextLesson(document.querySelector('.g4-vocab-modal')),80);
 }
+function skillRewardStore(){
+  try{return JSON.parse(localStorage.getItem('grade4SkillRewards')||'{}')}catch(e){return {}}
+}
+function saveSkillReward(key){
+  const rewards=skillRewardStore();
+  rewards[key]=true;
+  try{localStorage.setItem('grade4SkillRewards',JSON.stringify(rewards))}catch(e){}
+}
 function install(){
+  document.addEventListener('click',function(e){
+    const skill=e.target.closest('[data-skill-answer]');
+    if(!skill)return;
+    const box=skill.closest('.g4-skill-challenge');
+    const lesson=skill.closest('.g4-live-lesson');
+    if(!box||!lesson)return;
+    const correct=skill.dataset.skillAnswer===skill.dataset.skillCorrect;
+    if(!correct)return;
+    const id=lesson.querySelector('[data-complete]')?.dataset.complete||lesson.querySelector('.g4-live-lesson-head h3')?.textContent.trim();
+    const key=String(id||'')+'::'+(box.dataset.skillTitle||'skill');
+    const rewards=skillRewardStore();
+    if(rewards[key]){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      box.querySelectorAll('[data-skill-answer]').forEach(b=>{b.disabled=true;if(b.dataset.skillAnswer===skill.dataset.skillCorrect)b.classList.add('quiz-correct')});
+      const feedback=box.querySelector('.g4-skill-feedback');
+      if(feedback)feedback.textContent='✅ Skill challenge already mastered — no duplicate XP.';
+    }
+  },true);
+  document.addEventListener('click',function(e){
+    const skill=e.target.closest('[data-skill-answer]');
+    if(!skill||skill.dataset.skillAnswer!==skill.dataset.skillCorrect)return;
+    const lesson=skill.closest('.g4-live-lesson');
+    const box=skill.closest('.g4-skill-challenge');
+    if(!lesson||!box)return;
+    const id=lesson.querySelector('[data-complete]')?.dataset.complete||lesson.querySelector('.g4-live-lesson-head h3')?.textContent.trim();
+    saveSkillReward(String(id||'')+'::'+(box.dataset.skillTitle||'skill'));
+  });
   document.addEventListener('click',function(e){
     const retry=e.target.closest('[data-g4-retry]');
     if(!retry)return;
