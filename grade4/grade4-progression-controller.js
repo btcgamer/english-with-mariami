@@ -3,7 +3,7 @@
   'use strict';
   const GRADE=4, TOTAL=60;
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
-  let lessons=[], remoteDone=new Set(), localDone=new Set(), busy=false;
+  let lessons=[], remoteDone=new Set(), localDone=new Set(), remoteLoaded=false, busy=false;
 
   const qs=s=>document.querySelector(s);
   const lessonNo=l=>Number(l.lesson_number)||Number(l.order_index)||Number(l.position)||0;
@@ -25,17 +25,17 @@
   }
 
   async function loadProgress(u){
-    if(!client||!u)return false;
+    if(!client||!u){remoteLoaded=false;return false;}
     const r=await client.from('lesson_progress').select('lesson_id,completed').eq('student_id',u.id).eq('grade',GRADE).eq('completed',true);
-    if(r.error)return false;
+    if(r.error){remoteLoaded=false;return false;}
     remoteDone=new Set((r.data||[]).map(x=>String(x.lesson_id)));
+    remoteLoaded=true;
     return true;
   }
 
   function render(){
-    const done=remoteDone.size?remoteDone:localDone;
+    const done=remoteLoaded?remoteDone:localDone;
     const completed=lessons.length?lessons.filter(l=>done.has(String(l.id))).length:done.size;
-    const total=lessons.length===TOTAL?TOTAL:Math.max(TOTAL,lessons.length);
     const pct=Math.min(100,Math.round(completed/TOTAL*100));
     setText('#done',completed);
     setText('#progressText',`${completed}/${TOTAL} • ${pct}%`);
@@ -70,9 +70,9 @@
     try{
       localDone=localState();
       const u=await user();
-      if(u)await loadProgress(u);
+      if(u)await loadProgress(u);else remoteLoaded=false;
       render();
-    }finally{busy=false}
+    }finally{busy=false;}
   }
 
   async function boot(){
