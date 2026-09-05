@@ -11,6 +11,7 @@ if(!reduce.matches){document.addEventListener('pointermove',e=>{if(innerWidth<80
 /* Shared Core: load the additive MAX layer without replacing page-specific styles. */
 function loadOnce(kind,href){if(kind==='css'){if([...document.styleSheets].some(s=>s.href&&s.href.endsWith(href)))return;const l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);return;}if(document.querySelector(`script[src$="${href}"]`))return;const s=document.createElement('script');s.src=href;s.defer=true;document.head.appendChild(s);}
 loadOnce('css','/universe-max.css');
+loadOnce('css','/shared/lesson-design.css');
 loadOnce('js','/universe-max.js');
 
 /* Root page only: make the PWA manifest discoverable and register the existing root service worker. */
