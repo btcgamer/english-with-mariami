@@ -1,6 +1,6 @@
 /* Grade 3 Learning Universe — Supabase-first interactive core. */
 (function(){'use strict';
-const MAX_MISSIONS=24;
+const MAX_MISSIONS=60;
 const fallback=window.GRADE3_FUTURISTIC_CONTENT||{worlds:[]};
 let worlds=[];
 const key='grade3UniverseProgress';
@@ -23,5 +23,5 @@ function initRobotMotion(){const robot=document.querySelector('.ai-robot');if(!r
 function initCursorBot(){if(document.querySelector('.g3-cursor-bot'))return;const bot=document.createElement('div');bot.className='g3-cursor-bot';bot.setAttribute('aria-hidden','true');bot.innerHTML='<i class="cb-antenna"></i><i class="cb-dot"></i><span class="cb-head"><i class="cb-eye a"></i><i class="cb-eye b"></i></span><span class="cb-body"></span>';document.body.appendChild(bot);if(window.matchMedia&&window.matchMedia('(pointer:coarse),(max-width:700px)').matches)return;let raf=0;document.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||raf)return;raf=requestAnimationFrame(()=>{raf=0;bot.style.transform=`translate3d(${e.clientX+14}px,${e.clientY+14}px,0)`;bot.style.opacity='1'})},{passive:true})}
 const start=document.querySelector('#start'),review=document.querySelector('#review');if(start)start.addEventListener('click',()=>{const next=worlds.findIndex((_,i)=>!state.done.includes(i));document.querySelector(`[data-i="${next<0?Math.max(0,worlds.length-1):next}"]`)?.scrollIntoView({behavior:'smooth',block:'center'})});if(review)review.addEventListener('click',()=>alert(`🏆 ${state.done.length}/${worlds.length} missions complete • ${state.xp} XP • ${state.stars} stars`));
 save();render();initRobotMotion();initCursorBot();
-loadSupabase().then(ok=>{if(!ok){worlds=(fallback.worlds||[]).slice(0,MAX_MISSIONS);save();render()}else{save();render()}});
+loadSupabase().then(ok=>{if(ok)render()});
 })();
