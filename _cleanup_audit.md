@@ -116,20 +116,79 @@ A read-only audit of all Grade 3 lessons (1–60) confirms the same underlying *
 #### Grade 3 correction rule
 Grade 3 should be **meaningfully harder than Grade 2**, not merely larger vocabulary lists. The authoritative rewrite should increase text length, sentence complexity, dialogue turns, comprehension depth and reasoning while keeping tasks age-appropriate. No frontend substitution should be used to hide the current database mismatch.
 
+### Grade 4 Curriculum Pass — 2026-09-05
+A read-only audit of all Grade 4 lessons (1–60) confirms that the database structure is complete, but the curriculum is **not production-ready as a Grade 4 progression**. The same template-offset problem appears here, with an additional concern: later lessons are labeled as advanced skills but do not contain advanced skill tasks.
+
+#### Grade 4 findings
+- **L1–12 are the richest block**: approximately 43–55 vocabulary items and 15 quizzes per lesson. Titles are generally coherent with their main vocabulary theme, but cross-topic leftovers appear: L2 `My Best Friend` contains generic introduction language; L3 `My Family Tree` contains demonstratives; L10 `My City` contains body-part vocabulary; L11 `Travel` contains emotion vocabulary.
+- The first block's grammar sequence is also not reliably tied to its title. Examples include L3 `My Family Tree` with `this/that`, L7 `Healthy Food` with Present Continuous, L10 `My City` with Past Simple and L11 `Travel` with future plans. These grammar rules can be useful, but they need to be intentionally integrated with the lesson topic rather than inherited by position.
+- **L13–42 show systematic title→vocabulary rotation.** Examples: L13 `Present Simple Review` contains weather; L14 `Present Continuous` contains seasons; L15 `Present Simple vs Continuous` contains weekdays; L16 `Past Simple Review` contains months; L18 `Future with Going To` contains daily routine; L19 `Future with Will` contains school objects; L21 `Must and Have To` contains school subjects; L24 `Comparatives` contains toys; L25 `Superlatives` contains wild animals; L29 `Object Pronouns` contains food; L34 `Directions and Maps` contains sports; L35 `Travel Plans` contains hobbies; L36 `At the Hotel` contains music; L37 `At the Airport` contains transport; L38 `Restaurant Conversation` contains town places; L39 `Shopping and Prices` contains directions; L40 `Healthy Lifestyle` contains shopping; L41 `Nature and Environment` contains money; L42 `Animals and Facts` contains restaurant vocabulary.
+- **L43–56 are a major skills-implementation failure.** The titles promise `Reading: A Day in the City`, `Reading: A Travel Story`, `Writing: My Best Day`, `Writing: My Future Plans`, `Speaking: My Opinion`, `Speaking: Problem Solving`, `Communication Skills`, `Grammar Challenge`, vocabulary builders and conversation lessons. Yet each has only 8 vocabulary items and 5 translation-style quiz questions, so the actual data does not implement the stated reading, writing, speaking, problem-solving or communication objectives.
+- **L47 `Speaking: My Opinion`** contains travel vocabulary and repeats the same Georgian target (`მოგზაურობა`) twice in its five quiz questions. This is both a skill mismatch and a duplicate-question issue.
+- **L49 `Communication Skills`** is actually airport vocabulary; **L50 `Grammar Challenge 1`** is holidays/festivals; **L51 `Grammar Challenge 2`** is frequency adverbs; **L52–56** are effectively grammar/topic fragments rather than a designed skills sequence.
+- **L57–60 are too shallow for the highest grade.** L57–59 have only 8 vocabulary items and 5 quizzes. L60 `Grade 4 English Challenge` has only 8 generic learning words and 5 translation questions. It does not measure integrated Grade 4 reading, listening, grammar application, writing, speaking, inference or problem solving.
+- Grade 4 therefore has the same data-quality symptoms as Grades 2–3, but the mismatch is more serious because the expected learning outcome is the highest difficulty level. Simply expanding word counts would not fix it; the tasks themselves must become more complex.
+
+#### Grade 4 phase assessment
+| Phase | Lessons | Status | Finding |
+|---|---:|---|---|
+| Foundation / Core | 1–12 | 🟡 | Richer content exists, but grammar and some vocabulary need deliberate topic alignment. |
+| Grammar Expansion | 13–24 | 🔴 | Systematic title→vocabulary rotation and inherited grammar sequence undermine progression. |
+| Thematic / Functional Expansion | 25–42 | 🔴 | Topics are useful but frequently attached to the wrong lessons; 8-word/5-quiz template dominates. |
+| Integrated Skills | 43–56 | 🔴 | Skill labels promise reading/writing/speaking/problem solving that the underlying tasks do not implement. |
+| Review / Challenge | 57–60 | 🔴 | Final assessment is far too shallow for Grade 4 and lacks integrated production/reasoning. |
+
+#### Required Grade 4 target blueprint before any data write
+- **L1–12 Foundation-to-Intermediate:** personal information, friendship, family, home, school, nature, health, hobbies, weekend, city, travel, everyday communication. Use topic-specific grammar in context and richer listening than Grades 2–3.
+- **L13–24 Grammar Expansion:** Present Simple/Continuous contrast, Past Simple review, future forms, modals (`can/could/may`, `must/have to`, `should`), frequency adverbs, comparatives/superlatives, possessives, object pronouns, question formation. Every grammar lesson needs contextual vocabulary, examples, a short reading/listening passage and application tasks.
+- **L25–36 Thematic/Functional Expansion:** animals/facts, food/drinks, fruit/vegetables, health, sports, hobbies, music, transport, town, directions, travel, hotel/airport. Build multi-turn dialogues, short factual texts and practical problem-solving tasks.
+- **L37–48 Integrated English:** airport, restaurant, shopping, health, nature, animals, jobs, reading stories, writing, speaking, opinion and problem solving. Each lesson must actually contain the named skill rather than a translation-only quiz.
+- **L49–56 Functional/Production Skills:** communication, grammar challenges, vocabulary-in-context, present/past/future consolidation, mini-dialogues, guided writing, opinion, scenario-based problem solving and comprehension.
+- **L57–60 Final Assessment:** integrated reading, listening, grammar application, vocabulary-in-context, multi-turn dialogue, picture description, short writing, inference and reasoning. L60 should be a genuine Grade 4 capstone.
+
+#### Grade 4 correction rule
+Grade 4 must be **meaningfully harder than Grade 3**. Difficulty should rise through longer and more connected texts, broader grammar application, multi-step instructions, multi-turn dialogues, inference, justification of answers, guided writing and scenario-based speaking—not just more vocabulary.
+
+### Cross-grade curriculum matrix — target progression before any data write
+| Stage | Grade 2 | Grade 3 | Grade 4 |
+|---|---|---|---|
+| Foundation | Concrete vocabulary; short sentences; guided practice | Longer sentences; connected mini-texts | Intermediate connected texts; contextual grammar |
+| Grammar | One clear rule at a time; simple application | Rule + contrast + short comprehension | Rule contrast + application in context + editing/reasoning |
+| Reading | 3–5 short sentences; literal questions | 5–8 sentences; detail + simple inference | 8–12+ sentences; inference + evidence |
+| Listening | Short familiar dialogues/descriptions | Multi-sentence dialogue/story | Longer dialogue/story with key-detail and inference questions |
+| Speaking | 1–3 sentence guided response | Short description/dialogue with prompts | Multi-turn role-play, opinion and problem solving |
+| Writing | Word/sentence completion; 3–5 sentence guided text | 5–8 sentence guided paragraph | Structured paragraph/message with reasons/details |
+| Picture tasks | Name/identify and describe simple objects | Describe people/places/actions | Describe, compare, infer and explain |
+| Reasoning | One-step choice/inference | Two-step reasoning | Multi-step reasoning and justification |
+| Assessment | Integrated but heavily guided | Mixed skills with moderate independence | Integrated capstone with meaningful production and inference |
+
+### Global content reconstruction rules
+1. Treat the current Supabase rows as a corrupted content source, not as an authoritative curriculum.
+2. Build one authoritative 180-lesson matrix before performing bulk content updates.
+3. Every lesson must be a coherent bundle: title → target grammar → grammar examples → vocabulary → listening → exercises → quizzes.
+4. Do not move vocabulary/listening from one lesson to another merely to make titles look correct; rebuild the intended lesson bundle.
+5. Preserve grade isolation and existing lesson UUID relationships.
+6. Remove duplicated quiz questions while preserving coverage and appropriate difficulty.
+7. Avoid identical exercise templates across all lessons; task variety must follow the grade progression.
+8. Do not add frontend fallbacks that substitute content from another lesson or grade.
+9. Keep Supabase schema/auth/progress logic unchanged; content-only writes should be targeted and auditable.
+10. Validate every rewritten lesson after data updates, then run a final 180-lesson cross-grade QA.
+
 ### Content-quality action list
-1. Remove the 11 duplicated quiz questions from the authoritative lesson content while preserving question count and difficulty.
-2. Review Grades 2–4 lesson depth, especially the later lessons with only 8 vocabulary items, against the intended curriculum progression.
-3. Review difficulty progression: Grade 2 should remain simple and concrete; Grade 3 should introduce more complex texts/dialogues/descriptions; Grade 4 should be the most advanced.
-4. Do not solve these content problems by adding frontend fallbacks that invent or mix content between grades.
-5. Complete the Grade 2 and Grade 3 authoritative curriculum matrices before modifying their content rows.
+1. Complete the authoritative 180-lesson matrix using the target progression above.
+2. Reconstruct Grades 2–4 lesson bundles from that matrix.
+3. Remove the 11 duplicated quiz questions and replace them with non-duplicate questions of equivalent or better assessment value.
+4. Verify every lesson's title, grammar, vocabulary, listening, exercises and quizzes agree semantically.
+5. Verify Grade 2 < Grade 3 < Grade 4 difficulty using text length, sentence complexity, dialogue turns, reasoning and writing demands.
+6. Re-run full structural/content QA after reconstruction.
 
 ### Safety / scope
-- No Supabase schema, rows, auth settings, or production data were modified during this QA pass.
+- No Supabase schema, rows, auth settings, or production data were modified during this curriculum audit.
 - No changes were made to `main`.
 - Work remains isolated on `feat/magic-neon-future-mode`.
 - `academy.html` was inspected but not replaced wholesale because its Auth/Supabase/progress logic is inline and should not be risked without a complete source rewrite.
 
 ## Current status
-**MAGIC NEON AI ACADEMY — FUTURE MODE visual/architecture QA is strong, but curriculum content QA remains open. Grade 2 and Grade 3 have now completed their first full read-only curriculum passes and both require authoritative content realignment before data edits.**
+**MAGIC NEON AI ACADEMY — FUTURE MODE visual/architecture QA is strong, but curriculum content QA has now completed its first full read-only pass for Grades 2, 3 and 4. All three grades require authoritative content reconstruction before production data edits.**
 
-The next safe step is to complete the Grade 4 curriculum pass, then produce the final cross-grade curriculum matrix and only afterward consider targeted Supabase content updates.
+The next safe implementation step is to create the authoritative **180-lesson curriculum matrix** and use it as the sole source for targeted content reconstruction. Only after that matrix is internally consistent should Supabase content rows be updated.
