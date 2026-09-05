@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 180" role="img" aria-label="Magic Neon Lesson Mission HUD 2.0">
+<defs>
+ <linearGradient id="g" x1="0" x2="1"><stop stop-color="#63f7ff"/><stop offset=".48" stop-color="#8d6bff"/><stop offset="1" stop-color="#ff67df"/></linearGradient>
+ <linearGradient id="e" x1="0" x2="1"><stop stop-color="#62f7ff"/><stop offset="1" stop-color="#7568ff"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+ <filter id="soft"><feGaussianBlur stdDeviation="12"/></filter>
+ <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#63eaff" stroke-opacity=".09"/></pattern>
+</defs>
+<rect x="8" y="8" width="1184" height="164" rx="28" fill="#071026" fill-opacity=".9" stroke="url(#g)" stroke-width="2"/>
+<rect x="18" y="18" width="1164" height="144" rx="22" fill="url(#grid)"/>
+<circle cx="75" cy="90" r="42" fill="#10224a" stroke="#63f7ff" stroke-width="2" filter="url(#glow)"/>
+<circle cx="75" cy="90" r="31" fill="none" stroke="#8d6bff" stroke-width="2" stroke-dasharray="5 7"><animateTransform attributeName="transform" type="rotate" from="0 75 90" to="360 75 90" dur="7s" repeatCount="indefinite"/></circle>
+<path d="M75 67l7 17 18 7-18 7-7 18-7-18-18-7 18-7z" fill="url(#g)" filter="url(#glow)"/>
+<g font-family="system-ui,Segoe UI,sans-serif"><text x="140" y="55" fill="#63f7ff" font-size="14" font-weight="800" letter-spacing="3">MAGIC NEON // LESSON MISSION HUD</text><text x="140" y="92" fill="white" font-size="30" font-weight="900">WORLD 01  ·  MISSION 01</text><text x="140" y="119" fill="#aebbdc" font-size="14">MISSION CORE ONLINE  ·  LESSON ACTIVE</text></g>
+<g transform="translate(650 45)"><text x="0" y="0" fill="#aebbdc" font-family="monospace" font-size="12" letter-spacing="2">ENERGY</text><rect y="13" width="360" height="18" rx="9" fill="#111b38" stroke="#5262a0"/><rect x="3" y="16" width="278" height="12" rx="6" fill="url(#e)"><animate attributeName="width" values="278;330;278" dur="2.8s" repeatCount="indefinite"/></rect><text x="372" y="28" fill="#63f7ff" font-family="monospace" font-size="14" font-weight="800">77%</text></g>
+<g transform="translate(650 105)" font-family="monospace" font-size="12" font-weight="800"><circle cx="7" cy="0" r="5" fill="#63f7ff" filter="url(#glow)"/><text x="22" y="4" fill="#63f7ff">● LESSON ACTIVATED</text><text x="205" y="4" fill="#aebbdc">STATUS: READY</text></g>
+<path d="M1150 28v124" stroke="url(#g)" stroke-width="2" stroke-dasharray="4 8" opacity=".7"/>
+</svg>
