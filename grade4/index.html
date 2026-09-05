@@ -1,67 +1,52 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#020611">
-<meta name="description" content="English with Mariami — Grade 4 futuristic English learning universe.">
-<title>English with Mariami — Grade 4 Universe</title>
-<link rel="stylesheet" href="../mobile-app.css?v=20260904">
-<link rel="stylesheet" href="../pwa-mobile.css?v=20260901">
-<link rel="stylesheet" href="../universe-theme.css?v=20260901">
-<link rel="stylesheet" href="../universe-max.css?v=20260901">
-<link rel="stylesheet" href="./grade4.css?v=20260901">
-<link rel="stylesheet" href="./future-visual-layer.css?v=20260902">
-<link rel="stylesheet" href="./magic-future-v2.css?v=20260905">
-<link rel="stylesheet" href="../shared/ai-magic-companion.css?v=20260902">
-<link rel="stylesheet" href="../shared/learning-lab.css?v=20260903">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>English with Mariami — Grade 4</title>
+  <link rel="stylesheet" href="../styles.css?v=20260901">
+  <link rel="stylesheet" href="./grade4-futuristic-content.css?v=20260901">
 </head>
-<body class="u-universe u-grade4">
-<div class="space" aria-hidden="true"><div class="grid"></div><div class="stars"></div><div class="nebula"></div></div>
-<div class="energy" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-<main class="g4-app">
-<header class="g4-nav">
-<a class="brand" href="../academy.html" aria-label="Back to Academy"><b>⚡</b><span>ENGLISH WITH MARIAMI<small>GRADE 4 • NEO EXPLORER • LEARNING UNIVERSE</small></span></a>
-<a class="g4-home" href="../academy.html">↩ BACK TO ACADEMY</a>
-<div class="stats" aria-label="Learning progress"><strong>⚡ <i id="xp">0</i> XP</strong><strong>⭐ <i id="stars">0</i></strong><strong>🔥 <i id="streak">0</i></strong><strong>🏆 <i id="done">0</i></strong></div>
-</header>
-<section class="g4-hero">
-<div class="hero-copy">
-<span class="u-badge">✦ NEO EXPLORER ONLINE • ADAPTIVE LEARNING CORE</span>
-<h1>GRADE <em>04</em></h1>
-<div class="hero-line"><span></span></div>
-<h2>YOUR ENGLISH <b>UNIVERSE</b> AWAITS.</h2>
-<p>Master grammar, vocabulary, reading, listening, speaking, quizzes and brain missions. Every world is separated, focused and built for Grade 4.</p>
-<div class="actions"><button id="start" type="button">⚡ ENTER UNIVERSE</button><button id="review" class="secondary" type="button">🏆 MISSION STATUS</button></div>
-<div id="liveStats" class="g4-live-stats">BOOTING LEARNING CORE…</div>
-</div>
-<div class="hero-orbit" aria-label="Grade 4 learning core">
-<div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div><div class="core"><span>04</span><small>NEO<br>EXPLORER</small></div><div class="core-pulse"></div>
-</div>
-</section>
-<section class="g4-command">
-<div class="command-title"><span class="u-badge">COMMAND CENTER</span><h2>Choose your <span>mission</span></h2><p>60 focused lessons • 6 learning worlds • progressive XP</p></div>
-<div class="g4-progress"><div class="progress-top"><b>UNIVERSE PROGRESS</b><span id="progressText">0%</span></div><div class="progress-track"><i id="progressBar"></i></div><div class="progress-meta"><span id="nextMission">Next mission: Grammar Core</span><span>⚡ Keep learning to level up</span></div></div>
-<div class="g4-tools"><label>⌕ <input id="worldSearch" type="search" placeholder="Search a world or skill…" aria-label="Search Grade 4 worlds"></label><button id="randomMission" type="button">🎲 RANDOM MISSION</button></div>
-</section>
-<section id="missions" class="missions" aria-live="polite"><div class="mission loading"><span class="num">SYSTEM</span><h3>Loading learning worlds…</h3><p>Connecting to the Grade 4 learning core.</p></div></section>
-<footer><a href="../academy.html">↩ BACK TO ACADEMY</a><br><br>• ENGLISH WITH MARIAMI • GRADE 4 • LEARN • PLAY • LEVEL UP •</footer>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../config.js?v=20260901"></script>
-<script src="./grade4-futuristic-content.js?v=20260901"></script>
-<script src="./grade4-runtime-hardening.js?v=20260905"></script>
-<script src="./grade4-content-expansion.js?v=20260905"></script>
-<script src="./grade4-final-audit.js?v=20260908"></script>
-<script src="../shared/mega-vocabulary.js?v=20260902"></script>
-<script src="../shared/vocabulary-boost-v1.js?v=20260902"></script>
-<script src="./grade4.js?v=20260901"></script>
-<script src="./grade4-supabase-progress-bridge.js?v=20260905"></script>
-<script src="./grade4-progression-controller.js?v=20260905"></script>
-<script src="./grade4-interaction-qa.js?v=20260907"></script>
-<script src="../universe-theme.js?v=20260901"></script>
-<script src="../universe-max.js?v=20260901"></script>
-<script src="../shared/ai-magic-companion.js?v=20260902"></script>
-<script src="../shared/learning-lab.js?v=20260903"></script>
+<body>
+  <main id="academy">
+    <section class="hero">
+      <h1>🧠 MAGIC NEON AI ACADEMY</h1>
+      <p>Grade 4 • FUTURE MODE</p>
+    </section>
+    <section id="stats" class="stats">
+      <div>⚡ XP <strong id="xp">0</strong></div>
+      <div>⭐ STARS <strong id="stars">0</strong></div>
+      <div>🔥 STREAK <strong id="streak">0</strong></div>
+      <div>🏆 MISSIONS <strong id="done">0</strong>/60</div>
+    </section>
+    <section class="progress-wrap">
+      <div id="progressText">0/60 • 0%</div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div id="nextMission">Next mission loading…</div>
+    </section>
+    <section id="missions"></section>
+    <section class="actions">
+      <button id="review" type="button">REVIEW / NEXT MISSION</button>
+    </section>
+    <div id="liveStats" aria-live="polite"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../config.js?v=20260901"></script>
+  <script src="./grade4-futuristic-content.js?v=20260901"></script>
+  <script src="./grade4-runtime-hardening.js?v=20260905"></script>
+  <script src="./grade4-content-expansion.js?v=20260905"></script>
+  <script src="./grade4-final-audit.js?v=20260908"></script>
+  <script src="../shared/mega-vocabulary.js?v=20260902"></script>
+  <script src="../shared/vocabulary-boost-v1.js?v=20260902"></script>
+  <script src="./grade4.js?v=20260901"></script>
+  <script src="./grade4-supabase-progress-bridge.js?v=20260905"></script>
+  <script src="./grade4-progression-controller.js?v=20260905"></script>
+  <script src="./grade4-remote-rewards.js?v=20260905"></script>
+  <script src="./grade4-interaction-qa.js?v=20260907"></script>
+  <script src="../universe-theme.js?v=20260901"></script>
+  <script src="../universe-max.js?v=20260901"></script>
+  <script src="../shared/ai-magic-companion.js?v=20260902"></script>
+  <script src="../shared/learning-lab.js?v=20260903"></script>
 </body>
 </html>
