@@ -1,0 +1,13 @@
+/* MAGIC NEON AI ACADEMY — FINAL VISUAL POLISH 8.0
+   Visual-only safety layer: hierarchy, readability, glow discipline, mobile fit. */
+#modal .modal-panel,.g3-vocab-dialog,.g4-vocab-dialog{position:relative;isolation:isolate;overflow:hidden}
+#modal .modal-panel:before,.g3-vocab-dialog:before,.g4-vocab-dialog:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 50% 0%,rgba(95,247,255,.09),transparent 30%),linear-gradient(180deg,rgba(255,255,255,.025),transparent 28%);}
+#modal .modal-panel:after,.g3-vocab-dialog:after,.g4-vocab-dialog:after{content:"";position:absolute;left:7%;right:7%;top:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(95,247,255,.8),rgba(255,79,216,.65),transparent);box-shadow:0 0 18px rgba(95,247,255,.35);opacity:.8}
+#modal button,.g3-vocab-modal button,.g4-vocab-modal button{position:relative;z-index:2}
+#modal .word-card,.g3-word,.g4-live-words{backface-visibility:hidden}
+#modal .word-card:hover,.g3-word:hover,.g4-live-words:hover{transform:translateY(-2px)}
+#modal .quiz-card,.g3-question,.g4-quiz{backface-visibility:hidden}
+#modal .quiz-card:focus-within,.g3-question:focus-within,.g4-quiz:focus-within{outline:1px solid rgba(95,247,255,.65);outline-offset:2px;box-shadow:0 0 30px rgba(95,247,255,.14)}
+#modal .tabs,.g3-section,.g4-live-lesson{scroll-margin-top:12px}
+@media(max-width:760px){#modal .modal-panel,.g3-vocab-dialog,.g4-vocab-dialog{max-height:94vh}#modal .word-card,.g3-word,.g4-live-words{min-width:0}#modal .modal-panel:after,.g3-vocab-dialog:after,.g4-vocab-dialog:after{left:4%;right:4%}}
+@media(prefers-reduced-motion:reduce){#modal .word-card:hover,.g3-word:hover,.g4-live-words:hover{transform:none}}
