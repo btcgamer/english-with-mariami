@@ -74,3 +74,5 @@ jobs:
           name: grade4-playwright-report
           path: playwright-report/
           if-no-files-found: ignore
+
+# Master QA trigger: keep workflow push-triggered for live browser verification.
