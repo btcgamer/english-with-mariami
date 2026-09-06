@@ -1,5 +1,5 @@
 /* English with Mariami — public Supabase browser configuration. */
-window.SUPABASE_URL='https://vtdhvsfqhwesxtwmduew.supabase.co';
+window.SUPABASE_URL='https://vtdhvsfqhwesxtwmdue.supabase.co';
 window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 /*
@@ -172,5 +172,20 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   s.src='/shared/learning-organizer.js?v=20260902';
   s.async=true;
   s.dataset.ewmLearningOrganizer='1';
+  document.head.appendChild(s);
+})();
+
+/* Academy Magic Command Center — loaded through config.js because Academy
+   already bootstraps this configuration before its protected UI initializes. */
+(function(){
+  'use strict';
+  const path=(window.location.pathname||'').toLowerCase();
+  const isAcademy=path.endsWith('/academy.html')||path==='academy.html';
+  if(!isAcademy)return;
+  if(document.querySelector('script[data-ewm-magic-command-center]'))return;
+  const s=document.createElement('script');
+  s.src='/magic-command-center.js?v=20260906';
+  s.defer=true;
+  s.dataset.ewmMagicCommandCenter='1';
   document.head.appendChild(s);
 })();
