@@ -13,8 +13,7 @@
     const icons=['👋','🔢','👨‍👩‍👧','🏠','🐾','🍎','👕','🌦️','🏫','🚌','🌳','🏆'];
     root.innerHTML=Array.from({length:60},(_,i)=>{const n=i+1,t=topics[i%topics.length];return `<article class="lesson u-holo" data-i="${i}" data-offline-grade23="2"><div class="mission-no">${n===60?'FINAL MISSION':'MISSION '+String(n).padStart(2,'0')}</div><div class="scene">${icons[i%icons.length]}</div><h3>${esc(t)}</h3><p class="ka">Magic AI English Mission</p><p class="desc">Offline recovery mode • vocabulary • grammar • speaking • practice</p><div class="lesson-foot"><span class="stars">☆☆☆☆☆</span><button class="enter" type="button">ENTER →</button></div></article>`}).join('');
     if(!root.dataset.g23Bound){root.dataset.g23Bound='1';root.addEventListener('click',g2Open)}
-    window.__EWM_G23_OFFLINE_G2=true;
-    return true;
+    window.__EWM_G23_OFFLINE_G2=true;return true;
   }
   function g2Open(e){
     const card=e.target.closest('[data-offline-grade23="2"]');if(!card)return;
@@ -24,7 +23,9 @@
     modal.classList.add('open');modal.setAttribute('aria-hidden','false');content.querySelector('[data-offline-close]')?.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true')});
   }
   function recoverG3(){
-    const root=document.querySelector('#missions');if(!root||!root.textContent.includes('Loading learning worlds'))return false;
+    const root=document.querySelector('#missions');if(!root)return false;
+    const text=(root.textContent||'').trim();
+    if(text && !/Loading learning worlds|Connecting to the Grade 3 Magic AI learning core/i.test(text))return false;
     const data=window.GRADE3_FUTURISTIC_CONTENT?.worlds;if(!Array.isArray(data)||!data.length)return false;
     root.innerHTML=data.slice(0,60).map((w,i)=>`<article class="mission u-holo" data-i="${i}" data-offline-grade23="3"><span class="num">${i===data.length-1?'FINAL MISSION':'MISSION '+esc(w.id||String(i+1).padStart(2,'0'))} • ${esc(w.category||'LEARNING').toUpperCase()}</span><span class="icon">${esc(w.icon||'🚀')}</span><h3>${esc(w.title||'Mission '+(i+1))}</h3><p>${esc(w.desc||'Grade 3 English mission')}</p><small class="g3-ka">${esc(w.ka||'Grade 3 Core')}</small><div class="g3-mission-meta">${Array.isArray(w.words)?w.words.length:0} WORDS • ${Array.isArray(w.quiz)?w.quiz.length:0} QUIZ • READING • LISTENING • SPEAKING</div><button class="g3-open" type="button">OPEN MISSION →</button></article>`).join('');
     if(!root.dataset.g23Bound){root.dataset.g23Bound='1';root.addEventListener('click',g3Open)}
@@ -38,6 +39,5 @@
     modal.innerHTML=`<div class="g3-vocab-dialog" role="dialog" aria-modal="true"><button class="g3-close" type="button">×</button><div class="g3-modal-icon">${esc(w.icon||'🚀')}</div><div class="num">MISSION ${esc(w.id||'')}</div><h2>${esc(w.title||'Grade 3 Mission')}</h2><p>${esc(w.desc||'')}</p><section class="g3-section"><h3>🧠 GRAMMAR CORE</h3><p>${esc(w.grammar||'Practice the key grammar point.')}</p></section><section class="g3-section"><h3>🎧 LISTENING</h3><p>${esc(w.listen||'')}</p></section><section class="g3-section"><h3>📚 VOCABULARY</h3><div class="g3-word-list">${words}</div></section><section class="g3-section"><h3>📖 READING</h3><p>${esc(w.reading||'')}</p></section><button class="g3-complete" type="button">✓ COMPLETE PRACTICE</button></div>`;
     modal.querySelector('.g3-close').onclick=()=>modal.remove();modal.querySelector('.g3-complete').onclick=()=>{modal.remove();card.classList.add('done')};
   }
-  /* Boot quickly, then retry in case the page scripts are still constructing the curriculum DOM. */
-  let tries=0;const timer=setInterval(()=>{tries++;const ok=grade==='2'?recoverG2():recoverG3();if(ok||tries>=12)clearInterval(timer)},250);
+  let tries=0;const timer=setInterval(()=>{tries++;recover();if(tries>=20)clearInterval(timer)},250);
 })();
