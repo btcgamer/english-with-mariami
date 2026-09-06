@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v8';
+const CACHE_NAME = 'english-with-mariami-v9';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -24,7 +24,6 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {
       console.log('[SW] Installing:', CACHE_NAME);
-      // Do not fail the entire PWA install because one optional shell asset is missing.
       await Promise.allSettled(APP_SHELL.map(url => cache.add(url)));
       return self.skipWaiting();
     })
@@ -61,8 +60,6 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // JS/CSS and other assets use network-first so a new cache-busted release
-  // cannot be shadowed by an older cached response.
   event.respondWith(
     fetch(request)
       .then(response => {
@@ -100,4 +97,4 @@ self.addEventListener('notificationclick', event => {
   }));
 });
 
-console.log('[SW] English with Mariami v8 READY 🚀');
+console.log('[SW] English with Mariami v9 READY 🚀');
