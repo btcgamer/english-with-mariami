@@ -1,0 +1,39 @@
+name: Grade 4 Runtime QA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  runtime-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate Grade 4 QA harness
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f grade4/index.html
+          test -f grade4/grade4-core.js
+          test -f grade4/grade4-qa-hardening.js
+          test -f grade4/INTERACTION-AUDIT.js
+          test -f grade4/grade4-runtime-qa.js
+
+      - name: Validate JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check grade4/grade4-core.js
+          node --check grade4/grade4-qa-hardening.js
+          node --check grade4/INTERACTION-AUDIT.js
+          node --check grade4/grade4-runtime-qa.js
+
+      - name: Report runtime-browser prerequisite
+        shell: bash
+        run: |
+          echo "Grade 4 runtime harness is installed and syntax-valid."
+          echo "The opt-in browser run uses ?qa=1 and must be executed against a deployed Grade 4 page for true 60/60 runtime verification."
