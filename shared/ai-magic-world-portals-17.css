@@ -1,0 +1,32 @@
+/* MAGIC NEON AI ACADEMY — AI MAGIC WORLD PORTALS 17.0
+   Visual-only portal layer. No interaction interception, no curriculum/data changes. */
+.ai-magic-portals17{position:fixed;inset:0;z-index:7;pointer-events:none;overflow:hidden;isolation:isolate;color:#eaffff;font-family:Inter,system-ui,sans-serif}
+.amp17-ambient{position:absolute;inset:-15%;background:radial-gradient(circle at 50% 48%,rgba(95,247,255,.12),transparent 18%),radial-gradient(circle at 20% 25%,rgba(255,79,216,.08),transparent 24%),radial-gradient(circle at 80% 72%,rgba(122,92,255,.08),transparent 25%);filter:blur(2px);animation:amp17-breathe 7s ease-in-out infinite}
+.amp17-route{position:absolute;left:9%;right:9%;top:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(95,247,255,.18),rgba(95,247,255,.7),rgba(255,79,216,.55),transparent);box-shadow:0 0 22px rgba(95,247,255,.25);opacity:.7}
+.amp17-portal{position:absolute;width:150px;height:150px;border-radius:50%;transform:translate(-50%,-50%);opacity:.34;transition:opacity .45s ease,transform .45s ease,filter .45s ease}
+.amp17-portal:before,.amp17-portal:after{content:"";position:absolute;inset:7px;border-radius:50%;border:1px solid rgba(95,247,255,.55);box-shadow:0 0 18px rgba(95,247,255,.16),inset 0 0 18px rgba(95,247,255,.08);animation:amp17-spin 14s linear infinite}
+.amp17-portal:after{inset:24px;border-style:dashed;border-color:rgba(255,79,216,.48);animation-direction:reverse;animation-duration:9s}
+.amp17-inner{position:absolute;inset:38px;border-radius:50%;background:radial-gradient(circle,rgba(95,247,255,.22),rgba(30,15,70,.45) 48%,transparent 72%);box-shadow:0 0 34px rgba(95,247,255,.2),inset 0 0 22px rgba(255,79,216,.14);animation:amp17-core 3.5s ease-in-out infinite}
+.amp17-label{position:absolute;left:50%;top:calc(100% + 9px);transform:translateX(-50%);white-space:nowrap;font-size:9px;letter-spacing:.16em;font-weight:800;text-shadow:0 0 10px rgba(95,247,255,.7);opacity:.8}
+.amp17-status{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:8px;letter-spacing:.13em;font-weight:900;white-space:nowrap;opacity:.75}
+.amp17-energy{position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%);width:86px;height:3px;border:1px solid rgba(95,247,255,.35);background:rgba(5,10,28,.6);overflow:hidden;opacity:.7}
+.amp17-energy i{display:block;height:100%;width:0;background:linear-gradient(90deg,#5ff7ff,#ff4fd8);box-shadow:0 0 10px rgba(95,247,255,.8);transition:width .5s ease}
+.amp17-p1{left:13%;top:27%}.amp17-p2{left:29%;top:68%}.amp17-p3{left:47%;top:26%}.amp17-p4{left:66%;top:69%}.amp17-p5{left:82%;top:29%}.amp17-p6{left:88%;top:76%}
+.amp17-portal.is-complete{opacity:.72;filter:saturate(1.15)}
+.amp17-portal.is-current{opacity:1;transform:translate(-50%,-50%) scale(1.18);filter:drop-shadow(0 0 25px rgba(95,247,255,.45))}
+.amp17-portal.is-current:before{border-width:2px;box-shadow:0 0 34px rgba(95,247,255,.55),inset 0 0 28px rgba(95,247,255,.18)}
+.amp17-portal.is-current .amp17-status{color:#fff;opacity:1}
+.amp17-portal.is-current .amp17-inner{animation:amp17-core 1.8s ease-in-out infinite}
+.amp17-portal.is-locked{opacity:.14;filter:grayscale(.4)}
+.amp17-portal.is-jump{animation:amp17-jump .9s ease-out both}
+.amp17-hud{position:absolute;left:50%;top:7%;transform:translateX(-50%);padding:7px 14px;border:1px solid rgba(95,247,255,.22);background:rgba(3,8,24,.38);backdrop-filter:blur(8px);font-size:10px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 24px rgba(95,247,255,.08)}
+.amp17-hud b{color:#5ff7ff}.amp17-readout{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);font-size:9px;letter-spacing:.17em;opacity:.62;white-space:nowrap}
+.amp17-core{position:absolute;left:50%;top:50%;width:30px;height:30px;border-radius:50%;transform:translate(-50%,-50%);border:1px solid rgba(95,247,255,.7);box-shadow:0 0 25px rgba(95,247,255,.45),0 0 55px rgba(255,79,216,.16);background:radial-gradient(circle,#fff 0 5%,#5ff7ff 14%,rgba(95,247,255,.18) 46%,transparent 70%);animation:amp17-core 2.6s ease-in-out infinite}
+.amp17-core.is-jump{animation:amp17-overload 1s ease-out}
+@keyframes amp17-spin{to{transform:rotate(360deg)}}
+@keyframes amp17-core{0%,100%{transform:scale(.92);opacity:.75}50%{transform:scale(1.08);opacity:1}}
+@keyframes amp17-breathe{0%,100%{opacity:.55;transform:scale(.98)}50%{opacity:1;transform:scale(1.02)}}
+@keyframes amp17-jump{0%{transform:translate(-50%,-50%) scale(1.18);opacity:1}35%{transform:translate(-50%,-50%) scale(1.5);filter:brightness(1.8)}100%{transform:translate(-50%,-50%) scale(1.18)}}
+@keyframes amp17-overload{0%{transform:translate(-50%,-50%) scale(1)}45%{transform:translate(-50%,-50%) scale(2.7);filter:brightness(2)}100%{transform:translate(-50%,-50%) scale(1)}}
+@media(max-width:760px){.amp17-portal{width:100px;height:100px}.amp17-p2{left:24%}.amp17-p4{left:70%}.amp17-p5{left:78%}.amp17-p6{left:82%}.amp17-hud{top:4%;font-size:8px}.amp17-readout{bottom:3%;font-size:7px}.amp17-label{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.amp17-ambient,.amp17-portal:before,.amp17-portal:after,.amp17-inner,.amp17-core{animation:none}.amp17-portal.is-jump,.amp17-core.is-jump{animation:none}}
