@@ -1,5 +1,11 @@
-/* Grade 4 interaction hardening v2 — deterministic mission completion gate */
+/* Grade 4 interaction hardening v3 — deterministic mission completion gate */
 (function(){'use strict';
+function answerValid(input){
+ const text=input?.value.trim()||'';
+ if(text.length<20)return false;
+ const sentences=text.split(/[.!?]+/).map(s=>s.trim()).filter(Boolean);
+ return sentences.length>=4&&sentences.length<=6;
+}
 function arm(){
  const complete=document.querySelector('[data-complete]');
  const task=document.querySelector('.mission-task');
@@ -11,13 +17,13 @@ function arm(){
   if(choices.length){setLocked(!task.querySelector('.choice.g4-answered-correctly'));return}
   const input=task.querySelector('.answer');
   const save=task.querySelector('[data-save]');
-  setLocked(!(input&&save&&input.value.trim().length>=20&&save.dataset.g4Saved==='true'));
+  setLocked(!(input&&save&&answerValid(input)&&save.dataset.g4Saved==='true'));
  };
  setLocked(true);
  task.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{task.querySelectorAll('.choice').forEach(x=>x.classList.remove('g4-answered-correctly'));if(b.dataset.ok==='true')b.classList.add('g4-answered-correctly');evaluate()}));
  const save=task.querySelector('[data-save]');
  const input=task.querySelector('.answer');
- if(save){save.addEventListener('click',()=>{save.dataset.g4Saved=input&&input.value.trim().length>=20?'true':'false';evaluate()})}
+ if(save){save.addEventListener('click',()=>{save.dataset.g4Saved=input&&answerValid(input)?'true':'false';evaluate()})}
  if(input){input.addEventListener('input',()=>{if(save)save.dataset.g4Saved='false';evaluate()})}
  evaluate();
 }
