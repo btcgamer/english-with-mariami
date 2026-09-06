@@ -1,9 +1,0 @@
-/* Grade 4 — signature quantum explorer visual layer. Visual-only: no content, auth or learning logic changes. */
-.g4-app{isolation:isolate}
-.g4-app::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 50% 42%,rgba(0,229,255,.045),transparent 25%),linear-gradient(115deg,transparent 0 42%,rgba(255,255,255,.025) 50%,transparent 58%);opacity:.8;animation:g4Sweep 11s ease-in-out infinite alternate}
-.g4-app::after{content:"";position:fixed;left:50%;top:38%;width:min(68vw,820px);height:min(68vw,820px);pointer-events:none;z-index:-1;transform:translate(-50%,-50%);border:1px solid rgba(0,229,255,.07);border-radius:50%;box-shadow:0 0 80px rgba(0,229,255,.035),0 0 130px rgba(155,108,255,.035);animation:g4Quantum 24s linear infinite}
-.mission{backdrop-filter:blur(10px)}
-.g4-command{backdrop-filter:blur(16px)}
-@keyframes g4Sweep{from{transform:translateX(-2%) scale(1)}to{transform:translateX(2%) scale(1.03)}}
-@keyframes g4Quantum{to{transform:translate(-50%,-50%) rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.g4-app::before,.g4-app::after{animation:none!important}}
