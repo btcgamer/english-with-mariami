@@ -1,6 +1,10 @@
 name: Grade 4 Runtime QA
 
 on:
+  push:
+    paths:
+      - 'grade4/**'
+      - '.github/workflows/grade4-runtime-qa.yml'
   workflow_dispatch:
 
 permissions:
@@ -13,7 +17,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate Grade 4 QA harness
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate Grade 4 files
         shell: bash
         run: |
           set -euo pipefail
@@ -22,6 +31,7 @@ jobs:
           test -f grade4/grade4-qa-hardening.js
           test -f grade4/INTERACTION-AUDIT.js
           test -f grade4/grade4-runtime-qa.js
+          test -f grade4/grade4-runtime-qa-browser.spec.js
 
       - name: Validate JavaScript syntax
         shell: bash
@@ -31,9 +41,36 @@ jobs:
           node --check grade4/grade4-qa-hardening.js
           node --check grade4/INTERACTION-AUDIT.js
           node --check grade4/grade4-runtime-qa.js
+          node --check grade4/grade4-runtime-qa-browser.spec.js
 
-      - name: Report runtime-browser prerequisite
+      - name: Install Playwright
         shell: bash
         run: |
-          echo "Grade 4 runtime harness is installed and syntax-valid."
-          echo "The opt-in browser run uses ?qa=1 and must be executed against a deployed Grade 4 page for true 60/60 runtime verification."
+          set -euo pipefail
+          npm install --no-save @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start Grade 4 static server
+        shell: bash
+        run: |
+          set -euo pipefail
+          nohup python3 -m http.server 4173 --directory . >/tmp/grade4-server.log 2>&1 &
+          for i in {1..20}; do
+            if curl -fsS http://127.0.0.1:4173/grade4/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/grade4-server.log
+          exit 1
+
+      - name: Run Grade 4 60-mission browser QA
+        env:
+          GRADE4_BASE_URL: http://127.0.0.1:4173/grade4/
+        run: npx playwright test grade4/grade4-runtime-qa-browser.spec.js --reporter=line
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade4-playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore
