@@ -23,10 +23,28 @@ body[data-grade="2"].g2-ai-mission .hero .robot{animation:g2Mission .8s ease-out
 body[data-grade="2"].g2-ai-mission .hero .robot:after{content:"MISSION READY";color:var(--g2-cyan)}
 body[data-grade="2"].g2-ai-think .hero .robot{animation:g2Think 1.3s ease-in-out infinite;box-shadow:0 0 20px var(--g2-purple),0 0 55px rgba(184,77,255,.5)}
 body[data-grade="2"].g2-ai-think .hero .robot:after{content:"AI THINKING...";color:var(--g2-purple);text-shadow:0 0 10px var(--g2-purple)}
+body[data-grade="2"].g2-ai-complete .hero .robot{animation:g2Complete .95s ease-out 1;filter:brightness(1.7);box-shadow:0 0 34px var(--g2-green),0 0 95px rgba(184,77,255,.72)}
+body[data-grade="2"].g2-ai-complete .hero .robot:after{content:"MISSION COMPLETE ✦";color:var(--g2-green);text-shadow:0 0 14px var(--g2-green)}
 @keyframes g2Celebrate{50%{transform:translateY(-18px) scale(1.12) rotate(3deg)}}
 @keyframes g2Alert{50%{transform:translateX(7px) rotate(-5deg)}}
 @keyframes g2Mission{50%{transform:translateY(-10px) scale(1.06);filter:hue-rotate(30deg)}}
 @keyframes g2Think{50%{transform:translateY(-5px) rotate(2deg);opacity:.82}}
+@keyframes g2Complete{25%{transform:translateY(-13px) scale(1.08)}60%{transform:translateY(-4px) scale(1.16) rotate(4deg)}100%{transform:translateY(0) scale(1)}}
+.g2-ai-hologram{position:fixed;z-index:1001;left:50%;top:15%;transform:translate(-50%,12px) scale(.86);padding:9px 15px;border:1px solid rgba(69,247,255,.65);border-radius:999px;background:linear-gradient(135deg,rgba(2,6,17,.84),rgba(12,20,48,.72));color:var(--g2-cyan);font:900 10px/1 system-ui;letter-spacing:1.8px;text-shadow:0 0 9px currentColor;box-shadow:0 0 16px rgba(69,247,255,.18),inset 0 0 18px rgba(69,247,255,.06);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;backdrop-filter:blur(6px)}
+.g2-ai-hologram:after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:10px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateX(-50%) rotate(45deg);background:#081126}
+.g2-ai-hologram.show{opacity:1;transform:translate(-50%,0) scale(1);animation:g2HoloScan 1.8s linear infinite}
+.g2-ai-holo-happy{color:var(--g2-green);border-color:rgba(101,255,179,.7)}
+.g2-ai-holo-alert{color:var(--g2-pink);border-color:rgba(255,79,216,.7)}
+.g2-ai-holo-think{color:var(--g2-purple);border-color:rgba(184,77,255,.7)}
+.g2-ai-holo-complete{color:var(--g2-green);border-color:rgba(101,255,179,.8);box-shadow:0 0 26px rgba(101,255,179,.3),0 0 60px rgba(184,77,255,.18)}
+@keyframes g2HoloScan{50%{filter:brightness(1.25)}}
+.g2-celebration-spark{position:fixed;z-index:1000;left:50vw;top:28vh;width:4px;height:4px;border-radius:50%;background:#fff;pointer-events:none;box-shadow:0 0 7px #fff,0 0 15px var(--g2-cyan),0 0 28px var(--g2-purple);animation:g2CelebrationSpark 1s cubic-bezier(.18,.72,.25,1) var(--delay) forwards}
+@keyframes g2CelebrationSpark{0%{opacity:0;transform:translate3d(0,0,0) scale(.3)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--sx),var(--sy),0) scale(0)}}
+.g2-completion-burst{position:fixed;z-index:999;left:50%;top:28vh;width:28px;height:28px;border:2px solid var(--g2-green);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(.2);box-shadow:0 0 18px var(--g2-green),0 0 50px var(--g2-purple);animation:g2CompletionBurst 1.05s ease-out forwards}
+.g2-completion-burst:before,.g2-completion-burst:after{content:"";position:absolute;inset:-12px;border:1px solid rgba(69,247,255,.6);border-radius:50%;animation:g2CompletionRing 1.05s ease-out forwards}
+.g2-completion-burst:after{inset:-25px;border-color:rgba(184,77,255,.48);animation-delay:.08s}
+@keyframes g2CompletionBurst{55%{opacity:1;transform:translate(-50%,-50%) scale(2)}100%{opacity:0;transform:translate(-50%,-50%) scale(3.5)}}
+@keyframes g2CompletionRing{to{transform:scale(2);opacity:0}}
 .g2-cursor{position:fixed;z-index:9999;left:0;top:0;width:18px;height:18px;border:1px solid var(--g2-cyan);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 9px var(--g2-cyan),0 0 25px rgba(77,124,255,.7);transition:width .15s,height .15s,border-color .15s,box-shadow .15s;mix-blend-mode:screen}.g2-cursor-dot{position:fixed;z-index:10000;width:4px;height:4px;border-radius:50%;background:#fff;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 8px #fff,0 0 16px var(--g2-cyan)}.g2-cursor.hover{width:30px;height:30px;border-color:var(--g2-pink);box-shadow:0 0 12px var(--g2-pink),0 0 34px rgba(184,77,255,.75)}
 .g2-xenon-spark{position:fixed;z-index:3;width:3px;height:3px;border-radius:50%;pointer-events:none;background:#fff;box-shadow:0 0 5px #fff,0 0 12px var(--g2-cyan),0 0 22px var(--g2-blue);animation:g2Spark .9s ease-out forwards}
 @keyframes g2Spark{0%{opacity:0;transform:translate3d(0,0,0) scale(.5)}15%{opacity:1}100%{opacity:0;transform:translate3d(var(--sx),var(--sy),0) scale(0)}}
@@ -37,5 +55,5 @@ body[data-grade="2"].g2-ai-think .hero .robot:after{content:"AI THINKING...";col
 @keyframes g2LaunchRing{to{transform:scale(2.2);opacity:0}}
 body[data-grade="2"].g2-ai-mission .app{animation:g2WorldPulse .85s ease-out 1}
 @keyframes g2WorldPulse{35%{filter:brightness(1.18)}70%{filter:brightness(1.05)}}
-@media (pointer:coarse),(max-width:800px){.g2-cursor,.g2-cursor-dot{display:none}body[data-grade="2"]:before{height:55vh;background-size:42px 42px}.hero .robot{transform:scale(.9)}}
-@media(prefers-reduced-motion:reduce){body[data-grade="2"]:before,body[data-grade="2"] .app:before,body[data-grade="2"] .hero .robot,body[data-grade="2"] .hero .robot:before,.g2-xenon-spark,.g2-mission-launch{animation:none!important}.g2-xenon-spark,.g2-mission-launch{display:none}}
+@media (pointer:coarse),(max-width:800px){.g2-cursor,.g2-cursor-dot{display:none}.g2-ai-hologram{top:11%;max-width:80vw;text-align:center;font-size:9px}body[data-grade="2"]:before{height:55vh;background-size:42px 42px}.hero .robot{transform:scale(.9)}}
+@media(prefers-reduced-motion:reduce){body[data-grade="2"]:before,body[data-grade="2"] .app:before,body[data-grade="2"] .hero .robot,body[data-grade="2"] .hero .robot:before,.g2-xenon-spark,.g2-mission-launch,.g2-ai-hologram,.g2-celebration-spark,.g2-completion-burst{animation:none!important}.g2-xenon-spark,.g2-mission-launch,.g2-celebration-spark,.g2-completion-burst{display:none}}
