@@ -1,9 +1,9 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v17';
+const CACHE_NAME = 'english-with-mariami-v18';
 const FUTURE_THEME = './magic-ai-25c.css';
-const SHARED_FUTURE_THEME = './shared/magic-ai-25c-century.css';
-const OFFLINE_CORE = './shared/offline-core-fallback.js';
+const SHARED_FUTURE_THEME = '../shared/magic-ai-25c-century.css';
+const OFFLINE_CORE = '../shared/offline-core-fallback.js';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -11,7 +11,7 @@ const APP_SHELL = [
   './teacher-dashboard.html', './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
   './app.css', './styles.css', './mobile-app.css', './pwa-mobile.css', './pwa.js', './universe-theme.css',
   './universe-theme.js', './universe-max.css', './universe-max.js', './app-icon.svg', FUTURE_THEME,
-  SHARED_FUTURE_THEME, OFFLINE_CORE,
+  './shared/magic-ai-25c-century.css', './shared/offline-core-fallback.js',
   './grade2/index.html', './grade2/grade2.css', './grade2/grade2.js', './grade2/grade2-3d.css',
   './grade2/grade2-dashboard-bridge.js', './grade2/grade2-supabase-bridge.js', './grade2/grade2-content-expansion.js',
   './grade2/grade2-mega-practice-v2.js', './grade2/future-visual-layer.css', './shared/grade23-final-e2e.js',
@@ -109,4 +109,4 @@ self.addEventListener('notificationclick',event=>{
   }));
 });
 
-console.log('[SW] English with Mariami v17 READY — GRADE 2/3/4 OFFLINE CORE + MAGIC AI 🚀');
+console.log('[SW] English with Mariami v18 READY — GRADE 2/3/4 OFFLINE-SAFE CORE 🚀');
