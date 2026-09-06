@@ -17,7 +17,7 @@ function arm(){
  task.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{task.querySelectorAll('.choice').forEach(x=>x.classList.remove('g4-answered-correctly'));if(b.dataset.ok==='true')b.classList.add('g4-answered-correctly');evaluate()}));
  const save=task.querySelector('[data-save]');
  const input=task.querySelector('.answer');
- if(save){save.addEventListener('click',()=>{if(input&&input.value.trim().length>=20){save.dataset.g4Saved='true'}else{save.dataset.g4Saved='false'}evaluate()})}
+ if(save){save.addEventListener('click',()=>{save.dataset.g4Saved=input&&input.value.trim().length>=20?'true':'false';evaluate()})}
  if(input){input.addEventListener('input',()=>{if(save)save.dataset.g4Saved='false';evaluate()})}
  evaluate();
 }
