@@ -3,14 +3,16 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v14';
+const CACHE_NAME = 'english-with-mariami-v15';
+const FUTURE_THEME = './magic-ai-25c.css';
+const THEMED_PAGES = new Set(['/', '/index.html', '/academy.html']);
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
   './login.html', './register.html', './reset-password.html', './teacher-login.html', './teacher.html',
   './teacher-dashboard.html', './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
   './app.css', './styles.css', './mobile-app.css', './pwa-mobile.css', './pwa.js', './universe-theme.css',
-  './universe-theme.js', './universe-max.css', './universe-max.js', './app-icon.svg',
+  './universe-theme.js', './universe-max.css', './universe-max.js', './app-icon.svg', FUTURE_THEME,
   './grade2/index.html', './grade2/grade2.css', './grade2/grade2.js', './grade2/grade2-3d.css',
   './grade2/grade2-dashboard-bridge.js', './grade2/grade2-supabase-bridge.js', './grade2/grade2-content-expansion.js',
   './grade2/grade2-mega-practice-v2.js', './grade2/future-visual-layer.css',
@@ -18,7 +20,7 @@ const APP_SHELL = [
   './grade3/grade3-content-expansion.js', './grade3/grade3-ai-companion.js', './grade3/future-visual-layer.css',
   './grade4/index.html', './grade4/grade4.css', './grade4/grade4.js', './grade4/grade4-futuristic-content.js',
   './grade4/grade4-content-expansion.js', './grade4/future-visual-layer.css', './shared/mega-vocabulary.js',
-  './shared/magic-ai-25c-century.css', './academy-nav.js', './shared/ai-magic-companion.js'
+  './academy-nav.js', './shared/ai-magic-companion.js'
 ];
 
 self.addEventListener('install', event => {
@@ -43,18 +45,39 @@ self.addEventListener('activate', event => {
   );
 });
 
+function themedResponse(response){
+  if(!response || !response.ok) return response;
+  return response.text().then(html => {
+    const marker = 'magic-ai-25c.css';
+    if(html.includes(marker)) return new Response(html, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers
+    });
+    const tag = `<link rel="stylesheet" href="${FUTURE_THEME}">`;
+    const themed = html.includes('</head>') ? html.replace('</head>', `${tag}</head>`) : `${tag}${html}`;
+    const headers = new Headers(response.headers);
+    headers.delete('content-length');
+    return new Response(themed, {status:response.status,statusText:response.statusText,headers});
+  });
+}
+
 self.addEventListener('fetch', event => {
   const request = event.request;
   if (request.method !== 'GET') return;
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-
   if (url.pathname === '/config.js' || url.pathname.endsWith('/config.js')) return;
 
   if (request.mode === 'navigate' || request.destination === 'document') {
     event.respondWith(
-      fetch(request, {cache:'no-store'}).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
+      fetch(request, {cache:'no-store'}).then(response => {
+        return THEMED_PAGES.has(url.pathname) ? themedResponse(response) : response;
+      }).catch(() => caches.match(request).then(cached => {
+        if(!cached) return caches.match('./index.html');
+        return THEMED_PAGES.has(url.pathname) ? themedResponse(cached) : cached;
+      }))
     );
     return;
   }
@@ -91,4 +114,4 @@ self.addEventListener('notificationclick', event => {
   }));
 });
 
-console.log('[SW] English with Mariami v14 READY — MAGIC AI 25TH CENTURY 🚀');
+console.log('[SW] English with Mariami v15 READY — MAGIC AI 25TH CENTURY 🚀');
