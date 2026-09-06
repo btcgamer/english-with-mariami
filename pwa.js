@@ -6,10 +6,33 @@
   var iosStandalone = window.navigator.standalone === true;
   document.documentElement.classList.toggle('is-pwa', !!(standalone || iosStandalone));
 
-  /* Keep installed app navigation inside the app shell whenever possible. */
+  /* One-time recovery from stale/broken service-worker navigation caches. */
+  var RESET_KEY = 'ewm-sw-route-reset-v20';
+  function recoverRouting(){
+    try{
+      if(localStorage.getItem(RESET_KEY)==='1') return Promise.resolve(false);
+      localStorage.setItem(RESET_KEY,'1');
+    }catch(_){ return Promise.resolve(false); }
+    var work=[];
+    if('serviceWorker' in navigator){
+      work.push(navigator.serviceWorker.getRegistrations().then(function(regs){
+        return Promise.all(regs.map(function(reg){return reg.unregister().catch(function(){return false})}));
+      }).catch(function(){return []}));
+    }
+    if('caches' in window){
+      work.push(caches.keys().then(function(names){
+        return Promise.all(names.filter(function(n){return n.indexOf('english-with-mariami-')===0}).map(function(n){return caches.delete(n)}));
+      }).catch(function(){return []}));
+    }
+    return Promise.all(work).then(function(){
+      try{location.reload()}catch(_){}
+      return true;
+    }).catch(function(){return false});
+  }
+
   document.addEventListener('click', function(e){
     var link = e.target && e.target.closest ? e.target.closest('a[href]') : null;
-    if (!link || !standalone) return;
+    if (!link || standalone) return;
     var href = link.getAttribute('href');
     if (!href || href.charAt(0) === '#' || link.target === '_blank' || link.hasAttribute('download')) return;
     try {
@@ -19,7 +42,6 @@
     } catch (_) {}
   }, {passive:true});
 
-  /* Prevent accidental double-tap zoom on app controls without disabling page zoom. */
   var lastTouch = 0;
   document.addEventListener('touchend', function(e){
     var now = Date.now();
@@ -27,14 +49,15 @@
     lastTouch = now;
   }, {passive:false});
 
-  /* Register/update the existing service worker. */
-  if ('serviceWorker' in navigator) {
+  if('serviceWorker' in navigator){
     window.addEventListener('load', function(){
-      navigator.serviceWorker.register('/sw.js', {scope:'/'}).then(function(reg){ if (reg.update) reg.update(); }).catch(function(err){ console.warn('[PWA] Service Worker unavailable:', err); });
+      recoverRouting().then(function(reset){
+        if(reset) return;
+        navigator.serviceWorker.register('/sw.js', {scope:'/'}).then(function(reg){ if(reg.update) reg.update(); }).catch(function(err){ console.warn('[PWA] Service Worker unavailable:', err); });
+      });
     }, {once:true});
   }
 
-  /* Grade 4 install UI was moved to the Academy hub. */
   var deferredPrompt = null;
   var installButton = null;
   function isGrade4(){ return false; }
