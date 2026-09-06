@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v12';
+const CACHE_NAME = 'english-with-mariami-v13';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -50,20 +50,16 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Never cache browser Supabase configuration.
   if (url.pathname === '/config.js' || url.pathname.endsWith('/config.js')) return;
 
-  // Network-first for documents. No runtime response cloning/caching here;
-  // this eliminates Response-body reuse errors while keeping offline fallback.
+  // Navigation is always network-first so updated Grade 2/3/4 shells reach the browser.
   if (request.mode === 'navigate' || request.destination === 'document') {
     event.respondWith(
-      fetch(request).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
+      fetch(request, {cache:'no-store'}).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
     );
     return;
   }
 
-  // Network-first for same-origin assets. Runtime assets are intentionally not
-  // written to cache; the install cache remains the stable offline shell.
   event.respondWith(
     fetch(request).catch(() => caches.match(request).then(cached => cached || caches.match(request, {ignoreSearch:true})))
   );
@@ -96,4 +92,4 @@ self.addEventListener('notificationclick', event => {
   }));
 });
 
-console.log('[SW] English with Mariami v12 READY 🚀');
+console.log('[SW] English with Mariami v13 READY 🚀');
