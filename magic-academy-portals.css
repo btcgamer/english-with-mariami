@@ -1,0 +1,25 @@
+/* English with Mariami — Magic Academy Portal layer. Additive only. */
+.magic-portal-field{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;perspective:1200px}
+.magic-portal-field::before{content:"";position:absolute;left:50%;top:44%;width:min(78vw,980px);height:min(78vw,980px);transform:translate(-50%,-50%) rotateX(64deg);border:1px solid rgba(0,234,255,.16);border-radius:50%;box-shadow:0 0 80px rgba(0,234,255,.12),inset 0 0 100px rgba(139,92,255,.08);animation:magicFieldSpin 24s linear infinite}
+.magic-portal-field::after{content:"";position:absolute;left:50%;top:44%;width:min(58vw,720px);height:min(58vw,720px);transform:translate(-50%,-50%) rotateX(64deg) rotateZ(18deg);border:1px dashed rgba(255,54,217,.18);border-radius:50%;box-shadow:0 0 50px rgba(255,54,217,.08);animation:magicFieldSpinReverse 17s linear infinite}
+.magic-home-portals{position:absolute;left:50%;bottom:8%;transform:translateX(-50%);display:flex;gap:18px;align-items:center;justify-content:center;pointer-events:auto;z-index:5}
+.magic-grade-portal{--portal:#00eaff;position:relative;width:148px;min-height:92px;padding:15px 14px;border:1px solid color-mix(in srgb,var(--portal) 65%,white);border-radius:22px;background:linear-gradient(145deg,rgba(5,24,50,.9),rgba(3,7,22,.82));color:#fff;text-decoration:none;text-align:center;backdrop-filter:blur(14px);box-shadow:0 0 28px color-mix(in srgb,var(--portal) 18%,transparent),inset 0 0 24px rgba(255,255,255,.04);transform-style:preserve-3d;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.magic-grade-portal::before{content:"";position:absolute;inset:-7px;border:1px solid color-mix(in srgb,var(--portal) 28%,transparent);border-radius:inherit;filter:blur(.2px);animation:portalPulse 3.5s ease-in-out infinite}
+.magic-grade-portal:hover,.magic-grade-portal:focus-visible{transform:translateY(-9px) rotateX(5deg) rotateY(-4deg) scale(1.04);box-shadow:0 0 45px color-mix(in srgb,var(--portal) 35%,transparent),inset 0 0 30px color-mix(in srgb,var(--portal) 8%,transparent);outline:none}
+.magic-grade-portal .portal-icon{display:block;font-size:30px;line-height:1;margin-bottom:8px;filter:drop-shadow(0 0 10px var(--portal))}
+.magic-grade-portal strong{display:block;font:900 16px/1.1 Arial,sans-serif;letter-spacing:1px;text-shadow:0 0 10px var(--portal)}
+.magic-grade-portal small{display:block;margin-top:6px;color:#bceef8;font-size:10px;letter-spacing:1.5px;text-transform:uppercase}
+.magic-grade-portal.g2{--portal:#00eaff}.magic-grade-portal.g3{--portal:#8b5cff}.magic-grade-portal.g4{--portal:#ff36d9}
+.magic-academy-aura{position:fixed;left:50%;top:18%;width:min(65vw,850px);height:min(65vw,850px);transform:translate(-50%,-50%);pointer-events:none;z-index:-2;border-radius:50%;background:radial-gradient(circle,rgba(0,234,255,.10),rgba(139,92,255,.05) 38%,transparent 70%);filter:blur(3px);animation:academyAura 7s ease-in-out infinite}
+.magic-academy-orbit{position:fixed;left:50%;top:18%;width:min(52vw,680px);height:min(52vw,680px);transform:translate(-50%,-50%) rotateX(66deg);pointer-events:none;z-index:-1;border:1px solid rgba(0,234,255,.16);border-radius:50%;box-shadow:0 0 40px rgba(0,234,255,.10);animation:magicFieldSpin 20s linear infinite}
+.magic-academy-orbit::before,.magic-academy-orbit::after{content:"";position:absolute;inset:8%;border:1px solid rgba(139,92,255,.15);border-radius:50%;box-shadow:0 0 28px rgba(139,92,255,.08)}
+.magic-academy-orbit::after{inset:20%;border-color:rgba(255,54,217,.13);transform:rotate(58deg)}
+.magic-academy-portals{position:fixed;right:24px;top:86px;display:flex;gap:9px;z-index:80;pointer-events:auto}
+.magic-academy-portals .magic-grade-portal{width:112px;min-height:68px;padding:10px 9px;border-radius:16px}
+.magic-academy-portals .portal-icon{font-size:21px;margin-bottom:5px}.magic-academy-portals strong{font-size:12px}.magic-academy-portals small{font-size:8px;margin-top:4px}
+@keyframes magicFieldSpin{to{transform:translate(-50%,-50%) rotateX(64deg) rotateZ(360deg)}}
+@keyframes magicFieldSpinReverse{to{transform:translate(-50%,-50%) rotateX(64deg) rotateZ(-360deg)}}
+@keyframes portalPulse{50%{transform:scale(1.055);opacity:.5}}
+@keyframes academyAura{50%{transform:translate(-50%,-52%) scale(1.08);opacity:.7}}
+@media(max-width:800px){.magic-home-portals{bottom:3%;width:94%;gap:8px}.magic-grade-portal{width:31vw;min-width:96px;min-height:78px;padding:12px 8px}.magic-grade-portal .portal-icon{font-size:24px}.magic-grade-portal strong{font-size:13px}.magic-grade-portal small{font-size:8px}.magic-academy-portals{top:auto;right:10px;left:10px;bottom:10px;justify-content:center}.magic-academy-portals .magic-grade-portal{width:30vw}.magic-academy-aura{top:28%;width:110vw;height:110vw}.magic-academy-orbit{top:28%;width:90vw;height:90vw}}
+@media(prefers-reduced-motion:reduce){.magic-portal-field::before,.magic-portal-field::after,.magic-grade-portal::before,.magic-academy-aura,.magic-academy-orbit{animation:none!important}}
