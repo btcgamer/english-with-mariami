@@ -84,26 +84,25 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   }
   function installGradeNavigation(){
     if(!gradeMatch)return;
-    const currentGrade=Number(gradeMatch[1]);
     const add=()=>{
       const brand=document.querySelector('.brand');
       if(brand)brand.setAttribute('href','/academy.html');
       /* Grade 3 uses the shared secure logout button in logout.js.
-         Remove both legacy Home variants while preserving the logout loader. */
-      if(currentGrade===3){
+         Keep the old injected Home button disabled on Grade 3 so the
+         upper-right Logout action is the only top-level navigation control. */
+      if(Number(gradeMatch[1])===3){
         const oldHome=document.getElementById('__ewm-academy-home');
         if(oldHome)oldHome.remove();
-        document.querySelectorAll('.g3-home').forEach(function(el){el.remove()});
-      }else{
-        if(document.getElementById('__ewm-academy-home'))return;
-        const home=document.createElement('a');
-        home.id='__ewm-academy-home';
-        home.href='/academy.html';
-        home.textContent='🏠 HOME';
-        home.setAttribute('aria-label','Back to Academy');
-        home.style.cssText='position:fixed;left:16px;top:16px;z-index:999990;display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border:1px solid rgba(0,234,255,.45);border-radius:13px;background:rgba(2,18,35,.86);color:#fff;text-decoration:none;font:900 12px/1 Arial,sans-serif;box-shadow:0 0 18px rgba(0,234,255,.18);backdrop-filter:blur(12px)';
-        document.body.appendChild(home);
+        return;
       }
+      if(document.getElementById('__ewm-academy-home'))return;
+      const home=document.createElement('a');
+      home.id='__ewm-academy-home';
+      home.href='/academy.html';
+      home.textContent='🏠 HOME';
+      home.setAttribute('aria-label','Back to Academy');
+      home.style.cssText='position:fixed;left:16px;top:16px;z-index:999990;display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border:1px solid rgba(0,234,255,.45);border-radius:13px;background:rgba(2,18,35,.86);color:#fff;text-decoration:none;font:900 12px/1 Arial,sans-serif;box-shadow:0 0 18px rgba(0,234,255,.18);backdrop-filter:blur(12px)';
+      document.body.appendChild(home);
     };
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add,{once:true});else add();
     const ls=document.createElement('script');
