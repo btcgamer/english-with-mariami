@@ -1,7 +1,7 @@
 /* English with Mariami — unified Magic Mission Navigator */
 (function(){'use strict';
 if(!/academy\.html$/i.test(location.pathname))return;
-const grades=[2,3,4],total={2:10,3:10,4:60};
+const grades=[2,3,4],total={2:60,3:60,4:60};
 function readJson(k,d){try{const v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v}catch(_){return d}}
 function local(g){const s=readJson(`magic-neon-grade-${g}`,{});return {done:new Set(Array.isArray(s.done)?s.done.map(Number):[]),current:Number(s.current)||1}}
 function next(g){const s=local(g);for(let i=1;i<=total[g];i++)if(!s.done.has(i))return i;return total[g]}
