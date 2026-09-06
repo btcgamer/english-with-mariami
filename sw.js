@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v11';
+const CACHE_NAME = 'english-with-mariami-v12';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -50,43 +50,22 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Never cache the Supabase browser configuration. A stale cached config can
-  // point the login page at an old/deleted project hostname.
+  // Never cache browser Supabase configuration.
   if (url.pathname === '/config.js' || url.pathname.endsWith('/config.js')) return;
 
+  // Network-first for documents. No runtime response cloning/caching here;
+  // this eliminates Response-body reuse errors while keeping offline fallback.
   if (request.mode === 'navigate' || request.destination === 'document') {
     event.respondWith(
-      fetch(request)
-        .then(response => {
-          if (response?.ok) {
-            const cacheResponse = response.clone();
-            event.waitUntil(
-              caches.open(CACHE_NAME)
-                .then(cache => cache.put(request, cacheResponse))
-                .catch(error => console.warn('[SW] Document cache update skipped:', error))
-            );
-          }
-          return response;
-        })
-        .catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
+      fetch(request).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
     );
     return;
   }
 
+  // Network-first for same-origin assets. Runtime assets are intentionally not
+  // written to cache; the install cache remains the stable offline shell.
   event.respondWith(
-    fetch(request)
-      .then(response => {
-        if (response?.ok) {
-          const cacheResponse = response.clone();
-          event.waitUntil(
-            caches.open(CACHE_NAME)
-              .then(cache => cache.put(request, cacheResponse))
-              .catch(error => console.warn('[SW] Asset cache update skipped:', error))
-          );
-        }
-        return response;
-      })
-      .catch(() => caches.match(request).then(cached => cached || caches.match(request, {ignoreSearch:true})))
+    fetch(request).catch(() => caches.match(request).then(cached => cached || caches.match(request, {ignoreSearch:true})))
   );
 });
 
@@ -117,4 +96,4 @@ self.addEventListener('notificationclick', event => {
   }));
 });
 
-console.log('[SW] English with Mariami v11 READY 🚀');
+console.log('[SW] English with Mariami v12 READY 🚀');
