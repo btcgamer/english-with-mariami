@@ -14,9 +14,7 @@ function loadRewards(){
 }
 if(!isAcademy&&!isGrade)return;
 function addNav(){
-  /* Grade shortcuts were intentionally removed from the Academy surface.
-     Keep this hook for backward compatibility with pages that load the
-     script, but do not inject G2/G3/G4 controls anymore. */
+  /* Grade shortcuts were intentionally removed from the Academy surface. */
   return;
 }
 let deferredPrompt=null,installWrap=null;
