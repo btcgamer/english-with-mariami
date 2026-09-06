@@ -1,0 +1,5 @@
+/* MAGIC NEON AI ACADEMY — MAGIC WORLD CONSTELLATION 11.0 */
+(function(){'use strict';if(window.__EWM_MAGIC_WORLD_CONSTELLATION11)return;window.__EWM_MAGIC_WORLD_CONSTELLATION11=true;
+function mount(){if(document.querySelector('.magic-world-constellation11'))return;var o=document.createElement('div');o.className='magic-world-constellation11';o.setAttribute('aria-hidden','true');o.innerHTML='<div class="mwc11-vignette"></div><div class="mwc11-scan"></div><div class="mwc11-constellation"><i class="mwc11-line"></i><i class="mwc11-line"></i><i class="mwc11-line"></i><i class="mwc11-line"></i><i class="mwc11-line"></i><div class="mwc11-core"><i></i><b>AI WORLD CORE // ONLINE</b></div><div class="mwc11-node mwc11-n1"><span>WORLD 01 // G2</span></div><div class="mwc11-node mwc11-n2"><span>WORLD 02 // G3</span></div><div class="mwc11-node mwc11-n3"><span>WORLD 03 // G4</span></div><div class="mwc11-node mwc11-n4"><span>NEURAL GATE</span></div></div><div class="mwc11-readout">✦ WORLD CONSTELLATION // NEURAL ROUTE ACTIVE</div>';document.body.prepend(o)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
+})();
