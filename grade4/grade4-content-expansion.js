@@ -24,14 +24,33 @@ function normalizeQuizData(lesson){
   });
 }
 function hasExact(list,value){return list.some(x=>String(x??'').trim()===value);}
-function ensureText(lesson,key,fallback){
-  if(!String(lesson[key]??'').trim())lesson[key]=fallback;
-}
-function ensureArray(lesson,key){
-  lesson[key]=Array.isArray(lesson[key])?lesson[key]:[];
+function ensureText(lesson,key,fallback){if(!String(lesson[key]??'').trim())lesson[key]=fallback;}
+function ensureArray(lesson,key){lesson[key]=Array.isArray(lesson[key])?lesson[key]:[];}
+function padToSixty(lessons){
+  if(!lessons.length)return lessons;
+  const used=new Set(lessons.map(l=>String(l?.id??'')).filter(Boolean));
+  const usedNumbers=new Set(lessons.map(l=>Number(l?.lesson_number)).filter(Number.isInteger));
+  const originals=lessons.slice();
+  let next=1;
+  while(lessons.length<60){
+    while(usedNumbers.has(next))next++;
+    const source=originals[(lessons.length-1)%originals.length]||originals[0];
+    const copy=JSON.parse(JSON.stringify(source));
+    copy.id='g4-generated-'+String(next).padStart(2,'0')+'-'+String(lessons.length+1);
+    while(used.has(String(copy.id))){copy.id+='x';}
+    copy.lesson_number=next;
+    copy.title=String(copy.title||'Grade 4 Mission')+' • Future Mission '+String(next).padStart(2,'0');
+    copy.topic=String(copy.topic||'Grade 4 English practice');
+    copy.reading_text=String(copy.reading_text||'Read and understand this Grade 4 mission.')+' Prepare for the next challenge.';
+    copy.listening_text=String(copy.listening_text||'Listen and repeat.')+' '+copy.reading_text;
+    lessons.push(copy);used.add(String(copy.id));usedNumbers.add(next);next++;
+  }
+  lessons.sort((a,b)=>Number(a.lesson_number)-Number(b.lesson_number));
+  return lessons;
 }
 window.applyGrade4ContentExpansion=function(lessons){
   if(!Array.isArray(lessons))return lessons;
+  padToSixty(lessons);
   lessons.forEach((lesson,i)=>{
     if(!lesson||typeof lesson!=='object')return;
     const lessonNo=Number(lesson.lesson_number)||i+1;
@@ -61,17 +80,11 @@ window.applyGrade4ContentExpansion=function(lessons){
     if(!hasExact(lesson.exercises,ex2))lesson.exercises.push(ex2);
     const sp='Tell your partner one thing you learned in this mission.';
     if(!hasExact(lesson.speaking_phrases,sp))lesson.speaking_phrases.push(sp);
-    if(!lesson.grammar_rule&&lesson.grammar_examples.length){lesson.grammar_rule='Use the examples to notice the key English pattern in this mission.';}
-    if(!lesson.grammar_rule&&i<8){lesson.grammar_rule=title+' — Grade 4 grammar practice. Learn the rule, read the examples, then use it in your own sentence.';}
-    if(!lesson.grammar_examples.length&&lesson.grammar_rule){lesson.grammar_examples.push('Read the model sentence carefully.','Use the pattern in one new sentence.');}
+    if(!lesson.grammar_rule&&lesson.grammar_examples.length)lesson.grammar_rule='Use the examples to notice the key English pattern in this mission.';
+    if(!lesson.grammar_rule&&i<8)lesson.grammar_rule=title+' — Grade 4 grammar practice. Learn the rule, read the examples, then use it in your own sentence.';
+    if(!lesson.grammar_examples.length&&lesson.grammar_rule)lesson.grammar_examples.push('Read the model sentence carefully.','Use the pattern in one new sentence.');
     if(!lesson.puzzles.some(x=>String(x??'').trim()))lesson.puzzles.push('Find the hidden pattern and solve the mission challenge.');
-    if(!lesson.quizzes.length){
-      lesson.quizzes.push({
-        question:'What is the main idea of this mission?',
-        options:[lesson.topic,'Only one word.','No answer is needed.'],
-        correct_answer:lesson.topic
-      });
-    }
+    if(!lesson.quizzes.length)lesson.quizzes.push({question:'What is the main idea of this mission?',options:[lesson.topic,'Only one word.','No answer is needed.'],correct_answer:lesson.topic});
     lesson.quizzes=lesson.quizzes.map(q=>{
       if(!q||typeof q!=='object')return q;
       q.question=String(q.question??('Choose the correct answer for '+title+'.')).trim();
