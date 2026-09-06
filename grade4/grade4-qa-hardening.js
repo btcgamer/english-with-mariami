@@ -7,7 +7,6 @@ function arm(){
  complete.dataset.gateArmed='true';
  const setLocked=locked=>{complete.disabled=locked;complete.setAttribute('aria-disabled',String(locked));if(locked)complete.title='Complete the mission task first';else complete.removeAttribute('title')};
  const evaluate=()=>{
-  const choice=task.querySelector('.choice[data-ok="true"]');
   const choices=task.querySelectorAll('.choice');
   if(choices.length){setLocked(!task.querySelector('.choice.g4-answered-correctly'));return}
   const input=task.querySelector('.answer');
@@ -18,8 +17,8 @@ function arm(){
  task.querySelectorAll('.choice').forEach(b=>b.addEventListener('click',()=>{task.querySelectorAll('.choice').forEach(x=>x.classList.remove('g4-answered-correctly'));if(b.dataset.ok==='true')b.classList.add('g4-answered-correctly');evaluate()}));
  const save=task.querySelector('[data-save]');
  const input=task.querySelector('.answer');
- if(save){save.addEventListener('click',()=>{if(input&&input.value.trim().length>=20){save.dataset.g4Saved='true';evaluate()}else{save.dataset.g4Saved='false';evaluate()}})}
- if(input){input.addEventListener('input',()=>{if(input.value.trim().length<20&&save)save.dataset.g4Saved='false';evaluate()})}
+ if(save){save.addEventListener('click',()=>{if(input&&input.value.trim().length>=20){save.dataset.g4Saved='true'}else{save.dataset.g4Saved='false'}evaluate()})}
+ if(input){input.addEventListener('input',()=>{if(save)save.dataset.g4Saved='false';evaluate()})}
  evaluate();
 }
 function scan(){arm()}
