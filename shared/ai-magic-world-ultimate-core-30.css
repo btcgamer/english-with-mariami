@@ -1,0 +1,20 @@
+/* AI MAGIC WORLD — ULTIMATE CORE 30.0
+   Visual-only cinematic command layer. */
+.ai-ultimate-core30{position:fixed;inset:0;z-index:31;pointer-events:none;overflow:hidden;opacity:.9;font-family:Inter,system-ui,sans-serif;color:#eaffff}
+.ai-ultimate-core30 .u30-rift{position:absolute;left:50%;top:50%;width:min(54vw,620px);aspect-ratio:1;transform:translate(-50%,-50%);border:1px solid rgba(120,240,255,.28);border-radius:50%;box-shadow:0 0 30px rgba(90,220,255,.14),inset 0 0 55px rgba(120,120,255,.12);animation:u30Spin 18s linear infinite}
+.ai-ultimate-core30 .u30-rift:before,.ai-ultimate-core30 .u30-rift:after{content:"";position:absolute;inset:10%;border:1px dashed rgba(190,140,255,.34);border-radius:50%;animation:u30Spin 11s linear infinite reverse}
+.ai-ultimate-core30 .u30-rift:after{inset:25%;border-style:solid;border-color:rgba(100,255,240,.25);animation-duration:7s}
+.ai-ultimate-core30 .u30-core{position:absolute;left:50%;top:50%;width:105px;height:105px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.9) 0 3%,rgba(90,240,255,.55) 12%,rgba(120,80,255,.2) 43%,transparent 70%);box-shadow:0 0 35px rgba(100,240,255,.7),0 0 90px rgba(130,80,255,.28);animation:u30Pulse 2.2s ease-in-out infinite}
+.ai-ultimate-core30 .u30-beam{position:absolute;left:50%;top:0;width:2px;height:100%;transform:translateX(-50%);background:linear-gradient(transparent,rgba(110,240,255,.5),transparent);box-shadow:0 0 18px rgba(100,240,255,.4);animation:u30Beam 3.5s ease-in-out infinite}
+.ai-ultimate-core30 .u30-hud{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);padding:8px 18px;border:1px solid rgba(120,240,255,.25);border-radius:999px;background:rgba(3,10,28,.48);backdrop-filter:blur(8px);letter-spacing:.18em;font-size:11px;text-align:center;white-space:nowrap;box-shadow:0 0 22px rgba(70,220,255,.1)}
+.ai-ultimate-core30.is-warping .u30-rift{animation:u30Warp 1.15s cubic-bezier(.2,.8,.2,1)}
+.ai-ultimate-core30.is-warping .u30-core{animation:u30Overload .9s ease-out}
+.ai-ultimate-core30.is-warping .u30-beam{animation:u30Flash .9s ease-out}
+@keyframes u30Spin{to{transform:rotate(360deg)}}
+@keyframes u30Pulse{50%{transform:translate(-50%,-50%) scale(1.18);filter:brightness(1.4)}}
+@keyframes u30Beam{50%{opacity:.25;transform:translateX(-50%) scaleX(.4)}}
+@keyframes u30Warp{50%{transform:translate(-50%,-50%) scale(1.75);filter:brightness(1.8)}}
+@keyframes u30Overload{50%{transform:translate(-50%,-50%) scale(2.2);filter:brightness(2)}}
+@keyframes u30Flash{50%{opacity:1;box-shadow:0 0 70px rgba(150,245,255,.95)}}
+@media (max-width:700px){.ai-ultimate-core30 .u30-rift{width:86vw}.ai-ultimate-core30 .u30-core{width:72px;height:72px}.ai-ultimate-core30 .u30-hud{font-size:9px;bottom:4%;max-width:90vw;overflow:hidden;text-overflow:ellipsis}}
+@media (prefers-reduced-motion:reduce){.ai-ultimate-core30 .u30-rift,.ai-ultimate-core30 .u30-rift:before,.ai-ultimate-core30 .u30-rift:after,.ai-ultimate-core30 .u30-core,.ai-ultimate-core30 .u30-beam{animation:none}.ai-ultimate-core30.is-warping .u30-rift,.ai-ultimate-core30.is-warping .u30-core,.ai-ultimate-core30.is-warping .u30-beam{animation:none}}
