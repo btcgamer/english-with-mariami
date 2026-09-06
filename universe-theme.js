@@ -141,6 +141,8 @@
   loadOnce('css','/universe-max.css');
   loadOnce('css','/shared/lesson-design.css');
   loadOnce('js','/universe-max.js');
+  loadOnce('css','/magic-academy-portals.css');
+  loadOnce('js','/magic-academy-portals.js');
 
   /* Root page: manifest + existing service worker. */
   if(grade==='home'){
