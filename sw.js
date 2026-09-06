@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v13';
+const CACHE_NAME = 'english-with-mariami-v14';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -18,7 +18,7 @@ const APP_SHELL = [
   './grade3/grade3-content-expansion.js', './grade3/grade3-ai-companion.js', './grade3/future-visual-layer.css',
   './grade4/index.html', './grade4/grade4.css', './grade4/grade4.js', './grade4/grade4-futuristic-content.js',
   './grade4/grade4-content-expansion.js', './grade4/future-visual-layer.css', './shared/mega-vocabulary.js',
-  './academy-nav.js', './shared/ai-magic-companion.js'
+  './shared/magic-ai-25c-century.css', './academy-nav.js', './shared/ai-magic-companion.js'
 ];
 
 self.addEventListener('install', event => {
@@ -52,7 +52,6 @@ self.addEventListener('fetch', event => {
 
   if (url.pathname === '/config.js' || url.pathname.endsWith('/config.js')) return;
 
-  // Navigation is always network-first so updated Grade 2/3/4 shells reach the browser.
   if (request.mode === 'navigate' || request.destination === 'document') {
     event.respondWith(
       fetch(request, {cache:'no-store'}).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
@@ -92,4 +91,4 @@ self.addEventListener('notificationclick', event => {
   }));
 });
 
-console.log('[SW] English with Mariami v13 READY 🚀');
+console.log('[SW] English with Mariami v14 READY — MAGIC AI 25TH CENTURY 🚀');
