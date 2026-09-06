@@ -25,18 +25,25 @@ body[data-grade="2"].g2-ai-think .hero .robot{animation:g2Think 1.3s ease-in-out
 body[data-grade="2"].g2-ai-think .hero .robot:after{content:"AI THINKING...";color:var(--g2-purple);text-shadow:0 0 10px var(--g2-purple)}
 body[data-grade="2"].g2-ai-complete .hero .robot{animation:g2Complete .95s ease-out 1;filter:brightness(1.7);box-shadow:0 0 34px var(--g2-green),0 0 95px rgba(184,77,255,.72)}
 body[data-grade="2"].g2-ai-complete .hero .robot:after{content:"MISSION COMPLETE ✦";color:var(--g2-green);text-shadow:0 0 14px var(--g2-green)}
+body[data-grade="2"].g2-ai-encourage .hero .robot{animation:g2Encourage .7s ease-in-out 2;box-shadow:0 0 22px var(--g2-cyan),0 0 58px rgba(77,124,255,.45)}
+body[data-grade="2"].g2-ai-encourage .hero .robot:after{content:"KEEP GOING ✦";color:var(--g2-cyan)}
+body[data-grade="2"].g2-ai-mastery .hero .robot{animation:g2Mastery 1s ease-in-out 2;filter:brightness(1.45);box-shadow:0 0 34px var(--g2-green),0 0 90px rgba(184,77,255,.55)}
+body[data-grade="2"].g2-ai-mastery .hero .robot:after{content:"SKILL BOOSTED ✦";color:var(--g2-green);text-shadow:0 0 12px var(--g2-green)}
 @keyframes g2Celebrate{50%{transform:translateY(-18px) scale(1.12) rotate(3deg)}}
 @keyframes g2Alert{50%{transform:translateX(7px) rotate(-5deg)}}
 @keyframes g2Mission{50%{transform:translateY(-10px) scale(1.06);filter:hue-rotate(30deg)}}
 @keyframes g2Think{50%{transform:translateY(-5px) rotate(2deg);opacity:.82}}
 @keyframes g2Complete{25%{transform:translateY(-13px) scale(1.08)}60%{transform:translateY(-4px) scale(1.16) rotate(4deg)}100%{transform:translateY(0) scale(1)}}
+@keyframes g2Encourage{50%{transform:translateY(-6px) rotate(-2deg);filter:brightness(1.18)}}
+@keyframes g2Mastery{35%{transform:translateY(-12px) scale(1.1) rotate(2deg)}70%{transform:translateY(-5px) scale(1.16);filter:hue-rotate(18deg)}}
 .g2-ai-hologram{position:fixed;z-index:1001;left:50%;top:15%;transform:translate(-50%,12px) scale(.86);padding:9px 15px;border:1px solid rgba(69,247,255,.65);border-radius:999px;background:linear-gradient(135deg,rgba(2,6,17,.84),rgba(12,20,48,.72));color:var(--g2-cyan);font:900 10px/1 system-ui;letter-spacing:1.8px;text-shadow:0 0 9px currentColor;box-shadow:0 0 16px rgba(69,247,255,.18),inset 0 0 18px rgba(69,247,255,.06);opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;backdrop-filter:blur(6px)}
 .g2-ai-hologram:after{content:"";position:absolute;left:50%;bottom:-7px;width:10px;height:10px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateX(-50%) rotate(45deg);background:#081126}
 .g2-ai-hologram.show{opacity:1;transform:translate(-50%,0) scale(1);animation:g2HoloScan 1.8s linear infinite}
 .g2-ai-holo-happy{color:var(--g2-green);border-color:rgba(101,255,179,.7)}
 .g2-ai-holo-alert{color:var(--g2-pink);border-color:rgba(255,79,216,.7)}
 .g2-ai-holo-think{color:var(--g2-purple);border-color:rgba(184,77,255,.7)}
-.g2-ai-holo-complete{color:var(--g2-green);border-color:rgba(101,255,179,.8);box-shadow:0 0 26px rgba(101,255,179,.3),0 0 60px rgba(184,77,255,.18)}
+.g2-ai-holo-complete,.g2-ai-holo-mastery{color:var(--g2-green);border-color:rgba(101,255,179,.8);box-shadow:0 0 26px rgba(101,255,179,.3),0 0 60px rgba(184,77,255,.18)}
+.g2-ai-holo-encourage{color:var(--g2-cyan);border-color:rgba(69,247,255,.7)}
 @keyframes g2HoloScan{50%{filter:brightness(1.25)}}
 .g2-celebration-spark{position:fixed;z-index:1000;left:50vw;top:28vh;width:4px;height:4px;border-radius:50%;background:#fff;pointer-events:none;box-shadow:0 0 7px #fff,0 0 15px var(--g2-cyan),0 0 28px var(--g2-purple);animation:g2CelebrationSpark 1s cubic-bezier(.18,.72,.25,1) var(--delay) forwards}
 @keyframes g2CelebrationSpark{0%{opacity:0;transform:translate3d(0,0,0) scale(.3)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--sx),var(--sy),0) scale(0)}}
