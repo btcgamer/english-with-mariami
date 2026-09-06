@@ -13,33 +13,20 @@ function decorate(){const q='.lesson,.mission,.card,.grade-card,.grade,.feature-
 function robotFX(){if(reduced||mobile)return;const robot=document.querySelector('.ai-robot');if(!robot)return;robot.style.touchAction='manipulation';function move(x,y){const r=robot.getBoundingClientRect();const px=(x-r.left)/r.width-.5,py=(y-r.top)/r.height-.5;robot.style.setProperty('--robot-rx',(-py*9).toFixed(2)+'deg');robot.style.setProperty('--robot-ry',(px*12).toFixed(2)+'deg');robot.classList.add('robot-interactive')}function reset(){robot.style.removeProperty('--robot-rx');robot.style.removeProperty('--robot-ry');robot.classList.remove('robot-interactive');robot.classList.remove('robot-touched')}robot.addEventListener('pointerenter',()=>robot.classList.add('robot-interactive'),{passive:true});robot.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});robot.addEventListener('pointerleave',reset,{passive:true});robot.addEventListener('pointerdown',e=>{move(e.clientX,e.clientY);robot.classList.add('robot-touched')},{passive:true});robot.addEventListener('pointerup',()=>robot.classList.remove('robot-touched'),{passive:true});robot.addEventListener('pointercancel',reset,{passive:true})}
 function addRobotCompanion(){
   if(document.querySelector('.u-robot-companion')||grade==='home'||mobile)return;
-  const r=document.createElement('div');
-  r.className='u-robot-companion';
-  r.setAttribute('aria-hidden','true');
-  r.innerHTML='<span class="u-rc-aura"></span><span class="u-rc-body"><span class="u-rc-eye e1"></span><span class="u-rc-eye e2"></span><span class="u-rc-mouth"></span></span>';
-  document.body.appendChild(r);
-  const half=24;
-  let tx=window.innerWidth-half,ty=window.innerHeight-half,x=tx,y=ty,active=false,lastFrame=performance.now();
-  function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
-  function target(px,py){tx=clamp(px,half,window.innerWidth-half);ty=clamp(py,half,window.innerHeight-half);active=true;r.classList.add('u-rc-active')}
+  const r=document.createElement('div');r.className='u-robot-companion';r.setAttribute('aria-hidden','true');
+  r.innerHTML='<span class="u-rc-aura"></span><span class="u-rc-body"><span class="u-rc-eye e1"></span><span class="u-rc-eye e2"></span><span class="u-rc-mouth"></span></span>';document.body.appendChild(r);
+  const half=24;let tx=window.innerWidth-half,ty=window.innerHeight-half,x=tx,y=ty,active=false,lastFrame=performance.now();
+  function clamp(v,min,max){return Math.max(min,Math.min(max,v))}function target(px,py){tx=clamp(px,half,window.innerWidth-half);ty=clamp(py,half,window.innerHeight-half);active=true;r.classList.add('u-rc-active')}
   function follow(now){const dt=Math.min(40,Math.max(8,now-lastFrame));lastFrame=now;if(active){if(reduced){x=tx;y=ty}else{const alpha=1-Math.pow(1-.28,dt/16.67);x+=(tx-x)*alpha;y+=(ty-y)*alpha}r.style.transform='translate3d('+(x-half)+'px,'+(y-half)+'px,0)'}requestAnimationFrame(follow)}
-  function handlePointer(e){if(e.pointerType==='touch'||e.pointerType==='pen'||e.pointerType==='mouse')target(e.clientX,e.clientY)}
-  window.addEventListener('pointermove',handlePointer,{passive:true});
-  window.addEventListener('pointerdown',handlePointer,{passive:true});
-  window.addEventListener('touchmove',e=>{const t=e.touches&&e.touches[0];if(t)target(t.clientX,t.clientY)},{passive:true});
-  window.addEventListener('touchstart',e=>{const t=e.touches&&e.touches[0];if(t)target(t.clientX,t.clientY)},{passive:true});
-  window.addEventListener('resize',()=>{tx=clamp(tx,half,innerWidth-half);ty=clamp(ty,half,innerHeight-half);x=clamp(x,half,innerWidth-half);y=clamp(y,half,innerHeight-half)},{passive:true});
-  requestAnimationFrame(follow);
+  window.addEventListener('pointermove',e=>target(e.clientX,e.clientY),{passive:true});window.addEventListener('pointerdown',e=>target(e.clientX,e.clientY),{passive:true});window.addEventListener('touchmove',e=>{const t=e.touches&&e.touches[0];if(t)target(t.clientX,t.clientY)},{passive:true});window.addEventListener('touchstart',e=>{const t=e.touches&&e.touches[0];if(t)target(t.clientX,t.clientY)},{passive:true});
+  window.addEventListener('resize',()=>{tx=clamp(tx,half,innerWidth-half);ty=clamp(ty,half,innerHeight-half);x=clamp(x,half,innerWidth-half);y=clamp(y,half,innerHeight-half)},{passive:true});requestAnimationFrame(follow)
 }
-function loadOfflineRecovery(){
-  if(grade!=='2'&&grade!=='3')return;
-  if(document.querySelector('script[data-g23-offline-recovery]'))return;
-  const s=document.createElement('script');
-  s.src='/shared/grade23-offline-recovery.js?v=20260906-r1';
-  s.defer=true;
-  s.dataset.g23OfflineRecovery='1';
-  document.body.appendChild(s);
-}
-function init(){addParticles();addHud();addNav();decorate();addRobotCompanion();loadOfflineRecovery();if(!mobile){new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}}
+function loadOfflineRecovery(){if(grade!=='2'&&grade!=='3')return;if(document.querySelector('script[data-g23-offline-recovery]'))return;const s=document.createElement('script');s.src='/shared/grade23-offline-recovery.js?v=20260906-r1';s.defer=true;s.dataset.g23OfflineRecovery='1';document.body.appendChild(s)}
+
+/* Magical 3D portal for the public home/academy entrance. */
+function addMagicStage(){if(grade!=='home'||document.querySelector('.u-magic-stage'))return;const stage=document.createElement('div');stage.className='u-magic-stage';stage.setAttribute('aria-hidden','true');stage.innerHTML='<div class="u-magic-core"></div><span class="u-magic-rune">✦</span><span class="u-magic-rune">◈</span><span class="u-magic-rune">✧</span><span class="u-magic-rune">◇</span>';document.body.appendChild(stage)}
+function magicTilt(){if(reduced)return;const targets=document.querySelectorAll('.hero,.hero-content,.lesson,.info-card,.final-cta,.neon-card,.world-card,.portal');if(!targets.length)return;let raf=0,lastX=innerWidth/2,lastY=innerHeight/2;function frame(){raf=0;targets.forEach(el=>{if(innerWidth>900&&!el.matches(':hover'))return;const r=el.getBoundingClientRect();if(r.width<40||r.height<40)return;const x=(lastX-(r.left+r.width/2))/r.width,y=(lastY-(r.top+r.height/2))/r.height;el.classList.add('u-magic-tilt');el.style.transform='perspective(1100px) rotateX('+(-y*2.8).toFixed(2)+'deg) rotateY('+(x*3.8).toFixed(2)+'deg) translateZ(8px)'})}window.addEventListener('pointermove',e=>{lastX=e.clientX;lastY=e.clientY;if(!raf)raf=requestAnimationFrame(frame)},{passive:true})}
+function sparkFX(){if(reduced||mobile)return;document.addEventListener('pointerdown',e=>{const s=document.createElement('span');s.className='u-magic-spark';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';body.appendChild(s);setTimeout(()=>s.remove(),700)},{passive:true})}
+function init(){addParticles();addHud();addNav();decorate();addRobotCompanion();loadOfflineRecovery();addMagicStage();magicTilt();sparkFX();if(!mobile){new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
