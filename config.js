@@ -1,5 +1,5 @@
 /* English with Mariami — public Supabase browser configuration. */
-window.SUPABASE_URL='https://vtdhvsfqhwesxtwmduew.supabase.co';
+window.SUPABASE_URL='https://vtdhvsfqhwesxtwmdue.supabase.co';
 window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 /*
@@ -87,6 +87,14 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     const add=()=>{
       const brand=document.querySelector('.brand');
       if(brand)brand.setAttribute('href','/academy.html');
+      /* Grade 3 uses the shared secure logout button in logout.js.
+         Keep the old injected Home button disabled on Grade 3 so the
+         upper-right Logout action is the only top-level navigation control. */
+      if(Number(gradeMatch[1])===3){
+        const oldHome=document.getElementById('__ewm-academy-home');
+        if(oldHome)oldHome.remove();
+        return;
+      }
       if(document.getElementById('__ewm-academy-home'))return;
       const home=document.createElement('a');
       home.id='__ewm-academy-home';
