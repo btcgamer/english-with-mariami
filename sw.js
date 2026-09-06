@@ -1,81 +1,53 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v19';
+const CACHE_NAME = 'english-with-mariami-v21';
 const FUTURE_THEME = './magic-ai-25c.css';
-const SHARED_FUTURE_THEME = '../shared/magic-ai-25c-century.css';
-const OFFLINE_CORE = '../shared/offline-core-fallback.js';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
-  './grade2/', './grade3/', './grade4/',
+  './grade2/index.html', './grade3/index.html', './grade4/index.html',
   './login.html', './register.html', './reset-password.html', './teacher-login.html', './teacher.html',
   './teacher-dashboard.html', './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
   './app.css', './styles.css', './mobile-app.css', './pwa-mobile.css', './pwa.js', './universe-theme.css',
   './universe-theme.js', './universe-max.css', './universe-max.js', './app-icon.svg', FUTURE_THEME,
   './shared/magic-ai-25c-century.css', './shared/offline-core-fallback.js',
-  './grade2/index.html', './grade2/grade2.css', './grade2/grade2.js', './grade2/grade2-3d.css',
+  './grade2/grade2.css', './grade2/grade2.js', './grade2/grade2-3d.css',
   './grade2/grade2-dashboard-bridge.js', './grade2/grade2-supabase-bridge.js', './grade2/grade2-content-expansion.js',
   './grade2/grade2-mega-practice-v2.js', './grade2/future-visual-layer.css', './shared/grade23-final-e2e.js',
-  './grade3/index.html', './grade3/grade3.css', './grade3/grade3.js', './grade3/grade3-futuristic-content.js',
+  './grade3/grade3.css', './grade3/grade3.js', './grade3/grade3-futuristic-content.js',
   './grade3/grade3-content-expansion.js', './grade3/grade3-ai-companion.js', './grade3/future-visual-layer.css', './shared/grade23-final-e2e.js',
-  './grade4/index.html', './grade4/grade4.css', './grade4/grade4-futuristic-content.js', './grade4/future-visual-layer.css',
+  './grade4/grade4.css', './grade4/grade4-futuristic-content.js', './grade4/future-visual-layer.css',
   './grade4/grade4-runtime-hardening.js', './grade4/grade4-content-expansion.js', './grade4/grade4.js',
   './grade4/grade4-supabase-progress-bridge.js', './grade4/grade4-progression-controller.js', './grade4/grade4-remote-rewards.js',
   './shared/mega-vocabulary.js', './shared/vocabulary-boost-v1.js', './academy-nav.js', './shared/ai-magic-companion.js'
 ];
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(async cache => {
-      console.log('[SW] Installing:', CACHE_NAME);
-      await Promise.allSettled(APP_SHELL.map(url => cache.add(url)));
-      return self.skipWaiting();
-    })
-  );
-});
+self.addEventListener('install', event => event.waitUntil(
+  caches.open(CACHE_NAME).then(async cache => {
+    await Promise.allSettled(APP_SHELL.map(url => cache.add(url)));
+    return self.skipWaiting();
+  })
+));
 
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys()
-      .then(names => Promise.all(
-        names
-          .filter(name => name.startsWith('english-with-mariami-') && name !== CACHE_NAME)
-          .map(name => caches.delete(name))
-      ))
-      .then(() => self.clients.claim())
-  );
-});
+self.addEventListener('activate', event => event.waitUntil(
+  caches.keys().then(names => Promise.all(
+    names.filter(n => n.startsWith('english-with-mariami-') && n !== CACHE_NAME).map(n => caches.delete(n))
+  )).then(() => self.clients.claim())
+));
 
-function isGradePage(pathname){ return /\/grade[234](?:\/|\.html$)/.test(pathname); }
-function isGradeUniverse(pathname){ return /\/grade[234](?:\/|\/index\.html)$/.test(pathname); }
-function isThemedPage(pathname){ return pathname.endsWith('/index.html') || pathname.endsWith('/academy.html') || pathname === '/' || pathname === '/academy.html' || isGradePage(pathname); }
-function gradeIndexPath(pathname){
-  if(pathname.endsWith('/grade2/')) return pathname+'index.html';
-  if(pathname.endsWith('/grade3/')) return pathname+'index.html';
-  if(pathname.endsWith('/grade4/')) return pathname+'index.html';
-  return pathname;
+function isMainOrAcademy(pathname){
+  return pathname === '/' || pathname === '/index.html' || pathname.endsWith('/academy.html');
 }
 
-function transformPage(response, stylesheet, injectOfflineCore){
+function transform(response){
   if(!response || !response.ok) return response;
   return response.text().then(html => {
-    let out=html;
-    const styleMarker=String(stylesheet).replace('./','');
-    if(!out.includes(styleMarker)){
-      const tag=`<link rel="stylesheet" href="${stylesheet}">`;
-      out=out.includes('</head>') ? out.replace('</head>',`${tag}</head>`) : `${tag}${out}`;
-    }
-    if(injectOfflineCore && !out.includes('offline-core-fallback.js')){
-      const script=`<script src="${OFFLINE_CORE}" data-offline-core="1"></script>`;
-      out=out.includes('<head>') ? out.replace('<head>',`<head>${script}`) : script+out;
-    }
-    if(out===html) return new Response(response.body,{status:response.status,statusText:response.statusText,headers:response.headers});
+    if(html.includes('magic-ai-25c.css')) return new Response(html,{status:response.status,statusText:response.statusText,headers:response.headers});
+    const out=html.includes('</head>') ? html.replace('</head>','<link rel="stylesheet" href="./magic-ai-25c.css"></head>') : '<link rel="stylesheet" href="./magic-ai-25c.css">'+html;
     const headers=new Headers(response.headers);headers.delete('content-length');
     return new Response(out,{status:response.status,statusText:response.statusText,headers});
   });
 }
-
-function themeFor(pathname){ return isGradeUniverse(pathname) ? SHARED_FUTURE_THEME : FUTURE_THEME; }
 
 self.addEventListener('fetch', event => {
   const request=event.request;
@@ -84,31 +56,27 @@ self.addEventListener('fetch', event => {
   if(url.origin!==self.location.origin) return;
   if(url.pathname==='/config.js'||url.pathname.endsWith('/config.js')) return;
 
+  /* Critical: never rewrite Grade 2/3/4 navigation responses. Their own
+     documents already contain their assets and auth/runtime guards. */
+  if(request.mode==='navigate' && /\/grade[234](?:\/|\.html$)/.test(url.pathname)) return;
+
   if(request.mode==='navigate'||request.destination==='document'){
-    event.respondWith((async()=>{
-      try{
-        const response=await fetch(request,{cache:'no-store'});
-        return isThemedPage(url.pathname) ? transformPage(response,themeFor(url.pathname),isGradeUniverse(url.pathname)) : response;
-      }catch(_){
-        const candidates=[request, new Request(gradeIndexPath(url.pathname),{method:'GET'})];
-        for(const candidate of candidates){
-          const cached=await caches.match(candidate);
-          if(cached) return isThemedPage(url.pathname) ? transformPage(cached,themeFor(url.pathname),isGradeUniverse(url.pathname)) : cached;
-        }
-        const root=await caches.match('./index.html');
-        return root||Response.error();
-      }
-    })());
+    event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
+      return isMainOrAcademy(url.pathname) ? transform(response) : response;
+    }).catch(async()=>{
+      const cached=await caches.match(request);
+      return cached || caches.match('./index.html') || Response.error();
+    }));
     return;
   }
 
-  event.respondWith(fetch(request).catch(()=>caches.match(request).then(cached=>cached||caches.match(request,{ignoreSearch:true}))));
+  event.respondWith(fetch(request).catch(()=>caches.match(request).then(c=>c||caches.match(request,{ignoreSearch:true}))));
 });
 
 self.addEventListener('message', event => {
   if(!event.data)return;
   if(event.data.type==='SKIP_WAITING') self.skipWaiting();
-  if(event.data.type==='CLEAR_CACHE') event.waitUntil(caches.keys().then(names=>Promise.all(names.map(name=>caches.delete(name)))));
+  if(event.data.type==='CLEAR_CACHE') event.waitUntil(caches.keys().then(names=>Promise.all(names.map(n=>caches.delete(n)))));
 });
 
 self.addEventListener('push', event => {
@@ -126,4 +94,4 @@ self.addEventListener('notificationclick',event=>{
   }));
 });
 
-console.log('[SW] English with Mariami v19 READY — GRADE 2/3/4 DIRECT ROUTES FIXED 🚀');
+console.log('[SW] English with Mariami v21 READY — Grade routes bypass navigation interception 🚀');
