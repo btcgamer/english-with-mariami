@@ -1,0 +1,18 @@
+/* MAGIC NEON AI ACADEMY — REAL MISSION SYNCHRONIZATION 24.0
+   Visual-only state bridge. Reads authoritative DOM state and exposes stable data attributes. */
+:root{--ewm-real-grade:0;--ewm-real-mission:0;--ewm-real-world:0;--ewm-real-completed:0;--ewm-real-progress:0}
+body[data-ewm-real-sync="24"] .magic-world-master10,
+body[data-ewm-real-sync="24"] .magic-world-map13,
+body[data-ewm-real-sync="24"] .magic-nav14,
+body[data-ewm-real-sync="24"] .magic-gate-matrix15,
+body[data-ewm-real-sync="24"] .ai-neural-journey16,
+body[data-ewm-real-sync="24"] .ai-magic-world-portals17,
+body[data-ewm-real-sync="24"] .ai-dimension-shift18,
+body[data-ewm-real-sync="24"] .ai-quantum-core19,
+body[data-ewm-real-sync="24"] .ai-command-deck20,
+body[data-ewm-real-sync="24"] .ai-neural-constellation21,
+body[data-ewm-real-sync="24"] .ai-mission-control22,
+body[data-ewm-real-sync="24"] .ai-quantum-portal23{--real-grade:var(--ewm-real-grade);--real-mission:var(--ewm-real-mission);--real-world:var(--ewm-real-world);--real-completed:var(--ewm-real-completed);--real-progress:var(--ewm-real-progress)}
+body[data-ewm-real-complete="true"] .ai-quantum-portal23,
+body[data-ewm-real-complete="true"] .ai-quantum-core19{filter:saturate(1.18) brightness(1.08)}
+@media(prefers-reduced-motion:reduce){body[data-ewm-real-sync="24"] .ai-quantum-portal23,body[data-ewm-real-sync="24"] .ai-dimension-shift18{animation:none!important}}
