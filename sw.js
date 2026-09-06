@@ -1,12 +1,13 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v18';
+const CACHE_NAME = 'english-with-mariami-v19';
 const FUTURE_THEME = './magic-ai-25c.css';
 const SHARED_FUTURE_THEME = '../shared/magic-ai-25c-century.css';
 const OFFLINE_CORE = '../shared/offline-core-fallback.js';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
+  './grade2/', './grade3/', './grade4/',
   './login.html', './register.html', './reset-password.html', './teacher-login.html', './teacher.html',
   './teacher-dashboard.html', './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
   './app.css', './styles.css', './mobile-app.css', './pwa-mobile.css', './pwa.js', './universe-theme.css',
@@ -46,8 +47,14 @@ self.addEventListener('activate', event => {
 });
 
 function isGradePage(pathname){ return /\/grade[234](?:\/|\.html$)/.test(pathname); }
+function isGradeUniverse(pathname){ return /\/grade[234](?:\/|\/index\.html)$/.test(pathname); }
 function isThemedPage(pathname){ return pathname.endsWith('/index.html') || pathname.endsWith('/academy.html') || pathname === '/' || pathname === '/academy.html' || isGradePage(pathname); }
-function isGradeUniverse(pathname){ return pathname.endsWith('/grade2/index.html') || pathname.endsWith('/grade3/index.html') || pathname.endsWith('/grade4/index.html'); }
+function gradeIndexPath(pathname){
+  if(pathname.endsWith('/grade2/')) return pathname+'index.html';
+  if(pathname.endsWith('/grade3/')) return pathname+'index.html';
+  if(pathname.endsWith('/grade4/')) return pathname+'index.html';
+  return pathname;
+}
 
 function transformPage(response, stylesheet, injectOfflineCore){
   if(!response || !response.ok) return response;
@@ -63,7 +70,7 @@ function transformPage(response, stylesheet, injectOfflineCore){
       out=out.includes('<head>') ? out.replace('<head>',`<head>${script}`) : script+out;
     }
     if(out===html) return new Response(response.body,{status:response.status,statusText:response.statusText,headers:response.headers});
-    const headers=new Headers(response.headers); headers.delete('content-length');
+    const headers=new Headers(response.headers);headers.delete('content-length');
     return new Response(out,{status:response.status,statusText:response.statusText,headers});
   });
 }
@@ -76,15 +83,25 @@ self.addEventListener('fetch', event => {
   const url=new URL(request.url);
   if(url.origin!==self.location.origin) return;
   if(url.pathname==='/config.js'||url.pathname.endsWith('/config.js')) return;
+
   if(request.mode==='navigate'||request.destination==='document'){
-    event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
-      return isThemedPage(url.pathname) ? transformPage(response,themeFor(url.pathname),isGradeUniverse(url.pathname)) : response;
-    }).catch(()=>caches.match(request).then(cached=>{
-      if(!cached)return caches.match('./index.html');
-      return isThemedPage(url.pathname) ? transformPage(cached,themeFor(url.pathname),isGradeUniverse(url.pathname)) : cached;
-    })));
+    event.respondWith((async()=>{
+      try{
+        const response=await fetch(request,{cache:'no-store'});
+        return isThemedPage(url.pathname) ? transformPage(response,themeFor(url.pathname),isGradeUniverse(url.pathname)) : response;
+      }catch(_){
+        const candidates=[request, new Request(gradeIndexPath(url.pathname),{method:'GET'})];
+        for(const candidate of candidates){
+          const cached=await caches.match(candidate);
+          if(cached) return isThemedPage(url.pathname) ? transformPage(cached,themeFor(url.pathname),isGradeUniverse(url.pathname)) : cached;
+        }
+        const root=await caches.match('./index.html');
+        return root||Response.error();
+      }
+    })());
     return;
   }
+
   event.respondWith(fetch(request).catch(()=>caches.match(request).then(cached=>cached||caches.match(request,{ignoreSearch:true}))));
 });
 
@@ -109,4 +126,4 @@ self.addEventListener('notificationclick',event=>{
   }));
 });
 
-console.log('[SW] English with Mariami v18 READY — GRADE 2/3/4 OFFLINE-SAFE CORE 🚀');
+console.log('[SW] English with Mariami v19 READY — GRADE 2/3/4 DIRECT ROUTES FIXED 🚀');
