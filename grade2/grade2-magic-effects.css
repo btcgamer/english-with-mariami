@@ -3,22 +3,30 @@
 body[data-grade="2"]{background:#020611;overflow-x:hidden}
 body[data-grade="2"] .particles{opacity:.7;filter:drop-shadow(0 0 8px var(--g2-cyan))}
 body[data-grade="2"] .app{position:relative;z-index:2}
-/* Xenon perspective grid */
 body[data-grade="2"]:before{content:"";position:fixed;z-index:0;left:-15vw;right:-15vw;bottom:-24vh;height:70vh;pointer-events:none;transform:perspective(520px) rotateX(62deg);transform-origin:bottom center;background:linear-gradient(rgba(69,247,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(77,124,255,.18) 1px,transparent 1px);background-size:56px 56px;mask-image:linear-gradient(to top,rgba(0,0,0,1),transparent 85%);animation:g2Grid 7s linear infinite;filter:drop-shadow(0 0 7px rgba(69,247,255,.7))}
 @keyframes g2Grid{to{background-position:0 56px,56px 0}}
-/* moving xenon scan */
 body[data-grade="2"] .app:before{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(180deg,transparent 0 6px,rgba(69,247,255,.025) 7px,transparent 8px);mix-blend-mode:screen;animation:g2Scan 9s linear infinite}
 @keyframes g2Scan{from{transform:translateY(-30px)}to{transform:translateY(30px)}}
-/* magical cards */
 body[data-grade="2"] .card,body[data-grade="2"] .side{border-color:rgba(69,247,255,.32);box-shadow:0 0 22px rgba(69,247,255,.08),inset 0 0 28px rgba(77,124,255,.035);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
 body[data-grade="2"] .card:hover{transform:translateY(-3px);border-color:rgba(69,247,255,.7);box-shadow:0 0 30px rgba(69,247,255,.18),0 0 70px rgba(184,77,255,.08),inset 0 0 28px rgba(69,247,255,.06)}
-/* AI Companion */
-body[data-grade="2"] .hero .robot{position:relative;display:grid;place-items:center;width:72px;height:72px;flex:0 0 72px;border:1px solid rgba(69,247,255,.65);border-radius:24px;background:radial-gradient(circle,#bdfcff 0 3%,#45f7ff 8%,#163c69 42%,#070b1c 72%);box-shadow:0 0 16px #45f7ff,0 0 45px rgba(77,124,255,.45),inset 0 0 18px rgba(255,255,255,.2);animation:g2BotFloat 3.5s ease-in-out infinite}
+body[data-grade="2"] .hero .robot{position:relative;display:grid;place-items:center;width:72px;height:72px;flex:0 0 72px;border:1px solid rgba(69,247,255,.65);border-radius:24px;background:radial-gradient(circle,#bdfcff 0 3%,#45f7ff 8%,#163c69 42%,#070b1c 72%);box-shadow:0 0 16px #45f7ff,0 0 45px rgba(77,124,255,.45),inset 0 0 18px rgba(255,255,255,.2);animation:g2BotFloat 3.5s ease-in-out infinite;transition:filter .2s,transform .2s,box-shadow .2s}
 body[data-grade="2"] .hero .robot:before{content:"";position:absolute;inset:-8px;border:1px solid rgba(184,77,255,.4);border-radius:28px;animation:g2BotRing 2.8s linear infinite}
 body[data-grade="2"] .hero .robot:after{content:"AI ONLINE";position:absolute;bottom:-19px;white-space:nowrap;font:800 8px/1 system-ui;color:var(--g2-green);text-shadow:0 0 8px var(--g2-green);letter-spacing:1.4px}
 @keyframes g2BotFloat{0%,100%{transform:translate3d(0,0,0) rotate(-2deg)}50%{transform:translate3d(9px,-8px,0) rotate(2deg)}}
 @keyframes g2BotRing{to{transform:rotate(360deg) scale(1.08);opacity:.1}}
-/* AI cursor */
-.g2-cursor{position:fixed;z-index:9999;left:0;top:0;width:18px;height:18px;border:1px solid var(--g2-cyan);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 9px var(--g2-cyan),0 0 25px rgba(77,124,255,.7);transition:width .15s,height .15s,border-color .15s;mix-blend-mode:screen}.g2-cursor-dot{position:fixed;z-index:10000;width:4px;height:4px;border-radius:50%;background:#fff;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 8px #fff,0 0 16px var(--g2-cyan)}.g2-cursor.hover{width:30px;height:30px;border-color:var(--g2-pink);box-shadow:0 0 12px var(--g2-pink),0 0 34px rgba(184,77,255,.75)}
+body[data-grade="2"] .hero .robot:after{transition:color .2s,text-shadow .2s}
+body[data-grade="2"].g2-ai-happy .hero .robot{animation:g2Celebrate .75s ease-in-out 2;filter:brightness(1.5);box-shadow:0 0 28px var(--g2-green),0 0 70px rgba(69,247,255,.65)}
+body[data-grade="2"].g2-ai-happy .hero .robot:after{content:"MISSION SUCCESS ✦";color:var(--g2-green)}
+body[data-grade="2"].g2-ai-alert .hero .robot{animation:g2Alert .28s ease-in-out 3;box-shadow:0 0 24px var(--g2-pink),0 0 55px rgba(255,79,216,.5)}
+body[data-grade="2"].g2-ai-alert .hero .robot:after{content:"RECALIBRATING...";color:var(--g2-pink);text-shadow:0 0 10px var(--g2-pink)}
+body[data-grade="2"].g2-ai-mission .hero .robot{animation:g2Mission .8s ease-out 1;box-shadow:0 0 24px var(--g2-cyan),0 0 70px rgba(184,77,255,.55)}
+body[data-grade="2"].g2-ai-mission .hero .robot:after{content:"MISSION READY";color:var(--g2-cyan)}
+body[data-grade="2"].g2-ai-think .hero .robot{animation:g2Think 1.3s ease-in-out infinite;box-shadow:0 0 20px var(--g2-purple),0 0 55px rgba(184,77,255,.5)}
+body[data-grade="2"].g2-ai-think .hero .robot:after{content:"AI THINKING...";color:var(--g2-purple);text-shadow:0 0 10px var(--g2-purple)}
+@keyframes g2Celebrate{50%{transform:translateY(-18px) scale(1.12) rotate(3deg)}}
+@keyframes g2Alert{50%{transform:translateX(7px) rotate(-5deg)}}
+@keyframes g2Mission{50%{transform:translateY(-10px) scale(1.06);filter:hue-rotate(30deg)}}
+@keyframes g2Think{50%{transform:translateY(-5px) rotate(2deg);opacity:.82}}
+.g2-cursor{position:fixed;z-index:9999;left:0;top:0;width:18px;height:18px;border:1px solid var(--g2-cyan);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 9px var(--g2-cyan),0 0 25px rgba(77,124,255,.7);transition:width .15s,height .15s,border-color .15s,box-shadow .15s;mix-blend-mode:screen}.g2-cursor-dot{position:fixed;z-index:10000;width:4px;height:4px;border-radius:50%;background:#fff;pointer-events:none;transform:translate(-50%,-50%);box-shadow:0 0 8px #fff,0 0 16px var(--g2-cyan)}.g2-cursor.hover{width:30px;height:30px;border-color:var(--g2-pink);box-shadow:0 0 12px var(--g2-pink),0 0 34px rgba(184,77,255,.75)}
 @media (pointer:coarse),(max-width:800px){.g2-cursor,.g2-cursor-dot{display:none}body[data-grade="2"]:before{height:55vh;background-size:42px 42px}.hero .robot{transform:scale(.9)}}
 @media(prefers-reduced-motion:reduce){body[data-grade="2"]:before,body[data-grade="2"] .app:before,body[data-grade="2"] .hero .robot,body[data-grade="2"] .hero .robot:before{animation:none}}
