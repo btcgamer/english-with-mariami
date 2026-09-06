@@ -8,7 +8,6 @@ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile=window.matchMedia('(max-width: 900px)').matches;
 function addParticles(){if(document.querySelector('.u-max-particles'))return;const box=document.createElement('div');box.className='u-max-particles';box.setAttribute('aria-hidden','true');for(let i=0;i<18;i++)box.appendChild(document.createElement('i'));document.body.appendChild(box)}
 function addHud(){if(document.querySelector('.u-max-hud'))return;const hud=document.createElement('div');hud.className='u-max-hud';hud.innerHTML='<span class="u-max-dot"></span><span>UNIVERSE ONLINE • <b>GRADE '+(grade==='home'?'HUB':grade)+'</b></span>';document.body.appendChild(hud)}
-/* Grade navigation is now centralized on the Academy hub. */
 function addNav(){}
 function decorate(){const q='.lesson,.mission,.card,.grade-card,.grade,.feature-card,.mission-card,.info-card,.daily-card,.stats strong,.hero-core,.planet,.core';document.querySelectorAll(q).forEach((el,i)=>{el.classList.add('u-holo');el.style.setProperty('--u-delay',(i%16)*45+'ms');el.dataset.uDepth='1';});}
 function robotFX(){if(reduced||mobile)return;const robot=document.querySelector('.ai-robot');if(!robot)return;robot.style.touchAction='manipulation';function move(x,y){const r=robot.getBoundingClientRect();const px=(x-r.left)/r.width-.5,py=(y-r.top)/r.height-.5;robot.style.setProperty('--robot-rx',(-py*9).toFixed(2)+'deg');robot.style.setProperty('--robot-ry',(px*12).toFixed(2)+'deg');robot.classList.add('robot-interactive')}function reset(){robot.style.removeProperty('--robot-rx');robot.style.removeProperty('--robot-ry');robot.classList.remove('robot-interactive');robot.classList.remove('robot-touched')}robot.addEventListener('pointerenter',()=>robot.classList.add('robot-interactive'),{passive:true});robot.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});robot.addEventListener('pointerleave',reset,{passive:true});robot.addEventListener('pointerdown',e=>{move(e.clientX,e.clientY);robot.classList.add('robot-touched')},{passive:true});robot.addEventListener('pointerup',()=>robot.classList.remove('robot-touched'),{passive:true});robot.addEventListener('pointercancel',reset,{passive:true})}
@@ -32,6 +31,15 @@ function addRobotCompanion(){
   window.addEventListener('resize',()=>{tx=clamp(tx,half,innerWidth-half);ty=clamp(ty,half,innerHeight-half);x=clamp(x,half,innerWidth-half);y=clamp(y,half,innerHeight-half)},{passive:true});
   requestAnimationFrame(follow);
 }
-function init(){addParticles();addHud();addNav();decorate();addRobotCompanion();if(!mobile){new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}}
+function loadOfflineRecovery(){
+  if(grade!=='2'&&grade!=='3')return;
+  if(document.querySelector('script[data-g23-offline-recovery]'))return;
+  const s=document.createElement('script');
+  s.src='/shared/grade23-offline-recovery.js?v=20260906-r1';
+  s.defer=true;
+  s.dataset.g23OfflineRecovery='1';
+  document.body.appendChild(s);
+}
+function init(){addParticles();addHud();addNav();decorate();addRobotCompanion();loadOfflineRecovery();if(!mobile){new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1)decorate()}))).observe(document.body,{childList:true,subtree:true});robotFX()}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
