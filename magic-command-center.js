@@ -1,1 +1,62 @@
-(()=>{ 'use strict'; const p=(location.pathname||'').toLowerCase(); if(!p.endsWith('/academy.html')&&!p.endsWith('academy.html'))return; const boot=()=>{if(document.querySelector('.magic-command-center'))return; const style=document.createElement('link'); style.rel='stylesheet'; style.href='/magic-command-center.css?v=20260906'; document.head.appendChild(style); const center=document.createElement('section'); center.className='magic-command-center'; center.setAttribute('aria-label','Magic Academy command center'); center.innerHTML='<div class="mcc-core"><b>MAGIC<br>CORE</b></div><div class="mcc-stats"><div class="mcc-stat"><span class="mcc-value" data-mcc="xp">0</span><span class="mcc-label">XP</span></div><div class="mcc-stat"><span class="mcc-value" data-mcc="streak">0</span><span class="mcc-label">STREAK</span></div><div class="mcc-stat"><span class="mcc-value" data-mcc="missions">0</span><span class="mcc-label">MISSIONS</span></div><div class="mcc-stat"><span class="mcc-value" data-mcc="achievements">0</span><span class="mcc-label">ACHIEVEMENTS</span></div></div><div class="mcc-portals"><a class="mcc-portal" href="/grade2/"><span>🌱</span><strong>GRADE 2</strong><small>Foundation Portal</small></a><a class="mcc-portal" href="/grade3/"><span>🔮</span><strong>GRADE 3</strong><small>Adventure Portal</small></a><a class="mcc-portal" href="/grade4/"><span>👑</span><strong>GRADE 4</strong><small>Mastery Portal</small></a></div>'; const anchor=document.querySelector('main')||document.querySelector('.section')||document.body.firstElementChild; if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(center,anchor); else document.body.appendChild(center); const read=(keys)=>{for(const k of keys){try{const v=localStorage.getItem(k);if(v!=null)return v}catch(_){}}return null}; const update=()=>{let done=0,streak=0,xp=0; try{const raw=read(['magic-neon-grade-4','magic-neon-grade-3','magic-neon-grade-2']); const s=raw?JSON.parse(raw):null; done=Array.isArray(s?.done)?s.done.length:0; streak=Number(s?.streak||0); xp=Number(s?.xp||done*10)}catch(_){} const achievements=Math.floor(done/5); center.querySelector('[data-mcc="xp"]').textContent=xp; center.querySelector('[data-mcc="streak"]').textContent=streak; center.querySelector('[data-mcc="missions"]').textContent=done; center.querySelector('[data-mcc="achievements"]').textContent=achievements}; update(); window.addEventListener('storage',update);}; if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot(); })();
+(()=>{
+'use strict';
+const p=(location.pathname||'').toLowerCase();
+if(!p.endsWith('/academy.html')&&!p.endsWith('academy.html'))return;
+const boot=()=>{
+ if(document.querySelector('.magic-command-center'))return;
+ const style=document.createElement('link');
+ style.rel='stylesheet';
+ style.href='/magic-command-center.css?v=20260906';
+ document.head.appendChild(style);
+ const center=document.createElement('section');
+ center.className='magic-command-center';
+ center.setAttribute('aria-label','Magic Academy command center');
+ center.innerHTML='<div class="mcc-core"><b>MAGIC<br>CORE</b></div><div class="mcc-stats"><div class="mcc-stat"><span class="mcc-value" data-mcc="xp">0</span><span class="mcc-label">XP</span></div><div class="mcc-stat"><span class="mcc-value" data-mcc="streak">0</span><span class="mcc-label">STREAK</span></div><div class="mcc-stat"><span class="mcc-value" data-mcc="missions">0</span><span class="mcc-label">MISSIONS</span></div><div class="mcc-stat"><span class="mcc-value" data-mcc="achievements">0</span><span class="mcc-label">ACHIEVEMENTS</span></div></div><div class="mcc-portals"><a class="mcc-portal" href="/grade2/"><span>🌱</span><strong>GRADE 2</strong><small>Foundation Portal</small></a><a class="mcc-portal" href="/grade3/"><span>🔮</span><strong>GRADE 3</strong><small>Adventure Portal</small></a><a class="mcc-portal" href="/grade4/"><span>👑</span><strong>GRADE 4</strong><small>Mastery Portal</small></a></div>';
+ const anchor=document.querySelector('main')||document.querySelector('.section')||document.body.firstElementChild;
+ if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(center,anchor);else document.body.appendChild(center);
+ const read=(keys)=>{for(const k of keys){try{const v=localStorage.getItem(k);if(v!=null)return v}catch(_){}}return null};
+ const num=(v,d=0)=>{const n=Number(v);return Number.isFinite(n)?Math.max(0,n):d};
+ const update=async()=>{
+  let words=0,quizzes=0,best=0,done=0,streak=0,xp=0;
+  try{
+   const api=window.ENGLISH_MARIAMI_PROGRESS_SYNC;
+   const grades=[2,3,4];
+   const rows=[];
+   if(api&&typeof api.loadGrade==='function'){
+    for(const g of grades){const row=await api.loadGrade(g);if(row)rows.push(row)}
+   }
+   if(rows.length){
+    words=rows.reduce((s,r)=>s+num(r.words_learned||(Array.isArray(r.learned_words)?r.learned_words.length:0)),0);
+    quizzes=rows.reduce((s,r)=>s+num(r.quiz_completed),0);
+    best=Math.max(0,...rows.map(r=>num(r.best_quiz||r.score)));
+   }else{
+    for(const g of grades){
+     const learned=(()=>{try{const x=JSON.parse(read([`grade${g}LearnedWords`])||'[]');return Array.isArray(x)?[...new Set(x.map(String))].length:0}catch(_){return 0}})();
+     words+=learned;
+     quizzes+=num(read([`grade${g}QuizAttempts`]),0);
+     best=Math.max(best,num(read([`grade${g}BestScore`]),0));
+    }
+   }
+   const doneRaw=read(['magic-neon-grade-4','magic-neon-grade-3','magic-neon-grade-2']);
+   if(doneRaw){try{const s=JSON.parse(doneRaw);done=Array.isArray(s?.done)?s.done.length:0;streak=num(s?.streak);xp=num(s?.xp)}catch(_) {}}
+   if(!done)done=quizzes;
+   if(!xp)xp=words*10+quizzes*25;
+   if(!streak){
+    const raw=read(['streak','learningStreak','englishMariamiStreak']);
+    streak=num(raw);
+   }
+   const achievements=Math.floor((words+quizzes+done)/5);
+   center.querySelector('[data-mcc="xp"]').textContent=Math.round(xp);
+   center.querySelector('[data-mcc="streak"]').textContent=Math.round(streak);
+   center.querySelector('[data-mcc="missions"]').textContent=Math.round(done);
+   center.querySelector('[data-mcc="achievements"]').textContent=Math.round(achievements);
+   center.dataset.bestQuiz=String(Math.round(best));
+  }catch(error){console.warn('Magic Command Center progress error:',error)}
+ };
+ update();
+ window.addEventListener('storage',update);
+ window.addEventListener('englishMariamiProgressUpdated',update);
+ setInterval(update,15000);
+};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
