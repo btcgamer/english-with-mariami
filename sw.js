@@ -3,7 +3,7 @@
 
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v9';
+const CACHE_NAME = 'english-with-mariami-v10';
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -17,7 +17,8 @@ const APP_SHELL = [
   './grade3/index.html', './grade3/grade3.css', './grade3/grade3.js', './grade3/grade3-futuristic-content.js',
   './grade3/grade3-content-expansion.js', './grade3/grade3-ai-companion.js', './grade3/future-visual-layer.css',
   './grade4/index.html', './grade4/grade4.css', './grade4/grade4.js', './grade4/grade4-futuristic-content.js',
-  './grade4/grade4-content-expansion.js', './grade4/future-visual-layer.css', './shared/mega-vocabulary.js'
+  './grade4/grade4-content-expansion.js', './grade4/future-visual-layer.css', './shared/mega-vocabulary.js',
+  './academy-nav.js', './shared/ai-magic-companion.js'
 ];
 
 self.addEventListener('install', event => {
@@ -97,4 +98,4 @@ self.addEventListener('notificationclick', event => {
   }));
 });
 
-console.log('[SW] English with Mariami v9 READY 🚀');
+console.log('[SW] English with Mariami v10 READY 🚀');
