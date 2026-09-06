@@ -14,12 +14,10 @@ function loadRewards(){
 }
 if(!isAcademy&&!isGrade)return;
 function addNav(){
-  if(!isAcademy||document.getElementById('__ewm-academy-grade-nav'))return;
-  const nav=document.createElement('nav');nav.id='__ewm-academy-grade-nav';nav.setAttribute('aria-label','Choose grade');
-  nav.innerHTML='<a href="/grade2/">G2</a><a href="/grade3/">G3</a><a href="/grade4/">G4</a>';
-  nav.style.cssText='position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:99998;display:flex;gap:7px;align-items:center;padding:7px;border:1px solid rgba(0,234,255,.35);border-radius:16px;background:rgba(2,8,23,.88);box-shadow:0 0 24px rgba(0,234,255,.16);backdrop-filter:blur(14px);';
-  nav.querySelectorAll('a').forEach(function(a){a.style.cssText='display:inline-flex;align-items:center;justify-content:center;min-width:42px;padding:8px 11px;border:1px solid rgba(0,234,255,.35);border-radius:10px;color:#fff;text-decoration:none;font:900 12px/1 Arial,sans-serif;background:rgba(4,31,59,.82);';});
-  document.body.appendChild(nav);
+  /* Grade shortcuts were intentionally removed from the Academy surface.
+     Keep this hook for backward compatibility with pages that load the
+     script, but do not inject G2/G3/G4 controls anymore. */
+  return;
 }
 let deferredPrompt=null,installWrap=null;
 function createInstall(){
