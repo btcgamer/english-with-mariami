@@ -1,8 +1,10 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v22';
+const CACHE_NAME = 'english-with-mariami-v23';
 const FUTURE_THEME = './magic-ai-25c.css';
 const FUTURE_CLASSROOM = './shared/future-neon-classroom.css?v=20260906';
+const NAV_TIMEOUT_MS = 4500;
+const ASSET_TIMEOUT_MS = 7000;
 
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
@@ -38,6 +40,13 @@ self.addEventListener('activate', event => event.waitUntil(
 
 function isMainOrAcademy(pathname){
   return pathname === '/' || pathname === '/index.html' || pathname.endsWith('/academy.html');
+}
+
+function fetchWithTimeout(request, ms){
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), ms);
+  return fetch(request, { cache: 'no-store', signal: controller.signal })
+    .finally(() => clearTimeout(timer));
 }
 
 function injectVisualLayers(response){
@@ -78,7 +87,7 @@ self.addEventListener('fetch', event => {
 
   if(request.mode==='navigate'||request.destination==='document'){
     event.respondWith(
-      fetch(request,{cache:'no-store'})
+      fetchWithTimeout(request, NAV_TIMEOUT_MS)
         .then(response => isMainOrAcademy(url.pathname) ? injectVisualLayers(response) : response)
         .catch(async()=>{
           const cached=await caches.match(request);
@@ -89,7 +98,7 @@ self.addEventListener('fetch', event => {
   }
 
   event.respondWith(
-    fetch(request).catch(()=>
+    fetchWithTimeout(request, ASSET_TIMEOUT_MS).catch(()=>
       caches.match(request).then(c=>c||caches.match(request,{ignoreSearch:true}))
     )
   );
@@ -121,4 +130,4 @@ self.addEventListener('notificationclick',event=>{
   }));
 });
 
-console.log('[SW] English with Mariami v22 READY — Future Neon Classroom UI injected 🚀');
+console.log('[SW] English with Mariami v23 READY — timeout-safe navigation/assets 🚀');
