@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>English with Mariami — Redirecting…</title>
+  <style>
+    html,body{margin:0;min-height:100%;background:#010712;color:#fff;font-family:Arial,sans-serif}
+    main{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px;box-sizing:border-box}
+    .box{max-width:520px;padding:28px;border:1px solid rgba(0,234,255,.45);border-radius:22px;background:rgba(2,15,32,.82);box-shadow:0 0 35px rgba(0,234,255,.14)}
+    h1{margin:0 0 10px;text-shadow:0 0 16px #00eaff}
+    p{color:#bdebf7}
+  </style>
+</head>
+<body>
+  <main><section class="box"><h1>🌌 English with Mariami</h1><p id="status">Finding your learning world…</p></section></main>
+  <script>
+    (function(){
+      'use strict';
+      var path=(window.location.pathname||'').toLowerCase();
+      var match=path.match(/(?:^|\/)(grade[234])(?:\.html)?(?:\/)?$/);
+      var target=match ? './'+match[1]+'/' : './';
+      var status=document.getElementById('status');
+      status.textContent=match ? 'Opening '+match[1].replace('grade','Grade ')+'…' : 'Returning to the Academy…';
+      window.setTimeout(function(){ window.location.replace(target); },60);
+    })();
+  </script>
+</body>
+</html>
