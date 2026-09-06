@@ -1,1 +1,675 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#02030a"><title>English with Mariami — Grade 4 Magic AI Academy</title><link rel="stylesheet" href="../styles.css?v=20260901"><link rel="stylesheet" href="./grade4-futuristic-content.css?v=20260906-shell3"><link rel="stylesheet" href="./grade4-button-layout.css?v=20260906-buttons1"><link rel="stylesheet" href="../shared/magic-ai-25c-century.css?v=20260906-m25"><style>.g4-logout{display:none!important}</style></head><body class="g4-page g4-magic"><main id="academy" class="g4-academy"><header class="g4-topbar"><div class="g4-brand"><span class="g4-brand-orb">🧠</span><div><strong>MAGIC NEON AI ACADEMY</strong><small>GRADE 4 • MAGIC AI • 25TH CENTURY</small></div></div><div class="g4-status"><span class="g4-live-dot"></span> FUTURE CORE ONLINE</div></header><section class="g4-hero" aria-labelledby="g4-title"><div class="g4-hero-copy"><span class="g4-kicker">◆ NEURAL LEARNING SYSTEM / LEVEL 04 / 25XX</span><h1 id="g4-title">Welcome to the <span>Future.</span></h1><p>Master grammar, vocabulary, reading, listening and speaking through 60 interactive missions inside the Magic AI learning universe.</p><div class="g4-hero-actions"><button id="review" class="g4-primary" type="button">▶ ENTER NEXT MISSION</button><span id="nextMission">Next mission loading…</span></div></div><div class="g4-hero-core" aria-hidden="true"><div class="g4-ring r1"></div><div class="g4-ring r2"></div><div class="g4-core">G4</div></div></section><section id="stats" class="g4-stats" aria-label="Grade 4 progress"><div class="g4-stat"><span>⚡</span><div><small>XP</small><strong id="xp">0</strong></div></div><div class="g4-stat"><span>⭐</span><div><small>STARS</small><strong id="stars">0</strong></div></div><div class="g4-stat"><span>🔥</span><div><small>STREAK</small><strong id="streak">0</strong></div></div><div class="g4-stat"><span>🏆</span><div><small>MISSIONS</small><strong><b id="done">0</b><em>/60</em></strong></div></div></section><section class="g4-progress-card"><div class="g4-progress-head"><div><span class="g4-kicker">NEURAL PROGRESS</span><h2>Grade 4 Future Universe</h2></div><strong id="progressText">0/60 • 0%</strong></div><div class="g4-progress-track"><div id="progressBar"></div></div><div class="g4-progress-meta"><span>60 missions • 6 worlds • MAGIC AI</span><span>Your next unlock is waiting.</span></div></section><section class="g4-world-header"><div><span class="g4-kicker">QUANTUM WORLD SELECTOR</span><h2>Choose your world</h2></div><p>Complete missions to unlock deeper levels of the Grade 4 future core.</p></section><section id="missions" class="g4-world-grid" aria-label="Grade 4 worlds"></section><section class="g4-footer-card"><div><span class="g4-kicker">ACADEMY TELEMETRY</span><h2>Learning system ready.</h2><p id="liveStats" aria-live="polite">Loading curriculum…</p></div><div class="g4-footer-badge">AI<br><b>READY</b></div></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../config.js?v=20260906-g4fix"></script><script src="./grade4-futuristic-content.js?v=20260906"></script><script src="./grade4-content-expansion.js?v=20260906-g4safe60"></script><script src="../shared/mega-vocabulary.js?v=20260902"></script><script src="../shared/vocabulary-boost-v1.js?v=20260902"></script><script src="./grade4.js?v=20260906-g4safe60"></script><script src="./grade4-supabase-progress-bridge.js?v=20260905"></script><script src="./grade4-progression-controller.js?v=20260905"></script><script src="./grade4-remote-rewards.js?v=20260905"></script><script src="../universe-theme.js?v=20260901"></script><script src="../universe-max.js?v=20260901"></script><script src="../shared/ai-magic-companion.js?v=20260906-m25"></script><script src="../shared/learning-lab.js?v=20260903"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#02030a"
+  >
+
+  <title>
+    English with Mariami — Grade 4 Magic AI Academy
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="../styles.css?v=20260906"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./grade4-futuristic-content.css?v=20260906"
+  >
+
+  <link
+    rel="stylesheet"
+    href="./grade4-button-layout.css?v=20260906"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../shared/magic-ai-25c-century.css?v=20260906"
+  >
+
+  <style>
+    .g4-logout {
+      display: none !important;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: #02030a;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .g4-academy {
+      min-height: 100vh;
+    }
+
+    .g4-world-grid {
+      min-height: 220px;
+    }
+
+    .g4-primary,
+    .g4-open,
+    .g4-complete,
+    .g4-speak-text,
+    .g4-option,
+    .g4-close {
+      cursor: pointer;
+    }
+
+    .g4-vocab-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 30px 16px;
+      overflow-y: auto;
+      background: rgba(0, 0, 0, .78);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease;
+    }
+
+    .g4-vocab-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .g4-vocab-dialog {
+      width: min(1100px, 100%);
+      margin: 20px auto;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .g4-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 50%;
+      font-size: 28px;
+      line-height: 1;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+    }
+
+    .g4-live-lesson {
+      margin: 18px 0;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(0,234,255,.22);
+      background: rgba(2,12,25,.78);
+      box-shadow:
+        inset 0 0 30px rgba(0,234,255,.035),
+        0 0 25px rgba(0,0,0,.18);
+    }
+
+    .g4-live-lesson-head {
+      margin-bottom: 16px;
+    }
+
+    .g4-content-box,
+    .g4-live-words,
+    .g4-quiz {
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.025);
+    }
+
+    .g4-content-box p,
+    .g4-content-box li {
+      line-height: 1.6;
+    }
+
+    .g4-live-words > b,
+    .g4-quiz > summary {
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .g4-word {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 8px 0;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .g4-word > div {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .g4-word span {
+      opacity: .78;
+      font-size: .9rem;
+    }
+
+    .g4-word button {
+      min-width: 42px;
+      min-height: 42px;
+      border: 0;
+      border-radius: 12px;
+      background: rgba(0,234,255,.1);
+      color: #fff;
+    }
+
+    .quiz-q {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(180px, 1fr)
+      );
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .g4-option {
+      min-height: 46px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: #fff;
+      text-align: left;
+    }
+
+    .g4-option:disabled {
+      opacity: .78;
+      cursor: default;
+    }
+
+    .g4-option.quiz-correct {
+      border-color: rgba(0,255,140,.65);
+      background: rgba(0,255,140,.12);
+    }
+
+    .g4-option.quiz-wrong {
+      border-color: rgba(255,70,90,.65);
+      background: rgba(255,70,90,.12);
+    }
+
+    .g4-complete {
+      width: 100%;
+      margin-top: 16px;
+      min-height: 52px;
+      border: 0;
+      border-radius: 15px;
+      font-weight: 900;
+      letter-spacing: .03em;
+    }
+
+    .g4-complete:disabled {
+      opacity: .62;
+      cursor: not-allowed;
+    }
+
+    .g4-speak-text {
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,234,255,.25);
+      background: rgba(0,234,255,.08);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    @media (max-width: 720px) {
+      .g4-vocab-modal {
+        padding: 12px 8px;
+      }
+
+      .g4-live-lesson {
+        padding: 14px;
+      }
+
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="g4-page g4-magic">
+
+  <main
+    id="academy"
+    class="g4-academy"
+  >
+
+    <header class="g4-topbar">
+
+      <div class="g4-brand">
+        <span class="g4-brand-orb">🧠</span>
+
+        <div>
+          <strong>
+            MAGIC NEON AI ACADEMY
+          </strong>
+
+          <small>
+            GRADE 4 • MAGIC AI • 25TH CENTURY
+          </small>
+        </div>
+      </div>
+
+      <div class="g4-status">
+        <span class="g4-live-dot"></span>
+        FUTURE CORE ONLINE
+      </div>
+
+    </header>
+
+
+    <section
+      class="g4-hero"
+      aria-labelledby="g4-title"
+    >
+
+      <div class="g4-hero-copy">
+
+        <span class="g4-kicker">
+          ◆ NEURAL LEARNING SYSTEM /
+          LEVEL 04 /
+          25XX
+        </span>
+
+        <h1 id="g4-title">
+          Welcome to the
+          <span>Future.</span>
+        </h1>
+
+        <p>
+          Master grammar, vocabulary,
+          reading, listening and speaking
+          through 60 interactive missions
+          inside the Magic AI learning universe.
+        </p>
+
+        <div class="g4-hero-actions">
+
+          <button
+            id="review"
+            class="g4-primary"
+            type="button"
+          >
+            ▶ ENTER NEXT MISSION
+          </button>
+
+          <span id="nextMission">
+            Next mission loading…
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="g4-hero-core"
+        aria-hidden="true"
+      >
+
+        <div class="g4-ring r1"></div>
+        <div class="g4-ring r2"></div>
+
+        <div class="g4-core">
+          G4
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section
+      id="stats"
+      class="g4-stats"
+      aria-label="Grade 4 progress"
+    >
+
+      <div class="g4-stat">
+
+        <span>⚡</span>
+
+        <div>
+          <small>XP</small>
+          <strong id="xp">0</strong>
+        </div>
+
+      </div>
+
+
+      <div class="g4-stat">
+
+        <span>⭐</span>
+
+        <div>
+          <small>STARS</small>
+          <strong id="stars">0</strong>
+        </div>
+
+      </div>
+
+
+      <div class="g4-stat">
+
+        <span>🔥</span>
+
+        <div>
+          <small>STREAK</small>
+          <strong id="streak">0</strong>
+        </div>
+
+      </div>
+
+
+      <div class="g4-stat">
+
+        <span>🏆</span>
+
+        <div>
+          <small>MISSIONS</small>
+
+          <strong>
+            <b id="done">0</b>
+            <em>/60</em>
+          </strong>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="g4-progress-card">
+
+      <div class="g4-progress-head">
+
+        <div>
+
+          <span class="g4-kicker">
+            NEURAL PROGRESS
+          </span>
+
+          <h2>
+            Grade 4 Future Universe
+          </h2>
+
+        </div>
+
+        <strong id="progressText">
+          0/60 • 0%
+        </strong>
+
+      </div>
+
+
+      <div class="g4-progress-track">
+
+        <div id="progressBar"></div>
+
+      </div>
+
+
+      <div class="g4-progress-meta">
+
+        <span>
+          60 missions • 6 worlds • MAGIC AI
+        </span>
+
+        <span>
+          Your next unlock is waiting.
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <section class="g4-world-header">
+
+      <div>
+
+        <span class="g4-kicker">
+          QUANTUM WORLD SELECTOR
+        </span>
+
+        <h2>
+          Choose your world
+        </h2>
+
+      </div>
+
+      <p>
+        Complete missions to unlock deeper
+        levels of the Grade 4 future core.
+      </p>
+
+    </section>
+
+
+    <section
+      id="missions"
+      class="g4-world-grid"
+      aria-label="Grade 4 worlds"
+    >
+    </section>
+
+
+    <section class="g4-footer-card">
+
+      <div>
+
+        <span class="g4-kicker">
+          ACADEMY TELEMETRY
+        </span>
+
+        <h2>
+          Learning system ready.
+        </h2>
+
+        <p
+          id="liveStats"
+          aria-live="polite"
+        >
+          Loading curriculum…
+        </p>
+
+      </div>
+
+
+      <div class="g4-footer-badge">
+        AI
+        <br>
+        <b>READY</b>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       GRADE 4 LOCAL-FIRST SCRIPT CHAIN
+
+       NOTE:
+       config.js is intentionally NOT loaded here.
+       Grade 4 runs locally first and does not depend
+       on Supabase/auth redirect logic.
+       ===================================================== -->
+
+  <script
+    src="./grade4-futuristic-content.js?v=20260906"
+  ></script>
+
+  <script
+    src="./grade4-content-expansion.js?v=20260906"
+  ></script>
+
+  <script
+    src="./grade4.js?v=20260906"
+  ></script>
+
+
+  <script>
+    /*
+     * Optional helper integrations.
+     * They are loaded safely so an unavailable
+     * helper cannot stop the Grade 4 core app.
+     */
+
+    (function () {
+      'use strict';
+
+      function loadScript(src) {
+        try {
+          var script =
+            document.createElement('script');
+
+          script.src = src;
+          script.async = true;
+
+          script.onerror = function () {
+            console.warn(
+              '[G4] Optional script unavailable:',
+              src
+            );
+          };
+
+          document.head.appendChild(script);
+        } catch (error) {
+          console.warn(
+            '[G4] Optional loader error:',
+            error
+          );
+        }
+      }
+
+      loadScript(
+        '../shared/mega-vocabulary.js?v=20260906'
+      );
+
+      loadScript(
+        '../shared/vocabulary-boost-v1.js?v=20260906'
+      );
+
+      loadScript(
+        './grade4-supabase-progress-bridge.js?v=20260906'
+      );
+
+      loadScript(
+        './grade4-progression-controller.js?v=20260906'
+      );
+
+      loadScript(
+        './grade4-remote-rewards.js?v=20260906'
+      );
+
+      loadScript(
+        '../universe-theme.js?v=20260906'
+      );
+
+      loadScript(
+        '../universe-max.js?v=20260906'
+      );
+
+      loadScript(
+        '../shared/ai-magic-companion.js?v=20260906'
+      );
+
+      loadScript(
+        '../shared/learning-lab.js?v=20260906'
+      );
+
+    })();
+  </script>
+
+
+  <!-- =====================================================
+       NEXT MISSION BUTTON
+       ===================================================== -->
+
+  <script>
+    (function () {
+      'use strict';
+
+      document.addEventListener(
+        'click',
+        function (event) {
+
+          var button =
+            event.target.closest(
+              '#review'
+            );
+
+          if (!button) return;
+
+          var next =
+            document.querySelector(
+              '[data-complete]'
+            );
+
+          if (next) {
+            next.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center'
+            });
+          } else {
+
+            var missions =
+              document.querySelector(
+                '#missions'
+              );
+
+            if (missions) {
+              missions.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+              });
+            }
+
+          }
+
+        },
+        true
+      );
+
+    })();
+  </script>
+
+</body>
+</html>
