@@ -1,0 +1,19 @@
+/* MAGIC NEON AI ACADEMY — REAL MISSION SYNCHRONIZATION 24.0
+   Visual-only bridge. Prefers authoritative DOM/controller state; never changes progression. */
+(function(){'use strict';if(window.__EWM_REAL_MISSION_SYNC24)return;window.__EWM_REAL_MISSION_SYNC24=true;
+var body=document.body;if(!body)return;var lastKey='',timer=0;
+function num(v){var n=Number(v);return Number.isFinite(n)?n:0}
+function attr(el,names){for(var i=0;i<names.length;i++){var v=el.getAttribute&&el.getAttribute(names[i]);if(v!==null&&v!=='')return v}return ''}
+function grade(){var d=document.documentElement.dataset.universe||'',c=body.className||'',t=body.innerText||'';var m=(d+' '+c+' '+t).match(/(?:grade[- ]?|g)([234])\b/i);return m?+m[1]:0}
+function lesson(){var selectors=['[data-current-lesson]','[data-active-lesson]','[data-lesson-number].active','.current-lesson','.active-lesson','.current-mission','.active-mission'];for(var i=0;i<selectors.length;i++){var es=document.querySelectorAll(selectors[i]);for(var j=0;j<es.length;j++){var e=es[j],v=attr(e,['data-current-lesson','data-active-lesson','data-lesson-number'])||e.textContent||'';var m=String(v).match(/(?:lesson|mission|L)\s*#?\s*(\d{1,2})/i);if(m)return +m[1];var n=num(v);if(n>=1&&n<=60)return n}}var t=body.innerText||'';var m=t.match(/(?:CURRENT|ACTIVE|NEXT)\s+(?:LESSON|MISSION)\s*[:#-]?\s*(\d{1,2})/i);return m?+m[1]:0}
+function completed(){var sels=['#completedLessons','#done','.completed-count','.progress-count'];for(var i=0;i<sels.length;i++){var e=document.querySelector(sels[i]);if(e){var m=(e.textContent||'').match(/\d{1,3}/);if(m)return Math.min(60,+m[0])}}var t=body.innerText||'',m=t.match(/(\d{1,3})\s*\/\s*60/);return m?Math.min(60,+m[1]):0}
+function progress(done){var es=document.querySelectorAll('[data-progress],[aria-valuenow]');for(var i=0;i<es.length;i++){var v=attr(es[i],['data-progress','aria-valuenow']);if(/^\d+(?:\.\d+)?$/.test(v))return Math.max(0,Math.min(100,+v))}var t=body.innerText||'',m=t.match(/(?:PROGRESS|ENERGY|SCORE)\s*[:=]?\s*(\d{1,3})%/i);return m?Math.max(0,Math.min(100,+m[1])):Math.round(done/60*100)}
+function authoritativeWorld(g,m){
+  var sels=['[data-current-world]','[data-world].active','.current-world','.active-world'];
+  for(var i=0;i<sels.length;i++){var es=document.querySelectorAll(sels[i]);for(var j=0;j<es.length;j++){var v=attr(es[j],['data-current-world','data-world'])||es[j].textContent||'';var x=String(v).match(/world\s*#?\s*(\d{1,2})/i);if(x)return +x[1];var n=num(v);if(n>=1&&n<=6)return n}}
+  if(g===4&&window.GRADE4_CURRICULUM_MAP&&m){var item=window.GRADE4_CURRICULUM_MAP.find(function(x){return Number(x.id)===m});if(item&&item.world)return Number(item.world)}
+  return m?Math.ceil(m/10):0;
+}
+function sync(){var g=grade(),m=lesson(),d=completed(),p=progress(d),w=authoritativeWorld(g,m);if(g)body.dataset.ewmGrade=String(g);if(m)body.dataset.ewmMission=String(m);if(w)body.dataset.ewmWorld=String(w);body.dataset.ewmCompleted=String(d);body.dataset.ewmProgress=String(p);body.dataset.ewmRealSync='24';body.dataset.ewmRealComplete=(d>=60?'true':'false');document.documentElement.style.setProperty('--ewm-real-grade',g);document.documentElement.style.setProperty('--ewm-real-mission',m);document.documentElement.style.setProperty('--ewm-real-world',w);document.documentElement.style.setProperty('--ewm-real-completed',d);document.documentElement.style.setProperty('--ewm-real-progress',p);var key=[g,m,w,d,p].join(':');if(key!==lastKey){body.dispatchEvent(new CustomEvent('ewmRealMissionSync24',{detail:{grade:g,mission:m,world:w,completed:d,progress:p}}));lastKey=key}}
+function boot(){sync();new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(sync,80)}).observe(body,{subtree:true,childList:true,attributes:true,characterData:true});setInterval(sync,2500)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();})();
