@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Magic Neon AI Academy — Grade 4 Future Mode</title>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02030a}
+#grade4Frame{display:block;width:100%;height:100%;border:0;background:#02030a}
+#boot{position:fixed;inset:0;display:grid;place-items:center;background:#02030a;color:#00eaff;font:900 12px system-ui;letter-spacing:.18em;z-index:5;transition:opacity .35s ease}
+#boot.hide{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="boot">MAGIC NEON AI ACADEMY • GRADE 4 • FUTURE MODE</div>
+<iframe id="grade4Frame" src="./index.html" title="Grade 4 Future Mode"></iframe>
+<script>
+(function(){
+  const frame=document.getElementById('grade4Frame');
+  const boot=document.getElementById('boot');
+  frame.addEventListener('load',function(){
+    try{
+      const doc=frame.contentDocument;
+      if(!doc) throw new Error('Grade 4 document unavailable');
+      if(!doc.querySelector('link[data-g4-future]')){
+        const link=doc.createElement('link');
+        link.rel='stylesheet';
+        link.href='./future-mode.css?v=20260906';
+        link.dataset.g4Future='1';
+        doc.head.appendChild(link);
+      }
+      if(!doc.documentElement.dataset.futureMode) doc.documentElement.dataset.futureMode='grade4';
+      boot.classList.add('hide');
+    }catch(err){
+      boot.textContent='GRADE 4 • FUTURE MODE';
+      boot.classList.add('hide');
+    }
+  });
+})();
+</script>
+</body>
+</html>
