@@ -5,6 +5,13 @@ const MISSIONS = 60;
 const LABELS = ['Listening Word Quest', 'Dialogue Lab', 'Reading Mission', 'Grammar Lab', 'Critical Thinking'];
 
 test('Grade 4 — 60 mission runtime QA', async ({ page }) => {
+  const pageErrors = [];
+  const consoleErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  page.on('console', message => {
+    if (message.type() === 'error') consoleErrors.push(message.text());
+  });
+
   await page.addInitScript(() => {
     localStorage.setItem('magic-neon-grade-4', JSON.stringify({ current: 1, done: [], stars: 0, streak: 0 }));
     window.__G4_BROWSER_QA__ = true;
@@ -43,5 +50,10 @@ test('Grade 4 — 60 mission runtime QA', async ({ page }) => {
 
   const state = await page.evaluate(() => JSON.parse(localStorage.getItem('magic-neon-grade-4') || '{}'));
   expect(state.done).toHaveLength(60);
+  expect(new Set(state.done).size).toBe(60);
   expect(state.current).toBe(60);
+  expect(state.stars).toBe(60);
+  expect(state.streak).toBe(60);
+  expect(pageErrors, `Unexpected page errors: ${pageErrors.join(' | ')}`).toEqual([]);
+  expect(consoleErrors, `Unexpected console errors: ${consoleErrors.join(' | ')}`).toEqual([]);
 });
