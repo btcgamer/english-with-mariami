@@ -1,0 +1,5 @@
+/* MAGIC NEON AI ACADEMY — AI MAGIC WORLD MASTER 10.0 */
+(function(){'use strict';if(window.__EWM_MAGIC_WORLD_MASTER10)return;window.__EWM_MAGIC_WORLD_MASTER10=true;
+function mount(){if(document.querySelector('.magic-world-master10'))return;var o=document.createElement('div');o.className='magic-world-master10';o.setAttribute('aria-hidden','true');o.innerHTML='<div class="mw10-stars"></div><div class="mw10-orbit"></div><div class="mw10-orbit two"></div><div class="mw10-link"></div><div class="mw10-link l2"></div><div class="mw10-link l3"></div><div class="mw10-core"><i></i><b>AI MASTER CORE // ONLINE</b></div><div class="mw10-portal mw10-p1"><span>WORLD 01</span></div><div class="mw10-portal mw10-p2"><span>WORLD 02</span></div><div class="mw10-portal mw10-p3"><span>WORLD 03</span></div><div class="mw10-hud"><div><strong>MAGIC WORLD</strong></div><div><em>NEURAL FIELD ACTIVE</em></div><div><strong>CORE ONLINE</strong></div><div><em>MISSION SYSTEM READY</em></div></div>';document.body.prepend(o)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
+})();
