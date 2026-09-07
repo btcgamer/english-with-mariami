@@ -4,6 +4,19 @@
   const grade=Number(document.body.dataset.grade||0);
   if(![2,3,4].includes(grade)) return;
   const ACADEMY='../academy.html';
+  const STATE_KEY=`magic-neon-grade-${grade}`;
+
+  function resetTransientMission(){
+    try{
+      const saved=JSON.parse(localStorage.getItem(STATE_KEY)||'null');
+      if(saved&&typeof saved==='object'){
+        /* Reset only the currently selected mission. Never touch progress, XP, stars or streak. */
+        saved.current=1;
+        localStorage.setItem(STATE_KEY,JSON.stringify(saved));
+      }
+    }catch(e){}
+  }
+
   function mount(){
     if(document.querySelector('.grade-top-nav')) return;
     const nav=document.createElement('nav');
@@ -13,6 +26,8 @@
     document.body.appendChild(nav);
     nav.querySelector('.academy-btn').addEventListener('click',function(event){
       event.preventDefault();
+      /* Leaving a Grade for Academy starts the next Grade visit from its normal entry point. */
+      resetTransientMission();
       window.location.assign(new URL(ACADEMY,window.location.href).href);
     });
     nav.querySelector('.logout-btn').addEventListener('click',function(){
