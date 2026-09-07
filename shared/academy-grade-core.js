@@ -3,7 +3,20 @@
 const grade=Number(document.body.dataset.grade||2),key=`magic-neon-grade-${grade}`;
 const defaults={current:1,done:[],stars:0,streak:0};
 let state=defaults;
-try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved&&typeof saved==='object')state={...defaults,...saved,done:Array.isArray(saved.done)?saved.done:[]};}catch(e){state={...defaults};}
+try{
+  const saved=JSON.parse(localStorage.getItem(key)||'null');
+  if(saved&&typeof saved==='object')state={...defaults,...saved,done:Array.isArray(saved.done)?saved.done:[]};
+  /* Deterministic fresh entry: Academy sets a session flag before redirecting.
+     Consume it here, after the grade page loads, so intermediate redirects,
+     referrer behavior and browser navigation cannot restore the old mission. */
+  const freshKey=`magic-neon-fresh-grade-${grade}`;
+  if(sessionStorage.getItem(freshKey)==='1'){
+    state.current=1;
+    saveFreshState();
+    sessionStorage.removeItem(freshKey);
+  }
+}catch(e){state={...defaults};}
+function saveFreshState(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
 const G2=[
 ['My World','I, you, he, she, home, school, friend, happy','Hi! My name is Mia. I am eight. I live in a small home. I like school and my friends.','What is your name? — My name is Mia. How old are you? — I am eight.','My name is Mia. I am eight years old. I live with my family. I go to school every day. I like English because it is fun.','What is the child’s name?','Mia','What do you like about your school?'],
 ['Family & Friends','mother, father, sister, brother, grandma, friend, kind, funny','This is my family. My mother is kind. My brother is funny.','Who is she? — She is my sister. Who is he? — He is my brother.','I have a small family. My mother is kind and my father is funny. I have one sister. We play games together at home.','Who is kind?','The mother','What makes a good friend?'],
