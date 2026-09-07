@@ -11,6 +11,31 @@
     return /(?:^|[\/#._-])grade[234](?:\.html|\/|$)/.test(href) || /grade\s*[234]/.test(label);
   };
 
+  /* A grade opened from Academy is a fresh grade selection. Reset only the
+     transient lesson pointer; completed missions/stars/streak remain intact. */
+  function prepareFreshGradeEntry(el){
+    try{
+      const href=el.getAttribute('href')||'';
+      const match=href.match(/(?:^|[\/#._-])grade([234])(?:\.html|\/|$)/i);
+      if(!match) return;
+      const grade=Number(match[1]);
+      const key=`magic-neon-grade-${grade}`;
+      const saved=JSON.parse(localStorage.getItem(key)||'null');
+      if(saved&&typeof saved==='object'){
+        saved.current=1;
+        localStorage.setItem(key,JSON.stringify(saved));
+      }
+      sessionStorage.setItem(`magic-neon-fresh-grade-${grade}`,'1');
+    }catch(e){}
+  }
+
+  /* Capture before any other Academy click handler so every Grade 2/3/4
+     entry gets the same deterministic fresh-entry behavior. */
+  document.addEventListener('click',function(event){
+    const link=event.target.closest&&event.target.closest('a');
+    if(link&&isGradeLink(link)) prepareFreshGradeEntry(link);
+  },true);
+
   function findLearningBlock(){
     const nodes=[...document.querySelectorAll('h1,h2,h3,h4,p,a,button,[role="button"]')];
     const hit=nodes.find(el=>/დავიწყოთ\s*სწავლა|start\s*learning|begin\s*learning/i.test(clean(el.textContent)));
