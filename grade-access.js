@@ -1,7 +1,7 @@
 /* English with Mariami — secure student grade routing. */
 (function(){
   'use strict';
-  const m=(location.pathname||'').match(/(?:^|\/)grade([234])(?:\/index\.html)?$/i);
+  const m=(location.pathname||'').match(/(?:^|\/)grade([234])(?:\/index\.html)?\/?$/i);
   if(!m)return;
   const current=Number(m[1]);
   const ALLOWED=[2,3,4];
