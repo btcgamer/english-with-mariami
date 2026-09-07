@@ -6,6 +6,7 @@
   const VALID_GRADES=[2,3,4];
   const PRIVILEGED_ROLES=['teacher','admin','parent'];
   let busy=false;
+  let initialized=false;
 
   function getClient(){return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null}
   function loginUrl(){const current=location.pathname+location.search+location.hash;return 'login.html?redirect='+encodeURIComponent(current)}
@@ -38,6 +39,8 @@
   }
 
   async function initGate(){
+    if(initialized)return;
+    initialized=true;
     try{
       const access=await getAccess();
       if(!access.user){
@@ -109,16 +112,12 @@
     event.preventDefault();event.stopImmediatePropagation();openGrade(link);
   },true);
 
-  /* The old inline Academy initializer redirected every visitor immediately.
-     Intercept only that initializer and replace it with the access-gate flow. */
-  const nativeAdd=document.addEventListener.bind(document);
-  document.addEventListener=function(type,listener,options){
-    if(type==='DOMContentLoaded'&&typeof listener==='function'&&/initAcademy/.test(Function.prototype.toString.call(listener))){
-      return nativeAdd(type,initGate,options);
-    }
-    return nativeAdd(type,listener,options);
-  };
+  /* Stop the legacy Academy initializer before it can redirect visitors.
+     Capture phase runs before its normal DOMContentLoaded listener. */
+  document.addEventListener('DOMContentLoaded',function(event){
+    event.stopImmediatePropagation();
+    initGate();
+  },true);
 
-  if(document.readyState==='loading')nativeAdd('DOMContentLoaded',initGate,{once:true});
-  else initGate();
+  if(document.readyState!=='loading')initGate();
 })();
