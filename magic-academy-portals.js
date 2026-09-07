@@ -24,7 +24,10 @@
         portal('👑','GRADE 4','Master','/grade4/','g4')
       );
       const hero=document.querySelector('.hero');
-      (hero||document.body).appendChild(wrap);
+      const buttons=document.querySelector('.hero-buttons');
+      if(buttons&&buttons.parentNode) buttons.parentNode.appendChild(wrap);
+      else if(hero) hero.appendChild(wrap);
+      else document.body.appendChild(wrap);
     }
     if(academy&&!document.querySelector('.magic-academy-portals')){
       const aura=document.createElement('div'); aura.className='magic-academy-aura'; aura.setAttribute('aria-hidden','true'); document.body.appendChild(aura);
@@ -39,6 +42,8 @@
     }
     if(reduced)return;
     document.querySelectorAll('.magic-grade-portal').forEach(el=>{
+      if(el.dataset.ewmTiltBound)return;
+      el.dataset.ewmTiltBound='1';
       el.addEventListener('pointermove',e=>{
         const r=el.getBoundingClientRect();
         const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
