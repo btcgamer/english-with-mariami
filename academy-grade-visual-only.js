@@ -5,6 +5,10 @@
 
   function markVisualOnly(){
     document.querySelectorAll('.grade-link').forEach(function(link){
+      /* Remove navigation itself, not just the click behavior. This keeps
+         every Grade card visually intact while making it impossible for the
+         browser to follow a stale href handler. */
+      link.removeAttribute('href');
       link.setAttribute('aria-disabled','true');
       link.setAttribute('role','button');
       link.setAttribute('tabindex','0');
@@ -12,8 +16,6 @@
     });
   }
 
-  /* Capture before the existing grade-navigation handlers so no grade page
-     can be opened from Academy and no grade-entry/auth flow is triggered. */
   document.addEventListener('click',function(event){
     const link=event.target.closest&&event.target.closest('.grade-link');
     if(!link) return;
