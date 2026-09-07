@@ -1,5 +1,5 @@
 /* English with Mariami — public Supabase browser configuration. */
-window.SUPABASE_URL='https://vtdhvsfqhwesxtwmdue.supabase.co';
+window.SUPABASE_URL='https://vtdhvsfqhwesxtwmduew.supabase.co';
 window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 (function(){
@@ -52,6 +52,18 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   }
 
   if(!isAcademy) return;
+
+  /* Academy grade cards are presentation-only. This listener is registered
+     before the dynamically loaded grade-layout script, so clicking a grade
+     never reaches a navigation/auth handler. */
+  if(!document.querySelector('script[data-ewm-academy-grade-visual-only]')){
+    const visual=document.createElement('script');
+    visual.src='/academy-grade-visual-only.js?v=20260907';
+    visual.defer=true;
+    visual.dataset.ewmAcademyGradeVisualOnly='1';
+    document.head.appendChild(visual);
+  }
+
   if(document.querySelector('script[data-ewm-academy-grade-layout]')) return;
   const s=document.createElement('script');
   s.src='/academy-grade-layout.js?v=20260907';
