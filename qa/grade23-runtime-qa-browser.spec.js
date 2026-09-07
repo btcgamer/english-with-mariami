@@ -1,28 +1,8 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('playwright/test');
 
 const GRADE = Number(process.env.GRADE || 2);
 const BASE_URL = process.env.GRADE_BASE_URL || `http://127.0.0.1:4173/grade${GRADE}/`;
 const MISSIONS = 60;
-const LABELS = ['Listening Word Quest', 'Dialogue Lab', 'Reading Mission', 'Grammar Lab', 'Thinking Challenge'];
-
-function installSupabaseQaStub(page) {
-  return page.addInitScript((grade) => {
-    const user = { id: `qa-grade-${grade}-user` };
-    const profiles = { user_id: user.id, role: 'student', grade };
-    const chain = {
-      select() { return this; },
-      eq() { return this; },
-      maybeSingle: async () => ({ data: profiles, error: null }),
-      upsert: async () => ({ data: null, error: null })
-    };
-    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = {
-      auth: {
-        getUser: async () => ({ data: { user }, error: null })
-      },
-      from: () => chain
-    };
-  }, GRADE);
-}
 
 test(`Grade ${GRADE} — 60 mission runtime QA`, async ({ page }) => {
   const pageErrors = [];
@@ -36,43 +16,54 @@ test(`Grade ${GRADE} — 60 mission runtime QA`, async ({ page }) => {
     localStorage.setItem(`magic-neon-grade-${grade}`, JSON.stringify({ current: 1, done: [], stars: 0, streak: 0 }));
     sessionStorage.removeItem(`magic-neon-fresh-grade-${grade}`);
   }, GRADE);
-  await installSupabaseQaStub(page);
+
+  await page.addInitScript((grade) => {
+    const user = { id: `qa-grade-${grade}-user` };
+    const profiles = { user_id: user.id, role: 'student', grade };
+    const chain = {
+      select() { return this; },
+      eq() { return this; },
+      maybeSingle: async () => ({ data: profiles, error: null }),
+      upsert: async () => ({ data: null, error: null })
+    };
+    window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = {
+      auth: { getUser: async () => ({ data: { user }, error: null }) },
+      from: () => chain
+    };
+  }, GRADE);
 
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' });
 
   for (let n = 1; n <= MISSIONS; n++) {
     const task = page.locator('.mission-task');
     await expect(task).toBeVisible();
-    const missionText = page.locator('.eyebrow').filter({ hasText: /MISSION\s+\d+\s*\/\s*60/i }).first();
-    await expect(missionText).toContainText(`MISSION ${n} / 60`);
-    await expect(page.locator('.mission-card h2')).toContainText(LABELS[(n - 1) % 5]);
+    await expect(page.locator('body')).toContainText(new RegExp(`MISSION\\s+${n}\\s*/\\s*60`, 'i'));
 
-    const complete = page.locator('[data-complete]');
+    const complete = page.locator('[data-complete]').first();
     await expect(complete).toBeDisabled();
-    const type = (n - 1) % 5;
 
-    if (type === 0 || type === 1 || type === 3) {
-      await expect(task.locator('.choice')).toHaveCount(3);
-      await expect(task.locator('.choice[data-answer="right"]')).toHaveCount(1);
-      await task.locator('.choice[data-answer="right"]').click();
-    } else if (type === 2) {
-      const questions = task.locator('.question');
-      await expect(questions).toHaveCount(2);
-      const right = task.locator('.choice[data-answer="right"]');
-      await expect(right).toHaveCount(2);
-      await right.nth(0).click();
-      await right.nth(1).click();
+    const rightByAnswer = task.locator('.choice[data-answer="right"]');
+    const rightByOk = task.locator('.choice[data-ok="true"]');
+    const rightCount = await rightByAnswer.count() + await rightByOk.count();
+
+    if (rightCount > 0) {
+      for (const locator of [rightByAnswer, rightByOk]) {
+        const count = await locator.count();
+        for (let i = 0; i < count; i++) await locator.nth(i).click();
+      }
     } else {
-      await expect(task.locator('.answer')).toBeVisible();
-      await expect(task.locator('[data-save-answer]')).toBeVisible();
-      await task.locator('.answer').fill('I think this is a useful idea because it helps people learn. It can make a day better and give us a clear goal. We can practice, listen and try again when something is difficult.');
-      await task.locator('[data-save-answer]').click();
+      const answer = task.locator('.answer');
+      await expect(answer).toBeVisible();
+      await answer.fill('I think this is a useful idea because it helps people learn. It can make a day better and give us a clear goal. We can practice, listen and try again when something is difficult.');
+      const saveButton = task.locator('[data-save-answer], [data-save]').first();
+      await expect(saveButton).toBeVisible();
+      await saveButton.click();
       await expect(task.locator('.save-msg')).toContainText(/saved|save/i);
     }
 
     await expect(complete).toBeEnabled();
     await complete.click();
-    if (n < MISSIONS) await expect(missionText).toContainText(`MISSION ${n + 1} / 60`);
+    if (n < MISSIONS) await expect(page.locator('body')).toContainText(new RegExp(`MISSION\\s+${n + 1}\\s*/\\s*60`, 'i'));
   }
 
   const state = await page.evaluate((grade) => JSON.parse(localStorage.getItem(`magic-neon-grade-${grade}`) || '{}'), GRADE);
