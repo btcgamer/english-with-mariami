@@ -2,11 +2,12 @@
 /* Fresh entry from Academy: reset only the transient current mission. Keep progress, stars and completed missions. */
 (function(){
   try{
-    var ref=document.referrer||'';
-    if(/(?:^|\/)academy\.html(?:[?#]|$)/i.test(ref) || /(?:^|\/)grade3\.html(?:[?#]|$)/i.test(ref)){
+    var ref=document.referrer||'', fresh=new URLSearchParams(window.location.search).get('fresh')==='1';
+    if(fresh || /(?:^|\/)academy\.html(?:[?#]|$)/i.test(ref) || /(?:^|\/)grade3\.html(?:[?#]|$)/i.test(ref)){
       var key='magic-neon-grade-3', saved=JSON.parse(localStorage.getItem(key)||'null');
       if(saved&&typeof saved==='object'){saved.current=1;localStorage.setItem(key,JSON.stringify(saved));}
+      sessionStorage.setItem('magic-neon-fresh-grade-3','1');
     }
   }catch(e){}
 })();
-</script><script src="./grade3-core.js"></script><script src="./grade3-qa-hardening.js"></script><script src="./grade3-alien-world.js"></script><script src="../shared/academy-grade-nav.js"></script></body></html>
+</script><script src="./grade3-core.js?v=20260907"></script><script src="./grade3-qa-hardening.js?v=20260907"></script><script src="./grade3-alien-world.js?v=20260907"></script><script src="../shared/academy-grade-nav.js?v=20260907"></script></body></html>
