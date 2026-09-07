@@ -28,6 +28,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   const isAcademy=/\/academy\.html(?:$|[?#])/i.test(location.pathname+location.search+location.hash);
   if(!isAcademy) return;
 
+  /* Restore the Academy visual system independently of auth/network state. */
+  if(!document.querySelector('link[data-ewm-academy-visual]')){
+    const css=document.createElement('link');
+    css.rel='stylesheet';
+    css.href='/academy-visual.css?v=20260908';
+    css.dataset.ewmAcademyVisual='1';
+    document.head.appendChild(css);
+  }
+
   /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
