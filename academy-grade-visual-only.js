@@ -14,14 +14,17 @@
   function setMessage(text){const el=document.getElementById('grade-message');if(el)el.textContent=text}
   function hideLoader(){document.body.classList.remove('is-loading');const el=document.getElementById('academyLoader');if(el)el.classList.add('hidden')}
 
+  /* Never let auth/network latency prevent the Academy UI from rendering. */
+  setTimeout(hideLoader,1200);
+
   async function waitForClient(){
-    let client=getClient();
-    if(client)return client;
+    const immediate=getClient();
+    if(immediate)return immediate;
     await new Promise(function(resolve){
       let done=false;
       function finish(){if(done)return;done=true;resolve()}
       window.addEventListener('englishMariamiSupabaseReady',finish,{once:true});
-      setTimeout(finish,5000);
+      setTimeout(finish,2500);
     });
     return getClient();
   }
@@ -29,23 +32,29 @@
   async function getAccess(){
     const client=await waitForClient();
     if(!client)return {client:null,user:null,profile:null};
-    const sessionResult=await client.auth.getSession();
-    const session=sessionResult.data&&sessionResult.data.session;
-    const user=session&&session.user;
-    if(sessionResult.error||!user)return {client,user:null,profile:null};
-    const result=await client.from('profiles').select('role,grade,full_name').eq('user_id',user.id).maybeSingle();
-    if(result.error)throw result.error;
-    return {client,user,profile:result.data||{}};
+    try{
+      const sessionResult=await client.auth.getSession();
+      const session=sessionResult.data&&sessionResult.data.session;
+      const user=session&&session.user;
+      if(sessionResult.error||!user)return {client,user:null,profile:null};
+      const result=await client.from('profiles').select('role,grade,full_name').eq('user_id',user.id).maybeSingle();
+      if(result.error)throw result.error;
+      return {client,user,profile:result.data||{}};
+    }catch(error){
+      console.error('Academy access lookup error:',error);
+      return {client,user:null,profile:null,error:error};
+    }
   }
 
   async function initGate(){
     if(initialized)return;
     initialized=true;
+    /* UI first: the Academy must remain visible even if Supabase is unavailable. */
+    hideLoader();
     try{
       const access=await getAccess();
       if(!access.user){
         setMessage('კლასის გასახსნელად გაიარე ავტორიზაცია. ახალი მომხმარებელი ჯერ დარეგისტრირდი. 🔐');
-        hideLoader();
         return;
       }
       const profile=access.profile||{};
@@ -59,11 +68,9 @@
       }else{
         setMessage('კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს. 👩‍🏫');
       }
-      hideLoader();
     }catch(error){
       console.error('Academy gate init error:',error);
-      setMessage('ანგარიშის შემოწმება დროებით ვერ მოხერხდა. სცადე თავიდან.');
-      hideLoader();
+      setMessage('ანგარიშის შემოწმება დროებით ვერ მოხერხდა. კლასის გახსნისას ხელახლა შემოწმდება.');
     }
   }
 
@@ -112,8 +119,8 @@
     event.preventDefault();event.stopImmediatePropagation();openGrade(link);
   },true);
 
-  /* Block the legacy Academy auto-redirect initializer when this gate loads
-     before the page's inline script registers its DOMContentLoaded handler. */
+  /* The legacy Academy initializer redirects guests during DOMContentLoaded.
+     Stop that legacy handler; this file owns grade access now. */
   const nativeAddEventListener=document.addEventListener.bind(document);
   document.addEventListener=function(type,listener,options){
     if(type==='DOMContentLoaded'&&typeof listener==='function'&&/initAcademy/.test(Function.prototype.toString.call(listener))){
@@ -122,7 +129,6 @@
     return nativeAddEventListener(type,listener,options);
   };
 
-  /* Also protect against the legacy listener if it was already registered. */
   document.addEventListener('DOMContentLoaded',function(event){
     event.stopImmediatePropagation();
     initGate();
