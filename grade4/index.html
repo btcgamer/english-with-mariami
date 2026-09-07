@@ -1,13 +1,3 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#050713"><title>English with Mariami — Grade 4</title><link rel="stylesheet" href="../shared/academy-grade.css"><link rel="stylesheet" href="../shared/academy-grade-nav.css"><link rel="stylesheet" href="./grade4-wonderland.css"></head><body data-grade="4"><script>
-/* Fresh entry from Academy: reset only the transient current mission. Keep progress, stars and completed missions. */
-(function(){
-  try{
-    var ref=document.referrer||'', fresh=new URLSearchParams(window.location.search).get('fresh')==='1';
-    if(fresh || /(?:^|\/)academy\.html(?:[?#]|$)/i.test(ref) || /(?:^|\/)grade4\.html(?:[?#]|$)/i.test(ref)){
-      var key='magic-neon-grade-4', saved=JSON.parse(localStorage.getItem(key)||'null');
-      if(saved&&typeof saved==='object'){saved.current=1;localStorage.setItem(key,JSON.stringify(saved));}
-      sessionStorage.setItem('magic-neon-fresh-grade-4','1');
-    }
-  }catch(e){}
-})();
-</script><script src="../shared/grade-vocabulary-expansion.js?v=20260907"></script><script src="./grade4-core.js?v=20260907"></script><script src="./grade4-qa-hardening.js?v=20260907"></script><script src="./INTERACTION-AUDIT.js?v=20260907"></script><script src="./grade4-wonderland.js?v=20260907"></script><script src="./grade4-runtime-qa.js?v=20260907"></script><script src="./grade4-progress-sync.js?v=20260907"></script><script src="../shared/academy-grade-nav.js?v=20260907"></script></body></html>
+(function(){try{var ref=document.referrer||'',fresh=new URLSearchParams(window.location.search).get('fresh')==='1';if(fresh||/(?:^|\/)academy\.html(?:[?#]|$)/i.test(ref)||/(?:^|\/)grade4\.html(?:[?#]|$)/i.test(ref)){var key='magic-neon-grade-4',saved=JSON.parse(localStorage.getItem(key)||'null');if(saved&&typeof saved==='object'){saved.current=1;localStorage.setItem(key,JSON.stringify(saved));}sessionStorage.setItem('magic-neon-fresh-grade-4','1');}}catch(e){}})();
+</script><script src="../shared/grade-vocabulary-expansion.js?v=20260907"></script><script src="../shared/topic-isolation.js?v=20260907"></script><script src="./grade4-core.js?v=20260907"></script><script src="./grade4-qa-hardening.js?v=20260907"></script><script src="./INTERACTION-AUDIT.js?v=20260907"></script><script src="./grade4-wonderland.js?v=20260907"></script><script src="./grade4-runtime-qa.js?v=20260907"></script><script src="./grade4-progress-sync.js?v=20260907"></script><script src="../shared/academy-grade-nav.js?v=20260907"></script></body></html>
