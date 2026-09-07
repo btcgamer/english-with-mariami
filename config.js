@@ -28,26 +28,10 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
   const isAcademy=/\/academy\.html(?:$|[?#])/i.test(location.pathname+location.search+location.hash);
   if(!isAcademy) return;
 
-  /*
-     Academy has an older inline DOMContentLoaded initializer which can redirect
-     or keep the loader visible before the dedicated access-gate script loads.
-     Block that legacy event during page parsing; the access-gate script will
-     initialize itself after it loads (including when DOMContentLoaded already fired).
-  */
-  document.addEventListener('DOMContentLoaded',function(event){
-    event.stopImmediatePropagation();
-  },true);
-
-  /* Emergency UI failsafe: network/auth code must never freeze the Academy screen. */
-  setTimeout(function(){
-    document.body.classList.remove('is-loading');
-    const loader=document.getElementById('academyLoader');
-    if(loader) loader.classList.add('hidden');
-  },1500);
-
+  /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
-  visual.src='/academy-grade-visual-only.js?v=20260907';
+  visual.src='/academy-grade-visual-only.js?v=20260908';
   visual.defer=true;
   visual.dataset.ewmAcademyGradeVisualOnly='1';
   document.head.appendChild(visual);
