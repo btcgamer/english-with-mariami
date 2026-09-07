@@ -1,0 +1,48 @@
+name: Cross-Grade Master QA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  master-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check qa/cross-grade-master-qa.spec.js
+          node --check grade-access.js
+          node --check shared/grade23-progress.js
+          node --check shared/topic-isolation.js
+          node --check shared/academy-grade-core.js
+          node --check grade3/grade3-core.js
+          node --check grade4/grade4-core.js
+
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.55.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/english-mariami-server.log 2>&1 &
+
+      - name: Run Cross-Grade Master QA
+        run: npx playwright test qa/cross-grade-master-qa.spec.js --reporter=line
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-grade-master-qa-report
+          path: playwright-report/
+          if-no-files-found: ignore
