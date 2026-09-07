@@ -112,8 +112,17 @@
     event.preventDefault();event.stopImmediatePropagation();openGrade(link);
   },true);
 
-  /* Stop the legacy Academy initializer before it can redirect visitors.
-     Capture phase runs before its normal DOMContentLoaded listener. */
+  /* Block the legacy Academy auto-redirect initializer when this gate loads
+     before the page's inline script registers its DOMContentLoaded handler. */
+  const nativeAddEventListener=document.addEventListener.bind(document);
+  document.addEventListener=function(type,listener,options){
+    if(type==='DOMContentLoaded'&&typeof listener==='function'&&/initAcademy/.test(Function.prototype.toString.call(listener))){
+      return nativeAddEventListener(type,initGate,options);
+    }
+    return nativeAddEventListener(type,listener,options);
+  };
+
+  /* Also protect against the legacy listener if it was already registered. */
   document.addEventListener('DOMContentLoaded',function(event){
     event.stopImmediatePropagation();
     initGate();
