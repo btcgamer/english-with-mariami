@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v23';
+const CACHE_NAME = 'english-with-mariami-v24';
 const FUTURE_THEME = './magic-ai-25c.css';
 const FUTURE_CLASSROOM = './shared/future-neon-classroom.css?v=20260906';
 const NAV_TIMEOUT_MS = 4500;
@@ -38,8 +38,8 @@ self.addEventListener('activate', event => event.waitUntil(
   )).then(() => self.clients.claim())
 ));
 
-function isMainOrAcademy(pathname){
-  return pathname === '/' || pathname === '/index.html' || pathname.endsWith('/academy.html');
+function isAcademyPage(pathname){
+  return pathname.endsWith('/academy.html');
 }
 
 function fetchWithTimeout(request, ms){
@@ -88,7 +88,7 @@ self.addEventListener('fetch', event => {
   if(request.mode==='navigate'||request.destination==='document'){
     event.respondWith(
       fetchWithTimeout(request, NAV_TIMEOUT_MS)
-        .then(response => isMainOrAcademy(url.pathname) ? injectVisualLayers(response) : response)
+        .then(response => isAcademyPage(url.pathname) ? injectVisualLayers(response) : response)
         .catch(async()=>{
           const cached=await caches.match(request);
           return cached || caches.match('./index.html') || Response.error();
@@ -116,7 +116,7 @@ self.addEventListener('push', event => {
   event.waitUntil(self.registration.showNotification(data.title,{body:data.body,icon:data.icon,badge:data.badge,vibrate:[100,50,100],data:{url:'./academy.html'}}));
 });
 
-self.addEventListener('notificationclick',event=>{
+self.addEventListener('notificationclick',event => {
   event.notification.close();
   const targetUrl=event.notification?.data?.url||'./academy.html';
   event.waitUntil(clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{
@@ -130,4 +130,4 @@ self.addEventListener('notificationclick',event=>{
   }));
 });
 
-console.log('[SW] English with Mariami v23 READY — timeout-safe navigation/assets 🚀');
+console.log('[SW] English with Mariami v24 READY — homepage visual lock');
