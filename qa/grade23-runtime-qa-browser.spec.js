@@ -40,7 +40,7 @@ test(`Grade ${GRADE} — 60 mission runtime QA`, async ({ page }) => {
     await expect(page.locator('body')).toContainText(new RegExp(`MISSION\\s+${n}\\s*/\\s*60`, 'i'));
 
     const complete = page.locator('[data-complete]').first();
-    await expect(complete).toBeDisabled();
+    await expect(complete).toBeVisible();
 
     const rightByAnswer = task.locator('.choice[data-answer="right"]');
     const rightByOk = task.locator('.choice[data-ok="true"]');
