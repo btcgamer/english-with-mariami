@@ -13,6 +13,25 @@
     a.innerHTML='<span class="portal-icon">'+icon+'</span><strong>'+title+'</strong><small>'+sub+'</small>';
     return a;
   }
+  function homeLayout(){
+    if(!home||document.getElementById('ewm-home-grade-layout'))return;
+    const style=document.createElement('style');
+    style.id='ewm-home-grade-layout';
+    style.textContent=`
+      .hero{flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;min-height:auto!important;padding:58px 6% 48px!important}
+      .hero-content{width:100%!important;max-width:1000px!important}
+      .hero-buttons{margin-top:22px!important;margin-bottom:30px!important}
+      .magic-home-portals{position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;transform:none!important;width:100%!important;margin:0 auto!important;padding:0!important;display:flex!important;flex-wrap:wrap!important;gap:14px!important;align-items:center!important;justify-content:center!important;z-index:5!important}
+      .magic-home-portals .magic-grade-portal{flex:0 1 148px!important}
+      @media(max-width:600px){
+        .hero{padding:48px 16px 38px!important}
+        .hero-buttons{margin-top:18px!important;margin-bottom:24px!important}
+        .magic-home-portals{gap:9px!important}
+        .magic-home-portals .magic-grade-portal{flex:1 1 30%!important;min-width:96px!important}
+      }
+    `;
+    document.head.appendChild(style);
+  }
   function mount(){
     if(home&&!document.querySelector('.magic-home-portals')){
       const wrap=document.createElement('nav');
@@ -29,6 +48,7 @@
       else if(hero) hero.appendChild(wrap);
       else document.body.appendChild(wrap);
     }
+    if(home)homeLayout();
     if(academy&&!document.querySelector('.magic-academy-portals')){
       const aura=document.createElement('div'); aura.className='magic-academy-aura'; aura.setAttribute('aria-hidden','true'); document.body.appendChild(aura);
       const orbit=document.createElement('div'); orbit.className='magic-academy-orbit'; orbit.setAttribute('aria-hidden','true'); document.body.appendChild(orbit);
