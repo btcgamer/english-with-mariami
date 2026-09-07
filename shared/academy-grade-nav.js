@@ -3,7 +3,9 @@
   'use strict';
   const grade=Number(document.body.dataset.grade||0);
   if(![2,3,4].includes(grade)) return;
-  const ACADEMY='../academy.html';
+  /* Cache-bust Academy so an older cached auth/config page cannot send an
+     already-authenticated student back to login after Grade → Academy. */
+  const ACADEMY=`../academy.html?ewm_auth_refresh=20260907`;
   const STATE_KEY=`magic-neon-grade-${grade}`;
 
   function resetTransientMission(){
