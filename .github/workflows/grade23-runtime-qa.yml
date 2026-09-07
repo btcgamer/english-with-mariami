@@ -1,0 +1,65 @@
+name: Grade 2-3 Runtime QA
+
+on:
+  push:
+    paths:
+      - 'grade2/**'
+      - 'grade3/**'
+      - 'shared/**'
+      - 'config.js'
+      - 'grade-access.js'
+      - 'qa/grade23-runtime-qa-browser.spec.js'
+      - '.github/workflows/grade23-runtime-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  runtime-qa:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        grade: [2, 3]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check grade-access.js
+          node --check shared/academy-grade-core.js
+          node --check shared/grade23-progress.js
+          node --check shared/grade-vocabulary-expansion.js
+          node --check shared/topic-isolation.js
+          if [ "${{ matrix.grade }}" = "3" ]; then node --check grade3/grade3-core.js; fi
+          if [ "${{ matrix.grade }}" = "3" ]; then node --check grade3/grade3-qa-hardening.js; fi
+          node --check grade${{ matrix.grade }}/grade${{ matrix.grade }}-magic-effects.js 2>/dev/null || true
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start static server
+        run: python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/grade23-server.log 2>&1 &
+
+      - name: Run Grade ${{ matrix.grade }} 60-mission browser QA
+        env:
+          GRADE: ${{ matrix.grade }}
+          GRADE_BASE_URL: http://127.0.0.1:4173/grade${{ matrix.grade }}/
+        run: npx playwright test qa/grade23-runtime-qa-browser.spec.js --reporter=line
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade${{ matrix.grade }}-runtime-qa-report
+          path: |
+            playwright-report/
+            test-results/
+            /tmp/grade23-server.log
+          if-no-files-found: ignore
