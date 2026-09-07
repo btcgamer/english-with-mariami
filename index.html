@@ -1,1668 +1,1950 @@
 <!DOCTYPE html>
 <html lang="ka">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>English with Mariami — ინგლისურის აკადემია</title>
-
-<meta name="description"
-content="English with Mariami — ინგლისურის სასწავლო აკადემია ბავშვებისთვის">
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:
-    Arial,
-    "Noto Sans Georgian",
-    sans-serif;
-
-  color:#fff;
-
-  min-height:100vh;
-
-  overflow-x:hidden;
-
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      #164e8a 0%,
-      #071c3a 35%,
-      #020817 75%
-    );
-}
-
-/* =========================
-   ANIMATED BACKGROUND
-========================= */
-
-.background{
-  position:fixed;
-  inset:0;
-  z-index:-5;
-  overflow:hidden;
-  pointer-events:none;
-}
-
-.star{
-  position:absolute;
-
-  width:3px;
-  height:3px;
-
-  background:#fff;
-
-  border-radius:50%;
-
-  box-shadow:
-    0 0 8px #00eaff;
-
-  animation:
-    starMove linear infinite;
-}
-
-.star:nth-child(1){
-  left:5%;
-  top:15%;
-  animation-duration:7s;
-}
-
-.star:nth-child(2){
-  left:15%;
-  top:70%;
-  animation-duration:11s;
-}
-
-.star:nth-child(3){
-  left:28%;
-  top:30%;
-  animation-duration:8s;
-}
-
-.star:nth-child(4){
-  left:42%;
-  top:80%;
-  animation-duration:13s;
-}
-
-.star:nth-child(5){
-  left:55%;
-  top:20%;
-  animation-duration:9s;
-}
-
-.star:nth-child(6){
-  left:67%;
-  top:65%;
-  animation-duration:12s;
-}
-
-.star:nth-child(7){
-  left:78%;
-  top:35%;
-  animation-duration:10s;
-}
-
-.star:nth-child(8){
-  left:90%;
-  top:75%;
-  animation-duration:8s;
-}
-
-.star:nth-child(9){
-  left:35%;
-  top:55%;
-  animation-duration:14s;
-}
-
-.star:nth-child(10){
-  left:85%;
-  top:12%;
-  animation-duration:12s;
-}
-
-@keyframes starMove{
-
-  0%,100%{
-    opacity:.15;
-    transform:
-      scale(.6)
-      translateY(0);
-  }
-
-  50%{
-    opacity:1;
-    transform:
-      scale(1.8)
-      translateY(-30px);
-  }
-}
-
-/* glowing balls */
-
-.orb{
-  position:absolute;
-
-  border-radius:50%;
-
-  filter:blur(2px);
-
-  opacity:.25;
-
-  animation:
-    orbFloat 8s ease-in-out infinite;
-}
-
-.orb.one{
-  width:260px;
-  height:260px;
-
-  background:#00eaff;
-
-  top:10%;
-  left:-100px;
-}
-
-.orb.two{
-  width:220px;
-  height:220px;
-
-  background:#7c3cff;
-
-  right:-80px;
-  top:40%;
-
-  animation-delay:2s;
-}
-
-.orb.three{
-  width:180px;
-  height:180px;
-
-  background:#008cff;
-
-  left:35%;
-  bottom:-80px;
-
-  animation-delay:4s;
-}
-
-@keyframes orbFloat{
-
-  0%,100%{
-    transform:
-      translate(0,0)
-      scale(1);
-  }
-
-  50%{
-    transform:
-      translate(30px,-40px)
-      scale(1.15);
-  }
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-
-  position:sticky;
-
-  top:0;
-
-  z-index:100;
-
-  width:100%;
-
-  padding:14px 5%;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:20px;
-
-  background:
-    rgba(2,8,23,.78);
-
-  border-bottom:
-    1px solid
-    rgba(0,234,255,.25);
-
-  backdrop-filter:
-    blur(18px);
-
-  box-shadow:
-    0 10px 40px
-    rgba(0,0,0,.25);
-}
-
-.logo{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  font-size:20px;
-
-  font-weight:900;
-
-  color:#00eaff;
-
-  text-shadow:
-    0 0 10px #00eaff,
-    0 0 25px #008cff;
-
-  white-space:nowrap;
-}
-
-.logo-icon{
-
-  font-size:30px;
-
-  animation:
-    logoBounce 3s ease-in-out infinite;
-}
-
-@keyframes logoBounce{
-
-  0%,100%{
-    transform:translateY(0) rotate(0);
-  }
-
-  50%{
-    transform:translateY(-5px) rotate(5deg);
-  }
-}
-
-.auth-button{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:8px;
-
-  padding:11px 20px;
-
-  border-radius:14px;
-
-  text-decoration:none;
-
-  color:#00131a;
-
-  font-weight:900;
-
-  font-size:14px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #00eaff,
-      #008cff
-    );
-
-  border:
-    1px solid #9fffff;
-
-  box-shadow:
-    0 0 20px
-    rgba(0,234,255,.35);
-
-  transition:
-    transform .2s,
-    box-shadow .2s;
-}
-
-.auth-button:hover{
-
-  transform:
-    translateY(-3px)
-    scale(1.03);
-
-  box-shadow:
-    0 0 35px
-    rgba(0,234,255,.75);
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-
-  min-height:
-    calc(100vh - 75px);
-
-  padding:
-    70px 6%
-    90px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  position:relative;
-}
-
-.hero-content{
-
-  max-width:1000px;
-
-  animation:
-    heroAppear 1s ease;
-}
-
-@keyframes heroAppear{
-
-  from{
-    opacity:0;
-    transform:
-      translateY(35px);
-  }
-
-  to{
-    opacity:1;
-    transform:
-      translateY(0);
-  }
-}
-
-.hero-emoji{
-
-  font-size:
-    clamp(60px,10vw,110px);
-
-  margin-bottom:15px;
-
-  filter:
-    drop-shadow(0 0 12px #00eaff)
-    drop-shadow(0 0 30px #008cff);
-
-  animation:
-    heroFloat 4s ease-in-out infinite;
-}
-
-@keyframes heroFloat{
-
-  0%,100%{
-    transform:
-      translateY(0)
-      rotate(-2deg);
-  }
-
-  50%{
-    transform:
-      translateY(-15px)
-      rotate(2deg);
-  }
-}
-
-.hero h1{
-
-  font-size:
-    clamp(36px,7vw,72px);
-
-  line-height:1.05;
-
-  margin-bottom:20px;
-
-  font-weight:1000;
-
-  color:#fff;
-
-  text-shadow:
-    0 0 12px #00eaff,
-    0 0 30px #008cff,
-    0 0 60px rgba(0,234,255,.4);
-}
-
-.hero h1 span{
-
-  color:#00eaff;
-}
-
-.hero p{
-
-  max-width:720px;
-
-  margin:
-    0 auto 30px;
-
-  color:#c8f7ff;
-
-  font-size:
-    clamp(16px,2.5vw,20px);
-
-  line-height:1.7;
-}
-
-/* CTA */
-
-.hero-buttons{
-
-  display:flex;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:13px;
-}
-
-.primary-button,
-.secondary-button{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:8px;
-
-  min-width:180px;
-
-  padding:14px 22px;
-
-  border-radius:16px;
-
-  text-decoration:none;
-
-  font-weight:900;
-
-  transition:.25s;
-}
-
-.primary-button{
-
-  color:#00131a;
-
-  background:
-    linear-gradient(
-      135deg,
-      #00eaff,
-      #008cff
-    );
-
-  border:
-    1px solid #a4ffff;
-
-  box-shadow:
-    0 0 25px
-    rgba(0,234,255,.35);
-}
-
-.primary-button:hover{
-
-  transform:
-    translateY(-4px)
-    scale(1.03);
-
-  box-shadow:
-    0 0 40px
-    rgba(0,234,255,.7);
-}
-
-.secondary-button{
-
-  color:#fff;
-
-  background:
-    rgba(255,255,255,.06);
-
-  border:
-    1px solid
-    rgba(0,234,255,.4);
-
-  backdrop-filter:blur(10px);
-}
-
-.secondary-button:hover{
-
-  transform:
-    translateY(-4px);
-
-  background:
-    rgba(0,234,255,.12);
-}
-
-/* =========================
-   FLOATING 3D OBJECTS
-========================= */
-
-.floating{
-
-  position:absolute;
-
-  font-size:
-    clamp(35px,5vw,65px);
-
-  filter:
-    drop-shadow(0 0 10px
-    rgba(0,234,255,.7));
-
-  pointer-events:none;
-
-  animation:
-    floating 5s ease-in-out infinite;
-}
-
-.float1{
-  top:16%;
-  left:6%;
-}
-
-.float2{
-  top:25%;
-  right:7%;
-  animation-delay:1s;
-}
-
-.float3{
-  bottom:15%;
-  left:9%;
-  animation-delay:2s;
-}
-
-.float4{
-  bottom:12%;
-  right:9%;
-  animation-delay:3s;
-}
-
-@keyframes floating{
-
-  0%,100%{
-    transform:
-      translateY(0)
-      rotate(-5deg);
-  }
-
-  50%{
-    transform:
-      translateY(-25px)
-      rotate(8deg);
-  }
-}
-
-/* =========================
-   SECTION
-========================= */
-
-.section{
-
-  padding:
-    80px 5%;
-}
-
-.section-title{
-
-  text-align:center;
-
-  margin-bottom:45px;
-}
-
-.section-title h2{
-
-  font-size:
-    clamp(28px,5vw,46px);
-
-  color:#00eaff;
-
-  text-shadow:
-    0 0 12px #00eaff,
-    0 0 30px #008cff;
-
-  margin-bottom:10px;
-}
-
-.section-title p{
-
-  color:#bdeefa;
-
-  font-size:15px;
-}
-
-/* =========================
-   LESSONS
-========================= */
-
-.lessons{
-
-  max-width:1200px;
-
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:20px;
-}
-
-.lesson{
-
-  position:relative;
-
-  min-height:230px;
-
-  padding:25px 20px;
-
-  border-radius:25px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(7,39,72,.88),
-      rgba(2,10,25,.94)
-    );
-
-  border:
-    1px solid
-    rgba(0,234,255,.25);
-
-  box-shadow:
-    0 15px 40px
-    rgba(0,0,0,.35),
-
-    inset
-    0 1px 0
-    rgba(255,255,255,.08);
-
-  overflow:hidden;
-
-  transition:
-    transform .3s,
-    border-color .3s,
-    box-shadow .3s;
-}
-
-.lesson::before{
-
-  content:"";
-
-  position:absolute;
-
-  width:120px;
-  height:120px;
-
-  border-radius:50%;
-
-  background:
-    rgba(0,234,255,.15);
-
-  filter:blur(20px);
-
-  right:-50px;
-  top:-50px;
-}
-
-.lesson:hover{
-
-  transform:
-    translateY(-10px)
-    rotateX(3deg);
-
-  border-color:#00eaff;
-
-  box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.5),
-
-    0 0 30px
-    rgba(0,234,255,.2);
-}
-
-.lesson-number{
-
-  position:absolute;
-
-  top:15px;
-  right:17px;
-
-  color:#6edfff;
-
-  font-size:12px;
-
-  font-weight:900;
-}
-
-.lesson-icon{
-
-  font-size:55px;
-
-  margin-bottom:18px;
-
-  display:block;
-
-  filter:
-    drop-shadow(0 0 10px
-    rgba(0,234,255,.5));
-
-  animation:
-    lessonIcon 4s ease-in-out infinite;
-}
-
-@keyframes lessonIcon{
-
-  0%,100%{
-    transform:translateY(0);
-  }
-
-  50%{
-    transform:translateY(-7px);
-  }
-}
-
-.lesson h3{
-
-  color:#fff;
-
-  font-size:20px;
-
-  margin-bottom:9px;
-}
-
-.lesson p{
-
-  color:#a9d8e5;
-
-  font-size:13px;
-
-  line-height:1.5;
-}
-
-/* =========================
-   INFO CARDS
-========================= */
-
-.info-section{
-
-  max-width:1100px;
-
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:20px;
-}
-
-.info-card{
-
-  padding:30px 22px;
-
-  text-align:center;
-
-  border-radius:24px;
-
-  background:
-    rgba(5,25,48,.8);
-
-  border:
-    1px solid
-    rgba(0,234,255,.25);
-
-  transition:.3s;
-}
-
-.info-card:hover{
-
-  transform:
-    translateY(-8px);
-
-  border-color:#00eaff;
-
-  box-shadow:
-    0 0 30px
-    rgba(0,234,255,.18);
-}
-
-.info-card .icon{
-
-  font-size:48px;
-
-  margin-bottom:15px;
-}
-
-.info-card h3{
-
-  color:#00eaff;
-
-  margin-bottom:9px;
-}
-
-.info-card p{
-
-  color:#b8dce6;
-
-  font-size:13px;
-
-  line-height:1.6;
-}
-
-/* =========================
-   FINAL CTA
-========================= */
-
-.final-cta{
-
-  max-width:1000px;
-
-  margin:
-    30px auto 80px;
-
-  padding:
-    55px 25px;
-
-  text-align:center;
-
-  border-radius:30px;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(0,234,255,.13),
-      rgba(124,60,255,.12)
-    );
-
-  border:
-    1px solid
-    rgba(0,234,255,.35);
-
-  box-shadow:
-    0 0 50px
-    rgba(0,234,255,.08);
-}
-
-.final-cta h2{
-
-  font-size:
-    clamp(28px,5vw,45px);
-
-  margin-bottom:15px;
-
-  color:#fff;
-}
-
-.final-cta p{
-
-  color:#bdeefa;
-
-  margin-bottom:25px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-
-  padding:
-    30px 20px;
-
-  text-align:center;
-
-  border-top:
-    1px solid
-    rgba(0,234,255,.2);
-
-  background:
-    rgba(1,7,20,.8);
-
-  color:#83aeba;
-
-  font-size:12px;
-}
-
-footer strong{
-
-  color:#00eaff;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-
-  .lessons{
-
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .info-section{
-
-    grid-template-columns:
-      1fr;
-  }
-
-  .floating{
-
-    opacity:.45;
-  }
-}
-
-@media(max-width:600px){
-
-  header{
-
-    padding:
-      11px 14px;
-  }
-
-  .logo{
-
-    font-size:15px;
-  }
-
-  .logo-icon{
-
-    font-size:25px;
-  }
-
-  .auth-button{
-
-    padding:
-      9px 12px;
-
-    font-size:12px;
-  }
-
-  .hero{
-
-    padding:
-      55px 18px
-      70px;
-  }
-
-  .hero p{
-
-    font-size:14px;
-
-    line-height:1.6;
-  }
-
-  .hero-buttons{
-
-    flex-direction:column;
-
-    align-items:center;
-  }
-
-  .primary-button,
-  .secondary-button{
-
-    width:100%;
-
-    max-width:320px;
-  }
-
-  .floating{
-
-    display:none;
-  }
-
-  .section{
-
-    padding:
-      55px 14px;
-  }
-
-  .lessons{
-
-    grid-template-columns:1fr;
-
-    gap:15px;
-  }
-
-  .lesson{
-
-    min-height:205px;
-
-    padding:22px 18px;
-  }
-
-  .final-cta{
-
-    margin:
-      10px 14px 60px;
-
-    padding:
-      40px 20px;
-  }
-}
-
-@media(max-width:380px){
-
-  .logo{
-
-    font-size:13px;
-  }
-
-  .auth-button{
-
-    padding:
-      8px 9px;
-
-    font-size:11px;
-  }
-}
-</style>
-<link rel="stylesheet" href="/universe-theme.css"><script src="/universe-theme.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>English with Mariami — Holographic Academy</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js?v=20260907"></script>
+
+  <style>
+    :root{
+      --cyan:#00eaff;
+      --blue:#008cff;
+      --purple:#8b5cff;
+      --pink:#ff36d9;
+      --yellow:#ffe600;
+      --green:#39ff88;
+      --dark:#010712;
+      --card:rgba(2,15,35,.82);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+      -webkit-text-size-adjust:100%;
+    }
+
+    body{
+      min-height:100vh;
+      overflow-x:hidden;
+      font-family:Arial,"Noto Sans Georgian",sans-serif;
+      color:#fff;
+      background:#010712;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button,a{
+      touch-action:manipulation;
+    }
+
+    .wrap{
+      width:min(1250px,calc(100% - 28px));
+      margin:auto;
+    }
+
+    /* SPACE */
+
+    .space{
+      position:fixed;
+      inset:0;
+      z-index:-5;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 20%,rgba(0,234,255,.08),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(139,92,255,.12),transparent 35%),
+        #010712;
+    }
+
+    .stars{
+      position:absolute;
+      inset:0;
+      background-image:
+        radial-gradient(circle,#fff 1px,transparent 1px),
+        radial-gradient(circle,#00eaff 1px,transparent 1px);
+      background-size:80px 80px,130px 130px;
+      opacity:.28;
+      animation:stars 25s linear infinite;
+    }
+
+    @keyframes stars{
+      from{transform:translateY(0)}
+      to{transform:translateY(80px)}
+    }
+
+    .nebula{
+      position:absolute;
+      width:700px;
+      height:700px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(0,234,255,.14),transparent 68%);
+      top:-250px;
+      left:-180px;
+      filter:blur(30px);
+    }
+
+    .nebula.two{
+      top:auto;
+      left:auto;
+      right:-260px;
+      bottom:-300px;
+      background:radial-gradient(circle,rgba(139,92,255,.18),transparent 68%);
+    }
+
+    .grid-floor{
+      position:absolute;
+      left:-10%;
+      right:-10%;
+      bottom:-20%;
+      height:45%;
+      transform:perspective(400px) rotateX(65deg);
+      transform-origin:center bottom;
+      background-image:
+        linear-gradient(rgba(0,234,255,.16) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,234,255,.16) 1px,transparent 1px);
+      background-size:55px 55px;
+      opacity:.35;
+    }
+
+    /* HEADER */
+
+    .top{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(1,7,18,.78);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(0,234,255,.18);
+    }
+
+    .nav{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      color:var(--cyan);
+      font-size:18px;
+      font-weight:1000;
+      text-shadow:
+        0 0 8px var(--cyan),
+        0 0 25px var(--cyan);
+      white-space:nowrap;
+    }
+
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .navlinks a{
+      color:#c8f8ff;
+      font-size:13px;
+      font-weight:800;
+      transition:.2s;
+    }
+
+    .navlinks a:hover{
+      color:var(--cyan);
+      text-shadow:0 0 10px var(--cyan);
+    }
+
+    /* HERO */
+
+    main{
+      padding-bottom:60px;
+    }
+
+    .hero{
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      padding:70px 0;
+    }
+
+    .hero-grid{
+      width:100%;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:45px;
+      align-items:center;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:7px 13px;
+      border:1px solid rgba(0,234,255,.5);
+      border-radius:999px;
+      color:var(--cyan);
+      background:rgba(0,234,255,.07);
+      font-size:11px;
+      font-weight:1000;
+      letter-spacing:.7px;
+      box-shadow:0 0 18px rgba(0,234,255,.12);
+    }
+
+    h1{
+      margin:20px 0;
+      font-size:clamp(45px,7vw,85px);
+      line-height:.98;
+      font-weight:1000;
+      letter-spacing:-3px;
+      text-shadow:0 0 25px rgba(0,234,255,.18);
+    }
+
+    h1 span{
+      color:var(--cyan);
+      text-shadow:
+        0 0 8px var(--cyan),
+        0 0 25px var(--cyan),
+        0 0 50px rgba(0,234,255,.5);
+    }
+
+    .lead{
+      max-width:700px;
+      color:#c8eaf2;
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:25px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:11px 18px;
+      border-radius:14px;
+      font-weight:1000;
+      font-size:14px;
+      border:1px solid rgba(0,234,255,.55);
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg,#00eaff,#008cff);
+      color:#00121a;
+      box-shadow:0 0 25px rgba(0,234,255,.25);
+    }
+
+    .btn.yellow{
+      background:linear-gradient(135deg,#ffe600,#ff9f00);
+      color:#171000;
+      border-color:#fff27a;
+      box-shadow:0 0 25px rgba(255,230,0,.18);
+    }
+
+    .neon-card{
+      background:
+        linear-gradient(145deg,rgba(3,25,48,.9),rgba(1,9,24,.9));
+      border:1px solid rgba(0,234,255,.28);
+      border-radius:25px;
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 0 30px rgba(0,234,255,.06);
+    }
+
+    .teacher{
+      padding:40px 25px;
+      text-align:center;
+    }
+
+    .avatar-ring{
+      width:150px;
+      height:150px;
+      margin:auto;
+      padding:8px;
+      border-radius:50%;
+      border:2px solid var(--cyan);
+      box-shadow:
+        0 0 20px var(--cyan),
+        inset 0 0 25px rgba(0,234,255,.2);
+    }
+
+    .avatar{
+      width:100%;
+      height:100%;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:radial-gradient(circle,#164b69,#020817);
+      font-size:70px;
+    }
+
+    .teacher h2{
+      margin-top:20px;
+      color:var(--cyan);
+      font-size:25px;
+    }
+
+    .muted{
+      color:#9bc0ca;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:7px 10px;
+      margin:4px;
+      border-radius:999px;
+      background:rgba(0,234,255,.07);
+      border:1px solid rgba(0,234,255,.2);
+      color:#c9faff;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    /* SECTIONS */
+
+    .section{
+      padding:70px 0;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .section-title h2{
+      margin:14px 0 10px;
+      font-size:clamp(28px,5vw,48px);
+      text-shadow:0 0 18px rgba(0,234,255,.2);
+    }
+
+    /* GRADES */
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .grade{
+      overflow:hidden;
+      transition:.25s;
+    }
+
+    .grade:hover{
+      transform:translateY(-7px);
+      border-color:rgba(0,234,255,.65);
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.5),
+        0 0 30px rgba(0,234,255,.13);
+    }
+
+    .class-scene{
+      height:210px;
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 40%,rgba(0,234,255,.18),transparent 45%),
+        #020b1e;
+      border-bottom:1px solid rgba(0,234,255,.2);
+    }
+
+    .scene-floor{
+      position:absolute;
+      left:-10%;
+      right:-10%;
+      bottom:-45px;
+      height:110px;
+      transform:perspective(250px) rotateX(55deg);
+      background-image:
+        linear-gradient(rgba(0,234,255,.18) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,234,255,.18) 1px,transparent 1px);
+      background-size:35px 35px;
+    }
+
+    .grade-label{
+      position:absolute;
+      left:15px;
+      top:15px;
+      z-index:3;
+      padding:6px 9px;
+      border-radius:999px;
+      background:rgba(0,0,0,.45);
+      border:1px solid rgba(0,234,255,.3);
+      color:var(--cyan);
+      font-size:10px;
+      font-weight:1000;
+    }
+
+    .float-letter{
+      position:absolute;
+      color:var(--cyan);
+      font-size:38px;
+      font-weight:1000;
+      text-shadow:0 0 15px var(--cyan);
+      animation:float 4s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-13px)}
+    }
+
+    .plant{
+      position:absolute;
+      left:50%;
+      top:55%;
+      transform:translate(-50%,-50%);
+      font-size:80px;
+      filter:drop-shadow(0 0 14px #00eaff);
+    }
+
+    .book{
+      position:absolute;
+      width:100px;
+      height:18px;
+      background:#075eff;
+      left:50%;
+      top:72%;
+      transform:translate(-50%,-50%) rotate(-7deg);
+      border-radius:5px;
+      box-shadow:0 0 20px #075eff;
+    }
+
+    .rocket{
+      position:absolute;
+      left:50%;
+      top:53%;
+      transform:translate(-50%,-50%);
+      font-size:75px;
+      filter:drop-shadow(0 0 15px #00eaff);
+      animation:rocket 3s ease-in-out infinite;
+    }
+
+    @keyframes rocket{
+      0%,100%{transform:translate(-50%,-50%) translateY(0)}
+      50%{transform:translate(-50%,-50%) translateY(-14px)}
+    }
+
+    .planet{
+      position:absolute;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%,#5dffda,#075eff 60%,#071333);
+      box-shadow:0 0 30px rgba(0,234,255,.5);
+    }
+
+    .planet.big{
+      width:90px;
+      height:90px;
+      left:15%;
+      top:25%;
+    }
+
+    .planet.small{
+      width:38px;
+      height:38px;
+      right:15%;
+      top:18%;
+    }
+
+    .globe{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      font-size:85px;
+      filter:drop-shadow(0 0 18px #00eaff);
+      animation:spin 7s linear infinite;
+    }
+
+    @keyframes spin{
+      0%,100%{transform:translate(-50%,-50%) rotate(-5deg)}
+      50%{transform:translate(-50%,-50%) rotate(5deg)}
+    }
+
+    .word{
+      position:absolute;
+      color:#8ff7ff;
+      font-size:11px;
+      font-weight:1000;
+      text-shadow:0 0 10px var(--cyan);
+    }
+
+    .grade-content{
+      padding:22px;
+    }
+
+    .grade-content h3{
+      color:#fff;
+      font-size:23px;
+      margin-bottom:10px;
+    }
+
+    .grade-content p{
+      min-height:105px;
+      color:#a9ccd4;
+      line-height:1.65;
+      font-size:13px;
+    }
+
+    .grade-link{
+      width:100%;
+      margin-top:12px;
+    }
+
+    /* FEATURES */
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .feature{
+      padding:25px 18px;
+      text-align:center;
+    }
+
+    .feature-icon{
+      font-size:40px;
+      margin-bottom:12px;
+    }
+
+    .feature b{
+      display:block;
+      color:var(--cyan);
+      font-size:17px;
+      margin-bottom:8px;
+    }
+
+    .feature span{
+      color:#a9ccd4;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    /* COURSE */
+
+    .course{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .course-card{
+      padding:25px;
+      border-radius:22px;
+      background:rgba(2,15,35,.8);
+      border:1px solid rgba(0,234,255,.22);
+    }
+
+    .course-card b{
+      display:block;
+      color:var(--cyan);
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    .course-card p{
+      min-height:90px;
+      color:#aacbd4;
+      line-height:1.6;
+      font-size:13px;
+    }
+
+    .course-card .btn{
+      width:100%;
+    }
+
+    /* PROGRESS */
+
+    .progress-box{
+      padding:30px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+    }
+
+    .stat{
+      padding:20px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(0,234,255,.04);
+      border:1px solid rgba(0,234,255,.14);
+      color:#a9ccd4;
+      font-size:12px;
+    }
+
+    .stat b{
+      display:block;
+      color:var(--cyan);
+      font-size:28px;
+      margin-bottom:6px;
+      text-shadow:0 0 12px var(--cyan);
+    }
+
+    .progress{
+      height:14px;
+      margin:25px 0 12px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#06172c;
+      border:1px solid rgba(0,234,255,.2);
+    }
+
+    .progress i{
+      display:block;
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,#00eaff,#8b5cff,#ff36d9);
+      box-shadow:0 0 20px rgba(0,234,255,.6);
+      transition:1s;
+    }
+
+    /* PARENT */
+
+    .family-parent{
+      padding:35px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+      align-items:center;
+    }
+
+    .family-scene{
+      min-height:270px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:radial-gradient(circle,rgba(0,234,255,.1),transparent 65%);
+    }
+
+    .family{
+      display:flex;
+      align-items:flex-end;
+      gap:20px;
+      font-size:55px;
+      position:relative;
+      z-index:2;
+    }
+
+    .person{
+      text-align:center;
+    }
+
+    .head,.body,.legs{
+      line-height:.85;
+    }
+
+    .family-letter{
+      position:absolute;
+      color:var(--cyan);
+      font-size:35px;
+      font-weight:1000;
+      text-shadow:0 0 15px var(--cyan);
+    }
+
+    .family-floor{
+      position:absolute;
+      bottom:20px;
+      width:85%;
+      height:35px;
+      border-radius:50%;
+      border-bottom:2px solid var(--cyan);
+      box-shadow:0 10px 30px rgba(0,234,255,.35);
+    }
+
+    .parent-content h2{
+      color:var(--cyan);
+      margin:10px 0;
+    }
+
+    .parent-content p{
+      color:#a9ccd4;
+      line-height:1.7;
+      font-size:14px;
+      margin-bottom:15px;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      padding:35px 0;
+      text-align:center;
+      color:#82aab6;
+      border-top:1px solid rgba(0,234,255,.15);
+    }
+
+    .site-copyright{
+      padding:15px;
+      text-align:center;
+      color:#668894;
+      font-size:10px;
+      border-top:1px solid rgba(0,234,255,.1);
+    }
+
+    /* AUTH MESSAGE */
+
+    .auth-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(0,0,0,.72);
+      backdrop-filter:blur(12px);
+    }
+
+    .auth-modal.show{
+      display:flex;
+    }
+
+    .auth-box{
+      width:min(430px,100%);
+      padding:32px 25px;
+      text-align:center;
+      border-radius:25px;
+      background:linear-gradient(145deg,#041a30,#020817);
+      border:1px solid rgba(0,234,255,.55);
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.8),
+        0 0 40px rgba(0,234,255,.15);
+    }
+
+    .auth-box .icon{
+      font-size:50px;
+      margin-bottom:12px;
+    }
+
+    .auth-box h2{
+      color:var(--cyan);
+      margin-bottom:12px;
+    }
+
+    .auth-box p{
+      color:#b8dce5;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .auth-actions{
+      display:flex;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .auth-actions .btn{
+      flex:1;
+    }
+
+    .close-modal{
+      margin-top:15px;
+      color:#8faeb7;
+      cursor:pointer;
+      font-size:12px;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:950px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .feature-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .course{
+        grid-template-columns:1fr;
+      }
+
+      .family-parent{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:650px){
+      .nav{
+        padding:12px 0;
+        flex-direction:column;
+      }
+
+      .navlinks{
+        justify-content:center;
+        gap:10px;
+      }
+
+      .hero{
+        padding:45px 0;
+      }
+
+      .lead{
+        font-size:14px;
+      }
+
+      .feature-grid{
+        grid-template-columns:1fr;
+      }
+
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      h1{
+        font-size:47px;
+      }
+
+      .family{
+        font-size:42px;
+        gap:8px;
+      }
+    }
+
+    @media(max-width:400px){
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .auth-actions{
+        flex-direction:column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================
-     ANIMATED BACKGROUND
-========================= -->
-
-<div class="background">
-
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-  <div class="orb three"></div>
-
-</div>
-
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-  <div class="logo">
-
-    <span class="logo-icon">
-      🌈📚
-    </span>
-
-    <span>
-      English with Mariami
-    </span>
-
+  <div class="space" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="nebula"></div>
+    <div class="nebula two"></div>
+    <div class="grid-floor"></div>
   </div>
 
+  <header class="top">
+    <div class="wrap nav">
 
-  <!-- ავტორიზაციის ღილაკი -->
-
-  <a
-    class="auth-button"
-    href="login.html"
-  >
-    🔐 ავტორიზაცია
-  </a>
-
-</header>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<main>
-
-<section class="hero">
-
-  <div class="floating float1">
-    ⭐
-  </div>
-
-  <div class="floating float2">
-    🚀
-  </div>
-
-  <div class="floating float3">
-    🪐
-  </div>
-
-  <div class="floating float4">
-    🎈
-  </div>
-
-
-  <div class="hero-content">
-
-    <div class="hero-emoji">
-      🌈📚✨
-    </div>
-
-    <h1>
-      English with
-      <span>Mariami</span>
-    </h1>
-
-    <p>
-      ინგლისურის სწავლა შეიძლება იყოს
-      სახალისო, საინტერესო და თავგადასავლებით
-      სავსე! 🚀
-      აღმოაჩინე ახალი სიტყვები,
-      ითამაშე, ისწავლე და გახდი
-      ინგლისურის პატარა ექსპერტი. 🎓
-    </p>
-
-
-    <div class="hero-buttons">
-
-      <a
-        href="#lessons"
-        class="primary-button"
-      >
-        🚀 დავიწყოთ სწავლა
+      <a class="brand" href="index.html">
+        ⚡ ENGLISH WITH MARIAMI
       </a>
 
-      <a
-        href="login.html"
-        class="secondary-button"
-      >
-        🔐 ჩემს ანგარიშში შესვლა
-      </a>
+      <nav class="navlinks">
+        <a href="#grades">🎓 კლასები</a>
+        <a href="#course">🗺️ კურსი</a>
+        <a href="#learn">📚 სწავლა</a>
+        <a href="#progress">🏆 პროგრესი</a>
+        <a href="#parents">👨‍👩‍👧 მშობელი</a>
+        <a href="login.html">🔐 ავტორიზაცია</a>
+      </nav>
 
     </div>
+  </header>
 
-  </div>
+  <main class="wrap">
 
-</section>
+    <!-- HERO -->
 
+    <section class="hero">
 
-<!-- =========================
-     LESSONS
-========================= -->
+      <div class="hero-grid">
 
-<section
-  class="section"
-  id="lessons"
->
+        <div>
 
-  <div class="section-title">
+          <span class="badge">
+            🇬🇧 HOLOGRAPHIC ENGLISH ACADEMY • 2026
+          </span>
 
-    <h2>
-      🌟 ჩვენი გაკვეთილები
-    </h2>
+          <h1>
+            ვისწავლოთ<br>
+            <span>ინგლისური</span><br>
+            მარიამისთან ერთად!
+          </h1>
 
-    <p>
-      აირჩიე სამყარო და დაიწყე ინგლისურის აღმოჩენა!
-    </p>
+          <p class="lead">
+            მომავლის სასწავლო სივრცე მე-2, მე-3 და მე-4 კლასებისთვის.
+            Vocabulary, Speaking, Reading, Listening, Grammar, Writing და Quiz —
+            ყველაფერი ერთ ფუტურისტულ აკადემიაში.
+          </p>
 
-  </div>
+          <div class="buttons">
+            <a class="btn primary" href="#grades">
+              🎓 აირჩიე კლასი
+            </a>
 
+            <a class="btn yellow" href="register.html">
+              📝 რეგისტრაცია
+            </a>
+          </div>
 
-  <div class="lessons">
+        </div>
 
+        <div class="neon-card teacher">
 
-    <article class="lesson">
+          <div class="avatar-ring">
+            <div class="avatar">👩‍🏫</div>
+          </div>
 
-      <span class="lesson-number">
-        LESSON 01
-      </span>
+          <h2>მასწავლებელი მარიამი</h2>
 
-      <span class="lesson-icon">
-        🐶
-      </span>
+          <p class="muted">
+            შენი ინგლისურის ჰოლოგრამული გზამკვლევი ✨
+          </p>
 
-      <h3>
-        Animals
-      </h3>
+          <div style="margin-top:12px">
+            <span class="pill">🧠 Vocabulary</span>
+            <span class="pill">🔊 Listening</span>
+            <span class="pill">🗣️ Speaking</span>
+            <span class="pill">📖 Reading</span>
+            <span class="pill">✍️ Grammar</span>
+          </div>
 
-      <p>
-        გაიცანი ცხოველები და
-        ისწავლე მათი ინგლისური სახელები.
-      </p>
+        </div>
 
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 02
-      </span>
-
-      <span class="lesson-icon">
-        🔢
-      </span>
-
-      <h3>
-        Numbers
-      </h3>
-
-      <p>
-        ისწავლე რიცხვები თამაშებითა
-        და სახალისო დავალებებით.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 03
-      </span>
-
-      <span class="lesson-icon">
-        🌈
-      </span>
-
-      <h3>
-        Colors
-      </h3>
-
-      <p>
-        აღმოაჩინე ფერების ჯადოსნური
-        ინგლისური სამყარო.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 04
-      </span>
-
-      <span class="lesson-icon">
-        👨‍👩‍👧
-      </span>
-
-      <h3>
-        Family
-      </h3>
-
-      <p>
-        ისწავლე ოჯახის წევრების
-        ინგლისური სახელები.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 05
-      </span>
-
-      <span class="lesson-icon">
-        🍎
-      </span>
-
-      <h3>
-        Food
-      </h3>
-
-      <p>
-        ისწავლე საკვების სიტყვები
-        და შექმენი შენი პატარა მენიუ.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 06
-      </span>
-
-      <span class="lesson-icon">
-        🏠
-      </span>
-
-      <h3>
-        My Home
-      </h3>
-
-      <p>
-        აღმოაჩინე სახლის ოთახები,
-        ნივთები და ახალი სიტყვები.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 07
-      </span>
-
-      <span class="lesson-icon">
-        ☀️
-      </span>
-
-      <h3>
-        Weather
-      </h3>
-
-      <p>
-        ისწავლე ამინდის აღწერა
-        ინგლისურად.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 08
-      </span>
-
-      <span class="lesson-icon">
-        👕
-      </span>
-
-      <h3>
-        Clothes
-      </h3>
-
-      <p>
-        გაიცანი ტანსაცმლის
-        ინგლისური სახელები.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 09
-      </span>
-
-      <span class="lesson-icon">
-        🏫
-      </span>
-
-      <h3>
-        School
-      </h3>
-
-      <p>
-        აღმოაჩინე სკოლის
-        ნივთებისა და საგნების სამყარო.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 10
-      </span>
-
-      <span class="lesson-icon">
-        🚗
-      </span>
-
-      <h3>
-        Transport
-      </h3>
-
-      <p>
-        ისწავლე ტრანსპორტის
-        სხვადასხვა სახეობა.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 11
-      </span>
-
-      <span class="lesson-icon">
-        🌍
-      </span>
-
-      <h3>
-        Places
-      </h3>
-
-      <p>
-        იმოგზაურე მსოფლიოს
-        საინტერესო ადგილებში.
-      </p>
-
-    </article>
-
-
-    <article class="lesson">
-
-      <span class="lesson-number">
-        LESSON 12
-      </span>
-
-      <span class="lesson-icon">
-        🚀
-      </span>
-
-      <h3>
-        Space
-      </h3>
-
-      <p>
-        გაფრინდი კოსმოსში და
-        ისწავლე ახალი ინგლისური სიტყვები.
-      </p>
-
-    </article>
-
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     WHY US
-========================= -->
-
-<section class="section">
-
-  <div class="section-title">
-
-    <h2>
-      💎 რატომ English with Mariami?
-    </h2>
-
-    <p>
-      სწავლა, რომელიც ბავშვს არ ბეზრდება.
-    </p>
-
-  </div>
-
-
-  <div class="info-section">
-
-
-    <div class="info-card">
-
-      <div class="icon">
-        🎮
       </div>
 
-      <h3>
-        სწავლა თამაშით
-      </h3>
-
-      <p>
-        ინტერაქტიული დავალებები და
-        თამაშები ბავშვს სწავლის
-        პროცესში აქტიურად რთავს.
-      </p>
-
-    </div>
+    </section>
 
 
-    <div class="info-card">
+    <!-- GRADES -->
 
-      <div class="icon">
-        🧠
+    <section id="grades" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">
+          CLASSROOM SYSTEM
+        </span>
+
+        <h2>🎓 აირჩიე შენი კლასი</h2>
+
+        <p class="muted">
+          კლასი იხსნება მხოლოდ ავტორიზაციისა და მასწავლებლის მიერ მინიჭების შემდეგ.
+        </p>
+
       </div>
 
-      <h3>
-        მარტივი მეთოდი
-      </h3>
 
-      <p>
-        სიტყვები და თემები წარმოდგენილია
-        მარტივად და ასაკისთვის
-        გასაგებად.
-      </p>
-
-    </div>
+      <div class="grid">
 
 
-    <div class="info-card">
+        <!-- GRADE 2 -->
 
-      <div class="icon">
-        🏆
+        <article class="neon-card grade">
+
+          <div class="class-scene">
+
+            <span class="grade-label">
+              🌱 BEGINNER
+            </span>
+
+            <div class="float-letter" style="left:12%;top:20%">
+              A
+            </div>
+
+            <div class="float-letter" style="right:13%;top:27%">
+              B
+            </div>
+
+            <div class="plant">
+              🌱
+            </div>
+
+            <div class="book"></div>
+
+            <div class="scene-floor"></div>
+
+          </div>
+
+          <div class="grade-content">
+
+            <h3>🌱 მე-2 კლასი</h3>
+
+            <p>
+              პირველი ნაბიჯები ინგლისურში:
+              ფერები, ოჯახი, სკოლა, ცხოველები,
+              საკვები, სხეულის ნაწილები, სახლი,
+              რიცხვები და მარტივი წინადადებები.
+            </p>
+
+            <a
+              class="btn primary grade-link"
+              data-grade="2"
+              href="grade2.html"
+            >
+              🚀 მე-2 კლასში შესვლა →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- GRADE 3 -->
+
+        <article class="neon-card grade">
+
+          <div class="class-scene">
+
+            <span class="grade-label">
+              🚀 ELEMENTARY
+            </span>
+
+            <div class="planet big"></div>
+
+            <div class="planet small"></div>
+
+            <div class="rocket">
+              🚀
+            </div>
+
+            <div class="scene-floor"></div>
+
+          </div>
+
+          <div class="grade-content">
+
+            <h3>🚀 მე-3 კლასი</h3>
+
+            <p>
+              ყოველდღიური ცხოვრება, დღეები,
+              თვეები, ამინდი, მოქმედებები,
+              ქალაქი, საკვები, Speaking,
+              Reading და მარტივი გრამატიკა.
+            </p>
+
+            <a
+              class="btn primary grade-link"
+              data-grade="3"
+              href="grade3.html"
+            >
+              🚀 მე-3 კლასში შესვლა →
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- GRADE 4 -->
+
+        <article class="neon-card grade">
+
+          <div class="class-scene">
+
+            <span class="grade-label">
+              ⭐ ADVANCED
+            </span>
+
+            <div class="globe">
+              🌎
+            </div>
+
+            <div class="word" style="left:8%;top:15%">
+              SPEAK
+            </div>
+
+            <div class="word" style="right:8%;top:20%">
+              READ
+            </div>
+
+            <div class="word" style="left:10%;bottom:20%">
+              WRITE
+            </div>
+
+            <div class="word" style="right:8%;bottom:15%">
+              ENGLISH
+            </div>
+
+            <div class="scene-floor"></div>
+
+          </div>
+
+          <div class="grade-content">
+
+            <h3>⭐ მე-4 კლასი</h3>
+
+            <p>
+              გაფართოებული Vocabulary,
+              Present Simple, კითხვები,
+              Prepositions, Reading, Dialogues,
+              Writing, Listening და Practice.
+            </p>
+
+            <a
+              class="btn primary grade-link"
+              data-grade="4"
+              href="grade4.html"
+            >
+              ⭐ მე-4 კლასში შესვლა →
+            </a>
+
+          </div>
+
+        </article>
+
       </div>
 
-      <h3>
-        პროგრესი
-      </h3>
+    </section>
 
-      <p>
-        მოსწავლეს შეუძლია ეტაპობრივად
-        განავითაროს ინგლისურის ცოდნა
-        და შეამოწმოს საკუთარი შედეგები.
-      </p>
 
+    <!-- LEARNING -->
+
+    <section id="learn" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">
+          LEARNING TECHNOLOGY
+        </span>
+
+        <h2>📚 როგორ ვისწავლით?</h2>
+
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="neon-card feature">
+          <div class="feature-icon">🧠</div>
+          <b>Vocabulary</b>
+          <span>
+            სიტყვა + ქართული თარგმანი +
+            გამოთქმა + მაგალითი.
+          </span>
+        </div>
+
+        <div class="neon-card feature">
+          <div class="feature-icon">🔊</div>
+          <b>Listening</b>
+          <span>
+            მოსმენა და გამეორება მარტივი
+            სავარჯიშოებით.
+          </span>
+        </div>
+
+        <div class="neon-card feature">
+          <div class="feature-icon">🗣️</div>
+          <b>Speaking</b>
+          <span>
+            მოკლე დიალოგები და
+            ყოველდღიური ფრაზები.
+          </span>
+        </div>
+
+        <div class="neon-card feature">
+          <div class="feature-icon">📝</div>
+          <b>Quiz</b>
+          <span>
+            შემოწმება, ქულა და
+            პროგრესის კონტროლი.
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- COURSE -->
+
+    <section id="course" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">
+          FULL HOLOGRAPHIC COURSE
+        </span>
+
+        <h2>🗺️ სრული სასწავლო კურსი</h2>
+
+      </div>
+
+      <div class="course">
+
+        <div class="course-card">
+
+          <b>🌱 მე-2 კლასი</b>
+
+          <p>
+            სიტყვები, ფერები, ოჯახი,
+            სკოლა, ცხოველები, საკვები
+            და მარტივი წინადადებები.
+          </p>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="2"
+            href="grade2.html"
+          >
+            კურსის გახსნა
+          </a>
+
+        </div>
+
+
+        <div class="course-card">
+
+          <b>🚀 მე-3 კლასი</b>
+
+          <p>
+            დრო, დღეები, თვეები,
+            ამინდი, მოქმედებები, ქალაქი,
+            Speaking, Reading და Grammar.
+          </p>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="3"
+            href="grade3.html"
+          >
+            კურსის გახსნა
+          </a>
+
+        </div>
+
+
+        <div class="course-card">
+
+          <b>⭐ მე-4 კლასი</b>
+
+          <p>
+            Present Simple, კითხვები,
+            Prepositions, Reading, Dialogues,
+            Writing, Listening და Practice.
+          </p>
+
+          <a
+            class="btn primary grade-link"
+            data-grade="4"
+            href="grade4.html"
+          >
+            კურსის გახსნა
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <section id="progress" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">
+          MY HOLOGRAPHIC PROGRESS
+        </span>
+
+        <h2>🏆 შენი პროგრესი</h2>
+
+      </div>
+
+      <div class="neon-card progress-box">
+
+        <div class="stats">
+
+          <div class="stat">
+            <b id="words-count">0</b>
+            ნასწავლი სიტყვა
+          </div>
+
+          <div class="stat">
+            <b id="quiz-count">0</b>
+            Quiz
+          </div>
+
+          <div class="stat">
+            <b id="progress-percent">0%</b>
+            პროგრესი
+          </div>
+
+          <div class="stat">
+            <b id="student-level">⭐</b>
+            დონე
+          </div>
+
+        </div>
+
+        <div class="progress">
+          <i id="progress-bar"></i>
+        </div>
+
+        <p
+          class="muted"
+          id="progress-message"
+          style="text-align:center"
+        >
+          ავტორიზაციის შემდეგ გამოჩნდება შენი პროგრესი.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- PARENT -->
+
+    <section id="parents" class="section">
+
+      <div class="section-title">
+
+        <span class="badge">
+          FAMILY HOLOGRAM
+        </span>
+
+        <h2>👨‍👩‍👧 მშობლის სივრცე</h2>
+
+      </div>
+
+      <div class="family-parent neon-card">
+
+        <div class="family-scene">
+
+          <div
+            class="family-letter"
+            style="left:10%;top:15%"
+          >
+            A
+          </div>
+
+          <div
+            class="family-letter"
+            style="right:12%;top:25%"
+          >
+            B
+          </div>
+
+          <div
+            class="family-letter"
+            style="left:20%;bottom:20%"
+          >
+            C
+          </div>
+
+          <div class="family">
+
+            <div class="person">
+              <div class="head">👨</div>
+              <div class="body">👕</div>
+              <div class="legs">👖</div>
+            </div>
+
+            <div class="person">
+              <div class="head">👩</div>
+              <div class="body">👗</div>
+              <div class="legs">👠</div>
+            </div>
+
+            <div class="person">
+              <div class="head">🧒</div>
+              <div class="body">👕</div>
+              <div class="legs">👟</div>
+            </div>
+
+          </div>
+
+          <div class="family-floor"></div>
+
+        </div>
+
+        <div class="parent-content">
+
+          <div style="font-size:45px">
+            👨‍👩‍👧
+          </div>
+
+          <h2>
+            მშობლის სივრცე
+          </h2>
+
+          <p>
+            აქ მშობელს შეუძლია თვალყური
+            ადევნოს ბავშვის სწავლას,
+            პროგრესს, Quiz შედეგებს და
+            დასვას კითხვა მასწავლებელთან.
+          </p>
+
+          <div>
+            <span class="pill">📊 პროგრესი</span>
+            <span class="pill">📝 Quiz შედეგები</span>
+            <span class="pill">❓ კითხვები</span>
+            <span class="pill">💬 პასუხები</span>
+          </div>
+
+          <a
+            href="parent-space.html"
+            class="btn primary"
+            style="margin-top:15px"
+          >
+            👨‍👩‍👧 მშობლის სივრცეში შესვლა →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer class="footer">
+    <div class="wrap">
+      ⚡ English with Mariami • Holographic English Academy •
+      სწავლა, თამაში და პროგრესი ❤️
     </div>
+  </footer>
+
+  <footer class="site-copyright">
+    © 2026 English with Mariami — ყველა უფლება დაცულია •
+    Developed by btcgamer
+  </footer>
 
 
-  </div>
+  <!-- AUTH MODAL -->
 
-</section>
-
-
-<!-- =========================
-     FINAL CTA
-========================= -->
-
-<section class="final-cta">
-
-  <h2>
-    🚀 მზად ხარ სწავლის დასაწყებად?
-  </h2>
-
-  <p>
-    შემოდი შენს ანგარიშში და გააგრძელე
-    ინგლისურის თავგადასავალი!
-  </p>
-
-  <a
-    href="login.html"
-    class="primary-button"
+  <div
+    id="authModal"
+    class="auth-modal"
+    aria-hidden="true"
   >
-    🔐 ავტორიზაცია
-  </a>
 
-</section>
+    <div class="auth-box">
 
-</main>
+      <div class="icon">🔐</div>
+
+      <h2 id="authTitle">
+        საჭიროა ავტორიზაცია
+      </h2>
+
+      <p id="authText">
+        კლასის გასახსნელად ჯერ გაიარე
+        ავტორიზაცია ან რეგისტრაცია.
+      </p>
+
+      <div class="auth-actions">
+
+        <a
+          id="loginAction"
+          class="btn primary"
+          href="login.html"
+        >
+          🔐 ავტორიზაცია
+        </a>
+
+        <a
+          class="btn yellow"
+          href="register.html"
+        >
+          📝 რეგისტრაცია
+        </a>
+
+      </div>
+
+      <div
+        class="close-modal"
+        id="closeModal"
+      >
+        დახურვა
+      </div>
+
+    </div>
+
+  </div>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+  <!-- ACCESS CONTROL -->
 
-<footer>
+  <script>
 
-  © 2026
-  <strong>
-    English with Mariami
-  </strong>
+  (() => {
 
-  — ყველა უფლება დაცულია
+    "use strict";
 
-  <br><br>
+    const VALID_GRADES = [2,3,4];
 
-  Developed by btcgamer
+    const PRIVILEGED_ROLES = [
+      "teacher",
+      "admin",
+      "parent"
+    ];
 
-</footer>
+    let busy = false;
+
+    const modal =
+      document.getElementById("authModal");
+
+    const authTitle =
+      document.getElementById("authTitle");
+
+    const authText =
+      document.getElementById("authText");
+
+    const loginAction =
+      document.getElementById("loginAction");
+
+    const closeModal =
+      document.getElementById("closeModal");
 
 
-<!-- პატარა JS ანიმაციისთვის -->
+    function getClient(){
 
-<script>
+      return (
+        window.__ENGLISH_MARIAMI_SUPABASE_CLIENT ||
+        window.supabaseClient ||
+        null
+      );
 
-document.addEventListener(
-  "mousemove",
-  function(e){
+    }
 
-    const x =
-      (e.clientX / window.innerWidth - .5);
 
-    const y =
-      (e.clientY / window.innerHeight - .5);
+    function loginUrl(){
 
-    document
-      .querySelectorAll(".floating")
-      .forEach(function(el,index){
+      const current =
+        window.location.pathname +
+        window.location.search +
+        window.location.hash;
 
-        const speed =
-          (index + 1) * 8;
+      return (
+        "login.html?redirect=" +
+        encodeURIComponent(current)
+      );
 
-        el.style.transform =
-          "translate(" +
-          (x * speed) +
-          "px," +
-          (y * speed) +
-          "px)";
+    }
+
+
+    function showModal(
+      title,
+      text
+    ){
+
+      if(authTitle)
+        authTitle.textContent = title;
+
+      if(authText)
+        authText.textContent = text;
+
+      if(loginAction)
+        loginAction.href = loginUrl();
+
+      if(modal){
+
+        modal.classList.add("show");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      }
+
+    }
+
+
+    function hideModal(){
+
+      if(modal){
+
+        modal.classList.remove("show");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+
+    }
+
+
+    if(closeModal){
+
+      closeModal.addEventListener(
+        "click",
+        hideModal
+      );
+
+    }
+
+
+    if(modal){
+
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if(event.target === modal)
+            hideModal();
+
+        }
+      );
+
+    }
+
+
+    async function waitForClient(){
+
+      let client = getClient();
+
+      if(client)
+        return client;
+
+
+      await new Promise(resolve => {
+
+        let done = false;
+
+        function finish(){
+
+          if(done)
+            return;
+
+          done = true;
+          resolve();
+
+        }
+
+        window.addEventListener(
+          "englishMariamiSupabaseReady",
+          finish,
+          {once:true}
+        );
+
+        setTimeout(
+          finish,
+          5000
+        );
 
       });
 
-  }
-);
 
-</script>
+      return getClient();
+
+    }
+
+
+    async function openGrade(link){
+
+      if(busy)
+        return;
+
+      busy = true;
+
+      const targetGrade =
+        Number(link.dataset.grade);
+
+
+      const client =
+        await waitForClient();
+
+
+      if(!client){
+
+        busy = false;
+
+        showModal(
+          "🔐 საჭიროა ავტორიზაცია",
+          "სასწავლო კლასის გასახსნელად გაიარე ავტორიზაცია ან რეგისტრაცია."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        const sessionResult =
+          await client.auth.getSession();
+
+
+        const session =
+          sessionResult.data &&
+          sessionResult.data.session;
+
+
+        const user =
+          session &&
+          session.user;
+
+
+        /*
+         * NO SESSION
+         */
+
+        if(
+          sessionResult.error ||
+          !session ||
+          !user
+        ){
+
+          showModal(
+            "🔐 ავტორიზაცია საჭიროა",
+            "კლასის გასახსნელად ჯერ გაიარე ავტორიზაცია ან რეგისტრაცია."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * PROFILE
+         */
+
+        const profileResult =
+          await client
+            .from("profiles")
+            .select("role,grade,full_name")
+            .eq("user_id",user.id)
+            .maybeSingle();
+
+
+        if(profileResult.error){
+
+          console.error(
+            "Profile loading error:",
+            profileResult.error
+          );
+
+          showModal(
+            "⚠️ ანგარიშის შემოწმება ვერ მოხერხდა",
+            "მონაცემების შემოწმება დროებით ვერ მოხერხდა. სცადე თავიდან."
+          );
+
+          return;
+
+        }
+
+
+        const profile =
+          profileResult.data || {};
+
+
+        const role =
+          String(
+            profile.role ||
+            user.user_metadata?.role ||
+            "student"
+          )
+          .trim()
+          .toLowerCase();
+
+
+        const grade =
+          Number(
+            profile.grade ||
+            user.user_metadata?.grade ||
+            0
+          );
+
+
+        /*
+         * TEACHER / ADMIN / PARENT
+         */
+
+        if(
+          PRIVILEGED_ROLES.includes(role)
+        ){
+
+          window.location.href =
+            link.getAttribute("href");
+
+          return;
+
+        }
+
+
+        /*
+         * STUDENT ONLY
+         */
+
+        if(role !== "student"){
+
+          showModal(
+            "🚫 წვდომა შეზღუდულია",
+            "ამ ანგარიშს სასწავლო კლასზე წვდომა არ აქვს."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * NO ASSIGNED GRADE
+         */
+
+        if(
+          !VALID_GRADES.includes(grade)
+        ){
+
+          showModal(
+            "⏳ კლასი ჯერ არ არის მინიჭებული",
+            "რეგისტრაცია დასრულებულია, მაგრამ მასწავლებელს ჯერ არ აქვს შენთვის კლასი მინიჭებული. დაელოდე მასწავლებელს."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * WRONG GRADE
+         */
+
+        if(
+          grade !== targetGrade
+        ){
+
+          showModal(
+            "🚫 სხვა კლასზე წვდომა არ გაქვს",
+            "შენს ანგარიშზე მინიჭებულია მე-" +
+            grade +
+            " კლასი. შეგიძლია გახსნა მხოლოდ შენი მინიჭებული კლასი."
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * EVERYTHING OK
+         */
+
+        window.location.href =
+          link.getAttribute("href");
+
+      }
+
+      catch(error){
+
+        console.error(
+          "Academy grade access error:",
+          error
+        );
+
+        showModal(
+          "⚠️ შემოწმება ვერ მოხერხდა",
+          "ავტორიზაციის შემოწმებისას მოხდა შეცდომა. სცადე თავიდან."
+        );
+
+      }
+
+      finally{
+
+        busy = false;
+
+      }
+
+    }
+
+
+    /*
+     * GRADE CLICK
+     */
+
+    document.addEventListener(
+      "click",
+      event => {
+
+        const link =
+          event.target.closest &&
+          event.target.closest(
+            ".grade-link[data-grade]"
+          );
+
+
+        if(!link)
+          return;
+
+
+        event.preventDefault();
+
+        event.stopImmediatePropagation();
+
+        openGrade(link);
+
+      },
+      true
+    );
+
+
+    /*
+     * KEYBOARD ACCESS
+     */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if(
+          event.key !== "Enter" &&
+          event.key !== " "
+        )
+          return;
+
+
+        const link =
+          event.target.closest &&
+          event.target.closest(
+            ".grade-link[data-grade]"
+          );
+
+
+        if(!link)
+          return;
+
+
+        event.preventDefault();
+
+        event.stopImmediatePropagation();
+
+        openGrade(link);
+
+      },
+      true
+    );
+
+
+  })();
+
+  </script>
 
 </body>
 </html>
