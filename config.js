@@ -38,6 +38,13 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     event.stopImmediatePropagation();
   },true);
 
+  /* Emergency UI failsafe: network/auth code must never freeze the Academy screen. */
+  setTimeout(function(){
+    document.body.classList.remove('is-loading');
+    const loader=document.getElementById('academyLoader');
+    if(loader) loader.classList.add('hidden');
+  },1500);
+
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
   visual.src='/academy-grade-visual-only.js?v=20260907';
