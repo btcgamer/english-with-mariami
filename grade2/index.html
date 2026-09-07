@@ -2,7 +2,8 @@
 /* Fresh entry from Academy: reset only the transient current mission. Keep progress, stars and completed missions. */
 (function(){
   try{
-    if(/(?:^|\/)academy\.html(?:[?#]|$)/i.test(document.referrer||'')){
+    var ref=document.referrer||'';
+    if(/(?:^|\/)academy\.html(?:[?#]|$)/i.test(ref) || /(?:^|\/)grade2\.html(?:[?#]|$)/i.test(ref)){
       var key='magic-neon-grade-2', saved=JSON.parse(localStorage.getItem(key)||'null');
       if(saved&&typeof saved==='object'){saved.current=1;localStorage.setItem(key,JSON.stringify(saved));}
     }
