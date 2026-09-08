@@ -19,16 +19,32 @@
 
   function message(text,error){
     const n=document.getElementById('notice');
-    if(!n){ if(error) console.error(text); return; }
-    n.textContent=text;
-    n.className='notice show '+(error?'err':'ok');
-    clearTimeout(n.__ewmTimer);
-    n.__ewmTimer=setTimeout(function(){n.className='notice';},4500);
+    if(n){
+      n.textContent=text;
+      n.className='notice show '+(error?'err':'ok');
+      clearTimeout(n.__ewmTimer);
+      n.__ewmTimer=setTimeout(function(){n.className='notice';},4500);
+    }
+    if(error) console.error('[Teacher Dashboard Fix]',text);
   }
 
   function refresh(){
-    const b=document.getElementById('refreshStudents');
+    const b=document.getElementById('studentToolsRefresh')||document.getElementById('refreshStudents');
     if(b) b.click(); else location.reload();
+  }
+
+  async function findStudentIdFromCard(button){
+    const db=getDB();
+    if(!db) throw new Error('Supabase client ვერ მოიძებნა.');
+    const card=button.closest('.student-manage-card,.assignment-card,.student');
+    const nameEl=card?.querySelector('.student-name');
+    const raw=String(nameEl?.textContent||'').replace(/^🧑‍🎓\s*/,'').trim();
+    if(!raw) throw new Error('მოსწავლის სახელი ვერ მოიძებნა.');
+    const {data,error}=await db.from('profiles').select('user_id,full_name').eq('role','student').eq('full_name',raw).limit(2);
+    if(error) throw error;
+    if(!data?.length) throw new Error('მოსწავლე ბაზაში ვერ მოიძებნა.');
+    if(data.length>1) throw new Error('ამ სახელით ერთზე მეტი მოსწავლეა. წაშლა უსაფრთხოდ ვერ განისაზღვრა.');
+    return data[0].user_id;
   }
 
   async function resetStudent(id){
@@ -48,34 +64,41 @@
   }
 
   document.addEventListener('click',async function(e){
-    const b=e.target.closest?.('[data-act]');
-    if(b && (b.dataset.act==='reset'||b.dataset.act==='remove')){
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-      if(b.disabled) return;
-      const id=String(b.dataset.id||'').trim();
-      if(!id) return message('მოსწავლის ID ვერ მოიძებნა.',true);
-      b.disabled=true;
-      const old=b.textContent;
-      b.textContent='⏳ მუშავდება...';
-      try{
-        await getCurrentUser();
-        if(b.dataset.act==='reset'){
-          if(!window.confirm('ნამდვილად გინდა ამ მოსწავლის განულება?')) return;
-          await resetStudent(id);
-        }else{
-          if(!window.confirm('ნამდვილად გინდა ამ მოსწავლის სრულად ამოღება? ეს წაშლის მის ანგარიშსა და დაკავშირებულ სასწავლო მონაცემებს.')) return;
-          await deleteStudent(id);
-        }
-      }catch(err){
-        console.error('[Teacher Dashboard Fix]',err);
-        message(err?.message||'ოპერაცია ვერ შესრულდა.',true);
-      }finally{
-        b.disabled=false;
-        b.textContent=old;
+    const b=e.target.closest?.('[data-act],.delete-btn,.reset-btn');
+    if(!b) return;
+
+    const act=b.dataset.act || (b.classList.contains('delete-btn')?'remove':'reset');
+    if(act!=='reset'&&act!=='remove') return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    if(b.disabled) return;
+
+    let id=String(b.dataset.id||'').trim();
+    b.disabled=true;
+    const old=b.textContent;
+    b.textContent='⏳ მუშავდება...';
+
+    try{
+      await getCurrentUser();
+      if(!id) id=await findStudentIdFromCard(b);
+
+      if(act==='reset'){
+        if(!window.confirm('ნამდვილად გინდა ამ მოსწავლის განულება?')) return;
+        await resetStudent(id);
+      }else{
+        const card=b.closest('.student-manage-card,.assignment-card,.student');
+        const name=String(card?.querySelector('.student-name')?.textContent||'მოსწავლე').replace(/^🧑‍🎓\s*/,'').trim();
+        if(!window.confirm(`ნამდვილად გინდა „${name}“-ის სრულად ამოღება? ეს წაშლის მის ანგარიშსა და დაკავშირებულ სასწავლო მონაცემებს.`)) return;
+        await deleteStudent(id);
       }
-      return;
+    }catch(err){
+      console.error('[Teacher Dashboard Fix]',err);
+      message(err?.message||'ოპერაცია ვერ შესრულდა.',true);
+    }finally{
+      b.disabled=false;
+      b.textContent=old;
     }
   },true);
 
