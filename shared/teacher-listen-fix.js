@@ -24,24 +24,25 @@
       button.dataset.speech ||
       button.dataset.word ||
       button.getAttribute('data-text') ||
-      button.getAttribute('aria-label');
+      button.getAttribute('aria-label') ||
+      button.getAttribute('data-speak');
     if(direct && clean(direct)) return clean(direct);
 
     const card = button.closest('.word,.phrase,.lesson,.card,[data-word]');
     if(card){
       const dataWord = card.getAttribute('data-word');
       if(dataWord && clean(dataWord)) return clean(dataWord);
-      const strong = card.querySelector('strong,h3,.word strong');
+      const strong = card.querySelector('strong,h3,.word strong,b');
       if(strong && clean(strong.textContent)) return clean(strong.textContent);
+      const text = card.querySelector('span,p');
+      if(text && clean(text.textContent)) return clean(text.textContent);
     }
 
     return clean(button.textContent);
   }
 
   function speak(text, button){
-    if(!text || !('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
-      return;
-    }
+    if(!text || !('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) return;
 
     try{
       window.speechSynthesis.cancel();
@@ -73,7 +74,7 @@
   }
 
   document.addEventListener('click',function(event){
-    const button = event.target.closest?.('.listen,[data-listen],[data-speech],button[aria-label*="listen" i]');
+    const button = event.target.closest?.('.listen,.sound,[data-listen],[data-speech],button[aria-label*="listen" i]');
     if(!button) return;
 
     const text = getText(button);
