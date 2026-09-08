@@ -25,7 +25,18 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     setTimeout(initSupabaseClient,0);
   }
 
-  const isAcademy=/\/academy\.html(?:$|[?#])/i.test(location.pathname+location.search+location.hash);
+  const path=location.pathname+location.search+location.hash;
+  const isAcademy=/\/academy\.html(?:$|[?#])/i.test(path);
+  const isTeacherDashboard=/\/teacher-dashboard\.html(?:$|[?#])/i.test(path);
+
+  if(isTeacherDashboard && !document.querySelector('script[data-ewm-teacher-dashboard-fix]')){
+    const fix=document.createElement('script');
+    fix.src='/shared/teacher-dashboard-fix.js?v=20260908';
+    fix.async=false;
+    fix.dataset.ewmTeacherDashboardFix='1';
+    document.head.appendChild(fix);
+  }
+
   if(!isAcademy) return;
 
   /* Restore the Academy visual system independently of auth/network state. */
