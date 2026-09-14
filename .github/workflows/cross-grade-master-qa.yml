@@ -15,13 +15,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Validate JavaScript syntax
         run: |
           node --check qa/cross-grade-master-qa.spec.js
           node --check grade-access.js
           node --check shared/grade23-progress.js
+          node --check shared/master-qa-compat.js
+          node --check shared/fast-speech.js
           node --check shared/topic-isolation.js
           node --check shared/academy-grade-core.js
           node --check grade3/grade3-core.js
