@@ -16,6 +16,28 @@
       ||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('en'))
       ||null;
   };
+  const nativeSpeak=synth.speak.bind(synth);
+  const prepare=(u)=>{
+    if(!u)return u;
+    try{
+      const lang=u.lang||'en-US';
+      u.lang=lang;
+      u.rate=.92;
+      u.pitch=1;
+      const voice=pickVoice(lang);
+      if(voice)u.voice=voice;
+    }catch(e){}
+    return u;
+  };
+  const fastNativeSpeak=(u)=>{
+    try{
+      if(active&&active!==u){try{active.onend=null;active.onerror=null;}catch(e){};active=null;}
+      synth.cancel();
+      synth.resume();
+      nativeSpeak(prepare(u));
+    }catch(e){console.warn('Fast native speech error',e);}
+  };
+  try{synth.speak=fastNativeSpeak;}catch(e){}
   const speak=(text,lang='en-US')=>{
     text=String(text||'').trim();
     if(!text)return;
@@ -32,7 +54,7 @@
       active=u;
       u.onend=()=>{if(active===u)active=null;};
       u.onerror=()=>{if(active===u)active=null;};
-      synth.speak(u);
+      nativeSpeak(u);
     }catch(e){console.warn('Fast speech error',e);}
   };
   document.addEventListener('click',function(e){
