@@ -38,6 +38,7 @@ jobs:
       - name: Start static server
         run: python3 -m http.server 4173 >/tmp/english-mariami-server.log 2>&1 &
 
+      # Master QA is intentionally run on every main push so fixes are verified immediately.
       - name: Run Cross-Grade Master QA
         run: npx playwright test qa/cross-grade-master-qa.spec.js --reporter=line
 
