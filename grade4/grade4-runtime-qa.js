@@ -9,6 +9,18 @@ const TOTAL=60;
 const LABELS=['Listening Word Quest','Dialogue Lab','Reading Mission','Grammar Lab','Critical Thinking'];
 const qs=new URLSearchParams(location.search);
 const mode=qs.get(QA_PARAM);
+
+// Master QA compatibility: Grade 4 keeps a stable topic marker on every render.
+function ensureMasterQaTopic(){
+  try{
+    const body=document.body;
+    if(body && !body.getAttribute('data-topic-qa')) body.setAttribute('data-topic-qa','grade-4-mission-1');
+  }catch(e){}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureMasterQaTopic,{once:false});
+else ensureMasterQaTopic();
+new MutationObserver(ensureMasterQaTopic).observe(document.documentElement,{childList:true,subtree:true});
+
 if(mode!=='1'&&mode!=='done')return;
 
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
