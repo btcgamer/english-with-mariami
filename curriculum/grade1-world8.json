@@ -1,0 +1,39 @@
+{
+  "grade": 1,
+  "world": 8,
+  "title": "MAGIC ENGLISH BEGINNER — WORLD 8: A2 EVERYDAY COMMUNICATION",
+  "level": "A2 foundation",
+  "description": "An ambitious elementary-English world that develops longer conversations, practical grammar, richer vocabulary, everyday problem solving, reading for meaning, natural listening and independent production.",
+  "missions": [
+    {"id":1,"title":"A2 Vocabulary Power-Up","focus":"high-frequency A2 verbs, adjectives, collocations and everyday phrases","skills":["vocabulary","pronunciation","speaking"]},
+    {"id":2,"title":"Present Simple vs Present Continuous","focus":"routines versus actions happening now, temporary situations and time expressions","skills":["grammar","listening","speaking"]},
+    {"id":3,"title":"Past Stories — What Happened?","focus":"past simple, sequence markers, regular and irregular verbs, telling connected events","skills":["grammar","reading","speaking","writing"]},
+    {"id":4,"title":"Past Continuous Adventure","focus":"was/were + -ing, background actions, interrupted events and when/while","skills":["grammar","listening","speaking"]},
+    {"id":5,"title":"Future Choices","focus":"going to, will for simple decisions/predictions, plans and promises","skills":["grammar","conversation","writing"]},
+    {"id":6,"title":"Life Experiences","focus":"ever/never, already/yet, simple present perfect introduction and personal questions","skills":["grammar","speaking","listening"]},
+    {"id":7,"title":"Healthy Life Mission","focus":"health vocabulary, habits, symptoms, advice with should/shouldn't","skills":["vocabulary","real_life_english","conversation"]},
+    {"id":8,"title":"At the Doctor","focus":"describing symptoms, answering questions, asking for clarification and following instructions","skills":["listening","speaking","real_life_english"]},
+    {"id":9,"title":"Shopping Problem Solver","focus":"sizes, prices, returns, exchanges, preferences and polite complaints","skills":["conversation","vocabulary","real_life_english"]},
+    {"id":10,"title":"A2 Conversation Lab","focus":"6-minute conversation with follow-up questions, reasons, preferences and past experiences","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Explorer — The Unexpected Day","focus":"450–550 word narrative, main idea, details, sequence and simple inference","skills":["reading","vocabulary","writing"]},
+    {"id":12,"title":"Listening Explorer — Three Voices","focus":"multi-speaker A2 listening with key details, opinions, times and corrections","skills":["listening","vocabulary","comprehension"]},
+    {"id":13,"title":"Connectors & Better Sentences","focus":"because, so, although, when, before, after, then and finally","skills":["grammar","writing","reading"]},
+    {"id":14,"title":"Write a Real Story","focus":"180–220 word personal story with beginning, events, problem, solution and ending","skills":["writing","grammar","vocabulary"]},
+    {"id":15,"title":"Hotel Mission — Check-In & Problems","focus":"booking details, check-in, room requests, facilities and solving a simple hotel issue","skills":["conversation","listening","real_life_english"]},
+    {"id":16,"title":"Airport & Travel Challenge","focus":"departure information, baggage, boarding, directions, delays and asking for help","skills":["listening","speaking","real_life_english"]},
+    {"id":17,"title":"Plans, Invitations & Social English","focus":"inviting, accepting, refusing politely, arranging times and changing plans","skills":["conversation","grammar","speaking"]},
+    {"id":18,"title":"Explain It Another Way","focus":"paraphrasing, describing unknown words, giving examples and repairing communication breakdowns","skills":["speaking","conversation","vocabulary"]},
+    {"id":19,"title":"A2 Integrated Skills Marathon","focus":"long-form integrated assessment across vocabulary, grammar, reading, listening, speaking and writing","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 8 FINAL MASTER QUEST — A2 EVERYDAY ENGLISH","focus":"final A2 mission combining natural dialogue, reading, listening, writing, travel/health/shop scenarios and independent speaking","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "550+ active words and phrases",
+    "grammar": ["present simple vs present continuous","past simple","past continuous","future with going to","will for simple decisions and predictions","present perfect introduction","should/shouldn't","question forms","adverbs of frequency","connectors and sequencing words"],
+    "reading": "450–550 word A2 texts with main-idea, detail, sequence and simple-inference tasks",
+    "listening": "4–6 minute A2 recordings including multi-speaker everyday conversations",
+    "speaking": "6-minute guided-to-independent conversations with follow-up questions and reasons",
+    "writing": "180–220 word connected stories, descriptions and practical messages",
+    "real_life_english": ["doctor","pharmacy","shopping returns","hotel check-in","airport","travel problems","invitations","appointments","asking for clarification","polite complaints"],
+    "mastery": "Learner can handle familiar everyday conversations, describe past events, discuss current and future situations, explain simple problems, ask follow-up questions, understand the main points of ordinary speech and write connected A2-level texts."
+  }
+}
