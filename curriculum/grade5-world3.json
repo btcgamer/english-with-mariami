@@ -1,0 +1,39 @@
+{
+  "grade": 5,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 3: B1 COMMUNICATION CORE",
+  "level": "B1 foundation",
+  "description": "Grade 5 World 3 moves into practical B1 communication through richer grammar, connected texts, natural listening, sustained conversation, opinion language, storytelling and real-world problem solving.",
+  "missions": [
+    {"id":1,"title":"B1 Vocabulary Engine","focus":"collocations, phrasal verbs, word families, useful chunks and context-based meaning","skills":["vocabulary","reading","pronunciation"]},
+    {"id":2,"title":"Present Perfect vs Past Simple","focus":"experiences, finished past events, time expressions and choosing the correct tense in conversation","skills":["grammar","speaking","listening"]},
+    {"id":3,"title":"Narrative Tense Control","focus":"past simple, past continuous and past perfect for clear chronological storytelling","skills":["grammar","reading","writing"]},
+    {"id":4,"title":"Future Plans, Intentions & Predictions","focus":"will, going to and present continuous with evidence, arrangements and personal plans","skills":["grammar","speaking","writing"]},
+    {"id":5,"title":"Second Conditional Starter","focus":"imaginary situations, wishes, hypothetical choices and giving reasons","skills":["grammar","conversation","writing"]},
+    {"id":6,"title":"Relative Clauses","focus":"who, which, that and where for adding useful information to descriptions","skills":["grammar","reading","speaking"]},
+    {"id":7,"title":"Passive Voice Basics","focus":"understanding and producing simple passive sentences in everyday factual English","skills":["grammar","reading","writing"]},
+    {"id":8,"title":"Communication & Relationships","focus":"emotions, personality, conflict, cooperation, invitations, apologies and social responses","skills":["vocabulary","speaking","conversation"]},
+    {"id":9,"title":"Environment & Our World","focus":"nature, pollution, recycling, climate, responsible choices and explaining simple cause and effect","skills":["vocabulary","reading","speaking"]},
+    {"id":10,"title":"B1 Conversation Lab — Eight Minutes","focus":"sustained conversation with follow-up questions, comparisons, explanations, experiences and opinions","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Explorer — The Choice","focus":"800–950 word B1 text with gist, detail, inference, reference words, attitude and context vocabulary","skills":["reading","comprehension","vocabulary"]},
+    {"id":12,"title":"Listening Mission — Natural Conversations","focus":"7–9 minute multi-speaker audio with reduced pauses, connected speech, purpose and attitude","skills":["listening","comprehension","pronunciation"]},
+    {"id":13,"title":"Writing Mission — For & Against","focus":"220–260 word balanced response using reasons, examples, connectors and a clear conclusion","skills":["writing","grammar","critical_thinking"]},
+    {"id":14,"title":"Storytelling Lab — A Turning Point","focus":"telling a longer story with setting, conflict, sequence, dialogue, reaction and resolution","skills":["speaking","writing","reading"]},
+    {"id":15,"title":"Real-Life English — Booking & Changing Plans","focus":"making reservations, changing arrangements, confirming information and solving booking problems","skills":["conversation","listening","real_life_english"]},
+    {"id":16,"title":"Real-Life English — At Work & In the Community","focus":"basic workplace communication, responsibilities, requests, schedules and community services","skills":["vocabulary","speaking","real_life_english"]},
+    {"id":17,"title":"Opinion Lab — Explain Your Thinking","focus":"expressing opinions, giving evidence, softening disagreement and responding to another person's idea","skills":["speaking","conversation","critical_thinking"]},
+    {"id":18,"title":"Problem-Solving Simulation","focus":"understand a situation, identify options, compare solutions, negotiate a choice and explain the result","skills":["listening","speaking","conversation"]},
+    {"id":19,"title":"B1 Integrated Skills Marathon","focus":"full review of vocabulary, grammar, pronunciation, reading, listening, speaking, writing and real-life English","skills":["vocabulary","grammar","pronunciation","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 3 MASTER QUEST — B1 COMMUNICATION CORE","focus":"multi-stage B1 assessment combining reading, listening, storytelling, opinion, problem solving, writing and sustained conversation","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "900+ active words, collocations, phrasal verbs and communication chunks",
+    "grammar": ["present perfect vs past simple","past perfect","future forms","second conditional introduction","relative clauses","passive voice basics","modal verbs","tense review","linking devices"],
+    "reading": "800–950 word B1 texts",
+    "listening": "7–9 minute natural multi-speaker listening",
+    "speaking": "8-minute sustained conversation plus extended storytelling",
+    "writing": "220–260 word balanced or narrative texts",
+    "real_life_english": ["reservations","changing plans","workplace basics","community services","social communication","environment","problem solving"],
+    "mastery": "Learner demonstrates emerging independent B1 communication by connecting ideas, explaining reasons, handling practical situations, telling developed stories and participating in longer conversations."
+  }
+}
