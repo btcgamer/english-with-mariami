@@ -1,0 +1,39 @@
+{
+  "grade": 5,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 2: A2+ TO B1 BRIDGE",
+  "level": "A2+ → B1",
+  "description": "A stronger Grade 5 progression into independent English: longer connected speech, richer grammar, practical reasoning, multi-step comprehension and more natural interaction.",
+  "missions": [
+    {"id":1,"title":"Vocabulary Lab — Words in Families","focus":"prefixes, suffixes, word families, collocations, common phrasal verbs and context-based vocabulary","skills":["vocabulary","reading","pronunciation"]},
+    {"id":2,"title":"Present Perfect Power","focus":"have/has + past participle for experiences, recent events and unfinished time; ever, never, just, already, yet","skills":["grammar","speaking","listening"]},
+    {"id":3,"title":"Past Perfect Starter","focus":"understanding earlier and later past events with had + past participle in clear narratives","skills":["grammar","reading","writing"]},
+    {"id":4,"title":"Used To & Life Changes","focus":"used to for past habits and states, present contrasts and describing how life has changed","skills":["grammar","speaking","writing"]},
+    {"id":5,"title":"Modal Mission — Rules, Advice & Possibility","focus":"must, have to, should, could, may, might and can for obligation, advice, permission and possibility","skills":["grammar","conversation","real_life_english"]},
+    {"id":6,"title":"Conditionals in Real Life","focus":"zero and first conditional for facts, warnings, plans, consequences and everyday decisions","skills":["grammar","speaking","writing"]},
+    {"id":7,"title":"Reason & Result","focus":"because, so, therefore, although, but, however and other connectors for clearer communication","skills":["grammar","writing","speaking"]},
+    {"id":8,"title":"People, Personality & Relationships","focus":"personality vocabulary, describing behavior, giving examples and discussing relationships respectfully","skills":["vocabulary","speaking","reading"]},
+    {"id":9,"title":"Media, Technology & Information","focus":"news, websites, apps, messages, devices, online behavior and identifying basic information reliably","skills":["vocabulary","reading","listening"]},
+    {"id":10,"title":"B1 Bridge Conversation Lab","focus":"7-minute conversation with follow-up questions, explanations, comparisons, experiences and opinions","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Explorer — A Difficult Decision","focus":"700–850 word narrative with gist, detail, sequence, vocabulary in context and simple inference","skills":["reading","comprehension","vocabulary"]},
+    {"id":12,"title":"Listening Lab — Four Real Voices","focus":"6–8 minute listening with different speakers, natural speed, key details, attitude and purpose","skills":["listening","comprehension","vocabulary"]},
+    {"id":13,"title":"Writing Lab — Opinion Paragraph","focus":"180–220 word opinion text with a clear position, reasons, examples and conclusion","skills":["writing","grammar","vocabulary"]},
+    {"id":14,"title":"Conversation Repair & Clarification","focus":"asking someone to repeat, checking meaning, paraphrasing, correcting yourself and keeping communication moving","skills":["conversation","speaking","listening"]},
+    {"id":15,"title":"Customer Service Mission","focus":"returns, bookings, complaints, requests, explanations, apologies and polite solutions","skills":["real_life_english","conversation","writing"]},
+    {"id":16,"title":"Travel Problem Solver","focus":"missed transport, changed plans, hotel issues, directions and explaining a problem clearly","skills":["speaking","listening","real_life_english"]},
+    {"id":17,"title":"Mini Debate — Give Me Your Reasons","focus":"agreeing and disagreeing politely, supporting an opinion, asking follow-up questions and responding to another view","skills":["speaking","conversation","critical_thinking"]},
+    {"id":18,"title":"Story Mission — What Really Happened?","focus":"integrating past forms, sequencing, description, dialogue and cause-and-effect in a longer story","skills":["writing","reading","speaking"]},
+    {"id":19,"title":"A2+ to B1 Integrated Marathon","focus":"advanced Grade 5 review across vocabulary, grammar, reading, listening, speaking, writing and real-life communication","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 2 MASTER QUEST — B1 BRIDGE","focus":"multi-stage mastery assessment with reading, listening, problem solving, conversation, opinion, writing and real-life scenarios","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "800+ active words, phrases, collocations and common phrasal verbs",
+    "grammar": ["present perfect","past perfect basics","used to","modals of obligation/advice/possibility","zero conditional","first conditional","connectors","relative clause introduction","question forms","tense review"],
+    "reading": "700–850 word A2+/B1 bridge texts",
+    "listening": "6–8 minute multi-speaker listening with natural everyday speed",
+    "speaking": "7-minute sustained conversation with follow-up questions and explanations",
+    "writing": "180–220 word opinion and narrative texts",
+    "real_life_english": ["customer service","travel problems","bookings","complaints","requests","online communication","school and study","relationships","technology"],
+    "mastery": "Learner begins moving from elementary communication toward independent B1-style communication by connecting ideas, explaining reasons, handling problems and sustaining longer interactions."
+  }
+}
