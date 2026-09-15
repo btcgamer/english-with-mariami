@@ -66,6 +66,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     document.head.appendChild(portal);
   }
 
+  /* Academy Mission Gateway 5.0 — visual-only, navigation remains native. */
+  if(!document.querySelector('script[data-ewm-academy-gateway-5]')){
+    const gateway=document.createElement('script');
+    gateway.src='/academy-mission-gateway-5.js?v=20260915-g5';
+    gateway.defer=true;
+    gateway.dataset.ewmAcademyGateway5='1';
+    document.head.appendChild(gateway);
+  }
+
   /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
