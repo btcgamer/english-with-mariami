@@ -84,6 +84,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     document.head.appendChild(reality3d);
   }
 
+  /* Academy AI Guardian 7.0 — visual-only 3D companion layer. */
+  if(!document.querySelector('script[data-ewm-academy-ai-guardian-7]')){
+    const guardian=document.createElement('script');
+    guardian.src='/academy-ai-guardian-7.js?v=20260915-g7';
+    guardian.defer=true;
+    guardian.dataset.ewmAcademyAiGuardian7='1';
+    document.head.appendChild(guardian);
+  }
+
   /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
