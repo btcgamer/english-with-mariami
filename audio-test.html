@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>English with Mariami — Audio Diagnostic</title>
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,sans-serif;background:#050816;color:#eef3ff;display:grid;place-items:center;padding:20px}.card{width:min(680px,100%);padding:28px;border:1px solid #26365f;border-radius:22px;background:rgba(10,18,42,.94);box-shadow:0 0 50px rgba(70,100,255,.18)}h1{margin:0 0 8px;font-size:28px}p{color:#aebbdc}.btn{width:100%;padding:16px;border:0;border-radius:14px;background:#5c7cff;color:white;font-size:18px;font-weight:800;cursor:pointer;margin:12px 0 20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row{padding:12px;border:1px solid #26365f;border-radius:12px;background:#0a1229}.label{font-size:12px;color:#8291b8}.value{margin-top:4px;font-weight:700;word-break:break-word}.status{margin-top:14px;padding:14px;border-radius:12px;background:#070d20;font-family:ui-monospace,monospace;white-space:pre-wrap;min-height:54px}@media(max-width:520px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="card">
+<h1>🔊 Audio Diagnostic</h1>
+<p>This page is independent of Supabase and the Grade 2/3/4 lesson code.</p>
+<button class="btn" id="test">TEST AUDIO</button>
+<section class="grid">
+<div class="row"><div class="label">Speech API supported</div><div class="value" id="supported">Checking…</div></div>
+<div class="row"><div class="label">Voices</div><div class="value" id="voices">0</div></div>
+<div class="row"><div class="label">English voice</div><div class="value" id="english">Checking…</div></div>
+<div class="row"><div class="label">Speaking</div><div class="value" id="speaking">false</div></div>
+<div class="row"><div class="label">Pending</div><div class="value" id="pending">false</div></div>
+<div class="row"><div class="label">Paused</div><div class="value" id="paused">false</div></div>
+</section>
+<div class="row" style="margin-top:10px"><div class="label">Browser</div><div class="value" id="ua"></div></div>
+<div class="status" id="status">Ready. Tap TEST AUDIO.</div>
+</main>
+<script>
+(function(){
+  const synth=window.speechSynthesis;
+  const $=id=>document.getElementById(id);
+  $('ua').textContent=navigator.userAgent;
+  function status(t){$('status').textContent=t; refresh();}
+  function refresh(){
+    const supported=!!(synth&&window.SpeechSynthesisUtterance);
+    $('supported').textContent=supported?'YES':'NO';
+    if(!supported){$('voices').textContent='N/A';$('english').textContent='N/A';return;}
+    const list=synth.getVoices();
+    $('voices').textContent=String(list.length);
+    const en=list.some(v=>/^en(?:-|_)/i.test(v.lang)||/english/i.test(v.name));
+    $('english').textContent=en?'YES':'NO';
+    $('speaking').textContent=String(synth.speaking);
+    $('pending').textContent=String(synth.pending);
+    $('paused').textContent=String(synth.paused);
+  }
+  if(synth&&'onvoiceschanged' in synth)synth.addEventListener('voiceschanged',refresh);
+  refresh();
+  setTimeout(refresh,500);setTimeout(refresh,1500);
+  $('test').addEventListener('click',function(){
+    if(!synth||!window.SpeechSynthesisUtterance){status('ERROR: Speech Synthesis API is not supported by this browser.');return;}
+    const u=new SpeechSynthesisUtterance('Hello, this is the English with Mariami audio test.');
+    u.lang='en-US';u.rate=.9;
+    const voices=synth.getVoices();
+    const voice=voices.find(v=>/^en-US$/i.test(v.lang))||voices.find(v=>/^en(?:-|_)/i.test(v.lang));
+    if(voice)u.voice=voice;
+    u.onstart=()=>status('STARTED — audio playback was accepted by the browser.');
+    u.onend=()=>status('ENDED — speech playback finished.');
+    u.onerror=e=>status('ERROR: '+(e.error||'unknown'));
+    status('Starting…');
+    synth.cancel();
+    synth.resume();
+    setTimeout(()=>{try{synth.speak(u);refresh();}catch(e){status('ERROR: '+e.message)}},40);
+  });
+})();
+</script>
+</body>
+</html>
