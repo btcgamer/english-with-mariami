@@ -1,0 +1,39 @@
+{
+  "grade": 1,
+  "world": 9,
+  "title": "MAGIC ENGLISH BEGINNER — WORLD 9: A2 COMMUNICATION & INDEPENDENCE",
+  "level": "A2",
+  "description": "A high-density A2 world that moves learners from guided beginner English toward independent everyday communication, with richer grammar, longer texts, practical scenarios, problem solving and sustained speaking.",
+  "missions": [
+    {"id":1,"title":"A2 Vocabulary Expansion Lab","focus":"common A2 collocations, phrasal-style everyday expressions, opposites, word families and useful chunks","skills":["vocabulary","pronunciation","speaking"]},
+    {"id":2,"title":"People, Places & Experiences","focus":"describing people and places with detail, relative-style descriptive phrases and reasons","skills":["vocabulary","reading","speaking"]},
+    {"id":3,"title":"Grammar Control Center","focus":"present, past and future forms in connected communication","skills":["grammar","speaking","writing"]},
+    {"id":4,"title":"Questions That Keep a Conversation Going","focus":"follow-up questions, question words, indirect-style polite questions and clarification","skills":["grammar","conversation","listening"]},
+    {"id":5,"title":"Rules, Advice & Possibility","focus":"must, have to, don't have to, should, can, could and may for everyday meaning","skills":["grammar","real_life_english","speaking"]},
+    {"id":6,"title":"Money, Prices & Everyday Decisions","focus":"budgeting vocabulary, prices, quantities, choices, preferences and simple reasons","skills":["vocabulary","conversation","real_life_english"]},
+    {"id":7,"title":"Home, Neighborhood & Community","focus":"housing, services, neighborhood descriptions, local facilities and practical questions","skills":["reading","speaking","vocabulary"]},
+    {"id":8,"title":"Appointments & Phone English","focus":"making, changing and confirming appointments; leaving messages; spelling and checking information","skills":["listening","conversation","real_life_english"]},
+    {"id":9,"title":"Customer Service Mission","focus":"asking for information, explaining a problem, requesting a solution and responding politely","skills":["speaking","conversation","real_life_english"]},
+    {"id":10,"title":"A2 Conversation Lab — Seven Minutes","focus":"sustained conversation using questions, follow-ups, opinions, experiences and future plans","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Mission — A New School Project","focus":"550–650 word informational/story text, main idea, details, sequence, vocabulary in context and inference","skills":["reading","vocabulary","comprehension"]},
+    {"id":12,"title":"Listening Mission — Real-World Voices","focus":"5–7 minute A2 listening with announcements, conversations and short interviews","skills":["listening","comprehension","vocabulary"]},
+    {"id":13,"title":"Writing Mission — Messages That Work","focus":"practical emails/messages, requests, invitations, apologies, explanations and confirmations","skills":["writing","grammar","real_life_english"]},
+    {"id":14,"title":"Storytelling Mission — A Problem and a Solution","focus":"220–260 word story with setting, problem, events, solution and personal reaction","skills":["writing","speaking","reading"]},
+    {"id":15,"title":"Travel Planner","focus":"planning a short trip, comparing options, schedules, transport, accommodation and simple contingencies","skills":["reading","conversation","real_life_english"]},
+    {"id":16,"title":"Emergency & Safety English","focus":"clear safety instructions, describing what happened, asking for urgent help and giving essential information","skills":["listening","speaking","real_life_english"]},
+    {"id":17,"title":"Tell Me What You Think","focus":"opinions, preferences, reasons, agreement/disagreement and simple advantages/disadvantages","skills":["speaking","conversation","writing"]},
+    {"id":18,"title":"Communication Repair Challenge","focus":"misunderstandings, repetition, slower speech, paraphrasing, examples and confirmation checks","skills":["listening","speaking","conversation"]},
+    {"id":19,"title":"A2 Independence Marathon","focus":"integrated assessment requiring independent choices across vocabulary, grammar, reading, listening, speaking and writing","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 9 FINAL MASTER QUEST — A2 INDEPENDENT ENGLISH","focus":"multi-stage real-life quest with travel, phone, customer service, safety, reading, listening, writing and sustained speaking","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "650+ active words, phrases and collocations",
+    "grammar": ["present simple","present continuous","past simple","past continuous","future with going to","will","present perfect basics","must","have to","don't have to","should","can/could","may","question forms","frequency and time expressions","basic linking words"],
+    "reading": "550–650 word A2 texts with main idea, detail, sequence, context vocabulary and simple inference",
+    "listening": "5–7 minute A2 listening using announcements, conversations and short interviews",
+    "speaking": "7-minute sustained conversation with follow-up questions, opinions, experiences and plans",
+    "writing": "220–260 word stories plus practical messages and short emails",
+    "real_life_english": ["money and shopping","neighborhood services","appointments","phone calls","customer service","travel planning","emergency and safety","requests and explanations"],
+    "mastery": "Learner can participate in familiar everyday conversations with increasing independence, explain simple problems and needs, understand the main information in ordinary speech, read longer familiar texts, write connected practical messages and stories, and keep a conversation going with follow-up questions."
+  }
+}
