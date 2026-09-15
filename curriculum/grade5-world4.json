@@ -1,0 +1,39 @@
+{
+  "grade": 5,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 4: B1 FLUENCY & REAL-WORLD ENGLISH",
+  "level": "B1",
+  "description": "A deeper B1 world focused on fluency, precision, natural communication, connected reading and listening, practical decisions, social English, study skills and independent production.",
+  "missions": [
+    {"id":1,"title":"B1 Vocabulary Lab — Precision Power","focus":"collocations, word families, phrasal verbs, synonyms, antonyms and context-dependent meaning","skills":["vocabulary","reading","pronunciation"]},
+    {"id":2,"title":"Grammar Control — Tense Mastery","focus":"present, past and future forms in connected communication; choosing tense by meaning and context","skills":["grammar","writing","speaking"]},
+    {"id":3,"title":"Present Perfect Deep Dive","focus":"for, since, already, yet, just, ever, never and unfinished time with real-life situations","skills":["grammar","conversation","listening"]},
+    {"id":4,"title":"Narrative Mastery","focus":"past simple, past continuous and past perfect to build detailed stories and explain sequences","skills":["grammar","storytelling","writing"]},
+    {"id":5,"title":"Conditionals in Real Life","focus":"zero and first conditional review plus second conditional for advice, imagination and choices","skills":["grammar","speaking","problem_solving"]},
+    {"id":6,"title":"Modals for Meaning","focus":"must, have to, should, might, may, could and can for obligation, advice, possibility and permission","skills":["grammar","conversation","real_life_english"]},
+    {"id":7,"title":"Linking Ideas Like a B1 Speaker","focus":"although, however, therefore, while, unless, because, so, despite and in addition","skills":["grammar","writing","speaking"]},
+    {"id":8,"title":"People, Identity & Social Life","focus":"personality, relationships, communication styles, feelings, conflict and respectful responses","skills":["vocabulary","speaking","conversation"]},
+    {"id":9,"title":"Technology, Media & Digital Life","focus":"devices, social media, online safety, information quality, digital habits and explaining technology","skills":["vocabulary","reading","discussion"]},
+    {"id":10,"title":"B1 Fluency Lab — Ten Minutes","focus":"10-minute guided-to-independent conversation with follow-up questions, clarification, examples and opinions","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Mastery — The Unexpected Opportunity","focus":"900–1050 word B1 text with gist, detail, inference, writer purpose, reference and vocabulary in context","skills":["reading","comprehension","vocabulary"]},
+    {"id":12,"title":"Listening Mastery — Voices in the Real World","focus":"8–10 minute natural listening with interviews, announcements and informal conversation; identify attitude and key details","skills":["listening","comprehension","pronunciation"]},
+    {"id":13,"title":"Writing Lab — Email, Message & Opinion","focus":"formal and informal tone, paragraph structure, linking devices, requests, explanations and opinion writing","skills":["writing","grammar","real_life_english"]},
+    {"id":14,"title":"Presentation Mission — Teach Me Something","focus":"prepare and deliver a 4–5 minute presentation with opening, sequence, examples, signposting and conclusion","skills":["speaking","pronunciation","writing"]},
+    {"id":15,"title":"Travel & Accommodation Simulation","focus":"booking, check-in, directions, delays, changes, complaints, clarification and polite solutions","skills":["conversation","listening","real_life_english"]},
+    {"id":16,"title":"Health, Safety & Emergency English","focus":"describing symptoms, asking for help, understanding instructions, giving essential information and staying calm","skills":["vocabulary","speaking","listening","real_life_english"]},
+    {"id":17,"title":"Agree, Disagree & Negotiate","focus":"agreeing, partial agreement, polite disagreement, proposing alternatives and reaching a practical decision","skills":["conversation","speaking","critical_thinking"]},
+    {"id":18,"title":"B1 Simulation — A Day Full of Problems","focus":"integrated real-world scenarios requiring listening, explanation, decisions, requests, negotiation and follow-up","skills":["listening","speaking","conversation","problem_solving"]},
+    {"id":19,"title":"B1 Full Skills Marathon","focus":"high-density review across vocabulary, grammar, pronunciation, reading, listening, speaking, writing and real-life English","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 4 MASTER QUEST — B1 FLUENCY","focus":"final integrated B1 challenge combining natural listening, advanced reading, extended speaking, practical communication, presentation and writing","skills":["mastery","reading","listening","speaking","writing","real_life_english"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "1000+ active words, collocations, phrasal verbs and functional communication chunks",
+    "grammar": ["tense mastery","present perfect forms","narrative tenses","zero and first conditionals","second conditional","modal verbs","linking devices","relative clauses review","passive voice review"],
+    "reading": "900–1050 word B1 texts with inference and writer-purpose tasks",
+    "listening": "8–10 minute natural multi-speaker listening with attitude and detail questions",
+    "speaking": "10-minute sustained conversation plus a 4–5 minute presentation",
+    "writing": "250–300 word structured writing across practical and opinion formats",
+    "real_life_english": ["travel","accommodation","health","emergency","digital life","requests","complaints","negotiation","social communication"],
+    "mastery": "Learner communicates independently at B1 level across familiar real-world situations, connects ideas clearly, explains reasons, handles problems, understands natural spoken English and produces organized extended speech and writing."
+  }
+}
