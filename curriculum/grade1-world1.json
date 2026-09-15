@@ -1,0 +1,100 @@
+{
+  "grade": 1,
+  "world": 1,
+  "title": "MAGIC ENGLISH BEGINNER — WORLD 1: MY FIRST ENGLISH",
+  "level": "Pre-A1",
+  "description": "A high-density beginner foundation covering alphabet, phonics, numbers, colors, classroom English, greetings, family, simple sentences and first real-life conversations.",
+  "missions": [
+    {
+      "id": 1,
+      "title": "Meet the Alphabet",
+      "focus": ["alphabet", "letter recognition", "pronunciation"],
+      "vocabulary": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+      "speaking": ["Say the alphabet aloud.", "Spell your first name."],
+      "listening": ["Identify the letter you hear.", "Choose the beginning letter of a word."],
+      "grammar": ["A letter is a symbol.", "This is A.", "That is B."]
+    },
+    {
+      "id": 2,
+      "title": "Phonics Power",
+      "focus": ["phonics", "initial sounds", "sound recognition"],
+      "vocabulary": ["apple", "ant", "ball", "book", "cat", "dog", "egg", "fish", "goat", "hat", "ice", "jam", "kite", "lion", "moon", "nose", "orange", "pen", "queen", "rabbit", "sun", "tree", "umbrella", "van", "water", "box", "yellow", "zoo"],
+      "speaking": ["Repeat each word clearly.", "Tell the first sound of each word."],
+      "listening": ["Match sounds to pictures.", "Find two words with the same beginning sound."],
+      "grammar": ["It is a cat.", "It is an apple."]
+    },
+    {
+      "id": 3,
+      "title": "Numbers 0–20",
+      "focus": ["numbers", "counting", "quantity"],
+      "vocabulary": ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"],
+      "speaking": ["Count from zero to twenty.", "Say your age."],
+      "listening": ["Identify numbers you hear.", "Listen and count objects."],
+      "grammar": ["I am seven.", "I have two books."]
+    },
+    {
+      "id": 4,
+      "title": "Colors Everywhere",
+      "focus": ["colors", "describing objects"],
+      "vocabulary": ["red", "blue", "yellow", "green", "orange", "purple", "pink", "black", "white", "brown", "gray", "gold", "silver"],
+      "speaking": ["Name the colors around you.", "Answer: What color is it?"],
+      "listening": ["Listen and find the correct color.", "Follow two-step color instructions."],
+      "grammar": ["It is red.", "The ball is blue.", "I like green."]
+    },
+    {
+      "id": 5,
+      "title": "My Classroom",
+      "focus": ["school", "classroom objects", "classroom commands"],
+      "vocabulary": ["book", "notebook", "pencil", "pen", "eraser", "ruler", "bag", "desk", "chair", "board", "teacher", "student", "door", "window", "computer", "screen", "paper", "crayon", "marker", "glue"],
+      "speaking": ["Name classroom objects.", "Ask: What is this?", "Say: Can I have a pencil, please?"],
+      "listening": ["Follow classroom commands.", "Find the object named in a short dialogue."],
+      "grammar": ["This is a book.", "That is a chair.", "These are pencils."]
+    },
+    {
+      "id": 6,
+      "title": "Hello! My Name Is...",
+      "focus": ["greetings", "introductions", "basic conversation"],
+      "vocabulary": ["hello", "hi", "goodbye", "bye", "please", "thank you", "thanks", "sorry", "yes", "no", "name", "friend", "boy", "girl", "teacher", "student"],
+      "speaking": ["Hello! My name is ...", "What is your name?", "Nice to meet you.", "Goodbye! See you soon!"],
+      "listening": ["Identify greetings.", "Listen to a two-person introduction and answer questions."],
+      "grammar": ["My name is Mariami.", "I am a student.", "You are my friend."]
+    },
+    {
+      "id": 7,
+      "title": "My Family",
+      "focus": ["family", "people", "possessives"],
+      "vocabulary": ["family", "mother", "mom", "father", "dad", "sister", "brother", "grandmother", "grandfather", "baby", "parents", "child", "son", "daughter", "family", "home"],
+      "speaking": ["Talk about your family.", "Say: This is my mother.", "Answer: Who is he? Who is she?"],
+      "listening": ["Identify family members in a dialogue.", "Listen and build a simple family picture."],
+      "grammar": ["This is my sister.", "He is my brother.", "She is my mother."]
+    },
+    {
+      "id": 8,
+      "title": "My Body",
+      "focus": ["body parts", "descriptions", "health basics"],
+      "vocabulary": ["head", "hair", "face", "eye", "ear", "nose", "mouth", "tooth", "neck", "shoulder", "arm", "hand", "finger", "leg", "knee", "foot", "toe"],
+      "speaking": ["Point and name body parts.", "Answer: What is this?"],
+      "listening": ["Follow body-part instructions.", "Identify body parts in a song or short dialogue."],
+      "grammar": ["This is my hand.", "I have two eyes.", "My eyes are brown."]
+    },
+    {
+      "id": 9,
+      "title": "My Home",
+      "focus": ["home", "rooms", "objects", "prepositions"],
+      "vocabulary": ["home", "house", "room", "bedroom", "bathroom", "kitchen", "living room", "door", "window", "bed", "table", "chair", "sofa", "lamp", "box", "book", "cup", "plate"],
+      "speaking": ["Describe one room.", "Say where an object is."],
+      "listening": ["Listen to a room description.", "Find objects using location clues."],
+      "grammar": ["The book is on the table.", "The bag is under the chair.", "The lamp is in the room."]
+    },
+    {
+      "id": 10,
+      "title": "Mission 10 — First Conversation",
+      "focus": ["review", "conversation", "speaking", "listening"],
+      "vocabulary": ["hello", "name", "age", "friend", "family", "school", "book", "color", "number", "home", "happy", "good", "like", "have", "am", "is", "are", "please", "thank", "goodbye"],
+      "speaking": ["Introduce yourself.", "Say your age.", "Name three things you like.", "Talk about two family members.", "Describe one classroom object."],
+      "listening": ["Understand a short self-introduction.", "Identify name, age, family and favorite color."],
+      "grammar": ["I am ...", "My name is ...", "I have ...", "I like ...", "This is ...", "He is ...", "She is ..."],
+      "challenge": "Complete a guided 60-second English introduction using only English prompts."
+    }
+  ]
+}
