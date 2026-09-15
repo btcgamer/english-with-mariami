@@ -1,0 +1,43 @@
+{
+  "grade": 1,
+  "world": 10,
+  "title": "MAGIC ENGLISH BEGINNER — WORLD 10: A2 FINAL MASTERY & REAL-WORLD ENGLISH",
+  "level": "A2 mastery",
+  "description": "The final Grade 1 world consolidates the full beginner-to-A2 journey through independent communication, richer real-life scenarios, longer comprehension, practical writing, storytelling, problem solving and a comprehensive final mastery quest.",
+  "missions": [
+    {"id":1,"title":"A2 Word Power — 750+ Challenge","focus":"high-frequency vocabulary, collocations, word families, opposites and useful communication chunks","skills":["vocabulary","pronunciation","speaking"]},
+    {"id":2,"title":"Grammar Mission Control","focus":"choosing accurate present, past and future forms in meaningful communication","skills":["grammar","reading","writing"]},
+    {"id":3,"title":"Tell Me About Your Life","focus":"personal information, routines, experiences, achievements, preferences and future goals","skills":["speaking","conversation","vocabulary"]},
+    {"id":4,"title":"Past, Present & Future Story","focus":"connecting different time frames into one coherent spoken and written story","skills":["grammar","speaking","writing"]},
+    {"id":5,"title":"Advice, Rules & Choices","focus":"must, have to, should, can, could, need to and don't have to in practical situations","skills":["grammar","real_life_english","conversation"]},
+    {"id":6,"title":"Everyday Problem Solver","focus":"identify a problem, explain what happened, ask for help, suggest options and choose a solution","skills":["speaking","conversation","real_life_english"]},
+    {"id":7,"title":"School & Learning English","focus":"subjects, assignments, instructions, questions, study habits and explaining learning difficulties","skills":["vocabulary","reading","conversation"]},
+    {"id":8,"title":"Work & Future Dreams","focus":"jobs, responsibilities, skills, simple interview questions, ambitions and future plans","skills":["speaking","vocabulary","real_life_english"]},
+    {"id":9,"title":"Digital Life & Online English","focus":"devices, messages, accounts, basic online safety, instructions and digital communication","skills":["vocabulary","listening","real_life_english"]},
+    {"id":10,"title":"A2 Conversation Lab — Ten Minutes","focus":"sustained conversation across familiar topics with follow-up questions, explanations and reactions","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Mastery — The Big Adventure","focus":"650–800 word A2 story with main idea, details, sequence, context vocabulary and inference","skills":["reading","vocabulary","comprehension"]},
+    {"id":12,"title":"Listening Mastery — A Day of Real English","focus":"7–9 minute mixed-format listening with dialogue, announcement, interview and everyday instructions","skills":["listening","comprehension","vocabulary"]},
+    {"id":13,"title":"Writing Mastery — Real Messages","focus":"practical email/message writing: request, invitation, apology, explanation, confirmation and simple complaint","skills":["writing","grammar","real_life_english"]},
+    {"id":14,"title":"Storytelling Mastery — From Picture to Story","focus":"250–300 word narrative with setting, characters, sequence, problem, solution and personal response","skills":["writing","speaking","reading"]},
+    {"id":15,"title":"Travel Master Mission","focus":"planning and completing a journey using transport, hotel, airport, directions, schedules and problem solving","skills":["reading","listening","speaking","real_life_english"]},
+    {"id":16,"title":"Health, Safety & Emergency Mission","focus":"describe symptoms or incidents clearly, understand instructions and communicate essential information under pressure","skills":["listening","speaking","real_life_english"]},
+    {"id":17,"title":"Mini Presentation — My World","focus":"3–5 minute prepared presentation with opening, organized points, examples, reasons and conclusion","skills":["speaking","pronunciation","writing"]},
+    {"id":18,"title":"English-Only Final Challenge","focus":"communicate unknown vocabulary through descriptions, examples, paraphrase, clarification and repair strategies","skills":["speaking","conversation","vocabulary"]},
+    {"id":19,"title":"A2 Final Skills Marathon","focus":"large integrated review covering vocabulary, grammar, pronunciation, reading, listening, speaking, writing and real-life English","skills":["vocabulary","grammar","pronunciation","reading","listening","speaking","writing"]},
+    {"id":20,"title":"GRADE 1 FINAL MASTER QUEST — MAGIC ENGLISH A2","focus":"ultimate multi-stage assessment combining real-life scenarios, conversation, reading, listening, writing, storytelling, presentation and mastery review","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "750+ active words, phrases and collocations across Grade 1",
+    "grammar": ["present simple","present continuous","past simple","past continuous","future with going to","will","present perfect basics","comparatives","superlatives","countable and uncountable nouns","some/any","much/many","must","have to","don't have to","should","can/could","question forms","linking and sequencing words"],
+    "reading": "650–800 word A2 texts with main idea, detail, sequence, context vocabulary and inference",
+    "listening": "7–9 minute mixed-format A2 listening with everyday speech, announcements and short interviews",
+    "speaking": "10-minute sustained conversation plus a 3–5 minute prepared presentation",
+    "writing": "250–300 word narrative plus practical emails/messages and explanations",
+    "real_life_english": ["school","shopping","money","doctor and pharmacy","travel","hotel","airport","phone calls","customer service","appointments","work and jobs","online communication","safety and emergency","asking for help"],
+    "mastery": "Grade 1 learner completes the beginner-to-A2 pathway with the ability to understand and produce connected English about familiar topics, manage common real-life interactions, describe past experiences, discuss current situations and future plans, explain simple problems, ask and answer follow-up questions, write practical messages and short stories, and communicate with substantially reduced dependence on translation."
+  },
+  "final_assessment": {
+    "stages": ["Vocabulary Core","Grammar Core","Reading Comprehension","Listening Comprehension","Real-Life Dialogue","Problem Solving","Story Writing","Speaking Presentation","English-Only Challenge","Mastery Review"],
+    "completion_standard": "Demonstrated A2-level control across integrated receptive and productive skills rather than completion based only on memorization."
+  }
+}
