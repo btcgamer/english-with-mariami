@@ -3,98 +3,28 @@
   "world": 1,
   "title": "MAGIC ENGLISH BEGINNER — WORLD 1: MY FIRST ENGLISH",
   "level": "Pre-A1",
-  "description": "A high-density beginner foundation covering alphabet, phonics, numbers, colors, classroom English, greetings, family, simple sentences and first real-life conversations.",
+  "description": "A high-density beginner foundation covering alphabet, phonics, numbers, colors, classroom English, greetings, family, body, home, daily actions, feelings, food, animals, weather and first real-life conversations.",
   "missions": [
-    {
-      "id": 1,
-      "title": "Meet the Alphabet",
-      "focus": ["alphabet", "letter recognition", "pronunciation"],
-      "vocabulary": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
-      "speaking": ["Say the alphabet aloud.", "Spell your first name."],
-      "listening": ["Identify the letter you hear.", "Choose the beginning letter of a word."],
-      "grammar": ["A letter is a symbol.", "This is A.", "That is B."]
-    },
-    {
-      "id": 2,
-      "title": "Phonics Power",
-      "focus": ["phonics", "initial sounds", "sound recognition"],
-      "vocabulary": ["apple", "ant", "ball", "book", "cat", "dog", "egg", "fish", "goat", "hat", "ice", "jam", "kite", "lion", "moon", "nose", "orange", "pen", "queen", "rabbit", "sun", "tree", "umbrella", "van", "water", "box", "yellow", "zoo"],
-      "speaking": ["Repeat each word clearly.", "Tell the first sound of each word."],
-      "listening": ["Match sounds to pictures.", "Find two words with the same beginning sound."],
-      "grammar": ["It is a cat.", "It is an apple."]
-    },
-    {
-      "id": 3,
-      "title": "Numbers 0–20",
-      "focus": ["numbers", "counting", "quantity"],
-      "vocabulary": ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"],
-      "speaking": ["Count from zero to twenty.", "Say your age."],
-      "listening": ["Identify numbers you hear.", "Listen and count objects."],
-      "grammar": ["I am seven.", "I have two books."]
-    },
-    {
-      "id": 4,
-      "title": "Colors Everywhere",
-      "focus": ["colors", "describing objects"],
-      "vocabulary": ["red", "blue", "yellow", "green", "orange", "purple", "pink", "black", "white", "brown", "gray", "gold", "silver"],
-      "speaking": ["Name the colors around you.", "Answer: What color is it?"],
-      "listening": ["Listen and find the correct color.", "Follow two-step color instructions."],
-      "grammar": ["It is red.", "The ball is blue.", "I like green."]
-    },
-    {
-      "id": 5,
-      "title": "My Classroom",
-      "focus": ["school", "classroom objects", "classroom commands"],
-      "vocabulary": ["book", "notebook", "pencil", "pen", "eraser", "ruler", "bag", "desk", "chair", "board", "teacher", "student", "door", "window", "computer", "screen", "paper", "crayon", "marker", "glue"],
-      "speaking": ["Name classroom objects.", "Ask: What is this?", "Say: Can I have a pencil, please?"],
-      "listening": ["Follow classroom commands.", "Find the object named in a short dialogue."],
-      "grammar": ["This is a book.", "That is a chair.", "These are pencils."]
-    },
-    {
-      "id": 6,
-      "title": "Hello! My Name Is...",
-      "focus": ["greetings", "introductions", "basic conversation"],
-      "vocabulary": ["hello", "hi", "goodbye", "bye", "please", "thank you", "thanks", "sorry", "yes", "no", "name", "friend", "boy", "girl", "teacher", "student"],
-      "speaking": ["Hello! My name is ...", "What is your name?", "Nice to meet you.", "Goodbye! See you soon!"],
-      "listening": ["Identify greetings.", "Listen to a two-person introduction and answer questions."],
-      "grammar": ["My name is Mariami.", "I am a student.", "You are my friend."]
-    },
-    {
-      "id": 7,
-      "title": "My Family",
-      "focus": ["family", "people", "possessives"],
-      "vocabulary": ["family", "mother", "mom", "father", "dad", "sister", "brother", "grandmother", "grandfather", "baby", "parents", "child", "son", "daughter", "family", "home"],
-      "speaking": ["Talk about your family.", "Say: This is my mother.", "Answer: Who is he? Who is she?"],
-      "listening": ["Identify family members in a dialogue.", "Listen and build a simple family picture."],
-      "grammar": ["This is my sister.", "He is my brother.", "She is my mother."]
-    },
-    {
-      "id": 8,
-      "title": "My Body",
-      "focus": ["body parts", "descriptions", "health basics"],
-      "vocabulary": ["head", "hair", "face", "eye", "ear", "nose", "mouth", "tooth", "neck", "shoulder", "arm", "hand", "finger", "leg", "knee", "foot", "toe"],
-      "speaking": ["Point and name body parts.", "Answer: What is this?"],
-      "listening": ["Follow body-part instructions.", "Identify body parts in a song or short dialogue."],
-      "grammar": ["This is my hand.", "I have two eyes.", "My eyes are brown."]
-    },
-    {
-      "id": 9,
-      "title": "My Home",
-      "focus": ["home", "rooms", "objects", "prepositions"],
-      "vocabulary": ["home", "house", "room", "bedroom", "bathroom", "kitchen", "living room", "door", "window", "bed", "table", "chair", "sofa", "lamp", "box", "book", "cup", "plate"],
-      "speaking": ["Describe one room.", "Say where an object is."],
-      "listening": ["Listen to a room description.", "Find objects using location clues."],
-      "grammar": ["The book is on the table.", "The bag is under the chair.", "The lamp is in the room."]
-    },
-    {
-      "id": 10,
-      "title": "Mission 10 — First Conversation",
-      "focus": ["review", "conversation", "speaking", "listening"],
-      "vocabulary": ["hello", "name", "age", "friend", "family", "school", "book", "color", "number", "home", "happy", "good", "like", "have", "am", "is", "are", "please", "thank", "goodbye"],
-      "speaking": ["Introduce yourself.", "Say your age.", "Name three things you like.", "Talk about two family members.", "Describe one classroom object."],
-      "listening": ["Understand a short self-introduction.", "Identify name, age, family and favorite color."],
-      "grammar": ["I am ...", "My name is ...", "I have ...", "I like ...", "This is ...", "He is ...", "She is ..."],
-      "challenge": "Complete a guided 60-second English introduction using only English prompts."
-    }
-  ]
+    {"id":1,"title":"Meet the Alphabet","focus":["alphabet","letter recognition","pronunciation"],"vocabulary":["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],"speaking":["Say the alphabet aloud.","Spell your first name."],"listening":["Identify the letter you hear.","Choose the beginning letter of a word."],"grammar":["This is A.","That is B."]},
+    {"id":2,"title":"Phonics Power","focus":["phonics","initial sounds","sound recognition"],"vocabulary":["apple","ant","ball","book","cat","dog","egg","fish","goat","hat","ice","jam","kite","lion","moon","nose","orange","pen","queen","rabbit","sun","tree","umbrella","van","water","box","yellow","zoo"],"speaking":["Repeat each word clearly.","Tell the first sound of each word."],"listening":["Match sounds to pictures.","Find two words with the same beginning sound."],"grammar":["It is a cat.","It is an apple."]},
+    {"id":3,"title":"Numbers 0–20","focus":["numbers","counting","quantity"],"vocabulary":["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"],"speaking":["Count from zero to twenty.","Say your age."],"listening":["Identify numbers you hear.","Listen and count objects."],"grammar":["I am seven.","I have two books."]},
+    {"id":4,"title":"Colors Everywhere","focus":["colors","describing objects"],"vocabulary":["red","blue","yellow","green","orange","purple","pink","black","white","brown","gray","gold","silver"],"speaking":["Name the colors around you.","Answer: What color is it?"],"listening":["Listen and find the correct color.","Follow two-step color instructions."],"grammar":["It is red.","The ball is blue.","I like green."]},
+    {"id":5,"title":"My Classroom","focus":["school","classroom objects","classroom commands"],"vocabulary":["book","notebook","pencil","pen","eraser","ruler","bag","desk","chair","board","teacher","student","door","window","computer","screen","paper","crayon","marker","glue"],"speaking":["Name classroom objects.","Ask: What is this?","Say: Can I have a pencil, please?"],"listening":["Follow classroom commands.","Find the object named in a short dialogue."],"grammar":["This is a book.","That is a chair.","These are pencils."]},
+    {"id":6,"title":"Hello! My Name Is...","focus":["greetings","introductions","basic conversation"],"vocabulary":["hello","hi","goodbye","bye","please","thank you","thanks","sorry","yes","no","name","friend","boy","girl","teacher","student"],"speaking":["Hello! My name is ...","What is your name?","Nice to meet you.","Goodbye! See you soon!"],"listening":["Identify greetings.","Listen to a two-person introduction and answer questions."],"grammar":["My name is ...","I am a student.","You are my friend."]},
+    {"id":7,"title":"My Family","focus":["family","people","possessives"],"vocabulary":["family","mother","mom","father","dad","sister","brother","grandmother","grandfather","baby","parents","child","son","daughter","home"],"speaking":["Talk about your family.","Say: This is my mother.","Answer: Who is he? Who is she?"],"listening":["Identify family members in a dialogue.","Listen and build a simple family picture."],"grammar":["This is my sister.","He is my brother.","She is my mother."]},
+    {"id":8,"title":"My Body","focus":["body parts","descriptions","health basics"],"vocabulary":["head","hair","face","eye","ear","nose","mouth","tooth","neck","shoulder","arm","hand","finger","leg","knee","foot","toe"],"speaking":["Point and name body parts.","Answer: What is this?"],"listening":["Follow body-part instructions.","Identify body parts in a song or short dialogue."],"grammar":["This is my hand.","I have two eyes.","My eyes are brown."]},
+    {"id":9,"title":"My Home","focus":["home","rooms","objects","prepositions"],"vocabulary":["home","house","room","bedroom","bathroom","kitchen","living room","door","window","bed","table","chair","sofa","lamp","box","book","cup","plate"],"speaking":["Describe one room.","Say where an object is."],"listening":["Listen to a room description.","Find objects using location clues."],"grammar":["The book is on the table.","The bag is under the chair.","The lamp is in the room."]},
+    {"id":10,"title":"First Conversation","focus":["review","conversation","speaking","listening"],"vocabulary":["hello","name","age","friend","family","school","book","color","number","home","happy","good","like","have","am","is","are","please","thank","goodbye"],"speaking":["Introduce yourself.","Say your age.","Name three things you like.","Talk about two family members.","Describe one classroom object."],"listening":["Understand a short self-introduction.","Identify name, age, family and favorite color."],"grammar":["I am ...","My name is ...","I have ...","I like ...","This is ...","He is ...","She is ..."],"challenge":"Complete a guided 60-second English introduction using only English prompts."},
+    {"id":11,"title":"Numbers 21–100","focus":["numbers","tens","counting","prices"],"vocabulary":["twenty-one","twenty-two","twenty-three","thirty","forty","fifty","sixty","seventy","eighty","ninety","one hundred","price","number","more","less"],"speaking":["Count by tens.","Say numbers from 21 to 100.","Say a simple price."],"listening":["Identify two-digit numbers.","Listen and write the number you hear."],"grammar":["I have thirty books.","It is fifty lari.","There are twenty students."],"challenge":"Hear ten numbers and repeat them accurately."},
+    {"id":12,"title":"Shapes and Patterns","focus":["shapes","size","position","patterns"],"vocabulary":["circle","square","triangle","rectangle","star","heart","line","point","big","small","long","short","round","same","different","pattern"],"speaking":["Name five shapes.","Describe a shape by size and color."],"listening":["Follow shape-drawing instructions.","Find the shape described in a short audio prompt."],"grammar":["It is a big circle.","The square is red.","The two shapes are different."]},
+    {"id":13,"title":"Feelings and Emotions","focus":["feelings","emotions","well-being","questions"],"vocabulary":["happy","sad","angry","tired","sleepy","hungry","thirsty","excited","scared","okay","good","great","bad","fine","fun","love"],"speaking":["Answer: How are you?","Say why you feel happy.","Ask a friend how they feel."],"listening":["Identify feelings from voices and sentences.","Listen to a short child-friendly conversation about feelings."],"grammar":["I am happy.","I feel tired.","Are you okay?","Yes, I am."]},
+    {"id":14,"title":"Action Time","focus":["actions","verbs","imperatives","movement"],"vocabulary":["run","walk","jump","sit","stand","open","close","look","listen","read","write","draw","sing","dance","clap","play","eat","drink","sleep","help"],"speaking":["Act and say each verb.","Give three simple commands."],"listening":["Follow one-step and two-step commands.","Identify the action in a short sentence."],"grammar":["I can run.","Please sit down.","Open the book.","I like to play."]},
+    {"id":15,"title":"Food and Drinks","focus":["food","drinks","likes","polite requests"],"vocabulary":["apple","banana","orange","bread","rice","egg","cheese","chicken","fish","soup","cake","cookie","water","milk","juice","tea","sandwich","pizza","breakfast","lunch"],"speaking":["Say three foods you like.","Ask: Can I have some water, please?","Answer: What do you like?"],"listening":["Identify foods in a simple order.","Listen for likes and dislikes."],"grammar":["I like apples.","I do not like fish.","Can I have some water, please?","I want a sandwich."]},
+    {"id":16,"title":"Animals and Nature","focus":["animals","nature","descriptions"],"vocabulary":["dog","cat","bird","fish","horse","cow","sheep","goat","rabbit","lion","tiger","elephant","monkey","bear","tree","flower","sun","moon","star","river"],"speaking":["Name ten animals.","Describe one animal.","Say where an animal lives."],"listening":["Identify animals from sounds or descriptions.","Listen to a mini nature story."],"grammar":["A lion is big.","The bird can fly.","The fish can swim.","It is in the tree."]},
+    {"id":17,"title":"Weather and Seasons","focus":["weather","seasons","daily conversation"],"vocabulary":["sunny","rainy","cloudy","windy","snowy","hot","cold","warm","cool","spring","summer","autumn","winter","sun","rain","snow","wind","weather"],"speaking":["Answer: How is the weather?","Say your favorite season.","Describe today's weather."],"listening":["Identify weather words.","Listen to a simple weather report."],"grammar":["It is sunny.","It is cold today.","I like summer."]},
+    {"id":18,"title":"My Day","focus":["daily routine","time words","Present Simple introduction"],"vocabulary":["wake up","get up","wash","brush","eat","go","school","come home","play","read","study","have dinner","take a bath","sleep","morning","afternoon","evening","night","today"],"speaking":["Tell your morning routine.","Say three things you do every day."],"listening":["Put routine events in order.","Identify morning, afternoon and evening activities."],"grammar":["I wake up in the morning.","I go to school.","I play after school.","I sleep at night."]},
+    {"id":19,"title":"Real-Life English: At the Shop","focus":["shopping","money","polite language","role-play"],"vocabulary":["shop","store","buy","want","need","price","money","coin","bag","bottle","one","two","please","thank you","how much","here","there"],"speaking":["Ask: How much is it?","Say: I want one, please.","Role-play customer and shop assistant."],"listening":["Understand a simple purchase dialogue.","Identify item, quantity and price."],"grammar":["How much is it?","It is five lari.","I want two apples, please.","Here you are.","Thank you."]},
+    {"id":20,"title":"WORLD 1 MASTER QUEST","focus":["review","mastery","conversation","listening","speaking","reading","writing"],"vocabulary":["alphabet","number","color","shape","school","family","home","body","feeling","action","food","animal","weather","morning","friend","name","age","like","have","want","please","thank you","goodbye"],"speaking":["Introduce yourself for one minute.","Spell your name.","Count to 100.","Describe your family.","Describe your favorite food.","Describe today's weather.","Ask and answer three real-life questions."],"listening":["Understand a 45–60 second beginner dialogue.","Identify key details: name, age, family, likes, school and weather."],"reading":["Read a short 80–100 word beginner story and answer who, what and where questions."],"writing":["Write 5–8 simple sentences about yourself."],"grammar":["I am ...","My name is ...","I have ...","I like ...","I can ...","This is ...","There is ...","It is ...","I go ..."],"challenge":"Complete a multi-skill English mission using alphabet, numbers, vocabulary, listening, speaking, reading and writing without translating every sentence."}
+  ],
+  "world_review": {"minimum_targets":{"missions":20,"core_vocabulary_items":250,"skills":["vocabulary","phonics","pronunciation","grammar","listening","speaking","reading","writing","conversation","real-life English"]},"mastery":"Learner can understand and produce very short everyday English about self, family, school, home, food, feelings, animals, weather and simple shopping."}
 }
