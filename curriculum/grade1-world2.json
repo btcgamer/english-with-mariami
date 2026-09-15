@@ -1,0 +1,206 @@
+{
+  "grade": 1,
+  "world": 2,
+  "title": "MAGIC ENGLISH BEGINNER — WORLD 2: MY EVERYDAY WORLD",
+  "level": "Pre-A1 → A1 foundation",
+  "description": "A high-density beginner world focused on time, clothes, toys, hobbies, places, transport, friends, safety and everyday communication.",
+  "missions": [
+    {
+      "id": 1,
+      "title": "Days of the Week",
+      "focus": ["days", "calendar", "routine"],
+      "vocabulary": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "today", "tomorrow", "yesterday", "weekday", "weekend"],
+      "speaking": ["Say all seven days in order.", "Answer: What day is it today?", "Say your favorite day."],
+      "listening": ["Identify the day you hear.", "Put seven days in the correct order."],
+      "grammar": ["Today is Monday.", "Tomorrow is Tuesday.", "I go to school on Monday."]
+    },
+    {
+      "id": 2,
+      "title": "Months and Birthdays",
+      "focus": ["months", "dates", "birthday language"],
+      "vocabulary": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "birthday", "month", "date", "year", "party", "cake", "present"],
+      "speaking": ["Say all twelve months.", "Answer: When is your birthday?", "Talk about a birthday party."],
+      "listening": ["Identify months and simple dates.", "Listen for a birthday month."],
+      "grammar": ["My birthday is in August.", "My birthday is on August 10.", "I like December."]
+    },
+    {
+      "id": 3,
+      "title": "What Time Is It?",
+      "focus": ["time", "clock", "daily schedule"],
+      "vocabulary": ["clock", "time", "hour", "minute", "morning", "afternoon", "evening", "night", "one o'clock", "two o'clock", "half past", "early", "late"],
+      "speaking": ["Tell the time on a simple clock.", "Answer: What time do you get up?", "Say three times from your daily routine."],
+      "listening": ["Identify whole-hour times.", "Match times to daily activities."],
+      "grammar": ["It is three o'clock.", "I get up at seven.", "I go to bed at nine."]
+    },
+    {
+      "id": 4,
+      "title": "My Clothes",
+      "focus": ["clothing", "colors", "descriptions"],
+      "vocabulary": ["shirt", "T-shirt", "pants", "trousers", "shorts", "dress", "skirt", "jacket", "coat", "sweater", "shoes", "socks", "hat", "cap", "scarf", "gloves", "boots", "pocket"],
+      "speaking": ["Name what you are wearing.", "Describe three clothes by color.", "Answer: What are you wearing?"],
+      "listening": ["Identify clothing from a description.", "Listen and choose the correct color and item."],
+      "grammar": ["I am wearing a blue shirt.", "These are my shoes.", "My coat is black."]
+    },
+    {
+      "id": 5,
+      "title": "My Toys and Things",
+      "focus": ["toys", "possessions", "descriptions"],
+      "vocabulary": ["toy", "ball", "doll", "car", "truck", "train", "robot", "puzzle", "game", "kite", "teddy bear", "blocks", "book", "bike", "balloon", "box"],
+      "speaking": ["Talk about your favorite toy.", "Say what you have.", "Ask: Is this your robot?"],
+      "listening": ["Identify toys from clues.", "Listen for who owns each toy."],
+      "grammar": ["This is my robot.", "I have a red ball.", "It is in the box.", "These are my toys."]
+    },
+    {
+      "id": 6,
+      "title": "My Friends",
+      "focus": ["friends", "personal descriptions", "social language"],
+      "vocabulary": ["friend", "best friend", "kind", "funny", "happy", "quiet", "loud", "nice", "smart", "fast", "slow", "helpful", "boy", "girl", "name", "age", "favorite"],
+      "speaking": ["Introduce a friend.", "Say three things about a friend.", "Ask a friend about a favorite color or game."],
+      "listening": ["Identify a person from a short description.", "Listen for name, age and favorite activity."],
+      "grammar": ["My friend is kind.", "She likes games.", "He has a blue bike.", "We play together."]
+    },
+    {
+      "id": 7,
+      "title": "Hobbies and Fun",
+      "focus": ["hobbies", "likes", "free time"],
+      "vocabulary": ["read", "draw", "paint", "sing", "dance", "swim", "run", "ride a bike", "play football", "play games", "watch TV", "listen to music", "make things", "collect", "hobby", "fun"],
+      "speaking": ["Say three things you like doing.", "Answer: What do you do for fun?", "Ask: Do you like drawing?"],
+      "listening": ["Identify hobbies in a short conversation.", "Match people with their favorite activities."],
+      "grammar": ["I like drawing.", "I like to play football.", "Do you like music?", "Yes, I do. / No, I don't."]
+    },
+    {
+      "id": 8,
+      "title": "Places Around Me",
+      "focus": ["places", "community", "location"],
+      "vocabulary": ["school", "home", "park", "shop", "store", "library", "hospital", "pharmacy", "restaurant", "cafe", "bank", "bus stop", "street", "road", "playground", "city"],
+      "speaking": ["Name places near your home.", "Answer: Where do you go to read books?", "Say where you go to play."],
+      "listening": ["Identify places from simple descriptions.", "Follow a short place-and-purpose dialogue."],
+      "grammar": ["I go to the park.", "The library is near the school.", "We are at the shop."]
+    },
+    {
+      "id": 9,
+      "title": "Transport Adventure",
+      "focus": ["transport", "travel", "movement"],
+      "vocabulary": ["car", "bus", "train", "plane", "boat", "ship", "bike", "taxi", "road", "station", "airport", "ticket", "driver", "passenger", "travel"],
+      "speaking": ["Name five ways to travel.", "Answer: How do you go to school?", "Talk about a trip."],
+      "listening": ["Identify transport from sounds or clues.", "Listen for destination and transport."],
+      "grammar": ["I go by bus.", "We travel by train.", "The plane is at the airport."]
+    },
+    {
+      "id": 10,
+      "title": "World 2 Conversation Lab",
+      "focus": ["conversation", "days", "time", "clothes", "hobbies", "places"],
+      "vocabulary": ["today", "tomorrow", "birthday", "time", "shirt", "shoes", "toy", "friend", "hobby", "park", "school", "bus", "train", "like", "wear", "go", "play", "read"],
+      "speaking": ["Say the day and time.", "Describe what you are wearing.", "Talk about a friend.", "Say your favorite hobby.", "Say where you go after school."],
+      "listening": ["Understand a 45-second conversation about a child's day.", "Identify day, time, clothing, hobby and place."],
+      "reading": ["Read a short beginner schedule and answer who, when and where questions."],
+      "writing": ["Write 5 simple sentences about your day."],
+      "grammar": ["I am wearing ...", "I like ...", "I go to ...", "I play ...", "Today is ...", "It is ... o'clock."],
+      "challenge": "Complete a guided conversation without translating each question into another language."
+    },
+    {
+      "id": 11,
+      "title": "At the Playground",
+      "focus": ["playground", "movement", "social rules"],
+      "vocabulary": ["playground", "slide", "swing", "ball", "bench", "run", "jump", "wait", "share", "turn", "careful", "stop", "go", "friend"],
+      "speaking": ["Ask for a turn.", "Say: Can I play?", "Say three safe playground rules."],
+      "listening": ["Follow playground instructions.", "Identify who is playing and whose turn it is."],
+      "grammar": ["Can I play?", "It is my turn.", "Please wait.", "Be careful."]
+    },
+    {
+      "id": 12,
+      "title": "My Neighborhood",
+      "focus": ["community", "directions", "near/far"],
+      "vocabulary": ["street", "house", "building", "park", "shop", "school", "corner", "left", "right", "near", "far", "next to", "behind", "in front of", "here", "there"],
+      "speaking": ["Describe two places near your home.", "Say left and right.", "Give a simple direction."],
+      "listening": ["Follow simple location clues.", "Identify a place from a short route."],
+      "grammar": ["The park is near my house.", "The shop is next to the school.", "Go left.", "Go right."]
+    },
+    {
+      "id": 13,
+      "title": "Safety First",
+      "focus": ["safety", "rules", "help language"],
+      "vocabulary": ["safe", "danger", "stop", "wait", "help", "careful", "hot", "cold", "fire", "water", "road", "car", "adult", "police", "emergency", "phone"],
+      "speaking": ["Say three safety rules.", "Ask an adult for help.", "Practice: Help, please!"],
+      "listening": ["Identify safe and unsafe instructions.", "Follow simple emergency language."],
+      "grammar": ["Stop.", "Do not touch.", "Please wait.", "I need help.", "Can you help me?"]
+    },
+    {
+      "id": 14,
+      "title": "At the Restaurant",
+      "focus": ["restaurant", "food", "polite requests"],
+      "vocabulary": ["restaurant", "table", "menu", "water", "juice", "bread", "soup", "rice", "chicken", "pizza", "salad", "plate", "spoon", "fork", "please", "thank you"],
+      "speaking": ["Ask for a menu.", "Order one food and one drink.", "Say thank you politely."],
+      "listening": ["Understand a simple restaurant order.", "Identify food, drink and quantity."],
+      "grammar": ["Can I have the menu, please?", "I would like water, please.", "I want a pizza.", "Thank you."]
+    },
+    {
+      "id": 15,
+      "title": "At Home: Helping My Family",
+      "focus": ["home", "chores", "family communication"],
+      "vocabulary": ["clean", "wash", "cook", "help", "room", "bed", "table", "dish", "clothes", "toy", "put away", "open", "close", "carry", "give", "take"],
+      "speaking": ["Say three ways you can help at home.", "Ask: Can I help?", "Offer help politely."],
+      "listening": ["Follow simple home instructions.", "Identify who needs help and what they need."],
+      "grammar": ["I can help.", "Please clean your room.", "Put the toys away.", "Can I help you?"]
+    },
+    {
+      "id": 16,
+      "title": "Shopping for Clothes",
+      "focus": ["shopping", "clothes", "size", "color"],
+      "vocabulary": ["shop", "shirt", "pants", "dress", "shoes", "size", "small", "medium", "large", "color", "price", "money", "buy", "try on", "fit"],
+      "speaking": ["Ask for a color.", "Ask: How much is this?", "Say your size in a simple role-play."],
+      "listening": ["Identify item, size and color.", "Understand a simple shop conversation."],
+      "grammar": ["I like this shirt.", "Do you have a small size?", "How much is it?", "It is ten lari."]
+    },
+    {
+      "id": 17,
+      "title": "Travel Day",
+      "focus": ["travel", "airport/station basics", "sequence"],
+      "vocabulary": ["travel", "ticket", "bag", "passport", "airport", "station", "bus", "train", "plane", "gate", "seat", "wait", "go", "come", "arrive", "leave"],
+      "speaking": ["Name things you need for a trip.", "Practice a simple ticket question.", "Say where you are going."],
+      "listening": ["Identify destination, vehicle and seat.", "Follow simple travel announcements."],
+      "grammar": ["I am going to the airport.", "I have a ticket.", "My seat is here.", "The train leaves at five."]
+    },
+    {
+      "id": 18,
+      "title": "Phone and Online English",
+      "focus": ["technology", "simple messages", "online safety"],
+      "vocabulary": ["phone", "computer", "screen", "message", "call", "text", "photo", "video", "name", "password", "online", "friend", "send", "open", "close", "stop"],
+      "speaking": ["Say: Can you call me?", "Ask a simple online question.", "Practice safe help-seeking language."],
+      "listening": ["Identify caller and message purpose.", "Understand simple digital instructions."],
+      "grammar": ["Can you call me?", "Please send the photo.", "I am online.", "Do not share your password."]
+    },
+    {
+      "id": 19,
+      "title": "My Perfect Day",
+      "focus": ["integrated speaking", "routine", "preferences", "story"],
+      "vocabulary": ["morning", "breakfast", "school", "friend", "park", "lunch", "game", "family", "dinner", "book", "music", "happy", "favorite", "because", "then"],
+      "speaking": ["Tell a simple story about your perfect day.", "Use first, then and finally.", "Say what you like and why."],
+      "listening": ["Understand a one-minute beginner story.", "Put events in the correct order."],
+      "reading": ["Read a 100–120 word beginner story about a child's day."],
+      "writing": ["Write 8–10 simple sentences about your perfect day."],
+      "grammar": ["First, I ...", "Then I ...", "I like ... because ...", "Finally, I ..."]
+    },
+    {
+      "id": 20,
+      "title": "WORLD 2 FINAL QUEST — EVERYDAY ENGLISH",
+      "focus": ["mastery", "conversation", "listening", "speaking", "reading", "writing", "real-life English"],
+      "vocabulary": ["day", "month", "birthday", "time", "clothes", "toy", "friend", "hobby", "place", "transport", "safety", "restaurant", "shopping", "travel", "phone", "family", "help", "please", "thank you", "because", "then", "finally"],
+      "speaking": ["Introduce yourself and your daily routine.", "Talk about your clothes.", "Describe your favorite hobby.", "Describe your neighborhood.", "Role-play a shop conversation.", "Role-play a restaurant order.", "Ask for help safely.", "Tell a one-minute story about a trip."],
+      "listening": ["Understand a 60–90 second beginner conversation.", "Identify people, places, time, actions, preferences and key details."],
+      "reading": ["Read a 120–150 word beginner text and answer who, what, when, where and why questions."],
+      "writing": ["Write 10 simple connected sentences about yourself and your everyday world."],
+      "grammar": ["Present Simple basics","can/cannot","Do you...?","Can I...?","There is/There are","prepositions","imperatives","like + noun/verb-ing","because","first/then/finally"],
+      "challenge": "Complete an English-only beginner mission chain: listen, answer, speak, read, write and role-play without translating every instruction.",
+      "mastery_target": "Learner can handle short everyday exchanges about time, clothes, hobbies, places, transport, food, shopping, safety and family using simple English."
+    }
+  ],
+  "world_review": {
+    "minimum_targets": {
+      "missions": 20,
+      "core_vocabulary_items": 300,
+      "skills": ["vocabulary","pronunciation","grammar","listening","speaking","reading","writing","conversation","real-life English","safety English"]
+    },
+    "mastery": "Learner can participate in short everyday English conversations, understand simple spoken instructions, describe familiar people and places, ask for basic information, and produce connected beginner sentences."
+  }
+}
