@@ -75,6 +75,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     document.head.appendChild(gateway);
   }
 
+  /* Academy realistic 3D layer 6.0 — visual-only. */
+  if(!document.querySelector('script[data-ewm-academy-3d-reality-6]')){
+    const reality3d=document.createElement('script');
+    reality3d.src='/academy-3d-reality-6.js?v=20260915-3d6';
+    reality3d.defer=true;
+    reality3d.dataset.ewmAcademy3dReality6='1';
+    document.head.appendChild(reality3d);
+  }
+
   /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
