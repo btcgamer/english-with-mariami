@@ -1,0 +1,33 @@
+/* MAGIC NEON AI ACADEMY — Mission HUD 2.0 (visual-only) */
+:root{--hud-cyan:#35f6ff;--hud-violet:#8b5cff;--hud-pink:#ff4fd8;--hud-gold:#ffd76a;--hud-green:#55ffb0;--hud-bg:rgba(3,10,28,.58)}
+body{--hud-grade:var(--hud-cyan)}
+body[data-grade="3"]{--hud-grade:#64f7ff}
+body[data-grade="4"]{--hud-grade:var(--hud-gold)}
+.app{position:relative}
+main{position:relative;isolation:isolate}
+main::before{content:"MISSION HUD 2.0";position:absolute;top:0;right:0;z-index:-1;font:700 9px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.28em;color:var(--hud-grade);opacity:.22;pointer-events:none}
+.top{position:relative;border:1px solid color-mix(in srgb,var(--hud-grade) 28%,transparent);background:linear-gradient(110deg,rgba(5,13,35,.74),rgba(7,9,25,.38));box-shadow:inset 0 0 30px color-mix(in srgb,var(--hud-grade) 5%,transparent),0 0 28px rgba(0,0,0,.22);overflow:hidden}
+.top::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,color-mix(in srgb,var(--hud-grade) 18%,transparent) 48%,transparent 52%);transform:translateX(-120%);animation:hudScan 5.5s linear infinite;pointer-events:none}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--hud-grade),var(--hud-violet, #8b5cff),transparent);box-shadow:0 0 12px var(--hud-grade);opacity:.85}
+.eyebrow{position:relative;letter-spacing:.16em;text-shadow:0 0 10px color-mix(in srgb,var(--hud-grade) 55%,transparent)}
+.title{text-shadow:0 0 18px color-mix(in srgb,var(--hud-grade) 42%,transparent)}
+.stats{position:relative;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.stats .chip{position:relative;min-width:76px;text-align:center;border-color:color-mix(in srgb,var(--hud-grade) 32%,transparent);background:linear-gradient(180deg,rgba(9,22,52,.78),rgba(4,9,26,.7));box-shadow:inset 0 0 14px color-mix(in srgb,var(--hud-grade) 8%,transparent),0 0 12px rgba(0,0,0,.2);overflow:hidden}
+.stats .chip::after{content:"";position:absolute;top:0;left:-80%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:hudChipSweep 4.8s ease-in-out infinite}
+.hero.card{position:relative;border-color:color-mix(in srgb,var(--hud-grade) 30%,transparent);background:radial-gradient(circle at 12% 50%,color-mix(in srgb,var(--hud-grade) 12%,transparent),transparent 34%),linear-gradient(145deg,rgba(7,17,42,.8),rgba(5,7,22,.72));overflow:hidden}
+.hero.card::before{content:"AI LINK • ONLINE";position:absolute;top:10px;right:12px;font:700 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;color:var(--hud-green);opacity:.72;text-shadow:0 0 8px var(--hud-green)}
+.hero.card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,var(--hud-grade),transparent 75%);opacity:.55}
+.robot{filter:drop-shadow(0 0 12px color-mix(in srgb,var(--hud-grade) 55%,transparent));animation:hudRobot 3.2s ease-in-out infinite}
+.card{border-color:color-mix(in srgb,var(--hud-grade) 22%,transparent)}
+.card h2{letter-spacing:.02em}
+.progress{position:relative;overflow:hidden}
+.progress::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent);transform:translateX(-120%);animation:hudProgressSweep 3.6s linear infinite;pointer-events:none}
+.world.active{position:relative;box-shadow:0 0 0 1px color-mix(in srgb,var(--hud-grade) 35%,transparent),0 0 18px color-mix(in srgb,var(--hud-grade) 20%,transparent),inset 0 0 18px color-mix(in srgb,var(--hud-grade) 7%,transparent)}
+.world.active::after{content:"LIVE";float:right;font:700 7px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--hud-green);margin-top:3px;opacity:.8}
+.missions{scrollbar-color:var(--hud-grade) transparent}
+@keyframes hudScan{to{transform:translateX(120%)}}
+@keyframes hudChipSweep{0%,45%{left:-80%}70%,100%{left:145%}}
+@keyframes hudProgressSweep{to{transform:translateX(120%)}}
+@keyframes hudRobot{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(max-width:720px){main::before{display:none}.top{padding-top:14px}.stats{justify-content:flex-start}.stats .chip{min-width:70px}.hero.card::before{font-size:7px}.robot{transform:scale(.94)}}
+@media(prefers-reduced-motion:reduce){.top::before,.stats .chip::after,.progress::after,.robot{animation:none!important}}
