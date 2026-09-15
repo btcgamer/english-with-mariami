@@ -1,5 +1,5 @@
 /* English with Mariami — public Supabase browser configuration. */
-window.SUPABASE_URL='https://vtdhvsfqhwesxtwmduew.supabase.co';
+window.SUPABASE_URL='https://vtdhvsfqhwesxtwmdue.supabase.co';
 window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt';
 
 (function(){
@@ -46,6 +46,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     css.href='/academy-visual.css?v=20260908';
     css.dataset.ewmAcademyVisual='1';
     document.head.appendChild(css);
+  }
+
+  /* Academy Command Center 3.0 — visual-only, no auth/progress writes. */
+  if(!document.querySelector('script[data-ewm-academy-command-center]')){
+    const commandCenter=document.createElement('script');
+    commandCenter.src='/academy-visual.js?v=20260915-cc3';
+    commandCenter.defer=true;
+    commandCenter.dataset.ewmAcademyCommandCenter='1';
+    document.head.appendChild(commandCenter);
   }
 
   /* Academy access is owned by academy-grade-visual-only.js. */
