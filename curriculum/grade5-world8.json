@@ -1,0 +1,48 @@
+{
+  "grade": 5,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 8: B2 ADVANCED COMMUNICATION & REAL-WORLD MASTERY",
+  "level": "B2",
+  "description": "A demanding B2 world that develops flexible, natural and independent English through nuance, advanced grammar, extended texts, authentic-speed listening, discussion, professional communication and complex real-life tasks.",
+  "mission_count": 20,
+  "targets": {
+    "active_vocabulary": "1800+ words, collocations, phrasal verbs, idiomatic expressions and academic-functional language",
+    "reading": "1400–1600 words with inference, writer purpose, tone, structure, reference and evidence",
+    "listening": "12–14 minutes of natural-speed multi-speaker English with interruptions, reduced forms and implied meaning",
+    "conversation": "16–18 minutes of sustained discussion, negotiation and spontaneous interaction",
+    "writing": "350–420 words with strong cohesion, varied syntax, examples, counterarguments and controlled register",
+    "presentation": "7 minutes plus audience questions and follow-up discussion",
+    "real_life": "professional communication, education, travel, services, digital communication, complaints, negotiation and public situations"
+  },
+  "missions": [
+    {"id":1,"title":"B2 Lexical Precision — Collocations, Phrasal Verbs & Idioms","focus":["collocations","phrasal verbs","idioms","word families","register"],"skills":["vocabulary","pronunciation","speaking","writing"],"content":"Build a large active lexical network, distinguish near-synonyms, choose natural collocations and use common idiomatic and phrasal language accurately rather than translating word by word."},
+    {"id":2,"title":"Grammar Mastery — Aspect, Sequence & Meaning","focus":["perfect aspect","continuous aspect","narrative tenses","future forms","time clauses"],"skills":["grammar","reading","speaking","writing"],"content":"Control complex time relationships and select grammar according to meaning, emphasis, duration, completion, expectation and current relevance."},
+    {"id":3,"title":"Modal Logic — Deduction, Criticism & Probability","focus":["modal deduction","past modals","criticism","expectation","probability"],"skills":["grammar","listening","speaking","critical thinking"],"content":"Evaluate evidence and express certainty, probability, criticism and expectation about present and past situations with precise modal structures."},
+    {"id":4,"title":"Conditional Thinking — Mixed Time & Complex Consequences","focus":["mixed conditionals","third conditional","second conditional","unless","provided that","otherwise"],"skills":["grammar","speaking","writing","problem solving"],"content":"Explore alternative realities, regrets and present consequences of past choices while producing flexible conditional sentences in extended communication."},
+    {"id":5,"title":"Advanced Clause Lab — Compress & Expand Ideas","focus":["relative clauses","noun clauses","adverbial clauses","participle clauses awareness","sentence combining"],"skills":["grammar","writing","reading","speaking"],"content":"Combine multiple ideas into efficient B2 sentences, unpack dense sentences and reformulate complex information clearly."},
+    {"id":6,"title":"Reporting & Passive English — Professional Information Flow","focus":["reporting verbs","passive structures","impersonal reporting","causative structures","formal style"],"skills":["grammar","reading","writing","professional English"],"content":"Transform information for reports, news, workplace communication and formal explanations using accurate passive and reporting structures."},
+    {"id":7,"title":"Cohesion & Coherence — Build a Powerful Paragraph","focus":["discourse markers","reference","substitution","ellipsis","paragraph logic"],"skills":["writing","reading","editing","speaking"],"content":"Create and repair paragraphs so every sentence contributes to a clear progression of ideas, with accurate reference and logical connections."},
+    {"id":8,"title":"Nuance Mission — Hedging, Emphasis & Diplomatic English","focus":["hedging","softeners","intensifiers","diplomatic disagreement","politeness"],"skills":["speaking","listening","vocabulary","real-life English"],"content":"Adjust strength and tone to sound appropriately confident, cautious, polite, critical or diplomatic in social and professional situations."},
+    {"id":9,"title":"Critical Reading — Claims, Evidence & Perspective","focus":["claims","evidence","bias","tone","writer purpose","inference"],"skills":["reading","vocabulary","critical thinking"],"content":"Analyze an extended article, separate claims from evidence, identify perspective and infer meaning that is not directly stated."},
+    {"id":10,"title":"B2 Conversation Lab — Eighteen-Minute Real Discussion","focus":["turn-taking","follow-up","clarification","reformulation","negotiation","spontaneity"],"skills":["speaking","listening","conversation"],"content":"Sustain a complex conversation about technology, education, work, travel and society while handling interruptions, follow-up questions and unexpected changes of topic."},
+    {"id":11,"title":"Reading Mastery — The Future of Everyday Life","focus":["1400–1600 word text","inference","structure","tone","evidence","reference"],"skills":["reading","vocabulary","critical thinking"],"content":"Read a long analytical text and identify the author's central argument, supporting evidence, shifts in perspective, implied conclusions and contextual vocabulary."},
+    {"id":12,"title":"Listening Mastery — Four Voices, One Problem","focus":["natural speed","multi-speaker listening","connected speech","interruption","attitude","inference"],"skills":["listening","note-taking","speaking"],"content":"Follow a 12–14 minute multi-speaker discussion in which people disagree, clarify, interrupt and negotiate; reconstruct the main issue and each speaker's position."},
+    {"id":13,"title":"Writing Mastery — The Balanced B2 Essay","focus":["350–420 words","thesis","development","counterargument","cohesion","register"],"skills":["writing","grammar","vocabulary","organization"],"content":"Produce a polished balanced essay with a clear thesis, developed paragraphs, examples, counterargument, accurate linking and an effective conclusion."},
+    {"id":14,"title":"Presentation Mission — Explain a Complex Issue","focus":["7-minute presentation","signposting","comparison","evidence","Q&A"],"skills":["speaking","presentation","listening"],"content":"Present a complex issue clearly, compare alternatives, explain evidence, use transitions naturally and answer follow-up questions without memorized scripts."},
+    {"id":15,"title":"Real-Life English — Travel Disruption Command Center","focus":["delays","cancellations","rebooking","complaints","compensation","politeness"],"skills":["listening","speaking","functional English","problem solving"],"content":"Manage a realistic travel disruption involving transport, accommodation and schedule changes; explain the situation, negotiate alternatives and confirm the final plan."},
+    {"id":16,"title":"Real-Life English — Professional Meeting & Email Mission","focus":["meetings","formal emails","deadlines","feedback","clarification","action points"],"skills":["writing","speaking","reading","professional English"],"content":"Read a workplace request, participate in a meeting, clarify responsibilities, negotiate a deadline and write a concise professional follow-up message."},
+    {"id":17,"title":"Debate Arena — Evidence, Rebuttal & Persuasion","focus":["argument","counterargument","rebuttal","hedging","persuasive language"],"skills":["speaking","listening","critical thinking","vocabulary"],"content":"Develop a position on a challenging topic, test another argument, respond to objections and strengthen your own case through evidence and precise language."},
+    {"id":18,"title":"Real-World Simulation — One Week, Ten Decisions","focus":["planning","priorities","trade-offs","negotiation","consequences","adaptation"],"skills":["speaking","listening","reading","writing","real-life English"],"content":"Navigate a simulated week involving work, study, travel, money, appointments and communication problems. Make decisions, justify them and adapt when circumstances change."},
+    {"id":19,"title":"B2 Mastery Marathon — Accuracy Meets Fluency","focus":["vocabulary","grammar","reading","listening","speaking","writing","pronunciation"],"skills":["integrated skills","fluency","accuracy","independence"],"content":"Complete a high-demand integrated assessment combining vocabulary in context, grammar editing, extended reading, natural listening, spontaneous discussion, pronunciation repair and structured writing."},
+    {"id":20,"title":"WORLD 8 MASTER QUEST — B2 ADVANCED COMMUNICATION","focus":["B2 mastery","flexibility","accuracy","fluency","independence"],"skills":["vocabulary","grammar","reading","listening","speaking","conversation","writing","presentation","real-life English"],"content":"Final mission integrating advanced lexical control, complex grammar, inference reading, natural listening, sustained conversation, professional communication, debate, presentation and a multi-stage real-world simulation."}
+  ],
+  "quality_rules": {
+    "english_density":"maximum",
+    "translation_dependency":"minimal",
+    "difficulty":"high B2",
+    "assessment":"production-first, inference-heavy and communication-focused",
+    "progression":"World 8 recycles World 6–7 language while increasing length, speed, nuance and independence.",
+    "protected_grades":[2,3,4],
+    "protected_note":"This curriculum file adds Grade 5 World 8 only and does not modify Grade 2, Grade 3 or Grade 4."
+  }
+}
