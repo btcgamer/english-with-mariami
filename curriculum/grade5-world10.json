@@ -1,0 +1,55 @@
+{
+  "grade": 5,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 10: B2 FINAL MASTERY & INDEPENDENT ENGLISH",
+  "level": "B2 mastery",
+  "description": "The Grade 5 final world. A comprehensive B2 mastery environment where learners combine advanced vocabulary, grammar precision, extended comprehension, natural listening, sustained interaction, professional communication, argumentation, presentation and independent real-world problem solving.",
+  "mission_count": 20,
+  "targets": {
+    "active_vocabulary": "2200+ words, collocations, phrasal verbs, idioms, academic-functional language and professional expressions",
+    "reading": "1600–1800 words with inference, synthesis, tone, structure, purpose, evidence and vocabulary-in-context",
+    "listening": "14–16 minutes of natural-speed multi-speaker English with accents, interruptions, reduced forms and implied meaning",
+    "conversation": "20–25 minutes of sustained independent communication across unfamiliar topics",
+    "writing": "400–500 words with coherent argument, counterargument, evidence, varied syntax and audience-aware register",
+    "presentation": "8 minutes plus spontaneous audience questions and follow-up discussion",
+    "real_life": "professional, academic, travel, public-service, digital, customer-service, negotiation, emergency and social communication"
+  },
+  "missions": [
+    {"id":1,"title":"B2 Final Vocabulary Engine — Precision & Flexibility","focus":["collocations","phrasal verbs","idioms","word families","register","near-synonyms"],"skills":["vocabulary","pronunciation","speaking","writing"],"content":"Activate a large B2 lexical network and choose precise words according to context, register, meaning, tone and communicative purpose."},
+    {"id":2,"title":"Grammar Command Center — B2 Accuracy Under Pressure","focus":["tense and aspect","modals","conditionals","articles","determiners","relative clauses","passive and reporting"],"skills":["grammar","editing","speaking","writing"],"content":"Complete high-level editing and production tasks requiring accurate grammar choices in realistic extended communication rather than isolated drills."},
+    {"id":3,"title":"Meaning Mission — Modality, Certainty & Inference","focus":["deduction","probability","certainty","criticism","expectation","past modals"],"skills":["grammar","reading","listening","critical thinking"],"content":"Infer what speakers and writers mean, distinguish certainty levels and justify conclusions from linguistic and contextual evidence."},
+    {"id":4,"title":"Conditional Mastery — Imagine, Evaluate & Rebuild","focus":["second conditional","third conditional","mixed conditionals","unless","provided that","otherwise"],"skills":["grammar","speaking","writing","problem solving"],"content":"Analyze choices and consequences across different time frames, express regrets and alternatives and rebuild hypothetical scenarios fluently."},
+    {"id":5,"title":"Sentence Architecture — From Simple Ideas to B2 Control","focus":["complex clauses","relative clauses","noun clauses","subordination","reformulation"],"skills":["grammar","writing","reading","speaking"],"content":"Transform fragmented ideas into precise connected sentences, unpack dense language and reformulate complex information for different audiences."},
+    {"id":6,"title":"Information Mastery — Summarize, Report & Evaluate","focus":["reported speech","reporting verbs","passive reporting","summary","attribution","evaluation"],"skills":["reading","writing","speaking","grammar"],"content":"Process information from multiple sources, summarize accurately, attribute ideas and distinguish evidence from interpretation."},
+    {"id":7,"title":"Cohesion Mission — Build a Complete B2 Text","focus":["paragraph unity","reference","substitution","ellipsis","discourse markers","logical progression"],"skills":["writing","reading","editing","speaking"],"content":"Construct a connected multi-paragraph text in which ideas flow naturally through clear reference, linking and controlled repetition."},
+    {"id":8,"title":"Communication Intelligence — Tone, Nuance & Diplomacy","focus":["hedging","softening","emphasis","politeness","diplomatic disagreement","repair"],"skills":["speaking","listening","conversation","real-life English"],"content":"Adjust language to different people and situations, disagree respectfully, soften difficult messages and repair misunderstandings without abandoning the conversation."},
+    {"id":9,"title":"Critical Information Lab — Compare, Verify & Conclude","focus":["claims","evidence","source comparison","bias","certainty","inference"],"skills":["reading","listening","critical thinking","vocabulary"],"content":"Compare written and spoken information, identify contradictions, evaluate evidence and produce a reasoned conclusion using precise language."},
+    {"id":10,"title":"Final Conversation Lab — Twenty-Five Minute Challenge","focus":["spontaneity","turn-taking","follow-up","negotiation","clarification","topic shifts"],"skills":["speaking","listening","conversation"],"content":"Sustain a long unscripted conversation across multiple topics, introduce new ideas, respond to unexpected questions and keep interaction natural and purposeful."},
+    {"id":11,"title":"Reading Mastery — The Big B2 Investigation","focus":["1600–1800 word text","synthesis","inference","tone","purpose","evidence"],"skills":["reading","vocabulary","critical thinking"],"content":"Read an extended investigation-style text and synthesize information across sections, infer unstated ideas and defend interpretations with evidence."},
+    {"id":12,"title":"Listening Mastery — Natural English Final Test","focus":["14–16 minute listening","multi-speaker","accents","connected speech","interruptions","implied meaning"],"skills":["listening","note-taking","speaking"],"content":"Follow a demanding sequence of interviews, meetings, informal conversations and public announcements at natural speed, then reconstruct key information and speaker intentions."},
+    {"id":13,"title":"Writing Mastery — B2 Argument, Proposal & Response","focus":["400–500 words","argument","proposal","counterargument","evidence","register","cohesion"],"skills":["writing","grammar","vocabulary","professional English"],"content":"Produce a polished B2 text that identifies an issue, evaluates alternatives, supports recommendations, addresses objections and adapts tone to the intended reader."},
+    {"id":14,"title":"Presentation Mastery — Explain, Persuade & Defend","focus":["8-minute presentation","signposting","evidence","comparison","persuasion","Q&A"],"skills":["speaking","presentation","listening"],"content":"Deliver a complete presentation on an unfamiliar topic, explain complex points clearly, defend a position and answer spontaneous audience questions."},
+    {"id":15,"title":"Real-Life Master Mission — Travel, Services & Public Situations","focus":["travel disruption","appointments","public services","complaints","requests","solutions"],"skills":["listening","speaking","functional English","problem solving"],"content":"Handle several connected real-world situations involving travel, appointments, customer service and public services while keeping communication clear, polite and efficient."},
+    {"id":16,"title":"Professional Master Mission — Workplace & Academic Communication","focus":["meetings","professional emails","applications","deadlines","feedback","action plans"],"skills":["reading","writing","speaking","professional English"],"content":"Move from written instructions to discussion, decision-making, clarification, professional writing and a concrete action plan in one integrated simulation."},
+    {"id":17,"title":"Negotiation & Debate Mastery — Reach, Challenge & Defend","focus":["negotiation","persuasion","rebuttal","compromise","evidence","counterargument"],"skills":["speaking","listening","critical thinking","conversation"],"content":"Debate a difficult issue and negotiate a practical decision, responding to objections, making concessions and defending the final position with evidence."},
+    {"id":18,"title":"Ultimate Simulation — The Day Everything Changes","focus":["crisis communication","priorities","adaptation","decision making","consequences","problem solving"],"skills":["speaking","listening","reading","writing","real-life English"],"content":"Complete a long scenario in which travel, work, study, money, technology and communication problems appear unexpectedly. Explain decisions, adapt plans and maintain effective English throughout."},
+    {"id":19,"title":"Grade 5 Final Skills Marathon — B2 Under Real Conditions","focus":["vocabulary","grammar","reading","listening","speaking","writing","pronunciation","real-life English"],"skills":["integrated skills","fluency","accuracy","independence"],"content":"Complete the complete B2 skills circuit with limited preparation: lexical precision, grammar editing, extended reading, natural listening, spontaneous discussion, writing, presentation and negotiation."},
+    {"id":20,"title":"GRADE 5 FINAL MASTER QUEST — B2 INDEPENDENT ENGLISH","focus":["B2 final mastery","fluency","accuracy","flexibility","independence","real-world communication"],"skills":["vocabulary","grammar","reading","listening","speaking","conversation","writing","presentation","real-life English"],"content":"The ultimate Grade 5 mission: combine advanced vocabulary, grammar precision, extended reading, natural listening, a sustained conversation, professional writing, presentation, debate, negotiation and a multi-stage crisis simulation. The learner must create language independently and adapt it to the situation rather than rely on translation or memorized answers."}
+  ],
+  "final_mastery": {
+    "minimum_level_target":"B2",
+    "communication_goal":"Independent and flexible communication in familiar and unfamiliar everyday, academic and professional situations.",
+    "production_priority":"Learners must explain, justify, compare, negotiate, summarize, infer, present and solve problems using their own English.",
+    "capstone_components":["advanced vocabulary task","grammar transformation","extended reading","natural listening","20–25 minute conversation","400–500 word writing","8-minute presentation","negotiation","real-world crisis simulation"],
+    "graduation_focus":"Move from classroom English toward confident independent B2 communication."
+  },
+  "quality_rules": {
+    "english_density":"maximum",
+    "translation_dependency":"minimal",
+    "difficulty":"high B2 final mastery",
+    "assessment":"production-first, inference-heavy, integrated and scenario-based",
+    "progression":"World 10 consolidates and tests the language developed throughout Grade 5 Worlds 1–9 while requiring greater independence, flexibility, speed and communicative control.",
+    "protected_grades":[2,3,4],
+    "protected_note":"This curriculum file adds Grade 5 World 10 only and does not modify Grade 2, Grade 3 or Grade 4."
+  }
+}
