@@ -1,0 +1,39 @@
+{
+  "grade": 1,
+  "world": 7,
+  "title": "MAGIC ENGLISH BEGINNER — WORLD 7: A1+ ADVENTURE & COMMUNICATION",
+  "level": "A1+ → A2 bridge",
+  "description": "A richer beginner-to-elementary communication world focused on connected speech, longer comprehension, practical grammar, everyday problem solving, and independent English production.",
+  "missions": [
+    {"id":1,"title":"Question Master 2.0","focus":"wh- questions, yes/no questions, short answers, asking for details","skills":["vocabulary","grammar","speaking","listening"]},
+    {"id":2,"title":"People, Personality & Feelings","focus":"describing people, personality adjectives, feelings, reasons","skills":["vocabulary","speaking","writing"]},
+    {"id":3,"title":"Daily Routines in Detail","focus":"present simple, frequency adverbs, time expressions, connected sentences","skills":["grammar","reading","speaking"]},
+    {"id":4,"title":"Yesterday and Last Weekend","focus":"past simple of common regular and irregular verbs","skills":["grammar","vocabulary","speaking","writing"]},
+    {"id":5,"title":"Comparing My World","focus":"comparatives, superlatives, bigger/smaller/better/worse, giving reasons","skills":["grammar","speaking","reading"]},
+    {"id":6,"title":"Food, Quantities & Shopping","focus":"countable/uncountable nouns, some/any, much/many, prices and quantities","skills":["grammar","real_life_english","conversation"]},
+    {"id":7,"title":"Plans for Tomorrow","focus":"be going to, future plans, intentions, invitations","skills":["grammar","speaking","writing"]},
+    {"id":8,"title":"Can I Have...?","focus":"polite requests, permission, offers, can/could, classroom and everyday language","skills":["grammar","conversation","real_life_english"]},
+    {"id":9,"title":"Around Town","focus":"places, directions, prepositions, asking for and giving directions","skills":["vocabulary","listening","speaking","real_life_english"]},
+    {"id":10,"title":"Conversation Lab — Five Minutes","focus":"sustained A1+ conversation using questions, follow-ups, opinions and reasons","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Detective — The Missing Backpack","focus":"350–450 word story, sequencing events, identifying details and simple inference","skills":["reading","vocabulary","writing"]},
+    {"id":12,"title":"Listening Detective — A Busy Saturday","focus":"natural A1+ listening, key details, times, places, plans and corrections","skills":["listening","vocabulary"]},
+    {"id":13,"title":"Build a Real Paragraph","focus":"topic sentence, supporting details, sequence words, because/and/but/so","skills":["writing","grammar","reading"]},
+    {"id":14,"title":"Story Builder — Then, Now, Next","focus":"past events, present situation and future plans in one connected story","skills":["speaking","writing","grammar"]},
+    {"id":15,"title":"Travel Mission — Station to Hotel","focus":"tickets, platforms, schedules, check-in, directions and simple travel problems","skills":["real_life_english","conversation","listening"]},
+    {"id":16,"title":"Problem Solver — Something Went Wrong","focus":"explaining a simple problem, asking for help, suggesting solutions and responding politely","skills":["speaking","conversation","real_life_english"]},
+    {"id":17,"title":"Opinion Power","focus":"I think..., I like..., I prefer..., because..., agreeing and disagreeing politely","skills":["speaking","conversation","writing"]},
+    {"id":18,"title":"English-Only Challenge","focus":"communicating meaning without translation through description, paraphrase, gestures and examples","skills":["speaking","conversation","vocabulary"]},
+    {"id":19,"title":"A1+ Communication Marathon","focus":"integrated vocabulary, grammar, reading, listening, speaking and writing under time pressure","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 7 FINAL MASTER QUEST — A1+ TO A2","focus":"multi-skill final mission with real-life dialogue, reading comprehension, listening, paragraph writing, speaking and mastery review","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "450+ active words and phrases",
+    "grammar": ["present simple","past simple","be going to","can/could","comparatives","superlatives","countable and uncountable nouns","some/any","much/many","frequency adverbs","question forms","because/and/but/so"],
+    "reading": "350–450 word texts with detail questions and simple inference",
+    "listening": "3–5 minute A1+ recordings with natural pauses and everyday speed",
+    "speaking": "5-minute guided-to-semi-independent conversations",
+    "writing": "120–180 word connected paragraph/story tasks",
+    "real_life_english": ["shopping","directions","travel","hotel","asking for help","making plans","invitations","simple problems","polite requests"],
+    "mastery": "Learner can connect ideas, ask follow-up questions, describe past events, discuss plans, solve simple everyday communication problems, and produce connected beginner English with reduced translation support."
+  }
+}
