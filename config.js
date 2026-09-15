@@ -57,6 +57,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     document.head.appendChild(commandCenter);
   }
 
+  /* Academy Portal 4.0 — visual-only, no auth/progress writes. */
+  if(!document.querySelector('script[data-ewm-academy-portal-4]')){
+    const portal=document.createElement('script');
+    portal.src='/academy-portal-4.js?v=20260915-p4';
+    portal.defer=true;
+    portal.dataset.ewmAcademyPortal4='1';
+    document.head.appendChild(portal);
+  }
+
   /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
