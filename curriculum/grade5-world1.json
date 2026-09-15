@@ -1,0 +1,39 @@
+{
+  "grade": 5,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 1: A2 POWER-UP & NEW BEGINNINGS",
+  "level": "A2 → A2+",
+  "description": "Grade 5 begins with a clear step beyond elementary English: richer vocabulary, stronger grammar control, longer texts, natural listening, extended speaking and practical communication.",
+  "missions": [
+    {"id":1,"title":"Vocabulary Upgrade","focus":"A2 collocations, word families, high-frequency verbs, adjectives and everyday chunks","skills":["vocabulary","pronunciation","speaking"]},
+    {"id":2,"title":"Present Tense Precision","focus":"present simple vs present continuous, stative verbs, routines, temporary situations and habits","skills":["grammar","speaking","listening"]},
+    {"id":3,"title":"Past Events & Stories","focus":"past simple and past continuous, sequence markers, interrupted actions and narrative detail","skills":["grammar","reading","speaking","writing"]},
+    {"id":4,"title":"Future Plans & Predictions","focus":"going to, will, present continuous for arrangements and making simple predictions","skills":["grammar","conversation","writing"]},
+    {"id":5,"title":"Comparing People & Places","focus":"comparatives, superlatives, modifiers, preferences and supporting reasons","skills":["grammar","speaking","reading"]},
+    {"id":6,"title":"Food, Shopping & Quantities","focus":"countable/uncountable nouns, articles, some/any, much/many, enough and shopping language","skills":["grammar","vocabulary","real_life_english"]},
+    {"id":7,"title":"Healthy Habits Mission","focus":"health vocabulary, routines, symptoms, advice and should/shouldn't","skills":["vocabulary","conversation","real_life_english"]},
+    {"id":8,"title":"School Life & Study Skills","focus":"subjects, schedules, instructions, classroom communication, study habits and learning goals","skills":["reading","listening","speaking"]},
+    {"id":9,"title":"Around Town","focus":"directions, public places, transport, signs, prepositions and asking for information","skills":["vocabulary","listening","real_life_english"]},
+    {"id":10,"title":"A2 Conversation Lab","focus":"5-minute guided conversation with follow-up questions, opinions, descriptions and personal experiences","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Explorer — The New Student","focus":"500–600 word narrative, main idea, details, sequence, context vocabulary and simple inference","skills":["reading","vocabulary","comprehension"]},
+    {"id":12,"title":"Listening Lab — A Busy School Day","focus":"4–6 minute A2 listening with conversations, announcements, times and instructions","skills":["listening","comprehension","vocabulary"]},
+    {"id":13,"title":"Writing Lab — My Experience","focus":"150–200 word connected paragraph about a past experience using sequence and linking words","skills":["writing","grammar","vocabulary"]},
+    {"id":14,"title":"Dialogue Builder","focus":"building and performing natural dialogues with greetings, questions, reactions, clarification and closing","skills":["conversation","speaking","pronunciation"]},
+    {"id":15,"title":"Travel Starter Mission","focus":"tickets, schedules, hotel basics, directions, baggage and asking for help","skills":["real_life_english","listening","speaking"]},
+    {"id":16,"title":"Problem Solver","focus":"explaining a simple problem, requesting assistance, suggesting solutions and responding politely","skills":["speaking","conversation","real_life_english"]},
+    {"id":17,"title":"Opinion & Reason Power","focus":"I think, I believe, I prefer, because, so, but; giving reasons and simple agreement/disagreement","skills":["speaking","writing","conversation"]},
+    {"id":18,"title":"English Without Translation","focus":"describing unknown words, paraphrasing, examples, clarification and communication repair","skills":["speaking","vocabulary","conversation"]},
+    {"id":19,"title":"World 1 Skills Marathon","focus":"integrated vocabulary, grammar, reading, listening, speaking and writing review","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 1 MASTER QUEST — A2 POWER-UP","focus":"multi-stage assessment combining everyday dialogue, reading, listening, writing and independent speaking","skills":["mastery","conversation","real_life_english","reading","listening","speaking","writing"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "700+ active words and phrases",
+    "grammar": ["present simple","present continuous","past simple","past continuous","future forms","comparatives","superlatives","countable and uncountable nouns","articles","some/any","much/many","enough","should/shouldn't","question forms","linking words"],
+    "reading": "500–600 word A2 texts",
+    "listening": "4–6 minute A2 recordings",
+    "speaking": "5-minute guided-to-independent conversation",
+    "writing": "150–200 word connected texts",
+    "real_life_english": ["school","shopping","health","directions","transport","travel","asking for help","simple problems"],
+    "mastery": "Learner enters Grade 5 able to communicate confidently about familiar topics and handle longer, more connected A2-level English with reduced translation support."
+  }
+}
