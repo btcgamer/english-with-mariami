@@ -1,0 +1,169 @@
+{
+  "grade": 5,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 6: B1+ TO B2 GATEWAY",
+  "level": "B1+ → B2",
+  "description": "An advanced bridge into B2 communication through precision vocabulary, complex grammar, natural listening, sustained speaking, structured writing, debate, presentation, and realistic problem-solving.",
+  "mission_count": 20,
+  "progression": "B1+ fluency → B2 gateway → independent, flexible communication",
+  "targets": {
+    "active_vocabulary": "1400+ words, collocations, phrasal verbs, word families and functional expressions",
+    "reading": "1200–1400 words with inference, attitude, detail and main-idea questions",
+    "listening": "10–12 minutes of natural-speed, multi-speaker English with accents and implied meaning",
+    "conversation": "12–14 minutes of sustained interaction with follow-up questions, clarification and spontaneous responses",
+    "writing": "300–350 words using clear structure, linking, examples, contrast and justification",
+    "presentation": "6 minutes with introduction, organized points, examples, conclusion and audience questions",
+    "real_life": "travel, workplace, education, services, digital communication, complaints, negotiation, emergencies and social situations"
+  },
+  "missions": [
+    {
+      "id": 1,
+      "title": "B2 Vocabulary Gateway — Precision & Collocation Power",
+      "focus": ["advanced vocabulary", "collocations", "word families", "register"],
+      "skills": ["vocabulary", "pronunciation", "speaking", "writing"],
+      "content": "Build precise alternatives to common B1 words, learn strong verb-noun/adjective-noun combinations, identify formal and informal choices, and use new vocabulary in original sentences."
+    },
+    {
+      "id": 2,
+      "title": "Advanced Tense Control — Meaning, Not Memorization",
+      "focus": ["present perfect", "past perfect", "continuous forms", "future forms", "tense contrast"],
+      "skills": ["grammar", "reading", "speaking", "writing"],
+      "content": "Choose tense forms according to sequence, duration, completion, background information, plans, predictions and current relevance."
+    },
+    {
+      "id": 3,
+      "title": "Past Modals — What Must Have Happened?",
+      "focus": ["must have", "might have", "could have", "should have", "can't have"],
+      "skills": ["grammar", "listening", "speaking", "problem solving"],
+      "content": "Infer past situations, discuss missed opportunities, express certainty and uncertainty, and reconstruct events from evidence."
+    },
+    {
+      "id": 4,
+      "title": "Conditionals Lab — Hypotheses, Regrets & Alternatives",
+      "focus": ["second conditional", "third conditional", "mixed conditional awareness", "unless", "provided that"],
+      "skills": ["grammar", "speaking", "writing", "critical thinking"],
+      "content": "Discuss unreal situations, past regrets, alternative outcomes and consequences while controlling conditional meaning and time reference."
+    },
+    {
+      "id": 5,
+      "title": "Relative Clauses & Information Density",
+      "focus": ["defining clauses", "non-defining clauses", "whose", "where", "which", "reduced-clause awareness"],
+      "skills": ["grammar", "reading", "writing", "speaking"],
+      "content": "Combine short ideas into precise, natural sentences and use relative structures to describe people, places, systems and experiences."
+    },
+    {
+      "id": 6,
+      "title": "Passive & Reporting Structures — News and Information",
+      "focus": ["passive voice", "reporting verbs", "impersonal structures", "it is said", "be expected to"],
+      "skills": ["grammar", "reading", "formal writing", "listening"],
+      "content": "Transform information into formal and neutral structures used in news, reports, announcements, explanations and professional communication."
+    },
+    {
+      "id": 7,
+      "title": "Articles, Determiners & Reference Precision",
+      "focus": ["a/an", "the", "zero article", "this/that", "each/every", "few/little", "both/either/neither"],
+      "skills": ["grammar", "editing", "writing", "speaking"],
+      "content": "Improve accuracy when referring to known, general, specific, limited and contrasted information in connected communication."
+    },
+    {
+      "id": 8,
+      "title": "Connectors & Discourse — Sound Like a B2 Speaker",
+      "focus": ["however", "although", "whereas", "therefore", "nevertheless", "in addition", "on the other hand", "as a result"],
+      "skills": ["writing", "speaking", "reading", "argumentation"],
+      "content": "Organize ideas with logical relationships, contrast, cause, consequence, addition, concession and examples instead of producing disconnected sentences."
+    },
+    {
+      "id": 9,
+      "title": "Register Mission — Casual, Neutral & Formal English",
+      "focus": ["tone", "politeness", "formal vocabulary", "informal expressions", "professional register"],
+      "skills": ["real-life English", "writing", "speaking", "listening"],
+      "content": "Rewrite messages for friends, teachers, customers, managers and public services while preserving meaning and changing tone appropriately."
+    },
+    {
+      "id": 10,
+      "title": "B2 Conversation Lab — Twelve to Fourteen Minutes",
+      "focus": ["follow-up questions", "clarification", "turn-taking", "disagreement", "spontaneous response"],
+      "skills": ["speaking", "conversation", "listening"],
+      "content": "Sustain a long conversation about school, work, technology, travel and society; ask natural follow-up questions and keep interaction moving without translation."
+    },
+    {
+      "id": 11,
+      "title": "Reading Challenge — The Changing World",
+      "focus": ["1200–1400 word text", "main idea", "detail", "inference", "writer attitude", "reference"],
+      "skills": ["reading", "vocabulary", "critical thinking"],
+      "content": "Read an extended article about technology, education and social change, identify explicit and implied information, infer unfamiliar vocabulary from context and explain the writer's position."
+    },
+    {
+      "id": 12,
+      "title": "Listening Challenge — Real Voices, Real Speed",
+      "focus": ["natural speed", "multi-speaker dialogue", "connected speech", "attitude", "inference"],
+      "skills": ["listening", "note-taking", "speaking"],
+      "content": "Follow a 10–12 minute sequence of conversations, interviews and announcements; identify speaker purpose, attitude, key details and implied meaning."
+    },
+    {
+      "id": 13,
+      "title": "Writing Lab — Build a Strong Argument",
+      "focus": ["300–350 words", "thesis", "paragraph structure", "examples", "counterpoint", "conclusion"],
+      "skills": ["writing", "grammar", "vocabulary", "organization"],
+      "content": "Write a structured opinion essay with a clear position, supporting reasons, examples, a contrasting idea and a logical conclusion using B2-level connectors."
+    },
+    {
+      "id": 14,
+      "title": "Presentation Lab — Explain, Compare & Defend",
+      "focus": ["6-minute presentation", "signposting", "comparison", "examples", "audience questions"],
+      "skills": ["speaking", "presentation", "listening"],
+      "content": "Deliver an organized presentation on a real-world topic, transition between points, compare alternatives, explain evidence and respond to audience questions."
+    },
+    {
+      "id": 15,
+      "title": "Real-Life English — Travel, Booking & Unexpected Problems",
+      "focus": ["hotel", "airport", "transport", "changes", "complaints", "polite solutions"],
+      "skills": ["conversation", "listening", "speaking", "functional English"],
+      "content": "Handle delayed transport, booking mistakes, room problems, schedule changes and requests for compensation using clear, polite and flexible language."
+    },
+    {
+      "id": 16,
+      "title": "Real-Life English — Workplace & Education Mission",
+      "focus": ["workplace communication", "applications", "meetings", "deadlines", "feedback", "requests"],
+      "skills": ["speaking", "writing", "reading", "professional English"],
+      "content": "Write and respond to practical workplace and school messages, discuss deadlines, request clarification, give constructive feedback and participate in a short meeting simulation."
+    },
+    {
+      "id": 17,
+      "title": "Debate Lab — Evidence, Counterarguments & Respectful Disagreement",
+      "focus": ["agreeing", "disagreeing", "counterarguments", "evidence", "hedging", "persuasion"],
+      "skills": ["speaking", "listening", "critical thinking", "vocabulary"],
+      "content": "Develop a position, support it with reasons and examples, respond to opposing ideas and use respectful language such as I see your point, however... and It could be argued that..."
+    },
+    {
+      "id": 18,
+      "title": "Complex Problem-Solving Simulation — One Day, Five Problems",
+      "focus": ["priorities", "negotiation", "clarification", "solutions", "consequences"],
+      "skills": ["speaking", "listening", "reading", "writing", "real-life English"],
+      "content": "Solve a connected chain of realistic problems involving travel, money, technology, appointments and communication; explain choices and adapt when new information appears."
+    },
+    {
+      "id": 19,
+      "title": "B2 Gateway Integrated Skills Marathon",
+      "focus": ["vocabulary", "grammar", "reading", "listening", "speaking", "writing", "pronunciation"],
+      "skills": ["integrated skills", "independent learning", "accuracy", "fluency"],
+      "content": "Complete a demanding mixed-skills sequence: vocabulary in context, grammar editing, extended reading, natural listening, spontaneous speaking, structured writing and pronunciation repair."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 6 MASTER QUEST — B1+ TO B2 GATEWAY",
+      "focus": ["full B2 gateway assessment", "communication", "accuracy", "fluency", "independence"],
+      "skills": ["vocabulary", "grammar", "reading", "listening", "speaking", "conversation", "writing", "presentation", "real-life English"],
+      "content": "Final mission combining advanced vocabulary, grammar transformation, inference reading, natural multi-speaker listening, sustained conversation, a six-minute presentation, a 300–350 word argument and a realistic problem-solving scenario."
+    }
+  ],
+  "quality_rules": {
+    "english_density": "maximum",
+    "translation_dependency": "minimal",
+    "difficulty": "high for Grade 5, with a deliberate B2 gateway",
+    "assessment": "production-first: learners must create language, not only recognize answers",
+    "progression": "Each mission reuses and expands vocabulary and grammar from previous missions.",
+    "protected_grades": [2,3,4],
+    "protected_note": "This curriculum file adds Grade 5 World 6 only and does not modify Grade 2, Grade 3 or Grade 4."
+  }
+}
