@@ -93,6 +93,15 @@ window.SUPABASE_PUBLISHABLE_KEY='sb_publishable_MnrM2ulyJY_ugwfFVfpQYA_iV5wjCmt'
     document.head.appendChild(guardian);
   }
 
+  /* Academy 3D World Environment 8.0 — visual-only environment layer. */
+  if(!document.querySelector('script[data-ewm-academy-world-8]')){
+    const world8=document.createElement('script');
+    world8.src='/academy-3d-world-environment-8.js?v=20260915-w8';
+    world8.defer=true;
+    world8.dataset.ewmAcademyWorld8='1';
+    document.head.appendChild(world8);
+  }
+
   /* Academy access is owned by academy-grade-visual-only.js. */
   if(document.querySelector('script[data-ewm-academy-grade-visual-only]')) return;
   const visual=document.createElement('script');
