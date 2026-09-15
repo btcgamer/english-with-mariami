@@ -1,0 +1,39 @@
+{
+  "grade": 5,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 5 — WORLD 5: B1+ CHALLENGE & INDEPENDENT ENGLISH",
+  "level": "B1+",
+  "description": "A high-density B1+ progression that pushes learners toward more precise grammar, richer vocabulary, longer texts, faster listening, independent opinions, presentations, problem solving and flexible real-world communication.",
+  "missions": [
+    {"id":1,"title":"B1+ Vocabulary Accelerator","focus":"advanced collocations, phrasal verbs, word formation, shades of meaning and vocabulary through context","skills":["vocabulary","reading","pronunciation"]},
+    {"id":2,"title":"Grammar Precision Lab","focus":"tense contrast, perfect forms, narrative structures and selecting grammar by communicative purpose","skills":["grammar","writing","speaking"]},
+    {"id":3,"title":"Reported Speech Mission","focus":"reporting statements, questions, requests and instructions while managing tense and pronoun changes","skills":["grammar","reading","conversation"]},
+    {"id":4,"title":"Passive & Causative Starter","focus":"passive structures in news and everyday English plus introductory have/get something done","skills":["grammar","reading","real_life_english"]},
+    {"id":5,"title":"Conditionals & Hypothetical Thinking","focus":"zero, first and second conditionals with practical consequences, advice and imaginative scenarios","skills":["grammar","speaking","critical_thinking"]},
+    {"id":6,"title":"Gerunds, Infinitives & Verb Patterns","focus":"common verb patterns, meaning differences and accurate production in natural sentences","skills":["grammar","vocabulary","writing"]},
+    {"id":7,"title":"B1+ Connectors & Discourse","focus":"however, whereas, therefore, despite, in contrast, as a result, on the other hand and sequencing language","skills":["grammar","writing","speaking"]},
+    {"id":8,"title":"Society, Culture & Identity","focus":"traditions, communities, identity, cultural differences and respectful comparison","skills":["vocabulary","reading","discussion"]},
+    {"id":9,"title":"Science, Discovery & Innovation","focus":"explaining processes, discoveries, inventions, evidence and cause-and-effect relationships","skills":["vocabulary","reading","speaking"]},
+    {"id":10,"title":"B1+ Conversation Lab — Twelve Minutes","focus":"independent conversation with follow-up questions, clarification, examples, comparisons and extended opinions","skills":["conversation","speaking","listening"]},
+    {"id":11,"title":"Reading Challenge — A Changing World","focus":"1000–1200 word B1+ article with inference, attitude, reference, paraphrase and vocabulary-in-context tasks","skills":["reading","comprehension","critical_thinking"]},
+    {"id":12,"title":"Listening Challenge — Fast Everyday English","focus":"9–11 minute listening with natural speed, connected speech, multiple speakers, implied meaning and attitude","skills":["listening","comprehension","pronunciation"]},
+    {"id":13,"title":"Writing Lab — Structured Argument","focus":"280–330 word opinion or for-and-against essay with thesis, reasons, examples, counterpoint and conclusion","skills":["writing","grammar","critical_thinking"]},
+    {"id":14,"title":"Presentation Lab — Explain, Compare, Persuade","focus":"5–6 minute presentation using signposting, examples, comparisons, visuals and confident delivery","skills":["speaking","pronunciation","writing"]},
+    {"id":15,"title":"Real-Life English — Customer & Service Problems","focus":"complaints, refunds, misunderstandings, escalation, polite firmness and solution-focused communication","skills":["conversation","listening","real_life_english"]},
+    {"id":16,"title":"Real-Life English — Study & Future Work","focus":"applications, schedules, responsibilities, interviews, workplace requests and explaining experience","skills":["vocabulary","speaking","real_life_english"]},
+    {"id":17,"title":"Debate Lab — Build a Strong Case","focus":"state a position, support it with reasons, respond to opposing ideas, qualify claims and reach conclusions","skills":["speaking","conversation","critical_thinking"]},
+    {"id":18,"title":"Complex Problem-Solving Simulation","focus":"process several pieces of information, identify constraints, compare options, negotiate and justify a final solution","skills":["listening","speaking","problem_solving"]},
+    {"id":19,"title":"B1+ Integrated Skills Marathon","focus":"high-intensity review across vocabulary, grammar, reading, listening, speaking, writing, pronunciation and real-life English","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 5 MASTER QUEST — B1+ INDEPENDENT ENGLISH","focus":"final integrated B1+ challenge combining fast listening, long reading, argument, debate, presentation, practical communication and extended writing","skills":["mastery","reading","listening","speaking","writing","real_life_english"]}
+  ],
+  "content_targets": {
+    "core_vocabulary": "1200+ active words, collocations, phrasal verbs, word families and functional language chunks",
+    "grammar": ["tense contrast","perfect forms","reported speech","passive voice","causative starter","conditionals","gerunds and infinitives","discourse markers","relative clauses review"],
+    "reading": "1000–1200 word B1+ texts with inference, attitude, paraphrase and critical-reading tasks",
+    "listening": "9–11 minute natural-speed multi-speaker listening with implied meaning and attitude",
+    "speaking": "12-minute sustained conversation plus a 5–6 minute structured presentation and debate tasks",
+    "writing": "280–330 word structured argument, opinion or for-and-against writing",
+    "real_life_english": ["customer service","complaints","refunds","study applications","interviews","workplace communication","requests","negotiation","social and cultural communication"],
+    "mastery": "Learner demonstrates strong B1+ control by communicating independently, adapting language to situations, understanding natural spoken English, building arguments, handling disagreement, solving multi-step problems and producing organized extended speech and writing."
+  }
+}
