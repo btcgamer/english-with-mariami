@@ -1,0 +1,24 @@
+(()=>{'use strict';if(document.documentElement.dataset.ewm3dReality6==='1')return;document.documentElement.dataset.ewm3dReality6='1';
+const SID='ewm-3d-reality-6-style';
+function style(){if(document.getElementById(SID))return;const s=document.createElement('style');s.id=SID;s.textContent=`
+body{perspective:1400px}
+.ewm-3d-stage{position:relative;isolation:isolate;transform-style:preserve-3d}
+.ewm-3d-stage:before{content:"";position:absolute;inset:-12%;z-index:-2;pointer-events:none;background:radial-gradient(circle at 50% 45%,rgba(75,220,255,.09),transparent 35%),radial-gradient(circle at 80% 20%,rgba(157,93,255,.08),transparent 30%);filter:blur(24px);transform:translateZ(-80px)}
+.ewm-3d-card{position:relative;transform-style:preserve-3d;will-change:transform;transition:transform .18s cubic-bezier(.2,.8,.2,1),filter .25s ease;box-shadow:0 22px 45px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.07),inset 0 1px rgba(255,255,255,.14);overflow:visible!important}
+.ewm-3d-card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.16),transparent 22%,transparent 70%,rgba(80,210,255,.09));opacity:.55;transform:translateZ(18px);z-index:4}
+.ewm-3d-card:after{content:"";position:absolute;left:8%;right:8%;bottom:-22px;height:28px;border-radius:50%;pointer-events:none;background:radial-gradient(ellipse,rgba(45,220,255,.26),transparent 70%);filter:blur(9px);transform:translateZ(-20px);opacity:.8}
+.ewm-3d-depth{transform:translateZ(34px);transform-style:preserve-3d}
+.ewm-3d-glass{backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%)}
+.ewm-3d-card .ewm-3d-orb{position:absolute;width:90px;height:90px;right:14px;top:12px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 35% 30%,#fff 0 3%,rgba(90,240,255,.9) 12%,rgba(91,91,255,.55) 38%,transparent 70%);filter:drop-shadow(0 0 18px rgba(55,220,255,.7));transform:translate3d(0,0,48px);animation:ewmOrb6 3.2s ease-in-out infinite;z-index:5}
+.ewm-3d-card[data-grade="4"] .ewm-3d-orb{background:radial-gradient(circle at 35% 30%,#fff 0 3%,#ffe98a 12%,rgba(172,91,255,.65) 40%,transparent 70%);filter:drop-shadow(0 0 20px rgba(255,205,80,.75))}
+.ewm-3d-card .ewm-3d-orb:before,.ewm-3d-card .ewm-3d-orb:after{content:"";position:absolute;inset:-12px;border:1px solid rgba(100,230,255,.42);border-radius:50%;transform:rotateX(66deg);box-shadow:0 0 12px rgba(70,220,255,.28)}
+.ewm-3d-card .ewm-3d-orb:after{inset:-22px;transform:rotateY(66deg);opacity:.55}
+@keyframes ewmOrb6{50%{transform:translate3d(0,-9px,58px) scale(1.04)}100%{transform:translate3d(0,0,48px)}}
+.ewm-3d-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:inherit;opacity:.18;background-image:linear-gradient(rgba(90,220,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(90,220,255,.35) 1px,transparent 1px);background-size:28px 28px;transform:translateZ(-2px);mask-image:linear-gradient(to bottom,transparent,black 28%,black 70%,transparent)}
+.ewm-3d-card:hover{filter:brightness(1.08) saturate(1.1);box-shadow:0 34px 65px rgba(0,0,0,.45),0 0 35px rgba(65,215,255,.14),inset 0 1px rgba(255,255,255,.22)}
+@media(max-width:700px){body{perspective:900px}.ewm-3d-card .ewm-3d-orb{width:62px;height:62px;right:9px;top:9px}.ewm-3d-card:after{bottom:-14px}}
+@media(prefers-reduced-motion:reduce){.ewm-3d-card{transition:none!important}.ewm-3d-card .ewm-3d-orb{animation:none!important}}
+`;document.head.appendChild(s)}
+function boot(){style();const cards=[...document.querySelectorAll('a,button,[role="button"],.card')].filter(el=>{const t=(el.textContent||'').toLowerCase();return el.dataset.grade||/grade\s*[234]|class\s*[234]|მეორე|მესამე|მეოთხე/.test(t)});cards.forEach(card=>{if(card.dataset.ewm3d6==='1')return;card.dataset.ewm3d6='1';card.classList.add('ewm-3d-card','ewm-3d-glass');if(!card.closest('.ewm-3d-stage'))card.classList.add('ewm-3d-stage');const grade=String(card.dataset.grade||'');if(grade)card.dataset.grade=grade;const grid=document.createElement('span');grid.className='ewm-3d-grid';card.appendChild(grid);const orb=document.createElement('span');orb.className='ewm-3d-orb';orb.setAttribute('aria-hidden','true');card.appendChild(orb);[...card.children].forEach(ch=>{if(!ch.classList.contains('ewm-3d-grid')&&!ch.classList.contains('ewm-3d-orb'))ch.classList.add('ewm-3d-depth')});card.addEventListener('pointermove',e=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform=`rotateX(${(-y*7).toFixed(2)}deg) rotateY(${(x*9).toFixed(2)}deg) translateZ(10px)`});card.addEventListener('pointerleave',()=>card.style.transform='');});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
