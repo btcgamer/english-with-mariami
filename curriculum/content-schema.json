@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "scope": "new-grades-only",
+  "protectedGrades": [2, 3, 4],
+  "grades": [1, 5, 6, 7, 8, 9, 10, 11, 12],
+  "entities": {
+    "grade": ["id", "title", "level", "description", "worldIds"],
+    "world": ["id", "gradeId", "order", "title", "theme", "missionCount"],
+    "lesson": ["id", "gradeId", "worldId", "order", "title", "difficulty", "estimatedMinutes", "objectives", "content"],
+    "vocabulary": ["id", "lessonId", "word", "partOfSpeech", "definition", "translation", "phonetic", "example", "collocations", "phrases", "difficulty", "audio", "tags"],
+    "grammar": ["id", "lessonId", "title", "rule", "form", "examples", "commonMistakes", "practiceItems", "difficulty"],
+    "reading": ["id", "lessonId", "title", "text", "glossary", "questions", "difficulty"],
+    "listening": ["id", "lessonId", "title", "transcript", "audio", "questions", "speakerCount", "speed", "difficulty"],
+    "speaking": ["id", "lessonId", "title", "prompt", "keywords", "modelAnswer", "rubric", "timeLimit", "difficulty"],
+    "dialogue": ["id", "lessonId", "scenario", "turns", "targetVocabulary", "targetGrammar", "difficulty"],
+    "writing": ["id", "lessonId", "prompt", "requirements", "modelAnswer", "rubric", "difficulty"],
+    "exercise": ["id", "lessonId", "type", "prompt", "options", "answer", "explanation", "skill", "difficulty"],
+    "quiz": ["id", "lessonId", "questions", "passingScore", "skills", "difficulty"],
+    "review": ["id", "lessonId", "items", "spacedReviewKey", "skills"],
+    "pronunciation": ["id", "lessonId", "target", "phonetic", "minimalPairs", "audio", "prompt", "difficulty"],
+    "realLifeScenario": ["id", "lessonId", "context", "goal", "phrases", "dialogue", "speakingPrompt", "difficulty"]
+  },
+  "contentRules": {
+    "vocabularyMustBeContextualized": true,
+    "includePronunciationWhenApplicable": true,
+    "includeListeningForCoreLessons": true,
+    "includeSpeakingForCoreLessons": true,
+    "includeReview": true,
+    "difficultyMustIncreaseByGrade": true,
+    "englishExposureShouldIncreaseByGrade": true
+  }
+}
