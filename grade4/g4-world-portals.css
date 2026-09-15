@@ -1,0 +1,12 @@
+/* G4 — WONDERLAND / GUARDIAN WORLD PORTALS — VISUAL ONLY */
+body[data-grade="4"] .world{position:relative;overflow:hidden;isolation:isolate}
+body[data-grade="4"] .world:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 94% 50%,rgba(255,215,120,.13),transparent 23%),linear-gradient(110deg,transparent 35%,rgba(255,255,255,.045),transparent 72%);z-index:-1}
+body[data-grade="4"] .world:after{content:"";position:absolute;right:13px;top:50%;width:44px;height:44px;transform:translateY(-50%);border:1px solid rgba(255,221,137,.68);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7) 0 5%,rgba(255,220,120,.4) 6% 13%,transparent 14% 28%),conic-gradient(from 0deg,rgba(255,226,139,.95),transparent 20%,rgba(191,128,255,.8) 43%,transparent 66%,rgba(105,246,255,.85));box-shadow:0 0 13px rgba(255,221,137,.55),0 0 34px rgba(180,120,255,.3);animation:g4CrownPortal 6.5s linear infinite;opacity:.92}
+body[data-grade="4"] .world:hover:after,body[data-grade="4"] .world.active:after{width:53px;height:53px;border-color:rgba(255,246,190,.95);box-shadow:0 0 20px rgba(255,221,137,.8),0 0 48px rgba(180,120,255,.42);animation-duration:2.4s}
+body[data-grade="4"] .world:nth-child(4n+1):after{filter:hue-rotate(-8deg)}
+body[data-grade="4"] .world:nth-child(4n+2):after{filter:hue-rotate(25deg)}
+body[data-grade="4"] .world:nth-child(4n+3):after{filter:hue-rotate(65deg)}
+body[data-grade="4"] .world:nth-child(4n):after{filter:hue-rotate(105deg)}
+@keyframes g4CrownPortal{to{transform:translateY(-50%) rotate(360deg)}}
+@media(max-width:700px){body[data-grade="4"] .world:after{right:8px;width:33px;height:33px}body[data-grade="4"] .world:hover:after,body[data-grade="4"] .world.active:after{width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){body[data-grade="4"] .world:after{animation:none}}
