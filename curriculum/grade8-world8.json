@@ -1,0 +1,57 @@
+{
+  "grade": 8,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 8: C1 GLOBAL STRATEGY & LEADERSHIP",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "4800+ active words",
+    "reading": "2300–2700 words",
+    "listening": "28–33 min",
+    "speaking": "32–40 min",
+    "writing": "900–1050 words",
+    "presentation": "16–20 min"
+  },
+  "grammar": [
+    "Advanced conditionals for strategic planning",
+    "Modal perfect forms for evaluation and hindsight",
+    "Inversion and fronting for emphasis",
+    "Complex noun phrases in formal reports",
+    "Discourse cohesion in long-form communication",
+    "Diplomatic reformulation and leadership tone",
+    "Advanced hedging and evidence-based claims"
+  ],
+  "missions": [
+    {"id":1,"title":"Strategic Vision Intelligence Lab","focus":"Define long-term goals and communicate a clear strategic vision."},
+    {"id":2,"title":"Global Systems Mapping","focus":"Analyse interconnected organisations, markets, and global systems."},
+    {"id":3,"title":"Leadership Decision Matrix","focus":"Compare options, priorities, constraints, and consequences."},
+    {"id":4,"title":"Risk Forecasting Command","focus":"Use evidence and conditional language to discuss future risks."},
+    {"id":5,"title":"Stakeholder Influence Arena","focus":"Identify stakeholder interests and build persuasive communication plans."},
+    {"id":6,"title":"Strategic Negotiation Forge","focus":"Negotiate complex agreements while maintaining professional diplomacy."},
+    {"id":7,"title":"Crisis Leadership Simulator","focus":"Deliver calm, precise, and actionable communication during a crisis."},
+    {"id":8,"title":"Ethical Dilemma Council","focus":"Evaluate competing values and justify responsible decisions."},
+    {"id":9,"title":"Global Policy Decoder","focus":"Interpret policy language, institutional priorities, and strategic implications."},
+    {"id":10,"title":"Executive Listening Observatory","focus":"Identify implied meaning, stance, priorities, and hidden assumptions."},
+    {"id":11,"title":"Vision-to-Action Blueprint","focus":"Transform broad strategic goals into measurable action plans."},
+    {"id":12,"title":"Cross-Border Partnership Room","focus":"Coordinate objectives and resolve tensions in international partnerships."},
+    {"id":13,"title":"Leadership Feedback Studio","focus":"Give and respond to nuanced performance feedback."},
+    {"id":14,"title":"Strategic Report Architecture","focus":"Write a structured report with evidence, recommendations, and limitations."},
+    {"id":15,"title":"Boardroom Presentation Command","focus":"Present complex strategic proposals to a demanding audience."},
+    {"id":16,"title":"Transformation Planning Lab","focus":"Discuss organisational change, resistance, and implementation strategy."},
+    {"id":17,"title":"Hindsight & Accountability Reactor","focus":"Evaluate past decisions using modal perfects and balanced reasoning."},
+    {"id":18,"title":"Global Leadership Debate","focus":"Defend a position, respond to objections, and reformulate diplomatically."},
+    {"id":19,"title":"World 8 Integration Quest","focus":"Combine strategic reading, listening, speaking, and writing skills."},
+    {"id":20,"title":"C1 Global Strategy Master Challenge","focus":"Complete an integrated leadership mission using advanced C1 English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Strategy Summit","description":"Present a strategic plan to a multinational leadership panel and respond to critical questions."},
+    {"title":"Global Crisis Coordination Room","description":"Coordinate a cross-border response, clarify responsibilities, and communicate decisions under pressure."},
+    {"title":"Ethical Transformation Council","description":"Lead a discussion about organisational change while balancing people, performance, and responsibility."}
+  ],
+  "assessment": {
+    "level": "C1",
+    "type": "Integrated strategic communication assessment",
+    "components": ["critical reading", "executive listening", "strategic discussion", "evidence-based writing", "leadership presentation"],
+    "successCriteria": ["clear strategic reasoning", "accurate advanced grammar", "appropriate formal register", "coherent argument structure", "effective diplomatic interaction"]
+  }
+}
