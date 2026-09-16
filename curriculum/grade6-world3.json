@@ -1,0 +1,39 @@
+{
+  "grade": 6,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 3: B1 COMMUNICATION CORE",
+  "level": "B1",
+  "theme": "Communication, Stories, Opinions & Real-World English",
+  "target": {
+    "active_vocabulary": "1100+ words, collocations, phrasal verbs and functional expressions",
+    "reading": "800–1000 words with inference, reference and detail questions",
+    "listening": "8–10 minutes of natural multi-speaker B1 English",
+    "speaking": "8–10 minutes of sustained conversation and role-play",
+    "writing": "230–280 words across narrative, opinion and practical formats",
+    "grammar": ["present perfect vs past simple", "narrative tenses", "future forms", "modals", "first and second conditionals", "relative clauses", "passive voice", "reported speech introduction", "linking and discourse markers"]
+  },
+  "missions": [
+    {"id":1,"title":"B1 Vocabulary Engine — Meaning in Context","focus":["word families","collocations","phrasal verbs","context clues"],"skills":["vocabulary","reading","speaking"],"challenge":"Infer meaning from context and use 25+ new items in original sentences."},
+    {"id":2,"title":"Present Perfect vs Past Simple — Time & Meaning","focus":["finished vs unfinished time","life experience","recent events","time expressions"],"skills":["grammar","speaking","writing"],"challenge":"Choose the tense by meaning and explain why each form is appropriate."},
+    {"id":3,"title":"Narrative Tense Control — Tell the Story Clearly","focus":["past simple","past continuous","past perfect","sequence of events"],"skills":["grammar","reading","speaking"],"challenge":"Reconstruct a missing-event story and retell it with accurate time relationships."},
+    {"id":4,"title":"Future Forms — Plans, Arrangements & Predictions","focus":["will","going to","present continuous","present simple schedules"],"skills":["grammar","listening","conversation"],"challenge":"Make and justify predictions, arrangements and spontaneous decisions."},
+    {"id":5,"title":"Modal Mission — Advice, Obligation & Possibility","focus":["must","have to","should","might","could","can't"],"skills":["grammar","real-life English","speaking"],"challenge":"Solve practical situations using precise degrees of certainty and obligation."},
+    {"id":6,"title":"Conditionals Lab — Real & Imagined Situations","focus":["zero conditional","first conditional","second conditional","unless"],"skills":["grammar","problem solving","speaking"],"challenge":"Discuss real consequences and hypothetical alternatives without translation."},
+    {"id":7,"title":"Relative Clauses — Add Information Naturally","focus":["who","which","that","where","whose","defining clauses"],"skills":["grammar","writing","speaking"],"challenge":"Combine short statements into clear, information-rich B1 sentences."},
+    {"id":8,"title":"Passive Voice — News, Processes & Everyday Information","focus":["present passive","past passive","by-phrases","process descriptions"],"skills":["grammar","reading","writing"],"challenge":"Transform active information and describe how a product or process works."},
+    {"id":9,"title":"Communication & Relationships — Say What You Mean","focus":["personality","relationships","emotions","agreement and disagreement"],"skills":["vocabulary","listening","speaking"],"challenge":"Hold a natural conversation about people, conflict and solutions."},
+    {"id":10,"title":"B1 Conversation Lab — Ten-Minute Real Discussion","focus":["follow-up questions","clarification","turn-taking","opinions"],"skills":["speaking","listening","conversation"],"challenge":"Maintain a ten-minute conversation using reasons, examples and follow-up questions."},
+    {"id":11,"title":"Reading Explorer — The Choice","focus":["main idea","specific detail","inference","reference words","author purpose"],"skills":["reading","vocabulary","critical thinking"],"challenge":"Read an 800–900 word story and justify answers with textual evidence."},
+    {"id":12,"title":"Listening Mission — Natural Conversations","focus":["connected speech","speaker attitude","key details","implied meaning"],"skills":["listening","note-taking","speaking"],"challenge":"Understand multiple speakers at natural speed and reconstruct the important information."},
+    {"id":13,"title":"Writing Mission — Opinion Paragraph to Short Essay","focus":["topic sentence","supporting reasons","examples","linkers","conclusion"],"skills":["writing","grammar","vocabulary"],"challenge":"Write 230–280 words presenting an opinion with clear reasons and examples."},
+    {"id":14,"title":"Storytelling Lab — A Turning Point","focus":["narrative structure","description","sequence markers","dialogue","past tenses"],"skills":["writing","speaking","reading"],"challenge":"Create and tell a coherent story with a beginning, turning point, problem and resolution."},
+    {"id":15,"title":"Real-Life English — Booking, Changing & Fixing Plans","focus":["appointments","reservations","polite requests","changes","complaints"],"skills":["conversation","listening","real-life English"],"challenge":"Complete a booking simulation, change the plan and solve an unexpected problem politely."},
+    {"id":16,"title":"Real-Life English — Work, School & Community","focus":["requests","instructions","messages","responsibilities","community services"],"skills":["speaking","writing","listening"],"challenge":"Handle practical workplace, school and community situations with appropriate register."},
+    {"id":17,"title":"Opinion Lab — Explain, Compare & Defend","focus":["because","although","however","therefore","for example","in my view"],"skills":["speaking","writing","critical thinking"],"challenge":"Give an opinion, compare alternatives, respond to a counterpoint and defend a position with reasons."},
+    {"id":18,"title":"Problem-Solving Simulation — Five Things Go Wrong","focus":["clarification","priorities","solutions","negotiation","polite language"],"skills":["speaking","listening","real-life English"],"challenge":"Solve five connected real-world problems while adapting when new information appears."},
+    {"id":19,"title":"B1 Integrated Skills Marathon","focus":["vocabulary","grammar","reading","listening","speaking","writing"],"skills":["integrated skills"],"challenge":"Complete a timed multi-stage mission combining all core World 3 skills with minimal support."},
+    {"id":20,"title":"WORLD 3 MASTER QUEST — B1 COMMUNICATION CORE","focus":["full B1 communication","accuracy","fluency","independence"],"skills":["vocabulary","grammar","reading","listening","speaking","writing","real-life English"],"challenge":"Complete an integrated B1 scenario: read, listen, discuss, solve a problem, write a response and deliver a final spoken summary."}
+  ],
+  "real_life_scenarios":["travel booking and changes","hotel and transport problems","customer service","school communication","workplace requests","community services","health and appointments","phone conversations","digital communication","problem solving"],
+  "mastery_requirements":["use English to explain reasons and consequences","ask follow-up and clarification questions","connect ideas into paragraphs and extended speech","understand natural B1 multi-speaker English","switch between informal and polite neutral communication","produce independent spoken and written responses"]
+}
