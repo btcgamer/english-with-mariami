@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 7: C1+ BUSINESS, ECONOMICS & FINANCIAL INTELLIGENCE",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "7000+ active words",
+    "reading": "3100–3800 words",
+    "listening": "42–52 min",
+    "speaking": "46–60 min",
+    "writing": "1300–1550 words",
+    "presentation": "25–32 min"
+  },
+  "grammar": [
+    "Formal analytical writing for business and economics",
+    "Advanced cause, consequence, contrast, and concession structures",
+    "Modality, probability, forecasting, and risk language",
+    "Complex conditionals for financial and strategic scenarios",
+    "Comparative and evaluative structures for competing options",
+    "Nominalisation, compression, and concise professional reporting",
+    "Hedging, evidence attribution, and responsible financial claims",
+    "Register adaptation for clients, executives, investors, and public audiences"
+  ],
+  "missions": [
+    {"id":1,"title":"Business & Finance Calibration","focus":"Diagnose advanced business and financial language while distinguishing commercial facts, assumptions, forecasts, and opinions."},
+    {"id":2,"title":"Economic Vocabulary Forge","focus":"Use precise C1+ vocabulary for markets, firms, growth, productivity, finance, trade, incentives, and economic policy."},
+    {"id":3,"title":"Market Systems Observatory","focus":"Analyse market structures, competition, incentives, barriers to entry, and how firms respond to changing conditions."},
+    {"id":4,"title":"Supply & Demand Simulator","focus":"Explain shifts in supply and demand, pricing effects, elasticity, shortages, surpluses, and market responses."},
+    {"id":5,"title":"Inflation & Interest Rate Lab","focus":"Discuss inflation, interest rates, purchasing power, monetary policy, and their effects using cautious analytical language."},
+    {"id":6,"title":"Financial Statements Decoder","focus":"Interpret the language and basic relationships of income statements, balance sheets, cash flow, revenue, costs, assets, and liabilities."},
+    {"id":7,"title":"Budgeting & Cash-Flow Mission","focus":"Build and explain realistic budgets, cash-flow forecasts, financial priorities, and trade-offs for individuals or organisations."},
+    {"id":8,"title":"Risk & Uncertainty Arena","focus":"Evaluate financial and business risks, communicate uncertainty, and compare mitigation strategies without overclaiming."},
+    {"id":9,"title":"Entrepreneurship Strategy Studio","focus":"Develop a business idea, identify customer needs, assess feasibility, and explain competitive advantages and constraints."},
+    {"id":10,"title":"Business Model Architecture","focus":"Analyse value propositions, customer segments, revenue models, operating costs, partnerships, and scalable business systems."},
+    {"id":11,"title":"Global Trade Nexus","focus":"Discuss international trade, supply chains, exchange rates, tariffs, comparative advantage, and cross-border business decisions."},
+    {"id":12,"title":"Investment & Compound Growth Lab","focus":"Explain basic investment concepts, returns, compounding, diversification, time horizons, and risk using responsible language."},
+    {"id":13,"title":"Sustainable Finance Forum","focus":"Evaluate sustainability, ESG-related claims, responsible investment, long-term value, and the limits of simplified sustainability narratives."},
+    {"id":14,"title":"Economic Data Interpretation","focus":"Interpret tables, charts, indicators, trends, correlations, and uncertainty while avoiding unsupported conclusions."},
+    {"id":15,"title":"Professional Report Writing","focus":"Write a structured executive report that synthesises evidence, compares options, explains implications, and gives clearly qualified recommendations."},
+    {"id":16,"title":"Negotiation & Deal-Making Arena","focus":"Use advanced language for negotiation, concessions, priorities, objections, clarification, agreement, and strategic compromise."},
+    {"id":17,"title":"Investor Pitch Command","focus":"Deliver a persuasive but evidence-aware business pitch covering the problem, solution, market, model, risks, and growth plan."},
+    {"id":18,"title":"Crisis & Reputation Management","focus":"Respond to a business crisis with precise public communication, stakeholder analysis, corrective action, and reputation-sensitive language."},
+    {"id":19,"title":"World 7 Integration Quest","focus":"Integrate business reading, economic listening, data analysis, financial reasoning, report writing, negotiation, and presentation skills."},
+    {"id":20,"title":"C1+ Business & Financial Intelligence Master Challenge","focus":"Solve an integrated business and financial scenario using evidence-based analysis, risk language, strategic communication, and ethical decision-making."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Startup Strategy Room","description":"Evaluate a startup opportunity, analyse its business model and risks, interpret market information, and present a defensible growth strategy."},
+    {"title":"Personal Finance Planning Desk","description":"Create a realistic financial plan involving budgeting, cash flow, savings goals, uncertainty, and long-term trade-offs using responsible financial language."},
+    {"title":"Global Market Briefing","description":"Prepare and deliver a briefing on changing economic conditions, international trade, business risks, and possible strategic responses for a global organisation."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated business, economics, and financial intelligence assessment",
+    "components":["business reading","economic listening","market and data interpretation","financial scenario analysis","formal executive report","negotiation roleplay","investor pitch","strategic decision simulation"],
+    "successCriteria":["precise business and economic vocabulary","evidence-based economic reasoning","clear financial explanations","appropriate uncertainty and risk language","coherent professional reports","strategic negotiation and interaction","persuasive audience-aware presentation","ethical and responsible decision-making"]
+  }
+}
