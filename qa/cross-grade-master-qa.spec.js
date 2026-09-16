@@ -26,14 +26,24 @@ function mockAuth(role, grade) {
   };
 }
 
+function captureErrors(page) {
+  const pageErrors = [];
+  const consoleErrors = [];
+  page.on('pageerror', e => pageErrors.push(e.message));
+  page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
+  page.on('response', response => {
+    if (response.status() >= 400) {
+      consoleErrors.push(`HTTP ${response.status()}: ${response.url()}`);
+    }
+  });
+  return { pageErrors, consoleErrors };
+}
+
 test.describe('Cross-Grade Master QA — access matrix', () => {
   for (const requested of GRADES) {
     for (const studentGrade of GRADES) {
       test(`student G${studentGrade} -> G${requested}`, async ({ page }) => {
-        const pageErrors = [];
-        const consoleErrors = [];
-        page.on('pageerror', e => pageErrors.push(e.message));
-        page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
+        const { pageErrors, consoleErrors } = captureErrors(page);
         await mockAuth('student', studentGrade)({ page });
         await page.goto(`${BASE}/grade${requested}/`, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(500);
@@ -50,10 +60,7 @@ test.describe('Cross-Grade Master QA — access matrix', () => {
 
     for (const role of PRIVILEGED) {
       test(`${role} can enter G${requested}`, async ({ page }) => {
-        const pageErrors = [];
-        const consoleErrors = [];
-        page.on('pageerror', e => pageErrors.push(e.message));
-        page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
+        const { pageErrors, consoleErrors } = captureErrors(page);
         await mockAuth(role, 0)({ page });
         await page.goto(`${BASE}/grade${requested}/`, { waitUntil: 'domcontentloaded' });
         await page.waitForTimeout(500);
@@ -66,10 +73,7 @@ test.describe('Cross-Grade Master QA — access matrix', () => {
   }
 
   test('unauthenticated direct grade access fails closed', async ({ page }) => {
-    const pageErrors = [];
-    const consoleErrors = [];
-    page.on('pageerror', e => pageErrors.push(e.message));
-    page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
+    const { pageErrors, consoleErrors } = captureErrors(page);
     await page.goto(`${BASE}/grade2/`, { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveURL(/\/login\.html\?redirect=/);
     expect(pageErrors).toEqual([]);
@@ -98,10 +102,7 @@ test.describe('Cross-Grade Master QA — runtime isolation', () => {
 
   for (const grade of GRADES) {
     test(`G${grade} first mission has isolated topic and usable completion`, async ({ page }) => {
-      const pageErrors = [];
-      const consoleErrors = [];
-      page.on('pageerror', e => pageErrors.push(e.message));
-      page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
+      const { pageErrors, consoleErrors } = captureErrors(page);
       await mockAuth('student', grade)({ page });
       await page.addInitScript(g => {
         localStorage.setItem(`magic-neon-grade-${g}`, JSON.stringify({ current: 1, done: [], stars: 0, streak: 0 }));
