@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 4: C1+ MEDIA, TECHNOLOGY & DIGITAL INTELLIGENCE",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6400+ active words",
+    "reading": "3000–3600 words",
+    "listening": "40–48 min",
+    "speaking": "45–55 min",
+    "writing": "1200–1450 words",
+    "presentation": "22–28 min"
+  },
+  "grammar": [
+    "Advanced language for analysing media framing and perspective",
+    "Passive structures and agent focus in technical reporting",
+    "Modality and probability for forecasting technological change",
+    "Complex cause-and-effect and conditional structures",
+    "Nominalisation and information compression in digital discourse",
+    "Hedging, attribution, and responsible claims about technology",
+    "Register adaptation across technical, public, and professional audiences",
+    "Cohesion and rhetorical emphasis in digital presentations"
+  ],
+  "missions": [
+    {"id":1,"title":"Digital Intelligence Calibration","focus":"Evaluate digital information, identify purpose, audience, bias, and reliability."},
+    {"id":2,"title":"Media Framing Observatory","focus":"Analyse how wording, selection, headlines, and framing influence interpretation."},
+    {"id":3,"title":"News Verification Lab","focus":"Cross-check claims, compare sources, and distinguish verified information from speculation."},
+    {"id":4,"title":"Algorithm Awareness Reactor","focus":"Discuss recommendations, personalisation, data patterns, and the effects of algorithms."},
+    {"id":5,"title":"Technology Vocabulary Forge","focus":"Use precise language for AI, platforms, cybersecurity, data, automation, and innovation."},
+    {"id":6,"title":"AI Ethics Forum","focus":"Explore benefits, risks, accountability, privacy, fairness, and responsible technology use."},
+    {"id":7,"title":"Digital Privacy Mission","focus":"Explain privacy choices, consent, tracking, and responsible personal-data management."},
+    {"id":8,"title":"Cybersecurity Communication Lab","focus":"Describe digital threats, prevention strategies, and incident-response procedures clearly."},
+    {"id":9,"title":"Technical Text Expedition","focus":"Interpret complex technical explanations, processes, diagrams, and implied consequences."},
+    {"id":10,"title":"Future Forecasting Observatory","focus":"Make cautious predictions using evidence, probability, trends, and scenario language."},
+    {"id":11,"title":"Misinformation Detection Arena","focus":"Recognise manipulation, emotional framing, false certainty, and misleading presentation."},
+    {"id":12,"title":"Digital Debate Nexus","focus":"Discuss controversial technology issues while acknowledging competing perspectives."},
+    {"id":13,"title":"Product Research Studio","focus":"Compare digital tools using criteria, evidence, limitations, usability, and impact."},
+    {"id":14,"title":"Public Technology Briefing","focus":"Explain a complex digital topic accurately to a non-specialist audience."},
+    {"id":15,"title":"Responsible Content Creator","focus":"Create ethical, audience-aware digital content with accurate claims and clear structure."},
+    {"id":16,"title":"Innovation Pitch Command","focus":"Present a technology-based solution, justify its value, and address critical questions."},
+    {"id":17,"title":"Digital Crisis Simulator","focus":"Communicate transparently and calmly during a data, platform, or technology incident."},
+    {"id":18,"title":"Media Literacy Roundtable","focus":"Lead an extended discussion on media influence, technology, society, and responsibility."},
+    {"id":19,"title":"World 4 Integration Quest","focus":"Integrate media analysis, verification, ethics, technical communication, and presentation."},
+    {"id":20,"title":"C1+ Digital Intelligence Master Challenge","focus":"Complete an integrated media-and-technology challenge using evidence-based communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Breaking News Verification Desk","description":"Investigate conflicting reports, verify key claims, and deliver a balanced public briefing."},
+    {"title":"AI Product Ethics Review","description":"Evaluate a proposed AI product for usefulness, privacy, fairness, risks, and accountability."},
+    {"title":"Cyber Incident Communication Room","description":"Explain a digital incident to staff and customers while outlining responsible next steps."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated media, technology, and digital intelligence assessment",
+    "components":["media analysis","source verification","technical reading","advanced listening","ethical debate","digital risk explanation","public briefing","innovation presentation"],
+    "successCriteria":["critical media awareness","accurate and responsible claims","precise technology vocabulary","clear explanation of complex ideas","appropriate uncertainty and attribution","ethical reasoning","audience-aware communication","confident evidence-based presentation"]
+  }
+}
