@@ -1,0 +1,51 @@
+{
+  "grade": 7,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 2: ADVANCED COMMUNICATION CORE",
+  "level": "B2+",
+  "missionCount": 20,
+  "description": "World 2 strengthens advanced communication through discourse control, argumentation, nuanced vocabulary, authentic listening and extended written and spoken production.",
+  "targets": {
+    "vocabulary": "2700+ active words and phrases with collocations, idioms and academic-functional language",
+    "reading": "1700–2000 word texts with synthesis, evaluation and inference",
+    "listening": "17–20 minutes of authentic conversations, interviews and discussions",
+    "speaking": "22–27 minutes of sustained interaction, debate and explanation",
+    "writing": "600–750 words across argument, analysis and formal communication"
+  },
+  "grammar": [
+    "advanced discourse markers",
+    "subordination and sentence variety",
+    "modal nuance and stance",
+    "reported speech and reporting structures",
+    "advanced conditionals",
+    "passive and causative structures",
+    "nominalization and academic style",
+    "ellipsis and substitution",
+    "emphasis and information structure",
+    "hedging and diplomatic language"
+  ],
+  "missions": [
+    {"id":1,"title":"Collocation Power","focus":"natural advanced word combinations and lexical precision","skills":["vocabulary","speaking"]},
+    {"id":2,"title":"Discourse Marker Control","focus":"organizing ideas with precise linking and discourse signals","skills":["grammar","speaking","writing"]},
+    {"id":3,"title":"Nuanced Opinions","focus":"qualifying claims, expressing degrees of certainty and responding tactfully","skills":["speaking","pragmatics"]},
+    {"id":4,"title":"Reported Reality","focus":"reported speech, reporting verbs and source accuracy","skills":["grammar","reading","writing"]},
+    {"id":5,"title":"Advanced Conditionals Lab","focus":"complex hypothetical reasoning and alternative outcomes","skills":["grammar","problem-solving"]},
+    {"id":6,"title":"Causative & Passive Precision","focus":"advanced passive and causative structures in real contexts","skills":["grammar","writing"]},
+    {"id":7,"title":"Academic Style Upgrade","focus":"nominalization, formal vocabulary and concise academic expression","skills":["writing","vocabulary"]},
+    {"id":8,"title":"Natural Conversation Repair","focus":"clarifying, paraphrasing, interrupting politely and repairing communication","skills":["speaking","listening"]},
+    {"id":9,"title":"Debate Builder","focus":"claims, evidence, counterclaims and rebuttal","skills":["speaking","argumentation"]},
+    {"id":10,"title":"Interview Intelligence","focus":"understanding and responding to complex interview questions","skills":["listening","speaking"]},
+    {"id":11,"title":"Reading Lab — Conflicting Views","focus":"comparing viewpoints and identifying assumptions","skills":["reading","critical-thinking"]},
+    {"id":12,"title":"Listening Lab — Multiple Perspectives","focus":"tracking speakers, attitude and disagreement","skills":["listening","inference"]},
+    {"id":13,"title":"Argumentative Writing","focus":"developing a balanced evidence-based argument","skills":["writing","argumentation"]},
+    {"id":14,"title":"Professional Email & Report","focus":"clear formal communication for realistic workplace situations","skills":["writing","register"]},
+    {"id":15,"title":"Presentation Structure","focus":"opening, signposting, evidence, conclusion and Q&A","skills":["presentation","speaking"]},
+    {"id":16,"title":"Negotiation Workshop","focus":"offers, concessions, priorities and agreement","skills":["speaking","negotiation"]},
+    {"id":17,"title":"Problem-Solving Conference","focus":"collaborative decision making and solution language","skills":["speaking","listening"]},
+    {"id":18,"title":"Global English Simulation","focus":"international communication across travel, work and education","skills":["real-world-english","interaction"]},
+    {"id":19,"title":"World 2 Skills Marathon","focus":"integrated advanced language performance","skills":["integrated-mastery"]},
+    {"id":20,"title":"WORLD 2 MASTER QUEST — ADVANCED COMMUNICATION","focus":"independent capstone communication across complex real-world tasks","skills":["mastery","speaking","writing","listening","reading"]}
+  ],
+  "realWorldScenarios":["workplace meeting","formal email","academic debate","service complaint","negotiation","presentation Q&A","collaborative planning"],
+  "assessment":["lexical precision","grammar flexibility","reading evaluation","listening inference","speaking interaction","argumentative writing","formal register"]
+}
