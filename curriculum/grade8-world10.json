@@ -1,0 +1,58 @@
+{
+  "grade": 8,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 10: C1 FINAL MASTERY & GRADUATION QUEST",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "5500+ active words",
+    "reading": "2800–3200 words",
+    "listening": "35–40 min",
+    "speaking": "40–50 min",
+    "writing": "1100–1300 words",
+    "presentation": "20–25 min"
+  },
+  "grammar": [
+    "Integrated control of complex grammatical structures",
+    "Advanced cohesion, referencing, and discourse organisation",
+    "Subtle tense, aspect, modality, and stance choices",
+    "Inversion, emphasis, hedging, and sophisticated qualification",
+    "Ellipsis, substitution, nominalisation, and concise style",
+    "Advanced collocations, idiomatic language, and register control",
+    "Pragmatic competence across formal, neutral, and informal contexts",
+    "Self-editing, error analysis, and strategic language repair"
+  ],
+  "missions": [
+    { "id": 1, "title": "Graduation Readiness Scan", "focus": "Diagnose strengths and target remaining gaps across all C1 skills." },
+    { "id": 2, "title": "Master Vocabulary Constellation", "focus": "Activate precise academic, professional, social, and idiomatic vocabulary." },
+    { "id": 3, "title": "Complex Text Command", "focus": "Analyse demanding texts, structure arguments, and infer unstated meaning." },
+    { "id": 4, "title": "Listening Beyond the Surface", "focus": "Interpret rapid speech, nuanced viewpoints, humour, and implied attitudes." },
+    { "id": 5, "title": "Grammar Precision Reactor", "focus": "Apply advanced grammar accurately while communicating complex ideas." },
+    { "id": 6, "title": "Cohesion & Coherence Architect", "focus": "Build logically connected spoken and written discourse for different audiences." },
+    { "id": 7, "title": "Stance, Hedging & Persuasion Lab", "focus": "Express certainty, doubt, evaluation, and disagreement with precision." },
+    { "id": 8, "title": "Register-Shifting Portal", "focus": "Transform messages across academic, professional, public, and casual registers." },
+    { "id": 9, "title": "Advanced Negotiation Chamber", "focus": "Negotiate priorities, clarify conditions, and reach balanced agreements." },
+    { "id": 10, "title": "Global Collaboration Simulator", "focus": "Collaborate effectively with people from varied linguistic and cultural backgrounds." },
+    { "id": 11, "title": "Critical Response Arena", "focus": "Evaluate claims, challenge assumptions, and formulate evidence-based responses." },
+    { "id": 12, "title": "Unexpected Challenge Protocol", "focus": "Respond flexibly and strategically to unfamiliar real-world situations." },
+    { "id": 13, "title": "Professional Communication Trial", "focus": "Handle meetings, interviews, feedback, and difficult workplace conversations." },
+    { "id": 14, "title": "Long-Form Writing Observatory", "focus": "Produce a well-organised, nuanced, and audience-aware extended text." },
+    { "id": 15, "title": "Research-to-Insight Mission", "focus": "Synthesise multiple sources and communicate conclusions responsibly." },
+    { "id": 16, "title": "Graduation Presentation Stage", "focus": "Deliver a persuasive, structured presentation and manage challenging questions." },
+    { "id": 17, "title": "Live Fluency Recovery Lab", "focus": "Maintain communication through paraphrase, self-correction, and repair strategies." },
+    { "id": 18, "title": "Complete Real-World Roleplay", "focus": "Navigate integrated social, academic, travel, and professional scenarios." },
+    { "id": 19, "title": "C1 Portfolio Integration Quest", "focus": "Combine reading, listening, interaction, writing, and presentation into one portfolio." },
+    { "id": 20, "title": "Final C1 Mastery & Graduation Challenge", "focus": "Complete a comprehensive C1 capstone challenge and demonstrate independent communication." }
+  ],
+  "realWorldScenarios": [
+    { "title": "International Project Pitch", "description": "Present a practical project to a diverse audience, defend decisions, and respond to critical questions." },
+    { "title": "Complex Workplace Mediation", "description": "Clarify competing needs, manage disagreement respectfully, and develop an actionable agreement." },
+    { "title": "Independent Life Navigation", "description": "Resolve a multi-step travel, service, or community problem using confident and adaptable English." }
+  ],
+  "assessment": {
+    "level": "C1",
+    "type": "Final integrated C1 mastery and graduation assessment",
+    "components": ["advanced reading analysis", "nuanced listening", "spontaneous interaction", "extended writing", "research synthesis", "persuasive presentation", "real-world roleplay", "self-reflection portfolio"],
+    "successCriteria": ["consistent C1-level control", "clear and coherent communication", "flexible vocabulary and grammar", "appropriate register and pragmatic awareness", "effective interaction and repair", "independent critical thinking", "confident audience-focused delivery"]
+  }
+}
