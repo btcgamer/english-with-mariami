@@ -1,0 +1,55 @@
+{
+  "grade": 8,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 2: C1 DISCOURSE & ARGUMENTATION",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "3400+ active words",
+    "reading": "1900–2200 words",
+    "listening": "20–24 minutes",
+    "speaking": "25–30 minutes",
+    "writing": "650–800 words",
+    "presentation": "12–15 minutes"
+  },
+  "grammar": [
+    "advanced discourse markers",
+    "inversion for emphasis",
+    "cleft sentences",
+    "hedging and stance",
+    "complex noun phrases",
+    "advanced conditionals"
+  ],
+  "missions": [
+    {"mission":1,"title":"Discourse Intelligence Lab","focus":"Identify register, purpose, audience and discourse structure in advanced communication."},
+    {"mission":2,"title":"Precision Vocabulary Forge","focus":"Replace vague language with precise academic and professional vocabulary."},
+    {"mission":3,"title":"Argument Architecture","focus":"Build claims, evidence, warrants and counterclaims into a coherent argument."},
+    {"mission":4,"title":"Evidence Detective","focus":"Distinguish evidence, inference, assumption and unsupported assertion in complex texts."},
+    {"mission":5,"title":"Counterargument Arena","focus":"Anticipate opposing positions and respond with balanced, evidence-based language."},
+    {"mission":6,"title":"Hedging Command Center","focus":"Use cautious language to express degrees of certainty and avoid overclaiming."},
+    {"mission":7,"title":"Emphasis Engineering","focus":"Use inversion and cleft structures to highlight key information naturally."},
+    {"mission":8,"title":"Cohesion Matrix","focus":"Connect complex ideas using discourse markers, referencing and lexical cohesion."},
+    {"mission":9,"title":"Critical Reading Vault","focus":"Infer author stance, assumptions, implications and rhetorical choices."},
+    {"mission":10,"title":"Listening Between the Lines","focus":"Interpret implied meaning, attitude and speaker intention in extended audio."},
+    {"mission":11,"title":"Diplomatic Response Lab","focus":"Disagree, challenge and negotiate without damaging professional relationships."},
+    {"mission":12,"title":"Policy Brief Simulator","focus":"Turn complex evidence into a concise recommendation-focused briefing."},
+    {"mission":13,"title":"Debate Strategy Arena","focus":"Deliver structured arguments while adapting to unexpected counterpoints."},
+    {"mission":14,"title":"Academic Synthesis Lab","focus":"Combine ideas from multiple sources into one coherent synthesis."},
+    {"mission":15,"title":"Editorial Studio","focus":"Write a persuasive editorial using sophisticated stance and rhetorical techniques."},
+    {"mission":16,"title":"Executive Meeting Simulation","focus":"Lead a high-level discussion, clarify priorities and reach a defensible decision."},
+    {"mission":17,"title":"Complex Grammar Reactor","focus":"Integrate advanced conditionals, inversion, clefts and complex noun phrases in context."},
+    {"mission":18,"title":"C1 Presentation Command","focus":"Deliver a structured presentation with signposting, evidence and persuasive delivery."},
+    {"mission":19,"title":"World 2 Integration Quest","focus":"Integrate reading, listening, speaking, writing and argumentation under time pressure."},
+    {"mission":20,"title":"C1 Discourse Master Challenge","focus":"Complete a full advanced communication challenge demonstrating independent C1 performance."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Community Decision Forum","task":"Present a proposal, evaluate objections and negotiate a practical outcome."},
+    {"title":"Research Team Briefing","task":"Synthesize evidence and deliver a concise recommendation to a mixed audience."},
+    {"title":"International Meeting","task":"Handle disagreement, clarify ambiguity and reach a documented agreement."}
+  ],
+  "assessment": {
+    "format":"Integrated C1 World Assessment",
+    "components":["critical reading","extended listening","structured debate","analytical writing","presentation"],
+    "mastery":"Demonstrate precise, coherent and flexible C1 communication across academic and professional contexts."
+  }
+}
