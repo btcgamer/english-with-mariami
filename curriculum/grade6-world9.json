@@ -1,0 +1,177 @@
+{
+  "grade": 6,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 9: B2 ADVANCED INDEPENDENCE",
+  "level": "B2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "2200+ active vocabulary with advanced collocations, idioms, phrasal verbs, academic and professional expressions",
+    "reading": "1400–1600 words with inference, evaluation, synthesis and source comparison",
+    "listening": "14–16 minutes of natural multi-speaker input with varied accents and viewpoints",
+    "speaking": "18–22 minute sustained independent interaction, debate, negotiation and presentation",
+    "writing": "450–550 words with structured argument, synthesis and formal register",
+    "presentation": "10–12 minutes with evidence, signposting and audience interaction"
+  },
+  "grammar": [
+    "advanced tense and aspect in complex discourse",
+    "future in the past and perspective shifts",
+    "modal perfects and nuanced speculation",
+    "mixed and extended conditionals",
+    "advanced passive and impersonal reporting",
+    "reporting verbs and stance structures",
+    "participle clauses and reduced clauses",
+    "advanced relative clauses and complex noun phrases",
+    "inversion, fronting and cleft structures",
+    "ellipsis and substitution in natural discourse",
+    "discourse cohesion and information flow",
+    "hedging, certainty and diplomatic language",
+    "register and pragmatic precision",
+    "concession, rebuttal and counterargument"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Advanced Vocabulary Intelligence Lab",
+      "focus": "Build independent command of advanced vocabulary through collocations, idioms, phrasal verbs, word families and contextual precision.",
+      "skills": ["vocabulary", "collocation", "word formation", "fluency"]
+    },
+    {
+      "id": 2,
+      "title": "Perspective & Time Control",
+      "focus": "Shift accurately between past, present and future viewpoints while maintaining clear sequence and meaning in extended communication.",
+      "skills": ["grammar", "tense", "narrative", "speaking"]
+    },
+    {
+      "id": 3,
+      "title": "Speculation & Evidence Lab",
+      "focus": "Use modal perfects and evidence-based language to distinguish certainty, probability, possibility and inference.",
+      "skills": ["grammar", "deduction", "reasoning", "speaking"]
+    },
+    {
+      "id": 4,
+      "title": "Complex Conditional Strategy",
+      "focus": "Analyze hypothetical chains, alternative histories and future consequences using mixed and extended conditional structures.",
+      "skills": ["grammar", "reasoning", "problem solving", "discussion"]
+    },
+    {
+      "id": 5,
+      "title": "Reporting & Stance Control",
+      "focus": "Report information while controlling certainty, distance, attribution and personal stance through advanced reporting structures.",
+      "skills": ["grammar", "formal English", "reporting", "pragmatics"]
+    },
+    {
+      "id": 6,
+      "title": "Complex Sentence Engineering",
+      "focus": "Construct sophisticated sentences using participle clauses, reduced relatives, noun-phrase expansion and information compression.",
+      "skills": ["grammar", "writing", "sentence architecture"]
+    },
+    {
+      "id": 7,
+      "title": "Information Focus & Emphasis",
+      "focus": "Manipulate sentence structure with inversion, fronting and cleft constructions to highlight key information naturally.",
+      "skills": ["grammar", "emphasis", "speaking", "writing"]
+    },
+    {
+      "id": 8,
+      "title": "Natural Discourse Mastery",
+      "focus": "Use ellipsis, substitution, referencing and discourse markers to make extended communication concise, cohesive and natural.",
+      "skills": ["cohesion", "coherence", "listening", "speaking"]
+    },
+    {
+      "id": 9,
+      "title": "Pragmatics & Register Mission",
+      "focus": "Select language appropriate to relationship, purpose, power, context and degree of formality while remaining diplomatic.",
+      "skills": ["register", "pragmatics", "functional English", "interaction"]
+    },
+    {
+      "id": 10,
+      "title": "Independent B2 Discussion Arena",
+      "focus": "Lead a sustained discussion by introducing topics, developing ideas, challenging claims, clarifying meaning and summarizing outcomes.",
+      "skills": ["speaking", "leadership", "interaction", "fluency"]
+    },
+    {
+      "id": 11,
+      "title": "Reading Mastery — Compare & Evaluate Sources",
+      "focus": "Compare perspectives across extended texts, identify evidence quality, detect assumptions and synthesize key information.",
+      "skills": ["reading", "evaluation", "synthesis", "critical comprehension"]
+    },
+    {
+      "id": 12,
+      "title": "Listening Mastery — Voices & Viewpoints",
+      "focus": "Follow natural discussions with interruptions, implied meaning, changing attitudes, disagreement and multiple viewpoints.",
+      "skills": ["listening", "inference", "attitude", "detail"]
+    },
+    {
+      "id": 13,
+      "title": "B2+ Evidence-Based Essay",
+      "focus": "Write a 450–550 word structured argument that integrates evidence, concession, counterargument, rebuttal and conclusion.",
+      "skills": ["writing", "argumentation", "evidence", "cohesion"]
+    },
+    {
+      "id": 14,
+      "title": "Independent Report & Action Plan",
+      "focus": "Analyze a complex scenario, summarize findings and produce a formal action plan with justified recommendations.",
+      "skills": ["writing", "analysis", "professional English", "recommendation"]
+    },
+    {
+      "id": 15,
+      "title": "Executive Presentation Challenge",
+      "focus": "Deliver a 10–12 minute evidence-based presentation with clear signposting, comparison, persuasion and audience questions.",
+      "skills": ["presentation", "speaking", "persuasion", "interaction"]
+    },
+    {
+      "id": 16,
+      "title": "AI, Media & Society Investigation",
+      "focus": "Explore AI, misinformation, digital privacy, media influence and social change through evidence-based discussion and writing.",
+      "skills": ["speaking", "reading", "critical thinking", "vocabulary"]
+    },
+    {
+      "id": 17,
+      "title": "Global Travel & Public Services Mission",
+      "focus": "Independently solve complex travel, accommodation, transport and public-service situations through clarification and negotiation.",
+      "skills": ["functional English", "problem solving", "listening", "speaking"]
+    },
+    {
+      "id": 18,
+      "title": "High-Stakes Negotiation Simulation",
+      "focus": "Manage disagreement, priorities and competing interests while proposing solutions, making concessions and reaching agreement.",
+      "skills": ["negotiation", "diplomacy", "interaction", "fluency"]
+    },
+    {
+      "id": 19,
+      "title": "B2+ Independence Marathon",
+      "focus": "Complete a connected multi-stage challenge requiring source analysis, listening, spontaneous interaction, formal writing and presentation.",
+      "skills": ["reading", "listening", "speaking", "writing", "integration"]
+    },
+    {
+      "id": 20,
+      "title": "WORLD 9 MASTER QUEST — B2 ADVANCED INDEPENDENCE",
+      "focus": "Complete a fully independent real-world mission by analyzing information, making decisions, defending a position, negotiating and presenting a final solution.",
+      "skills": ["mastery", "B2+ independence", "decision making", "integrated communication"]
+    }
+  ],
+  "realWorldScenarios": [
+    "source comparison and information evaluation",
+    "AI and digital technology decisions",
+    "media literacy and misinformation",
+    "workplace problem solving",
+    "academic research discussion",
+    "international travel disruption",
+    "public-service negotiation",
+    "formal complaints and action plans",
+    "multi-party negotiation",
+    "evidence-based presentations"
+  ],
+  "assessment": [
+    "advanced B2 grammar range and flexibility",
+    "independent vocabulary selection and collocation control",
+    "sustained fluency with effective interaction strategies",
+    "understanding of explicit, implied and speaker-attitude meaning",
+    "comparison and synthesis of information from sources",
+    "evidence-based extended writing",
+    "formal and diplomatic register control",
+    "independent decision making in English",
+    "negotiation and counterargument skills",
+    "integrated B2+ real-world performance"
+  ]
+}
