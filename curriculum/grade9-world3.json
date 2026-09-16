@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 3: C1+ PROFESSIONAL LEADERSHIP & GLOBAL COMMUNICATION",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6200+ active words",
+    "reading": "3000–3600 words",
+    "listening": "40–48 min",
+    "speaking": "45–55 min",
+    "writing": "1200–1450 words",
+    "presentation": "22–28 min"
+  },
+  "grammar": [
+    "Advanced professional sentence design and information prioritisation",
+    "Modality, diplomacy, and degrees of obligation",
+    "Conditional and hypothetical language for strategic planning",
+    "Complex participle clauses and concise professional phrasing",
+    "Advanced discourse markers for negotiation and leadership",
+    "Indirect questions, softening, and diplomatic reformulation",
+    "Register adaptation across formal, neutral, and conversational contexts",
+    "Cohesion, emphasis, and precision in executive communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Leadership Communication Calibration","focus":"Assess communication goals, audience needs, tone, and leadership impact in complex situations."},
+    {"id":2,"title":"Executive Vocabulary Forge","focus":"Use precise language for strategy, performance, priorities, risk, and organisational change."},
+    {"id":3,"title":"Global Team Nexus","focus":"Communicate effectively with multicultural teams and adapt to different expectations."},
+    {"id":4,"title":"Strategic Briefing Observatory","focus":"Extract priorities, decisions, risks, and action points from complex professional briefings."},
+    {"id":5,"title":"Negotiation Tactics Arena","focus":"Clarify interests, make proposals, manage concessions, and reach workable agreements."},
+    {"id":6,"title":"Diplomatic Language Reactor","focus":"Use tactful phrasing, softeners, indirectness, and respectful disagreement."},
+    {"id":7,"title":"Conflict Resolution Lab","focus":"Diagnose communication breakdowns and guide difficult conversations toward solutions."},
+    {"id":8,"title":"Decision-Making Command","focus":"Compare options, evaluate trade-offs, and communicate reasoned decisions under pressure."},
+    {"id":9,"title":"Presentation Architecture Studio","focus":"Structure persuasive professional presentations with clear signposting and emphasis."},
+    {"id":10,"title":"High-Stakes Q&A Mission","focus":"Respond spontaneously to challenging questions while staying accurate and composed."},
+    {"id":11,"title":"Project Management Observatory","focus":"Discuss timelines, dependencies, responsibilities, milestones, and delivery risks."},
+    {"id":12,"title":"Feedback & Coaching Nexus","focus":"Give and receive specific, constructive feedback using supportive professional language."},
+    {"id":13,"title":"Crisis Communication Simulator","focus":"Deliver clear, credible, and audience-aware messages during uncertainty or disruption."},
+    {"id":14,"title":"Cross-Cultural Pragmatics Lab","focus":"Interpret indirect meaning, politeness norms, and culturally sensitive communication choices."},
+    {"id":15,"title":"Professional Writing Command","focus":"Write concise executive emails, reports, proposals, and decision summaries."},
+    {"id":16,"title":"Innovation Pitch Arena","focus":"Present an innovative idea, justify its value, address objections, and propose next steps."},
+    {"id":17,"title":"Stakeholder Alignment Quest","focus":"Balance competing priorities and build shared understanding among stakeholders."},
+    {"id":18,"title":"Leadership Roundtable","focus":"Lead an extended discussion, invite perspectives, summarise progress, and guide action."},
+    {"id":19,"title":"World 3 Integration Quest","focus":"Integrate negotiation, diplomacy, leadership, presentation, writing, and conflict-resolution skills."},
+    {"id":20,"title":"C1+ Global Leadership Master Challenge","focus":"Complete a demanding professional communication simulation with strategic decisions and public presentation."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Project Recovery","description":"Lead a multicultural team through a delayed project, negotiate priorities, and present a recovery plan."},
+    {"title":"Executive Negotiation Room","description":"Represent stakeholder interests, manage disagreement, and reach a balanced professional agreement."},
+    {"title":"Global Innovation Pitch","description":"Present a new initiative to an international panel, respond to critical questions, and secure next-step alignment."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated professional leadership and global communication assessment",
+    "components":["executive reading","professional listening","negotiation roleplay","conflict-resolution dialogue","formal writing","strategic presentation","high-stakes Q&A","multicultural leadership simulation"],
+    "successCriteria":["clear strategic communication","diplomatic and adaptable register","precise professional vocabulary","effective negotiation language","confident spontaneous interaction","constructive conflict management","coherent professional writing","audience-aware leadership delivery"]
+  }
+}
