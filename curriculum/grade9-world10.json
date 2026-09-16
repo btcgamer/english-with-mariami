@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 10: C1+ FINAL GLOBAL MASTERY & GRADUATION QUEST",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "8000+ active words",
+    "reading": "3500–4300 words",
+    "listening": "48–60 min",
+    "speaking": "55–70 min",
+    "writing": "1500–1800 words",
+    "presentation": "30–38 min"
+  },
+  "grammar": [
+    "Full-spectrum C1+ discourse control across academic, professional, civic, cultural, and scientific contexts",
+    "Advanced tense, aspect, modality, stance, and hypothetical reasoning",
+    "Sophisticated cohesion, reformulation, substitution, ellipsis, and information structure",
+    "Inversion, fronting, clefting, emphasis, and rhetorical control",
+    "Nominalisation, compression, and high-level formal written style",
+    "Advanced hedging, qualification, attribution, and evidence management",
+    "Fine control of register, pragmatics, politeness, and audience adaptation",
+    "Integrated error correction, self-monitoring, repair, and strategic communication"
+  ],
+  "missions": [
+    {"id":1,"title":"C1+ Global Diagnostic","focus":"Complete a multidomain diagnostic covering advanced reading, listening, vocabulary, grammar, interaction, writing, and presentation."},
+    {"id":2,"title":"Ultimate Vocabulary Forge","focus":"Consolidate high-frequency and specialised C1+ vocabulary, collocation, idiom, nuance, and precision across global domains."},
+    {"id":3,"title":"Discourse Mastery Observatory","focus":"Control complex discourse organisation, cohesion, emphasis, reformulation, and audience-aware information flow."},
+    {"id":4,"title":"Advanced Grammar Reactor","focus":"Apply sophisticated grammar accurately and flexibly while maintaining natural fluency under communicative pressure."},
+    {"id":5,"title":"Global Listening Command","focus":"Follow complex authentic speech, infer implied meaning, identify stance, distinguish evidence from interpretation, and track rapid shifts in topic."},
+    {"id":6,"title":"Critical Reading Nexus","focus":"Analyse demanding texts, evaluate arguments, identify assumptions, compare sources, and synthesise multiple perspectives."},
+    {"id":7,"title":"Research Synthesis Engine","focus":"Combine information from diverse sources into an accurate synthesis with attribution, qualification, and coherent conclusions."},
+    {"id":8,"title":"Complex Problem-Solving Arena","focus":"Solve a multidisciplinary real-world problem by defining constraints, comparing options, managing uncertainty, and communicating a defensible solution."},
+    {"id":9,"title":"Global Business Command","focus":"Handle an advanced professional scenario involving strategy, negotiation, risk, leadership, reporting, and cross-cultural communication."},
+    {"id":10,"title":"Science & Future Systems Lab","focus":"Explain scientific or technological developments, interpret evidence, communicate uncertainty, and assess practical and ethical implications."},
+    {"id":11,"title":"Law, Governance & Civic Forum","focus":"Analyse a complex institutional issue using careful evidence evaluation, policy language, stakeholder perspectives, and responsible public communication."},
+    {"id":12,"title":"Culture & Media Intelligence","focus":"Interpret cultural and media material while distinguishing observation, context, representation, evidence, and personal interpretation."},
+    {"id":13,"title":"Executive Writing Observatory","focus":"Produce a polished high-level report that synthesises evidence, compares alternatives, explains implications, and uses precise qualification."},
+    {"id":14,"title":"Diplomatic Interaction Nexus","focus":"Navigate disagreement, ambiguity, negotiation, clarification, repair, and relationship-sensitive communication in a demanding multilingual setting."},
+    {"id":15,"title":"Master Presentation Command","focus":"Deliver a sustained C1+ presentation with clear structure, persuasive reasoning, nuanced language, responsive interaction, and confident delivery."},
+    {"id":16,"title":"Spontaneous Speaking Arena","focus":"Respond to unexpected questions, challenge assumptions, reformulate ideas, and maintain precise spontaneous communication."},
+    {"id":17,"title":"Integrated Global Simulation","focus":"Complete a multi-stage simulation combining research, analysis, teamwork, negotiation, writing, listening, and public presentation."},
+    {"id":18,"title":"Personal Mastery & Repair Lab","focus":"Identify recurring language weaknesses, practise strategic self-correction, strengthen repair techniques, and demonstrate independent learning control."},
+    {"id":19,"title":"World 10 Graduation Integration Quest","focus":"Integrate the full Grade 9 skill system across academic, professional, civic, scientific, cultural, and interpersonal contexts."},
+    {"id":20,"title":"C1+ Global Mastery Graduation Challenge","focus":"Complete the final integrated challenge demonstrating flexible C1+ communication, critical thinking, strategic interaction, research synthesis, and audience-aware performance."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Global Leadership Summit","description":"Lead a multidisciplinary international briefing, analyse a complex global challenge, negotiate priorities with stakeholders, and present a coordinated action plan."},
+    {"title":"Future World Strategy Room","description":"Evaluate a rapidly changing future scenario using scientific, economic, technological, cultural, and civic evidence before defending a strategic response."},
+    {"title":"C1+ Graduation Capstone","description":"Research an ambitious real-world question, synthesise diverse evidence, produce an executive-quality written report, defend the analysis in discussion, and deliver a final public presentation."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated C1+ global mastery and graduation assessment",
+    "components":["advanced reading analysis","authentic listening inference","precision vocabulary and grammar","research synthesis","multidisciplinary problem solving","professional and diplomatic interaction","extended formal writing","final persuasive presentation"],
+    "successCriteria":["flexible and precise C1+ language control","coherent extended communication","advanced grammatical accuracy","nuanced vocabulary and collocation","independent critical reasoning","responsible evidence and attribution","strategic interaction and repair","strong register and pragmatic control","audience-aware professional presentation","confident independent communication across domains"]
+  }
+}
