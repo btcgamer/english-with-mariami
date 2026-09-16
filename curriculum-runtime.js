@@ -1,20 +1,29 @@
-/* MAGIC ENGLISH — Advanced Curriculum Runtime v2
-   Grades 5–12: curriculum world loader + mission completion layer.
+/* MAGIC ENGLISH — Advanced Curriculum Runtime v3
+   Grades 5–12: world loader + mission completion + XP/stars + progress + world unlocks.
    Intentionally isolated from the legacy Grade 2/3/4 lesson engine.
 */
 (function () {
   'use strict';
 
-  const DEFAULT_CONFIG = { root:'curriculum', worldCount:10, missionCount:20 };
+  const DEFAULT_CONFIG = { root:'curriculum', worldCount:10, missionCount:20, xpPerMission:50, starsPerMission:1 };
   const state = { grade:0, world:1, worldData:null, cache:new Map(), loading:false, completed:new Set() };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   const getConfig = () => Object.assign({}, DEFAULT_CONFIG, window.MAGIC_CURRICULUM_CONFIG || {});
+  const storageKey = grade => `magicCurriculumProgress:g${grade}`;
 
   function getGrade(){
     const value=(document.body&&Number(document.body.dataset.grade))||Number(window.MAGIC_CURRICULUM_GRADE);
     return Number.isInteger(value)?value:0;
   }
   function worldUrl(grade,world){ return `${String(getConfig().root).replace(/\/$/,'')}/grade${grade}-world${world}.json`; }
+  function missionNumber(item,index){ return Number(item.mission||item.id||index+1)||index+1; }
+  function missionKey(grade,world,number){ return `${grade}:${world}:${number}`; }
+  function completedInWorld(world){ return [...state.completed].filter(key=>key.startsWith(`${state.grade}:${world}:`)).length; }
+  function worldUnlocked(world){ return world===1 || completedInWorld(world-1) >= getConfig().missionCount; }
+  function completedTotal(){ return [...state.completed].filter(key=>key.startsWith(`${state.grade}:`)).length; }
+  function xpTotal(){ return completedTotal()*getConfig().xpPerMission; }
+  function starsTotal(){ return completedTotal()*getConfig().starsPerMission; }
+  function currentWorldProgress(){ return completedInWorld(state.world); }
 
   async function fetchWorld(grade,world){
     const key=`${grade}:${world}`;
@@ -27,20 +36,29 @@
     if(!data||Number(data.grade)!==grade||Number(data.world)!==world) throw new Error(`არასწორი curriculum ფაილი: Grade ${grade} World ${world}.`);
     if(!Array.isArray(data.missions)) throw new Error(`Grade ${grade} World ${world}: missions მასივი ვერ მოიძებნა.`);
   }
-  function missionNumber(item,index){ return Number(item.mission||item.id||index+1)||index+1; }
-  function missionKey(number){ return `${state.grade}:${state.world}:${number}`; }
+
+  function renderProgress(){
+    const q=s=>document.querySelector(s),xp=q('[data-curriculum-xp]'),stars=q('[data-curriculum-stars]'),world=q('[data-curriculum-world-progress]'),total=q('[data-curriculum-total-progress]'),status=q('[data-curriculum-world-status]');
+    if(xp)xp.textContent=xpTotal(); if(stars)stars.textContent=starsTotal();
+    if(world)world.textContent=`${currentWorldProgress()}/${getConfig().missionCount}`;
+    if(total)total.textContent=`${completedTotal()}/${getConfig().worldCount*getConfig().missionCount}`;
+    if(status){const next=state.world+1;if(next<=getConfig().worldCount)status.textContent=worldUnlocked(next)?`WORLD ${next} UNLOCKED`:`WORLD ${next} LOCKED • COMPLETE WORLD ${state.world}`;else status.textContent='ALL WORLDS COMPLETE • MASTER STATUS';}
+  }
 
   function renderWorldNav(host,grade,activeWorld){
     if(!host)return;
-    host.innerHTML=Array.from({length:getConfig().worldCount},(_,i)=>{const world=i+1;return `<button class="magic-world-btn ${world===activeWorld?'active':''}" data-curriculum-world="${world}">WORLD ${world}</button>`;}).join('');
-    host.querySelectorAll('[data-curriculum-world]').forEach(button=>button.addEventListener('click',()=>loadWorld(grade,Number(button.dataset.curriculumWorld))));
+    host.innerHTML=Array.from({length:getConfig().worldCount},(_,i)=>{
+      const world=i+1,unlocked=worldUnlocked(world),active=world===activeWorld;
+      return `<button class="magic-world-btn ${active?'active ':''}${unlocked?'':'is-locked'}" data-curriculum-world="${world}" ${unlocked?'':'disabled aria-disabled="true"'}>${unlocked?'WORLD':'🔒 WORLD'} ${world}</button>`;
+    }).join('');
+    host.querySelectorAll('[data-curriculum-world]:not(:disabled)').forEach(button=>button.addEventListener('click',()=>loadWorld(grade,Number(button.dataset.curriculumWorld))));
   }
   function renderTargets(targets){
     if(!targets||typeof targets!=='object')return '';
     return Object.entries(targets).map(([key,value])=>{const label=key.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase());return `<div class="magic-target"><small>${esc(label)}</small><strong>${esc(value)}</strong></div>`;}).join('');
   }
   function renderMissions(missions){
-    return missions.map((mission,index)=>{const number=missionNumber(mission,index),done=state.completed.has(missionKey(number)),title=mission.title||mission.name||`Mission ${number}`,focus=mission.focus||mission.description||mission.objective||'';return `<article class="magic-mission-card ${done?'is-complete':''}" data-mission="${esc(number)}"><div class="magic-mission-number">MISSION ${esc(number)} ${done?'✓':''}</div><h3>${esc(title)}</h3>${focus?`<p>${esc(focus)}</p>`:''}<button type="button" class="magic-mission-open" data-open-mission="${esc(number)}">${done?'REPLAY ↻':'ACTIVATE →'}</button></article>`;}).join('');
+    return missions.map((mission,index)=>{const number=missionNumber(mission,index),done=state.completed.has(missionKey(state.grade,state.world,number)),title=mission.title||mission.name||`Mission ${number}`,focus=mission.focus||mission.description||mission.objective||'';return `<article class="magic-mission-card ${done?'is-complete':''}" data-mission="${esc(number)}"><div class="magic-mission-number">MISSION ${esc(number)} ${done?'✓':''}</div><h3>${esc(title)}</h3>${focus?`<p>${esc(focus)}</p>`:''}<button type="button" class="magic-mission-open" data-open-mission="${esc(number)}">${done?'REPLAY ↻':'ACTIVATE →'}</button></article>`;}).join('');
   }
   function renderGenericList(value){
     if(!value)return '<div class="magic-empty">No data available.</div>';
@@ -51,6 +69,7 @@
     const q=s=>document.querySelector(s),title=q('[data-curriculum-title]'),level=q('[data-curriculum-level]'),targets=q('[data-curriculum-targets]'),missions=q('[data-curriculum-missions]'),scenarios=q('[data-curriculum-scenarios]'),assessment=q('[data-curriculum-assessment]');
     if(title)title.textContent=data.title||`Grade ${data.grade} World ${data.world}`; if(level)level.textContent=data.level||''; if(targets)targets.innerHTML=renderTargets(data.targets); if(missions)missions.innerHTML=renderMissions(data.missions||[]); if(scenarios)scenarios.innerHTML=renderGenericList(data.realWorldScenarios); if(assessment)assessment.innerHTML=renderGenericList(data.assessment);
     document.querySelectorAll('[data-open-mission]').forEach(button=>button.addEventListener('click',()=>openMission(Number(button.dataset.openMission))));
+    renderProgress(); renderWorldNav(document.querySelector('[data-curriculum-world-nav]'),state.grade,state.world);
   }
   function renderMissionDetail(mission){
     const omit=new Set(['mission','id','title','name']);
@@ -62,22 +81,33 @@
     const modal=document.querySelector('[data-curriculum-modal]'); if(!modal)return;
     const title=modal.querySelector('[data-curriculum-modal-title]'),body=modal.querySelector('[data-curriculum-modal-body]'),complete=modal.querySelector('[data-curriculum-complete]');
     if(title)title.textContent=`MISSION ${number} — ${mission.title||mission.name||'Mission'}`; if(body)body.innerHTML=renderMissionDetail(mission);
-    if(complete){complete.hidden=false;complete.disabled=false;complete.dataset.mission=String(number);complete.textContent=state.completed.has(missionKey(number))?'COMPLETED ✓':'MARK MISSION COMPLETE ✓';}
+    if(complete){complete.hidden=false;complete.disabled=state.completed.has(missionKey(state.grade,state.world,number));complete.dataset.mission=String(number);complete.textContent=state.completed.has(missionKey(state.grade,state.world,number))?'COMPLETED ✓':'MARK MISSION COMPLETE • +'+getConfig().xpPerMission+' XP • +'+getConfig().starsPerMission+' ★';}
     modal.hidden=false;modal.classList.add('open');
   }
   function markMissionComplete(number){
-    const key=missionKey(Number(number)); state.completed.add(key);
-    try{localStorage.setItem('magicCurriculumCompleted',JSON.stringify([...state.completed]));}catch(_){ }
+    const num=Number(number),key=missionKey(state.grade,state.world,num); if(state.completed.has(key))return;
+    state.completed.add(key);
+    try{localStorage.setItem(storageKey(state.grade),JSON.stringify([...state.completed]));}catch(_){ }
     renderWorld(state.worldData);
     const complete=document.querySelector('[data-curriculum-complete]'); if(complete){complete.textContent='COMPLETED ✓';complete.disabled=true;}
-    window.dispatchEvent(new CustomEvent('magicCurriculumMissionComplete',{detail:{grade:state.grade,world:state.world,mission:Number(number)}}));
+    window.dispatchEvent(new CustomEvent('magicCurriculumMissionComplete',{detail:{grade:state.grade,world:state.world,mission:num,xpEarned:getConfig().xpPerMission,starsEarned:getConfig().starsPerMission,xpTotal:xpTotal(),starsTotal:starsTotal()}}));
   }
-  function restoreProgress(){try{const saved=JSON.parse(localStorage.getItem('magicCurriculumCompleted')||'[]');if(Array.isArray(saved))saved.forEach(key=>state.completed.add(String(key)));}catch(_){ }}
+  function restoreProgress(){
+    try{
+      const current=JSON.parse(localStorage.getItem(storageKey(state.grade))||'null');
+      if(Array.isArray(current)){current.forEach(key=>state.completed.add(String(key)));return;}
+      const legacy=JSON.parse(localStorage.getItem('magicCurriculumCompleted')||'[]');
+      if(Array.isArray(legacy))legacy.filter(key=>String(key).startsWith(`${state.grade}:`)).forEach(key=>state.completed.add(String(key)));
+      if(state.completed.size)localStorage.setItem(storageKey(state.grade),JSON.stringify([...state.completed]));
+    }catch(_){ }
+  }
 
   async function loadWorld(grade,world){
-    if(state.loading)return; state.loading=true;
+    if(state.loading)return;
+    if(!worldUnlocked(world)){renderProgress();const errorHost=document.querySelector('[data-curriculum-error]');if(errorHost){errorHost.hidden=false;errorHost.textContent=`WORLD ${world} ჩაკეტილია. ჯერ დაასრულე WORLD ${world-1} — ${getConfig().missionCount}/${getConfig().missionCount} მისია.`;}return;}
+    state.loading=true;
     const loading=document.querySelector('[data-curriculum-loading]'),errorHost=document.querySelector('[data-curriculum-error]'); if(loading)loading.hidden=false; if(errorHost)errorHost.hidden=true;
-    try{const data=await fetchWorld(grade,world);state.grade=grade;state.world=world;state.worldData=data;renderWorld(data);renderWorldNav(document.querySelector('[data-curriculum-world-nav]'),grade,world);window.dispatchEvent(new CustomEvent('magicCurriculumWorldLoaded',{detail:{grade,world,data}}));}
+    try{const data=await fetchWorld(grade,world);state.grade=grade;state.world=world;state.worldData=data;renderWorld(data);window.dispatchEvent(new CustomEvent('magicCurriculumWorldLoaded',{detail:{grade,world,data}}));}
     catch(error){console.error('[Magic Curriculum]',error);if(errorHost){errorHost.hidden=false;errorHost.textContent=error.message||'Curriculum ჩატვირთვა ვერ მოხერხდა.';}}
     finally{state.loading=false;if(loading)loading.hidden=true;}
   }
@@ -88,8 +118,8 @@
     modal.addEventListener('click',event=>{if(event.target===modal)close();}); document.addEventListener('keydown',event=>{if(event.key==='Escape')close();});
   }
   async function boot(){
-    const grade=getGrade(); if(!grade||grade<5)return; restoreProgress();
-    window.MagicCurriculum={state,loadWorld,fetchWorld,openMission,markMissionComplete,worldUrl}; bindModal();
+    const grade=getGrade(); if(!grade||grade<5)return; state.grade=grade; restoreProgress();
+    window.MagicCurriculum={state,loadWorld,fetchWorld,openMission,markMissionComplete,worldUrl,worldUnlocked,xpTotal,starsTotal,completedTotal}; bindModal();
     const requestedWorld=Number(new URLSearchParams(window.location.search).get('world'))||1; await loadWorld(grade,Math.min(Math.max(requestedWorld,1),getConfig().worldCount));
   }
   boot();
