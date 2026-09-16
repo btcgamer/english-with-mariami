@@ -1,0 +1,174 @@
+{
+  "grade": 6,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 7: B2 CORE COMMUNICATION",
+  "level": "B2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "1800+ active vocabulary, collocations, phrasal verbs, idiomatic language, academic and functional expressions",
+    "reading": "1200–1400 words",
+    "listening": "12–14 minutes with natural multi-speaker and authentic-style input",
+    "speaking": "15–18 minute sustained discussion, debate and interaction",
+    "writing": "350–450 words",
+    "presentation": "8–10 minutes"
+  },
+  "grammar": [
+    "advanced tense and aspect contrast",
+    "narrative and perfect forms",
+    "advanced modals, deduction and nuance",
+    "mixed conditionals and hypothetical reasoning",
+    "passive reporting structures",
+    "reported speech and advanced reporting verbs",
+    "participle clauses",
+    "advanced relative clauses and sentence compression",
+    "inversion and emphasis",
+    "cleft sentences and focus",
+    "discourse markers and cohesion/coherence",
+    "hedging, stance and register",
+    "complex noun phrases and academic style",
+    "argumentation, counterargument and rebuttal"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "B2 Vocabulary & Collocation Lab",
+      "focus": "Expand precise B2 vocabulary through collocations, phrasal verbs, idioms and word families.",
+      "skills": ["vocabulary", "collocation", "word formation", "speaking"]
+    },
+    {
+      "id": 2,
+      "title": "Advanced Tense & Aspect Control",
+      "focus": "Choose advanced tense and aspect forms to express sequence, duration, completion and narrative perspective.",
+      "skills": ["grammar", "accuracy", "storytelling"]
+    },
+    {
+      "id": 3,
+      "title": "Modals, Deduction & Nuance",
+      "focus": "Use modal structures to express certainty, probability, criticism, obligation, speculation and past deduction.",
+      "skills": ["grammar", "meaning", "speaking"]
+    },
+    {
+      "id": 4,
+      "title": "Conditionals & Hypothetical Reasoning",
+      "focus": "Handle third, mixed and extended conditional structures while explaining consequences and alternative outcomes.",
+      "skills": ["grammar", "reasoning", "discussion"]
+    },
+    {
+      "id": 5,
+      "title": "Passive & Reporting Mastery",
+      "focus": "Transform information using passive reporting structures, reporting verbs and formal information patterns.",
+      "skills": ["grammar", "formal English", "reporting"]
+    },
+    {
+      "id": 6,
+      "title": "Advanced Relative Clauses & Compression",
+      "focus": "Combine ideas efficiently with defining and non-defining relative clauses and reduced structures.",
+      "skills": ["grammar", "sentence building", "writing"]
+    },
+    {
+      "id": 7,
+      "title": "Participle Clauses & Complex Sentences",
+      "focus": "Use participle clauses and complex sentence patterns to create concise, sophisticated communication.",
+      "skills": ["grammar", "writing", "sentence architecture"]
+    },
+    {
+      "id": 8,
+      "title": "Emphasis, Inversion & Focus",
+      "focus": "Use inversion, cleft sentences and focus structures to highlight important information naturally.",
+      "skills": ["grammar", "emphasis", "speaking"]
+    },
+    {
+      "id": 9,
+      "title": "Cohesion, Coherence & Discourse Markers",
+      "focus": "Build longer spoken and written texts with clear logical links, referencing, sequencing and contrast.",
+      "skills": ["cohesion", "coherence", "writing", "speaking"]
+    },
+    {
+      "id": 10,
+      "title": "B2 Debate & Discussion Lab",
+      "focus": "Present a position, justify claims, challenge ideas, ask follow-up questions and respond to counterarguments.",
+      "skills": ["speaking", "interaction", "argumentation", "fluency"]
+    },
+    {
+      "id": 11,
+      "title": "Reading Mastery — Argument & Author Purpose",
+      "focus": "Identify arguments, evidence, assumptions, tone, author purpose and implied meaning in extended texts.",
+      "skills": ["reading", "inference", "critical comprehension"]
+    },
+    {
+      "id": 12,
+      "title": "Listening Mastery — Multiple Perspectives",
+      "focus": "Follow natural conversations and discussions involving different speakers, attitudes, opinions and implied meanings.",
+      "skills": ["listening", "inference", "speaker attitude"]
+    },
+    {
+      "id": 13,
+      "title": "B2 Writing — Argumentative Essay",
+      "focus": "Write a structured 350–450 word argument with a clear position, developed reasons, examples, counterargument and conclusion.",
+      "skills": ["writing", "argumentation", "cohesion"]
+    },
+    {
+      "id": 14,
+      "title": "Formal Proposal & Report Writing",
+      "focus": "Produce organized formal proposals and reports using appropriate register, headings, evidence and recommendations.",
+      "skills": ["writing", "formal register", "organization"]
+    },
+    {
+      "id": 15,
+      "title": "Presentation Mastery — Explain, Compare, Persuade",
+      "focus": "Deliver an 8–10 minute presentation that explains information, compares options and persuades an audience.",
+      "skills": ["presentation", "speaking", "organization", "persuasion"]
+    },
+    {
+      "id": 16,
+      "title": "Media, Technology & Society Simulation",
+      "focus": "Discuss digital life, media influence, technology choices and social change using evidence and nuanced language.",
+      "skills": ["speaking", "vocabulary", "discussion", "critical thinking"]
+    },
+    {
+      "id": 17,
+      "title": "Work, Study & Professional Communication",
+      "focus": "Handle meetings, academic discussion, workplace communication, requests, feedback and professional problem solving.",
+      "skills": ["functional English", "professional communication", "interaction"]
+    },
+    {
+      "id": 18,
+      "title": "Negotiation & Conflict Resolution",
+      "focus": "Clarify needs, propose compromises, disagree respectfully, negotiate solutions and resolve communication problems.",
+      "skills": ["negotiation", "interaction", "fluency", "pragmatics"]
+    },
+    {
+      "id": 19,
+      "title": "B2 Integrated Skills Marathon",
+      "focus": "Complete a connected reading, listening, speaking and writing challenge built around one complex real-world scenario.",
+      "skills": ["reading", "listening", "speaking", "writing", "integration"]
+    },
+    {
+      "id": 20,
+      "title": "WORLD 7 MASTER QUEST — B2 CORE COMMUNICATION",
+      "focus": "Complete a final B2 communication mission combining advanced grammar, vocabulary, comprehension, argumentation, presentation and real-world interaction.",
+      "skills": ["mastery", "B2 communication", "independence", "integrated skills"]
+    }
+  ],
+  "realWorldScenarios": [
+    "academic discussion and debate",
+    "workplace meetings and professional communication",
+    "media and technology conversations",
+    "travel and public-service interactions",
+    "formal complaints and requests",
+    "negotiation and compromise",
+    "presentations and persuasive speaking",
+    "community and social issues",
+    "problem solving and decision making"
+  ],
+  "assessment": [
+    "B2 grammar range and control",
+    "fluency and interaction management",
+    "comprehension of main ideas, details, inference and attitude",
+    "coherent and well-structured writing",
+    "precise vocabulary and collocation use",
+    "appropriate register and pragmatic control",
+    "ability to justify opinions and respond to counterarguments",
+    "independent real-world communication"
+  ]
+}
