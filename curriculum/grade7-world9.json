@@ -1,0 +1,180 @@
+{
+  "grade": 7,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 9: C1 ADVANCED FLUENCY & REAL-WORLD MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "A high-level real-world English mastery world focused on spontaneous fluency, nuanced communication, complex situations, and independent performance across everyday, professional, academic, and global contexts.",
+  "targets": {
+    "vocabulary": "4300+ active words and high-frequency C1 collocations",
+    "reading": "2300–3000 words with inference, stance, tone, and synthesis",
+    "listening": "24–30 minutes of authentic multi-speaker and fast-paced English",
+    "speaking": "28–38 minutes of spontaneous, interactive C1 communication",
+    "writing": "900–1100 words across practical, analytical, and persuasive tasks",
+    "presentation": "14–18 minute structured presentation with unscripted Q&A",
+    "realWorldFluency": true,
+    "independentCommunication": true
+  },
+  "grammar": [
+    "Advanced tense and aspect choices for viewpoint and emphasis",
+    "Modal and semi-modal systems for probability, obligation, criticism, and deduction",
+    "Modal perfects in nuanced real and hypothetical contexts",
+    "Complex conditional and mixed conditional structures",
+    "Advanced passive and reporting structures",
+    "Nominalization and information-dense sentence design",
+    "Participial and reduced clauses for concise communication",
+    "Inversion, fronting, clefting, and emphasis",
+    "Advanced relative clauses, apposition, and complex noun phrases",
+    "Ellipsis, substitution, parallelism, and discourse cohesion",
+    "Concession, qualification, hedging, boosting, and stance control",
+    "Register shifting and pragmatic grammar choices"
+  ],
+  "missions": [
+    {
+      "mission": 1,
+      "title": "Real-World Fluency Engine",
+      "focus": "Build spontaneous C1 responses through rapid vocabulary retrieval, paraphrase, and flexible sentence formation.",
+      "skills": ["speaking", "vocabulary", "paraphrasing", "fluency"]
+    },
+    {
+      "mission": 2,
+      "title": "Nuance & Meaning Control",
+      "focus": "Distinguish subtle differences in certainty, attitude, implication, intensity, and interpersonal meaning.",
+      "skills": ["vocabulary", "grammar", "pragmatics", "speaking"]
+    },
+    {
+      "mission": 3,
+      "title": "Spontaneous Conversation Lab",
+      "focus": "Maintain natural conversations while responding, clarifying, reformulating, and extending ideas without scripts.",
+      "skills": ["speaking", "listening", "interaction"]
+    },
+    {
+      "mission": 4,
+      "title": "Difficult Conversation Arena",
+      "focus": "Handle disagreement, criticism, misunderstanding, and sensitive topics with precise and diplomatic English.",
+      "skills": ["speaking", "pragmatics", "conflict-resolution"]
+    },
+    {
+      "mission": 5,
+      "title": "Decision & Advice Command",
+      "focus": "Compare options, explain trade-offs, give qualified recommendations, and defend decisions under pressure.",
+      "skills": ["speaking", "reasoning", "modal-language"]
+    },
+    {
+      "mission": 6,
+      "title": "Storytelling & Perspective Lab",
+      "focus": "Use advanced tense, aspect, emphasis, and narrative structure to tell complex stories and control perspective.",
+      "skills": ["speaking", "grammar", "narrative"]
+    },
+    {
+      "mission": 7,
+      "title": "Problem-Solving War Room",
+      "focus": "Collaboratively diagnose problems, challenge assumptions, propose solutions, and negotiate priorities.",
+      "skills": ["speaking", "collaboration", "negotiation"]
+    },
+    {
+      "mission": 8,
+      "title": "Negotiation & Persuasion Lab",
+      "focus": "Use persuasive language, concessions, hedging, framing, and strategic questions in complex negotiations.",
+      "skills": ["speaking", "persuasion", "pragmatics"]
+    },
+    {
+      "mission": 9,
+      "title": "Cross-Cultural Communication Arena",
+      "focus": "Adapt tone, directness, politeness, and conversational strategy across international communication contexts.",
+      "skills": ["speaking", "pragmatics", "intercultural-communication"]
+    },
+    {
+      "mission": 10,
+      "title": "High-Stakes Conversation Mission",
+      "focus": "Sustain clear, calm, and precise communication during interviews, complaints, urgent requests, and difficult questions.",
+      "skills": ["speaking", "listening", "real-world-communication"]
+    },
+    {
+      "mission": 11,
+      "title": "Authentic Reading Intelligence",
+      "focus": "Analyze long-form authentic texts for argument, tone, assumptions, evidence, implication, and author stance.",
+      "skills": ["reading", "critical-thinking", "inference"]
+    },
+    {
+      "mission": 12,
+      "title": "Fast Listening Command",
+      "focus": "Understand natural-speed speech, reduced forms, interruptions, multiple speakers, implied meaning, and changing viewpoints.",
+      "skills": ["listening", "note-taking", "inference"]
+    },
+    {
+      "mission": 13,
+      "title": "Real-World Writing Studio",
+      "focus": "Produce polished messages, explanations, complaints, proposals, and responses with appropriate tone and structure.",
+      "skills": ["writing", "register", "cohesion"]
+    },
+    {
+      "mission": 14,
+      "title": "Argument & Counterargument Lab",
+      "focus": "Build balanced arguments, acknowledge limitations, address counterclaims, and control claim strength precisely.",
+      "skills": ["writing", "reasoning", "persuasion"]
+    },
+    {
+      "mission": 15,
+      "title": "Presentation Under Pressure",
+      "focus": "Deliver a structured presentation and handle unexpected audience questions with spontaneous C1 responses.",
+      "skills": ["presentation", "speaking", "listening"]
+    },
+    {
+      "mission": 16,
+      "title": "Media & Information Reality Lab",
+      "focus": "Interpret headlines, interviews, commentary, claims, framing, and competing perspectives in modern media.",
+      "skills": ["reading", "listening", "critical-thinking"]
+    },
+    {
+      "mission": 17,
+      "title": "Global Life Simulation",
+      "focus": "Navigate travel, services, work, education, technology, healthcare, and social situations through integrated English tasks.",
+      "skills": ["speaking", "listening", "reading", "real-world-communication"]
+    },
+    {
+      "mission": 18,
+      "title": "Independent English Challenge",
+      "focus": "Complete a multi-stage mission with minimal scaffolding, selecting strategies and language independently.",
+      "skills": ["integrated-skills", "autonomy", "problem-solving"]
+    },
+    {
+      "mission": 19,
+      "title": "World 9 Integrated Fluency Marathon",
+      "focus": "Combine advanced vocabulary, grammar, reading, listening, speaking, writing, and presentation skills in one continuous challenge.",
+      "skills": ["integrated-skills", "fluency", "assessment"]
+    },
+    {
+      "mission": 20,
+      "title": "WORLD 9 MASTER QUEST — C1 ADVANCED FLUENCY & REAL-WORLD MASTERY",
+      "focus": "Complete an end-to-end C1 real-world simulation requiring spontaneous communication, interpretation, decision-making, writing, negotiation, and presentation.",
+      "skills": ["mastery", "integrated-skills", "real-world-performance"]
+    }
+  ],
+  "realWorldScenarios": [
+    "International travel and service problem-solving",
+    "Job interview and workplace communication",
+    "Customer support and complaint resolution",
+    "Team decision-making and project meetings",
+    "Negotiation and conflict mediation",
+    "Cross-cultural social communication",
+    "Media interpretation and information evaluation",
+    "Academic discussion and presentation",
+    "Professional email, proposal, and report communication",
+    "High-stakes spontaneous conversation"
+  ],
+  "assessment": {
+    "format": "Integrated C1 performance assessment",
+    "components": [
+      "advanced vocabulary and collocation control",
+      "grammar precision and flexibility",
+      "authentic reading comprehension",
+      "natural-speed listening comprehension",
+      "spontaneous speaking and interaction",
+      "real-world writing",
+      "negotiation and problem-solving",
+      "presentation and unscripted Q&A"
+    ],
+    "masteryStandard": "Learner can communicate independently and effectively across complex real-world contexts, adapting language, register, tone, and strategy with C1-level control."
+  }
+}
