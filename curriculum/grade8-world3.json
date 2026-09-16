@@ -1,0 +1,55 @@
+{
+  "grade": 8,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 3: C1 GLOBAL COMMUNICATION & CULTURAL INTELLIGENCE",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "3600+ active words",
+    "reading": "2000–2300 words",
+    "listening": "22–26 minutes",
+    "speaking": "25–32 minutes",
+    "writing": "700–850 words",
+    "presentation": "12–16 minutes"
+  },
+  "grammar": [
+    "advanced modality",
+    "reported speech in complex contexts",
+    "ellipsis and substitution",
+    "nominalisation",
+    "parallel structures",
+    "register shifting"
+  ],
+  "missions": [
+    {"mission":1,"title":"Global Communication Lab","focus":"Adapt language, tone and structure for international audiences and complex communication goals."},
+    {"mission":2,"title":"Culture Codebreaker","focus":"Recognise how cultural expectations affect meaning, politeness and interaction."},
+    {"mission":3,"title":"Register Shift Reactor","focus":"Move accurately between informal, neutral, academic and professional registers."},
+    {"mission":4,"title":"Diplomacy Intelligence","focus":"Use tactful language to handle sensitive disagreement and competing interests."},
+    {"mission":5,"title":"Cross-Cultural Negotiation","focus":"Negotiate priorities while identifying indirect meanings and cultural assumptions."},
+    {"mission":6,"title":"Global Media Decoder","focus":"Analyse framing, tone, bias signals and audience positioning in international media."},
+    {"mission":7,"title":"Advanced Modality Forge","focus":"Express obligation, probability, criticism and recommendation with precise modality."},
+    {"mission":8,"title":"Reported Speech Matrix","focus":"Report complex statements while preserving stance, nuance and source distance."},
+    {"mission":9,"title":"Meaning Beyond Words","focus":"Infer implied intentions from context, hesitation, emphasis and conversational choices."},
+    {"mission":10,"title":"International Listening Vault","focus":"Follow extended discussions involving accents, interruptions and shifting viewpoints."},
+    {"mission":11,"title":"Conflict Resolution Arena","focus":"Clarify misunderstandings, reframe conflict and move conversations toward agreement."},
+    {"mission":12,"title":"Global Project Briefing","focus":"Explain project goals, risks, responsibilities and timelines to a diverse team."},
+    {"mission":13,"title":"Intercultural Debate","focus":"Defend a position while accurately representing and responding to alternative perspectives."},
+    {"mission":14,"title":"Global Research Synthesis","focus":"Synthesize perspectives from multiple cultural and professional sources."},
+    {"mission":15,"title":"International Editorial Studio","focus":"Write a nuanced editorial for an informed global audience."},
+    {"mission":16,"title":"Multinational Meeting Simulation","focus":"Manage turn-taking, clarification, disagreement and decision-making in a global meeting."},
+    {"mission":17,"title":"Register & Style Mastery","focus":"Edit complex communication for audience, purpose, tone and cultural appropriateness."},
+    {"mission":18,"title":"Global Presentation Command","focus":"Deliver a persuasive presentation that anticipates an international audience's needs."},
+    {"mission":19,"title":"World 3 Integration Quest","focus":"Combine intercultural reading, listening, negotiation, writing and speaking under pressure."},
+    {"mission":20,"title":"C1 Global Communication Master","focus":"Complete an integrated challenge demonstrating flexible, precise and culturally aware C1 communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Student Summit","task":"Present a proposal, respond to cultural concerns and negotiate a shared action plan."},
+    {"title":"Global Project Crisis","task":"Lead a multilingual team through a misunderstanding, clarify responsibilities and restore alignment."},
+    {"title":"Cross-Cultural Negotiation Room","task":"Reach a workable agreement while balancing different communication styles and priorities."}
+  ],
+  "assessment": {
+    "format":"Integrated C1 Global Communication Assessment",
+    "components":["intercultural reading","extended listening","negotiation","analytical writing","global presentation"],
+    "mastery":"Demonstrate precise, adaptable and culturally intelligent communication across international academic, social and professional contexts."
+  }
+}
