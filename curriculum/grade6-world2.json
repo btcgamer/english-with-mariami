@@ -1,0 +1,203 @@
+{
+  "grade": 6,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 2: A2+ TO B1 BRIDGE",
+  "level": "A2+ → B1",
+  "theme": "Communication, Grammar Control & Independent English",
+  "description": "A high-volume bridge world designed to move Grade 6 learners from confident A2+ communication toward independent B1 English through richer vocabulary, connected speech, longer texts, multi-speaker listening, sustained conversation, practical writing and realistic problem-solving.",
+  "targets": {
+    "active_vocabulary": "1000+ words, collocations, phrasal verbs and functional expressions",
+    "reading": "750–900 words per extended reading mission",
+    "listening": "7–9 minutes, including natural-speed multi-speaker conversations and announcements",
+    "speaking": "8–10 minutes of sustained interaction, explanation and role-play",
+    "writing": "220–260 words with paragraph structure, linking and clear purpose",
+    "grammar": [
+      "Present Perfect vs Past Simple",
+      "Past Continuous and narrative sequencing",
+      "Past Perfect introduction and controlled use",
+      "Future forms: will, going to and Present Continuous",
+      "Modal verbs for obligation, advice, possibility and deduction",
+      "First Conditional and Second Conditional foundations",
+      "Relative clauses",
+      "Gerunds and infinitives in common patterns",
+      "Articles, quantifiers and determiners",
+      "Comparatives, superlatives and degree",
+      "Question forms and indirect questions",
+      "Linking words, clauses and paragraph cohesion",
+      "Reported speech foundations"
+    ],
+    "real_life": [
+      "travel and accommodation",
+      "shopping and customer service",
+      "health and pharmacy",
+      "school and study",
+      "work and future plans",
+      "phone calls and appointments",
+      "public transport",
+      "digital communication",
+      "complaints and solutions",
+      "emergency and safety communication"
+    ]
+  },
+  "missions": [
+    {
+      "id": 1,
+      "title": "Vocabulary Engine — Words That Work Together",
+      "focus": "collocations, word families, phrasal verbs and functional phrases",
+      "skills": ["vocabulary", "pronunciation", "speaking", "writing"],
+      "challenge": "Use new words naturally in complete sentences instead of isolated memorization."
+    },
+    {
+      "id": 2,
+      "title": "Present Perfect vs Past Simple — Time Detective",
+      "focus": "finished time, life experience, recent events, ever/never, already/yet/just",
+      "skills": ["grammar", "reading", "speaking", "exercises"],
+      "challenge": "Choose the tense from meaning and time reference, then explain the choice."
+    },
+    {
+      "id": 3,
+      "title": "Story Control — Past, Past Continuous & Past Perfect",
+      "focus": "narrative sequence, background actions and earlier events",
+      "skills": ["grammar", "reading", "listening", "storytelling"],
+      "challenge": "Rebuild a mixed-up story and retell it using accurate narrative tenses."
+    },
+    {
+      "id": 4,
+      "title": "Future Mission — Plans, Predictions & Decisions",
+      "focus": "will, going to, Present Continuous and spontaneous decisions",
+      "skills": ["grammar", "speaking", "listening", "real-life English"],
+      "challenge": "Discuss plans, predictions and decisions while selecting the most natural future form."
+    },
+    {
+      "id": 5,
+      "title": "Modal Power — Rules, Advice, Possibility & Deduction",
+      "focus": "must, have to, should, may, might, could, must be and can't be",
+      "skills": ["grammar", "speaking", "listening", "problem solving"],
+      "challenge": "Interpret what a speaker means from context and degree of certainty."
+    },
+    {
+      "id": 6,
+      "title": "Conditional Lab — Real Choices & Possible Worlds",
+      "focus": "zero/first conditional review and second conditional foundation",
+      "skills": ["grammar", "speaking", "writing", "decision making"],
+      "challenge": "Solve realistic situations using conditions, consequences and hypothetical ideas."
+    },
+    {
+      "id": 7,
+      "title": "Sentence Builder — Add Detail Without Losing Clarity",
+      "focus": "relative clauses, conjunctions, dependent clauses and sentence expansion",
+      "skills": ["grammar", "writing", "reading"],
+      "challenge": "Transform short sentences into connected B1-style sentences without creating confusion."
+    },
+    {
+      "id": 8,
+      "title": "People & Relationships — Describe, Compare & Understand",
+      "focus": "personality, relationships, emotions, behavior and social situations",
+      "skills": ["vocabulary", "reading", "speaking", "conversation"],
+      "challenge": "Describe people precisely and support observations with reasons and examples."
+    },
+    {
+      "id": 9,
+      "title": "Technology & Media — Information Everywhere",
+      "focus": "devices, apps, online behavior, media, information and digital communication",
+      "skills": ["vocabulary", "reading", "listening", "discussion"],
+      "challenge": "Explain how technology affects everyday life and distinguish fact from personal opinion."
+    },
+    {
+      "id": 10,
+      "title": "B1 Conversation Lab — Ten Minutes Together",
+      "focus": "questions, follow-up questions, clarification, turn-taking and extended answers",
+      "skills": ["speaking", "listening", "conversation", "pronunciation"],
+      "challenge": "Maintain a natural 8–10 minute conversation without relying on one-word answers."
+    },
+    {
+      "id": 11,
+      "title": "Reading Explorer — The Unexpected Opportunity",
+      "focus": "main idea, supporting detail, inference, vocabulary in context and sequencing",
+      "skills": ["reading", "vocabulary", "critical thinking"],
+      "challenge": "Read a 750–900 word story/article and justify answers with evidence from the text."
+    },
+    {
+      "id": 12,
+      "title": "Listening Lab — Four Voices, One Situation",
+      "focus": "speaker identification, key details, attitude, paraphrase and natural connected speech",
+      "skills": ["listening", "pronunciation", "note taking", "speaking"],
+      "challenge": "Follow several speakers at natural speed and reconstruct the important information."
+    },
+    {
+      "id": 13,
+      "title": "Writing Lab — One Strong Paragraph Becomes Three",
+      "focus": "topic sentences, supporting details, examples, connectors and conclusions",
+      "skills": ["writing", "grammar", "vocabulary"],
+      "challenge": "Write 220–260 words with clear paragraph organization and controlled grammar."
+    },
+    {
+      "id": 14,
+      "title": "Dialogue Builder — Say It Naturally",
+      "focus": "functional language, polite requests, clarification, agreement and disagreement",
+      "skills": ["speaking", "listening", "conversation", "real-life English"],
+      "challenge": "Turn formal textbook phrases into natural everyday dialogue while keeping the meaning."
+    },
+    {
+      "id": 15,
+      "title": "Travel Mission — Booking, Changes & Problems",
+      "focus": "tickets, reservations, hotels, delays, changes, directions and service requests",
+      "skills": ["real-life English", "speaking", "listening", "reading"],
+      "challenge": "Complete a multi-step travel simulation when the original plan changes unexpectedly."
+    },
+    {
+      "id": 16,
+      "title": "Health & Public Services — Explain the Problem",
+      "focus": "symptoms, appointments, pharmacy language, forms, instructions and polite questions",
+      "skills": ["real-life English", "vocabulary", "speaking", "listening"],
+      "challenge": "Explain a problem clearly, understand instructions and ask useful follow-up questions."
+    },
+    {
+      "id": 17,
+      "title": "Opinion Lab — Give Reasons, Examples & Alternatives",
+      "focus": "opinions, reasons, examples, contrast, agreement and respectful disagreement",
+      "skills": ["speaking", "writing", "critical thinking"],
+      "challenge": "Give a structured opinion and respond to another viewpoint using connected English."
+    },
+    {
+      "id": 18,
+      "title": "Communication Repair — When English Goes Wrong",
+      "focus": "clarification, repetition, paraphrasing, checking understanding and repair strategies",
+      "skills": ["speaking", "listening", "conversation"],
+      "challenge": "Keep a conversation moving even when a word, instruction or message is misunderstood."
+    },
+    {
+      "id": 19,
+      "title": "A2+ → B1 Integrated Skills Marathon",
+      "focus": "vocabulary, grammar, reading, listening, speaking and writing under time pressure",
+      "skills": ["all skills"],
+      "challenge": "Complete a connected multi-stage mission where every answer feeds the next task."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 2 MASTER QUEST — B1 BRIDGE",
+      "focus": "full-world mastery and independent communication",
+      "skills": ["all skills", "mastery", "real-life English"],
+      "challenge": "Complete a final integrated scenario combining vocabulary, grammar, reading, listening, conversation, writing, problem solving and real-world communication."
+    }
+  ],
+  "assessment": {
+    "vocabulary": "1000+ active items with collocations, phrasal verbs and functional language",
+    "grammar": "mixed-context accuracy rather than isolated rule recall",
+    "reading": "750–900 word text with inference and evidence questions",
+    "listening": "7–9 minute natural multi-speaker task",
+    "speaking": "8–10 minute sustained conversation and role-play",
+    "writing": "220–260 word structured response",
+    "mastery": "integrated final mission requiring independent language production"
+  },
+  "design_tags": [
+    "MAGIC NEON AI ACADEMY",
+    "Grade 6",
+    "World 2",
+    "A2+ → B1",
+    "high-volume English",
+    "real-life communication",
+    "B1 bridge",
+    "master quest"
+  ]
+}
