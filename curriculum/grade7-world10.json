@@ -1,0 +1,181 @@
+{
+  "grade": 7,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 10: C1 FINAL MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "The final Grade 7 mastery world. Learners demonstrate independent C1 performance across complex academic, professional, social, global, and high-pressure real-world communication contexts.",
+  "targets": {
+    "vocabulary": "4500+ active words, advanced collocations, idioms, and register-sensitive language",
+    "reading": "2400–3200 words with synthesis, inference, evaluation, tone, stance, and implied meaning",
+    "listening": "25–32 minutes of authentic fast-paced, multi-speaker, and mixed-register English",
+    "speaking": "30–40 minutes of spontaneous C1 interaction, discussion, negotiation, and problem-solving",
+    "writing": "950–1200 words across analytical, persuasive, professional, and reflective tasks",
+    "presentation": "15–20 minute presentation with unscripted audience interaction",
+    "integratedPerformance": true,
+    "independentC1Mastery": true
+  },
+  "grammar": [
+    "Advanced tense and aspect for precise viewpoint, sequencing, and emphasis",
+    "Modal and semi-modal systems for deduction, criticism, obligation, probability, and stance",
+    "Modal perfects and complex hypothetical structures",
+    "Mixed and advanced conditional systems",
+    "Complex passive, reporting, and causative structures",
+    "Nominalization and information-dense academic/professional syntax",
+    "Participial, reduced, and non-finite clause structures",
+    "Inversion, fronting, clefting, and marked information structure",
+    "Advanced relative clauses, apposition, and complex noun phrases",
+    "Ellipsis, substitution, parallelism, reference, and discourse cohesion",
+    "Concession, qualification, hedging, boosting, and precise stance control",
+    "Register shifting, pragmatics, politeness, and context-sensitive grammar"
+  ],
+  "missions": [
+    {
+      "mission": 1,
+      "title": "C1 Mastery Activation",
+      "focus": "Activate the full Grade 7 language system through rapid retrieval, paraphrase, precision, and spontaneous response challenges.",
+      "skills": ["vocabulary", "grammar", "speaking", "fluency"]
+    },
+    {
+      "mission": 2,
+      "title": "Precision Under Pressure",
+      "focus": "Select exact vocabulary, grammar, tone, and register while responding quickly to changing communication demands.",
+      "skills": ["speaking", "grammar", "register", "pragmatics"]
+    },
+    {
+      "mission": 3,
+      "title": "Advanced Conversation Command",
+      "focus": "Lead and sustain complex conversations, manage turn-taking, clarify meaning, reformulate ideas, and respond naturally.",
+      "skills": ["speaking", "listening", "interaction"]
+    },
+    {
+      "mission": 4,
+      "title": "Conflict & Mediation Mastery",
+      "focus": "Handle disagreement, sensitive issues, complaints, misunderstandings, and competing interests with diplomatic precision.",
+      "skills": ["speaking", "negotiation", "pragmatics", "mediation"]
+    },
+    {
+      "mission": 5,
+      "title": "Strategic Decision Lab",
+      "focus": "Evaluate evidence, compare alternatives, explain consequences, and communicate decisions with carefully controlled certainty.",
+      "skills": ["speaking", "reasoning", "modal-language"]
+    },
+    {
+      "mission": 6,
+      "title": "Complex Storytelling Arena",
+      "focus": "Construct nuanced narratives using advanced aspect, viewpoint, sequencing, emphasis, implication, and descriptive precision.",
+      "skills": ["speaking", "grammar", "narrative"]
+    },
+    {
+      "mission": 7,
+      "title": "Global Problem-Solving Command",
+      "focus": "Work through a complex global scenario, identify constraints, challenge assumptions, negotiate priorities, and produce a solution.",
+      "skills": ["speaking", "collaboration", "critical-thinking"]
+    },
+    {
+      "mission": 8,
+      "title": "Negotiation Master Arena",
+      "focus": "Conduct a multi-stage negotiation using persuasion, concessions, strategic questions, hedging, reframing, and agreement-building.",
+      "skills": ["speaking", "persuasion", "negotiation"]
+    },
+    {
+      "mission": 9,
+      "title": "Intercultural Intelligence Lab",
+      "focus": "Adapt communication strategy across cultures by controlling directness, politeness, assumptions, tone, and relationship-building.",
+      "skills": ["speaking", "pragmatics", "intercultural-communication"]
+    },
+    {
+      "mission": 10,
+      "title": "High-Stakes Communication Test",
+      "focus": "Respond effectively to unexpected questions, urgent requests, interviews, complaints, and difficult professional situations.",
+      "skills": ["speaking", "listening", "real-world-communication"]
+    },
+    {
+      "mission": 11,
+      "title": "C1 Reading Synthesis Lab",
+      "focus": "Compare long-form sources, identify assumptions and evidence, evaluate competing viewpoints, and synthesize conclusions.",
+      "skills": ["reading", "critical-thinking", "synthesis"]
+    },
+    {
+      "mission": 12,
+      "title": "Authentic Listening Mastery",
+      "focus": "Process natural-speed English with interruptions, reduced forms, multiple accents, changing viewpoints, and implied meaning.",
+      "skills": ["listening", "inference", "note-taking"]
+    },
+    {
+      "mission": 13,
+      "title": "Professional Writing Mastery",
+      "focus": "Produce polished emails, reports, proposals, explanations, and recommendations with precise structure, tone, and register.",
+      "skills": ["writing", "register", "cohesion"]
+    },
+    {
+      "mission": 14,
+      "title": "Critical Argument Forge",
+      "focus": "Build sophisticated arguments, integrate evidence, address counterarguments, qualify claims, and reach defensible conclusions.",
+      "skills": ["writing", "reasoning", "persuasion"]
+    },
+    {
+      "mission": 15,
+      "title": "C1 Presentation Command",
+      "focus": "Deliver a substantial presentation with clear structure, rhetorical control, audience adaptation, and unscripted Q&A.",
+      "skills": ["presentation", "speaking", "listening"]
+    },
+    {
+      "mission": 16,
+      "title": "Media, Society & Information Lab",
+      "focus": "Analyze complex media content, framing, rhetoric, evidence, commentary, and competing narratives without losing nuance.",
+      "skills": ["reading", "listening", "critical-thinking"]
+    },
+    {
+      "mission": 17,
+      "title": "Life, Work & Global Simulation",
+      "focus": "Navigate a sequence of realistic travel, workplace, education, technology, service, and social communication challenges.",
+      "skills": ["speaking", "listening", "reading", "real-world-communication"]
+    },
+    {
+      "mission": 18,
+      "title": "Independent C1 Mission",
+      "focus": "Complete an open-ended communication challenge with minimal scaffolding while independently selecting language and strategies.",
+      "skills": ["integrated-skills", "autonomy", "problem-solving"]
+    },
+    {
+      "mission": 19,
+      "title": "World 10 Final Integrated Marathon",
+      "focus": "Complete a continuous multi-skill challenge combining advanced vocabulary, grammar, reading, listening, speaking, writing, negotiation, and presentation.",
+      "skills": ["integrated-skills", "fluency", "assessment"]
+    },
+    {
+      "mission": 20,
+      "title": "WORLD 10 MASTER QUEST — C1 FINAL MASTERY",
+      "focus": "Complete the ultimate Grade 7 C1 simulation: interpret complex information, solve a real-world problem, negotiate, write a professional response, and present a final solution with unscripted questions.",
+      "skills": ["mastery", "integrated-skills", "real-world-performance"]
+    }
+  ],
+  "realWorldScenarios": [
+    "International travel disruption and service recovery",
+    "Advanced job interview and workplace challenge",
+    "Customer complaint and resolution negotiation",
+    "Project meeting with conflicting priorities",
+    "Cross-cultural misunderstanding and mediation",
+    "High-stakes professional decision briefing",
+    "Academic discussion and evidence-based presentation",
+    "Media claim analysis and competing viewpoints",
+    "Professional proposal and recommendation task",
+    "Unexpected-question and crisis communication simulation"
+  ],
+  "assessment": {
+    "format": "Grade 7 C1 Final Mastery Assessment",
+    "components": [
+      "advanced vocabulary and collocation precision",
+      "grammar flexibility and accuracy",
+      "long-form reading synthesis",
+      "authentic listening and inference",
+      "spontaneous interactive speaking",
+      "professional and analytical writing",
+      "negotiation and mediation performance",
+      "presentation and unscripted Q&A",
+      "integrated real-world problem solving"
+    ],
+    "masteryStandard": "Learner can communicate independently and effectively in complex academic, professional, social, and global contexts, adapting language, register, tone, structure, and strategy with sustained C1-level control."
+  }
+}
