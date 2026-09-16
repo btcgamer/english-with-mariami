@@ -1,0 +1,179 @@
+{
+  "grade": 7,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 6: C1 PROFESSIONAL & GLOBAL COMMUNICATION",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "A high-level communication world focused on professional judgment, leadership, collaboration, global communication, and precise English in demanding real-world situations.",
+  "targets": {
+    "vocabulary": "3700+ active words and high-frequency professional collocations",
+    "reading": "2000–2600 words with synthesis, evaluation, and implied meaning",
+    "listening": "20–26 minutes across meetings, interviews, presentations, and authentic discussions",
+    "speaking": "25–32 minutes of sustained professional and collaborative communication",
+    "writing": "750–950 words across reports, proposals, recommendations, and reflective analysis",
+    "presentation": "12–16 minutes with structured delivery and live Q&A",
+    "professionalCommunication": "confident C1 communication across formal, collaborative, and international contexts"
+  },
+  "grammar": [
+    "advanced tense and aspect choices for precise sequencing and stance",
+    "modal verbs and modal perfects for probability, obligation, criticism, and deduction",
+    "complex conditionals and mixed hypothetical structures",
+    "advanced passive, reporting, and impersonal constructions",
+    "participial clauses, reduced clauses, and dense noun phrases",
+    "inversion, fronting, clefting, and information-structure choices",
+    "advanced relative clauses, apposition, and nominalization",
+    "ellipsis, substitution, parallelism, and discourse cohesion",
+    "concession, qualification, hedging, boosting, and diplomatic language",
+    "register shifting between conversational, professional, academic, and executive English"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Professional Vocabulary Command",
+      "focus": "High-precision professional vocabulary, collocations, and lexical choice",
+      "outcome": "Select natural C1 vocabulary for workplace, project, and leadership contexts."
+    },
+    {
+      "id": 2,
+      "title": "Decision-Making Language Lab",
+      "focus": "Expressing options, trade-offs, evidence, risk, and recommendations",
+      "outcome": "Explain and justify decisions with precise, balanced language."
+    },
+    {
+      "id": 3,
+      "title": "Leadership Communication Arena",
+      "focus": "Delegation, alignment, feedback, accountability, and motivation",
+      "outcome": "Lead short professional interactions while maintaining clarity and diplomacy."
+    },
+    {
+      "id": 4,
+      "title": "Diplomatic Disagreement Mission",
+      "focus": "Polite disagreement, qualification, challenge, and face-saving strategies",
+      "outcome": "Disagree constructively without sounding abrupt, vague, or overly indirect."
+    },
+    {
+      "id": 5,
+      "title": "Problem-Solving Command Center",
+      "focus": "Diagnosing causes, proposing solutions, prioritizing actions, and evaluating outcomes",
+      "outcome": "Handle complex problems through structured spoken and written English."
+    },
+    {
+      "id": 6,
+      "title": "Meeting Intelligence Lab",
+      "focus": "Interrupting appropriately, clarifying, summarizing, redirecting, and closing",
+      "outcome": "Participate actively and naturally in fast-moving professional meetings."
+    },
+    {
+      "id": 7,
+      "title": "Negotiation Strategy Arena",
+      "focus": "Persuasion, concessions, conditions, priorities, and mutually acceptable outcomes",
+      "outcome": "Negotiate with nuanced language while protecting goals and relationships."
+    },
+    {
+      "id": 8,
+      "title": "Conflict Mediation Mission",
+      "focus": "Reframing conflict, acknowledging concerns, and building workable agreements",
+      "outcome": "Use diplomatic English to move difficult conversations toward resolution."
+    },
+    {
+      "id": 9,
+      "title": "Cross-Cultural Communication Lab",
+      "focus": "Directness, politeness, expectations, ambiguity, and international communication norms",
+      "outcome": "Adapt communication choices for culturally diverse professional settings."
+    },
+    {
+      "id": 10,
+      "title": "Executive Conversation Arena",
+      "focus": "Spontaneous discussion, follow-up questions, nuance, and concise answers",
+      "outcome": "Respond confidently to challenging questions without losing precision."
+    },
+    {
+      "id": 11,
+      "title": "Global Reading Intelligence",
+      "focus": "Reports, policy-style texts, business analysis, and competing viewpoints",
+      "outcome": "Identify claims, assumptions, implications, and evidence across complex texts."
+    },
+    {
+      "id": 12,
+      "title": "Authentic Workplace Listening",
+      "focus": "Meetings, interviews, presentations, and spontaneous professional speech",
+      "outcome": "Track key ideas, implied meaning, stance, and changing priorities in real time."
+    },
+    {
+      "id": 13,
+      "title": "Strategic Report Writing",
+      "focus": "Executive summaries, findings, recommendations, and evidence-based structure",
+      "outcome": "Write concise, coherent reports that support practical decisions."
+    },
+    {
+      "id": 14,
+      "title": "Proposal & Recommendation Lab",
+      "focus": "Persuasive proposals, options analysis, benefits, risks, and implementation",
+      "outcome": "Produce professional recommendations with clear reasoning and appropriate register."
+    },
+    {
+      "id": 15,
+      "title": "Presentation Command Center",
+      "focus": "Signposting, emphasis, visual explanation, transitions, and live Q&A",
+      "outcome": "Deliver a structured C1 presentation and handle unexpected questions."
+    },
+    {
+      "id": 16,
+      "title": "Crisis Communication Simulation",
+      "focus": "Urgency, uncertainty, accountability, reassurance, and action planning",
+      "outcome": "Communicate clearly and responsibly when information is incomplete or changing."
+    },
+    {
+      "id": 17,
+      "title": "Technology, Work & Society",
+      "focus": "Digital transformation, AI, changing workplaces, ethics, and social impact",
+      "outcome": "Discuss complex technology and society topics using evidence and nuanced stance."
+    },
+    {
+      "id": 18,
+      "title": "Global Collaboration Simulation",
+      "focus": "International project planning, role coordination, deadlines, and compromise",
+      "outcome": "Collaborate effectively with multiple stakeholders in a realistic global scenario."
+    },
+    {
+      "id": 19,
+      "title": "World 6 Integrated Professional Marathon",
+      "focus": "Integrated vocabulary, grammar, reading, listening, speaking, and writing",
+      "outcome": "Demonstrate sustained C1 performance across a multi-stage professional challenge."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 6 MASTER QUEST — C1 PROFESSIONAL & GLOBAL COMMUNICATION",
+      "focus": "Final integrated leadership, negotiation, presentation, and communication challenge",
+      "outcome": "Complete a full C1 professional communication mission with adaptive language, strategic reasoning, and confident delivery."
+    }
+  ],
+  "realWorldScenarios": [
+    "Leading a project kickoff meeting with international teammates",
+    "Negotiating priorities and deadlines with a project partner",
+    "Giving constructive feedback to a teammate",
+    "Handling a disagreement between two stakeholders",
+    "Presenting a recommendation to a decision-making group",
+    "Responding to unexpected questions during a presentation",
+    "Writing an executive summary after reviewing complex information",
+    "Managing a communication problem during a fast-changing situation",
+    "Participating in a cross-cultural workplace discussion",
+    "Planning a collaborative project with distributed international teams"
+  ],
+  "assessment": {
+    "type": "integrated_c1_professional_communication",
+    "components": [
+      "professional vocabulary and collocation precision",
+      "advanced grammar and register control",
+      "complex reading comprehension and synthesis",
+      "authentic listening and inference",
+      "structured professional speaking",
+      "strategic negotiation and problem solving",
+      "report and proposal writing",
+      "presentation with live Q&A",
+      "cross-cultural communication",
+      "integrated Master Quest performance"
+    ],
+    "successCriteria": "Learner communicates clearly, flexibly, and precisely in demanding professional and global contexts, adapting register, structure, tone, and language to audience and purpose."
+  }
+}
