@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 5: C1+ GLOBAL SOCIETY, CULTURE & HUMAN CHALLENGES",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6600+ active words",
+    "reading": "3000–3700 words",
+    "listening": "40–48 min",
+    "speaking": "45–55 min",
+    "writing": "1250–1500 words",
+    "presentation": "22–28 min"
+  },
+  "grammar": [
+    "Advanced language for social analysis and nuanced comparison",
+    "Concession, contrast, and qualification in complex arguments",
+    "Modality for obligation, possibility, responsibility, and policy impact",
+    "Complex cause, consequence, and conditional relationships",
+    "Nominalisation and information density in formal social commentary",
+    "Pragmatic choices for sensitive and culturally diverse conversations",
+    "Advanced cohesion, reference, and reformulation",
+    "Register control in public, academic, and community communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Society Calibration","focus":"Analyse complex social issues through multiple perspectives and distinguish description from interpretation."},
+    {"id":2,"title":"Culture & Identity Observatory","focus":"Discuss identity, belonging, cultural expression, and social change with nuance and respect."},
+    {"id":3,"title":"Migration & Belonging Nexus","focus":"Explore migration, integration, displacement, and belonging using careful and inclusive language."},
+    {"id":4,"title":"Inequality Analysis Lab","focus":"Explain different forms of inequality, their causes, and possible responses without oversimplification."},
+    {"id":5,"title":"Human Rights Vocabulary Forge","focus":"Master precise language for rights, dignity, access, equality, responsibility, and protection."},
+    {"id":6,"title":"Global Health Communication","focus":"Communicate clearly about public health challenges, prevention, access, and community responsibility."},
+    {"id":7,"title":"Climate Society Reactor","focus":"Discuss climate impacts, adaptation, responsibility, and competing social priorities."},
+    {"id":8,"title":"Sustainable Futures Arena","focus":"Evaluate sustainable choices and explain trade-offs among economic, social, and environmental goals."},
+    {"id":9,"title":"Intercultural Dialogue Studio","focus":"Handle cultural misunderstandings through clarification, empathy, and pragmatic flexibility."},
+    {"id":10,"title":"Ethical Dilemmas Observatory","focus":"Present balanced reasoning about difficult human and social decisions while acknowledging uncertainty."},
+    {"id":11,"title":"Community Problem-Solving Mission","focus":"Identify stakeholders, compare solutions, and develop a practical response to a community challenge."},
+    {"id":12,"title":"Global History & Memory Lab","focus":"Discuss historical events, collective memory, and contested interpretations with careful attribution."},
+    {"id":13,"title":"Education & Opportunity Nexus","focus":"Analyse access to education, lifelong learning, skills, and social mobility using precise language."},
+    {"id":14,"title":"Work, Economy & Human Life","focus":"Discuss changing work patterns, economic pressures, wellbeing, and the future of employment."},
+    {"id":15,"title":"Media and Social Change Forum","focus":"Evaluate how media, public narratives, and communication technologies shape social behaviour."},
+    {"id":16,"title":"Humanitarian Communication Command","focus":"Deliver sensitive, accurate, and audience-aware messages about crises and community support."},
+    {"id":17,"title":"Global Roundtable Arena","focus":"Lead an extended multicultural discussion, invite diverse views, and build shared understanding."},
+    {"id":18,"title":"Social Impact Presentation","focus":"Present an evidence-informed proposal for addressing a human or community challenge."},
+    {"id":19,"title":"World 5 Integration Quest","focus":"Integrate social analysis, intercultural dialogue, ethical reasoning, research, and presentation skills."},
+    {"id":20,"title":"C1+ Global Society Master Challenge","focus":"Complete an integrated challenge requiring nuanced reasoning, sensitive communication, and practical solutions."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Multicultural Community Forum","description":"Facilitate a respectful discussion about belonging, integration, and shared community priorities."},
+    {"title":"Sustainable City Planning Room","description":"Compare environmental, economic, and social needs before presenting a balanced development proposal."},
+    {"title":"Humanitarian Response Briefing","description":"Explain a complex community challenge, evaluate support options, and communicate an ethical action plan."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated global society, culture, and human challenges assessment",
+    "components":["social issue analysis","intercultural reading","advanced listening","ethical discussion","source-informed synthesis","community problem-solving","sensitive professional writing","impact presentation"],
+    "successCriteria":["nuanced social reasoning","respectful intercultural communication","precise and inclusive vocabulary","balanced treatment of perspectives","clear cause-and-effect explanation","ethical and audience-aware language","coherent extended writing","practical evidence-informed recommendations"]
+  }
+}
