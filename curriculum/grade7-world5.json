@@ -1,0 +1,173 @@
+{
+  "grade": 7,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 5: C1 CRITICAL THINKING & ACADEMIC ENGLISH",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "A C1 academic communication world focused on critical reading, evidence evaluation, analytical reasoning, structured argument, source synthesis, and precise academic language.",
+  "targets": {
+    "vocabulary": "3500+ active words with academic collocations, abstract vocabulary, reporting verbs, and discipline-sensitive language",
+    "reading": "2000–2500 words with argument mapping, inference, evaluation, synthesis, and rhetorical analysis",
+    "listening": "20–25 minutes of lectures, interviews, panel discussions, and academic-style explanations",
+    "speaking": "25–30 minutes of seminar discussion, explanation, argumentation, and evidence-based response",
+    "writing": "700–900 words with thesis development, source integration, evaluation, cohesion, and academic register",
+    "presentation": "12–15 minute evidence-based presentation with structured Q&A"
+  },
+  "grammar": [
+    "Advanced nominalization and academic noun phrases",
+    "Complex passive and reporting structures for source-based writing",
+    "Participle and reduced clauses for information density",
+    "Inversion and fronting for rhetorical emphasis",
+    "Advanced conditionals for hypothetical and counterfactual analysis",
+    "Modal perfects and epistemic modality for evidence and inference",
+    "Relative clauses, apposition, and post-modification",
+    "Cohesion through substitution, ellipsis, reference, and lexical chains",
+    "Concession, qualification, comparison, and synthesis structures",
+    "Hedging and boosting in academic claims",
+    "Register control between conversational, academic, and professional English"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Academic Vocabulary Forge",
+      "focus": "abstract vocabulary, collocations, nominalization, and reporting verbs",
+      "challenge": "Upgrade everyday explanations into precise academic English without making them unnecessarily complex."
+    },
+    {
+      "id": 2,
+      "title": "Argument Mapping Lab",
+      "focus": "claims, reasons, evidence, assumptions, and conclusions",
+      "challenge": "Identify the logical structure of a complex argument and reconstruct it clearly."
+    },
+    {
+      "id": 3,
+      "title": "Evidence Detective",
+      "focus": "evidence quality, relevance, reliability, and limitations",
+      "challenge": "Distinguish strong support from weak, irrelevant, or insufficient evidence."
+    },
+    {
+      "id": 4,
+      "title": "Inference Engine",
+      "focus": "deduction, implication, probability, and cautious interpretation",
+      "challenge": "Draw justified conclusions while separating what is known from what is inferred."
+    },
+    {
+      "id": 5,
+      "title": "Source Reporting Mastery",
+      "focus": "reporting verbs, attribution, paraphrase, and source integration",
+      "challenge": "Present another person's ideas accurately while maintaining clear source attribution."
+    },
+    {
+      "id": 6,
+      "title": "Counterargument Architect",
+      "focus": "concession, rebuttal, qualification, and alternative perspectives",
+      "challenge": "Acknowledge a credible opposing view and respond to it with evidence-based reasoning."
+    },
+    {
+      "id": 7,
+      "title": "Academic Cohesion Lab",
+      "focus": "reference chains, transitions, lexical cohesion, and paragraph progression",
+      "challenge": "Build paragraphs that connect ideas smoothly without repetitive linking words."
+    },
+    {
+      "id": 8,
+      "title": "Claim Strength Controller",
+      "focus": "hedging, boosting, certainty, and academic caution",
+      "challenge": "Match the strength of a claim to the strength of the available evidence."
+    },
+    {
+      "id": 9,
+      "title": "Bias & Framing Mission",
+      "focus": "framing, loaded language, omission, perspective, and rhetorical choices",
+      "challenge": "Explain how wording and selection of information can influence interpretation."
+    },
+    {
+      "id": 10,
+      "title": "Seminar Intelligence Arena",
+      "focus": "academic discussion, questioning, clarification, challenge, and synthesis",
+      "challenge": "Join a seminar discussion by developing ideas, asking useful questions, and responding to disagreement."
+    },
+    {
+      "id": 11,
+      "title": "Comparative Reading Lab",
+      "focus": "cross-text comparison, agreement, disagreement, tone, and evidence",
+      "challenge": "Compare two complex texts and explain where their reasoning converges and diverges."
+    },
+    {
+      "id": 12,
+      "title": "Lecture Listening Core",
+      "focus": "main claims, supporting details, examples, signposting, and speaker stance",
+      "challenge": "Extract the structure and key reasoning from an extended academic-style talk."
+    },
+    {
+      "id": 13,
+      "title": "Thesis Builder",
+      "focus": "research questions, thesis statements, scope, and argumentative direction",
+      "challenge": "Turn a broad topic into a focused, defensible central claim."
+    },
+    {
+      "id": 14,
+      "title": "Source Synthesis Workshop",
+      "focus": "multiple-source integration, comparison, paraphrase, and synthesis",
+      "challenge": "Combine information from several sources without producing a disconnected summary."
+    },
+    {
+      "id": 15,
+      "title": "Academic Presentation Lab",
+      "focus": "evidence sequencing, visual explanation, signposting, and Q&A",
+      "challenge": "Present an evidence-based position clearly and defend it under questioning."
+    },
+    {
+      "id": 16,
+      "title": "Problem-Solving Conference",
+      "focus": "analysis, alternatives, criteria, recommendations, and decision language",
+      "challenge": "Evaluate competing solutions and communicate a reasoned recommendation."
+    },
+    {
+      "id": 17,
+      "title": "Science, Technology & Society",
+      "focus": "complex issues, uncertainty, evidence, ethics, and public communication",
+      "challenge": "Discuss a technology or science-related issue while distinguishing evidence from speculation."
+    },
+    {
+      "id": 18,
+      "title": "Research Communication Mission",
+      "focus": "academic writing, professional explanation, summaries, and audience adaptation",
+      "challenge": "Convert complex research information into a clear explanation for different audiences."
+    },
+    {
+      "id": 19,
+      "title": "World 5 Critical Thinking Marathon",
+      "focus": "integrated academic reading, listening, speaking, writing, grammar, and vocabulary",
+      "challenge": "Analyze sources, form a position, defend it orally, and produce a coherent written synthesis."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 5 MASTER QUEST — C1 CRITICAL THINKING",
+      "focus": "full-world academic mastery assessment",
+      "challenge": "Demonstrate independent C1 reasoning and communication through evidence-based academic and real-world tasks."
+    }
+  ],
+  "realWorldScenarios": [
+    "Comparing two reports that reach different conclusions about the same issue",
+    "Participating in a seminar and challenging an argument respectfully",
+    "Writing a recommendation based on several sources",
+    "Explaining research findings to a general audience",
+    "Evaluating evidence before making a professional decision",
+    "Giving a presentation and defending conclusions during Q&A"
+  ],
+  "assessment": {
+    "format": "Integrated C1 critical-thinking and academic English assessment",
+    "components": [
+      "academic vocabulary and collocation precision",
+      "argument and evidence analysis",
+      "inference and comparative reading",
+      "lecture-style listening comprehension",
+      "seminar discussion and spontaneous response",
+      "thesis and counterargument writing",
+      "multi-source synthesis task",
+      "evidence-based presentation with Q&A"
+    ],
+    "masteryGoal": "Learner can evaluate information, construct and defend nuanced arguments, synthesize sources, and communicate complex ideas accurately in C1 academic and professional English."
+  }
+}
