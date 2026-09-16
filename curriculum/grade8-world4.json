@@ -1,0 +1,81 @@
+{
+  "grade": 8,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 4: C1 INNOVATION & PROBLEM-SOLVING MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "3900+ active words",
+    "reading": "2100–2400 words",
+    "listening": "24–28 min",
+    "speaking": "28–34 min",
+    "writing": "750–900 words",
+    "presentation": "13–17 min"
+  },
+  "grammar": [
+    "advanced relative and participle clauses",
+    "complex sentence compression",
+    "advanced passive and causative structures",
+    "subordination and information packaging",
+    "conditionals for hypothetical problem-solving",
+    "precision with modality and obligation",
+    "cohesion across extended arguments"
+  ],
+  "missions": [
+    {"id":1,"title":"Innovation Intelligence Lab","focus":"Innovation vocabulary, collocations, and precise definitions","skills":["vocabulary","speaking","critical thinking"]},
+    {"id":2,"title":"Problem Framing Reactor","focus":"Turn vague problems into precise, testable problem statements","skills":["vocabulary","writing","critical thinking"]},
+    {"id":3,"title":"Systems Thinking Matrix","focus":"Map causes, dependencies, feedback loops, and consequences","skills":["reading","speaking","analysis"]},
+    {"id":4,"title":"Root Cause Detective","focus":"Distinguish symptoms from underlying causes using evidence","skills":["reading","vocabulary","reasoning"]},
+    {"id":5,"title":"Solution Design Forge","focus":"Generate, compare, and refine solutions under constraints","skills":["speaking","writing","problem solving"]},
+    {"id":6,"title":"Advanced Relative Clause Lab","focus":"Compress complex information with precise relative structures","skills":["grammar","writing","editing"]},
+    {"id":7,"title":"Causative Systems Workshop","focus":"Use advanced passive and causative forms in real-world explanations","skills":["grammar","speaking","accuracy"]},
+    {"id":8,"title":"Risk & Trade-Off Arena","focus":"Evaluate risks, benefits, opportunity costs, and unintended effects","skills":["vocabulary","speaking","critical thinking"]},
+    {"id":9,"title":"Evidence Evaluation Vault","focus":"Separate strong evidence, weak evidence, assumptions, and speculation","skills":["reading","listening","analysis"]},
+    {"id":10,"title":"Innovation Listening Command","focus":"Decode expert explanations, implied meaning, and technical detail","skills":["listening","note-taking","inference"]},
+    {"id":11,"title":"Constraint Negotiation Room","focus":"Negotiate priorities when time, money, people, or technology are limited","skills":["speaking","listening","negotiation"]},
+    {"id":12,"title":"Prototype Pitch Simulator","focus":"Present a proposed solution with evidence, limitations, and next steps","skills":["speaking","presentation","persuasion"]},
+    {"id":13,"title":"Failure Analysis Arena","focus":"Explain failure without oversimplifying causes or assigning unsupported blame","skills":["reading","speaking","reasoning"]},
+    {"id":14,"title":"Scenario Planning Lab","focus":"Build plausible scenarios and conditional responses for uncertain futures","skills":["grammar","writing","strategic thinking"]},
+    {"id":15,"title":"Innovation Brief Studio","focus":"Write a structured 750–900 word brief recommending an evidence-based solution","skills":["writing","organization","editing"]},
+    {"id":16,"title":"C1 Expert Panel Simulation","focus":"Defend proposals, challenge assumptions, and respond to expert questions","skills":["speaking","listening","argumentation"]},
+    {"id":17,"title":"Information Packaging Reactor","focus":"Transform dense technical information into clear executive communication","skills":["grammar","writing","communication"]},
+    {"id":18,"title":"Future Solutions Presentation","focus":"Deliver a 13–17 minute presentation on an emerging solution and its implications","skills":["presentation","speaking","research"]},
+    {"id":19,"title":"World 4 Integration Quest","focus":"Combine innovation vocabulary, grammar, evidence, negotiation, and presentation skills","skills":["integrated skills","problem solving","communication"]},
+    {"id":20,"title":"C1 Innovation Master Challenge","focus":"Solve a complex real-world problem, justify the solution, address counterarguments, and present an implementation plan","skills":["reading","listening","speaking","writing","presentation","critical thinking"]}
+  ],
+  "realWorldScenarios": [
+    {
+      "title":"Community Innovation Council",
+      "description":"Work with a mixed stakeholder group to identify a community problem, compare possible interventions, negotiate constraints, and present a justified action plan."
+    },
+    {
+      "title":"Startup Product Strategy Room",
+      "description":"Act as part of an international product team deciding which feature to develop, using evidence, user needs, technical constraints, risks, and projected impact."
+    },
+    {
+      "title":"Climate Solutions Task Force",
+      "description":"Evaluate competing solutions to a local environmental challenge, communicate uncertainty responsibly, and recommend a practical multi-stage response."
+    }
+  ],
+  "assessment": {
+    "level": "C1",
+    "format": "Integrated innovation and problem-solving assessment",
+    "components": [
+      "advanced vocabulary and collocation precision",
+      "C1 grammar transformation and editing",
+      "critical reading with evidence evaluation",
+      "expert listening with inference and note-taking",
+      "structured problem-solving discussion",
+      "750–900 word evidence-based innovation brief",
+      "13–17 minute solution presentation",
+      "final integrated challenge with counterargument handling"
+    ],
+    "successCriteria": [
+      "communicates complex ideas precisely and coherently",
+      "supports claims with relevant evidence and qualified language",
+      "adapts register for technical, academic, and professional audiences",
+      "handles uncertainty, constraints, and counterarguments effectively",
+      "maintains C1-level grammatical control across extended communication"
+    ]
+  }
+}
