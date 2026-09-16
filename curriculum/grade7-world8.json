@@ -1,0 +1,179 @@
+{
+  "grade": 7,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 8: C1 GLOBAL LEADERSHIP & STRATEGIC COMMUNICATION",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "An advanced communication world focused on strategic thinking, leadership, influence, stakeholder communication, international collaboration, and high-stakes professional decision-making.",
+  "targets": {
+    "vocabulary": "4100+ active words with leadership, strategy, diplomacy, and organizational collocations",
+    "reading": "2300–2900 words with strategic analysis, policy-style argument, and stakeholder perspectives",
+    "listening": "23–29 minutes across leadership talks, negotiations, briefings, interviews, and panel discussions",
+    "speaking": "28–36 minutes of leadership dialogue, strategic discussion, negotiation, and decision defense",
+    "writing": "850–1050 words across strategic briefs, proposals, stakeholder updates, and analytical recommendations",
+    "presentation": "14–18 minutes with executive-style structure, persuasion, visuals, and live Q&A",
+    "leadershipCommunication": "adapt tone, framing, evidence, and register to audience, objective, urgency, and cultural context"
+  },
+  "grammar": [
+    "advanced modal systems for obligation, probability, strategic recommendation, and risk",
+    "modal perfects and conditional structures for scenario planning and hindsight",
+    "complex passive and reporting structures for institutional and stakeholder communication",
+    "nominalization and dense noun phrases for concise strategic writing",
+    "inversion, fronting, clefting, and emphasis for persuasive communication",
+    "advanced concession, qualification, hedging, and boosting for calibrated claims",
+    "ellipsis, substitution, parallelism, and cohesion in high-level discourse",
+    "complex relative and participial structures for information compression",
+    "pragmatic choices for diplomacy, authority, disagreement, and relationship management",
+    "register shifting across executive, collaborative, public-facing, and cross-cultural contexts"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Strategic Vocabulary Command",
+      "focus": "Leadership, strategy, priorities, resources, risk, and stakeholder vocabulary",
+      "outcome": "Use precise strategic language to frame complex organizational situations."
+    },
+    {
+      "id": 2,
+      "title": "Vision & Mission Lab",
+      "focus": "Explaining purpose, long-term direction, values, and measurable objectives",
+      "outcome": "Communicate a clear vision while connecting abstract goals to concrete actions."
+    },
+    {
+      "id": 3,
+      "title": "Strategic Priorities Arena",
+      "focus": "Ranking goals, allocating attention, explaining trade-offs, and setting boundaries",
+      "outcome": "Defend priorities using concise reasoning and evidence-aware language."
+    },
+    {
+      "id": 4,
+      "title": "Stakeholder Intelligence Mission",
+      "focus": "Identifying interests, concerns, influence, expectations, and communication needs",
+      "outcome": "Adapt messages to different stakeholders without changing the underlying facts."
+    },
+    {
+      "id": 5,
+      "title": "Influence Without Pressure",
+      "focus": "Persuasion, framing, credibility, reciprocity, and respectful influence",
+      "outcome": "Present compelling arguments while preserving trust and professional relationships."
+    },
+    {
+      "id": 6,
+      "title": "High-Stakes Negotiation Lab",
+      "focus": "Interests, concessions, conditions, alternatives, and agreement language",
+      "outcome": "Navigate complex negotiations using precise, diplomatic C1 communication."
+    },
+    {
+      "id": 7,
+      "title": "Executive Decision Briefing",
+      "focus": "Concise problem framing, options, evidence, risks, and recommendations",
+      "outcome": "Deliver a decision-ready briefing that separates facts, assumptions, and recommendations."
+    },
+    {
+      "id": 8,
+      "title": "Difficult Conversation Command",
+      "focus": "Accountability, performance concerns, boundaries, empathy, and next steps",
+      "outcome": "Handle sensitive conversations with clarity, respect, and appropriate authority."
+    },
+    {
+      "id": 9,
+      "title": "Cross-Cultural Leadership Lab",
+      "focus": "Communication expectations, directness, hierarchy, face, and cultural adaptation",
+      "outcome": "Lead international interactions while reducing avoidable communication friction."
+    },
+    {
+      "id": 10,
+      "title": "Leadership Q&A Arena",
+      "focus": "Spontaneous questions, challenge, clarification, reframing, and concise response",
+      "outcome": "Respond confidently when questions are difficult, unexpected, or strategically sensitive."
+    },
+    {
+      "id": 11,
+      "title": "Global Strategy Reading Lab",
+      "focus": "Strategic reports, stakeholder analysis, policy-style texts, and competing priorities",
+      "outcome": "Identify strategic assumptions, risks, evidence, and implications in complex texts."
+    },
+    {
+      "id": 12,
+      "title": "Leadership Listening Under Pressure",
+      "focus": "Briefings, interviews, negotiations, panels, and rapidly changing information",
+      "outcome": "Track priorities, speaker stance, implied meaning, and action points in real time."
+    },
+    {
+      "id": 13,
+      "title": "Strategic Brief Writing",
+      "focus": "Executive summaries, situation analysis, options, risks, and recommendations",
+      "outcome": "Write concise strategic briefs that support informed decision-making."
+    },
+    {
+      "id": 14,
+      "title": "Stakeholder Communication Lab",
+      "focus": "Announcements, updates, difficult news, reassurance, and expectation management",
+      "outcome": "Communicate complex developments clearly to audiences with different priorities."
+    },
+    {
+      "id": 15,
+      "title": "Global Presentation Command",
+      "focus": "Persuasive structure, narrative, evidence, visuals, delivery, and Q&A",
+      "outcome": "Deliver a compelling strategic presentation to an international audience."
+    },
+    {
+      "id": 16,
+      "title": "Crisis Leadership Simulation",
+      "focus": "Uncertainty, rapid decisions, public communication, accountability, and recovery",
+      "outcome": "Coordinate communication when facts are incomplete and priorities are changing."
+    },
+    {
+      "id": 17,
+      "title": "Global Change & Transformation",
+      "focus": "Organizational change, technology, sustainability, workforce shifts, and adaptation",
+      "outcome": "Explain change strategies while addressing uncertainty, resistance, and competing interests."
+    },
+    {
+      "id": 18,
+      "title": "International Leadership Council",
+      "focus": "Multi-stakeholder roundtable, compromise, coalition building, and final agreement",
+      "outcome": "Coordinate a complex international discussion toward a workable shared outcome."
+    },
+    {
+      "id": 19,
+      "title": "World 8 Integrated Leadership Marathon",
+      "focus": "Strategic reading, listening, negotiation, briefing, writing, and presentation",
+      "outcome": "Demonstrate sustained C1 performance across a multi-stage leadership challenge."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 8 MASTER QUEST — C1 GLOBAL LEADERSHIP & STRATEGIC COMMUNICATION",
+      "focus": "Full strategic scenario from diagnosis through negotiation, decision, communication, and defense",
+      "outcome": "Complete an integrated leadership mission using precise, adaptive, diplomatic, and persuasive C1 English."
+    }
+  ],
+  "realWorldScenarios": [
+    "Explaining a long-term vision to a diverse team",
+    "Choosing between competing priorities under limited resources",
+    "Briefing decision-makers on risks and strategic options",
+    "Negotiating a cross-border partnership",
+    "Handling a difficult performance conversation",
+    "Communicating an unpopular but necessary change",
+    "Responding to challenging questions from stakeholders",
+    "Leading a multilingual international meeting",
+    "Managing communication during a fast-moving crisis",
+    "Presenting a strategic transformation plan to an international audience"
+  ],
+  "assessment": {
+    "type": "integrated_c1_global_leadership_communication",
+    "components": [
+      "strategic vocabulary and collocation precision",
+      "vision, priorities, and stakeholder communication",
+      "advanced grammar and pragmatic register control",
+      "strategic reading and listening comprehension",
+      "negotiation and difficult-conversation performance",
+      "executive briefing and strategic writing",
+      "international presentation and live Q&A",
+      "crisis communication and decision defense",
+      "cross-cultural leadership communication",
+      "integrated Master Quest performance"
+    ],
+    "successCriteria": "Learner communicates strategically and diplomatically in complex global contexts, adapting language, structure, tone, evidence, and level of directness to audience, objective, risk, and cultural setting."
+  }
+}
