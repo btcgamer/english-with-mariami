@@ -1,0 +1,173 @@
+{
+  "grade": 7,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 4: C1 FLUENCY & DISCOURSE MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "A C1 fluency world focused on sustained communication, discourse control, sophisticated interaction, and the ability to adapt language naturally across complex academic, social, and professional situations.",
+  "targets": {
+    "vocabulary": "3300+ active words with advanced collocations, idioms, phrasal verbs, and register-sensitive vocabulary",
+    "reading": "1900–2300 words with synthesis, rhetorical analysis, inference, and author-position analysis",
+    "listening": "20–24 minutes of authentic dialogue, interviews, presentations, and spontaneous discussion",
+    "speaking": "24–30 minutes of sustained interaction, argumentation, explanation, and spontaneous follow-up",
+    "writing": "650–850 words with sophisticated organization, synthesis, nuance, and audience awareness",
+    "presentation": "12–15 minute presentation with structured interaction and unscripted Q&A"
+  },
+  "grammar": [
+    "Advanced tense and aspect for narrative viewpoint and discourse management",
+    "Modal and semi-modal systems for subtle certainty, obligation, criticism, and inference",
+    "Complex conditional and hypothetical structures",
+    "Advanced passive and reporting constructions",
+    "Participle clauses and reduced structures for concise formal expression",
+    "Inversion and fronting for emphasis and rhetorical effect",
+    "Clefting and information packaging",
+    "Ellipsis, substitution, and parallel structures",
+    "Advanced relative clauses and noun phrase modification",
+    "Concession, qualification, contrast, and logical sequencing",
+    "Hedging, boosters, stance, politeness, and interpersonal meaning"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Fluency Engine",
+      "focus": "automatic retrieval, collocations, chunks, and flexible sentence patterns",
+      "challenge": "Maintain natural flow while selecting precise language under time pressure."
+    },
+    {
+      "id": 2,
+      "title": "Discourse Architecture",
+      "focus": "topic development, paragraph logic, signposting, and discourse structure",
+      "challenge": "Build a long response that remains coherent from opening idea to final conclusion."
+    },
+    {
+      "id": 3,
+      "title": "Advanced Paraphrase Lab",
+      "focus": "reformulation, compression, expansion, and semantic equivalence",
+      "challenge": "Express the same complex meaning in several natural and context-appropriate ways."
+    },
+    {
+      "id": 4,
+      "title": "Rhetorical Precision",
+      "focus": "emphasis, contrast, inversion, fronting, and persuasive sentence design",
+      "challenge": "Use advanced structures to make important information stand out without sounding forced."
+    },
+    {
+      "id": 5,
+      "title": "Stance & Position Lab",
+      "focus": "certainty, probability, evaluation, criticism, and author stance",
+      "challenge": "Communicate a position while controlling exactly how strongly each claim is presented."
+    },
+    {
+      "id": 6,
+      "title": "Argument Connector",
+      "focus": "concession, counterargument, qualification, and logical progression",
+      "challenge": "Connect competing ideas into a balanced and convincing line of reasoning."
+    },
+    {
+      "id": 7,
+      "title": "Conversation Navigation",
+      "focus": "turn-taking, interruption, clarification, repair, and topic management",
+      "challenge": "Enter, redirect, sustain, and close complex conversations naturally."
+    },
+    {
+      "id": 8,
+      "title": "Diplomatic English Arena",
+      "focus": "indirect disagreement, tact, mitigation, and relationship-sensitive language",
+      "challenge": "Handle disagreement without losing clarity, professionalism, or rapport."
+    },
+    {
+      "id": 9,
+      "title": "Humor, Irony & Implication",
+      "focus": "implied meaning, irony, understatement, exaggeration, and contextual interpretation",
+      "challenge": "Recognize and respond appropriately when speakers communicate beyond literal wording."
+    },
+    {
+      "id": 10,
+      "title": "Advanced Discussion Arena",
+      "focus": "extended discussion, spontaneous questions, challenge-response, and synthesis",
+      "challenge": "Sustain a demanding discussion while responding directly to unexpected ideas."
+    },
+    {
+      "id": 11,
+      "title": "Rhetorical Reading Lab",
+      "focus": "argument structure, tone, rhetorical choices, assumptions, and evidence",
+      "challenge": "Explain not only what a text says, but how its language shapes interpretation."
+    },
+    {
+      "id": 12,
+      "title": "Listening Under Pressure",
+      "focus": "fast speech, overlapping ideas, reformulation, hesitation, and speaker intent",
+      "challenge": "Follow authentic speech even when speakers change direction or qualify themselves."
+    },
+    {
+      "id": 13,
+      "title": "Synthesis Writing Lab",
+      "focus": "combining multiple sources, comparison, evaluation, and integrated argument",
+      "challenge": "Synthesize information from different perspectives into one coherent written response."
+    },
+    {
+      "id": 14,
+      "title": "Executive Communication",
+      "focus": "briefings, summaries, recommendations, and decision-focused writing",
+      "challenge": "Turn complex information into concise communication for a busy professional audience."
+    },
+    {
+      "id": 15,
+      "title": "Presentation Command",
+      "focus": "opening, narrative structure, transitions, emphasis, visuals, and Q&A",
+      "challenge": "Lead an extended presentation while adapting explanations to audience reactions."
+    },
+    {
+      "id": 16,
+      "title": "Conflict Resolution Simulation",
+      "focus": "clarification, reframing, compromise, persuasion, and mediation",
+      "challenge": "Resolve a realistic disagreement through precise and relationship-aware communication."
+    },
+    {
+      "id": 17,
+      "title": "Global Communication Lab",
+      "focus": "intercultural communication, global English, register, and audience adaptation",
+      "challenge": "Adjust language and interaction style for people with different linguistic and cultural backgrounds."
+    },
+    {
+      "id": 18,
+      "title": "Academic & Professional Roundtable",
+      "focus": "seminar discussion, workplace strategy, evidence, questions, and collaboration",
+      "challenge": "Contribute substantial ideas while accurately building on, challenging, and clarifying others' points."
+    },
+    {
+      "id": 19,
+      "title": "World 4 Integrated Fluency Marathon",
+      "focus": "integrated C1 reading, listening, speaking, writing, grammar, and vocabulary",
+      "challenge": "Complete a multi-stage communication sequence with minimal preparation and limited support."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 4 MASTER QUEST — C1 FLUENCY & DISCOURSE",
+      "focus": "full-world mastery assessment",
+      "challenge": "Demonstrate sustained, coherent, precise, flexible, and socially appropriate C1 communication across complex tasks."
+    }
+  ],
+  "realWorldScenarios": [
+    "Leading a meeting where several participants disagree about priorities",
+    "Explaining a complicated issue to a non-specialist audience",
+    "Comparing two proposals and recommending a course of action",
+    "Participating in a seminar discussion with spontaneous follow-up questions",
+    "Writing an executive summary from multiple information sources",
+    "Mediating a conflict while maintaining trust and professional relationships"
+  ],
+  "assessment": {
+    "format": "Integrated C1 fluency and discourse assessment",
+    "components": [
+      "advanced vocabulary and collocation precision",
+      "grammar and information-structure transformation",
+      "rhetorical reading and inference",
+      "authentic listening with speaker-attitude analysis",
+      "extended discussion and spontaneous response",
+      "synthesis writing from multiple sources",
+      "professional communication task",
+      "presentation and unscripted Q&A"
+    ],
+    "masteryGoal": "Learner can sustain sophisticated communication, organize complex discourse, adapt register, and express nuanced meaning naturally and independently at C1 level."
+  }
+}
