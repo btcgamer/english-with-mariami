@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 9: C1+ ARTS, CULTURE, MEDIA & HUMANITIES",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "7600+ active words",
+    "reading": "3300–4000 words",
+    "listening": "45–55 min",
+    "speaking": "50–64 min",
+    "writing": "1400–1650 words",
+    "presentation": "27–34 min"
+  },
+  "grammar": [
+    "Advanced critical and interpretive language for humanities and cultural analysis",
+    "Nuanced comparison, contrast, concession, and evaluation",
+    "Hedging and attribution when interpreting evidence and artistic meaning",
+    "Complex relative, participial, and reduced-clause structures",
+    "Nominalisation and sophisticated academic prose",
+    "Modal language for interpretation, inference, and degrees of certainty",
+    "Rhetorical emphasis and stylistic variation in reviews and essays",
+    "Register adaptation for academic, journalistic, creative, and public audiences"
+  ],
+  "missions": [
+    {"id":1,"title":"Culture & Humanities Calibration","focus":"Diagnose advanced language for art, literature, history, culture, identity, media, and human behaviour."},
+    {"id":2,"title":"Interpretive Vocabulary Forge","focus":"Use precise vocabulary for themes, symbolism, narrative, aesthetics, representation, context, and interpretation."},
+    {"id":3,"title":"Art Analysis Observatory","focus":"Analyse visual and performing arts through composition, technique, context, intention, audience, and interpretation."},
+    {"id":4,"title":"Literature & Narrative Lab","focus":"Interpret character, voice, structure, perspective, imagery, symbolism, and narrative choices in sophisticated texts."},
+    {"id":5,"title":"History & Memory Nexus","focus":"Discuss historical evidence, collective memory, perspective, continuity, change, and competing interpretations responsibly."},
+    {"id":6,"title":"Film & Visual Storytelling Studio","focus":"Evaluate cinematography, editing, sound, narrative structure, visual language, genre, and audience impact."},
+    {"id":7,"title":"Music & Cultural Expression Arena","focus":"Describe musical features, cultural context, emotional effect, performance choices, and evolving artistic traditions."},
+    {"id":8,"title":"Media Representation Decoder","focus":"Examine framing, representation, stereotypes, omission, audience targeting, and narrative choices across media."},
+    {"id":9,"title":"Cultural Identity Forum","focus":"Discuss identity, language, heritage, migration, belonging, cultural exchange, and internal diversity with nuance."},
+    {"id":10,"title":"Philosophy & Human Questions","focus":"Explore abstract questions about knowledge, ethics, meaning, freedom, identity, and human experience through careful argumentation."},
+    {"id":11,"title":"Museum Curator Mission","focus":"Design a thematic exhibition by selecting works, explaining context, sequencing ideas, and adapting interpretation for visitors."},
+    {"id":12,"title":"Creative Industries Observatory","focus":"Analyse publishing, film, music, gaming, design, and cultural industries through audiences, technology, economics, and creativity."},
+    {"id":13,"title":"Critical Review Studio","focus":"Write and present a sophisticated review that combines description, interpretation, evidence, evaluation, and qualified judgement."},
+    {"id":14,"title":"Media Interview Command","focus":"Conduct and respond to a high-level cultural interview using precise questions, active listening, follow-up, and nuanced answers."},
+    {"id":15,"title":"Academic Humanities Writing","focus":"Construct an evidence-based humanities essay with a clear thesis, contextualised evidence, counterinterpretations, and a coherent conclusion."},
+    {"id":16,"title":"Cultural Debate Arena","focus":"Compare interpretations of a cultural work or social phenomenon while acknowledging ambiguity and alternative perspectives."},
+    {"id":17,"title":"Creative Presentation Command","focus":"Deliver an engaging public presentation that translates complex cultural analysis into accessible, audience-aware language."},
+    {"id":18,"title":"Digital Culture & AI Studio","focus":"Examine how digital platforms and generative technologies are changing creativity, authorship, access, and cultural production."},
+    {"id":19,"title":"World 9 Integration Quest","focus":"Integrate literary reading, media listening, cultural interpretation, critical writing, interview skills, debate, and presentation."},
+    {"id":20,"title":"C1+ Arts, Culture & Humanities Master Challenge","focus":"Complete an integrated cultural intelligence challenge using evidence, interpretation, critical evaluation, and sophisticated communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Arts Festival Briefing","description":"Curate and present a cultural programme for an international audience, explaining artistic choices, cultural context, and audience relevance."},
+    {"title":"Film & Media Review Desk","description":"Analyse a major film or media work, evaluate its narrative and representation choices, and produce a professional critical review."},
+    {"title":"Digital Culture Roundtable","description":"Lead a multidisciplinary discussion about AI, creativity, authorship, cultural access, and the future of creative industries."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated arts, culture, media, and humanities assessment",
+    "components":["literary and cultural reading","expert media listening","interpretive analysis","historical and cultural reasoning","critical review","humanities essay","cultural interview","public presentation"],
+    "successCriteria":["precise interpretive vocabulary","evidence-aware cultural analysis","nuanced comparison and evaluation","clear distinction between evidence and interpretation","coherent academic writing","effective critical discussion","creative audience-aware presentation","responsible treatment of cultural perspectives"]
+  }
+}
