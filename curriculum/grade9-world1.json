@@ -1,0 +1,57 @@
+{
+  "grade": 9,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 1: C1+ GLOBAL FLUENCY GATEWAY",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "5700+ active words",
+    "reading": "2800–3300 words",
+    "listening": "35–42 min",
+    "speaking": "40–50 min",
+    "writing": "1100–1300 words",
+    "presentation": "20–25 min"
+  },
+  "grammar": [
+    "Advanced discourse organisation and information structure",
+    "Fine control of tense, aspect, modality, and stance",
+    "Complex conditionals and hypothetical reasoning",
+    "Inversion, fronting, clefting, and emphasis",
+    "Nominalisation, compression, and sophisticated written style",
+    "Advanced cohesion, substitution, ellipsis, and reformulation",
+    "Register, pragmatics, politeness, and audience adaptation"
+  ],
+  "missions": [
+    {"id":1,"title":"C1+ Diagnostic Gateway","focus":"Map current advanced strengths and identify the precision gaps required for C1+ communication."},
+    {"id":2,"title":"Precision Vocabulary Forge","focus":"Build flexible control of sophisticated collocations, academic language, and domain-specific vocabulary."},
+    {"id":3,"title":"Discourse Architecture Lab","focus":"Organise extended spoken and written communication with clear progression and cohesion."},
+    {"id":4,"title":"Nuance Signal Decoder","focus":"Interpret implication, stance, understatement, irony, and subtle pragmatic signals."},
+    {"id":5,"title":"Advanced Listening Command","focus":"Follow dense authentic speech, identify discourse shifts, and reconstruct complex arguments."},
+    {"id":6,"title":"Hypothetical Worlds Simulator","focus":"Use advanced conditional structures to analyse alternative outcomes and complex scenarios."},
+    {"id":7,"title":"Emphasis Reactor","focus":"Use inversion, clefting, fronting, and emphasis to control information and rhetorical impact."},
+    {"id":8,"title":"Register Transformation Portal","focus":"Reformulate the same message for academic, professional, public, and informal audiences."},
+    {"id":9,"title":"Argument Precision Arena","focus":"Build nuanced arguments, qualify claims, anticipate objections, and respond with evidence."},
+    {"id":10,"title":"Real-Time Interaction Nexus","focus":"Manage turn-taking, interruption, clarification, repair, and spontaneous topic development."},
+    {"id":11,"title":"Complex Problem-Solving Mission","focus":"Solve an unfamiliar real-world problem through analysis, negotiation, and collaborative communication."},
+    {"id":12,"title":"Advanced Reading Observatory","focus":"Analyse long-form texts, infer authorial stance, and connect explicit and implicit ideas."},
+    {"id":13,"title":"Research Synthesis Engine","focus":"Combine multiple sources into a coherent, carefully qualified synthesis."},
+    {"id":14,"title":"Executive Communication Studio","focus":"Handle high-level meetings, briefings, questions, and concise decision-focused communication."},
+    {"id":15,"title":"Diplomatic Conflict Lab","focus":"Manage disagreement, protect relationships, and move difficult conversations toward resolution."},
+    {"id":16,"title":"Advanced Writing Observatory","focus":"Produce a sophisticated long-form text with precise structure, style, evidence, and audience awareness."},
+    {"id":17,"title":"Persuasion & Counterargument Arena","focus":"Present a persuasive position while accurately representing and answering alternative viewpoints."},
+    {"id":18,"title":"C1+ Presentation Command","focus":"Deliver a sustained expert-style presentation and respond flexibly to challenging questions."},
+    {"id":19,"title":"World 1 Integration Quest","focus":"Integrate advanced reading, listening, speaking, writing, grammar, and pragmatic communication."},
+    {"id":20,"title":"C1+ Gateway Master Challenge","focus":"Complete an integrated real-world communication challenge demonstrating flexible, precise, independent C1+ English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Expert Roundtable","description":"Join a multilingual discussion, present a complex position, challenge ideas diplomatically, and respond to spontaneous questions."},
+    {"title":"High-Stakes Professional Problem","description":"Analyse an unexpected workplace or service problem, negotiate with stakeholders, and produce a clear action plan."},
+    {"title":"Global Knowledge Presentation","description":"Synthesize information from several sources, present nuanced conclusions, and adapt explanations for different audiences."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated C1+ gateway assessment",
+    "components":["advanced reading analysis","authentic listening inference","spontaneous interaction","complex problem solving","research synthesis","extended writing","persuasive presentation","pragmatic roleplay"],
+    "successCriteria":["precise and flexible language control","coherent extended communication","advanced grammatical accuracy","nuanced vocabulary and collocation","effective pragmatic and register control","independent argumentation","strategic interaction and repair","clear audience-aware delivery"]
+  }
+}
