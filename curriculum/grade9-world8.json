@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 8: C1+ LAW, GOVERNANCE & CIVIC COMMUNICATION",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "7300+ active words",
+    "reading": "3200–3900 words",
+    "listening": "44–54 min",
+    "speaking": "48–62 min",
+    "writing": "1350–1600 words",
+    "presentation": "26–33 min"
+  },
+  "grammar": [
+    "Advanced formal register for legal, institutional, and civic communication",
+    "Complex qualification, limitation, and exception structures",
+    "Modality and obligation for rules, rights, duties, and policy language",
+    "Conditional and hypothetical reasoning for institutional scenarios",
+    "Passive, impersonal, and agentless structures in formal documents",
+    "Nominalisation and information compression in legal and policy writing",
+    "Hedging, attribution, and careful treatment of contested claims",
+    "Audience and register adaptation for citizens, officials, lawyers, media, and international audiences"
+  ],
+  "missions": [
+    {"id":1,"title":"Civic Language Calibration","focus":"Distinguish laws, regulations, policies, institutions, rights, duties, procedures, and public claims using precise C1+ language."},
+    {"id":2,"title":"Legal Vocabulary Forge","focus":"Use advanced vocabulary for courts, contracts, evidence, liability, compliance, disputes, remedies, and legal procedure."},
+    {"id":3,"title":"Constitution & Institutions Observatory","focus":"Explain how public institutions are structured and how formal responsibilities and powers are described."},
+    {"id":4,"title":"Rights & Responsibilities Lab","focus":"Analyse language about individual rights, civic duties, responsibilities, protections, limitations, and competing interests."},
+    {"id":5,"title":"Law in Context Simulator","focus":"Interpret rules and hypothetical cases while distinguishing legal text from interpretation, application, and opinion."},
+    {"id":6,"title":"Evidence & Argument Courtroom","focus":"Evaluate evidence, claims, counterclaims, relevance, uncertainty, and reasoning in a simulated legal argument."},
+    {"id":7,"title":"Contract Language Decoder","focus":"Understand key contractual structures including obligations, conditions, warranties, exceptions, termination, and remedies."},
+    {"id":8,"title":"Governance Systems Nexus","focus":"Discuss transparency, accountability, institutional roles, public administration, oversight, and decision-making processes."},
+    {"id":9,"title":"Policy Analysis Studio","focus":"Analyse a public policy by identifying objectives, affected groups, implementation mechanisms, evidence, trade-offs, and limitations."},
+    {"id":10,"title":"Regulation & Compliance Mission","focus":"Explain regulatory requirements, compliance systems, enforcement, risk management, and organisational responsibilities."},
+    {"id":11,"title":"International Law Forum","focus":"Explore advanced language for treaties, international obligations, cooperation, jurisdiction, and cross-border disputes."},
+    {"id":12,"title":"Public Administration Problem-Solver","focus":"Resolve an institutional case by clarifying procedures, stakeholders, constraints, responsibilities, and possible lawful responses."},
+    {"id":13,"title":"Civic Media Intelligence","focus":"Separate reporting, commentary, official statements, legal claims, and unverified assertions when analysing public information."},
+    {"id":14,"title":"Public Consultation Arena","focus":"Participate in a structured consultation by presenting evidence, asking precise questions, acknowledging competing concerns, and responding respectfully."},
+    {"id":15,"title":"Formal Legal & Policy Writing","focus":"Write a structured policy or legal briefing that defines the issue, summarises evidence, explains implications, and qualifies uncertainty."},
+    {"id":16,"title":"Mediation & Dispute Resolution","focus":"Use diplomatic and legally appropriate language to clarify interests, propose settlements, manage disagreement, and record agreements."},
+    {"id":17,"title":"Civic Presentation Command","focus":"Deliver an audience-aware presentation explaining a complex institutional or policy issue clearly without overstating evidence."},
+    {"id":18,"title":"Governance Crisis Simulation","focus":"Manage a simulated institutional crisis through accurate public communication, stakeholder coordination, procedural reasoning, and accountability language."},
+    {"id":19,"title":"World 8 Integration Quest","focus":"Integrate legal reading, institutional listening, evidence analysis, policy writing, mediation, civic discussion, and formal presentation."},
+    {"id":20,"title":"C1+ Law, Governance & Civic Master Challenge","focus":"Complete an integrated civic scenario using precise legal vocabulary, evidence-based reasoning, careful qualification, and strategic communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Policy Consultation Chamber","description":"Review a proposed public policy, identify evidence and trade-offs, prepare questions, and present a balanced stakeholder response."},
+    {"title":"Contract & Dispute Resolution Desk","description":"Analyse a simulated contract dispute, identify relevant obligations and uncertainties, and conduct a structured mediation."},
+    {"title":"International Governance Briefing","description":"Prepare a formal briefing on an international institutional issue, explaining responsibilities, competing interests, evidence, and possible cooperative responses."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated law, governance, and civic communication assessment",
+    "components":["legal and policy reading","institutional listening","evidence evaluation","case analysis","formal policy briefing","mediation roleplay","public consultation","civic presentation"],
+    "successCriteria":["precise legal and institutional vocabulary","careful distinction between fact and interpretation","coherent evidence-based reasoning","accurate use of obligation and qualification language","clear formal writing","respectful dispute resolution","audience-aware civic communication","responsible treatment of contested claims"]
+  }
+}
