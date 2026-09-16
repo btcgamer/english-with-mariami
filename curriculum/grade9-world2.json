@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 2: C1+ ACADEMIC & CRITICAL THINKING MASTERY",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6000+ active words",
+    "reading": "3000–3600 words",
+    "listening": "38–45 min",
+    "speaking": "42–52 min",
+    "writing": "1200–1400 words",
+    "presentation": "22–27 min"
+  },
+  "grammar": [
+    "Advanced academic sentence structure and information density",
+    "Nominalisation and formal style control",
+    "Hedging, boosting, and cautious academic claims",
+    "Complex linking, concession, contrast, and qualification",
+    "Participle clauses and compressed academic constructions",
+    "Advanced reporting verbs and source attribution",
+    "Cohesion, referencing, and paragraph-level argument development",
+    "Editing for precision, clarity, and logical consistency"
+  ],
+  "missions": [
+    {"id":1,"title":"Critical Thinking Calibration","focus":"Identify assumptions, distinguish evidence from opinion, and evaluate reasoning quality."},
+    {"id":2,"title":"Academic Vocabulary Reactor","focus":"Master precise academic collocations, word families, and discipline-neutral terminology."},
+    {"id":3,"title":"Argument Mapping Observatory","focus":"Map claims, reasons, evidence, counterclaims, and conclusions in complex texts."},
+    {"id":4,"title":"Evidence Quality Scanner","focus":"Assess reliability, relevance, sufficiency, and limitations of supporting evidence."},
+    {"id":5,"title":"Research Question Forge","focus":"Transform broad topics into focused, researchable, and meaningful questions."},
+    {"id":6,"title":"Source Attribution Command","focus":"Report, paraphrase, and synthesise ideas while maintaining accurate attribution."},
+    {"id":7,"title":"Academic Hedging Lab","focus":"Express uncertainty, probability, limitations, and confidence with appropriate language."},
+    {"id":8,"title":"Counterargument Arena","focus":"Represent alternative positions fairly and respond with nuanced, evidence-based reasoning."},
+    {"id":9,"title":"Complex Reading Expedition","focus":"Analyse dense academic and journalistic texts, structure, tone, and implicit meaning."},
+    {"id":10,"title":"Lecture Logic Decoder","focus":"Follow extended lectures and identify structure, examples, transitions, and conclusions."},
+    {"id":11,"title":"Data-to-Insight Mission","focus":"Describe patterns, compare findings, and draw cautious conclusions from information displays."},
+    {"id":12,"title":"Synthesis Writing Studio","focus":"Combine multiple texts into a coherent synthesis without copying or distorting ideas."},
+    {"id":13,"title":"Academic Paragraph Architect","focus":"Write focused paragraphs with strong topic sentences, development, and logical cohesion."},
+    {"id":14,"title":"Formal Style Transformation","focus":"Convert conversational language into clear, concise, and appropriately formal academic prose."},
+    {"id":15,"title":"Research Ethics Protocol","focus":"Practise responsible source use, accurate representation, originality, and ethical reasoning."},
+    {"id":16,"title":"Seminar Discussion Nexus","focus":"Lead and participate in advanced discussions by questioning, clarifying, and extending ideas."},
+    {"id":17,"title":"Critical Review Observatory","focus":"Write a balanced critical review that evaluates strengths, weaknesses, and implications."},
+    {"id":18,"title":"Academic Presentation Arena","focus":"Present a structured argument with evidence and respond effectively to challenging questions."},
+    {"id":19,"title":"World 2 Integration Quest","focus":"Integrate critical reading, listening, research, discussion, and academic writing skills."},
+    {"id":20,"title":"C1+ Critical Thinking Master Challenge","focus":"Complete a research-informed capstone task demonstrating independent academic communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Mini Research Investigation","description":"Define a question, evaluate sources, synthesise findings, and present a carefully qualified conclusion."},
+    {"title":"Public Policy Discussion","description":"Compare competing claims, identify assumptions, and participate in a respectful evidence-based seminar."},
+    {"title":"Academic Review Board","description":"Review a proposal, identify strengths and weaknesses, and deliver constructive recommendations."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated academic and critical thinking assessment",
+    "components":["complex reading analysis","extended listening","argument evaluation","source synthesis","data commentary","critical review","seminar interaction","academic presentation"],
+    "successCriteria":["clear and logical reasoning","accurate source attribution","balanced treatment of alternatives","appropriate academic register","precise grammar and vocabulary","effective evidence use","coherent extended writing","confident discussion and presentation"]
+  }
+}
