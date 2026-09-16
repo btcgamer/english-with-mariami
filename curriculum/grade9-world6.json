@@ -1,0 +1,58 @@
+{
+  "grade": 9,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 9 — WORLD 6: C1+ SCIENCE, INNOVATION & FUTURE SYSTEMS",
+  "level": "C1+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6800+ active words",
+    "reading": "3000–3700 words",
+    "listening": "42–50 min",
+    "speaking": "45–58 min",
+    "writing": "1250–1500 words",
+    "presentation": "24–30 min"
+  },
+  "grammar": [
+    "Advanced language for scientific explanation and process description",
+    "Passive and impersonal structures in formal scientific communication",
+    "Modality, probability, and cautious forecasting",
+    "Complex cause-and-effect and hypothesis structures",
+    "Nominalisation and concise technical writing",
+    "Hedging, evidence attribution, and research limitations",
+    "Comparative and evaluative structures for competing solutions",
+    "Register adaptation for experts, learners, and the general public"
+  ],
+  "missions": [
+    {"id":1,"title":"Scientific Thinking Calibration","focus":"Distinguish observation, hypothesis, evidence, interpretation, and conclusion in scientific material."},
+    {"id":2,"title":"Innovation Vocabulary Forge","focus":"Use precise language for discovery, invention, experimentation, systems, and technological progress."},
+    {"id":3,"title":"Research Method Observatory","focus":"Describe research questions, variables, methods, controls, results, and limitations."},
+    {"id":4,"title":"Hypothesis Builder Lab","focus":"Formulate testable hypotheses and explain predictions using accurate conditional language."},
+    {"id":5,"title":"Complex Process Decoder","focus":"Understand and explain multi-stage scientific and technological processes clearly."},
+    {"id":6,"title":"Data Interpretation Nexus","focus":"Interpret patterns, trends, uncertainty, and relationships without overclaiming."},
+    {"id":7,"title":"Scientific Debate Arena","focus":"Compare competing explanations and defend a position with evidence and appropriate caution."},
+    {"id":8,"title":"Future Systems Simulator","focus":"Explore possible technological futures through scenarios, risks, opportunities, and trade-offs."},
+    {"id":9,"title":"Climate & Energy Innovation","focus":"Discuss energy systems, sustainability, innovation, and the limitations of proposed solutions."},
+    {"id":10,"title":"Health & Biotechnology Forum","focus":"Communicate about biotechnology, health innovation, benefits, risks, and ethical considerations."},
+    {"id":11,"title":"Space & Exploration Observatory","focus":"Explain space research, exploration goals, engineering challenges, and scientific uncertainty."},
+    {"id":12,"title":"Engineering Problem-Solving Mission","focus":"Analyse constraints, compare designs, and propose practical evidence-informed solutions."},
+    {"id":13,"title":"Scientific Listening Command","focus":"Follow expert talks and identify key concepts, explanations, evidence, and conclusions."},
+    {"id":14,"title":"Research Summary Studio","focus":"Summarise complex research accurately while preserving limitations and source attribution."},
+    {"id":15,"title":"Public Science Communication","focus":"Translate technical information into accessible language for a non-specialist audience."},
+    {"id":16,"title":"Innovation Proposal Arena","focus":"Present a new solution, explain its mechanism, justify its value, and address objections."},
+    {"id":17,"title":"Science Ethics Council","focus":"Discuss responsible innovation, safety, access, unintended consequences, and accountability."},
+    {"id":18,"title":"Future Systems Roundtable","focus":"Lead a multidisciplinary discussion about emerging systems and their social impact."},
+    {"id":19,"title":"World 6 Integration Quest","focus":"Integrate scientific reading, listening, data analysis, research writing, and innovation communication."},
+    {"id":20,"title":"C1+ Future Systems Master Challenge","focus":"Complete an integrated science-and-innovation challenge using evidence, hypotheses, and strategic communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Research Discovery Briefing","description":"Evaluate a research summary, explain its findings and limitations, and present the implications to a mixed audience."},
+    {"title":"Sustainable Energy Design Room","description":"Compare possible energy solutions, assess trade-offs, and recommend a realistic innovation pathway."},
+    {"title":"Emerging Technology Ethics Panel","description":"Assess a new technology from scientific, social, ethical, and practical perspectives before presenting a reasoned position."}
+  ],
+  "assessment": {
+    "level":"C1+",
+    "type":"Integrated science, innovation, and future systems assessment",
+    "components":["scientific reading","expert listening","hypothesis formation","data interpretation","research synthesis","technical explanation","innovation proposal","ethics roundtable"],
+    "successCriteria":["accurate scientific reasoning","clear explanation of complex processes","appropriate uncertainty and hedging","precise technical vocabulary","responsible evidence use","balanced evaluation of solutions","accessible public communication","confident innovation presentation"]
+  }
+}
