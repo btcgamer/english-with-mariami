@@ -1,0 +1,179 @@
+{
+  "grade": 7,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 7: C1 ADVANCED ACADEMIC & RESEARCH ENGLISH",
+  "level": "C1",
+  "missionCount": 20,
+  "description": "An advanced academic world focused on research literacy, evidence, synthesis, critical interpretation, formal argument, and precise communication of complex ideas.",
+  "targets": {
+    "vocabulary": "3900+ active words with academic, analytical, and research collocations",
+    "reading": "2200–2800 words with synthesis, inference, evaluation, and source comparison",
+    "listening": "22–28 minutes across lectures, seminars, interviews, and expert discussions",
+    "speaking": "26–34 minutes of structured academic discussion, explanation, and defense",
+    "writing": "800–1000 words across analytical essays, research summaries, and evidence-based arguments",
+    "presentation": "13–17 minutes with visual explanation, synthesis, and live questioning",
+    "researchCommunication": "clear C1 communication of evidence, uncertainty, interpretation, and conclusions"
+  },
+  "grammar": [
+    "advanced nominalization and information-dense academic structures",
+    "complex passive and reporting constructions for source attribution",
+    "modal verbs and modal perfects for evidence, probability, and cautious claims",
+    "advanced conditionals for hypotheses, limitations, and counterfactual analysis",
+    "participial and reduced clauses for concise formal writing",
+    "inversion, fronting, clefting, and emphasis in formal argument",
+    "advanced relative clauses, apposition, and embedded structures",
+    "cohesion through reference, substitution, lexical chains, and discourse markers",
+    "hedging, boosting, concession, qualification, and epistemic stance",
+    "register control across academic, research, seminar, and public-facing communication"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Academic Vocabulary Forge",
+      "focus": "Academic word families, collocations, nominalization, and precise lexical choice",
+      "outcome": "Use sophisticated academic vocabulary accurately rather than relying on vague general words."
+    },
+    {
+      "id": 2,
+      "title": "Research Question Architect",
+      "focus": "Turning broad topics into focused, answerable research questions",
+      "outcome": "Formulate precise questions that define scope, variables, context, and purpose."
+    },
+    {
+      "id": 3,
+      "title": "Evidence Detective",
+      "focus": "Claims, evidence, examples, limitations, and source reliability",
+      "outcome": "Distinguish strong support from weak, irrelevant, or insufficient evidence."
+    },
+    {
+      "id": 4,
+      "title": "Inference & Interpretation Lab",
+      "focus": "Reading implications, assumptions, patterns, and unstated conclusions",
+      "outcome": "Make careful inferences while separating what a source states from what it suggests."
+    },
+    {
+      "id": 5,
+      "title": "Source Reporting Mastery",
+      "focus": "Attribution verbs, reporting structures, paraphrase, and source integration",
+      "outcome": "Report ideas from sources accurately while maintaining an appropriate academic register."
+    },
+    {
+      "id": 6,
+      "title": "Paraphrase Precision Lab",
+      "focus": "Meaning preservation, structural transformation, and lexical flexibility",
+      "outcome": "Paraphrase complex information without distorting meaning or overusing source wording."
+    },
+    {
+      "id": 7,
+      "title": "Synthesis Engine",
+      "focus": "Combining multiple sources into a coherent analytical position",
+      "outcome": "Connect, compare, and synthesize sources instead of summarizing them separately."
+    },
+    {
+      "id": 8,
+      "title": "Argument Architecture",
+      "focus": "Thesis, claims, reasons, evidence, counterarguments, and conclusions",
+      "outcome": "Build logically connected arguments that remain clear across complex ideas."
+    },
+    {
+      "id": 9,
+      "title": "Bias & Framing Intelligence",
+      "focus": "Loaded language, framing, omission, perspective, and rhetorical positioning",
+      "outcome": "Identify how language choices can influence interpretation without confusing framing with evidence."
+    },
+    {
+      "id": 10,
+      "title": "Academic Seminar Arena",
+      "focus": "Turn-taking, clarification, challenge, qualification, and evidence-based response",
+      "outcome": "Participate actively in advanced seminar discussion while developing ideas spontaneously."
+    },
+    {
+      "id": 11,
+      "title": "Comparative Research Reading",
+      "focus": "Comparing methodology, claims, findings, limitations, and conclusions across texts",
+      "outcome": "Evaluate similarities and differences between complex sources with precision."
+    },
+    {
+      "id": 12,
+      "title": "Lecture & Expert Listening Lab",
+      "focus": "Following extended explanations, signposting, examples, qualifications, and conclusions",
+      "outcome": "Extract structure, key evidence, and speaker stance from demanding academic speech."
+    },
+    {
+      "id": 13,
+      "title": "Analytical Essay Mission",
+      "focus": "Thesis development, paragraph logic, evidence integration, and synthesis",
+      "outcome": "Write a coherent C1 analytical essay with a defensible central argument."
+    },
+    {
+      "id": 14,
+      "title": "Research Summary Workshop",
+      "focus": "Abstract-style compression, findings, limitations, and implications",
+      "outcome": "Reduce complex research into a concise and accurate professional summary."
+    },
+    {
+      "id": 15,
+      "title": "Academic Presentation Lab",
+      "focus": "Explaining research, interpreting visuals, signposting, and answering questions",
+      "outcome": "Present complex information clearly to an audience with different levels of expertise."
+    },
+    {
+      "id": 16,
+      "title": "Methodology & Limitations Mission",
+      "focus": "Methods, variables, uncertainty, limitations, and cautious interpretation",
+      "outcome": "Discuss how research design affects the strength and scope of conclusions."
+    },
+    {
+      "id": 17,
+      "title": "Science, Technology & Society Research",
+      "focus": "Interdisciplinary evidence, public impact, ethics, and competing interpretations",
+      "outcome": "Discuss complex science-and-society questions using evidence and qualified claims."
+    },
+    {
+      "id": 18,
+      "title": "Research Conference Simulation",
+      "focus": "Poster-style explanation, peer questions, critique, response, and revision",
+      "outcome": "Defend an idea professionally while responding constructively to critical questions."
+    },
+    {
+      "id": 19,
+      "title": "World 7 Integrated Research Marathon",
+      "focus": "Integrated reading, listening, source analysis, discussion, writing, and presentation",
+      "outcome": "Complete a multi-stage research communication challenge using sustained C1 English."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 7 MASTER QUEST — C1 ADVANCED ACADEMIC & RESEARCH ENGLISH",
+      "focus": "End-to-end research communication from question to evidence, synthesis, argument, and presentation",
+      "outcome": "Demonstrate independent C1 academic communication through a complete research-style mission."
+    }
+  ],
+  "realWorldScenarios": [
+    "Choosing a focused research question for a school or personal project",
+    "Comparing two sources that reach different conclusions",
+    "Explaining why evidence supports one interpretation more strongly than another",
+    "Summarizing a complex article for someone who has not read it",
+    "Participating in a seminar and responding to a challenging question",
+    "Presenting research findings with charts or other visual evidence",
+    "Explaining research limitations without undermining the entire project",
+    "Writing an evidence-based recommendation for a real-world problem",
+    "Defending a research interpretation during a conference-style Q&A",
+    "Communicating complex research findings to a general audience"
+  ],
+  "assessment": {
+    "type": "integrated_c1_academic_research_communication",
+    "components": [
+      "academic vocabulary and collocation precision",
+      "research question formulation",
+      "source evaluation and evidence interpretation",
+      "accurate paraphrase and source reporting",
+      "multi-source synthesis",
+      "advanced reading and listening comprehension",
+      "analytical argumentation",
+      "research summary and essay writing",
+      "academic presentation and live Q&A",
+      "integrated Master Quest performance"
+    ],
+    "successCriteria": "Learner can independently interpret, compare, synthesize, and communicate complex information in clear C1 academic English while distinguishing evidence, inference, uncertainty, and personal interpretation."
+  }
+}
