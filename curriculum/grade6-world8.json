@@ -1,0 +1,177 @@
+{
+  "grade": 6,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 8: B2 FLUENCY & REAL-WORLD MASTERY",
+  "level": "B2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "2000+ active vocabulary with collocations, phrasal verbs, idioms, academic language and functional chunks",
+    "reading": "1300–1500 words with inference, evaluation, tone and synthesis",
+    "listening": "13–15 minutes of natural multi-speaker and authentic-style input",
+    "speaking": "16–20 minute sustained interaction, discussion, negotiation and presentation",
+    "writing": "400–500 words across argumentative, formal and reflective tasks",
+    "presentation": "9–11 minutes with structured explanation and persuasion"
+  },
+  "grammar": [
+    "advanced tense and aspect choices in extended discourse",
+    "past and future perspective shifts",
+    "modal perfects and nuanced deduction",
+    "mixed and extended conditionals",
+    "advanced passive and reporting structures",
+    "participle clauses and reduced structures",
+    "advanced relative clauses and noun-phrase expansion",
+    "inversion, cleft sentences and fronting",
+    "ellipsis and substitution",
+    "discourse markers, referencing and lexical cohesion",
+    "hedging, stance and diplomatic language",
+    "formal, neutral and informal register shifts",
+    "complex noun phrases and academic style",
+    "argument structure, concession and counterargument"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "B2 Fluency Vocabulary Reactor",
+      "focus": "Build automatic B2 vocabulary recall through collocations, phrasal verbs, idioms, word families and functional chunks.",
+      "skills": ["vocabulary", "collocation", "fluency", "word formation"]
+    },
+    {
+      "id": 2,
+      "title": "Tense & Aspect in Real Conversation",
+      "focus": "Control tense and aspect while switching naturally between background, events, completed actions and current relevance.",
+      "skills": ["grammar", "speaking", "accuracy", "narrative"]
+    },
+    {
+      "id": 3,
+      "title": "Nuanced Modals & Modal Perfects",
+      "focus": "Express degrees of certainty, criticism, possibility, obligation and past inference with precise modal language.",
+      "skills": ["grammar", "deduction", "nuance", "speaking"]
+    },
+    {
+      "id": 4,
+      "title": "Hypothetical Worlds Challenge",
+      "focus": "Use mixed and extended conditionals to analyze imagined situations, consequences, regrets and alternative decisions.",
+      "skills": ["grammar", "reasoning", "discussion", "problem solving"]
+    },
+    {
+      "id": 5,
+      "title": "Information Transformation Lab",
+      "focus": "Transform statements using advanced passive, reporting verbs, impersonal structures and formal information patterns.",
+      "skills": ["grammar", "reporting", "formal English", "writing"]
+    },
+    {
+      "id": 6,
+      "title": "Sentence Compression Mission",
+      "focus": "Combine and shorten complex ideas using participle clauses, reduced relatives and efficient noun phrases.",
+      "skills": ["grammar", "sentence architecture", "writing"]
+    },
+    {
+      "id": 7,
+      "title": "Focus & Emphasis Command",
+      "focus": "Use inversion, cleft structures, fronting and emphasis patterns to control information focus.",
+      "skills": ["grammar", "emphasis", "speaking", "writing"]
+    },
+    {
+      "id": 8,
+      "title": "Cohesion Control Center",
+      "focus": "Create clear long-form communication with referencing, substitution, ellipsis, discourse markers and lexical cohesion.",
+      "skills": ["cohesion", "coherence", "writing", "speaking"]
+    },
+    {
+      "id": 9,
+      "title": "Register Shift Simulator",
+      "focus": "Rewrite and deliver the same message in informal, neutral, formal and diplomatic registers.",
+      "skills": ["register", "pragmatics", "writing", "speaking"]
+    },
+    {
+      "id": 10,
+      "title": "B2 Fluency Conversation Arena",
+      "focus": "Maintain a sustained conversation by extending answers, asking follow-up questions, clarifying and reacting spontaneously.",
+      "skills": ["speaking", "interaction", "fluency", "listening"]
+    },
+    {
+      "id": 11,
+      "title": "Reading Mastery — Evaluate & Synthesize",
+      "focus": "Compare viewpoints, identify evidence and assumptions, evaluate arguments and synthesize information across an extended text.",
+      "skills": ["reading", "evaluation", "inference", "synthesis"]
+    },
+    {
+      "id": 12,
+      "title": "Listening Mastery — Natural Speech",
+      "focus": "Understand connected natural speech, speaker attitude, implied meaning, interruptions and changing viewpoints.",
+      "skills": ["listening", "inference", "attitude", "detail"]
+    },
+    {
+      "id": 13,
+      "title": "Argument Builder — B2 Essay",
+      "focus": "Write a 400–500 word argument with a clear thesis, developed evidence, concession, counterargument and strong conclusion.",
+      "skills": ["writing", "argumentation", "cohesion", "register"]
+    },
+    {
+      "id": 14,
+      "title": "Professional Report & Recommendation",
+      "focus": "Analyze a realistic problem and produce a formal report containing findings, comparisons and practical recommendations.",
+      "skills": ["writing", "professional English", "analysis", "recommendation"]
+    },
+    {
+      "id": 15,
+      "title": "Persuasive Presentation Command",
+      "focus": "Deliver a 9–11 minute presentation that explains a complex topic, compares alternatives and persuades an audience.",
+      "skills": ["presentation", "speaking", "persuasion", "organization"]
+    },
+    {
+      "id": 16,
+      "title": "Digital World & Media Mission",
+      "focus": "Discuss social media, digital privacy, AI, online communication and media influence using nuanced B2 language.",
+      "skills": ["speaking", "vocabulary", "critical thinking", "discussion"]
+    },
+    {
+      "id": 17,
+      "title": "Travel, Services & Unexpected Problems",
+      "focus": "Solve realistic travel and public-service problems involving delays, complaints, changes, requests and negotiation.",
+      "skills": ["functional English", "speaking", "listening", "problem solving"]
+    },
+    {
+      "id": 18,
+      "title": "Negotiation, Mediation & Agreement",
+      "focus": "Manage disagreement, clarify priorities, make diplomatic proposals, negotiate compromises and reach a workable agreement.",
+      "skills": ["negotiation", "interaction", "pragmatics", "fluency"]
+    },
+    {
+      "id": 19,
+      "title": "B2 Real-World Skills Marathon",
+      "focus": "Complete a multi-stage scenario combining reading, listening, spontaneous speaking, negotiation, formal writing and presentation.",
+      "skills": ["reading", "listening", "speaking", "writing", "integration"]
+    },
+    {
+      "id": 20,
+      "title": "WORLD 8 MASTER QUEST — B2 REAL-WORLD MASTERY",
+      "focus": "Complete a final B2 mission requiring independent decisions, nuanced communication, evidence-based argument, negotiation and a polished final presentation.",
+      "skills": ["mastery", "B2 fluency", "independence", "integrated communication"]
+    }
+  ],
+  "realWorldScenarios": [
+    "travel disruption and service recovery",
+    "customer complaints and formal requests",
+    "workplace meetings and professional problem solving",
+    "academic discussion and research presentation",
+    "media and technology debates",
+    "digital communication and privacy",
+    "negotiation and compromise",
+    "community decision making",
+    "public-service communication",
+    "persuasive presentations"
+  ],
+  "assessment": [
+    "B2 grammar range, accuracy and flexibility",
+    "sustained fluency and interaction management",
+    "natural use of collocations and functional language",
+    "comprehension of explicit and implied meaning",
+    "evaluation and synthesis of information",
+    "coherent and persuasive extended writing",
+    "appropriate register and diplomatic communication",
+    "independent problem solving in English",
+    "ability to negotiate, justify and defend ideas",
+    "successful integrated B2 real-world performance"
+  ]
+}
