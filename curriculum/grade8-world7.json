@@ -1,0 +1,56 @@
+{
+  "grade": 8,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 7: C1 ADVANCED RESEARCH, MEDIA & INFORMATION MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "4700+ active words",
+    "reading": "2300–2700 words",
+    "listening": "27–32 min",
+    "speaking": "32–40 min",
+    "writing": "900–1050 words",
+    "presentation": "15–20 min"
+  },
+  "grammar": [
+    "advanced reporting verbs and reporting structures",
+    "complex passive constructions",
+    "fronting, inversion, and rhetorical emphasis",
+    "discourse-level cohesion and substitution",
+    "advanced relative and participle clauses",
+    "hedging, certainty, and evidential language",
+    "style control across media and academic genres"
+  ],
+  "missions": [
+    {"id":1,"title":"Research Intelligence Lab","focus":"research vocabulary, inquiry questions, and source mapping"},
+    {"id":2,"title":"Information Literacy Forge","focus":"distinguishing facts, interpretations, assumptions, and claims"},
+    {"id":3,"title":"Source Reliability Matrix","focus":"evaluating authority, relevance, currency, and evidence"},
+    {"id":4,"title":"Media Framing Detective","focus":"headline framing, selection, omission, and perspective"},
+    {"id":5,"title":"Misinformation Defense Arena","focus":"misleading claims, manipulated context, and verification strategies"},
+    {"id":6,"title":"Advanced Reporting Reactor","focus":"reporting verbs, passive reporting, and attribution"},
+    {"id":7,"title":"Evidence Language Command","focus":"evidential verbs, probability, and calibrated certainty"},
+    {"id":8,"title":"Data Interpretation Vault","focus":"describing trends, comparisons, limitations, and implications"},
+    {"id":9,"title":"Investigative Reading Chamber","focus":"long-form reading, inference, and argument reconstruction"},
+    {"id":10,"title":"Media Listening Observatory","focus":"interviews, commentary, bias, tone, and implied meaning"},
+    {"id":11,"title":"Fact-Checking Simulation","focus":"building a claim-verification workflow"},
+    {"id":12,"title":"Research Question Studio","focus":"narrowing broad topics into answerable research questions"},
+    {"id":13,"title":"Literature Synthesis Lab","focus":"connecting multiple sources and comparing viewpoints"},
+    {"id":14,"title":"Editorial Decision Room","focus":"editorial choices, audience awareness, and responsible wording"},
+    {"id":15,"title":"Analytical Report Forge","focus":"writing structured reports with evidence and qualified conclusions"},
+    {"id":16,"title":"Podcast Investigation Mission","focus":"planning and presenting an evidence-based audio segment"},
+    {"id":17,"title":"Style Transfer Reactor","focus":"rewriting information for academic, journalistic, and public audiences"},
+    {"id":18,"title":"Research Defense Command","focus":"answering challenging questions and defending methodology"},
+    {"id":19,"title":"World 7 Integration Quest","focus":"integrating research, media analysis, listening, speaking, and writing"},
+    {"id":20,"title":"C1 Information Master Challenge","focus":"complete research-and-media mastery assessment"}
+  ],
+  "realWorldScenarios": [
+    {"title":"Community Fact-Check Desk","description":"Investigate a circulating claim, verify evidence, and publish a responsible summary."},
+    {"title":"Student Research Conference","description":"Present a research question, compare sources, explain limitations, and answer audience questions."},
+    {"title":"Digital Media Editorial Board","description":"Evaluate a sensitive story and prepare accurate versions for different audiences."}
+  ],
+  "assessment": {
+    "type":"integrated C1 research and media literacy assessment",
+    "components":["source evaluation","critical reading","media listening analysis","evidence-based discussion","analytical report","research presentation"],
+    "masteryStandard":"Learners can independently evaluate information, communicate uncertainty precisely, synthesize credible sources, and adapt complex content to different audiences."
+  }
+}
