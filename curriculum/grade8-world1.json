@@ -1,0 +1,55 @@
+{
+  "grade": 8,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 1: C1 ADVANCED COMMUNICATION GATEWAY",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "3200+ words",
+    "reading": "1800–2200 words",
+    "listening": "20–25 minutes",
+    "speaking": "25–30 minutes",
+    "writing": "650–800 words",
+    "presentation": "10–12 minutes"
+  },
+  "grammar": [
+    "advanced tense and aspect control",
+    "inversion and emphasis",
+    "complex conditionals and mixed conditionals",
+    "advanced relative and participle clauses",
+    "hedging, modality and nuanced claims",
+    "cohesion, reference and discourse markers"
+  ],
+  "missions": [
+    {"mission":1,"title":"Advanced Vocabulary Intelligence Lab","focus":"Build precise C1 vocabulary through collocations, register and contextual meaning."},
+    {"mission":2,"title":"Precision & Nuance Decoder","focus":"Distinguish near-synonyms and select language according to degree, certainty and tone."},
+    {"mission":3,"title":"Collocation Command Center","focus":"Master high-frequency academic and professional collocations in authentic contexts."},
+    {"mission":4,"title":"Grammar: Aspect Mastery","focus":"Control perfect, continuous and perfect-continuous forms to express precise time relationships."},
+    {"mission":5,"title":"Grammar: Inversion Protocol","focus":"Use negative and restrictive inversion for emphasis and sophisticated written communication."},
+    {"mission":6,"title":"Grammar: Conditional Architect","focus":"Construct mixed and advanced conditional structures to analyse hypothetical situations."},
+    {"mission":7,"title":"Reading: Argument Scanner","focus":"Identify claims, evidence, assumptions, counterarguments and implied conclusions in a complex text."},
+    {"mission":8,"title":"Reading: Hidden Meaning Lab","focus":"Infer attitude, implication, bias and unstated meaning from advanced prose."},
+    {"mission":9,"title":"Listening: Signal Hunter","focus":"Track key ideas, discourse markers, speaker stance and shifts in an extended recording."},
+    {"mission":10,"title":"Listening: Fast Speech Challenge","focus":"Understand connected speech, reduced forms and reformulated ideas in natural English."},
+    {"mission":11,"title":"Speaking: Strategic Response","focus":"Give structured responses that qualify claims, provide evidence and address alternatives."},
+    {"mission":12,"title":"Speaking: Debate Arena","focus":"Defend a position, challenge assumptions and respond spontaneously to opposing arguments."},
+    {"mission":13,"title":"Speaking: Executive Briefing","focus":"Deliver a concise professional briefing with clear priorities, evidence and recommendations."},
+    {"mission":14,"title":"Writing: Cohesion Engine","focus":"Create coherent paragraphs using reference, substitution, linking and controlled repetition."},
+    {"mission":15,"title":"Writing: Analytical Report","focus":"Write an evidence-based report with an introduction, findings, interpretation and conclusion."},
+    {"mission":16,"title":"Writing: Persuasive Editorial","focus":"Develop a nuanced argument using counterclaims, concessions, evidence and a controlled register."},
+    {"mission":17,"title":"Real-World Communication Lab","focus":"Solve a complex workplace or academic communication problem through spoken and written English."},
+    {"mission":18,"title":"C1 Integrated Skills Quest","focus":"Combine advanced vocabulary, grammar, reading, listening, speaking and writing in one scenario."},
+    {"mission":19,"title":"World 1 Master Challenge","focus":"Complete a multi-stage C1 challenge that tests precision, inference, argumentation and fluency."},
+    {"mission":20,"title":"World 1 Gateway Boss","focus":"Demonstrate independent C1 communication across academic, professional and real-world tasks."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Project Meeting","task":"Present a proposal, handle objections and negotiate a practical next step."},
+    {"title":"Academic Discussion","task":"Analyse a complex issue, cite evidence and respond to alternative interpretations."},
+    {"title":"Professional Problem Solving","task":"Write a concise report and deliver a briefing about a developing situation."}
+  ],
+  "assessment": {
+    "format":"Integrated C1 World Assessment",
+    "components":["Vocabulary precision","Advanced grammar","Reading inference","Listening comprehension","Spoken argumentation","Analytical writing"],
+    "mastery":"Learner must demonstrate accurate, flexible and context-appropriate C1 communication."
+  }
+}
