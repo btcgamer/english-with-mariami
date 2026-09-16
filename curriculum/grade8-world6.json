@@ -1,0 +1,82 @@
+{
+  "grade": 8,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 6: C1 PROFESSIONAL, LEADERSHIP & GLOBAL COMMUNICATION",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "4500+ active words",
+    "reading": "2200–2600 words",
+    "listening": "26–31 min",
+    "speaking": "30–38 min",
+    "writing": "850–1000 words",
+    "presentation": "15–19 min"
+  },
+  "grammar": [
+    "advanced register and tone control",
+    "complex conditionals in professional contexts",
+    "modal perfect forms for evaluation and hindsight",
+    "inversion and emphasis in formal communication",
+    "participial and reduced clauses",
+    "cohesive devices across extended reports",
+    "polite disagreement and diplomatic reformulation"
+  ],
+  "missions": [
+    {"id":1,"title":"Leadership Language Core","focus":"Master precise vocabulary for leadership, responsibility, influence, and accountability","skills":["vocabulary","speaking","professional communication"]},
+    {"id":2,"title":"Global Team Command","focus":"Coordinate an international team across time zones, roles, and communication styles","skills":["speaking","listening","collaboration"]},
+    {"id":3,"title":"Strategic Vision Lab","focus":"Explain long-term goals, priorities, measurable outcomes, and strategic direction","skills":["reading","writing","strategy"]},
+    {"id":4,"title":"Decision-Making Matrix","focus":"Compare options, weigh evidence, and justify high-impact professional decisions","skills":["vocabulary","speaking","critical thinking"]},
+    {"id":5,"title":"Diplomatic Disagreement Arena","focus":"Challenge proposals respectfully, reformulate criticism, and preserve working relationships","skills":["speaking","listening","diplomacy"]},
+    {"id":6,"title":"Professional Register Reactor","focus":"Adapt tone, formality, and directness for colleagues, clients, executives, and public audiences","skills":["grammar","writing","register"]},
+    {"id":7,"title":"Crisis Communication Center","focus":"Deliver clear, calm, and accountable messages during uncertainty or organisational disruption","skills":["speaking","writing","crisis communication"]},
+    {"id":8,"title":"Negotiation Strategy Forge","focus":"Use conditional language, concessions, priorities, and persuasive framing in negotiations","skills":["speaking","listening","negotiation"]},
+    {"id":9,"title":"Global Culture Intelligence","focus":"Recognise cultural expectations in meetings, feedback, hierarchy, and decision-making","skills":["reading","listening","intercultural awareness"]},
+    {"id":10,"title":"Executive Listening Observatory","focus":"Follow complex briefings, implied priorities, and nuanced professional viewpoints","skills":["listening","note-taking","inference"]},
+    {"id":11,"title":"Performance Feedback Lab","focus":"Give and receive constructive feedback using evidence, tact, and actionable language","skills":["speaking","vocabulary","interpersonal communication"]},
+    {"id":12,"title":"Stakeholder Alignment Room","focus":"Identify stakeholder interests, resolve competing priorities, and build shared commitment","skills":["speaking","reading","problem solving"]},
+    {"id":13,"title":"Professional Report Studio","focus":"Write a structured report with findings, risks, recommendations, and implementation steps","skills":["writing","organization","professional English"]},
+    {"id":14,"title":"Meeting Facilitation Command","focus":"Chair a complex meeting, manage interruptions, summarise decisions, and assign actions","skills":["speaking","listening","leadership"]},
+    {"id":15,"title":"Ethical Leadership Forum","focus":"Discuss fairness, transparency, responsibility, and competing organisational values","skills":["reading","speaking","critical thinking"]},
+    {"id":16,"title":"Global Partnership Simulator","focus":"Build a cross-border partnership through presentations, clarification, negotiation, and follow-up","skills":["speaking","writing","intercultural communication"]},
+    {"id":17,"title":"Leadership Hindsight Lab","focus":"Use modal perfect forms and conditional reasoning to evaluate past decisions and alternatives","skills":["grammar","speaking","reflection"]},
+    {"id":18,"title":"Executive Vision Presentation","focus":"Deliver a 15–19 minute strategic presentation tailored to an international professional audience","skills":["presentation","speaking","persuasion"]},
+    {"id":19,"title":"World 6 Integration Quest","focus":"Integrate leadership vocabulary, diplomacy, negotiation, reporting, facilitation, and presentation","skills":["integrated skills","leadership","communication"]},
+    {"id":20,"title":"C1 Global Leadership Master Challenge","focus":"Lead a complex international project meeting, resolve a conflict, defend a strategic plan, and produce a professional action report","skills":["reading","listening","speaking","writing","presentation","leadership"]}
+  ],
+  "realWorldScenarios": [
+    {
+      "title":"International Project Steering Committee",
+      "description":"Lead a multilingual project team through competing priorities, delivery risks, and stakeholder expectations, then present agreed actions and responsibilities."
+    },
+    {
+      "title":"Cross-Border Partnership Negotiation",
+      "description":"Negotiate the terms of a professional partnership while balancing cultural expectations, resources, deadlines, accountability, and long-term trust."
+    },
+    {
+      "title":"Organisational Crisis Briefing",
+      "description":"Respond to a developing organisational crisis by preparing a clear briefing, acknowledging uncertainty, answering difficult questions, and proposing responsible next steps."
+    }
+  ],
+  "assessment": {
+    "level": "C1",
+    "format": "Integrated professional leadership and global communication assessment",
+    "components": [
+      "professional leadership vocabulary and collocation precision",
+      "register, tone, and advanced grammar transformation",
+      "critical reading of strategic and organisational documents",
+      "executive listening with inference and structured notes",
+      "complex negotiation and diplomatic disagreement task",
+      "850–1000 word professional report and action plan",
+      "15–19 minute strategic vision presentation",
+      "final leadership simulation with conflict resolution"
+    ],
+    "successCriteria": [
+      "adapts language and tone to varied professional audiences",
+      "communicates priorities, risks, decisions, and responsibilities precisely",
+      "handles disagreement and negotiation diplomatically",
+      "supports recommendations with evidence and clearly stated assumptions",
+      "maintains C1-level control during extended professional interaction",
+      "leads discussions toward clear, realistic, and accountable outcomes"
+    ]
+  }
+}
