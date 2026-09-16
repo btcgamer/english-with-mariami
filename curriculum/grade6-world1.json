@@ -1,0 +1,178 @@
+{
+  "grade": 6,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 1: A2+ POWER-UP & B1 FOUNDATION",
+  "level": "A2 → A2+ → B1 foundation",
+  "description": "A high-volume transition world that moves learners from controlled A2 communication toward confident B1 English through vocabulary depth, grammar control, connected reading, natural listening, sustained speaking, practical writing and real-life problem solving.",
+  "targets": {
+    "active_vocabulary": "850–950 words, collocations, phrasal verbs and functional expressions",
+    "reading": "600–750 words per major reading task",
+    "listening": "6–8 minutes, clear to natural multi-speaker English",
+    "speaking": "7–8 minutes of sustained guided-to-independent communication",
+    "writing": "180–220 words",
+    "mission_count": 20,
+    "skills": ["Vocabulary", "Pronunciation", "Grammar", "Sentence Building", "Reading", "Listening", "Speaking", "Conversation", "Writing", "Real-Life English", "Exercises", "Challenge", "Review", "Mastery Quiz", "Mission"]
+  },
+  "progression": {
+    "vocabulary": "word → phrase → collocation → sentence → paragraph → conversation",
+    "listening": "slow clear speech → normal speed → natural connected speech",
+    "speaking": "guided answers → follow-up questions → role-play → independent discussion",
+    "writing": "controlled sentences → connected paragraph → structured short text"
+  },
+  "missions": [
+    {
+      "id": 1,
+      "title": "Vocabulary Upgrade — Words That Work Together",
+      "focus": ["word families", "collocations", "common phrasal verbs", "functional expressions"],
+      "content": "Build a powerful A2+ vocabulary system using learn/learning/learner, decide/decision, succeed/success/successful, improve/improvement and practical collocations such as make a decision, take responsibility and solve a problem.",
+      "challenge": "Use 20 target expressions in original sentences and a two-minute spoken summary."
+    },
+    {
+      "id": 2,
+      "title": "Present Perfect vs Past Simple — Time Control",
+      "focus": ["finished time", "life experience", "recent events", "ever/never/already/yet/just"],
+      "grammar": ["present perfect", "past simple", "time expressions"],
+      "challenge": "Tell a personal-style fictional experience and explain exactly when specific events happened."
+    },
+    {
+      "id": 3,
+      "title": "Story Engine — Past Simple, Past Continuous & Past Perfect",
+      "focus": ["narrative sequencing", "background actions", "earlier events", "story connectors"],
+      "grammar": ["past simple", "past continuous", "past perfect basics", "when/while/before/after"],
+      "challenge": "Rebuild a 250-word story from mixed events and then retell it without reading."
+    },
+    {
+      "id": 4,
+      "title": "Future Lab — Plans, Predictions & Instant Decisions",
+      "focus": ["plans", "arrangements", "predictions", "offers", "decisions"],
+      "grammar": ["will", "be going to", "present continuous for arrangements", "may/might"],
+      "challenge": "Plan a three-day trip, predict problems and respond to unexpected changes."
+    },
+    {
+      "id": 5,
+      "title": "Modal Mission — Rules, Advice, Possibility & Permission",
+      "focus": ["obligation", "necessity", "advice", "permission", "possibility"],
+      "grammar": ["must", "have to", "should", "could", "can", "may", "might", "mustn't", "don't have to"],
+      "challenge": "Solve a school, travel and workplace situation using precise modal meaning."
+    },
+    {
+      "id": 6,
+      "title": "Conditional Gateway — Real Choices & Possible Futures",
+      "focus": ["conditions", "consequences", "warnings", "plans"],
+      "grammar": ["zero conditional review", "first conditional", "second conditional introduction"],
+      "challenge": "Create and explain ten real-life if-sentences, then handle a problem-solving simulation."
+    },
+    {
+      "id": 7,
+      "title": "Sentence Builder — Relative Clauses & Better Details",
+      "focus": ["describing people", "places", "objects", "giving extra information"],
+      "grammar": ["who", "which", "that", "where", "whose introduction"],
+      "challenge": "Turn 15 short sentences into clear, information-rich B1-style sentences."
+    },
+    {
+      "id": 8,
+      "title": "Connect Your Ideas — Because, Although, However & Therefore",
+      "focus": ["reason", "contrast", "result", "sequence", "addition"],
+      "grammar": ["because", "so", "although", "however", "therefore", "also", "firstly/finally"],
+      "challenge": "Build a coherent 200-word paragraph using at least 12 connectors correctly."
+    },
+    {
+      "id": 9,
+      "title": "People & Relationships — Communication Intelligence",
+      "focus": ["personality", "friendship", "feelings", "conflict", "support", "respect"],
+      "real_life": "Ask for clarification, apologize, give advice, disagree politely and repair a misunderstanding.",
+      "challenge": "Complete a six-scene conversation where the relationship changes because of communication choices."
+    },
+    {
+      "id": 10,
+      "title": "B1 Conversation Lab — Eight-Minute Challenge",
+      "focus": ["follow-up questions", "opinions", "examples", "clarification", "turn-taking"],
+      "conversation": "Discuss school, hobbies, technology, travel, health and future plans; answer follow-up questions instead of giving isolated sentences.",
+      "challenge": "Maintain an eight-minute conversation with no translation and at least 15 connected responses."
+    },
+    {
+      "id": 11,
+      "title": "Reading Explorer — The Choice",
+      "focus": ["main idea", "supporting details", "inference", "reference words", "context vocabulary"],
+      "reading": "600–750-word narrative/informational text about a young person facing an important everyday decision.",
+      "challenge": "Identify evidence, infer two unstated ideas and summarize the text in 100 words."
+    },
+    {
+      "id": 12,
+      "title": "Listening Lab — Natural Conversations",
+      "focus": ["gist", "specific information", "speaker attitude", "connected speech", "note-taking"],
+      "listening": "6–8-minute sequence with school, family, travel and service conversations moving from clear A2+ speech toward natural B1 speed.",
+      "challenge": "Complete a two-stage listen: first gist, then detailed evidence without replaying every sentence."
+    },
+    {
+      "id": 13,
+      "title": "Writing Lab — My Experience, My Lesson",
+      "focus": ["paragraph structure", "narrative sequencing", "descriptive detail", "reflection"],
+      "writing": "Write 180–220 words about an experience, including what happened, what caused it, how the situation changed and what was learned.",
+      "challenge": "Use at least three past-time forms, eight connectors and ten target vocabulary items."
+    },
+    {
+      "id": 14,
+      "title": "Dialogue Builder — From Script to Spontaneous English",
+      "focus": ["question formation", "natural replies", "polite language", "follow-up questions"],
+      "real_life": "Build dialogues for meeting someone new, changing a plan, asking for help and solving a misunderstanding.",
+      "challenge": "Complete the same dialogue three times: with prompts, with partial prompts and independently."
+    },
+    {
+      "id": 15,
+      "title": "Real-Life English — Travel Mission",
+      "focus": ["tickets", "check-in", "directions", "delays", "hotel problems", "requests"],
+      "real_life": "Handle a complete journey from station to hotel, including a missed connection, a booking problem and a request for help.",
+      "challenge": "Use polite questions, clarification phrases and alternative solutions under time pressure."
+    },
+    {
+      "id": 16,
+      "title": "Real-Life English — Health, Safety & Public Services",
+      "focus": ["symptoms", "appointments", "instructions", "emergency information", "public-service language"],
+      "real_life": "Describe a problem clearly, answer questions, understand instructions and ask for appropriate help in a pharmacy, clinic or public service setting.",
+      "challenge": "Complete a multi-step role-play while distinguishing urgent information from background details."
+    },
+    {
+      "id": 17,
+      "title": "Opinion Lab — Explain Your Thinking",
+      "focus": ["opinions", "reasons", "examples", "advantages/disadvantages", "respectful disagreement"],
+      "language": ["I think...", "In my opinion...", "The main reason is...", "For example...", "However...", "I see your point, but..."],
+      "challenge": "Give a two-minute opinion, answer three challenges and reformulate one answer more clearly."
+    },
+    {
+      "id": 18,
+      "title": "Problem-Solving Simulation — One Day, Five Problems",
+      "focus": ["decision making", "clarification", "priorities", "solutions", "communication under pressure"],
+      "scenario": "A learner has a transport delay, a missed appointment, a broken phone, a school/work deadline and a money problem on the same day.",
+      "challenge": "Choose priorities, explain decisions, request help and change the plan when new information appears."
+    },
+    {
+      "id": 19,
+      "title": "B1 Integrated Skills Marathon",
+      "focus": ["accuracy", "fluency", "reading", "listening", "speaking", "writing"],
+      "assessment": "Vocabulary retrieval → grammar correction → 650-word reading → 7-minute listening → 5-minute speaking → 200-word writing.",
+      "challenge": "Complete the full sequence with limited translation and maintain meaning while working under time limits."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 1 MASTER QUEST — A2+ TO B1 FOUNDATION",
+      "focus": ["full communication mastery", "accuracy", "fluency", "independence", "real-life English"],
+      "final_quest": "A cinematic integrated mission combining vocabulary, grammar, pronunciation, reading, listening, speaking, conversation, writing and real-life problem solving.",
+      "requirements": ["850+ active vocabulary target", "600–750-word reading", "6–8-minute listening", "7–8-minute conversation", "180–220-word writing", "multi-step real-life simulation", "mastery review and final quiz"],
+      "mastery_standard": "Learner can understand the main points of clear natural English, communicate connected ideas, describe experiences, explain reasons, handle common real-life problems and produce independent A2+/early-B1 English."
+    }
+  ],
+  "assessment": {
+    "vocabulary": "retrieval, collocation matching, word-family formation, sentence production",
+    "grammar": "meaning-focused selection, correction, transformation and production",
+    "reading": "gist, detail, inference, reference, vocabulary in context",
+    "listening": "gist, detail, speaker intention, sequence and note-taking",
+    "speaking": "fluency, intelligibility, connected speech, interaction and task completion",
+    "writing": "organization, grammar control, vocabulary range, connectors and clarity",
+    "real_life": "successful completion of practical communication tasks"
+  },
+  "unlock": {
+    "world_1": "available",
+    "world_2": "locked until World 1 mastery criteria are met"
+  }
+}
