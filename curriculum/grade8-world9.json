@@ -1,0 +1,57 @@
+{
+  "grade": 8,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 9: C1 ADVANCED FLUENCY & REAL-WORLD MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "5100+ active words",
+    "reading": "2400–2800 words",
+    "listening": "30–35 min",
+    "speaking": "35–42 min",
+    "writing": "950–1100 words",
+    "presentation": "17–21 min"
+  },
+  "grammar": [
+    "Advanced discourse management and turn-taking",
+    "Complex tense and aspect choices in narrative and analysis",
+    "Mixed conditionals in authentic contexts",
+    "Inversion, fronting, and emphasis for fluent expression",
+    "Ellipsis, substitution, and concise reformulation",
+    "Advanced collocations, idioms, and phrasal-prepositional verbs",
+    "Register, tone, and pragmatic appropriateness"
+  ],
+  "missions": [
+    { "id": 1, "title": "Fluency Calibration Lab", "focus": "Build accurate, natural, and flexible C1 spoken fluency." },
+    { "id": 2, "title": "Real-World Vocabulary Forge", "focus": "Master high-level collocations, idioms, and domain-specific expressions." },
+    { "id": 3, "title": "Conversation Navigation Arena", "focus": "Manage turns, interruptions, clarification, and topic shifts." },
+    { "id": 4, "title": "Nuance & Implication Decoder", "focus": "Interpret subtle meaning, implication, irony, and pragmatic intent." },
+    { "id": 5, "title": "Authentic Media Immersion", "focus": "Analyse interviews, podcasts, reports, and unscripted media." },
+    { "id": 6, "title": "Narrative Time Reactor", "focus": "Control advanced tense and aspect choices in complex narratives." },
+    { "id": 7, "title": "Conditional Reality Simulator", "focus": "Use mixed and advanced conditionals to explore real and hypothetical outcomes." },
+    { "id": 8, "title": "Reformulation Command Center", "focus": "Express the same idea with different levels of precision, tone, and formality." },
+    { "id": 9, "title": "Idiomatic Expression Vault", "focus": "Use idioms and phrasal-prepositional verbs appropriately in context." },
+    { "id": 10, "title": "Advanced Listening Expedition", "focus": "Follow rapid, nuanced speech and identify shifts in stance." },
+    { "id": 11, "title": "Conflict-to-Consensus Lab", "focus": "Handle disagreement and move a discussion toward practical agreement." },
+    { "id": 12, "title": "Real-World Problem Solver", "focus": "Respond spontaneously to complex everyday and professional challenges." },
+    { "id": 13, "title": "High-Stakes Interview Simulator", "focus": "Answer challenging questions with clarity, evidence, and composure." },
+    { "id": 14, "title": "Advanced Writing Studio", "focus": "Produce coherent, nuanced, reader-focused long-form writing." },
+    { "id": 15, "title": "Pragmatic Email & Message Lab", "focus": "Adapt digital communication to audience, purpose, and relationship." },
+    { "id": 16, "title": "Integrated Presentation Arena", "focus": "Deliver a persuasive presentation and respond flexibly to questions." },
+    { "id": 17, "title": "Fluency Repair Workshop", "focus": "Use self-correction, paraphrase, and repair strategies without losing flow." },
+    { "id": 18, "title": "C1 Real-Life Roleplay Nexus", "focus": "Perform multiple authentic roleplays across social, academic, and professional settings." },
+    { "id": 19, "title": "World 9 Integration Quest", "focus": "Combine advanced reading, listening, speaking, writing, and interaction skills." },
+    { "id": 20, "title": "C1 Advanced Fluency Master Challenge", "focus": "Complete a comprehensive real-world communication challenge at C1 level." }
+  ],
+  "realWorldScenarios": [
+    { "title": "International Networking Event", "description": "Navigate spontaneous conversations, introduce ideas, and build meaningful professional connections." },
+    { "title": "Complex Service & Travel Challenge", "description": "Resolve an unexpected real-world problem through clarification, negotiation, and polite persistence." },
+    { "title": "Multistage Community Project", "description": "Coordinate a diverse team, present progress, manage disagreement, and agree on next steps." }
+  ],
+  "assessment": {
+    "level": "C1",
+    "type": "Integrated advanced fluency and real-world communication assessment",
+    "components": ["authentic reading", "nuanced listening", "spontaneous interaction", "extended writing", "persuasive presentation", "pragmatic roleplay"],
+    "successCriteria": ["natural and flexible fluency", "accurate advanced grammar", "appropriate idiomatic language", "effective turn-taking and repair", "clear organisation and nuance", "audience-aware communication"]
+  }
+}
