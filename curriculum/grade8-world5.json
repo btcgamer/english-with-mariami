@@ -1,0 +1,82 @@
+{
+  "grade": 8,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 8 — WORLD 5: C1 CRITICAL THINKING & ACADEMIC MASTERY",
+  "level": "C1",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "4200+ active words",
+    "reading": "2200–2500 words",
+    "listening": "25–30 min",
+    "speaking": "30–36 min",
+    "writing": "800–950 words",
+    "presentation": "14–18 min"
+  },
+  "grammar": [
+    "advanced nominalisation and academic noun phrases",
+    "participle clauses and reduced structures",
+    "complex subordination and information hierarchy",
+    "inversion and fronting for rhetorical emphasis",
+    "advanced modality, stance, and hedging",
+    "cohesion, reference, and lexical chains",
+    "sentence-level and paragraph-level academic editing"
+  ],
+  "missions": [
+    {"id":1,"title":"Critical Thinking Core","focus":"Build precise language for claims, reasons, assumptions, evidence, and conclusions","skills":["vocabulary","reading","critical thinking"]},
+    {"id":2,"title":"Claim & Evidence Lab","focus":"Match claims with relevant evidence and distinguish relevance from mere detail","skills":["reading","analysis","vocabulary"]},
+    {"id":3,"title":"Argument Logic Matrix","focus":"Identify premises, conclusions, logical gaps, and unsupported leaps","skills":["reading","reasoning","speaking"]},
+    {"id":4,"title":"Bias Detection Vault","focus":"Recognise framing, loaded language, selective evidence, and hidden assumptions","skills":["reading","listening","critical thinking"]},
+    {"id":5,"title":"Source Reliability Arena","focus":"Evaluate source quality, expertise, evidence quality, and corroboration","skills":["reading","research","analysis"]},
+    {"id":6,"title":"Academic Nominalisation Lab","focus":"Transform extended ideas into concise, controlled academic structures","skills":["grammar","writing","editing"]},
+    {"id":7,"title":"Compression & Clarity Reactor","focus":"Reduce unnecessary repetition while preserving meaning and logical relationships","skills":["grammar","writing","precision"]},
+    {"id":8,"title":"Hedging & Stance Command","focus":"Express certainty, probability, limitation, and scholarly caution with precision","skills":["grammar","speaking","writing"]},
+    {"id":9,"title":"Research Reading Chamber","focus":"Extract arguments, methods, findings, limitations, and implications from dense texts","skills":["reading","note-taking","analysis"]},
+    {"id":10,"title":"Academic Listening Observatory","focus":"Follow extended expert lectures and distinguish main claims from supporting detail","skills":["listening","note-taking","inference"]},
+    {"id":11,"title":"Synthesis Engine","focus":"Combine information from multiple sources into one coherent analytical position","skills":["reading","writing","synthesis"]},
+    {"id":12,"title":"Counterargument Laboratory","focus":"Anticipate objections, qualify claims, and respond without weakening the central argument","skills":["speaking","writing","argumentation"]},
+    {"id":13,"title":"Data Commentary Studio","focus":"Describe trends, contrasts, uncertainty, and significant patterns without overclaiming","skills":["vocabulary","writing","analysis"]},
+    {"id":14,"title":"Academic Discussion Forum","focus":"Lead a high-level discussion, challenge ideas respectfully, and build on previous contributions","skills":["speaking","listening","discussion"]},
+    {"id":15,"title":"Research Brief Studio","focus":"Write an 800–950 word analytical brief with a clear thesis, evidence, synthesis, and limitations","skills":["writing","research","organization"]},
+    {"id":16,"title":"Scholarly Presentation Lab","focus":"Present a complex argument for an informed audience using signposting and evidence","skills":["presentation","speaking","academic communication"]},
+    {"id":17,"title":"Academic Editing Reactor","focus":"Edit cohesion, register, sentence structure, precision, and paragraph logic","skills":["grammar","editing","writing"]},
+    {"id":18,"title":"C1 Research Defense","focus":"Defend an analytical position under questioning and respond to challenges with qualified reasoning","skills":["speaking","listening","critical thinking"]},
+    {"id":19,"title":"World 5 Integration Quest","focus":"Integrate evidence evaluation, academic grammar, synthesis, discussion, writing, and presentation","skills":["integrated skills","research","communication"]},
+    {"id":20,"title":"C1 Academic Master Challenge","focus":"Analyse a complex issue, synthesise multiple perspectives, produce an evidence-based written position, and defend it orally","skills":["reading","listening","speaking","writing","presentation","critical thinking"]}
+  ],
+  "realWorldScenarios": [
+    {
+      "title":"University Research Seminar",
+      "description":"Analyse several viewpoints on a complex question, identify the strongest evidence, formulate a qualified position, and defend it during a seminar discussion."
+    },
+    {
+      "title":"Evidence Review Panel",
+      "description":"Review competing claims for a public-facing report, assess source reliability, identify limitations, and produce a concise evidence-based recommendation."
+    },
+    {
+      "title":"Academic Conference Defense",
+      "description":"Present a research-informed argument to a demanding audience, answer challenging questions, qualify conclusions, and explain what further evidence is needed."
+    }
+  ],
+  "assessment": {
+    "level": "C1",
+    "format": "Integrated critical thinking and academic English assessment",
+    "components": [
+      "advanced academic vocabulary and collocation precision",
+      "C1 grammar transformation, compression, and editing",
+      "critical reading with argument and source evaluation",
+      "extended academic listening with inference and structured notes",
+      "multi-source synthesis task",
+      "800–950 word analytical research brief",
+      "14–18 minute academic presentation",
+      "oral defense with counterarguments and qualification"
+    ],
+    "successCriteria": [
+      "evaluates arguments and evidence rather than merely summarising them",
+      "distinguishes fact, interpretation, assumption, and uncertainty",
+      "uses C1 academic grammar and vocabulary with consistent control",
+      "synthesises multiple perspectives into a coherent independent position",
+      "supports conclusions with relevant evidence and appropriately cautious language",
+      "communicates complex academic ideas clearly to an informed audience"
+    ]
+  }
+}
