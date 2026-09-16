@@ -1,0 +1,63 @@
+{
+  "grade": 6,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 6 — WORLD 6: B1+ → B2 GATEWAY",
+  "level": "B1+",
+  "mission_count": 20,
+  "targets": {
+    "active_vocabulary": "1600+ words, collocations, phrasal verbs, idiomatic chunks and academic expressions",
+    "reading": "1100–1300 words",
+    "listening": "11–13 minutes, authentic-style multi-speaker English",
+    "speaking": "12–15 minute sustained discussion",
+    "writing": "300–380 words",
+    "presentation": "7–9 minutes",
+    "skills": "integrated B1+ communication with a structured bridge into B2 accuracy, complexity, fluency and independence"
+  },
+  "grammar_focus": [
+    "advanced tense and aspect review",
+    "future continuous and future perfect",
+    "past deduction: must have, might have, could have, can't have",
+    "third conditional and mixed conditional awareness",
+    "advanced modal meaning and hedging",
+    "defining and non-defining relative clauses",
+    "passive structures and reporting verbs",
+    "reported speech and reporting verbs",
+    "gerunds, infinitives and verb patterns",
+    "participle clauses introduction",
+    "complex sentence structure and clause reduction",
+    "discourse markers, cohesion and paragraph development",
+    "formal, neutral and informal register",
+    "hedging and cautious language for B2 communication"
+  ],
+  "missions": [
+    {"id":1,"title":"B1+ Vocabulary Expansion Lab","focus":"collocations, phrasal verbs, word families, idiomatic chunks and academic vocabulary","output":"Use 45–55 target items accurately in connected speech and writing"},
+    {"id":2,"title":"Future Timeline Command","focus":"future continuous, future perfect, predictions and planned events","output":"Describe complex future timelines and explain form choices"},
+    {"id":3,"title":"Past Deduction Investigation","focus":"must have, might have, could have and can't have","output":"Reconstruct an unknown event from evidence and competing possibilities"},
+    {"id":4,"title":"Conditional Decision Lab","focus":"third conditional and mixed hypothetical situations","output":"Discuss alternative past outcomes and present consequences"},
+    {"id":5,"title":"Modal Precision & Hedging","focus":"certainty, probability, obligation, criticism and cautious claims","output":"Express nuanced opinions without overclaiming"},
+    {"id":6,"title":"Relative Clause Upgrade","focus":"defining and non-defining relative clauses and sentence compression","output":"Transform basic sentences into precise information-rich statements"},
+    {"id":7,"title":"Reporting & Passive Information","focus":"reporting verbs, passive voice and reported speech","output":"Summarize announcements, interviews and information accurately"},
+    {"id":8,"title":"Verb Pattern Mastery","focus":"gerunds, infinitives and common verb-pattern contrasts","output":"Use complex verb patterns naturally in conversation and writing"},
+    {"id":9,"title":"Complex Sentence Architecture","focus":"subordination, coordination, participle clauses and cohesion","output":"Build a coherent B1+/B2-style paragraph from short ideas"},
+    {"id":10,"title":"B2 Gateway Discussion Lab","focus":"turn-taking, follow-up questions, clarification, agreement and disagreement","output":"Sustain a 12–15 minute discussion with limited scripted support"},
+    {"id":11,"title":"Reading Mastery — Evidence & Inference","focus":"main argument, supporting evidence, inference, writer purpose and vocabulary in context","output":"Read 1100–1300 words and justify interpretations with textual evidence"},
+    {"id":12,"title":"Listening Mastery — Natural Voices","focus":"connected speech, attitude, implication, speaker intention and multiple viewpoints","output":"Complete detailed and inferential tasks from 11–13 minutes of audio"},
+    {"id":13,"title":"B2 Gateway Writing — Opinion & Argument","focus":"thesis, reasons, examples, counterarguments, cohesion and conclusion","output":"Write 300–380 words with a clear, logically developed argument"},
+    {"id":14,"title":"Formal Communication Lab","focus":"formal emails, requests, complaints, proposals and register control","output":"Write and revise professional communication for different audiences"},
+    {"id":15,"title":"Real-World Challenge — Travel & Services","focus":"disruption, complaints, alternatives, negotiation and polite escalation","output":"Resolve a multi-stage service problem using flexible language"},
+    {"id":16,"title":"Health, Community & Emergency Simulation","focus":"explaining situations, interpreting instructions and requesting appropriate help","output":"Handle complex health, public-service and safety scenarios"},
+    {"id":17,"title":"Study, Work & Technology Communication","focus":"meetings, deadlines, digital communication, presentations and collaborative problem solving","output":"Participate in a simulated professional or academic communication cycle"},
+    {"id":18,"title":"Independent Problem-Solving Quest","focus":"negotiation, alternatives, compromise, justification and decision-making","output":"Solve five connected problems while defending choices in English"},
+    {"id":19,"title":"B1+ → B2 Integrated Skills Marathon","focus":"advanced vocabulary, grammar, reading, listening, speaking and writing under time pressure","output":"Complete a full gateway assessment across all core skills"},
+    {"id":20,"title":"WORLD 6 MASTER QUEST — B2 GATEWAY","focus":"final transition from independent B1+ communication toward B2 performance","output":"Complete advanced reading, natural listening, extended discussion, formal writing, presentation and real-world simulation"}
+  ],
+  "real_life_scenarios": ["travel disruption","customer complaints","health and pharmacy","public services","workplace meetings","academic discussion","digital communication","formal requests","negotiation","problem solving","presentation","community situations"],
+  "assessment": {
+    "accuracy":"strong B1+ grammar control with emerging B2 complexity",
+    "fluency":"sustained independent communication with natural turn-taking",
+    "comprehension":"main ideas, details, inference, attitude and implied meaning",
+    "production":"organized connected speech and logically developed writing",
+    "independence":"communicate flexibly without relying on sentence-by-sentence translation",
+    "b2_gateway":"demonstrate readiness for longer, more complex B2-level tasks"
+  }
+}
