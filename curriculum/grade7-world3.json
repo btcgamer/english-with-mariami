@@ -1,0 +1,172 @@
+{
+  "grade": 7,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 3: C1 COMMUNICATION EXPANSION",
+  "level": "B2+ → C1",
+  "missionCount": 20,
+  "description": "A high-level communication world that moves learners from accurate advanced English toward flexible, precise, independent C1 communication across social, academic, and professional contexts.",
+  "targets": {
+    "vocabulary": "3000+ active words with collocations, idiomatic language, phrasal verbs, and domain-specific vocabulary",
+    "reading": "1800–2200 words with inference, stance, tone, and implicit meaning",
+    "listening": "18–22 minutes of authentic speech with varied accents and discourse styles",
+    "speaking": "22–28 minutes of sustained interaction, explanation, discussion, and spontaneous response",
+    "writing": "600–800 words with clear argumentation, cohesion, nuance, and register control",
+    "presentation": "10–14 minute structured presentation with follow-up questions"
+  },
+  "grammar": [
+    "Advanced tense and aspect choices for emphasis, sequencing, and viewpoint",
+    "Modal verbs and modal perfects for certainty, criticism, probability, and speculation",
+    "Mixed and complex conditionals in analytical and hypothetical contexts",
+    "Advanced passive, reporting structures, and impersonal constructions",
+    "Participle clauses, reduced clauses, and dense noun phrases",
+    "Advanced relative clauses and apposition",
+    "Inversion, fronting, clefting, and information structure",
+    "Ellipsis, substitution, and reference for concise discourse",
+    "Advanced linking, concession, contrast, and cause-effect patterns",
+    "Hedging, stance, politeness, and pragmatic precision"
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "title": "Lexical Precision Lab",
+      "focus": "collocations, semantic shades, word families, and precision vocabulary",
+      "challenge": "Choose language that communicates exact meaning rather than approximate meaning."
+    },
+    {
+      "id": 2,
+      "title": "Aspect & Viewpoint Mastery",
+      "focus": "advanced tense and aspect choices",
+      "challenge": "Explain how tense and aspect change emphasis, sequence, and speaker viewpoint."
+    },
+    {
+      "id": 3,
+      "title": "Probability & Evidence Lab",
+      "focus": "modal verbs, modal perfects, deduction, and evidence",
+      "challenge": "Express degrees of certainty and evaluate evidence with precise modal language."
+    },
+    {
+      "id": 4,
+      "title": "Hypothesis Architect",
+      "focus": "mixed conditionals and complex hypothetical reasoning",
+      "challenge": "Build accurate hypothetical explanations about past, present, and future consequences."
+    },
+    {
+      "id": 5,
+      "title": "Reporting Reality",
+      "focus": "passive reporting, impersonal reporting, and source attribution",
+      "challenge": "Transform direct claims into neutral, formal, and evidence-aware reporting."
+    },
+    {
+      "id": 6,
+      "title": "Complex Sentence Forge",
+      "focus": "participial clauses, reduced relatives, apposition, and dense noun phrases",
+      "challenge": "Combine ideas into sophisticated sentences without losing clarity."
+    },
+    {
+      "id": 7,
+      "title": "Information Focus Lab",
+      "focus": "cleft sentences, inversion, fronting, and emphasis",
+      "challenge": "Control what listeners notice first and create deliberate information focus."
+    },
+    {
+      "id": 8,
+      "title": "Cohesion Intelligence",
+      "focus": "reference, substitution, ellipsis, discourse markers, and paragraph flow",
+      "challenge": "Connect complex ideas naturally without repetitive or mechanical linking."
+    },
+    {
+      "id": 9,
+      "title": "Nuance & Hedging Arena",
+      "focus": "hedging, stance, degrees of commitment, and diplomatic language",
+      "challenge": "Express disagreement and uncertainty without becoming vague or unnatural."
+    },
+    {
+      "id": 10,
+      "title": "Pragmatics Control Room",
+      "focus": "politeness, indirectness, implied meaning, and social context",
+      "challenge": "Select language that fits relationship, situation, intention, and cultural expectations."
+    },
+    {
+      "id": 11,
+      "title": "Reading Between the Lines",
+      "focus": "implicit meaning, author stance, tone, bias signals, and inference",
+      "challenge": "Identify conclusions that are suggested rather than directly stated."
+    },
+    {
+      "id": 12,
+      "title": "Authentic Listening Mission",
+      "focus": "fast speech, reduced forms, discourse shifts, and speaker attitude",
+      "challenge": "Track meaning when speakers change topic, qualify claims, or speak spontaneously."
+    },
+    {
+      "id": 13,
+      "title": "Critical Writing Lab",
+      "focus": "argument, counterargument, synthesis, evidence, and conclusion",
+      "challenge": "Build a balanced argument that acknowledges alternatives and reaches a justified conclusion."
+    },
+    {
+      "id": 14,
+      "title": "Professional Writing Upgrade",
+      "focus": "formal email, report language, recommendations, and executive summaries",
+      "challenge": "Deliver complex information clearly for a professional audience."
+    },
+    {
+      "id": 15,
+      "title": "Presentation Intelligence",
+      "focus": "signposting, emphasis, examples, transitions, and audience adaptation",
+      "challenge": "Present a complex topic clearly while adapting explanations to audience needs."
+    },
+    {
+      "id": 16,
+      "title": "Negotiation & Mediation Lab",
+      "focus": "persuasion, compromise, clarification, and diplomatic problem solving",
+      "challenge": "Reach a workable agreement while protecting key priorities and relationships."
+    },
+    {
+      "id": 17,
+      "title": "Media & Society Analysis",
+      "focus": "media language, technology, social change, and competing interpretations",
+      "challenge": "Compare viewpoints and explain how language shapes public interpretation."
+    },
+    {
+      "id": 18,
+      "title": "Academic & Workplace Simulation",
+      "focus": "seminars, meetings, evidence-based discussion, and professional collaboration",
+      "challenge": "Participate actively while asking precise questions, challenging ideas, and building on others."
+    },
+    {
+      "id": 19,
+      "title": "World 3 Integrated Marathon",
+      "focus": "integrated reading, listening, speaking, writing, grammar, and vocabulary",
+      "challenge": "Complete a multi-stage C1-style communication mission with limited support."
+    },
+    {
+      "id": 20,
+      "title": "WORLD 3 MASTER QUEST — C1 COMMUNICATION EXPANSION",
+      "focus": "full-world mastery assessment",
+      "challenge": "Demonstrate precise, flexible, coherent, and independent English across complex real-world tasks."
+    }
+  ],
+  "realWorldScenarios": [
+    "Participating in a university-style seminar and responding to challenging questions",
+    "Leading a workplace discussion where participants have conflicting priorities",
+    "Explaining and evaluating information from two competing sources",
+    "Writing a recommendation report for a practical decision",
+    "Negotiating a solution while maintaining a professional relationship",
+    "Giving a presentation and responding spontaneously to audience follow-up questions"
+  ],
+  "assessment": {
+    "format": "Integrated C1 communication assessment",
+    "components": [
+      "precision vocabulary and collocation test",
+      "advanced grammar and sentence transformation",
+      "inference-based reading",
+      "authentic listening comprehension",
+      "analytical speaking task",
+      "negotiation or discussion task",
+      "formal writing task",
+      "presentation with spontaneous Q&A"
+    ],
+    "masteryGoal": "Learner can communicate complex ideas accurately, flexibly, coherently, and appropriately with increasing C1 independence."
+  }
+}
