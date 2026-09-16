@@ -1,0 +1,72 @@
+{
+  "grade": 7,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 7 — WORLD 1: B2 → C1 GATEWAY",
+  "level": "B2 → C1",
+  "missionCount": 20,
+  "description": "Grade 7 begins the transition from strong B2 communication toward C1-level independence through precision vocabulary, complex grammar, extended reading, authentic listening, sustained speaking and structured writing.",
+  "targets": {
+    "vocabulary": "2600+ active words and phrases with collocations, idioms, phrasal verbs and academic language",
+    "reading": "1600–1900 words with inference, evaluation, synthesis and author stance",
+    "listening": "16–20 minutes of authentic multi-speaker English with varied accents",
+    "speaking": "20–25 minutes of sustained discussion, explanation, negotiation and presentation",
+    "writing": "550–700 words across analytical, argumentative, formal and reflective tasks",
+    "presentation": "10–12 minutes with evidence, structure and Q&A"
+  },
+  "grammar": [
+    "advanced tense and aspect for precise meaning",
+    "modal verbs and modal perfects for deduction and stance",
+    "mixed and inverted conditionals",
+    "advanced passive and impersonal structures",
+    "reporting verbs and source attribution",
+    "participial and reduced clauses",
+    "complex relative clauses and noun phrases",
+    "inversion, clefting and fronting",
+    "ellipsis and substitution",
+    "cohesion and discourse markers",
+    "hedging, emphasis and pragmatic precision",
+    "formal and informal register control"
+  ],
+  "missions": [
+    {"id":1,"title":"Vocabulary Intelligence Lab","focus":"advanced collocations, word families, idioms and high-value academic vocabulary","skills":["vocabulary","pronunciation","speaking"]},
+    {"id":2,"title":"Tense & Aspect Precision","focus":"advanced control of time, aspect and narrative perspective","skills":["grammar","writing","speaking"]},
+    {"id":3,"title":"Modal Meaning & Deduction","focus":"certainty, probability, deduction and nuanced speaker stance","skills":["grammar","listening","speaking"]},
+    {"id":4,"title":"Conditional Reasoning","focus":"mixed conditionals, hypothetical situations and consequences","skills":["grammar","problem-solving","speaking"]},
+    {"id":5,"title":"Passive & Reporting Mastery","focus":"formal passive structures, reporting verbs and attribution","skills":["grammar","reading","writing"]},
+    {"id":6,"title":"Complex Sentence Builder","focus":"subordination, reduced clauses and concise complex expression","skills":["grammar","writing","editing"]},
+    {"id":7,"title":"Information Focus Lab","focus":"inversion, clefts, fronting and emphasis for precise communication","skills":["grammar","speaking","writing"]},
+    {"id":8,"title":"Cohesion & Coherence Mission","focus":"logical organization, referencing, linking and discourse flow","skills":["reading","writing","speaking"]},
+    {"id":9,"title":"Register & Pragmatics","focus":"formal, neutral, informal and diplomatic language choices","skills":["pragmatics","speaking","writing"]},
+    {"id":10,"title":"Advanced Conversation Arena","focus":"sustained discussion, follow-up questions, clarification and spontaneous response","skills":["speaking","listening","interaction"]},
+    {"id":11,"title":"Reading Explorer — Hidden Meaning","focus":"long-form reading with inference, attitude, implication and author purpose","skills":["reading","vocabulary","critical-thinking"]},
+    {"id":12,"title":"Authentic Listening Lab","focus":"multi-speaker listening, implied meaning, attitude and note-taking","skills":["listening","inference","comprehension"]},
+    {"id":13,"title":"Analytical Writing Lab","focus":"structured analysis with evidence, explanation and clear conclusions","skills":["writing","argumentation","editing"]},
+    {"id":14,"title":"Formal Communication Mission","focus":"professional emails, reports, requests, complaints and recommendations","skills":["writing","register","real-life-english"]},
+    {"id":15,"title":"Presentation & Q&A Lab","focus":"structured presentation, signposting, evidence and spontaneous questions","skills":["presentation","speaking","listening"]},
+    {"id":16,"title":"Real-World Negotiation","focus":"negotiating solutions, clarifying interests and reaching agreement","skills":["speaking","negotiation","pragmatics"]},
+    {"id":17,"title":"Media, Technology & Society","focus":"evaluating information and discussing technology and social impact","skills":["reading","speaking","critical-thinking"]},
+    {"id":18,"title":"Academic & Workplace English","focus":"meetings, project discussion, study skills and professional interaction","skills":["speaking","listening","professional-english"]},
+    {"id":19,"title":"World 1 Integrated Marathon","focus":"integrated vocabulary, grammar, reading, listening, speaking and writing","skills":["vocabulary","grammar","reading","listening","speaking","writing"]},
+    {"id":20,"title":"WORLD 1 MASTER QUEST — B2 → C1 GATEWAY","focus":"capstone assessment combining independent communication, analysis, negotiation and presentation","skills":["integrated-mastery","independence","real-world-english"]}
+  ],
+  "realWorldScenarios": [
+    "professional meeting and project decision",
+    "formal complaint and service recovery",
+    "academic discussion and presentation",
+    "travel disruption and problem solving",
+    "multi-party negotiation",
+    "media and technology discussion",
+    "community planning and collaboration",
+    "evidence-based recommendation"
+  ],
+  "assessment": [
+    "advanced grammar accuracy and flexibility",
+    "vocabulary precision and collocation control",
+    "reading inference and author stance",
+    "listening comprehension of explicit and implied meaning",
+    "speaking fluency and interaction",
+    "writing coherence, evidence and register",
+    "presentation structure and Q&A handling",
+    "real-world problem solving and negotiation"
+  ]
+}
