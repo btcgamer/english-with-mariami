@@ -1,0 +1,57 @@
+{
+  "grade": 10,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 3: C2 CRITICAL THINKING & GLOBAL SYSTEMS",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6500+ active words",
+    "reading": "3000–3600 words",
+    "listening": "40–48 min",
+    "speaking": "45–55 min",
+    "writing": "1200–1450 words",
+    "presentation": "22–28 min"
+  },
+  "grammar": [
+    "Fine-grained modality, evidentiality, and degrees of certainty",
+    "Complex participle clauses and reduced structures",
+    "Advanced inversion, emphasis, and information packaging",
+    "Cohesion across long-form arguments and complex paragraphs",
+    "Nominalisation, syntactic compression, and academic concision",
+    "Hedging, concession, qualification, and counterfactual reasoning",
+    "Register shifts between analytical, professional, public, and conversational English"
+  ],
+  "missions": [
+    {"id":1,"title":"Critical Thinking Calibration","focus":"Diagnose reasoning, language-precision, and evidence-handling strengths in complex English tasks."},
+    {"id":2,"title":"Concept Vocabulary Matrix","focus":"Master abstract concepts, semantic relationships, collocations, and precise word choice."},
+    {"id":3,"title":"Evidence & Inference Lab","focus":"Separate observation, inference, assumption, interpretation, and conclusion."},
+    {"id":4,"title":"Modality Precision Reactor","focus":"Express certainty, probability, obligation, doubt, and evidence with nuanced modality."},
+    {"id":5,"title":"Complex Text Deconstruction","focus":"Map the structure, claims, counterclaims, and rhetorical strategy of demanding texts."},
+    {"id":6,"title":"Listening Between the Lines","focus":"Infer unstated meanings, speaker attitudes, and shifts in position from authentic speech."},
+    {"id":7,"title":"Counterfactual Systems Simulator","focus":"Explore alternative histories, policies, decisions, and consequences through advanced hypotheticals."},
+    {"id":8,"title":"Argument Stress Test","focus":"Test claims for relevance, consistency, hidden assumptions, and unsupported generalisations."},
+    {"id":9,"title":"Science & Technology Forum","focus":"Explain complex scientific or technological developments accurately for non-specialist audiences."},
+    {"id":10,"title":"Society & Policy Observatory","focus":"Discuss social systems and policy choices while distinguishing evidence from opinion."},
+    {"id":11,"title":"Global Risk Negotiation","focus":"Evaluate competing risks, negotiate priorities, and justify a balanced action plan."},
+    {"id":12,"title":"Data Narrative Studio","focus":"Describe trends, comparisons, uncertainty, and limitations in charts and reports."},
+    {"id":13,"title":"Research Synthesis Chamber","focus":"Combine several sources into a coherent, attributed, and critically qualified synthesis."},
+    {"id":14,"title":"Precision Reformulation Gate","focus":"Rephrase dense information without losing meaning, nuance, or logical relationships."},
+    {"id":15,"title":"Difficult Dialogue Protocol","focus":"Handle disagreement, challenge assumptions, and preserve constructive interpersonal dynamics."},
+    {"id":16,"title":"C2 Analytical Writing Forge","focus":"Write a structured analytical essay with a clear thesis, evidence, concessions, and conclusion."},
+    {"id":17,"title":"Public Explanation Mission","focus":"Translate specialist ideas into accessible explanations for multiple audiences."},
+    {"id":18,"title":"Expert Question Arena","focus":"Respond spontaneously to probing questions, qualify answers, and repair communication gaps."},
+    {"id":19,"title":"Global Systems Integration Quest","focus":"Integrate reading, listening, research, grammar, reasoning, and interaction in one complex task."},
+    {"id":20,"title":"C2 Critical Mastery Challenge","focus":"Complete a multidisciplinary challenge demonstrating precise, flexible, independent C2 communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Global Systems Briefing","description":"Analyse a complex global issue, compare evidence, explain uncertainty, and brief a mixed-expertise audience."},
+    {"title":"Technology Impact Roundtable","description":"Evaluate a new technology, challenge assumptions respectfully, and negotiate responsible recommendations."},
+    {"title":"Evidence-Based Decision Lab","description":"Review conflicting reports, identify limitations, and present a justified decision with clear caveats."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 critical thinking and global systems assessment",
+    "components":["complex reading analysis","implicit meaning in listening","precision vocabulary and grammar","evidence evaluation","counterfactual reasoning","research synthesis","analytical writing","expert discussion","audience-aware presentation"],
+    "successCriteria":["precise and flexible C2 language control","clear distinction between evidence and inference","coherent and logically developed arguments","nuanced modality and qualification","accurate advanced grammar","effective register adaptation","strategic interaction and repair","responsible attribution of sources","independent critical reasoning"]
+  }
+}
