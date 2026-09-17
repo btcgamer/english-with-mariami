@@ -1,0 +1,57 @@
+{
+  "grade": 10,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 4: C2 RHETORIC, INFLUENCE & STRATEGIC COMMUNICATION",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6500+ active words",
+    "reading": "3000–3600 words",
+    "listening": "40–48 min",
+    "speaking": "45–55 min",
+    "writing": "1200–1450 words",
+    "presentation": "22–28 min"
+  },
+  "grammar": [
+    "Rhetorical questions, parallelism, antithesis, and controlled repetition",
+    "Advanced modality, evidentiality, and degrees of certainty",
+    "Concession, contrast, and multi-layered argument structure",
+    "Information packaging through clefts, inversion, and marked word order",
+    "Nominalisation, dense modification, and concise formal prose",
+    "Hedging, boosting, attribution, and responsible claims",
+    "Pragmatic force, politeness, implicature, and strategic tone"
+  ],
+  "missions": [
+    {"id":1,"title":"Rhetoric Calibration Gateway","focus":"Diagnose rhetorical strengths and identify how language choices shape meaning, authority, and audience response."},
+    {"id":2,"title":"Influence Vocabulary Forge","focus":"Master precise collocations for persuasion, leadership, negotiation, and public communication."},
+    {"id":3,"title":"Argument Architecture Lab","focus":"Construct layered arguments with claims, evidence, concessions, rebuttals, and clear conclusions."},
+    {"id":4,"title":"Certainty Signal Decoder","focus":"Distinguish fact, inference, probability, speculation, and strategically qualified opinion."},
+    {"id":5,"title":"Rhetorical Listening Observatory","focus":"Analyse speeches, interviews, and debates for framing, emphasis, implication, and persuasive technique."},
+    {"id":6,"title":"Contrast & Concession Reactor","focus":"Use sophisticated contrast and concession structures to acknowledge complexity without losing direction."},
+    {"id":7,"title":"Emphasis Engineering Chamber","focus":"Control focus and rhetorical impact through inversion, clefting, fronting, and parallel structures."},
+    {"id":8,"title":"Message Reframing Portal","focus":"Reframe sensitive or complex messages for different audiences while preserving accuracy and intent."},
+    {"id":9,"title":"Evidence & Attribution Arena","focus":"Integrate sources, quotations, and paraphrases while distinguishing evidence from interpretation."},
+    {"id":10,"title":"Strategic Negotiation Nexus","focus":"Use tactful language, conditional proposals, and calibrated disagreement to reach workable agreements."},
+    {"id":11,"title":"Crisis Communication Simulator","focus":"Deliver clear, responsible, and reassuring communication during an unfolding high-pressure scenario."},
+    {"id":12,"title":"Editorial Reading Observatory","focus":"Evaluate tone, framing, assumptions, rhetorical devices, and unstated positions in complex texts."},
+    {"id":13,"title":"Policy Brief Synthesis Engine","focus":"Transform several sources into a concise, balanced, evidence-aware policy-style briefing."},
+    {"id":14,"title":"Leadership Briefing Studio","focus":"Present recommendations, explain trade-offs, and answer challenging questions with precision."},
+    {"id":15,"title":"Difficult Conversation Lab","focus":"Address disagreement and emotional tension through respectful, strategic, relationship-aware language."},
+    {"id":16,"title":"High-Precision Writing Observatory","focus":"Write a structured persuasive text using nuanced vocabulary, cohesion, qualification, and register control."},
+    {"id":17,"title":"Counterargument Transformation Arena","focus":"Represent opposing views fairly, identify their strongest reasoning, and respond with relevant evidence."},
+    {"id":18,"title":"Persuasive Presentation Command","focus":"Deliver a compelling presentation using signposting, rhetorical design, audience adaptation, and confident responses."},
+    {"id":19,"title":"World 4 Strategic Integration Quest","focus":"Integrate rhetoric, grammar, listening, reading, negotiation, writing, and spontaneous speaking in one mission."},
+    {"id":20,"title":"C2 Strategic Communication Master Challenge","focus":"Complete a complex communication challenge demonstrating precise, flexible, ethical, and audience-aware C2 English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Crisis Briefing","description":"Analyse an evolving situation, prepare a concise briefing, communicate uncertainty responsibly, and answer difficult stakeholder questions."},
+    {"title":"Multilateral Negotiation Room","description":"Represent competing interests, make conditional proposals, manage disagreement, and produce a mutually workable agreement."},
+    {"title":"Public Ideas Forum","description":"Present a nuanced position to a mixed audience, respond to counterarguments, and adapt explanations in real time."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 rhetoric and strategic communication assessment",
+    "components":["rhetorical reading analysis","authentic listening interpretation","precision vocabulary and grammar","evidence-based argumentation","strategic negotiation","crisis communication","extended persuasive writing","audience-aware presentation"],
+    "successCriteria":["precise and flexible C2 language control","clear and layered argument structure","accurate use of advanced grammar","nuanced vocabulary and collocation","responsible evidence and attribution","effective pragmatic and register control","strategic interaction and repair","persuasive and audience-aware delivery"]
+  }
+}
