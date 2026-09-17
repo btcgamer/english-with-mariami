@@ -1,0 +1,26 @@
+name: Grade 9 Master QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'curriculum/grade9-world*.json'
+      - 'curriculum-runtime.js'
+      - 'qa/grade9-master-qa.js'
+      - '.github/workflows/grade9-master-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  grade9-master-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Validate Grade 9 curriculum and runtime
+        run: node qa/grade9-master-qa.js
