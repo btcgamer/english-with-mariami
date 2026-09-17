@@ -1,0 +1,58 @@
+{
+  "grade": 10,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 6: C2 GLOBAL LEADERSHIP, COLLABORATION & DECISION INTELLIGENCE",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "7100+ active words",
+    "reading": "3300–3900 words",
+    "listening": "44–52 min",
+    "speaking": "50–60 min",
+    "writing": "1300–1550 words",
+    "presentation": "25–31 min"
+  },
+  "grammar": [
+    "Advanced discourse management through coordination, subordination, and strategic sentence variation",
+    "Modal verbs and modal expressions for obligation, permission, probability, criticism, and diplomatic recommendation",
+    "Complex conditionals and hypothetical reasoning for planning, negotiation, and contingency management",
+    "Reported speech and stance reporting for meetings, interviews, research, and institutional communication",
+    "Advanced passive, impersonal, and agentless structures for objective and formal reporting",
+    "Concession, qualification, contrast, and reformulation in high-level collaborative argument",
+    "Ellipsis, substitution, parallelism, and lexical cohesion for efficient spoken and written communication",
+    "Pragmatic register control across leadership, teamwork, conflict resolution, and international communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Leadership Gateway","focus":"Diagnose communication choices that build clarity, trust, accountability, and shared direction in complex teams."},
+    {"id":2,"title":"Leadership Vocabulary Forge","focus":"Master advanced collocations for strategy, responsibility, collaboration, performance, and organisational change."},
+    {"id":3,"title":"Stakeholder Mapping Observatory","focus":"Identify stakeholder interests, influence, constraints, and communication needs in a complex project."},
+    {"id":4,"title":"Decision Intelligence Lab","focus":"Compare evidence, assumptions, risks, and trade-offs before communicating a difficult decision."},
+    {"id":5,"title":"Executive Listening Command","focus":"Interpret meetings, interviews, and leadership briefings while tracking priorities, disagreement, and implied commitments."},
+    {"id":6,"title":"Diplomatic Disagreement Reactor","focus":"Challenge ideas directly but constructively through nuanced disagreement, concession, and reformulation."},
+    {"id":7,"title":"Consensus Architecture Chamber","focus":"Build consensus by summarising competing views, identifying common ground, and proposing workable next steps."},
+    {"id":8,"title":"Delegation Strategy Portal","focus":"Give precise instructions, clarify ownership, negotiate deadlines, and establish accountability without unnecessary ambiguity."},
+    {"id":9,"title":"Conflict Resolution Arena","focus":"Manage a high-stakes disagreement by identifying interests, reframing positions, and negotiating practical solutions."},
+    {"id":10,"title":"Meeting Intelligence Nexus","focus":"Lead a complex meeting using signposting, interruption management, clarification, summarising, and action tracking."},
+    {"id":11,"title":"Cross-Cultural Collaboration Simulator","focus":"Adapt tone, directness, examples, and interaction strategies for a culturally diverse professional team."},
+    {"id":12,"title":"Strategic Memo Observatory","focus":"Transform a complicated organisational issue into a concise memo with evidence, options, risks, and recommendations."},
+    {"id":13,"title":"Crisis Team Command","focus":"Coordinate communication during a rapidly changing scenario while prioritising accuracy, calmness, and action."},
+    {"id":14,"title":"Feedback Precision Lab","focus":"Deliver and respond to sophisticated feedback using specific evidence, tact, accountability, and forward-looking language."},
+    {"id":15,"title":"Collaborative Problem-Solving Engine","focus":"Facilitate a team through competing proposals toward a reasoned solution and clearly defined responsibilities."},
+    {"id":16,"title":"Leadership Narrative Studio","focus":"Explain a strategic change through a coherent narrative that connects purpose, evidence, people, and measurable outcomes."},
+    {"id":17,"title":"Negotiation Decision Arena","focus":"Conduct a multi-stage negotiation involving priorities, constraints, conditional offers, concessions, and final commitments."},
+    {"id":18,"title":"Global Team Presentation Command","focus":"Present a complex strategy to an international audience and respond precisely to challenge, uncertainty, and follow-up questions."},
+    {"id":19,"title":"Integrated Leadership Mission","focus":"Combine listening, reading, negotiation, writing, grammar, vocabulary, and spontaneous speaking in one leadership simulation."},
+    {"id":20,"title":"C2 Global Leadership Master Challenge","focus":"Complete an advanced team and decision challenge demonstrating precise, flexible, diplomatic, and accountable C2 English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Project Control Room","description":"Coordinate a diverse team through a complex project disruption, prioritise actions, negotiate responsibilities, and brief stakeholders."},
+    {"title":"Executive Decision Council","description":"Review competing evidence and constraints, discuss disagreement, choose a strategic path, and defend the reasoning to senior stakeholders."},
+    {"title":"Global Partnership Summit","description":"Represent an organisation in a cross-cultural partnership negotiation, build trust, resolve competing priorities, and agree on next steps."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 global leadership, collaboration, and decision intelligence assessment",
+    "components":["complex leadership reading analysis","executive and meeting listening interpretation","precision leadership vocabulary and grammar","stakeholder and evidence analysis","diplomatic disagreement and conflict resolution","collaborative decision-making","strategic memo and recommendation writing","global leadership presentation and Q&A"],
+    "successCriteria":["precise and flexible C2 language control","clear communication of priorities and responsibilities","accurate advanced grammar in demanding contexts","nuanced leadership and collaboration vocabulary","balanced analysis of evidence, risk, and trade-offs","effective diplomatic and pragmatic interaction","coherent strategic writing and synthesis","confident adaptive leadership communication"]
+  }
+}
