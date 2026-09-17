@@ -1,0 +1,58 @@
+{
+  "grade": 10,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 8: C2 MEDIA INTELLIGENCE, DIGITAL LITERACY & GLOBAL COMMUNICATION",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "7700+ active words",
+    "reading": "3500–4100 words",
+    "listening": "46–55 min",
+    "speaking": "54–64 min",
+    "writing": "1400–1650 words",
+    "presentation": "27–33 min"
+  },
+  "grammar": [
+    "Advanced information structure for emphasis, contrast, correction, and controlled focus",
+    "Complex reported speech and stance reporting for interviews, journalism, commentary, and digital communication",
+    "Modal and semi-modal expressions for certainty, doubt, obligation, prediction, and evaluation",
+    "Advanced passive and impersonal constructions for neutral, institutional, and analytical reporting",
+    "Conditionals and hypothetical structures for analysing media scenarios, consequences, and alternative interpretations",
+    "Ellipsis, substitution, coordination, and discourse reference across extended spoken interaction",
+    "Nominalisation, compression, and sentence-level reformulation for headlines, reports, and analytical prose",
+    "Pragmatic register control across journalism, social media, professional communication, and public debate"
+  ],
+  "missions": [
+    {"id":1,"title":"Media Intelligence Gateway","focus":"Identify how language, structure, visuals, and context influence the interpretation of information."},
+    {"id":2,"title":"Digital Vocabulary Forge","focus":"Master precise vocabulary for journalism, platforms, algorithms, audiences, information quality, and online behaviour."},
+    {"id":3,"title":"Headline Decoder Observatory","focus":"Analyse compressed headlines, framing choices, ambiguity, omission, and the effect of word selection."},
+    {"id":4,"title":"Source Credibility Lab","focus":"Evaluate source quality by examining evidence, expertise, transparency, corroboration, and limitations."},
+    {"id":5,"title":"Newsroom Listening Command","focus":"Interpret reports, interviews, panels, and commentary while distinguishing fact, interpretation, and speculation."},
+    {"id":6,"title":"Framing & Perspective Reactor","focus":"Compare different presentations of the same event and identify how framing changes emphasis and interpretation."},
+    {"id":7,"title":"Fact-Claim Separation Chamber","focus":"Distinguish verifiable statements from opinions, predictions, interpretations, and unsupported assertions."},
+    {"id":8,"title":"Algorithm Awareness Portal","focus":"Discuss how recommendation systems, ranking signals, and audience behaviour can shape information exposure."},
+    {"id":9,"title":"Interview Analysis Arena","focus":"Analyse questioning strategies, evasive answers, clarification, interruption, tone, and implied meaning in interviews."},
+    {"id":10,"title":"Digital Argument Nexus","focus":"Construct and evaluate complex arguments in online discussions while maintaining evidence and pragmatic control."},
+    {"id":11,"title":"Misinformation Response Simulator","focus":"Respond to questionable information by checking claims, expressing uncertainty, and communicating corrections responsibly."},
+    {"id":12,"title":"Global Media Comparison Lab","focus":"Compare coverage from different outlets or audiences and explain differences in emphasis, terminology, and context."},
+    {"id":13,"title":"Visual Data Narrative Studio","focus":"Explain charts, graphics, captions, and visual narratives while identifying misleading or incomplete interpretations."},
+    {"id":14,"title":"Public Commentary Observatory","focus":"Analyse persuasive commentary and distinguish rhetorical force, evidence, assumption, and emotional framing."},
+    {"id":15,"title":"Investigative Report Forge","focus":"Write a structured analytical report that organises evidence, source limitations, competing explanations, and conclusions."},
+    {"id":16,"title":"Responsible Digital Communication Lab","focus":"Rewrite sensitive information for public communication using accuracy, context, respectful language, and appropriate qualification."},
+    {"id":17,"title":"Media Ethics Decision Arena","focus":"Evaluate difficult communication choices involving privacy, public interest, accuracy, speed, and potential harm."},
+    {"id":18,"title":"Global Media Briefing Command","focus":"Deliver a balanced briefing on a complex information environment and answer challenging audience questions."},
+    {"id":19,"title":"Integrated Media Intelligence Quest","focus":"Combine reading, listening, source evaluation, writing, vocabulary, grammar, and spontaneous speaking in one digital-media scenario."},
+    {"id":20,"title":"C2 Media Intelligence Master Challenge","focus":"Complete an advanced global communication challenge demonstrating precise, critical, ethical, and audience-aware C2 English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Newsroom","description":"Analyse a developing story, compare source reliability, identify uncertainty, prepare a balanced briefing, and answer editorial questions."},
+    {"title":"Digital Information Crisis","description":"Assess a rapidly spreading claim, separate evidence from speculation, formulate a responsible correction, and explain the reasoning to a public audience."},
+    {"title":"Global Media Strategy Room","description":"Adapt the same complex information for executives, journalists, and the general public while preserving accuracy and essential context."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 media intelligence, digital literacy, and global communication assessment",
+    "components":["advanced media text analysis","news and interview listening interpretation","digital communication vocabulary and grammar","source credibility and evidence evaluation","framing and perspective analysis","responsible misinformation response","investigative analytical writing","global media briefing and Q&A"],
+    "successCriteria":["precise and flexible C2 communication control","accurate distinction between fact, interpretation, and speculation","critical analysis of framing and source quality","advanced grammatical and discourse control","nuanced digital and media vocabulary","responsible communication of uncertainty and corrections","clear synthesis of complex information","adaptive and audience-aware spoken delivery"]
+  }
+}
