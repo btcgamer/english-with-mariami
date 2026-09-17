@@ -1,0 +1,74 @@
+{
+  "grade": 12,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 7: C2+ LAW, ETHICS, HUMAN RIGHTS, JUSTICE & INSTITUTIONAL REASONING",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "14000+",
+    "reading": "6600–7200 words",
+    "listening": "114–124 minutes",
+    "speaking": "124–136 minutes",
+    "writing": "3200–3500 words",
+    "presentation": "64–71 minutes"
+  },
+  "grammarFocus": [
+    "advanced legal qualification and precision",
+    "modal structures for obligation, prohibition, permission and discretion",
+    "conditional and counterfactual reasoning in legal and ethical contexts",
+    "concession, exception and limitation clauses",
+    "passive, impersonal and agentive legal constructions",
+    "reported positions, testimony and evidential attribution",
+    "nominalisation and dense institutional prose",
+    "logical connectors for complex legal argument",
+    "hedging, proportionality and normative uncertainty",
+    "register shifting between legal, academic, institutional and public communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Justice Gateway","focus":"Foundations of law, justice, rights and institutional vocabulary","skills":["reading","vocabulary","speaking"]},
+    {"id":2,"title":"Legal Vocabulary Forge","focus":"Advanced terminology, collocations and precision in legal English","skills":["vocabulary","writing"]},
+    {"id":3,"title":"Constitutional Reasoning Observatory","focus":"Constitutions, separation of powers, rights and institutional authority","skills":["reading","analysis","speaking"]},
+    {"id":4,"title":"Human Rights Command","focus":"Universal rights frameworks, duties, limitations and competing claims","skills":["reading","listening","discussion"]},
+    {"id":5,"title":"Courtroom Listening Nexus","focus":"Hearings, testimony, judicial reasoning and extracting legal implications","skills":["listening","noteTaking","analysis"]},
+    {"id":6,"title":"Evidence & Testimony Laboratory","focus":"Reliability, corroboration, admissibility, inference and evidential language","skills":["reading","listening","criticalThinking"]},
+    {"id":7,"title":"Ethics & Moral Reasoning Reactor","focus":"Normative arguments, competing principles, consequences and justification","skills":["reading","speaking","argumentation"]},
+    {"id":8,"title":"Due Process Chamber","focus":"Procedural fairness, accountability, remedies and institutional safeguards","skills":["reading","writing","speaking"]},
+    {"id":9,"title":"Privacy & Digital Rights Observatory","focus":"Privacy, data governance, surveillance, consent and emerging rights questions","skills":["listening","analysis","debate"]},
+    {"id":10,"title":"Corporate Ethics Studio","focus":"Compliance, fiduciary duties, conflicts of interest and responsible governance","skills":["reading","writing","presentation"]},
+    {"id":11,"title":"International Law Arena","focus":"Treaties, jurisdiction, state responsibility and transnational legal reasoning","skills":["reading","listening","speaking"]},
+    {"id":12,"title":"Crisis & Emergency Powers Simulation","focus":"Emergency authority, proportionality, necessity and rights protections","skills":["listening","decisionMaking","speaking"]},
+    {"id":13,"title":"Legal Data-to-Meaning Lab","focus":"Case statistics, legal trends, evidence tables and careful interpretation","skills":["reading","analysis","writing"]},
+    {"id":14,"title":"Judicial Opinion Briefing Forge","focus":"Synthesising complex legal reasoning into concise professional briefings","skills":["writing","presentation","speaking"]},
+    {"id":15,"title":"Rights & Ethics Debate Arena","focus":"Rebuttal, proportionality, principles, exceptions and evidence-based disagreement","skills":["speaking","listening","argumentation"]},
+    {"id":16,"title":"Mediation & Negotiation Laboratory","focus":"Dispute resolution, settlement language, interests, concessions and remedies","skills":["speaking","negotiation","pragmatics"]},
+    {"id":17,"title":"Institutional Justice War Room","focus":"Designing fair procedures while balancing rights, risks, resources and authority","skills":["decisionMaking","writing","collaboration"]},
+    {"id":18,"title":"Integrated Law & Ethics Mission","focus":"Research-to-recommendation simulation combining legal analysis, ethics and institutional communication","skills":["reading","listening","analysis","presentation"]},
+    {"id":19,"title":"World 7 Mastery Integration Quest","focus":"Integrated C2+ legal, ethical and human-rights reasoning under high cognitive load","skills":["all"]},
+    {"id":20,"title":"C2+ Law, Rights & Justice Master Challenge","focus":"Final high-stakes challenge in legal reasoning, ethical judgment, evidence and strategic communication","skills":["all"]}
+  ],
+  "scenarios": [
+    "Global Justice & Human Rights Council",
+    "International Legal Strategy Chamber",
+    "Ethics, Rights & Institutional Resilience Summit"
+  ],
+  "assessment": {
+    "reading":"Interpret sophisticated legal, ethical, human-rights and institutional texts with precision, nuance and source awareness.",
+    "listening":"Extract claims, testimony, assumptions, qualifications and implications from expert legal and ethical communication.",
+    "speaking":"Present, challenge and negotiate complex rights and justice positions using precise C2+ register and respectful disagreement.",
+    "writing":"Produce legal-style analyses, ethical arguments, institutional briefs and evidence-based recommendations with strong cohesion.",
+    "decisionMaking":"Evaluate rights, duties, evidence, proportionality, uncertainty and competing institutional interests before recommending action.",
+    "presentation":"Communicate complex legal and ethical issues clearly to expert and non-expert audiences while preserving important qualifications."
+  },
+  "successCriteria": [
+    "distinguishes legal fact, evidence, inference, interpretation and normative judgment",
+    "uses advanced legal, ethical and human-rights vocabulary accurately and flexibly",
+    "handles exceptions, limitations, uncertainty and competing rights with precision",
+    "evaluates testimony and evidence without overclaiming",
+    "constructs sophisticated arguments using principles, authorities, concessions and rebuttals",
+    "shifts naturally between legal, academic, institutional and public registers",
+    "negotiates disputes using precise, proportionate and constructive language",
+    "produces concise institutional recommendations from complex evidence",
+    "responds effectively to high-pressure justice and ethics scenarios",
+    "integrates research, listening, analysis, speaking and writing at C2+ level"
+  ]
+}
