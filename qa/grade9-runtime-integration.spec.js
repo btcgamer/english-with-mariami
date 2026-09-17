@@ -1,3 +1,4 @@
+// Grade 9 Runtime Integration QA — validates the current main runtime end-to-end.
 const { test, expect } = require('playwright/test');
 
 const BASE = 'http://127.0.0.1:4173';
