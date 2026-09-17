@@ -1,0 +1,74 @@
+{
+  "grade": 12,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 8: C2+ SCIENCE, RESEARCH, TECHNOLOGY & EVIDENCE-BASED INNOVATION",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "14700+",
+    "reading": "6900–7500 words",
+    "listening": "122–132 minutes",
+    "speaking": "132–144 minutes",
+    "writing": "3400–3700 words",
+    "presentation": "68–75 minutes"
+  },
+  "grammarFocus": [
+    "scientific qualification and epistemic modality",
+    "hypothesis, prediction and conditional reasoning",
+    "cause, mechanism, correlation and causal inference",
+    "passive and impersonal constructions in research writing",
+    "reporting findings, methods and limitations",
+    "nominalisation and information density",
+    "comparison, contrast and statistical qualification",
+    "hedging and precision in scientific claims",
+    "cohesion across technical and interdisciplinary texts",
+    "register shifting between specialist, academic and public science communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Science Intelligence Gateway","focus":"Scientific disciplines, research language and evidence vocabulary","skills":["reading","vocabulary","speaking"]},
+    {"id":2,"title":"Research Vocabulary Forge","focus":"Advanced scientific collocations, methodology and academic terminology","skills":["vocabulary","writing"]},
+    {"id":3,"title":"Hypothesis Observatory","focus":"Questions, hypotheses, predictions, variables and testable claims","skills":["reading","analysis","writing"]},
+    {"id":4,"title":"Methods & Evidence Laboratory","focus":"Research design, sampling, controls, measurement and methodological validity","skills":["reading","listening","criticalThinking"]},
+    {"id":5,"title":"Expert Science Listening Command","focus":"Extracting methods, findings, caveats and implications from expert talks","skills":["listening","noteTaking","analysis"]},
+    {"id":6,"title":"Statistics & Uncertainty Reactor","focus":"Probability, significance, effect size, uncertainty and responsible interpretation","skills":["reading","analysis","speaking"]},
+    {"id":7,"title":"Causality Nexus","focus":"Correlation, mechanism, confounding variables and causal reasoning","skills":["reading","criticalThinking","discussion"]},
+    {"id":8,"title":"Peer Review Chamber","focus":"Evaluating research claims, methodology, limitations and scholarly responses","skills":["reading","writing","speaking"]},
+    {"id":9,"title":"Technology Futures Observatory","focus":"Emerging technologies, technical risk, adoption and societal implications","skills":["listening","analysis","debate"]},
+    {"id":10,"title":"Research Writing Studio","focus":"Abstracts, literature synthesis, results discussion and evidence-based conclusions","skills":["writing","reading","presentation"]},
+    {"id":11,"title":"Interdisciplinary Research Arena","focus":"Connecting concepts and evidence across science, technology and society","skills":["reading","listening","synthesis"]},
+    {"id":12,"title":"Scientific Crisis Simulation","focus":"Responding to uncertainty, emerging evidence and high-stakes scientific communication","skills":["listening","decisionMaking","speaking"]},
+    {"id":13,"title":"Data-to-Discovery Lab","focus":"Interpreting figures, tables, datasets and experimental trends without overclaiming","skills":["reading","analysis","writing"]},
+    {"id":14,"title":"Research Presentation Forge","focus":"Communicating complex findings clearly to expert and non-expert audiences","skills":["presentation","speaking","writing"]},
+    {"id":15,"title":"Science Debate Arena","focus":"Evidence-based disagreement, rebuttal, uncertainty and competing explanations","skills":["speaking","listening","argumentation"]},
+    {"id":16,"title":"Innovation Translation Laboratory","focus":"Turning scientific evidence into practical, responsible technology recommendations","skills":["speaking","writing","problemSolving"]},
+    {"id":17,"title":"Global Research Strategy War Room","focus":"Prioritising research directions under uncertainty, constraints and competing objectives","skills":["decisionMaking","collaboration","speaking"]},
+    {"id":18,"title":"Integrated Science-to-Innovation Mission","focus":"Research, evidence, synthesis and strategic communication simulation","skills":["reading","listening","analysis","presentation"]},
+    {"id":19,"title":"World 8 Mastery Integration Quest","focus":"Integrated C2+ scientific reasoning, research communication and innovation intelligence","skills":["all"]},
+    {"id":20,"title":"C2+ Science, Research & Innovation Master Challenge","focus":"Final high-stakes challenge in evidence evaluation, research synthesis and strategic science communication","skills":["all"]}
+  ],
+  "scenarios": [
+    "Global Science & Research Council",
+    "International Technology Assessment War Room",
+    "Evidence-Based Innovation Summit"
+  ],
+  "assessment": {
+    "reading":"Interpret sophisticated scientific, technical and research texts with precision, methodological awareness and appropriate skepticism.",
+    "listening":"Extract methods, findings, assumptions, uncertainty, limitations and implications from expert scientific communication.",
+    "speaking":"Explain, question and defend evidence-based positions using accurate C2+ scientific and academic register.",
+    "writing":"Produce research syntheses, methodological critiques, technical briefs and evidence-based recommendations with strong cohesion.",
+    "decisionMaking":"Evaluate evidence quality, uncertainty, technical constraints, risks and competing research priorities before recommending action.",
+    "presentation":"Translate complex scientific findings into clear, accurate and audience-appropriate presentations without oversimplification."
+  },
+  "successCriteria": [
+    "distinguishes observation, evidence, hypothesis, inference, interpretation and conclusion",
+    "uses advanced scientific and research vocabulary accurately and flexibly",
+    "recognises methodological limitations, uncertainty and possible confounding factors",
+    "interprets quantitative and qualitative evidence without overclaiming",
+    "constructs and critiques research arguments using evidence and appropriate qualification",
+    "shifts naturally between specialist, academic, professional and public science registers",
+    "communicates technical risk and uncertainty responsibly",
+    "translates research findings into practical and strategically framed recommendations",
+    "responds effectively to high-pressure scientific and technology scenarios",
+    "integrates research, listening, analysis, speaking and writing at C2+ level"
+  ]
+}
