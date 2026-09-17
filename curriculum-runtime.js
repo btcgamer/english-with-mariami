@@ -61,9 +61,27 @@
     return missions.map((mission,index)=>{const number=missionNumber(mission,index),done=state.completed.has(missionKey(state.grade,state.world,number)),title=mission.title||mission.name||`Mission ${number}`,focus=mission.focus||mission.description||mission.objective||'';return `<article class="magic-mission-card ${done?'is-complete':''}" data-mission="${esc(number)}"><div class="magic-mission-number">MISSION ${esc(number)} ${done?'✓':''}</div><h3>${esc(title)}</h3>${focus?`<p>${esc(focus)}</p>`:''}<button type="button" class="magic-mission-open" data-open-mission="${esc(number)}">${done?'REPLAY ↻':'ACTIVATE →'}</button></article>`;}).join('');
   }
   function renderGenericList(value){
-    if(!value)return '<div class="magic-empty">No data available.</div>';
+    if(value==null)return '<div class="magic-empty">No data available.</div>';
+    const renderItem=(item,index)=>{
+      if(item==null)return '';
+      if(typeof item==='string'||typeof item==='number'||typeof item==='boolean')return `<div>${esc(item)}</div>`;
+      if(Array.isArray(item))return `<div class="magic-nested-list">${item.map((nested,nestedIndex)=>renderItem(nested,nestedIndex)).join('')}</div>`;
+      const entries=Object.entries(item);
+      if(!entries.length)return '<div class="magic-empty">No data available.</div>';
+      const title=item.title||item.name||item.scenario||item.area||item.type||`Item ${index+1}`;
+      const primaryKeys=['title','name','scenario','area','type'];
+      const bodyKeys=['description','task','outcome','criteria','details'];
+      const primary=entries.find(([key])=>bodyKeys.includes(key));
+      const extra=entries.filter(([key])=>!primaryKeys.includes(key)&&(!primary||key!==primary[0]));
+      const body=primary?primary[1]:null;
+      const extras=extra.map(([key,val])=>{
+        const label=key.replace(/([A-Z])/g,' $1').replace(/^./,c=>c.toUpperCase());
+        return `<div class="magic-list-field"><small>${esc(label)}</small>${Array.isArray(val)||typeof val==='object'?renderGenericList(val):`<span>${esc(val)}</span>`}</div>`;
+      }).join('');
+      return `<div><strong>${esc(title)}</strong>${body!=null?`<p>${Array.isArray(body)||typeof body==='object'?renderGenericList(body):esc(body)}</p>`:''}${extras}</div>`;
+    };
     const items=Array.isArray(value)?value:[value];
-    return `<div class="magic-list">${items.map((item,index)=>{if(typeof item==='string'||typeof item==='number')return `<div>${esc(item)}</div>`;const title=item.title||item.name||item.scenario||item.area||`Item ${index+1}`,body=item.description||item.task||item.outcome||item.criteria||item.details||'';return `<div><strong>${esc(title)}</strong>${body?`<p>${esc(body)}</p>`:''}</div>`;}).join('')}</div>`;
+    return `<div class="magic-list">${items.map(renderItem).join('')}</div>`;
   }
   function renderWorld(data){
     const q=s=>document.querySelector(s),title=q('[data-curriculum-title]'),level=q('[data-curriculum-level]'),targets=q('[data-curriculum-targets]'),missions=q('[data-curriculum-missions]'),scenarios=q('[data-curriculum-scenarios]'),assessment=q('[data-curriculum-assessment]');
