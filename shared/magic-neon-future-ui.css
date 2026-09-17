@@ -1,0 +1,22 @@
+/* Magic Neon Future UI — shared compatibility layer */
+:root{
+  --mn-cyan:#4de8ff;
+  --mn-pink:#ff4fd8;
+  --mn-gold:#ffd76a;
+  --mn-green:#65ffb0;
+  --mn-panel:rgba(8,16,42,.72);
+  --mn-border:rgba(77,232,255,.28);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-width:0;overflow-x:hidden;background:#050713;color:#eef7ff}
+button,a,input,textarea,select{font:inherit}
+button,a{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--mn-cyan);outline-offset:3px}
+.hidden,[hidden]{display:none!important}
+.neon-panel,.glass-panel,.hud-panel{background:var(--mn-panel);border:1px solid var(--mn-border);box-shadow:0 0 24px rgba(77,232,255,.08);backdrop-filter:blur(14px)}
+.neon-text{color:var(--mn-cyan);text-shadow:0 0 14px rgba(77,232,255,.45)}
+.neon-button{border:1px solid var(--mn-cyan);border-radius:12px;background:rgba(77,232,255,.1);color:#fff;cursor:pointer;transition:transform .16s,box-shadow .16s,background .16s}
+.neon-button:hover{transform:translateY(-1px);box-shadow:0 0 18px rgba(77,232,255,.2);background:rgba(77,232,255,.18)}
+.neon-button:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
