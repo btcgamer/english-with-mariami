@@ -1,0 +1,71 @@
+{
+  "grade": 11,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 3: C2+ NUANCE, RHETORIC, PRAGMATICS & INFLUENCE INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "8900+ active words",
+    "reading": "4200–4800 words",
+    "listening": "58–68 min",
+    "speaking": "68–78 min",
+    "writing": "1800–2100 words",
+    "presentation": "34–40 min"
+  },
+  "grammarFocus": [
+    "rhetorical clause architecture and emphasis",
+    "advanced modality, stance and interpersonal meaning",
+    "implicature, presupposition and indirectness",
+    "discourse markers, coherence and strategic sequencing",
+    "fronting, inversion, clefting and information focus",
+    "register, politeness and face-sensitive language",
+    "reported discourse, attribution and strategic framing",
+    "ellipsis, substitution, reformulation and compression"
+  ],
+  "missions": [
+    {"id":1,"title":"Nuance Intelligence Gateway","focus":"detect fine distinctions in meaning, stance, implication and communicative intent"},
+    {"id":2,"title":"Rhetorical Vocabulary Forge","focus":"master high-precision language for rhetoric, influence, diplomacy and public communication"},
+    {"id":3,"title":"Implicature Observatory","focus":"infer intended meanings that go beyond literal wording and explicit propositions"},
+    {"id":4,"title":"Presupposition & Framing Lab","focus":"identify hidden assumptions and analyse how framing shapes interpretation"},
+    {"id":5,"title":"Prosody & Pragmatics Command","focus":"interpret emphasis, intonation, hesitation and delivery as signals of stance and intent"},
+    {"id":6,"title":"Rhetorical Architecture Nexus","focus":"analyse and construct sophisticated rhetorical structures, contrasts and progression"},
+    {"id":7,"title":"Audience Psychology Studio","focus":"adapt wording, tone, evidence and sequencing to different audiences and goals"},
+    {"id":8,"title":"Diplomatic Language Reactor","focus":"manage disagreement, refusal, correction and sensitive requests with precision"},
+    {"id":9,"title":"Strategic Framing Arena","focus":"reframe the same information for different legitimate communicative purposes without distorting facts"},
+    {"id":10,"title":"Persuasion Evidence Engine","focus":"combine rhetoric with relevant evidence, qualification and transparent reasoning"},
+    {"id":11,"title":"High-Stakes Dialogue Lab","focus":"navigate difficult conversations through clarification, repair, concession and controlled assertiveness"},
+    {"id":12,"title":"Cross-Cultural Pragmatics Portal","focus":"compare indirectness, politeness, turn-taking and expectations across communicative cultures"},
+    {"id":13,"title":"Media Discourse Observatory","focus":"analyse headlines, commentary, interviews and public narratives for framing and stance"},
+    {"id":14,"title":"Executive Narrative Forge","focus":"turn complex information into concise, audience-aware executive communication"},
+    {"id":15,"title":"Negotiation Rhetoric Chamber","focus":"use concessions, conditions, strategic questions and precise language in negotiation"},
+    {"id":16,"title":"Influence Ethics Laboratory","focus":"distinguish legitimate persuasion from misleading framing, manipulation and unsupported certainty"},
+    {"id":17,"title":"Live Audience Adaptation Simulation","focus":"respond in real time when audience needs, objections or goals change"},
+    {"id":18,"title":"Integrated Pragmatics Mission","focus":"integrate nuance, rhetoric, pragmatics, evidence and audience design in complex scenarios"},
+    {"id":19,"title":"World 3 Mastery Integration Quest","focus":"sustain C2+ control across rhetorical analysis, diplomatic interaction and strategic communication"},
+    {"id":20,"title":"C2+ Rhetoric & Influence Master Challenge","focus":"complete an integrated C2+ challenge combining interpretation, persuasion, negotiation and ethical influence"}
+  ],
+  "scenarios": [
+    "International Media Briefing",
+    "Executive Negotiation Summit",
+    "Global Diplomacy Simulation"
+  ],
+  "assessment": {
+    "type": "integrated C2+ nuance, rhetoric, pragmatics and influence intelligence assessment",
+    "components": [
+      "dense pragmatic reading and inference",
+      "prosody-rich advanced listening",
+      "spontaneous high-stakes dialogue and negotiation",
+      "extended rhetorical and audience-aware writing",
+      "cross-cultural pragmatics and register control",
+      "integrated ethical influence capstone"
+    ]
+  },
+  "successCriteria": [
+    "sustained C2+ control of literal, implied and culturally mediated meaning",
+    "accurate interpretation of stance, presupposition, implicature and rhetorical framing",
+    "flexible audience-aware control of register, politeness and strategic emphasis",
+    "precise use of modality, cohesion, information structure and attribution",
+    "effective negotiation, disagreement, repair and adaptation under communicative pressure",
+    "persuasive communication that remains evidence-aware, transparent and ethically responsible"
+  ]
+}
