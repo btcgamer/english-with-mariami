@@ -1,0 +1,72 @@
+{
+  "grade": 12,
+  "world": 3,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 3: C2+ ADVANCED RHETORIC, PRAGMATICS, INFLUENCE & CROSS-CULTURAL COMMUNICATION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "11200+ active words",
+    "reading": "5400–6000 words",
+    "listening": "82–92 min",
+    "speaking": "92–104 min",
+    "writing": "2400–2700 words",
+    "presentation": "48–55 min"
+  },
+  "grammarFocus": [
+    "advanced rhetoric through parallelism, contrast, inversion, anaphora and controlled repetition",
+    "pragmatic meaning, implicature, presupposition, inference and indirectness",
+    "hedging, strategic modality, stance and calibrated interpersonal force",
+    "discourse markers, coherence, information structure and rhetorical progression",
+    "politeness, face management, mitigation and tactful disagreement",
+    "register, tone and audience adaptation across diplomatic, academic, executive and public contexts",
+    "complex question forms, embedded challenges and precision follow-up strategies",
+    "persuasive framing, narrative sequencing and strategic emphasis without distortion",
+    "cross-cultural pragmatic variation, ambiguity management and communication repair",
+    "real-time reformulation, turn-taking, interruption management and high-stakes negotiation language"
+  ],
+  "missions": [
+    {"mission":1,"title":"Rhetoric Awakening Gate","focus":"Identify how structure, emphasis, contrast and rhythm shape meaning and audience response."},
+    {"mission":2,"title":"Pragmatic Signal Observatory","focus":"Decode implicature, presupposition, indirect meaning, irony and unstated assumptions."},
+    {"mission":3,"title":"Precision Modality Forge","focus":"Control certainty, tentativeness, obligation, likelihood and interpersonal force with C2+ precision."},
+    {"mission":4,"title":"Audience Architecture Lab","focus":"Rebuild the same message for expert, executive, public, academic and cross-cultural audiences."},
+    {"mission":5,"title":"Diplomatic Listening Command","focus":"Track stance, tact, strategic ambiguity, implied disagreement and relationship management in expert dialogue."},
+    {"mission":6,"title":"Persuasion Structure Nexus","focus":"Construct persuasive arguments using framing, sequencing, concession, contrast and evidence-aware emphasis."},
+    {"mission":7,"title":"High-Stakes Dialogue Reactor","focus":"Manage disagreement, challenge, clarification and pressure while preserving precision and rapport."},
+    {"mission":8,"title":"Negotiation Language Chamber","focus":"Use conditional offers, calibrated concessions, priorities and strategic reframing in complex negotiations."},
+    {"mission":9,"title":"Cross-Cultural Pragmatics Lab","focus":"Recognize pragmatic variation in directness, politeness, silence, disagreement and relationship signals."},
+    {"mission":10,"title":"Narrative Influence Studio","focus":"Turn complex information into coherent narratives while maintaining accuracy, proportion and transparency."},
+    {"mission":11,"title":"Executive Message Forge","focus":"Compress nuanced analysis into decisive, audience-aware language without erasing important qualifications."},
+    {"mission":12,"title":"Rhetorical Counterplay Arena","focus":"Anticipate objections, expose weak framing and respond with controlled rebuttal and strategic concession."},
+    {"mission":13,"title":"Conflict Mediation Observatory","focus":"De-escalate tense exchanges through reframing, acknowledgement, clarification and face-sensitive language."},
+    {"mission":14,"title":"Media & Public Communication Nexus","focus":"Adapt complex ideas for interviews, public statements, press questions and high-visibility communication."},
+    {"mission":15,"title":"Influence Ethics Command","focus":"Distinguish legitimate persuasion from distortion while communicating transparently and responsibly."},
+    {"mission":16,"title":"Live Interaction Simulation","focus":"Handle interruptions, unexpected objections, ambiguity and rapid topic shifts in real time."},
+    {"mission":17,"title":"Global Negotiation Simulation","focus":"Navigate a multilingual, multicultural negotiation with competing priorities, indirect signals and changing constraints."},
+    {"mission":18,"title":"Integrated Communication Mission","focus":"Combine rhetoric, pragmatics, listening, negotiation, writing and speaking in one complex scenario."},
+    {"mission":19,"title":"World 3 Mastery Integration Quest","focus":"Demonstrate flexible C2+ control of influence, audience adaptation, diplomacy and cross-cultural communication."},
+    {"mission":20,"title":"C2+ Rhetoric & Global Communication Master Challenge","focus":"Deliver an independent high-stakes communication performance with precise rhetoric, pragmatic control and adaptive audience strategy."}
+  ],
+  "scenarios": [
+    "Global Diplomatic Communication Forum",
+    "International Executive Negotiation Chamber",
+    "Cross-Cultural Crisis Communication Summit"
+  ],
+  "assessment": [
+    "dense rhetorical and pragmatic texts requiring inference, tone analysis and audience interpretation",
+    "expert listening requiring recognition of stance, indirectness, strategic ambiguity and interpersonal intent",
+    "high-stakes speaking involving negotiation, diplomacy, challenge, mediation and persuasive presentation",
+    "advanced writing that adapts framing, register, cohesion and rhetorical structure to different audiences",
+    "cross-cultural communication simulation requiring pragmatic flexibility and rapid repair",
+    "live negotiation and crisis-response tasks with changing constraints, interruptions and stakeholder priorities"
+  ],
+  "successCriteria": [
+    "sustained C2+ control of rhetoric, pragmatics, register, tone and interpersonal force",
+    "accurate interpretation of explicit meaning, implication, presupposition and contextual signals",
+    "flexible audience adaptation without loss of factual accuracy or essential nuance",
+    "strategic use of concession, rebuttal, framing, emphasis and qualification",
+    "confident management of disagreement, interruption, ambiguity and high-pressure interaction",
+    "effective cross-cultural communication with awareness of pragmatic variation and face management",
+    "persuasive communication that remains transparent, evidence-aware and ethically responsible",
+    "independent C2+ performance across unfamiliar diplomatic, executive, public and international communication contexts"
+  ]
+}
