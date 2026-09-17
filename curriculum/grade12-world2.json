@@ -1,0 +1,71 @@
+{
+  "grade": 12,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 2: C2+ CRITICAL RESEARCH, EVIDENCE, ANALYSIS & STRATEGIC DECISION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "10500+ active words",
+    "reading": "5000–5600 words",
+    "listening": "74–84 min",
+    "speaking": "84–94 min",
+    "writing": "2200–2500 words",
+    "presentation": "43–49 min"
+  },
+  "grammarFocus": [
+    "advanced evidence evaluation and epistemic qualification",
+    "complex causal reasoning, correlation, uncertainty and competing explanations",
+    "multi-source attribution, synthesis and source-positioning",
+    "concession, rebuttal, qualification and strategic disagreement",
+    "nominalisation, compression, apposition, ellipsis and information packaging",
+    "complex conditionals and counterfactual reasoning for strategic scenarios",
+    "register shifting across academic, technical, executive, institutional and public contexts",
+    "precise reporting of data, claims, assumptions, limitations and confidence",
+    "real-time clarification, reformulation, repair and audience adaptation"
+  ],
+  "missions": [
+    {"mission":1,"title":"Critical Evidence Gateway","focus":"Diagnose complex claims, evidence quality, assumptions and uncertainty."},
+    {"mission":2,"title":"Research Vocabulary Forge","focus":"Master high-precision academic and analytical vocabulary for complex investigations."},
+    {"mission":3,"title":"Claim–Evidence Observatory","focus":"Separate observations, claims, interpretations, inferences and predictions."},
+    {"mission":4,"title":"Source Reliability Lab","focus":"Evaluate authority, methodology, provenance, limitations and competing sources."},
+    {"mission":5,"title":"Expert Listening Intelligence Command","focus":"Track stance, qualification, evidence and implied meaning in dense expert speech."},
+    {"mission":6,"title":"Argument Mapping Nexus","focus":"Map premises, conclusions, counterarguments, assumptions and logical dependencies."},
+    {"mission":7,"title":"Causal Reasoning Reactor","focus":"Distinguish causation, correlation, mechanism, confounding and uncertainty."},
+    {"mission":8,"title":"Counterfactual Futures Lab","focus":"Build sophisticated hypothetical and counterfactual scenarios under changing constraints."},
+    {"mission":9,"title":"Data-to-Meaning Studio","focus":"Translate complex data and patterns into accurate, audience-aware explanations."},
+    {"mission":10,"title":"Research Synthesis Engine","focus":"Integrate multiple sources into a coherent, qualified analytical position."},
+    {"mission":11,"title":"Expert Interview Arena","focus":"Conduct high-level questioning, clarification, challenge and follow-up in real time."},
+    {"mission":12,"title":"Decision Intelligence Command","focus":"Compare options through evidence, risk, uncertainty, trade-offs and stakeholder constraints."},
+    {"mission":13,"title":"Risk & Uncertainty Observatory","focus":"Communicate probability, confidence, limitations and scenario ranges precisely."},
+    {"mission":14,"title":"Strategic Research Briefing Forge","focus":"Convert complex research into concise executive recommendations without losing nuance."},
+    {"mission":15,"title":"Critical Debate Chamber","focus":"Defend and revise positions while accurately representing opposing evidence."},
+    {"mission":16,"title":"Problem Framing Laboratory","focus":"Reframe ambiguous problems, expose hidden assumptions and define decision criteria."},
+    {"mission":17,"title":"Strategic Recommendation Simulation","focus":"Produce evidence-aware recommendations under time pressure and incomplete information."},
+    {"mission":18,"title":"Integrated Research-to-Decision Mission","focus":"Complete a multidisciplinary investigation and communicate its strategic implications."},
+    {"mission":19,"title":"World 2 Mastery Integration Quest","focus":"Integrate critical reading, listening, reasoning, synthesis, writing and speaking."},
+    {"mission":20,"title":"C2+ Evidence & Decision Master Challenge","focus":"Demonstrate independent C2+ research and strategic decision communication."}
+  ],
+  "scenarios": [
+    "Global Research & Evidence Council",
+    "Strategic Decision Intelligence War Room",
+    "International Research-to-Action Summit"
+  ],
+  "assessment": [
+    "dense multidisciplinary texts requiring inference, source evaluation and synthesis",
+    "expert listening requiring stance, evidence, qualification and uncertainty tracking",
+    "high-stakes analytical speaking, questioning, debate and strategic recommendation",
+    "research writing that integrates sources while preserving attribution and nuance",
+    "executive briefing that translates complex evidence for specialist and non-specialist audiences",
+    "adaptive decision simulation with changing evidence, constraints and stakeholder priorities"
+  ],
+  "successCriteria": [
+    "sustained C2+ control when evaluating and communicating complex evidence",
+    "clear distinction between evidence, observation, interpretation, inference, assumption and prediction",
+    "precise causal, probabilistic and systems-level reasoning",
+    "flexible control of attribution, modality, qualification, cohesion and information structure",
+    "accurate synthesis of conflicting or incomplete sources without false certainty",
+    "rapid reformulation and audience adaptation under pressure",
+    "strategic recommendations that are transparent about evidence, uncertainty, risks and trade-offs",
+    "independent C2+ performance across unfamiliar research and decision contexts"
+  ]
+}
