@@ -1,0 +1,58 @@
+{
+  "grade": 10,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 2: C2 PRECISION, RHETORIC & GLOBAL SYSTEMS",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9000+ active words",
+    "reading": "3600–4400 words",
+    "listening": "50–60 min",
+    "speaking": "55–70 min",
+    "writing": "1500–1800 words",
+    "presentation": "28–35 min"
+  },
+  "grammar": [
+    "Fine-grained modality, evidentiality, and epistemic distance",
+    "Advanced clause combining, embedding, and information packaging",
+    "Rhetorical parallelism, contrast, concession, and controlled repetition",
+    "Ellipsis, substitution, anaphora, and cohesion across extended texts",
+    "Complex nominal groups, apposition, and compressed academic style",
+    "Discourse markers, metadiscourse, and argument navigation",
+    "Pragmatic inference, indirectness, irony, and strategic politeness",
+    "Self-editing for precision, rhythm, ambiguity, and unintended implications"
+  ],
+  "missions": [
+    {"id":1,"title":"C2 Precision Calibration","focus":"Diagnose subtle gaps in accuracy, fluency, nuance, and appropriateness across demanding communication tasks."},
+    {"id":2,"title":"Lexical Collocation Observatory","focus":"Master rare but natural collocations, lexical bundles, semantic prosody, and precise word choice."},
+    {"id":3,"title":"Evidence & Certainty Matrix","focus":"Express degrees of certainty, source reliability, inference, doubt, and qualified commitment."},
+    {"id":4,"title":"Rhetorical Structure Forge","focus":"Construct arguments using parallelism, concession, contrast, framing, and deliberate rhetorical progression."},
+    {"id":5,"title":"Implicit Meaning Decoder","focus":"Infer unstated intentions, presuppositions, implicatures, humour, irony, and socially sensitive meanings."},
+    {"id":6,"title":"Academic Compression Lab","focus":"Transform verbose explanations into concise, sophisticated prose without losing essential meaning."},
+    {"id":7,"title":"Complex Text Reconstruction","focus":"Rebuild fragmented or densely organised texts using cohesion, reference, substitution, and logical sequencing."},
+    {"id":8,"title":"Multi-Register Translation Gate","focus":"Reformulate complex ideas across technical, public-facing, diplomatic, journalistic, and conversational registers."},
+    {"id":9,"title":"Global Systems Reading Nexus","focus":"Analyse a challenging text about interconnected economic, environmental, technological, and social systems."},
+    {"id":10,"title":"Authentic Speech Signal Lab","focus":"Track rapid speech, reduced forms, stance shifts, interruptions, and competing voices in authentic audio."},
+    {"id":11,"title":"Strategic Negotiation Arena","focus":"Negotiate priorities and trade-offs while using tact, conditional proposals, clarification, and face-saving language."},
+    {"id":12,"title":"Ethical Dilemma Forum","focus":"Discuss a complex ethical dilemma, distinguish principles from consequences, and acknowledge uncertainty."},
+    {"id":13,"title":"Research Evidence Synthesis","focus":"Integrate contrasting sources, identify methodological limitations, and produce a balanced synthesis."},
+    {"id":14,"title":"Crisis Communication Command","focus":"Deliver accurate, calm, audience-sensitive communication during a rapidly changing high-pressure scenario."},
+    {"id":15,"title":"Editorial Voice Studio","focus":"Write a persuasive editorial with a controlled voice, strong structure, nuanced claims, and responsible framing."},
+    {"id":16,"title":"Precision Editing Reactor","focus":"Edit advanced writing for ambiguity, redundancy, weak cohesion, register mismatch, and hidden bias in wording."},
+    {"id":17,"title":"Cross-Cultural Pragmatics Lab","focus":"Adapt requests, refusals, disagreement, humour, and feedback to different cultural and professional expectations."},
+    {"id":18,"title":"Expert Q&A Simulation","focus":"Give concise but sophisticated answers, handle hostile or unexpected questions, and repair misunderstandings."},
+    {"id":19,"title":"Global Systems Integration Quest","focus":"Combine reading, listening, research, negotiation, writing, and presentation skills in one complex systems task."},
+    {"id":20,"title":"C2 Rhetoric & Precision Master Challenge","focus":"Complete an integrated C2 challenge demonstrating accurate, nuanced, flexible, audience-aware communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"International Systems Briefing","description":"Analyse interconnected global developments, synthesise evidence, brief stakeholders, and answer demanding follow-up questions."},
+    {"title":"Cross-Cultural Negotiation Table","description":"Resolve a complex disagreement between partners with different priorities, communication styles, and risk perceptions."},
+    {"title":"Public Trust Communication Lab","description":"Create and deliver a transparent public message that explains uncertainty, responds to criticism, and protects credibility."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 precision and rhetoric assessment",
+    "components":["implicit meaning analysis","advanced listening discrimination","lexical precision and collocation","rhetorical argument construction","cross-register reformulation","research evidence synthesis","strategic negotiation","precision editing","crisis communication","expert presentation and Q&A"],
+    "successCriteria":["near-complete control of advanced language resources","precise and nuanced meaning management","coherent and persuasive extended discourse","accurate handling of evidence and uncertainty","flexible register and pragmatic adaptation","effective interpretation of implicit meaning","clear rhetorical organisation","strategic interaction and repair","economical and polished writing","independent audience-aware performance"]
+  }
+}
