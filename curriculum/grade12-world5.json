@@ -1,0 +1,72 @@
+{
+  "grade": 12,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 5: C2+ GLOBAL LEADERSHIP, INSTITUTIONAL INTELLIGENCE, POLICY & COLLABORATIVE ACTION",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "12600+ active words",
+    "reading": "6000–6600 words",
+    "listening": "98–108 min",
+    "speaking": "108–120 min",
+    "writing": "2800–3100 words",
+    "presentation": "56–63 min"
+  },
+  "grammarFocus": [
+    "advanced institutional and policy language for authority, accountability, implementation and governance",
+    "complex reporting, attribution and stance in policy, organizational and international communication",
+    "modal nuance for obligation, recommendation, permission, feasibility and institutional responsibility",
+    "conditional and concessive structures for policy scenarios, constraints and competing priorities",
+    "passive, impersonal and agentive constructions for precise responsibility and process description",
+    "advanced cohesion, reference, thematic progression and paragraph-level information architecture",
+    "diplomatic hedging, mitigation, disagreement and consensus-building language",
+    "strategic use of nominalisation, apposition, compression and parallel structures in executive writing",
+    "register shifting across boardroom, institutional, public, academic and international contexts",
+    "real-time chairing, turn-taking, clarification, summarising and collaborative decision language"
+  ],
+  "missions": [
+    {"mission":1,"title":"Global Leadership Gateway","focus":"Define leadership through vision, responsibility, influence, accountability and collective outcomes."},
+    {"mission":2,"title":"Institutional Vocabulary Forge","focus":"Master high-precision language for governance, institutions, stakeholders, mandates and implementation."},
+    {"mission":3,"title":"Governance Intelligence Observatory","focus":"Analyse how institutions make decisions, allocate responsibility and manage competing interests."},
+    {"mission":4,"title":"Policy Reading Command","focus":"Interpret dense policy documents, recommendations, caveats, implementation mechanisms and stakeholder positions."},
+    {"mission":5,"title":"Leadership Listening Nexus","focus":"Track priorities, commitments, qualifications, diplomatic signals and accountability in expert leadership speech."},
+    {"mission":6,"title":"Stakeholder Mapping Lab","focus":"Identify stakeholder interests, incentives, constraints, influence, dependencies and areas of alignment."},
+    {"mission":7,"title":"Consensus Architecture Reactor","focus":"Build agreement through acknowledgement, reframing, concession, evidence and clearly defined common ground."},
+    {"mission":8,"title":"Policy Trade-off Chamber","focus":"Explain competing objectives, resource constraints, distributional effects and implementation trade-offs."},
+    {"mission":9,"title":"Crisis Leadership Simulation","focus":"Communicate under uncertainty while coordinating information, priorities, responsibilities and public expectations."},
+    {"mission":10,"title":"Strategic Meeting Studio","focus":"Chair and participate in complex meetings using agenda control, clarification, summarisation and decision language."},
+    {"mission":11,"title":"Accountability Observatory","focus":"Express responsibility, ownership, oversight, milestones and corrective action with precise institutional language."},
+    {"mission":12,"title":"International Cooperation Command","focus":"Negotiate shared objectives across institutions with different mandates, incentives and political constraints."},
+    {"mission":13,"title":"Policy Briefing Forge","focus":"Convert complex evidence and stakeholder analysis into concise, qualified recommendations for decision-makers."},
+    {"mission":14,"title":"Executive Decision Arena","focus":"Present options, risks, dependencies and implementation choices in a high-pressure leadership briefing."},
+    {"mission":15,"title":"Ethical Leadership Observatory","focus":"Evaluate transparency, fairness, responsibility, conflicting duties and unintended institutional consequences."},
+    {"mission":16,"title":"Coalition Building Laboratory","focus":"Develop durable collaboration by identifying shared incentives, resolving friction and sequencing commitments."},
+    {"mission":17,"title":"Global Governance Simulation","focus":"Lead a multinational response while evidence, stakeholder priorities, resources and constraints evolve in real time."},
+    {"mission":18,"title":"Integrated Leadership Mission","focus":"Combine policy analysis, negotiation, crisis communication, stakeholder reasoning and strategic presentation."},
+    {"mission":19,"title":"World 5 Mastery Integration Quest","focus":"Integrate advanced reading, listening, institutional language, leadership communication, writing and collaborative action."},
+    {"mission":20,"title":"C2+ Global Leadership & Policy Master Challenge","focus":"Deliver an independent institutional strategy that demonstrates accountable leadership and adaptive C2+ communication."}
+  ],
+  "scenarios": [
+    "Global Leadership & Governance Council",
+    "International Policy Coordination War Room",
+    "Multilateral Cooperation Summit"
+  ],
+  "assessment": [
+    "dense institutional and policy texts requiring inference, attribution, implementation analysis and stakeholder interpretation",
+    "expert leadership listening requiring stance, diplomatic nuance, commitments, uncertainty and accountability tracking",
+    "high-stakes speaking involving chairing, negotiation, crisis leadership, policy briefing and coalition building",
+    "advanced policy and executive writing that balances evidence, feasibility, responsibility and audience needs",
+    "collaborative decision simulations with conflicting mandates, limited resources and changing stakeholder priorities",
+    "multilateral crisis task requiring rapid coordination, reformulation and transparent communication under pressure"
+  ],
+  "successCriteria": [
+    "sustained C2+ control of institutional, policy and leadership communication",
+    "precise expression of authority, responsibility, accountability, recommendation and feasibility",
+    "clear analysis of stakeholders, incentives, mandates, trade-offs and implementation dependencies",
+    "flexible diplomatic control of agreement, disagreement, mitigation, concession and consensus-building",
+    "effective leadership communication under uncertainty, conflict and time pressure",
+    "accurate adaptation across executive, institutional, public, academic and international registers",
+    "strategic recommendations that remain transparent about evidence, constraints, responsibility and risks",
+    "independent C2+ performance across unfamiliar governance, policy, leadership and multinational collaboration contexts"
+  ]
+}
