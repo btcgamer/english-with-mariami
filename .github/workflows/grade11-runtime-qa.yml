@@ -37,7 +37,18 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Start static server
-        run: npx http-server . -p 4173 > /tmp/grade11-server.log 2>&1 &
+        run: |
+          npx http-server . -p 4173 > /tmp/grade11-server.log 2>&1 &
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/advanced-academy.html?grade=11 >/dev/null; then
+              echo "Grade 11 static server is ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Static server failed to become ready"
+          cat /tmp/grade11-server.log
+          exit 1
 
       - name: Run Grade 11 Runtime Integration QA
         run: npx playwright test qa/grade11-runtime-integration.spec.js --reporter=line
