@@ -1,0 +1,72 @@
+{
+  "grade": 11,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 9: C2+ AI, DIGITAL SOCIETY, HUMAN–MACHINE COMMUNICATION & FUTURE INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "10100+ active words",
+    "reading": "4800–5400 words",
+    "listening": "70–80 min",
+    "speaking": "80–90 min",
+    "writing": "2100–2400 words",
+    "presentation": "40–46 min"
+  },
+  "grammarFocus": [
+    "advanced modality, evidentiality and calibrated claims for AI capabilities, limitations and uncertainty",
+    "complex conditionals, counterfactuals and scenario language for human–machine futures",
+    "advanced attribution, reported discourse and source-positioning in technical and digital debates",
+    "information packaging, nominalisation, compression and dense technical explanation",
+    "concession, rebuttal, qualification and nuanced disagreement in AI and technology policy discourse",
+    "cause, consequence, correlation and causal uncertainty in digital-society analysis",
+    "rhetorical emphasis, inversion, clefting and strategic information focus in executive technology communication",
+    "register shifting across technical, academic, executive, regulatory, diplomatic, media and public-facing contexts",
+    "pragmatic precision for human–AI interaction, clarification, prompt refinement and collaborative meaning-making",
+    "ellipsis, reformulation, repair and real-time adaptation during high-stakes technology communication"
+  ],
+  "missions": [
+    { "id": 1, "title": "AI Intelligence Gateway" },
+    { "id": 2, "title": "Digital Society Vocabulary Forge" },
+    { "id": 3, "title": "Human–Machine Communication Observatory" },
+    { "id": 4, "title": "AI Evidence & Reliability Lab" },
+    { "id": 5, "title": "Future Technology Listening Command" },
+    { "id": 6, "title": "Algorithms & Information Nexus" },
+    { "id": 7, "title": "AI Risk & Safety Reactor" },
+    { "id": 8, "title": "Automation & Future Work Arena" },
+    { "id": 9, "title": "Digital Futures Scenario Studio" },
+    { "id": 10, "title": "AI Research Synthesis Engine" },
+    { "id": 11, "title": "Executive Technology Briefing Command" },
+    { "id": 12, "title": "AI Governance & Regulation Portal" },
+    { "id": 13, "title": "Human–AI Negotiation Chamber" },
+    { "id": 14, "title": "Digital Policy Writing Forge" },
+    { "id": 15, "title": "Robotics, Interfaces & Smart Cities Lab" },
+    { "id": 16, "title": "AI Ethics & Communication Laboratory" },
+    { "id": 17, "title": "Live Future Intelligence Adaptation Simulation" },
+    { "id": 18, "title": "Integrated AI-to-Strategy Mission" },
+    { "id": 19, "title": "World 9 Mastery Integration Quest" },
+    { "id": 20, "title": "C2+ AI & Future Intelligence Master Challenge" }
+  ],
+  "scenarios": [
+    "Global AI Governance Council",
+    "Human–Machine Futures Summit",
+    "Digital Transformation War Room"
+  ],
+  "assessment": [
+    "integrated C2+ AI, digital society, human–machine communication and future intelligence assessment",
+    "dense technical and policy reading with causal, systems, ethical and perspective-based inference",
+    "high-information expert listening with evidence, uncertainty, capability claims, limitations and competing interpretations",
+    "spontaneous technical discussion, stakeholder negotiation, AI governance dialogue and high-stakes crisis communication",
+    "research synthesis, technology policy writing and executive AI strategy briefing",
+    "cross-cultural register adaptation across technical, academic, institutional, regulatory, diplomatic and public-facing contexts",
+    "integrated AI-to-strategy capstone requiring evidence-aware reasoning, human-centered communication and transparent uncertainty"
+  ],
+  "successCriteria": [
+    "sustained C2+ control across AI, technology, digital society and future-oriented communication",
+    "clear distinction between observed evidence, model output, interpretation, capability claim, assumption, prediction and uncertainty",
+    "precise analysis of automation, algorithmic systems, human agency, incentives, risks, governance constraints and competing future scenarios",
+    "flexible control of modality, evidentiality, attribution, cohesion, information structure, rhetorical emphasis and technical register",
+    "effective translation of complex technical concepts for specialist and non-specialist audiences without sacrificing accuracy or nuance",
+    "rapid adaptation when evidence, system capabilities, stakeholder priorities or scenario assumptions change",
+    "strategic communication that is evidence-aware, human-centered, transparent, culturally responsive, ethically responsible and precise under pressure"
+  ]
+}
