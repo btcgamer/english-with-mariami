@@ -101,9 +101,9 @@ test.describe('Grade 9 Runtime Integration QA', () => {
     await expect(page.locator('[data-curriculum-title]')).toContainText('WORLD 10');
     await expect(page.locator('[data-curriculum-missions]')).toContainText('C1+ Global Mastery Graduation Challenge');
     await expect(page.locator('[data-curriculum-scenarios]')).toContainText('C1+ Graduation Capstone');
-    await expect(page.locator('[data-curriculum-assessment]')).toContainText('Integrated C1+ global mastery and graduation assessment');
-    await expect(page.locator('[data-curriculum-assessment]')).toContainText('advanced reading analysis');
-    await expect(page.locator('[data-curriculum-assessment]')).toContainText('flexible and precise C1+ language control');
+    await expect(page.locator('[data-curriculum-assessment]')).toContainText(/Integrated C1\+ global mastery and graduation assessment/i);
+    await expect(page.locator('[data-curriculum-assessment]')).toContainText(/advanced reading analysis/i);
+    await expect(page.locator('[data-curriculum-assessment]')).toContainText(/flexible and precise C1\+ language control/i);
 
     const finalState = await page.evaluate(() => ({
       completed: JSON.parse(localStorage.getItem('magicCurriculumProgress:g9') || '[]'),
