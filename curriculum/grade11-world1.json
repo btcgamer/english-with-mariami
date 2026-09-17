@@ -1,0 +1,71 @@
+{
+  "grade": 11,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 1: C2+ ADVANCED DISCOURSE, STRATEGIC COMMUNICATION & GLOBAL INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "8500+ active words",
+    "reading": "4000–4600 words",
+    "listening": "55–65 min",
+    "speaking": "65–75 min",
+    "writing": "1700–2000 words",
+    "presentation": "32–38 min"
+  },
+  "grammar": [
+    "Advanced discourse architecture: topic, focus, information flow and rhetorical emphasis",
+    "Fine-grained modality, evidentiality, stance and epistemic qualification",
+    "Implicature, inference, indirectness, irony and pragmatic meaning in demanding contexts",
+    "Sophisticated cohesion through ellipsis, substitution, reference, reformulation and lexical chains",
+    "Nominalisation, compression, apposition and dense professional and academic syntax",
+    "Advanced reporting, passive, causative and attribution structures across formal registers",
+    "Register shifting, politeness, diplomacy and audience adaptation at sentence and discourse level",
+    "Real-time self-monitoring, strategic repair, clarification and reformulation during spontaneous interaction"
+  ],
+  "missions": [
+    {"id":1,"title":"C2+ Diagnostic Gateway","focus":"Benchmark precision, flexibility, comprehension, discourse control and strategic communication across unfamiliar tasks"},
+    {"id":2,"title":"Precision Vocabulary Forge","focus":"Activate high-precision collocations, idioms, lexical nuance, connotation and specialist register"},
+    {"id":3,"title":"Nuance & Implicature Observatory","focus":"Decode implied meaning, indirectness, irony, presupposition, conversational inference and speaker intent"},
+    {"id":4,"title":"Advanced Discourse Architecture Lab","focus":"Control information flow, topic-focus structure, cohesion, emphasis and rhetorical progression"},
+    {"id":5,"title":"Prosody & Listening Intelligence Command","focus":"Interpret rapid speech, prosody, hesitation, emphasis, turn-taking and subtle stance signals"},
+    {"id":6,"title":"Deep Reading & Inference Nexus","focus":"Analyse dense texts for assumptions, inference, author positioning, structure and competing interpretations"},
+    {"id":7,"title":"Evidence & Epistemic Control Lab","focus":"Evaluate evidence quality, source strength, certainty, attribution and responsible qualification"},
+    {"id":8,"title":"Strategic Argument Reactor","focus":"Construct layered arguments with concessions, counterarguments, warrants, limitations and precise conclusions"},
+    {"id":9,"title":"High-Stakes Negotiation Arena","focus":"Manage interests, ambiguity, disagreement, concessions and solutions through strategic language"},
+    {"id":10,"title":"Executive Briefing Command","focus":"Deliver concise decision-ready briefings, recommendations, summaries and risk-aware messages"},
+    {"id":11,"title":"Diplomatic Pragmatics Portal","focus":"Use indirectness, tact, face-saving, hedging and calibrated disagreement in sensitive interactions"},
+    {"id":12,"title":"Cross-Cultural Meaning Lab","focus":"Adapt communication to cultural expectations, relationship dynamics, context and pragmatic norms"},
+    {"id":13,"title":"Advanced Writing Compression Studio","focus":"Transform complex ideas into concise, coherent and high-impact formal prose without losing nuance"},
+    {"id":14,"title":"Research Synthesis Engine","focus":"Integrate multiple sources, reconcile disagreement, attribute claims and produce evidence-based synthesis"},
+    {"id":15,"title":"Real-Time Repair & Reformulation Lab","focus":"Recover from ambiguity, misunderstanding and lexical gaps while preserving precision and communicative goals"},
+    {"id":16,"title":"Persuasion & Audience Design Arena","focus":"Shape framing, tone, evidence and rhetorical choices for different audiences and communication goals"},
+    {"id":17,"title":"Complex Problem-Solving Simulation","focus":"Analyse multifactor problems, compare options, negotiate trade-offs and communicate strategic decisions"},
+    {"id":18,"title":"Integrated Global Communication Mission","focus":"Combine advanced reading, listening, reasoning, writing and speaking in a realistic global scenario"},
+    {"id":19,"title":"World 1 Mastery Integration Quest","focus":"Complete a multi-stage capstone requiring sustained C2+ discourse control, synthesis and adaptation"},
+    {"id":20,"title":"C2+ Strategic Communication Master Challenge","focus":"Demonstrate precise, flexible and audience-aware English across high-level academic, professional and global communication tasks"}
+  ],
+  "scenarios": [
+    "Global Strategy War Room",
+    "International Diplomatic Briefing",
+    "Executive Communication Simulation"
+  ],
+  "assessment": {
+    "type": "Integrated C2+ strategic communication and global intelligence assessment",
+    "components": [
+      "Dense reading analysis with inference, stance, evidence evaluation and synthesis",
+      "Advanced listening with prosody, implied meaning, register shifts and multi-speaker interaction",
+      "C2+ spontaneous speaking, negotiation, diplomatic interaction and executive briefing",
+      "Extended formal writing with compression, attribution, argumentation and precise qualification",
+      "Cross-domain vocabulary, grammar and pragmatic performance with deliberate register adaptation",
+      "Integrated capstone requiring strategic reasoning, real-time repair and audience-aware communication"
+    ],
+    "successCriteria": [
+      "Precise, flexible and sustained C2+ control across unfamiliar academic, professional and global contexts",
+      "Accurate interpretation of explicit, implicit, pragmatic, rhetorical and culturally nuanced meaning",
+      "Sophisticated argumentation using evidence, concession, qualification, counterargument and limitation",
+      "Consistent control of discourse architecture, advanced grammar, cohesion, information structure and register",
+      "Effective spontaneous repair, clarification, reformulation and adaptation while maintaining communicative purpose",
+      "Independent, strategic and audience-aware communication with concise, high-impact expression under demanding conditions"
+    ]
+  }
+}
