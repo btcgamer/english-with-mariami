@@ -1,0 +1,43 @@
+name: Grade 9 Runtime Integration QA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  grade9-runtime-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Validate runtime and QA syntax
+        run: |
+          node --check curriculum-runtime.js
+          node --check qa/grade9-runtime-integration.spec.js
+
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.55.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/english-mariami-server.log 2>&1 &
+
+      - name: Run Grade 9 Runtime Integration QA
+        run: npx playwright test qa/grade9-runtime-integration.spec.js --reporter=line
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade9-runtime-qa-report
+          path: playwright-report/
+          if-no-files-found: ignore
