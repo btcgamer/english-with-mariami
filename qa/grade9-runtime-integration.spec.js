@@ -110,13 +110,15 @@ test.describe('Grade 9 Runtime Integration QA', () => {
       total: window.MagicCurriculum.completedTotal(),
       xp: window.MagicCurriculum.xpTotal(),
       stars: window.MagicCurriculum.starsTotal(),
-      world10Unlocked: window.MagicCurriculum.worldUnlocked(10)
+      world10Unlocked: window.MagicCurriculum.worldUnlocked(10),
+      world10MissionCount: window.MagicCurriculum.state.worldData?.missions?.length || 0
     }));
     expect(finalState.completed).toHaveLength(200);
     expect(finalState.total).toBe(200);
     expect(finalState.xp).toBe(10000);
     expect(finalState.stars).toBe(200);
     expect(finalState.world10Unlocked).toBe(true);
+    expect(finalState.world10MissionCount).toBe(20);
     expect(pageErrors).toEqual([]);
     expect(consoleErrors).toEqual([]);
   });
