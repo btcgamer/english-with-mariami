@@ -1,0 +1,71 @@
+{
+  "grade": 12,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 1: C2+ ACADEMIC MASTERY, RESEARCH & GLOBAL LEADERSHIP GATEWAY",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "10600+ active words",
+    "reading": "5000–5600 words",
+    "listening": "74–84 min",
+    "speaking": "84–94 min",
+    "writing": "2200–2500 words",
+    "presentation": "43–49 min"
+  },
+  "grammarFocus": [
+    "Integrated C2+ discourse architecture, information structure and rhetorical control",
+    "Advanced modality, evidentiality, stance and calibrated certainty",
+    "Complex conditionals, counterfactuals and scenario-based reasoning",
+    "Multi-source attribution, reported discourse and source-positioning",
+    "Concession, rebuttal, qualification, hedging and strategic disagreement",
+    "Causal reasoning, correlation, uncertainty, trade-offs and systems explanation",
+    "Nominalisation, compression, apposition, ellipsis, substitution and reformulation",
+    "Register shifting across academic, technical, executive, diplomatic, media and public contexts",
+    "High-stakes pragmatics, politeness, indirectness, repair and audience adaptation",
+    "Real-time self-monitoring, clarification and precision under pressure"
+  ],
+  "missions": [
+    {"mission":1,"title":"C2+ Mastery Gateway","focus":"Diagnose advanced comprehension, production, discourse control and strategic communication readiness."},
+    {"mission":2,"title":"Academic Precision Vocabulary Forge","focus":"Build high-precision lexical control for research, leadership and multidisciplinary communication."},
+    {"mission":3,"title":"Meaning, Nuance & Inference Observatory","focus":"Separate literal meaning, implication, inference, presupposition, stance and uncertainty."},
+    {"mission":4,"title":"Research Discourse Architecture Lab","focus":"Design coherent high-level arguments using information structure, cohesion and rhetorical progression."},
+    {"mission":5,"title":"Expert Listening Intelligence Command","focus":"Extract evidence, stance, assumptions, uncertainty and competing interpretations from dense expert speech."},
+    {"mission":6,"title":"Deep Reading & Synthesis Nexus","focus":"Integrate multiple complex texts while tracking claims, evidence, causality and author positioning."},
+    {"mission":7,"title":"Evidence & Epistemic Control Reactor","focus":"Calibrate claims according to evidence strength, source quality, uncertainty and scope."},
+    {"mission":8,"title":"Strategic Argument Arena","focus":"Construct, challenge and refine sophisticated arguments with concession, rebuttal and qualification."},
+    {"mission":9,"title":"Global Negotiation Chamber","focus":"Use diplomacy, mediation, indirectness and adaptive register in high-stakes negotiation."},
+    {"mission":10,"title":"Executive Briefing Command","focus":"Compress complex analysis into accurate, audience-aware executive briefings and recommendations."},
+    {"mission":11,"title":"Cross-Cultural Leadership Portal","focus":"Adapt meaning, politeness, rhetoric and expectations across international leadership contexts."},
+    {"mission":12,"title":"Systems Thinking & Futures Studio","focus":"Explain interacting systems, feedback loops, scenarios, risks and trade-offs with calibrated language."},
+    {"mission":13,"title":"Research-to-Decision Synthesis Engine","focus":"Transform multi-source research into transparent decisions, options and strategic recommendations."},
+    {"mission":14,"title":"Mastery Writing & Rhetoric Forge","focus":"Produce compressed, cohesive and rhetorically controlled C2+ analytical writing."},
+    {"mission":15,"title":"High-Stakes Crisis Communication Lab","focus":"Respond clearly under pressure while balancing evidence, uncertainty, urgency, empathy and action."},
+    {"mission":16,"title":"Human-Centered Influence & Ethics Arena","focus":"Persuade responsibly while preserving evidence transparency, autonomy, cultural awareness and trust."},
+    {"mission":17,"title":"Live Global Adaptation Simulation","focus":"Adapt language, register, reasoning and strategy as audiences, evidence and constraints change."},
+    {"mission":18,"title":"Integrated Global Intelligence Mission","focus":"Combine reading, listening, speaking, writing, negotiation and systems reasoning in one scenario."},
+    {"mission":19,"title":"World 1 Mastery Integration Quest","focus":"Demonstrate transferable C2+ control across unfamiliar academic, institutional and global contexts."},
+    {"mission":20,"title":"C2+ Academic & Leadership Master Challenge","focus":"Complete the World 1 capstone with sustained precision, synthesis, leadership communication and adaptive reasoning."}
+  ],
+  "scenarios": [
+    {"title":"Global Academic Strategy Council","description":"Synthesize competing research findings and brief an international leadership panel."},
+    {"title":"International Leadership Summit","description":"Negotiate a complex cross-cultural decision while adapting register, evidence and strategy."},
+    {"title":"Research-to-Action War Room","description":"Move from uncertain evidence to transparent recommendations under time pressure."}
+  ],
+  "assessment": [
+    "Dense multidisciplinary reading with inference, synthesis, causal reasoning and source-positioning",
+    "High-information expert listening with stance, evidence, uncertainty, implicature and competing interpretations",
+    "Spontaneous C2+ speaking, negotiation, mediation, leadership and crisis communication",
+    "Research synthesis, analytical writing, executive briefing and strategic presentation",
+    "Cross-cultural pragmatic adaptation and register control",
+    "Integrated capstone transferring C2+ communication skills to unfamiliar real-world scenarios"
+  ],
+  "successCriteria": [
+    "Sustained C2+ control across academic, technical, institutional, executive and global communication",
+    "Clear distinction between evidence, observation, interpretation, inference, assumption, prediction and uncertainty",
+    "Precise analysis of stakeholders, incentives, systems, trade-offs, constraints, risks and competing scenarios",
+    "Flexible control of modality, evidentiality, attribution, cohesion, information structure, rhetoric and register",
+    "Accurate translation of complex ideas for specialist and non-specialist audiences without losing nuance",
+    "Rapid adaptation when evidence, audience priorities or scenario conditions change",
+    "Evidence-aware, transparent, human-centered, culturally responsive and ethically responsible communication"
+  ]
+}
