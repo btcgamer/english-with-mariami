@@ -1,0 +1,76 @@
+{
+  "grade": 12,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 10: C2+ GLOBAL MASTERY, GRAND INTEGRATION, LEADERSHIP & GRADUATION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "16100+",
+    "reading": "7800–8400 words",
+    "listening": "138–150 minutes",
+    "speaking": "150–164 minutes",
+    "writing": "3900–4300 words",
+    "presentation": "78–86 minutes"
+  },
+  "grammarFocus": [
+    "full C2+ grammatical control across academic, professional and public registers",
+    "precision modality, epistemic stance and strategic hedging",
+    "complex conditional, counterfactual and scenario reasoning",
+    "advanced cohesion, information packaging and discourse architecture",
+    "nominalisation, compression and syntactic flexibility",
+    "attribution, reporting and evidential positioning",
+    "concession, rebuttal, qualification and strategic reframing",
+    "register shifting for expert, executive, institutional and public audiences",
+    "real-time repair, clarification and interaction management",
+    "integrated grammar choices under high cognitive and communicative pressure"
+  ],
+  "missions": [
+    {"id":1,"title":"Grand Mastery Gateway","focus":"Activate and diagnose integrated C2+ English across all core domains","skills":["all"]},
+    {"id":2,"title":"Ultimate Vocabulary Forge","focus":"Integrate high-precision vocabulary, collocation, idiom and domain-specific language","skills":["vocabulary","speaking","writing"]},
+    {"id":3,"title":"Global Research Synthesis Observatory","focus":"Combine evidence from complex sources into a coherent analytical position","skills":["reading","listening","synthesis"]},
+    {"id":4,"title":"Strategic Argument Architecture","focus":"Construct, qualify, challenge and refine sophisticated multi-layered arguments","skills":["reading","speaking","argumentation"]},
+    {"id":5,"title":"Expert Listening Command Center","focus":"Process dense expert communication, implicit meaning, stance and strategic intent","skills":["listening","noteTaking","analysis"]},
+    {"id":6,"title":"Global Problem-Solving Reactor","focus":"Reframe complex problems, identify constraints and communicate viable solution pathways","skills":["analysis","speaking","decisionMaking"]},
+    {"id":7,"title":"Cross-Cultural Leadership Chamber","focus":"Lead high-stakes interaction across cultures, registers and competing expectations","skills":["speaking","pragmatics","negotiation"]},
+    {"id":8,"title":"Evidence & Uncertainty Nexus","focus":"Evaluate evidence quality, uncertainty, probability and competing explanations","skills":["reading","listening","criticalThinking"]},
+    {"id":9,"title":"Executive Communication Studio","focus":"Transform complex analysis into concise strategic messages and executive briefings","skills":["writing","presentation","speaking"]},
+    {"id":10,"title":"Global Negotiation Arena","focus":"Negotiate priorities, risks, interests, concessions and outcomes in a high-stakes simulation","skills":["speaking","negotiation","listening"]},
+    {"id":11,"title":"Crisis Intelligence Simulation","focus":"Respond to rapidly changing information while maintaining accuracy, clarity and strategic control","skills":["listening","decisionMaking","speaking"]},
+    {"id":12,"title":"Interdisciplinary Knowledge Reactor","focus":"Integrate law, economics, science, technology, culture and leadership perspectives","skills":["reading","synthesis","analysis"]},
+    {"id":13,"title":"Master Writing Laboratory","focus":"Produce an advanced analytical report, executive brief and persuasive recommendation","skills":["writing","reading","argumentation"]},
+    {"id":14,"title":"Global Presentation Forge","focus":"Deliver a sophisticated evidence-based presentation to expert and non-expert audiences","skills":["presentation","speaking","listening"]},
+    {"id":15,"title":"C2+ Debate & Counterplay Arena","focus":"Defend, challenge and strategically revise positions under intense questioning","skills":["speaking","listening","argumentation"]},
+    {"id":16,"title":"Leadership Decision War Room","focus":"Coordinate stakeholders, evaluate trade-offs and communicate a defensible strategic decision","skills":["decisionMaking","collaboration","speaking"]},
+    {"id":17,"title":"Global Transformation Mission","focus":"Lead an integrated research-to-action simulation involving uncertainty, negotiation and public communication","skills":["all"]},
+    {"id":18,"title":"Ultimate Integrated Mastery Mission","focus":"Complete a full-spectrum C2+ challenge combining research, listening, speaking, writing and presentation","skills":["all"]},
+    {"id":19,"title":"Final Graduation Integration Quest","focus":"Demonstrate sustained C2+ performance across all ten worlds and major communication domains","skills":["all"]},
+    {"id":20,"title":"C2+ GRAND GRADUATION MASTER CHALLENGE","focus":"Final Grade 12 graduation challenge: integrated global intelligence, research, leadership, negotiation, communication and strategic English mastery","skills":["all"]}
+  ],
+  "scenarios": [
+    "Global Mastery Leadership Council",
+    "International Grand Strategy War Room",
+    "C2+ Global Graduation Summit"
+  ],
+  "assessment": {
+    "reading":"Interpret and synthesise sophisticated academic, legal, economic, scientific, media, cultural and institutional texts with precision and critical awareness.",
+    "listening":"Process dense expert communication, implicit meaning, uncertainty, rhetoric, competing positions and strategic intent in real time.",
+    "speaking":"Lead, negotiate, debate, explain and defend complex positions with sustained C2+ accuracy, flexibility and pragmatic control.",
+    "writing":"Produce coherent, nuanced and audience-appropriate analytical, executive, persuasive and research-based texts at an advanced professional standard.",
+    "decisionMaking":"Integrate evidence, uncertainty, ethics, risk, stakeholder interests and competing objectives into defensible strategic decisions.",
+    "presentation":"Deliver clear, persuasive and nuanced high-level presentations, adapting register, structure and emphasis to expert and non-expert audiences.",
+    "graduation":"Demonstrate integrated C2+ command across vocabulary, grammar, reading, listening, speaking, writing, presentation, research, negotiation and strategic communication."
+  },
+  "successCriteria": [
+    "maintains precise C2+ language control across unfamiliar and high-pressure contexts",
+    "integrates evidence from multiple complex sources without losing nuance",
+    "distinguishes fact, evidence, inference, interpretation, uncertainty and opinion",
+    "constructs sophisticated arguments with qualification, concession and rebuttal",
+    "communicates naturally across academic, professional, executive, institutional and public registers",
+    "adapts language pragmatically to diverse audiences and cross-cultural contexts",
+    "handles ambiguity, uncertainty, disagreement and real-time repair effectively",
+    "turns complex information into concise strategic recommendations",
+    "leads and negotiates high-stakes simulations with precise and constructive communication",
+    "demonstrates sustained integrated C2+ performance across the complete Grade 12 curriculum",
+    "successfully completes the final graduation master challenge"
+  ]
+}
