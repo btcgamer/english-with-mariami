@@ -12,6 +12,13 @@ async function clearProgress(page) {
   });
 }
 
+async function waitForRuntime(page) {
+  await page.waitForFunction(() => {
+    const runtime = window.MagicCurriculum;
+    return !!(runtime && runtime.state && runtime.state.worldData && Array.isArray(runtime.state.worldData.missions));
+  }, null, { timeout: 15000 });
+}
+
 test('Grade 11 runtime loads World 1 with 20 missions and preserves completion state', async ({ page }) => {
   const pageErrors = [];
   const consoleErrors = [];
@@ -28,6 +35,7 @@ test('Grade 11 runtime loads World 1 with 20 missions and preserves completion s
   await page.goto(BASE_URL, { waitUntil: 'networkidle' });
   await clearProgress(page);
   await page.reload({ waitUntil: 'networkidle' });
+  await waitForRuntime(page);
 
   await expect(page.locator('body')).toContainText('GRADE 11');
   await expect(page.locator('body')).toContainText('C2+');
@@ -71,6 +79,7 @@ test('Grade 11 runtime loads World 1 with 20 missions and preserves completion s
   expect(afterCompletion.completed).toBeTruthy();
 
   await page.reload({ waitUntil: 'networkidle' });
+  await waitForRuntime(page);
   const persisted = await page.evaluate(() => {
     const runtime = window.MagicCurriculum;
     return {
