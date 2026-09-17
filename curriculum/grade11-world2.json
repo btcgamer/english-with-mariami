@@ -1,0 +1,71 @@
+{
+  "grade": 11,
+  "world": 2,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 2: C2+ CRITICAL THINKING, EVIDENCE, RESEARCH & DECISION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "8700+ active words",
+    "reading": "4100–4700 words",
+    "listening": "56–66 min",
+    "speaking": "66–76 min",
+    "writing": "1750–2050 words",
+    "presentation": "33–39 min"
+  },
+  "grammarFocus": [
+    "advanced clause linking and information flow",
+    "concessive and counterfactual structures",
+    "epistemic modality and calibrated certainty",
+    "advanced attribution and reporting verbs",
+    "information packaging and emphasis",
+    "hedging, qualification and source integration",
+    "rhetorical structure and argument signalling",
+    "advanced cohesion, reference and reformulation"
+  ],
+  "missions": [
+    {"id":1,"title":"Evidence Intelligence Gateway","focus":"distinguish claims, evidence, assumptions and conclusions in dense discourse"},
+    {"id":2,"title":"Research Vocabulary Forge","focus":"master high-precision research, evidence and decision-making vocabulary"},
+    {"id":3,"title":"Claim vs Evidence Observatory","focus":"evaluate whether evidence directly, indirectly or insufficiently supports a claim"},
+    {"id":4,"title":"Source Reliability Lab","focus":"analyse source credibility, provenance, limitations and corroboration"},
+    {"id":5,"title":"Advanced Academic Listening Command","focus":"extract argument structure, qualification, stance and evidence from complex speech"},
+    {"id":6,"title":"Argument Mapping Nexus","focus":"map premises, counterarguments, rebuttals and inferential links"},
+    {"id":7,"title":"Causal Reasoning Reactor","focus":"separate correlation, causation, mechanism and confounding explanations"},
+    {"id":8,"title":"Counterfactual Futures Lab","focus":"use advanced counterfactual reasoning to test assumptions and alternative outcomes"},
+    {"id":9,"title":"Data-to-Meaning Studio","focus":"interpret quantitative information accurately and communicate its implications"},
+    {"id":10,"title":"Research Synthesis Engine","focus":"integrate multiple sources into a coherent evidence-based synthesis"},
+    {"id":11,"title":"Expert Interview Arena","focus":"conduct precise expert questioning, clarification and evidence checking"},
+    {"id":12,"title":"Decision Intelligence Command","focus":"compare options using evidence, uncertainty, constraints and trade-offs"},
+    {"id":13,"title":"Risk & Uncertainty Observatory","focus":"express probability, uncertainty, downside exposure and confidence with precision"},
+    {"id":14,"title":"Policy Briefing Forge","focus":"compress complex research into a concise decision-oriented briefing"},
+    {"id":15,"title":"Critical Debate Chamber","focus":"construct, challenge and revise sophisticated positions under evidence pressure"},
+    {"id":16,"title":"Problem Framing Laboratory","focus":"reframe ambiguous problems and identify the information needed for sound decisions"},
+    {"id":17,"title":"Strategic Recommendation Simulation","focus":"deliver defensible recommendations while acknowledging evidence limits and alternatives"},
+    {"id":18,"title":"Integrated Research-to-Decision Mission","focus":"move from source analysis through synthesis to an evidence-based decision"},
+    {"id":19,"title":"World 2 Mastery Integration Quest","focus":"integrate critical reading, listening, argumentation, research and decision language"},
+    {"id":20,"title":"C2+ Evidence & Decision Master Challenge","focus":"complete an integrated C2+ research, reasoning, communication and decision challenge"}
+  ],
+  "scenarios": [
+    "Global Research Council",
+    "Strategic Decision War Room",
+    "Evidence-to-Action Simulation"
+  ],
+  "assessment": {
+    "type": "integrated C2+ critical thinking, evidence, research and decision intelligence assessment",
+    "components": [
+      "dense critical reading and inference",
+      "advanced evidence-focused listening",
+      "spontaneous expert questioning and debate",
+      "extended evidence-based analytical writing",
+      "cross-domain research and decision vocabulary",
+      "integrated research-to-decision capstone"
+    ]
+  },
+  "successCriteria": [
+    "sustained C2+ control across complex evidence-driven tasks",
+    "accurate distinction between explicit claims, inference, assumptions and uncertainty",
+    "sophisticated evaluation and synthesis of sources",
+    "precise control of modality, attribution, cohesion and rhetorical structure",
+    "clear reasoning across causal, counterfactual and risk-based scenarios",
+    "strategic audience-aware recommendations supported by evidence and transparent limitations"
+  ]
+}
