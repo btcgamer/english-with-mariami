@@ -1,0 +1,71 @@
+{
+  "grade": 10,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 10: C2 GLOBAL MASTERY & GRADUATION QUEST",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "8300+ active words",
+    "reading": "3800–4400 words",
+    "listening": "50–60 min",
+    "speaking": "60–72 min",
+    "writing": "1600–1900 words",
+    "presentation": "30–36 min"
+  },
+  "grammar": [
+    "Full-spectrum C2 tense, aspect, modality and hypothetical reasoning control",
+    "Advanced information structure including inversion, fronting, clefting and emphasis",
+    "Sophisticated cohesion through substitution, ellipsis, reference and reformulation",
+    "Precise hedging, qualification, attribution, evidentiality and stance",
+    "Complex nominalisation, compression and formal written discourse",
+    "Advanced reporting, passive and causative structures across academic, institutional and professional registers",
+    "Pragmatic meaning, implicature, politeness, irony and intercultural register control",
+    "Self-monitoring, strategic repair and flexible adaptation under spontaneous communication demands"
+  ],
+  "missions": [
+    {"id":1,"title":"C2 Mastery Gateway","focus":"Comprehensive diagnostic integrating advanced comprehension, grammar, vocabulary and communication"},
+    {"id":2,"title":"Ultimate Vocabulary Forge","focus":"Activate high-precision vocabulary, collocation, idiom, nuance and register across domains"},
+    {"id":3,"title":"Grammar Singularity","focus":"Control complex grammar choices for meaning, emphasis, stance and discourse effect"},
+    {"id":4,"title":"Deep Reading Nexus","focus":"Analyse dense texts, implicit meaning, author stance, structure and competing interpretations"},
+    {"id":5,"title":"Global Listening Command","focus":"Process rapid, nuanced speech, implied meaning, register shifts and multi-speaker interaction"},
+    {"id":6,"title":"Spontaneous Speaking Arena","focus":"Sustain precise C2 interaction while clarifying, reformulating and responding under pressure"},
+    {"id":7,"title":"Advanced Writing Observatory","focus":"Produce cohesive high-level writing with controlled register, evidence, qualification and synthesis"},
+    {"id":8,"title":"Cross-Domain Intelligence Lab","focus":"Transfer advanced English across science, culture, business, law, media and society"},
+    {"id":9,"title":"Critical Reasoning Reactor","focus":"Build and test complex arguments, assumptions, counterarguments and conclusions"},
+    {"id":10,"title":"Global Negotiation Nexus","focus":"Negotiate meaning, interests and solutions using precise diplomatic and pragmatic language"},
+    {"id":11,"title":"Research-to-Action Engine","focus":"Transform complex evidence into recommendations, decisions and audience-aware communication"},
+    {"id":12,"title":"Future Systems Simulation","focus":"Reason about uncertain futures, competing scenarios, risk and strategic responses"},
+    {"id":13,"title":"Executive Communication Command","focus":"Deliver concise high-level briefings, summaries, recommendations and difficult messages"},
+    {"id":14,"title":"Intercultural Mastery Portal","focus":"Adapt language to cultural expectations, indirectness, politeness and relationship dynamics"},
+    {"id":15,"title":"Integrated Debate Arena","focus":"Defend nuanced positions, challenge assumptions and respond to sophisticated objections"},
+    {"id":16,"title":"Master Presentation Quest","focus":"Plan and deliver a sustained C2 presentation with evidence, narrative and audience interaction"},
+    {"id":17,"title":"Real-Time Communication Lab","focus":"Repair misunderstandings, manage interruptions and maintain precision in spontaneous dialogue"},
+    {"id":18,"title":"Personal C2 Repair & Reflection","focus":"Identify recurring errors, refine strategies and demonstrate independent self-correction"},
+    {"id":19,"title":"World 10 Graduation Integration Quest","focus":"Complete a multi-stage capstone combining reading, listening, reasoning, writing and speaking"},
+    {"id":20,"title":"C2 Global Mastery Graduation Challenge","focus":"Final Grade 10 graduation challenge demonstrating flexible, precise and independent C2 English"}
+  ],
+  "scenarios": [
+    "Global Mastery Command Center",
+    "International Capstone Council",
+    "C2 Graduation Simulation"
+  ],
+  "assessment": {
+    "type": "Integrated C2 global mastery and Grade 10 graduation assessment",
+    "components": [
+      "Advanced reading analysis with inference, stance, structure and synthesis",
+      "High-speed listening with implied meaning, register and multi-speaker interaction",
+      "C2 spontaneous speaking, negotiation, presentation and follow-up questioning",
+      "Extended formal writing with argumentation, evidence, cohesion and precise qualification",
+      "Cross-domain vocabulary and grammar performance with flexible register control",
+      "Integrated capstone requiring strategic reasoning and audience-aware communication"
+    ],
+    "successCriteria": [
+      "Precise, flexible and sustained C2 language control across unfamiliar contexts",
+      "Accurate interpretation of explicit, implicit, pragmatic and culturally nuanced meaning",
+      "Sophisticated argumentation using evidence, concession, qualification and counterargument",
+      "Consistent control of advanced grammar, cohesion, information structure and register",
+      "Effective spontaneous repair, clarification and adaptation without losing communicative purpose",
+      "Independent, confident and audience-aware communication suitable for complex academic, professional and global settings"
+    ]
+  }
+}
