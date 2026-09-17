@@ -1,0 +1,71 @@
+{
+  "grade": 10,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 9: C2 GLOBAL SOCIETY, CULTURE, LAW & ETHICAL REASONING",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "8000+ active words",
+    "reading": "3600–4200 words",
+    "listening": "48–56 min",
+    "speaking": "56–66 min",
+    "writing": "1450–1700 words",
+    "presentation": "28–34 min"
+  },
+  "grammar": [
+    "Advanced legal and institutional modality for obligation, permission, prohibition and entitlement",
+    "Complex concessive, conditional and counterfactual reasoning in formal discourse",
+    "Discourse particles, implicature, stance and pragmatic meaning",
+    "Advanced passive, causative and reporting structures in institutional contexts",
+    "Sophisticated relative, appositive and parenthetical structures",
+    "Nominalisation, compression and formal legal/institutional prose",
+    "Politeness, intercultural pragmatics and strategic register control",
+    "Long-form cohesion, reference, substitution and reformulation in argumentative writing"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Society Gateway","focus":"C2 diagnostic across society, culture, law and ethical reasoning"},
+    {"id":2,"title":"Civic Vocabulary Forge","focus":"Rights, duties, institutions, identity, inequality, justice and social change vocabulary"},
+    {"id":3,"title":"Culture Interpretation Observatory","focus":"Interpret cultural practices with nuance, context and evidence without stereotyping"},
+    {"id":4,"title":"Rights & Responsibilities Lab","focus":"Analyse rights, obligations, exceptions and institutional language"},
+    {"id":5,"title":"Legal Reading Command","focus":"Decode complex legal and policy texts, definitions, conditions and implications"},
+    {"id":6,"title":"Ethical Dilemma Reactor","focus":"Evaluate competing principles, consequences, uncertainty and trade-offs"},
+    {"id":7,"title":"Social Change Nexus","focus":"Trace causes, effects, competing explanations and long-term social transformations"},
+    {"id":8,"title":"Intercultural Communication Arena","focus":"Handle disagreement, politeness, indirectness and culturally sensitive meaning"},
+    {"id":9,"title":"Justice & Fairness Forum","focus":"Compare arguments about fairness, access, equality and proportionality"},
+    {"id":10,"title":"Global Institutions Chamber","focus":"Understand institutional mandates, procedures, authority and accountability"},
+    {"id":11,"title":"Ethics Hearing Simulator","focus":"Present balanced arguments and respond precisely to difficult ethical questions"},
+    {"id":12,"title":"Cultural Heritage Intelligence Lab","focus":"Discuss heritage, ownership, preservation, adaptation and contested interpretation"},
+    {"id":13,"title":"Policy Language Observatory","focus":"Analyse how policy wording encodes priorities, conditions, incentives and limitations"},
+    {"id":14,"title":"Mediation & Dialogue Nexus","focus":"Use reformulation, clarification, de-escalation and consensus-building language"},
+    {"id":15,"title":"Institutional Writing Forge","focus":"Write formal recommendations, position papers and rights-and-responsibilities briefs"},
+    {"id":16,"title":"Global Values Debate Arena","focus":"Defend nuanced positions while acknowledging evidence, exceptions and alternative frameworks"},
+    {"id":17,"title":"Rights & Responsibilities Hearing","focus":"Integrate legal interpretation, ethical reasoning and persuasive oral response"},
+    {"id":18,"title":"Society Futures Council","focus":"Reason about demographic, cultural, institutional and ethical change under uncertainty"},
+    {"id":19,"title":"Integrated Global Society Quest","focus":"Synthesize culture, law, ethics and civic reasoning in a multi-stage scenario"},
+    {"id":20,"title":"C2 Global Society Master Challenge","focus":"Final C2 challenge combining advanced comprehension, reasoning, writing and speaking"}
+  ],
+  "scenarios": [
+    "International Ethics Council",
+    "Cultural Exchange Forum",
+    "Rights & Responsibilities Hearing"
+  ],
+  "assessment": {
+    "type": "Integrated C2 global society, culture, law and ethical reasoning assessment",
+    "components": [
+      "Advanced reading of legal, cultural and institutional texts",
+      "Critical analysis of ethical claims, evidence and competing principles",
+      "High-precision listening across formal and intercultural contexts",
+      "Structured C2 speaking with clarification, concession and rebuttal",
+      "Formal institutional writing with controlled register and cohesion",
+      "Integrated scenario response linking rights, responsibilities, culture and ethics"
+    ],
+    "successCriteria": [
+      "Precise and flexible C2 language control across formal and intercultural settings",
+      "Accurate distinction between legal requirements, ethical claims, social observations and interpretations",
+      "Nuanced handling of cultural difference without overgeneralisation",
+      "Effective use of advanced modality, conditionals, reporting, nominalisation and discourse structures",
+      "Clear synthesis of competing perspectives with explicit uncertainty and qualification",
+      "Audience-aware communication that remains respectful, precise and strategically persuasive"
+    ]
+  }
+}
