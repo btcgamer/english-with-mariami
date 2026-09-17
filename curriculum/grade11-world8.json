@@ -1,0 +1,72 @@
+{
+  "grade": 11,
+  "world": 8,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 8: C2+ CLIMATE, SUSTAINABILITY, SCIENCE, SYSTEMS & GLOBAL TRANSFORMATION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9900+ active words",
+    "reading": "4700–5300 words",
+    "listening": "68–78 min",
+    "speaking": "78–88 min",
+    "writing": "2050–2350 words",
+    "presentation": "39–45 min"
+  },
+  "grammarFocus": [
+    "complex hypothesis, conditionality and counterfactual reasoning for climate and systems scenarios",
+    "advanced information packaging, nominalisation and discourse compression for scientific and sustainability communication",
+    "epistemic modality, evidentiality and calibrated claims about scientific uncertainty, forecasts and environmental risk",
+    "multi-source attribution, reporting structures and synthesis across scientific, institutional and stakeholder perspectives",
+    "concession, rebuttal, qualification and nuanced disagreement in contested sustainability and policy discussions",
+    "cause, consequence, correlation, feedback loops and causal uncertainty in systems-based analytical communication",
+    "rhetorical emphasis, inversion, clefting and strategic information focus in high-stakes science-to-policy discourse",
+    "register shifting across scientific, academic, executive, diplomatic, media and public-facing sustainability contexts",
+    "cross-cultural environmental diplomacy, consensus-building and precision in negotiated language",
+    "ellipsis, reformulation, clarification and real-time repair under complex technical and strategic communication pressure"
+  ],
+  "missions": [
+    { "id": 1, "title": "Climate Intelligence Gateway" },
+    { "id": 2, "title": "Sustainability Vocabulary Forge" },
+    { "id": 3, "title": "Earth Systems Observatory" },
+    { "id": 4, "title": "Climate Evidence Lab" },
+    { "id": 5, "title": "Scientific Listening Command" },
+    { "id": 6, "title": "Energy Transition Nexus" },
+    { "id": 7, "title": "Biodiversity & Resilience Reactor" },
+    { "id": 8, "title": "Climate Risk & Adaptation Arena" },
+    { "id": 9, "title": "Green Economy Strategy Studio" },
+    { "id": 10, "title": "Science-to-Policy Research Synthesis Engine" },
+    { "id": 11, "title": "Global Sustainability Briefing Command" },
+    { "id": 12, "title": "Environmental Diplomacy Portal" },
+    { "id": 13, "title": "Climate Negotiation Chamber" },
+    { "id": 14, "title": "Sustainability Policy Writing Forge" },
+    { "id": 15, "title": "Technology, Cities & Resilient Futures Lab" },
+    { "id": 16, "title": "Environmental Communication Ethics Laboratory" },
+    { "id": 17, "title": "Live Climate Futures Adaptation Simulation" },
+    { "id": 18, "title": "Integrated Science-to-Strategy Mission" },
+    { "id": 19, "title": "World 8 Mastery Integration Quest" },
+    { "id": 20, "title": "C2+ Climate & Global Transformation Master Challenge" }
+  ],
+  "scenarios": [
+    "Global Climate Council",
+    "International Sustainability Summit",
+    "Resilient Futures War Room"
+  ],
+  "assessment": [
+    "integrated C2+ climate, sustainability, science, systems and global transformation intelligence assessment",
+    "dense scientific and policy reading with systems, causal, quantitative and perspective-based inference",
+    "high-information expert listening with evidence, uncertainty, stance, qualification and competing-model detection",
+    "spontaneous scientific discussion, stakeholder negotiation, environmental diplomacy and high-stakes crisis communication",
+    "research synthesis, sustainability policy writing and executive science-to-decision briefing",
+    "cross-cultural register adaptation across scientific, institutional, diplomatic, media and public-facing contexts",
+    "integrated climate-to-strategy capstone requiring evidence-aware systems reasoning and transparent decision communication"
+  ],
+  "successCriteria": [
+    "sustained C2+ control across scientific, environmental, policy and global transformation communication",
+    "clear distinction between evidence, measurement, interpretation, correlation, causation, model assumption, forecast and uncertainty",
+    "precise analysis of climate systems, feedback loops, trade-offs, incentives, resilience, adaptation constraints and competing transition scenarios",
+    "flexible control of modality, evidentiality, attribution, cohesion, information structure, rhetorical emphasis and technical register",
+    "effective explanation of complex science for different audiences without sacrificing accuracy, nuance or uncertainty calibration",
+    "rapid adaptation when evidence, stakeholder priorities, scientific assumptions or scenario conditions change",
+    "strategic communication that is evidence-aware, transparent, culturally responsive, ethically responsible and precise under pressure"
+  ]
+}
