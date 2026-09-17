@@ -1,0 +1,73 @@
+{
+  "grade": 11,
+  "world": 10,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 10: C2+ GLOBAL MASTERY, LEADERSHIP, INTEGRATION & GRADUATION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "10300+ active words",
+    "reading": "4900–5500 words",
+    "listening": "72–82 min",
+    "speaking": "82–92 min",
+    "writing": "2150–2450 words",
+    "presentation": "42–48 min"
+  },
+  "grammarFocus": [
+    "integrated C2+ discourse architecture, information structure and rhetorical control",
+    "advanced modality, evidentiality, stance and calibrated certainty across complex domains",
+    "complex conditionals, counterfactuals and scenario reasoning for strategic decisions",
+    "advanced attribution, reported discourse, source-positioning and multi-perspective synthesis",
+    "concession, rebuttal, qualification, nuance and strategic disagreement",
+    "causal reasoning, correlation, uncertainty, trade-offs and systems-level explanation",
+    "nominalisation, compression, apposition, ellipsis, substitution and reformulation",
+    "register shifting across academic, technical, executive, diplomatic, media and public-facing contexts",
+    "high-stakes pragmatics, politeness, indirectness, repair and audience adaptation",
+    "real-time self-monitoring, clarification, reformulation and precision under pressure"
+  ],
+  "missions": [
+    {"id": 1, "title": "Global Mastery Gateway"},
+    {"id": 2, "title": "C2+ Precision Vocabulary Forge"},
+    {"id": 3, "title": "Integrated Meaning Observatory"},
+    {"id": 4, "title": "Advanced Discourse Architecture Nexus"},
+    {"id": 5, "title": "Expert Listening Intelligence Command"},
+    {"id": 6, "title": "Deep Reading & Inference Lab"},
+    {"id": 7, "title": "Evidence, Stance & Uncertainty Reactor"},
+    {"id": 8, "title": "Strategic Argument & Decision Arena"},
+    {"id": 9, "title": "Global Negotiation & Mediation Chamber"},
+    {"id": 10, "title": "Executive Leadership Briefing Command"},
+    {"id": 11, "title": "Cross-Cultural Communication Portal"},
+    {"id": 12, "title": "Systems Thinking & Futures Studio"},
+    {"id": 13, "title": "Research-to-Strategy Synthesis Engine"},
+    {"id": 14, "title": "Mastery Writing & Rhetoric Forge"},
+    {"id": 15, "title": "High-Stakes Crisis Communication Lab"},
+    {"id": 16, "title": "Human-Centered Influence & Ethics Arena"},
+    {"id": 17, "title": "Live Global Adaptation Simulation"},
+    {"id": 18, "title": "Integrated Global Intelligence Mission"},
+    {"id": 19, "title": "World 10 Mastery Integration Quest"},
+    {"id": 20, "title": "C2+ Global Mastery Graduation Challenge"}
+  ],
+  "scenarios": [
+    "Global Leadership Council",
+    "International Crisis & Strategy Summit",
+    "C2+ Global Mastery War Room"
+  ],
+  "assessment": [
+    "integrated C2+ global mastery assessment across all major communication domains",
+    "dense multidisciplinary reading with inference, synthesis, causal and systems reasoning",
+    "high-information expert listening with stance, evidence, uncertainty, implicature and competing interpretations",
+    "spontaneous high-stakes speaking, negotiation, mediation, leadership and crisis communication",
+    "research synthesis, analytical writing, executive briefing and strategic presentation",
+    "cross-cultural pragmatic adaptation and register control across global contexts",
+    "final integrated capstone demonstrating transfer of C2+ skills to unfamiliar real-world scenarios"
+  ],
+  "successCriteria": [
+    "sustained C2+ control across complex global, academic, technical, institutional and executive communication",
+    "clear distinction between evidence, observation, interpretation, inference, assumption, prediction and uncertainty",
+    "precise analysis of systems, incentives, stakeholders, trade-offs, constraints, risks and competing scenarios",
+    "flexible control of modality, evidentiality, attribution, cohesion, information structure, rhetoric and register",
+    "effective translation of complex ideas for specialist and non-specialist audiences without sacrificing accuracy or nuance",
+    "rapid adaptation when evidence, audience, stakeholder priorities or scenario conditions change",
+    "strategic communication that is evidence-aware, transparent, human-centered, culturally responsive and ethically responsible",
+    "graduation-level performance showing independent, precise and resilient C2+ communication under pressure"
+  ]
+}
