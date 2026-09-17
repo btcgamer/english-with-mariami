@@ -1,0 +1,74 @@
+{
+  "grade": 12,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 6: C2+ GLOBAL ECONOMICS, FINANCE, MARKETS & STRATEGIC ECONOMIC COMMUNICATION",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "13300+",
+    "reading": "6300–6900 words",
+    "listening": "106–116 minutes",
+    "speaking": "116–128 minutes",
+    "writing": "3000–3300 words",
+    "presentation": "60–67 minutes"
+  },
+  "grammarFocus": [
+    "advanced economic qualification and stance",
+    "cause, correlation, causation and attribution",
+    "conditional reasoning in markets and policy",
+    "concession, contrast and trade-off framing",
+    "hedging, probability and forecasting",
+    "nominalisation and information compression",
+    "passive, impersonal and agentive economic reporting",
+    "register shifting between public, professional and technical communication",
+    "cohesion across long-form financial analysis",
+    "real-time clarification, repair and negotiation"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Economics Gateway","focus":"Macroeconomic systems, indicators and economic vocabulary","skills":["reading","vocabulary","speaking"]},
+    {"id":2,"title":"Financial Vocabulary Forge","focus":"Markets, instruments, institutions and advanced financial collocations","skills":["vocabulary","writing"]},
+    {"id":3,"title":"Macro Indicators Observatory","focus":"GDP, inflation, unemployment, productivity and interpreting economic signals","skills":["reading","listening","analysis"]},
+    {"id":4,"title":"Markets Intelligence Command","focus":"Equities, bonds, commodities, currencies and market narratives","skills":["reading","listening","speaking"]},
+    {"id":5,"title":"Central Banking Listening Nexus","focus":"Monetary policy, interest rates, guidance and policy communication","skills":["listening","noteTaking","speaking"]},
+    {"id":6,"title":"Fiscal Strategy Laboratory","focus":"Taxation, public spending, debt, deficits and fiscal trade-offs","skills":["reading","writing","analysis"]},
+    {"id":7,"title":"Inflation & Cost-of-Living Reactor","focus":"Price dynamics, purchasing power, supply shocks and distributional effects","skills":["listening","analysis","discussion"]},
+    {"id":8,"title":"Currency & Global Trade Chamber","focus":"Exchange rates, trade balances, tariffs, competitiveness and international flows","skills":["reading","speaking","vocabulary"]},
+    {"id":9,"title":"Investment Risk Observatory","focus":"Risk, return, diversification, volatility and uncertainty communication","skills":["reading","listening","decisionMaking"]},
+    {"id":10,"title":"Corporate Finance Studio","focus":"Revenue, margins, cash flow, capital allocation and strategic finance","skills":["reading","writing","presentation"]},
+    {"id":11,"title":"Economic Forecasting Arena","focus":"Scenarios, assumptions, forecasts, probabilities and model limitations","skills":["listening","speaking","criticalThinking"]},
+    {"id":12,"title":"Financial Crisis Simulation","focus":"Liquidity, solvency, contagion, systemic risk and crisis communication","skills":["listening","speaking","problemSolving"]},
+    {"id":13,"title":"Data-to-Economic Meaning Lab","focus":"Charts, datasets, trends, anomalies and evidence-based economic interpretation","skills":["reading","analysis","writing"]},
+    {"id":14,"title":"Executive Economic Briefing Forge","focus":"Turning complex economic evidence into concise executive briefings","skills":["writing","presentation","speaking"]},
+    {"id":15,"title":"Markets Debate Arena","focus":"Competing economic explanations, rebuttal, qualification and evidence","skills":["speaking","argumentation","listening"]},
+    {"id":16,"title":"Global Investment Negotiation Lab","focus":"Negotiating financial priorities, risk appetite, terms and strategic trade-offs","skills":["speaking","negotiation","pragmatics"]},
+    {"id":17,"title":"Economic Policy War Room","focus":"Balancing growth, inflation, employment, debt and financial stability","skills":["decisionMaking","speaking","writing"]},
+    {"id":18,"title":"Integrated Global Markets Mission","focus":"Research-to-recommendation economic intelligence simulation","skills":["reading","listening","analysis","presentation"]},
+    {"id":19,"title":"World 6 Mastery Integration Quest","focus":"Integrated C2+ economic reasoning across markets, policy, finance and communication","skills":["all"]},
+    {"id":20,"title":"C2+ Global Economics & Finance Master Challenge","focus":"Final high-stakes economic intelligence, strategic communication and decision challenge","skills":["all"]}
+  ],
+  "scenarios": [
+    "Global Economic Strategy Council",
+    "International Markets & Investment War Room",
+    "Global Finance and Economic Resilience Summit"
+  ],
+  "assessment": {
+    "reading":"Interpret sophisticated economic, financial and policy texts with precision, nuance and source awareness.",
+    "listening":"Extract assumptions, implications, uncertainty and strategic intent from expert economic communication.",
+    "speaking":"Explain, challenge and negotiate complex economic positions using accurate C2+ register and qualification.",
+    "writing":"Produce executive briefs, analytical arguments and evidence-based recommendations with strong cohesion.",
+    "decisionMaking":"Evaluate competing economic scenarios, risks, trade-offs and constraints before recommending action.",
+    "presentation":"Communicate complex financial and economic evidence clearly to expert and non-expert audiences."
+  },
+  "successCriteria": [
+    "distinguishes correlation from causation and evidence from interpretation",
+    "uses advanced economic and financial vocabulary accurately and flexibly",
+    "communicates uncertainty, probability and forecasts responsibly",
+    "interprets quantitative economic information without overclaiming",
+    "shifts naturally between technical, professional, executive and public registers",
+    "constructs and challenges sophisticated economic arguments",
+    "negotiates financial and strategic trade-offs with precise language",
+    "produces concise executive-level recommendations from complex evidence",
+    "responds effectively to high-pressure economic and financial scenarios",
+    "integrates research, listening, analysis, speaking and writing at C2+ level"
+  ]
+}
