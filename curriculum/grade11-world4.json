@@ -1,0 +1,71 @@
+{
+  "grade": 11,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 4: C2+ GLOBAL LEADERSHIP, NEGOTIATION & SYSTEMS COMMUNICATION",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9100+ active words",
+    "reading": "4300–4900 words",
+    "listening": "60–70 min",
+    "speaking": "70–80 min",
+    "writing": "1850–2150 words",
+    "presentation": "35–41 min"
+  },
+  "grammarFocus": [
+    "advanced conditionality, hypothetical reasoning and strategic qualification",
+    "complex clause packaging, information hierarchy and discourse compression",
+    "modality, stance, evidentiality and calibrated certainty",
+    "advanced reporting, attribution and multi-source synthesis",
+    "inversion, fronting, clefting and emphasis for strategic communication",
+    "concession, contrast, rebuttal and counterargument architecture",
+    "diplomatic register, mitigation, rapport and face management",
+    "ellipsis, substitution, reformulation and real-time self-correction"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Leadership Gateway","focus":"diagnose and demonstrate C2+ control in complex leadership and international communication tasks"},
+    {"id":2,"title":"Leadership Vocabulary Forge","focus":"master precise vocabulary for leadership, governance, strategy, institutions and organisational change"},
+    {"id":3,"title":"Systems Thinking Observatory","focus":"describe interconnected causes, feedback loops, trade-offs and unintended consequences with precision"},
+    {"id":4,"title":"Strategic Briefing Lab","focus":"compress complex evidence into clear, decision-ready briefings while preserving essential nuance"},
+    {"id":5,"title":"Advanced Listening Command","focus":"extract stance, priorities, assumptions, uncertainty and implied objectives from dense expert speech"},
+    {"id":6,"title":"Negotiation Architecture Nexus","focus":"structure positions, interests, concessions, conditions and alternatives in sophisticated negotiation"},
+    {"id":7,"title":"Conflict Mediation Studio","focus":"reframe disagreement, acknowledge interests and build precise language for constructive resolution"},
+    {"id":8,"title":"Crisis Communication Reactor","focus":"communicate under uncertainty with clarity, empathy, accountability and calibrated certainty"},
+    {"id":9,"title":"Stakeholder Strategy Arena","focus":"adapt arguments, evidence and register to stakeholders with different priorities and information needs"},
+    {"id":10,"title":"Decision Narrative Engine","focus":"turn competing evidence and constraints into transparent, logically sequenced recommendations"},
+    {"id":11,"title":"High-Stakes Questioning Lab","focus":"ask, answer and redirect difficult questions while maintaining relevance, precision and composure"},
+    {"id":12,"title":"Cross-Cultural Leadership Portal","focus":"navigate culturally variable expectations around authority, disagreement, trust, politeness and collaboration"},
+    {"id":13,"title":"Institutional Discourse Observatory","focus":"analyse policy, corporate, academic and international institutional language for stance and strategic framing"},
+    {"id":14,"title":"Executive Writing Forge","focus":"produce concise executive summaries, decision notes and action-oriented recommendations"},
+    {"id":15,"title":"Multi-Party Negotiation Chamber","focus":"manage competing interests, coalition dynamics, conditional offers and principled trade-offs"},
+    {"id":16,"title":"Ethical Leadership Communication","focus":"distinguish transparent leadership, responsible persuasion and accountability from misleading communication"},
+    {"id":17,"title":"Live Crisis Adaptation Simulation","focus":"respond in real time as facts, stakeholder priorities and communication constraints change"},
+    {"id":18,"title":"Integrated Global Strategy Mission","focus":"integrate systems thinking, evidence, negotiation, pragmatics and audience adaptation in one complex scenario"},
+    {"id":19,"title":"World 4 Mastery Integration Quest","focus":"sustain C2+ control across leadership discourse, negotiation, crisis communication and strategic writing"},
+    {"id":20,"title":"C2+ Global Leadership Master Challenge","focus":"complete an integrated leadership challenge combining analysis, negotiation, presentation, writing and adaptive communication"}
+  ],
+  "scenarios": [
+    "Global Leadership Council",
+    "International Crisis Response Room",
+    "Multi-Stakeholder Negotiation Summit"
+  ],
+  "assessment": {
+    "type": "integrated C2+ global leadership, negotiation and systems communication assessment",
+    "components": [
+      "dense expert reading and systems-level inference",
+      "high-information advanced listening with stance and uncertainty detection",
+      "spontaneous negotiation, mediation and crisis dialogue",
+      "executive writing and decision-ready synthesis",
+      "cross-cultural leadership and register adaptation",
+      "integrated strategic leadership capstone"
+    ]
+  },
+  "successCriteria": [
+    "sustained C2+ control across complex leadership and institutional communication",
+    "clear analysis of systems, trade-offs, constraints, uncertainty and stakeholder interests",
+    "precise negotiation, mediation, questioning and crisis-response language",
+    "flexible control of modality, attribution, cohesion, information structure and register",
+    "rapid audience adaptation, repair and reformulation under communicative pressure",
+    "strategic communication that is evidence-aware, transparent, culturally responsive and ethically responsible"
+  ]
+}
