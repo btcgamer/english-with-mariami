@@ -1,0 +1,58 @@
+{
+  "grade": 10,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 7: C2 ACADEMIC MASTERY, KNOWLEDGE & EXPERT COMMUNICATION",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "7400+ active words",
+    "reading": "3400–4000 words",
+    "listening": "45–54 min",
+    "speaking": "52–62 min",
+    "writing": "1350–1600 words",
+    "presentation": "26–32 min"
+  },
+  "grammar": [
+    "Advanced clause combining for precise relationships between evidence, interpretation, qualification, and conclusion",
+    "Tense and aspect choices in academic narration, explanation, reporting, and historical analysis",
+    "Complex modality and stance for probability, limitation, evaluation, and responsible academic claims",
+    "Relative, participial, appositive, and supplementary structures for dense but controlled information",
+    "Cohesive devices, discourse markers, lexical repetition, and reference across extended texts",
+    "Nominalisation and grammatical metaphor for formal analytical and research communication",
+    "Hedging, boosting, attribution, and citation language for nuanced knowledge claims",
+    "Register and audience adaptation between specialist, academic, educational, and public communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Academic Mastery Gateway","focus":"Identify the language patterns needed to understand and communicate sophisticated academic and expert ideas."},
+    {"id":2,"title":"Knowledge Vocabulary Forge","focus":"Master high-precision vocabulary and collocations for research, scholarship, expertise, and intellectual debate."},
+    {"id":3,"title":"Complex Text Observatory","focus":"Navigate demanding texts by identifying thesis, structure, assumptions, evidence, implications, and limitations."},
+    {"id":4,"title":"Claim & Evidence Reactor","focus":"Separate claims from evidence and evaluate whether conclusions are adequately supported by the information provided."},
+    {"id":5,"title":"Expert Lecture Listening Lab","focus":"Track dense spoken explanations, examples, qualifications, transitions, and conclusions in expert-level audio."},
+    {"id":6,"title":"Academic Stance Chamber","focus":"Express agreement, uncertainty, criticism, significance, and interpretation with carefully calibrated academic language."},
+    {"id":7,"title":"Source Integration Portal","focus":"Integrate ideas from several sources through accurate paraphrase, synthesis, attribution, and comparison."},
+    {"id":8,"title":"Theory Comparison Arena","focus":"Compare competing explanations by defining concepts, identifying assumptions, and weighing explanatory strengths and limits."},
+    {"id":9,"title":"Research Methodology Nexus","focus":"Understand and explain research design, variables, limitations, sampling, interpretation, and methodological choices."},
+    {"id":10,"title":"Critical Literature Review Engine","focus":"Synthesize a set of readings into a coherent critical review that identifies patterns, disagreements, and gaps."},
+    {"id":11,"title":"Expert Interview Simulator","focus":"Conduct a sophisticated interview by asking precise questions, clarifying technical answers, and following emerging ideas."},
+    {"id":12,"title":"Public Knowledge Translation Lab","focus":"Translate specialist knowledge into clear language for an informed non-specialist audience without losing accuracy."},
+    {"id":13,"title":"Academic Debate Observatory","focus":"Build and defend a nuanced position while accurately representing alternative interpretations and responding to objections."},
+    {"id":14,"title":"Concept Definition Studio","focus":"Define abstract concepts precisely, distinguish related terms, and illustrate meaning through relevant examples."},
+    {"id":15,"title":"Evidence-Based Essay Forge","focus":"Write an extended analytical essay with a controlled thesis, integrated evidence, counterargument, and qualified conclusion."},
+    {"id":16,"title":"Research Poster Presentation","focus":"Condense a complex investigation into a clear visual-style spoken presentation with logical sequencing and concise explanation."},
+    {"id":17,"title":"Peer Review Challenge","focus":"Evaluate another argument constructively by identifying strengths, weaknesses, unsupported claims, and specific improvements."},
+    {"id":18,"title":"Expert Q&A Command","focus":"Respond spontaneously to demanding questions by clarifying assumptions, qualifying claims, and reasoning aloud precisely."},
+    {"id":19,"title":"Integrated Knowledge Quest","focus":"Combine reading, listening, research synthesis, writing, grammar, vocabulary, and speaking in a complete academic scenario."},
+    {"id":20,"title":"C2 Academic Mastery Challenge","focus":"Complete an expert communication challenge demonstrating precise, evidence-aware, flexible, and audience-conscious C2 English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Research Symposium","description":"Present a complex investigation to an expert audience, explain methodology and evidence, address limitations, and answer critical questions."},
+    {"title":"Knowledge Translation Mission","description":"Convert specialist research into an accessible briefing for decision-makers and the public while preserving essential nuance."},
+    {"title":"Peer Review Council","description":"Evaluate competing academic arguments, identify evidence gaps, propose revisions, and defend your analysis in discussion."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 academic mastery and expert communication assessment",
+    "components":["advanced academic reading analysis","expert lecture listening interpretation","academic vocabulary and grammar precision","claim and evidence evaluation","multi-source research synthesis","methodology and critical reasoning","extended evidence-based writing","expert presentation and spontaneous Q&A"],
+    "successCriteria":["precise and flexible C2 academic language control","accurate interpretation of complex arguments","clear distinction between evidence and inference","effective use of advanced grammar and cohesion","nuanced stance, hedging, attribution, and qualification","coherent synthesis across multiple sources","clear adaptation from specialist to public-facing communication","confident and precise responses to expert questions"]
+  }
+}
