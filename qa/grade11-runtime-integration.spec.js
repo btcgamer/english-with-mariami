@@ -36,10 +36,10 @@ test('Grade 11 runtime loads World 1 with 20 missions and preserves completion s
   const state = await page.evaluate(() => ({
     grade: window.MAGIC_CURRICULUM_GRADE,
     runtime: !!window.MagicCurriculum,
-    worldCount: window.MagicCurriculum?.worlds?.length ?? null,
-    currentWorld: window.MagicCurriculum?.currentWorld ?? null,
-    missionCount: window.MagicCurriculum?.worlds?.[0]?.missionCount ?? window.MagicCurriculum?.worlds?.[0]?.missions?.length ?? null,
-    world1Missions: window.MagicCurriculum?.worlds?.[0]?.missions?.length ?? null
+    worldCount: window.MagicCurriculum?.state?.worldData ? 1 : 0,
+    currentWorld: window.MagicCurriculum?.state?.world ?? null,
+    missionCount: window.MagicCurriculum?.state?.worldData?.missionCount ?? window.MagicCurriculum?.state?.worldData?.missions?.length ?? null,
+    world1Missions: window.MagicCurriculum?.state?.worldData?.missions?.length ?? null
   }));
 
   expect(state.grade).toBe(11);
@@ -54,15 +54,15 @@ test('Grade 11 runtime loads World 1 with 20 missions and preserves completion s
 
   await page.evaluate(() => {
     const runtime = window.MagicCurriculum;
-    if (runtime?.completeMission) runtime.completeMission(1);
+    if (runtime?.markMissionComplete) runtime.markMissionComplete(1);
   });
 
   const afterCompletion = await page.evaluate(() => {
     const runtime = window.MagicCurriculum;
     return {
-      xp: runtime?.progress?.xp ?? null,
-      stars: runtime?.progress?.stars ?? null,
-      completed: runtime?.progress?.completedMissions?.includes?.('11-1-1') || runtime?.progress?.completedMissions?.includes?.(1) || false
+      xp: runtime?.xpTotal?.() ?? null,
+      stars: runtime?.starsTotal?.() ?? null,
+      completed: runtime?.state?.completed?.has?.('11:1:1') || false
     };
   });
 
@@ -74,8 +74,8 @@ test('Grade 11 runtime loads World 1 with 20 missions and preserves completion s
   const persisted = await page.evaluate(() => {
     const runtime = window.MagicCurriculum;
     return {
-      xp: runtime?.progress?.xp ?? null,
-      stars: runtime?.progress?.stars ?? null
+      xp: runtime?.xpTotal?.() ?? null,
+      stars: runtime?.starsTotal?.() ?? null
     };
   });
 
