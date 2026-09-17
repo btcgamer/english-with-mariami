@@ -1,0 +1,71 @@
+{
+  "grade": 11,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 5: C2+ RESEARCH, INNOVATION, TECHNOLOGY & FUTURES INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9300+ active words",
+    "reading": "4400–5000 words",
+    "listening": "62–72 min",
+    "speaking": "72–82 min",
+    "writing": "1900–2200 words",
+    "presentation": "36–42 min"
+  },
+  "grammarFocus": [
+    "complex hypothesis, conditionality and counterfactual reasoning",
+    "advanced information packaging, nominalisation and discourse compression",
+    "epistemic modality, evidentiality and calibrated claims",
+    "multi-source attribution, reporting and synthesis",
+    "rhetorical emphasis, inversion, clefting and strategic focus",
+    "concession, qualification, rebuttal and uncertainty management",
+    "technical and interdisciplinary register adaptation",
+    "ellipsis, reformulation, clarification and real-time precision repair"
+  ],
+  "missions": [
+    {"id":1,"title":"Futures Intelligence Gateway","focus":"diagnose C2+ ability to interpret and communicate complex technological, scientific and societal futures"},
+    {"id":2,"title":"Innovation Vocabulary Forge","focus":"master high-precision vocabulary for research, innovation, technology, experimentation and emerging systems"},
+    {"id":3,"title":"Research Question Observatory","focus":"formulate precise research questions, variables, assumptions and boundaries for complex problems"},
+    {"id":4,"title":"Methodology Architecture Lab","focus":"explain research methods, limitations, evidence quality and methodological choices with calibrated language"},
+    {"id":5,"title":"Expert Science Listening Command","focus":"extract claims, evidence, uncertainty, technical terminology and implied conclusions from dense expert speech"},
+    {"id":6,"title":"Innovation Evidence Nexus","focus":"distinguish discovery, observation, hypothesis, interpretation and validated evidence in technical discourse"},
+    {"id":7,"title":"Technology Risk Reactor","focus":"analyse technological risks, benefits, constraints, externalities and uncertainty without overstating conclusions"},
+    {"id":8,"title":"AI & Society Dialogue Arena","focus":"discuss artificial intelligence and societal change through nuanced argumentation, evidence and responsible qualification"},
+    {"id":9,"title":"Future Scenario Studio","focus":"construct plausible scenarios using conditionality, causal chains, uncertainty and competing assumptions"},
+    {"id":10,"title":"Research Synthesis Engine","focus":"integrate multiple sources into coherent conclusions while preserving attribution, disagreement and evidential limits"},
+    {"id":11,"title":"Technical Briefing Command","focus":"translate complex technical findings into accurate decision-ready briefings for non-specialist audiences"},
+    {"id":12,"title":"Interdisciplinary Translation Portal","focus":"adapt concepts and terminology across scientific, business, policy and public communication contexts"},
+    {"id":13,"title":"Innovation Debate Chamber","focus":"evaluate competing interpretations, challenge assumptions and construct evidence-aware rebuttals"},
+    {"id":14,"title":"Research Writing Forge","focus":"produce sophisticated abstracts, analytical sections, synthesis paragraphs and evidence-qualified conclusions"},
+    {"id":15,"title":"Emerging Technology Negotiation Lab","focus":"negotiate priorities, safeguards, investment choices and implementation conditions around emerging technologies"},
+    {"id":16,"title":"Responsible Innovation Laboratory","focus":"communicate ethical, social and technical trade-offs transparently without false certainty or misleading framing"},
+    {"id":17,"title":"Live Futures Adaptation Simulation","focus":"update explanations and recommendations in real time as new evidence, constraints and forecasts arrive"},
+    {"id":18,"title":"Integrated Research-to-Future Mission","focus":"integrate research literacy, technical communication, scenario reasoning, evidence synthesis and audience adaptation"},
+    {"id":19,"title":"World 5 Mastery Integration Quest","focus":"sustain C2+ control across research discourse, innovation communication, futures reasoning and interdisciplinary synthesis"},
+    {"id":20,"title":"C2+ Futures Intelligence Master Challenge","focus":"complete an integrated research and innovation challenge combining analysis, listening, debate, writing, briefing and adaptive communication"}
+  ],
+  "scenarios": [
+    "Global Innovation Observatory",
+    "Advanced Technology Futures Council",
+    "Research-to-Decision Innovation Summit"
+  ],
+  "assessment": {
+    "type": "integrated C2+ research, innovation, technology and futures intelligence assessment",
+    "components": [
+      "dense interdisciplinary reading and methodological inference",
+      "high-information expert listening with evidence and uncertainty detection",
+      "spontaneous technical discussion, debate and negotiation",
+      "research synthesis, analytical writing and executive briefing",
+      "cross-disciplinary register and audience adaptation",
+      "integrated futures-intelligence capstone"
+    ]
+  },
+  "successCriteria": [
+    "sustained C2+ control across scientific, technological and interdisciplinary communication",
+    "clear distinction between evidence, interpretation, hypothesis, forecast and uncertainty",
+    "precise explanation of methods, causal reasoning, limitations and competing scenarios",
+    "flexible control of modality, attribution, cohesion, information structure and technical register",
+    "rapid adaptation when evidence, audience needs or future assumptions change",
+    "strategic communication that is evidence-aware, transparent, interdisciplinary and ethically responsible"
+  ]
+}
