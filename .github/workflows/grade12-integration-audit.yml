@@ -1,0 +1,33 @@
+name: Grade 12 Integration Audit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  grade12-integration-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Validate QA syntax
+        run: node --check qa/grade12-integration-audit.spec.js && node --check curriculum-runtime.js
+
+      - name: Install Playwright
+        run: npm install --no-save --no-package-lock @playwright/test@1.55.0
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/magic-academy-server.log 2>&1 &
+
+      - name: Run Grade 12 Integration Audit
+        run: npx playwright test qa/grade12-integration-audit.spec.js --reporter=line
