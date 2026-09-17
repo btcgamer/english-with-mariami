@@ -85,7 +85,7 @@
   }
   function renderWorld(data){
     const q=s=>document.querySelector(s),title=q('[data-curriculum-title]'),level=q('[data-curriculum-level]'),targets=q('[data-curriculum-targets]'),missions=q('[data-curriculum-missions]'),scenarios=q('[data-curriculum-scenarios]'),assessment=q('[data-curriculum-assessment]');
-    if(title)title.textContent=data.title||`Grade ${data.grade} World ${data.world}`; if(level)level.textContent=data.level||''; if(targets)targets.innerHTML=renderTargets(data.targets); if(missions)missions.innerHTML=renderMissions(data.missions||[]); if(scenarios)scenarios.innerHTML=renderGenericList(data.realWorldScenarios); if(assessment)assessment.innerHTML=renderGenericList(data.assessment);
+    if(title)title.textContent=data.title||`Grade ${data.grade} World ${data.world}`; if(level)level.textContent=data.level||''; if(targets)targets.innerHTML=renderTargets(data.targets); if(missions)missions.innerHTML=renderMissions(data.missions||[]); if(scenarios)scenarios.innerHTML=renderGenericList(data.realWorldScenarios ?? data.scenarios); if(assessment)assessment.innerHTML=renderGenericList(data.assessment);
     document.querySelectorAll('[data-open-mission]').forEach(button=>button.addEventListener('click',()=>openMission(Number(button.dataset.openMission))));
     renderProgress(); renderWorldNav(document.querySelector('[data-curriculum-world-nav]'),state.grade,state.world);
   }
