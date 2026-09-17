@@ -1,0 +1,69 @@
+{
+  "grade": 11,
+  "world": 6,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 6: C2+ GLOBAL ECONOMICS, SOCIETY, POLICY & STRATEGIC FUTURES INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9500+ active words",
+    "reading": "4500–5100 words",
+    "listening": "64–74 min",
+    "speaking": "74–84 min",
+    "writing": "1950–2250 words",
+    "presentation": "37–43 min"
+  },
+  "grammarFocus": [
+    "complex conditionals, hypothetical policy reasoning and counterfactual economic scenarios",
+    "advanced nominalisation, compression and information packaging for policy discourse",
+    "epistemic modality, evidentiality and calibrated claims about uncertain social and economic outcomes",
+    "multi-source attribution, reporting structures and synthesis across expert perspectives",
+    "concession, rebuttal, qualification and nuanced disagreement in contested policy discussions",
+    "cause, consequence, correlation and causal uncertainty in analytical communication",
+    "register shifting across academic, executive, public-facing and diplomatic policy contexts",
+    "ellipsis, reformulation, clarification and real-time repair for high-stakes strategic communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Systems Intelligence Gateway","objective":"Diagnose C2+ control while analysing interconnected economic, social and institutional systems."},
+    {"id":2,"title":"Macroeconomics Vocabulary Forge","objective":"Master high-precision vocabulary for growth, inflation, labour markets, trade, finance and inequality."},
+    {"id":3,"title":"Society & Inequality Observatory","objective":"Interpret nuanced arguments about inequality, mobility, demographics, opportunity and social change."},
+    {"id":4,"title":"Economic Evidence Lab","objective":"Distinguish indicators, measurements, correlations, causal claims, assumptions and limitations."},
+    {"id":5,"title":"Policy Listening Command","objective":"Extract stance, evidence, uncertainty and implied recommendations from dense expert policy discussions."},
+    {"id":6,"title":"Global Trade Nexus","objective":"Analyse trade-offs involving supply chains, comparative advantage, tariffs, resilience and interdependence."},
+    {"id":7,"title":"Fiscal & Monetary Strategy Reactor","objective":"Discuss fiscal and monetary choices using precise modality, conditionality and consequence language."},
+    {"id":8,"title":"Labour, Demography & Future Work Arena","objective":"Evaluate competing perspectives on automation, migration, ageing, skills and labour-market transformation."},
+    {"id":9,"title":"Public Policy Scenario Studio","objective":"Construct and compare plausible policy scenarios while explicitly communicating uncertainty and assumptions."},
+    {"id":10,"title":"Research Synthesis Engine","objective":"Synthesize multiple sources into a coherent C2+ analytical position without overstating evidence."},
+    {"id":11,"title":"Executive Policy Briefing Command","objective":"Deliver concise, audience-aware briefings that connect evidence, risks, options and implementation constraints."},
+    {"id":12,"title":"Development & Global South Portal","objective":"Analyse development challenges through multiple economic, institutional and cultural perspectives."},
+    {"id":13,"title":"Climate-Economy Decision Chamber","objective":"Reason about climate policy, transition costs, distributional effects and competing time horizons."},
+    {"id":14,"title":"Digital Economy & Platform Lab","objective":"Discuss data, platforms, digital labour, competition, innovation and regulation with technical precision."},
+    {"id":15,"title":"Crisis Economics Negotiation Arena","objective":"Negotiate responses to shocks while balancing competing interests, evidence, uncertainty and feasibility."},
+    {"id":16,"title":"Policy Communication Ethics Laboratory","objective":"Identify misleading certainty, selective framing and unsupported causal narratives in public communication."},
+    {"id":17,"title":"Live Strategic Adaptation Simulation","objective":"Adapt recommendations in real time when new evidence, constraints, stakeholders or forecasts emerge."},
+    {"id":18,"title":"Integrated Society-to-Strategy Mission","objective":"Integrate economic, social, policy and futures reasoning into one evidence-aware strategic communication task."},
+    {"id":19,"title":"World 6 Mastery Integration Quest","objective":"Demonstrate sustained C2+ control across global economics, society, policy and strategic futures discourse."},
+    {"id":20,"title":"C2+ Global Strategy Master Challenge","objective":"Complete an integrated capstone combining research synthesis, policy analysis, negotiation, briefing and uncertainty-aware decision communication."}
+  ],
+  "scenarios": [
+    "Global Economic Strategy Council",
+    "International Social Policy Summit",
+    "Strategic Futures Decision War Room"
+  ],
+  "assessment": [
+    "integrated C2+ global economics, society, policy and strategic futures intelligence assessment",
+    "dense analytical reading with causal, statistical and institutional inference",
+    "high-information expert listening with stance, evidence and uncertainty detection",
+    "spontaneous policy discussion, negotiation and high-stakes stakeholder communication",
+    "research synthesis, policy writing and executive briefing",
+    "cross-cultural register adaptation across academic, institutional and public-facing contexts",
+    "integrated strategic futures and policy decision capstone"
+  ],
+  "successCriteria": [
+    "sustained C2+ control across economic, social, institutional and policy communication",
+    "clear distinction between evidence, interpretation, correlation, causation, forecast and uncertainty",
+    "precise explanation of trade-offs, incentives, distributional effects, constraints and competing scenarios",
+    "flexible control of modality, attribution, cohesion, information structure and policy register",
+    "rapid adaptation when evidence, stakeholder priorities or scenario assumptions change",
+    "strategic communication that is evidence-aware, transparent, culturally responsive and ethically responsible"
+  ]
+}
