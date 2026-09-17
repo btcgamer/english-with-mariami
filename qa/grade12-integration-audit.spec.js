@@ -20,10 +20,30 @@ for (const world of WORLDS) {
     const result = await page.evaluate(async ({ world }) => {
       const response = await fetch(`curriculum/grade12-world${world}.json`, { cache: 'no-store' });
       const data = await response.json();
-      return { status: response.status, grade: data.grade, world: data.world, missionCount: data.missions?.length };
+      const missions = Array.isArray(data.missions) ? data.missions : [];
+      const missionNumbers = missions.map(mission => mission?.id ?? mission?.mission ?? mission?.number);
+      const hasTwentyDistinctMissions = missions.length === 20 && new Set(missionNumbers).size === 20;
+      const hasScenarioLayer = Array.isArray(data.scenarios) || Array.isArray(data.realWorldScenarios);
+      return {
+        status: response.status,
+        grade: data.grade,
+        world: data.world,
+        level: data.level,
+        missionCount: missions.length,
+        hasTwentyDistinctMissions,
+        hasScenarioLayer,
+        title: data.title
+      };
     }, { world });
 
-    expect(result).toEqual({ status: 200, grade: 12, world, missionCount: 20 });
+    expect(result.status).toBe(200);
+    expect(result.grade).toBe(12);
+    expect(result.world).toBe(world);
+    expect(result.level).toBe('C2+');
+    expect(result.missionCount).toBe(20);
+    expect(result.hasTwentyDistinctMissions).toBe(true);
+    expect(result.hasScenarioLayer).toBe(true);
+    expect(result.title).toContain('GRADE 12');
   });
 }
 
