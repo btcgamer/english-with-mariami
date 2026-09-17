@@ -1,0 +1,50 @@
+name: Grade 11 Final Graduation QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'advanced-academy.html'
+      - 'curriculum-runtime.js'
+      - 'curriculum/grade11-world*.json'
+      - 'qa/grade11-final-graduation.spec.js'
+      - '.github/workflows/grade11-final-graduation-qa.yml'
+  workflow_dispatch:
+
+jobs:
+  grade11-final:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate JavaScript syntax
+        run: |
+          node --check qa/grade11-final-graduation.spec.js
+          node --check curriculum-runtime.js
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/english-mariami-server.log 2>&1 &
+      - name: Wait for academy
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS 'http://127.0.0.1:4173/advanced-academy.html?grade=11' >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/english-mariami-server.log
+          exit 1
+      - name: Run Grade 11 Final Graduation QA
+        run: npx playwright test qa/grade11-final-graduation.spec.js --reporter=line
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade11-final-graduation-qa-report
+          path: playwright-report/
+          if-no-files-found: ignore
