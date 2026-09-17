@@ -1,4 +1,3 @@
-// Grade 9 Runtime Integration QA — validates the current main runtime end-to-end.
 const { test, expect } = require('playwright/test');
 
 const BASE = 'http://127.0.0.1:4173';
@@ -102,7 +101,7 @@ test.describe('Grade 9 Runtime Integration QA', () => {
     await expect(page.locator('[data-curriculum-title]')).toContainText('WORLD 10');
     await expect(page.locator('[data-curriculum-missions]')).toContainText('C1+ Global Mastery Graduation Challenge');
     await expect(page.locator('[data-curriculum-scenarios]')).toContainText('C1+ Graduation Capstone');
-    await expect(page.locator('[data-curriculum-assessment]')).toContainText('integrated C1+ global mastery and graduation assessment');
+    await expect(page.locator('[data-curriculum-assessment]')).toContainText('Integrated C1+ global mastery and graduation assessment');
     await expect(page.locator('[data-curriculum-assessment]')).toContainText('advanced reading analysis');
     await expect(page.locator('[data-curriculum-assessment]')).toContainText('flexible and precise C1+ language control');
 
