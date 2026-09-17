@@ -1,0 +1,72 @@
+{
+  "grade": 11,
+  "world": 7,
+  "title": "MAGIC ENGLISH GRADE 11 — WORLD 7: C2+ INTERNATIONAL RELATIONS, DIPLOMACY, GEOPOLITICS & GLOBAL SYSTEMS INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9700+ active words",
+    "reading": "4600–5200 words",
+    "listening": "66–76 min",
+    "speaking": "76–86 min",
+    "writing": "2000–2300 words",
+    "presentation": "38–44 min"
+  },
+  "grammarFocus": [
+    "diplomatic modality, hedging and calibrated commitment",
+    "conditional and counterfactual structures for geopolitical scenario analysis",
+    "advanced attribution, reported discourse and source-positioning in international affairs",
+    "concession, rebuttal, qualification and strategic disagreement",
+    "indirectness, face-sensitive language and de-escalatory pragmatic choices",
+    "cause, consequence, correlation and uncertainty in geopolitical reasoning",
+    "rhetorical framing, information structure and strategic emphasis in diplomatic communication",
+    "register shifting across diplomatic, academic, institutional, media and public-facing contexts",
+    "multilateral discourse, consensus-building and precision in negotiated language",
+    "ellipsis, reformulation, clarification and real-time repair under high-stakes pressure"
+  ],
+  "missions": [
+    {"id": 1, "title": "Diplomatic Intelligence Gateway"},
+    {"id": 2, "title": "Geopolitics Vocabulary Forge"},
+    {"id": 3, "title": "Power & Interests Observatory"},
+    {"id": 4, "title": "International Institutions Lab"},
+    {"id": 5, "title": "Diplomatic Listening Command"},
+    {"id": 6, "title": "Conflict & Cooperation Nexus"},
+    {"id": 7, "title": "Negotiation & Mediation Reactor"},
+    {"id": 8, "title": "Sanctions, Security & Risk Arena"},
+    {"id": 9, "title": "Alliance & Multilateral Strategy Studio"},
+    {"id": 10, "title": "Foreign Policy Research Synthesis Engine"},
+    {"id": 11, "title": "Diplomatic Briefing Command"},
+    {"id": 12, "title": "Cross-Cultural Protocol Portal"},
+    {"id": 13, "title": "Crisis De-escalation Chamber"},
+    {"id": 14, "title": "Treaty & Agreement Writing Forge"},
+    {"id": 15, "title": "Global South & Regional Perspectives Lab"},
+    {"id": 16, "title": "Strategic Communication Ethics Laboratory"},
+    {"id": 17, "title": "Live Diplomatic Adaptation Simulation"},
+    {"id": 18, "title": "Integrated Geopolitics-to-Strategy Mission"},
+    {"id": 19, "title": "World 7 Mastery Integration Quest"},
+    {"id": 20, "title": "C2+ Diplomacy & Geopolitical Strategy Master Challenge"}
+  ],
+  "scenarios": [
+    "International Security Council",
+    "Global Diplomatic Summit",
+    "Geopolitical Crisis War Room"
+  ],
+  "assessment": [
+    "integrated C2+ international relations, diplomacy, geopolitics and global systems intelligence assessment",
+    "dense geopolitical reading with institutional, causal, strategic and perspective-based inference",
+    "high-information diplomatic listening with stance, implicature, evidence, uncertainty and negotiation signals",
+    "spontaneous negotiation, mediation, crisis communication and high-stakes stakeholder interaction",
+    "foreign-policy research synthesis, diplomatic writing and executive briefing",
+    "cross-cultural protocol, pragmatic adaptation and register control across international contexts",
+    "integrated geopolitical crisis-to-strategy capstone requiring evidence-aware strategic communication"
+  ],
+  "successCriteria": [
+    "sustained C2+ control across diplomatic, geopolitical, institutional and international communication",
+    "clear distinction between interests, positions, evidence, interpretation, attribution, forecast and uncertainty",
+    "precise analysis of power, incentives, alliances, institutional constraints, conflict dynamics and competing scenarios",
+    "flexible control of diplomatic modality, hedging, attribution, cohesion, information structure and register",
+    "effective use of indirectness, de-escalation, face-sensitive language and culturally responsive pragmatic choices",
+    "rapid adaptation when stakeholders, evidence, negotiation conditions or geopolitical assumptions change",
+    "strategic communication that is evidence-aware, transparent, culturally responsive, ethically responsible and precise under pressure"
+  ]
+}
