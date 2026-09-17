@@ -1,0 +1,58 @@
+{
+  "grade": 10,
+  "world": 1,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 1: C2 TRANSITION & GLOBAL INTELLIGENCE GATEWAY",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "9000+ active words",
+    "reading": "4000–4800 words",
+    "listening": "50–65 min",
+    "speaking": "60–75 min",
+    "writing": "1600–1900 words",
+    "presentation": "30–40 min"
+  },
+  "grammar": [
+    "C2-level discourse precision, cohesion, and information structure",
+    "Advanced tense, aspect, modality, and evidential stance",
+    "Layered conditionals, counterfactual reasoning, and mixed hypothetical systems",
+    "Inversion, fronting, clefting, extraposition, and rhetorical emphasis",
+    "Nominalisation, syntactic compression, and controlled complexity",
+    "Hedging, attribution, qualification, and academic caution",
+    "Register shifting, pragmatic inference, politeness, and intercultural nuance",
+    "Self-correction, reformulation, ellipsis, substitution, and strategic repair"
+  ],
+  "missions": [
+    {"id":1,"title":"C2 Diagnostic Gateway","focus":"Audit advanced strengths, identify precision gaps, and design a personal C2 improvement map."},
+    {"id":2,"title":"Lexical Precision Forge","focus":"Master rare but useful collocations, semantic distinctions, idiomatic combinations, and domain-specific phrasing."},
+    {"id":3,"title":"Meaning & Nuance Decoder","focus":"Interpret implication, irony, understatement, ambiguity, presupposition, and layered speaker intent."},
+    {"id":4,"title":"Discourse Engineering Lab","focus":"Build sophisticated arguments with progression, cohesion, thematic development, and controlled emphasis."},
+    {"id":5,"title":"Authentic Listening Observatory","focus":"Track fast, dense, accented, and overlapping speech while reconstructing implicit argument structure."},
+    {"id":6,"title":"Hypothesis & Counterfactual Reactor","focus":"Evaluate alternative realities, complex causal chains, and uncertain outcomes using precise hypothetical language."},
+    {"id":7,"title":"Grammar Architecture Core","focus":"Select complex grammatical structures deliberately for meaning, rhythm, focus, and audience effect."},
+    {"id":8,"title":"Register Shift Portal","focus":"Transform one message across research, executive, journalistic, conversational, and diplomatic contexts."},
+    {"id":9,"title":"Evidence & Attribution Arena","focus":"Integrate sources, distinguish fact from interpretation, and qualify claims with accurate attribution."},
+    {"id":10,"title":"High-Pressure Interaction Nexus","focus":"Handle interruptions, disagreement, ambiguity, clarification, and spontaneous topic shifts with control."},
+    {"id":11,"title":"Multidisciplinary Problem Lab","focus":"Analyse an unfamiliar global problem, compare competing solutions, and negotiate a practical response."},
+    {"id":12,"title":"Long-Form Reading Command","focus":"Analyse complex essays and reports, infer authorial positioning, and evaluate rhetorical choices."},
+    {"id":13,"title":"Synthesis & Contradiction Engine","focus":"Reconcile conflicting sources and produce a balanced, logically structured synthesis."},
+    {"id":14,"title":"Executive Briefing Studio","focus":"Deliver concise high-level briefings, answer difficult questions, and communicate decisions precisely."},
+    {"id":15,"title":"Intercultural Diplomacy Lab","focus":"Manage sensitive disagreement across cultures using tact, perspective-taking, and pragmatic flexibility."},
+    {"id":16,"title":"C2 Writing Observatory","focus":"Produce an extended analytical text with sophisticated structure, style, evidence, and reader awareness."},
+    {"id":17,"title":"Rhetoric & Counterargument Arena","focus":"Construct persuasive reasoning, identify weak assumptions, and respond accurately to alternative positions."},
+    {"id":18,"title":"Expert Presentation Command","focus":"Deliver an expert-level presentation with controlled pacing, nuanced language, and flexible Q&A."},
+    {"id":19,"title":"World 1 Integration Quest","focus":"Combine advanced comprehension, grammar, vocabulary, reasoning, writing, and interaction in one mission."},
+    {"id":20,"title":"C2 Gateway Master Challenge","focus":"Complete an integrated global-intelligence challenge demonstrating precise, flexible, independent C2 communication."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Global Intelligence Roundtable","description":"Compare complex viewpoints, challenge assumptions respectfully, and deliver a nuanced shared conclusion."},
+    {"title":"Crisis Decision Room","description":"Interpret incomplete information, assess competing risks, negotiate priorities, and produce an actionable briefing."},
+    {"title":"International Knowledge Forum","description":"Synthesize multiple sources, explain difficult ideas to mixed audiences, and respond to unpredictable questions."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 transition gateway assessment",
+    "components":["complex reading analysis","authentic listening inference","lexical precision task","advanced grammar control","evidence-based synthesis","high-pressure interaction","extended analytical writing","expert presentation","intercultural roleplay"],
+    "successCriteria":["precise and flexible C2 language control","clear and coherent extended communication","accurate and purposeful complex grammar","subtle vocabulary and collocation choices","responsible evidence and attribution","strong register and pragmatic awareness","strategic interaction and repair","independent critical reasoning","confident audience-aware delivery"]
+  }
+}
