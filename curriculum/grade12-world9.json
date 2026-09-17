@@ -1,0 +1,74 @@
+{
+  "grade": 12,
+  "world": 9,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 9: C2+ GLOBAL MEDIA, CULTURE, PUBLIC DISCOURSE & INFORMATION INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "15400+",
+    "reading": "7200–7800 words",
+    "listening": "130–140 minutes",
+    "speaking": "140–152 minutes",
+    "writing": "3600–3900 words",
+    "presentation": "72–79 minutes"
+  },
+  "grammarFocus": [
+    "advanced discourse framing and stance",
+    "reported speech and source attribution",
+    "epistemic modality and evidential qualification",
+    "rhetorical questions, emphasis and information structure",
+    "concession, contrast and strategic reframing",
+    "nominalisation and compression in media and institutional prose",
+    "passive and impersonal constructions for public reporting",
+    "conditional and counterfactual discourse analysis",
+    "cohesion across long-form analytical and cultural texts",
+    "register shifting between journalism, academic, public and professional communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Global Media Gateway","focus":"Media systems, journalism, public discourse and information vocabulary","skills":["reading","vocabulary","speaking"]},
+    {"id":2,"title":"Media Vocabulary Forge","focus":"Advanced journalism, broadcasting, digital media and discourse collocations","skills":["vocabulary","writing"]},
+    {"id":3,"title":"Source & Attribution Observatory","focus":"Identifying sources, attribution, evidence and degrees of certainty","skills":["reading","analysis","listening"]},
+    {"id":4,"title":"Narrative Framing Laboratory","focus":"Framing, agenda, emphasis, omission and competing interpretations","skills":["reading","criticalThinking","speaking"]},
+    {"id":5,"title":"Expert Media Listening Command","focus":"Extracting claims, assumptions, rhetoric and implications from broadcasts and interviews","skills":["listening","noteTaking","analysis"]},
+    {"id":6,"title":"Misinformation & Verification Reactor","focus":"Verification, source quality, manipulation signals and responsible information assessment","skills":["reading","listening","decisionMaking"]},
+    {"id":7,"title":"Public Discourse Nexus","focus":"How language, institutions and audiences shape public conversations","skills":["reading","speaking","argumentation"]},
+    {"id":8,"title":"Culture & Identity Chamber","focus":"Cultural narratives, identity, representation and intercultural interpretation","skills":["reading","listening","discussion"]},
+    {"id":9,"title":"Digital Communities Observatory","focus":"Online communities, platform language, virality and social communication","skills":["listening","analysis","debate"]},
+    {"id":10,"title":"Investigative Writing Studio","focus":"Long-form reporting, source synthesis, chronology and evidence-based narrative","skills":["writing","reading","presentation"]},
+    {"id":11,"title":"Global Culture Listening Arena","focus":"Interviews, documentaries, cultural commentary and implicit meaning","skills":["listening","speaking","synthesis"]},
+    {"id":12,"title":"Information Crisis Simulation","focus":"Rapid verification, uncertainty, corrections and responsible public communication","skills":["listening","decisionMaking","speaking"]},
+    {"id":13,"title":"Media Data-to-Meaning Lab","focus":"Audience data, trends, polls, charts and careful interpretation of media evidence","skills":["reading","analysis","writing"]},
+    {"id":14,"title":"Public Communication Briefing Forge","focus":"Turning complex information into accurate public-facing briefings","skills":["writing","presentation","speaking"]},
+    {"id":15,"title":"Discourse Debate Arena","focus":"Competing narratives, rebuttal, framing, source evaluation and respectful disagreement","skills":["speaking","listening","argumentation"]},
+    {"id":16,"title":"Cross-Cultural Communication Lab","focus":"Managing cultural assumptions, pragmatic differences and high-context communication","skills":["speaking","negotiation","pragmatics"]},
+    {"id":17,"title":"Global Information Strategy War Room","focus":"Designing communication responses under uncertainty, competing narratives and public pressure","skills":["decisionMaking","collaboration","speaking"]},
+    {"id":18,"title":"Integrated Media & Culture Mission","focus":"Research-to-public-communication simulation combining evidence, culture and strategic messaging","skills":["reading","listening","analysis","presentation"]},
+    {"id":19,"title":"World 9 Mastery Integration Quest","focus":"Integrated C2+ media reasoning, cultural interpretation and information intelligence","skills":["all"]},
+    {"id":20,"title":"C2+ Global Media & Information Master Challenge","focus":"Final high-stakes challenge in source evaluation, discourse analysis, cultural intelligence and strategic public communication","skills":["all"]}
+  ],
+  "scenarios": [
+    "Global Media & Information Council",
+    "International Public Communication War Room",
+    "Global Culture and Information Integrity Summit"
+  ],
+  "assessment": {
+    "reading":"Interpret sophisticated journalistic, cultural, analytical and public-discourse texts with source and framing awareness.",
+    "listening":"Extract explicit claims, implicit assumptions, rhetorical strategies, source positions and uncertainty from expert media communication.",
+    "speaking":"Analyse, challenge and explain competing narratives using precise C2+ discourse and culturally appropriate communication.",
+    "writing":"Produce investigative-style analyses, public briefings, discourse critiques and evidence-based communication strategies.",
+    "decisionMaking":"Evaluate source reliability, framing, uncertainty, audience effects and communication risks before selecting a response.",
+    "presentation":"Communicate complex information and cultural issues accurately to diverse audiences while preserving nuance and attribution."
+  },
+  "successCriteria": [
+    "distinguishes verified information, attribution, interpretation, framing and opinion",
+    "uses advanced media, cultural and discourse vocabulary accurately and flexibly",
+    "recognises rhetorical framing, omission, emphasis and potential manipulation",
+    "evaluates source quality and uncertainty without overclaiming",
+    "constructs and critiques sophisticated public-discourse arguments",
+    "shifts naturally between journalistic, academic, professional and public registers",
+    "adapts communication to culturally diverse audiences and contexts",
+    "produces concise public-facing recommendations from complex information",
+    "responds effectively to high-pressure information and communication scenarios",
+    "integrates research, listening, analysis, speaking and writing at C2+ level"
+  ]
+}
