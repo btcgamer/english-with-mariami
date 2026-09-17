@@ -1,0 +1,58 @@
+{
+  "grade": 10,
+  "world": 5,
+  "title": "MAGIC ENGLISH GRADE 10 — WORLD 5: C2 SYSTEMS THINKING, RESEARCH & FUTURE INNOVATION",
+  "level": "C2",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "6800+ active words",
+    "reading": "3200–3800 words",
+    "listening": "42–50 min",
+    "speaking": "48–58 min",
+    "writing": "1250–1500 words",
+    "presentation": "24–30 min"
+  },
+  "grammar": [
+    "Complex sentence architecture with embedded clauses and controlled information density",
+    "Advanced aspect, modality, and stance in analytical and speculative discourse",
+    "Conditionals, mixed hypotheticals, and counterfactual systems reasoning",
+    "Participial clauses, reduced relatives, and non-finite structures for concise prose",
+    "Cohesion through reference, substitution, ellipsis, lexical chains, and discourse markers",
+    "Nominalisation, abstraction, and compression in research-oriented writing",
+    "Qualification, evidential language, and uncertainty management in complex claims",
+    "Register shifts between technical, academic, professional, and public-facing communication"
+  ],
+  "missions": [
+    {"id":1,"title":"Systems Thinking Launchpad","focus":"Map interconnected causes, feedback loops, dependencies, and unintended consequences in a complex situation."},
+    {"id":2,"title":"Future-Focused Vocabulary Forge","focus":"Master precise terminology for innovation, research, technology, systems, risk, and long-term change."},
+    {"id":3,"title":"Research Question Observatory","focus":"Transform broad topics into focused, answerable, and analytically useful research questions."},
+    {"id":4,"title":"Evidence Quality Detector","focus":"Evaluate reliability, relevance, limitations, and evidential strength across different information sources."},
+    {"id":5,"title":"Technical Listening Nexus","focus":"Interpret lectures, expert interviews, and technical explanations while tracking structure and implied meaning."},
+    {"id":6,"title":"Complex Cause-and-Effect Reactor","focus":"Express layered causation, correlation, probability, conditions, and consequences with precision."},
+    {"id":7,"title":"Counterfactual Futures Lab","focus":"Use advanced hypothetical language to explore alternative futures, policy choices, and system failures."},
+    {"id":8,"title":"Data-to-Meaning Translation Portal","focus":"Convert numerical, visual, and technical information into accurate natural-language explanations."},
+    {"id":9,"title":"Innovation Ethics Arena","focus":"Discuss benefits, risks, trade-offs, responsibility, and competing values in emerging technologies."},
+    {"id":10,"title":"Research Synthesis Engine","focus":"Combine multiple sources into a coherent synthesis while separating evidence, inference, and speculation."},
+    {"id":11,"title":"Future Workplace Simulator","focus":"Solve a complex professional challenge through planning, collaboration, clarification, and strategic reporting."},
+    {"id":12,"title":"Scientific Argument Reading Lab","focus":"Analyse the claims, methods, limitations, and conclusions of demanding scientific or analytical texts."},
+    {"id":13,"title":"Risk Communication Command","focus":"Explain uncertainty and potential harm clearly without exaggeration, false certainty, or unnecessary alarm."},
+    {"id":14,"title":"Interdisciplinary Dialogue Chamber","focus":"Bridge ideas from different fields and adapt explanations for audiences with varied expertise."},
+    {"id":15,"title":"Research Proposal Studio","focus":"Write a structured proposal with objectives, rationale, methodology, limitations, and expected outcomes."},
+    {"id":16,"title":"Precision Reformulation Observatory","focus":"Reformulate dense technical or academic language into clear, accurate, audience-appropriate communication."},
+    {"id":17,"title":"Strategic Decision-Making Arena","focus":"Compare possible actions, explain trade-offs, and justify a decision using balanced evidence-aware language."},
+    {"id":18,"title":"Future Innovation Presentation","focus":"Deliver a structured presentation about an emerging idea, responding flexibly to critical questions."},
+    {"id":19,"title":"Integrated Systems Challenge","focus":"Combine research, listening, reading, grammar, vocabulary, and spontaneous speaking in a multi-stage scenario."},
+    {"id":20,"title":"C2 Future Mastery Graduation Quest","focus":"Complete an advanced innovation and systems-thinking challenge demonstrating precise, flexible, and responsible C2 English."}
+  ],
+  "realWorldScenarios": [
+    {"title":"Global Innovation Strategy Room","description":"Assess an emerging technology, identify stakeholders and risks, compare implementation pathways, and present a responsible strategy."},
+    {"title":"Research Review Council","description":"Evaluate a collection of competing findings, identify methodological limitations, synthesise conclusions, and answer expert questions."},
+    {"title":"Future City Decision Lab","description":"Design a response to a complex urban challenge while balancing sustainability, cost, access, innovation, and public trust."}
+  ],
+  "assessment": {
+    "level":"C2",
+    "type":"Integrated C2 systems thinking, research, and future innovation assessment",
+    "components":["advanced technical reading analysis","expert listening interpretation","precision vocabulary and grammar","evidence evaluation and synthesis","counterfactual and systems reasoning","ethical innovation discussion","research proposal writing","audience-aware innovation presentation"],
+    "successCriteria":["precise and flexible C2 language control","clear explanation of complex relationships","accurate use of advanced grammatical structures","nuanced technical and academic vocabulary","responsible evaluation of evidence and uncertainty","effective adaptation across registers and audiences","coherent research synthesis and decision-making","confident and responsive presentation delivery"]
+  }
+}
