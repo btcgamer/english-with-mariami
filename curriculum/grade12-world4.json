@@ -1,0 +1,72 @@
+{
+  "grade": 12,
+  "world": 4,
+  "title": "MAGIC ENGLISH GRADE 12 — WORLD 4: C2+ INNOVATION, SYSTEMS THINKING, FUTURES & TRANSFORMATIVE PROBLEM-SOLVING INTELLIGENCE",
+  "level": "C2+",
+  "missionCount": 20,
+  "targets": {
+    "vocabulary": "11900+ active words",
+    "reading": "5700–6300 words",
+    "listening": "90–100 min",
+    "speaking": "100–112 min",
+    "writing": "2600–2900 words",
+    "presentation": "52–59 min"
+  },
+  "grammarFocus": [
+    "complex systems language, relationships, dependencies and interacting variables",
+    "advanced hypothetical, counterfactual and mixed conditional structures for future modelling",
+    "cause, consequence, agency and responsibility in multi-factor systems",
+    "nominalisation, compression and information density in technical and strategic writing",
+    "precise comparison, contrast, analogy and conceptual framing",
+    "speculation, prediction, probability and scenario qualification",
+    "process description, sequencing, transformation and change over time",
+    "advanced problem-solution structures with constraints, trade-offs and unintended consequences",
+    "register shifting between technical, strategic, academic, entrepreneurial and public communication",
+    "real-time collaborative reasoning, clarification, reformulation and adaptive response"
+  ],
+  "missions": [
+    {"mission":1,"title":"Innovation Gateway","focus":"Define innovation precisely and distinguish novelty, usefulness, impact, adoption and transformation."},
+    {"mission":2,"title":"Systems Thinking Observatory","focus":"Map interconnected variables, feedback loops, dependencies and system-level effects."},
+    {"mission":3,"title":"Complexity Vocabulary Forge","focus":"Master high-precision language for systems, innovation, disruption, adaptation and transformation."},
+    {"mission":4,"title":"Future Signals Laboratory","focus":"Interpret weak signals, emerging patterns, trends and uncertainty without overstating predictions."},
+    {"mission":5,"title":"Expert Futures Listening Command","focus":"Track forecasts, assumptions, scenarios, confidence and competing futures in dense expert speech."},
+    {"mission":6,"title":"Problem Reframing Nexus","focus":"Transform vague or inherited problem statements into precise, testable and strategically useful questions."},
+    {"mission":7,"title":"Solution Architecture Reactor","focus":"Design multi-stage solutions while explaining constraints, dependencies, risks and implementation logic."},
+    {"mission":8,"title":"Scenario Futures Chamber","focus":"Build contrasting future scenarios using evidence, assumptions, drivers and uncertainty ranges."},
+    {"mission":9,"title":"Failure & Resilience Lab","focus":"Analyse failure modes, resilience mechanisms, recovery strategies and lessons from complex systems."},
+    {"mission":10,"title":"Creative Constraint Studio","focus":"Generate and evaluate solutions under financial, technical, ethical, social and time constraints."},
+    {"mission":11,"title":"Technology Impact Observatory","focus":"Explain technological change through benefits, limitations, second-order effects and adoption barriers."},
+    {"mission":12,"title":"Transformation Strategy Command","focus":"Construct transformation pathways with milestones, stakeholders, dependencies, risks and measurable outcomes."},
+    {"mission":13,"title":"Unintended Consequences Nexus","focus":"Anticipate indirect effects, feedback responses, trade-offs and risks created by proposed interventions."},
+    {"mission":14,"title":"Innovation Pitch Forge","focus":"Present a complex innovation concept with a compelling but evidence-aware narrative for decision-makers."},
+    {"mission":15,"title":"Future Debate Arena","focus":"Defend competing futures and challenge assumptions through structured, nuanced C2+ argumentation."},
+    {"mission":16,"title":"Rapid Prototyping Communication Lab","focus":"Explain experiments, iterations, evidence, failures and revisions with concise high-level language."},
+    {"mission":17,"title":"Global Transformation Simulation","focus":"Coordinate a cross-sector transformation response while priorities, evidence and constraints change in real time."},
+    {"mission":18,"title":"Integrated Futures Mission","focus":"Combine systems analysis, scenario planning, innovation, risk reasoning and persuasive communication."},
+    {"mission":19,"title":"World 4 Mastery Integration Quest","focus":"Integrate advanced reading, listening, systems reasoning, innovation communication, writing and speaking."},
+    {"mission":20,"title":"C2+ Innovation & Futures Master Challenge","focus":"Deliver an independent transformation strategy that demonstrates sophisticated systems thinking and adaptive C2+ communication."}
+  ],
+  "scenarios": [
+    "Global Innovation & Futures Council",
+    "International Transformation Strategy Lab",
+    "Future Systems Resilience Summit"
+  ],
+  "assessment": [
+    "complex interdisciplinary texts requiring systems interpretation, inference and future-oriented reasoning",
+    "expert listening requiring identification of assumptions, scenarios, uncertainty and competing explanations",
+    "high-stakes speaking involving innovation pitches, future debates, strategic workshops and transformation planning",
+    "advanced writing that explains complex systems, scenarios, interventions and implementation pathways",
+    "collaborative problem-solving tasks with changing constraints, incomplete information and competing stakeholder priorities",
+    "future simulation requiring rapid adaptation when evidence, risks, resources and objectives change"
+  ],
+  "successCriteria": [
+    "sustained C2+ control when explaining complex systems, innovation and transformation",
+    "clear distinction between observation, trend, signal, scenario, forecast, assumption and prediction",
+    "precise explanation of causal chains, dependencies, feedback loops, trade-offs and second-order effects",
+    "flexible control of hypothetical, conditional, comparative and speculative language",
+    "strategic communication that balances creativity with evidence, feasibility, uncertainty and risk",
+    "rapid reformulation and collaborative reasoning under changing constraints",
+    "persuasive innovation and transformation communication without exaggerating evidence or certainty",
+    "independent C2+ performance across unfamiliar future, technology, resilience and complex problem-solving contexts"
+  ]
+}
