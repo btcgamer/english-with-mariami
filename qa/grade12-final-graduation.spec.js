@@ -12,8 +12,13 @@ async function waitForRuntime(page) {
 test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(e.message));
-  await page.addInitScript(() => localStorage.clear());
+
+  // Clear only once before the initial boot. Do not use addInitScript here:
+  // init scripts also run on page.reload(), which would erase the progress
+  // we intentionally persist before validating the real reload/boot path.
   await page.goto(`${BASE}/advanced-academy.html?grade=${GRADE}`, { waitUntil: 'domcontentloaded' });
+  await page.evaluate(() => localStorage.clear());
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await waitForRuntime(page);
 
   const result = await page.evaluate(async ({ worlds, missionsPerWorld }) => {
@@ -32,6 +37,7 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
         await runtime.loadWorld(12, world + 1);
       }
     }
+
     localStorage.setItem('magicCurriculumProgress:g12', JSON.stringify([...runtime.state.completed]));
     return { seen, completed: runtime.completedTotal(), xp: runtime.xpTotal(), stars: runtime.starsTotal() };
   }, { worlds: WORLDS, missionsPerWorld: MISSIONS_PER_WORLD });
@@ -44,7 +50,7 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
 
   // Reload from persisted progress so the assertion verifies the real boot/render path.
   await page.reload({ waitUntil: 'domcontentloaded' });
-  await waitForRuntime(page);
+  await waitForRuntime();
   await expect(page.locator('[data-curriculum-total-progress]')).toContainText('200/200');
   expect(pageErrors).toEqual([]);
 });
@@ -57,8 +63,8 @@ test('Grade 12 graduation progress persists after reload', async ({ page }) => {
       return `12:${world}:${mission}`;
     })));
   });
-  await page.goto(`${BASE}/advanced-academy.html?grade=12&world=10`, { waitUntil: 'domcontentloaded' });
-  await waitForRuntime(page);
+  await page.goto(`${BASE}/advanced-academy.html?grade=${GRADE}&world=10`, { waitUntil: 'domcontentloaded' });
+  await waitForRuntime();
   await expect(page.locator('[data-curriculum-total-progress]')).toContainText('200/200');
   await expect(page.locator('[data-curriculum-world-status]')).toContainText('ALL WORLDS COMPLETE');
   await expect(page.locator('[data-curriculum-missions] .magic-mission-card')).toHaveCount(20);
