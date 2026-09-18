@@ -33,7 +33,6 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
       }
     }
     localStorage.setItem('magicCurriculumProgress:g12', JSON.stringify([...runtime.state.completed]));
-    await runtime.loadWorld(12, worlds);
     return { seen, completed: runtime.completedTotal(), xp: runtime.xpTotal(), stars: runtime.starsTotal() };
   }, { worlds: WORLDS, missionsPerWorld: MISSIONS_PER_WORLD });
 
@@ -42,6 +41,10 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
   expect(result.completed).toBe(200);
   expect(result.xp).toBe(10000);
   expect(result.stars).toBe(200);
+
+  // Reload from persisted progress so the assertion verifies the real boot/render path.
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await waitForRuntime(page);
   await expect(page.locator('[data-curriculum-total-progress]')).toContainText('200/200');
   expect(pageErrors).toEqual([]);
 });
