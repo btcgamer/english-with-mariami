@@ -1,0 +1,28 @@
+name: Grade 12 World 7 Content QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'curriculum/grade12-world7.json'
+      - 'qa/grade12-world7-content-qa.js'
+      - '.github/workflows/grade12-world7-content-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  world7-content-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Run Grade 12 World 7 content validator
+        run: node qa/grade12-world7-content-qa.js
