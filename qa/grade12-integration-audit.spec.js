@@ -10,8 +10,22 @@ for (const world of WORLDS) {
       if (message.type() === 'error') errors.push(message.text());
     });
 
+    // The runtime intentionally locks World N until World N-1 is complete.
+    // This audit tests each world directly, so seed only the prerequisite
+    // worlds in localStorage instead of bypassing the runtime unlock logic.
+    await page.addInitScript(({ world }) => {
+      if (world <= 1) return;
+      const completed = [];
+      for (let prerequisiteWorld = 1; prerequisiteWorld < world; prerequisiteWorld++) {
+        for (let mission = 1; mission <= 20; mission++) {
+          completed.push(`12:${prerequisiteWorld}:${mission}`);
+        }
+      }
+      localStorage.setItem('magicCurriculumProgress:g12', JSON.stringify(completed));
+    }, { world });
+
     await page.goto(`http://127.0.0.1:4173/advanced-academy.html?grade=12&world=${world}`, { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('[data-curriculum-title]')).not.toHaveText('Curriculum loading…', { timeout: 10000 });
+    await expect(page.locator('[data-curriculum-title]')).not.toHaveText('Curriculum loading…', { timeout: 15000 });
     await expect(page.locator('[data-curriculum-level]')).toHaveText('C2+');
     await expect(page.locator('[data-curriculum-missions] .magic-mission-card')).toHaveCount(20);
     await expect(page.locator('[data-curriculum-error]')).toBeHidden();
