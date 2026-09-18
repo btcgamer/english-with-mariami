@@ -33,6 +33,7 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
       }
     }
     localStorage.setItem('magicCurriculumProgress:g12', JSON.stringify([...runtime.state.completed]));
+    await runtime.loadWorld(12, worlds);
     return { seen, completed: runtime.completedTotal(), xp: runtime.xpTotal(), stars: runtime.starsTotal() };
   }, { worlds: WORLDS, missionsPerWorld: MISSIONS_PER_WORLD });
 
