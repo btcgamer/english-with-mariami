@@ -50,7 +50,7 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
 
   // Reload from persisted progress so the assertion verifies the real boot/render path.
   await page.reload({ waitUntil: 'domcontentloaded' });
-  await waitForRuntime();
+  await waitForRuntime(page);
   await expect(page.locator('[data-curriculum-total-progress]')).toContainText('200/200');
   expect(pageErrors).toEqual([]);
 });
@@ -64,7 +64,7 @@ test('Grade 12 graduation progress persists after reload', async ({ page }) => {
     })));
   });
   await page.goto(`${BASE}/advanced-academy.html?grade=${GRADE}&world=10`, { waitUntil: 'domcontentloaded' });
-  await waitForRuntime();
+  await waitForRuntime(page);
   await expect(page.locator('[data-curriculum-total-progress]')).toContainText('200/200');
   await expect(page.locator('[data-curriculum-world-status]')).toContainText('ALL WORLDS COMPLETE');
   await expect(page.locator('[data-curriculum-missions] .magic-mission-card')).toHaveCount(20);
