@@ -1,0 +1,32 @@
+name: Advanced Academy Live UX Audit
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  live-ux-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/advanced-academy-live-server.log 2>&1 &
+      - name: Run live UX audit
+        run: npx playwright test qa/advanced-academy-live-ux-audit.spec.js --reporter=line
+      - name: Upload report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advanced-academy-live-ux-audit-report
+          path: playwright-report/
+          if-no-files-found: ignore
