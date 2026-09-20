@@ -25,6 +25,9 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Start static server
         run: python3 -m http.server 4173 >/tmp/advanced-academy-live-server.log 2>&1 &
+      - name: Verify static server is ready
+        run: |
+          curl --fail --silent --show-error --retry 12 --retry-delay 1 --retry-connrefused http://127.0.0.1:4173/advanced-academy.html >/dev/null
       - name: Run live UX audit
         run: npx playwright test qa/advanced-academy-live-ux-audit.spec.js --reporter=line
       - name: Upload report on failure
@@ -32,5 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: advanced-academy-live-ux-audit-report
-          path: playwright-report/
+          path: |
+            playwright-report/
+            /tmp/advanced-academy-live-server.log
           if-no-files-found: ignore
