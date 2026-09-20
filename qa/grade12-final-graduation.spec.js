@@ -13,9 +13,6 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
   const pageErrors = [];
   page.on('pageerror', e => pageErrors.push(e.message));
 
-  // Clear only once before the initial boot. Do not use addInitScript here:
-  // init scripts also run on page.reload(), which would erase the progress
-  // we intentionally persist before validating the real reload/boot path.
   await page.goto(`${BASE}/advanced-academy.html?grade=${GRADE}`, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: 'domcontentloaded' });
@@ -27,10 +24,16 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
     for (let world = 1; world <= worlds; world++) {
       const data = await runtime.fetchWorld(12, world);
       if (Number(data.grade) !== 12 || Number(data.world) !== world) throw new Error(`Invalid World ${world} identity`);
+      if (!String(data.title || '').trim()) throw new Error(`World ${world} title missing`);
+      if (!String(data.level || '').trim()) throw new Error(`World ${world} level missing`);
       if (!Array.isArray(data.missions) || data.missions.length !== missionsPerWorld) throw new Error(`World ${world} mission count invalid`);
       const nums = data.missions.map((m, i) => Number(m.mission || m.id || i + 1));
       if (new Set(nums).size !== missionsPerWorld || nums.some(n => n < 1 || n > missionsPerWorld)) throw new Error(`World ${world} mission numbering invalid`);
-      seen.push({ world, title: data.title, missions: data.missions.length });
+      data.missions.forEach((mission, index) => {
+        if (!String(mission.title || mission.name || '').trim()) throw new Error(`World ${world} Mission ${index + 1} title missing`);
+        if (!String(mission.focus || mission.description || mission.objective || '').trim()) throw new Error(`World ${world} Mission ${index + 1} focus missing`);
+      });
+      seen.push({ world, title: data.title, level: data.level, missions: data.missions.length });
       for (let mission = 1; mission <= missionsPerWorld; mission++) runtime.state.completed.add(`12:${world}:${mission}`);
       if (world < worlds) {
         if (!runtime.worldUnlocked(world + 1)) throw new Error(`World ${world + 1} did not unlock`);
@@ -38,20 +41,22 @@ test('Grade 12 final graduation — all 10 worlds and 200 missions', async ({ pa
       }
     }
 
+    await runtime.loadWorld(12, worlds);
     localStorage.setItem('magicCurriculumProgress:g12', JSON.stringify([...runtime.state.completed]));
     return { seen, completed: runtime.completedTotal(), xp: runtime.xpTotal(), stars: runtime.starsTotal() };
   }, { worlds: WORLDS, missionsPerWorld: MISSIONS_PER_WORLD });
 
   expect(result.seen).toHaveLength(10);
+  expect(new Set(result.seen.map(w => w.title)).size).toBe(10);
   expect(result.seen.every(w => w.missions === 20)).toBe(true);
   expect(result.completed).toBe(200);
   expect(result.xp).toBe(10000);
   expect(result.stars).toBe(200);
 
-  // Reload from persisted progress so the assertion verifies the real boot/render path.
   await page.reload({ waitUntil: 'domcontentloaded' });
   await waitForRuntime(page);
   await expect(page.locator('[data-curriculum-total-progress]')).toContainText('200/200');
+  await expect(page.locator('[data-curriculum-world-status]')).toContainText('ALL WORLDS COMPLETE');
   expect(pageErrors).toEqual([]);
 });
 
