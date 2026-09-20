@@ -42,6 +42,8 @@
     if(xp)xp.textContent=xpTotal(); if(stars)stars.textContent=starsTotal();
     if(world)world.textContent=`${currentWorldProgress()}/${getConfig().missionCount}`;
     if(total)total.textContent=`${completedTotal()}/${getConfig().worldCount*getConfig().missionCount}`;
+    const meter=q('[data-curriculum-grade-meter]');
+    if(meter){const max=getConfig().worldCount*getConfig().missionCount,done=completedTotal(),pct=max?Math.min(100,(done/max)*100):0;meter.style.width=pct+'%';const bar=meter.parentElement;if(bar){bar.setAttribute('aria-valuenow',String(done));bar.setAttribute('aria-valuemax',String(max));}}
     if(status){const next=state.world+1;if(next<=getConfig().worldCount)status.textContent=worldUnlocked(next)?`WORLD ${next} UNLOCKED`:`WORLD ${next} LOCKED • COMPLETE WORLD ${state.world}`;else status.textContent='ALL WORLDS COMPLETE • MASTER STATUS';}
   }
 
