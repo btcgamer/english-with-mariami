@@ -15,7 +15,7 @@
     const value=(document.body&&Number(document.body.dataset.grade))||Number(window.MAGIC_CURRICULUM_GRADE);
     return Number.isInteger(value)?value:0;
   }
-  function worldUrl(grade,world){ return `${String(getConfig().root).replace(/\/$/,'')}/grade${grade}-world${world}.json`; }
+  function worldUrl(grade,world){ return `${String(getConfig().root).replace(/\\/$/,'')}/grade${grade}-world${world}.json`; }
   function missionNumber(item,index){ return Number(item.mission||item.id||index+1)||index+1; }
   function missionKey(grade,world,number){ return `${grade}:${world}:${number}`; }
   function completedInWorld(world){ return [...state.completed].filter(key=>key.startsWith(`${state.grade}:${world}:`)).length; }
@@ -109,14 +109,79 @@
     if(complete){complete.hidden=false;complete.disabled=state.completed.has(missionKey(state.grade,state.world,number));complete.dataset.mission=String(number);complete.textContent=state.completed.has(missionKey(state.grade,state.world,number))?'COMPLETED ✓':'MARK MISSION COMPLETE • +'+getConfig().xpPerMission+' XP • +'+getConfig().starsPerMission+' ★';}
     modal.hidden=false;modal.classList.add('open');
   }
+
+  function closeMissionModal(){
+    const modal=document.querySelector('[data-curriculum-modal]');
+    if(!modal)return;
+    modal.hidden=true;
+    modal.classList.remove('open');
+  }
+
+  function getNextMissionNumber(number){
+    const missions=state.worldData?.missions||[];
+    const index=missions.findIndex((item,missionIndex)=>missionNumber(item,missionIndex)===Number(number));
+    if(index<0)return null;
+    const next=missions[index+1];
+    return next?missionNumber(next,index+1):null;
+  }
+
+  function showMissionFlowNotice(message){
+    const status=document.querySelector('[data-curriculum-world-status]');
+    if(status)status.textContent=message;
+  }
+
+  function queueNextMission(number){
+    window.setTimeout(()=>{
+      if(state.worldData)openMission(number);
+    },650);
+  }
+
+  function queueNextWorld(world){
+    window.setTimeout(async()=>{
+      try{
+        await loadWorld(state.grade,world);
+        const firstMission=(state.worldData?.missions||[])[0];
+        if(firstMission)queueNextMission(missionNumber(firstMission,0));
+      }catch(error){
+        console.error('[Magic Curriculum] Mission Flow 2.0 world advance',error);
+      }
+    },850);
+  }
+
   function markMissionComplete(number){
-    const num=Number(number),key=missionKey(state.grade,state.world,num); if(state.completed.has(key))return;
+    const num=Number(number),key=missionKey(state.grade,state.world,num);
+    if(state.completed.has(key))return;
+
     state.completed.add(key);
     try{localStorage.setItem(storageKey(state.grade),JSON.stringify([...state.completed]));}catch(_){ }
+
     renderWorld(state.worldData);
-    const complete=document.querySelector('[data-curriculum-complete]'); if(complete){complete.textContent='COMPLETED ✓';complete.disabled=true;}
+    const complete=document.querySelector('[data-curriculum-complete]');
+    if(complete){complete.textContent='COMPLETED ✓';complete.disabled=true;}
+
     window.dispatchEvent(new CustomEvent('magicCurriculumMissionComplete',{detail:{grade:state.grade,world:state.world,mission:num,xpEarned:getConfig().xpPerMission,starsEarned:getConfig().starsPerMission,xpTotal:xpTotal(),starsTotal:starsTotal()}}));
+
+    const nextMission=getNextMissionNumber(num);
+    if(nextMission!=null){
+      showMissionFlowNotice(`MISSION ${num} COMPLETE ✓ • NEXT MISSION ${nextMission} ACTIVATING…`);
+      closeMissionModal();
+      queueNextMission(nextMission);
+      return;
+    }
+
+    const nextWorld=state.world+1;
+    if(nextWorld<=getConfig().worldCount && completedInWorld(state.world)>=getConfig().missionCount){
+      showMissionFlowNotice(`WORLD ${state.world} COMPLETE ✓ • WORLD ${nextWorld} UNLOCKED…`);
+      closeMissionModal();
+      renderWorldNav(document.querySelector('[data-curriculum-world-nav]'),state.grade,state.world);
+      queueNextWorld(nextWorld);
+      return;
+    }
+
+    showMissionFlowNotice('ALL WORLDS COMPLETE • MASTER STATUS');
+    closeMissionModal();
   }
+
   function restoreProgress(){
     try{
       const current=JSON.parse(localStorage.getItem(storageKey(state.grade))||'null');
