@@ -53,6 +53,9 @@ test.describe('Advanced Academy UX audit', () => {
   });
 
   test('Mission Flow 2.0 — completed mission automatically activates the next mission', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', e => errors.push(e.message));
+
     await page.goto(BASE + '/advanced-academy.html?grade=12&world=1', { waitUntil: 'domcontentloaded' });
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -69,9 +72,13 @@ test.describe('Advanced Academy UX audit', () => {
     ).toBe('MISSION 2');
     await expect(page.locator('[data-curriculum-modal]')).toBeVisible();
     await expect(page.locator('[data-curriculum-world-progress]')).toHaveText('1/20');
+    expect(errors).toEqual([]);
   });
 
   test('Mission Flow 2.0 — completing World 1 Mission 20 unlocks World 2 and activates Mission 1', async ({ page }) => {
+    const errors = [];
+    page.on('pageerror', e => errors.push(e.message));
+
     await page.goto(BASE + '/advanced-academy.html?grade=12&world=1', { waitUntil: 'domcontentloaded' });
     await page.evaluate(() => localStorage.clear());
     await page.reload({ waitUntil: 'domcontentloaded' });
@@ -99,8 +106,13 @@ test.describe('Advanced Academy UX audit', () => {
       () => page.locator('[data-curriculum-modal-number]').textContent(),
       { timeout: 8000 }
     ).toBe('MISSION 1');
+    await expect.poll(
+      () => page.evaluate(() => Boolean(window.MagicCurriculum?.state?.worldData?.title)),
+      { timeout: 8000 }
+    ).toBe(true);
     await expect(page.locator('[data-curriculum-world-progress]')).toHaveText('0/20');
     await expect(page.locator('[data-curriculum-total-progress]')).toHaveText('20/200');
     await expect(page.locator('[data-curriculum-world-nav] [data-curriculum-world="2"]')).not.toBeDisabled();
+    expect(errors).toEqual([]);
   });
 });
