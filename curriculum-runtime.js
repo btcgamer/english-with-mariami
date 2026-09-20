@@ -15,7 +15,7 @@
     const value=(document.body&&Number(document.body.dataset.grade))||Number(window.MAGIC_CURRICULUM_GRADE);
     return Number.isInteger(value)?value:0;
   }
-  function worldUrl(grade,world){ return `${String(getConfig().root).replace(/\\/$/,'')}/grade${grade}-world${world}.json`; }
+  function worldUrl(grade,world){ return `${String(getConfig().root).replace(/\/$/,'')}/grade${grade}-world${world}.json`; }
   function missionNumber(item,index){ return Number(item.mission||item.id||index+1)||index+1; }
   function missionKey(grade,world,number){ return `${grade}:${world}:${number}`; }
   function completedInWorld(world){ return [...state.completed].filter(key=>key.startsWith(`${state.grade}:${world}:`)).length; }
