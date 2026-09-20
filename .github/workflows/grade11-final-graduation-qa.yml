@@ -41,6 +41,14 @@ jobs:
           exit 1
       - name: Run Grade 11 Final Graduation QA
         run: npx playwright test qa/grade11-final-graduation.spec.js --reporter=line
+      - name: Upload server log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade11-final-graduation-server-log
+          path: /tmp/english-mariami-server.log
+          if-no-files-found: ignore
+
       - name: Upload Playwright report on failure
         if: failure()
         uses: actions/upload-artifact@v4
