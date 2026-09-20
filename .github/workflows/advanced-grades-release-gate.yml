@@ -1,0 +1,59 @@
+name: Advanced Grades Release Gate QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'advanced-academy.html'
+      - 'curriculum-runtime.js'
+      - 'curriculum/grade10-world*.json'
+      - 'curriculum/grade11-world*.json'
+      - 'curriculum/grade12-world*.json'
+      - 'qa/advanced-grades-release-gate.spec.js'
+      - '.github/workflows/advanced-grades-release-gate.yml'
+  workflow_dispatch:
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate JavaScript syntax
+        run: |
+          node --check qa/advanced-grades-release-gate.spec.js
+          node --check curriculum-runtime.js
+      - name: Install Playwright
+        run: npm install --no-save playwright@1.55.0
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start static server
+        run: python3 -m http.server 4173 >/tmp/advanced-grades-release-gate-server.log 2>&1 &
+      - name: Wait for academy
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS 'http://127.0.0.1:4173/advanced-academy.html?grade=10' >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/advanced-grades-release-gate-server.log
+          exit 1
+      - name: Run Advanced Grades Release Gate
+        run: npx playwright test qa/advanced-grades-release-gate.spec.js --reporter=line
+      - name: Upload server log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advanced-grades-release-gate-server-log
+          path: /tmp/advanced-grades-release-gate-server.log
+          if-no-files-found: ignore
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advanced-grades-release-gate-report
+          path: playwright-report/
+          if-no-files-found: ignore
