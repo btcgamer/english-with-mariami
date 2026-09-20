@@ -101,6 +101,11 @@
     const modal=document.querySelector('[data-curriculum-modal]'); if(!modal)return;
     const title=modal.querySelector('[data-curriculum-modal-title]'),body=modal.querySelector('[data-curriculum-modal-body]'),complete=modal.querySelector('[data-curriculum-complete]');
     if(title)title.textContent=`MISSION ${number} — ${mission.title||mission.name||'Mission'}`; if(body)body.innerHTML=renderMissionDetail(mission);
+    const worldMeta=modal.querySelector('[data-curriculum-modal-world]'),numberMeta=modal.querySelector('[data-curriculum-modal-number]'),rewardMeta=modal.querySelector('[data-curriculum-modal-reward]'),modalProgress=modal.querySelector('[data-curriculum-modal-progress]');
+    if(worldMeta)worldMeta.textContent=`WORLD ${state.world}`;
+    if(numberMeta)numberMeta.textContent=`MISSION ${number}`;
+    if(rewardMeta)rewardMeta.textContent=`+${getConfig().xpPerMission} XP • +${getConfig().starsPerMission} ★`;
+    if(modalProgress){const pct=getConfig().missionCount?Math.min(100,(currentWorldProgress()/getConfig().missionCount)*100):0;modalProgress.style.width=pct+'%';}
     if(complete){complete.hidden=false;complete.disabled=state.completed.has(missionKey(state.grade,state.world,number));complete.dataset.mission=String(number);complete.textContent=state.completed.has(missionKey(state.grade,state.world,number))?'COMPLETED ✓':'MARK MISSION COMPLETE • +'+getConfig().xpPerMission+' XP • +'+getConfig().starsPerMission+' ★';}
     modal.hidden=false;modal.classList.add('open');
   }
