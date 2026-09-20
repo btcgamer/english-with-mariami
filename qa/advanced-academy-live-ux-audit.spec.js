@@ -51,4 +51,56 @@ test.describe('Advanced Academy UX audit', () => {
     await expect(page.locator('[data-curriculum-world-progress]')).toHaveText('1/20');
     await expect(page.locator('[data-curriculum-total-progress]')).toHaveText('1/200');
   });
+
+  test('Mission Flow 2.0 — completed mission automatically activates the next mission', async ({ page }) => {
+    await page.goto(BASE + '/advanced-academy.html?grade=12&world=1', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => localStorage.clear());
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect.poll(() => page.evaluate(() => Boolean(window.MagicCurriculum?.state?.worldData?.missions)), { timeout: 15000 }).toBe(true);
+
+    await page.locator('[data-open-mission="1"]').click();
+    await expect(page.locator('[data-curriculum-modal]')).toBeVisible();
+    await expect(page.locator('[data-curriculum-modal-number]')).toHaveText('MISSION 1');
+    await page.locator('[data-curriculum-complete]').click();
+
+    await expect.poll(
+      () => page.locator('[data-curriculum-modal-number]').textContent(),
+      { timeout: 5000 }
+    ).toBe('MISSION 2');
+    await expect(page.locator('[data-curriculum-modal]')).toBeVisible();
+    await expect(page.locator('[data-curriculum-world-progress]')).toHaveText('1/20');
+  });
+
+  test('Mission Flow 2.0 — completing World 1 Mission 20 unlocks World 2 and activates Mission 1', async ({ page }) => {
+    await page.goto(BASE + '/advanced-academy.html?grade=12&world=1', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(() => localStorage.clear());
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect.poll(() => page.evaluate(() => Boolean(window.MagicCurriculum?.state?.worldData?.missions)), { timeout: 15000 }).toBe(true);
+
+    for (let mission = 1; mission <= 20; mission++) {
+      await page.locator('[data-open-mission="' + mission + '"]').click();
+      await expect(page.locator('[data-curriculum-modal]')).toBeVisible();
+      await expect(page.locator('[data-curriculum-modal-number]')).toHaveText('MISSION ' + mission);
+      await page.locator('[data-curriculum-complete]').click();
+
+      if (mission < 20) {
+        await expect.poll(
+          () => page.locator('[data-curriculum-modal-number]').textContent(),
+          { timeout: 5000 }
+        ).toBe('MISSION ' + (mission + 1));
+      }
+    }
+
+    await expect.poll(
+      () => page.evaluate(() => window.MagicCurriculum?.state?.world),
+      { timeout: 8000 }
+    ).toBe(2);
+    await expect.poll(
+      () => page.locator('[data-curriculum-modal-number]').textContent(),
+      { timeout: 8000 }
+    ).toBe('MISSION 1');
+    await expect(page.locator('[data-curriculum-world-progress]')).toHaveText('0/20');
+    await expect(page.locator('[data-curriculum-total-progress]')).toHaveText('20/200');
+    await expect(page.locator('[data-curriculum-world-nav] [data-curriculum-world="2"]')).not.toBeDisabled();
+  });
 });
