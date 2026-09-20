@@ -3,6 +3,12 @@ name: Grade 12 Final Graduation QA
 on:
   push:
     branches: [main]
+    paths:
+      - 'advanced-academy.html'
+      - 'curriculum-runtime.js'
+      - 'curriculum/grade12-world*.json'
+      - 'qa/grade12-final-graduation.spec.js'
+      - '.github/workflows/grade12-final-graduation-qa.yml'
   workflow_dispatch:
 
 jobs:
@@ -30,6 +36,15 @@ jobs:
       - name: Start local server
         run: python3 -m http.server 4173 > /tmp/magic-academy-server.log 2>&1 &
 
+      - name: Wait for academy
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS 'http://127.0.0.1:4173/advanced-academy.html?grade=12' >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/magic-academy-server.log
+          exit 1
+
       - name: Run Grade 12 final graduation QA
         run: npx playwright test qa/grade12-final-graduation.spec.js --reporter=line
 
@@ -39,4 +54,12 @@ jobs:
         with:
           name: grade12-final-graduation-playwright-report
           path: playwright-report/
+          if-no-files-found: ignore
+
+      - name: Upload server log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: grade12-final-graduation-server-log
+          path: /tmp/magic-academy-server.log
           if-no-files-found: ignore
