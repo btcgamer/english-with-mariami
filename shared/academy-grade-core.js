@@ -80,7 +80,7 @@ function renderVocabularyCards(dbWords,fallbackWords){
     return '<button type="button" class="vocab-card wordbtn" data-speak="'+esc(word)+'"'+(audio?' data-audio-url="'+esc(audio)+'"':'')+'>'+
       '<span class="vocab-en">'+(i+1)+'. '+esc(word)+'</span>'+
       '<span class="vocab-ka">'+(translation?esc(translation):'ქართული თარგმანი მიუწვდომელია')+'</span>'+
-      '<span class="vocab-pron">გამოთქმა: '+esc(word)+'</span>'+
+      '<span class="vocab-pron">გამოთქმა: დააჭირე 🔊</span>'+
       '<span class="vocab-audio">🔊 მოსმენა</span>'+
       '</button>';
   }).join('');
