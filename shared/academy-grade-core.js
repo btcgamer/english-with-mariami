@@ -63,6 +63,8 @@ async function loadDbLesson(n){
   }
 }
 
+
+function dbWordsForLesson(words,dbWords){return dbWords.length?dbWords:words.split(', ').map(word=>({word,translation:''}));}
 function installVocabularyStyles(){
   if(document.getElementById('g2-vocabulary-cards-style'))return;
   const style=document.createElement('style');
