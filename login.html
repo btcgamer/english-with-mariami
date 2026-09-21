@@ -9,8 +9,8 @@
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Your Supabase configuration (cache-busted so auth never uses a stale hostname) -->
-  <script src="config.js?v=20260907"></script>
+  <!-- Supabase configuration: force a fresh fetch after deployment -->
+  <script src="config.js?v=20260921"></script>
 
   <style>
     * { box-sizing: border-box; }
@@ -141,7 +141,7 @@
           const text = String(error && error.message ? error.message : "");
           if (/invalid login credentials/i.test(text)) setMessage("❌ ელფოსტა ან პაროლი არასწორია.", "error");
           else if (/email not confirmed/i.test(text)) setMessage("📧 ჯერ დაადასტურე ელფოსტა.", "error");
-          else if (/failed to fetch|networkerror|err_name_not_resolved|network request failed/i.test(text)) setMessage("🌐 Supabase სერვერთან კავშირი ვერ დამყარდა. ახლა ვამოწმებთ კავშირის/ქეშის პრობლემას.", "error");
+          else if (/failed to fetch|networkerror|err_name_not_resolved|network request failed/i.test(text)) setMessage("🌐 Supabase სერვერთან კავშირი ვერ დამყარდა. სცადე გვერდის სრულად განახლება და Wi‑Fi/მობილური ინტერნეტის გადართვა.", "error");
           else if (/დროის ამოწურვით/.test(text)) setMessage("⏱️ Supabase პასუხს ვერ იღებს 15 წამში. შეამოწმე ქსელი ან სცადე Wi‑Fi/მობილური ინტერნეტის გადართვა.", "error");
           else setMessage("❌ " + (text || "შესვლა ვერ მოხერხდა."), "error");
         } finally { loginButton.disabled = false; loginButton.textContent = "🚀 შესვლა"; }
