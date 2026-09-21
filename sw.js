@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v24';
+const CACHE_NAME = 'english-with-mariami-v25';
 const FUTURE_THEME = './magic-ai-25c.css';
 const FUTURE_CLASSROOM = './shared/future-neon-classroom.css?v=20260906';
 const NAV_TIMEOUT_MS = 4500;
@@ -130,4 +130,4 @@ self.addEventListener('notificationclick',event => {
   }));
 });
 
-console.log('[SW] English with Mariami v24 READY — homepage visual lock');
+console.log('[SW] English with Mariami v25 READY — auth cache refresh');
