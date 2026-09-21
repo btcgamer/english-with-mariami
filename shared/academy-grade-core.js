@@ -32,6 +32,59 @@ const G2=[
 ['Big Review','learn, speak, listen, read, write, help, try, great','I can listen, speak, read and write in English. I try every day.','Can you help me? — Yes! Let’s learn together.','English is a journey. We learn new words, read short texts, speak with friends and ask questions. We make mistakes, try again and improve.','What do learners do when something is difficult?','They try again','What English skill will you practice next?']
 ];
 const types=['Vocabulary Quest','Dialogue Lab','Reading Mission','Grammar Lab','Thinking Challenge'];
+
+let dbLessonCache=new Map();
+
+async function loadDbLesson(n){
+  if(grade!==2)return null;
+  if(dbLessonCache.has(n))return dbLessonCache.get(n);
+  const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
+  if(!client)return null;
+  try{
+    const {data:lessonRow,error:lessonError}=await client
+      .from('lessons')
+      .select('id,lesson_number,title,topic,description')
+      .eq('grade',grade)
+      .eq('lesson_number',n)
+      .maybeSingle();
+    if(lessonError||!lessonRow)return null;
+    const {data:wordRows,error:wordError}=await client
+      .from('lesson_words')
+      .select('word,translation,emoji,image_url,audio_url,sort_order')
+      .eq('lesson_id',lessonRow.id)
+      .order('sort_order',{ascending:true});
+    if(wordError)return null;
+    const result={...lessonRow,words:Array.isArray(wordRows)?wordRows:[]};
+    dbLessonCache.set(n,result);
+    return result;
+  }catch(error){
+    console.warn('Grade 2 DB lesson load skipped:',error);
+    return null;
+  }
+}
+
+function installVocabularyStyles(){
+  if(document.getElementById('g2-vocabulary-cards-style'))return;
+  const style=document.createElement('style');
+  style.id='g2-vocabulary-cards-style';
+  style.textContent='.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.vocab-card{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:14px;border:1px solid rgba(0,234,255,.22);border-radius:16px;background:linear-gradient(145deg,rgba(0,234,255,.07),rgba(5,12,30,.82));color:#fff;text-align:left;cursor:pointer}.vocab-card:hover{border-color:rgba(0,234,255,.6);transform:translateY(-2px)}.vocab-en{font-size:18px;font-weight:1000;color:#8ff7ff}.vocab-ka{font-size:14px;color:#d7f7ff;min-height:20px}.vocab-pron{font-size:11px;color:#83aeb9}.vocab-audio{align-self:flex-start;margin-top:2px;font-size:11px;color:#00eaff}.vocab-source{margin:-2px 0 12px;color:#8db8c2;font-size:12px}.vocab-empty{padding:16px;border:1px dashed rgba(0,234,255,.25);border-radius:14px;color:#9fc5cf}';
+  document.head.appendChild(style);
+}
+
+function renderVocabularyCards(dbWords,fallbackWords){
+  const rows=Array.isArray(dbWords)&&dbWords.length?dbWords:fallbackWords.split(', ').map(word=>({word,translation:''}));
+  return rows.map((item,i)=>{
+    const word=String(item.word||'').trim();
+    const translation=String(item.translation||'').trim();
+    const audio=item.audio_url?String(item.audio_url):'';
+    return '<button type="button" class="vocab-card wordbtn" data-speak="'+esc(word)+'"'+(audio?' data-audio-url="'+esc(audio)+'"':'')+'>'+
+      '<span class="vocab-en">'+(i+1)+'. '+esc(word)+'</span>'+
+      '<span class="vocab-ka">'+(translation?esc(translation):'ქართული თარგმანი მიუწვდომელია')+'</span>'+
+      '<span class="vocab-pron">გამოთქმა: '+esc(word)+'</span>'+
+      '<span class="vocab-audio">🔊 მოსმენა</span>'+
+      '</button>';
+  }).join('');
+}
 const lesson=n=>G2[Math.floor((n-1)/5)%12];
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 function save(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
@@ -59,7 +112,7 @@ function missionData(n,L){
  if(m===4){const [sentence,opts,correct]=grammarSets[wi][(n-1)%5];return {title:'Grammar Lab',brief:'Complete the sentence. Look at the subject and choose the correct word.',html:`<p class="example"><b>${sentence}</b></p><div class="choicegrid">${shuffle(opts).map(x=>`<button class="btn choice" data-answer="${x===correct?'right':'wrong'}">${esc(x)}</button>`).join('')}</div><div class="quizmsg"></div><p class="example">Bonus: say the complete sentence aloud.</p>`};}
  const savedKey=`${key}-answer-${n}`,saved=localStorage.getItem(savedKey)||'';return {title:'Thinking Challenge',brief:'Use your own English. There is more than one good answer.',html:`<p class="question">${esc(think)}</p><textarea class="answer" placeholder="Write 2–4 English sentences...">${esc(saved)}</textarea><div class="wordhint">Try to use: ${esc(w.slice(0,4).join(' • '))}</div><button class="btn" data-save-answer>💾 Save answer</button><div class="save-msg"></div>`};
 }
-function render(){const total=60,n=Math.max(1,Math.min(60,Number(state.current)||1)),d=new Set(state.done),L=lesson(n),[topic,words,dialogue,reply,read,q,a,think]=L,md=missionData(n,L);document.body.innerHTML=`<div class="particles"></div><div class="app"><aside class="side"><div class="brand">MAGIC NEON AI</div><div class="orb"><span>G${grade}</span></div><div class="grade">GRADE ${grade}</div><div class="progress"><i style="width:${d.size/total*100}%"></i></div><div class="pct">${Math.round(d.size/total*100)}% COMPLETE</div><div class="missions">${G2.map((x,i)=>{let s=i*5+1,ok=[0,1,2,3,4].every(k=>d.has(s+k));return `<button class="world ${n>=s&&n<s+5?'active':''}" data-m="${s}">🪐 ${i+1}. ${esc(x[0])} ${ok?'✓':''}</button>`}).join('')}</div></aside><main><div class="top"><div><div class="eyebrow">MAGIC NEON AI ACADEMY • GRADE ${grade}</div><div class="title">${esc(topic)}</div><div class="eyebrow">${types[(n-1)%5]} • MISSION ${n}/60</div></div><div class="stats"><span class="chip">⚡ ${d.size*10} XP</span><span class="chip">⭐ ${state.stars||0}</span><span class="chip">🔥 ${state.streak||0}</span></div></div><div class="hero card"><div class="robot">🤖</div><div><h2>AI Companion</h2><p>${esc(md.brief)}</p></div></div><div class="card"><h2>🚀 Mission ${n} • ${esc(md.title)}</h2><p>Every mission has a different task. Read, listen, choose, speak and write to build real English skills.</p></div><div class="grid"><section class="card activity"><h2>🧠 Vocabulary Vault</h2><div class="vocab">${words.split(', ').map((w,i)=>`<button class="wordbtn" data-speak="${esc(w)}">${i+1}. ${esc(w)}<small>🔊</small></button>`).join('')}</div></section><section class="card activity"><h2>💬 Dialogue Lab</h2><p class="dialogue">${esc(dialogue)}</p><p class="dialogue reply">${esc(reply)}</p><button class="btn" data-speak="${esc(dialogue+' '+reply)}">🔊 Listen</button></section><section class="card activity mission-task"><h2>🎮 Your Mission</h2>${md.html}</section><section class="card activity"><h2>📖 Reading Zone</h2><p class="reading">${esc(read)}</p><button class="btn" data-speak="${esc(read)}">🔊 Listen to reading</button></section><section class="card activity"><h2>🎯 Comprehension</h2><p class="question">${esc(q)}</p><div class="choicegrid">${shuffle([a,'The answer is not in the text.','Something different']).map(x=>`<button class="btn choice" data-answer="${x===a?'right':'wrong'}">${esc(x)}</button>`).join('')}</div><div class="quizmsg"></div></section><section class="card activity"><h2>💡 Critical Thinking</h2><p class="question">${esc(think)}</p><p class="example">Think in English. Try a complete sentence.</p></section></div><div class="card footer"><div class="btns"><button class="btn" data-prev ${n===1?'disabled':''}>← Previous</button><button class="btn primary" data-complete>✓ Complete Mission +10 XP</button><button class="btn" data-next ${n===60?'disabled':''}>Next →</button></div></div></main></div><div class="toast"></div>`;bind()}
+async function render(){const total=60,n=Math.max(1,Math.min(60,Number(state.current)||1)),d=new Set(state.done),L=lesson(n),db=await loadDbLesson(n),[fallbackTopic,words,dialogue,reply,read,q,a,think]=L,topic=db?.title||db?.topic||fallbackTopic,dbWords=db?.words||[],md=missionData(n,L);installVocabularyStyles();document.body.innerHTML=`<div class="particles"></div><div class="app"><aside class="side"><div class="brand">MAGIC NEON AI</div><div class="orb"><span>G${grade}</span></div><div class="grade">GRADE ${grade}</div><div class="progress"><i style="width:${d.size/total*100}%"></i></div><div class="pct">${Math.round(d.size/total*100)}% COMPLETE</div><div class="missions">${G2.map((x,i)=>{let s=i*5+1,ok=[0,1,2,3,4].every(k=>d.has(s+k));return `<button class="world ${n>=s&&n<s+5?'active':''}" data-m="${s}">🪐 ${i+1}. ${esc(x[0])} ${ok?'✓':''}</button>`}).join('')}</div></aside><main><div class="top"><div><div class="eyebrow">MAGIC NEON AI ACADEMY • GRADE ${grade}</div><div class="title">${esc(topic)}</div><div class="eyebrow">${types[(n-1)%5]} • MISSION ${n}/60</div></div><div class="stats"><span class="chip">⚡ ${d.size*10} XP</span><span class="chip">⭐ ${state.stars||0}</span><span class="chip">🔥 ${state.streak||0}</span></div></div><div class="hero card"><div class="robot">🤖</div><div><h2>AI Companion</h2><p>${esc(md.brief)}</p></div></div><div class="card"><h2>🚀 Mission ${n} • ${esc(md.title)}</h2><p>Every mission has a different task. Read, listen, choose, speak and write to build real English skills.</p></div><div class="grid"><section class="card activity"><h2>🧠 Vocabulary Vault</h2><p class="vocab-source">${dbWords.length?`Supabase • ${dbWords.length} სასწავლო სიტყვა`:'სასწავლო სიტყვები'}</p><div class="vocab">${renderVocabularyCards(dbWords,words)}</div></section><section class="card activity"><h2>💬 Dialogue Lab</h2><p class="dialogue">${esc(dialogue)}</p><p class="dialogue reply">${esc(reply)}</p><button class="btn" data-speak="${esc(dialogue+' '+reply)}">🔊 Listen</button></section><section class="card activity mission-task"><h2>🎮 Your Mission</h2>${md.html}</section><section class="card activity"><h2>📖 Reading Zone</h2><p class="reading">${esc(read)}</p><button class="btn" data-speak="${esc(read)}">🔊 Listen to reading</button></section><section class="card activity"><h2>🎯 Comprehension</h2><p class="question">${esc(q)}</p><div class="choicegrid">${shuffle([a,'The answer is not in the text.','Something different']).map(x=>`<button class="btn choice" data-answer="${x===a?'right':'wrong'}">${esc(x)}</button>`).join('')}</div><div class="quizmsg"></div></section><section class="card activity"><h2>💡 Critical Thinking</h2><p class="question">${esc(think)}</p><p class="example">Think in English. Try a complete sentence.</p></section></div><div class="card footer"><div class="btns"><button class="btn" data-prev ${n===1?'disabled':''}>← Previous</button><button class="btn primary" data-complete>✓ Complete Mission +10 XP</button><button class="btn" data-next ${n===60?'disabled':''}>Next →</button></div></div></main></div><div class="toast"></div>`;bind()}
 function bind(){document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{state.current=+b.dataset.m;save();render()});document.querySelector('[data-prev]')?.addEventListener('click',()=>{state.current=Math.max(1,state.current-1);save();render()});document.querySelector('[data-next]')?.addEventListener('click',()=>{state.current=Math.min(60,state.current+1);save();render()});document.querySelector('[data-complete]')?.addEventListener('click',()=>{if(!state.done.includes(state.current)){state.done.push(state.current);state.stars=(state.stars||0)+1;state.streak=(state.streak||0)+1}if(state.current<60)state.current++;save();render()});document.querySelectorAll('[data-speak]').forEach(b=>b.onclick=()=>speak(b.dataset.speak));document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{const box=b.closest('.activity')||b.parentElement,msg=box.querySelector('.quizmsg')||document.querySelector('.quizmsg');msg.textContent=b.dataset.answer==='right'?'✅ Correct! Great job.':'🔁 Try again — read and listen carefully.'});document.querySelector('[data-save-answer]')?.addEventListener('click',()=>{const input=document.querySelector('.answer');try{localStorage.setItem(`${key}-answer-${state.current}`,input.value)}catch(e){}document.querySelector('.save-msg').textContent='✅ Saved on this device.'})}
-window.addEventListener('DOMContentLoaded',render);
+window.addEventListener('DOMContentLoaded',()=>{render();});
 })();
