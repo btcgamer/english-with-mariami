@@ -1,10 +1,10 @@
 /* English with Mariami — secure student grade routing. */
 (function(){
   'use strict';
-  const m=(location.pathname||'').match(/(?:^|\/)grade([234])(?:\/index\.html)?\/?$/i);
+  const m=(location.pathname||'').match(/(?:^|\/)grade([1234])(?:\/index\.html)?\/?$/i);
   if(!m)return;
   const current=Number(m[1]);
-  const ALLOWED=[2,3,4];
+  const ALLOWED=[1,2,3,4];
   const PRIVILEGED=['teacher','parent','admin'];
   const client=()=>window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;
   const login=()=>location.replace('/login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
