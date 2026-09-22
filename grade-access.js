@@ -8,7 +8,7 @@
   const PRIVILEGED=['teacher','parent','admin'];
   const client=()=>window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;
   const login=()=>location.replace('/login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
-  const target=g=>({2:'/grade2/index.html',3:'/grade3/index.html',4:'/grade4/index.html'})[Number(g)]||'/academy.html';
+  const target=g=>({1:'/grade1/index.html',2:'/grade2/index.html',3:'/grade3/index.html',4:'/grade4/index.html'})[Number(g)]||'/academy.html';
 
   async function check(){
     /* Browser QA uses an isolated init flag set before page navigation. */
