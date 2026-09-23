@@ -37,7 +37,7 @@ main{padding-bottom:50px}.hero{min-height:650px;display:flex;align-items:center;
 <footer class="footer"><div class="wrap">⚡ English with Mariami • Holographic English Academy • სწავლა, თამაში და პროგრესი ❤️</div></footer><footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer>
 <script>
 (function(){'use strict';
-const GRADES=[2,3,4],ROLES=['teacher','admin','parent'];
+const GRADES=Array.from({length:12},(_,i)=>i+1),ROLES=['teacher','admin','parent'];
 const $=id=>document.getElementById(id);
 function client(){return window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null}
 function login(){location.href='login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash)}
