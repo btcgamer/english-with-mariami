@@ -34,7 +34,7 @@ function init(){
   document.addEventListener('focusin',e=>{if(e.target.matches('textarea,input'))state('think',0)});
   document.addEventListener('focusout',e=>{if(e.target.matches('textarea,input')){body.classList.remove('g2-ai-think');personality('ready',900)}});
   addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.closest('.choice')){writeMemory({correct:(readMemory()?.correct||0)+1,lastOutcome:'correct'});state('happy',900)}});
-  if(reduce){personality('ready',1200);return}
+  if(reduce||!fine){personality('ready',1200);return}
   let robot=null,lastSpark=0,phase=Math.random()*10;const sparks=[];
   function queryRobot(){const next=document.querySelector('body[data-grade="2"] .hero .robot');if(next!==robot){robot=next;if(robot)robot.style.translate='0 0'}return robot}
   function spark(){if(!robot||sparks.length>=18)return;const r=robot.getBoundingClientRect(),s=document.createElement('i');s.className='g2-xenon-spark';s.style.left=(r.left+r.width*.5+(Math.random()-.5)*18)+'px';s.style.top=(r.top+r.height*.72+(Math.random()-.5)*12)+'px';s.style.setProperty('--sx',((Math.random()-.5)*28)+'px');s.style.setProperty('--sy',(8+Math.random()*26)+'px');body.appendChild(s);sparks.push(s);setTimeout(()=>{s.remove();const i=sparks.indexOf(s);if(i>=0)sparks.splice(i,1)},900)}
