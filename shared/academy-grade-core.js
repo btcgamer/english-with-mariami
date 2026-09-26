@@ -184,7 +184,7 @@ async function recordMissionCompletion(missionNumber){
     return null;
   }
 }
-function speak(t){if('speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(t))}}
+function speak(t,lang='en-US'){try{if(typeof window.magicFastSpeak==='function')return window.magicFastSpeak(t,lang)!==false;}catch(e){console.warn('Academy shared speech failed',e)}try{if('speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.resume();const u=new SpeechSynthesisUtterance(t);u.lang=lang;u.rate=.92;u.pitch=1;speechSynthesis.speak(u);return true}}catch(e){console.warn('Academy native speech fallback failed',e)}return false}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
 const grammarSets=[
 [['I ___ happy at home.',['am','is','are'],'am'],['You ___ my friend.',['am','is','are'],'are'],['He ___ at school.',['am','is','are'],'is'],['She ___ kind.',['am','is','are'],'is'],['We ___ happy.',['am','is','are'],'are']],
