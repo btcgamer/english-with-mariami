@@ -8,6 +8,7 @@
   let voices=[];
   let active=null;
   let speakTimer=0;
+  let gestureToken=0;
 
   const refreshVoices=()=>{try{voices=synth.getVoices()||[];}catch(e){voices=[];}};
   if(supported){refreshVoices();if('onvoiceschanged' in synth)synth.addEventListener('voiceschanged',refreshVoices,{passive:true});}
@@ -21,11 +22,11 @@
     text=String(text||'').trim();if(!text||!supported)return false;stop();try{synth.resume();}catch(e){}
     const u=new SpeechSynthesisUtterance(text);u.lang=lang||'en-US';u.rate=.92;u.pitch=1;refreshVoices();const voice=pickVoice(u.lang);if(voice)u.voice=voice;active=u;
     u.onend=()=>{if(active===u)active=null;};u.onerror=(e)=>{if(active===u)active=null;console.warn('Magic speech error',e&&e.error||e);};
-    speakTimer=setTimeout(()=>{if(active!==u)return;try{synth.resume();synth.speak(u);}catch(e){console.warn('Magic speech start error',e);}},40);return true;
+    try{synth.resume();synth.speak(u);}catch(e){console.warn('Magic speech start error',e);return false;}return true;
   };
   window.magicFastSpeak=speak;window.magicStopSpeech=stop;window.magicSpeechSupported=supported;
 
-  document.addEventListener('click',function(e){const el=e.target&&e.target.closest?e.target.closest('[data-speak]'):null;if(!el)return;const text=el.getAttribute('data-speak');if(!text)return;e.preventDefault();e.stopImmediatePropagation();speak(text,el.getAttribute('data-lang')||'en-US');},true);
+  document.addEventListener('click',function(e){const el=e.target&&e.target.closest?e.target.closest('[data-speak]'):null;if(!el||el.disabled)return;const text=el.getAttribute('data-speak');if(!text)return;e.preventDefault();e.stopImmediatePropagation();speak(text,el.getAttribute('data-lang')||'en-US');},true);
   document.addEventListener('pointerdown',function(){if(!supported)return;try{synth.resume();}catch(e){}},{capture:true,passive:true});
 
   const renderDiagnostic=(r,status)=>{
