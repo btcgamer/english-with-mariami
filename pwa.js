@@ -60,10 +60,28 @@
 
   var deferredPrompt = null;
   var installButton = null;
-  function isGrade4(){ return false; }
-  function createInstallUI(){ return; }
-  function showInstallUI(){ return; }
+  function isInstalled(){ return !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; }
+  function createInstallUI(){
+    if(installButton || isInstalled()) return;
+    installButton=document.createElement('button');
+    installButton.type='button';
+    installButton.id='ewm-pwa-install';
+    installButton.textContent='📲 Install Academy / აპის დაყენება';
+    installButton.setAttribute('aria-label','Install English with Mariami');
+    installButton.style.cssText='position:fixed;right:16px;bottom:16px;z-index:2147483647;padding:12px 16px;border:1px solid rgba(143,247,255,.9);border-radius:14px;background:linear-gradient(135deg,#00eaff,#008cff);color:#00131a;font:800 13px Arial,sans-serif;box-shadow:0 0 24px rgba(0,234,255,.45);cursor:pointer;display:none;';
+    installButton.addEventListener('click',async function(){
+      if(!deferredPrompt) return;
+      try{ deferredPrompt.prompt(); await deferredPrompt.userChoice; }
+      catch(error){ console.warn('[PWA] Install prompt failed:',error); }
+      deferredPrompt=null; hideInstallUI();
+    });
+    document.body.appendChild(installButton);
+  }
+  function showInstallUI(){ if(installButton && deferredPrompt && !isInstalled()) installButton.style.display='block'; }
   function hideInstallUI(){ if (installButton) installButton.style.display='none'; }
-  window.addEventListener('beforeinstallprompt', function(e){ return; });
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault(); deferredPrompt=e; createInstallUI(); showInstallUI();
+  });
   window.addEventListener('appinstalled', function(){ deferredPrompt = null; hideInstallUI(); });
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',createInstallUI,{once:true}); else createInstallUI();
 })();
