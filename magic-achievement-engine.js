@@ -27,6 +27,6 @@
     const earned=achievements.filter(a=>a[3]&&a[3]&&a[4](s)).length;
     box.innerHTML=`<div class="magic-achievement-title"><span>🏅</span><div><small>MAGIC ACHIEVEMENTS</small><strong>${earned}/${achievements.length} UNLOCKED</strong></div></div><div class="magic-achievement-grid">${achievements.map(a=>{const ok=a[4](s);return `<article class="magic-achievement ${ok?'is-earned':'is-locked'}" data-achievement="${a[0]}"><span>${a[1]}</span><div><b>${a[2]}</b><small>${a[3]}</small></div><i>${ok?'✓':'🔒'}</i></article>`}).join('')}</div>`;
   }
-  const boot=()=>{render();setInterval(render,15000);window.addEventListener('englishMariamiProgressUpdated',render)};
+  let renderQueued=false;const scheduleRender=()=>{if(renderQueued)return;renderQueued=true;requestAnimationFrame(()=>{renderQueued=false;render()})};const boot=()=>{render();window.addEventListener('englishMariamiProgressUpdated',scheduleRender)};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
