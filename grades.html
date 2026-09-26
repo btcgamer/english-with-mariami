@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#010712">
+<title>English with Mariami — Grades 1–12</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=20260927"></script>
+<style>
+:root{--c:#00eaff;--b:#008cff;--p:#8b5cff;--g:#39ff88;--bg:#010712;--card:rgba(2,15,35,.9);--muted:#9fc5cf}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0%,rgba(0,234,255,.12),transparent 30%),var(--bg);color:#fff;font-family:Arial,"Noto Sans Georgian",sans-serif}a{text-decoration:none;color:inherit}.wrap{width:min(1240px,calc(100% - 28px));margin:auto}.top{position:sticky;top:0;z-index:20;background:rgba(1,7,18,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,234,255,.18)}.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-weight:1000;color:var(--c);text-shadow:0 0 14px var(--c)}.nav a{font-size:13px;font-weight:800;color:#c9f8ff}.hero{padding:55px 0 30px;text-align:center}.badge{display:inline-block;padding:7px 12px;border:1px solid rgba(0,234,255,.45);border-radius:999px;color:var(--c);font-size:11px;font-weight:1000}.hero h1{font-size:clamp(36px,6vw,66px);margin:18px 0 10px}.hero h1 span{color:var(--c);text-shadow:0 0 18px var(--c)}.hero p{color:var(--muted);line-height:1.7;max-width:760px;margin:auto}.status{margin:20px auto 0;padding:12px 16px;border:1px solid rgba(0,234,255,.18);border-radius:14px;background:rgba(0,234,255,.04);max-width:760px;color:#c8f6ff}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:25px 0 60px}.card{background:linear-gradient(145deg,rgba(3,25,48,.94),rgba(1,9,24,.94));border:1px solid rgba(0,234,255,.24);border-radius:22px;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.35);transition:.2s}.card:hover{transform:translateY(-5px);border-color:rgba(0,234,255,.65)}.scene{height:145px;position:relative;display:grid;place-items:center;background:radial-gradient(circle,rgba(0,234,255,.16),transparent 55%),#020b1e;border-bottom:1px solid rgba(0,234,255,.16)}.grade-no{font-size:58px;font-weight:1000;color:var(--c);text-shadow:0 0 12px var(--c),0 0 30px rgba(0,234,255,.45)}.level{position:absolute;left:13px;top:12px;font-size:10px;font-weight:1000;padding:6px 9px;border-radius:999px;background:rgba(0,0,0,.4);border:1px solid rgba(0,234,255,.25);color:#c8f8ff}.body{padding:18px}.body h2{margin:0 0 7px;font-size:21px}.body p{min-height:48px;margin:0;color:#a9ccd4;font-size:13px;line-height:1.55}.btn{display:flex;align-items:center;justify-content:center;margin-top:15px;min-height:44px;border-radius:13px;background:linear-gradient(135deg,var(--c),var(--b));color:#00121a;font-weight:1000;font-size:13px}.selected{border-color:var(--g);box-shadow:0 0 30px rgba(57,255,136,.18)}.selected .grade-no{color:var(--g);text-shadow:0 0 16px var(--g)}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.nav{padding:10px 0}.grid{grid-template-columns:1fr}.hero{padding-top:35px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap nav"><a class="brand" href="index.html">⚡ ENGLISH WITH MARIAMI</a><a href="index.html">← მთავარი / Home</a></div></header>
+<main class="wrap">
+<section class="hero"><span class="badge">CONNECTED ACADEMY • GRADE 1 → GRADE 12</span><h1>🎓 <span>ერთიანი აკადემია</span></h1><p>Grade 1-დან Grade 12-მდე ყველა კლასი ერთ საერთო სისტემაში, ერთიანი ნავიგაციით და თანმიმდევრული სასწავლო გზით. English + ქართული.</p><div id="status" class="status">კლასების ერთიანი სივრცე მზად არის.</div></section>
+<section id="grades" class="grid"></section>
+</main>
+<script>
+(function(){
+'use strict';
+const DATA=[
+[1,'BEGINNER / დამწყები','Alphabet & Greetings / ანბანი და მისალმება'],
+[2,'ELEMENTARY / დაწყებითი','Daily English / ყოველდღიური ინგლისური'],
+[3,'EXPLORER / მკვლევარი','Stories & Communication / ისტორიები და კომუნიკაცია'],
+[4,'EXPLORER+ / მკვლევარი+','English Explorer / ინგლისურის მკვლევარი'],
+[5,'A2 BUILDER / A2 განვითარება','Everyday Skills / ყოველდღიური უნარები'],
+[6,'A2+ BUILDER / A2+ განვითარება','Real Life English / რეალური ცხოვრების ინგლისური'],
+[7,'B1 EXPLORER / B1 მკვლევარი','Thinking & Communication / აზროვნება და კომუნიკაცია'],
+[8,'B1+ WORLD / B1+ სამყარო','Modern World / თანამედროვე სამყარო'],
+[9,'ACADEMIC / აკადემიური','Academic English / აკადემიური ინგლისური'],
+[10,'B2 PATH / B2 გზა','B2 Skills / B2 უნარები'],
+[11,'ACADEMIC & EXAM / აკადემიური და საგამოცდო','Academic & Exam English / აკადემიური და საგამოცდო'],
+[12,'FUTURE READY / მომავლისთვის მზად','Future & Professional English / მომავლისა და პროფესიული ინგლისური']
+];
+const grid=document.getElementById('grades'),params=new URLSearchParams(location.search),requested=Number(params.get('grade')||0);
+const client=()=>window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;
+function render(active){
+grid.innerHTML=DATA.map(([g,l,d])=>'<article class="card '+(g===active?'selected':'')+'" id="grade-'+g+'"><div class="scene"><span class="level">'+l+'</span><div class="grade-no">G'+g+'</div></div><div class="body"><h2>🎓 Grade '+g+' / '+g+' კლასი</h2><p>'+d+'</p><a class="btn" href="grade'+g+'/">🚀 Open Grade '+g+' / '+g+' კლასის გახსნა →</a></div></article>').join('');
+if(active){const el=document.getElementById('grade-'+active);if(el)setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'center'}),80)}
+}
+async function init(){
+render(requested);
+const db=client(); if(!db)return;
+try{
+ const r=await db.auth.getSession(),u=r.data&&r.data.session&&r.data.session.user;
+ if(!u)return;
+ const p=await db.from('profiles').select('role,grade,full_name').eq('user_id',u.id).maybeSingle();
+ const profile=p.data||{},role=String(profile.role||'student').toLowerCase(),grade=Number(profile.grade||0),name=profile.full_name||u.email||'მოსწავლე';
+ const status=document.getElementById('status');
+ if(['teacher','admin','parent'].includes(role)){status.textContent='🟢 '+name+' • '+role+' • ყველა კლასი ხელმისაწვდომია';return}
+ if(grade>=1&&grade<=12){status.textContent='🟢 შენი კლასი: Grade '+grade+' • ერთიანი აკადემიის სივრცე';return}
+ status.textContent='🟡 ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული.';
+}catch(e){console.warn('[Unified Grades]',e)}
+}
+init();
+})();
+</script>
+</body>
+</html>
