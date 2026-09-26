@@ -95,6 +95,11 @@ const fallbackWorlds=grade===1?G1:G2;
 const lesson=n=>grade===1?fallbackG1(n):fallbackWorlds[Math.floor((n-1)/5)%fallbackWorlds.length];
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 function save(){try{localStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new CustomEvent('englishMariamiProgressUpdated',{detail:{grade,current:state.current,done:Array.isArray(state.done)?state.done.length:0}}))}catch(e){}}
+function nextIncomplete(done){
+  const set=new Set(Array.isArray(done)?done.map(Number):[]);
+  for(let n=1;n<=60;n++)if(!set.has(n))return n;
+  return 60;
+}
 async function loadServerProgress(){
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
   if(!client||!client.auth)return;
@@ -102,6 +107,11 @@ async function loadServerProgress(){
     const {data:userData,error:userError}=await client.auth.getUser();
     const user=userData&&userData.user;
     if(userError||!user)return;
+    const ownerId=String(state.ownerUserId||'');
+    if(ownerId!==String(user.id)){
+      state={...defaults,ownerUserId:String(user.id)};
+      save();
+    }
     const {data:rows,error:progressError}=await client.from('lesson_progress').select('lesson_id,completed').eq('student_id',user.id).eq('grade',grade).eq('completed',true);
     if(!progressError&&Array.isArray(rows)){
       const ids=rows.map(r=>String(r.lesson_id||'')).filter(Boolean);
@@ -115,6 +125,7 @@ async function loadServerProgress(){
       }
       state.done=[...new Set([...state.done,...serverDone])].sort((a,b)=>a-b);
       state.serverLessons=serverDone.length;
+      state.current=nextIncomplete(state.done);
     }
     const {data:reward,error:rewardError}=await client.from('academy_reward_state').select('xp,stars,lessons_completed').eq('student_id',user.id).maybeSingle();
     if(!rewardError&&reward){
