@@ -130,7 +130,7 @@
           if (role === "teacher") { setMessage("👩‍🏫 მასწავლებლის სივრცე იხსნება...", "success"); setTimeout(() => window.location.replace("/teacher-dashboard.html"), 500); return; }
           if (role === "parent") { setMessage("👨‍👩‍👧 მშობლის სივრცე იხსნება...", "success"); setTimeout(() => window.location.replace("/parent-space.html"), 500); return; }
           if (role === "student") {
-            if (![2,3,4].includes(grade)) { setMessage("⚠️ ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული. მასწავლებელმა უნდა დაგინიშნოს კლასი.", "error"); await client.auth.signOut(); return; }
+            if (!(grade >= 1 && grade <= 12)) { setMessage("⚠️ ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული. მასწავლებელმა უნდა დაგინიშნოს კლასი.", "error"); await client.auth.signOut(); return; }
             setMessage("✅ შესვლა წარმატებულია! იხსნება მე-" + grade + " კლასის სივრცე...", "success");
             const requested = new URLSearchParams(window.location.search).get("redirect") || "";
             const requestedGrade = requested.match(/^\\/grade([234])\\/(?:index\\.html)?/i);
