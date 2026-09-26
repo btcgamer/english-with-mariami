@@ -94,7 +94,7 @@ const G1=G1Topics.map((topic,i)=>[topic,G1Words[i],'Hello! My name is Mia.','Nic
 const fallbackWorlds=grade===1?G1:G2;
 const lesson=n=>grade===1?fallbackG1(n):fallbackWorlds[Math.floor((n-1)/5)%fallbackWorlds.length];
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-function save(){try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}}
+function save(){try{localStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new CustomEvent('englishMariamiProgressUpdated',{detail:{grade,current:state.current,done:Array.isArray(state.done)?state.done.length:0}}))}catch(e){}}
 async function loadServerProgress(){
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
   if(!client||!client.auth)return;
