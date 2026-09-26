@@ -48,6 +48,12 @@
       if(r.error)throw r.error;
 
       const local=readLocal();
+      const owner=String(local.ownerUserId||'');
+      if(owner!==String(user.id)){
+        writeLocal({...local,ownerUserId:String(user.id),done:[],current:1,stars:0,streak:0});
+        restored=true;
+        return;
+      }
       const localDone=normalizeDone(local.done);
       let remoteDone=[];
       if(r.data&&Array.isArray(r.data.learned_words))remoteDone=normalizeDone(r.data.learned_words);
