@@ -132,7 +132,12 @@
           if (role === "student") {
             if (![2,3,4].includes(grade)) { setMessage("⚠️ ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული. მასწავლებელმა უნდა დაგინიშნოს კლასი.", "error"); await client.auth.signOut(); return; }
             setMessage("✅ შესვლა წარმატებულია! იხსნება მე-" + grade + " კლასის სივრცე...", "success");
-            setTimeout(() => window.location.replace("/grade" + grade + ".html"), 500); return;
+            const requested = new URLSearchParams(window.location.search).get("redirect") || "";
+            const requestedGrade = requested.match(/^\\/grade([234])\\/(?:index\\.html)?/i);
+            const destination = requestedGrade && Number(requestedGrade[1]) === grade
+              ? requested
+              : "/grade" + grade + "/index.html?fresh=1";
+            setTimeout(() => window.location.replace(destination), 350); return;
           }
           setMessage("⚠️ ანგარიშის ტიპი ვერ განისაზღვრა. დაუკავშირდი მასწავლებელს.", "error");
           await client.auth.signOut();
