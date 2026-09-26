@@ -123,6 +123,7 @@
 
   restore();
   watch();
-  setInterval(watch,2000);
+  window.addEventListener('englishMariamiProgressUpdated',watch);
+  window.addEventListener('storage',function(e){if(e.key===KEY)watch();});
   window.addEventListener('beforeunload',sync);
 })();
