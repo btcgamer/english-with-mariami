@@ -1,0 +1,17 @@
+/* ENGLISH WITH MARIAMI — Unified Grade 1–12 Curriculum Standard
+   Each grade increases vocabulary, grammar, comprehension, speaking and critical-thinking difficulty.
+   UI/content contract: English + ქართული throughout. */
+window.ENGLISH_MARIAMI_CURRICULUM={
+  1:{level:'Pre-A1 / საწყისი',words:'8–12 new words/lesson / 8–12 ახალი სიტყვა',focus:'Alphabet, sounds, greetings, family, colors, numbers, simple sentences / ანბანი, ბგერები, მისალმება, ოჯახი, ფერები, რიცხვები, მარტივი წინადადებები'},
+  2:{level:'A1 / დამწყები',words:'12–16 new words/lesson / 12–16 ახალი სიტყვა',focus:'Daily life, school, home, food, routines, basic questions and answers / ყოველდღიური ცხოვრება, სკოლა, სახლი, საკვები, რუტინა, მარტივი კითხვები და პასუხები'},
+  3:{level:'A1+ / განვითარებადი',words:'16–22 new words/lesson / 16–22 ახალი სიტყვა',focus:'Stories, communication, descriptions, past events, opinions and short texts / ისტორიები, კომუნიკაცია, აღწერა, წარსული მოვლენები, მოსაზრებები და მოკლე ტექსტები'},
+  4:{level:'A2 / დაწყებითი საშუალო',words:'20–26 new words/lesson / 20–26 ახალი სიტყვა',focus:'Goals, health, environment, projects, evidence and structured communication / მიზნები, ჯანმრთელობა, გარემო, პროექტები, მტკიცებულება და სტრუქტურირებული კომუნიკაცია'},
+  5:{level:'A2 / A2 განვითარება',words:'8–12 core new words/lesson + review / 8–12 ახალი საკვანძო სიტყვა + გამეორება',focus:'Everyday English, stronger grammar patterns and short explanations / ყოველდღიური ინგლისური, გაძლიერებული გრამატიკული სტრუქტურები და მოკლე ახსნა'},
+  6:{level:'A2+ / A2+',words:'8–12 new words/lesson + collocations / 8–12 ახალი სიტყვა + სიტყვათა კომბინაციები',focus:'Real-life communication, frequency, comparison, explanation and longer texts / რეალური კომუნიკაცია, სიხშირე, შედარება, ახსნა და უფრო გრძელი ტექსტები'},
+  7:{level:'B1 / B1 განვითარება',words:'8–12 new words/lesson + academic chunks / 8–12 ახალი სიტყვა + აკადემიური ფრაზები',focus:'Reasoning, opinions, evidence, multi-paragraph reading and confident speaking / მსჯელობა, მოსაზრება, მტკიცებულება, მრავალაბზაციანი კითხვა და თავდაჯერებული საუბარი'},
+  8:{level:'B1+ / B1+',words:'8–12 new words/lesson + collocations / 8–12 ახალი სიტყვა + კოლოკაციები',focus:'Digital world, media, critical reading, argument and nuanced communication / ციფრული სამყარო, მედია, კრიტიკული კითხვა, არგუმენტი და უფრო ზუსტი კომუნიკაცია'},
+  9:{level:'B1+ / Academic / B1+ აკადემიური',words:'8–12 academic words/lesson / 8–12 აკადემიური სიტყვა',focus:'Academic study skills, evidence, analysis, synthesis and structured writing / აკადემიური უნარები, მტკიცებულება, ანალიზი, სინთეზი და სტრუქტურირებული წერა'},
+  10:{level:'B2 / B2 გზა',words:'8–12 advanced words/lesson / 8–12 მოწინავე სიტყვა',focus:'Advanced grammar, argumentation, formal communication and independent writing / მოწინავე გრამატიკა, არგუმენტაცია, ფორმალური კომუნიკაცია და დამოუკიდებელი წერა'},
+  11:{level:'B2 / Academic & Exam / B2 აკადემიური და საგამოცდო',words:'8–12 advanced academic words / 8–12 მოწინავე აკადემიური სიტყვა',focus:'Formal debate, counterarguments, evidence evaluation, exam and academic communication / ფორმალური დებატი, საპირისპირო არგუმენტი, მტკიცებულების შეფასება, გამოცდა და აკადემიური კომუნიკაცია'},
+  12:{level:'B2+ / Future Ready / B2+ მომავლისთვის მზად',words:'8–12 high-level words/lesson / 8–12 მაღალი დონის სიტყვა',focus:'Professional English, research, synthesis, presentations, advanced writing and final challenges / პროფესიული ინგლისური, კვლევა, სინთეზი, პრეზენტაცია, მოწინავე წერა და ფინალური გამოწვევები'}
+};
