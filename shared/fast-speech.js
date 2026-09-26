@@ -26,7 +26,7 @@
   };
   window.magicFastSpeak=speak;window.magicStopSpeech=stop;window.magicSpeechSupported=supported;
 
-  document.addEventListener('click',function(e){const el=e.target&&e.target.closest?e.target.closest('[data-speak]'):null;if(!el||el.disabled)return;const text=el.getAttribute('data-speak');if(!text)return;e.preventDefault();e.stopImmediatePropagation();speak(text,el.getAttribute('data-lang')||'en-US');},true);
+  document.addEventListener('click',function(e){const el=e.target&&e.target.closest?e.target.closest('[data-speak]'):null;if(!el||el.disabled)return;const text=el.getAttribute('data-speak');if(!text)return;const now=Date.now();const last=window.__magicAudioLastPlay;if(last&&last.el===el&&now-last.at<500)return;e.preventDefault();e.stopImmediatePropagation();window.__magicAudioLastPlay={el,at:now};speak(text,el.getAttribute('data-lang')||'en-US');},true);
   document.addEventListener('pointerdown',function(){if(!supported)return;try{synth.resume();}catch(e){}},{capture:true,passive:true});
 
   const renderDiagnostic=(r,status)=>{
