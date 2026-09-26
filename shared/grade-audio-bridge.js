@@ -28,7 +28,7 @@
     const text=getText(el); if(!text)return;
     const now=Date.now();
     if(lastPlayEl===el&&now-lastPlayAt<500)return;
-    lastPlayEl=el;lastPlayAt=now;
+    lastPlayEl=el;lastPlayAt=now;window.__magicAudioLastPlay={el,at:now};
     e.preventDefault();
     e.stopImmediatePropagation();
     play(el);
@@ -43,7 +43,7 @@
     if(!el||el.disabled||!getText(el))return;
     const now=Date.now();
     if(lastPlayEl===el&&now-lastPlayAt<500)return;
-    lastPlayEl=el;lastPlayAt=now;
+    lastPlayEl=el;lastPlayAt=now;window.__magicAudioLastPlay={el,at:now};
     try{play(el);}catch(err){console.warn('Grade audio touch fallback failed',err);}
   },{capture:true,passive:false});
 
