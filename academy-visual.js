@@ -46,8 +46,8 @@
       const el=panel.querySelector('#acc-stars'); if(el)el.textContent=stars;
     };
     refresh();
-    window.addEventListener('storage',refresh);
-    window.setInterval(refresh,4000);
+    window.addEventListener('storage',refresh,{passive:true});
+    window.addEventListener('englishMariamiProgressUpdated',refresh,{passive:true});
   }
 
   if (/\/academy\.html$/i.test(window.location.pathname)) {
