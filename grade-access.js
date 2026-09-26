@@ -4,11 +4,11 @@
   const m=(location.pathname||'').match(/(?:^|\/)grade([1234])(?:\/index\.html)?\/?$/i);
   if(!m)return;
   const current=Number(m[1]);
-  const ALLOWED=[1,2,3,4];
+  const ALLOWED=Array.from({length:12},(_,i)=>i+1);
   const PRIVILEGED=['teacher','parent','admin'];
   const client=()=>window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;
   const login=()=>location.replace('/login.html?redirect='+encodeURIComponent(location.pathname+location.search+location.hash));
-  const target=g=>({1:'/grade1/index.html',2:'/grade2/index.html',3:'/grade3/index.html',4:'/grade4/index.html'})[Number(g)]||'/academy.html';
+  const target=g=>`/grade${Number(g)}/index.html`;
 
   let checking=false;
   const sleep=ms=>new Promise(r=>setTimeout(r,ms));
