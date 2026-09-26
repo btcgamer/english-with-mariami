@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#010712">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="description" content="English with Mariami — ინტერაქტიული ინგლისურის აკადემია მე-1-დან მე-12 კლასის ჩათვლით.">
 <title>English with Mariami — Holographic Academy</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -45,5 +46,6 @@ function renderProgress(g){const s=stateFor(g),done=Array.isArray(s.done)?new Se
 async function init(){const db=client();if(!db){$('accountStatus').innerHTML='⚠️ <strong>კავშირის ინიციალიზაცია მიმდინარეობს…</strong>';return}try{const r=await db.auth.getSession(),u=r.data&&r.data.session&&r.data.session.user;if(!u){$('accountStatus').textContent='სისტემა მზად არის. შედი ანგარიშში, რათა გაიხსნას შენთვის მინიჭებული კლასი.';return}const p=await db.from('profiles').select('role,grade,full_name').eq('user_id',u.id).maybeSingle();const profile=p.data||{},role=String(profile.role||'student').toLowerCase(),grade=Number(profile.grade||0),name=profile.full_name||u.email||'მოსწავლე';$('authLink').textContent='👤 '+name; $('authLink').href='logout.html';if(ROLES.includes(role)){$('accountStatus').innerHTML='🟢 <strong>ავტორიზებული ანგარიში</strong> • '+role;return}if(role==='student'&&GRADES.includes(grade)){renderProgress(grade);$('accountStatus').innerHTML='🟢 <strong>შენი კლასი: Grade '+grade+'</strong> • სისტემა დაკავშირებულია და მზადაა';document.querySelectorAll('.grade-link').forEach(a=>{const g=Number(a.dataset.grade);if(g!==grade){a.style.opacity='.45';a.title='შენს ანგარიშს მინიჭებული აქვს Grade '+grade}})}else{$('accountStatus').textContent='⏳ ანგარიში აქტიურია, მაგრამ Grade ჯერ არ არის მინიჭებული.'}}catch(e){console.error('[Index Academy]',e);$('accountStatus').textContent='⚠️ ანგარიშის მონაცემების ჩატვირთვა ვერ მოხერხდა. სცადე თავიდან.'}}
 document.addEventListener('click',async e=>{const a=e.target.closest&&e.target.closest('.grade-link[data-grade]');if(!a)return;e.preventDefault();const db=client();if(!db){login();return}try{const r=await db.auth.getSession(),u=r.data&&r.data.session&&r.data.session.user;if(!u){login();return}const p=await db.from('profiles').select('role,grade').eq('user_id',u.id).maybeSingle(),profile=p.data||{},role=String(profile.role||'student').toLowerCase(),grade=Number(profile.grade||0),target=Number(a.dataset.grade);if(ROLES.includes(role)||(role==='student'&&grade===target))location.href=a.getAttribute('href');else alert(grade?'შენს ანგარიშზე მინიჭებულია მხოლოდ Grade '+grade+'.':'მასწავლებელს ჯერ არ აქვს Grade მინიჭებული.')}catch(err){console.error('[Index Grade Access]',err);alert('წვდომის შემოწმება ვერ მოხერხდა. სცადე თავიდან.')}});init();})();
 </script>
-<script src="news-system.js?v=20260924-g12"></script></body>
+<script src="news-system.js?v=20260924-g12"></script>
+<script src="pwa.js?v=20260927-pwa1"></script></body>
 </html>
