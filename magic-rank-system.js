@@ -26,6 +26,6 @@
     if(!panel){panel=document.createElement('section');panel.className='magic-rank-panel';panel.setAttribute('aria-label','Magic Academy rank and XP');root.appendChild(panel)}
     panel.innerHTML=`<div class="magic-rank-head"><span class="magic-rank-icon" aria-hidden="true">${r.icon}</span><div><small>MAGIC RANK</small><strong>${r.name}</strong></div><b>${xp.toLocaleString()} XP</b></div><div class="magic-xp-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${progress}"><i style="width:${progress}%"></i></div><div class="magic-rank-meta"><span>${r.i===4?'MAX RANK':'Next rank: '+r.next.toLocaleString()+' XP'}</span><span>${progress}%</span></div><div class="magic-badges"><span class="${s.words>=25?'earned':''}">📚 Word Seeker</span><span class="${s.quizzes>=1?'earned':''}">🎯 Quiz Caster</span><span class="${s.best>=90?'earned':''}">🏆 Score Master</span></div>`;
   }
-  function boot(){render();setInterval(render,2000);window.addEventListener('englishMariamiProgressUpdated',render)}
+  function boot(){render();window.addEventListener('englishMariamiProgressUpdated',render)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
