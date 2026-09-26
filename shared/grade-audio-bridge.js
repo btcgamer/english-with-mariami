@@ -5,6 +5,7 @@
   if(window.__magicGradeAudioBridge)return;
   window.__magicGradeAudioBridge=true;
 
+  let lastPlayEl=null,lastPlayAt=0;
   const getText=el=>String(el?.getAttribute('data-speak')||el?.dataset?.speak||'').trim();
   const play=el=>{
     const text=getText(el); if(!text)return false;
@@ -25,6 +26,9 @@
     const el=e.target&&e.target.closest?e.target.closest('[data-speak]'):null;
     if(!el||el.disabled)return;
     const text=getText(el); if(!text)return;
+    const now=Date.now();
+    if(lastPlayEl===el&&now-lastPlayAt<500)return;
+    lastPlayEl=el;lastPlayAt=now;
     e.preventDefault();
     e.stopImmediatePropagation();
     play(el);
@@ -37,7 +41,10 @@
   document.addEventListener('touchend',function(e){
     const el=e.target&&e.target.closest?e.target.closest('[data-speak]'):null;
     if(!el||el.disabled||!getText(el))return;
-    try{if(typeof window.magicFastSpeak==='function')play(el);}catch(err){}
+    const now=Date.now();
+    if(lastPlayEl===el&&now-lastPlayAt<500)return;
+    lastPlayEl=el;lastPlayAt=now;
+    try{play(el);}catch(err){console.warn('Grade audio touch fallback failed',err);}
   },{capture:true,passive:false});
 
   window.magicGradeAudio={play, supported:!!(window.speechSynthesis&&window.SpeechSynthesisUtterance)};
