@@ -1,7 +1,7 @@
 /* GRADE 3 — ALIEN PLANET / LIVING WORLD + AI EVOLUTION ENGINE */
 (function(){'use strict';
 const boot=()=>{if(document.body?.dataset.grade!=='3'||document.body.dataset.g3AlienBooted!=='1'||document.body.dataset.g3ZonesBooted)return;document.body.dataset.g3ZonesBooted='1';
-const drone=document.querySelector('.g3-drone'),holo=document.querySelector('.g3-ai-holo'),energy=document.querySelector('.g3-energy');if(!drone||!holo||!energy)return;
+const drone=document.querySelector('.g3-drone'),holo=document.querySelector('.g3-ai-holo'),energy=document.querySelector('.g3-energy');if(!drone||!holo||!energy)return;const fine=!matchMedia('(pointer:coarse)').matches;
 const messages={ready:'ALIEN CORE ONLINE',mission:'PORTAL LOCKED • MISSION READY',happy:'ENERGY SYNCHRONIZED ✦',alert:'CORE UNSTABLE • TRY AGAIN',think:'SCANNING YOUR ANSWER…',complete:'PLANET ENERGY SURGE ✦',mastery:'SKILL CORE EVOLVED ✦',near:'PROXIMITY LINK ESTABLISHED',world:'WORLD CORE DETECTED ✦',evolution:'ALIEN CORE EVOLVED ✦'};
 const zones=['aurora','crystal','nebula','forest','ocean','desert','ice','volcano','moon','temple','quantum','core'];let timer=0,px=innerWidth*.5,py=innerHeight*.5,tx=px,ty=py,lastSpark=0,env=null,lastEvolution=-1;
 const evoKey='magic-neon-grade-3-ai-evolution';
