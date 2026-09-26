@@ -133,7 +133,7 @@
             if (!(grade >= 1 && grade <= 12)) { setMessage("⚠️ ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული. მასწავლებელმა უნდა დაგინიშნოს კლასი.", "error"); await client.auth.signOut(); return; }
             setMessage("✅ შესვლა წარმატებულია! იხსნება მე-" + grade + " კლასის სივრცე...", "success");
             const requested = new URLSearchParams(window.location.search).get("redirect") || "";
-            const requestedGrade = requested.match(/^\\/grade([234])\\/(?:index\\.html)?/i);
+            const requestedGrade = requested.match(/^\\/grade([1-9]|1[0-2])\\/(?:index\\.html)?/i);
             const destination = requestedGrade && Number(requestedGrade[1]) === grade
               ? requested
               : "/grade" + grade + "/index.html?fresh=1";
