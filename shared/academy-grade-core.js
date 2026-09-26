@@ -122,6 +122,11 @@ async function loadServerProgress(){
       if(Number.isFinite(Number(reward.stars)))state.stars=Number(reward.stars);
       if(Number.isFinite(Number(reward.lessons_completed)))state.serverLessons=Number(reward.lessons_completed);
     }
+    const {data:streakRow,error:streakError}=await client.from('academy_streaks').select('current_streak,best_streak,last_active_date').eq('student_id',user.id).maybeSingle();
+    if(!streakError&&streakRow&&Number.isFinite(Number(streakRow.current_streak))){
+      state.streak=Number(streakRow.current_streak);
+      state.serverStreak=Number(streakRow.current_streak);
+    }
     save();
   }catch(error){console.warn('Grade '+grade+' server progress hydration skipped:',error)}
 }
@@ -129,10 +134,12 @@ async function recordMissionCompletion(missionNumber){
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
   if(!client||!client.rpc)return null;
   try{
+    const dbLesson=await loadDbLesson(missionNumber);
+    const activityId=dbLesson?.id?String(dbLesson.id):String(missionNumber);
     const {data,error}=await client.rpc('academy_record_activity',{
       p_grade:grade,
       p_activity_type:'lesson',
-      p_activity_id:String(missionNumber),
+      p_activity_id:activityId,
       p_score:1,
       p_max_score:1,
       p_points:10
@@ -189,15 +196,16 @@ function bind(){const writing=document.querySelector('[data-writing-answer]');if
   button.disabled=true;
   button.textContent='⏳ Saving mission...';
   const server=await recordMissionCompletion(mission);
-  if(!state.done.includes(mission))state.done.push(mission);
-  state.stars=(state.stars||0)+1;
-  state.streak=(state.streak||0)+1;
-  if(server){
-    if(Number.isFinite(Number(server.xp)))state.serverXp=Number(server.xp);
-    if(Number.isFinite(Number(server.stars)))state.stars=Number(server.stars);
-    if(Number.isFinite(Number(server.streak)))state.streak=Number(server.streak);
-    if(Number.isFinite(Number(server.lessons_completed)))state.serverLessons=Number(server.lessons_completed);
+  if(!server){
+    button.disabled=false;
+    button.textContent='⚠️ Save failed — try again';
+    return;
   }
+  if(!state.done.includes(mission))state.done.push(mission);
+  if(Number.isFinite(Number(server.xp)))state.serverXp=Number(server.xp);
+  if(Number.isFinite(Number(server.stars)))state.stars=Number(server.stars);
+  if(Number.isFinite(Number(server.streak)))state.streak=Number(server.streak);
+  if(Number.isFinite(Number(server.lessons_completed)))state.serverLessons=Number(server.lessons_completed);
   if(mission<60)state.current=mission+1;
   save();
   render();
