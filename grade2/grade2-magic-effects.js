@@ -24,7 +24,7 @@ function init(){
   function launch(el){const target=el.closest('.world,[data-m]')||el;if(!target)return;const r=target.getBoundingClientRect(),fx=document.createElement('div');fx.className='g2-mission-launch';fx.style.left=(r.left+r.width/2)+'px';fx.style.top=(r.top+r.height/2)+'px';body.appendChild(fx);setTimeout(()=>fx.remove(),800);state('mission',850)}
   let lastDoneCount=(currentState()||{}).done?.length||0;
   function detectCompletion(){const s=currentState(),count=Array.isArray(s?.done)?new Set(s.done).size:0;if(count>lastDoneCount){const mission=Number(s?.current)||0;const m=writeMemory({completed:(readMemory()?.completed||0)+(count-lastDoneCount),lastOutcome:'complete',lastMission:mission});lastDoneCount=count;state('complete',1400);celebration();if(m&&m.completed>=3)state('mastery',1800)}}
-  setInterval(detectCompletion,350);
+  window.addEventListener('englishMariamiProgressUpdated',detectCompletion);\n  window.addEventListener('storage',e=>{if(e.key===key)detectCompletion();});
   document.addEventListener('click',e=>{const el=e.target.closest('button,a');if(!el)return;
     if(el.matches('.world,[data-m]'))launch(el);
     if(el.matches('.choice[data-answer="right"]')){const m=writeMemory({correct:(readMemory()?.correct||0)+1,lastOutcome:'correct'});state(m&&m.correct>=5?'mastery':'happy',m&&m.correct>=5?1500:1200)}
