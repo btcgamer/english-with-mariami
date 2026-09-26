@@ -74,7 +74,7 @@
       if(world)markDirty();
     },true);
     window.addEventListener('storage',function(e){if(e.key===stateKey)markDirty()});
-    setInterval(()=>{if(getState())markDirty()},5000);
+    window.addEventListener('englishMariamiProgressUpdated',function(e){if(!e.detail||Number(e.detail.grade)===grade)markDirty()});
     window.addEventListener('beforeunload',()=>{if(dirty)save()});
   }
   if(window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient)boot();
