@@ -104,7 +104,15 @@ async function loadServerProgress(){
     if(userError||!user)return;
     const {data:rows,error:progressError}=await client.from('lesson_progress').select('lesson_id,completed').eq('student_id',user.id).eq('grade',grade).eq('completed',true);
     if(!progressError&&Array.isArray(rows)){
-      const serverDone=rows.map(r=>Number(r.lesson_id)).filter(n=>Number.isInteger(n)&&n>=1&&n<=60);
+      const ids=rows.map(r=>String(r.lesson_id||'')).filter(Boolean);
+      let serverDone=[];
+      if(ids.length){
+        const {data:lessonRows,error:lessonError}=await client.from('lessons').select('id,lesson_number').eq('grade',grade).in('id',ids);
+        if(!lessonError&&Array.isArray(lessonRows)){
+          const byId=new Map(lessonRows.map(r=>[String(r.id),Number(r.lesson_number)]));
+          serverDone=ids.map(id=>byId.get(id)).filter(n=>Number.isInteger(n)&&n>=1&&n<=60);
+        }
+      }
       state.done=[...new Set([...state.done,...serverDone])].sort((a,b)=>a-b);
       state.serverLessons=serverDone.length;
     }
