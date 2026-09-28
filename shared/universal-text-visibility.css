@@ -1,0 +1,19 @@
+/* English with Mariami — Universal text visibility / responsive safety layer.
+   Visual-only: never truncates lesson content or hides words. */
+*,*::before,*::after{box-sizing:border-box}
+html,body{max-width:100%;overflow-x:hidden}
+body{min-width:0}
+main,.app,.shell,.panel,.page,.content,.container,.card,.lesson,.lesson-card,.mission,.mission-card,.question,.question-card,.answer,.reading,.dialogue,.vocab,.vocabulary,.exercise,.exercise-card,.quiz,.quiz-card,.hud,.hud-card,.world,.world-card,.magic-mission-card{min-width:0;max-width:100%}
+h1,h2,h3,h4,h5,h6,p,span,small,strong,b,label,li,a,button,.title,.subtitle,.eyebrow,.chip,.wordbtn,.choice,.magic-target,.magic-list,.magic-list>*{max-width:100%;overflow-wrap:anywhere;word-break:normal}
+button,a,.btn,.wordbtn,.choice,.magic-world-btn,.magic-mission-open{height:auto;min-height:44px;white-space:normal;text-overflow:clip}
+input,textarea,select{max-width:100%;min-width:0}
+img,video,svg,canvas{max-width:100%;height:auto}
+.card,.panel,.lesson-card,.mission-card,.question-card,.quiz-card,.magic-mission-card{overflow:visible}
+.reading,.question,.dialogue,.example,.description,.translation,.instructions,.prompt,.lesson-text,.vocabulary,.grammar,.listening,.speaking,.exercise,.quiz,.content-text{white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+.grid,.vocab,.choicegrid,.magic-missions,.magic-targets{min-width:0}
+@media(max-width:800px){
+  main,.content,.container{width:100%;padding-left:12px;padding-right:12px}
+  .grid,.vocab,.choicegrid,.magic-missions,.magic-targets{grid-template-columns:1fr;min-width:0}
+  .btns{display:flex;flex-wrap:wrap}
+  button,a,.btn,.wordbtn,.choice,.magic-world-btn,.magic-mission-open{width:100%;max-width:100%;min-height:46px}
+}
