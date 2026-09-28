@@ -1,8 +1,8 @@
-/* English with Mariami — shared Grade 2/3/4 top navigation */
+/* English with Mariami — shared Grade 1–12 top navigation */
 (function(){
   'use strict';
   const grade=Number(document.body.dataset.grade||0);
-  if(![2,3,4].includes(grade)) return;
+  if(grade<1||grade>12) return;
   /* Cache-bust Academy so an older cached auth/config page cannot send an
      already-authenticated student back to login after Grade → Academy. */
   const ACADEMY=`../academy.html?ewm_auth_refresh=20260907`;
