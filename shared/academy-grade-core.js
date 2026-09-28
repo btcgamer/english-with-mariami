@@ -225,6 +225,7 @@ function refreshCompleteGate(){const b=document.querySelector('[data-complete]')
 function bind(){const writing=document.querySelector('[data-writing-answer]');if(writing){writing.value=localStorage.getItem(key+'-writing-'+state.current)||'';writing.addEventListener('input',()=>{try{localStorage.setItem(key+'-writing-'+state.current,writing.value)}catch(e){}})}document.querySelector('[data-save-writing]')?.addEventListener('click',()=>{try{localStorage.setItem(key+'-writing-'+state.current,writing?.value||'')}catch(e){}const m=document.querySelector('.writing-save-msg');if(m)m.textContent='✅ Writing saved on this device.'});document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{state.current=+b.dataset.m;save();render()});document.querySelector('[data-prev]')?.addEventListener('click',()=>{state.current=Math.max(1,state.current-1);save();render()});document.querySelector('[data-next]')?.addEventListener('click',()=>{if(!state.done.includes(state.current))return;state.current=Math.min(60,state.current+1);save();render()});document.querySelector('[data-complete]')?.addEventListener('click',async(e)=>{
   const button=e.currentTarget,mission=state.current;
   if(state.done.includes(mission))return;
+  if(!missionTestPassed()){refreshCompleteGate();return;}
   button.disabled=true;
   button.textContent='⏳ Saving mission...';
   const server=await recordMissionCompletion(mission);
