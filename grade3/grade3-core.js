@@ -49,7 +49,7 @@ if(!state.done.includes(n))state.done.push(n);
 if(Number.isFinite(Number(server.stars)))state.stars=Number(server.stars);else state.stars=(state.stars||0)+1;
 if(Number.isFinite(Number(server.streak)))state.streak=Number(server.streak);else state.streak=(state.streak||0)+1;
 if(n<60)state.current++;
-save();render();
+save();window.dispatchEvent(new CustomEvent('englishMariamiMissionCompleted',{detail:{grade:3,mission:n,final:n===60,xp:state.done.length*10,stars:state.stars,streak:state.streak}}));render();
 });document.querySelectorAll('[data-speak]').forEach(b=>b.onclick=()=>speak(b.dataset.speak));document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{const grid=b.closest('.choicegrid'),box=b.closest('.activity'),msg=box?.querySelector('.quizmsg')||document.querySelector('.quizmsg');if(b.dataset.ok==='true'){if(grid)grid.dataset.passed='1';msg.textContent='✅ Correct! Great job.'}else{msg.textContent='🔁 Try again — read the clue carefully.'}refreshCompleteGate()});document.querySelector('[data-save]')?.addEventListener('click',()=>refreshCompleteGate());refreshCompleteGate();document.querySelector('[data-save]')?.addEventListener('click',e=>{const n=e.currentTarget.dataset.save,input=document.querySelector('.answer');try{localStorage.setItem(`grade3-answer-${n}`,input.value)}catch(err){}document.querySelector('.save-msg').textContent='✅ Saved on this device.'})}
 window.addEventListener('DOMContentLoaded',render);
 })();
