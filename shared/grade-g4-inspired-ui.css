@@ -1,0 +1,27 @@
+/* MAGIC NEON AI ACADEMY — G4-inspired universal grade UI v2
+   Shared presentation layer for Grades 1–12. Content is never truncated. */
+:root{--academy-glow:#4de8ff;--academy-violet:#9b6cff;--academy-pink:#ff4fd8;--academy-gold:#ffd76a}
+body[data-grade] .vault{position:relative;margin:0 0 16px;padding:20px;border:1px solid rgba(120,220,255,.3);border-radius:20px;background:linear-gradient(145deg,rgba(10,22,48,.82),rgba(8,10,30,.72));box-shadow:0 14px 45px rgba(0,0,0,.22),0 0 28px rgba(77,232,255,.07),inset 0 0 35px rgba(155,108,255,.04);min-width:0;max-width:100%}
+body[data-grade] .vault h3{margin:0 0 14px;font-size:clamp(18px,2.5vw,25px);line-height:1.2;color:#fff;text-shadow:0 0 14px rgba(77,232,255,.35);overflow-wrap:anywhere}
+body[data-grade] .chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;min-width:0;max-width:100%}
+body[data-grade] .chips>span{display:block;min-width:0;max-width:100%;padding:12px 14px;border:1px solid rgba(77,232,255,.25);border-radius:13px;background:linear-gradient(135deg,rgba(77,232,255,.08),rgba(155,108,255,.08));color:#f3fbff;font-weight:850;font-size:15px;line-height:1.45;white-space:normal;overflow-wrap:anywhere;word-break:normal;box-shadow:inset 0 0 15px rgba(77,232,255,.025);transition:.18s}
+body[data-grade] .chips>span::before{content:"✦";color:var(--academy-gold);margin-right:7px;text-shadow:0 0 9px currentColor}
+body[data-grade] .chips>span:hover{transform:translateY(-2px);border-color:rgba(77,232,255,.65);box-shadow:0 0 18px rgba(77,232,255,.13)}
+body[data-grade] .mission-card{position:relative;margin:0 0 16px;padding:22px;border:1px solid rgba(120,220,255,.3);border-radius:20px;background:linear-gradient(145deg,rgba(12,23,50,.84),rgba(7,10,28,.75));box-shadow:0 16px 50px rgba(0,0,0,.22),0 0 30px rgba(77,232,255,.06);min-width:0;max-width:100%}
+body[data-grade] .mission-card>*{max-width:100%}
+body[data-grade] .mission-label{font:900 10px/1.2 system-ui,sans-serif;letter-spacing:.18em;color:var(--academy-glow);margin-bottom:8px}
+body[data-grade] .mission-card h2{margin:0 0 7px;font-size:clamp(20px,3vw,30px);line-height:1.2;overflow-wrap:anywhere}
+body[data-grade] .mission-card>p{margin:0 0 14px;color:#b9cbe0;line-height:1.6;overflow-wrap:anywhere}
+body[data-grade] .mission-task{padding:15px;border:1px solid rgba(77,232,255,.18);border-radius:15px;background:rgba(0,0,0,.16);min-width:0;max-width:100%;overflow:visible}
+body[data-grade] .content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 16px;min-width:0}
+body[data-grade] .content-grid>article{min-width:0;padding:19px;border:1px solid rgba(120,220,255,.22);border-radius:18px;background:rgba(10,18,42,.7);box-shadow:0 10px 32px rgba(0,0,0,.16)}
+body[data-grade] .content-grid h3{margin:0 0 9px;color:#fff;overflow-wrap:anywhere}
+body[data-grade] .content-grid p,body[data-grade] .content-grid strong{display:block;line-height:1.65;overflow-wrap:anywhere;word-break:normal}
+body[data-grade] .actions,body[data-grade] .bottom{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;min-width:0}
+body[data-grade] .actions .btn,body[data-grade] .bottom .btn{min-width:150px;white-space:normal;overflow-wrap:anywhere}
+body[data-grade] .ai{width:76px;height:76px;flex:0 0 76px;display:grid;place-items:center;border:1px solid rgba(77,232,255,.4);border-radius:22px;background:radial-gradient(circle at 40% 30%,rgba(255,255,255,.16),rgba(77,232,255,.1) 35%,rgba(8,12,32,.88) 70%);font-size:40px;box-shadow:0 0 25px rgba(77,232,255,.16)}
+body[data-grade] .hero{min-width:0;max-width:100%;padding:18px;border:1px solid rgba(120,220,255,.22);border-radius:20px;background:rgba(8,16,38,.64);margin-bottom:16px}
+body[data-grade] .hero h2,body[data-grade] .hero p{overflow-wrap:anywhere}
+@media(max-width:900px){body[data-grade] .chips{grid-template-columns:repeat(2,minmax(0,1fr))}body[data-grade] .content-grid{grid-template-columns:1fr}}
+@media(max-width:600px){body[data-grade] .vault,body[data-grade] .mission-card{padding:15px;border-radius:16px}body[data-grade] .chips{grid-template-columns:1fr;gap:8px}body[data-grade] .chips>span{font-size:15px;padding:11px 12px}body[data-grade] .content-grid{gap:10px}body[data-grade] .content-grid>article{padding:15px}.actions .btn,.bottom .btn{width:100%;min-width:0}body[data-grade] .ai{width:60px;height:60px;flex-basis:60px;font-size:32px}}
+@media(prefers-reduced-motion:reduce){body[data-grade] .chips>span{transition:none}}
