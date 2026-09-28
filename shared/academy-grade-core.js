@@ -1,5 +1,6 @@
 /* MAGIC NEON AI ACADEMY — shared interactive grade engine */
 (function(){'use strict';
+document.documentElement.dataset.ewmGradeRuntime='active';document.body.dataset.ewmGradeRuntime='active';
 const grade=Number(document.body.dataset.grade||2),key=`magic-neon-grade-${grade}`;
 const defaults={current:1,done:[],stars:0,streak:0};
 let state=defaults;
