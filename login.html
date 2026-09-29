@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <!-- Supabase configuration: force a fresh fetch after deployment -->
-  <script src="config.js?v=20260928-authfix"></script>
+  <script src="config.js?v=20260930-auth2"></script>
 
   <style>
     * { box-sizing: border-box; }
@@ -106,6 +106,32 @@
           setTimeout(done, 5000);
         });
       }
+      async function redirectIfAlreadyAuthenticated() {
+        try {
+          const auth = window.EWM_AUTH;
+          const result = auth ? await auth.waitForSession(6500) : {client: await getClient(), session: null};
+          const client = result.client || await getClient();
+          const session = result.session;
+          if (!client || !session || !session.user) return;
+          const p = auth ? await auth.profile(client, session.user.id) : await client.from("profiles").select("role,grade").eq("user_id", session.user.id).maybeSingle();
+          const profile = p.data || {};
+          const role = String(profile.role || "").trim().toLowerCase();
+          const grade = Number(profile.grade || 0);
+          const requested = new URLSearchParams(window.location.search).get("redirect") || "";
+          if (role === "teacher") return window.location.replace("/teacher-dashboard.html");
+          if (role === "parent") return window.location.replace("/parent-space.html");
+          if (role === "student" && grade >= 1 && grade <= 12) {
+            const requestedPath = requested.toLowerCase().split("?")[0].split("#")[0];
+            const parts = requestedPath.split("/").filter(Boolean);
+            const requestedGrade = parts[0] && parts[0].startsWith("grade") ? Number(parts[0].slice(5)) : 0;
+            const destination = requestedGrade === grade && (parts.length === 1 || parts[1] === "index.html")
+              ? requested
+              : "/grade" + grade + "/index.html?fresh=1";
+            return window.location.replace(destination);
+          }
+        } catch (e) { console.warn("[Login] Existing session check skipped:", e); }
+      }
+      redirectIfAlreadyAuthenticated();
       form.addEventListener("submit", async function (event) {
         event.preventDefault();
         setMessage("", "");
