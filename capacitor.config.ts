@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.englishwithmariami.academy',
   appName: 'English with Mariami',
-  webDir: '.',
+  webDir: 'www',
   bundledWebRuntime: false,
   android: {
     allowMixedContent: false
