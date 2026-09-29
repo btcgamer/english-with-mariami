@@ -76,6 +76,11 @@ test.describe('Cross-Grade Master QA — access matrix', () => {
 
   test('unauthenticated direct grade access fails closed', async ({ page }) => {
     const { pageErrors, consoleErrors } = captureErrors(page);
+    await page.context().clearCookies();
+    await page.addInitScript(() => {
+      localStorage.clear();
+      sessionStorage.clear();
+    });
     await page.goto(`${BASE}/grade2/`, { waitUntil: 'domcontentloaded' });
     await expect(page).toHaveURL(/\/login\.html\?redirect=/);
     expect(pageErrors).toEqual([]);
