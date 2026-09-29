@@ -6,7 +6,7 @@
     window.addEventListener('englishMariamiMissionCompleted',function(e){
       const n=Number(e&&e.detail&&e.detail.mission)||0;
       const heading=[...document.querySelectorAll('h1,h2,.title,.eyebrow')].map(x=>x.textContent||'').join(' ');
-      const isFinal=n===60||/MISSION\\s*60(?:\\s*\\/\\s*60)?/i.test(heading);
+      const isFinal=n===60||/MISSION\s*60(?:\s*\/\s*60)?/i.test(heading);
       const title=isFinal?'FINAL MISSION COMPLETE':'MISSION COMPLETE';
       const sub=isFinal?'60 / 60 • FINAL REWARD UNLOCKED':'XP ENERGY +10 • STAR CORE UPDATED • NEXT MISSION READY';
       const overlay=document.createElement('div');
