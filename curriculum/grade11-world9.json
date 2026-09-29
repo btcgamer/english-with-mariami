@@ -25,26 +25,106 @@
     "ellipsis, reformulation, repair and real-time adaptation during high-stakes technology communication"
   ],
   "missions": [
-    { "id": 1, "title": "AI Intelligence Gateway" },
-    { "id": 2, "title": "Digital Society Vocabulary Forge" },
-    { "id": 3, "title": "Human–Machine Communication Observatory" },
-    { "id": 4, "title": "AI Evidence & Reliability Lab" },
-    { "id": 5, "title": "Future Technology Listening Command" },
-    { "id": 6, "title": "Algorithms & Information Nexus" },
-    { "id": 7, "title": "AI Risk & Safety Reactor" },
-    { "id": 8, "title": "Automation & Future Work Arena" },
-    { "id": 9, "title": "Digital Futures Scenario Studio" },
-    { "id": 10, "title": "AI Research Synthesis Engine" },
-    { "id": 11, "title": "Executive Technology Briefing Command" },
-    { "id": 12, "title": "AI Governance & Regulation Portal" },
-    { "id": 13, "title": "Human–AI Negotiation Chamber" },
-    { "id": 14, "title": "Digital Policy Writing Forge" },
-    { "id": 15, "title": "Robotics, Interfaces & Smart Cities Lab" },
-    { "id": 16, "title": "AI Ethics & Communication Laboratory" },
-    { "id": 17, "title": "Live Future Intelligence Adaptation Simulation" },
-    { "id": 18, "title": "Integrated AI-to-Strategy Mission" },
-    { "id": 19, "title": "World 9 Mastery Integration Quest" },
-    { "id": 20, "title": "C2+ AI & Future Intelligence Master Challenge" }
+    {
+      "id": 1,
+      "title": "AI Intelligence Gateway",
+      "focus": "AI Intelligence Gateway"
+    },
+    {
+      "id": 2,
+      "title": "Digital Society Vocabulary Forge",
+      "focus": "Digital Society Vocabulary Forge"
+    },
+    {
+      "id": 3,
+      "title": "Human–Machine Communication Observatory",
+      "focus": "Human–Machine Communication Observatory"
+    },
+    {
+      "id": 4,
+      "title": "AI Evidence & Reliability Lab",
+      "focus": "AI Evidence & Reliability Lab"
+    },
+    {
+      "id": 5,
+      "title": "Future Technology Listening Command",
+      "focus": "Future Technology Listening Command"
+    },
+    {
+      "id": 6,
+      "title": "Algorithms & Information Nexus",
+      "focus": "Algorithms & Information Nexus"
+    },
+    {
+      "id": 7,
+      "title": "AI Risk & Safety Reactor",
+      "focus": "AI Risk & Safety Reactor"
+    },
+    {
+      "id": 8,
+      "title": "Automation & Future Work Arena",
+      "focus": "Automation & Future Work Arena"
+    },
+    {
+      "id": 9,
+      "title": "Digital Futures Scenario Studio",
+      "focus": "Digital Futures Scenario Studio"
+    },
+    {
+      "id": 10,
+      "title": "AI Research Synthesis Engine",
+      "focus": "AI Research Synthesis Engine"
+    },
+    {
+      "id": 11,
+      "title": "Executive Technology Briefing Command",
+      "focus": "Executive Technology Briefing Command"
+    },
+    {
+      "id": 12,
+      "title": "AI Governance & Regulation Portal",
+      "focus": "AI Governance & Regulation Portal"
+    },
+    {
+      "id": 13,
+      "title": "Human–AI Negotiation Chamber",
+      "focus": "Human–AI Negotiation Chamber"
+    },
+    {
+      "id": 14,
+      "title": "Digital Policy Writing Forge",
+      "focus": "Digital Policy Writing Forge"
+    },
+    {
+      "id": 15,
+      "title": "Robotics, Interfaces & Smart Cities Lab",
+      "focus": "Robotics, Interfaces & Smart Cities Lab"
+    },
+    {
+      "id": 16,
+      "title": "AI Ethics & Communication Laboratory",
+      "focus": "AI Ethics & Communication Laboratory"
+    },
+    {
+      "id": 17,
+      "title": "Live Future Intelligence Adaptation Simulation",
+      "focus": "Live Future Intelligence Adaptation Simulation"
+    },
+    {
+      "id": 18,
+      "title": "Integrated AI-to-Strategy Mission",
+      "focus": "Integrated AI-to-Strategy Mission"
+    },
+    {
+      "id": 19,
+      "title": "World 9 Mastery Integration Quest",
+      "focus": "World 9 Mastery Integration Quest"
+    },
+    {
+      "id": 20,
+      "title": "C2+ AI & Future Intelligence Master Challenge",
+      "focus": "C2+ AI & Future Intelligence Master Challenge"
+    }
   ],
   "scenarios": [
     "Global AI Governance Council",
