@@ -25,26 +25,106 @@
     "real-time self-monitoring, clarification, reformulation and precision under pressure"
   ],
   "missions": [
-    {"id": 1, "title": "Global Mastery Gateway"},
-    {"id": 2, "title": "C2+ Precision Vocabulary Forge"},
-    {"id": 3, "title": "Integrated Meaning Observatory"},
-    {"id": 4, "title": "Advanced Discourse Architecture Nexus"},
-    {"id": 5, "title": "Expert Listening Intelligence Command"},
-    {"id": 6, "title": "Deep Reading & Inference Lab"},
-    {"id": 7, "title": "Evidence, Stance & Uncertainty Reactor"},
-    {"id": 8, "title": "Strategic Argument & Decision Arena"},
-    {"id": 9, "title": "Global Negotiation & Mediation Chamber"},
-    {"id": 10, "title": "Executive Leadership Briefing Command"},
-    {"id": 11, "title": "Cross-Cultural Communication Portal"},
-    {"id": 12, "title": "Systems Thinking & Futures Studio"},
-    {"id": 13, "title": "Research-to-Strategy Synthesis Engine"},
-    {"id": 14, "title": "Mastery Writing & Rhetoric Forge"},
-    {"id": 15, "title": "High-Stakes Crisis Communication Lab"},
-    {"id": 16, "title": "Human-Centered Influence & Ethics Arena"},
-    {"id": 17, "title": "Live Global Adaptation Simulation"},
-    {"id": 18, "title": "Integrated Global Intelligence Mission"},
-    {"id": 19, "title": "World 10 Mastery Integration Quest"},
-    {"id": 20, "title": "C2+ Global Mastery Graduation Challenge"}
+    {
+      "id": 1,
+      "title": "Global Mastery Gateway",
+      "focus": "Global Mastery Gateway"
+    },
+    {
+      "id": 2,
+      "title": "C2+ Precision Vocabulary Forge",
+      "focus": "C2+ Precision Vocabulary Forge"
+    },
+    {
+      "id": 3,
+      "title": "Integrated Meaning Observatory",
+      "focus": "Integrated Meaning Observatory"
+    },
+    {
+      "id": 4,
+      "title": "Advanced Discourse Architecture Nexus",
+      "focus": "Advanced Discourse Architecture Nexus"
+    },
+    {
+      "id": 5,
+      "title": "Expert Listening Intelligence Command",
+      "focus": "Expert Listening Intelligence Command"
+    },
+    {
+      "id": 6,
+      "title": "Deep Reading & Inference Lab",
+      "focus": "Deep Reading & Inference Lab"
+    },
+    {
+      "id": 7,
+      "title": "Evidence, Stance & Uncertainty Reactor",
+      "focus": "Evidence, Stance & Uncertainty Reactor"
+    },
+    {
+      "id": 8,
+      "title": "Strategic Argument & Decision Arena",
+      "focus": "Strategic Argument & Decision Arena"
+    },
+    {
+      "id": 9,
+      "title": "Global Negotiation & Mediation Chamber",
+      "focus": "Global Negotiation & Mediation Chamber"
+    },
+    {
+      "id": 10,
+      "title": "Executive Leadership Briefing Command",
+      "focus": "Executive Leadership Briefing Command"
+    },
+    {
+      "id": 11,
+      "title": "Cross-Cultural Communication Portal",
+      "focus": "Cross-Cultural Communication Portal"
+    },
+    {
+      "id": 12,
+      "title": "Systems Thinking & Futures Studio",
+      "focus": "Systems Thinking & Futures Studio"
+    },
+    {
+      "id": 13,
+      "title": "Research-to-Strategy Synthesis Engine",
+      "focus": "Research-to-Strategy Synthesis Engine"
+    },
+    {
+      "id": 14,
+      "title": "Mastery Writing & Rhetoric Forge",
+      "focus": "Mastery Writing & Rhetoric Forge"
+    },
+    {
+      "id": 15,
+      "title": "High-Stakes Crisis Communication Lab",
+      "focus": "High-Stakes Crisis Communication Lab"
+    },
+    {
+      "id": 16,
+      "title": "Human-Centered Influence & Ethics Arena",
+      "focus": "Human-Centered Influence & Ethics Arena"
+    },
+    {
+      "id": 17,
+      "title": "Live Global Adaptation Simulation",
+      "focus": "Live Global Adaptation Simulation"
+    },
+    {
+      "id": 18,
+      "title": "Integrated Global Intelligence Mission",
+      "focus": "Integrated Global Intelligence Mission"
+    },
+    {
+      "id": 19,
+      "title": "World 10 Mastery Integration Quest",
+      "focus": "World 10 Mastery Integration Quest"
+    },
+    {
+      "id": 20,
+      "title": "C2+ Global Mastery Graduation Challenge",
+      "focus": "C2+ Global Mastery Graduation Challenge"
+    }
   ],
   "scenarios": [
     "Global Leadership Council",
