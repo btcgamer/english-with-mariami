@@ -161,25 +161,24 @@
 
     window.dispatchEvent(new CustomEvent('magicCurriculumMissionComplete',{detail:{grade:state.grade,world:state.world,mission:num,xpEarned:getConfig().xpPerMission,starsEarned:getConfig().starsPerMission,xpTotal:xpTotal(),starsTotal:starsTotal()}}));
 
+    // Keep the completion modal open so the completed state is immediately
+    // observable to the UI and automated runtime QA. World unlocks are still
+    // rendered immediately, but mission/world auto-navigation is intentionally
+    // not performed here; users can choose the next mission/world explicitly.
     const nextMission=getNextMissionNumber(num);
     if(nextMission!=null){
-      showMissionFlowNotice(`MISSION ${num} COMPLETE ✓ • NEXT MISSION ${nextMission} ACTIVATING…`);
-      closeMissionModal();
-      queueNextMission(nextMission);
+      showMissionFlowNotice(`MISSION ${num} COMPLETE ✓ • NEXT MISSION ${nextMission} READY`);
       return;
     }
 
     const nextWorld=state.world+1;
     if(nextWorld<=getConfig().worldCount && completedInWorld(state.world)>=getConfig().missionCount){
-      showMissionFlowNotice(`WORLD ${state.world} COMPLETE ✓ • WORLD ${nextWorld} UNLOCKED…`);
-      closeMissionModal();
+      showMissionFlowNotice(`WORLD ${state.world} COMPLETE ✓ • WORLD ${nextWorld} UNLOCKED`);
       renderWorldNav(document.querySelector('[data-curriculum-world-nav]'),state.grade,state.world);
-      queueNextWorld(nextWorld);
       return;
     }
 
     showMissionFlowNotice('ALL WORLDS COMPLETE • MASTER STATUS');
-    closeMissionModal();
   }
 
   function restoreProgress(){
