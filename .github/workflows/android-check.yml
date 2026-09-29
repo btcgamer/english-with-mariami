@@ -1,0 +1,32 @@
+name: Android App Check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'package.json'
+      - 'capacitor.config.ts'
+      - '**/*.html'
+      - '**/*.js'
+      - '**/*.css'
+      - 'manifest.webmanifest'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Add Android platform
+        run: npx cap add android
+      - name: Sync web app
+        run: npx cap sync android
+      - name: Validate Android release build
+        working-directory: android
+        run: ./gradlew bundleRelease
