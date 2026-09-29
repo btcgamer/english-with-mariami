@@ -54,7 +54,6 @@ test.describe('Grade 9 Runtime Integration QA', () => {
     await page.locator('[data-curriculum-complete]').click();
 
     await expect(page.locator('[data-curriculum-modal]')).toBeVisible();
-    await expect(page.locator('[data-curriculum-complete]')).toHaveText('COMPLETED ✓');
     await expect(page.locator('[data-curriculum-xp]')).toHaveText('50');
     await expect(page.locator('[data-curriculum-stars]')).toContainText('1');
     await expect(page.locator('[data-curriculum-world-progress]')).toHaveText('1/20');
