@@ -14,6 +14,7 @@ if (!/signingConfigs\s*\{[\s\S]*?release\s*\{/.test(s)) {
   const signing = `signingConfigs {
         release {
             storeFile file(System.getenv('ANDROID_KEYSTORE_PATH'))
+            storeType 'PKCS12'
             storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
             keyAlias System.getenv('ANDROID_KEY_ALIAS')
             keyPassword System.getenv('ANDROID_KEY_PASSWORD')
@@ -36,4 +37,5 @@ s = s.replace(/(release\s*\{)(?![\s\S]*?signingConfig)/, '$1\n            signin
 fs.writeFileSync(file, s);
 
 if (!/signingConfig\s+signingConfigs\.release/.test(s)) throw new Error('Release signing config was not applied');
+if (!/storeType\s+['"]PKCS12['"]/.test(s)) throw new Error('PKCS12 store type was not applied');
 console.log(`Android release configured: version ${process.env.ANDROID_VERSION_NAME} (${process.env.ANDROID_VERSION_CODE})`);
