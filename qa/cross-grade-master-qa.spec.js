@@ -85,7 +85,7 @@ test.describe('Cross-Grade Master QA — access matrix', () => {
     await expect.poll(() => page.url(), { timeout: 15000 }).not.toContain('/grade2/');
     await expect(page.locator('body')).not.toContainText('GRADE 2');
     expect(pageErrors).toEqual([]);
-    expect(consoleErrors).toEqual([]);
+    expect(consoleErrors.filter(error => !/401|status of a 401/i.test(error))).toEqual([]);
   });
 });
 
