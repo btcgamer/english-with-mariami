@@ -3,7 +3,7 @@
   'use strict';
 
   /* Native Capacitor builds do not need a browser PWA service worker/install prompt. */
-  var nativeApp = !!(window.Capacitor) || location.protocol === 'capacitor:' || location.hostname === 'localhost';
+  var nativeApp = !!(window.Capacitor) || location.protocol === 'capacitor:';
   if(nativeApp){
     document.documentElement.classList.add('is-native-app');
     return;
