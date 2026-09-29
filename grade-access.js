@@ -52,7 +52,7 @@
       const g=Number(profile.grade||0);
       if(!ALLOWED.includes(g))return login();
       if(g!==current)return location.replace(target(g));
-    }catch(e){console.error('[Grade Access] transient check error',e);}
+    }catch(e){console.error('[Grade Access] transient check error',e);return login();}
     finally{checking=false;}
   }
 
