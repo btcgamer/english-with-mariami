@@ -2,6 +2,13 @@
 (function(){
   'use strict';
 
+  /* Native Capacitor builds do not need a browser PWA service worker/install prompt. */
+  var nativeApp = !!(window.Capacitor) || location.protocol === 'capacitor:' || location.hostname === 'localhost';
+  if(nativeApp){
+    document.documentElement.classList.add('is-native-app');
+    return;
+  }
+
   var standalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
   var iosStandalone = window.navigator.standalone === true;
   document.documentElement.classList.toggle('is-pwa', !!(standalone || iosStandalone));
