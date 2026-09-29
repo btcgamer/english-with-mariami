@@ -25,10 +25,19 @@ jobs:
         run: npm install
       - name: Prepare web bundle
         run: npm run web:prepare
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
       - name: Add Android platform
         run: npx cap add android
+      - name: Prepare Android API 36
+        run: node scripts/prepare-android.mjs
+      - name: Generate Android icons and splash
+        run: npx @capacitor/assets generate --android --assetPath assets --iconBackgroundColor '#050814' --iconBackgroundColorDark '#03050c' --splashBackgroundColor '#050814' --splashBackgroundColorDark '#03050c'
       - name: Sync web app
         run: npx cap sync android
       - name: Validate Android release build
         working-directory: android
-        run: ./gradlew bundleRelease
+        run: ./gradlew bundleRelease --stacktrace
