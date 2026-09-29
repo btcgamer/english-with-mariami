@@ -13,40 +13,62 @@ on:
       - 'assets/**'
       - 'scripts/**'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - name: Install dependencies
         run: npm install
+
       - name: Prepare web bundle
         run: npm run web:prepare
+
+      - name: Validate web bundle
+        run: |
+          test -s www/index.html
+          test -s www/manifest.webmanifest
+          test -s capacitor.config.ts
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
+          cache: gradle
+
       - name: Add Android platform
         run: npx cap add android
+
       - name: Prepare Android API 36
         run: node scripts/prepare-android.mjs
+
       - name: Generate Android icons and splash
         run: npx @capacitor/assets generate --android --assetPath assets --iconBackgroundColor '#050814' --iconBackgroundColorDark '#03050c' --splashBackgroundColor '#050814' --splashBackgroundColorDark '#03050c'
+
       - name: Sync web app
         run: npx cap sync android
+
       - name: Validate Android release build
         working-directory: android
         run: ./gradlew bundleRelease --stacktrace
+
       - name: Verify AAB exists
         run: |
           test -s android/app/build/outputs/bundle/release/app-release.aab
           unzip -t android/app/build/outputs/bundle/release/app-release.aab >/dev/null
+
       - name: Upload unsigned release AAB for QA
         uses: actions/upload-artifact@v4
         with:
