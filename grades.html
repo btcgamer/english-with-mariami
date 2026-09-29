@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#010712">
 <title>English with Mariami — Grades 1–12</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js?v=20260927"></script>
+<script src="config.js?v=20260930-auth2"></script>
 <script src="shared/grade-curriculum.js?v=20260927"></script>
 <style>
 :root{--c:#00eaff;--b:#008cff;--p:#8b5cff;--g:#39ff88;--bg:#010712;--card:rgba(2,15,35,.9);--muted:#9fc5cf}
@@ -44,15 +44,17 @@ if(active){const el=document.getElementById('grade-'+active);if(el)setTimeout(()
 }
 async function init(){
 render(requested);
-const db=client(); if(!db)return;
+const auth=window.EWM_AUTH;
+const result=auth?await auth.waitForSession(8000):{client:client(),session:null,error:null};
+const db=result.client||client(),u=result.session&&result.session.user;
+if(!db)return;
+if(!u)return;
 try{
- const r=await db.auth.getSession(),u=r.data&&r.data.session&&r.data.session.user;
- if(!u)return;
- const p=await db.from('profiles').select('role,grade,full_name').eq('user_id',u.id).maybeSingle();
+ const p=auth?await auth.profile(db,u.id):await db.from('profiles').select('role,grade,full_name').eq('user_id',u.id).maybeSingle();
  const profile=p.data||{},role=String(profile.role||'student').toLowerCase(),grade=Number(profile.grade||0),name=profile.full_name||u.email||'მოსწავლე';
  const status=document.getElementById('status');
  if(['teacher','admin','parent'].includes(role)){status.textContent='🟢 '+name+' • '+role+' • ყველა კლასი ხელმისაწვდომია';return}
- if(grade>=1&&grade<=12){status.textContent='🟢 შენი კლასი: Grade '+grade+' • ერთიანი აკადემიის სივრცე';return}
+ if(grade>=1&&grade<=12){status.textContent='🟢 '+name+' • შენი კლასი: Grade '+grade+' • ერთიანი აკადემიის სივრცე';return}
  status.textContent='🟡 ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული.';
 }catch(e){console.warn('[Unified Grades]',e)}
 }
