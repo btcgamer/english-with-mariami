@@ -31,13 +31,21 @@
       resetTransientMission();
       window.location.assign(new URL(ACADEMY,window.location.href).href);
     });
-    nav.querySelector('.logout-btn').addEventListener('click',function(){
+    nav.querySelector('.logout-btn').addEventListener('click',async function(){
       const ok=window.confirm('Log out of English with Mariami?');
       if(!ok) return;
+      const btn=this;
+      btn.disabled=true;
+      btn.textContent='⏳ Logging out...';
       try{
+        const db=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient||null;
+        if(db&&db.auth&&typeof db.auth.signOut==='function'){
+          const result=await db.auth.signOut();
+          if(result&&result.error) console.warn('[Grade Nav] signOut warning:',result.error);
+        }
         Object.keys(localStorage).forEach(function(k){if(/^supabase\.auth\.token$|^sb-.*-auth-token$/.test(k)) localStorage.removeItem(k);});
         sessionStorage.clear();
-      }catch(e){}
+      }catch(e){console.warn('[Grade Nav] logout cleanup warning:',e);}
       window.location.href='../login.html?reason=logout';
     });
   }
