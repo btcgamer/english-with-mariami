@@ -8,7 +8,7 @@
 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="config.js"></script>
+  <script src="config.js?v=20260930-auth2"></script>
 
   <style>
     :root{
@@ -2577,6 +2577,13 @@
       user
     ){
 
+      if(window.EWM_AUTH&&typeof window.EWM_AUTH.profile==="function"){
+        const shared=await window.EWM_AUTH.profile(client,user.id);
+        if(shared.error && !shared.data){
+          console.warn("Profile loading warning:",shared.error);
+        }
+        return shared.data || null;
+      }
       const result =
         await client
           .from("profiles")
@@ -2589,15 +2596,11 @@
           )
           .maybeSingle();
 
-      if(result.error){
-
-        console.error(
-          "Profile loading error:",
+      if(result.error && !result.data){
+        console.warn(
+          "Profile loading warning:",
           result.error
         );
-
-        throw result.error;
-
       }
 
       return result.data || null;
@@ -2646,30 +2649,49 @@
            GET CURRENT SESSION
         --------------------------------------------- */
 
-        const {
-          data:sessionData,
-          error:sessionError
-        } =
-          await client.auth.getSession();
+        let session=null;
+        let sessionError=null;
+        if(window.EWM_AUTH&&typeof window.EWM_AUTH.waitForSession==="function"){
+          const auth=await window.EWM_AUTH.waitForSession(8000);
+          if(auth.client) client=auth.client;
+          session=auth.session||null;
+          sessionError=auth.error||null;
+        }else{
+          const {
+            data:sessionData,
+            error:err
+          } = await client.auth.getSession();
+          session=sessionData?.session||null;
+          sessionError=err||null;
+        }
 
-        if(sessionError){
+        if(sessionError && !session){
 
-          console.error(
-            "Session error:",
+          console.warn(
+            "Session check warning:",
             sessionError
           );
 
-          await client.auth.signOut({
-            scope:"local"
-          });
+          setLoaderText(
+            "ვერ ვიღებთ სესიის მონაცემებს. ვცდით ხელახლა..."
+          );
 
-          redirectToLogin();
-          return;
+          await new Promise(resolve=>setTimeout(resolve,700));
 
+          try{
+            const retry=await client.auth.getSession();
+            session=retry.data?.session||null;
+            sessionError=retry.error||null;
+          }catch(retryError){
+            sessionError=retryError;
+          }
+
+          if(sessionError && !session){
+            setLoaderText("სისტემასთან კავშირი დროებით შეფერხებულია.");
+            setTimeout(redirectToLogin,1200);
+            return;
+          }
         }
-
-        const session =
-          sessionData?.session;
 
         const user =
           session?.user;
