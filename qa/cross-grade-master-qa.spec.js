@@ -13,7 +13,8 @@ function mockAuth(role, grade) {
         select() { return this; },
         eq() { return this; },
         maybeSingle: async () => ({ data: profiles, error: null }),
-        upsert: async () => ({ data: null, error: null })
+        upsert: async () => ({ data: null, error: null }),
+        rpc: async () => ({ data: { xp: 10, stars: 1, streak: 1, lessons_completed: 1 }, error: null })
       };
       window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = {
         auth: {
