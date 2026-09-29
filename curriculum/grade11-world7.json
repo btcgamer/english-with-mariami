@@ -25,26 +25,106 @@
     "ellipsis, reformulation, clarification and real-time repair under high-stakes pressure"
   ],
   "missions": [
-    {"id": 1, "title": "Diplomatic Intelligence Gateway"},
-    {"id": 2, "title": "Geopolitics Vocabulary Forge"},
-    {"id": 3, "title": "Power & Interests Observatory"},
-    {"id": 4, "title": "International Institutions Lab"},
-    {"id": 5, "title": "Diplomatic Listening Command"},
-    {"id": 6, "title": "Conflict & Cooperation Nexus"},
-    {"id": 7, "title": "Negotiation & Mediation Reactor"},
-    {"id": 8, "title": "Sanctions, Security & Risk Arena"},
-    {"id": 9, "title": "Alliance & Multilateral Strategy Studio"},
-    {"id": 10, "title": "Foreign Policy Research Synthesis Engine"},
-    {"id": 11, "title": "Diplomatic Briefing Command"},
-    {"id": 12, "title": "Cross-Cultural Protocol Portal"},
-    {"id": 13, "title": "Crisis De-escalation Chamber"},
-    {"id": 14, "title": "Treaty & Agreement Writing Forge"},
-    {"id": 15, "title": "Global South & Regional Perspectives Lab"},
-    {"id": 16, "title": "Strategic Communication Ethics Laboratory"},
-    {"id": 17, "title": "Live Diplomatic Adaptation Simulation"},
-    {"id": 18, "title": "Integrated Geopolitics-to-Strategy Mission"},
-    {"id": 19, "title": "World 7 Mastery Integration Quest"},
-    {"id": 20, "title": "C2+ Diplomacy & Geopolitical Strategy Master Challenge"}
+    {
+      "id": 1,
+      "title": "Diplomatic Intelligence Gateway",
+      "focus": "Diplomatic Intelligence Gateway"
+    },
+    {
+      "id": 2,
+      "title": "Geopolitics Vocabulary Forge",
+      "focus": "Geopolitics Vocabulary Forge"
+    },
+    {
+      "id": 3,
+      "title": "Power & Interests Observatory",
+      "focus": "Power & Interests Observatory"
+    },
+    {
+      "id": 4,
+      "title": "International Institutions Lab",
+      "focus": "International Institutions Lab"
+    },
+    {
+      "id": 5,
+      "title": "Diplomatic Listening Command",
+      "focus": "Diplomatic Listening Command"
+    },
+    {
+      "id": 6,
+      "title": "Conflict & Cooperation Nexus",
+      "focus": "Conflict & Cooperation Nexus"
+    },
+    {
+      "id": 7,
+      "title": "Negotiation & Mediation Reactor",
+      "focus": "Negotiation & Mediation Reactor"
+    },
+    {
+      "id": 8,
+      "title": "Sanctions, Security & Risk Arena",
+      "focus": "Sanctions, Security & Risk Arena"
+    },
+    {
+      "id": 9,
+      "title": "Alliance & Multilateral Strategy Studio",
+      "focus": "Alliance & Multilateral Strategy Studio"
+    },
+    {
+      "id": 10,
+      "title": "Foreign Policy Research Synthesis Engine",
+      "focus": "Foreign Policy Research Synthesis Engine"
+    },
+    {
+      "id": 11,
+      "title": "Diplomatic Briefing Command",
+      "focus": "Diplomatic Briefing Command"
+    },
+    {
+      "id": 12,
+      "title": "Cross-Cultural Protocol Portal",
+      "focus": "Cross-Cultural Protocol Portal"
+    },
+    {
+      "id": 13,
+      "title": "Crisis De-escalation Chamber",
+      "focus": "Crisis De-escalation Chamber"
+    },
+    {
+      "id": 14,
+      "title": "Treaty & Agreement Writing Forge",
+      "focus": "Treaty & Agreement Writing Forge"
+    },
+    {
+      "id": 15,
+      "title": "Global South & Regional Perspectives Lab",
+      "focus": "Global South & Regional Perspectives Lab"
+    },
+    {
+      "id": 16,
+      "title": "Strategic Communication Ethics Laboratory",
+      "focus": "Strategic Communication Ethics Laboratory"
+    },
+    {
+      "id": 17,
+      "title": "Live Diplomatic Adaptation Simulation",
+      "focus": "Live Diplomatic Adaptation Simulation"
+    },
+    {
+      "id": 18,
+      "title": "Integrated Geopolitics-to-Strategy Mission",
+      "focus": "Integrated Geopolitics-to-Strategy Mission"
+    },
+    {
+      "id": 19,
+      "title": "World 7 Mastery Integration Quest",
+      "focus": "World 7 Mastery Integration Quest"
+    },
+    {
+      "id": 20,
+      "title": "C2+ Diplomacy & Geopolitical Strategy Master Challenge",
+      "focus": "C2+ Diplomacy & Geopolitical Strategy Master Challenge"
+    }
   ],
   "scenarios": [
     "International Security Council",
