@@ -4,10 +4,11 @@
   "private": true,
   "description": "English with Mariami — Holographic English Academy",
   "scripts": {
-    "android:add": "npx cap add android",
-    "android:sync": "npx cap sync android",
+    "web:prepare": "node scripts/prepare-web.mjs",
+    "android:add": "npm run web:prepare && npx cap add android",
+    "android:sync": "npm run web:prepare && npx cap sync android",
     "android:open": "npx cap open android",
-    "android:build": "cd android && ./gradlew bundleRelease"
+    "android:build": "npm run android:sync && cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
     "@capacitor/core": "^7.4.3"
