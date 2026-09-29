@@ -27,8 +27,9 @@ test(`Grade ${GRADE} — 60 mission runtime QA`, async ({ page }) => {
       upsert: async () => ({ data: null, error: null })
     };
     window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = {
-      auth: { getUser: async () => ({ data: { user }, error: null }) },
-      from: () => chain
+      auth: { getUser: async () => ({ data: { user }, error: null }), getSession: async () => ({ data: { session: { user } }, error: null }) },
+      from: () => chain,
+      rpc: async () => ({ data: { xp: 10, stars: 1, streak: 1, lessons_completed: 1 }, error: null })
     };
   }, GRADE);
 
