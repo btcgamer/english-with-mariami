@@ -58,12 +58,12 @@ jobs:
           ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
         run: |
           test -n "$ANDROID_KEYSTORE_B64"
-          echo "$ANDROID_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/english-with-mariami-upload.jks"
-          test -s "$RUNNER_TEMP/english-with-mariami-upload.jks"
+          echo "$ANDROID_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/english-with-mariami-upload.p12"
+          test -s "$RUNNER_TEMP/english-with-mariami-upload.p12"
 
       - name: Configure signed release
         env:
-          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/english-with-mariami-upload.jks
+          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/english-with-mariami-upload.p12
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
@@ -79,7 +79,7 @@ jobs:
           test -n "$VERSION_NAME"
           test -n "$VERSION_CODE"
           [[ "$VERSION_CODE" =~ ^[0-9]+$ ]]
-          [[ "$VERSION_NAME" =~ ^[0-9]+\\.[0-9]+(\\.[0-9]+)?([.-][0-9A-Za-z.-]+)?$ ]]
+          [[ "$VERSION_NAME" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?([.-][0-9A-Za-z.-]+)?$ ]]
 
       - name: Build signed AAB
         working-directory: android
@@ -97,3 +97,4 @@ jobs:
           name: english-with-mariami-signed-aab-${{ inputs.version_name }}-${{ inputs.version_code }}
           path: android/app/build/outputs/bundle/release/app-release.aab
           if-no-files-found: error
+        
