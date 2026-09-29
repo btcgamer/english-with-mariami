@@ -18,7 +18,8 @@ function mockAuth(role, grade) {
       };
       window.__ENGLISH_MARIAMI_SUPABASE_CLIENT = {
         auth: {
-          getUser: async () => ({ data: { user }, error: null }),\n          getSession: async () => ({ data: { session: { user } }, error: null }),
+          getUser: async () => ({ data: { user }, error: null }),
+          getSession: async () => ({ data: { session: { user } }, error: null }),
           onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } })
         },
         from: () => chain
