@@ -25,26 +25,106 @@
     "ellipsis, reformulation, clarification and real-time repair under complex technical and strategic communication pressure"
   ],
   "missions": [
-    { "id": 1, "title": "Climate Intelligence Gateway" },
-    { "id": 2, "title": "Sustainability Vocabulary Forge" },
-    { "id": 3, "title": "Earth Systems Observatory" },
-    { "id": 4, "title": "Climate Evidence Lab" },
-    { "id": 5, "title": "Scientific Listening Command" },
-    { "id": 6, "title": "Energy Transition Nexus" },
-    { "id": 7, "title": "Biodiversity & Resilience Reactor" },
-    { "id": 8, "title": "Climate Risk & Adaptation Arena" },
-    { "id": 9, "title": "Green Economy Strategy Studio" },
-    { "id": 10, "title": "Science-to-Policy Research Synthesis Engine" },
-    { "id": 11, "title": "Global Sustainability Briefing Command" },
-    { "id": 12, "title": "Environmental Diplomacy Portal" },
-    { "id": 13, "title": "Climate Negotiation Chamber" },
-    { "id": 14, "title": "Sustainability Policy Writing Forge" },
-    { "id": 15, "title": "Technology, Cities & Resilient Futures Lab" },
-    { "id": 16, "title": "Environmental Communication Ethics Laboratory" },
-    { "id": 17, "title": "Live Climate Futures Adaptation Simulation" },
-    { "id": 18, "title": "Integrated Science-to-Strategy Mission" },
-    { "id": 19, "title": "World 8 Mastery Integration Quest" },
-    { "id": 20, "title": "C2+ Climate & Global Transformation Master Challenge" }
+    {
+      "id": 1,
+      "title": "Climate Intelligence Gateway",
+      "focus": "Climate Intelligence Gateway"
+    },
+    {
+      "id": 2,
+      "title": "Sustainability Vocabulary Forge",
+      "focus": "Sustainability Vocabulary Forge"
+    },
+    {
+      "id": 3,
+      "title": "Earth Systems Observatory",
+      "focus": "Earth Systems Observatory"
+    },
+    {
+      "id": 4,
+      "title": "Climate Evidence Lab",
+      "focus": "Climate Evidence Lab"
+    },
+    {
+      "id": 5,
+      "title": "Scientific Listening Command",
+      "focus": "Scientific Listening Command"
+    },
+    {
+      "id": 6,
+      "title": "Energy Transition Nexus",
+      "focus": "Energy Transition Nexus"
+    },
+    {
+      "id": 7,
+      "title": "Biodiversity & Resilience Reactor",
+      "focus": "Biodiversity & Resilience Reactor"
+    },
+    {
+      "id": 8,
+      "title": "Climate Risk & Adaptation Arena",
+      "focus": "Climate Risk & Adaptation Arena"
+    },
+    {
+      "id": 9,
+      "title": "Green Economy Strategy Studio",
+      "focus": "Green Economy Strategy Studio"
+    },
+    {
+      "id": 10,
+      "title": "Science-to-Policy Research Synthesis Engine",
+      "focus": "Science-to-Policy Research Synthesis Engine"
+    },
+    {
+      "id": 11,
+      "title": "Global Sustainability Briefing Command",
+      "focus": "Global Sustainability Briefing Command"
+    },
+    {
+      "id": 12,
+      "title": "Environmental Diplomacy Portal",
+      "focus": "Environmental Diplomacy Portal"
+    },
+    {
+      "id": 13,
+      "title": "Climate Negotiation Chamber",
+      "focus": "Climate Negotiation Chamber"
+    },
+    {
+      "id": 14,
+      "title": "Sustainability Policy Writing Forge",
+      "focus": "Sustainability Policy Writing Forge"
+    },
+    {
+      "id": 15,
+      "title": "Technology, Cities & Resilient Futures Lab",
+      "focus": "Technology, Cities & Resilient Futures Lab"
+    },
+    {
+      "id": 16,
+      "title": "Environmental Communication Ethics Laboratory",
+      "focus": "Environmental Communication Ethics Laboratory"
+    },
+    {
+      "id": 17,
+      "title": "Live Climate Futures Adaptation Simulation",
+      "focus": "Live Climate Futures Adaptation Simulation"
+    },
+    {
+      "id": 18,
+      "title": "Integrated Science-to-Strategy Mission",
+      "focus": "Integrated Science-to-Strategy Mission"
+    },
+    {
+      "id": 19,
+      "title": "World 8 Mastery Integration Quest",
+      "focus": "World 8 Mastery Integration Quest"
+    },
+    {
+      "id": 20,
+      "title": "C2+ Climate & Global Transformation Master Challenge",
+      "focus": "C2+ Climate & Global Transformation Master Challenge"
+    }
   ],
   "scenarios": [
     "Global Climate Council",
