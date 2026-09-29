@@ -85,7 +85,11 @@ test.describe('Advanced Academy UX audit', () => {
     await expect.poll(() => page.evaluate(() => Boolean(window.MagicCurriculum?.state?.worldData?.missions)), { timeout: 15000 }).toBe(true);
 
     for (let mission = 1; mission <= 20; mission++) {
-      await page.locator('[data-open-mission="' + mission + '"]').click();
+      // Production runtime auto-advances inside the open modal after completion.
+      // Only Mission 1 needs an explicit card click; subsequent missions are already active.
+      if (mission === 1) {
+        await page.locator('[data-open-mission="1"]').click();
+      }
       await expect(page.locator('[data-curriculum-modal]')).toBeVisible();
       await expect(page.locator('[data-curriculum-modal-number]')).toHaveText('MISSION ' + mission);
       await page.locator('[data-curriculum-complete]').click();
