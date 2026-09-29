@@ -148,7 +148,7 @@
     },850);
   }
 
-  function markMissionComplete(number){
+  function markMissionComplete(number,options={}){
     const num=Number(number),key=missionKey(state.grade,state.world,num);
     if(state.completed.has(key))return;
 
@@ -161,13 +161,11 @@
 
     window.dispatchEvent(new CustomEvent('magicCurriculumMissionComplete',{detail:{grade:state.grade,world:state.world,mission:num,xpEarned:getConfig().xpPerMission,starsEarned:getConfig().starsPerMission,xpTotal:xpTotal(),starsTotal:starsTotal()}}));
 
-    // Keep the completion modal open so the completed state is immediately
-    // observable to the UI and automated runtime QA. World unlocks are still
-    // rendered immediately, but mission/world auto-navigation is intentionally
-    // not performed here; users can choose the next mission/world explicitly.
+    const autoAdvance=options.autoAdvance!==false;
     const nextMission=getNextMissionNumber(num);
     if(nextMission!=null){
       showMissionFlowNotice(`MISSION ${num} COMPLETE ✓ • NEXT MISSION ${nextMission} READY`);
+      if(autoAdvance){ closeMissionModal(); queueNextMission(nextMission); }
       return;
     }
 
@@ -175,6 +173,7 @@
     if(nextWorld<=getConfig().worldCount && completedInWorld(state.world)>=getConfig().missionCount){
       showMissionFlowNotice(`WORLD ${state.world} COMPLETE ✓ • WORLD ${nextWorld} UNLOCKED`);
       renderWorldNav(document.querySelector('[data-curriculum-world-nav]'),state.grade,state.world);
+      if(autoAdvance){ closeMissionModal(); queueNextWorld(nextWorld); }
       return;
     }
 
@@ -209,7 +208,17 @@
   async function boot(){
     const grade=getGrade(); if(!grade||grade<5)return; state.grade=grade; restoreProgress();
     window.MagicCurriculum={state,loadWorld,fetchWorld,openMission,markMissionComplete,worldUrl,worldUnlocked,xpTotal,starsTotal,completedTotal}; bindModal();
-    const requestedWorld=Number(new URLSearchParams(window.location.search).get('world'))||1; await loadWorld(grade,Math.min(Math.max(requestedWorld,1),getConfig().worldCount));
+    const requestedParam=new URLSearchParams(window.location.search).get('world');
+    let requestedWorld=Number(requestedParam);
+    if(!Number.isFinite(requestedWorld)||requestedWorld<1){
+      requestedWorld=1;
+      for(let world=1;world<=getConfig().worldCount;world++){
+        const done=Array.from({length:getConfig().missionCount},(_,i)=>state.completed.has(missionKey(grade,world,i+1))).filter(Boolean).length;
+        if(done<getConfig().missionCount){requestedWorld=world;break;}
+        requestedWorld=world;
+      }
+    }
+    await loadWorld(grade,Math.min(Math.max(requestedWorld,1),getConfig().worldCount));
   }
   boot();
 })();
