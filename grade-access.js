@@ -20,7 +20,7 @@
     try{
       let db=null;
       for(let i=0;i<20&&!db;i++){db=client();if(!db)await sleep(100);}
-      if(!db){console.warn('[Grade Access] Supabase client is not ready yet.');return;}
+      if(!db){console.warn('[Grade Access] Supabase client is not ready yet; failing closed.');return login();}
       let session=null,authError=null;
       if(window.EWM_AUTH&&typeof window.EWM_AUTH.waitForSession==='function'){
         const shared=await window.EWM_AUTH.waitForSession(8000);
@@ -32,7 +32,7 @@
           await sleep(350);
         }
       }
-      if(authError&&!session){console.warn('[Grade Access] Auth session check failed; retrying without redirect.',authError);return;}
+      if(authError&&!session){console.warn('[Grade Access] Auth session check failed; failing closed.',authError);return login();}
       if(!session?.user)return login();
       let profile=null,profileError=null;
       if(window.EWM_AUTH&&typeof window.EWM_AUTH.profile==='function'){
@@ -44,7 +44,7 @@
           await sleep(400);
         }
       }
-      if(profileError&&!profile){console.warn('[Grade Access] Profile check failed; keeping authenticated user on the page.',profileError);return;}
+      if(profileError&&!profile){console.warn('[Grade Access] Profile check failed; failing closed.',profileError);return login();}
       if(!profile)return login();
       const role=String(profile.role||'').trim().toLowerCase();
       if(PRIVILEGED.includes(role))return;
