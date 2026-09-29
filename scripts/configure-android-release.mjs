@@ -10,7 +10,7 @@ for (const key of required) {
 
 let s = fs.readFileSync(file, 'utf8');
 
-if (!/signingConfigs\\s*\\{[\\s\\S]*?release\\s*\\{/.test(s)) {
+if (!/signingConfigs\s*\{[\s\S]*?release\s*\{/.test(s)) {
   const signing = `signingConfigs {
         release {
             storeFile file(System.getenv('ANDROID_KEYSTORE_PATH'))
@@ -21,19 +21,19 @@ if (!/signingConfigs\\s*\\{[\\s\\S]*?release\\s*\\{/.test(s)) {
     }
 
     `;
-  s = s.replace(/(buildTypes\\s*\\{)/, signing + '$1');
+  s = s.replace(/(buildTypes\s*\{)/, signing + '$1');
 }
 
-const defaultConfigMatch = s.match(/defaultConfig\\s*\\{[\\s\\S]*?\\n    \\}/);
+const defaultConfigMatch = s.match(/defaultConfig\s*\{[\s\S]*?\n    \}/);
 if (!defaultConfigMatch) throw new Error('defaultConfig block not found');
 
 let dc = defaultConfigMatch[0];
-dc = dc.replace(/versionCode\\s+[^\\n]+/, `versionCode ${process.env.ANDROID_VERSION_CODE}`);
-dc = dc.replace(/versionName\\s+[^\\n]+/, `versionName "${process.env.ANDROID_VERSION_NAME}"`);
+dc = dc.replace(/versionCode\s+[^\n]+/, `versionCode ${process.env.ANDROID_VERSION_CODE}`);
+dc = dc.replace(/versionName\s+[^\n]+/, `versionName "${process.env.ANDROID_VERSION_NAME}"`);
 s = s.replace(defaultConfigMatch[0], dc);
 
-s = s.replace(/(release\\s*\\{)(?![\\s\\S]*?signingConfig)/, '$1\\n            signingConfig signingConfigs.release');
+s = s.replace(/(release\s*\{)(?![\s\S]*?signingConfig)/, '$1\n            signingConfig signingConfigs.release');
 fs.writeFileSync(file, s);
 
-if (!/signingConfig\\s+signingConfigs\\.release/.test(s)) throw new Error('Release signing config was not applied');
+if (!/signingConfig\s+signingConfigs\.release/.test(s)) throw new Error('Release signing config was not applied');
 console.log(`Android release configured: version ${process.env.ANDROID_VERSION_NAME} (${process.env.ANDROID_VERSION_CODE})`);
