@@ -22,16 +22,27 @@
       for(let i=0;i<20&&!db;i++){db=client();if(!db)await sleep(100);}
       if(!db){console.warn('[Grade Access] Supabase client is not ready yet.');return;}
       let session=null,authError=null;
-      for(let i=0;i<8&&!session;i++){
-        try{const r=await db.auth.getSession();authError=r.error||null;session=r.data?.session||null;if(session)break;}catch(e){authError=e;}
-        await sleep(350);
+      if(window.EWM_AUTH&&typeof window.EWM_AUTH.waitForSession==='function'){
+        const shared=await window.EWM_AUTH.waitForSession(8000);
+        if(shared.client)db=shared.client;
+        session=shared.session||null; authError=shared.error||null;
+      }else{
+        for(let i=0;i<8&&!session;i++){
+          try{const r=await db.auth.getSession();authError=r.error||null;session=r.data?.session||null;if(session)break;}catch(e){authError=e;}
+          await sleep(350);
+        }
       }
       if(authError&&!session){console.warn('[Grade Access] Auth session check failed; retrying without redirect.',authError);return;}
       if(!session?.user)return login();
       let profile=null,profileError=null;
-      for(let i=0;i<5&&!profile;i++){
-        try{const r=await db.from('profiles').select('user_id,role,grade').eq('user_id',session.user.id).maybeSingle();profileError=r.error||null;profile=r.data||null;if(profile)break;}catch(e){profileError=e;}
-        await sleep(400);
+      if(window.EWM_AUTH&&typeof window.EWM_AUTH.profile==='function'){
+        const pr=await window.EWM_AUTH.profile(db,session.user.id);
+        profile=pr.data||null; profileError=pr.error||null;
+      }else{
+        for(let i=0;i<5&&!profile;i++){
+          try{const r=await db.from('profiles').select('user_id,role,grade').eq('user_id',session.user.id).maybeSingle();profileError=r.error||null;profile=r.data||null;if(profile)break;}catch(e){profileError=e;}
+          await sleep(400);
+        }
       }
       if(profileError&&!profile){console.warn('[Grade Access] Profile check failed; keeping authenticated user on the page.',profileError);return;}
       if(!profile)return login();
