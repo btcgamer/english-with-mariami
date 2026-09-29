@@ -11,11 +11,11 @@
     "android:build": "npm run android:sync && cd android && ./gradlew bundleRelease"
   },
   "dependencies": {
-    "@capacitor/core": "^7.4.3"
+    "@capacitor/core": "^8.5.2"
   },
   "devDependencies": {
-    "@capacitor/cli": "^7.4.3",
-    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/android": "^8.5.2",
     "@capacitor/assets": "^3.0.5"
   }
 }
