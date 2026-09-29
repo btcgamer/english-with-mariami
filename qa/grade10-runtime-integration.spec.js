@@ -30,7 +30,7 @@ async function openGrade10(page) {
 
 async function completeCurrentWorld(page) {
   for (let mission = 1; mission <= MISSIONS_PER_WORLD; mission += 1) {
-    await page.evaluate(m => window.MagicCurriculum.markMissionComplete(m), mission);
+    await page.evaluate(m => window.MagicCurriculum.markMissionComplete(m, { autoAdvance: false }), mission);
   }
   await expect(page.locator('[data-curriculum-world-progress]')).toHaveText(`${MISSIONS_PER_WORLD}/20`);
 }
