@@ -10,6 +10,8 @@ on:
       - '**/*.js'
       - '**/*.css'
       - 'manifest.webmanifest'
+      - 'assets/**'
+      - 'scripts/**'
 
 jobs:
   build:
@@ -41,3 +43,13 @@ jobs:
       - name: Validate Android release build
         working-directory: android
         run: ./gradlew bundleRelease --stacktrace
+      - name: Verify AAB exists
+        run: |
+          test -s android/app/build/outputs/bundle/release/app-release.aab
+          unzip -t android/app/build/outputs/bundle/release/app-release.aab >/dev/null
+      - name: Upload unsigned release AAB for QA
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-with-mariami-release-aab
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
