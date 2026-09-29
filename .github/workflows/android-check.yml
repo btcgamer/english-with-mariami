@@ -23,6 +23,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm install
+      - name: Prepare web bundle
+        run: npm run web:prepare
       - name: Add Android platform
         run: npx cap add android
       - name: Sync web app
