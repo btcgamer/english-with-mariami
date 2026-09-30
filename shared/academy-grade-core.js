@@ -163,7 +163,10 @@ async function loadServerProgress(){
 }
 async function recordMissionCompletion(missionNumber){
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
-  if(!client||!client.rpc)return {xp:(Number(state.serverXp)||0)+10,stars:(Number(state.stars)||0)+1,streak:(Number(state.streak)||0)+1,lessons_completed:(Array.isArray(state.done)?state.done.length:0)+1};
+  if(!client||!client.rpc){
+    console.warn('Grade '+grade+' activity sync unavailable');
+    return null;
+  }
   try{
     const dbLesson=await loadDbLesson(missionNumber);
     const activityId=dbLesson?.id?String(dbLesson.id):String(missionNumber);
@@ -176,13 +179,17 @@ async function recordMissionCompletion(missionNumber){
       p_points:10
     });
     if(error){
-      console.warn('Grade '+grade+' activity sync skipped:',error);
-      return {xp:(Number(state.serverXp)||0)+10,stars:(Number(state.stars)||0)+1,streak:(Number(state.streak)||0)+1,lessons_completed:(Array.isArray(state.done)?state.done.length:0)+1};
+      console.warn('Grade '+grade+' activity sync failed:',error);
+      return null;
     }
-    return data&&typeof data==='object'?data:{xp:(Number(state.serverXp)||0)+10,stars:(Number(state.stars)||0)+1,streak:(Number(state.streak)||0)+1,lessons_completed:(Array.isArray(state.done)?state.done.length:0)+1};
+    if(!data||typeof data!=='object'||data.activity_saved!==true){
+      console.warn('Grade '+grade+' activity sync returned an invalid result:',data);
+      return null;
+    }
+    return data;
   }catch(error){
     console.warn('Grade '+grade+' activity sync failed:',error);
-    return {xp:(Number(state.serverXp)||0)+10,stars:(Number(state.stars)||0)+1,streak:(Number(state.streak)||0)+1,lessons_completed:(Array.isArray(state.done)?state.done.length:0)+1};
+    return null;
   }
 }
 function speak(t,lang='en-US'){try{if(typeof window.magicFastSpeak==='function')return window.magicFastSpeak(t,lang)!==false;}catch(e){console.warn('Academy shared speech failed',e)}try{if('speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.resume();const u=new SpeechSynthesisUtterance(t);u.lang=lang;u.rate=.92;u.pitch=1;speechSynthesis.speak(u);return true}}catch(e){console.warn('Academy native speech fallback failed',e)}return false}
