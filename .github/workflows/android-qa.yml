@@ -47,7 +47,14 @@ jobs:
           test -s "$APK"
           unzip -t "$APK" >/dev/null
           ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/apksigner verify "$APK"
-          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt dump badging "$APK" | grep -F "package: name='com.englishwithmariami.academy'"
+          AAPT=${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt
+          BADGING="$("$AAPT" dump badging "$APK")"
+          grep -F "package: name='com.englishwithmariami.academy'" <<<"$BADGING"
+          grep -F "launchable-activity:" <<<"$BADGING"
+          grep -F "uses-permission: name='android.permission.INTERNET'" <<<"$BADGING"
+          grep -F "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'" <<<"$BADGING"
+          "$AAPT" dump badging "$APK" | grep -F "application-label:'English with Mariami'"
+          "$AAPT" dump badging "$APK" | grep -F "application-icon-160:"
           sha256sum "$APK" | tee android-debug-apk.sha256
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
