@@ -143,7 +143,7 @@ async function loadServerProgress(){
           serverDone=ids.map(id=>byId.get(id)).filter(n=>Number.isInteger(n)&&n>=1&&n<=60);
         }
       }
-      state.done=[...new Set([...state.done,...serverDone])].sort((a,b)=>a-b);
+      state.done=[...new Set(serverDone)].sort((a,b)=>a-b);
       state.serverLessons=serverDone.length;
       state.current=nextIncomplete(state.done);
     }
