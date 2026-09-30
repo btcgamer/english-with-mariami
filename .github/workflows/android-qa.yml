@@ -16,78 +16,69 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
       - name: Install dependencies
         run: npm install
+
       - name: Prepare web bundle
         run: npm run web:prepare
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: gradle
+
       - name: Add Android platform
         run: npx cap add android
+
       - name: Prepare Android API 36
         run: node scripts/prepare-android.mjs
+
       - name: Generate Android icons and splash
         run: npx @capacitor/assets generate --android --assetPath assets --iconBackgroundColor '#050814' --iconBackgroundColorDark '#03050c' --splashBackgroundColor '#050814' --splashBackgroundColorDark '#03050c'
+
       - name: Sync web app
         run: npx cap sync android
+
       - name: Validate Android toolchain
         working-directory: android
         run: |
+          set -euo pipefail
           test -x ./gradlew
           ./gradlew --version
-          grep -Eq '^distributionUrl=.*gradle-[0-9]+\\.[0-9]+.*\\.zip
-      - name: Verify debug APK
-        run: |
-          APK=android/app/build/outputs/apk/debug/app-debug.apk
-          test -s "$APK"
-          unzip -t "$APK" >/dev/null
-          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/apksigner verify "$APK"
-          AAPT=${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt
-          BADGING="$("$AAPT" dump badging "$APK")"
-          grep -F "package: name='com.englishwithmariami.academy'" <<<"$BADGING"
-          grep -F "launchable-activity:" <<<"$BADGING"
-          grep -F "uses-permission: name='android.permission.INTERNET'" <<<"$BADGING"
-          grep -F "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'" <<<"$BADGING"
-          "$AAPT" dump badging "$APK" | grep -F "application-label:'English with Mariami'"
-          "$AAPT" dump badging "$APK" | grep -F "application-icon-160:"
-          sha256sum "$APK" | tee android-debug-apk.sha256
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: english-with-mariami-android-qa-apk-${{ github.sha }}
-          path: |
-            android/app/build/outputs/apk/debug/app-debug.apk
-            android-debug-apk.sha256
-          if-no-files-found: error
- gradle/wrapper/gradle-wrapper.properties
+          grep -Eq '^distributionUrl=.*gradle-[0-9]+\.[0-9]+.*\.zip$' gradle/wrapper/gradle-wrapper.properties
           grep -Eq 'compileSdkVersion[[:space:]]*=[[:space:]]*36|compileSdk[[:space:]]*=[[:space:]]*36' variables.gradle
           grep -Eq 'targetSdkVersion[[:space:]]*=[[:space:]]*36|targetSdk[[:space:]]*=[[:space:]]*36' variables.gradle
+
       - name: Build debug APK
         working-directory: android
         run: ./gradlew assembleDebug --stacktrace
+
       - name: Verify debug APK
         run: |
+          set -euo pipefail
           APK=android/app/build/outputs/apk/debug/app-debug.apk
           test -s "$APK"
           unzip -t "$APK" >/dev/null
-          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/apksigner verify "$APK"
-          AAPT=${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt
+          BUILD_TOOLS="$ANDROID_HOME/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)"
+          "$BUILD_TOOLS/apksigner" verify --verbose "$APK"
+          AAPT="$BUILD_TOOLS/aapt"
           BADGING="$("$AAPT" dump badging "$APK")"
           grep -F "package: name='com.englishwithmariami.academy'" <<<"$BADGING"
           grep -F "launchable-activity:" <<<"$BADGING"
           grep -F "uses-permission: name='android.permission.INTERNET'" <<<"$BADGING"
           grep -F "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'" <<<"$BADGING"
-          "$AAPT" dump badging "$APK" | grep -F "application-label:'English with Mariami'"
-          "$AAPT" dump badging "$APK" | grep -F "application-icon-160:"
+          grep -F "application-label:'English with Mariami'" <<<"$BADGING"
+          grep -F "application-icon-160:" <<<"$BADGING"
           sha256sum "$APK" | tee android-debug-apk.sha256
+
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
