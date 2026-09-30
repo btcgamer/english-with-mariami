@@ -33,7 +33,9 @@ dc = dc.replace(/versionCode\s+[^\n]+/, `versionCode ${process.env.ANDROID_VERSI
 dc = dc.replace(/versionName\s+[^\n]+/, `versionName "${process.env.ANDROID_VERSION_NAME}"`);
 s = s.replace(defaultConfigMatch[0], dc);
 
-if (!/buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?signingConfig\s+signingConfigs\.release/.test(s)) {\n  s = s.replace(/(buildTypes\s*\{\s*release\s*\{)/, '$1\\n            signingConfig signingConfigs.release');\n}
+if (!/buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?signingConfig\s+signingConfigs\.release/.test(s)) {
+  s = s.replace(/(buildTypes\s*\{\s*release\s*\{)/, '$1\n            signingConfig signingConfigs.release');
+}
 fs.writeFileSync(file, s);
 
 if (!/buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?signingConfig\s+signingConfigs\.release/.test(s)) throw new Error('Release signing config was not applied to buildTypes.release');
