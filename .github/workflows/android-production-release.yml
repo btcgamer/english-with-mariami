@@ -21,37 +21,28 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
       - name: Install dependencies
         run: npm install
-
       - name: Prepare web bundle
         run: npm run web:prepare
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: gradle
-
       - name: Add Android platform
         run: npx cap add android
-
       - name: Prepare Android API 36
         run: node scripts/prepare-android.mjs
-
       - name: Generate Android icons and splash
         run: npx @capacitor/assets generate --android --assetPath assets --iconBackgroundColor '#050814' --iconBackgroundColorDark '#03050c' --splashBackgroundColor '#050814' --splashBackgroundColorDark '#03050c'
-
       - name: Sync web app
         run: npx cap sync android
-
       - name: Decode release keystore
         env:
           ANDROID_KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_B64 }}
@@ -59,7 +50,6 @@ jobs:
           test -n "$ANDROID_KEYSTORE_B64"
           echo "$ANDROID_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/english-with-mariami-upload.p12"
           test -s "$RUNNER_TEMP/english-with-mariami-upload.p12"
-
       - name: Configure signed release
         env:
           ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/english-with-mariami-upload.p12
@@ -69,7 +59,6 @@ jobs:
           ANDROID_VERSION_NAME: ${{ inputs.version_name }}
           ANDROID_VERSION_CODE: ${{ inputs.version_code }}
         run: node scripts/configure-android-release.mjs
-
       - name: Validate release metadata
         env:
           VERSION_NAME: ${{ inputs.version_name }}
@@ -79,31 +68,40 @@ jobs:
           test -n "$VERSION_CODE"
           [[ "$VERSION_CODE" =~ ^[0-9]+$ ]]
           [[ "$VERSION_NAME" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?([.-][0-9A-Za-z.-]+)?$ ]]
-
       - name: Build signed AAB + APK
         working-directory: android
         run: ./gradlew bundleRelease assembleRelease --stacktrace
-
       - name: Verify signed AAB + APK
+        env:
+          VERSION_NAME: ${{ inputs.version_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
         run: |
-          test -s android/app/build/outputs/bundle/release/app-release.aab
-          test -s android/app/build/outputs/apk/release/app-release.apk
-          unzip -t android/app/build/outputs/bundle/release/app-release.aab >/dev/null
-          unzip -t android/app/build/outputs/apk/release/app-release.apk >/dev/null
-          jarsigner -verify -verbose -certs android/app/build/outputs/bundle/release/app-release.aab >/dev/null
-          jarsigner -verify -verbose -certs android/app/build/outputs/apk/release/app-release.apk >/dev/null
-
+          AAB=android/app/build/outputs/bundle/release/app-release.aab
+          APK=android/app/build/outputs/apk/release/app-release.apk
+          test -s "$AAB"
+          test -s "$APK"
+          unzip -t "$AAB" >/dev/null
+          unzip -t "$APK" >/dev/null
+          jarsigner -verify -verbose -certs "$AAB" >/dev/null
+          jarsigner -verify -verbose -certs "$APK" >/dev/null
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/apksigner verify "$APK"
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt dump badging "$APK" | grep -F "package: name='com.englishwithmariami.academy'"
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt dump badging "$APK" | grep -F "versionName='$VERSION_NAME'"
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt dump badging "$APK" | grep -F "versionCode='$VERSION_CODE'"
+          sha256sum "$AAB" "$APK" | tee android-release-sha256.txt
       - name: Upload signed AAB
         uses: actions/upload-artifact@v4
         with:
           name: english-with-mariami-signed-aab-${{ inputs.version_name }}-${{ inputs.version_code }}
-          path: android/app/build/outputs/bundle/release/app-release.aab
+          path: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android-release-sha256.txt
           if-no-files-found: error
-
       - name: Upload signed APK
         uses: actions/upload-artifact@v4
         with:
           name: english-with-mariami-signed-apk-${{ inputs.version_name }}-${{ inputs.version_code }}
-          path: android/app/build/outputs/apk/release/app-release.apk
+          path: |
+            android/app/build/outputs/apk/release/app-release.apk
+            android-release-sha256.txt
           if-no-files-found: error
-        
