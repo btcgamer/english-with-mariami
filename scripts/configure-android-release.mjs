@@ -33,9 +33,9 @@ dc = dc.replace(/versionCode\s+[^\n]+/, `versionCode ${process.env.ANDROID_VERSI
 dc = dc.replace(/versionName\s+[^\n]+/, `versionName "${process.env.ANDROID_VERSION_NAME}"`);
 s = s.replace(defaultConfigMatch[0], dc);
 
-s = s.replace(/(release\s*\{)(?![\s\S]*?signingConfig)/, '$1\n            signingConfig signingConfigs.release');
+if (!/buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?signingConfig\s+signingConfigs\.release/.test(s)) {\n  s = s.replace(/(buildTypes\s*\{\s*release\s*\{)/, '$1\\n            signingConfig signingConfigs.release');\n}
 fs.writeFileSync(file, s);
 
-if (!/signingConfig\s+signingConfigs\.release/.test(s)) throw new Error('Release signing config was not applied');
+if (!/buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?signingConfig\s+signingConfigs\.release/.test(s)) throw new Error('Release signing config was not applied to buildTypes.release');
 if (!/storeType\s+['"]PKCS12['"]/.test(s)) throw new Error('PKCS12 store type was not applied');
 console.log(`Android release configured: version ${process.env.ANDROID_VERSION_NAME} (${process.env.ANDROID_VERSION_CODE})`);
