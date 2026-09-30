@@ -35,23 +35,21 @@ const defaults={current:1,done:[],stars:0,streak:0};let state=defaults;try{const
 const esc=s=>String(s).replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));const save=()=>{try{localStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new CustomEvent('englishMariamiProgressUpdated',{detail:{grade:3,done:state.done.length,current:state.current}}))}catch(e){}};const speak=(t,lang='en-US')=>{try{if(typeof window.magicFastSpeak==='function')return window.magicFastSpeak(t,lang)!==false;}catch(e){console.warn('Grade 3 shared speech failed',e)}try{if('speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.resume();const u=new SpeechSynthesisUtterance(t);u.lang=lang;u.rate=.92;u.pitch=1;speechSynthesis.speak(u);return true}}catch(e){console.warn('Grade 3 native speech fallback failed',e)}return false};const shuffle=a=>[...a].sort(()=>Math.random()-.5);const world=n=>worlds[Math.floor((n-1)/5)%12];
 async function recordMissionCompletion(n){
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
-  if(client&&client.rpc){
-    try{
-      const {data:lesson,error:lessonError}=await client.from('lessons').select('id').eq('grade',3).eq('lesson_number',n).maybeSingle();
-      if(!lessonError&&lesson?.id){
-        const {data,error}=await client.rpc('academy_record_activity',{
-          p_grade:3,
-          p_activity_type:'lesson',
-          p_activity_id:String(lesson.id),
-          p_score:100,
-          p_max_score:100,
-          p_points:10
-        });
-        if(!error&&data&&typeof data==='object')return data;
-      }
-    }catch(error){console.warn('[Grade 3] reward sync failed',error)}
-  }
-  return {stars:(state.stars||0)+1,streak:(state.streak||0)+1};
+  if(!client||!client.rpc)return null;
+  try{
+    const {data:lesson,error:lessonError}=await client.from('lessons').select('id').eq('grade',3).eq('lesson_number',n).maybeSingle();
+    if(lessonError||!lesson?.id)return null;
+    const {data,error}=await client.rpc('academy_record_activity',{
+      p_grade:3,
+      p_activity_type:'lesson',
+      p_activity_id:String(lesson.id),
+      p_score:100,
+      p_max_score:100,
+      p_points:10
+    });
+    if(error||!data||typeof data!=='object'||data.activity_saved!==true)return null;
+    return data;
+  }catch(error){console.warn('[Grade 3] reward sync failed',error);return null}
 }
 function grammar(n,L){const wi=worlds.indexOf(L);return grammarSets[wi][(n-1)%5]}
 function mission(n,L){const [topic,words,dialogue,reply,read,q,a,think]=L,w=words,m=(n-1)%5;if(m===0){const target=w[(n*2)%w.length],opts=shuffle([target,...w.filter(x=>x!==target).slice(0,2)]);return ['Listening Word Quest',`Listen for a Grade 3 word and choose what you heard.`,`<button class="btn" data-speak="${esc(target)}">🔊 Play word</button><div class="choicegrid">${opts.map(x=>`<button class="btn choice" data-ok="${x===target}">${esc(x)}</button>`).join('')}</div><div class="quizmsg"></div>`]};if(m===1){const parts=reply.split('—');const correct=(parts.length>1?parts[parts.length-1]:reply).trim();const distractors=['I forgot the question.','That is a different topic.'];return ['Dialogue Lab','Listen to the exchange and select the natural response.',`<p class="dialogue">${esc(dialogue)}</p><button class="btn" data-speak="${esc(dialogue)}">🔊 Listen</button><div class="choicegrid">${shuffle([correct,...distractors]).map(x=>`<button class="btn choice" data-ok="${x===correct}">${esc(x)}</button>`).join('')}</div><div class="quizmsg"></div>`]};if(m===2){const distractors={
