@@ -50,6 +50,17 @@ jobs:
           test -n "$ANDROID_KEYSTORE_B64"
           echo "$ANDROID_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/english-with-mariami-upload.p12"
           test -s "$RUNNER_TEMP/english-with-mariami-upload.p12"
+      - name: Validate release keystore
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/english-with-mariami-upload.p12
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          test -s "$ANDROID_KEYSTORE_PATH"
+          test -n "$ANDROID_KEYSTORE_PASSWORD"
+          test -n "$ANDROID_KEY_ALIAS"
+          keytool -list -storetype PKCS12 -keystore "$ANDROID_KEYSTORE_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" >/dev/null
+          keytool -list -v -storetype PKCS12 -keystore "$ANDROID_KEYSTORE_PATH" -storepass "$ANDROID_KEYSTORE_PASSWORD" -alias "$ANDROID_KEY_ALIAS" | grep -F "PrivateKeyEntry"
       - name: Configure signed release
         env:
           ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/english-with-mariami-upload.p12
