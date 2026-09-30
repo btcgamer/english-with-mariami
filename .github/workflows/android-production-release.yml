@@ -79,6 +79,56 @@ jobs:
           test -n "$VERSION_CODE"
           [[ "$VERSION_CODE" =~ ^[0-9]+$ ]]
           [[ "$VERSION_NAME" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?([.-][0-9A-Za-z.-]+)?$ ]]
+      - name: Validate Android toolchain
+        working-directory: android
+        run: |
+          test -x ./gradlew
+          ./gradlew --version
+          grep -Eq '^distributionUrl=.*gradle-[0-9]+\\.[0-9]+.*\\.zip
+      - name: Verify signed AAB + APK
+        env:
+          VERSION_NAME: ${{ inputs.version_name }}
+          VERSION_CODE: ${{ inputs.version_code }}
+        run: |
+          AAB=android/app/build/outputs/bundle/release/app-release.aab
+          APK=android/app/build/outputs/apk/release/app-release.apk
+          test -s "$AAB"
+          test -s "$APK"
+          unzip -t "$AAB" >/dev/null
+          unzip -t "$APK" >/dev/null
+          jarsigner -verify -verbose -certs "$AAB" >/dev/null
+          jarsigner -verify -verbose -certs "$APK" >/dev/null
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/apksigner verify "$APK"
+          AAPT=${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt
+          BADGING="$("$AAPT" dump badging "$APK")"
+          grep -F "package: name='com.englishwithmariami.academy'" <<<"$BADGING"
+          grep -F "versionName='$VERSION_NAME'" <<<"$BADGING"
+          grep -F "versionCode='$VERSION_CODE'" <<<"$BADGING"
+          grep -F "launchable-activity:" <<<"$BADGING"
+          grep -F "uses-permission: name='android.permission.INTERNET'" <<<"$BADGING"
+          grep -F "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'" <<<"$BADGING"
+          "$AAPT" dump badging "$APK" | grep -F "application-label:'English with Mariami'"
+          "$AAPT" dump badging "$APK" | grep -F "application-icon-160:"
+          sha256sum "$AAB" "$APK" | tee android-release-sha256.txt
+      - name: Upload signed AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-with-mariami-signed-aab-${{ inputs.version_name }}-${{ inputs.version_code }}
+          path: |
+            android/app/build/outputs/bundle/release/app-release.aab
+            android-release-sha256.txt
+          if-no-files-found: error
+      - name: Upload signed APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: english-with-mariami-signed-apk-${{ inputs.version_name }}-${{ inputs.version_code }}
+          path: |
+            android/app/build/outputs/apk/release/app-release.apk
+            android-release-sha256.txt
+          if-no-files-found: error
+ gradle/wrapper/gradle-wrapper.properties
+          grep -Eq 'compileSdkVersion[[:space:]]*=[[:space:]]*36|compileSdk[[:space:]]*=[[:space:]]*36' variables.gradle
+          grep -Eq 'targetSdkVersion[[:space:]]*=[[:space:]]*36|targetSdk[[:space:]]*=[[:space:]]*36' variables.gradle
       - name: Build signed AAB + APK
         working-directory: android
         run: ./gradlew bundleRelease assembleRelease --stacktrace
