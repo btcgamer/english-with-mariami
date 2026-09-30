@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v25';
+const CACHE_NAME = 'english-with-mariami-v26';
 const FUTURE_THEME = './magic-ai-25c.css';
 const FUTURE_CLASSROOM = './shared/future-neon-classroom.css?v=20260906';
 const NAV_TIMEOUT_MS = 4500;
@@ -13,7 +13,7 @@ const APP_SHELL = [
   './teacher-dashboard.html', './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
   './app.css', './styles.css', './mobile-app.css', './pwa-mobile.css', './pwa.js', './universe-theme.css',
   './universe-theme.js', './universe-max.css', './universe-max.js', './app-icon.svg', FUTURE_THEME,
-  './shared/magic-ai-25c-century.css', FUTURE_CLASSROOM, './shared/offline-core-fallback.js',
+  './shared/magic-ai-25c-century.css', FUTURE_CLASSROOM, './shared/academy-grade.css?v=20260930-rqa1', './shared/academy-grade-nav.css?v=20260930-rqa1', './shared/offline-core-fallback.js',
   './grade2/grade2.css', './grade2/grade2.js', './grade2/grade2-3d.css',
   './grade2/grade2-dashboard-bridge.js', './grade2/grade2-supabase-bridge.js', './grade2/grade2-content-expansion.js',
   './grade2/grade2-mega-practice-v2.js', './grade2/future-visual-layer.css', './shared/grade23-final-e2e.js',
@@ -130,4 +130,4 @@ self.addEventListener('notificationclick',event => {
   }));
 });
 
-console.log('[SW] English with Mariami v25 READY — auth cache refresh');
+console.log('[SW] English with Mariami v26 READY — responsive QA refresh');
