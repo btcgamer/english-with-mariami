@@ -33,6 +33,9 @@ jobs:
       - name: Prepare web bundle
         run: npm run web:prepare
 
+      - name: Android runtime smoke preflight
+        run: node scripts/android-runtime-preflight.mjs
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
