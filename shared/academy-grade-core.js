@@ -193,6 +193,7 @@ async function recordMissionCompletion(missionNumber){
   }
 }
 let activeAudio=null;
+window.academyAudioQA={plays:0,fallbacks:0};
 function validAudioUrl(url){
   const u=String(url||'').trim();
   if(!u)return false;
@@ -204,9 +205,10 @@ function speak(t,lang='en-US'){
   return false
 }
 function playAudio(url,text,lang='en-US'){
-  const fallback=()=>{if(text)return speak(text,lang);return false};
+  const fallback=()=>{window.academyAudioQA.fallbacks++;if(text)return speak(text,lang);return false};
   if(!validAudioUrl(url))return fallback();
   try{
+    window.academyAudioQA.plays++;
     if(activeAudio){try{activeAudio.pause()}catch(e){}}
     const a=new Audio(url);activeAudio=a;a.preload='auto';
     let failed=false;
