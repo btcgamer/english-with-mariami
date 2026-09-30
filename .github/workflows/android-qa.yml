@@ -22,7 +22,7 @@ jobs:
           node-version: 22
           cache: npm
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Prepare web bundle
         run: npm run web:prepare
       - name: Setup Java
@@ -44,12 +44,17 @@ jobs:
         run: ./gradlew assembleDebug --stacktrace
       - name: Verify debug APK
         run: |
-          test -s android/app/build/outputs/apk/debug/app-debug.apk
-          unzip -t android/app/build/outputs/apk/debug/app-debug.apk >/dev/null
-          jarsigner -verify -verbose -certs android/app/build/outputs/apk/debug/app-debug.apk >/dev/null
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          test -s "$APK"
+          unzip -t "$APK" >/dev/null
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/apksigner verify "$APK"
+          ${ANDROID_HOME}/build-tools/$(ls "$ANDROID_HOME/build-tools" | sort -V | tail -1)/aapt dump badging "$APK" | grep -F "package: name='com.englishwithmariami.academy'"
+          sha256sum "$APK" | tee android-debug-apk.sha256
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: english-with-mariami-android-qa-apk-${{ github.sha }}
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: |
+            android/app/build/outputs/apk/debug/app-debug.apk
+            android-debug-apk.sha256
           if-no-files-found: error
