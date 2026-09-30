@@ -33,6 +33,7 @@
     });
   }
   function mount(){
+    hideAudioTest();
     if(document.querySelector('.grade-top-nav')) return;
     const nav=document.createElement('nav');
     nav.className='grade-top-nav';
@@ -63,8 +64,9 @@
     });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',mount); else mount();
-  const observer=new MutationObserver(function(){mount();});
+  const observer=new MutationObserver(function(){mount();hideAudioTest();});
   observer.observe(document.body,{childList:true});
   setTimeout(mount,250);
   setTimeout(mount,1000);
+  setTimeout(hideAudioTest,1500);
 })();
