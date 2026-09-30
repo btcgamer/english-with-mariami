@@ -19,6 +19,19 @@
     }catch(e){}
   }
 
+
+  function hideAudioTest(){
+    const nodes=document.querySelectorAll('button,a,[role="button"],section,article,div');
+    nodes.forEach(function(el){
+      if(el.dataset.ewmAudioTestHidden==='1') return;
+      const text=String(el.textContent||'').replace(/\\s+/g,' ').trim().toLowerCase();
+      if(text==='audio test'||text==='🎧 audio test'||text==='audio test / test'){
+        el.dataset.ewmAudioTestHidden='1';
+        el.style.display='none';
+        el.setAttribute('aria-hidden','true');
+      }
+    });
+  }
   function mount(){
     if(document.querySelector('.grade-top-nav')) return;
     const nav=document.createElement('nav');
