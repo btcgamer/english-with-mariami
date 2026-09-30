@@ -43,7 +43,7 @@ async function loadDbLesson(n){
   try{
     const {data:lessonRow,error:lessonError}=await client
       .from('lessons')
-      .select('id,lesson_number,title,topic,description,grammar_rule,grammar_examples,listening_text,speaking_phrases,reading_text,exercises')
+      .select('id,lesson_number,title,topic,description,grammar_rule,grammar_examples,listening_text,listening_audio_url,speaking_phrases,reading_text,exercises')
       .eq('grade',grade)
       .eq('lesson_number',n)
       .maybeSingle();
@@ -192,7 +192,30 @@ async function recordMissionCompletion(missionNumber){
     return null;
   }
 }
-function speak(t,lang='en-US'){try{if(typeof window.magicFastSpeak==='function')return window.magicFastSpeak(t,lang)!==false;}catch(e){console.warn('Academy shared speech failed',e)}try{if('speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.resume();const u=new SpeechSynthesisUtterance(t);u.lang=lang;u.rate=.92;u.pitch=1;speechSynthesis.speak(u);return true}}catch(e){console.warn('Academy native speech fallback failed',e)}return false}
+let activeAudio=null;
+function validAudioUrl(url){
+  const u=String(url||'').trim();
+  if(!u)return false;
+  try{const x=new URL(u,window.location.href);return x.protocol==='http:'||x.protocol==='https:';}catch(e){return false}
+}
+function speak(t,lang='en-US'){
+  try{if(typeof window.magicFastSpeak==='function')return window.magicFastSpeak(t,lang)!==false;}catch(e){console.warn('Academy shared speech failed',e)}
+  try{if('speechSynthesis'in window){speechSynthesis.cancel();speechSynthesis.resume();const u=new SpeechSynthesisUtterance(t);u.lang=lang;u.rate=.92;u.pitch=1;speechSynthesis.speak(u);return true}}catch(e){console.warn('Academy native speech fallback failed',e)}
+  return false
+}
+function playAudio(url,text,lang='en-US'){
+  const fallback=()=>{if(text)return speak(text,lang);return false};
+  if(!validAudioUrl(url))return fallback();
+  try{
+    if(activeAudio){try{activeAudio.pause()}catch(e){}}
+    const a=new Audio(url);activeAudio=a;a.preload='auto';
+    let failed=false;
+    a.addEventListener('error',()=>{failed=true;fallback()},{once:true});
+    const p=a.play();
+    if(p&&typeof p.catch==='function')p.catch(()=>{if(!failed)fallback()});
+    return true;
+  }catch(e){return fallback()}
+}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
 const grammarSets=[
 [['I ___ happy at home.',['am','is','are'],'am'],['You ___ my friend.',['am','is','are'],'are'],['He ___ at school.',['am','is','are'],'is'],['She ___ kind.',['am','is','are'],'is'],['We ___ happy.',['am','is','are'],'are']],
@@ -220,7 +243,7 @@ function missionData(n,L,db){
 async function render(){await loadServerProgress();const total=60,n=Math.max(1,Math.min(60,Number(state.current)||1)),d=new Set(state.done),L=lesson(n),db=await loadDbLesson(n),[fallbackTopic,words,dialogue,reply,read,q,a,think]=L,topic=db?.title||db?.topic||fallbackTopic,dbWords=db?.words||[],dbRead=db?.reading_text||read,dbSpeak=Array.isArray(db?.speaking_phrases)?db.speaking_phrases:[],dbExamples=Array.isArray(db?.grammar_examples)?db.grammar_examples:[],dbQuizzes=Array.isArray(db?.quizzes)?db.quizzes:[],md=missionData(n,L,db);document.body.dataset.topicQa=String(topic||'').trim();installVocabularyStyles();document.body.innerHTML=`<div class="particles"></div><div class="app"><aside class="side"><div class="brand">MAGIC NEON AI</div><div class="orb"><span>G${grade}</span></div><div class="grade">GRADE ${grade}</div><div class="progress"><i style="width:${d.size/total*100}%"></i></div><div class="pct">${Math.round(d.size/total*100)}% COMPLETE</div><div class="missions">${fallbackWorlds.map((x,i)=>{let s=i*5+1,ok=[0,1,2,3,4].every(k=>d.has(s+k));return `<button class="world ${n>=s&&n<s+5?'active':''}" data-m="${s}">🪐 ${i+1}. ${esc(x[0])} ${ok?'✓':''}</button>`}).join('')}</div></aside><main><div class="top"><div><div class="eyebrow">MAGIC NEON AI ACADEMY • GRADE ${grade}</div><div class="title">${esc(topic)}</div><div class="eyebrow">${types[(n-1)%5]} • MISSION ${n}/60</div></div><div class="stats"><span class="chip">⚡ ${Number.isFinite(Number(state.serverXp))?Number(state.serverXp):d.size*10} XP</span><span class="chip">⭐ ${state.stars||0}</span><span class="chip">🔥 ${state.streak||0}</span></div></div><div class="card"><h2>🚀 Mission ${n} • ${esc(md.title)}</h2><p>Every mission has a different task. Learn vocabulary, grammar, listening, speaking, reading, writing and exercises — then use the quiz as assessment.</p></div><div class="grid">
 <section class="card activity"><h2>🧠 Vocabulary Vault</h2><p class="vocab-source">${dbWords.length?`Supabase • ${dbWords.length} სასწავლო სიტყვა`:'სასწავლო სიტყვები'}</p><div class="vocab">${renderVocabularyCards(dbWords,words)}</div></section>
 <section class="card activity"><h2>📘 Grammar Lab</h2><p class="example"><b>${esc(db?.grammar_rule||'Use the lesson words in a simple English sentence.')}</b></p>${dbExamples.length?`<div class="example">${dbExamples.map(x=>`<div>• ${esc(x)}</div>`).join('')}</div>`:'<p class="example">Study the rule, read the examples, then practise in Your Mission.</p>'}</section>
-<section class="card activity"><h2>🎧 Listening Zone</h2><p class="dialogue">${esc(db?.listening_text||dialogue)}</p><button class="btn" data-speak="${esc(db?.listening_text||dialogue)}">🔊 Listen</button></section>
+<section class="card activity"><h2>🎧 Listening Zone</h2><p class="dialogue">${esc(db?.listening_text||dialogue)}</p><button class="btn" data-speak="${esc(db?.listening_text||dialogue)}" data-audio-url="${esc(db?.listening_audio_url||'')}">🔊 Listen</button></section>
 <section class="card activity"><h2>🗣️ Speaking Lab</h2><p class="dialogue">${esc(dbSpeak.length?dbSpeak.join(' • '):reply)}</p><button class="btn" data-speak="${esc(dbSpeak.length?dbSpeak.join(' '):reply)}">🔊 Speak & Repeat</button></section>
 <section class="card activity mission-task"><h2>🎮 Mission Practice</h2>${md.html}</section>
 <section class="card activity"><h2>📖 Reading Zone</h2><p class="reading">${esc(dbRead)}</p><button class="btn" data-speak="${esc(dbRead)}">🔊 Listen to reading</button></section>
@@ -255,6 +278,6 @@ function bind(){const writing=document.querySelector('[data-writing-answer]');if
   save();
   window.dispatchEvent(new CustomEvent('englishMariamiMissionCompleted',{detail:{grade:grade,mission:mission,final:mission===60,xp:state.serverXp,stars:state.stars,streak:state.streak}}));
   render();
-});document.querySelectorAll('[data-speak]').forEach(b=>b.onclick=()=>speak(b.dataset.speak));document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{const grid=b.closest('.choicegrid');const box=b.closest('.activity')||b.parentElement,msg=box.querySelector('.quizmsg')||document.querySelector('.quizmsg');if(b.dataset.answer==='right'){if(grid)grid.dataset.passed='1';msg.textContent='✅ Correct! Great job.'}else{msg.textContent='🔁 Try again — read and listen carefully.'}refreshCompleteGate()});document.querySelector('[data-save-answer]')?.addEventListener('click',()=>{const input=document.querySelector('.answer');try{localStorage.setItem(`${key}-answer-${state.current}`,input.value)}catch(e){}document.querySelector('.save-msg').textContent='✅ Saved on this device.';refreshCompleteGate()});refreshCompleteGate();hardenRuntimeQA();}
+});document.querySelectorAll('[data-speak]').forEach(b=>b.onclick=()=>playAudio(b.dataset.audioUrl,b.dataset.speak));document.querySelectorAll('[data-audio-url]').forEach(b=>b.setAttribute('aria-label','Play audio'));document.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{const grid=b.closest('.choicegrid');const box=b.closest('.activity')||b.parentElement,msg=box.querySelector('.quizmsg')||document.querySelector('.quizmsg');if(b.dataset.answer==='right'){if(grid)grid.dataset.passed='1';msg.textContent='✅ Correct! Great job.'}else{msg.textContent='🔁 Try again — read and listen carefully.'}refreshCompleteGate()});document.querySelector('[data-save-answer]')?.addEventListener('click',()=>{const input=document.querySelector('.answer');try{localStorage.setItem(`${key}-answer-${state.current}`,input.value)}catch(e){}document.querySelector('.save-msg').textContent='✅ Saved on this device.';refreshCompleteGate()});refreshCompleteGate();hardenRuntimeQA();}
 window.addEventListener('DOMContentLoaded',()=>{render();});
 })();
