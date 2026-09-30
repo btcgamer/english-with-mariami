@@ -243,9 +243,9 @@ function bind(){const writing=document.querySelector('[data-writing-answer]');if
     return;
   }
   if(!state.done.includes(mission))state.done.push(mission);
-  if(Number.isFinite(Number(server.xp)))state.serverXp=Math.max((Number(state.serverXp)||0)+10,Number(server.xp));
-  if(Number.isFinite(Number(server.stars)))state.stars=Math.max((Number(state.stars)||0)+1,Number(server.stars));
-  if(Number.isFinite(Number(server.streak)))state.streak=Math.max((Number(state.streak)||0)+1,Number(server.streak));
+  if(Number.isFinite(Number(server.xp)))state.serverXp=Number(server.xp);
+  if(Number.isFinite(Number(server.stars)))state.stars=Number(server.stars);
+  if(Number.isFinite(Number(server.streak)))state.streak=Number(server.streak);
   if(Number.isFinite(Number(server.lessons_completed)))state.serverLessons=Number(server.lessons_completed);
   if(mission<60)state.current=mission+1;
   save();
