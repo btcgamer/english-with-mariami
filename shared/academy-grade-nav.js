@@ -8,18 +8,6 @@
   const ACADEMY=`../academy.html?ewm_auth_refresh=20260907`;
   const STATE_KEY=`magic-neon-grade-${grade}`;
 
-  function resetTransientMission(){
-    try{
-      const saved=JSON.parse(localStorage.getItem(STATE_KEY)||'null');
-      if(saved&&typeof saved==='object'){
-        saved.current=1;
-        localStorage.setItem(STATE_KEY,JSON.stringify(saved));
-      }
-      sessionStorage.setItem(`magic-neon-fresh-grade-${grade}`,'1');
-    }catch(e){}
-  }
-
-
   function hideAudioTest(){
     const nodes=document.querySelectorAll('button,a,[role="button"],section,article,div');
     nodes.forEach(function(el){
@@ -42,7 +30,6 @@
     document.body.appendChild(nav);
     nav.querySelector('.academy-btn').addEventListener('click',function(event){
       event.preventDefault();
-      resetTransientMission();
       window.location.assign(new URL(ACADEMY,window.location.href).href);
     });
     nav.querySelector('.logout-btn').addEventListener('click',async function(){
