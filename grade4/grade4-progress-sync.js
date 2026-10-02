@@ -49,10 +49,14 @@
 
       const local=readLocal();
       const owner=String(local.ownerUserId||'');
-      if(owner!==String(user.id)){
+      if(owner && owner!==String(user.id)){
         writeLocal({...local,ownerUserId:String(user.id),done:[],current:1,stars:0,streak:0});
         restored=true;
         return;
+      }
+      if(!owner){
+        local.ownerUserId=String(user.id);
+        writeLocal(local);
       }
       const localDone=normalizeDone(local.done);
       let remoteDone=[];
