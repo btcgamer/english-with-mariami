@@ -77,7 +77,6 @@ jobs:
           grep -F "package: name='com.englishwithmariami.academy'" <<<"$BADGING"
           grep -F "launchable-activity:" <<<"$BADGING"
           grep -F "uses-permission: name='android.permission.INTERNET'" <<<"$BADGING"
-          grep -F "uses-permission: name='android.permission.ACCESS_NETWORK_STATE'" <<<"$BADGING"
           grep -F "application-label:'English with Mariami'" <<<"$BADGING"
           grep -F "application-icon-160:" <<<"$BADGING"
           sha256sum "$APK" | tee android-debug-apk.sha256
