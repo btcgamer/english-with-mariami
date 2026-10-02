@@ -135,6 +135,25 @@ test.describe('Cross-Grade Master QA — runtime isolation', () => {
       await expect(complete).toBeEnabled();
       await complete.click();
       await expect(page.locator('body')).toContainText(/MISSION\s+2\s*\/\s*60/i);
+
+      for (let mission = 2; mission <= 5; mission++) {
+        const nextComplete = page.locator('[data-complete]').first();
+        await expect(page.locator('body')).toContainText(new RegExp('MISSION\\s+' + mission + '\\s*\\/\\s*60', 'i'));
+        const nextChoices = page.locator('.mission-task .choice[data-answer="right"], .mission-task .choice[data-ok="true"]');
+        if (await nextChoices.count()) {
+          await nextChoices.first().click();
+        } else {
+          const nextAnswer = page.locator('.mission-task .answer');
+          await nextAnswer.fill('This is a useful idea because it helps us learn and practice English.');
+          const nextSave = page.locator('.mission-task [data-save-answer], .mission-task [data-save]').first();
+          await nextSave.click();
+          await expect(page.locator('.mission-task .save-msg')).toContainText(/saved|save/i);
+        }
+        await expect(nextComplete).toBeEnabled();
+        await nextComplete.click();
+        await expect(page.locator('body')).toContainText(new RegExp('MISSION\\s+' + (mission + 1) + '\\s*\\/\\s*60', 'i'));
+      }
+
       expect(pageErrors, `G${grade} page errors: ${pageErrors.join(' | ')}`).toEqual([]);
       expect(consoleErrors, `G${grade} console errors: ${consoleErrors.join(' | ')}`).toEqual([]);
     });
