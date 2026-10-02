@@ -1,7 +1,6 @@
 /* MAGIC NEON AI ACADEMY — Grade 4 curriculum engine */
 (function(){'use strict';
 const key='magic-neon-grade-4';
-const freshKey='magic-neon-fresh-grade-4';
 const worlds=[
 ['Identity & Goals',['identity','strength','challenge','ambition','responsibility','confidence','future','achievement'],'I have learned that knowing my strengths also means accepting areas I need to improve. My goal is to become more confident when I speak English.','What is your goal? — My goal is to speak English more confidently.','Maya reflects on her future. She knows that achievement requires effort, responsibility, and the confidence to learn from mistakes. She writes small goals and reviews her progress each week.','What does Maya review each week?','Her progress','Why is knowing both strengths and weaknesses useful?'],
 ['Family & Relationships',['relationship','respect','tradition','advice','generation','trust','supportive','memory'],'Our family has different traditions, but we respect one another and share responsibilities at home.','What does the family share? — Responsibilities at home.','David interviews his grandparents about family traditions. He discovers that some customs have changed, while the values of respect and support have remained important across generations.','What has remained important?','Respect and support','How can families preserve traditions while accepting change?'],
@@ -32,7 +31,7 @@ const grammar=[
 [['A good argument ___ reasons.',['needs','need','needing'],'needs'],['We ___ evidence.',['compare','compares','comparing'],'compare'],['She ___ different perspectives.',['respects','respect','respecting'],'respects'],['They ___ a conclusion.',['reach','reaches','reaching'],'reach'],['He ___ his opinion clearly.',['explains','explain','explaining'],'explains']]
 ];
 const distract=['A random detail','The opposite idea'];
-const defaults={current:1,done:[],stars:0,streak:0};let state=defaults;try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x&&typeof x==='object')state={...defaults,...x,done:Array.isArray(x.done)?x.done:[]};if(sessionStorage.getItem(freshKey)==='1'){state.current=1;try{localStorage.setItem(key,JSON.stringify(state))}catch(e){}sessionStorage.removeItem(freshKey)}}catch(e){}
+const defaults={current:1,done:[],stars:0,streak:0};let state=defaults;try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x&&typeof x==='object')state={...defaults,...x,done:Array.isArray(x.done)?x.done:[]};}catch(e){}
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));const save=()=>{try{localStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new CustomEvent('englishMariamiProgressUpdated',{detail:{grade:4,done:state.done.length,current:state.current}}))}catch(e){}};
 async function recordMissionCompletion(n){
   const client=window.__ENGLISH_MARIAMI_SUPABASE_CLIENT||window.supabaseClient;
