@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ka">
 <head>
   <meta charset="UTF-8">
@@ -156,23 +156,39 @@
           if (role === "teacher") { setMessage("👩‍🏫 მასწავლებლის სივრცე იხსნება...", "success"); setTimeout(() => window.location.replace("/teacher-dashboard.html"), 500); return; }
           if (role === "parent") { setMessage("👨‍👩‍👧 მშობლის სივრცე იხსნება...", "success"); setTimeout(() => window.location.replace("/parent-space.html"), 500); return; }
           if (role === "student") {
-            if (!(grade >= 1 && grade <= 12)) { setMessage("⚠️ ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული. მასწავლებელმა უნდა დაგინიშნოს კლასი.", "error"); await client.auth.signOut(); return; }
-            setMessage("✅ შესვლა წარმატებულია! იხსნება მე-" + grade + " კლასის სივრცე...", "success");
+            const selectedGrade = (grade >= 1 && grade <= 12) ? grade : 0;
+            setMessage(
+              selectedGrade
+                ? "✅ შესვლა წარმატებულია! იხსნება English with Mariami Academy..."
+                : "✅ შესვლა წარმატებულია! იხსნება English with Mariami Academy...",
+              "success"
+            );
+
             const requested = new URLSearchParams(window.location.search).get("redirect") || "";
-            let requestedMatch = null;
             const requestedPath = requested.toLowerCase().split("?")[0].split("#")[0];
             const requestedParts = requestedPath.split("/").filter(Boolean);
-            if (requestedParts.length >= 1 && requestedParts[0].startsWith("grade")) {
-              const gradeText = requestedParts[0].slice(5);
-              const parsedGrade = Number(gradeText);
-              if (parsedGrade >= 1 && parsedGrade <= 12 && (requestedParts.length === 1 || requestedParts[1] === "index.html")) {
-                requestedMatch = [requestedParts[0], String(parsedGrade)];
+
+            let requestedMatch = null;
+
+            if (
+              requestedParts.length >= 1 &&
+              requestedParts[0].startsWith("grade")
+            ) {
+              const parsedGrade = Number(requestedParts[0].slice(5));
+
+              if (
+                parsedGrade >= 1 &&
+                parsedGrade <= 12 &&
+                (requestedParts.length === 1 || requestedParts[1] === "index.html")
+              ) {
+                requestedMatch = requested;
               }
             }
-            const destination = requestedMatch && Number(requestedMatch[1]) === grade
-              ? requested
-              : "/grade" + grade + "/index.html?fresh=1";
-            setTimeout(() => window.location.replace(destination), 350); return;
+
+            const destination = requestedMatch || "academy.html";
+
+            setTimeout(() => window.location.replace(destination), 350);
+            return;
           }
           setMessage("⚠️ ანგარიშის ტიპი ვერ განისაზღვრა. დაუკავშირდი მასწავლებელს.", "error");
           await client.auth.signOut();
@@ -190,3 +206,4 @@
   </script>
 </body>
 </html>
+
