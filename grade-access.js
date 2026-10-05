@@ -1,4 +1,4 @@
-/* English with Mariami — secure student grade routing. */
+﻿/* English with Mariami — secure student grade routing. */
 (function(){
   'use strict';
   const m=(location.pathname||'').match(/(?:^|\/)grade([1-9]|1[0-2])(?:\/index\.html)?\/?$/i);
@@ -49,9 +49,7 @@
       const role=String(profile.role||'').trim().toLowerCase();
       if(PRIVILEGED.includes(role))return;
       if(role!=='student')return login();
-      const g=Number(profile.grade||0);
-      if(!ALLOWED.includes(g))return login();
-      if(g!==current)return location.replace(target(g));
+      /* Students may access all grades 1-12. */
     }catch(e){console.error('[Grade Access] transient check error',e);return login();}
     finally{checking=false;}
   }
@@ -62,3 +60,5 @@
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});
   window.addEventListener('focus',check);
 })();
+
+
