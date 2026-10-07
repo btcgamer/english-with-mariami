@@ -3,7 +3,7 @@
   'use strict';
   if(!/\/academy\.html(?:$|[?#])/i.test(location.pathname+location.search+location.hash)) return;
 
-  const VALID_GRADES=[2,3,4];
+  const VALID_GRADES=[1,2,3,4,5,6,7,8,9,10,11,12];
   const PRIVILEGED_ROLES=['teacher','admin','parent'];
   let busy=false;
   let initialized=false;
@@ -59,12 +59,10 @@
       }
       const profile=access.profile||{};
       const role=String(profile.role||access.user.user_metadata?.role||'student').trim().toLowerCase();
-      const grade=Number(profile.grade||access.user.user_metadata?.grade||0);
       if(PRIVILEGED_ROLES.includes(role)){
         setMessage('მასწავლებლის/ადმინისტრატორის სრული რეჟიმი აქტიურია. 🎓');
-      }else if(role==='student'&&VALID_GRADES.includes(grade)){
-        links().forEach(function(link){if(Number(link.dataset.grade)!==grade){link.style.opacity='.45';link.title='ეს კლასი შენთვის არ არის მინიჭებული'}});
-        setMessage('შენი მინიჭებული კლასი: მე-'+grade+' კლასი 🎓');
+      }else if(role==='student'){
+        setMessage('You can choose any grade from 1 to 12.');
       }else{
         setMessage('კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს. 👩‍🏫');
       }
@@ -83,18 +81,9 @@
       if(!access.user){location.href=loginUrl();return}
       const profile=access.profile||{};
       const role=String(profile.role||access.user.user_metadata?.role||'student').trim().toLowerCase();
-      const grade=Number(profile.grade||access.user.user_metadata?.grade||0);
       if(PRIVILEGED_ROLES.includes(role)){location.href=link.getAttribute('href');return}
       if(role!=='student'){
         alert('ამ ანგარიშს სასწავლო კლასზე წვდომა არ აქვს.');
-        return;
-      }
-      if(!VALID_GRADES.includes(grade)){
-        alert('კლასი ჯერ არ არის მინიჭებული. დაელოდე მასწავლებელს, რომ კლასი მოგანიჭოს.');
-        return;
-      }
-      if(grade!==target){
-        alert('შენს ანგარიშზე მინიჭებულია მე-'+grade+' კლასი. სხვა კლასის გახსნა შეუძლებელია.');
         return;
       }
       location.href=link.getAttribute('href');
