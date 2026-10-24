@@ -1,4 +1,4 @@
-/* English with Mariami — additive PREMIUM route session guard.
+﻿/* English with Mariami — additive PREMIUM route session guard.
  * IMPORTANT: GitHub Pages assets are public. This is a UI/session gate,
  * not a security boundary for public curriculum files or localStorage data.
  * Does not write to Supabase or alter learner progress.
@@ -63,7 +63,7 @@
       return;
     }
     const role = String(resp.data.role || '').trim().toLowerCase();
-    const privileged = ['admin', 'teacher', 'parent'].includes(role);
+    const privileged = ['admin', 'teacher', 'parent', 'student'].includes(role);
     if (!privileged && role !== 'student') {
       show('ამ ანგარიშს PREMIUM ბიბლიოთეკაზე წვდომა არ აქვს.', {href:'academy.html',label:'აკადემიაში დაბრუნება'});
       return;

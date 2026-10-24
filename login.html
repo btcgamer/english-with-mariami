@@ -126,7 +126,7 @@
             const requestedGrade = parts[0] && parts[0].startsWith("grade") ? Number(parts[0].slice(5)) : 0;
             const destination = requestedGrade === grade && (parts.length === 1 || parts[1] === "index.html")
               ? requested
-              : "/grade" + grade + "/index.html?fresh=1";
+              : "/academy.html?grade=" + grade;
             return window.location.replace(destination);
           }
         } catch (e) { console.warn("[Login] Existing session check skipped:", e); }
@@ -206,4 +206,3 @@
   </script>
 </body>
 </html>
-
