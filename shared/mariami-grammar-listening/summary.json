@@ -1,0 +1,138 @@
+{
+  "grades": 12,
+  "topics_total": 1512,
+  "topics_per_grade": 126,
+  "new_topics": 48,
+  "word_cards": 21072,
+  "distinct_english_terms": 2687,
+  "new_distinct_term_contribution": 366,
+  "new_topic_distinct_terms": 689,
+  "georgian_grammar_repairs": 139,
+  "english_grammar_rule_variants": 104,
+  "teacher_review_required": true,
+  "source_sha256_by_grade": {
+    "1": "f772346b67ced90f09474cb80edcdad02050197891c9c0b6b0a24b674b16cd5a",
+    "2": "af773a5b4239879334ed3113ab711d18c31c94ed0a899cf43e6e46c976509df7",
+    "3": "360d4e322dd27ee34701bac756eb3b1643c39643b8d981fa28d492c21c3cf76d",
+    "4": "9f686137e1f63785527574b92c32b293ee0ca78275f49edb0124e17f81c08943",
+    "5": "978010c9a271972556bfab996e1cc1e1ef4446e12cbd5cf7fe3c2e96e739d08f",
+    "6": "ffe86ea87be471d379af81b6face20da8bb018e2ceb38191fa60d73b0dd0f4fd",
+    "7": "deccea063540955bbb810735b7db29a13d0b7b2b4be0a148291f1448a727e858",
+    "8": "c56606dcd354c90345035406568d42db1c081c4a1d8508adf8d20780d962df40",
+    "9": "6247d68c50f7c400b11d3ed05807aefb0f065f724b6b4b90cdd6b47566faec5b",
+    "10": "4d096e6d7feb7d5dfc61f47543eab78333633a1950819d8c0db70fa97b4e0d20",
+    "11": "02e75e2668c161637c8e2fed83e6b55d90d8230ee824d68c4dd9bf720d6a2520",
+    "12": "9223960f1c7b7d7e67eef1a956cb8e57483bae7b7b3c21de1d506e0bb745cf89"
+  },
+  "per_grade": [
+    {
+      "grade": 1,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 525,
+      "repeated_cards": 1231,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 8
+    },
+    {
+      "grade": 2,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 563,
+      "repeated_cards": 1193,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 4
+    },
+    {
+      "grade": 3,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 597,
+      "repeated_cards": 1159,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 2
+    },
+    {
+      "grade": 4,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 564,
+      "repeated_cards": 1192,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 4
+    },
+    {
+      "grade": 5,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 586,
+      "repeated_cards": 1170,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 8
+    },
+    {
+      "grade": 6,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 604,
+      "repeated_cards": 1152,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 19
+    },
+    {
+      "grade": 7,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 558,
+      "repeated_cards": 1198,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 10
+    },
+    {
+      "grade": 8,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 536,
+      "repeated_cards": 1220,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 12
+    },
+    {
+      "grade": 9,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 517,
+      "repeated_cards": 1239,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 20
+    },
+    {
+      "grade": 10,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 525,
+      "repeated_cards": 1231,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 12
+    },
+    {
+      "grade": 11,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 528,
+      "repeated_cards": 1228,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 20
+    },
+    {
+      "grade": 12,
+      "topics": 126,
+      "word_cards": 1756,
+      "distinct_words": 540,
+      "repeated_cards": 1216,
+      "new_topics": 4,
+      "georgian_grammar_repairs": 20
+    }
+  ],
+  "audio_type": "Browser SpeechSynthesis, not recorded audio"
+}

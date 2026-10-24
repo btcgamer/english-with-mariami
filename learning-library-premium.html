@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#08152b">
+<meta name="description" content="English with Mariami: 1–12 კლასის დამატებითი თემები, სიტყვები, გრამატიკა, მოსმენა და პრაქტიკა.">
+<title>English with Mariami — PREMIUM LEARNING · 1–12 კლასი</title>
+<link rel="stylesheet" href="shared/mariami-grammar-listening-ui.css">
+<link rel="stylesheet" href="shared/mariami-study-pro.css">
+<link rel="stylesheet" href="shared/mariami-premium-base.css">
+<link rel="stylesheet" href="shared/mariami-premium.css">
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-grammar-listening-ui-pro.js"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-study-pro.js"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-premium-base.js"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-premium.js"></script>
+<!-- English with Mariami PREMIUM auth: additive, reversible -->
+<style data-mariami-premium-auth="1">
+html:not(.mariami-auth-ready) body > :not(#mariami-auth-status){visibility:hidden!important}
+html:not(.mariami-auth-ready) body{background:#08152b!important}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js?v=mariami-premium-auth1"></script>
+<script defer src="shared/mariami-premium-auth.js?v=1"></script>
+</head>
+<body>
+<a class="skip-link" href="#lesson">გადასვლა გაკვეთილზე</a>
+<header class="header"><div class="header-inner"><a href="academy.html" class="brand"><span class="brand-icon">✦</span> English with Mariami <small>ACADEMY</small></a><a class="back" href="academy.html">← აკადემიაში დაბრუნება</a></div></header>
+<main class="shell">
+<section class="welcome"><div class="eyebrow">ENGLISH WITH MARIAMI · PREMIUM LEARNING</div><h1>შენი ინგლისური.<br><span>შენი პროგრესი.</span></h1><p>შენზე მორგებული სასწავლო სივრცე 1–12 კლასისთვის: იმეცადინე, მოუსმინე, გაიმეორე რთული სიტყვები და თვალყური ადევნე საკუთარ წინსვლას. ყველა არსებული გაკვეთილი შენარჩუნებულია.</p>
+<div class="stats"><div><b>12</b><small>კლასი</small></div><div><b>1,512</b><small>თემა</small></div><div><b>21,072</b><small>სიტყვა-ბარათი</small></div><div><b>10+</b><small>პრაქტიკის ფორმატი</small></div></div>
+<p class="caution">შენი ინფორმაციით, მასწავლებელმა არსებული სასწავლო მასალა გადაამოწმა. ბიბლიოთეკაში არის 1,512 თემა, 21,072 ბარათი და 2,687 განსხვავებული ინგლისური სიტყვა/გამოთქმა. ახალი Study Pro მხოლოდ სავარჯიშოებისა და გამეორების შესაძლებლობებს ამატებს — გაკვეთილების ტექსტი არ იცვლება. შედეგები ამ ბრაუზერში ინახება და ოფიციალურ ქულებს ან Supabase-ს არ ცვლის.</p></section>
+<nav class="premium-navigation" aria-label="სწრაფი გადასვლა"><a href="#ewm-progress">◉ ჩემი პროგრესი</a><a href="#pro-practice">✦ გამეორება</a><a href="#lesson">▤ გაკვეთილები</a></nav>
+<section class="toolbar" aria-label="კლასისა და თემის არჩევა"><div class="select-wrap"><label for="grade">აირჩიე კლასი</label><select id="grade"><option value="">კლასების ჩატვირთვა...</option></select></div><div class="search-wrap"><label for="search">მოძებნე თემა ან სიტყვა</label><input id="search" type="search" autocomplete="off" placeholder="მაგალითად: family, გრამატიკა, science"></div><div class="results" id="results" aria-live="polite">ჩატვირთვა...</div></section>
+<section id="pro-hub" class="pro-hub" aria-label="გამეორება და სასწავლო პროგრესი">
+<div class="pro-heading"><div><span class="eyebrow">STUDY PRO · YOUR PERSONAL LEARNING SPACE</span><h2>სწავლა, რომელიც შენ გერგება</h2><p>დაიმახსოვრე სიტყვები უფრო მყარად — გაიმეორე როცა გაგიჭირდება, რჩეულ თემებს დაუბრუნდი და შეინახე პროგრესის ასლი.</p></div></div>
+
+<section id="ewm-progress" aria-labelledby="pg-heading">
+  <div class="pg-hero">
+    <div><span class="pg-kicker">MY LEARNING JOURNEY · ჩემი პროგრესი</span><h3 id="pg-heading">ჩემი სასწავლო გზა</h3><p>ნამდვილი პროგრესი შენს ნამეცადინარზე — ყოველი პატარა ნაბიჯი მნიშვნელოვანია.</p></div>
+    <div class="pg-hero-right">
+      <div class="pg-ring" id="pg-ring" role="img" aria-label="კლასის დასრულების პროცენტი"><div class="pg-ring-core"><strong id="pg-ring-num">0%</strong><small>კლასის თემები</small></div></div>
+      <div class="pg-mini-stats" aria-label="ჩემი სწრაფი სტატისტიკა"><span>🔥 <b id="pg-streak">0</b> დღიანი სერია</span><span>✨ <b id="pg-xp">0</b> სავარჯიშო XP</span><span>🔁 <b id="pg-due-count">0</b> გასამეორებელი</span></div>
+    </div>
+  </div>
+  <div class="pg-grid">
+    <article class="pg-metric"><div class="pg-metric-head"><strong>📚 დასრულებული თემები</strong><b id="pg-lessons-pct">0%</b></div><progress id="pg-lessons" value="0" max="126" aria-label="დასრულებული თემების პროგრესი"></progress><p><span id="pg-total-done">0 / 126</span> თემა მონიშნულია დასრულებულად</p></article>
+    <article class="pg-metric"><div class="pg-metric-head"><strong>🌱 ნავარჯიშები სიტყვები</strong><b id="pg-started-pct">0%</b></div><progress id="pg-started" value="0" max="1" aria-label="ნავარჯიშები სიტყვების პროგრესი"></progress><p id="pg-started-detail">0 სიტყვა</p></article>
+    <article class="pg-metric"><div class="pg-metric-head"><strong>🧠 კარგად დამახსოვრებული</strong><b id="pg-mastered-pct">0%</b></div><progress id="pg-mastered" value="0" max="1" aria-label="დამახსოვრებული სიტყვების პროგრესი"></progress><p id="pg-mastered-detail">0 სიტყვა</p></article>
+    <article class="pg-metric"><div class="pg-metric-head"><strong>🎯 დღიური მიზანი</strong><b id="pg-daily-pct">0%</b></div><progress id="pg-daily" value="0" max="15" aria-label="დღიური მიზნის პროგრესი"></progress><p><b id="pg-day-count">0 / 15</b> · <span id="pg-daily-detail">გაიმეორე დღეში 15 განსხვავებული სიტყვა</span></p><label class="premium-goal-row" for="premium-goal">ჩემი დღიური მიზანი <select id="premium-goal" aria-label="დღიური სასწავლო მიზნის შეცვლა"><option value="5">5 სიტყვა</option><option value="10">10 სიტყვა</option><option value="15" selected>15 სიტყვა</option><option value="20">20 სიტყვა</option><option value="30">30 სიტყვა</option></select></label></article>
+  </div>
+
+<div class="premium-eyebrow-row"><span>PERSONALIZED STUDY SPACE</span><span id="premium-grade-label">კლასი ირჩევა…</span></div>
+<section class="premium-focus" aria-label="სასწავლო რეკომენდაცია">
+  <div class="premium-focus-icon" aria-hidden="true">✦</div>
+  <div class="premium-focus-content"><span class="premium-small-label">შენი შემდეგი ნაბიჯი</span><h4 id="premium-focus-title">აირჩიე კლასი და დაიწყე სწავლა</h4><p id="premium-focus-desc">მონაცემებს არჩეული კლასისთვის დავთვლით.</p>
+  <div class="premium-focus-actions"><button type="button" id="premium-focus-action" class="premium-cta">დაიწყე სწავლა →</button><button type="button" id="premium-open-lessons" class="premium-ghost">თემების ნახვა ↓</button></div></div>
+  <div class="premium-focus-count"><strong id="premium-focus-number">0</strong><span id="premium-focus-unit">სიტყვა</span></div>
+</section>
+<div class="premium-signal-grid">
+ <section class="premium-signal" aria-labelledby="premium-week-title"><div class="premium-card-header"><div><span class="premium-small-label">CONSISTENCY</span><h4 id="premium-week-title">ბოლო 7 დღე</h4></div><span id="premium-week-total" class="premium-subtle-pill">0 სიტყვა</span></div><div id="premium-week-chart" class="premium-week-chart" role="img" aria-label="ბოლო 7 დღის აქტივობის სვეტოვანი დიაგრამა"></div><p class="premium-card-note">სვეტები აჩვენებს სიტყვებს მათი <strong>ბოლო შეფასების</strong> დღის მიხედვით; ყველა ისტორიული გამეორება არ ინახება.</p></section>
+ <section class="premium-signal" aria-labelledby="premium-memory-title"><div class="premium-card-header"><div><span class="premium-small-label">WORD MASTERY</span><h4 id="premium-memory-title">როგორ მახსოვს სიტყვები?</h4></div><span id="premium-memory-total" class="premium-subtle-pill">0 სიტყვა</span></div><div id="premium-memory-meter" class="premium-memory-meter" role="img" aria-label="სიტყვების ცოდნის დონეები"><span id="premium-memory-strong" class="premium-memory-part premium-strong"></span><span id="premium-memory-learning" class="premium-memory-part premium-learning"></span><span id="premium-memory-hard" class="premium-memory-part premium-hard"></span><span id="premium-memory-unseen" class="premium-memory-part premium-unseen"></span></div><div class="premium-memory-legend"><span><i class="premium-dot premium-dot-strong"></i> დამახსოვრებული <b id="premium-memory-strong-n">0</b></span><span><i class="premium-dot premium-dot-learning"></i> სწავლაში <b id="premium-memory-learning-n">0</b></span><span><i class="premium-dot premium-dot-hard"></i> რთული <b id="premium-memory-hard-n">0</b></span><span><i class="premium-dot premium-dot-unseen"></i> ჯერ ახალი <b id="premium-memory-unseen-n">0</b></span></div><p class="premium-card-note">დონეები ეფუძნება ბარათების შენ მიერ გაკეთებულ თვითშეფასებას.</p></section>
+</div>
+<section class="premium-roadmap" aria-labelledby="premium-roadmap-title"><div class="premium-roadmap-head"><div><span class="premium-small-label">LEARNING PLAN</span><h4 id="premium-roadmap-title">შენი სასწავლო გეგმა</h4></div><span class="premium-roadmap-tip">ყოველდღე პატარა ნაბიჯით</span></div><div class="premium-roadmap-steps"><div class="premium-step"><span class="premium-step-icon">01</span><div><strong>ახალი სიტყვები</strong><small>გაიცანი ახალი გამოთქმები</small></div><button type="button" id="premium-go-new" aria-label="ახალი სიტყვების სწავლა">გახსნა ↗</button></div><div class="premium-step"><span class="premium-step-icon">02</span><div><strong>გამეორება</strong><small id="premium-due-mini">დაუბრუნდი დაგეგმილ ბარათებს</small></div><button type="button" id="premium-go-due" aria-label="გასამეორებელი სიტყვების გახსნა">გახსნა ↗</button></div><div class="premium-step"><span class="premium-step-icon">03</span><div><strong>გაკვეთილის დასრულება</strong><small id="premium-lesson-mini">აირჩიე თემა და განაგრძე</small></div><button type="button" id="premium-go-lessons" aria-label="გაკვეთილების ნახვა">გახსნა ↗</button></div></div></section>
+  <div class="pg-bottom">
+    <div class="pg-panel"><h4>🏅 ჩემი მიღწევები</h4><div id="pg-awards" class="pg-awards" aria-live="polite">დასაწყისისთვის გაიმეორე პირველი სიტყვა.</div></div>
+    <div class="pg-panel"><h4>💡 რას ვაკეთებ შემდეგ?</h4><p id="pg-next">აირჩიე კლასი და დაიწყე სიტყვების გამეორება.</p></div>
+  </div>
+  <p class="pg-foot">პროგრესი ითვლება ამ მოწყობილობაზე შენახული მონაცემებით. XP და ნიშნები მხოლოდ თამაშის ელემენტებია, არა ოფიციალური ქულები. დღიური სერია ითვლება ამ დამატების დაყენების დღიდან.</p>
+</section>
+
+<div class="pro-stats"><div><strong id="pro-words">0</strong><small>განსხვავებული სიტყვა ამ კლასში</small></div><div><strong id="pro-started">0</strong><small>ნავარჯიშები</small></div><div><strong id="pro-due">0</strong><small>გასამეორებელი ახლა</small></div><div><strong id="pro-mastered">0</strong><small>დამახსოვრებული</small></div></div>
+<div class="pro-row pro-meta"><span id="pro-completed">0 / 126 გამეორებული თემა</span><span id="pro-fav-count">0 რჩეული თემა</span><span>სუსტად დამახსოვრებული: <b id="pro-weak-count">0</b></span></div>
+<p class="pro-meta" id="pro-current-topic"></p>
+<div class="pro-row pro-tools"><button type="button" class="primary" id="pro-start-mixed">▶ დღევანდელი ვარჯიში</button><button type="button" id="pro-start-due">🔁 გასამეორებელი</button><button type="button" id="pro-start-new">🌱 ახალი სიტყვები</button><button type="button" id="pro-start-weak">🎯 რთული სიტყვები</button><button type="button" id="pro-start-lesson">📖 მიმდინარე თემა</button><button type="button" id="pro-start-fav">★ რჩეული თემები</button></div>
+<div class="pro-row pro-tools"><button type="button" id="pro-fav">☆ რჩეულებში დამატება</button><button type="button" id="pro-show-favs">რჩეულების სია</button><label for="pro-direction">ბარათის მიმართულება</label><select id="pro-direction"><option value="ka-en">ქართული → ინგლისური</option><option value="en-ka">ინგლისური → ქართული</option></select><label for="pro-speed">მოსმენის სიჩქარე</label><select id="pro-speed"><option value="0.68">ნელი</option><option value="0.85" selected>ნორმალური</option><option value="1">სწრაფი</option></select></div>
+<p class="pro-info" id="pro-message" role="status">არჩიე კლასი და დაიწყე გამეორება.</p>
+<div id="pro-practice" class="pro-practice" hidden><div class="pg-session-box" id="pg-session-box" hidden><div class="pg-session-head"><b>მიმდინარე სესიის პროგრესი</b><span id="pg-session-count">0 / 15 ბარათი შეფასებულია</span></div><progress id="pg-session-bar" max="15" value="0" aria-label="სესიის დასრულების პროგრესი"></progress></div><div class="pro-row"><b id="pro-progress">1 / 15</b><span id="pro-context"></span></div><div class="pro-flash"><p id="pro-front" class="pro-front"></p><p id="pro-back" class="pro-back" hidden></p></div><div class="pro-row"><button type="button" id="pro-show" class="primary">პასუხის ჩვენება · Space</button><button type="button" id="pro-listen">🔊 ინგლისურად მოსმენა</button></div><div class="pro-row pro-tools" id="pro-rate" hidden><button type="button" id="pro-rate-again">1 · თავიდან</button><button type="button" id="pro-rate-hard">2 · რთულია</button><button type="button" id="pro-rate-good" class="primary">3 · მახსოვს</button><button type="button" id="pro-rate-easy">4 · მარტივია</button></div><p id="pro-card-result" role="status"></p></div>
+<div id="pro-finish" class="pro-info" hidden></div>
+<div class="pro-row pro-backup"><button type="button" id="pro-export">⬇ პროგრესის ასლის შენახვა</button><label class="pro-file">⬆ პროგრესის აღდგენა <input id="pro-import" type="file" accept="application/json,.json" aria-label="პროგრესის JSON ფაილის არჩევა"></label></div>
+<p class="pro-fineprint">შედეგები ინახება მხოლოდ ამ ბრაუზერში. არ ცვლის ოფიციალურ ქულებს, Supabase-ს ან მასწავლებლის შეფასებას. ინტერვალური გამეორება სასწავლო დამხმარე მეთოდია, არა სერტიფიცირებული შეფასება.</p>
+</section>
+
+<div class="layout"><aside class="sidebar"><div class="side-title"><h2>თემები</h2><span id="gradeprogress">0 / 126</span></div><nav id="topics" class="topic-list" aria-label="გაკვეთილების არჩევა"></nav></aside>
+<section id="lesson" class="lesson" aria-live="off"><div id="loading" class="loading" role="status">არჩეული კლასის მასალა იტვირთება…</div><div id="lesson-content" hidden>
+<div class="lesson-top"><div><span id="topic-no" class="eyebrow"></span><h2 id="title-ka"></h2><p id="title-en" class="engtitle"></p></div><div id="lesson-status" class="status-pill"></div></div>
+<div class="pg-lesson-meter" id="pg-lesson-meter" hidden><div class="pg-lesson-label"><b>📖 ამ თემის პროგრესი</b><span id="pg-lesson-count">0 სიტყვა</span></div><progress id="pg-lesson-bar" max="1" value="0" aria-label="თემის ნავარჯიშები სიტყვები"></progress></div>
+<div class="notice"><strong>სასწავლო გზა</strong> — ჯერ წაიკითხე, შემდეგ მოუსმინე, გაიმეორე და შეამოწმე შენი ცოდნა. კითხვები სავარჯიშოა და არა ოფიციალური გამოცდა.</div>
+<section class="section"><div class="section-title"><h3>🧠 ლექსიკა და გამოთქმა</h3><span id="word-count">სასწავლო ბარათები</span></div><div class="vocab-tools"><label><input id="only-new" type="checkbox"> მხოლოდ პირველად შესწავლილი გამოთქმები</label><span id="new-word-count"></span></div><div id="words" class="word-grid"></div></section>
+<section class="section"><h3>📐 გრამატიკა / Grammar</h3><p id="grammar" class="grammar-rule"></p><div class="examples"><p id="grammar-en"></p><p id="grammar-ka"></p></div><div class="practice"><h4>გრამატიკის შემოწმება</h4><p id="grammar-question"></p><div id="grammar-options" class="options"></div><p class="feedback" id="grammar-feedback" aria-live="polite"></p></div></section>
+<section class="section"><h3>📖 მაგალითი და გაგება</h3><div class="examples"><p id="example-en"></p><p id="example-ka"></p></div><p class="helper">წაიკითხე ინგლისური წინადადება, შეადარე ქართულ მნიშვნელობას და ხელახლა თქვი ინგლისურად.</p></section>
+<section class="section"><h3>📖 ტექსტის გაგების ტესტი / Reading comprehension</h3><p class="helper">წაიკითხე მოცემული ტექსტი და აირჩიე, რომელ თემას აღწერს იგი. ეს არის თემის ამოცნობის სავარჯიშო და არა ღრმა ტექსტის ანალიზის ტესტი.</p><div class="practice"><p id="reading-question"></p><div id="reading-options" class="options"></div><p class="feedback" id="reading-feedback" aria-live="polite"></p></div></section>
+<section class="section"><h3>🧱 ააწყვე სწორი წინადადება / Sentence order</h3><p class="helper">დააჭირე სიტყვებს სწორი თანმიმდევრობით და შეამოწმე წინადადება.</p><div class="practice"><div id="sentence-selected" class="sentence-selected" aria-live="polite"></div><div id="sentence-parts" class="options"></div><div class="actions"><button type="button" id="sentence-clear">თავიდან დაწყება</button><button type="button" class="primary" id="sentence-check">შემოწმება</button></div><p id="sentence-feedback" class="feedback" aria-live="polite"></p></div></section>
+<section class="section"><h3>🎧 მოსმენა / Listening</h3><p class="helper">Chrome-ის ხმოვანი წაკითხვა (TTS): მოუსმინე წინადადებას, შემდეგ კი ერთ სიტყვას და აკრიფე გაგონილი. ეს არ არის სტუდიური აუდიო.</p><div class="actions"><button id="listen-text" class="primary" type="button">🔊 მოუსმინე წინადადებას</button><button id="listen-slow" type="button">🐢 ნელი მოსმენა</button><button id="stop-audio" type="button">⏹ გაჩერება</button></div><div class="practice"><h4>მოისმინე და ჩაწერე სიტყვა</h4><div class="actions"><button id="listen-word" type="button">🔊 მოუსმინე სიტყვას</button><button id="next-listen-word" type="button">შემდეგი სიტყვა ↻</button></div><label class="input-label" for="listen-answer">რა გაიგონე ინგლისურად?</label><div class="answer-row"><input id="listen-answer" type="text" autocomplete="off" spellcheck="false" placeholder="Type the English word..." maxlength="80"><button id="check-listen" class="primary" type="button">შემოწმება</button></div><p class="feedback" id="listen-feedback" aria-live="polite"></p></div></section>
+<section class="section" id="listening-plus"><h3>🎧 დამატებითი მოსმენა — კარნახი და გაგება</h3>
+<p class="helper">მოისმინე ტექსტი ნორმალური ან ნელი სიჩქარით. ტექსტი თავიდან დამალულია. ხმას წარმოქმნის Chrome-ის SpeechSynthesis (TTS), თუ ბრაუზერი მას მხარს უჭერს.</p>
+<div class="advanced-listening"><div class="actions"><button type="button" id="play-passage" class="primary">🔊 მთლიანი ტექსტი</button><button type="button" id="play-passage-slow">🐢 ნელი ტექსტი / გამეორება</button><button type="button" id="reveal-transcript">ტექსტის ჩვენება</button></div>
+<p id="advanced-transcript" hidden></p>
+<div class="practice"><h4>1. წინადადების კარნახი</h4><button id="play-dictation" type="button">🔊 მოისმინე წინადადება</button><label for="dictation-answer" class="input-label">აკრიფე გაგონილი ინგლისურად</label><div class="answers"><input id="dictation-answer" type="text" autocomplete="off" spellcheck="false" maxlength="500"><button type="button" id="dictation-check" class="primary">შეამოწმე</button></div><p class="feedback" id="dictation-feedback" aria-live="polite"></p></div>
+<div class="practice"><h4>2. მოსმენილი სიტყვის ამოცნობა</h4><p id="audio-choice-question"></p><div id="audio-choice-options" class="options"></div><p class="feedback" id="audio-choice-feedback" aria-live="polite"></p></div></div></section>
+<section class="section"><h3>🧩 ლექსიკის ტესტი</h3><div class="practice"><p id="quiz-question"></p><div id="quiz-options" class="options"></div><p class="feedback" id="quiz-feedback" aria-live="polite"></p><button id="next-quiz" type="button">შემდეგი სიტყვა ↻</button></div></section>
+
+<section class="section"><h3>🗣️ დიალოგისა და მოსმენის პრაქტიკა</h3>
+<p class="helper">საუბრის მოკლე ნიმუში. მოსმენა სრულდება Chrome-ის ხმით, არა ჩაწერილი ადამიანის აუდიოთი. სცადე ორივე როლის გამეორება.</p>
+<div class="examples"><p id="dialogue-en"></p><p id="dialogue-ka"></p></div>
+<div class="actions"><button type="button" id="listen-dialogue" class="primary">🔊 მოუსმინე დიალოგს</button><button type="button" id="slow-dialogue">🐢 ნელა მოისმინე</button></div></section>
+<section class="section"><h3>🧠 გახსენება / Recall</h3>
+<p class="helper">ქართული მნიშვნელობის მიხედვით აკრიფე ინგლისური სიტყვა. პასუხის შემოწმება ზუსტ დამთხვევაზე მუშაობს; დასაშვები სინონიმები ცალკე უნდა გადამოწმდეს.</p>
+<div class="practice"><p id="recall-prompt"></p>
+<div class="answer-row"><input id="recall-answer" type="text" autocomplete="off" spellcheck="false" maxlength="95" placeholder="English word or phrase..."><button id="recall-check" class="primary" type="button">შემოწმება</button></div>
+<p id="recall-feedback" class="feedback" aria-live="polite"></p><button id="recall-next" type="button">შემდეგი ბარათი ↻</button></div></section>
+<section class="section"><h3>✍️ წერა და საუბარი</h3><p class="helper">დაწერე ინგლისურად ორი წინადადება თემის სიტყვებით. ერთი წინადადება ხმამაღლა თქვი. თავისუფალი პასუხი ავტომატურად არ ფასდება.</p><label class="input-label" for="writing">ჩემი წინადადებები</label><textarea id="writing" maxlength="2000" rows="4" placeholder="Write two English sentences using the new vocabulary..."></textarea><button id="save-writing" type="button">💾 ტექსტის შენახვა</button><p id="writing-feedback" class="feedback" aria-live="polite"></p></section>
+<div class="footer-actions"><button id="mark-done" class="primary" type="button">✓ თემა გავიმეორე</button><button id="next-topic" type="button">შემდეგი თემა →</button></div>
+</div><div id="error" class="error" hidden></div></section></div>
+<footer class="footer">© English with Mariami. PREMIUM LEARNING — ეს 1,512-თემიანი Study Pro ბიბლიოთეკა დამოუკიდებელი დამატებაა. არსებული გაკვეთილები, Supabase და მოსწავლის ოფიციალური ქულები უცვლელი რჩება.</footer></main>
+</body></html>

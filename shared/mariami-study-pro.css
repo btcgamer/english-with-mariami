@@ -1,0 +1,23 @@
+/* English with Mariami Study Pro — scoped low-motion, accessible styles. */
+.pro-hub{margin:18px 0 22px;border:1px solid #416987;border-radius:19px;padding:20px;background:linear-gradient(135deg,#132d4b,#0b2239);box-shadow:0 8px 20px #0002}
+.pro-heading h2{font-size:clamp(21px,3vw,30px);margin:5px 0 7px}.pro-heading p{color:#c4d9ea;line-height:1.7;margin:0 0 14px}
+.pro-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.pro-stats>div{border:1px solid #3b617a;background:#0a253d;padding:12px;border-radius:12px}
+.pro-stats strong{display:block;font-size:clamp(21px,3vw,30px);color:#77f1e4}.pro-stats small{display:block;font-size:11px;color:#d1deed;line-height:1.45}
+.pro-row{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.pro-meta{color:#d1dfee;font-size:13px;line-height:1.7}
+.pro-meta>span{background:#15354d;padding:4px 8px;border-radius:8px}
+.pro-tools button{min-height:41px}
+.pro-hub select{max-width:175px;background:#0d2941;color:white;padding:9px;border:1px solid #50718c;border-radius:9px;font-size:13px}
+.pro-hub label{font-size:13px;color:#ddeaf2}
+.pro-info{color:#d4e9ff;font-size:13px;line-height:1.7;background:#1a3950;padding:10px 12px;border-radius:10px}
+.pro-practice{border:1px solid #3f7c83;background:#09243a;border-radius:14px;padding:15px;margin:16px 0}
+.pro-flash{padding:18px;min-height:122px;border:1px solid #3c7690;border-radius:12px;display:flex;flex-direction:column;justify-content:center;background:#133450;text-align:center}
+.pro-front{font-size:clamp(19px,3vw,29px);font-weight:750;margin:6px}.pro-back{font-size:clamp(18px,2vw,24px);font-weight:750;color:#82ffcf;margin:8px 0}
+.pro-fineprint{font-size:12px;color:#b5cfe2;line-height:1.65}
+.pro-file{display:inline-flex;align-items:center;gap:8px;border-radius:9px;background:#173b54;border:1px solid #4c7891;padding:8px 10px;cursor:pointer}
+.pro-file input{max-width:190px;font-size:12px}
+@media(max-width:760px){.pro-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pro-hub{padding:14px}.pro-file input{max-width:130px}}
+@media(prefers-reduced-motion:reduce){.pro-hub *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+#pro-hub [hidden]{display:none!important}
