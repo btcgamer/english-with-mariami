@@ -22,7 +22,7 @@ html:not(.mariami-auth-ready) body{background:#08152b!important}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js?v=mariami-premium-auth1"></script>
 <script defer src="shared/mariami-premium-auth.js?v=1"></script>
-<style>html.mariami-auth-ready header .premium-navigation{display:none!important}</style></head>
+<style>html.mariami-auth-ready header .premium-navigation{display:none!important}</style><link rel="stylesheet" href="shared/mariami-visual-refresh.css"></head>
 <body>
 <a class="skip-link" href="#lesson">გადასვლა გაკვეთილზე</a>
 <header class="header"><div class="header-inner"><a href="academy.html" class="brand"><span class="brand-icon">✦</span> English with Mariami <small>ACADEMY</small></a><a class="back" href="index.html">← მთავარზე დაბრუნება</a></div><nav class="premium-navigation"><a href="login.html">შესვლა</a><a href="register.html">რეგისტრაცია</a></nav><button class="back" onclick="window.EWM_AUTH.client().auth.signOut().then(r=>r.error?alert(r.error.message):location.replace('login.html'))">გასვლა</button></header>
@@ -114,6 +114,7 @@ html:not(.mariami-auth-ready) body{background:#08152b!important}
 </div><div id="error" class="error" hidden></div></section></div>
 <footer class="footer">© English with Mariami. ყველა უფლება დაცულია (DEVELOPED BY BTCGAMER)</footer></main>
 </body></html>
+
 
 
 
