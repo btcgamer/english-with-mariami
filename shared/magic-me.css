@@ -1,0 +1,42 @@
+/* Magic Me V1: separate local avatar for each learner. Never displays Mariami portrait
+   to non-owner accounts in the academy UI. The original public asset is not private. */
+html #ewm-progress .pg-hero::before{display:none!important}
+html.magic-me-owner #ewm-progress .pg-hero::before{display:block!important}
+html.magic-me-student #ewm-progress .pg-hero::before{display:none!important;content:none!important}
+html.magic-me-student #ewm-progress .pg-hero{padding-left:22px!important;gap:18px!important;align-items:center}
+html.magic-me-student #ewm-progress .pg-hero>.magic-me-card{flex:0 0 164px!important;min-width:0!important;position:relative;z-index:3}
+html.magic-me-student #ewm-progress .pg-hero>div:nth-child(2){flex:1 1 190px!important;min-width:0!important}
+.magic-me-card{display:grid;justify-items:center;gap:6px;padding:10px 10px 12px;border:1px solid #82eaff;border-radius:19px;background:linear-gradient(150deg,#142a68,#0b4471);box-shadow:0 8px 21px #000a2d7a;max-width:220px}
+.magic-me-viewport{width:100%;max-width:148px;aspect-ratio:6/7;overflow:hidden;border-radius:16px;border:1px solid #7ddfff;background:#082747}
+.magic-me-viewport svg,.magic-me-preview svg{display:block;width:100%;height:100%}
+.magic-me-buddy{position:absolute;right:6px;top:4px;font-size:27px;filter:drop-shadow(0 2px 4px #001b3b)}
+.magic-me-caption{display:grid;justify-items:center;gap:0;font-size:13px;line-height:1.5;text-align:center}
+.magic-me-caption strong{color:#b4f8ff;letter-spacing:1px}.magic-me-caption small{color:#d0e5ff;font-size:10px}
+.magic-me-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}
+.magic-me-actions button{min-height:35px!important;padding:6px!important;font-size:10px!important;border:1px solid #80ddfa;border-radius:9px;color:#fff;background:#174f85}
+.magic-me-editor[hidden]{display:none!important}
+.magic-me-editor{margin:12px auto 18px;padding:18px;border:1px solid #5edfff;border-radius:20px;background:linear-gradient(130deg,#10285c,#082d55);color:#fff;box-shadow:0 12px 30px #03122966;max-width:960px}
+.magic-me-editor h3{margin:0 0 6px;font-size:21px}.magic-me-editor>p{font-size:12px;line-height:1.6;color:#d7eaff}
+.magic-me-preview{width:150px;height:175px;margin:12px auto;overflow:hidden;border-radius:16px;border:1px solid #74dfff}
+.magic-me-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.magic-me-field{display:grid;gap:5px;min-width:0;color:#d5edff;font-size:12px;font-weight:800}
+.magic-me-field select{width:100%;min-width:0;min-height:43px;background:#082e5b;color:#fff;border:1px solid #4eaddd;border-radius:11px;padding:8px;font-size:15px}
+.magic-me-editor-buttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.magic-me-editor-buttons button{min-height:44px;padding:9px 13px;border:1px solid #87cfff;background:#183c75;color:#fff;border-radius:12px;font-size:12px;font-weight:800}
+.magic-me-editor-buttons .magic-me-primary{background:#087b99;border-color:#8ef4ff}
+.magic-me-editor-buttons .magic-me-danger{background:#55304b;border-color:#d28ba7}
+.magic-me-editor .magic-me-info{font-size:11px;color:#aacde8}.magic-me-status{font-weight:800;min-height:1.2em}
+.magic-me-character{transform-origin:90px 165px}.magic-me-wave-arm{transform-origin:128px 138px}
+@keyframes magic-me-welcome{0%,100%{transform:rotate(0)}30%{transform:rotate(-6deg) translateY(-3px)}65%{transform:rotate(7deg) translateY(-7px)}}
+@keyframes magic-me-wave{0%,100%{transform:rotate(0)}35%{transform:rotate(-24deg)}75%{transform:rotate(14deg)}}
+.magic-me-character.magic-me-dance{animation:magic-me-welcome .85s ease-in-out 3}
+.magic-me-character.magic-me-dance .magic-me-wave-arm{animation:magic-me-wave .6s ease-in-out 4}
+@media(max-width:760px){
+ html.magic-me-student #ewm-progress .pg-hero{padding:13px!important;gap:12px!important;flex-direction:column!important;align-items:center!important}
+ html.magic-me-student #ewm-progress .pg-hero>.magic-me-card{width:153px!important;max-width:60vw!important;flex:none!important}
+ html.magic-me-student #ewm-progress .pg-hero>div:nth-child(2){width:100%!important;flex:none!important;text-align:center!important}
+ .magic-me-viewport{max-width:125px}.magic-me-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .magic-me-editor{padding:13px}.magic-me-editor-buttons{display:grid;grid-template-columns:1fr 1fr}
+}
+@media(max-width:380px){.magic-me-fields{grid-template-columns:1fr 1fr}.magic-me-editor-buttons{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.magic-me-character,.magic-me-wave-arm{animation:none!important;transition:none!important}}

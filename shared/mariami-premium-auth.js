@@ -104,6 +104,14 @@
         gradeSelect.title = 'მოსწავლეს მხოლოდ საკუთარ კლასზე აქვს წვდომა';
       }
     }
+    // After the session and profile have been validated, initialize account-scoped avatars.
+    // This flag controls UI presentation only; public teacher artwork is not access-restricted.
+    window.MARIAMI_MAGIC_ME_CONTEXT = Object.freeze({
+      userId: session.user.id,
+      isOwner: String(session.user.email || '').trim().toLowerCase() === 'datogringo@gmail.com'
+    });
+    try { await load('shared/magic-me.js?v=20261027-v1'); }
+    catch (avatarError) { console.warn('[Magic Me] Optional avatar unavailable:', avatarError); }
     ROOT.classList.add('mariami-auth-ready');
     gate.remove();
   }
