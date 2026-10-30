@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v26';
+const CACHE_NAME = 'english-with-mariami-v27';
 const FUTURE_THEME = './magic-ai-25c.css';
 const FUTURE_CLASSROOM = './shared/future-neon-classroom.css?v=20260906';
 const NAV_TIMEOUT_MS = 4500;
@@ -9,8 +9,8 @@ const ASSET_TIMEOUT_MS = 7000;
 const APP_SHELL = [
   './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
   './grade2/index.html', './grade3/index.html', './grade4/index.html',
-  './login.html', './register.html', './reset-password.html', './teacher-login.html', './teacher.html',
-  './teacher-dashboard.html', './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
+  './login.html', './register.html', './reset-password.html',
+  './student-dashboard.html', './parent-space.html', './manifest.webmanifest',
   './app.css', './styles.css', './mobile-app.css', './pwa-mobile.css', './pwa.js', './universe-theme.css',
   './universe-theme.js', './universe-max.css', './universe-max.js', './app-icon.svg', FUTURE_THEME,
   './shared/magic-ai-25c-century.css', FUTURE_CLASSROOM, './shared/academy-grade.css?v=20260930-rqa1', './shared/academy-grade-nav.css?v=20260930-rqa1', './shared/offline-core-fallback.js',

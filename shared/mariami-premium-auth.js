@@ -74,7 +74,7 @@
     // All authenticated learners can choose any of 12 grades. This is a UI gate,
     // NOT the server-side authorization boundary. Supabase RLS must protect data.
     const role = String(resp.data.role || '').trim().toLowerCase();
-    const allowed = ['admin', 'teacher', 'parent', 'student'].includes(role);
+    const allowed = ['admin', 'parent', 'student'].includes(role);
     if (!allowed) {
       show('ამ ანგარიშს აკადემიაზე წვდომა არ აქვს.', {href:'academy.html',label:'დაბრუნება'});
       return;

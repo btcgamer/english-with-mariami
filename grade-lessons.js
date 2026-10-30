@@ -442,20 +442,8 @@
     state.profile = profileResult.data;
 
     const role = String(state.profile?.role || '').trim().toLowerCase();
-    const assignedGrade = Number(state.profile?.grade || 0);
-
     if (role !== 'student') {
-      window.location.replace(role === 'teacher' ? 'teacher-dashboard.html' : 'login.html?reason=wrong-role');
-      return;
-    }
-
-    if (![2, 3, 4].includes(assignedGrade)) {
-      window.location.replace('student-dashboard.html?reason=no-grade');
-      return;
-    }
-
-    if (assignedGrade !== grade) {
-      window.location.replace(`grade${assignedGrade}.html?reason=grade-locked`);
+      window.location.replace('login.html?reason=wrong-role');
       return;
     }
 
