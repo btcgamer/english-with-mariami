@@ -120,13 +120,13 @@
           const requested = new URLSearchParams(window.location.search).get("redirect") || "";
           if (role === "teacher") return window.location.replace("/teacher-dashboard.html");
           if (role === "parent") return window.location.replace("/parent-space.html");
-          if (role === "student" && grade >= 1 && grade <= 12) {
+          if (role === "student") {
             const requestedPath = requested.toLowerCase().split("?")[0].split("#")[0];
             const parts = requestedPath.split("/").filter(Boolean);
             const requestedGrade = parts[0] && parts[0].startsWith("grade") ? Number(parts[0].slice(5)) : 0;
-            const destination = requestedGrade === grade && (parts.length === 1 || parts[1] === "index.html")
+            const destination = Number.isInteger(requestedGrade) && requestedGrade >= 1 && requestedGrade <= 12 && (parts.length === 1 || parts[1] === "index.html")
               ? requested
-              : "/academy.html?grade=" + grade;
+              : "/academy.html";
             return window.location.replace(destination);
           }
         } catch (e) { console.warn("[Login] Existing session check skipped:", e); }

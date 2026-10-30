@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080f29">
+<title>Magic Me V10 · Front Facing Avatar Studio — English with Mariami</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;--ink:#f5f8ff;--muted:#aebfe0;--line:#819fe04b;--cyan:#83f1ff;--violet:#ae8fff;--rose:#ff9dcf;--gold:#ffda83}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:#071126;background-image:radial-gradient(ellipse 65% 50% at 16% 0%,#3043a36a,transparent),radial-gradient(ellipse 57% 45% at 97% 65%,#5d2c8d6a,transparent);min-height:100vh}button,input,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #92f8ff;outline-offset:3px}button:disabled{cursor:default;opacity:.5}a{color:#97efff}.app{width:min(1140px,100%);margin:0 auto;padding:22px 24px 34px}.mast{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 16px}.brand{display:flex;align-items:center;gap:11px}.mark{display:grid;place-items:center;width:44px;height:44px;font-size:25px;border-radius:15px;background:linear-gradient(130deg,#a86dfb,#178acb);box-shadow:0 0 25px #8d7ef866}.brand h1{font-family:Georgia,serif;font-size:23px;margin:0;letter-spacing:-.5px;color:#fff0d5}.brand small{display:block;font-size:10px;letter-spacing:2.1px;font-weight:800;color:#89eefc}.private{display:flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #4cc9c476;background:#12374d88;border-radius:50px;color:#a6ffee;font-size:12px;font-weight:800;white-space:nowrap}.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 18px}.step{padding:10px 5px;border:1px solid #697bb066;border-radius:12px;color:#99aed6;background:#18214392;text-align:center;font-size:11px;font-weight:700}.step b{display:inline-grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#3d4a70;color:#d5eaff;margin-right:5px}.step.on{color:#fff;border-color:#87dffb;background:linear-gradient(115deg,#244c9e,#573a8c)}.step.on b{color:#081b32;background:#8efaff}.step.done{color:#b6f3d3;border-color:#4adcad77}.step.done b{background:#155f67;color:#aaffee}
+.layout{display:grid;grid-template-columns:minmax(350px,1.02fr) minmax(350px,.98fr);align-items:start;gap:18px}.visual{position:sticky;top:16px;min-width:0}.portrait{position:relative;min-height:735px;overflow:hidden;border:1px solid #d1a3ff88;border-radius:32px;background:radial-gradient(circle at 55% 15%,#7778dc7c,transparent 42%),radial-gradient(circle at 70% 75%,#442e8a,transparent 52%),linear-gradient(#16194e,#071735 72%,#092b40);box-shadow:0 20px 70px #020817b0,inset 0 0 40px #49bce731;isolation:isolate}.portrait::before{content:'';pointer-events:none;position:absolute;inset:-40%;background:conic-gradient(from 25deg,transparent,#6cc5ff26,transparent,#ef99ff21,transparent);animation:halo 24s linear infinite}.portrait::after{content:'';position:absolute;inset:10px;border:1px solid #bbd6ff30;border-radius:25px;pointer-events:none}.star-field{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#b8f8ff 1px,transparent 2px),radial-gradient(#ffccef 1px,transparent 2px);background-position:14px 25px,60px 70px;background-size:79px 107px,111px 139px;opacity:.34;animation:sky 22s linear infinite}.planet{position:absolute;border-radius:50%;opacity:.6;filter:blur(2px)}.planet.one{width:245px;height:245px;left:-90px;top:210px;border:2px solid #91a9ff69;box-shadow:0 0 55px #a588fb80,inset 0 0 65px #9c67dd54}.planet.two{width:140px;height:140px;right:-60px;top:60px;background:radial-gradient(circle at 32% 31%,#9af6ff99,#ae7ded30 70%,transparent 72%);box-shadow:0 0 40px #63f2ff66}.top-copy{position:absolute;z-index:3;left:23px;top:24px;right:23px;pointer-events:none}.eyebrow{font-size:10px;font-weight:900;letter-spacing:2px;color:#8bf6ff}.stage-title{font-family:Georgia,serif;font-size:clamp(29px,3vw,40px);margin:7px 0 4px;line-height:1.05;text-shadow:0 4px 14px #09072a}.stage-description{font-size:12px;color:#c8d5ff;line-height:1.5}.spark-label{position:absolute;right:17px;top:126px;font-size:11px;border:1px solid #deb9ff8a;background:#29175eaa;color:#f6d6ff;padding:6px 9px;border-radius:20px;z-index:2;font-weight:800;box-shadow:0 0 22px #b157d833}.portrait-floor{position:absolute;z-index:0;bottom:79px;left:10%;width:80%;height:75px;border-radius:50%;background:radial-gradient(ellipse,#4bebf3bd 0%,#ad67fb88 36%,transparent 70%);filter:blur(15px)}.avatar-scene{position:absolute;top:112px;bottom:96px;left:0;right:0;z-index:2;display:flex;align-items:center;justify-content:center;min-height:0}.avatar-scene svg{width:auto;height:100%;max-width:100%;max-height:100%;overflow:visible;filter:drop-shadow(0 13px 20px #0008)}.stage-actions{position:absolute;z-index:6;bottom:18px;left:15px;right:15px;display:flex;justify-content:center;gap:8px}.mini{background:#152e5fda;border:1px solid #78bfffa4;color:#edf8ff;font-size:12px;font-weight:800;min-height:44px;border-radius:14px;padding:9px 11px;flex:1}.mini.active{background:#20789a;box-shadow:0 0 18px #52daef65}.live-pill{display:none;position:absolute;top:95px;left:22px;z-index:4;display:flex;align-items:center;gap:5px;color:#c6ffef;font-size:10px;font-weight:800}.live-pill i{width:8px;height:8px;border-radius:50%;background:#76ffb2;box-shadow:0 0 11px #82ffc5}.float-petal{position:absolute;pointer-events:none;z-index:1;color:#b6faff;animation:floatvar var(--dur) ease-in-out infinite alternate;opacity:.75}.float-petal:nth-child(1){left:8%;top:33%;--dur:4s;font-size:18px}.float-petal:nth-child(2){left:86%;top:38%;--dur:3s;font-size:25px}.float-petal:nth-child(3){left:13%;top:77%;--dur:5s;font-size:27px}.float-petal:nth-child(4){left:78%;top:73%;--dur:2.5s;font-size:16px}.portrait[data-theme="dragon"]{background:radial-gradient(circle at 53% 27%,#ff8b626c,transparent 39%),linear-gradient(152deg,#3b2045,#281338 56%,#09293a)}.portrait[data-theme="dream"]{background:radial-gradient(circle at 57% 22%,#ffafdc77,transparent 44%),linear-gradient(155deg,#3b2c6a,#2a467b 64%,#17465b)}.portrait[data-theme="future"]{background:radial-gradient(circle at 48% 20%,#69e7ff6c,transparent 43%),linear-gradient(155deg,#053c64,#0e234d 63%,#182744)}
+.panel{min-width:0;border:1px solid #8aa4e250;border-radius:27px;background:linear-gradient(150deg,#1b2755ee,#101937f7);box-shadow:0 16px 54px #0007;padding:25px}.screen[hidden]{display:none!important}.section-head{display:flex;align-items:start;justify-content:space-between;gap:8px;margin:0 0 12px}.overline{display:block;color:var(--cyan);font-size:11px;letter-spacing:1.65px;font-weight:900;text-transform:uppercase}.panel h2{font-size:27px;line-height:1.18;margin:7px 0 8px;letter-spacing:-.5px}.panel p{color:#c0cde8;line-height:1.6;font-size:13px;margin:8px 0 19px}.soft-badge{background:#29355d;border:1px solid #98a6db70;color:#d9e6ff;padding:6px 9px;border-radius:30px;font-size:10px;font-weight:800;white-space:nowrap}.field{margin:0 0 14px}.field label{display:block;color:#dceafa;font-size:12px;font-weight:750;margin-bottom:7px}.field input,.field select{width:100%;border:1px solid #869ad17b;background:#0b1734;color:white;border-radius:14px;padding:12px 14px;min-height:48px;font-size:15px}.field input::placeholder{color:#92a2c2}.notice{border:1px solid #55d7bb66;background:#0a46454e;border-radius:14px;padding:11px 13px;color:#c8fff4;font-size:12px;line-height:1.65}.note{color:#9bacc9!important;font-size:11px!important}.btn{min-height:48px;border-radius:14px;background:#243d70;color:white;border:1px solid #8aace18c;padding:11px 15px;font-weight:850;box-shadow:0 7px 17px #030b2873}.btn.primary{color:#121735;border:0;background:linear-gradient(105deg,#89f7ff,#c9a3ff 58%,#ffaadf);box-shadow:0 9px 20px #699cf855}.btn.gold{color:#312344;border:0;background:linear-gradient(110deg,#ffe28c,#ffb7d3)}.btn.block{width:100%}.btn.alt{background:transparent;border-color:#788eb0}.inline-actions{display:flex;gap:9px;flex-wrap:wrap}.inline-actions .btn{flex:1 1 auto}.status{min-height:23px;font-size:12px;color:#a4ffe1;margin:10px 0 0!important}.styles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:15px 0 16px}.style{padding:11px 3px;background:#152b53;border:1px solid #6b88c777;border-radius:13px;color:#d1dcf2;display:grid;justify-items:center;gap:4px;font-size:10px;font-weight:900}.style b{font-size:24px;line-height:1.3}.style.selected{border-color:#94f5ff;background:linear-gradient(140deg,#26519c,#553c8a);color:white;box-shadow:0 0 20px #51b1ff43}.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.controls .field{margin:0}.helper{font-size:12px!important;color:#b3c4de!important}.tiny-title{display:block;font-size:12px;font-weight:900;color:#e5edff;margin:18px 0 8px}.class-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.class-tile{background:linear-gradient(150deg,#1a3764,#231c52);border:1px solid #7e91cb7d;border-radius:16px;padding:12px 5px;color:#e8edff;display:grid;gap:4px;text-align:center;justify-items:center;min-height:87px}.class-tile em{font-style:normal;font-size:26px}.class-tile strong{font-size:13px}.class-tile small{font-size:10px;color:#b9c8dd}.class-tile.selected{border-color:#8effed;box-shadow:inset 0 0 17px #40cbb13e,0 0 14px #5de0ff47;background:#235275}.question{font-size:25px;font-weight:950;color:#fff;padding:15px;border:1px solid #85b8db72;border-radius:15px;background:#133967aa;text-align:center;margin:15px 0}.answers{display:grid;gap:9px}.answer{text-align:left;padding:14px 16px;min-height:48px;border:1px solid #7894d78a;background:#152955;color:white;border-radius:13px;font-weight:800}.answer.right{border-color:#5bf5b4;background:#115946}.answer.wrong{border-color:#ff8ca1;background:#6a304e}.finish{text-align:center;background:#154b6b83;border:1px solid #98e8ed7b;border-radius:17px;padding:20px;margin:14px 0}.finish b{font-size:45px}.finish h3{margin:10px 0}.finish p{margin:7px auto}.footer{color:#9bb0d3;max-width:900px;margin:16px auto 0;text-align:center;font-size:11px;line-height:1.65}.footer strong{color:#b0f7ee}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:20;background:#e1fbff;color:#092440;border-radius:30px;padding:12px 17px;box-shadow:0 10px 25px #0009;max-width:calc(100vw - 32px);text-align:center;font-size:12px;font-weight:850;transition:opacity .22s,transform .22s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes halo{to{transform:rotate(360deg)}}@keyframes sky{to{background-position:14px 425px,60px 600px}}@keyframes floatvar{to{transform:translateY(-28px) rotate(20deg)}}
+@media(max-width:850px){.app{max-width:555px;padding:12px 12px 30px}.layout{display:flex;flex-direction:column;gap:12px}.visual{position:relative;top:0;width:100%}.portrait{min-height:600px;border-radius:24px}.avatar-scene{top:116px;bottom:95px}.top-copy{top:18px;left:17px}.stage-title{font-size:30px}.stage-description{font-size:10px}.live-pill{display:none}.spark-label{top:118px;right:14px}.stage-actions{bottom:9px;left:9px;right:9px;gap:5px}.mini{min-height:42px;padding:8px 4px;font-size:11px}.panel{width:100%;padding:18px;border-radius:22px}.panel h2{font-size:23px}.steps{margin-bottom:10px}.step{font-size:10px;padding:8px 3px}.step b{width:19px;height:19px;margin-right:3px}.mast{margin-bottom:11px}.brand h1{font-size:18px}.brand small{font-size:9px}.mark{width:38px;height:38px}.private{font-size:10px;padding:8px}.portrait-floor{bottom:56px}.class-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:360px){.step{font-size:9px}.portrait{min-height:540px}.styles{gap:5px}.style{padding:8px 2px}.class-tile{min-height:76px}.brand h1{font-size:16px}.private{font-size:9px}}
+.live-pill{display:none!important}
+.stage-actions{flex-wrap:wrap}.stage-actions .mini{flex:1 1 calc(33.33% - 9px);min-width:0}.avatar-scene{bottom:120px}.portrait-floor{bottom:108px}@media(max-width:850px){.avatar-scene{bottom:119px}.portrait-floor{bottom:104px}.stage-actions .mini{font-size:10px;min-height:40px}}@media(max-width:360px){.portrait{min-height:585px}}
+.portrait{min-height:790px}.avatar-scene{top:96px;bottom:115px}.portrait-floor{bottom:116px}@media(max-width:850px){.portrait{min-height:665px}.avatar-scene{top:102px;bottom:125px}.portrait-floor{bottom:112px}}@media(max-width:380px){.portrait{min-height:620px}}
+@media(prefers-reduced-motion:reduce){.portrait::before,.star-field,.float-petal{animation:none!important}.toast{transition:none}}
+
+/* V9: generous full-length framing with visible shoe soles. */
+.avatar-scene{top:90px;bottom:123px}
+.avatar-scene svg{filter:drop-shadow(0 16px 20px #050a2588)}
+.stage-actions .mini.active{outline:2px solid #b6f8ff;outline-offset:1px}
+@media(max-width:850px){.avatar-scene{top:98px;bottom:124px}.portrait{min-height:685px}}
+@media(max-width:380px){.portrait{min-height:645px}}
+
+.gender-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:9px 0 17px}
+.gender-btn{cursor:pointer;border-radius:17px;min-height:64px;padding:10px;font-size:17px;font-weight:900;color:#e9f9ff;background:linear-gradient(145deg,#1b3565,#171f48);border:1px solid #87bcfd77;transition:.18s ease}
+.gender-btn.selected{color:#fff;background:linear-gradient(145deg,#6233a3,#197cb0);border:2px solid #80f2ff;box-shadow:0 0 19px #3fdafe55}
+.gender-btn:focus-visible,#startAvatar:focus-visible{outline:3px solid #ffe9ad;outline-offset:2px}
+#startAvatar{cursor:pointer;min-height:58px;font-size:17px}
+@media(max-width:550px){.gender-btn{font-size:15px;min-height:57px}}
+
+html,body{height:100%;overflow:hidden;background:transparent!important}.app{height:100%;width:100%;padding:0!important}.mast,.steps,.panel,.footer,.toast{display:none!important}.layout{display:block;height:100%;width:100%;margin:0}.visual{position:relative!important;top:auto!important;height:100%}.portrait{height:100%;min-height:0!important;border-radius:17px;border:0}.avatar-scene{top:3%!important;bottom:4%!important}.top-copy,.stage-actions,.spark-label,.live-pill{display:none!important}.portrait-floor{bottom:5%!important}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="mast"><div class="brand"><div class="mark">✦</div><div><h1>English with Mariami</h1><small>MAGIC ME · LIVING PORTRAIT V10</small></div></div><div class="private">🔒 ოფლაინ დემო</div></header>
+<nav class="steps" aria-label="დემოს ეტაპები" id="steps"><div class="step on"><b>1</b> რეგისტრაცია</div><div class="step"><b>2</b> ავატარი</div><div class="step"><b>3</b> კლასები</div><div class="step"><b>4</b> მისია</div></nav>
+<main class="layout">
+<div class="visual"><section class="portrait" id="portrait" data-theme="cosmic" aria-label="ცოცხალი პორტრეტი — წინ მიმართული ფეხები და მოძრაობები"><div class="star-field"></div><div class="planet one"></div><div class="planet two"></div><div class="top-copy"><div class="eyebrow">✧ LIVING PORTRAIT · FRONT VIEW V10</div><div class="stage-title">შენი ცოცხალი<br>გმირი ✨</div><div class="stage-description">წინ მიმართული ფეხები · გოგო ან ბიჭი · ცოცხალი თვალები</div></div><div class="live-pill"><i></i> FRONT VIEW · LIVE</div><span class="spark-label">✦ MOTION LAB V10</span><div class="float-petal">✦</div><div class="float-petal">✧</div><div class="float-petal">✦</div><div class="float-petal">✧</div><div class="portrait-floor"></div><div class="avatar-scene" id="avatarScene" role="img" aria-label="ანიმირებული ჯადოსნური პერსონაჟი"></div><div class="stage-actions"><button type="button" class="mini" id="wave">👋 ხელი</button><button type="button" class="mini" id="dance">💃 ცეკვა</button><button type="button" class="mini" id="walk">🚶 ნაბიჯები</button><button type="button" class="mini" id="hiFive">🙌 ორივე ხელი</button><button type="button" class="mini" id="blink">😉 თვალები</button></div></section></div>
+<div class="panel">
+<section class="screen" id="screen1"><div class="section-head"><div><span class="overline">01 / Magic Entry</span><h2>კეთილი იყოს შენი მობრძანება! 🌟</h2></div><span class="soft-badge">მხოლოდ ტესტი</span></div><p>ეს არის თავისუფალი ტესტი: პირდაპირ გახსენი ავატარის სტუდია. პაროლი, კლასი და ნამდვილი რეგისტრაცია არ დაგჭირდება.</p><form id="registerForm"><div class="field"><label for="nickname">👤 საცდელი სახელი (სურვილისამებრ)</label><input id="nickname" placeholder="მაგ.: ჯადოსნური მოგზაური" autocomplete="off" maxlength="40"></div><div class="field"><label for="demoEmail">📧 საცდელი ელფოსტა (არასავალდებულო)</label><input id="demoEmail" type="text" placeholder="შეგიძლია არც შეავსო" autocomplete="off"></div><div class="notice">🔐 ეს მონაცემები არსად იგზავნება და არ ინახება. პერსონაჟისთვის არ გვჭირდება ბავშვის ფოტო ან პირადი ინფორმაცია.</div><div style="height:13px"></div><button class="btn primary block" type="button" id="startAvatar">✨ შევქმნა ჩემი პერსონაჟი</button></form><div style="height:10px"></div><button class="btn alt block" id="resume" type="button" hidden>🪄 შენახული ავატარის გახსნა</button><p class="note">ფოტოები, კამერა, მიკროფონი და გარე AI არ გამოიყენება. ეს არის ინტერაქციული ლოკალური გრაფიკა.</p></section>
+<section class="screen" id="screen2" hidden><div class="section-head"><div><span class="overline">02 / Living Portrait Atelier</span><h2>გააცოცხლე შენი გმირი 🪄</h2></div><span class="soft-badge">ნამდვილი ანიმაცია</span></div><p>აირჩიე გოგო ან ბიჭი და ააწყე საკუთარი პერსონაჟი. ფეხები წინ იყურება, ხელები და თვალები მოძრაობს. პერსონაჟი შენია — მხოლოდ ამ ბრაუზერში.</p><span class="tiny-title">👧👦 აირჩიე შენი გმირი</span><div class="gender-grid" id="genderSelect" role="group" aria-label="პერსონაჟის ტიპი"><button type="button" class="gender-btn selected" data-gender="0" aria-pressed="true">👧 გოგო</button><button type="button" class="gender-btn" data-gender="1" aria-pressed="false">👦 ბიჭი</button></div><span class="tiny-title">აირჩიე ჯადოსნური სამყარო</span><div class="styles" id="styles"><button type="button" class="style selected" data-style="0"><b>🌌</b>Cosmic</button><button type="button" class="style" data-style="1"><b>🐉</b>Dragon</button><button type="button" class="style" data-style="2"><b>☁️</b>Dream</button><button type="button" class="style" data-style="3"><b>🤖</b>Future</button></div><div class="controls">
+<div class="field"><label for="skin">კანის ფერი</label><select id="skin"><option value="0">ნაზი ღია</option><option value="1">თბილი</option><option value="2">ოქროსფერი</option><option value="3">ყავისფერი</option><option value="4">მუქი</option><option value="5">ღრმა</option></select></div>
+<div class="field"><label for="hair">თმის ფერი</label><select id="hair"><option value="0">შოკოლადი</option><option value="1">შავი</option><option value="2">ოქროსფერი</option><option value="3">წითური</option><option value="4">იისფერი</option><option value="5">ცისფერი</option></select></div>
+<div class="field"><label for="haircut">თმის სტილი</label><select id="haircut"><option value="0">მოკლე</option><option value="1">კულულები</option><option value="2">გრძელი</option><option value="3">ვარსკვლავური</option></select></div>
+<div class="field"><label for="outfit">სამოსი</label><select id="outfit"><option value="0">იისფერი</option><option value="1">ლურჯი</option><option value="2">ვარდისფერი</option><option value="3">მწვანე</option><option value="4">ოქროსფერი</option><option value="5">წითელი</option></select></div>
+<div class="field"><label for="eyes">თვალის ფერი</label><select id="eyes"><option value="0">ყავისფერი</option><option value="1">ლურჯი</option><option value="2">მწვანე</option><option value="3">იისფერი</option></select></div>
+<div class="field"><label for="accessory">აქსესუარი</label><select id="accessory"><option value="0">ვარსკვლავი</option><option value="1">გვირგვინი</option><option value="2">თავსაბურავი</option><option value="3">ყურსასმენები</option></select></div>
+<div class="field"><label for="footwear">👟 აირჩიე ფეხსაცმელი</label><select id="footwear"><option value="0">მაღალი სპორტული ბოტასი</option><option value="1">ქალაქური ბოტასი</option><option value="2">ჯადოსნური ჩექმა</option></select></div></div><p class="helper">💫 ფეხები წინ დგას, ფეხსაცმელების წვერები კამერისკენ იყურება. „ნაბიჯები“ — ადგილზე სიარული, „ცეკვა“ — მხრებისა და მუხლების მოძრაობა.</p><div class="inline-actions"><button type="button" class="btn" id="random">🎲 ჯადოსნური ვარიანტი</button><button type="button" class="btn" id="celebrate">🎉 დღესასწაული</button></div><div style="height:9px"></div><button type="button" class="btn primary block" id="saveAvatar">💾 შევინახო და გავხსნა სამყარო</button><p class="status" id="saveStatus" role="status"></p></section>
+<section class="screen" id="screen3" hidden><div class="section-head"><div><span class="overline">03 / Open Worlds</span><h2>ყველა კლასი შენია! 🌍</h2></div><span class="soft-badge">1–12</span></div><p>შეარჩიე ნებისმიერი კლასი. ამ დემოში არაფერია დაბლოკილი და რეგისტრაციის დროს კლასის არჩევა საჭირო არ არის.</p><div class="class-grid" id="classGrid"></div><p class="status" id="classStatus" role="status">✨ აირჩიე სამყარო.</p><button class="btn gold block" id="enterWorld" type="button" disabled>🚀 გავხსნა არჩეული კლასი</button><div style="height:10px"></div><button class="btn alt block" id="editAvatar" type="button">🎨 ავატარის ხელახლა შეცვლა</button></section>
+<section class="screen" id="screen4" hidden><div class="section-head"><div><span class="overline">04 / Mini Mission</span><h2>მისია: პირველი ჯადოსნური სიტყვა ⭐</h2></div><span class="soft-badge" id="gradeBadge">კლასი 1</span></div><p>ეს პატარა სავარჯიშო მხოლოდ დემოსთვისაა; რეალური გაკვეთილებისა და შეფასებების ბაზას არ ეხება.</p><div id="quizView"><div class="question">STAR ✦</div><p>რა არის ინგლისური სიტყვა <strong>STAR</strong>-ის ქართული მნიშვნელობა?</p><div class="answers" id="answers"><button type="button" class="answer" data-answer="wrong">🌙 მთვარე</button><button type="button" class="answer" data-answer="right">⭐ ვარსკვლავი</button><button type="button" class="answer" data-answer="wrong">☀️ მზე</button><button type="button" class="answer" data-answer="wrong">☁️ ღრუბელი</button></div><p class="status" id="answerStatus" role="status">აირჩიე ერთი პასუხი.</p></div><div class="finish" id="finish" hidden><b>🏅</b><h3>მისია შესრულებულია!</h3><p>შენი გმირი სიხარულით ცეკვავს. ახალი სამყაროები შენთვის ღიაა!</p></div><div class="inline-actions"><button class="btn block" id="backClasses" type="button">🌍 სხვა კლასის არჩევა</button><button class="btn alt block" id="again" type="button">↻ თავიდან გამოცდა</button></div></section>
+</div>
+</main><footer class="footer"><strong>🔒 PRIVACY BY DESIGN</strong> · ინტერაქციული, ერთფაილიანი დემო. ნამდვილი რეგისტრაცია და სერვერთან კავშირი არ ხდება. ავატარის მხოლოდ ფერები და სტილი ინახება ამ ბრაუზერში; წაშლისას ქრება. ეს არ არის ცოცხალი AI გენერაცია ან ნამდვილი ბავშვის ფოტო. · © English with Mariami</footer>
+</div><div class="toast" id="toast" role="status"></div>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const palettes={skin:['#f9d3b8','#eec1a0','#dbab78','#b97958','#865139','#50382c'],hair:['#533049','#171932','#e6b76d','#ab5842','#7142b8','#499bc9'],outfit:['#9e79fc','#55afff','#ef84bf','#35c5ae','#e6ad50','#e76b7f'],eye:['#80523b','#438bcb','#469e71','#9569d3'],themes:['cosmic','dragon','dream','future']};
+const base={gender:0,style:0,skin:1,hair:0,haircut:2,outfit:0,eyes:0,accessory:0,footwear:1};
+const safe = x=>{const out={};for(const k of Object.keys(base)){const max=k==='gender'?2:k==='style'?4:k==='skin'?6:k==='hair'?6:k==='haircut'?4:k==='outfit'?6:k==='eyes'?4:k==='footwear'?3:4;const n=Number(x?.[k]);out[k]=Number.isInteger(n)&&n>=0&&n<max?n:base[k]}return out};
+const STORE='ewm-v10-viewer-no-persist';let state=safe(base),saved=null,step=1,grade=null,pose='idle',poseStart=performance.now(),nextBlink=performance.now()+2000,blinkStart=-1,blinkCount=0,forcedBlink=false,lookX=0,lookY=0,goalX=0,goalY=0,lastTick=0,enabled=true,hasWon=false,toastTimer;
+// No storage access to learner avatar. Data is passed by parent frame.
+$('resume').hidden=!saved;
+const palette=(k,i)=>palettes[k][i];
+const mix=(hex,amount)=>{const h=hex.slice(1);let r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);const to=n=>Math.max(0,Math.min(255,Math.round(n)));if(amount>=0){r=to(r+(255-r)*amount);g=to(g+(255-g)*amount);b=to(b+(255-b)*amount);}else{r=to(r*(1+amount));g=to(g*(1+amount));b=to(b*(1+amount));}return '#'+[r,g,b].map(n=>n.toString(16).padStart(2,'0')).join('')};
+function avatar(c){
+ const s=palette('skin',c.skin),ss=mix(s,.22),sd=mix(s,-.20),hair=palette('hair',c.hair),hi=mix(hair,.28),out=palette('outfit',c.outfit),od=mix(out,-.24),eye=palette('eye',c.eyes);
+ const fringe=['<path d="M115 180 Q105 120 142 108 Q184 79 224 115 Q260 142 253 182 Q235 162 231 142 Q203 161 180 139 Q151 164 127 156 Z"/>','<path d="M113 166 Q110 120 135 115 Q139 95 163 110 Q187 84 208 107 Q240 103 246 133 Q264 151 251 173 Q243 153 232 156 Q220 144 210 151 Q198 134 183 154 Q158 144 139 166 Z"/>','<path d="M110 174 Q96 102 158 102 Q200 84 242 115 Q262 137 253 180 L245 270 L231 268 L233 149 Q195 149 171 131 Q151 163 124 155 L130 266 L112 270Z"/>','<path d="M113 177 L119 132 L137 142 L155 103 L172 131 L190 99 L209 128 L233 109 L251 157 L246 180 Q218 142 186 143 Q146 142 118 181Z"/>'][c.haircut];
+ const addHead=['<g transform="translate(190 104)"><path d="M0 -9 L9 1 L0 12 L-9 1Z" fill="#ffde81"/><circle r="3" fill="white"/></g>','<path d="M149 111 L143 92 L162 100 L177 80 L192 97 L209 79 L226 103 L245 93 L231 117Z" stroke="#ffedac" stroke-width="4" fill="#f5ba4f"/><path d="M160 105 L220 105" stroke="white" stroke-width="2"/>','<path d="M111 154 Q190 127 256 157" stroke="#c9fdff" stroke-width="12" fill="none"/><path d="M111 154 Q190 127 256 157" stroke="#8978e7" stroke-width="6" fill="none"/>','<g><path d="M104 175 Q85 207 105 248" stroke="#8ef5ff" stroke-width="11" stroke-linecap="round" fill="none"/><path d="M257 175 Q278 202 256 249" stroke="#8ef5ff" stroke-width="11" stroke-linecap="round" fill="none"/><rect x="95" y="193" width="17" height="40" rx="8" fill="#b89dff"/><rect x="248" y="193" width="17" height="40" rx="8" fill="#b89dff"/></g>'][c.accessory];
+ const L=['l','r'];
+ const leg=side=>`<g id="${side}Leg" aria-hidden="true">
+  <path id="${side}Thigh" fill="url(#pants)" stroke="#1b2a50" stroke-width="2"/>
+  <path id="${side}ThighLight" stroke="#cde3fb" stroke-width="2.8" opacity=".18" fill="none"/>
+  <ellipse id="${side}KneeCap" rx="15.4" ry="11" fill="#475c94" stroke="#324976" stroke-width="1.5"/>
+  <path id="${side}Shin" fill="url(#pants)" stroke="#1b2a50" stroke-width="2"/>
+  <path id="${side}ShinLight" stroke="#d3e7ff" stroke-width="2.6" opacity=".2" fill="none"/>
+  <g id="${side}Shoe" transform="translate(0 0)">
+  <g id="${side}Sneaker" ${c.footwear!==1?'display="none"':''}>
+    <path d="M-18 -24 Q-17 -30 -7 -31 L8 -31 Q19 -29 19 -22 L21 13 Q27 24 26 34 Q25 42 14 43 L-17 43 Q-29 41 -27 32 Q-27 20 -21 12Z" fill="url(#boots)" stroke="#4c6a97" stroke-width="2.4"/>
+    <path d="M-13 -24 Q0 -28 13 -24 L13 12 Q5 17 -14 12Z" fill="#5b85bc" opacity=".72"/>
+    <path d="M-12 -11 L11 -11 M-12 -4 L11 -4 M-11 3 L12 3" stroke="#e9f7ff" stroke-width="3.1" stroke-linecap="round"/>
+    <path d="M-22 27 Q-2 33 22 27 L23 35 Q1 43 -23 35Z" fill="#e5faff"/>
+    <path d="M-23 37 Q0 43 22 37" fill="none" stroke="#41699b" stroke-width="3.2"/>
+  </g>
+  <g id="${side}HighTop" ${c.footwear!==0?'display="none"':''}>
+    <path d="M-19 -42 Q-14 -47 0 -47 Q17 -47 19 -40 L20 14 Q27 28 25 35 Q23 43 12 44 L-13 44 Q-27 42 -28 33 Q-27 25 -21 14Z" fill="url(#boots)" stroke="#4c6a97" stroke-width="2.5"/>
+    <path d="M-14 -37 L14 -37 L15 9 L-14 9Z" fill="#6e91c5" opacity=".56"/>
+    <path d="M-11 -30 L12 -30 M-12 -19 L12 -19 M-12 -8 L12 -8 M-12 3 L12 3" stroke="#e7f5ff" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-23 32 Q0 40 22 32" stroke="#f9ffff" stroke-width="8" stroke-linecap="round" fill="none"/>
+  </g>
+  <g id="${side}Boot" ${c.footwear!==2?'display="none"':''}>
+    <path d="M-20 -49 Q-14 -55 0 -54 Q16 -54 21 -48 L22 18 Q27 28 26 35 Q24 44 11 44 L-13 44 Q-28 43 -28 33 Q-26 23 -21 16Z" fill="url(#boots)" stroke="#405c99" stroke-width="2.7"/>
+    <path d="M-15 -45 L15 -44 L17 17 L-16 17Z" fill="#6979c0" opacity=".62"/>
+    <path d="M-9 -38 L8 -32 L-8 -26 L8 -20 L-8 -14 L8 -8" fill="none" stroke="#fff1cf" stroke-width="3.2"/>
+    <path d="M-23 31 Q-1 41 23 31" stroke="#fff4ea" stroke-width="8" stroke-linecap="round" fill="none"/>
+  </g></g></g>`;
+ // Hand silhouette: four separate rounded fingers plus a shorter, inward-pointing thumb.
+ // Each wrist is positioned from the forearm bone, not independently animated.
+ const hand=side=>`<g id="${side}Hand" transform="translate(0 0)"><g transform="scale(${side==='l'?-1:1} 1)">
+  <path d="M-9 -6 Q-14 0 -13 12 L-13 19 Q-13 28 -6 31 Q4 35 12 26 Q17 19 12 10 L9 -6Z" fill="url(#skinGrad)" stroke="${sd}" stroke-width="1.7"/>
+  <g stroke="${s}" stroke-width="5.5" stroke-linecap="round" fill="none"><path d="M-10 17 L-11 35"/><path d="M-4 20 L-3 38"/><path d="M3 20 L4 36"/><path d="M10 16 L11 31"/><path d="M10 8 Q21 4 24 16"/></g>
+  <g stroke="${sd}" stroke-width=".9" opacity=".38"><path d="M-7 20 L-7 28"/><path d="M0 20 L0 30"/><path d="M7 20 L7 27"/></g>
+  </g></g>`;
+ const arm=side=>`<g id="${side}Arm" aria-hidden="true"><path id="${side}Upper" fill="url(#robe)" stroke="${od}" stroke-width="2"/><path id="${side}UpperLight" fill="none" stroke="#fff" opacity=".26" stroke-width="3.2" stroke-linecap="round"/><ellipse id="${side}ElbowCap" rx="14" ry="13" fill="${mix(out,-.06)}" stroke="${od}" stroke-width="1.7"/><path id="${side}Forearm" fill="url(#skinGrad)" stroke="${sd}" stroke-width="1.6"/><path id="${side}ForearmLight" fill="none" stroke="${ss}" stroke-width="2.2" opacity=".44" stroke-linecap="round"/><ellipse id="${side}Cuff" rx="10" ry="8" fill="${mix(out,.18)}" stroke="${od}" stroke-width="1.4"/>${hand(side)}</g>`;
+ return `<svg viewBox="0 0 380 704" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+ <defs><linearGradient id="skinGrad" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="${ss}"/><stop offset=".55" stop-color="${s}"/><stop offset="1" stop-color="${sd}"/></linearGradient><linearGradient id="robe" x1="0" y1="0" x2=".95" y2=".2"><stop stop-color="${mix(out,.33)}"/><stop offset=".52" stop-color="${out}"/><stop offset="1" stop-color="${od}"/></linearGradient><linearGradient id="pants" x1="0" y1="0" x2="1" y2=".15"><stop stop-color="#536eaa"/><stop offset=".42" stop-color="#354b87"/><stop offset="1" stop-color="#213663"/></linearGradient><linearGradient id="boots" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#effaff"/><stop offset=".52" stop-color="#9dcdf1"/><stop offset="1" stop-color="#619ed3"/></linearGradient><radialGradient id="cheek"><stop stop-color="#f4889b" stop-opacity=".5"/><stop offset="1" stop-color="#f4889b" stop-opacity="0"/></radialGradient><radialGradient id="starShine"><stop stop-color="#fff8d6"/><stop offset="1" stop-color="#f4b957"/></radialGradient></defs>
+ <g id="whole"><ellipse cx="190" cy="675" rx="91" ry="10" fill="#020c29" opacity=".38"/><ellipse id="lShadow" cx="160" cy="672" rx="38" ry="7" fill="#031327" opacity=".25"/><ellipse id="rShadow" cx="220" cy="672" rx="38" ry="7" fill="#031327" opacity=".25"/>
+ ${leg('l')}${leg('r')}
+ ${arm('l')}${arm('r')}
+ <path d="M145 297 Q162 284 178 288 L207 288 Q231 283 246 301 L264 441 Q194 471 114 442Z" fill="url(#robe)" stroke="${od}" stroke-width="3"/>
+ <path d="M143 302 Q167 327 191 340 Q218 328 247 302" fill="none" stroke="#ecf8ff" stroke-opacity=".82" stroke-width="6"/>
+ <path d="M191 341 L190 435" stroke="${od}" stroke-width="3" opacity=".5"/><path d="M123 428 Q191 449 256 427" stroke="${mix(out,.44)}" stroke-opacity=".67" stroke-width="3" fill="none"/>
+ <rect x="149" y="413" width="85" height="14" rx="7" fill="#17224c" opacity=".58"/>
+ <path d="M190 361 L199 375 L214 378 L203 391 L205 407 L190 399 L175 407 L177 391 L166 378 L182 375Z" fill="url(#starShine)" stroke="white" stroke-width="2"/>
+ <path d="M163 270 L218 270 L226 300 Q190 317 154 299Z" fill="url(#skinGrad)"/>
+ <g id="headRig" transform="translate(0 0)"><path d="M166 273 L214 273 L222 304 Q191 321 158 302Z" fill="url(#skinGrad)"/>${c.gender===0?`<path d="M121 154 Q109 105 149 90 Q188 73 222 99 Q274 123 256 191 L267 282 Q237 282 223 258 L160 261 Q143 289 108 280Z" fill="${hair}" stroke="${hi}" stroke-opacity=".4" stroke-width="3"/>`:`<path d="M118 165 Q111 102 165 97 Q213 82 246 112 Q263 135 252 186 Q239 169 227 160 Q197 148 163 157 Q142 161 118 165Z" fill="${hair}" stroke="${hi}" stroke-opacity=".4" stroke-width="3"/>`}
+<ellipse cx="191" cy="202" rx="76" ry="87" fill="url(#skinGrad)" stroke="${sd}" stroke-opacity=".25" stroke-width="2"/>
+<ellipse cx="129" cy="217" rx="11" ry="19" fill="${s}"/><ellipse cx="250" cy="217" rx="11" ry="19" fill="${s}"/>
+<ellipse cx="142" cy="232" rx="23" ry="14" fill="url(#cheek)"/><ellipse cx="239" cy="232" rx="23" ry="14" fill="url(#cheek)"/>
+<g fill="${hair}">${fringe}</g>
+<path d="M141 178 Q158 168 173 181 M205 181 Q221 170 240 181" stroke="${mix(hair,-.22)}" stroke-width="5" fill="none" stroke-linecap="round"/>
+<g id="eyeLeft" transform="translate(159 207) scale(1 1)"><ellipse rx="17" ry="21" fill="white"/><ellipse id="pupilL" cy="3" rx="10" ry="13" fill="${eye}"/><ellipse cy="5" rx="5.3" ry="8.5" fill="#171426"/><circle cx="-4" cy="-2" r="4.3" fill="white"/><circle cx="5" cy="10" r="1.9" fill="#cdeaff"/></g>
+<g id="eyeRight" transform="translate(221 207) scale(1 1)"><ellipse rx="17" ry="21" fill="white"/><ellipse id="pupilR" cy="3" rx="10" ry="13" fill="${eye}"/><ellipse cy="5" rx="5.3" ry="8.5" fill="#171426"/><circle cx="-4" cy="-2" r="4.3" fill="white"/><circle cx="5" cy="10" r="1.9" fill="#cdeaff"/></g>
+<path id="lidLeft" d="M143 207 Q159 218 175 207" fill="none" stroke="${sd}" stroke-width="3" stroke-linecap="round" opacity="0"/><path id="lidRight" d="M205 207 Q221 218 237 207" fill="none" stroke="${sd}" stroke-width="3" stroke-linecap="round" opacity="0"/>
+<path d="M184 227 Q191 233 198 227" stroke="${sd}" stroke-width="2.5" fill="none" stroke-linecap="round"/><path id="smile" d="M171 246 Q190 265 209 246" fill="none" stroke="#a04a57" stroke-width="4.5" stroke-linecap="round"/>
+<path d="M183 251 Q191 256 197 251" stroke="white" stroke-width="2.5" fill="none" opacity=".8"/>
+${addHead}</g>
+
+ <g id="pet" transform="translate(292 364)"><ellipse r="28" fill="#bceaff" stroke="#f4fcff" stroke-width="3"/><path d="M-22 -17 L-26 -42 L-6 -27 M22 -17 L26 -42 L6 -27" fill="#dceeff" stroke="#a0d9ff" stroke-width="3"/><ellipse cx="-9" cy="-2" rx="4" ry="6" fill="#365187"/><ellipse cx="10" cy="-2" rx="4" ry="6" fill="#365187"/><path d="M-6 11 Q0 17 6 11" stroke="#637bb2" stroke-width="3" fill="none"/><path d="M0 -37 L6 -25 L20 -24 L10 -15 L12 -2 L0 -10 L-12 -2 L-10 -15 L-20 -24 L-6 -25Z" fill="#ffe39b" stroke="#fff"/></g>
+ </g></svg>`;
+}
+function paint(){state=safe(state);$('avatarScene').innerHTML=avatar(state);$('portrait').dataset.theme=palettes.themes[state.style];applyRig(0);for(const btn of document.querySelectorAll('[data-style]'))btn.classList.toggle('selected',Number(btn.dataset.style)===state.style)}
+function updateInputs(){for(const b of document.querySelectorAll('[data-gender]')){const on=Number(b.dataset.gender)===state.gender;b.classList.toggle('selected',on);b.setAttribute('aria-pressed',String(on));}for(const k of ['skin','hair','haircut','outfit','eyes','accessory','footwear'])$(k).value=state[k];for(const btn of document.querySelectorAll('[data-style]'))btn.classList.toggle('selected',Number(btn.dataset.style)===state.style)}
+function toast(s){const el=$('toast');el.textContent=s;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
+function go(n){step=n;for(let k=1;k<=4;k++){$('screen'+k).hidden=k!==n;const v=$('steps').children[k-1];v.classList.toggle('on',k===n);v.classList.toggle('done',k<n)} if(n===2)updateInputs();window.scrollTo({top:0,behavior:'instant'})}
+function startPose(mode){if(matchMedia('(prefers-reduced-motion: reduce)').matches){toast('♿ მოძრაობა გამორთულია მოწყობილობის პარამეტრებში.');return}pose=mode;poseStart=performance.now();document.querySelectorAll('.mini').forEach(btn=>btn.classList.remove('active'));if(mode==='wave')$('wave').classList.add('active');if(mode==='dance')$('dance').classList.add('active');if(mode==='hiFive')$('hiFive').classList.add('active');if(mode==='walk')$('walk').classList.add('active');}
+const setTr=(id,tx,ty,rotation)=>{const el=$(id);if(el)el.setAttribute('transform',`translate(${tx.toFixed(2)} ${ty.toFixed(2)}) rotate(${rotation.toFixed(2)})`)};
+const setJoint=(id,x,y,rot)=>{const el=$(id);if(el)el.setAttribute('transform',`translate(${x} ${y}) rotate(${rot.toFixed(2)})`)};
+// Real joint-based 2D skeleton. Shoulder → elbow → wrist → palm; hip → knee → ankle → shoe.
+// Every shape is calculated from shared joint coordinates: no floating or detached limbs.
+const vv=(x,y)=>({x,y});
+const rad=d=>d*Math.PI/180;
+const joint=(p,a,len)=>vv(p.x+Math.sin(rad(a))*len,p.y+Math.cos(rad(a))*len);
+const num=n=>Number(n.toFixed(2));
+const pathBetween=(a,b,r0,r1)=>{const dx=b.x-a.x,dy=b.y-a.y,L=Math.max(1,Math.hypot(dx,dy)),nx=-dy/L,ny=dx/L;
+const A=vv(a.x+nx*r0,a.y+ny*r0),B=vv(b.x+nx*r1,b.y+ny*r1),C=vv(b.x-nx*r1,b.y-ny*r1),D=vv(a.x-nx*r0,a.y-ny*r0);
+return `M${num(A.x)} ${num(A.y)} Q${num((A.x+B.x)/2+nx*3)} ${num((A.y+B.y)/2+ny*3)} ${num(B.x)} ${num(B.y)} Q${num(b.x+dx/L*3)} ${num(b.y+dy/L*3)} ${num(C.x)} ${num(C.y)} Q${num((C.x+D.x)/2-nx*3)} ${num((C.y+D.y)/2-ny*3)} ${num(D.x)} ${num(D.y)} Q${num(a.x-dx/L*3)} ${num(a.y-dy/L*3)} ${num(A.x)} ${num(A.y)} Z`;
+};
+const prop=(id,k,v)=>{const el=$(id);if(el)el.setAttribute(k,v)};
+const move=(id,p,angle=0)=>prop(id,'transform',`translate(${num(p.x)} ${num(p.y)}) rotate(${num(-angle)})`);
+const segmentLine=(a,b,o=3)=>{const dx=b.x-a.x,dy=b.y-a.y,L=Math.max(1,Math.hypot(dx,dy));return `M${num(a.x-dy/L*o)} ${num(a.y+dx/L*o)} L${num(b.x-dy/L*o)} ${num(b.y+dx/L*o)}`};
+function drawArm(side,shoulderAngle,forearmAngle,handAngle){
+ const left=side==='l', S=vv(left?139:241,310), E=joint(S,shoulderAngle,87), W=joint(E,forearmAngle,78);
+ prop(side+'Upper','d',pathBetween(S,E,21,15)); prop(side+'UpperLight','d',segmentLine(S,E,-9));move(side+'ElbowCap',E);
+ prop(side+'Forearm','d',pathBetween(E,W,14.3,9.3));prop(side+'ForearmLight','d',segmentLine(E,W,5));move(side+'Cuff',W);
+ move(side+'Hand',W,handAngle);
+}
+// Front-facing bone rig: the knees stay over the shoe centers when standing.
+// In a stepping animation the ankle lifts vertically; the knee flexes gently inward.
+function drawLeg(side,targetX,targetY,pitch=0,going=false){
+ const left=side==='l',H=vv(left?158:222,433),L1=102,L2=103;
+ const vx=targetX-H.x,vy=targetY-H.y;
+ const d=Math.max(2,Math.min(L1+L2-.01,Math.hypot(vx,vy)));
+ const normal=Math.max(.001,Math.hypot(vx,vy)),ux=vx/normal,uy=vy/normal;
+ const along=(L1*L1-L2*L2+d*d)/(2*d);
+ const rise=Math.sqrt(Math.max(0,L1*L1-along*along));
+ // Bend toward the center during lifting, with a maximum 9px sideways displacement.
+ const lateral=Math.min(9,rise*(going?.20:.08));
+ const K=vv(H.x+ux*along+(left?1:-1)*lateral,H.y+uy*along);
+ const A=vv(targetX,targetY);
+ prop(side+'Thigh','d',pathBetween(H,K,19,16));
+ prop(side+'ThighLight','d',segmentLine(H,K,-10));move(side+'KneeCap',K);
+ prop(side+'Shin','d',pathBetween(K,A,16,12));prop(side+'ShinLight','d',segmentLine(K,A,-7));
+ prop(side+'Shoe','transform',`translate(${num(A.x)} ${num(A.y)}) rotate(${num(pitch)})`);
+ const shadow=$(side+'Shadow');if(shadow){shadow.setAttribute('cx',num(A.x));shadow.setAttribute('opacity',num(Math.max(.07,.27-(638-A.y)*.006)));}
+}
+function footTarget(side,age,blend,body){
+ const center=side==='l'?157:223,phase=((age*1.18+(side==='r'?.5:0))%1+1)%1;
+ const lift=phase<.55?0:24*Math.sin(Math.PI*(phase-.55)/.45);
+ return {x:center+Math.sin(phase*2*Math.PI)*3*blend,y:638-lift*blend-body,angle:0};
+}
+function smooth(v){v=Math.max(0,Math.min(1,v));return v*v*(3-2*v)}
+function applyRig(now){
+ const t=now/1000,s=Math.sin, reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const running=!reduced&&enabled&&!document.hidden;
+ const age=Math.max(0,(now-poseStart)/1000);let mode=pose;
+ const duration=mode==='dance'?4.4:mode==='walk'?5.8:mode==='hiFive'?3.1:2.6;
+ if(mode!=='idle'&&age>duration){pose='idle';mode='idle';document.querySelectorAll('.mini').forEach(b=>b.classList.remove('active'))}
+ const blend=mode==='idle'?0:smooth(age/.26)*smooth((duration-age)/.5);
+ let body=running?.7*s(t*1.7):0,head=running?.9*s(t*1.2):0;
+ let la=-18+1.5*s(t*1.2),ra=18-1.5*s(t*1.2),le=-9,re=9,lha=-8,rha=8;
+ if(running&&mode==='wave'){ra+=(77-ra)*blend;re+=(135+9*s(age*8)-re)*blend;rha+=(142+10*s(age*9)-rha)*blend;head+=4*s(age*2)*blend}
+ if(running&&mode==='hiFive'){la+=(-70-la)*blend;ra+=(70-ra)*blend;le+=(-145-le)*blend;re+=(145-re)*blend;lha+=(-156-lha)*blend;rha+=(156-rha)*blend;body-=3*blend}
+ let leftFoot={x:157,y:638-body,angle:0},rightFoot={x:223,y:638-body,angle:0};
+ if(running&&mode==='walk'){
+   body+=(-2+1.6*Math.cos(age*2*Math.PI*1.8))*blend;
+   leftFoot=footTarget('l',age,blend,body);rightFoot=footTarget('r',age,blend,body);
+   const q=s(age*2*Math.PI*.9);
+   la+=(-16*q)*blend;ra+=(-16*q)*blend;le+=(-7*q)*blend;re+=(-7*q)*blend;
+   head+=1.5*s(age*2*Math.PI*.9)*blend;
+ }
+ if(running&&mode==='dance'){
+   const q=s(age*6.5),v=s(age*3.25);
+   body-=7*Math.abs(q)*blend;
+   la+=(-51+16*q-la)*blend;ra+=(51+16*q-ra)*blend;
+   le+=(-112+16*q-le)*blend;re+=(112+16*q-re)*blend;
+   lha+=(-120+18*q-lha)*blend;rha+=(120+18*q-rha)*blend;
+   leftFoot={x:157+3*v*blend,y:638-15*Math.max(0,q)*blend-body,angle:0};
+   rightFoot={x:223-3*v*blend,y:638-15*Math.max(0,-q)*blend-body,angle:0};
+   head+=4*v*blend;
+ }
+ const g=$('whole');if(g)g.setAttribute('transform',`translate(0 ${num(body)})`);
+ drawLeg('l',leftFoot.x,leftFoot.y,leftFoot.angle,mode==='walk');
+ drawLeg('r',rightFoot.x,rightFoot.y,rightFoot.angle,mode==='walk');
+ drawArm('l',la,le,lha);drawArm('r',ra,re,rha);
+ setTr('headRig',190,205,head);
+ if(running){lookX+=(goalX-lookX)*.075;lookY+=(goalY-lookY)*.075;}else{lookX*=.92;lookY*=.92}
+ const pL=$('pupilL'),pR=$('pupilR');if(pL)pL.setAttribute('transform',`translate(${lookX.toFixed(1)} ${lookY.toFixed(1)})`);if(pR)pR.setAttribute('transform',`translate(${lookX.toFixed(1)} ${lookY.toFixed(1)})`);
+ if(running&&now>nextBlink){blinkStart=now;blinkCount++;nextBlink=now+2300+Math.random()*2300;}
+ let blink=1;if(running&&blinkStart>=0){const d=(now-blinkStart)/165;if(d>=0&&d<1)blink=.05+.95*Math.abs(Math.cos(d*Math.PI));else blinkStart=-1}
+ const eyeL=$('eyeLeft'),eyeR=$('eyeRight');if(eyeL)eyeL.setAttribute('transform',`translate(159 207) scale(1 ${blink.toFixed(3)})`);if(eyeR)eyeR.setAttribute('transform',`translate(221 207) scale(1 ${blink.toFixed(3)})`);
+ const l1=$('lidLeft'),l2=$('lidRight');if(l1)l1.setAttribute('opacity',blink<.16?'1':'0');if(l2)l2.setAttribute('opacity',blink<.16?'1':'0');
+ const pet=$('pet');if(pet)pet.setAttribute('transform',`translate(292 ${(364+(running?5*s(t*2):0)).toFixed(2)}) rotate(${running?4*s(t*2.4):0})`);
+}
+// The head pivots around its natural neck/face position, not around the SVG's top-left.
+function tick(t){if(t-lastTick>=16){applyRig(t);lastTick=t}requestAnimationFrame(tick)}
+// SVG transform on head uses translate(190 205) rotation(...): retain its global artwork coordinates by adding an opposite inner translation.
+function fixHeadRig(){const head=$('headRig');if(head){let inner=head.querySelector('.head-contents');if(!inner){inner=document.createElementNS('http://www.w3.org/2000/svg','g');inner.setAttribute('class','head-contents');inner.setAttribute('transform','translate(-190 -205)');while(head.firstChild)inner.appendChild(head.firstChild);head.appendChild(inner)}}}
+const originalPaint=paint;paint=()=>{originalPaint();fixHeadRig()};
+$('genderSelect').addEventListener('click',e=>{const b=e.target.closest('button[data-gender]');if(!b)return;state.gender=Number(b.dataset.gender);state.haircut=state.gender===0?2:0;updateInputs();paint();startPose('wave');toast(state.gender===0?'👧 გოგოს პერსონაჟი მზადაა!':'👦 ბიჭის პერსონაჟი მზადაა!')});
+for(const id of ['skin','hair','haircut','outfit','eyes','accessory','footwear'])$(id).addEventListener('change',e=>{state[id]=Number(e.target.value);paint()});
+$('styles').addEventListener('click',e=>{const button=e.target.closest('button[data-style]');if(!button)return;state.style=Number(button.dataset.style);if(state.style===1)state.outfit=5;if(state.style===2)state.outfit=2;if(state.style===3)state.outfit=1;if(state.style===0)state.outfit=0;updateInputs();paint();startPose('wave')});
+$('wave').addEventListener('click',()=>startPose('wave'));$('dance').addEventListener('click',()=>startPose('dance'));$('hiFive').addEventListener('click',()=>startPose('hiFive'));$('walk').addEventListener('click',()=>startPose('walk'));$('blink').addEventListener('click',()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;blinkStart=performance.now();nextBlink=blinkStart+3000;toast('😉 თვალები ახამხამდა!')});
+$('celebrate').addEventListener('click',()=>startPose('dance'));
+$('portrait').addEventListener('pointermove',e=>{const b=$('portrait').getBoundingClientRect();goalX=Math.max(-5,Math.min(5,(e.clientX-b.left-b.width/2)/b.width*13));goalY=Math.max(-3,Math.min(3,(e.clientY-b.top-b.height/2)/b.height*9))});$('portrait').addEventListener('pointerleave',()=>{goalX=0;goalY=0});
+$('random').addEventListener('click',()=>{const picks=new Uint32Array(Object.keys(base).length);if(window.crypto?.getRandomValues)crypto.getRandomValues(picks);else for(let i=0;i<picks.length;i++)picks[i]=Math.floor(Math.random()*999999);Object.keys(base).forEach((k,i)=>{state[k]=picks[i]%(k==='gender'?2:k==='style'?4:k==='skin'?6:k==='hair'?6:k==='haircut'?4:k==='outfit'?6:k==='eyes'?4:k==='footwear'?3:4)});updateInputs();paint();startPose('dance');toast('✨ ახალი ჯადოსნური პორტრეტი მზადაა!')});
+const openStudio=()=>{go(2);startPose('wave');toast('✨ ავატარის სტუდია გაიხსნა — აირჩიე გოგო ან ბიჭი!')};
+$('startAvatar').addEventListener('click',openStudio);
+$('registerForm').addEventListener('submit',e=>{e.preventDefault();openStudio()});
+$('resume').addEventListener('click',()=>{state=safe(saved);paint();go(3);startPose('hiFive')});
+$('saveAvatar').addEventListener('click',()=>{saved=safe(state);try{localStorage.setItem(STORE,JSON.stringify(saved));$('saveStatus').textContent='✅ ავატარი ამ ბრაუზერში დამახსოვრდა.'}catch{$('saveStatus').textContent='⚠️ ბრაუზერმა შენახვა დაბლოკა; დემოს დახურვისას ავატარი შეიძლება დაიკარგოს.'}$('resume').hidden=false;go(3);startPose('dance')});
+const classIcons=['🌱','🌊','🍀','✨','💎','🔥','🪐','🌈','🏰','🌠','🦋','👑'];const classNames=['საწყისი','სათავგადასავლო','ტყე','ვარსკვლავები','კრისტალები','ენერგია','გალაქტიკა','ცისარტყელა','ციხესიმაგრე','კოსმოსი','ფანტაზია','ლეგენდა'];
+for(let g=1;g<=12;g++){const b=document.createElement('button');b.className='class-tile';b.type='button';b.setAttribute('aria-pressed','false');b.innerHTML=`<em>${classIcons[g-1]}</em><strong>კლასი ${g}</strong><small>${classNames[g-1]}</small>`;b.dataset.grade=String(g);$('classGrid').appendChild(b)}
+$('classGrid').addEventListener('click',e=>{const b=e.target.closest('button[data-grade]');if(!b)return;grade=Number(b.dataset.grade);document.querySelectorAll('.class-tile').forEach(x=>{x.classList.toggle('selected',x===b);x.setAttribute('aria-pressed',String(x===b))});$('classStatus').textContent='✨ აირჩიე კლასი '+grade+' — პორტალი მზადაა!';$('enterWorld').disabled=false;startPose('hiFive')});
+function resetQuiz(){$('quizView').hidden=false;$('finish').hidden=true;hasWon=false;$('answerStatus').textContent='აირჩიე ერთი პასუხი.';document.querySelectorAll('.answer').forEach(b=>{b.classList.remove('wrong','right');b.disabled=false})}
+$('enterWorld').addEventListener('click',()=>{if(!grade)return;$('gradeBadge').textContent='კლასი '+grade;resetQuiz();go(4);startPose('wave')});
+$('answers').addEventListener('click',e=>{const b=e.target.closest('button[data-answer]');if(!b||hasWon)return;if(b.dataset.answer==='right'){b.classList.add('right');hasWon=true;$('answerStatus').textContent='🌟 შესანიშნავია!';setTimeout(()=>{if(step!==4)return;$('quizView').hidden=true;$('finish').hidden=false;startPose('dance')},450)}else{b.classList.add('wrong');$('answerStatus').textContent='💛 სცადე კიდევ, შენ გამოგივა!'}});
+$('editAvatar').addEventListener('click',()=>{go(2);startPose('wave')});$('backClasses').addEventListener('click',()=>go(3));$('again').addEventListener('click',()=>{resetQuiz();go(1);startPose('wave')});
+window.addEventListener('message',event=>{
+  if(event.origin!==location.origin || event.source!==window.parent || window.parent===window)return;
+  const m=event.data;
+  if(!m||m.type!=='ewm-v10-parent')return;
+  if(m.action==='display'&&m.avatar){state=safe(m.avatar);paint();updateInputs();startPose('wave')}
+  if(m.action==='dance')startPose('dance');
+  if(m.action==='wave')startPose('wave');
+});
+// Display-only frame. No account data is read or uploaded.
+paint();updateInputs();startPose('wave');requestAnimationFrame(tick);
+})();
+</script>
+</body></html>
