@@ -697,7 +697,7 @@ footer{
   <div class="nav wrap">
 
 ```
-<a class="brand" id="brandLink" href="teacher-lessons.html">
+<a class="brand" id="brandLink" href="academy.html">
   ⚡ ENGLISH WITH MARIAMI
 </a>
 
@@ -706,7 +706,7 @@ footer{
   <a
     class="btn"
     id="backButton"
-    href="teacher-lessons.html"
+    href="academy.html"
   >
     📚 გაკვეთილებზე დაბრუნება
   </a>
@@ -1020,12 +1020,12 @@ const client =
   const brand =
     document.getElementById('brandLink');
 
-  const fromTeacher =
+  const fromAcademy =
     document.referrer.includes(
-      '/teacher-lessons.html'
+      '/academy.html'
     );
 
-  if(!fromTeacher && grade===2){
+  if(!fromAcademy && grade===2){
 
     back.href =
       '/grade2.html';
@@ -2583,10 +2583,10 @@ async function render(){
           href="${
             grade===2 &&
             !document.referrer.includes(
-              '/teacher-lessons.html'
+              '/academy.html'
             )
               ? '/grade2.html'
-              : '/teacher-lessons.html'
+              : '/academy.html'
           }"
         >
           ↩️ დაბრუნება
