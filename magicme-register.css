@@ -1,0 +1,25 @@
+/* MAGICME_PRO_V11_REAL_REGISTRATION_BRIDGE — styled only for register.html */
+#mm11Bridge,#mm11Bridge *{box-sizing:border-box}
+#mm11Bridge{background:linear-gradient(140deg,#132c4b,#14233b);border:1px solid #42658f;border-radius:20px;padding:clamp(12px,2vw,20px);box-shadow:0 15px 50px #0003;color:#eaf4ff;font:14px/1.5 system-ui,Segoe UI,sans-serif;min-width:0}
+#mm11Bridge h2{color:#fff;font-size:clamp(21px,2vw,27px);line-height:1.28;margin:0 0 7px}
+#mm11Bridge p{margin:5px 0 12px;color:#c2d7ee;font-size:13px}
+#mm11Bridge .mm11-label{color:#83ead3;font-size:11px;font-weight:800;letter-spacing:.11em;margin-bottom:7px;display:block}
+#mm11Frame{display:block;width:100%;height:690px;border:1px solid #536c8c;border-radius:14px;background:#152941}
+#mm11Bridge .mm11-info{padding:13px;border-radius:12px;background:#1e3b58;border:1px solid #3c6282;margin:12px 0;min-width:0}
+#mm11Details{font-weight:750;color:#fff;overflow-wrap:anywhere}
+#mm11Bridge .mm11-actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin:12px 0}
+#mm11Confirm{min-height:47px;background:#6756cc;color:#fff;border:1px solid #aca1ee;border-radius:12px;padding:10px 15px;font:700 14px system-ui,Segoe UI,sans-serif;cursor:pointer}
+#mm11Confirm:hover{background:#796ae2}
+#mm11Bridge .mm11-skip{display:flex;gap:8px;align-items:center;font-size:13px;color:#e2ecff;cursor:pointer}
+#mm11Bridge .mm11-skip input{width:18px;height:18px;min-width:18px;accent-color:#9d85ff;margin:0}
+#mm11Message{color:#c5f4e6;font-weight:650;font-size:13px;min-height:21px;overflow-wrap:anywhere}
+#mm11Confirm:focus-visible,#mm11Bridge input:focus-visible{outline:3px solid #8eeedc;outline-offset:3px}
+body.mm11-layout{display:block!important;width:100%!important;margin:0!important;overflow-x:hidden!important}
+body.mm11-layout #mm11Workspace{display:grid!important;grid-template-columns:minmax(0,1.75fr) minmax(310px,.85fr);gap:clamp(14px,2vw,25px);align-items:start;width:calc(100% - 36px)!important;max-width:1460px!important;margin:clamp(14px,2vw,28px) auto 38px!important;padding:0!important}
+#mm11Workspace .mm11-visual,#mm11Workspace .mm11-registration{min-width:0!important;width:100%!important;max-width:100%!important}
+#mm11Workspace .mm11-visual #mm11Bridge{width:100%!important;max-width:none!important;margin:0!important}
+#mm11Workspace .mm11-registration>*{width:100%!important;max-width:100%!important;margin:0 auto!important;box-sizing:border-box!important}
+#mm11Workspace .mm11-registration{overflow-wrap:anywhere}
+@media(max-width:1060px){body.mm11-layout #mm11Workspace{grid-template-columns:minmax(0,1fr)!important;max-width:850px!important;width:calc(100% - 28px)!important}}
+@media(max-width:620px){body.mm11-layout #mm11Workspace{width:calc(100% - 14px)!important;margin:7px auto 25px!important;gap:10px!important}#mm11Bridge{border-radius:13px;padding:10px}#mm11Bridge .mm11-actions{display:grid;grid-template-columns:1fr}#mm11Confirm{width:100%;min-height:48px}}
+@media(prefers-reduced-motion:reduce){#mm11Workspace *{scroll-behavior:auto!important}}

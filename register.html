@@ -570,7 +570,8 @@ VERY SMALL PHONE
 }
 </style>
 
-<script data-magic-v10-redirect="1">(function(){try{if(!new URLSearchParams(location.search).has('legacy'))location.replace('magic-me-register.html');}catch(e){console.warn(e)}})();</script>
+
+<link rel="stylesheet" href="./magicme-register.css">
 </head>
 
 <body>
@@ -589,7 +590,18 @@ VERY SMALL PHONE
     შექმენი შენი მოსწავლის ანგარიში 🚀
   </p>
 
-  <form id="registerForm">
+  
+<!-- MAGICME_PRO_V11_REAL_REGISTRATION_BRIDGE: local integration; no automatic deployment -->
+<section id="mm11Bridge" aria-label="MAGIC ME PRO — 3D გმირის არჩევა">
+  <span class="mm11-label">ENGLISH WITH MARIAMI · MAGIC ME PRO</span>
+  <h2>✨ შექმენი შენი 3D გმირი</h2>
+  <p>აირჩიე Girl ან Boy, ტანსაცმელი და სნიკერები. შენს არჩევანს რეგისტრაციისას შენივე ანგარიშს დავუკავშირებთ.</p>
+  <iframe id="mm11Frame" title="3D გმირის არჩევის სტუდია" src="./magicme-studio/index.html" loading="eager" referrerpolicy="same-origin"></iframe>
+  <div class="mm11-info"><b>შენი არჩევანი:</b> <span id="mm11Details">იტვირთება…</span></div>
+  <div class="mm11-actions"><button type="button" id="mm11Confirm">✅ ავატარის დადასტურება</button><label class="mm11-skip"><input id="mm11Skip" type="checkbox"> ავატარის გარეშე გაგრძელება</label></div>
+  <p id="mm11Message" role="status" aria-live="polite">3D სტუდია იტვირთება…</p>
+</section>
+<form id="registerForm">
 
 ```
 <div class="field">
@@ -635,32 +647,20 @@ VERY SMALL PHONE
   >
 </div>
 
-<div class="field">
-  <label for="grade">
-    🎓 აირჩიე შენი კლასი
-  </label>
 
-  <select
-    id="grade"
-    name="grade"
-    required
-  >
-    <option value="" selected disabled>აირჩიე კლასი — 1-დან 12-მდე</option>
-    <option value="1">🎒 მე-1 კლასი</option>
-    <option value="2">📘 მე-2 კლასი</option>
-    <option value="3">🚀 მე-3 კლასი</option>
-    <option value="4">⭐ მე-4 კლასი</option>
-    <option value="5">🌌 მე-5 კლასი</option>
-    <option value="6">🧠 მე-6 კლასი</option>
-    <option value="7">⚡ მე-7 კლასი</option>
-    <option value="8">🔮 მე-8 კლასი</option>
-    <option value="9">🌠 მე-9 კლასი</option>
-    <option value="10">🤖 მე-10 კლასი</option>
-    <option value="11">🏆 მე-11 კლასი</option>
-    <option value="12">👑 მე-12 კლასი</option>
-  </select>
-</div>
 
+<div class="field"><label for="grade">🎓 აირჩიე შენი კლასი</label><select id="grade" name="grade" required><option value="" selected disabled>აირჩიე კლასი — 1-დან 12-მდე</option><option value="1">მე-1 კლასი</option>
+<option value="2">მე-2 კლასი</option>
+<option value="3">მე-3 კლასი</option>
+<option value="4">მე-4 კლასი</option>
+<option value="5">მე-5 კლასი</option>
+<option value="6">მე-6 კლასი</option>
+<option value="7">მე-7 კლასი</option>
+<option value="8">მე-8 კლასი</option>
+<option value="9">მე-9 კლასი</option>
+<option value="10">მე-10 კლასი</option>
+<option value="11">მე-11 კლასი</option>
+<option value="12">მე-12 კლასი</option></select></div>
 <button
   id="submitBtn"
   class="register-button"
@@ -837,18 +837,11 @@ form.addEventListener(
         .trim()
         .toLowerCase();
 
-    const grade =
-      Number(
-        document
-          .getElementById("grade")
-          .value
-      );
-
+        const grade = Number(document.getElementById("grade").value);
     if(!Number.isInteger(grade) || grade < 1 || grade > 12){
       setMessage("🎓 გთხოვ, აირჩიე კლასი 1-დან 12-მდე.", "error");
       return;
     }
-
     const password =
       document
         .getElementById("password")
@@ -910,7 +903,8 @@ form.addEventListener(
             data:{
               full_name:fullName,
               role:"student",
-              grade:grade
+              grade:grade,
+              ...((typeof window.magicMeReadRegistrationAvatar === "function") ? window.magicMeReadRegistrationAvatar() : {})
             }
           }
 
@@ -941,7 +935,7 @@ form.addEventListener(
                 user_id:data.user.id,
                 full_name:fullName,
                 role:"student",
-                grade:grade
+              grade:grade
               },
               {
                 onConflict:"user_id"
@@ -964,7 +958,7 @@ form.addEventListener(
       if(data && data.session){
 
         setMessage(
-          "🎉 რეგისტრაცია წარმატებულია! კლასი ჯერ არ არის მინიჭებული.",
+          "🎉 რეგისტრაცია წარმატებულია! სასურველი კლასი აირჩიე აკადემიაში.",
           "success"
         );
 
@@ -979,7 +973,7 @@ form.addEventListener(
       }else{
 
         setMessage(
-          "📧 ანგარიში შეიქმნა! დაადასტურე ელფოსტა. კლასი მასწავლებელმა უნდა მოგანიჭოს.",
+          "⚠️ ანგარიში შეიქმნა, მაგრამ ავტომატური შესვლა ვერ შესრულდა. გადაამოწმე Supabase-ის Confirm Email პარამეტრი.",
           "success"
         );
 
@@ -1044,5 +1038,6 @@ form.addEventListener(
 })();
 </script>
 
+<script defer src="./magicme-register.js"></script>
 </body>
 </html>

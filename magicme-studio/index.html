@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101829">
+<title>MAGIC ME PRO — Independent 3D Studio</title>
+<link rel="stylesheet" href="/magicme-studio/src/style.css">
+<script type="importmap">{"imports":{"three":"/magicme-studio/vendor/three.module.js"}}</script>
+<script type="module" src="/magicme-studio/src/app.js"></script>
+</head>
+<body>
+<main class="shell">
+ <header class="heading">
+  <div class="brand"><span class="logo">✦</span><div><small>ENGLISH WITH MARIAMI · CHILD AVATAR LAB</small><h1>MAGIC ME <em>PRO</em></h1></div></div>
+  <span class="version">3D CHILDREN · MOTION REVIEW</span>
+ </header>
+ <section class="layout" aria-label="3D avatar studio">
+  <div class="stage-wrap">
+    <div class="corner-label"><span class="live-dot"></span><span id="sceneStatus">სისტემა იტვირთება…</span></div>
+    <div id="stage" class="stage" aria-label="ბავშვის 3D ავატარი; მოძრაობის შერჩევა შესაძლებელია ღილაკებით"></div>
+    <div class="bottom-hint">გადაატარე თითი ან მაუსი — 3D დათვალიერება</div>
+  </div>
+  <aside class="controls">
+    <div class="panel">
+     <p class="eyebrow">01 / CHARACTER</p><h2>აირჩიე გმირი</h2>
+     <div class="segmented" role="group" aria-label="პერსონაჟის არჩევა">
+      <button type="button" class="gender selected" data-gender="girl" aria-pressed="true">👧 Girl</button>
+      <button type="button" class="gender" data-gender="boy" aria-pressed="false">👦 Boy</button>
+     </div>
+    </div>
+    <div class="panel"><p class="eyebrow">02 / MOTION</p><h2>მოძრაობები</h2>
+     <div class="actions" role="group" aria-label="მოძრაობები">
+      <button type="button" data-motion="idle" class="selected">🧍 Idle</button>
+      <button type="button" data-motion="walk">🚶 Walk</button>
+      <button type="button" data-motion="wave">👋 Wave</button>
+      <button type="button" data-motion="highfive">🙌 High Five · Beta</button>
+      <button type="button" data-motion="dance">💃 Dance</button>
+      <button type="button" data-motion="blink">😉 Blink</button>
+     </div>
+    </div>
+    <div class="panel"><p class="eyebrow">03 / QUALITY CHECK</p><h2>მდგომარეობა</h2>
+      <dl class="stats">
+       <div><dt>3D მოდელი</dt><dd id="qaModel">შემოწმება…</dd></div>
+       <div><dt>Skeleton / skin</dt><dd id="qaSkeleton">შემოწმება…</dd></div>
+       <div><dt>Idle / Walk</dt><dd id="qaClips">შემოწმება…</dd></div>
+       <div><dt>Wave / High Five</dt><dd id="qaArms">შემოწმება…</dd></div>
+       <div><dt>თვალის ხამხამი</dt><dd id="qaBlink">შემოწმება…</dd></div>
+       <div><dt>FPS (მიმდინარე)</dt><dd id="qaFps">—</dd></div>
+      </dl>
+    </div>
+    <p id="notice" class="notice" role="status" aria-live="polite">მზადყოფნის შეფასება გამოჩნდება აქ.</p>
+    <p class="disclaimer">საბავშვო 3D მოდელები და რეალური მოძრაობების კლიპები. High Five იყენებს Cheer ჟესტს, თუ ნამდვილი High Five კლიპი არ არსებობს; Blink აქტიურია მხოლოდ შესაბამისი სახის ანიმაციისას. დამოუკიდებელი ტესტია — რეგისტრაციასა და მონაცემებს არ უკავშირდება.</p>
+  </aside>
+ </section>
+</main>
+</body>
+</html>
