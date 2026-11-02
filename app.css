@@ -41,8 +41,7 @@ main,
 .lesson,
 .word,
 .grade,
-.dashboard,
-.teacher {
+.dashboard {
   min-width: 0;
 }
 
@@ -213,7 +212,6 @@ textarea:focus-visible {
 .card,
 .neon-card,
 .grade,
-.teacher,
 .lesson,
 .word,
 .quiz {
@@ -436,15 +434,7 @@ textarea:focus-visible {
    TEACHER DASHBOARD
 ========================================================= */
 
-.teacher {
-  width: 100%;
-  max-width: 100%;
-  transform: none;
-}
 
-.teacher .avatar {
-  max-width: 100%;
-}
 
 .student-card,
 .student-management {
@@ -852,15 +842,7 @@ footer,
 
   /* ---------- TEACHER ---------- */
 
-  .teacher {
-    width: 100%;
-    padding: 18px;
-    transform: none;
-  }
 
-  .teacher .avatar {
-    font-size: 4.5rem;
-  }
 
   /* ---------- PROGRESS MODAL ---------- */
 
@@ -1130,7 +1112,6 @@ nav,
 .word,
 .quiz,
 .grade,
-.teacher,
 .dashboard {
   min-width: 0;
   max-width: 100%;

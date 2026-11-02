@@ -649,18 +649,7 @@ VERY SMALL PHONE
 
 
 
-<div class="field"><label for="grade">🎓 აირჩიე შენი კლასი</label><select id="grade" name="grade" required><option value="" selected disabled>აირჩიე კლასი — 1-დან 12-მდე</option><option value="1">მე-1 კლასი</option>
-<option value="2">მე-2 კლასი</option>
-<option value="3">მე-3 კლასი</option>
-<option value="4">მე-4 კლასი</option>
-<option value="5">მე-5 კლასი</option>
-<option value="6">მე-6 კლასი</option>
-<option value="7">მე-7 კლასი</option>
-<option value="8">მე-8 კლასი</option>
-<option value="9">მე-9 კლასი</option>
-<option value="10">მე-10 კლასი</option>
-<option value="11">მე-11 კლასი</option>
-<option value="12">მე-12 კლასი</option></select></div>
+
 <button
   id="submitBtn"
   class="register-button"
@@ -836,12 +825,7 @@ form.addEventListener(
         .value
         .trim()
         .toLowerCase();
-
-        const grade = Number(document.getElementById("grade").value);
-    if(!Number.isInteger(grade) || grade < 1 || grade > 12){
-      setMessage("🎓 გთხოვ, აირჩიე კლასი 1-დან 12-მდე.", "error");
-      return;
-    }
+    const grade = 0;
     const password =
       document
         .getElementById("password")

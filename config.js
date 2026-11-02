@@ -37,7 +37,7 @@ window.EWM_AUTH=window.EWM_AUTH||{
     }
     return {data:null,error:last};
   }
-};const path=location.pathname+location.search+location.hash,isAcademy=/\/academy\.html(?:$|[?#])/i.test(path),isTeacherDashboard=/\/teacher-dashboard\.html(?:$|[?#])/i.test(path);if(isTeacherDashboard&&!document.querySelector('script[data-ewm-teacher-dashboard-fix]')){const x=document.createElement('script');x.src='/shared/teacher-dashboard-fix.js?v=20260908';x.async=false;x.dataset.ewmTeacherDashboardFix='1';document.head.appendChild(x)}if(isAcademy){
+};const path=location.pathname+location.search+location.hash,isAcademy=/\/academy\.html(?:$|[?#])/i.test(path);if(isAcademy){
   if(!window.__EWM_ACADEMY_RETURN_GUARD){
     window.__EWM_ACADEMY_RETURN_GUARD='1';
     window.addEventListener('pageshow',function(event){

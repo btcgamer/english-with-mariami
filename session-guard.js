@@ -7,8 +7,7 @@
   const publicPages = [
     '/login.html',
     '/register.html',
-    '/reset-password.html',
-    '/teacher-login.html'
+    '/reset-password.html'
   ];
 
   // საჯარო გვერდებზე ავტორიზაცია არ არის საჭირო

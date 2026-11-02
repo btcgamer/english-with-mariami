@@ -32,16 +32,9 @@
   const page = path.split('/').pop() || '';
 
   const LOGIN = '/login.html';
-  const TEACHER_LOGIN = '/teacher-login.html';
-
-  const GRADE_PAGES = {
-    2: '/grade2/index.html',
-    3: '/grade3.html',
-    4: '/grade4.html'
-  };
+  const GRADE_PAGES = Object.fromEntries(Array.from({length:12},(_,i)=>[i+1,`/grade${i+1}/index.html`]));
 
   const ROLE = {
-    TEACHER: 'teacher',
     STUDENT: 'student',
     PARENT: 'parent'
   };
@@ -60,18 +53,8 @@
       'login.html',
       'register.html',
       'reset-password.html',
-      'teacher-login.html'
     ].includes(page);
   }
-
-  function isTeacherPage() {
-    return (
-      page === 'teacher-dashboard.html' ||
-      page === 'teacher-journal.html' ||
-      page.startsWith('teacher-')
-    );
-  }
-
   function isParentPage() {
     return (
       page === 'parent-dashboard.html' ||
@@ -83,12 +66,12 @@
   function isStudentPage() {
     return (
       page === 'student-dashboard.html' ||
-      /(?:^|\/)grade[234](?:\.html|\/index\.html)$/.test(path)
+      /(?:^|\/)grade(?:[1-9]|1[0-2])(?:\.html|\/index\.html)$/.test(path)
     );
   }
 
   function getGradeFromPage() {
-    const match = path.match(/(?:^|\/)grade([234])(?:\.html|\/index\.html)$/i);
+    const match = path.match(/(?:^|\/)grade((?:[1-9]|1[0-2]))(?:\.html|\/index\.html)$/i);
     return match ? Number(match[1]) : null;
   }
 
@@ -123,19 +106,6 @@
 
     redirect(target);
   }
-
-  function teacherLoginRedirect() {
-    redirect(
-      TEACHER_LOGIN +
-      '?redirect=' +
-      encodeURIComponent(
-        window.location.pathname +
-        window.location.search +
-        window.location.hash
-      )
-    );
-  }
-
   /* ==========================================================
      LOADING SCREEN
   ========================================================== */
@@ -412,38 +382,16 @@
     const role =
       normalizeRole(profile.role);
 
-    if (isTeacherPage()) {
-
-      if (role !== ROLE.TEACHER) {
-
-        if (role === ROLE.STUDENT) {
-          redirect(
-            GRADE_PAGES[
-              Number(profile.grade)
-            ] || '/student-dashboard.html'
-          );
-
-        } else if (role === ROLE.PARENT) {
-          redirect('/parent-dashboard.html');
-
-        } else {
-          loginRedirect();
-        }
-
-        return false;
-      }
-
-      return true;
+    if (page.startsWith('teacher-')) {
+      loginRedirect();
+      return false;
     }
 
     if (isParentPage()) {
 
       if (role !== ROLE.PARENT) {
 
-        if (role === ROLE.TEACHER) {
-          redirect('/teacher-dashboard.html');
-
-        } else if (role === ROLE.STUDENT) {
+        if (role === ROLE.STUDENT) {
           redirect(
             GRADE_PAGES[
               Number(profile.grade)
@@ -464,10 +412,7 @@
 
       if (role !== ROLE.STUDENT) {
 
-        if (role === ROLE.TEACHER) {
-          redirect('/teacher-dashboard.html');
-
-        } else if (role === ROLE.PARENT) {
+        if (role === ROLE.PARENT) {
           redirect('/parent-dashboard.html');
 
         } else {
@@ -488,57 +433,15 @@
   ========================================================== */
 
   function enforceGrade(profile) {
-
-    if (!profile) {
-      return false;
-    }
-
-    if (
-      normalizeRole(profile.role) !==
-      ROLE.STUDENT
-    ) {
-      return true;
-    }
-
-    const assignedGrade =
-      Number(profile.grade || 0);
-
-    const pageGrade =
-      getGradeFromPage();
-
-    if (
-      ![2, 3, 4].includes(assignedGrade)
-    ) {
-      console.warn(
-        'EWM Security: invalid student grade.'
-      );
-
-      redirect('/student-dashboard.html');
-
-      return false;
-    }
-
-    if (
-      pageGrade &&
-      pageGrade !== assignedGrade
-    ) {
-
-      console.info(
-        `EWM Security: redirect Grade ${pageGrade} → Grade ${assignedGrade}`
-      );
-
-      redirect(
-        GRADE_PAGES[assignedGrade]
-      );
-
-      return false;
-    }
-
-    return true;
+    if (!profile) return false;
+    if (normalizeRole(profile.role) !== ROLE.STUDENT) return true;
+    const pageGrade = getGradeFromPage();
+    // Any signed-in student can open Grade 1–12. Grade 0 means unassigned at registration.
+    return pageGrade === null || (Number.isInteger(pageGrade) && pageGrade >= 1 && pageGrade <= 12);
   }
 
   /* ==========================================================
-     STUDENT DASHBOARD → ASSIGNED GRADE
+     STUDENT DASHBOARD → FREE GRADE ACCESS
   ========================================================== */
 
   function enforceStudentDashboard(profile) {
@@ -627,7 +530,7 @@
             }
 
             if (
-              [2,3,4].includes(newGrade) &&
+              (newGrade >= 1 && newGrade <= 12) &&
               newGrade !== oldGrade
             ) {
 
@@ -820,11 +723,6 @@
         grade: Number(
           currentProfile.grade || 0
         ),
-
-        isTeacher:
-          normalizeRole(
-            currentProfile.role
-          ) === ROLE.TEACHER,
 
         isStudent:
           normalizeRole(

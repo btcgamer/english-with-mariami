@@ -197,51 +197,6 @@
     }
   }
 
-  async function loadTeacherProgress(){
-    if(!path.includes('teacher-dashboard.html')) return;
-    const cards = [...document.querySelectorAll('.student-card')];
-    if(!cards.length) return;
-    const ids = cards.map(card=>{
-      const text = card.querySelector('.small')?.textContent || '';
-      const m=text.match(/[0-9a-f]{8}-[0-9a-f-]{27,}/i);
-      return m ? m[0] : null;
-    }).filter(Boolean);
-    if(!ids.length) return;
-
-    const {data,error}=await client
-      .from('student_progress')
-      .select('user_id,grade,words_learned,quiz_completed,best_quiz,learned_words,updated_at')
-      .in('user_id',ids)
-      .in('grade',[2,3,4]);
-    if(error){console.warn('Teacher progress read error:',error);return;}
-
-    const byStudent=new Map();
-    (data||[]).forEach(row=>{
-      const k=String(row.user_id);
-      const old=byStudent.get(k);
-      if(!old || new Date(row.updated_at||0)>new Date(old.updated_at||0)) byStudent.set(k,row);
-    });
-
-    cards.forEach(card=>{
-      const text=card.querySelector('.small')?.textContent || '';
-      const m=text.match(/[0-9a-f]{8}-[0-9a-f-]{27,}/i);
-      if(!m) return;
-      const row=byStudent.get(m[0]);
-      if(!row) return;
-      const words=Number(row.words_learned || (Array.isArray(row.learned_words)?row.learned_words.length:0));
-      const quiz=Number(row.quiz_completed||0);
-      const best=Number(row.best_quiz||0);
-      let box=card.querySelector('.progress-sync-badge');
-      if(!box){
-        box=document.createElement('div');
-        box.className='progress-sync-badge';
-        box.style.cssText='margin-top:10px;padding:8px 10px;border:1px solid #00eaff33;border-radius:10px;background:#031a32;color:#dffaff;font-size:12px;font-weight:800;';
-        card.querySelector('.student-name')?.parentElement?.appendChild(box);
-      }
-      box.textContent=`📊 Progress: ${words} words • ${quiz} quizzes • Best ${best}%`;
-    });
-  }
-
   async function boot(){
     if(currentGrade){
       await syncCurrentGrade();
@@ -250,10 +205,6 @@
     if(path.includes('academy.html')){
       setTimeout(loadAcademyProgress,1200);
       setTimeout(loadAcademyProgress,3000);
-    }
-    if(path.includes('teacher-dashboard.html')){
-      setTimeout(loadTeacherProgress,1200);
-      setTimeout(loadTeacherProgress,3500);
     }
   }
 
@@ -264,7 +215,6 @@
     loadGrade,
     saveGrade,
     syncCurrentGrade,
-    loadAcademyProgress,
-    loadTeacherProgress
+    loadAcademyProgress
   };
 })();

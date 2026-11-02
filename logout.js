@@ -24,7 +24,7 @@
 
   // Do not install on authentication pages
   if (
-    /\/(login|register|reset-password|teacher-login)\.html$/.test(PATH)
+    /\/(login|register|reset-password)\.html$/.test(PATH)
   ) {
     return;
   }
@@ -40,11 +40,6 @@
   // ROLE / AREA DETECTION
   // ------------------------------------------------------------
 
-  const isTeacher =
-    /teacher-dashboard/.test(PATH) ||
-    /teacher-journal/.test(PATH) ||
-    /teacher-(dashboard|journal)/.test(PATH);
-
   const isParent =
     /parent-dashboard/.test(PATH) ||
     /parent-journal/.test(PATH) ||
@@ -52,17 +47,13 @@
 
   const isStudent =
     /student-dashboard/.test(PATH) ||
-    /grade[234](?:\.html|\/index\.html)$/.test(PATH);
+    /grade(?:[1-9]|1[0-2])(?:\.html|\/index\.html)$/.test(PATH);
 
   // ------------------------------------------------------------
   // REDIRECT
   // ------------------------------------------------------------
 
   function getLoginPage() {
-
-    if (isTeacher) {
-      return 'teacher-login.html?logout=1';
-    }
 
     if (isParent) {
       return 'login.html?logout=1&role=parent';

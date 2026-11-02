@@ -54,8 +54,8 @@ try{
  const profile=p.data||{},role=String(profile.role||'student').toLowerCase(),grade=Number(profile.grade||0),name=profile.full_name||u.email||'მოსწავლე';
  const status=document.getElementById('status');
  if(['teacher','admin','parent'].includes(role)){status.textContent='🟢 '+name+' • '+role+' • ყველა კლასი ხელმისაწვდომია';return}
- if(grade>=1&&grade<=12){status.textContent='🟢 '+name+' • შენი კლასი: Grade '+grade+' • ერთიანი აკადემიის სივრცე';return}
- status.textContent='🟡 ანგარიში აქტიურია, მაგრამ კლასი ჯერ არ არის მინიჭებული.';
+ if(grade>=1&&grade<=12){status.textContent='🟢 '+name+' • ყველა კლასი 1–12 ხელმისაწვდომია';return}
+ status.textContent='🟢 '+name+' • აირჩიე სასურველი კლასი 1–12';
 }catch(e){console.warn('[Unified Grades]',e)}
 }
 init();
