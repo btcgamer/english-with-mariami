@@ -2,7 +2,7 @@
   'use strict';
   const scene = document.querySelector('[data-neon-scene]');
   if (!scene) return;
-  const button = scene.querySelector('.motion-control');
+  const button = document.querySelector('.motion-control');
   const label = button.querySelector('.motion-label');
   const symbol = button.querySelector('.motion-symbol');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
