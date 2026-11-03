@@ -17,9 +17,8 @@ function currentGrade(){const n=Number($('grade').value);return Number.isInteger
 function records(g){try{const p=JSON.parse(readLocal(prefix+g)||'{}');return p&&typeof p==='object'&&!Array.isArray(p)?p:{}}catch{return {}}}
 function availableWords(lessons){const unique=new Set();for(const lesson of lessons)for(const w of lesson.words||[]){const key=normalize(w.en);if(key)unique.add(key)}return unique}
 function loadGoal(){const n=Number(readLocal(goalKey));return allowed.includes(n)?n:15}
-function saveGoal(v){const n=Number(v);if(!allowed.includes(n))return;try{localStorage.setItem(goalKey,String(n))}catch{}render()}
+function saveGoal(v){const n=Number(v);if(!allowed.includes(n))return;try{localStorage.setItem(goalKey,String(n))}catch{setText('pro-message','დღიური მიზანი ვერ შეინახა. შეამოწმე ბრაუზერის შენახვის პარამეტრები.')}document.dispatchEvent(new CustomEvent('mariami:progress-changed',{detail:{source:'goal'}}))}
 function setText(id,v){const n=$(id);if(n)n.textContent=String(v)}
-function bar(id,value,total){const p=$(id);if(!p)return;p.max=Math.max(1,total);p.value=Math.min(Math.max(0,value),p.max)}
 function lessonCompleted(id){return !!readLocal(donePrefix+id)}
 function moveToPractice(button){const b=$(button);if(!b)return;b.click();if(!$('pro-practice')?.hidden)$('pro-practice').scrollIntoView({block:'start',behavior:'auto'});else $('pro-hub')?.scrollIntoView({block:'start',behavior:'auto'})}
 function goLessons(){$('lesson')?.scrollIntoView({block:'start',behavior:'auto'});$('search')?.focus({preventScroll:true})}
@@ -49,7 +48,7 @@ function render(){const g=currentGrade(),lessons=grades[g]?.lessons;if(!g||!Arra
  const unseen=unique.size-reviewed,done=lessons.filter(l=>lessonCompleted(l.id)).length;
  const counts={strong:mastered,learning,hard,unseen};
  for(const [name,count] of Object.entries(counts)){
-  const el=$('premium-memory-'+name);if(el)el.style.width=(unique.size?Math.max(0,count)/unique.size*100:0)+'%';
+  const el=$('premium-memory-'+name);if(el){el.style.width=(unique.size?Math.max(0,count)/unique.size*100:0)+'%';el.dataset.hasProgress=String(count>0);}
   setText('premium-memory-'+name+'-n',count);
  }
  setText('premium-memory-total',unique.size+' სიტყვა');
@@ -65,11 +64,9 @@ function render(){const g=currentGrade(),lessons=grades[g]?.lessons;if(!g||!Arra
  else{title='გააგრძელე სწავლა საკუთარი ტემპით';desc='აირჩიე შემდეგი გაკვეთილი ან გაიმეორე შესწავლილი სიტყვები.';button='დღევანდელი ვარჯიში →';target='pro-start-mixed';amount=Math.max(0,lessons.length-done);label='დარჩენილი თემა'}
  setText('premium-focus-title',title);setText('premium-focus-desc',desc);setText('premium-focus-action',button);setText('premium-focus-number',amount);setText('premium-focus-unit',label);
  $('premium-focus-action').dataset.target=target;
- const todayN=hist[localDay(now)]||0,goal=loadGoal();$('premium-goal').value=String(goal);
- // The original progress add-on has a fixed 15-word goal. Refine only this presentation.
- bar('pg-daily',todayN,goal);setText('pg-daily-pct',Math.round(Math.min(1,todayN/goal)*100)+'%');
- setText('pg-day-count',todayN+' / '+goal);
- setText('pg-daily-detail',todayN>=goal?'დღიური მიზანი შესრულებულია 🎉': 'დარჩა '+(goal-todayN)+' განსხვავებული სიტყვის შეფასება');
+ const goal=loadGoal();$('premium-goal').value=String(goal);
+ // The base dashboard is the single owner of the daily progress bar.
+
 }
 $('premium-goal').addEventListener('change',e=>saveGoal(e.target.value));
 $('premium-open-lessons').addEventListener('click',goLessons);
@@ -77,9 +74,10 @@ $('premium-go-lessons').addEventListener('click',goLessons);
 $('premium-go-new').addEventListener('click',()=>moveToPractice('pro-start-new'));
 $('premium-go-due').addEventListener('click',()=>moveToPractice('pro-start-due'));
 $('premium-focus-action').addEventListener('click',()=>moveToPractice($('premium-focus-action').dataset.target||'pro-start-mixed'));
-for(const id of ['pro-rate-again','pro-rate-hard','pro-rate-good','pro-rate-easy','mark-done'])$(id)?.addEventListener('click',render);
-document.addEventListener('keydown',e=>{if(!['1','2','3','4'].includes(e.key))return;if(e.target?.closest('input,textarea,select,button,[contenteditable="true"]'))return;if(!$('pro-practice')?.hidden)render()});
+document.addEventListener('mariami:progress-changed',render);
 document.addEventListener('mariami:lesson-rendered',render);
-const proMessage=$('pro-message');if(proMessage)new MutationObserver(()=>{if(proMessage.textContent?.startsWith('✅ პროგრესი გაერთიანდა'))render()}).observe(proMessage,{childList:true,subtree:true});
+addEventListener('pageshow',render);
+addEventListener('storage',event=>{if(!event.key||event.key===goalKey)render()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)render()});
 if(grades[currentGrade()]?.lessons)render();
 })();

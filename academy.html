@@ -10,10 +10,10 @@
 <link rel="stylesheet" href="shared/mariami-study-pro.css">
 <link rel="stylesheet" href="shared/mariami-premium-base.css">
 <link rel="stylesheet" href="shared/mariami-premium.css">
-<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-grammar-listening-ui-pro.js?v=mobile-audio1"></script>
-<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-study-pro.js?v=mobile-audio1"></script>
-<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-premium-base.js"></script>
-<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-premium.js"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-grammar-listening-ui-pro.js?v=progress2"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-study-pro.js?v=progress2"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-premium-base.js?v=progress2"></script>
+<script type="application/x-mariami-protected" data-mariami-protected-src="shared/mariami-premium.js?v=progress2"></script>
 <!-- English with Mariami PREMIUM auth: additive, reversible -->
 <style data-mariami-premium-auth="1">
 html:not(.mariami-auth-ready) body > :not(#mariami-auth-status){visibility:hidden!important}
@@ -32,6 +32,7 @@ html:not(.mariami-auth-ready) body{background:#08152b!important}
 <link rel="stylesheet" href="academy-cards.css?v=1">
 <script defer src="academy-cards.js?v=1"></script>
 <link rel="stylesheet" href="responsive-layout.css?v=1">
+<link rel="stylesheet" href="shared/academy-progress.css?v=1">
 </head>
 <body class="academy-cosmos academy-enchanted">
 <div class="academy-sky" aria-hidden="true"><div class="academy-nebula nebula-blue"></div><div class="academy-nebula nebula-purple"></div><div class="academy-starfield"></div><div class="academy-sky-grid"></div></div>
@@ -79,7 +80,7 @@ html:not(.mariami-auth-ready) body{background:#08152b!important}
     <div class="pg-panel"><h4>🏅 ჩემი მიღწევები</h4><div id="pg-awards" class="pg-awards" aria-live="polite">დასაწყისისთვის გაიმეორე პირველი სიტყვა.</div></div>
     <div class="pg-panel"><h4>💡 რას ვაკეთებ შემდეგ?</h4><p id="pg-next">აირჩიე კლასი და დაიწყე სიტყვების გამეორება.</p></div>
   </div>
-  <p class="pg-foot">პროგრესი ითვლება ამ მოწყობილობაზე შენახული მონაცემებით. XP და ნიშნები მხოლოდ თამაშის ელემენტებია, არა ოფიციალური ქულები. დღიური სერია ითვლება ამ დამატების დაყენების დღიდან.</p>
+  <p class="pg-foot">სიტყვების პროგრესი იზრდება სავარჯიშო ბარათების შეფასებისას; დასრულებული თემები — „თემა გავიმეორე“-ზე დაჭერისას. პროგრესი ინახება ამ მოწყობილობაზე. XP და ნიშნები მხოლოდ თამაშის ელემენტებია, არა ოფიციალური ქულები. დღიური სერია ითვლება ამ დამატების დაყენების დღიდან.</p>
 </section>
 
 <div class="pro-stats"><div><strong id="pro-words">0</strong><small>განსხვავებული სიტყვა ამ კლასში</small></div><div><strong id="pro-started">0</strong><small>ნავარჯიშები</small></div><div><strong id="pro-due">0</strong><small>გასამეორებელი ახლა</small></div><div><strong id="pro-mastered">0</strong><small>დამახსოვრებული</small></div></div>
@@ -88,7 +89,8 @@ html:not(.mariami-auth-ready) body{background:#08152b!important}
 <div class="pro-row pro-tools"><button type="button" class="primary" id="pro-start-mixed">▶ დღევანდელი ვარჯიში</button><button type="button" id="pro-start-due">🔁 გასამეორებელი</button><button type="button" id="pro-start-new">🌱 ახალი სიტყვები</button><button type="button" id="pro-start-weak">🎯 რთული სიტყვები</button><button type="button" id="pro-start-lesson">📖 მიმდინარე თემა</button><button type="button" id="pro-start-fav">★ რჩეული თემები</button></div>
 <div class="pro-row pro-tools"><button type="button" id="pro-fav">☆ რჩეულებში დამატება</button><button type="button" id="pro-show-favs">რჩეულების სია</button><label for="pro-direction">ბარათის მიმართულება</label><select id="pro-direction"><option value="ka-en">ქართული → ინგლისური</option><option value="en-ka">ინგლისური → ქართული</option></select><label for="pro-speed">მოსმენის სიჩქარე</label><select id="pro-speed"><option value="0.68">ნელი</option><option value="0.85" selected>ნორმალური</option><option value="1">სწრაფი</option></select></div>
 <p class="pro-info" id="pro-message" role="status">არჩიე კლასი და დაიწყე გამეორება.</p>
-<div id="pro-practice" class="pro-practice" hidden><div class="pg-session-box" id="pg-session-box" hidden><div class="pg-session-head"><b>მიმდინარე სესიის პროგრესი</b><span id="pg-session-count">0 / 15 ბარათი შეფასებულია</span></div><progress id="pg-session-bar" max="15" value="0" aria-label="სესიის დასრულების პროგრესი"></progress></div><div class="pro-row"><b id="pro-progress">1 / 15</b><span id="pro-context"></span></div><div class="pro-flash"><p id="pro-front" class="pro-front"></p><p id="pro-back" class="pro-back" hidden></p></div><div class="pro-row"><button type="button" id="pro-show" class="primary">პასუხის ჩვენება · Space</button><button type="button" id="pro-listen">🔊 ინგლისურად მოსმენა</button></div><div class="pro-row pro-tools" id="pro-rate" hidden><button type="button" id="pro-rate-again">1 · თავიდან</button><button type="button" id="pro-rate-hard">2 · რთულია</button><button type="button" id="pro-rate-good" class="primary">3 · მახსოვს</button><button type="button" id="pro-rate-easy">4 · მარტივია</button></div><p id="pro-card-result" role="status"></p></div>
+<div class="pg-session-box" id="pg-session-box" hidden><div class="pg-session-head"><b>მიმდინარე სესიის პროგრესი</b><span id="pg-session-count">0 / 15 ბარათი შეფასებულია</span></div><progress id="pg-session-bar" max="15" value="0" aria-label="სესიის დასრულების პროგრესი"></progress></div>
+<div id="pro-practice" class="pro-practice" hidden><div class="pro-row"><b id="pro-progress">1 / 15</b><span id="pro-context"></span></div><div class="pro-flash"><p id="pro-front" class="pro-front"></p><p id="pro-back" class="pro-back" hidden></p></div><div class="pro-row"><button type="button" id="pro-show" class="primary">პასუხის ჩვენება · Space</button><button type="button" id="pro-listen">🔊 ინგლისურად მოსმენა</button></div><div class="pro-row pro-tools" id="pro-rate" hidden><button type="button" id="pro-rate-again">1 · თავიდან</button><button type="button" id="pro-rate-hard">2 · რთულია</button><button type="button" id="pro-rate-good" class="primary">3 · მახსოვს</button><button type="button" id="pro-rate-easy">4 · მარტივია</button></div><p id="pro-card-result" role="status"></p></div>
 <div id="pro-finish" class="pro-info" hidden></div>
 <div class="pro-row pro-backup"><button type="button" id="pro-export">⬇ პროგრესის ასლის შენახვა</button><label class="pro-file">⬆ პროგრესის აღდგენა <input id="pro-import" type="file" accept="application/json,.json" aria-label="პროგრესის JSON ფაილის არჩევა"></label></div>
 <p class="pro-fineprint">შედეგები ინახება მხოლოდ ამ ბრაუზერში. არ ცვლის ოფიციალურ ქულებს, Supabase-ს ან მასწავლებლის შეფასებას. ინტერვალური გამეორება სასწავლო დამხმარე მეთოდია, არა სერტიფიცირებული შეფასება.</p>

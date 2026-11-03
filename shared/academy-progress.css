@@ -1,0 +1,8 @@
+/* Keep the first saved review visible without changing its actual fraction. */
+#ewm-progress progress[data-has-progress=true]::-webkit-progress-value,.pg-session-box progress[data-has-progress=true]::-webkit-progress-value,.pg-topic-meter progress[data-has-progress=true]::-webkit-progress-value,.pg-lesson-meter progress[data-has-progress=true]::-webkit-progress-value{min-width:3px}
+#ewm-progress progress[data-has-progress=true]::-moz-progress-bar,.pg-session-box progress[data-has-progress=true]::-moz-progress-bar,.pg-topic-meter progress[data-has-progress=true]::-moz-progress-bar,.pg-lesson-meter progress[data-has-progress=true]::-moz-progress-bar{min-width:3px}
+#ewm-progress progress::-webkit-progress-value,.pg-session-box progress::-webkit-progress-value,.pg-topic-meter progress::-webkit-progress-value,.pg-lesson-meter progress::-webkit-progress-value{transition:width .25s ease}
+.pg-session-box{margin:15px 0;padding:15px;border:1px solid #8ca7d655;border-radius:13px;background:#13283d}
+.pg-session-box[hidden]{display:none!important}.pg-session-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:12px;line-height:1.7}.pg-session-box progress{width:100%;height:10px;margin-top:10px}
+@media(prefers-reduced-motion:reduce){progress::-webkit-progress-value{transition:none!important}}
+.premium-memory-part[data-has-progress=true]{min-width:2px}

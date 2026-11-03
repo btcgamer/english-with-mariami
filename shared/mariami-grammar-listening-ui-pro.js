@@ -36,7 +36,7 @@ function renderTopics(){
  if(!filtered.length){$('lesson-content').hidden=true;$('loading').hidden=false;$('loading').textContent='ძიების შედეგი ვერ მოიძებნა. სცადე სხვა სიტყვა.';return}
  if(!filtered.some(l=>l.id===lessonId)){lessonId=filtered[0].id;quizIndex=0;listenIndex=0;recallIndex=0}
  for(let i=0;i<filtered.length;i++){
-  const l=filtered[i],b=el('button','topic-item'),name=el('span'),en=el('span','topic-en');b.type='button';b.setAttribute('aria-current',String(l.id===lessonId));
+  const l=filtered[i],b=el('button','topic-item'),name=el('span'),en=el('span','topic-en');b.type='button';b.dataset.lessonId=l.id;b.setAttribute('aria-current',String(l.id===lessonId));
   name.textContent=(retrieve('done',l.id)?'✓ ':'')+l.titleKa;en.textContent=l.title;b.append(name,en);
   b.onclick=()=>{stop();lessonId=l.id;quizIndex=0;listenIndex=0;recallIndex=0;renderTopics()};container.append(b)
  }
@@ -174,7 +174,7 @@ function renderLesson(l,filtered){
  $('next-quiz').onclick=()=>{quizIndex=(quizIndex+1)%l.words.length;renderQuiz(l)};renderQuiz(l);
  $('writing').value=retrieve('writing',l.id);$('writing-feedback').textContent='';
  $('save-writing').onclick=()=>{$('writing-feedback').textContent=store('writing',l.id,$('writing').value)?'✅ შენახულია ამ მოწყობილობაზე.':'⚠️ ბრაუზერმა შენახვა დაბლოკა.'};
- $('mark-done').onclick=()=>{store('done',l.id,new Date().toISOString());renderTopics()};
+ $('mark-done').onclick=()=>{if(!store('done',l.id,new Date().toISOString())){$('lesson-status').textContent='პროგრესი ვერ შეინახა. შეამოწმე ბრაუზერის შენახვის პარამეტრები.';return}renderTopics();document.dispatchEvent(new CustomEvent('mariami:progress-changed',{detail:{grade,source:'lesson'}}))};
  $('next-topic').onclick=()=>{stop();const idx=filtered.findIndex(x=>x.id===l.id);lessonId=filtered[(idx+1)%filtered.length].id;quizIndex=0;listenIndex=0;recallIndex=0;renderTopics();$('lesson').scrollIntoView({block:'start',behavior:'auto'})};
  document.dispatchEvent(new CustomEvent('mariami:lesson-rendered',{detail:{grade,lesson:l}}));
 }

@@ -26,6 +26,7 @@ function status(){const all=collection(grade),data=read(grade);let started=0,due
 function favorites(g){const raw=read(g).__fav;return Array.isArray(raw)?raw.filter(x=>typeof x==='string').slice(0,126):[]}
 function starLabel(){if(!lesson)return;$('pro-fav').textContent=favorites(grade).includes(lesson.id)?'★ რჩეული თემიდან ამოღება':'☆ რჩეულებში დამატება'}
 function setMessage(v){$('pro-message').textContent=v}
+function notifyProgress(source){const host=$('pro-practice');host.dataset.sessionTotal=String(deck.length);host.dataset.sessionReviewed=String(seenInSession);host.dataset.sessionFinished=String(deck.length>0&&cursor>=deck.length);document.dispatchEvent(new CustomEvent('mariami:progress-changed',{detail:{grade,source}}));}
 function seededShuffle(input){let seed=Number(today().replace(/-/g,''))+grade*131;const a=input.slice();for(let i=a.length-1;i>0;i--){seed=(seed*1664525+1013904223)>>>0;const j=seed%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
 function makeDeck(kind){const data=read(grade);let words=kind==='lesson'?lessonWords(lesson):collection(grade);const newWords=words.filter(w=>!getRec(data,w.key)),dueWords=words.filter(w=>due(getRec(data,w.key)));
  if(kind==='due')words=dueWords;else if(kind==='new')words=newWords;else if(kind==='weak')words=words.filter(w=>{const r=getRec(data,w.key);return r&&(r.misses||0)>0&&(r.level||0)<3});else if(kind==='favorites'){const ids=new Set(favorites(grade)),unique=new Set();words=(base[grade]?.lessons||[]).filter(l=>ids.has(l.id)).flatMap(l=>lessonWords(l)).filter(w=>{if(unique.has(w.key))return false;unique.add(w.key);return true})}else if(kind==='mixed')words=[...seededShuffle(dueWords),...seededShuffle(newWords)];else words=seededShuffle(words);
@@ -34,8 +35,8 @@ function makeDeck(kind){const data=read(grade);let words=kind==='lesson'?lessonW
 function start(kind){if(!base[grade]?.lessons){setMessage('ჯერ აირჩიე კლასი.');return}mode=kind;deck=makeDeck(kind);cursor=0;revealed=false;seenInSession=0;
  $('pro-practice').hidden=!deck.length;
  $('pro-finish').hidden=true;
- if(!deck.length){setMessage(kind==='due'?'დღეს გადასამეორებელი სიტყვა არ დაგიგროვდა. სცადე ახალი სიტყვები.':'ამ რეჟიმში სიტყვები არ მოიძებნა. სცადე სხვა რეჟიმი.');return}
- setMessage('მზადაა '+deck.length+' ბარათი. პასუხი გამოაჩინე და შეაფასე, რამდენად კარგად გახსოვდა.');renderCard();$('pro-practice').scrollIntoView({block:'nearest',behavior:'instant'});
+ if(!deck.length){setMessage(kind==='due'?'დღეს გადასამეორებელი სიტყვა არ დაგიგროვდა. სცადე ახალი სიტყვები.':'ამ რეჟიმში სიტყვები არ მოიძებნა. სცადე სხვა რეჟიმი.');notifyProgress('session');return}
+ setMessage('მზადაა '+deck.length+' ბარათი. პასუხი გამოაჩინე და შეაფასე, რამდენად კარგად გახსოვდა.');renderCard();notifyProgress('session');$('pro-practice').scrollIntoView({block:'nearest',behavior:'instant'});
 }
 function renderCard(){const w=deck[cursor];if(!w){$('pro-practice').hidden=true;$('pro-finish').hidden=false;$('pro-finish').textContent='✅ სესია დასრულდა — '+seenInSession+' ბარათი გადაიმეორე!';status();return}
  revealed=false;$('pro-progress').textContent=(cursor+1)+' / '+deck.length+' · კლასი '+grade;
@@ -54,7 +55,7 @@ function rate(gradeValue){const w=deck[cursor];if(!w)return;if(!revealed){reveal
  data[w.key]={level,due:Date.now()+wait,hits:(old.hits||0)+(gradeValue?1:0),misses:(old.misses||0)+(gradeValue===0?1:0),last:Date.now()};
  if(!write(grade,data)){$('pro-card-result').textContent='⚠️ ბრაუზერმა პროგრესის შენახვა დაბლოკა.';return}
  if(gradeValue===0&&(old.misses||0)<2&&deck.length<25)deck.push(w);
- seenInSession++;cursor++;renderCard();status();
+ seenInSession++;cursor++;renderCard();status();notifyProgress('review');
 }
 function toggleFavorite(){if(!lesson)return;const data=read(grade),items=favorites(grade),i=items.indexOf(lesson.id);if(i<0)items.push(lesson.id);else items.splice(i,1);data.__fav=items;write(grade,data);starLabel();status();setMessage('რჩეული თემების სია შენახულია ამ ბრაუზერში.');}
 function showFavs(){const f=favorites(grade),topics=base[grade]?.lessons||[];const names=f.map(id=>topics.find(l=>l.id===id)?.titleKa).filter(Boolean);setMessage(names.length?'რჩეული თემები: '+names.join(' · '):'ჯერ რჩეულებში თემა არ დაგიმატებია. გახსენი სასურველი თემა და დააჭირე ☆ ღილაკს.');}
@@ -68,14 +69,15 @@ async function importData(file){if(!file)return;if(file.size>2_000_000){setMessa
  const original=merged[key];if(!original||last>Number(original.last||0))merged[key]={level:Math.max(0,Math.min(6,Number(val.level)||0)),due:Math.max(0,Number(val.due)||0),hits:Math.max(0,Number(val.hits)||0),misses:Math.max(0,Number(val.misses)||0),last};if(++n>2500)break;
  }if(!write(g,merged))throw Error('ვერ შეინახა პროგრესი');count+=n;}
  status();starLabel();setMessage('✅ პროგრესი გაერთიანდა ('+count+' ჩანაწერი შემოწმდა).');
- }catch(e){setMessage('⚠️ აღდგენა ვერ შესრულდა: '+e.message)}finally{$('pro-import').value=''}}
+ }catch(e){setMessage('⚠️ აღდგენა ვერ შესრულდა: '+e.message)}finally{$('pro-import').value='';status();notifyProgress('import')}}
 function resetForLesson(ev){const detail=ev.detail||{};const n=safeGrade(detail.grade);if(!n)return;const changed=n!==grade;grade=n;lesson=detail.lesson||null;status();starLabel();$('pro-current-topic').textContent=lesson?'მიმდინარე თემა: '+lesson.titleKa:'';
- if(changed){deck=[];cursor=0;$('pro-practice').hidden=true;$('pro-finish').hidden=true;setMessage('აირჩიე სასწავლო რეჟიმი. პროგრესი ამ კლასზე ცალკე ინახება.')}}
+ if(changed){deck=[];cursor=0;$('pro-practice').hidden=true;$('pro-finish').hidden=true;setMessage('აირჩიე სასწავლო რეჟიმი. პროგრესი ამ კლასზე ცალკე ინახება.')}notifyProgress('session')}
 document.addEventListener('mariami:lesson-rendered',resetForLesson);
 $('pro-start-mixed').onclick=()=>start('mixed');$('pro-start-due').onclick=()=>start('due');$('pro-start-new').onclick=()=>start('new');$('pro-start-weak').onclick=()=>start('weak');$('pro-start-lesson').onclick=()=>start('lesson');$('pro-start-fav').onclick=()=>start('favorites');
 $('pro-show').onclick=reveal;$('pro-rate-again').onclick=()=>rate(0);$('pro-rate-hard').onclick=()=>rate(1);$('pro-rate-good').onclick=()=>rate(2);$('pro-rate-easy').onclick=()=>rate(3);
 $('pro-direction').onchange=()=>{direction=$('pro-direction').value;if(deck[cursor])renderCard()};$('pro-listen').onclick=speakCard;$('pro-fav').onclick=toggleFavorite;$('pro-show-favs').onclick=showFavs;
 $('pro-export').onclick=exportData;$('pro-import').onchange=e=>importData(e.target.files?.[0]);
+addEventListener('storage',event=>{if(!event.key||event.key.startsWith(prefix)||event.key.startsWith('mariami-grammar-listening-2026-done-')){status();notifyProgress('storage')}});
 // Handle the case where the first lesson rendered before this add-on finished loading.
 const startingGrade=safeGrade($('grade')?.value);
 if(startingGrade&&base[startingGrade]?.lessons?.length&&$('lesson-content')&&!$('lesson-content').hidden){
