@@ -124,7 +124,7 @@
           const grade = Number(profile.grade || 0);
           const requested = new URLSearchParams(window.location.search).get("redirect") || "";
           if (role && !["student","parent","admin"].includes(role)) { await client.auth.signOut(); return; }
-          if (role === "parent") return window.location.replace("/parent-space.html");
+          if (role === "parent") return window.location.replace("/academy.html");
           if (role === "student") {
             const requestedPath = requested.toLowerCase().split("?")[0].split("#")[0];
             const parts = requestedPath.split("/").filter(Boolean);
@@ -159,7 +159,7 @@
           let role = ""; let grade = 0;
           if (profileResult.data) { role = String(profileResult.data.role || "").trim().toLowerCase(); grade = Number(profileResult.data.grade || 0); }
           if (role && !["student","parent","admin"].includes(role)) { await client.auth.signOut(); setMessage("Unsupported account role.", "error"); return; }
-          if (role === "parent") { setMessage("👨‍👩‍👧 მშობლის სივრცე იხსნება...", "success"); setTimeout(() => window.location.replace("/parent-space.html"), 500); return; }
+          if (role === "parent") { setMessage("აკადემია იხსნება...", "success"); setTimeout(() => window.location.replace("/academy.html"), 500); return; }
           if (role === "student") {
             const selectedGrade = (grade >= 1 && grade <= 12) ? grade : 0;
             setMessage(
