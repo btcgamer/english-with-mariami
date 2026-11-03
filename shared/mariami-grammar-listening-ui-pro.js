@@ -9,8 +9,9 @@ const stateKey=(kind,id)=>'mariami-grammar-listening-2026-'+kind+'-'+id;
 const retrieve=(kind,id)=>{try{return localStorage.getItem(stateKey(kind,id))||''}catch{return''}};
 const store=(kind,id,value)=>{try{localStorage.setItem(stateKey(kind,id),String(value));return true}catch{return false}};
 const normal=v=>String(v??'').normalize('NFKC').trim().toLocaleLowerCase('en').replace(/[.,!?]+$/,'').replace(/\s+/g,' ');
-const stop=()=>{if('speechSynthesis' in window)try{speechSynthesis.cancel()}catch{}};
-function speak(text,slow=false){
+const stop=()=>{if(window.EWM_SPEECH){window.EWM_SPEECH.stop();return}if('speechSynthesis' in window)try{speechSynthesis.cancel()}catch{}};
+function speak(text,slow=false,feedback=null){
+  if(window.EWM_SPEECH){window.EWM_SPEECH.speak(text,{rate:slow?0.68:0.9,onStatus:message=>{(feedback||$('listen-feedback')).textContent=message;}});return}
   if(!('speechSynthesis' in window)){$('listen-feedback').textContent='ამ ბრაუზერს ხმოვანი წაკითხვა არ აქვს.';return}
   stop();try{const u=new SpeechSynthesisUtterance(String(text));u.lang='en-GB';u.rate=slow?0.68:0.9;u.volume=1;window.speechSynthesis.speak(u)}catch{$('listen-feedback').textContent='მოსმენა ამ მოწყობილობაზე ვერ გაეშვა.'}
 }
@@ -95,7 +96,7 @@ function renderListeningPlus(lesson){
  $('audio-choice-question').textContent='რომელი ინგლისური სიტყვა ან გამოთქმა გაიგონე მოსმენისას?';
  choicesUI($('audio-choice-options'),opts,candidate.en,$('audio-choice-feedback'),lesson.words.length+grade);
 }
-function lessonWordButton(word){const b=el('button');b.type='button';b.textContent='🔊 მოისმინე';b.setAttribute('aria-label','მოსმენა: '+word.en);b.onclick=()=>speak(word.en);return b}
+function lessonWordButton(word){const b=el('button');b.type='button';b.textContent='🔊 მოისმინე';b.setAttribute('aria-label','მოსმენა: '+word.en);b.onclick=()=>{let note=b.parentElement.querySelector(':scope>.speech-help');if(!note){note=el('p','speech-help');note.setAttribute('role','status');b.after(note)}speak(word.en,false,note)};return b}
 function choicesUI(host,choices,correct,feedback,tag){
  host.replaceChildren();feedback.textContent='';feedback.classList.remove('warn');
  const order=choices.map((x,i)=>({x,k:(i*11+tag*17)%7})).sort((a,b)=>a.k-b.k).map(y=>y.x);

@@ -571,16 +571,17 @@ VERY SMALL PHONE
 </style>
 
 
-<link rel="stylesheet" href="./magicme-register.css">
+
 <meta name="theme-color" content="#070b1b">
 <link rel="stylesheet" href="magic-auth.css?v=1">
 <link rel="stylesheet" href="magic-water.css?v=1">
 <script defer src="magic-water.js?v=1"></script>
+<link rel="stylesheet" href="responsive-layout.css?v=1">
 </head>
 
 <body class="auth-magic auth-register"><div class="auth-atmosphere" aria-hidden="true"><i></i><i></i><div class="auth-starfield"></div><div class="auth-dust"></div></div><header class="auth-header"><a class="auth-home-brand" href="index.html"><span class="auth-brand-mark" aria-hidden="true">m</span><span>English with <strong>Mariami</strong></span></a><a class="auth-home-link" href="index.html">← მთავარზე დაბრუნება</a></header>
 
-<aside class="auth-world"><p class="auth-world-kicker">A LITTLE MAGIC. A WORLD OF ENGLISH.</p><h2>შექმენი შენი<br><em>ჯადოსნური ამბავი.</em></h2><p class="auth-world-description">შეუერთდი აკადემიას, აირჩიე შენი გმირი და გახსენი ცოდნის ახალი პორტალი.</p><div class="auth-illustration"><img data-magic-water src="assets/mariami-magic-world.png" width="1672" height="941" alt="ჯადოსნური სასწავლო აკადემია მოლივლივე კუნძულებზე" decoding="async"><i class="auth-orbit orbit-one" aria-hidden="true"></i><i class="auth-orbit orbit-two" aria-hidden="true"></i><span class="auth-float-card" aria-hidden="true">✦ <b>Your story begins here</b></span></div><div class="auth-world-foot"><span>LEARN</span><i>✦</i><span>EXPLORE</span><i>✦</i><span>SHINE</span></div></aside>
+<div class="auth-layout"><aside class="auth-world"><p class="auth-world-kicker">A LITTLE MAGIC. A WORLD OF ENGLISH.</p><h2>შექმენი შენი<br><em>ჯადოსნური ამბავი.</em></h2><p class="auth-world-description">შეუერთდი აკადემიას და გახსენი ცოდნის ახალი პორტალი.</p><div class="auth-illustration"><img data-magic-water src="assets/mariami-magic-world.png" width="1672" height="941" alt="ჯადოსნური სასწავლო აკადემია მოლივლივე კუნძულებზე" decoding="async"><i class="auth-orbit orbit-one" aria-hidden="true"></i><i class="auth-orbit orbit-two" aria-hidden="true"></i><span class="auth-float-card" aria-hidden="true">✦ <b>Your story begins here</b></span></div><div class="auth-world-foot"><span>LEARN</span><i>✦</i><span>EXPLORE</span><i>✦</i><span>SHINE</span></div></aside>
 
 <main class="register-card">
 
@@ -591,17 +592,6 @@ VERY SMALL PHONE
   </p>
 
 
-<p class="auth-avatar-hint"><a href="#mm11Bridge">აირჩიე შენი 3D გმირი</a> ან მონიშნე ავატარის გარეშე გაგრძელება.</p>
-<!-- MAGICME_PRO_V11_REAL_REGISTRATION_BRIDGE: local integration; no automatic deployment -->
-<section id="mm11Bridge" aria-label="MAGIC ME PRO — 3D გმირის არჩევა">
-  <span class="mm11-label">ENGLISH WITH MARIAMI · MAGIC ME PRO</span>
-  <h2>✨ შექმენი შენი 3D გმირი</h2>
-  <p>აირჩიე Girl ან Boy, ტანსაცმელი და სნიკერები. შენს არჩევანს რეგისტრაციისას შენივე ანგარიშს დავუკავშირებთ.</p>
-  <iframe id="mm11Frame" title="3D გმირის არჩევის სტუდია" src="./magicme-studio/index.html" loading="eager" referrerpolicy="same-origin"></iframe>
-  <div class="mm11-info"><b>შენი არჩევანი:</b> <span id="mm11Details">იტვირთება…</span></div>
-  <div class="mm11-actions"><button type="button" id="mm11Confirm">✅ ავატარის დადასტურება</button><label class="mm11-skip"><input id="mm11Skip" type="checkbox"> ავატარის გარეშე გაგრძელება</label></div>
-  <p id="mm11Message" role="status" aria-live="polite">3D სტუდია იტვირთება…</p>
-</section>
 <form id="registerForm">
 
 
@@ -683,7 +673,7 @@ VERY SMALL PHONE
     © 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer
   </footer>
 
-</main>
+</main></div>
 
 <script>
 (function(){
@@ -888,8 +878,7 @@ form.addEventListener(
             data:{
               full_name:fullName,
               role:"student",
-              grade:grade,
-              ...((typeof window.magicMeReadRegistrationAvatar === "function") ? window.magicMeReadRegistrationAvatar() : {})
+              grade:grade
             }
           }
 
@@ -958,7 +947,7 @@ form.addEventListener(
       }else{
 
         setMessage(
-          "⚠️ ანგარიში შეიქმნა, მაგრამ ავტომატური შესვლა ვერ შესრულდა. გადაამოწმე Supabase-ის Confirm Email პარამეტრი.",
+          "რეგისტრაციის მოთხოვნა მიღებულია. შეამოწმე ელფოსტა დასადასტურებლად, შემდეგ შედი ანგარიშში.",
           "success"
         );
 
@@ -1023,7 +1012,7 @@ form.addEventListener(
 })();
 </script>
 
-<script defer src="./magicme-register.js"></script>
-<button type="button" class="auth-motion" aria-pressed="false"><span aria-hidden="true">Ⅱ</span><span>ფონის შეჩერება</span></button><script defer src="magic-auth.js?v=1"></script>
+
+<button type="button" class="auth-motion" aria-pressed="false"><span aria-hidden="true">Ⅱ</span><span>ფონის შეჩერება</span></button><script defer src="magic-auth.js?v=2"></script>
 </body>
 </html>

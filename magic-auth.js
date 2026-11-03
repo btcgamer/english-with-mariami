@@ -1,8 +1,5 @@
 (() => {
   'use strict';
-  const world = document.querySelector('.auth-world');
-  const visual = document.querySelector('#mm11Workspace .mm11-visual');
-  if (world && visual) visual.prepend(world);
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const motion = document.querySelector('.auth-motion');
   let paused = false;
