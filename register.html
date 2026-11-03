@@ -572,25 +572,26 @@ VERY SMALL PHONE
 
 
 <link rel="stylesheet" href="./magicme-register.css">
+<meta name="theme-color" content="#070b1b">
+<link rel="stylesheet" href="magic-auth.css?v=1">
+<link rel="stylesheet" href="magic-water.css?v=1">
+<script defer src="magic-water.js?v=1"></script>
 </head>
 
-<body>
+<body class="auth-magic auth-register"><div class="auth-atmosphere" aria-hidden="true"><i></i><i></i><div class="auth-starfield"></div><div class="auth-dust"></div></div><header class="auth-header"><a class="auth-home-brand" href="index.html"><span class="auth-brand-mark" aria-hidden="true">m</span><span>English with <strong>Mariami</strong></span></a><a class="auth-home-link" href="index.html">← მთავარზე დაბრუნება</a></header>
 
-<div class="scene">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-</div>
+<aside class="auth-world"><p class="auth-world-kicker">A LITTLE MAGIC. A WORLD OF ENGLISH.</p><h2>შექმენი შენი<br><em>ჯადოსნური ამბავი.</em></h2><p class="auth-world-description">შეუერთდი აკადემიას, აირჩიე შენი გმირი და გახსენი ცოდნის ახალი პორტალი.</p><div class="auth-illustration"><img data-magic-water src="assets/mariami-magic-world.png" width="1672" height="941" alt="ჯადოსნური სასწავლო აკადემია მოლივლივე კუნძულებზე" decoding="async"><i class="auth-orbit orbit-one" aria-hidden="true"></i><i class="auth-orbit orbit-two" aria-hidden="true"></i><span class="auth-float-card" aria-hidden="true">✦ <b>Your story begins here</b></span></div><div class="auth-world-foot"><span>LEARN</span><i>✦</i><span>EXPLORE</span><i>✦</i><span>SHINE</span></div></aside>
 
 <main class="register-card">
 
-  <h1>📝 რეგისტრაცია</h1>
+  <h1>შექმენი ანგარიში</h1>
 
   <p class="subtitle">
-    შექმენი შენი მოსწავლის ანგარიში 🚀
+    ერთი პატარა ნაბიჯი დიდი თავგადასავლისკენ.
   </p>
 
-  
+
+<p class="auth-avatar-hint"><a href="#mm11Bridge">აირჩიე შენი 3D გმირი</a> ან მონიშნე ავატარის გარეშე გაგრძელება.</p>
 <!-- MAGICME_PRO_V11_REAL_REGISTRATION_BRIDGE: local integration; no automatic deployment -->
 <section id="mm11Bridge" aria-label="MAGIC ME PRO — 3D გმირის არჩევა">
   <span class="mm11-label">ENGLISH WITH MARIAMI · MAGIC ME PRO</span>
@@ -603,10 +604,10 @@ VERY SMALL PHONE
 </section>
 <form id="registerForm">
 
-```
+
 <div class="field">
   <label for="fullName">
-    👤 სახელი და გვარი
+    სახელი და გვარი
   </label>
 
   <input
@@ -620,7 +621,7 @@ VERY SMALL PHONE
 
 <div class="field">
   <label for="email">
-    📧 ელფოსტა
+    ელფოსტა
   </label>
 
   <input
@@ -634,7 +635,7 @@ VERY SMALL PHONE
 
 <div class="field">
   <label for="password">
-    🔐 პაროლი
+    პაროლი
   </label>
 
   <input
@@ -663,7 +664,7 @@ VERY SMALL PHONE
   class="message"
   aria-live="polite"
 ></div>
-```
+
 
   </form>
 
@@ -1023,5 +1024,6 @@ form.addEventListener(
 </script>
 
 <script defer src="./magicme-register.js"></script>
+<button type="button" class="auth-motion" aria-pressed="false"><span aria-hidden="true">Ⅱ</span><span>ფონის შეჩერება</span></button><script defer src="magic-auth.js?v=1"></script>
 </body>
 </html>

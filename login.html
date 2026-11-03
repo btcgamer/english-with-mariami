@@ -57,24 +57,28 @@
       .form-group { margin: 6px 0; } .form-group input { height: 40px; font-size: 13px; } .login-button { height: 43px; font-size: 15px; } .links a { font-size: 10px; padding: 5px 7px; } .site-copyright { font-size: 7px; }
     }
   </style>
+<meta name="theme-color" content="#070b1b">
+<link rel="stylesheet" href="magic-auth.css?v=1">
+<link rel="stylesheet" href="magic-water.css?v=1">
+<script defer src="magic-water.js?v=1"></script>
 </head>
-<body>
-  <main class="login-card">
-    <div class="logo">🌈📚</div>
-    <div class="brand">English with Mariami</div>
-    <div class="subtitle">ინგლისურის სასწავლო აკადემია ✨</div>
-    <h1>🔐 შესვლა</h1>
-    <p>კეთილი იყოს შენი დაბრუნება! 🎓</p>
+<body class="auth-magic auth-login"><div class="auth-atmosphere" aria-hidden="true"><i></i><i></i><div class="auth-starfield"></div><div class="auth-dust"></div></div><header class="auth-header"><a class="auth-home-brand" href="index.html"><span class="auth-brand-mark" aria-hidden="true">m</span><span>English with <strong>Mariami</strong></span></a><a class="auth-home-link" href="index.html">← მთავარზე დაბრუნება</a></header>
+  <div class="auth-layout"><aside class="auth-world"><p class="auth-world-kicker">A LITTLE MAGIC. A WORLD OF ENGLISH.</p><h2>შენი შემდეგი<br><em>აღმოჩენა აქაა.</em></h2><p class="auth-world-description">გახსენი წიგნი, დაუბრუნდი შენს მისიებს და აანთე კიდევ ერთი ვარსკვლავი.</p><div class="auth-illustration"><img src="assets/mariami-neon-illustration.png" width="1448" height="1086" alt="ნეონით განათებული წიგნი, გლობუსი და მანათობელი სიტყვების ბარათები" decoding="async"><i class="auth-orbit orbit-one" aria-hidden="true"></i><i class="auth-orbit orbit-two" aria-hidden="true"></i><span class="auth-float-card" aria-hidden="true">✦ <b>Welcome back, explorer</b></span></div><div class="auth-world-foot"><span>LEARN</span><i>✦</i><span>EXPLORE</span><i>✦</i><span>SHINE</span></div></aside><main class="login-card">
+    <div class="logo" aria-hidden="true">m</div>
+    <div class="auth-form-kicker">WELCOME BACK</div>
+    <div class="subtitle">შედი და გააგრძელე შენი აღმოჩენები.</div>
+    <h1>კეთილი დაბრუნება</h1>
+
     <form id="loginForm">
-      <div class="form-group"><label for="email">📧 ელფოსტა</label><input id="email" type="email" required autocomplete="email" placeholder="შეიყვანე ელფოსტა"></div>
-      <div class="form-group"><label for="password">🔑 პაროლი</label><input id="password" type="password" required autocomplete="current-password" placeholder="შეიყვანე პაროლი"></div>
+      <div class="form-group"><label for="email">ელფოსტა</label><input id="email" type="email" required autocomplete="email" placeholder="შეიყვანე ელფოსტა"></div>
+      <div class="form-group"><label for="password">პაროლი</label><input id="password" type="password" required autocomplete="current-password" placeholder="შეიყვანე პაროლი"></div>
       <button id="loginButton" class="login-button" type="submit">🚀 შესვლა</button>
     </form>
     <div class="links"><a href="reset-password.html">🔑 დაგავიწყდა პაროლი?</a></div>
     <div id="message" class="message" aria-live="polite"></div>
     <div class="links"><a href="register.html">📝 რეგისტრაცია</a><a href="/index.html" onclick="window.location.href='/index.html'; return false;">🏠 მთავარი</a></div>
     <footer class="site-copyright">© 2026 English with Mariami — ყველა უფლება დაცულია • Developed by btcgamer</footer>
-  </main>
+  </main></div>
   <script>
     (function () {
       "use strict";
@@ -204,5 +208,6 @@
       });
     })();
   </script>
+<button type="button" class="auth-motion" aria-pressed="false"><span aria-hidden="true">Ⅱ</span><span>ფონის შეჩერება</span></button><script defer src="magic-auth.js?v=1"></script>
 </body>
 </html>
