@@ -28,6 +28,11 @@
   async function fetchWorld(grade,world){
     const key=`${grade}:${world}`;
     if(state.cache.has(key)) return state.cache.get(key);
+    if(window.EWM_PRIVATE_COURSES===true){
+      await window.EWM_PRIVATE_COURSE_READY;
+      const data=await window.EWM_PRIVATE_COURSE.get(`curriculum/grade${grade}-world${world}.json`);
+      validateWorld(data,grade,world);state.cache.set(key,data);return data;
+    }
     const response=await fetch(worldUrl(grade,world),{cache:'no-store',headers:{Accept:'application/json'}});
     if(!response.ok) throw new Error(`Curriculum World ${world} ვერ ჩაიტვირთა (${response.status}).`);
     const data=await response.json(); validateWorld(data,grade,world); state.cache.set(key,data); return data;

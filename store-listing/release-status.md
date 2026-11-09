@@ -1,7 +1,7 @@
 # Google Play submission preparation
 
 Package: com.englishwithmariami.academy
-Current internal-test version: 1.0.3 (code 4). User confirmed no previous AAB upload.
+Current private staging version: 1.0.4 (code 5), requiring the private backend. User confirmed no previous AAB upload.
 Target API: 36. Minimum Android: 7.0/API 24.
 
 ## Prepared
@@ -14,6 +14,8 @@ Target API: 36. Minimum Android: 7.0/API 24.
 - Web packaging excludes QA directories, test specs, hidden files, build scripts and non-web source files. Web 3D model formats are retained.
 
 - Designated administrator: datogringi@gmail.com; verified-account SQL migration prepared and tested locally, not applied to production.
+
+- Private course endpoint, RLS store, export/import commands and private client/build mode implemented and tested. Not deployed to the live website/backend.
 
 ## Required before submission
 

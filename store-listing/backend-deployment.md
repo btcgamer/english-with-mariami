@@ -13,9 +13,13 @@ The Supabase edge function in `supabase/functions/play-subscription` verifies be
 5. In Play Console create `mariami_all_grades` with the four auto-renewing base plans in console-setup.md. Set exact supplied USD prices and review localized prices/taxes/countries. Do not add trials or mark yearly as discounted.
 6. Upload the signed AAB to internal testing and install it through Google Play for license-tester purchases. A sideloaded APK alone cannot validate Play purchase behavior.
 
+## Private content implementation
+
+A private content table, authenticated paid-course endpoint and content export/import commands are now prepared. See `private-content-deployment.md`. Private client/build mode has also been implemented and tested. Source and local tests do not establish a live deployment; the public site has not yet switched to that build.
+
 ## Still required before production charging
 
-The existing course JS/JSON is public and bundled. The new verification endpoint returns current subscription status but does not by itself restrict those files or change existing lesson/progress RLS. Do not claim subscription-only content protection. Design/deploy paid-content authorization against the actual Supabase schema and supported offline policy before enabling charges. Preserve legitimate existing teacher/admin access deliberately.
+The existing course JS/JSON is public and bundled. The new verification endpoint returns current subscription status but does not by itself restrict those files or change existing lesson/progress RLS. Do not claim subscription-only content protection. Deploy and verify the new private course store/endpoint and private client build, and review actual existing Supabase schema/policies before enabling charges. The private build deliberately requires online verification. Preserve legitimate existing teacher/admin access deliberately.
 
 Status requests recheck Google instead of relying on cached expiry. Real-time Developer Notifications, scheduled reconciliation and refund/revocation integration with any future persistent entitlements still need configuration/implementation. Live device tests must cover renewal, restore, cancellation, pending purchase, account hold, expired/refunded/revoked access and second-device sign-in. No credentials or remote schema access were available here to apply these steps.
 

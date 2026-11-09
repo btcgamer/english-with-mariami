@@ -19,6 +19,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 35
+    env:
+      PRIVATE_COURSES: '1'
     steps:
       - uses: actions/checkout@v4
 
@@ -30,11 +32,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Test purchase verification
-        run: npm run test:billing
+      - name: Test purchase verification and private content
+        run: |
+          npm run test:billing
+          npm run test:content
 
       - name: Prepare web bundle
         run: npm run web:prepare
+
+      - name: Audit private course release
+        run: node scripts/audit-private-build.mjs
 
       - name: Android runtime smoke preflight
         run: node scripts/android-runtime-preflight.mjs

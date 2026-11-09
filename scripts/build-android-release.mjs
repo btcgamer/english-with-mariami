@@ -11,6 +11,7 @@ run(process.execPath, ['scripts/configure-android-release.mjs']);
 run(process.execPath, ['scripts/android-runtime-preflight.mjs']);
 run(process.execPath, ['node_modules/@capacitor/assets/bin/capacitor-assets','generate','--android','--assetPath','assets','--iconBackgroundColor','#050814','--iconBackgroundColorDark','#03050c','--splashBackgroundColor','#050814','--splashBackgroundColorDark','#03050c']);
 run(process.execPath, ['scripts/prepare-web.mjs']);
+run(process.execPath, ['scripts/audit-private-build.mjs']);
 run(process.execPath, ['node_modules/@capacitor/cli/bin/capacitor','sync','android']);
 if (process.platform === 'win32') run('cmd.exe',['/d','/c','gradlew.bat bundleRelease assembleRelease --console=plain'],path.join(root,'android'));
 else run('bash',['./gradlew','bundleRelease','assembleRelease','--console=plain'],path.join(root,'android'));

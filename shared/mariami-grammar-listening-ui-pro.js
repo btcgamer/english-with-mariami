@@ -16,6 +16,15 @@ function speak(text,slow=false,feedback=null){
   stop();try{const u=new SpeechSynthesisUtterance(String(text));u.lang='en-GB';u.rate=slow?0.68:0.9;u.volume=1;window.speechSynthesis.speak(u)}catch{$('listen-feedback').textContent='მოსმენა ამ მოწყობილობაზე ვერ გაეშვა.'}
 }
 function loadGrade(n){
+ if(window.EWM_PRIVATE_COURSES===true){
+  if(!scriptLoads.has(n))scriptLoads.set(n,(async()=>{
+   await window.EWM_PRIVATE_COURSE_READY;
+   const data=await window.EWM_PRIVATE_COURSE.get('supplementary/grade'+n+'.json');
+   if(data.grade!==n||!Array.isArray(data.lessons)||data.lessons.length!==126)throw new Error('კლასის მონაცემები არასრულია.');
+   grades[n]=data;return data.lessons;
+  })().catch(error=>{scriptLoads.delete(n);throw error}));
+  return scriptLoads.get(n);
+ }
  if(grades[n])return Promise.resolve(grades[n].lessons);
  if(!scriptLoads.has(n)){
   scriptLoads.set(n,new Promise((resolve,reject)=>{

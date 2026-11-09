@@ -1,3 +1,7 @@
 [functions.play-subscription]
 # The handler verifies every bearer token with Supabase Auth, including status requests.
 verify_jwt = false
+
+[functions.paid-course]
+# Auth is verified with Supabase Auth by the shared server-side entitlement handler.
+verify_jwt = false

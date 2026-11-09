@@ -12,7 +12,10 @@
     "android:apk": "node scripts/build-android-debug.mjs",
     "android:release": "node scripts/build-android-release.mjs",
     "test:billing": "node --test qa/play-verification.test.mjs",
-    "android:upload-internal": "node scripts/upload-play-internal.mjs"
+    "android:upload-internal": "node scripts/upload-play-internal.mjs",
+    "content:export": "node scripts/export-private-content.mjs",
+    "test:content": "node --test qa/paid-course.test.mjs",
+    "content:import": "node scripts/import-private-content.mjs"
   },
   "dependencies": {
     "@capacitor/core": "8.5.2"
