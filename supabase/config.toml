@@ -1,0 +1,3 @@
+[functions.play-subscription]
+# The handler verifies every bearer token with Supabase Auth, including status requests.
+verify_jwt = false

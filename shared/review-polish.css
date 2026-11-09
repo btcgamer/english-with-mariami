@@ -1,0 +1,67 @@
+/* Shared visual refinement: keep the academy's night-sky palette. */
+:root{--review-ink:#eef3ff;--review-muted:#b6c6df;--review-line:rgba(177,197,244,.2);--review-panel:#101d35}
+html{scroll-padding-top:100px}
+:where(a,button,input,select,textarea):focus-visible{outline:3px solid #b9e9ff!important;outline-offset:4px!important}
+body.magic-home .hero-description{font-size:16px;line-height:1.9;color:var(--review-muted)}
+body.magic-home .hero{padding-block:64px 72px}
+body.magic-home .hero-copy>.eyebrow{font-size:10px;line-height:1.8}
+body.magic-home .button,body.magic-home .nav-login{min-height:48px}
+body.magic-home .hero-note p{font-size:12px;line-height:1.8}
+body.magic-home .portal-card{transition:transform .2s,border-color .2s}
+body.magic-home .portal-card:hover{transform:translateY(-5px);border-color:#b7d8ff}
+body.academy-cosmos .toolbar{border:1px solid var(--review-line);background:linear-gradient(120deg,#14213a,#171c35);border-radius:20px;padding:22px;gap:18px;box-shadow:0 16px 40px #0002}
+body.academy-cosmos .toolbar label{font-size:12px;color:var(--review-muted);margin-bottom:8px}
+body.academy-cosmos .toolbar input,body.academy-cosmos .toolbar select{min-height:48px;font-size:14px;border-radius:12px}
+body.academy-cosmos .layout{align-items:start;gap:24px}
+body.academy-cosmos .sidebar{border:1px solid var(--review-line);border-radius:20px;background:#101b30;padding:18px}
+body.academy-cosmos .topic-item{border-radius:12px;padding:14px;line-height:1.65}
+body.academy-cosmos .topic-item[aria-current="true"],body.academy-cosmos .topic-item.active{background:#233556;border-color:#a9ceff}
+body.academy-cosmos #lesson{min-width:0;border:1px solid var(--review-line);border-radius:24px;background:linear-gradient(150deg,#14213a,#0c1528);padding:28px}
+body.academy-cosmos #lesson .lesson-top{padding-bottom:22px;border-bottom:1px solid var(--review-line);gap:16px}
+body.academy-cosmos #lesson h2{font-size:clamp(24px,3vw,34px);line-height:1.5}
+body.academy-cosmos #lesson .section{margin-top:24px;border:1px solid var(--review-line);border-radius:18px;padding:22px;background:#0c1629}
+body.academy-cosmos #lesson h3{font-size:18px;line-height:1.7;margin-bottom:16px;color:var(--review-ink)}
+body.academy-cosmos #lesson .helper{font-size:13px;line-height:1.9;color:var(--review-muted)}
+body.academy-cosmos #lesson .word-grid{gap:14px}
+body.academy-cosmos #lesson .word-card{border-radius:16px;background:linear-gradient(140deg,#1b2d48,#172039);padding:20px;box-shadow:0 8px 20px #0002}
+body.academy-cosmos #lesson .word-card b{font-size:25px;line-height:1.4;color:#d9efff}
+body.academy-cosmos #lesson button{min-height:44px;white-space:normal}
+body.academy-cosmos #lesson textarea,body.academy-cosmos #lesson input[type=text]{font-size:16px;line-height:1.6;border-radius:12px}
+body.lesson-review{background:radial-gradient(ellipse at 85% 0,#30235c55,transparent 45%),#091222;color:var(--review-ink)}
+.lesson-review .top{background:#0b1428f2;border-bottom:1px solid var(--review-line);backdrop-filter:blur(16px)}
+.lesson-review .hero,.lesson-review .section{background:linear-gradient(145deg,#16253d,#101a30);border:1px solid var(--review-line);border-radius:22px;box-shadow:0 16px 40px #0002;padding:28px}
+.lesson-review .hero h1{font-size:clamp(28px,4vw,44px);line-height:1.45;text-shadow:none}
+.lesson-review .section h2{font-size:22px;line-height:1.6;text-shadow:none;color:#d6eaff}
+.lesson-review .word-card{border-radius:16px;background:#192b44;border-color:var(--review-line);box-shadow:none}
+.lesson-review .btn,.lesson-review .option,.lesson-review .speak{min-height:46px;border-radius:12px;line-height:1.5;white-space:normal}
+.lesson-review .lesson-jumps{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+.lesson-review .lesson-jumps a{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;background:#1c2e49;border:1px solid var(--review-line);border-radius:100px;color:#d9edff;text-decoration:none;font-size:13px}
+body.auth-magic .login-card,body.auth-magic .register-card{border-color:var(--review-line)!important;background:linear-gradient(145deg,#17273fee,#10182ef5)!important;box-shadow:0 28px 80px #0005!important;border-radius:24px!important}
+body.auth-magic .login-card h1,body.auth-magic .register-card h1{color:#e7f2ff;text-shadow:none;line-height:1.5}
+body.auth-magic input,body.auth-magic select{min-height:48px;font-size:16px;border-radius:12px}
+body.auth-magic label{line-height:1.7}
+body.auth-magic .auth-home-link{min-height:44px;display:inline-flex;align-items:center}
+@media(max-width:760px){
+ html{scroll-padding-top:120px}
+ body.magic-home .hero{padding-block:32px 42px}
+ body.magic-home .hero-description{font-size:15px}
+ body.magic-home .hero-actions{gap:18px}
+ body.magic-home .hero-copy>.eyebrow{font-size:9px}
+ body.academy-cosmos .toolbar{padding:16px;gap:14px}
+ body.academy-cosmos #lesson{padding:16px;border-radius:18px}
+ body.academy-cosmos #lesson .section{padding:16px}
+ body.academy-cosmos #lesson .word-card{padding:18px}
+ body.academy-cosmos .sidebar{max-height:360px;overflow:auto}
+ body.academy-cosmos #lesson .answer-row{flex-wrap:wrap}
+ body.academy-cosmos #lesson .answer-row input{width:100%;min-width:0}
+ .lesson-review .hero,.lesson-review .section{padding:20px}
+ .lesson-review .nav{flex-wrap:wrap;gap:12px;padding-block:12px}
+ .lesson-review .nav-actions{flex-wrap:wrap;gap:8px}
+ .lesson-review .lesson-jumps{gap:8px}
+ .lesson-review .lesson-jumps a{font-size:12px;padding:9px 12px}
+ body.auth-magic .auth-header{flex-wrap:wrap;gap:12px;padding-block:16px}
+ body.auth-magic .login-card,body.auth-magic .register-card{width:100%;max-width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}}
+body.academy-cosmos #lesson .grammar-rule{padding:16px;line-height:1.9}
+@media(max-width:760px){.lesson-review .lesson-jumps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.lesson-review .lesson-jumps a{width:auto;justify-content:center;text-align:center}}

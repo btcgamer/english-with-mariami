@@ -1,10 +1,12 @@
 # English with Mariami — Google Play Release Checklist
 
+See `store-listing/release-status.md` and `store-listing/backend-deployment.md` for the current candidate status and remaining deployment requirements.
+
 ## Current Android foundation
 - Application ID: `com.englishwithmariami.academy`
 - App name: `English with Mariami`
 - Capacitor Android is configured.
-- Android CI prepares Android API 36 and builds an unsigned release AAB.
+- Android CI prepares API 36 and supports signed release AAB/APK builds using private upload-key environment variables.
 - Web assets are copied into `www/` by `npm run web:prepare`.
 
 ## Required before production upload

@@ -1,0 +1,29 @@
+{
+  "currency": "USD",
+  "access": "all_grades_1_12",
+  "download": "free",
+  "ads": false,
+  "status": "configuration_draft_not_activated",
+  "plans": [
+    {
+      "id": "monthly",
+      "months": 1,
+      "price": "2.50"
+    },
+    {
+      "id": "quarterly",
+      "months": 3,
+      "price": "6.70"
+    },
+    {
+      "id": "half-yearly",
+      "months": 6,
+      "price": "15.78"
+    },
+    {
+      "id": "yearly",
+      "months": 12,
+      "price": "31.56"
+    }
+  ]
+}

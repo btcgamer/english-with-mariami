@@ -1,5 +1,17 @@
 apply plugin: 'com.android.application'
 
+def releaseCode = System.getenv('ANDROID_VERSION_CODE')
+def releaseName = System.getenv('ANDROID_VERSION_NAME')
+if (releaseCode && !(releaseCode ==~ /[1-9][0-9]{0,9}/ && releaseCode.toLong() <= 2100000000)) {
+    throw new GradleException('ANDROID_VERSION_CODE must be a positive integer <= 2100000000')
+}
+if (releaseName && !(releaseName ==~ /[0-9]+\.[0-9]+(\.[0-9]+)?([.-][0-9A-Za-z.-]+)?/)) {
+    throw new GradleException('ANDROID_VERSION_NAME is invalid')
+}
+def signingNames = ['ANDROID_KEYSTORE_PATH','ANDROID_KEYSTORE_PASSWORD','ANDROID_KEY_ALIAS','ANDROID_KEY_PASSWORD']
+def hasReleaseKey = signingNames.every { System.getenv(it) }
+
+
 android {
     namespace = "com.englishwithmariami.academy"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -7,8 +19,8 @@ android {
         applicationId "com.englishwithmariami.academy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode releaseCode ? releaseCode.toInteger() : 1
+        versionName releaseName ?: '1.0'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,8 +28,20 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        if (hasReleaseKey) {
+            release {
+                storeFile file(System.getenv('ANDROID_KEYSTORE_PATH'))
+                storeType 'PKCS12'
+                storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('ANDROID_KEY_ALIAS')
+                keyPassword System.getenv('ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
     buildTypes {
         release {
+            if (hasReleaseKey) signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -31,6 +55,7 @@ repositories {
 }
 
 dependencies {
+    implementation "com.android.billingclient:billing:8.3.0"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"

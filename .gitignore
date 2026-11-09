@@ -6,3 +6,9 @@ android/.idea/
 *.jks
 *.keystore
 local.properties
+
+*.p12
+.env
+.env.*
+www/
+supabase/.temp/

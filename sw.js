@@ -1,13 +1,13 @@
 'use strict';
 
-const CACHE_NAME = 'english-with-mariami-v28';
+const CACHE_NAME = 'english-with-mariami-v29';
 const FUTURE_THEME = './magic-ai-25c.css';
 const FUTURE_CLASSROOM = './shared/future-neon-classroom.css?v=20260906';
 const NAV_TIMEOUT_MS = 4500;
 const ASSET_TIMEOUT_MS = 7000;
 
 const APP_SHELL = [
-  './', './index.html', './academy.html', './grade2.html', './grade3.html', './grade4.html',
+  './', './index.html', './academy.html', './grades.html', './academy-enchanted.js?v=2', './shared/academy-redirect.js', './shared/academy-redirect.css', './shared/review-polish.css?v=1', './grade2.html', './grade3.html', './grade4.html',
   './grade2/index.html', './grade3/index.html', './grade4/index.html',
   './login.html', './register.html', './reset-password.html',
   './student-dashboard.html', './manifest.webmanifest',
@@ -38,40 +38,11 @@ self.addEventListener('activate', event => event.waitUntil(
   )).then(() => self.clients.claim())
 ));
 
-function isAcademyPage(pathname){
-  return pathname.endsWith('/academy.html');
-}
-
 function fetchWithTimeout(request, ms){
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ms);
   return fetch(request, { cache: 'no-store', signal: controller.signal })
     .finally(() => clearTimeout(timer));
-}
-
-function injectVisualLayers(response){
-  if(!response || !response.ok) return response;
-
-  return response.text().then(html => {
-    const hasTheme=html.includes('magic-ai-25c.css');
-    const hasClassroom=html.includes('future-neon-classroom.css');
-
-    if(hasTheme && hasClassroom){
-      return new Response(html,{status:response.status,statusText:response.statusText,headers:response.headers});
-    }
-
-    let out=html;
-    const links=[];
-    if(!hasTheme) links.push('<link rel="stylesheet" href="./magic-ai-25c.css">');
-    if(!hasClassroom) links.push('<link rel="stylesheet" href="'+FUTURE_CLASSROOM+'">');
-
-    const injection=links.join('');
-    out=out.includes('</head>') ? out.replace('</head>',injection+'</head>') : injection+out;
-
-    const headers=new Headers(response.headers);
-    headers.delete('content-length');
-    return new Response(out,{status:response.status,statusText:response.statusText,headers});
-  });
 }
 
 self.addEventListener('fetch', event => {
@@ -89,7 +60,6 @@ self.addEventListener('fetch', event => {
   if(request.mode==='navigate'||request.destination==='document'){
     event.respondWith(
       fetchWithTimeout(request, NAV_TIMEOUT_MS)
-        .then(response => isAcademyPage(url.pathname) ? injectVisualLayers(response) : response)
         .catch(async()=>{
           const cached=await caches.match(request);
           return cached || caches.match('./index.html') || Response.error();
