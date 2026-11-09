@@ -5,3 +5,11 @@ verify_jwt = false
 [functions.paid-course]
 # Auth is verified with Supabase Auth by the shared server-side entitlement handler.
 verify_jwt = false
+
+[functions.web-subscription]
+# Bearer tokens are verified with Supabase Auth in the handler.
+verify_jwt = false
+
+[functions.web-payment-hook]
+# Provider webhook requires a valid raw-body HMAC signature, not a Supabase user token.
+verify_jwt = false

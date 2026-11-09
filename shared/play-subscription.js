@@ -49,8 +49,7 @@
   async function init() {
     controls();
     if (!native) {
-      for (const [id, price] of Object.entries(reference)) document.querySelector(`[data-price="${id}"]`).textContent = price;
-      say('ეს არის აშშ დოლარის საბაზო ფასები. გამოწერა ხელმისაწვდომი გახდება Android აპში Google Play-ის მეშვეობით; ადგილობრივი ფასი შეძენამდე გამოჩნდება.');
+      await window.EWM_WEB_SUBSCRIPTION.init();
       return;
     }
     try {

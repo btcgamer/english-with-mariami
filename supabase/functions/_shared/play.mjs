@@ -1,3 +1,4 @@
+import { webEntitlement, webProviderConfigured, webConfigured } from './web-billing.mjs';
 export const PRODUCT = 'mariami_all_grades';
 export const PACKAGE = 'com.englishwithmariami.academy';
 export const PLANS = new Set(['monthly', 'quarterly', 'half-yearly', 'yearly']);
@@ -37,7 +38,7 @@ export async function googleAccessToken(email, pem, fetcher = fetch) {
 
 // Dependencies are injected so authentication, ownership and acknowledgement can be tested without credentials.
 export function subscriptionHandler({ env, fetcher = fetch, accessToken = () => googleAccessToken(env.GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL, env.GOOGLE_PLAY_PRIVATE_KEY, fetcher) }) {
-  const origins = new Set(['https://englishwithmariami.com.ge', 'https://www.englishwithmariami.com.ge', 'https://localhost']);
+  const origins = new Set(['https://englishwithmariami.com.ge', 'https://www.englishwithmariami.com.ge', 'https://localhost','http://localhost:4173','http://127.0.0.1:4173','http://127.0.0.1:4174']);
   return async request => {
     const origin = request.headers.get('Origin');
     const cors = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'Vary': 'Origin',
@@ -66,6 +67,11 @@ export function subscriptionHandler({ env, fetcher = fetch, accessToken = () => 
       const profiles = await profile.json();
       if (user.app_metadata?.mariami_admin === true && profiles.length === 1 && String(profiles[0].role || '').trim().toLowerCase() === 'admin') {
         return reply(200, { ready: true, active: true, expiresAt: null, access: 'admin' });
+      }
+      let webReady=false,webState=null;
+      if(body.action==='status'&&webProviderConfigured(env)){
+        const web=await webEntitlement(env,user,fetcher);webState=web;webReady=web.ready&&webConfigured(env);
+        if(web.ready&&(web.active||env.PLAY_BILLING_ENABLED!=='true'))return reply(200,{ready:true,active:web.active,expiresAt:web.expiresAt,source:'web',webReady,hasWebSubscription:!!web.portal,webPurchaseBlocked:!!web.purchaseBlocked});
       }
       if (env.PLAY_BILLING_ENABLED !== 'true' || !['GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL','GOOGLE_PLAY_PRIVATE_KEY'].every(k => env[k])) {
         return reply(503, { error: 'BILLING_NOT_CONFIGURED' });
@@ -110,7 +116,7 @@ export function subscriptionHandler({ env, fetcher = fetch, accessToken = () => 
           if (!expiresAt || verified.expiresAt > expiresAt) expiresAt = verified.expiresAt;
         }
       }
-      return reply(200, { ready: true, active, expiresAt });
+      return reply(200, { ready: true, active, expiresAt, source:'play', ...(webReady?{webReady:true}:{}), ...(webState?.ready?{hasWebSubscription:!!webState.portal,webPurchaseBlocked:!!webState.purchaseBlocked}:{}) });
     } catch (error) {
       // Never return/log Google responses, user bearer tokens, private keys or purchase tokens.
       if (error.message === 'PURCHASE_ACCOUNT_MISMATCH') return reply(403, { error: error.message });

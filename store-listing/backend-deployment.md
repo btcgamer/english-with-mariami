@@ -1,6 +1,6 @@
 # Purchase verification deployment (not applied)
 
-The native Android plugin (`MariamiBillingPlugin.java`) uses Google Play Billing 8.3.0. The checkout page (`subscriptions.html`) uses store-returned localized full-period prices, cancellation/pending handling and purchase restoration. Web-only visitors see the exact USD reference prices and cannot start a payment.
+The native Android plugin (`MariamiBillingPlugin.java`) uses Google Play Billing 8.3.0. Native checkout uses store-returned localized full-period prices, cancellation/pending handling and purchase restoration. The browser, installed PWA and desktop now have a separate hosted web-checkout implementation, disabled until provider and private-delivery prerequisites are complete. See [WEB-PAYMENTS.md](../WEB-PAYMENTS.md). Google Play registration is optional for the PWA distribution path.
 
 The Supabase edge function in `supabase/functions/play-subscription` verifies bearer tokens against Supabase Auth, binds Play purchases to the hash of that authenticated user's ID, calls subscriptionsv2, acknowledges eligible purchases, refuses other users' tokens and rechecks stored tokens for status. It does not trust localStorage or client purchase success. Purchase tokens are in a table with RLS and no anon/authenticated-user grants. Server code and migrations are excluded from the web/native asset bundle.
 

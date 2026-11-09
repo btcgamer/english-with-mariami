@@ -1,5 +1,7 @@
 # Google Play submission preparation
 
+Current priority: free website/PWA installation on Android and desktop, with a separately prepared card-subscription integration. See [WEB-PAYMENTS.md](../WEB-PAYMENTS.md). Real web sales remain disabled pending merchant approval, fee/country confirmation, private backend deployment and payment acceptance tests. No Google Play fee is needed to distribute the website/PWA this way.
+
 Package: com.englishwithmariami.academy
 Current private staging version: 1.0.5 (code 6), requiring the private backend. User confirmed no previous AAB upload.
 Target API: 36. Minimum Android: 7.0/API 24.

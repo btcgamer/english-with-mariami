@@ -1,6 +1,8 @@
 const {test,expect} = require('playwright/test');
 const BASE='http://127.0.0.1:4173';
 async function setup(page,{native=true,backend=true,active=false,admin=false}={}){
+  await page.route('**/pwa.js*',r=>r.fulfill({body:''}));
+  await page.route('**/functions/v1/web-subscription',r=>r.fulfill({status:503,contentType:'application/json',body:'{"error":"WEB_PAYMENT_NOT_CONFIGURED"}'}));
   await page.route('https://cdn.jsdelivr.net/**',r=>r.fulfill({body:''}));
   await page.addInitScript(({native})=>{
     const user={id:'9de081b3-4263-49f4-a0cf-e67dd494bc84'};
