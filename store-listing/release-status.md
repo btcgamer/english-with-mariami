@@ -1,7 +1,7 @@
 # Google Play submission preparation
 
 Package: com.englishwithmariami.academy
-Current private staging version: 1.0.4 (code 5), requiring the private backend. User confirmed no previous AAB upload.
+Current private staging version: 1.0.5 (code 6), requiring the private backend. User confirmed no previous AAB upload.
 Target API: 36. Minimum Android: 7.0/API 24.
 
 ## Prepared
@@ -13,7 +13,7 @@ Target API: 36. Minimum Android: 7.0/API 24.
 - Georgian store description draft and monthly subscription implementation requirements.
 - Web packaging excludes QA directories, test specs, hidden files, build scripts and non-web source files. Web 3D model formats are retained.
 
-- Designated administrator: datogringi@gmail.com; verified-account SQL migration prepared and tested locally, not applied to production.
+- Designated administrator: datogringo@gmail.com; verified-account SQL migration prepared and tested locally, not applied to production.
 
 - Private course endpoint, RLS store, export/import commands and private client/build mode implemented and tested. Not deployed to the live website/backend.
 
@@ -21,7 +21,7 @@ Target API: 36. Minimum Android: 7.0/API 24.
 
 - Confirmed USD 31.56 annual model with 1/3/6/12-month periods. Access scope confirmed: all grades (1–12).
 - Public website provided: https://englishwithmariami.com.ge/index.html; verify privacy/support content on the deployed site.
-- User reports verified developer account. Merchant/payments setup, subscription country availability and any testing requirements must still be checked in Play Console.
+- Latest shared Console screen shows Individual account registration; verification is not confirmed. Merchant/payments setup, subscription country availability and any testing requirements must still be checked in Play Console.
 - Live site verification was blocked by environment egress policy (proxy 403).
 - Deploy/configure the purchase verifier, enforce paid content access server-side and complete live Play Billing tests. Keep PLAY_BILLING_ENABLED disabled until these are complete.
 - Keep the new upload key and its credentials private and backed up. Enable Play App Signing for the first upload. The signed candidate is for internal testing, not production acceptance.

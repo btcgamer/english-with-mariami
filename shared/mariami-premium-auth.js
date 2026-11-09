@@ -94,7 +94,7 @@
       // Revalidate identity with the auth server; do not trust a locally cached session alone.
       const verified = await db.auth.getUser();
       const verifiedUser = verified && verified.data && verified.data.user;
-      ownerVerified = !verified.error && verifiedUser?.id === session.user.id && verifiedUser?.app_metadata?.mariami_admin === true && String(verifiedUser?.email || '').trim().toLowerCase() === 'datogringi@gmail.com';
+      ownerVerified = !verified.error && verifiedUser?.id === session.user.id && verifiedUser?.app_metadata?.mariami_admin === true && String(verifiedUser?.email || '').trim().toLowerCase() === 'datogringo@gmail.com';
       if (!verified.error && verifiedUser && verifiedUser.id === session.user.id && window.EWM_MAGIC_V10_PENDING) {
         await window.EWM_MAGIC_V10_PENDING.restore(verifiedUser);
       }

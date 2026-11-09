@@ -11,13 +11,13 @@ import urllib.error
 import urllib.request
 
 PROJECT = 'vtdhvsfqhwesxtwmduew'
-ADMIN_EMAIL = 'datogringi@gmail.com'
+ADMIN_EMAIL = 'datogringo@gmail.com'
 API = 'https://api.supabase.com/v1/projects/' + PROJECT
-SQL_SHA256 = '3e7b0a6c5ccda8483f6b31b0c51bbd9174fc3fe172b66bd0da98e5e12e585c26'
+SQL_SHA256 = 'b690a702c051d1bdb4003bcc157ac87e9f3728a6432c88a9df0b48e0d6f273e9'
 VERIFY_SQL = """select u.email, p.role,
   (u.raw_app_meta_data->>'mariami_admin' = 'true') as admin_verified
 from auth.users u join public.profiles p on p.user_id = u.id
-where lower(u.email) = 'datogringi@gmail.com';"""
+where lower(u.email) = 'datogringo@gmail.com';"""
 
 class SetupError(Exception):
     pass
@@ -41,7 +41,7 @@ def request_json(method, url, token, body=None):
             # Recognize only our own migration errors; never display raw server bodies.
             message = error.read(16384).decode('utf-8', errors='replace')
             if 'designated admin must already have a verified account' in message:
-                raise SetupError('ჯერ დარეგისტრირდი საიტზე datogringi@gmail.com-ით და დაადასტურე ელფოსტა. შემდეგ ხელახლა გაუშვი ეს პროგრამა.') from None
+                raise SetupError('ჯერ დარეგისტრირდი საიტზე datogringo@gmail.com-ით და დაადასტურე ელფოსტა. შემდეგ ხელახლა გაუშვი ეს პროგრამა.') from None
             if 'Expected exactly one existing profile' in message:
                 raise SetupError('ამ ანგარიშის პროფილი ვერ დადასტურდა. ცვლილებები გაუქმებულია; საჭიროა პროფილის შემოწმება Supabase-ში.') from None
         raise SetupError('Supabase-მა ოპერაცია ვერ შეასრულა (HTTP {}). ადმინისტრატორის ჩართვა არ დადასტურებულა.'.format(error.code)) from None
@@ -104,7 +104,7 @@ def launch_gui():
             try:
                 sql = Path(__file__).with_name('set-designated-admin.sql').read_text(encoding='utf-8')
                 apply_admin(token, sql)
-                messages.put((True, 'წარმატებულია: datogringi@gmail.com — admin. საიტიდან გამოდი და ხელახლა შედი. Play Store-ის გადახდები ამ მოქმედებით არ აქტიურდება.'))
+                messages.put((True, 'წარმატებულია: datogringo@gmail.com — admin. საიტიდან გამოდი და ხელახლა შედი. Play Store-ის გადახდები ამ მოქმედებით არ აქტიურდება.'))
             except SetupError as error:
                 messages.put((False, str(error)))
             except Exception:

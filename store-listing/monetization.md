@@ -6,7 +6,7 @@
 - Public website: https://englishwithmariami.com.ge/index.html
 - Public support email: razmadze467@gmail.com.
 - Access scope confirmed: all grades (1–12).
-- Developer reports a verified Play Console developer account. This has not been independently checked.
+- Latest shared Play Console screen shows new Individual account registration under datogringo@gmail.com; completion/verification is not yet confirmed.
 - No trial or introductory offer has been authorized.
 - Explicit user requirement: no advertisements or advertising SDKs. Do not label longer plans as discounted: the supplied period prices are not cheaper per month.
 

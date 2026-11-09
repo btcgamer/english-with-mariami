@@ -1,6 +1,6 @@
 # Play Console setup draft
 
-Confirmed: free download; all 12 grades; auto-renewing periods 1/3/6/12 months. Developer reports verified account.
+Confirmed: free download; all 12 grades; auto-renewing periods 1/3/6/12 months. Latest Console screen shows new Individual developer registration; completion/verification is not yet confirmed.
 
 Suggested product ID (not created): mariami_all_grades
 Suggested base plans (not created): monthly, quarterly, half-yearly, yearly.

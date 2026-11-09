@@ -1,6 +1,6 @@
 # Designated administrator
 
-User-specified exact email: datogringi@gmail.com. Do not silently substitute the earlier datogringo@gmail.com address.
+User-confirmed corrected email: datogringo@gmail.com. This supersedes the earlier mistyped designation. Existing administrators are not automatically demoted.
 
 `supabase/migrations/202611090002_designated_admin.sql` promotes only the existing, email-confirmed Auth account with that exact email and its existing profile. It aborts if the account is absent/unconfirmed, duplicated, or the profile is absent/duplicated. It changes the designated profile's role and adds the protected mariami_admin flag to that account's Auth app metadata, preserving existing metadata. It does not demote other admins. Apply it using a trusted database administrator to the intended Supabase project, then verify the returned email/role.
 

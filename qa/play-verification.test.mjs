@@ -108,7 +108,7 @@ test('Only a server-assigned admin can bypass a subscription, even when sales ar
 });
 test('A client-supplied admin role or email never promotes a student',async()=>{
   const {handler}=harness({role:'student',overrides:{PLAY_BILLING_ENABLED:'false'}});
-  const result=await handler(request({action:'status',role:'admin',email:'datogringi@gmail.com'}));
+  const result=await handler(request({action:'status',role:'admin',email:'datogringo@gmail.com'}));
   assert.equal(result.status,503);
 });
 test('Profile lookup errors fail closed instead of granting admin access',async()=>{

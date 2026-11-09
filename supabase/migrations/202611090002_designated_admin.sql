@@ -9,7 +9,7 @@ declare
 begin
   select id into strict account_id
     from auth.users
-    where lower(email) = 'datogringi@gmail.com'
+    where lower(email) = 'datogringo@gmail.com'
       and email_confirmed_at is not null
     for update;
 
@@ -31,5 +31,5 @@ end;
 $$;
 select u.email, p.role, u.raw_app_meta_data->>'mariami_admin' as verified_admin
 from auth.users u join public.profiles p on p.user_id = u.id
-where lower(u.email) = 'datogringi@gmail.com';
+where lower(u.email) = 'datogringo@gmail.com';
 commit;
