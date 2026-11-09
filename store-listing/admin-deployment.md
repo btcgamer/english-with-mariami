@@ -13,3 +13,9 @@ Live deployment still needs Supabase administrative authorization, Google Play A
 Secure environment requirements were saved as draft bindings: SUPABASE_MANAGEMENT_TOKEN (Supabase Management API) and PLAY_PUBLISHER_ACCESS_TOKEN (Android Publisher OAuth scope). Values have not been supplied. These are network bearer bindings, not browser passwords. Network additions and credential binding changes must be reviewed/saved in environment settings and published before reuse; saving the draft alone does not activate them.
 
 After publishing access is configured, `npm run android:upload-internal -- /path/to/signed.aab` can upload and validate the bundle in an internal-track draft. It never rolls out to production. This uploader has been syntax-checked and its missing-credential guard checked; live Google API execution is unverified.
+
+## Windows alternative — no cloud settings needed for the admin step
+
+`setup-windows/START-ADMIN.cmd` starts a local Python setup program from its own folder. On standard Windows Python installs it opens a password-entry window; there is a hidden console-input fallback if Tk was omitted. The user pastes their PAT locally, not in chat. The program checks the exact Supabase project, checks the migration's SHA-256, applies only the designated-admin migration and independently reads the role/protected flag back. It never writes the token to disk or includes it in command arguments. Project mismatch, changed SQL, missing/unconfirmed accounts and unsuccessful verification cannot produce a success message.
+
+Request logic was tested with 9 synthetic transport tests, and the migration with 7 PostgreSQL scenarios. The Windows GUI/launcher itself was not exercised on a physical Windows machine here. Live database execution requires the owner's valid token and project permissions. This helper does not deploy subscription functions, create Google credentials, enforce paid content access or publish a Play release.

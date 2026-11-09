@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const out = path.join(root, 'www');
-const skip = new Set(['node_modules','android','www','scripts','qa','test-results','playwright-report','store-listing','supabase']);
+const skip = new Set(['node_modules','android','www','scripts','qa','test-results','playwright-report','store-listing','supabase','setup-windows']);
 const webExtensions = new Set(['.html','.js','.mjs','.css','.json','.webmanifest','.svg','.png','.jpg','.jpeg','.webp','.gif','.ico','.avif','.mp3','.wav','.ogg','.m4a','.mp4','.webm','.woff','.woff2','.ttf','.otf','.txt','.wasm','.glb','.gltf','.bin','.ktx','.ktx2']);
 const buildOnlyFiles = new Set(['package.json','package-lock.json','tsconfig.json']);
 
