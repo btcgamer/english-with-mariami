@@ -27,11 +27,12 @@ test('Missing ownership, expired dates and unexpected products/plans fail closed
 const env = { PLAY_BILLING_ENABLED:'true', SUPABASE_URL:'https://supabase.example.test', SUPABASE_SERVICE_ROLE_KEY:'test-only-key', GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL:'test@example.test', GOOGLE_PLAY_PRIVATE_KEY:'test-only-key' };
 const request = (body, authorization='Bearer test-only-session') => new Request('https://functions.example.test', { method:'POST', headers:{Authorization:authorization,'Content-Type':'application/json',Origin:'https://localhost'},body:JSON.stringify(body) });
 const response = (body,status=200) => Response.json(body,{status});
-function harness({data, acknowledgementFails=false, identityStatus=200, owner=user, tokens=[]}={}) {
+function harness({data, acknowledgementFails=false, identityStatus=200, owner=user, tokens=[], role='student', profileStatus=200, overrides={}, trustedAdmin=false}={}) {
   const calls=[];
-  const handler=subscriptionHandler({env,accessToken:async()=>'test-only-oauth',fetcher:async(url,options={})=>{
+  const handler=subscriptionHandler({env:{...env,...overrides},accessToken:async()=>'test-only-oauth',fetcher:async(url,options={})=>{
     calls.push({url,options});
-    if(url.endsWith('/auth/v1/user'))return response({id:user},identityStatus);
+    if(url.endsWith('/auth/v1/user'))return response({id:user,app_metadata:trustedAdmin?{mariami_admin:true}:{},user_metadata:{role:'admin',mariami_admin:true}},identityStatus);
+    if(url.includes('/rest/v1/profiles?'))return response([{role}],profileStatus);
     if(url.includes('subscriptionsv2'))return response(data||await purchase());
     if(url.endsWith(':acknowledge'))return acknowledgementFails?response({},500):new Response(null,{status:204});
     if(url.includes('token_hash=eq.'))return response(owner?[{user_id:owner}]:[]);
@@ -96,4 +97,26 @@ test('OAuth JWT uses the correct audience/scope and a verifiable RSA signature',
     return response({access_token:'test-access-token'});
   });
   assert.equal(value,'test-access-token');
+});
+
+test('Only a server-assigned admin can bypass a subscription, even when sales are disabled', async()=>{
+  const {handler,calls}=harness({role:'admin',trustedAdmin:true,overrides:{PLAY_BILLING_ENABLED:'false',GOOGLE_PLAY_PRIVATE_KEY:''}});
+  const result=await handler(request({action:'status'}));
+  assert.equal(result.status,200);
+  assert.deepEqual(await result.json(),{ready:true,active:true,expiresAt:null,access:'admin'});
+  assert.equal(calls.some(c=>c.url.includes('androidpublisher')||c.url.includes('play_purchase_tokens')),false);
+});
+test('A client-supplied admin role or email never promotes a student',async()=>{
+  const {handler}=harness({role:'student',overrides:{PLAY_BILLING_ENABLED:'false'}});
+  const result=await handler(request({action:'status',role:'admin',email:'datogringi@gmail.com'}));
+  assert.equal(result.status,503);
+});
+test('Profile lookup errors fail closed instead of granting admin access',async()=>{
+  const {handler}=harness({role:'admin',trustedAdmin:true,profileStatus:500});
+  assert.equal((await handler(request({action:'status'}))).status,503);
+});
+
+test('A profile role alone and editable user metadata cannot bypass a subscription',async()=>{
+  const {handler}=harness({role:'admin',trustedAdmin:false,overrides:{PLAY_BILLING_ENABLED:'false'}});
+  assert.equal((await handler(request({action:'status'}))).status,503);
 });

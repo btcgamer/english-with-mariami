@@ -1,7 +1,7 @@
 # Google Play submission preparation
 
 Package: com.englishwithmariami.academy
-Current internal-test version: 1.0.2 (code 3). User confirmed no previous AAB upload.
+Current internal-test version: 1.0.3 (code 4). User confirmed no previous AAB upload.
 Target API: 36. Minimum Android: 7.0/API 24.
 
 ## Prepared
@@ -12,6 +12,8 @@ Target API: 36. Minimum Android: 7.0/API 24.
 - Google Play Billing 8.3.0 native checkout/restore, localized plan prices and a Supabase Google verification function implemented. Live purchase acceptance is unverified.
 - Georgian store description draft and monthly subscription implementation requirements.
 - Web packaging excludes QA directories, test specs, hidden files, build scripts and non-web source files. Web 3D model formats are retained.
+
+- Designated administrator: datogringi@gmail.com; verified-account SQL migration prepared and tested locally, not applied to production.
 
 ## Required before submission
 

@@ -55,6 +55,13 @@
     }
     try {
       const data = await api('status');
+      if (data.access === 'admin' && data.active === true) {
+        active = true;
+        document.querySelector('.plans').hidden = true;
+        say('ადმინისტრატორის წვდომა დადასტურებულია. გამოწერის შეძენა არ გჭირდება.');
+        controls();
+        return;
+      }
       await native.addListener('purchasesUpdated', async event => {
         try {
           if (event.code === 1) say('გადახდა გაუქმებულია.');

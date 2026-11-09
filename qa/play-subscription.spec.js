@@ -1,6 +1,6 @@
 const {test,expect} = require('playwright/test');
 const BASE='http://127.0.0.1:4173';
-async function setup(page,{native=true,backend=true,active=false}={}){
+async function setup(page,{native=true,backend=true,active=false,admin=false}={}){
   await page.route('https://cdn.jsdelivr.net/**',r=>r.fulfill({body:''}));
   await page.addInitScript(({native})=>{
     const user={id:'9de081b3-4263-49f4-a0cf-e67dd494bc84'};
@@ -15,7 +15,7 @@ async function setup(page,{native=true,backend=true,active=false}={}){
   const requests=[];
   await page.route('**/functions/v1/play-subscription',async route=>{
     const body=route.request().postDataJSON();requests.push(body);
-    await route.fulfill({status:backend?200:503,contentType:'application/json',body:JSON.stringify(backend?{ready:true,active,expiresAt:null}:{error:'BILLING_NOT_CONFIGURED'})});
+    await route.fulfill({status:backend?200:503,contentType:'application/json',body:JSON.stringify(backend?{ready:true,active,expiresAt:null,...(admin?{access:'admin'}:{})}:{error:'BILLING_NOT_CONFIGURED'})});
   });
   await page.goto(BASE+'/subscriptions.html');
   return requests;
@@ -72,4 +72,12 @@ test('A verified existing subscriber cannot be charged again by this page',async
   await setup(page,{active:true});
   await expect(page.locator('#subscription-status')).toContainText('წვდომა დადასტურებულია');
   for(const button of await page.locator('[data-plan]').all())await expect(button).toBeDisabled();
+});
+
+test('A server-verified admin is not offered a purchase or restore action',async({page})=>{
+  await setup(page,{active:true,admin:true});
+  await expect(page.locator('#subscription-status')).toContainText('ადმინისტრატორის წვდომა დადასტურებულია');
+  await expect(page.locator('.plans')).toBeHidden();
+  await expect(page.locator('#restore-purchases')).toBeDisabled();
+  expect(await page.evaluate(()=>window.testPurchases)).toEqual([]);
 });

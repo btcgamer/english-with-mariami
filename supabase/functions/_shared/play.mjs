@@ -47,7 +47,7 @@ export function subscriptionHandler({ env, fetcher = fetch, accessToken = () => 
     if (origin && !origins.has(origin)) return reply(403, { error: 'ORIGIN_NOT_ALLOWED' });
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
     if (request.method !== 'POST') return reply(405, { error: 'METHOD_NOT_ALLOWED' });
-    if (env.PLAY_BILLING_ENABLED !== 'true' || !['SUPABASE_URL','SUPABASE_SERVICE_ROLE_KEY','GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL','GOOGLE_PLAY_PRIVATE_KEY'].every(k => env[k])) {
+    if (!['SUPABASE_URL','SUPABASE_SERVICE_ROLE_KEY'].every(k => env[k])) {
       return reply(503, { error: 'BILLING_NOT_CONFIGURED' });
     }
     const auth = request.headers.get('Authorization');
@@ -60,6 +60,16 @@ export function subscriptionHandler({ env, fetcher = fetch, accessToken = () => 
       if (!user.id) return reply(401, { error: 'SIGN_IN_REQUIRED' });
       const body = await request.json();
       if (!['status','verify'].includes(body.action)) return reply(400, { error: 'INVALID_REQUEST' });
+      // Database roles are trusted; email strings and user-editable auth metadata are not.
+      const profile = await fetcher(env.SUPABASE_URL + '/rest/v1/profiles?select=role&user_id=eq.' + encodeURIComponent(user.id), { headers: admin });
+      if (!profile.ok) throw new Error('SERVICE_UNAVAILABLE');
+      const profiles = await profile.json();
+      if (user.app_metadata?.mariami_admin === true && profiles.length === 1 && String(profiles[0].role || '').trim().toLowerCase() === 'admin') {
+        return reply(200, { ready: true, active: true, expiresAt: null, access: 'admin' });
+      }
+      if (env.PLAY_BILLING_ENABLED !== 'true' || !['GOOGLE_PLAY_SERVICE_ACCOUNT_EMAIL','GOOGLE_PLAY_PRIVATE_KEY'].every(k => env[k])) {
+        return reply(503, { error: 'BILLING_NOT_CONFIGURED' });
+      }
       const rest = env.SUPABASE_URL + '/rest/v1/play_purchase_tokens';
       let tokens;
       if (body.action === 'verify') {

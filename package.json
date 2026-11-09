@@ -11,7 +11,8 @@
     "android:build": "npm run android:sync && cd android && ./gradlew bundleRelease",
     "android:apk": "node scripts/build-android-debug.mjs",
     "android:release": "node scripts/build-android-release.mjs",
-    "test:billing": "node --test qa/play-verification.test.mjs"
+    "test:billing": "node --test qa/play-verification.test.mjs",
+    "android:upload-internal": "node scripts/upload-play-internal.mjs"
   },
   "dependencies": {
     "@capacitor/core": "8.5.2"

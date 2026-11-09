@@ -88,11 +88,13 @@
     // After the session and profile have been validated, initialize account-scoped avatars.
     // This flag controls UI presentation only; public teacher artwork is not access-restricted.
     // Magic Me V10: restore a pending avatar only for this verified account.
+    let ownerVerified = false;
     try {
       await load('shared/magic-me-v10-pending.js?v=20261030');
       // Revalidate identity with the auth server; do not trust a locally cached session alone.
       const verified = await db.auth.getUser();
       const verifiedUser = verified && verified.data && verified.data.user;
+      ownerVerified = !verified.error && verifiedUser?.id === session.user.id && verifiedUser?.app_metadata?.mariami_admin === true && String(verifiedUser?.email || '').trim().toLowerCase() === 'datogringi@gmail.com';
       if (!verified.error && verifiedUser && verifiedUser.id === session.user.id && window.EWM_MAGIC_V10_PENDING) {
         await window.EWM_MAGIC_V10_PENDING.restore(verifiedUser);
       }
@@ -101,7 +103,7 @@
     }
     window.MARIAMI_MAGIC_ME_CONTEXT = Object.freeze({
       userId: session.user.id,
-      isOwner: String(session.user.email || '').trim().toLowerCase() === 'datogringo@gmail.com'
+      isOwner: role === 'admin' && ownerVerified
     });
     try { await load('shared/magic-me.js?v=20261027-v1'); }
     catch (avatarError) { console.warn('[Magic Me] Optional avatar unavailable:', avatarError); }
